@@ -20,7 +20,125 @@ effects:
           - Rq6MOc7Mnb9bHNeR
           - GQ8RtFsKbLAt6ofX
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: hour
+        quantity: 24
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 24 Hours
+      effectTypes:
+        - transformation
+        - disease
+        - automatic
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: 10 Minutes
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: slow
+      overview:
+        base: >-
+          You undergo a @L[Condition:Transformed]{greater transformation} that
+          cannot be reverted from into a particular @L[Category:Common animal
+          creatures]{animal}. This is typically the type of @L[Category:Common
+          animal creatures]{animal} that the
+          @L[Creature:Were-Creature]{were-creature} that first bit you was. Your
+          @L[Core:Size]{SIZE} is 1 greater than that @L[Category:Common animal
+          creatures]{animal} normally is and you maintain all
+          @L[Creature:Were-Creature]{were-creature}
+          @L[Category:Abilities]{abilities}, @L[Core:Hit Points and Mana
+          Points]{hit dice}, and @L[Core:HP]{HP}. You also have
+          @L[Ability:Impure Durability]{Impure Durability}, and become
+          @L[Ability:Aggressive]{Aggressive} while
+          @L[Condition:Transformed]{transformed}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: >-
+        The moon is in a particular phase. This is typically the phase in which
+        you were first bitten by a @L[Creature:Were-Creature]{were-creature}.
+        This triggers automatically. You cannot choose to not use it if you are
+        able to.
+      warded: false
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -218,6 +336,34 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!cYcj9zK4GMl0NYty.xqB1lZo5Ks9xMkli'
+  - name: Impure Durability
+    type: ability
+    system:
+      hierarchy:
+        supId: xqB1lZo5Ks9xMkli
+        rootUuid: Compendium.teriock.abilities.Item.cYcj9zK4GMl0NYty
+        subIds: []
+      gmNotes: null
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       adept:
         enabled: false
         amount: 1
@@ -251,22 +397,20 @@ effects:
         parent: null
         package: null
       duration:
-        unit: hour
-        quantity: 24
+        unit: noLimit
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 24 Hours
+        description: Always Active
       effectTypes:
-        - transformation
-        - disease
-        - automatic
+        - immunity
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: 10 Minutes
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -288,22 +432,11 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: slow
+      maneuver: passive
       overview:
         base: >-
-          You undergo a @L[Condition:Transformed]{greater transformation} that
-          cannot be reverted from into a particular @L[Category:Common animal
-          creatures]{animal}. This is typically the type of @L[Category:Common
-          animal creatures]{animal} that the
-          @L[Creature:Were-Creature]{were-creature} that first bit you was. Your
-          @L[Core:Size]{SIZE} is 1 greater than that @L[Category:Common animal
-          creatures]{animal} normally is and you maintain all
-          @L[Creature:Were-Creature]{were-creature}
-          @L[Category:Abilities]{abilities}, @L[Core:Hit Points and Mana
-          Points]{hit dice}, and @L[Core:HP]{HP}. You also have
-          @L[Ability:Impure Durability]{Impure Durability}, and become
-          @L[Ability:Aggressive]{Aggressive} while
-          @L[Condition:Transformed]{transformed}.
+          You are @L[Keyword:Immunity]{immune} to non-@L[Damage:Magic]{magic}
+          non-@L[Damage:Silver]{silver} @L[Core:Damage]{damage}.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -330,41 +463,9 @@ effects:
       sustained: false
       targets:
         - self
-      trigger: >-
-        The moon is in a particular phase. This is typically the phase in which
-        you were first bitten by a @L[Creature:Were-Creature]{were-creature}.
-        This triggers automatically. You cannot choose to not use it if you are
-        able to.
+      trigger: ''
       warded: false
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cYcj9zK4GMl0NYty.xqB1lZo5Ks9xMkli'
-  - name: Impure Durability
-    type: ability
-    system:
-      hierarchy:
-        supId: xqB1lZo5Ks9xMkli
-        rootUuid: Compendium.teriock.abilities.Item.cYcj9zK4GMl0NYty
-        subIds: []
-      gmNotes: null
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -566,6 +667,36 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
+    _id: Rq6MOc7Mnb9bHNeR
+    img: systems/teriock/src/icons/abilities/impure-durability.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!cYcj9zK4GMl0NYty.Rq6MOc7Mnb9bHNeR'
+  - name: Aggressive
+    type: ability
+    system:
+      hierarchy:
+        supId: xqB1lZo5Ks9xMkli
+        rootUuid: Compendium.teriock.abilities.Item.cYcj9zK4GMl0NYty
+        subIds: []
+      gmNotes: null
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       adept:
         enabled: false
         amount: 1
@@ -606,8 +737,7 @@ effects:
           absent: []
         stationary: false
         description: Always Active
-      effectTypes:
-        - immunity
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
@@ -617,7 +747,7 @@ effects:
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: special
+      form: flaw
       gifted:
         enabled: false
         amount: 1
@@ -637,13 +767,13 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          You are @L[Keyword:Immunity]{immune} to non-@L[Damage:Magic]{magic}
-          non-@L[Damage:Silver]{silver} @L[Core:Damage]{damage}.
+          You will not leave combat willingly and are @L[Keyword:Inept]{inept}
+          at not killing anyone who opposes you.
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - magical
+        - martial
       prepared: true
       range: Self.
       requirements: ''
@@ -667,37 +797,7 @@ effects:
         - self
       trigger: ''
       warded: false
-    _id: Rq6MOc7Mnb9bHNeR
-    img: systems/teriock/src/icons/abilities/impure-durability.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cYcj9zK4GMl0NYty.Rq6MOc7Mnb9bHNeR'
-  - name: Aggressive
-    type: ability
-    system:
-      hierarchy:
-        supId: xqB1lZo5Ks9xMkli
-        rootUuid: Compendium.teriock.abilities.Item.cYcj9zK4GMl0NYty
-        subIds: []
-      gmNotes: null
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -895,106 +995,6 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: passive
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: flaw
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          You will not leave combat willingly and are @L[Keyword:Inept]{inept}
-          at not killing anyone who opposes you.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
     _id: GQ8RtFsKbLAt6ofX
     img: systems/teriock/src/icons/abilities/aggressive.webp
     changes: []

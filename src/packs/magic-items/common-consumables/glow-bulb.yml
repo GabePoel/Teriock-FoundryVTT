@@ -64,7 +64,7 @@ effects:
       modifiesActor: false
       limitation: ''
       improvement: ''
-      applies:
+      impacts:
         changes: []
         macros: {}
     _id: x6sjcsIVaOkVZOFD
@@ -107,7 +107,7 @@ effects:
       modifiesActor: false
       limitation: ''
       improvement: ''
-      applies:
+      impacts:
         changes: []
         macros: {}
     _id: VQDFXr0oJQZ7Waxe
@@ -139,7 +139,113 @@ effects:
         rootUuid: Compendium.teriock.magicItems.Item.XulEbO8Db240HloN
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: true
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: shatter
+        materialCost: >-
+          Using this ability consumes the @L[Category:Equipment]{equipment} that
+          provides it.
+      delivery:
+        base: item
+        parent: null
+        package: null
+      duration:
+        unit: minute
+        quantity: 10
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 10 Minutes
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          The spot on the ground where the source of this ability was smashed
+          starts @L[Property:Glowing]{glowing} (100 feet).
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - alchemical
+      prepared: true
+      range: null
+      requirements: >-
+        Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - area
+      trigger: ''
+      warded: false
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -293,6 +399,35 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 3tRBJEOyF2iqoSWP
+    img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!XulEbO8Db240HloN.3tRBJEOyF2iqoSWP'
+  - name: Shake Glow Bulb
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.XulEbO8Db240HloN
+        subIds: []
+        supId: null
       adept:
         enabled: false
         amount: 1
@@ -319,7 +454,7 @@ effects:
             static: 0
             formula: ''
             variable: ''
-        break: shatter
+        break: ''
         materialCost: >-
           Using this ability consumes the @L[Category:Equipment]{equipment} that
           provides it.
@@ -365,8 +500,9 @@ effects:
       maneuver: active
       overview:
         base: >-
-          The spot on the ground where the source of this ability was smashed
-          starts @L[Property:Glowing]{glowing} (100 feet).
+          The source of this ability starts @L[Property:Glowing]{glowing} (30
+          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
+          renders it inert.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -396,39 +532,10 @@ effects:
       standard: false
       sustained: false
       targets:
-        - area
+        - item
       trigger: ''
       warded: false
-    _id: 3tRBJEOyF2iqoSWP
-    img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XulEbO8Db240HloN.3tRBJEOyF2iqoSWP'
-  - name: Shake Glow Bulb
-    type: ability
-    system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      hierarchy:
-        rootUuid: Compendium.teriock.magicItems.Item.XulEbO8Db240HloN
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -582,113 +689,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: true
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: >-
-          Using this ability consumes the @L[Category:Equipment]{equipment} that
-          provides it.
-      delivery:
-        base: item
-        parent: null
-        package: null
-      duration:
-        unit: minute
-        quantity: 10
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 10 Minutes
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: a1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: >-
-          The source of this ability starts @L[Property:Glowing]{glowing} (30
-          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
-          renders it inert.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - alchemical
-      prepared: true
-      range: null
-      requirements: >-
-        Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - item
-      trigger: ''
-      warded: false
     _id: ggtGhVK8MhJkniZo
     img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
     changes: []
@@ -731,7 +731,7 @@ effects:
       modifiesActor: false
       limitation: ''
       improvement: ''
-      applies:
+      impacts:
         changes: []
         macros: {}
     _id: noKdZjPi2sibwmHs

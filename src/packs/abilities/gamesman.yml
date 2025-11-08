@@ -12,7 +12,108 @@ effects:
         subIds:
           - mvkH9IQvqlKyGc9e
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Hunter]{hunter}. In addition, you have
+          @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for one species of
+          your choice. You can change the species once per a @L[Core:Short
+          Rest]{short rest}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: archer
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -166,38 +267,62 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: ueYla8bhEj1usHVo
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!cgetZplFKBGFd1kt.ueYla8bhEj1usHVo'
+  - name: Adept Slay
+    type: ability
+    system:
+      hierarchy:
+        supId: ueYla8bhEj1usHVo
+        rootUuid: Compendium.teriock.abilities.Item.cgetZplFKBGFd1kt
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: reactive
+      executionTime: r0
       delivery:
-        base: self
+        base: weapon
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
-        description: Always Active
+        stationary: false
+        description: Instant
       sustained: false
-      range: Self.
+      range: Your Weapon's Range
       overview:
         base: >-
-          You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Hunter]{hunter}. In addition, you have
-          @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for one species of
-          your choice. You can change the species once per a @L[Core:Short
-          Rest]{short rest}.
+          Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.
         proficient: ''
         fluent: ''
       results:
@@ -217,11 +342,11 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      skill: true
+      skill: false
       spell: false
-      standard: true
+      standard: false
       ritual: false
-      class: archer
+      class: ''
       rotator: false
       invoked: false
       costs:
@@ -251,47 +376,30 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
+      trigger: >-
+        You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.
       basic: false
       form: normal
-      limitation: ''
+      limitation: Only usable against one species, as specified when you use Gamesman.
       improvement: ''
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: ueYla8bhEj1usHVo
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cgetZplFKBGFd1kt.ueYla8bhEj1usHVo'
-  - name: Adept Slay
-    type: ability
-    system:
-      hierarchy:
-        supId: ueYla8bhEj1usHVo
-        rootUuid: Compendium.teriock.abilities.Item.cgetZplFKBGFd1kt
-        subIds: []
-      applies:
+      effectTypes:
+        - killing
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -442,115 +550,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Your Weapon's Range
-      overview:
-        base: >-
-          Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      class: ''
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: >-
-        You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.
-      basic: false
-      form: normal
-      limitation: Only usable against one species, as specified when you use Gamesman.
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - killing
     _id: mvkH9IQvqlKyGc9e
     img: systems/teriock/src/icons/abilities/adept-slay.webp
     changes: []

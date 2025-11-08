@@ -14,7 +14,6 @@ system:
     the sport of combat and don't like missile weapons. Not reliable as guards
     as they are too distracted and are rarely very intelligent. If you are a
     Berserker be larger than life, brash, not too bright and stupidly brave.
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -38,7 +37,112 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - primal
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent:
+            - dead
+        stationary: false
+        description: While Alive
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You are @L[Keyword:Resistance]{resistant} to all @L[Category:Conjured
+          spells]{conjured} @L[Category:Missile delivery spells]{Missile
+          Spells}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - resistance
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -192,6 +296,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: dPkhLmmcMMuuFnw9
+    img: systems/teriock/src/icons/abilities/missile-magic-resistance.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!hLLmAybWTIyrRV91.dPkhLmmcMMuuFnw9'
+  - name: Missile Weapon Resistance
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -213,16 +341,15 @@ effects:
         conditions:
           present: []
           absent:
-            - dead
+            - down
         stationary: false
-        description: While Alive
+        description: While Up
       sustained: false
       range: Self.
       overview:
         base: >-
-          You are @L[Keyword:Resistance]{resistant} to all @L[Category:Conjured
-          spells]{conjured} @L[Category:Missile delivery spells]{Missile
-          Spells}.
+          You are @L[Keyword:Resistant]{resistant} to all
+          @L[Property:Ranged]{ranged} @L[Category:Weapons]{weapons}.
         proficient: ''
         fluent: ''
       results:
@@ -297,31 +424,7 @@ effects:
         derived: 0
       effectTypes:
         - resistance
-    _id: dPkhLmmcMMuuFnw9
-    img: systems/teriock/src/icons/abilities/missile-magic-resistance.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hLLmAybWTIyrRV91.dPkhLmmcMMuuFnw9'
-  - name: Missile Weapon Resistance
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -475,10 +578,35 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 7BOk8OKvMWK2KPrG
+    img: systems/teriock/src/icons/abilities/missile-weapon-resistance.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!hLLmAybWTIyrRV91.7BOk8OKvMWK2KPrG'
+  - name: Advanced Smell
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
+        subIds:
+          - 5foqx5QSi0CyZYFU
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - primal
+        - martial
       interaction: manifest
       featSaveAttribute: mov
       maneuver: passive
@@ -503,8 +631,11 @@ effects:
       range: Self.
       overview:
         base: >-
-          You are @L[Keyword:Resistant]{resistant} to all
-          @L[Property:Ranged]{ranged} @L[Category:Weapons]{weapons}.
+          You can passively smell the types of all living creatures within 30
+          feet. You can detect dead and undead creatures as well, but you cannot
+          distinguish within or between them. They all smell like death. You
+          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
+          @L[Condition:Odorless]{odorless} creatures in this way.
         proficient: ''
         fluent: ''
       results:
@@ -519,8 +650,8 @@ effects:
       piercing: normal
       improvements:
         attributeImprovement:
-          attribute: null
-          minVal: 0
+          attribute: per
+          minVal: 2
         featSaveImprovement:
           attribute: null
           amount: proficient
@@ -557,7 +688,7 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: ''
+      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -578,33 +709,8 @@ effects:
         raw: ''
         derived: 0
       effectTypes:
-        - resistance
-    _id: 7BOk8OKvMWK2KPrG
-    img: systems/teriock/src/icons/abilities/missile-weapon-resistance.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hLLmAybWTIyrRV91.7BOk8OKvMWK2KPrG'
-  - name: Advanced Smell
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
-        subIds:
-          - 5foqx5QSi0CyZYFU
-        supId: null
-      applies:
+        - sensory
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -754,6 +860,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: Skaw8KlWgJXFCmda
+    img: systems/teriock/src/icons/abilities/advanced-smell.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!hLLmAybWTIyrRV91.Skaw8KlWgJXFCmda'
+  - name: Berserker Tracking
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -782,11 +912,10 @@ effects:
       range: Self.
       overview:
         base: >-
-          You can passively smell the types of all living creatures within 30
-          feet. You can detect dead and undead creatures as well, but you cannot
-          distinguish within or between them. They all smell like death. You
-          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
-          @L[Condition:Odorless]{odorless} creatures in this way.
+          You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Tracker]{tracker}. Additionally, you
+          @L[Keyword:Resistance]{resist} being @L[Core:Surprise
+          Rounds]{surprised} outside towns and other urban areas.
         proficient: ''
         fluent: ''
       results:
@@ -802,7 +931,7 @@ effects:
       improvements:
         attributeImprovement:
           attribute: per
-          minVal: 2
+          minVal: 1
         featSaveImprovement:
           attribute: null
           amount: proficient
@@ -839,7 +968,7 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
+      requirements: You are outside towns and other urban areas.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -860,32 +989,9 @@ effects:
         raw: ''
         derived: 0
       effectTypes:
+        - resistance
         - sensory
-    _id: Skaw8KlWgJXFCmda
-    img: systems/teriock/src/icons/abilities/advanced-smell.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hLLmAybWTIyrRV91.Skaw8KlWgJXFCmda'
-  - name: Berserker Tracking
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1043,6 +1149,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: lwt8MmlvcR9x3y6K
+    img: systems/teriock/src/icons/abilities/berserker-tracking.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!hLLmAybWTIyrRV91.lwt8MmlvcR9x3y6K'
+  - name: Scent Seeing
+    type: ability
+    system:
+      hierarchy:
+        supId: Skaw8KlWgJXFCmda
+        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1052,29 +1182,28 @@ effects:
       maneuver: passive
       executionTime: passive
       delivery:
-        base: self
+        base: aura
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
         unit: noLimit
         quantity: 0
         conditions:
           present: []
-          absent:
-            - down
+          absent: []
         stationary: false
-        description: While Up
+        description: While Target Remains In Range
       sustained: false
-      range: Self.
+      range: '10'
       overview:
         base: >-
-          You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Tracker]{tracker}. Additionally, you
-          @L[Keyword:Resistance]{resist} being @L[Core:Surprise
-          Rounds]{surprised} outside towns and other urban areas.
+          You know the exact location of all target creatures. You continue to
+          know the location of all targets within 10 feet, whether they are or
+          you are moving or not, so long as they are still within 10 feet of
+          you.<p></p>
         proficient: ''
         fluent: ''
       results:
@@ -1089,8 +1218,8 @@ effects:
       piercing: normal
       improvements:
         attributeImprovement:
-          attribute: per
-          minVal: 1
+          attribute: null
+          minVal: 0
         featSaveImprovement:
           attribute: null
           amount: proficient
@@ -1127,7 +1256,9 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: You are outside towns and other urban areas.
+      requirements: >-
+        You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
+        @L[Condition:Odorless]{odorless}.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -1148,33 +1279,8 @@ effects:
         raw: ''
         derived: 0
       effectTypes:
-        - resistance
         - sensory
-    _id: lwt8MmlvcR9x3y6K
-    img: systems/teriock/src/icons/abilities/berserker-tracking.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hLLmAybWTIyrRV91.lwt8MmlvcR9x3y6K'
-  - name: Scent Seeing
-    type: ability
-    system:
-      hierarchy:
-        supId: Skaw8KlWgJXFCmda
-        rootUuid: Compendium.teriock.classes.Item.hLLmAybWTIyrRV91
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1328,113 +1434,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: aura
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: While Target Remains In Range
-      sustained: false
-      range: '10'
-      overview:
-        base: >-
-          You know the exact location of all target creatures. You continue to
-          know the location of all targets within 10 feet, whether they are or
-          you are moving or not, so long as they are still within 10 feet of
-          you.<p></p>
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: >-
-        You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
-        @L[Condition:Odorless]{odorless}.
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - sensory
     _id: 5foqx5QSi0CyZYFU
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     changes: []

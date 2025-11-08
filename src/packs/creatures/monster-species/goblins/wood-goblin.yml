@@ -166,7 +166,107 @@ items:
             rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
             subIds: []
             supId: null
-          applies:
+          adept:
+            enabled: false
+            amount: 1
+          basic: false
+          costs:
+            verbal: false
+            somatic: false
+            material: false
+            mp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            hp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            gp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            break: ''
+            materialCost: ''
+          delivery:
+            base: self
+            parent: null
+            package: null
+          duration:
+            unit: minute
+            quantity: 1
+            conditions:
+              present: []
+              absent: []
+            stationary: false
+            description: 1 Minute
+          effectTypes:
+            - resistance
+          elderSorcery: false
+          elderSorceryIncant: ''
+          elements: []
+          endCondition: ''
+          executionTime: r1
+          expansion: null
+          expansionRange: null
+          expansionSaveAttribute: mov
+          featSaveAttribute: mov
+          form: normal
+          gifted:
+            enabled: false
+            amount: 1
+          grantOnly: false
+          heightened: ''
+          improvement: ''
+          improvements:
+            attributeImprovement:
+              attribute: null
+              minVal: 0
+            featSaveImprovement:
+              attribute: null
+              amount: proficient
+          interaction: manifest
+          invoked: false
+          limitation: ''
+          maneuver: reactive
+          overview:
+            base: You begin @L[Condition:Defying Death]{defying death}.
+            proficient: ''
+            fluent: ''
+          piercing: normal
+          powerSources:
+            - martial
+          prepared: true
+          range: Self.
+          requirements: ''
+          results:
+            hit: ''
+            critHit: ''
+            miss: ''
+            critMiss: ''
+            save: ''
+            critSave: ''
+            fail: ''
+            critFail: ''
+          ritual: false
+          rotator: false
+          secret: false
+          skill: true
+          spell: false
+          standard: true
+          sustained: true
+          targets:
+            - self
+          trigger: You would @L[Condition:Down]{drop}.
+          warded: false
+          class: duelist
+          impacts:
             base:
               statuses:
                 - defyingDeath
@@ -318,6 +418,36 @@ items:
                 changeOnCrit: false
                 doesExpire: false
             macros: {}
+        _id: MDD9sTfQUvqVGQGp
+        img: systems/teriock/src/icons/abilities/defy-death.webp
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _key: >-
+          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.MDD9sTfQUvqVGQGp
+      - name: Digging
+        type: ability
+        system:
+          consumable: false
+          maxQuantity:
+            saved: ''
+            raw: ''
+          quantity: 1
+          hierarchy:
+            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
+            subIds: []
+            supId: null
           adept:
             enabled: false
             amount: 1
@@ -351,20 +481,20 @@ items:
             parent: null
             package: null
           duration:
-            unit: minute
-            quantity: 1
+            unit: noLimit
+            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
-            description: 1 Minute
+            description: Always Active
           effectTypes:
-            - resistance
+            - movement
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
-          executionTime: r1
+          executionTime: passive
           expansion: null
           expansionRange: null
           expansionSaveAttribute: mov
@@ -386,9 +516,9 @@ items:
           interaction: manifest
           invoked: false
           limitation: ''
-          maneuver: reactive
+          maneuver: passive
           overview:
-            base: You begin @L[Condition:Defying Death]{defying death}.
+            base: You dig at @L[Core:Movement Speed]{quarter speed}.
             proficient: ''
             fluent: ''
           piercing: normal
@@ -409,46 +539,15 @@ items:
           ritual: false
           rotator: false
           secret: false
-          skill: true
+          skill: false
           spell: false
-          standard: true
-          sustained: true
+          standard: false
+          sustained: false
           targets:
             - self
-          trigger: You would @L[Condition:Down]{drop}.
+          trigger: ''
           warded: false
-          class: duelist
-        _id: MDD9sTfQUvqVGQGp
-        img: systems/teriock/src/icons/abilities/defy-death.webp
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          combat: null
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
-        _stats:
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.1
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.MDD9sTfQUvqVGQGp
-      - name: Digging
-        type: ability
-        system:
-          consumable: false
-          maxQuantity:
-            saved: ''
-            raw: ''
-          quantity: 1
-          hierarchy:
-            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
-            subIds: []
-            supId: null
-          applies:
+          impacts:
             base:
               statuses: []
               startStatuses: []
@@ -602,105 +701,6 @@ items:
                 changeOnCrit: false
                 doesExpire: false
             macros: {}
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
-          delivery:
-            base: self
-            parent: null
-            package: null
-          duration:
-            unit: noLimit
-            quantity: 0
-            conditions:
-              present: []
-              absent: []
-            stationary: false
-            description: Always Active
-          effectTypes:
-            - movement
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
-          executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
-          featSaveAttribute: mov
-          form: normal
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          improvements:
-            attributeImprovement:
-              attribute: null
-              minVal: 0
-            featSaveImprovement:
-              attribute: null
-              amount: proficient
-          interaction: manifest
-          invoked: false
-          limitation: ''
-          maneuver: passive
-          overview:
-            base: You dig at @L[Core:Movement Speed]{quarter speed}.
-            proficient: ''
-            fluent: ''
-          piercing: normal
-          powerSources:
-            - martial
-          prepared: true
-          range: Self.
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          secret: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
-          targets:
-            - self
-          trigger: ''
-          warded: false
         _id: LBG9hbZXOI2vITfM
         img: systems/teriock/src/icons/abilities/digging.webp
         changes: []
@@ -731,156 +731,6 @@ items:
             rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
             subIds: []
             supId: null
-          applies:
-            base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                changeOnCrit: false
-                doesExpire: false
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                changeOnCrit: false
-                doesExpire: false
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                changeOnCrit: false
-                doesExpire: false
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: none
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                changeOnCrit: false
-                doesExpire: false
-            macros: {}
           adept:
             enabled: false
             amount: 1
@@ -979,37 +829,7 @@ items:
             - self
           trigger: ''
           warded: false
-        _id: 4iOrHVYOJKsjOutm
-        img: systems/teriock/src/icons/abilities/low-strength.webp
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          combat: null
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
-        _stats:
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.1
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.4iOrHVYOJKsjOutm
-      - name: Normal Movement
-        type: ability
-        system:
-          consumable: false
-          maxQuantity:
-            saved: ''
-            raw: ''
-          quantity: 1
-          hierarchy:
-            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
-            subIds: []
-            supId: null
-          applies:
+          impacts:
             base:
               statuses: []
               startStatuses: []
@@ -1159,6 +979,36 @@ items:
                 changeOnCrit: false
                 doesExpire: false
             macros: {}
+        _id: 4iOrHVYOJKsjOutm
+        img: systems/teriock/src/icons/abilities/low-strength.webp
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _key: >-
+          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.4iOrHVYOJKsjOutm
+      - name: Normal Movement
+        type: ability
+        system:
+          consumable: false
+          maxQuantity:
+            saved: ''
+            raw: ''
+          quantity: 1
+          hierarchy:
+            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
+            subIds: []
+            supId: null
           adept:
             enabled: false
             amount: 1
@@ -1257,37 +1107,7 @@ items:
             - self
           trigger: ''
           warded: false
-        _id: FkDiMaWE3Kz8g7dx
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          combat: null
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
-        _stats:
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.1
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.FkDiMaWE3Kz8g7dx
-      - name: Normal Perception
-        type: ability
-        system:
-          consumable: false
-          maxQuantity:
-            saved: ''
-            raw: ''
-          quantity: 1
-          hierarchy:
-            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
-            subIds: []
-            supId: null
-          applies:
+          impacts:
             base:
               statuses: []
               startStatuses: []
@@ -1437,6 +1257,36 @@ items:
                 changeOnCrit: false
                 doesExpire: false
             macros: {}
+        _id: FkDiMaWE3Kz8g7dx
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _key: >-
+          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.FkDiMaWE3Kz8g7dx
+      - name: Normal Perception
+        type: ability
+        system:
+          consumable: false
+          maxQuantity:
+            saved: ''
+            raw: ''
+          quantity: 1
+          hierarchy:
+            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
+            subIds: []
+            supId: null
           adept:
             enabled: false
             amount: 1
@@ -1535,37 +1385,7 @@ items:
             - self
           trigger: ''
           warded: false
-        _id: Ns4976dT07tTvWGx
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          combat: null
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
-        _stats:
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.1
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.Ns4976dT07tTvWGx
-      - name: Normal Sneak
-        type: ability
-        system:
-          consumable: false
-          maxQuantity:
-            saved: ''
-            raw: ''
-          quantity: 1
-          hierarchy:
-            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
-            subIds: []
-            supId: null
-          applies:
+          impacts:
             base:
               statuses: []
               startStatuses: []
@@ -1715,6 +1535,36 @@ items:
                 changeOnCrit: false
                 doesExpire: false
             macros: {}
+        _id: Ns4976dT07tTvWGx
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _key: >-
+          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.Ns4976dT07tTvWGx
+      - name: Normal Sneak
+        type: ability
+        system:
+          consumable: false
+          maxQuantity:
+            saved: ''
+            raw: ''
+          quantity: 1
+          hierarchy:
+            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
+            subIds: []
+            supId: null
           adept:
             enabled: false
             amount: 1
@@ -1813,37 +1663,7 @@ items:
             - self
           trigger: ''
           warded: false
-        _id: NClJq7DTo8ED25pC
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        changes: []
-        disabled: false
-        duration:
-          startTime: null
-          combat: null
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
-        _stats:
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.1
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.NClJq7DTo8ED25pC
-      - name: Stupid Intelligence
-        type: ability
-        system:
-          consumable: false
-          maxQuantity:
-            saved: ''
-            raw: ''
-          quantity: 1
-          hierarchy:
-            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
-            subIds: []
-            supId: null
-          applies:
+          impacts:
             base:
               statuses: []
               startStatuses: []
@@ -1993,6 +1813,36 @@ items:
                 changeOnCrit: false
                 doesExpire: false
             macros: {}
+        _id: NClJq7DTo8ED25pC
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _key: >-
+          !actors.items.effects!uFKN08IvIfk1QvWX.xtLPeU8G7GD1SZln.NClJq7DTo8ED25pC
+      - name: Stupid Intelligence
+        type: ability
+        system:
+          consumable: false
+          maxQuantity:
+            saved: ''
+            raw: ''
+          quantity: 1
+          hierarchy:
+            rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
+            subIds: []
+            supId: null
           adept:
             enabled: false
             amount: 1
@@ -2091,6 +1941,156 @@ items:
             - self
           trigger: ''
           warded: false
+          impacts:
+            base:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+            proficient:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+            fluent:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+            heightened:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+            macros: {}
         _id: Wn2DUxMFjTQxSbbt
         img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
         changes: []
@@ -2121,7 +2121,108 @@ items:
             rootUuid: Compendium.teriock.species.Item.Ym2LQZHXHOxnyi3b
             subIds: []
             supId: null
-          applies:
+          adept:
+            enabled: false
+            amount: 1
+          basic: false
+          costs:
+            verbal: false
+            somatic: false
+            material: false
+            mp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            hp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            gp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            break: ''
+            materialCost: ''
+          delivery:
+            base: weapon
+            parent: null
+            package: strike
+          duration:
+            unit: minute
+            quantity: 1
+            conditions:
+              present: []
+              absent: []
+            stationary: false
+            description: 1 Minute
+          effectTypes: []
+          elderSorcery: false
+          elderSorceryIncant: ''
+          elements: []
+          endCondition: >-
+            At the start of each of the target's @L[Core:Turn]{turns}, they roll
+            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+          executionTime: a1
+          expansion: null
+          expansionRange: null
+          expansionSaveAttribute: mov
+          featSaveAttribute: mov
+          form: normal
+          gifted:
+            enabled: false
+            amount: 1
+          grantOnly: false
+          heightened: ''
+          improvement: ''
+          improvements:
+            attributeImprovement:
+              attribute: null
+              minVal: 0
+            featSaveImprovement:
+              attribute: null
+              amount: proficient
+          interaction: attack
+          invoked: false
+          limitation: ''
+          maneuver: active
+          overview:
+            base: ''
+            proficient: ''
+            fluent: ''
+          piercing: normal
+          powerSources:
+            - martial
+          prepared: true
+          range: Your Weapon's Range
+          requirements: ''
+          results:
+            hit: Targeted creature is @L[Condition:Frightened]{frightened}.
+            critHit: The target automatically fails the first [[/roll 2d4]] roll.
+            miss: ''
+            critMiss: ''
+            save: ''
+            critSave: ''
+            fail: ''
+            critFail: ''
+          ritual: false
+          rotator: false
+          secret: false
+          skill: true
+          spell: false
+          standard: true
+          sustained: false
+          targets:
+            - vitals
+          trigger: ''
+          warded: false
+          class: berserker
+          impacts:
             base:
               statuses:
                 - frightened
@@ -2274,107 +2375,6 @@ items:
                 doesExpire: false
             macros:
               Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
-          delivery:
-            base: weapon
-            parent: null
-            package: strike
-          duration:
-            unit: minute
-            quantity: 1
-            conditions:
-              present: []
-              absent: []
-            stationary: false
-            description: 1 Minute
-          effectTypes: []
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: >-
-            At the start of each of the target's @L[Core:Turn]{turns}, they roll
-            [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-          executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
-          featSaveAttribute: mov
-          form: normal
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          improvements:
-            attributeImprovement:
-              attribute: null
-              minVal: 0
-            featSaveImprovement:
-              attribute: null
-              amount: proficient
-          interaction: attack
-          invoked: false
-          limitation: ''
-          maneuver: active
-          overview:
-            base: ''
-            proficient: ''
-            fluent: ''
-          piercing: normal
-          powerSources:
-            - martial
-          prepared: true
-          range: Your Weapon's Range
-          requirements: ''
-          results:
-            hit: Targeted creature is @L[Condition:Frightened]{frightened}.
-            critHit: The target automatically fails the first [[/roll 2d4]] roll.
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          secret: false
-          skill: true
-          spell: false
-          standard: true
-          sustained: false
-          targets:
-            - vitals
-          trigger: ''
-          warded: false
-          class: berserker
         _id: 27FJ07cQNhVCHgQq
         img: systems/teriock/src/icons/abilities/threat.webp
         changes: []
@@ -2450,10 +2450,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: LwntE76DWV8LsMYk
         img: systems/teriock/src/icons/properties/bashing.webp
         changes: []
@@ -2498,10 +2498,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: 70oASdJA4Iza7rlK
         img: systems/teriock/src/icons/properties/small.webp
         changes: []
@@ -2583,10 +2583,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: FAUPXdLk1A1fD0k8
         img: systems/teriock/src/icons/properties/bashing.webp
         changes: []
@@ -2625,10 +2625,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: wGdRsURrcXoNZsur
         img: systems/teriock/src/icons/properties/handy.webp
         changes: []
@@ -2667,10 +2667,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: 1eIcI58ulvhlFYKA
         img: systems/teriock/src/icons/properties/prehensile.webp
         changes: []
@@ -2715,10 +2715,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: r6jJPWhMBH4YpEKr
         img: systems/teriock/src/icons/properties/small.webp
         changes: []
@@ -2800,10 +2800,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: 1keJAxX1vkfTL8Wl
         img: systems/teriock/src/icons/properties/bashing.webp
         changes: []
@@ -2842,10 +2842,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: cj70nNvBKfT3EQ8P
         img: systems/teriock/src/icons/properties/biting.webp
         changes: []
@@ -2890,10 +2890,10 @@ items:
           modifiesActor: false
           limitation: ''
           improvement: ''
-          applies:
+          gmNotes: null
+          impacts:
             changes: []
             macros: {}
-          gmNotes: null
         _id: 43UnM2Fnf4EpPLFE
         img: systems/teriock/src/icons/properties/small.webp
         changes: []

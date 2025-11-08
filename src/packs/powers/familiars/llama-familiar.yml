@@ -15,7 +15,6 @@ effects:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Llama]{llama}.</p>
-      wikiNamespace: Tradecraft
     _id: drXjKzoSb7J0y2iW
     img: icons/environment/settlement/stables-logo.webp
     changes: []
@@ -45,7 +44,121 @@ effects:
         rootUuid: Compendium.teriock.powers.Item.QrEdEJvoBmFpaxa8
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: variable
+          value:
+            static: 0
+            formula: ''
+            variable: >-
+              This costs 0 @L[Core:MP]{MP} if the triggering
+              @L[Category:Abilities]{ability} was used on you or some
+              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
+              It costs 1 @L[Core:MP]{MP} otherwise.
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: missile
+        parent: null
+        package: ray
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: >-
+        At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+      executionTime: r1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: reactive
+      overview:
+        base: ''
+        proficient: >-
+          This also makes the effect of that @L[Category:Abilities]{ability}
+          @L[Core:Fizzles]{fizzle}.
+        fluent: ''
+      piercing: av0
+      powerSources:
+        - spiritual
+      prepared: true
+      range: '60'
+      requirements: You may only target the triggering creature.
+      results:
+        hit: >-
+          Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: >-
+        Another creature uses a non-@L[Category:Basic abilities]{basic}
+        @L[Category:Active abilities]{active} or @L[Category:Reactive
+        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
+        against a different creature or some @L[Category:Equipment]{equipment}
+        that different creature @L[Keyword:Bearing]{bares}.
+      warded: false
+      class: thief
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -196,120 +309,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: variable
-          value:
-            static: 0
-            formula: ''
-            variable: >-
-              This costs 0 @L[Core:MP]{MP} if the triggering
-              @L[Category:Abilities]{ability} was used on you or some
-              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
-              It costs 1 @L[Core:MP]{MP} otherwise.
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: missile
-        parent: null
-        package: ray
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: >-
-        At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      executionTime: r1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: ''
-      maneuver: reactive
-      overview:
-        base: ''
-        proficient: >-
-          This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.
-        fluent: ''
-      piercing: av0
-      powerSources:
-        - spiritual
-      prepared: true
-      range: '60'
-      requirements: You may only target the triggering creature.
-      results:
-        hit: >-
-          Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - creature
-      trigger: >-
-        Another creature uses a non-@L[Category:Basic abilities]{basic}
-        @L[Category:Active abilities]{active} or @L[Category:Reactive
-        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
-        against a different creature or some @L[Category:Equipment]{equipment}
-        that different creature @L[Keyword:Bearing]{bares}.
-      warded: false
-      class: thief
     _id: tdb8il601UVtFEn7
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     changes: []
@@ -339,7 +338,121 @@ effects:
         rootUuid: Compendium.teriock.powers.Item.QrEdEJvoBmFpaxa8
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: hack
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes:
+        - damaging
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: r1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: reactive
+      overview:
+        base: >-
+          You take the triggering @L[Core:Damage]{damage} as a
+          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
+          types]{damage types} still apply. If the hit was critical, you instead
+          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
+          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
+          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
+          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
+          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
+          @L[Core:Damage]{damage} was dealt by a creature, they choose which
+          limb is affected. If not, it is random. Only an
+          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
+          possible, you take the @L[Core:Damage]{damage} normally.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: >-
+        You are hit by an @L[Category:Attack abilities]{attack} that would
+        @L[Core:Damage]{damage} you.
+      warded: false
+      class: ranger
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -491,120 +604,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: hack
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes:
-        - damaging
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: r1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: reactive
-      overview:
-        base: >-
-          You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
-          types]{damage types} still apply. If the hit was critical, you instead
-          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
-          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
-          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
-          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
-          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
-          @L[Core:Damage]{damage} was dealt by a creature, they choose which
-          limb is affected. If not, it is random. Only an
-          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
-          possible, you take the @L[Core:Damage]{damage} normally.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
-      trigger: >-
-        You are hit by an @L[Category:Attack abilities]{attack} that would
-        @L[Core:Damage]{damage} you.
-      warded: false
-      class: ranger
     _id: pNyAc6KYComlzl2w
     img: systems/teriock/src/icons/abilities/endure.webp
     changes: []

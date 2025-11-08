@@ -13,7 +13,110 @@ effects:
           - 0j2itZyi3K3gy2hG
           - S1MAqSUh9BRr2GDy
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You gain @L[Ability:Scouting]{Scouting} and @L[Ability:Ethereal
+          Senses]{Ethereal Senses} and can see
+          @L[Condition:Invisible]{invisible} things. You can also see through
+          @L[Keyword:Illusionary]{illusions} and
+          @L[Condition:Transformed]{transformations}. You may be able to through
+          other effects as well at @L[Core:GM]{GM} discretion.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: per
+          minVal: 4
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      class: ''
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: special
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - sensory
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -167,11 +270,33 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: 1IyOuH8dVg4dvNcJ
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!5NQk47KFSZn0tkOY.1IyOuH8dVg4dvNcJ'
+  - name: Scouting
+    type: ability
+    system:
+      hierarchy:
+        supId: 1IyOuH8dVg4dvNcJ
+        rootUuid: Compendium.teriock.abilities.Item.5NQk47KFSZn0tkOY
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - magical
+        - martial
       interaction: manifest
       featSaveAttribute: mov
       maneuver: passive
@@ -189,17 +314,14 @@ effects:
         conditions:
           present: []
           absent: []
+        stationary: false
         description: Always Active
       sustained: false
       range: Self.
       overview:
         base: >-
-          You gain @L[Ability:Scouting]{Scouting} and @L[Ability:Ethereal
-          Senses]{Ethereal Senses} and can see
-          @L[Condition:Invisible]{invisible} things. You can also see through
-          @L[Keyword:Illusionary]{illusions} and
-          @L[Condition:Transformed]{transformations}. You may be able to through
-          other effects as well at @L[Core:GM]{GM} discretion.
+          You have @L[Core:Advantage]{advantage} on checks made with
+          @L[Ability:Perceive]{Perceive}.
         proficient: ''
         fluent: ''
       results:
@@ -215,15 +337,15 @@ effects:
       improvements:
         attributeImprovement:
           attribute: per
-          minVal: 4
+          minVal: 2
         featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
+          attribute: per
+          amount: proficiency
+      skill: true
       spell: false
-      standard: false
+      standard: true
       ritual: false
-      class: ''
+      class: ranger
       rotator: false
       invoked: false
       costs:
@@ -258,12 +380,15 @@ effects:
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: special
+      form: normal
       limitation: ''
       improvement: ''
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
@@ -271,30 +396,7 @@ effects:
         derived: 0
       effectTypes:
         - sensory
-    _id: 1IyOuH8dVg4dvNcJ
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!5NQk47KFSZn0tkOY.1IyOuH8dVg4dvNcJ'
-  - name: Scouting
-    type: ability
-    system:
-      hierarchy:
-        supId: 1IyOuH8dVg4dvNcJ
-        rootUuid: Compendium.teriock.abilities.Item.5NQk47KFSZn0tkOY
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -444,10 +546,36 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 0j2itZyi3K3gy2hG
+    img: systems/teriock/src/icons/abilities/scouting.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!5NQk47KFSZn0tkOY.0j2itZyi3K3gy2hG'
+  - name: Ethereal Senses
+    type: ability
+    system:
+      hierarchy:
+        supId: 1IyOuH8dVg4dvNcJ
+        rootUuid: Compendium.teriock.abilities.Item.5NQk47KFSZn0tkOY
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - martial
+        - magical
+        - spiritual
+        - primal
       interaction: manifest
       featSaveAttribute: mov
       maneuver: passive
@@ -458,7 +586,8 @@ effects:
         package: null
       targets:
         - self
-      elements: []
+      elements:
+        - necromancy
       duration:
         unit: noLimit
         quantity: 0
@@ -471,8 +600,8 @@ effects:
       range: Self.
       overview:
         base: >-
-          You have @L[Core:Advantage]{advantage} on checks made with
-          @L[Ability:Perceive]{Perceive}.
+          You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
+          creatures.
         proficient: ''
         fluent: ''
       results:
@@ -487,16 +616,16 @@ effects:
       piercing: normal
       improvements:
         attributeImprovement:
-          attribute: per
-          minVal: 2
+          attribute: null
+          minVal: 0
         featSaveImprovement:
-          attribute: per
-          amount: proficiency
-      skill: true
+          attribute: null
+          amount: proficient
+      skill: false
       spell: false
-      standard: true
+      standard: false
       ritual: false
-      class: ranger
+      class: ''
       rotator: false
       invoked: false
       costs:
@@ -547,31 +676,7 @@ effects:
         derived: 0
       effectTypes:
         - sensory
-    _id: 0j2itZyi3K3gy2hG
-    img: systems/teriock/src/icons/abilities/scouting.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!5NQk47KFSZn0tkOY.0j2itZyi3K3gy2hG'
-  - name: Ethereal Senses
-    type: ability
-    system:
-      hierarchy:
-        supId: 1IyOuH8dVg4dvNcJ
-        rootUuid: Compendium.teriock.abilities.Item.5NQk47KFSZn0tkOY
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -725,112 +830,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
-          creatures.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      class: ''
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - sensory
     _id: S1MAqSUh9BRr2GDy
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     changes: []

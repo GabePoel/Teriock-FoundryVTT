@@ -13,7 +13,105 @@ effects:
           - 5EiczQ5pM1ELbpbM
           - qC6zYjlbB65kUXMe
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Minute
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
+          @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: veteran
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -163,21 +261,43 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: 7brepIvcVkL5Hm9n
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!EI6qvU7SUIw0RADw.7brepIvcVkL5Hm9n'
+  - name: Bodyguard Backup
+    type: ability
+    system:
+      hierarchy:
+        supId: 7brepIvcVkL5Hm9n
+        rootUuid: Compendium.teriock.abilities.Item.EI6qvU7SUIw0RADw
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: reactive
+      executionTime: r0
       delivery:
-        base: self
+        base: weapon
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
         unit: minute
@@ -185,13 +305,15 @@ effects:
         conditions:
           present: []
           absent: []
+        stationary: false
         description: 1 Minute
       sustained: false
-      range: Self.
+      range: '5'
       overview:
         base: >-
-          You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
-          @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
+          Pick another creature within range. They gain
+          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
+          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they make.
         proficient: ''
         fluent: ''
       results:
@@ -244,12 +366,14 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: ''
+      requirements: You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
       effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
+      trigger: >-
+        You attempt an @L[Core:Attack Interaction]{attack} against another
+        creature.
       basic: false
       form: normal
       limitation: ''
@@ -257,35 +381,15 @@ effects:
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: 7brepIvcVkL5Hm9n
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!EI6qvU7SUIw0RADw.7brepIvcVkL5Hm9n'
-  - name: Bodyguard Backup
-    type: ability
-    system:
-      hierarchy:
-        supId: 7brepIvcVkL5Hm9n
-        rootUuid: Compendium.teriock.abilities.Item.EI6qvU7SUIw0RADw
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -436,6 +540,30 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_U3eabIvCln4vwrrO: rollFeatSave
+    _id: 5EiczQ5pM1ELbpbM
+    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!EI6qvU7SUIw0RADw.5EiczQ5pM1ELbpbM'
+  - name: Bodyguard Taunt
+    type: ability
+    system:
+      hierarchy:
+        supId: 7brepIvcVkL5Hm9n
+        rootUuid: Compendium.teriock.abilities.Item.EI6qvU7SUIw0RADw
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -452,20 +580,20 @@ effects:
         - creature
       elements: []
       duration:
-        unit: minute
-        quantity: 1
+        unit: second
+        quantity: 5
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: 5 Seconds
       sustained: false
       range: '5'
       overview:
         base: >-
-          Pick another creature within range. They gain
-          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
-          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they make.
+          Pick another creature within range. They are
+          @L[Condition:Goaded]{goaded} until the start of your next
+          @L[Core:Turns]{turn}.
         proficient: ''
         fluent: ''
       results:
@@ -518,7 +646,7 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
+      requirements: You are not also using @L[Ability:Bodyguard Backup]{Bodyguard Backup}.
       effects: []
       expansion: null
       expansionRange: null
@@ -541,31 +669,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: 5EiczQ5pM1ELbpbM
-    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!EI6qvU7SUIw0RADw.5EiczQ5pM1ELbpbM'
-  - name: Bodyguard Taunt
-    type: ability
-    system:
-      hierarchy:
-        supId: 7brepIvcVkL5Hm9n
-        rootUuid: Compendium.teriock.abilities.Item.EI6qvU7SUIw0RADw
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses:
             - goaded
@@ -717,111 +821,6 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_R54099tFLeLMmBAw: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: second
-        quantity: 5
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 5 Seconds
-      sustained: false
-      range: '5'
-      overview:
-        base: >-
-          Pick another creature within range. They are
-          @L[Condition:Goaded]{goaded} until the start of your next
-          @L[Core:Turns]{turn}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: veteran
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: You are not also using @L[Ability:Bodyguard Backup]{Bodyguard Backup}.
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: >-
-        You attempt an @L[Core:Attack Interaction]{attack} against another
-        creature.
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: qC6zYjlbB65kUXMe
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     changes: []

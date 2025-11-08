@@ -44,7 +44,114 @@ effects:
         rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          Your @L[Body:Mouth]{mouth} and other @L[Category:Biting
+          equipment]{biting items} count as a @L[Category:Weapons]{weapon} for
+          the purposes of abilities that target or are delivered by it (although
+          it cannot be @L[Property:Shattered]{shattered} or
+          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
+          Interaction]{attack} with it and its damage die is now [[/damage
+          1d4]].
+        proficient: The damage die is instead [[/damage 1d6]].
+        fluent: The damage die is instead [[/damage 1d8]].
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      class: ''
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -209,20 +316,44 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: oD0lbDWy8NPzVbo5
+    img: systems/teriock/src/icons/abilities/bite.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pEHlzKqtdHmrOVMr.oD0lbDWy8NPzVbo5'
+  - name: Blinding Spit
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
-      interaction: manifest
+      interaction: attack
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: active
+      executionTime: a1
       delivery:
-        base: self
+        base: missile
         parent: null
-        package: null
+        package: ray
       targets:
-        - self
+        - vitals
       elements: []
       duration:
         unit: noLimit
@@ -231,20 +362,13 @@ effects:
           present: []
           absent: []
         stationary: false
-        description: Always Active
+        description: No Limit
       sustained: false
-      range: Self.
+      range: '10'
       overview:
-        base: >-
-          Your @L[Body:Mouth]{mouth} and other @L[Category:Biting
-          equipment]{biting items} count as a @L[Category:Weapons]{weapon} for
-          the purposes of abilities that target or are delivered by it (although
-          it cannot be @L[Property:Shattered]{shattered} or
-          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
-          Interaction]{attack} with it and its damage die is now [[/damage
-          1d4]].
-        proficient: The damage die is instead [[/damage 1d6]].
-        fluent: The damage die is instead [[/damage 1d8]].
+        base: Target is @L[Condition:Blind]{blind}.
+        proficient: ''
+        fluent: ''
       results:
         hit: ''
         critHit: ''
@@ -254,7 +378,7 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing: av0
       improvements:
         attributeImprovement:
           attribute: null
@@ -294,7 +418,9 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: ''
+      endCondition: >-
+        At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
       requirements: ''
       effects: []
       expansion: null
@@ -316,31 +442,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: oD0lbDWy8NPzVbo5
-    img: systems/teriock/src/icons/abilities/bite.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pEHlzKqtdHmrOVMr.oD0lbDWy8NPzVbo5'
-  - name: Blinding Spit
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses:
             - blind
@@ -492,108 +594,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        parent: null
-        package: ray
-      targets:
-        - vitals
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: No Limit
-      sustained: false
-      range: '10'
-      overview:
-        base: Target is @L[Condition:Blind]{blind}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      class: ''
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: >-
-        At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: KLlg5BbuJrxeWpaa
     img: systems/teriock/src/icons/abilities/blinding-spit.webp
     changes: []
@@ -608,7 +608,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!pEHlzKqtdHmrOVMr.KLlg5BbuJrxeWpaa'
   - name: Dense Intelligence
@@ -618,156 +618,6 @@ effects:
         rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
         subIds: []
         supId: null
-      applies:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -868,33 +718,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: h3LJpPqfpeot3ulU
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pEHlzKqtdHmrOVMr.h3LJpPqfpeot3ulU'
-  - name: Desert Native
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
-        subIds:
-          - 6T9tqQPuNznYiXkJ
-          - 1zCM4cIxCmTjxDnI
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1044,6 +868,32 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: h3LJpPqfpeot3ulU
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pEHlzKqtdHmrOVMr.h3LJpPqfpeot3ulU'
+  - name: Desert Native
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
+        subIds:
+          - 6T9tqQPuNznYiXkJ
+          - 1zCM4cIxCmTjxDnI
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1144,31 +994,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: B2O7KNCUXar7o9uz
-    img: systems/teriock/src/icons/abilities/desert-native.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pEHlzKqtdHmrOVMr.B2O7KNCUXar7o9uz'
-  - name: Desert Resilience
-    type: ability
-    system:
-      hierarchy:
-        supId: B2O7KNCUXar7o9uz
-        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1318,6 +1144,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: B2O7KNCUXar7o9uz
+    img: systems/teriock/src/icons/abilities/desert-native.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pEHlzKqtdHmrOVMr.B2O7KNCUXar7o9uz'
+  - name: Desert Resilience
+    type: ability
+    system:
+      hierarchy:
+        supId: B2O7KNCUXar7o9uz
+        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1418,6 +1268,156 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      impacts:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
     _id: 6T9tqQPuNznYiXkJ
     img: systems/teriock/src/icons/abilities/desert-resilience.webp
     changes: []
@@ -1442,7 +1442,110 @@ effects:
         supId: B2O7KNCUXar7o9uz
         rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
         subIds: []
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You walk through difficult terrain at @L[Core:Movement Speed]{normal
+          speed}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      class: ''
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - movement
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1596,109 +1699,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You walk through difficult terrain at @L[Core:Movement Speed]{normal
-          speed}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      class: ''
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - movement
     _id: 1zCM4cIxCmTjxDnI
     img: systems/teriock/src/icons/abilities/agile.webp
     changes: []
@@ -1723,156 +1723,6 @@ effects:
         rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
         subIds: []
         supId: null
-      applies:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1976,31 +1826,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: 6RSevwG8WVhaPyRi
-    img: systems/teriock/src/icons/abilities/endurance.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pEHlzKqtdHmrOVMr.6RSevwG8WVhaPyRi'
-  - name: No Hands
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2150,6 +1976,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 6RSevwG8WVhaPyRi
+    img: systems/teriock/src/icons/abilities/endurance.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pEHlzKqtdHmrOVMr.6RSevwG8WVhaPyRi'
+  - name: No Hands
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -2250,31 +2100,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: FUTUglYHlbjQU7mS
-    img: systems/teriock/src/icons/abilities/no-hands.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pEHlzKqtdHmrOVMr.FUTUglYHlbjQU7mS'
-  - name: Normal Movement
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2424,6 +2250,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: FUTUglYHlbjQU7mS
+    img: systems/teriock/src/icons/abilities/no-hands.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pEHlzKqtdHmrOVMr.FUTUglYHlbjQU7mS'
+  - name: Normal Movement
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -2524,31 +2374,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: LUacm5gsh0mNCU2l
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pEHlzKqtdHmrOVMr.LUacm5gsh0mNCU2l'
-  - name: Normal Perception
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2698,6 +2524,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: LUacm5gsh0mNCU2l
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pEHlzKqtdHmrOVMr.LUacm5gsh0mNCU2l'
+  - name: Normal Perception
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -2798,31 +2648,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: vSNYpJZzcvHol2pD
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pEHlzKqtdHmrOVMr.vSNYpJZzcvHol2pD'
-  - name: Normal Sneak
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2972,6 +2798,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: vSNYpJZzcvHol2pD
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pEHlzKqtdHmrOVMr.vSNYpJZzcvHol2pD'
+  - name: Normal Sneak
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -3072,6 +2922,156 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      impacts:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
     _id: lkHSLcKoBXUGUARf
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     changes: []
@@ -3102,7 +3102,105 @@ effects:
         rootUuid: Compendium.teriock.species.Item.pEHlzKqtdHmrOVMr
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: passive
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: str
+          minVal: 2
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - primal
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -3300,104 +3398,6 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: passive
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 2
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - primal
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
     _id: CyRuxPGMGM7ncPlm
     img: systems/teriock/src/icons/abilities/improved-carrying-capacity.webp
     changes: []

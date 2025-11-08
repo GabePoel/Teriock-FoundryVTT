@@ -19,7 +19,6 @@ system:
     more job opportunities for themselves. If you're an Assassin, don't think
     twice about killing someone, care little for your own life and cut to the
     chase!
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -38,7 +37,120 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.CLZUpGn9Vg4QyXhQ
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
+          are @L[Property:AV0]{AV0} for you. You may change which class of
+          weapons you choose during a @L[Core:Long Rest]{long rest}. Whenever
+          you attempt a @L[Category:Single action abilities]{single action}
+          @L[Category:Weapon delivery abilities]{weapon} @L[Category:Attack
+          abilities]{attack} with a weapon of the chosen @L[Category:Weapon
+          classes]{class}, you may trigger a @L[Category:Single action
+          abilities]{single action} non-attack @L[Category:Basic
+          abilities]{basic ability} as a @L[Core:Reactive Maneuvers]{free
+          reaction} as well.
+        proficient: >-
+          You may also trigger @L[Category:Single action abilities]{single
+          action} non-attack @L[Category:Assassin class abilities]{Assassin
+          abilities} as @L[Core:Reactive Maneuvers]{free reactions} in this way.
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: assassin
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -189,47 +301,64 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
+    _id: jbphA4Hh5P5qFAwC
+    img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!CLZUpGn9Vg4QyXhQ.jbphA4Hh5P5qFAwC'
+  - name: Slay
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.CLZUpGn9Vg4QyXhQ
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: reactive
+      executionTime: r0
       delivery:
-        base: self
+        base: weapon
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Always Active
+        description: Instant
       sustained: false
-      range: Self.
+      range: Your Weapon's Range
       overview:
         base: >-
-          Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
-          are @L[Property:AV0]{AV0} for you. You may change which class of
-          weapons you choose during a @L[Core:Long Rest]{long rest}. Whenever
-          you attempt a @L[Category:Single action abilities]{single action}
-          @L[Category:Weapon delivery abilities]{weapon} @L[Category:Attack
-          abilities]{attack} with a weapon of the chosen @L[Category:Weapon
-          classes]{class}, you may trigger a @L[Category:Single action
-          abilities]{single action} non-attack @L[Category:Basic
-          abilities]{basic ability} as a @L[Core:Reactive Maneuvers]{free
-          reaction} as well.
-        proficient: >-
-          You may also trigger @L[Category:Single action abilities]{single
-          action} non-attack @L[Category:Assassin class abilities]{Assassin
-          abilities} as @L[Core:Reactive Maneuvers]{free reactions} in this way.
+          Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.
+        proficient: ''
         fluent: ''
       results:
         hit: ''
@@ -260,9 +389,9 @@ effects:
         somatic: false
         material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -282,11 +411,12 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
+      trigger: >-
+        You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.
       basic: false
       form: normal
       limitation: ''
@@ -302,31 +432,10 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: jbphA4Hh5P5qFAwC
-    img: systems/teriock/src/icons/abilities/weapons-mastery.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!CLZUpGn9Vg4QyXhQ.jbphA4Hh5P5qFAwC'
-  - name: Slay
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.CLZUpGn9Vg4QyXhQ
-        subIds: []
-        supId: null
-      applies:
+      effectTypes:
+        - killing
+        - damaging
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -477,41 +586,69 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: U6te8wmZCvU5LGx1
+    img: systems/teriock/src/icons/abilities/slay.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!CLZUpGn9Vg4QyXhQ.U6te8wmZCvU5LGx1'
+  - name: Careful Planning
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.CLZUpGn9Vg4QyXhQ
+        subIds:
+          - BvYk4v41WjCPKc1p
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      maneuver: passive
+      executionTime: passive
       delivery:
-        base: weapon
+        base: self
         parent: null
         package: null
       targets:
-        - creature
+        - self
       elements: []
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
+        description: Always Active
       sustained: false
-      range: Your Weapon's Range
+      range: Self.
       overview:
         base: >-
-          Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.
-        proficient: ''
-        fluent: ''
+          When you use @L[Ability:Hitman]{Hitman}, you may instead prepare an
+          area up to 15 feet by 15 feet. In addition, you
+          @L[Keyword:Resistance]{resist} being @L[Core:Surprise
+          Rounds]{surprised} in towns and other urban areas. You also gain
+          @L[Ability:Reactive Hide]{Reactive Hide}.
+        proficient: >-
+          The size of area you can prepare is (@L[Core:Proficiency Bonus]{P} +
+          2) × 5 feet by (@L[Core:Proficiency Bonus]{P} + 2) × 5 feet.
+        fluent: >-
+          The size of area you can prepare is (@L[Core:Fluency Bonus]{F} + 2) ×
+          5 feet by (@L[Core:Fluency Bonus]{F} + 2) × 5 feet.
       results:
         hit: ''
         critHit: ''
@@ -541,9 +678,9 @@ effects:
         somatic: false
         material: false
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -566,9 +703,7 @@ effects:
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: >-
-        You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.
+      trigger: ''
       basic: false
       form: normal
       limitation: ''
@@ -585,34 +720,8 @@ effects:
         raw: ''
         derived: 0
       effectTypes:
-        - killing
-        - damaging
-    _id: U6te8wmZCvU5LGx1
-    img: systems/teriock/src/icons/abilities/slay.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!CLZUpGn9Vg4QyXhQ.U6te8wmZCvU5LGx1'
-  - name: Careful Planning
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.CLZUpGn9Vg4QyXhQ
-        subIds:
-          - BvYk4v41WjCPKc1p
-        supId: null
-      applies:
+        - resistance
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -766,14 +875,38 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: GLCSBZxuh2GNxbkb
+    img: systems/teriock/src/icons/abilities/careful-planning.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!CLZUpGn9Vg4QyXhQ.GLCSBZxuh2GNxbkb'
+  - name: Reactive Hide
+    type: ability
+    system:
+      hierarchy:
+        supId: GLCSBZxuh2GNxbkb
+        rootUuid: Compendium.teriock.classes.Item.CLZUpGn9Vg4QyXhQ
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: reactive
+      executionTime: r0
       delivery:
         base: self
         parent: null
@@ -782,28 +915,19 @@ effects:
         - self
       elements: []
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Always Active
+        description: Instant
       sustained: false
       range: Self.
       overview:
-        base: >-
-          When you use @L[Ability:Hitman]{Hitman}, you may instead prepare an
-          area up to 15 feet by 15 feet. In addition, you
-          @L[Keyword:Resistance]{resist} being @L[Core:Surprise
-          Rounds]{surprised} in towns and other urban areas. You also gain
-          @L[Ability:Reactive Hide]{Reactive Hide}.
-        proficient: >-
-          The size of area you can prepare is (@L[Core:Proficiency Bonus]{P} +
-          2) × 5 feet by (@L[Core:Proficiency Bonus]{P} + 2) × 5 feet.
-        fluent: >-
-          The size of area you can prepare is (@L[Core:Fluency Bonus]{F} + 2) ×
-          5 feet by (@L[Core:Fluency Bonus]{F} + 2) × 5 feet.
+        base: You become @L[Condition:Hidden]{hidden}.
+        proficient: ''
+        fluent: ''
       results:
         hit: ''
         critHit: ''
@@ -855,10 +979,11 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
+      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
+      trigger: You @L[Condition:Down]{drop} another creature.
       basic: false
       form: normal
       limitation: ''
@@ -874,33 +999,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-      effectTypes:
-        - resistance
-    _id: GLCSBZxuh2GNxbkb
-    img: systems/teriock/src/icons/abilities/careful-planning.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!CLZUpGn9Vg4QyXhQ.GLCSBZxuh2GNxbkb'
-  - name: Reactive Hide
-    type: ability
-    system:
-      hierarchy:
-        supId: GLCSBZxuh2GNxbkb
-        rootUuid: Compendium.teriock.classes.Item.CLZUpGn9Vg4QyXhQ
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses:
@@ -1051,106 +1150,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Self.
-      overview:
-        base: You become @L[Condition:Hidden]{hidden}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: assassin
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: You @L[Condition:Down]{drop} another creature.
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: BvYk4v41WjCPKc1p
     img: systems/teriock/src/icons/abilities/reactive-hide.webp
     changes: []
@@ -1165,7 +1164,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!CLZUpGn9Vg4QyXhQ.BvYk4v41WjCPKc1p'
 ownership:

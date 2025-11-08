@@ -17,7 +17,6 @@ effects:
       description: >-
         <p>You know the way of the @L[Creature:Venomous Frog]{venomous
         frog}.</p>
-      wikiNamespace: Tradecraft
     _id: bhj0ByHnnfKlRJpA
     img: icons/environment/settlement/stables-logo.webp
     changes: []
@@ -47,7 +46,111 @@ effects:
         rootUuid: Compendium.teriock.powers.Item.rwvrBCeyZr4W24P3
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: hand
+        parent: null
+        package: touch
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - nature
+      endCondition: >-
+        At the start of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well."
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: ub
+      powerSources:
+        - magical
+      prepared: true
+      range: Your Hand's Range
+      requirements: ''
+      results:
+        hit: >-
+          Target is @L[Condition:Grounded]{grounded} and
+          @L[Condition:Immobile]{immobilized}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: true
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: natureMage
+      impacts:
         base:
           statuses:
             - grounded
@@ -201,6 +304,35 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: OVY3qxmZWXVRi72B
+    img: systems/teriock/src/icons/abilities/earthbind-touch.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!rwvrBCeyZr4W24P3.OVY3qxmZWXVRi72B'
+  - name: Poison Item
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.powers.Item.rwvrBCeyZr4W24P3
+        subIds: []
+        supId: null
       adept:
         enabled: false
         amount: 1
@@ -232,23 +364,20 @@ effects:
       delivery:
         base: hand
         parent: null
-        package: touch
+        package: null
       duration:
-        unit: minute
-        quantity: 1
+        unit: hour
+        quantity: 24
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: 24 Hours
       effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
-      elements:
-        - nature
-      endCondition: >-
-        At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+      elements: []
+      endCondition: Target @L[Condition:Dead]{dies}.
       executionTime: a1
       expansion: null
       expansionRange: null
@@ -259,7 +388,7 @@ effects:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well."
+      heightened: ''
       improvement: ''
       improvements:
         attributeImprovement:
@@ -268,25 +397,34 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: attack
+      interaction: manifest
       invoked: false
       limitation: ''
       maneuver: active
       overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      piercing: ub
+        base: >-
+          Target makes a creature become @L[Condition:Poisoned]{poisoned}. The
+          @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @L[Core:Damage]{damage}. The way the item delivers this to its user
+          depends on the nature of the item. If it's food or drink, it's when
+          the item is consumed. The @L[Core:GM]{GM} may approve other cases as
+          well. The item only delivers the @L[Condition:Poisoned]{poison} effect
+          once.
+        proficient: >-
+          The @L[Condition:Poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @L[Core:Damage]{damage}.
+        fluent: >-
+          The @L[Condition:Poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @L[Core:Damage]{damage}.
+      piercing: normal
       powerSources:
-        - magical
+        - alchemical
       prepared: true
       range: Your Hand's Range
-      requirements: ''
+      requirements: Target is not a weapon.
       results:
-        hit: >-
-          Target is @L[Condition:Grounded]{grounded} and
-          @L[Condition:Immobile]{immobilized}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        hit: ''
+        critHit: ''
         miss: ''
         critMiss: ''
         save: ''
@@ -296,45 +434,16 @@ effects:
       ritual: false
       rotator: false
       secret: false
-      skill: false
-      spell: true
+      skill: true
+      spell: false
       standard: true
       sustained: false
       targets:
-        - creature
+        - item
       trigger: ''
       warded: false
-      class: natureMage
-    _id: OVY3qxmZWXVRi72B
-    img: systems/teriock/src/icons/abilities/earthbind-touch.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rwvrBCeyZr4W24P3.OVY3qxmZWXVRi72B'
-  - name: Poison Item
-    type: ability
-    system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      hierarchy:
-        rootUuid: Compendium.teriock.powers.Item.rwvrBCeyZr4W24P3
-        subIds: []
-        supId: null
-      applies:
+      class: assassin
+      impacts:
         base:
           statuses:
             - poisoned
@@ -488,116 +597,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: hand
-        parent: null
-        package: null
-      duration:
-        unit: hour
-        quantity: 24
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 24 Hours
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: Target @L[Condition:Dead]{dies}.
-      executionTime: a1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: >-
-          Target makes a creature become @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @L[Core:Damage]{damage}. The way the item delivers this to its user
-          depends on the nature of the item. If it's food or drink, it's when
-          the item is consumed. The @L[Core:GM]{GM} may approve other cases as
-          well. The item only delivers the @L[Condition:Poisoned]{poison} effect
-          once.
-        proficient: >-
-          The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @L[Core:Damage]{damage}.
-        fluent: >-
-          The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @L[Core:Damage]{damage}.
-      piercing: normal
-      powerSources:
-        - alchemical
-      prepared: true
-      range: Your Hand's Range
-      requirements: Target is not a weapon.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - item
-      trigger: ''
-      warded: false
-      class: assassin
     _id: WvNu0UEEsOYqdHYz
     img: systems/teriock/src/icons/abilities/poison-item.webp
     changes: []

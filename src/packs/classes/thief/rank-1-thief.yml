@@ -17,7 +17,6 @@ system:
     blinking an eyelash, that is their job. If you are playing a thief, lie and
     make up stories, be ever watchful for a chance to search or loot and look
     for the profit angle, never doing anything for free.
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -36,7 +35,123 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.gSFiJrrtQ9pUnVI6
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You become @L[Condition:Hidden]{hidden}. As you do this, you may roll
+          [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
+          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
+          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.
+        proficient: >-
+          Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC (if
+          it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).
+        fluent: >-
+          Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC (if
+          it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: snk
+          minVal: 2
+        featSaveImprovement:
+          attribute: snk
+          amount: proficiency
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: thief
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: >-
+        You are in a location with shadows, dim light,
+        @L[Core:Cover]{three-quarters cover}, or some other feature which the
+        @L[Core:GM]{GM} determines is appropriate for being
+        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+        these conditions to stay @L[Condition:Hidden]{hidden}.
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses:
@@ -190,122 +305,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You become @L[Condition:Hidden]{hidden}. As you do this, you may roll
-          [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
-          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.
-        proficient: >-
-          Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC (if
-          it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).
-        fluent: >-
-          Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC (if
-          it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          attribute: snk
-          amount: proficiency
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: thief
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: >-
-        You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:GM]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: ppFOABLH2goL7oXi
     img: systems/teriock/src/icons/abilities/hide.webp
     changes: []
@@ -330,7 +329,122 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.gSFiJrrtQ9pUnVI6
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - spiritual
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: reactive
+      executionTime: r1
+      delivery:
+        base: missile
+        parent: null
+        package: ray
+      targets:
+        - creature
+      elements: []
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      sustained: false
+      range: '60'
+      overview:
+        base: ''
+        proficient: >-
+          This also makes the effect of that @L[Category:Abilities]{ability}
+          @L[Core:Fizzles]{fizzle}.
+        fluent: ''
+      results:
+        hit: >-
+          Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: av0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: thief
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: variable
+          value:
+            static: 0
+            formula: ''
+            variable: >-
+              This costs 0 @L[Core:MP]{MP} if the triggering
+              @L[Category:Abilities]{ability} was used on you or some
+              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
+              It costs 1 @L[Core:MP]{MP} otherwise.
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: >-
+        At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+      requirements: You may only target the triggering creature.
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: >-
+        Another creature uses a non-@L[Category:Basic abilities]{basic}
+        @L[Category:Active abilities]{active} or @L[Category:Reactive
+        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
+        against a different creature or some @L[Category:Equipment]{equipment}
+        that different creature @L[Keyword:Bearing]{bares}.
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -481,41 +595,63 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: GnibXJDvothwbijT
+    img: systems/teriock/src/icons/abilities/disable-ray.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!gSFiJrrtQ9pUnVI6.GnibXJDvothwbijT'
+  - name: Glue
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.gSFiJrrtQ9pUnVI6
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - spiritual
-      interaction: attack
+      interaction: manifest
       featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      maneuver: slow
+      executionTime: 10 Minutes
       delivery:
-        base: missile
+        base: sight
         parent: null
-        package: ray
+        package: ritual
       targets:
-        - creature
+        - item
       elements: []
       duration:
-        unit: minute
-        quantity: 1
+        unit: hour
+        quantity: 24
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: 24 Hours
       sustained: false
-      range: '60'
+      range: '5'
       overview:
-        base: ''
-        proficient: >-
-          This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.
+        base: >-
+          Target is @L[Property:Glued]{glued} to the creature
+          @L[Keyword:Bearing]{bearing} it.
+        proficient: ''
         fluent: ''
       results:
-        hit: >-
-          Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.
+        hit: ''
         critHit: ''
         miss: ''
         critMiss: ''
@@ -523,7 +659,7 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: av0
+      piercing: normal
       improvements:
         attributeImprovement:
           attribute: null
@@ -534,7 +670,7 @@ effects:
       skill: true
       spell: false
       standard: true
-      ritual: false
+      ritual: true
       class: thief
       rotator: false
       invoked: false
@@ -543,15 +679,11 @@ effects:
         somatic: false
         material: false
         mp:
-          type: variable
+          type: none
           value:
             static: 0
             formula: ''
-            variable: >-
-              This costs 0 @L[Core:MP]{MP} if the triggering
-              @L[Category:Abilities]{ability} was used on you or some
-              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
-              It costs 1 @L[Core:MP]{MP} otherwise.
+            variable: ''
         hp:
           type: none
           value:
@@ -567,20 +699,12 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: >-
-        At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: You may only target the triggering creature.
-      effects: []
+      endCondition: ''
+      requirements: Target item must be @L[Keyword:Bearing]{beared} by a creature.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: >-
-        Another creature uses a non-@L[Category:Basic abilities]{basic}
-        @L[Category:Active abilities]{active} or @L[Category:Reactive
-        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
-        against a different creature or some @L[Category:Equipment]{equipment}
-        that different creature @L[Keyword:Bearing]{bares}.
+      trigger: ''
       basic: false
       form: normal
       limitation: ''
@@ -596,31 +720,9 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: GnibXJDvothwbijT
-    img: systems/teriock/src/icons/abilities/disable-ray.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!gSFiJrrtQ9pUnVI6.GnibXJDvothwbijT'
-  - name: Glue
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.gSFiJrrtQ9pUnVI6
-        subIds: []
-        supId: null
-      applies:
+      effectTypes:
+        - immunity
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -774,109 +876,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        parent: null
-        package: ritual
-      targets:
-        - item
-      elements: []
-      duration:
-        unit: hour
-        quantity: 24
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 24 Hours
-      sustained: false
-      range: '5'
-      overview:
-        base: >-
-          Target is @L[Property:Glued]{glued} to the creature
-          @L[Keyword:Bearing]{bearing} it.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: true
-      class: thief
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: Target item must be @L[Keyword:Bearing]{beared} by a creature.
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - immunity
     _id: rj6V7Q1lLOUPu7Du
     img: systems/teriock/src/icons/abilities/glue.webp
     changes: []
@@ -901,7 +900,110 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.gSFiJrrtQ9pUnVI6
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - spiritual
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      targets:
+        - item
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      sustained: false
+      range: Your Hand's Range
+      overview:
+        base: Target is no longer @L[Property:Glued]{glued} and you take it.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: thief
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: static
+          value:
+            static: 1
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: >-
+        Target's bearer is @L[Condition:Down]{down} or target it
+        @L[Property:Searchable]{searchable}.
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - stealing
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1051,33 +1153,59 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: HVztFRuBvKRFmzSR
+    img: systems/teriock/src/icons/abilities/unglue.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!gSFiJrrtQ9pUnVI6.HVztFRuBvKRFmzSR'
+  - name: Talented Locksmith
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.gSFiJrrtQ9pUnVI6
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - spiritual
+        - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      maneuver: passive
+      executionTime: passive
       delivery:
-        base: hand
+        base: self
         parent: null
         package: null
       targets:
-        - item
+        - self
       elements: []
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
+        description: Always Active
       sustained: false
-      range: Your Hand's Range
+      range: Self.
       overview:
-        base: Target is no longer @L[Property:Glued]{glued} and you take it.
+        base: >-
+          You are a @L[Keyword:Talented]{talented}
+          @L[Tradecraft:Locksmith]{locksmith}.
         proficient: ''
         fluent: ''
       results:
@@ -1109,9 +1237,9 @@ effects:
         somatic: false
         material: false
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -1130,9 +1258,8 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: >-
-        Target's bearer is @L[Condition:Down]{down} or target it
-        @L[Property:Searchable]{searchable}.
+      requirements: ''
+      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -1152,33 +1279,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-      effectTypes:
-        - stealing
-    _id: HVztFRuBvKRFmzSR
-    img: systems/teriock/src/icons/abilities/unglue.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!gSFiJrrtQ9pUnVI6.HVztFRuBvKRFmzSR'
-  - name: Talented Locksmith
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.gSFiJrrtQ9pUnVI6
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1332,108 +1433,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You are a @L[Keyword:Talented]{talented}
-          @L[Tradecraft:Locksmith]{locksmith}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: thief
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: 5wJIYxX759GMCUms
     img: icons/skills/trades/security-locksmith-key-gray.webp
     changes: []
@@ -1448,7 +1447,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!gSFiJrrtQ9pUnVI6.5wJIYxX759GMCUms'
 ownership:

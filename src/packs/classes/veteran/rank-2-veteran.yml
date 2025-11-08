@@ -17,7 +17,6 @@ system:
     always working to better ensure their protection, which is why they survive
     to be veterans. If you are a Veteran be jaded, unimpressed, hard, and
     pessimistic.
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -41,7 +40,120 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: reactive
+      executionTime: r1
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You take only half the triggering @L[Core:Damage]{damage}.<div
+          class="note"><b>Note:</b> You must be able to @L[Core:Movement
+          Speed]{move} to use Tumble. This means you cannot use it while
+          @L[Condition:Snared]{snared}.</div><div class="note"><b>Note:</b> The
+          @L[Core:Damage]{damage} is rounded <i>down</i>. If there are multiple
+          independent @L[Category:Damage types]{types of damage} then they are
+          halved independently. If you were originally dealt 15
+          @L[Damage:Fire]{fire damage} and 3 @L[Damage:Holy]{holy damage} then
+          you would only take 7 @L[Damage:Fire]{fire damage} and 1
+          @L[Damage:Holy]{holy damage}.</div>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: veteran
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: >-
+        At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: You would take @L[Core:Damage]{damage}.
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - movement
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -192,14 +304,38 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: oUIgsh14OU9naofi
+    img: systems/teriock/src/icons/abilities/tumble.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!EBmpH7xO1BimJZ7A.oUIgsh14OU9naofi'
+  - name: Unbreachability
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      maneuver: passive
+      executionTime: passive
       delivery:
         base: self
         parent: null
@@ -208,27 +344,17 @@ effects:
         - self
       elements: []
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
+        description: Always Active
       sustained: false
       range: Self.
       overview:
-        base: >-
-          You take only half the triggering @L[Core:Damage]{damage}.<div
-          class="note"><b>Note:</b> You must be able to @L[Core:Movement
-          Speed]{move} to use Tumble. This means you cannot use it while
-          @L[Condition:Snared]{snared}.</div><div class="note"><b>Note:</b> The
-          @L[Core:Damage]{damage} is rounded <i>down</i>. If there are multiple
-          independent @L[Category:Damage types]{types of damage} then they are
-          halved independently. If you were originally dealt 15
-          @L[Damage:Fire]{fire damage} and 3 @L[Damage:Holy]{holy damage} then
-          you would only take 7 @L[Damage:Fire]{fire damage} and 1
-          @L[Damage:Holy]{holy damage}.</div>
+        base: Armor you wear is @L[Property:Unbreachable]{unbreachable}.
         proficient: ''
         fluent: ''
       results:
@@ -280,14 +406,13 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: >-
-        At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.
+      endCondition: ''
       requirements: ''
+      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: You would take @L[Core:Damage]{damage}.
+      trigger: ''
       basic: false
       form: normal
       limitation: ''
@@ -303,33 +428,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-      effectTypes:
-        - movement
-    _id: oUIgsh14OU9naofi
-    img: systems/teriock/src/icons/abilities/tumble.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!EBmpH7xO1BimJZ7A.oUIgsh14OU9naofi'
-  - name: Unbreachability
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -483,35 +582,69 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: clVulByqsIAxIfwU
+    img: systems/teriock/src/icons/abilities/unbreachability.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!EBmpH7xO1BimJZ7A.clVulByqsIAxIfwU'
+  - name: Fortify Area
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: slow
+      executionTime: Short Rest
       delivery:
         base: self
         parent: null
         package: null
       targets:
-        - self
+        - area
       elements: []
       duration:
-        unit: noLimit
-        quantity: 0
+        unit: hour
+        quantity: 24
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Always Active
+        description: 24 Hours
       sustained: false
       range: Self.
       overview:
-        base: Armor you wear is @L[Property:Unbreachable]{unbreachable}.
-        proficient: ''
-        fluent: ''
+        base: >-
+          You may spend a @L[Core:Short Rest]{short rest} building defensive
+          fortifications around the area you are resting in. You and your allies
+          that are in this are when @L[Core:Combat]{combat} begins gain
+          [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for
+          the duration of that @L[Core:Combat]{combat}. This area counts as
+          having been "fortified".
+        proficient: >-
+          You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
+          @L[Core:Temporary Hit Points]{temporary HP}.
+        fluent: >-
+          You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
+          @L[Core:Temporary Hit Points]{temporary HP}.
       results:
         hit: ''
         critHit: ''
@@ -562,7 +695,7 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: ''
+      requirements: You remain in the targeted area.
       effects: []
       expansion: null
       expansionRange: null
@@ -583,31 +716,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: clVulByqsIAxIfwU
-    img: systems/teriock/src/icons/abilities/unbreachability.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!EBmpH7xO1BimJZ7A.clVulByqsIAxIfwU'
-  - name: Fortify Area
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -760,45 +869,63 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: mPIL5K3lB044ADRs
+    img: systems/teriock/src/icons/abilities/fortify-area.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!EBmpH7xO1BimJZ7A.mPIL5K3lB044ADRs'
+  - name: Bodyguard Training
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
+        subIds:
+          - tXicjO2kkuaK6lwM
+          - HIALVm61I7jeQzj2
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      maneuver: passive
+      executionTime: passive
       delivery:
         base: self
         parent: null
         package: null
       targets:
-        - area
+        - self
       elements: []
       duration:
-        unit: hour
-        quantity: 24
+        unit: minute
+        quantity: 1
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 24 Hours
+        description: 1 Minute
       sustained: false
       range: Self.
       overview:
         base: >-
-          You may spend a @L[Core:Short Rest]{short rest} building defensive
-          fortifications around the area you are resting in. You and your allies
-          that are in this are when @L[Core:Combat]{combat} begins gain
-          [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for
-          the duration of that @L[Core:Combat]{combat}. This area counts as
-          having been "fortified".
-        proficient: >-
-          You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.
-        fluent: >-
-          You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.
+          You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
+          @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
+        proficient: ''
+        fluent: ''
       results:
         hit: ''
         critHit: ''
@@ -849,7 +976,7 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: You remain in the targeted area.
+      requirements: ''
       effects: []
       expansion: null
       expansionRange: null
@@ -870,33 +997,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: mPIL5K3lB044ADRs
-    img: systems/teriock/src/icons/abilities/fortify-area.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!EBmpH7xO1BimJZ7A.mPIL5K3lB044ADRs'
-  - name: Bodyguard Training
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
-        subIds:
-          - tXicjO2kkuaK6lwM
-          - HIALVm61I7jeQzj2
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1046,20 +1147,44 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: JvnYKtX1AOq8g8QI
+    img: systems/teriock/src/icons/abilities/bodyguard-training.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!EBmpH7xO1BimJZ7A.JvnYKtX1AOq8g8QI'
+  - name: Bodyguard Backup
+    type: ability
+    system:
+      hierarchy:
+        supId: JvnYKtX1AOq8g8QI
+        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: reactive
+      executionTime: r0
       delivery:
-        base: self
+        base: weapon
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
         unit: minute
@@ -1070,11 +1195,12 @@ effects:
         stationary: false
         description: 1 Minute
       sustained: false
-      range: Self.
+      range: '5'
       overview:
         base: >-
-          You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
-          @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
+          Pick another creature within range. They gain
+          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
+          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they make.
         proficient: ''
         fluent: ''
       results:
@@ -1127,12 +1253,14 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: ''
+      requirements: You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
       effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
+      trigger: >-
+        You attempt an @L[Core:Attack Interaction]{attack} against another
+        creature.
       basic: false
       form: normal
       limitation: ''
@@ -1148,31 +1276,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: JvnYKtX1AOq8g8QI
-    img: systems/teriock/src/icons/abilities/bodyguard-training.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!EBmpH7xO1BimJZ7A.JvnYKtX1AOq8g8QI'
-  - name: Bodyguard Backup
-    type: ability
-    system:
-      hierarchy:
-        supId: JvnYKtX1AOq8g8QI
-        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1323,6 +1427,30 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_U3eabIvCln4vwrrO: rollFeatSave
+    _id: tXicjO2kkuaK6lwM
+    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!EBmpH7xO1BimJZ7A.tXicjO2kkuaK6lwM'
+  - name: Bodyguard Taunt
+    type: ability
+    system:
+      hierarchy:
+        supId: JvnYKtX1AOq8g8QI
+        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1339,20 +1467,20 @@ effects:
         - creature
       elements: []
       duration:
-        unit: minute
-        quantity: 1
+        unit: second
+        quantity: 5
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: 5 Seconds
       sustained: false
       range: '5'
       overview:
         base: >-
-          Pick another creature within range. They gain
-          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
-          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they make.
+          Pick another creature within range. They are
+          @L[Condition:Goaded]{goaded} until the start of your next
+          @L[Core:Turns]{turn}.
         proficient: ''
         fluent: ''
       results:
@@ -1405,7 +1533,7 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.
+      requirements: You are not also using @L[Ability:Bodyguard Backup]{Bodyguard Backup}.
       effects: []
       expansion: null
       expansionRange: null
@@ -1428,31 +1556,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: tXicjO2kkuaK6lwM
-    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!EBmpH7xO1BimJZ7A.tXicjO2kkuaK6lwM'
-  - name: Bodyguard Taunt
-    type: ability
-    system:
-      hierarchy:
-        supId: JvnYKtX1AOq8g8QI
-        rootUuid: Compendium.teriock.classes.Item.EBmpH7xO1BimJZ7A
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses:
             - goaded
@@ -1604,111 +1708,6 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_R54099tFLeLMmBAw: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: second
-        quantity: 5
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 5 Seconds
-      sustained: false
-      range: '5'
-      overview:
-        base: >-
-          Pick another creature within range. They are
-          @L[Condition:Goaded]{goaded} until the start of your next
-          @L[Core:Turns]{turn}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: veteran
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: You are not also using @L[Ability:Bodyguard Backup]{Bodyguard Backup}.
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: >-
-        You attempt an @L[Core:Attack Interaction]{attack} against another
-        creature.
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: HIALVm61I7jeQzj2
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     changes: []

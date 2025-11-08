@@ -115,6 +115,11 @@ function cleanEntry(doc) {
     delete doc.system.mpDiceBase;
     delete doc.system.applyHp;
     delete doc.system.applyMp;
+    delete doc.system.wikiNamespace;
+    if (doc.system.applies) {
+      doc.system.impacts = doc.system.applies;
+      delete doc.system.applies;
+    }
     if (doc.system.imports) {
       delete doc.system.imports.bodyParts;
       delete doc.system.imports.equipment;

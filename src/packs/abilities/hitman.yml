@@ -12,7 +12,105 @@ effects:
         subIds:
           - 5Jxyd7V2FYCQcIZs
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a2
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - area
+      elements: []
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Hour
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You prepare a 5 foot by 5 foot area. While in this area, you may make
+          a limited improved @L[Ability:Hide]{Hide} action.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: snk
+          minVal: 1
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: assassin
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -162,7 +260,29 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: NhuBlMa7kbphjRsy
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!aeUNJJ3naMPH4h5R.NhuBlMa7kbphjRsy'
+  - name: Hide
+    type: ability
+    system:
+      hierarchy:
+        supId: NhuBlMa7kbphjRsy
+        rootUuid: Compendium.teriock.abilities.Item.aeUNJJ3naMPH4h5R
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -170,29 +290,39 @@ effects:
       interaction: manifest
       featSaveAttribute: mov
       maneuver: active
-      executionTime: a2
+      executionTime: a1
       delivery:
         base: self
         parent: null
         package: null
       targets:
-        - area
+        - self
       elements: []
       duration:
-        unit: hour
-        quantity: 1
+        unit: instant
+        quantity: 0
         conditions:
           present: []
           absent: []
-        description: 1 Hour
+        stationary: false
+        description: Instant
       sustained: false
       range: Self.
       overview:
         base: >-
-          You prepare a 5 foot by 5 foot area. While in this area, you may make
-          a limited improved @L[Ability:Hide]{Hide} action.
-        proficient: ''
-        fluent: ''
+          You become @L[Condition:Hidden]{hidden}. As you do this, you may roll
+          [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
+          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
+          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.
+        proficient: >-
+          Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC (if
+          it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).
+        fluent: >-
+          Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC (if
+          it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).
       results:
         hit: ''
         critHit: ''
@@ -206,15 +336,15 @@ effects:
       improvements:
         attributeImprovement:
           attribute: snk
-          minVal: 1
+          minVal: 2
         featSaveImprovement:
-          attribute: null
-          amount: proficient
+          attribute: snk
+          amount: proficiency
       skill: true
       spell: false
       standard: true
       ritual: false
-      class: assassin
+      class: thief
       rotator: false
       invoked: false
       costs:
@@ -243,7 +373,12 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: ''
+      requirements: >-
+        You are in a location with shadows, dim light,
+        @L[Core:Cover]{three-quarters cover}, or some other feature which the
+        @L[Core:GM]{GM} determines is appropriate for being
+        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+        these conditions to stay @L[Condition:Hidden]{hidden}.
       effects: []
       expansion: null
       expansionRange: null
@@ -251,40 +386,25 @@ effects:
       trigger: ''
       basic: false
       form: normal
-      limitation: ''
-      improvement: ''
+      limitation: >-
+        You may only Hide in the location you have prepared and you do not get
+        the attribute improvement from this ability. You also do not remain
+        hidden if you leave this location.
+      improvement: >-
+        You may Hide regardless of the environment (cover, lighting, etc.) that
+        you prepare.
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: NhuBlMa7kbphjRsy
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!aeUNJJ3naMPH4h5R.NhuBlMa7kbphjRsy'
-  - name: Hide
-    type: ability
-    system:
-      hierarchy:
-        supId: NhuBlMa7kbphjRsy
-        rootUuid: Compendium.teriock.abilities.Item.aeUNJJ3naMPH4h5R
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses:
@@ -438,127 +558,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You become @L[Condition:Hidden]{hidden}. As you do this, you may roll
-          [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
-          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.
-        proficient: >-
-          Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC (if
-          it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).
-        fluent: >-
-          Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC (if
-          it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          attribute: snk
-          amount: proficiency
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: thief
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: >-
-        You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:GM]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: >-
-        You may only Hide in the location you have prepared and you do not get
-        the attribute improvement from this ability. You also do not remain
-        hidden if you leave this location.
-      improvement: >-
-        You may Hide regardless of the environment (cover, lighting, etc.) that
-        you prepare.
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: 5Jxyd7V2FYCQcIZs
     img: systems/teriock/src/icons/abilities/hide.webp
     changes: []

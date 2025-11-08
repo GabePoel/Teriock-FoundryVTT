@@ -14,7 +14,6 @@ system:
     the sport of combat and don't like missile weapons. Not reliable as guards
     as they are too distracted and are rarely very intelligent. If you are a
     Berserker be larger than life, brash, not too bright and stupidly brave.
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -40,7 +39,109 @@ effects:
           - VRvsBmMtlKtaINzb
           - zELmMqBHVULbvUn4
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
+          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -190,10 +291,36 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: u1FsCvpyntlWnTSb
+    img: systems/teriock/src/icons/abilities/battle-cry.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags:
+      teriock:
+        category: combat
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!dPRCI33meV4Uq3nN.u1FsCvpyntlWnTSb'
+  - name: Called Magic Resistance
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - martial
+        - primal
       interaction: manifest
       featSaveAttribute: mov
       maneuver: passive
@@ -210,15 +337,17 @@ effects:
         quantity: 0
         conditions:
           present: []
-          absent: []
+          absent:
+            - dead
         stationary: false
-        description: Always Active
+        description: While Alive
       sustained: false
       range: Self.
       overview:
         base: >-
-          You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
-          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.
+          You @L[Keyword:Resistance]{resist} all @L[Category:Conjured
+          spells]{Conjured spells} that aren't @L[Category:Self target
+          spells]{self targeted}.
         proficient: ''
         fluent: ''
       results:
@@ -272,7 +401,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -292,33 +420,9 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: u1FsCvpyntlWnTSb
-    img: systems/teriock/src/icons/abilities/battle-cry.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dPRCI33meV4Uq3nN.u1FsCvpyntlWnTSb'
-  - name: Called Magic Resistance
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
-        subIds: []
-        supId: null
-      applies:
+      effectTypes:
+        - resistance
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -472,111 +576,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent:
-            - dead
-        stationary: false
-        description: While Alive
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You @L[Keyword:Resistance]{resist} all @L[Category:Conjured
-          spells]{Conjured spells} that aren't @L[Category:Self target
-          spells]{self targeted}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - resistance
     _id: p2DArxllTXC5ohs5
     img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
     changes: []
@@ -603,156 +602,6 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
         subIds: []
         supId: null
-      applies:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -861,33 +710,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: U6Io4HFjTqIXYLJb
-    img: systems/teriock/src/icons/abilities/berserk.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dPRCI33meV4Uq3nN.U6Io4HFjTqIXYLJb'
-  - name: Throw the Bones
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1037,6 +860,32 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: U6Io4HFjTqIXYLJb
+    img: systems/teriock/src/icons/abilities/berserk.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags:
+      teriock:
+        category: combat
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!dPRCI33meV4Uq3nN.U6Io4HFjTqIXYLJb'
+  - name: Throw the Bones
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1142,35 +991,7 @@ effects:
         derived: 0
       effectTypes:
         - immunity
-    _id: 53Sm4pFZ19kZu9u4
-    img: systems/teriock/src/icons/abilities/throw-the-bones.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags:
-      teriock:
-        category: support
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dPRCI33meV4Uq3nN.53Sm4pFZ19kZu9u4'
-  - name: Intimidate
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
-        subIds:
-          - IhBghFsPiK6ssxM0
-          - cCSzKhvHE3YMNlSJ
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1320,6 +1141,34 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 53Sm4pFZ19kZu9u4
+    img: systems/teriock/src/icons/abilities/throw-the-bones.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags:
+      teriock:
+        category: support
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!dPRCI33meV4Uq3nN.53Sm4pFZ19kZu9u4'
+  - name: Intimidate
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
+        subIds:
+          - IhBghFsPiK6ssxM0
+          - cCSzKhvHE3YMNlSJ
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1422,6 +1271,156 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      impacts:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
     _id: P1C4Cgw7I4jMhLiY
     img: systems/teriock/src/icons/abilities/intimidate.webp
     changes: []
@@ -1448,7 +1447,113 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - primal
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent:
+            - dead
+        stationary: false
+        description: While Alive
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          At the start of each of your @L[Core:Turn]{turns}, you
+          @L[Core:Healing]{heal}. You cannot restore @L[Core:HP]{HP} in this
+          way.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - healing
+        - regeneration
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1599,112 +1704,6 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_7Kae2klQGEeDaA7B: turnStart
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent:
-            - dead
-        stationary: false
-        description: While Alive
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          At the start of each of your @L[Core:Turn]{turns}, you
-          @L[Core:Healing]{heal}. You cannot restore @L[Core:HP]{HP} in this
-          way.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - healing
-        - regeneration
     _id: yq8GVnL6HrtfXvue
     img: systems/teriock/src/icons/abilities/berserker-healing-factor.webp
     changes: []
@@ -1731,7 +1730,110 @@ effects:
         supId: u1FsCvpyntlWnTSb
         rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
         subIds: []
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: feat
+      featSaveAttribute: int
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: aura
+        parent: null
+        package: null
+      targets:
+        - creature
+      elements: []
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      sustained: false
+      range: '10'
+      overview:
+        base: This ability cannot affect @L[Condition:Deaf]{deaf} creatures.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: Targets become @L[Condition:Frightened]{frightened}.
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
+      costs:
+        verbal: true
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: >-
+        At the start of each of the targets' @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - loud
+      impacts:
         base:
           statuses:
             - frightened
@@ -1884,109 +1986,6 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: '10'
-      overview:
-        base: This ability cannot affect @L[Condition:Deaf]{deaf} creatures.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: Targets become @L[Condition:Frightened]{frightened}.
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: true
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: >-
-        At the start of each of the targets' @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - loud
     _id: VRvsBmMtlKtaINzb
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     changes: []
@@ -2011,7 +2010,109 @@ effects:
         supId: P1C4Cgw7I4jMhLiY
         rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
         subIds: []
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Enforcer]{enforcer}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2165,14 +2266,38 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: IhBghFsPiK6ssxM0
+    img: systems/teriock/src/icons/abilities/intimidating-presence.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!dPRCI33meV4Uq3nN.IhBghFsPiK6ssxM0'
+  - name: Battle Cry Resistance
+    type: ability
+    system:
+      hierarchy:
+        supId: u1FsCvpyntlWnTSb
+        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: active
+      executionTime: a0
       delivery:
         base: self
         parent: null
@@ -2181,19 +2306,19 @@ effects:
         - self
       elements: []
       duration:
-        unit: noLimit
-        quantity: 0
+        unit: minute
+        quantity: 5
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Always Active
+        description: 5 Minutes
       sustained: false
       range: Self.
       overview:
         base: >-
-          You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Enforcer]{enforcer}.
+          You @L[Keyword:Resistance]{resist} being
+          @L[Condition:Frightened]{frightened}.
         proficient: ''
         fluent: ''
       results:
@@ -2245,9 +2370,8 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: ''
+      endCondition: You die or 1 minute passes without combat.
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -2267,31 +2391,9 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: IhBghFsPiK6ssxM0
-    img: systems/teriock/src/icons/abilities/intimidating-presence.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dPRCI33meV4Uq3nN.IhBghFsPiK6ssxM0'
-  - name: Battle Cry Resistance
-    type: ability
-    system:
-      hierarchy:
-        supId: u1FsCvpyntlWnTSb
-        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
-        subIds: []
-      applies:
+      effectTypes:
+        - resistance
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2445,20 +2547,44 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: zELmMqBHVULbvUn4
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!dPRCI33meV4Uq3nN.zELmMqBHVULbvUn4'
+  - name: Terrify
+    type: ability
+    system:
+      hierarchy:
+        supId: P1C4Cgw7I4jMhLiY
+        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
+      interaction: feat
+      featSaveAttribute: int
       maneuver: active
-      executionTime: a0
+      executionTime: a1
       delivery:
-        base: self
+        base: sight
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
         unit: minute
@@ -2469,11 +2595,9 @@ effects:
         stationary: false
         description: 5 Minutes
       sustained: false
-      range: Self.
+      range: '30'
       overview:
-        base: >-
-          You @L[Keyword:Resistance]{resist} being
-          @L[Condition:Frightened]{frightened}.
+        base: ''
         proficient: ''
         fluent: ''
       results:
@@ -2483,7 +2607,12 @@ effects:
         critMiss: ''
         save: ''
         critSave: ''
-        fail: ''
+        fail: >-
+          If the target is @L[Condition:Frightened]{frightened}, they
+          immediately take [[/damage 1d4[psychic]]] @L[Core:Damage]{damage}.
+          Additionally, if some effect would cause them to become
+          @L[Condition:Frightened]{frightened}, they take [[/damage
+          1d4[psychic]]] @L[Core:Damage]{damage} as well.
         critFail: ''
       piercing: normal
       improvements:
@@ -2525,7 +2654,7 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: You die or 1 minute passes without combat.
+      endCondition: ''
       requirements: ''
       expansion: null
       expansionRange: null
@@ -2547,32 +2676,8 @@ effects:
         raw: ''
         derived: 0
       effectTypes:
-        - resistance
-    _id: zELmMqBHVULbvUn4
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dPRCI33meV4Uq3nN.zELmMqBHVULbvUn4'
-  - name: Terrify
-    type: ability
-    system:
-      hierarchy:
-        supId: P1C4Cgw7I4jMhLiY
-        rootUuid: Compendium.teriock.classes.Item.dPRCI33meV4Uq3nN
-        subIds: []
-      applies:
+        - mental
+      impacts:
         base:
           statuses:
             - frightened
@@ -2724,112 +2829,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: minute
-        quantity: 5
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 5 Minutes
-      sustained: false
-      range: '30'
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: >-
-          If the target is @L[Condition:Frightened]{frightened}, they
-          immediately take [[/damage 1d4[psychic]]] @L[Core:Damage]{damage}.
-          Additionally, if some effect would cause them to become
-          @L[Condition:Frightened]{frightened}, they take [[/damage
-          1d4[psychic]]] @L[Core:Damage]{damage} as well.
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - mental
     _id: cCSzKhvHE3YMNlSJ
     img: systems/teriock/src/icons/abilities/terrify.webp
     changes: []
@@ -2844,7 +2843,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!dPRCI33meV4Uq3nN.cCSzKhvHE3YMNlSJ'
 ownership:

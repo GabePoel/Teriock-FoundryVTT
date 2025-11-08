@@ -15,7 +15,6 @@ effects:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Boar]{boar}.</p>
-      wikiNamespace: Tradecraft
     _id: OZh3dDmeZWdlxORu
     img: icons/environment/settlement/stables-logo.webp
     changes: []
@@ -45,7 +44,107 @@ effects:
         rootUuid: Compendium.teriock.powers.Item.Qb4gMSIwEjNdwcBq
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes:
+        - resistance
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: r1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: reactive
+      overview:
+        base: You begin @L[Condition:Defying Death]{defying death}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: true
+      targets:
+        - self
+      trigger: You would @L[Condition:Down]{drop}.
+      warded: false
+      class: duelist
+      impacts:
         base:
           statuses:
             - defyingDeath
@@ -197,6 +296,35 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: LHH9eOxMgAlmlQqh
+    img: systems/teriock/src/icons/abilities/defy-death.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!Qb4gMSIwEjNdwcBq.LHH9eOxMgAlmlQqh'
+  - name: Talented Enforcer
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.powers.Item.Qb4gMSIwEjNdwcBq
+        subIds: []
+        supId: null
       adept:
         enabled: false
         amount: 1
@@ -230,20 +358,19 @@ effects:
         parent: null
         package: null
       duration:
-        unit: minute
-        quantity: 1
+        unit: noLimit
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
-      effectTypes:
-        - resistance
+        description: Always Active
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: r1
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -265,9 +392,11 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: reactive
+      maneuver: passive
       overview:
-        base: You begin @L[Condition:Defying Death]{defying death}.
+        base: >-
+          You are a @L[Keyword:Talented]{talented}
+          @L[Tradecraft:Enforcer]{enforcer}.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -288,45 +417,15 @@ effects:
       ritual: false
       rotator: false
       secret: false
-      skill: true
+      skill: false
       spell: false
-      standard: true
-      sustained: true
+      standard: false
+      sustained: false
       targets:
         - self
-      trigger: You would @L[Condition:Down]{drop}.
+      trigger: ''
       warded: false
-      class: duelist
-    _id: LHH9eOxMgAlmlQqh
-    img: systems/teriock/src/icons/abilities/defy-death.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!Qb4gMSIwEjNdwcBq.LHH9eOxMgAlmlQqh'
-  - name: Talented Enforcer
-    type: ability
-    system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      hierarchy:
-        rootUuid: Compendium.teriock.powers.Item.Qb4gMSIwEjNdwcBq
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -480,106 +579,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: passive
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          You are a @L[Keyword:Talented]{talented}
-          @L[Tradecraft:Enforcer]{enforcer}.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
     _id: tydLOnNiFwHFSU9G
     img: icons/skills/melee/unarmed-punch-fist-white.webp
     changes: []

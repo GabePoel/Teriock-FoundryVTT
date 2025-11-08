@@ -16,7 +16,6 @@ system:
     tune with the world at all times. If you are playing a Nature Mage be
     reclusive, avoiding people if you can, happy in nature and eager to leave
     any civilization.
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -40,7 +39,130 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.pmq5WaOSzBbspXEZ
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: missile
+        parent: null
+        package: ray
+      targets:
+        - creature
+      elements:
+        - nature
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      sustained: false
+      range: '60'
+      overview:
+        base: >-
+          As you cast Empathic Ray, choose either "damage" or "healing". The
+          effect varies depending on what you choose. Empathic Ray only counts
+          as a @L[Category:Damaging effects]{damaging effect} if you choose
+          "damage" and only as a @L[Category:Healing effects]{healing effect} if
+          you choose "healing". <br />If you do not take any damage before the
+          start of your next @L[Core:Turns]{turn}, you regain the
+          @L[Core:HP]{HP} you spent on Empathic Ray. This counts as a
+          @L[Category:Regeneration effects]{regeneration effect} and a
+          @L[Category:Healing effects]{healing effect}. This is the only part of
+          Empathic Ray that counts as a @L[Category:Regeneration
+          effects]{regeneration effect}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: >-
+          Deal [[/damage 1d8[magic]]] @L[Core:Damage]{damage} to target or
+          @L[Core:Healing]{heal} them (depending on what you chose).
+        critHit: >-
+          Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}. Or, if you chose "healing", double
+          the number of times that target @L[Core:Healing]{heals}.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: av0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: natureMage
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: formula
+          value:
+            static: 0
+            formula: 1d4
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: >-
+        For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+        1d8[magic]]] or @L[Core:Healing]{heal} the target again (depending on
+        what you chose).
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - healing
+        - regeneration
+        - damaging
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -192,6 +314,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: UYtzGLcYxtF6n42o
+    img: systems/teriock/src/icons/abilities/empathic-ray.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pmq5WaOSzBbspXEZ.UYtzGLcYxtF6n42o'
+  - name: Treeform Ball
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.pmq5WaOSzBbspXEZ
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -203,51 +349,44 @@ effects:
       delivery:
         base: missile
         parent: null
-        package: ray
+        package: ball
       targets:
         - creature
       elements:
         - nature
       duration:
-        unit: instant
+        unit: untilDawn
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
+        description: Until Dawn
       sustained: false
-      range: '60'
+      range: '30'
       overview:
-        base: >-
-          As you cast Empathic Ray, choose either "damage" or "healing". The
-          effect varies depending on what you choose. Empathic Ray only counts
-          as a @L[Category:Damaging effects]{damaging effect} if you choose
-          "damage" and only as a @L[Category:Healing effects]{healing effect} if
-          you choose "healing". <br />If you do not take any damage before the
-          start of your next @L[Core:Turns]{turn}, you regain the
-          @L[Core:HP]{HP} you spent on Empathic Ray. This counts as a
-          @L[Category:Regeneration effects]{regeneration effect} and a
-          @L[Category:Healing effects]{healing effect}. This is the only part of
-          Empathic Ray that counts as a @L[Category:Regeneration
-          effects]{regeneration effect}.
+        base: ''
         proficient: ''
         fluent: ''
       results:
         hit: >-
-          Deal [[/damage 1d8[magic]]] @L[Core:Damage]{damage} to target or
-          @L[Core:Healing]{heal} them (depending on what you chose).
+          Target is @L[Condition:Transformed]{minorly transformed} into a
+          @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
+          transformation}. The @L[Core:Size]{size} of the tree is equal to the
+          target's @L[Core:Size]{SIZE} prior to being
+          @L[Condition:Transformed]{transformed}. If a treeformed creature is
+          reduced to 0 @L[Core:HP]{HP}, then they revert and any remaining
+          @L[Core:Damage]{damage} carries over to their reverted state.
         critHit: >-
-          Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}. Or, if you chose "healing", double
-          the number of times that target @L[Core:Healing]{heals}.
+          If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
+          @L[Ability:Self Revert]{Self Revert}.
         miss: ''
         critMiss: ''
         save: ''
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: av0
+      piercing: ub
       improvements:
         attributeImprovement:
           attribute: null
@@ -273,10 +412,10 @@ effects:
             formula: ''
             variable: ''
         hp:
-          type: formula
+          type: none
           value:
             static: 0
-            formula: 1d4
+            formula: ''
             variable: ''
         gp:
           type: none
@@ -287,9 +426,9 @@ effects:
         break: ''
         materialCost: ''
       heightened: >-
-        For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
-        1d8[magic]]] or @L[Core:Healing]{heal} the target again (depending on
-        what you chose).
+        For each additional @L[Core:MP]{MP} spent, this effect lasts an addition
+        turn without the target being able to @L[Ability:Self Revert]{Self
+        Revert}.
       endCondition: ''
       requirements: ''
       expansion: null
@@ -312,34 +451,8 @@ effects:
         raw: ''
         derived: 0
       effectTypes:
-        - healing
-        - regeneration
-        - damaging
-    _id: UYtzGLcYxtF6n42o
-    img: systems/teriock/src/icons/abilities/empathic-ray.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pmq5WaOSzBbspXEZ.UYtzGLcYxtF6n42o'
-  - name: Treeform Ball
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.pmq5WaOSzBbspXEZ
-        subIds: []
-        supId: null
-      applies:
+        - transformation
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -492,120 +605,6 @@ effects:
           Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
           Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
           Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        parent: null
-        package: ball
-      targets:
-        - creature
-      elements:
-        - nature
-      duration:
-        unit: untilDawn
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Until Dawn
-      sustained: false
-      range: '30'
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: >-
-          Target is @L[Condition:Transformed]{minorly transformed} into a
-          @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
-          transformation}. The @L[Core:Size]{size} of the tree is equal to the
-          target's @L[Core:Size]{SIZE} prior to being
-          @L[Condition:Transformed]{transformed}. If a treeformed creature is
-          reduced to 0 @L[Core:HP]{HP}, then they revert and any remaining
-          @L[Core:Damage]{damage} carries over to their reverted state.
-        critHit: >-
-          If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
-          @L[Ability:Self Revert]{Self Revert}.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: natureMage
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: >-
-        For each additional @L[Core:MP]{MP} spent, this effect lasts an addition
-        turn without the target being able to @L[Ability:Self Revert]{Self
-        Revert}.
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - transformation
     _id: 7708EBMqpj0gjuCT
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
     changes: []
@@ -630,156 +629,6 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.pmq5WaOSzBbspXEZ
         subIds: []
         supId: null
-      applies:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -900,31 +749,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: IchCwvqx4Y2cflx6
-    img: systems/teriock/src/icons/abilities/oracle.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pmq5WaOSzBbspXEZ.IchCwvqx4Y2cflx6'
-  - name: Familiar Bond
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.pmq5WaOSzBbspXEZ
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1074,6 +899,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: IchCwvqx4Y2cflx6
+    img: systems/teriock/src/icons/abilities/oracle.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!pmq5WaOSzBbspXEZ.IchCwvqx4Y2cflx6'
+  - name: Familiar Bond
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.pmq5WaOSzBbspXEZ
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1197,6 +1046,156 @@ effects:
       effectTypes:
         - longRange
         - contract
+      impacts:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
     _id: w0uBsFDKbWVlndfk
     img: systems/teriock/src/icons/abilities/familiar-bond.webp
     changes: []

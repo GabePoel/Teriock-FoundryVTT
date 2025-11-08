@@ -16,7 +16,110 @@ effects:
         subIds:
           - oePM4DpZsKT2XpyE
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Hour
+      effectTypes:
+        - temporal
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - storm
+      endCondition: ''
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          You immediately stop being @L[Condition:Frozen]{frozen}. You may use
+          this ability even while @L[Condition:Frozen]{frozen}. However, you
+          also gain @L[Ability:Temporal Lethargy]{Temporal Lethargy}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -167,6 +270,35 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: JNhSnbhHtnTAZdN2
+    img: systems/teriock/src/icons/abilities/prethaw.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!CpLgUAjdl9zFtNdL.JNhSnbhHtnTAZdN2'
+  - name: Temporal Lethargy
+    type: ability
+    system:
+      hierarchy:
+        supId: JNhSnbhHtnTAZdN2
+        rootUuid: Compendium.teriock.abilities.Item.CpLgUAjdl9zFtNdL
+        subIds: []
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       adept:
         enabled: false
         amount: 1
@@ -200,13 +332,13 @@ effects:
         parent: null
         package: null
       duration:
-        unit: hour
-        quantity: 1
+        unit: noLimit
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Hour
+        description: Always Active
       effectTypes:
         - temporal
       elderSorcery: false
@@ -214,12 +346,12 @@ effects:
       elements:
         - storm
       endCondition: ''
-      executionTime: a1
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: normal
+      form: flaw
       gifted:
         enabled: false
         amount: 1
@@ -236,12 +368,14 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: passive
       overview:
         base: >-
-          You immediately stop being @L[Condition:Frozen]{frozen}. You may use
-          this ability even while @L[Condition:Frozen]{frozen}. However, you
-          also gain @L[Ability:Temporal Lethargy]{Temporal Lethargy}.
+          Negative effects tend to linger on you longer than they would
+          otherwise. Effects placed on you by opponents have their duration
+          doubled. Additionally, if you would roll some number of [[/roll d4]]s
+          to end effects placed on you by opponents, you roll one less [[/roll
+          d4]] than you would otherwise.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -270,36 +404,7 @@ effects:
         - self
       trigger: ''
       warded: false
-    _id: JNhSnbhHtnTAZdN2
-    img: systems/teriock/src/icons/abilities/prethaw.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!CpLgUAjdl9zFtNdL.JNhSnbhHtnTAZdN2'
-  - name: Temporal Lethargy
-    type: ability
-    system:
-      hierarchy:
-        supId: JNhSnbhHtnTAZdN2
-        rootUuid: Compendium.teriock.abilities.Item.CpLgUAjdl9zFtNdL
-        subIds: []
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -449,111 +554,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - temporal
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - storm
-      endCondition: ''
-      executionTime: passive
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: flaw
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          Negative effects tend to linger on you longer than they would
-          otherwise. Effects placed on you by opponents have their duration
-          doubled. Additionally, if you would roll some number of [[/roll d4]]s
-          to end effects placed on you by opponents, you roll one less [[/roll
-          d4]] than you would otherwise.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
     _id: oePM4DpZsKT2XpyE
     img: systems/teriock/src/icons/abilities/temporal-lethargy.webp
     changes: []

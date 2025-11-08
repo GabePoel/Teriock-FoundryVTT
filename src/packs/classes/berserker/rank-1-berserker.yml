@@ -14,7 +14,6 @@ system:
     the sport of combat and don't like missile weapons. Not reliable as guards
     as they are too distracted and are rarely very intelligent. If you are a
     Berserker be larger than life, brash, not too bright and stupidly brave.
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -38,7 +37,109 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.61TQqD43myeiyM1h
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: weapon
+        parent: null
+        package: strike
+      targets:
+        - vitals
+      elements: []
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      sustained: false
+      range: Your Weapon's Range
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      results:
+        hit: Targeted creature is @L[Condition:Frightened]{frightened}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: >-
+        At the start of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses:
             - frightened
@@ -191,6 +292,30 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
+    _id: 5HV8HJNxiR2xZPyA
+    img: systems/teriock/src/icons/abilities/threat.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!61TQqD43myeiyM1h.5HV8HJNxiR2xZPyA'
+  - name: Hack
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.61TQqD43myeiyM1h
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -204,25 +329,32 @@ effects:
         parent: null
         package: strike
       targets:
-        - vitals
+        - arm
+        - leg
       elements: []
       duration:
-        unit: minute
-        quantity: 1
+        unit: instant
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: Instant
       sustained: false
       range: Your Weapon's Range
       overview:
-        base: ''
+        base: >-
+          As you attack, choose either <i>arm</i> or <i>leg</i>. The damage gets
+          dealt accordingly.
         proficient: ''
         fluent: ''
       results:
-        hit: Targeted creature is @L[Condition:Frightened]{frightened}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        hit: >-
+          The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
+          leg, depending on what you chose.
+        critHit: >-
+          The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
+          legs, depending on what you chose.
         miss: ''
         critMiss: ''
         save: ''
@@ -269,9 +401,7 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: >-
-        At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
+      endCondition: ''
       requirements: ''
       effects: []
       expansion: null
@@ -293,31 +423,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: 5HV8HJNxiR2xZPyA
-    img: systems/teriock/src/icons/abilities/threat.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!61TQqD43myeiyM1h.5HV8HJNxiR2xZPyA'
-  - name: Hack
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.61TQqD43myeiyM1h
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -469,45 +575,71 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: yBIK3qs2GLBJ87dn
+    img: systems/teriock/src/icons/abilities/hack.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!61TQqD43myeiyM1h.yBIK3qs2GLBJ87dn'
+  - name: Gladiator Skills
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.61TQqD43myeiyM1h
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
-      interaction: attack
+      interaction: manifest
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      maneuver: passive
+      executionTime: passive
       delivery:
-        base: weapon
+        base: self
         parent: null
-        package: strike
+        package: null
       targets:
-        - arm
-        - leg
+        - self
       elements: []
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
-          present: []
+          present:
+            - dueling
           absent: []
         stationary: false
-        description: Instant
+        description: While Dueling
       sustained: false
-      range: Your Weapon's Range
+      range: Self.
       overview:
         base: >-
-          As you attack, choose either <i>arm</i> or <i>leg</i>. The damage gets
-          dealt accordingly.
+          While @L[Condition:Dueling]{dueling} or in a staged battle (gladiator
+          fights, ceremonial battles, etc.) you gain an extra @L[Core:Hit
+          Die]{warrior hit die} (+7 HP, [[/roll 1d12]]). Additionally, any
+          allies @L[Condition:Dueling]{dueled} with you or with you in a staged
+          fight may pay 1 @L[Core:MP]{MP} at the beginning of the fight to gain
+          @L[Ability:Hack]{Hack} for that fight. @L[Category:Gladiator fighting
+          style weapons]{Weapons you use with the gladiator fighting style} are
+          @L[Property:AV0]{AV0} as well.
         proficient: ''
         fluent: ''
       results:
-        hit: >-
-          The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.
-        critHit: >-
-          The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.
+        hit: ''
+        critHit: ''
         miss: ''
         critMiss: ''
         save: ''
@@ -576,31 +708,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: yBIK3qs2GLBJ87dn
-    img: systems/teriock/src/icons/abilities/hack.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!61TQqD43myeiyM1h.yBIK3qs2GLBJ87dn'
-  - name: Gladiator Skills
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.61TQqD43myeiyM1h
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -755,115 +863,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present:
-            - dueling
-          absent: []
-        stationary: false
-        description: While Dueling
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          While @L[Condition:Dueling]{dueling} or in a staged battle (gladiator
-          fights, ceremonial battles, etc.) you gain an extra @L[Core:Hit
-          Die]{warrior hit die} (+7 HP, [[/roll 1d12]]). Additionally, any
-          allies @L[Condition:Dueling]{dueled} with you or with you in a staged
-          fight may pay 1 @L[Core:MP]{MP} at the beginning of the fight to gain
-          @L[Ability:Hack]{Hack} for that fight. @L[Category:Gladiator fighting
-          style weapons]{Weapons you use with the gladiator fighting style} are
-          @L[Property:AV0]{AV0} as well.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: enbfwxp0uOWTFy0r
     img: systems/teriock/src/icons/abilities/gladiator-skills.webp
     changes: []
@@ -878,7 +877,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!61TQqD43myeiyM1h.enbfwxp0uOWTFy0r'
 ownership:

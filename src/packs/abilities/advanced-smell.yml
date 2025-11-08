@@ -12,7 +12,110 @@ effects:
         subIds:
           - wr8poVTjGunqbwkr
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent:
+            - down
+        description: While Up
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You can passively smell the types of all living creatures within 30
+          feet. You can detect dead and undead creatures as well, but you cannot
+          distinguish within or between them. They all smell like death. You
+          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
+          @L[Condition:Odorless]{odorless} creatures in this way.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: per
+          minVal: 2
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - sensory
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -162,7 +265,29 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: cnj0NfFmgycXvOjy
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!R65QBgIc0qUqyn4S.cnj0NfFmgycXvOjy'
+  - name: Scent Seeing
+    type: ability
+    system:
+      hierarchy:
+        supId: cnj0NfFmgycXvOjy
+        rootUuid: Compendium.teriock.abilities.Item.R65QBgIc0qUqyn4S
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -172,29 +297,28 @@ effects:
       maneuver: passive
       executionTime: passive
       delivery:
-        base: self
+        base: aura
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
         unit: noLimit
         quantity: 0
         conditions:
           present: []
-          absent:
-            - down
-        description: While Up
+          absent: []
+        stationary: false
+        description: While Target Remains In Range
       sustained: false
-      range: Self.
+      range: '10'
       overview:
         base: >-
-          You can passively smell the types of all living creatures within 30
-          feet. You can detect dead and undead creatures as well, but you cannot
-          distinguish within or between them. They all smell like death. You
-          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
-          @L[Condition:Odorless]{odorless} creatures in this way.
+          You know the exact location of all target creatures. You continue to
+          know the location of all targets within 10 feet, whether they are or
+          you are moving or not, so long as they are still within 10 feet of
+          you.<p></p>
         proficient: ''
         fluent: ''
       results:
@@ -209,8 +333,8 @@ effects:
       piercing: normal
       improvements:
         attributeImprovement:
-          attribute: per
-          minVal: 2
+          attribute: null
+          minVal: 0
         featSaveImprovement:
           attribute: null
           amount: proficient
@@ -247,7 +371,9 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
+      requirements: >-
+        You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
+        @L[Condition:Odorless]{odorless}.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -259,6 +385,9 @@ effects:
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
@@ -266,30 +395,7 @@ effects:
         derived: 0
       effectTypes:
         - sensory
-    _id: cnj0NfFmgycXvOjy
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!R65QBgIc0qUqyn4S.cnj0NfFmgycXvOjy'
-  - name: Scent Seeing
-    type: ability
-    system:
-      hierarchy:
-        supId: cnj0NfFmgycXvOjy
-        rootUuid: Compendium.teriock.abilities.Item.R65QBgIc0qUqyn4S
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -443,113 +549,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: aura
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: While Target Remains In Range
-      sustained: false
-      range: '10'
-      overview:
-        base: >-
-          You know the exact location of all target creatures. You continue to
-          know the location of all targets within 10 feet, whether they are or
-          you are moving or not, so long as they are still within 10 feet of
-          you.<p></p>
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: >-
-        You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
-        @L[Condition:Odorless]{odorless}.
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - sensory
     _id: wr8poVTjGunqbwkr
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     changes: []

@@ -14,7 +14,6 @@ system:
     be humble in that they understand that nature is greater than they are and
     respect it for that. If you are an Corsair, crave water and sailing, go with
     the flow, keep on the move, and keep things ship shape.
-  wikiNamespace: Class
   flaws: None.
   hitDieSpent: false
   manaDieSpent: false
@@ -33,7 +32,113 @@ effects:
         rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          All @L[Category:Thrown equipment]{thrown}
+          @L[Category:Weapons]{weapons} are @L[Property:AV0]{AV0} for you.
+        proficient: >-
+          The range of all @L[Category:Thrown equipment]{thrown}
+          @L[Category:Weapons]{weapons} you use is doubled.
+        fluent: >-
+          Instead, the range of all @L[Category:Thrown equipment]{thrown}
+          @L[Category:Weapons]{weapons} you use is tripled.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: corsair
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -187,51 +292,74 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: p9c3rcsXH45hEOYy
+    img: systems/teriock/src/icons/abilities/throwing-training.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!kBQcgF2Cn9E4MUyX.p9c3rcsXH45hEOYy'
+  - name: Wind Shuriken
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - martial
-      interaction: manifest
+        - magical
+      interaction: attack
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: active
+      executionTime: a1
       delivery:
-        base: self
+        base: missile
         parent: null
-        package: null
+        package: ray
       targets:
-        - self
+        - creature
       elements: []
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Always Active
+        description: Instant
       sustained: false
-      range: Self.
+      range: '300'
       overview:
         base: >-
-          All @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} are @L[Property:AV0]{AV0} for you.
-        proficient: >-
-          The range of all @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} you use is doubled.
-        fluent: >-
-          Instead, the range of all @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} you use is tripled.
+          Wind Shuriken counts as a @L[Category:Weapons]{weapon} in the
+          @L[Category:Daggers]{dagger weapon class}.<div
+          class="note"><b>Note:</b> Although Wind Shuriken does not deal
+          @L[Damage:Magic]{magic damage}, it can be made to using
+          @L[Ability:Might Strike]{Might Strike}.</div>
+        proficient: Instead, deal [[/damage 1d10]] @L[Core:Damage]{damage} to target.
+        fluent: Instead, deal [[/damage 1d12]] @L[Core:Damage]{damage} to target.
       results:
-        hit: ''
-        critHit: ''
+        hit: Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target.
+        critHit: Double @L[Core:Damage]{damage dice}.
         miss: ''
         critMiss: ''
         save: ''
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing: av0
       improvements:
         attributeImprovement:
           attribute: null
@@ -273,7 +401,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -293,31 +420,9 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: p9c3rcsXH45hEOYy
-    img: systems/teriock/src/icons/abilities/throwing-training.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kBQcgF2Cn9E4MUyX.p9c3rcsXH45hEOYy'
-  - name: Wind Shuriken
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
-        subIds: []
-        supId: null
-      applies:
+      effectTypes:
+        - damaging
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -470,20 +575,44 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: Ve3YGN46PPKZq4Js
+    img: systems/teriock/src/icons/abilities/wind-shuriken.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!kBQcgF2Cn9E4MUyX.Ve3YGN46PPKZq4Js'
+  - name: Impale
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - magical
+        - martial
       interaction: attack
       featSaveAttribute: mov
       maneuver: active
       executionTime: a1
       delivery:
-        base: missile
+        base: weapon
         parent: null
-        package: ray
+        package: strike
       targets:
-        - creature
+        - vitals
       elements: []
       duration:
         unit: instant
@@ -494,26 +623,21 @@ effects:
         stationary: false
         description: Instant
       sustained: false
-      range: '300'
+      range: Your Weapon's Range
       overview:
-        base: >-
-          Wind Shuriken counts as a @L[Category:Weapons]{weapon} in the
-          @L[Category:Daggers]{dagger weapon class}.<div
-          class="note"><b>Note:</b> Although Wind Shuriken does not deal
-          @L[Damage:Magic]{magic damage}, it can be made to using
-          @L[Ability:Might Strike]{Might Strike}.</div>
-        proficient: Instead, deal [[/damage 1d10]] @L[Core:Damage]{damage} to target.
-        fluent: Instead, deal [[/damage 1d12]] @L[Core:Damage]{damage} to target.
+        base: ''
+        proficient: ''
+        fluent: ''
       results:
-        hit: Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target.
-        critHit: Double @L[Core:Damage]{damage dice}.
+        hit: Target takes a @L[Damage:Hack]{body hack}.
+        critHit: If you want, target takes @L[Core:Damage]{standard damage} as well.
         miss: ''
         critMiss: ''
         save: ''
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: av0
+      piercing: normal
       improvements:
         attributeImprovement:
           attribute: null
@@ -555,6 +679,7 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
+      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -574,33 +699,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-      effectTypes:
-        - damaging
-    _id: Ve3YGN46PPKZq4Js
-    img: systems/teriock/src/icons/abilities/wind-shuriken.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kBQcgF2Cn9E4MUyX.Ve3YGN46PPKZq4Js'
-  - name: Impale
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -752,38 +851,62 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: IhPJPnkMSMJd815z
+    img: systems/teriock/src/icons/abilities/impale.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!kBQcgF2Cn9E4MUyX.IhPJPnkMSMJd815z'
+  - name: Swimming
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
-      interaction: attack
+      interaction: manifest
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      maneuver: passive
+      executionTime: passive
       delivery:
-        base: weapon
+        base: self
         parent: null
-        package: strike
+        package: null
       targets:
-        - vitals
+        - self
       elements: []
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
+        description: Always Active
       sustained: false
-      range: Your Weapon's Range
+      range: Self.
       overview:
-        base: ''
+        base: You swim at @L[Core:Movement Speed]{full speed}.
         proficient: ''
         fluent: ''
       results:
-        hit: Target takes a @L[Damage:Hack]{body hack}.
-        critHit: If you want, target takes @L[Core:Damage]{standard damage} as well.
+        hit: ''
+        critHit: ''
         miss: ''
         critMiss: ''
         save: ''
@@ -852,31 +975,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: IhPJPnkMSMJd815z
-    img: systems/teriock/src/icons/abilities/impale.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kBQcgF2Cn9E4MUyX.IhPJPnkMSMJd815z'
-  - name: Swimming
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1030,33 +1129,61 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: pCIuOp5KxcKgYpQ5
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!kBQcgF2Cn9E4MUyX.pCIuOp5KxcKgYpQ5'
+  - name: Skill Share
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - martial
+        - magical
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: active
+      executionTime: a1
       delivery:
-        base: self
+        base: sight
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
-        unit: noLimit
-        quantity: 0
+        unit: hour
+        quantity: 1
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
+        description: 1 Hour
+      sustained: true
+      range: '30'
       overview:
-        base: You swim at @L[Core:Movement Speed]{full speed}.
+        base: >-
+          Target gains one @L[Category:Standard abilities]{standard ability} you
+          have, aren't @L[Keyword:Incapable]{incapable} of, and are
+          @L[Core:Proficiency Bonus]{proficient} in. You may only have this
+          active on one creature at a time.
         proficient: ''
         fluent: ''
       results:
@@ -1108,9 +1235,8 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: ''
+      endCondition: You use Skill Share again.
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -1130,31 +1256,9 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: pCIuOp5KxcKgYpQ5
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kBQcgF2Cn9E4MUyX.pCIuOp5KxcKgYpQ5'
-  - name: Skill Share
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.classes.Item.kBQcgF2Cn9E4MUyX
-        subIds: []
-        supId: null
-      applies:
+      effectTypes:
+        - contract
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1305,111 +1409,6 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: hour
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Hour
-      sustained: true
-      range: '30'
-      overview:
-        base: >-
-          Target gains one @L[Category:Standard abilities]{standard ability} you
-          have, aren't @L[Keyword:Incapable]{incapable} of, and are
-          @L[Core:Proficiency Bonus]{proficient} in. You may only have this
-          active on one creature at a time.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: corsair
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: You use Skill Share again.
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - contract
     _id: HEd7GIHNQW9PtVxS
     img: systems/teriock/src/icons/abilities/skill-share.webp
     changes: []

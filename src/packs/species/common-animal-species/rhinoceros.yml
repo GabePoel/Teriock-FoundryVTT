@@ -42,7 +42,112 @@ effects:
         rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent:
+            - down
+        stationary: false
+        description: While Up
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You can hear all moving creatures within 30 feet. If the creature is
+          breathing, you can hear it even if it is not moving. You can not
+          detect @L[Condition:Silent]{silent} creatures in this way.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: per
+          minVal: 2
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      class: ''
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - sensory
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -196,6 +301,31 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: REbMcgM86xT2XcDE
+    img: systems/teriock/src/icons/abilities/advanced-hearing.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.REbMcgM86xT2XcDE'
+  - name: Advanced Smell
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds:
+          - sWe2V0jyB11fmHs6
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -224,9 +354,11 @@ effects:
       range: Self.
       overview:
         base: >-
-          You can hear all moving creatures within 30 feet. If the creature is
-          breathing, you can hear it even if it is not moving. You can not
-          detect @L[Condition:Silent]{silent} creatures in this way.
+          You can passively smell the types of all living creatures within 30
+          feet. You can detect dead and undead creatures as well, but you cannot
+          distinguish within or between them. They all smell like death. You
+          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
+          @L[Condition:Odorless]{odorless} creatures in this way.
         proficient: ''
         fluent: ''
       results:
@@ -246,11 +378,11 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      skill: false
+      skill: true
       spell: false
-      standard: false
+      standard: true
       ritual: false
-      class: ''
+      class: berserker
       rotator: false
       invoked: false
       costs:
@@ -279,7 +411,7 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: ''
+      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -301,32 +433,7 @@ effects:
         derived: 0
       effectTypes:
         - sensory
-    _id: REbMcgM86xT2XcDE
-    img: systems/teriock/src/icons/abilities/advanced-hearing.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.REbMcgM86xT2XcDE'
-  - name: Advanced Smell
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds:
-          - sWe2V0jyB11fmHs6
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -476,6 +583,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 6kE56ETLifi2GZSh
+    img: systems/teriock/src/icons/abilities/advanced-smell.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.6kE56ETLifi2GZSh'
+  - name: Scent Seeing
+    type: ability
+    system:
+      hierarchy:
+        supId: 6kE56ETLifi2GZSh
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -485,30 +616,28 @@ effects:
       maneuver: passive
       executionTime: passive
       delivery:
-        base: self
+        base: aura
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
         unit: noLimit
         quantity: 0
         conditions:
           present: []
-          absent:
-            - down
+          absent: []
         stationary: false
-        description: While Up
+        description: While Target Remains In Range
       sustained: false
-      range: Self.
+      range: '10'
       overview:
         base: >-
-          You can passively smell the types of all living creatures within 30
-          feet. You can detect dead and undead creatures as well, but you cannot
-          distinguish within or between them. They all smell like death. You
-          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
-          @L[Condition:Odorless]{odorless} creatures in this way.
+          You know the exact location of all target creatures. You continue to
+          know the location of all targets within 10 feet, whether they are or
+          you are moving or not, so long as they are still within 10 feet of
+          you.<p></p>
         proficient: ''
         fluent: ''
       results:
@@ -523,8 +652,8 @@ effects:
       piercing: normal
       improvements:
         attributeImprovement:
-          attribute: per
-          minVal: 2
+          attribute: null
+          minVal: 0
         featSaveImprovement:
           attribute: null
           amount: proficient
@@ -561,7 +690,9 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
+      requirements: >-
+        You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
+        @L[Condition:Odorless]{odorless}.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -583,31 +714,7 @@ effects:
         derived: 0
       effectTypes:
         - sensory
-    _id: 6kE56ETLifi2GZSh
-    img: systems/teriock/src/icons/abilities/advanced-smell.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.6kE56ETLifi2GZSh'
-  - name: Scent Seeing
-    type: ability
-    system:
-      hierarchy:
-        supId: 6kE56ETLifi2GZSh
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -761,113 +868,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: aura
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: While Target Remains In Range
-      sustained: false
-      range: '10'
-      overview:
-        base: >-
-          You know the exact location of all target creatures. You continue to
-          know the location of all targets within 10 feet, whether they are or
-          you are moving or not, so long as they are still within 10 feet of
-          you.<p></p>
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: >-
-        You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
-        @L[Condition:Odorless]{odorless}.
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - sensory
     _id: sWe2V0jyB11fmHs6
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     changes: []
@@ -892,156 +892,6 @@ effects:
         rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
         subIds: []
         supId: null
-      applies:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1151,31 +1001,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: NtpVFrpkWGz5qrSZ
-    img: systems/teriock/src/icons/abilities/battle-charge.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.NtpVFrpkWGz5qrSZ'
-  - name: Berserk
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1325,6 +1151,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: NtpVFrpkWGz5qrSZ
+    img: systems/teriock/src/icons/abilities/battle-charge.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.NtpVFrpkWGz5qrSZ'
+  - name: Berserk
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1433,31 +1283,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: 0mf8ZlJMZoUJBGTe
-    img: systems/teriock/src/icons/abilities/berserk.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.0mf8ZlJMZoUJBGTe'
-  - name: Dense Intelligence
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1607,6 +1433,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 0mf8ZlJMZoUJBGTe
+    img: systems/teriock/src/icons/abilities/berserk.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.0mf8ZlJMZoUJBGTe'
+  - name: Dense Intelligence
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1707,33 +1557,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: D5CUYCOEiIk58sOC
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.D5CUYCOEiIk58sOC'
-  - name: Giant Strength
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds:
-          - kZbzSUinKdh3mCAL
-          - ONLwi8qZovVQIIvZ
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1883,6 +1707,32 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: D5CUYCOEiIk58sOC
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.D5CUYCOEiIk58sOC'
+  - name: Giant Strength
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds:
+          - kZbzSUinKdh3mCAL
+          - ONLwi8qZovVQIIvZ
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1987,33 +1837,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: TLD7mZSvdo0ncldt
-    img: systems/teriock/src/icons/abilities/giant-strength.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.TLD7mZSvdo0ncldt'
-  - name: Improved Strength
-    type: ability
-    system:
-      hierarchy:
-        supId: TLD7mZSvdo0ncldt
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds:
-          - d3NwkUSAOREXDzLM
-          - THg809sJAvGWj7wS
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2163,6 +1987,32 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: TLD7mZSvdo0ncldt
+    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.TLD7mZSvdo0ncldt'
+  - name: Improved Strength
+    type: ability
+    system:
+      hierarchy:
+        supId: TLD7mZSvdo0ncldt
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds:
+          - d3NwkUSAOREXDzLM
+          - THg809sJAvGWj7wS
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -2265,31 +2115,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: kZbzSUinKdh3mCAL
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.kZbzSUinKdh3mCAL'
-  - name: Beastly Strength
-    type: ability
-    system:
-      hierarchy:
-        supId: kZbzSUinKdh3mCAL
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2439,6 +2265,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: kZbzSUinKdh3mCAL
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.kZbzSUinKdh3mCAL'
+  - name: Beastly Strength
+    type: ability
+    system:
+      hierarchy:
+        supId: kZbzSUinKdh3mCAL
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -2542,31 +2392,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: d3NwkUSAOREXDzLM
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.d3NwkUSAOREXDzLM'
-  - name: Improved Armor Piercing
-    type: ability
-    system:
-      hierarchy:
-        supId: kZbzSUinKdh3mCAL
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2716,6 +2542,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: d3NwkUSAOREXDzLM
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.d3NwkUSAOREXDzLM'
+  - name: Improved Armor Piercing
+    type: ability
+    system:
+      hierarchy:
+        supId: kZbzSUinKdh3mCAL
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -2816,31 +2666,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: THg809sJAvGWj7wS
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.THg809sJAvGWj7wS'
-  - name: Melee Damage Boost
-    type: ability
-    system:
-      hierarchy:
-        supId: TLD7mZSvdo0ncldt
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2990,6 +2816,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: THg809sJAvGWj7wS
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.THg809sJAvGWj7wS'
+  - name: Melee Damage Boost
+    type: ability
+    system:
+      hierarchy:
+        supId: TLD7mZSvdo0ncldt
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -3099,6 +2949,156 @@ effects:
         derived: 0
       effectTypes:
         - damaging
+      impacts:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
     _id: ONLwi8qZovVQIIvZ
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     changes: []
@@ -3123,7 +3123,107 @@ effects:
         rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
         subIds: []
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: weapon
+        parent: null
+        package: strike
+      targets:
+        - vitals
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      sustained: false
+      range: Your Weapon's Range
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      results:
+        hit: Target takes a @L[Damage:Hack]{body hack}.
+        critHit: If you want, target takes @L[Core:Damage]{standard damage} as well.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: corsair
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -3275,106 +3375,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        parent: null
-        package: strike
-      targets:
-        - vitals
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Your Weapon's Range
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: Target takes a @L[Damage:Hack]{body hack}.
-        critHit: If you want, target takes @L[Core:Damage]{standard damage} as well.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: corsair
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: 3r9B7KwAvl8ZcMKh
     img: systems/teriock/src/icons/abilities/impale.webp
     changes: []
@@ -3389,7 +3389,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!VIjZhyMIn6m47oXq.3r9B7KwAvl8ZcMKh'
   - name: Knockback
@@ -3399,156 +3399,6 @@ effects:
         rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
         subIds: []
         supId: null
-      applies:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -3652,31 +3502,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: pL9MuAWyXaU8ire0
-    img: systems/teriock/src/icons/abilities/knockback.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.pL9MuAWyXaU8ire0'
-  - name: No Hands
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -3826,6 +3652,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: pL9MuAWyXaU8ire0
+    img: systems/teriock/src/icons/abilities/knockback.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.pL9MuAWyXaU8ire0'
+  - name: No Hands
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -3926,31 +3776,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: 5MpbGVk8Cq2TjSSN
-    img: systems/teriock/src/icons/abilities/no-hands.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.5MpbGVk8Cq2TjSSN'
-  - name: Normal Movement
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -4100,6 +3926,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 5MpbGVk8Cq2TjSSN
+    img: systems/teriock/src/icons/abilities/no-hands.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.5MpbGVk8Cq2TjSSN'
+  - name: Normal Movement
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -4200,31 +4050,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: J0uP1a6PUmImTVcm
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.J0uP1a6PUmImTVcm'
-  - name: Normal Sneak
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -4374,6 +4200,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: J0uP1a6PUmImTVcm
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.J0uP1a6PUmImTVcm'
+  - name: Normal Sneak
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -4474,31 +4324,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: JrdJyX3lNZmW6u4Y
-    img: systems/teriock/src/icons/abilities/normal-sneak.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VIjZhyMIn6m47oXq.JrdJyX3lNZmW6u4Y'
-  - name: Trample
-    type: ability
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -4648,6 +4474,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: JrdJyX3lNZmW6u4Y
+    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!VIjZhyMIn6m47oXq.JrdJyX3lNZmW6u4Y'
+  - name: Trample
+    type: ability
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.species.Item.VIjZhyMIn6m47oXq
+        subIds: []
+        supId: null
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -4753,6 +4603,156 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      impacts:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
     _id: sxtI8McOnuwpaF6z
     img: systems/teriock/src/icons/abilities/trample.webp
     changes: []

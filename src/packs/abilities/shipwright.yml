@@ -13,7 +13,105 @@ effects:
           - igiconBOtrYCZk3i
           - FlqL2urcmx8VmoIF
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You gain @L[Ability:Ship Lore]{Ship Lore} and @L[Ability:Improvised
+          Ship Repairs]{Improvised Ship Repairs}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: corsair
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -163,35 +261,64 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: zOcIOiAKedtwe4pB
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!XV0QqlrtRFDd6m3D.zOcIOiAKedtwe4pB'
+  - name: Ship Lore
+    type: ability
+    system:
+      hierarchy:
+        supId: zOcIOiAKedtwe4pB
+        rootUuid: Compendium.teriock.abilities.Item.XV0QqlrtRFDd6m3D
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: active
+      executionTime: a1
       delivery:
-        base: self
+        base: sight
         parent: null
         package: null
       targets:
-        - self
+        - ship
       elements: []
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
-        description: Always Active
+        stationary: false
+        description: Instant
       sustained: false
-      range: Self.
+      range: Unlimited
       overview:
         base: >-
-          You gain @L[Ability:Ship Lore]{Ship Lore} and @L[Ability:Improvised
-          Ship Repairs]{Improvised Ship Repairs}.
+          You recognize details about ships by sight. For a given target ship,
+          you know the following.<ul><li>Where it was built.</li><li>How damaged
+          it is.</li><li>What it was built for (warship, cargo ship, and so
+          on).</li><li>How old it is (roughly).</li><li>How fast it can go
+          (roughly).</li><li>Any noteworthy features.</li></ul><p>You may also
+          make a @L[Tradecraft:Historian]{historian} @L[Core:Tradecrafts]{check}
+          to learn more about the ship, its crew, its captain, or other features
+          the @L[Core:GM]{GM} allows.</p>
         proficient: ''
         fluent: ''
       results:
@@ -245,7 +372,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -257,35 +383,17 @@ effects:
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: zOcIOiAKedtwe4pB
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XV0QqlrtRFDd6m3D.zOcIOiAKedtwe4pB'
-  - name: Ship Lore
-    type: ability
-    system:
-      hierarchy:
-        supId: zOcIOiAKedtwe4pB
-        rootUuid: Compendium.teriock.abilities.Item.XV0QqlrtRFDd6m3D
-        subIds: []
-      applies:
+      effectTypes:
+        - truthDetecting
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -436,43 +544,68 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: igiconBOtrYCZk3i
+    img: systems/teriock/src/icons/abilities/ship-lore.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!XV0QqlrtRFDd6m3D.igiconBOtrYCZk3i'
+  - name: Improvised Ship Repairs
+    type: ability
+    system:
+      hierarchy:
+        supId: zOcIOiAKedtwe4pB
+        rootUuid: Compendium.teriock.abilities.Item.XV0QqlrtRFDd6m3D
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      maneuver: slow
+      executionTime: Short Rest
       delivery:
-        base: sight
+        base: self
         parent: null
         package: null
       targets:
         - ship
       elements: []
       duration:
-        unit: instant
-        quantity: 0
+        unit: hour
+        quantity: 8
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
+        description: 8 Hours
       sustained: false
-      range: Unlimited
+      range: Self.
       overview:
         base: >-
-          You recognize details about ships by sight. For a given target ship,
-          you know the following.<ul><li>Where it was built.</li><li>How damaged
-          it is.</li><li>What it was built for (warship, cargo ship, and so
-          on).</li><li>How old it is (roughly).</li><li>How fast it can go
-          (roughly).</li><li>Any noteworthy features.</li></ul><p>You may also
-          make a @L[Tradecraft:Historian]{historian} @L[Core:Tradecrafts]{check}
-          to learn more about the ship, its crew, its captain, or other features
-          the @L[Core:GM]{GM} allows.</p>
-        proficient: ''
-        fluent: ''
+          During a @L[Core:Short Rest]{short rest}, you may scavenge materials
+          and repair 1 part of a ship. These repairs exist for 8 hours before
+          they are no longer functional. The types of repairs you can make are
+          as follows.<ul><li>A mast.</li><li>A sail.</li><li>A steering
+          wheel.</li><li>A rudder.</li><li>A hole in the hull.</li><li>A
+          cannon.</li><li>A crow's nest.</li><li>A figurehead.</li><li>A
+          plank.</li><li>A ladder.</li><li>An anchor.</li></ul>With
+          @L[Core:GM]{GM} permission, you may be able to repair other parts of a
+          ship as well.
+        proficient: You can instead make up to @L[Core:Proficiency Bonus]{P} repairs.
+        fluent: You can instead make up to @L[Core:Fluency Bonus]{F} repairs.
       results:
         hit: ''
         critHit: ''
@@ -524,6 +657,7 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
+      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -543,33 +677,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-      effectTypes:
-        - truthDetecting
-    _id: igiconBOtrYCZk3i
-    img: systems/teriock/src/icons/abilities/ship-lore.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XV0QqlrtRFDd6m3D.igiconBOtrYCZk3i'
-  - name: Improvised Ship Repairs
-    type: ability
-    system:
-      hierarchy:
-        supId: zOcIOiAKedtwe4pB
-        rootUuid: Compendium.teriock.abilities.Item.XV0QqlrtRFDd6m3D
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -719,115 +827,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - ship
-      elements: []
-      duration:
-        unit: hour
-        quantity: 8
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 8 Hours
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          During a @L[Core:Short Rest]{short rest}, you may scavenge materials
-          and repair 1 part of a ship. These repairs exist for 8 hours before
-          they are no longer functional. The types of repairs you can make are
-          as follows.<ul><li>A mast.</li><li>A sail.</li><li>A steering
-          wheel.</li><li>A rudder.</li><li>A hole in the hull.</li><li>A
-          cannon.</li><li>A crow's nest.</li><li>A figurehead.</li><li>A
-          plank.</li><li>A ladder.</li><li>An anchor.</li></ul>With
-          @L[Core:GM]{GM} permission, you may be able to repair other parts of a
-          ship as well.
-        proficient: You can instead make up to @L[Core:Proficiency Bonus]{P} repairs.
-        fluent: You can instead make up to @L[Core:Fluency Bonus]{F} repairs.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: corsair
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: FlqL2urcmx8VmoIF
     img: systems/teriock/src/icons/abilities/improvised-ship-repairs.webp
     changes: []

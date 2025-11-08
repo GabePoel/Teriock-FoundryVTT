@@ -15,7 +15,6 @@ effects:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Lizard]{lizard}.</p>
-      wikiNamespace: Tradecraft
     _id: n0M9DRWAo5X7lY9E
     img: icons/environment/settlement/stables-logo.webp
     changes: []
@@ -45,7 +44,111 @@ effects:
         rootUuid: Compendium.teriock.powers.Item.BfkdHzQCeDObQbVP
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes:
+        - resistance
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          You become @L[Keyword:Resistance]{resistant} to effects that would
+          make you @L[Condition:Snared]{snared}, effects that would make you
+          @L[Condition:Immobile]{immobile}, and to @L[Damage:Hack]{hack damage}
+          dealt by other creatures.<div class="note"><b>Note:</b> This does not
+          clear any existing effects.</div>
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - primal
+      prepared: true
+      range: Self.
+      requirements: You are not within 10 feet of any enemy creature.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -207,6 +310,35 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: BG1GYBJ4CHNQd0DQ
+    img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!BfkdHzQCeDObQbVP.BG1GYBJ4CHNQd0DQ'
+  - name: Natural Hide
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.powers.Item.BfkdHzQCeDObQbVP
+        subIds: []
+        supId: null
       adept:
         enabled: false
         amount: 1
@@ -240,20 +372,19 @@ effects:
         parent: null
         package: null
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
-      effectTypes:
-        - resistance
+        description: Always Active
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -275,22 +406,19 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: passive
       overview:
         base: >-
-          You become @L[Keyword:Resistance]{resistant} to effects that would
-          make you @L[Condition:Snared]{snared}, effects that would make you
-          @L[Condition:Immobile]{immobile}, and to @L[Damage:Hack]{hack damage}
-          dealt by other creatures.<div class="note"><b>Note:</b> This does not
-          clear any existing effects.</div>
+          You always have at least 1 @L[Core:AV]{AV}. This is the case even when
+          you are not wearing @L[Category:Armor]{armor}.
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - primal
+        - martial
       prepared: true
       range: Self.
-      requirements: You are not within 10 feet of any enemy creature.
+      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -311,36 +439,7 @@ effects:
         - self
       trigger: ''
       warded: false
-    _id: BG1GYBJ4CHNQd0DQ
-    img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!BfkdHzQCeDObQbVP.BG1GYBJ4CHNQd0DQ'
-  - name: Natural Hide
-    type: ability
-    system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      hierarchy:
-        rootUuid: Compendium.teriock.powers.Item.BfkdHzQCeDObQbVP
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -494,106 +593,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: passive
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          You always have at least 1 @L[Core:AV]{AV}. This is the case even when
-          you are not wearing @L[Category:Armor]{armor}.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
     _id: KcwLPjTsA5eCukjF
     img: systems/teriock/src/icons/abilities/natural-hide.webp
     changes: []

@@ -17,7 +17,104 @@ effects:
           - m0sQmiuRlhlOIw1P
           - tmHtCd0r8pAwPFQw
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements:
+        - necromancy
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: "You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Impure Durability]{Impure Durability},\_@L[Ability:Mana Drain Grasp]{Mana Drain Grasp},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}."
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      class: ''
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: special
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes: []
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -167,11 +264,36 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: YVZ0PFSMRueZYEv4
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!bjxE6abWNndIpUYC.YVZ0PFSMRueZYEv4'
+  - name: Ethereal Senses
+    type: ability
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
+        subIds: []
+        supId: YVZ0PFSMRueZYEv4
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
+        - spiritual
+        - primal
       interaction: manifest
       featSaveAttribute: mov
       maneuver: passive
@@ -191,10 +313,13 @@ effects:
           present: []
           absent: []
         description: Always Active
+        stationary: false
       sustained: false
       range: Self.
       overview:
-        base: "You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Impure Durability]{Impure Durability},\_@L[Ability:Mana Drain Grasp]{Mana Drain Grasp},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}."
+        base: >-
+          You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
+          creatures.
         proficient: ''
         fluent: ''
       results:
@@ -218,7 +343,6 @@ effects:
       spell: false
       standard: false
       ritual: false
-      class: ''
       rotator: false
       invoked: false
       costs:
@@ -253,7 +377,7 @@ effects:
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: special
+      form: normal
       limitation: ''
       improvement: ''
       prepared: true
@@ -263,33 +387,18 @@ effects:
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
-      effectTypes: []
-    _id: YVZ0PFSMRueZYEv4
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bjxE6abWNndIpUYC.YVZ0PFSMRueZYEv4'
-  - name: Ethereal Senses
-    type: ability
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
-        subIds: []
-        supId: YVZ0PFSMRueZYEv4
-      applies:
+        saved: ''
+      effectTypes:
+        - sensory
+      gmNotes: null
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -491,12 +600,34 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
+    _id: QY0zw9rZ5DjSA78d
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!bjxE6abWNndIpUYC.QY0zw9rZ5DjSA78d'
+  - name: Healing Sensitivity
+    type: ability
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
+        subIds: []
+        supId: YVZ0PFSMRueZYEv4
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
-        - spiritual
-        - primal
       interaction: manifest
       featSaveAttribute: mov
       maneuver: passive
@@ -521,8 +652,13 @@ effects:
       range: Self.
       overview:
         base: >-
-          You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
-          creatures.
+          @L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage} you.
+          If the creature providing you @L[Core:Healing]{healing} specifies that
+          they are doing so "for damage" then you roll your <i>largest</i>
+          @L[Core:HP]{hit die} and take that much @L[Damage:Holy]{holy}
+          @L[Damage:Magic]{magic damage} instead of the normal
+          @L[Core:Healing]{healing} effect. This does not consume any of your
+          @L[Core:HP]{hit dice}.
         proficient: ''
         fluent: ''
       results:
@@ -580,7 +716,7 @@ effects:
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: normal
+      form: flaw
       limitation: ''
       improvement: ''
       prepared: true
@@ -591,41 +727,16 @@ effects:
       maxQuantity:
         raw: ''
         saved: ''
-      effectTypes:
-        - sensory
       gmNotes: null
       adept:
         enabled: false
         amount: 1
+      effectTypes: []
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-    _id: QY0zw9rZ5DjSA78d
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bjxE6abWNndIpUYC.QY0zw9rZ5DjSA78d'
-  - name: Healing Sensitivity
-    type: ability
-    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
-        subIds: []
-        supId: YVZ0PFSMRueZYEv4
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -823,6 +934,30 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
+    _id: LiOiQNCcNS6raIHN
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!bjxE6abWNndIpUYC.LiOiQNCcNS6raIHN'
+  - name: Impure Durability
+    type: ability
+    img: systems/teriock/src/icons/abilities/impure-durability.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
+        subIds: []
+        supId: YVZ0PFSMRueZYEv4
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -837,8 +972,7 @@ effects:
         package: null
       targets:
         - self
-      elements:
-        - necromancy
+      elements: []
       duration:
         unit: noLimit
         quantity: 0
@@ -851,13 +985,8 @@ effects:
       range: Self.
       overview:
         base: >-
-          @L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage} you.
-          If the creature providing you @L[Core:Healing]{healing} specifies that
-          they are doing so "for damage" then you roll your <i>largest</i>
-          @L[Core:HP]{hit die} and take that much @L[Damage:Holy]{holy}
-          @L[Damage:Magic]{magic damage} instead of the normal
-          @L[Core:Healing]{healing} effect. This does not consume any of your
-          @L[Core:HP]{hit dice}.
+          You are @L[Keyword:Immunity]{immune} to non-@L[Damage:Magic]{magic}
+          non-@L[Damage:Silver]{silver} @L[Core:Damage]{damage}.
         proficient: ''
         fluent: ''
       results:
@@ -915,7 +1044,7 @@ effects:
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: flaw
+      form: special
       limitation: ''
       improvement: ''
       prepared: true
@@ -926,40 +1055,17 @@ effects:
       maxQuantity:
         raw: ''
         saved: ''
+      effectTypes:
+        - immunity
       gmNotes: null
       adept:
         enabled: false
         amount: 1
-      effectTypes: []
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-    _id: LiOiQNCcNS6raIHN
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bjxE6abWNndIpUYC.LiOiQNCcNS6raIHN'
-  - name: Impure Durability
-    type: ability
-    img: systems/teriock/src/icons/abilities/impure-durability.webp
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
-        subIds: []
-        supId: YVZ0PFSMRueZYEv4
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1161,40 +1267,72 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
+    _id: qVptnwb2xpN8RWWl
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!bjxE6abWNndIpUYC.qVptnwb2xpN8RWWl'
+  - name: Mana Drain Grasp
+    type: ability
+    img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
+        subIds: []
+        supId: YVZ0PFSMRueZYEv4
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
-      interaction: manifest
+      interaction: attack
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: active
+      executionTime: a2
       delivery:
-        base: self
+        base: hand
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
-        description: Always Active
+        description: Instant
         stationary: false
       sustained: false
-      range: Self.
+      range: Your Hand's Range
       overview:
-        base: >-
-          You are @L[Keyword:Immunity]{immune} to non-@L[Damage:Magic]{magic}
-          non-@L[Damage:Silver]{silver} @L[Core:Damage]{damage}.
+        base: ''
         proficient: ''
         fluent: ''
       results:
-        hit: ''
-        critHit: ''
+        hit: >-
+          Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
+          target. If this @L[Condition:Dead]{kills} the target, you
+          @L[Core:Revitalizing]{revitalize}.  This
+          @L[Core:Revitalizing]{revitalization} is the only part of this that is
+          a @L[Category:Revitalization effects]{revitalization effect}.
+        critHit: >-
+          Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to the
+          target. If this @L[Condition:Dead]{kills} the target, you
+          @L[Core:Revitalizing]{revitalize} twice. This
+          @L[Core:Revitalizing]{revitalization} is the only part of this that is
+          a @L[Category:Revitalization effects]{revitalization effect}.
         miss: ''
         critMiss: ''
         save: ''
@@ -1259,7 +1397,8 @@ effects:
         raw: ''
         saved: ''
       effectTypes:
-        - immunity
+        - revitalization
+        - draining
       gmNotes: null
       adept:
         enabled: false
@@ -1268,31 +1407,7 @@ effects:
         enabled: false
         amount: 1
       grantOnly: false
-    _id: qVptnwb2xpN8RWWl
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bjxE6abWNndIpUYC.qVptnwb2xpN8RWWl'
-  - name: Mana Drain Grasp
-    type: ability
-    img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
-        subIds: []
-        supId: YVZ0PFSMRueZYEv4
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1491,48 +1606,67 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
+    _id: xkMlG5IbAoq3kBUp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!bjxE6abWNndIpUYC.xkMlG5IbAoq3kBUp'
+  - name: Undead Mind
+    type: ability
+    img: systems/teriock/src/icons/abilities/undead-mind.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
+        subIds: []
+        supId: YVZ0PFSMRueZYEv4
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
-      interaction: attack
+      interaction: manifest
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
+      maneuver: passive
+      executionTime: passive
       delivery:
-        base: hand
+        base: self
         parent: null
         package: null
       targets:
-        - creature
-      elements: []
+        - self
+      elements:
+        - necromancy
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
-        description: Instant
+        description: Always Active
         stationary: false
       sustained: false
-      range: Your Hand's Range
+      range: Self.
       overview:
-        base: ''
+        base: >-
+          You are @L[Keyword:Immunity]{immune} to being
+          @L[Condition:Frightened]{frightened} and
+          @L[Condition:Charmed]{charmed}. The effects of Undead Mind are
+          maintained even if @L[Condition:Transformed]{transformed}.
         proficient: ''
         fluent: ''
       results:
-        hit: >-
-          Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize}.  This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.
-        critHit: >-
-          Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize} twice. This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.
+        hit: ''
+        critHit: ''
         miss: ''
         critMiss: ''
         save: ''
@@ -1597,8 +1731,7 @@ effects:
         raw: ''
         saved: ''
       effectTypes:
-        - revitalization
-        - draining
+        - immunity
       gmNotes: null
       adept:
         enabled: false
@@ -1607,31 +1740,7 @@ effects:
         enabled: false
         amount: 1
       grantOnly: false
-    _id: xkMlG5IbAoq3kBUp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bjxE6abWNndIpUYC.xkMlG5IbAoq3kBUp'
-  - name: Undead Mind
-    type: ability
-    img: systems/teriock/src/icons/abilities/undead-mind.webp
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
-        subIds: []
-        supId: YVZ0PFSMRueZYEv4
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -1837,6 +1946,31 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
+    _id: m0sQmiuRlhlOIw1P
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!bjxE6abWNndIpUYC.m0sQmiuRlhlOIw1P'
+  - name: Undying Durability
+    type: ability
+    _id: tmHtCd0r8pAwPFQw
+    img: systems/teriock/src/icons/abilities/undying-durability.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
+        subIds: []
+        supId: YVZ0PFSMRueZYEv4
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -1859,16 +1993,20 @@ effects:
         conditions:
           present: []
           absent: []
-        description: Always Active
         stationary: false
+        description: Always Active
       sustained: false
       range: Self.
       overview:
         base: >-
-          You are @L[Keyword:Immunity]{immune} to being
-          @L[Condition:Frightened]{frightened} and
-          @L[Condition:Charmed]{charmed}. The effects of Undead Mind are
-          maintained even if @L[Condition:Transformed]{transformed}.
+          You are @L[Keyword:Immunity]{immune} to
+          @L[Condition:Unconscious]{unconsciousness},
+          @L[Condition:Suffocating]{suffocating}, and being
+          @L[Condition:Poisoned]{poisoned}. You do not @L[Condition:Down]{drop}
+          due to being at negative @L[Core:HP]{HP}. You still
+          @L[Condition:Dead]{die} when you reach half your maximum
+          @L[Core:HP]{HP} below zero. You also do not have to
+          @L[Core:Drowning]{breathe}.
         proficient: ''
         fluent: ''
       results:
@@ -1932,6 +2070,9 @@ effects:
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
@@ -1943,36 +2084,8 @@ effects:
       adept:
         enabled: false
         amount: 1
-      gifted:
-        enabled: false
-        amount: 1
       grantOnly: false
-    _id: m0sQmiuRlhlOIw1P
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bjxE6abWNndIpUYC.m0sQmiuRlhlOIw1P'
-  - name: Undying Durability
-    type: ability
-    _id: tmHtCd0r8pAwPFQw
-    img: systems/teriock/src/icons/abilities/undying-durability.webp
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
-        subIds: []
-        supId: YVZ0PFSMRueZYEv4
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -2170,120 +2283,6 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You are @L[Keyword:Immunity]{immune} to
-          @L[Condition:Unconscious]{unconsciousness},
-          @L[Condition:Suffocating]{suffocating}, and being
-          @L[Condition:Poisoned]{poisoned}. You do not @L[Condition:Down]{drop}
-          due to being at negative @L[Core:HP]{HP}. You still
-          @L[Condition:Dead]{die} when you reach half your maximum
-          @L[Core:HP]{HP} below zero. You also do not have to
-          @L[Core:Drowning]{breathe}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: special
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        saved: ''
-      effectTypes:
-        - immunity
-      gmNotes: null
-      adept:
-        enabled: false
-        amount: 1
-      grantOnly: false
     changes: []
     disabled: false
     duration:

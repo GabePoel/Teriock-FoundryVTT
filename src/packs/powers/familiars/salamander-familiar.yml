@@ -15,7 +15,6 @@ effects:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Salamander]{salamander}.</p>
-      wikiNamespace: Tradecraft
     _id: a9oFDVG8RiAHiXNP
     img: icons/environment/settlement/stables-logo.webp
     changes: []
@@ -45,7 +44,106 @@ effects:
         rootUuid: Compendium.teriock.powers.Item.0KqGdNp771I1Aw9A
         subIds: []
         supId: null
-      applies:
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes:
+        - resistance
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: passive
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: You @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -199,6 +297,35 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: 42qNf17G6XQAJ2hW
+    img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!0KqGdNp771I1Aw9A.42qNf17G6XQAJ2hW'
+  - name: Healing Factor
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.powers.Item.0KqGdNp771I1Aw9A
+        subIds: []
+        supId: null
       adept:
         enabled: false
         amount: 1
@@ -236,11 +363,13 @@ effects:
         quantity: 0
         conditions:
           present: []
-          absent: []
+          absent:
+            - down
         stationary: false
-        description: Always Active
+        description: While Up
       effectTypes:
-        - resistance
+        - healing
+        - regeneration
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
@@ -266,15 +395,20 @@ effects:
           amount: proficient
       interaction: manifest
       invoked: false
-      limitation: ''
+      limitation: Limbs only.
       maneuver: passive
       overview:
-        base: You @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.
+        base: >-
+          At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Healing]{heal} and regain that many @L[Core:HP]{HP}. This does
+          <i>not</i> consume your @L[Core:HP]{hit die}. If you take
+          @L[Damage:Fire]{fire damage}, this effect doesn't apply on your next
+          @L[Core:Turns]{turn}.
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - magical
+        - primal
       prepared: true
       range: Self.
       requirements: ''
@@ -298,36 +432,7 @@ effects:
         - self
       trigger: ''
       warded: false
-    _id: 42qNf17G6XQAJ2hW
-    img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!0KqGdNp771I1Aw9A.42qNf17G6XQAJ2hW'
-  - name: Healing Factor
-    type: ability
-    system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      hierarchy:
-        rootUuid: Compendium.teriock.powers.Item.0KqGdNp771I1Aw9A
-        subIds: []
-        supId: null
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -478,112 +583,6 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_ZM9N8Z1sgRIN5HRZ: turnStart
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent:
-            - down
-        stationary: false
-        description: While Up
-      effectTypes:
-        - healing
-        - regeneration
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: passive
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: Limbs only.
-      maneuver: passive
-      overview:
-        base: >-
-          At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Healing]{heal} and regain that many @L[Core:HP]{HP}. This does
-          <i>not</i> consume your @L[Core:HP]{hit die}. If you take
-          @L[Damage:Fire]{fire damage}, this effect doesn't apply on your next
-          @L[Core:Turns]{turn}.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - primal
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
     _id: Qf4JkOHKo0twnzRu
     img: systems/teriock/src/icons/abilities/healing-factor.webp
     changes: []

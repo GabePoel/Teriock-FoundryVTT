@@ -13,7 +13,107 @@ effects:
           - pbTwRikkgfpjPjCH
           - zsEoZeeh1QQKjSM7
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements:
+        - life
+      duration:
+        unit: hour
+        quantity: 8
+        conditions:
+          present: []
+          absent: []
+        description: 8 Hours
+      sustained: true
+      range: Self.
+      overview:
+        base: >-
+          A small circle of golden light circles above your head. You gain
+          @L[Ability:Light Touch]{Light Touch} and @L[Ability:Light Aura]{Light
+          Aura}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: lifeMage
+      rotator: true
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: static
+          value:
+            static: 1
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: special
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -175,49 +275,69 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: IhiRgwXkTtc1I95J
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!qzeb2OOcLI2CcUIz.IhiRgwXkTtc1I95J'
+  - name: Light Touch
+    type: ability
+    system:
+      hierarchy:
+        supId: IhiRgwXkTtc1I95J
+        rootUuid: Compendium.teriock.abilities.Item.qzeb2OOcLI2CcUIz
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
-      interaction: manifest
+      interaction: attack
       featSaveAttribute: mov
       maneuver: active
       executionTime: a1
       delivery:
-        base: self
+        base: hand
         parent: null
-        package: null
+        package: touch
       targets:
-        - self
+        - creature
       elements:
         - life
       duration:
-        unit: hour
-        quantity: 8
+        unit: minute
+        quantity: 1
         conditions:
           present: []
           absent: []
-        description: 8 Hours
-      sustained: true
-      range: Self.
+        stationary: false
+        description: 1 Minute
+      sustained: false
+      range: Your Hand's Range
       overview:
-        base: >-
-          A small circle of golden light circles above your head. You gain
-          @L[Ability:Light Touch]{Light Touch} and @L[Ability:Light Aura]{Light
-          Aura}.
+        base: ''
         proficient: ''
         fluent: ''
       results:
-        hit: ''
-        critHit: ''
+        hit: Target is @L[Condition:Lighted]{lighted} to a creature of your choice.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
         miss: ''
         critMiss: ''
         save: ''
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing: ub
       improvements:
         attributeImprovement:
           attribute: null
@@ -230,16 +350,16 @@ effects:
       standard: true
       ritual: false
       class: lifeMage
-      rotator: true
+      rotator: false
       invoked: false
       costs:
         verbal: false
         somatic: false
         material: false
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -256,8 +376,10 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
-      endCondition: ''
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well."
+      endCondition: >-
+        At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
       requirements: ''
       effects: []
       expansion: null
@@ -265,41 +387,21 @@ effects:
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: special
+      form: normal
       limitation: ''
       improvement: ''
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: IhiRgwXkTtc1I95J
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!qzeb2OOcLI2CcUIz.IhiRgwXkTtc1I95J'
-  - name: Light Touch
-    type: ability
-    system:
-      hierarchy:
-        supId: IhiRgwXkTtc1I95J
-        rootUuid: Compendium.teriock.abilities.Item.qzeb2OOcLI2CcUIz
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses:
             - lighted
@@ -453,18 +555,42 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
+    _id: pbTwRikkgfpjPjCH
+    img: systems/teriock/src/icons/abilities/light-touch.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!qzeb2OOcLI2CcUIz.pbTwRikkgfpjPjCH'
+  - name: Light Aura
+    type: ability
+    system:
+      hierarchy:
+        supId: IhiRgwXkTtc1I95J
+        rootUuid: Compendium.teriock.abilities.Item.qzeb2OOcLI2CcUIz
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
-      interaction: attack
+      interaction: feat
       featSaveAttribute: mov
       maneuver: active
       executionTime: a1
       delivery:
-        base: hand
+        base: aura
         parent: null
-        package: touch
+        package: null
       targets:
         - creature
       elements:
@@ -478,21 +604,21 @@ effects:
         stationary: false
         description: 1 Minute
       sustained: false
-      range: Your Hand's Range
+      range: '10'
       overview:
         base: ''
         proficient: ''
         fluent: ''
       results:
-        hit: Target is @L[Condition:Lighted]{lighted} to a creature of your choice.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        hit: ''
+        critHit: ''
         miss: ''
         critMiss: ''
         save: ''
         critSave: ''
-        fail: ''
+        fail: Target is @L[Condition:Lighted]{lighted} to a creature of your choice.
         critFail: ''
-      piercing: ub
+      piercing: normal
       improvements:
         attributeImprovement:
           attribute: null
@@ -512,9 +638,9 @@ effects:
         somatic: false
         material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -556,31 +682,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: pbTwRikkgfpjPjCH
-    img: systems/teriock/src/icons/abilities/light-touch.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!qzeb2OOcLI2CcUIz.pbTwRikkgfpjPjCH'
-  - name: Light Aura
-    type: ability
-    system:
-      hierarchy:
-        supId: IhiRgwXkTtc1I95J
-        rootUuid: Compendium.teriock.abilities.Item.qzeb2OOcLI2CcUIz
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses:
             - lighted
@@ -735,109 +837,6 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: '10'
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: Target is @L[Condition:Lighted]{lighted} to a creature of your choice.
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: lifeMage
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: static
-          value:
-            static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well."
-      endCondition: >-
-        At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
     _id: zsEoZeeh1QQKjSM7
     img: systems/teriock/src/icons/abilities/light-aura.webp
     changes: []

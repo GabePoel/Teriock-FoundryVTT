@@ -12,7 +12,106 @@ effects:
         subIds:
           - USLxP9nLbao34Xb9
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
+          @L[Ability:Detect Lie]{Detect Lie}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: duelist
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -166,36 +265,56 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: Pam0KiIGSB7dDovT
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!E72AFglumdOwjfU6.Pam0KiIGSB7dDovT'
+  - name: Detect Lie
+    type: ability
+    system:
+      hierarchy:
+        supId: Pam0KiIGSB7dDovT
+        rootUuid: Compendium.teriock.abilities.Item.E72AFglumdOwjfU6
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+        - spiritual
+      interaction: feat
+      featSaveAttribute: snk
+      maneuver: reactive
+      executionTime: r0
       delivery:
-        base: self
+        base: sight
         parent: null
         package: null
       targets:
-        - self
+        - creature
       elements: []
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
-        description: Always Active
+        stationary: false
+        description: Instant
       sustained: false
-      range: Self.
+      range: '15'
       overview:
-        base: >-
-          You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
-          @L[Ability:Detect Lie]{Detect Lie}.
+        base: ''
         proficient: ''
         fluent: ''
       results:
@@ -203,9 +322,13 @@ effects:
         critHit: ''
         miss: ''
         critMiss: ''
-        save: ''
+        save: >-
+          You detect that the statement is true, regardless of what the target
+          actually believes. This also applies if Detect Lie is
+          @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for some
+          other reason.
         critSave: ''
-        fail: ''
+        fail: You detect whether the target believes the statement is true or false.
         critFail: ''
       piercing: normal
       improvements:
@@ -227,9 +350,9 @@ effects:
         somatic: false
         material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -249,11 +372,10 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
+      trigger: Someone makes a statement which could, in principle, be true or false.
       basic: false
       form: normal
       limitation: ''
@@ -261,35 +383,17 @@ effects:
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: Pam0KiIGSB7dDovT
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!E72AFglumdOwjfU6.Pam0KiIGSB7dDovT'
-  - name: Detect Lie
-    type: ability
-    system:
-      hierarchy:
-        supId: Pam0KiIGSB7dDovT
-        rootUuid: Compendium.teriock.abilities.Item.E72AFglumdOwjfU6
-        subIds: []
-      applies:
+      effectTypes:
+        - truthDetecting
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -439,111 +543,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - spiritual
-      interaction: feat
-      featSaveAttribute: snk
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: sight
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: '15'
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: >-
-          You detect that the statement is true, regardless of what the target
-          actually believes. This also applies if Detect Lie is
-          @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for some
-          other reason.
-        critSave: ''
-        fail: You detect whether the target believes the statement is true or false.
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: duelist
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: static
-          value:
-            static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: Someone makes a statement which could, in principle, be true or false.
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - truthDetecting
     _id: USLxP9nLbao34Xb9
     img: systems/teriock/src/icons/abilities/detect-lie.webp
     changes: []

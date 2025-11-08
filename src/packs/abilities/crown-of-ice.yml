@@ -13,7 +13,107 @@ effects:
           - 7Ui1OIIGP4zmtnOu
           - hOTWK2FAqtKEgXWr
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements:
+        - storm
+      duration:
+        unit: hour
+        quantity: 8
+        conditions:
+          present: []
+          absent: []
+        description: 8 Hours
+      sustained: true
+      range: Self.
+      overview:
+        base: >-
+          A small circle of glowing frost circles above your head. You gain
+          @L[Ability:Shock Touch]{Shock Touch} and @L[Ability:Blizzard
+          Aura]{Blizzard Aura}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: stormMage
+      rotator: true
+      invoked: false
+      costs:
+        verbal: true
+        somatic: true
+        material: false
+        mp:
+          type: static
+          value:
+            static: 1
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: special
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -175,49 +275,69 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: qnqVPNmooEu9bLQH
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!1XElAYLlzdYg8Ao1.qnqVPNmooEu9bLQH'
+  - name: Shock Touch
+    type: ability
+    system:
+      hierarchy:
+        supId: qnqVPNmooEu9bLQH
+        rootUuid: Compendium.teriock.abilities.Item.1XElAYLlzdYg8Ao1
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
-      interaction: manifest
+      interaction: attack
       featSaveAttribute: mov
       maneuver: active
       executionTime: a1
       delivery:
-        base: self
+        base: hand
         parent: null
-        package: null
+        package: touch
       targets:
-        - self
+        - creature
       elements:
         - storm
       duration:
-        unit: hour
-        quantity: 8
+        unit: minute
+        quantity: 1
         conditions:
           present: []
           absent: []
-        description: 8 Hours
-      sustained: true
-      range: Self.
+        stationary: false
+        description: 1 Minute
+      sustained: false
+      range: Your Hand's Range
       overview:
-        base: >-
-          A small circle of glowing frost circles above your head. You gain
-          @L[Ability:Shock Touch]{Shock Touch} and @L[Ability:Blizzard
-          Aura]{Blizzard Aura}.
+        base: ''
         proficient: ''
         fluent: ''
       results:
-        hit: ''
-        critHit: ''
+        hit: Target is @L[Condition:Frozen]{frozen}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
         miss: ''
         critMiss: ''
         save: ''
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing: ub
       improvements:
         attributeImprovement:
           attribute: null
@@ -230,16 +350,16 @@ effects:
       standard: true
       ritual: false
       class: stormMage
-      rotator: true
+      rotator: false
       invoked: false
       costs:
         verbal: true
         somatic: true
         material: false
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -256,50 +376,33 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
-      endCondition: ''
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well."
+      endCondition: >-
+        At the end of each of the target's actions, they roll [[/roll 2d4]]. If
+        either of these dice roll a 4, this effect ends.
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: special
+      form: normal
       limitation: ''
       improvement: ''
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: qnqVPNmooEu9bLQH
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!1XElAYLlzdYg8Ao1.qnqVPNmooEu9bLQH'
-  - name: Shock Touch
-    type: ability
-    system:
-      hierarchy:
-        supId: qnqVPNmooEu9bLQH
-        rootUuid: Compendium.teriock.abilities.Item.1XElAYLlzdYg8Ao1
-        subIds: []
-      applies:
+      effectTypes:
+        - temporal
+      impacts:
         base:
           statuses:
             - frozen
@@ -452,110 +555,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        parent: null
-        package: touch
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: Your Hand's Range
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: Target is @L[Condition:Frozen]{frozen}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: stormMage
-      rotator: false
-      invoked: false
-      costs:
-        verbal: true
-        somatic: true
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well."
-      endCondition: >-
-        At the end of each of the target's actions, they roll [[/roll 2d4]]. If
-        either of these dice roll a 4, this effect ends.
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - temporal
     _id: 7Ui1OIIGP4zmtnOu
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     changes: []
@@ -580,7 +579,111 @@ effects:
         supId: qnqVPNmooEu9bLQH
         rootUuid: Compendium.teriock.abilities.Item.1XElAYLlzdYg8Ao1
         subIds: []
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: feat
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: aura
+        parent: null
+        package: null
+      targets:
+        - creature
+      elements:
+        - storm
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      sustained: false
+      range: '10'
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: Target is @L[Condition:Frozen]{frozen}.
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: stormMage
+      rotator: false
+      invoked: false
+      costs:
+        verbal: true
+        somatic: true
+        material: false
+        mp:
+          type: static
+          value:
+            static: 1
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well."
+      endCondition: >-
+        At the start of each of the target's actions, they roll [[/roll 2d4]].
+        If either of these dice roll a 4, this effect ends.
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - temporal
+      impacts:
         base:
           statuses:
             - frozen
@@ -733,110 +836,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: '10'
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: Target is @L[Condition:Frozen]{frozen}.
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: stormMage
-      rotator: false
-      invoked: false
-      costs:
-        verbal: true
-        somatic: true
-        material: false
-        mp:
-          type: static
-          value:
-            static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well."
-      endCondition: >-
-        At the start of each of the target's actions, they roll [[/roll 2d4]].
-        If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - temporal
     _id: hOTWK2FAqtKEgXWr
     img: systems/teriock/src/icons/abilities/blizzard-aura.webp
     changes: []

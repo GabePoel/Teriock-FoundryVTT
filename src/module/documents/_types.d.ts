@@ -95,7 +95,7 @@ declare global {
 
     export type EffectModelMetadata = Teriock.Documents.ChildModelMetadata & {
       type: Teriock.Documents.EffectType;
-      modifies: TeriockParent;
+      modifies: TeriockParentName;
     };
 
     export type ActorModel = (typeof models.actor)[keyof typeof models.actor];

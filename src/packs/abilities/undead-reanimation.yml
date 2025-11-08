@@ -13,7 +13,106 @@ effects:
           - Nr4afxgg1BDBD1im
           - smEqHOVTFAEJ8Ffk
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements:
+        - necromancy
+      duration:
+        unit: hour
+        quantity: 8
+        conditions:
+          present: []
+          absent: []
+        description: 8 Hours
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
+          Dead]{Animate Dead}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: necromancer
+      rotator: true
+      invoked: false
+      costs:
+        verbal: true
+        somatic: true
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: special
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -163,40 +262,67 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: qdqVqlsfYkMk0qjt
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!fitVlHWFrJkDk7iV.qdqVqlsfYkMk0qjt'
+  - name: Zombify
+    type: ability
+    system:
+      hierarchy:
+        supId: qdqVqlsfYkMk0qjt
+        rootUuid: Compendium.teriock.abilities.Item.fitVlHWFrJkDk7iV
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
         - magical
-      interaction: manifest
+      interaction: attack
       featSaveAttribute: mov
       maneuver: active
       executionTime: a1
       delivery:
-        base: self
+        base: hand
         parent: null
-        package: null
+        package: touch
       targets:
-        - self
+        - creature
       elements:
         - necromancy
       duration:
-        unit: hour
-        quantity: 8
+        unit: minute
+        quantity: 1
         conditions:
           present: []
           absent: []
-        description: 8 Hours
+        stationary: false
+        description: 1 Minute
       sustained: false
-      range: Self.
+      range: Your Hand's Range
       overview:
-        base: >-
-          You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
-          Dead]{Animate Dead}.
-        proficient: ''
-        fluent: ''
+        base: ''
+        proficient: Zombify is @L[Keyword:Warded]{warded}.
+        fluent: The base duration of this effect is 1 hour.
       results:
-        hit: ''
+        hit: >-
+          Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not under
+          your command, but is hostile to everyone but you. The
+          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
+          before, but loses all other traits and abilities. If the target was
+          already @L[Category:Zombies]{some kind of zombie}, then it is
+          reanimated as that type.
         critHit: ''
         miss: ''
         critMiss: ''
@@ -204,7 +330,7 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing: ub
       improvements:
         attributeImprovement:
           attribute: null
@@ -217,7 +343,7 @@ effects:
       standard: true
       ritual: false
       class: necromancer
-      rotator: true
+      rotator: false
       invoked: false
       costs:
         verbal: true
@@ -243,50 +369,35 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      heightened: >-
+        For each additional @L[Core:MP]{MP} spent, the duration of this effect
+        increases by 1 hour. The overall duration is rounded to the nearest
+        hour.
       endCondition: ''
-      requirements: ''
-      effects: []
+      requirements: Target is @L[Condition:Dead]{dead}.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: special
+      form: normal
       limitation: ''
       improvement: ''
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
         derived: 0
-    _id: qdqVqlsfYkMk0qjt
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!fitVlHWFrJkDk7iV.qdqVqlsfYkMk0qjt'
-  - name: Zombify
-    type: ability
-    system:
-      hierarchy:
-        supId: qdqVqlsfYkMk0qjt
-        rootUuid: Compendium.teriock.abilities.Item.fitVlHWFrJkDk7iV
-        subIds: []
-      applies:
+      effectTypes:
+        - control
+        - reanimation
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -444,6 +555,30 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+    _id: Nr4afxgg1BDBD1im
+    img: systems/teriock/src/icons/abilities/zombify.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!fitVlHWFrJkDk7iV.Nr4afxgg1BDBD1im'
+  - name: Animate Dead
+    type: ability
+    system:
+      hierarchy:
+        supId: qdqVqlsfYkMk0qjt
+        rootUuid: Compendium.teriock.abilities.Item.fitVlHWFrJkDk7iV
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -461,27 +596,29 @@ effects:
       elements:
         - necromancy
       duration:
-        unit: minute
-        quantity: 1
+        unit: instant
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: Instant
       sustained: false
       range: Your Hand's Range
       overview:
-        base: ''
-        proficient: Zombify is @L[Keyword:Warded]{warded}.
-        fluent: The base duration of this effect is 1 hour.
+        base: >-
+          Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
+          creatures]{undead}) at 1 @L[Core:HP]{HP}, although its maximum
+          @L[Core:HP]{HP} is halved (minimum of 1) until it completes a
+          @L[Core:Short Rest]{short rest}. This does not count as a
+          @L[Category:Revival effects]{revival effect}.
+        proficient: >-
+          Target has all @L[Core:HP]{HP} restored, but its maximum
+          @L[Core:HP]{HP} is still halved. This does not count as a
+          @L[Category:Healing effects]{healing effect}.
+        fluent: Target's @L[Core:HP]{HP} is no longer halved.
       results:
-        hit: >-
-          Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not under
-          your command, but is hostile to everyone but you. The
-          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
-          before, but loses all other traits and abilities. If the target was
-          already @L[Category:Zombies]{some kind of zombie}, then it is
-          reanimated as that type.
+        hit: ''
         critHit: ''
         miss: ''
         critMiss: ''
@@ -509,9 +646,9 @@ effects:
         somatic: true
         material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -528,12 +665,11 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: >-
-        For each additional @L[Core:MP]{MP} spent, the duration of this effect
-        increases by 1 hour. The overall duration is rounded to the nearest
-        hour.
+      heightened: ''
       endCondition: ''
-      requirements: Target is @L[Condition:Dead]{dead}.
+      requirements: >-
+        Target is @L[Condition:Dead]{dead} and @L[Category:Undead
+        creatures]{undead}.
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -554,33 +690,8 @@ effects:
         raw: ''
         derived: 0
       effectTypes:
-        - control
         - reanimation
-    _id: Nr4afxgg1BDBD1im
-    img: systems/teriock/src/icons/abilities/zombify.webp
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!fitVlHWFrJkDk7iV.Nr4afxgg1BDBD1im'
-  - name: Animate Dead
-    type: ability
-    system:
-      hierarchy:
-        supId: qdqVqlsfYkMk0qjt
-        rootUuid: Compendium.teriock.abilities.Item.fitVlHWFrJkDk7iV
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -730,118 +841,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        parent: null
-        package: touch
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Your Hand's Range
-      overview:
-        base: >-
-          Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
-          creatures]{undead}) at 1 @L[Core:HP]{HP}, although its maximum
-          @L[Core:HP]{HP} is halved (minimum of 1) until it completes a
-          @L[Core:Short Rest]{short rest}. This does not count as a
-          @L[Category:Revival effects]{revival effect}.
-        proficient: >-
-          Target has all @L[Core:HP]{HP} restored, but its maximum
-          @L[Core:HP]{HP} is still halved. This does not count as a
-          @L[Category:Healing effects]{healing effect}.
-        fluent: Target's @L[Core:HP]{HP} is no longer halved.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: necromancer
-      rotator: false
-      invoked: false
-      costs:
-        verbal: true
-        somatic: true
-        material: false
-        mp:
-          type: static
-          value:
-            static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: >-
-        Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-        creatures]{undead}.
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - reanimation
     _id: smEqHOVTFAEJ8Ffk
     img: systems/teriock/src/icons/abilities/animate-dead.webp
     changes: []

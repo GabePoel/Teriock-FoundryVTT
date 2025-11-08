@@ -12,7 +12,107 @@ effects:
         subIds:
           - dTrb56zkGGF0VPqH
         supId: null
-      applies:
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - spiritual
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: sight
+        parent: null
+        package: null
+      targets:
+        - creature
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+      sustained: false
+      range: '30'
+      overview:
+        base: >-
+          You and the target begin @L[Condition:Dueling]{dueling} each other.
+          You gain @L[Ability:Active Bow Out]{Active Bow Out} while in this
+          @L[Condition:Dueling]{duel}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: assassin
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - duelModifying
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -162,7 +262,29 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      wikiNamespace: Ability
+    _id: 2WyB2lOcGfeJr05N
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!p0J89inUSBmr6dL2.2WyB2lOcGfeJr05N'
+  - name: Active Bow Out
+    type: ability
+    system:
+      hierarchy:
+        supId: 2WyB2lOcGfeJr05N
+        rootUuid: Compendium.teriock.abilities.Item.p0J89inUSBmr6dL2
+        subIds: []
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -172,11 +294,11 @@ effects:
       maneuver: active
       executionTime: a1
       delivery:
-        base: sight
+        base: self
         parent: null
         package: null
       targets:
-        - creature
+        - self
       elements: []
       duration:
         unit: instant
@@ -184,15 +306,19 @@ effects:
         conditions:
           present: []
           absent: []
+        stationary: false
         description: Instant
       sustained: false
-      range: '30'
+      range: Self.
       overview:
         base: >-
-          You and the target begin @L[Condition:Dueling]{dueling} each other.
-          You gain @L[Ability:Active Bow Out]{Active Bow Out} while in this
-          @L[Condition:Dueling]{duel}.
-        proficient: ''
+          You end a @L[Condition:Dueling]{duel} you are currently in. You do not
+          count as "forfeiting" or "losing" if you use Active Bow Out to stop
+          @L[Condition:Dueling]{dueling}.
+        proficient: >-
+          If you want, everyone in the @L[Condition:Dueling]{duel} returns to
+          the number of @L[Core:HP]{HP} they had prior to
+          @L[Condition:Dueling]{dueling}.
         fluent: ''
       results:
         hit: ''
@@ -215,7 +341,7 @@ effects:
       spell: false
       standard: true
       ritual: false
-      class: assassin
+      class: duelist
       rotator: false
       invoked: false
       costs:
@@ -256,6 +382,9 @@ effects:
       prepared: true
       warded: false
       secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
@@ -263,30 +392,7 @@ effects:
         derived: 0
       effectTypes:
         - duelModifying
-    _id: 2WyB2lOcGfeJr05N
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!p0J89inUSBmr6dL2.2WyB2lOcGfeJr05N'
-  - name: Active Bow Out
-    type: ability
-    system:
-      hierarchy:
-        supId: 2WyB2lOcGfeJr05N
-        rootUuid: Compendium.teriock.abilities.Item.p0J89inUSBmr6dL2
-        subIds: []
-      applies:
+      impacts:
         base:
           statuses: []
           startStatuses: []
@@ -437,113 +543,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You end a @L[Condition:Dueling]{duel} you are currently in. You do not
-          count as "forfeiting" or "losing" if you use Active Bow Out to stop
-          @L[Condition:Dueling]{dueling}.
-        proficient: >-
-          If you want, everyone in the @L[Condition:Dueling]{duel} returns to
-          the number of @L[Core:HP]{HP} they had prior to
-          @L[Condition:Dueling]{dueling}.
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: duelist
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - duelModifying
     _id: dTrb56zkGGF0VPqH
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     changes: []
@@ -558,7 +557,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!p0J89inUSBmr6dL2.dTrb56zkGGF0VPqH'
 ownership:
