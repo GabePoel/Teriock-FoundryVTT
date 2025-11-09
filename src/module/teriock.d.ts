@@ -25,7 +25,6 @@ import * as documents from "./documents/_documents.mjs";
 import { TeriockBody, TeriockEquipment } from "./documents/_documents.mjs";
 import * as data from "./data/_module.mjs";
 import * as placeables from "./canvas/placeables/_module.mjs";
-import * as collections from "./documents/_collections.mjs";
 import type TeriockBaseActorSheet from "./applications/sheets/actor-sheets/base-actor-sheet/base-actor-sheet.mjs";
 import type TeriockBaseEffectSheet from "./applications/sheets/effect-sheets/base-effect-sheet/base-effect-sheet.mjs";
 import type TeriockBaseItemSheet from "./applications/sheets/item-sheets/base-item-sheet/base-item-sheet.mjs";
@@ -87,6 +86,7 @@ declare global {
   // -----
 
   const TeriockCharacter: documents.TeriockCharacter;
+  const TeriockCreature: documents.TeriockCreature;
 
   // Item
   // ----
@@ -109,19 +109,6 @@ declare global {
   const TeriockFluency: documents.TeriockFluency;
   const TeriockProperty: documents.TeriockProperty;
   const TeriockResource: documents.TeriockResource;
-
-  // Compendium collections
-  // ----------------------
-
-  const TeriockBodyCompendium: collections.TeriockBodyCompendium;
-  const TeriockCharacterCompendium: collections.TeriockCharacterCompendium;
-  const TeriockCompendiumCollection: collections.TeriockCompendiumCollection;
-  const TeriockEquipmentCompendium: collections.TeriockEquipmentCompendium;
-  const TeriockMacroCompendium: collections.TeriockMacroCompendium;
-  const TeriockPowerCompendium: collections.TeriockPowerCompendium;
-  const TeriockRankCompendium: collections.TeriockRankCompendium;
-  const TeriockSpeciesCompendium: collections.TeriockSpeciesCompendium;
-  const TeriockWrapperCompendium: collections.TeriockWrapperCompendium;
 
   // Data Models
   // ===========

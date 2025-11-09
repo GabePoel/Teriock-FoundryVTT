@@ -1,5 +1,3 @@
-import { toTitleCase } from "../helpers/string.mjs";
-
 export function registerSettings() {
   //noinspection JSValidateJSDoc
   /** @type {Record<string, Partial<SettingConfig>>} */
@@ -116,22 +114,6 @@ export function registerSettings() {
       type: Boolean,
     },
   };
-  const quickIndexDefaults = {
-    abilities: true,
-    armaments: true,
-    properties: true,
-    species: true,
-  };
-  for (const [title, initial] of Object.entries(quickIndexDefaults)) {
-    settings[`quickIndex${toTitleCase(title)}`] = {
-      name: `Quickly Index ${toTitleCase(title)}`,
-      hint: `If enabled, the window to import ${title.toLowerCase()} is loaded quickly but no tooltips are displayed.`,
-      scope: "client",
-      config: true,
-      type: Boolean,
-      default: initial,
-    };
-  }
   settings.developerMode = {
     config: true,
     default: false,

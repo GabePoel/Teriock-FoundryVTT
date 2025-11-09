@@ -43,6 +43,11 @@ export default class TeriockPowerModel extends TeriockBaseItemModel {
   }
 
   /** @inheritDoc */
+  get color() {
+    return TERIOCK.display.colors[TERIOCK.options.power[this.type].color];
+  }
+
+  /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,

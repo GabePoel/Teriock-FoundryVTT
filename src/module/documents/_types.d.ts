@@ -1,11 +1,23 @@
 import "./mixins/_types";
 import type { documentTypes } from "../constants/system/document-types.mjs";
 import type * as models from "../data/_module.mjs";
+import { TeriockFolder } from "./_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
     type NullDocument = {
       readonly documentName: "";
+    };
+
+    type Index<Doc> = {
+      _id: Teriock.ID<Doc>;
+      folder: Teriock.ID<TeriockFolder>;
+      img: string;
+      name: string;
+      pack: string;
+      sort: number;
+      type: Teriock.Documents.CommonType;
+      uuid: Teriock.UUID<Doc>;
     };
 
     interface Interface<

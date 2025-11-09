@@ -1,6 +1,5 @@
 //noinspection JSUnusedGlobalSymbols
 
-import { getAbility, getItem, getProperty } from "../../helpers/fetch.mjs";
 import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
 import { getIcon } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
@@ -166,20 +165,11 @@ export async function selectConditionDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey|null>}
  */
 export async function selectPropertyDialog() {
-  let choices;
-  let tooltipAsync = true;
-  if (game.settings.get("teriock", "quickIndexProperties")) {
-    choices = game.teriock.packs.properties().index.contents;
-  } else {
-    choices = await Promise.all(
-      Object.values(TERIOCK.index.properties).map((name) => getProperty(name)),
-    );
-    tooltipAsync = false;
-  }
+  const choices = game.teriock.packs.properties().index.contents;
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a property.",
     title: "Select Property",
-    tooltipAsync: tooltipAsync,
+    tooltipAsync: true,
     openable: true,
   });
   if (chosen) {
@@ -222,20 +212,11 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectAbilityDialog() {
-  let choices;
-  let tooltipAsync = true;
-  if (game.settings.get("teriock", "quickIndexAbilities")) {
-    choices = game.teriock.packs.abilities().index.contents;
-  } else {
-    choices = await Promise.all(
-      Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)),
-    );
-    tooltipAsync = false;
-  }
+  const choices = game.teriock.packs.abilities().index.contents;
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an ability.",
     title: "Select Ability",
-    tooltipAsync: tooltipAsync,
+    tooltipAsync: true,
     openable: true,
   });
   if (chosen) {
@@ -246,51 +227,15 @@ export async function selectAbilityDialog() {
 }
 
 /**
- * Select common animal dialog.
- * @param [maxBr]
- * @returns {Promise<TeriockSpecies|null>}
- */
-export async function selectCommonAnimalDialog(maxBr = null) {
-  const folderId = game.teriock.packs
-    .species()
-    .folders.find((f) => f.name === "Common Animal Species")?.id;
-  let choices = await game.teriock.packs
-    .species()
-    .getIndex({ fields: ["system.br"] });
-  choices = choices.filter((c) => c.folder === folderId);
-  if (maxBr !== null) {
-    choices = choices.filter((c) => c.system.br <= maxBr);
-  }
-  return selectDocumentDialog(choices, {
-    hint: "Please select an animal.",
-    title: "Select Common Animal",
-    tooltipAsync: true,
-    openable: true,
-  });
-}
-
-/**
  * Select equipment dialog.
  * @returns {Promise<string|null>}
  */
 export async function selectEquipmentTypeDialog() {
-  let choices;
-  let tooltipAsync = true;
-  if (game.settings.get("teriock", "quickIndexArmaments")) {
-    const equipmentPack = game.teriock.packs.equipment();
-    choices = equipmentPack.index.contents;
-  } else {
-    choices = await Promise.all(
-      Object.values(TERIOCK.index.equipment).map((name) =>
-        getItem(name, "equipment"),
-      ),
-    );
-    tooltipAsync = false;
-  }
+  const choices = game.teriock.packs.equipment().index.contents;
   let chosen = await selectDocumentDialog(choices, {
     hint: "Please select an equipment type.",
     title: "Select Equipment Type",
-    tooltipAsync: tooltipAsync,
+    tooltipAsync: true,
     openable: true,
   });
   if (chosen) {
@@ -306,23 +251,11 @@ export async function selectEquipmentTypeDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectBodyPartDialog() {
-  let choices;
-  let tooltipAsync = true;
-  if (game.settings.get("teriock", "quickIndexArmaments")) {
-    const bodyPartsPack = game.teriock.packs.bodyParts();
-    choices = bodyPartsPack.index.contents;
-  } else {
-    choices = await Promise.all(
-      Object.values(TERIOCK.index.equipment).map((name) =>
-        getItem(name, "bodyParts"),
-      ),
-    );
-    tooltipAsync = false;
-  }
+  const choices = game.teriock.packs.bodyParts().index.contents;
   let chosen = await selectDocumentDialog(choices, {
     hint: "Please select a body part.",
     title: "Select Body Part",
-    tooltipAsync: tooltipAsync,
+    tooltipAsync: true,
     openable: true,
   });
   if (chosen) {

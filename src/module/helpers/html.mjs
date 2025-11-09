@@ -1,4 +1,3 @@
-import { selectCommonAnimalDialog } from "../applications/dialogs/select-dialog.mjs";
 import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
 import { getIcon } from "./path.mjs";
@@ -482,38 +481,6 @@ export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
         effectObject.system.associations.push(association);
         button.dataset[useType] = JSON.stringify(effectObject);
       }
-    }
-  }
-}
-
-/**
- * Add common animal transformation to the roll config.
- * @param {AbilityRollConfig} rollConfig
- * @param {number} multiplier
- * @returns {Promise<void>}
- */
-export async function addCommonAnimalToRollConfig(rollConfig, multiplier) {
-  let maxBr = multiplier;
-  if (rollConfig.useData.proficient) {
-    maxBr = multiplier * rollConfig.useData.actor.system.scaling.p;
-  }
-  if (rollConfig.useData.fluent) {
-    maxBr = multiplier * rollConfig.useData.actor.system.scaling.f;
-  }
-  if (rollConfig.useData.modifiers.heightened) {
-    maxBr += multiplier * rollConfig.useData.modifiers.heightened;
-  }
-  const species = await selectCommonAnimalDialog(maxBr);
-  if (species) {
-    const consequence = unpackEffectButton(rollConfig);
-    if (consequence) {
-      //noinspection JSValidateTypes
-      consequence.system.transformation.uuids = [species.uuid];
-      consequence.system.transformation.image = species.img.replace(
-        "icons/creatures/",
-        "icons/tokens/",
-      );
-      packEffectButton(rollConfig, consequence);
     }
   }
 }

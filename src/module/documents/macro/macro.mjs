@@ -52,14 +52,15 @@ export default class TeriockMacro extends BlankMixin(Macro) {
       id: game.user.id,
     });
     const folders =
-      /** @type {Collection<string, TeriockFolder>} */ game.folders;
+      /** @type {Collection<Teriock.ID<TeriockFolder>,TeriockFolder>} */ game.folders;
     const macroFolder = folders.find(
       (f) =>
         f.getFlag("teriock", "user") === game.user.id &&
         f.getFlag("teriock", "hotbarFolder") &&
         f.type === "Macro",
     );
-    const macros = /** @type {Collection<string, TeriockMacro>} */ game.macros;
+    const macros =
+      /** @type {Collection<Teriock.ID<TeriockMacro>,TeriockMacro>} */ game.macros;
     let macro = macros.find(
       (m) =>
         m.getFlag("teriock", "user") === game.user.id &&

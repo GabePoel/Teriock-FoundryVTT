@@ -367,43 +367,43 @@ foundry.helpers.Hooks.once("init", function () {
     data: data,
     packs: {
       abilities: () =>
-        /** @type {TeriockWrapperCompendium} */
+        /** @type {CompendiumCollection<TeriockWrapper> & CompendiumHelper<TeriockWrapper>} */
         packs.get("teriock.abilities"),
       bodyParts: () =>
-        /** @type {TeriockBodyCompendium} */
+        /** @type {CompendiumCollection<TeriockBody> & CompendiumHelper<TeriockBody>} */
         packs.get("teriock.bodyParts"),
       classes: () =>
-        /** @type {TeriockRankCompendium} */
+        /** @type {CompendiumCollection<TeriockRank> & CompendiumHelper<TeriockRank>} */
         packs.get("teriock.classes"),
       creatures: () =>
-        /** @type {TeriockCharacterCompendium} */
+        /** @type {CompendiumCollection<TeriockCreature> & CompendiumHelper<TeriockCreature>} */
         packs.get("teriock.creatures"),
       equipment: () =>
-        /** @type {TeriockEquipmentCompendium} */
+        /** @type {CompendiumCollection<TeriockEquipment> & CompendiumHelper<TeriockEquipment>} */
         packs.get("teriock.equipment"),
       essentials: () =>
-        /** @type {TeriockPowerCompendium} */
+        /** @type {CompendiumCollection<TeriockPower> & CompendiumHelper<TeriockPower>} */
         packs.get("teriock.essentials"),
       execution: () =>
-        /** @type {TeriockMacroCompendium} */
+        /** @type {CompendiumCollection<TeriockMacro> & CompendiumHelper<TeriockMacro>} */
         packs.get("teriock.execution"),
       magicItems: () =>
-        /** @type {TeriockEquipmentCompendium} */
+        /** @type {CompendiumCollection<TeriockEquipment> & CompendiumHelper<TeriockEquipment>} */
         packs.get("teriock.magicItems"),
       maintenance: () =>
-        /** @type {TeriockMacroCompendium} */
+        /** @type {CompendiumCollection<TeriockMacro> & CompendiumHelper<TeriockMacro>} */
         packs.get("teriock.maintenance"),
       powers: () =>
-        /** @type {TeriockPowerCompendium} */
+        /** @type {CompendiumCollection<TeriockPower> & CompendiumHelper<TeriockPower>} */
         packs.get("teriock.powers"),
       properties: () =>
-        /** @type {TeriockWrapperCompendium} */
+        /** @type {CompendiumCollection<TeriockWrapper> & CompendiumHelper<TeriockWrapper>} */
         packs.get("teriock.properties"),
       rules: () =>
-        /** @type {TeriockJournalCompendium} */
+        /** @type {CompendiumCollection<TeriockJournalEntry> & CompendiumHelper<TeriockJournalEntry>} */
         packs.get("teriock.rules"),
       species: () =>
-        /** @type {TeriockSpeciesCompendium} */
+        /** @type {CompendiumCollection<TeriockSpecies> & CompendiumHelper<TeriockSpecies>} */
         packs.get("teriock.species"),
     },
   };

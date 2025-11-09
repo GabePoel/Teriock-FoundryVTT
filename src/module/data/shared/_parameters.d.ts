@@ -8,6 +8,8 @@ declare global {
     export type Font = keyof typeof TERIOCK.display.fonts;
     /** Die Stat */
     export type DieStat = "hp" | "mp";
+    /** Color */
+    export type Color = keyof typeof TERIOCK.display.colors;
     /** Transformation level */
     export type TransformationLevel =
       keyof typeof TERIOCK.options.effect.transformationLevel;
