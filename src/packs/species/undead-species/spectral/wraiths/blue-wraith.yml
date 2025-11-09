@@ -1836,7 +1836,7 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          You are @L[Keyword:Immunity]{immune} to non-@L[Damage:Magic]{magic}
+          You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
           @L[Core:Damage]{damage}.
         proficient: ''
         fluent: ''
@@ -1876,9 +1876,9 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.immunities.damageTypes
+            - key: system.protections.immunities.damageTypes
               mode: 2
-              value: Non-magical
+              value: mundane
               priority: 10
           common: []
           expiration:
@@ -2453,11 +2453,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.immunities.statuses
+            - key: system.protections.immunities.statuses
               mode: 2
               value: frightened
               priority: 10
-            - key: system.immunities.statuses
+            - key: system.protections.immunities.statuses
               mode: 2
               value: charmed
               priority: 10
@@ -2747,7 +2747,19 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              value: unconscious
+              priority: 10
+            - key: system.protections.immunities.statuses
+              mode: 2
+              value: suffocating
+              priority: 10
+            - key: system.protections.immunities.statuses
+              mode: 2
+              value: poisoned
+              priority: 10
           common: []
           expiration:
             normal:

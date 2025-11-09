@@ -141,13 +141,15 @@ function migrateProtection(change) {
  */
 function migrateProtections(data) {
   for (const application of ["base", "proficient", "fluent", "heightened"]) {
-    if (foundry.utils.hasProperty(data, `applies.${application}.changes`)) {
-      const changes = foundry.utils.getProperty(
-        data,
-        `applies.${application}.changes`,
-      );
-      for (const change of changes) {
-        migrateProtection(change);
+    for (const prefix of ["applies", "impacts"]) {
+      if (foundry.utils.hasProperty(data, `${prefix}.${application}.changes`)) {
+        const changes = foundry.utils.getProperty(
+          data,
+          `${prefix}.${application}.changes`,
+        );
+        for (const change of changes) {
+          migrateProtection(change);
+        }
       }
     }
   }

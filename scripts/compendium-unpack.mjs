@@ -123,6 +123,30 @@ function cleanEntry(doc) {
       doc.system.impacts = doc.system.applies;
       delete doc.system.applies;
     }
+    if (doc.system.impacts) {
+      for (const impact of ["base", "proficient", "fluent", "heightened"]) {
+        if (doc.system.impacts[impact]) {
+          if (doc.system.impacts[impact].changes) {
+            for (const change of doc.system.impacts[impact].changes) {
+              let key = change.key;
+              for (const protection of [
+                "resistances",
+                "immunities",
+                "hexproofs",
+                "hexseals",
+              ]) {
+                if (key.startsWith(`system.${protection}`)) {
+                  change.key = key.replace(
+                    `system.${protection}`,
+                    `system.protections.${protection}`,
+                  );
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     if (doc.system.imports) {
       delete doc.system.imports.bodyParts;
       delete doc.system.imports.equipment;

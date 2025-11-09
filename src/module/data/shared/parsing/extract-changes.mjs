@@ -15,7 +15,17 @@ export function extractChangesFromHTML(htmlString) {
       if (!(el instanceof HTMLElement)) {
         return [];
       }
-      const key = el.dataset.key;
+      let key = el.dataset.key;
+      for (const prefix of [
+        "immunities",
+        "resistances",
+        "hexproofs",
+        "hexseals",
+      ]) {
+        if (key.startsWith(`system.${prefix}`)) {
+          key = key.replace(`system.${prefix}`, `system.protections.${prefix}`);
+        }
+      }
       const mode = el.dataset.mode;
       const value = el.dataset.value;
       const priority = el.dataset.priority;
