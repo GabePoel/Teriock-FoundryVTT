@@ -54,29 +54,17 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      form: new fields.StringField({ initial: "normal" }),
-      damageType: new fields.StringField({ initial: "" }),
-      extraDamage: new FormulaField({ deterministic: false }),
-      applyIfShattered: new fields.BooleanField({
-        initial: false,
-        label: "Apply if Shattered",
-      }),
       applyIfDampened: new fields.BooleanField({
         initial: false,
         label: "Apply if Dampened",
       }),
-      modifiesActor: new fields.BooleanField({
+      applyIfShattered: new fields.BooleanField({
         initial: false,
-        label: "Modifies Actor",
+        label: "Apply if Shattered",
       }),
-      limitation: new TextField({
-        initial: "",
-        label: "Limitation",
-      }),
-      improvement: new TextField({
-        initial: "",
-        label: "Improvement",
-      }),
+      damageType: new fields.StringField({ initial: "" }),
+      extraDamage: new FormulaField({ deterministic: false }),
+      form: new fields.StringField({ initial: "normal" }),
       impacts: new fields.SchemaField({
         changes: new ListField(changeField(), {
           label: "Changes",
@@ -87,6 +75,18 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
             choices: propertyPseudoHooks,
           }),
         ),
+      }),
+      improvement: new TextField({
+        initial: "",
+        label: "Improvement",
+      }),
+      limitation: new TextField({
+        initial: "",
+        label: "Limitation",
+      }),
+      modifiesActor: new fields.BooleanField({
+        initial: false,
+        label: "Modifies Actor",
       }),
     });
   }

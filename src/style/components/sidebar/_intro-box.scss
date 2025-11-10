@@ -9,14 +9,26 @@
   position: relative;
 
   .character-avatar {
-    border: 1px solid color-mix(in srgb, var(--color-dark-2), transparent 75%);
     border-radius: 6px;
     cursor: pointer;
     height: 220px;
     outline: 1px solid var(--color-border);
     overflow: hidden;
-    position: relative; // so the shadow positions against this
+    position: relative;
     width: 220px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: inset 0 0 10px var(--color-dark-2);
+      z-index: 1;
+    }
 
     img {
       @include mixins.image-position;
@@ -41,12 +53,12 @@
       .character-avatar-token-circle {
         border: 1px solid var(--color-border);
         border-radius: 50%;
-        margin-top: 3px;
         position: absolute;
 
         &.inner {
-          height: calc(66.7% + 5px);
-          width: calc(66.7% + 5px);
+          height: calc(66.7% + 2px);
+          width: calc(66.7% + 2px);
+          @include mixins.warm-image-background;
         }
 
         &.outer {
@@ -68,6 +80,12 @@
       transition: opacity 150ms ease-in-out;
       width: var(--shadow-icon-width);
 
+      .character-avatar-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 0.25em;
+      }
+
       &::before {
         background: radial-gradient(
           circle at calc(100% - 1.25em) 1em,
@@ -84,6 +102,24 @@
     &:hover .character-avatar-shadow {
       opacity: 1;
     }
+
+    &.ring {
+      outline: none;
+
+      &::after {
+        box-shadow: none;
+      }
+
+      .character-avatar-background {
+        background: none;
+      }
+
+      .character-avatar-shadow {
+        &::before {
+          background: none;
+        }
+      }
+    }
   }
 
   .character-name {
@@ -93,12 +129,19 @@
     .character-name-text {
       background-color: var(--color-cool-5);
       border: 1px solid var(--color-text-subtle);
-      border-radius: 0 0 6px 6px;
-      border-top: none;
+      border-radius: 6px;
       color: var(--color-text-primary);
       font-family: var(--font-h4), serif;
       font-size: var(--font-h4-size);
       text-align: center;
+    }
+
+    &:not(.ring) {
+      .character-name-text {
+        padding-top: 1px;
+        border-radius: 0 0 6px 6px;
+        border-top: none;
+      }
     }
   }
 

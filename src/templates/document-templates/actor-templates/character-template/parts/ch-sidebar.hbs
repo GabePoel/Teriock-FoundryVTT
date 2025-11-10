@@ -1,10 +1,26 @@
 <div class="character-sidebar">
   <div class="character-sidebar-container">
     <div class="character-intro-box">
-      <div class="character-avatar timage" data-src="{{img}}">
+      <div
+        class="character-avatar timage {{#if
+          (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}ring{{/if}}"
+        data-src="{{img}}"
+      >
         <div class="character-avatar-shadow">
-          <div class="take-harm-button thover" data-tooltip="{{avatarTooltip}}" data-action="switchImage">
-            <i class="fa-fw {{avatarIcon}} fa-light"></i>
+          <div class="character-avatar-buttons take-harm-button">
+            {{#if (eq avatarImagePath "prototypeToken.texture.src")}}
+              <div
+                class="thover"
+                data-tooltip="Ring {{#if document.prototypeToken.ring.enabled}}Enabled{{else}}Disabled{{/if}}"
+                data-action="toggleRing"
+              >
+                <i class="fa-fw fa-circle-{{#if document.prototypeToken.ring.enabled}}check{{else}}xmark{{/if}}
+              fa-light"></i>
+              </div>
+            {{/if}}
+            <div class="thover" data-tooltip="{{avatarTooltip}}" data-action="switchImage">
+              <i class="fa-fw {{avatarIcon}} fa-light"></i>
+            </div>
           </div>
         </div>
         <img
@@ -17,13 +33,14 @@
           alt="{{name}}"
         >
         <div class="character-avatar-background">
-          {{#if (eq avatarImagePath "prototypeToken.texture.src")}}
+          {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
             <div class="character-avatar-token-circle inner"></div>
             <div class="character-avatar-token-circle outer"></div>
           {{/if}}
         </div>
       </div>
-      <div class="character-name">
+      <div class="character-name {{#if
+        (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}ring{{/if}}">
         {{formInput
           fields.name
           value=name

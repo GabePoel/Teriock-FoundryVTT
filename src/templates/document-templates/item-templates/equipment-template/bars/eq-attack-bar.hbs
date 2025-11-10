@@ -1,9 +1,9 @@
 {{#if
   (or
-    (exists system.av.saved)
-    (exists system.bv.saved)
-    (exists system.damage.base.saved)
-    (exists system.range.long.saved)
+    (exists system.av.raw)
+    (exists system.bv.raw)
+    (exists system.damage.base.raw)
+    (exists system.range.long.raw)
   )
 }}
   <div class="ab-bar">
@@ -40,8 +40,8 @@
       )
       after=false
       icon=(path TERIOCK.display.icons "range")
-      include=(exists system.range.long.saved)
-      includeSecondary=(exists system.range.short.saved)
+      include=(exists system.range.long.raw)
+      includeSecondary=(exists system.range.short.raw)
       label="ft"
       unselected=system.range.long.raw
       unselectedSecondary=system.range.short.raw

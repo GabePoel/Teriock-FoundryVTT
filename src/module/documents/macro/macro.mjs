@@ -118,11 +118,15 @@ export default class TeriockMacro extends BlankMixin(Macro) {
         const useOptions = {
           actor: a,
         };
+        let secret = game.settings.get("teriock", "secretArmaments");
+        if (event.shiftKey) {
+          secret = !secret;
+        }
         if (event) {
           useOptions.advantage = event.altKey;
           useOptions.disadvantage = event.shiftKey;
           useOptions.twoHanded = event.ctrlKey;
-          useOptions.secret = event.shiftKey;
+          useOptions.secret = secret;
         }
         await doc.system.use(useOptions);
       } else {

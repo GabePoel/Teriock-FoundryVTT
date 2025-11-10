@@ -2398,7 +2398,6 @@ img.rescale {
   position: relative;
 }
 .teriock .character-intro-box .character-avatar {
-  border: 1px solid color-mix(in srgb, var(--color-dark-2), transparent 75%);
   border-radius: 6px;
   cursor: pointer;
   height: 220px;
@@ -2406,6 +2405,18 @@ img.rescale {
   overflow: hidden;
   position: relative;
   width: 220px;
+}
+.teriock .character-intro-box .character-avatar::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 10px var(--color-dark-2);
+  z-index: 1;
 }
 .teriock .character-intro-box .character-avatar img {
   object-fit: cover;
@@ -2430,12 +2441,12 @@ img.rescale {
 .teriock .character-intro-box .character-avatar .character-avatar-background .character-avatar-token-circle {
   border: 1px solid var(--color-border);
   border-radius: 50%;
-  margin-top: 3px;
   position: absolute;
 }
 .teriock .character-intro-box .character-avatar .character-avatar-background .character-avatar-token-circle.inner {
-  height: calc(66.7% + 5px);
-  width: calc(66.7% + 5px);
+  height: calc(66.7% + 2px);
+  width: calc(66.7% + 2px);
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 .teriock .character-intro-box .character-avatar .character-avatar-background .character-avatar-token-circle.outer {
   height: calc(66.7% + 12px);
@@ -2453,6 +2464,11 @@ img.rescale {
   transition: opacity 150ms ease-in-out;
   width: var(--shadow-icon-width);
 }
+.teriock .character-intro-box .character-avatar .character-avatar-shadow .character-avatar-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+}
 .teriock .character-intro-box .character-avatar .character-avatar-shadow::before {
   background: radial-gradient(circle at calc(100% - 1.25em) 1em, rgba(0, 0, 0, 0.75), transparent calc(var(--shadow-icon-width) - 1.25em));
   border-top-right-radius: 6px;
@@ -2463,6 +2479,18 @@ img.rescale {
 .teriock .character-intro-box .character-avatar:hover .character-avatar-shadow {
   opacity: 1;
 }
+.teriock .character-intro-box .character-avatar.ring {
+  outline: none;
+}
+.teriock .character-intro-box .character-avatar.ring::after {
+  box-shadow: none;
+}
+.teriock .character-intro-box .character-avatar.ring .character-avatar-background {
+  background: none;
+}
+.teriock .character-intro-box .character-avatar.ring .character-avatar-shadow::before {
+  background: none;
+}
 .teriock .character-intro-box .character-name {
   margin-top: 1px;
   width: calc(100% - 2em);
@@ -2470,12 +2498,16 @@ img.rescale {
 .teriock .character-intro-box .character-name .character-name-text {
   background-color: var(--color-cool-5);
   border: 1px solid var(--color-text-subtle);
-  border-radius: 0 0 6px 6px;
-  border-top: none;
+  border-radius: 6px;
   color: var(--color-text-primary);
   font-family: var(--font-h4), serif;
   font-size: var(--font-h4-size);
   text-align: center;
+}
+.teriock .character-intro-box .character-name:not(.ring) .character-name-text {
+  padding-top: 1px;
+  border-radius: 0 0 6px 6px;
+  border-top: none;
 }
 .teriock .character-intro-box .character-basics {
   display: flex;

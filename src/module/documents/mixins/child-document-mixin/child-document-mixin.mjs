@@ -194,7 +194,10 @@ export default (Base) => {
           return;
         }
         const panel = await this.toPanel();
-        const actor = options?.actor || this.actor;
+        const actor =
+          options?.actor ||
+          this.actor ||
+          TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
         const messageData = {
           speaker: TeriockChatMessage.getSpeaker({
             actor: actor,
@@ -210,7 +213,6 @@ export default (Base) => {
             tags: [],
           },
         };
-        console.log(messageData);
         TeriockChatMessage.applyRollMode(
           messageData,
           game.settings.get("core", "rollMode"),
@@ -220,7 +222,15 @@ export default (Base) => {
 
       /** @inheritDoc */
       async toPanel() {
-        return await TeriockTextEditor.enrichPanel(this.system.messageParts);
+        let parts = this.system.messageParts;
+        // If this is part of a preview, it won't have a real UUID.
+        if (this.getFlag("teriock", "previewUuid")) {
+          const doc = await fromUuid(this.getFlag("teriock", "previewUuid"));
+          if (doc) {
+            parts = doc.system.messageParts;
+          }
+        }
+        return await TeriockTextEditor.enrichPanel(parts);
       }
 
       /** @inheritDoc */

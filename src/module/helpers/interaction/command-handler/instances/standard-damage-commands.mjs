@@ -10,7 +10,7 @@ export class StandardDamageCommand extends CommandHandler {
       await actor.system?.primaryAttacker.system.use({
         advantage: this.advantage || this.crit,
         disadvantage: this.disadvantage,
-        secret: true,
+        secret: game.settings.get("teriock", "secretArmaments"),
       });
     }
   }

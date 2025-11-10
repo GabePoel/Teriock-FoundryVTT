@@ -635,11 +635,15 @@ export function getToken(actor) {
  * @returns {Teriock.RollOptions.CommonRoll | Teriock.RollOptions.EquipmentRoll}
  */
 export function makeCommonRollOptions(event) {
+  let secret = game.settings.get("teriock", "secretArmaments");
+  if (event.shiftKey) {
+    secret = !secret;
+  }
   return {
     advantage: event.altKey,
     disadvantage: event.shiftKey,
     crit: event.altKey,
-    secret: event.shiftKey,
+    secret: secret,
     twoHanded: event.ctrlKey,
   };
 }

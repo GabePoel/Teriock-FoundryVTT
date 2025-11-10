@@ -1,5 +1,10 @@
 <div class="ab-tags-container">
   <div class="ab-tags">
+    {{#each system.equipmentClasses as |key index|}}<span
+      class="ab-tag tsubtle equipment-class-tag"
+      data-value="{{key}}"
+      data-tooltip="Remove Tag"
+    >{{lookup ../TERIOCK.options.equipment.equipmentClasses key}}</span>{{/each}}
     {{#if system.shattered}}
       <span class="ab-tag tsubtle flag-tag-shattered" data-tooltip="Remove Tag">Shattered</span>
     {{/if}}
@@ -12,11 +17,9 @@
     {{#if system.spellTurning}}
       <span class="ab-tag tsubtle flag-tag-spell-turning">Spell Turning</span>
     {{/if}}
-    {{#each system.equipmentClasses as |key index|}}<span
-      class="ab-tag tsubtle equipment-class-tag"
-      data-value="{{key}}"
-      data-tooltip="Remove Tag"
-    >{{lookup ../TERIOCK.options.equipment.equipmentClasses key}}</span>{{/each}}
+    {{#if system.range.ranged}}
+      <span class="ab-tag tsubtle flag-tag-ranged">Ranged</span>
+    {{/if}}
   </div>
   <div class="ab-icon ab-menu-toggle">
     <div class="ab-menu-closed-container" data-tooltip="Open Menu">

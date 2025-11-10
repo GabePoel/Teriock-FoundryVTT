@@ -81,6 +81,20 @@ export async function _parse(equipmentData, rawHTML) {
     properties.add(piercing.toUpperCase());
   }
 
+  // Add ranged properties if present
+  const reach = Boolean(getText("a[title='Property:Reach']"));
+  const thrown = Boolean(getText("a[title='Property:Thrown']"));
+  const ammunition = Boolean(getText("a[title='Property:Ammunition']"));
+  if (reach) {
+    properties.add("Reach");
+  }
+  if (thrown) {
+    properties.add("Thrown");
+  }
+  if (ammunition) {
+    properties.add("Ammunition");
+  }
+
   // Parse sb, av, bv
   parameters.fightingStyle =
     toCamelCase(getValue(".sb") || "") ?? parameters.fightingStyle;

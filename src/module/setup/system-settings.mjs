@@ -63,16 +63,6 @@ export function registerSettings() {
       scope: "user",
       type: Number,
     },
-    automaticTokenMagicConditionEffects: {
-      config: true,
-      default: true,
-      hint:
-        "Automatically add visual effects to tokens based on their current conditions. Requires the Token Magic" +
-        " FX module.",
-      name: "Automatic Token Magic Condition Effects",
-      scope: "world",
-      type: Boolean,
-    },
     placeTemplateOnAbilityUse: {
       config: true,
       default: true,
@@ -89,21 +79,13 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
-    gmDocumentNotesJournalName: {
+    secretArmaments: {
       config: true,
-      default: "GM Document Notes",
-      hint: "Name of the journal entry that linked document notes will automatically be added to.",
-      name: "GM Document Notes Journal Name",
-      scope: "world",
-      type: String,
-    },
-    playerMacrosFolderName: {
-      config: true,
-      default: "Player Macros",
-      hint: "Name of the folder for macros players create with hotbar drops.",
-      name: "Player Macros Folder Name",
-      scope: "world",
-      type: String,
+      default: false,
+      hint: "If enabled, armaments will be secret when used by default.",
+      name: "Secret Armaments",
+      scope: "user",
+      type: Boolean,
     },
     synchronizeSpeciesSizeWithActor: {
       config: true,
@@ -113,16 +95,42 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
-  };
-  settings.developerMode = {
-    config: true,
-    default: false,
-    hint:
-      "Check this if you are a developer of the Teriock system and need additional features. Do not check this " +
-      "otherwise. It is likely to break your game. Even module developers shouldn't check this.",
-    name: "Developer Mode",
-    scope: "world",
-    type: Boolean,
+    automaticTokenMagicConditionEffects: {
+      config: true,
+      default: true,
+      hint:
+        "Automatically add visual effects to tokens based on their current conditions. Requires the Token Magic" +
+        " FX module.",
+      name: "Automatic Token Magic Condition Effects",
+      scope: "world",
+      type: Boolean,
+    },
+    playerMacrosFolderName: {
+      config: true,
+      default: "Player Macros",
+      hint: "Name of the folder for macros players create with hotbar drops.",
+      name: "Player Macros Folder Name",
+      scope: "world",
+      type: String,
+    },
+    gmDocumentNotesJournalName: {
+      config: true,
+      default: "GM Document Notes",
+      hint: "Name of the journal entry that linked document notes will automatically be added to.",
+      name: "GM Document Notes Journal Name",
+      scope: "world",
+      type: String,
+    },
+    developerMode: {
+      config: true,
+      default: false,
+      hint:
+        "Check this if you are a developer of the Teriock system and need additional features. Do not check this " +
+        "otherwise. It is likely to break your game. Even module developers shouldn't check this.",
+      name: "Developer Mode",
+      scope: "world",
+      type: Boolean,
+    },
   };
   for (const [key, data] of Object.entries(settings)) {
     game.settings.register("teriock", key, data);

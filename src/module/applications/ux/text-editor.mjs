@@ -12,6 +12,15 @@ export default class TeriockTextEditor extends TextEditor {
     for (const block of panel.blocks || []) {
       block.text = await this.enrichHTML(block.text);
     }
+    for (const association of panel.associations || []) {
+      for (const card of association.cards || []) {
+        if (card.uuid) {
+          card.tooltip = foundry.utils.escapeHTML(
+            TERIOCK.display.panel.loading,
+          );
+        }
+      }
+    }
     return panel;
   }
 

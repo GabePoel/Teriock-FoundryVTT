@@ -3,6 +3,7 @@ export default (Base) =>
     static DEFAULT_OPTIONS = {
       actions: {
         switchImage: this._switchImage,
+        toggleRing: this._toggleRing,
       },
     };
 
@@ -18,6 +19,18 @@ export default (Base) =>
         this.settings.avatarImagePath = "img";
       }
       await this.render();
+    }
+
+    /**
+     * Toggles whether the prototype token has a ring.
+     * @returns {Promise<void>}
+     * @private
+     */
+    static async _toggleRing() {
+      await this.document.update({
+        "prototypeToken.ring.enabled":
+          !this.document.prototypeToken.ring.enabled,
+      });
     }
 
     async _prepareContext(options) {
