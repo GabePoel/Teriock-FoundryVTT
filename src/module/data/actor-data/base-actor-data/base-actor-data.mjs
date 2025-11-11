@@ -224,7 +224,7 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   isProtected(key, value) {
     let hasProtection = false;
     for (const protectionData of Object.values(this.protections)) {
-      if (protectionData[key].has(value)) {
+      if ((protectionData[key] || new Set()).has(value)) {
         hasProtection = true;
       }
     }

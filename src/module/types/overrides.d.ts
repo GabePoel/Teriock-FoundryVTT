@@ -9,6 +9,7 @@ import {
 } from "../documents/collections/_module.mjs";
 import type TeriockGame from "../_game.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
+import type TeriockCanvas from "../_canvas.mjs";
 
 declare global {
   // Definition for writing macros.
@@ -21,6 +22,8 @@ declare global {
     user: TeriockUser;
     tooltip: TeriockTooltipManager;
   };
+
+  const canvas: TeriockCanvas;
 
   const ChatMessage: typeof TeriockChatMessage;
 

@@ -3,7 +3,6 @@ import { pureUuid } from "../../../../../helpers/utils.mjs";
 
 /**
  * If this ability has a macro, execute it.
- *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @param {string} pseudoHook - The pseudo-hook to execute macros for.
  * @returns {Promise<void>}

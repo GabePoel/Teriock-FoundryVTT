@@ -158,16 +158,16 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
         if (this.tooltipAsync) {
           el.addEventListener("mouseover", async (ev) => {
             const target = /** @type {HTMLElement} */ ev.currentTarget;
-            const uuid = target.dataset.uuid;
+            const uuid =
+              /** @type {Teriock.UUID<TeriockChild>} */ target.dataset.uuid;
             const fetched = target.dataset.tooltipFetched === "true";
             if (!fetched) {
               target.setAttribute("data-tooltip-fetched", "true");
-              const doc = /** @type {TeriockChild} */ await fromUuid(uuid);
+              const doc = await fromUuid(uuid);
               if (doc && typeof doc.toTooltip === "function") {
                 const tooltip = await doc.toTooltip();
                 target.setAttribute("data-tooltip-html", tooltip);
-                const tooltipManager =
-                  /** @type {TeriockTooltipManager} */ game.tooltip;
+                const tooltipManager = game.tooltip;
                 if (
                   tooltipManager.tooltip.getAttribute("data-linked-uuid") ===
                   uuid
@@ -197,7 +197,6 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-
     Object.assign(context, {
       documents: this.docs,
       multi: this.multi,
