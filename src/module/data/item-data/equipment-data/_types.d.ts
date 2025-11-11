@@ -31,16 +31,25 @@ declare global {
     glued: boolean;
     /** <base> Registered pseudo-hook macros to fire */
     hookedMacros: Teriock.Parameters.Equipment.HookedEquipmentMacros;
-    /** <schema> Is the equipment identified? */
-    identified: boolean;
+    /** <schema.> Identification info */
+    identification: {
+      /** <schema> Secret notes for when this is identified */
+      notes: string;
+      /** <schema> Is the equipment identified? */
+      identified: boolean;
+      /** <schema> Secret name for when this is identified */
+      name: string;
+      /** <schema> Secret power level */
+      powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
+      /** <schema> Whether magic has been read on this */
+      read: boolean;
+    };
     /** <schema> Minimum STR */
     minStr: Teriock.Fields.ModifiableNumber;
     /** <schema> Power Level */
     powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
     /** <schema> Price */
     price: number;
-    /** <schema> Identification Reference Equipment UUID */
-    reference: Teriock.UUID<TeriockEquipment>;
     /** <schema> Is the equipment shattered? */
     shattered: boolean;
     /** <schema> Presence Tier */

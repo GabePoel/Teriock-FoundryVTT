@@ -1,4 +1,5 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
+import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
 
 const { ux } = foundry.applications;
 
@@ -20,58 +21,24 @@ export default (Base) => {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentIdentify", data);
         if (!data.cancel) {
-          if (this.reference && !this.identified) {
-            const activeGM = game.users.activeGM;
-            const ref = await fromUuid(this.reference);
-            const referenceName = ref ? ref.name : "Unknown";
-            const referenceUuid = ref ? ref.uuid : "Unknown";
+          if (!this.identification.identified) {
             foundry.ui.notifications.info(
               `Asking GMs to approve identification of ${this.parent.name}.`,
             );
-            const content = await ux.TextEditor.implementation.enrichHTML(
-              `<p>Should ${game.user.name} identify @UUID[${referenceUuid}]{${referenceName}}?</p>`,
+            const doIdentify = await game.users.activeGM.query(
+              "teriock.identifyItem",
+              { uuid: this.parent.uuid },
             );
-            const doIdentify = await TeriockDialog.query(activeGM, "confirm", {
-              content: content,
-              modal: false,
-              window: {
-                icon: "fa-solid fa-magnifying-glass",
-                title: "Identify Item",
-              },
-            });
             if (doIdentify) {
-              const knownEffectNames = this.parent.transferredEffects.map(
-                (e) => e.name,
-              );
-              const unknownEffects = ref.transferredEffects.filter(
-                (e) => !knownEffectNames.includes(e.name),
-              );
-              const unknownEffectData = unknownEffects.map((e) =>
-                foundry.utils.duplicate(e),
-              );
-              await this.parent.createEmbeddedDocuments(
-                "ActiveEffect",
-                unknownEffectData,
-              );
-              const refSystem = foundry.utils.duplicate(ref.system);
-              delete refSystem.equipped;
-              delete refSystem.dampened;
-              delete refSystem.shattered;
-              if (ref) {
-                await this.parent.update({
-                  name: ref.name,
-                  system: refSystem,
-                });
-              }
               ui.notifications.success(
                 `${this.parent.name} was successfully identified.`,
               );
-            } else {
-              ui.notifications.error(
-                `${this.parent.name} was not successfully identified.`,
-              );
+              return;
             }
           }
+          ui.notifications.error(
+            `${this.parent.name} was not successfully identified.`,
+          );
         }
       }
 
@@ -83,16 +50,13 @@ export default (Base) => {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentReadMagic", data);
         if (!data.cancel) {
-          if (this.reference && !this.identified) {
+          if (!this.identification.identified && !this.identification.read) {
             const activeGM = game.users.activeGM;
-            const ref = await fromUuid(this.reference);
-            const referenceName = ref ? ref.name : "Unknown";
-            const referenceUuid = ref ? ref.uuid : "Unknown";
             foundry.ui.notifications.info(
               `Asking GMs to approve reading magic on ${this.parent.name}.`,
             );
             const content = await ux.TextEditor.enrichHTML(
-              `<p>Should ${game.user.name} read magic on @UUID[${referenceUuid}]{${referenceName}}?</p>`,
+              `<p>Should ${game.user.name} read magic on @UUID[${this.parent.uuid}]{${this.parent.name}}?</p>`,
             );
             const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
               content: content,
@@ -103,11 +67,10 @@ export default (Base) => {
               },
             });
             if (doReadMagic) {
-              if (ref) {
-                await this.parent.update({
-                  "system.powerLevel": ref.system.powerLevel,
-                });
-              }
+              await this.parent.update({
+                "system.identification.read": true,
+                "system.powerLevel": this.identification.powerLevel,
+              });
               foundry.ui.notifications.success(
                 `${this.parent.name} was successfully read.`,
               );
@@ -128,35 +91,36 @@ export default (Base) => {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentUnidentify", data);
         if (!data.cancel) {
-          if (this.identified) {
-            const reference = this.parent.uuid;
-            const copy =
-              /** @type {TeriockEquipment} */ await this.parent.duplicate();
-            const name = "Unidentified " + this.equipmentType;
-            const description = "This item has not been identified.";
-            const effects = copy.transferredEffects;
-            const unidentifiedProperties =
-              TERIOCK.options.equipment.unidentifiedProperties;
-            const idsToRemove = effects
-              .filter(
-                (e) =>
-                  e.type !== "property" ||
-                  !unidentifiedProperties.includes(e.name),
-              )
-              .map((e) => e._id);
-            await copy.update({
-              name: name,
-              "system.reference": reference,
-              "system.description": description,
+          if (this.identification.identified) {
+            await this.parent.update({
+              name: "Unidentified " + this.equipmentType,
+              "system.notes": "This item has not been identified.",
+              "system.identification.notes": this.notes,
+              "system.identification.identified": false,
+              "system.identification.name": this.parent.name,
+              "system.identification.powerLevel": this.powerLevel,
+              "system.identification.read": false,
               "system.powerLevel": "unknown",
-              "system.tier.saved": "",
-              "system.identified": false,
-              "system.flaws": "",
-              "system.notes": "",
-              "system.font": "",
-              "system.equipped": false,
             });
-            await copy.deleteEmbeddedDocuments("ActiveEffect", idsToRemove);
+            const revealed = [
+              ...this.parent.properties.filter((p) => p.system.revealed),
+              ...this.parent.abilities.filter((a) => a.system.revealed),
+              ...this.parent.resources.filter((r) => r.system.revealed),
+              ...this.parent.fluencies.filter((f) => f.system.revealed),
+            ];
+            const toReveal = await selectDocumentsDialog(revealed, {
+              hint: "Select effects to unreveal.",
+              tooltipAsync: false,
+            });
+            await this.parent.updateEmbeddedDocuments(
+              "ActiveEffect",
+              toReveal.map((e) => {
+                return {
+                  _id: e._id,
+                  "system.revealed": false,
+                };
+              }),
+            );
           } else if (this.parent.type === "equipment") {
             foundry.ui.notifications.warn("This item is already unidentified.");
           }

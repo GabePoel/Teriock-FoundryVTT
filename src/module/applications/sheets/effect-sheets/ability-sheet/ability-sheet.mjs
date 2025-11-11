@@ -278,7 +278,11 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
     const context = await super._prepareContext(options);
     const system = this.document.system;
     context.tab = this._tab;
-    context.subAbilities = abilitySort(this.document.getAbilities());
+    context.subAbilities = abilitySort(
+      this.document
+        .getAbilities()
+        .filter((a) => a.system.revealed || game.user.isGM),
+    );
     context.supAbility = this.document.sup;
     const effectsSet = new Set(system.effectTypes);
     //noinspection JSUnresolvedReference

@@ -203,7 +203,7 @@ export default (Base) => {
             actor: actor,
           }),
           system: {
-            avatar: actor.img,
+            avatar: actor?.img,
             bars: [],
             blocks: [],
             buttons: [],

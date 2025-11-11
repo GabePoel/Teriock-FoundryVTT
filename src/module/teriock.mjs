@@ -327,17 +327,19 @@ foundry.helpers.Hooks.once("init", function () {
   }
 
   // Modifying index fields
-  CONFIG.ActiveEffect.IndexFields = [
+  const hierarchyIndexFields = [
     "system.hierarchy.rootUuid",
     "system.hierarchy.subIds",
     "system.hierarchy.supId",
   ];
+  CONFIG.Item.compendiumIndexFields.push(...hierarchyIndexFields);
 
   // Registering custom queries
   Object.assign(CONFIG.queries, {
     "teriock.addToSustaining": helpers.queries.addToSustainingQuery,
     "teriock.callPseudoHook": helpers.queries.callPseudoHookQuery,
     "teriock.createHotbarFolder": helpers.queries.createHotbarFolderQuery,
+    "teriock.identifyItem": helpers.queries.identifyItemQuery,
     "teriock.inCombatExpiration": helpers.queries.inCombatExpirationQuery,
     "teriock.resetAttackPenalties": helpers.queries.resetAttackPenalties,
     "teriock.sustainedExpiration": helpers.queries.sustainedExpirationQuery,

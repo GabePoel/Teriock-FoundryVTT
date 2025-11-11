@@ -101,6 +101,9 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
 
   /** @inheritDoc */
   get color() {
+    if (!this.read) {
+      return TERIOCK.display.colors.grey;
+    }
     return TERIOCK.options.equipment.powerLevel[this.powerLevel].color;
   }
 

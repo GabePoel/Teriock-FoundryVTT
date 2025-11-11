@@ -1,13 +1,25 @@
 <div class="ab-bar">
-  {{formBox
-    (path TERIOCK.options.equipment.powerLevel system.powerLevel "name")
-    classes=(ifThen editable "power-level-box")
-    icon=(path TERIOCK.options.equipment.powerLevel system.powerLevel "icon")
-    iconColor=(path
-      TERIOCK.options.equipment.powerLevel system.powerLevel "color"
-    )
-    tooltip="Power Level"
-  }}
+  {{#if (and isGM (not system.identification.read))}}
+    {{formBox
+      (path TERIOCK.options.equipment.powerLevel system.identification.powerLevel "name")
+      classes=(ifThen editable "power-level-box")
+      icon=(path TERIOCK.options.equipment.powerLevel system.identification.powerLevel "icon")
+      iconColor=(path
+        TERIOCK.options.equipment.powerLevel system.identification.powerLevel "color"
+      )
+      tooltip="Power Level"
+    }}
+  {{else}}
+    {{formBox
+      (path TERIOCK.options.equipment.powerLevel system.powerLevel "name")
+      classes=(ifThen editable "power-level-box")
+      icon=(path TERIOCK.options.equipment.powerLevel system.powerLevel "icon")
+      iconColor=(path
+        TERIOCK.options.equipment.powerLevel system.powerLevel "color"
+      )
+      tooltip="Power Level"
+    }}
+  {{/if}}
   {{formBox
     (formInput
       systemFields.equipmentType

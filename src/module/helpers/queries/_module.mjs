@@ -1,6 +1,7 @@
 export { default as addToSustainingQuery } from "./add-to-sustaining-query.mjs";
 export { default as callPseudoHookQuery } from "./call-pseudo-hook-query.mjs";
 export { default as createHotbarFolderQuery } from "./create-hotbar-folder-query.mjs";
+export { default as identifyItemQuery } from "./identify-item-query.mjs";
 export { default as inCombatExpirationQuery } from "./in-combat-expiration-query.mjs";
 export { default as resetAttackPenalties } from "./reset-attack-penalties-query.mjs";
 export { default as sustainedExpirationQuery } from "./sustained-expiration-query.mjs";

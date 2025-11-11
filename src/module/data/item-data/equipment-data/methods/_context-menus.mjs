@@ -26,7 +26,7 @@ export function _entries(equipmentData) {
       name: "Identify",
       icon: makeIcon("eye", "contextMenu"),
       callback: equipmentData.identify.bind(equipmentData),
-      condition: !equipmentData.identified && equipmentData.reference,
+      condition: !equipmentData.identification.identified,
       group: "usage",
     },
     {
@@ -34,9 +34,8 @@ export function _entries(equipmentData) {
       icon: makeIcon("hand", "contextMenu"),
       callback: equipmentData.readMagic.bind(equipmentData),
       condition:
-        !equipmentData.identified &&
-        equipmentData.reference &&
-        equipmentData.powerLevel === "unknown",
+        !equipmentData.identification.identified &&
+        !equipmentData.identification.read,
       group: "usage",
     },
     {
@@ -110,10 +109,10 @@ export function _entries(equipmentData) {
       group: "control",
     },
     {
-      name: "Make Unidentified Copy",
+      name: "Unidentify",
       icon: makeIcon("eye-slash", "contextMenu"),
       callback: equipmentData.unidentify.bind(equipmentData),
-      condition: equipmentData.identified && game.user.isGM,
+      condition: equipmentData.identification.identified && game.user.isGM,
       group: "usage",
     },
   ];

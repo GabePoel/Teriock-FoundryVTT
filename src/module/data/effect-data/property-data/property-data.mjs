@@ -2,7 +2,11 @@ import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { copyProperty } from "../../../helpers/fetch.mjs";
 import { mergeFreeze, pureUuid, safeUuid } from "../../../helpers/utils.mjs";
-import { HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import {
+  HierarchyDataMixin,
+  RevelationDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
 import {
   FormulaField,
   ListField,
@@ -24,11 +28,12 @@ const { fields } = foundry.data;
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
  * @extends {TeriockBaseEffectModel}
- * @mixes WikiDataMixin
  * @mixes HierarchyDataMixin
+ * @mixes RevelationDataMixin
+ * @mixes WikiDataMixin
  */
-export default class TeriockPropertyModel extends HierarchyDataMixin(
-  WikiDataMixin(TeriockBaseEffectModel),
+export default class TeriockPropertyModel extends RevelationDataMixin(
+  HierarchyDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
 ) {
   /**
    * @inheritDoc
@@ -126,6 +131,9 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
     }
     if (this.improvement && this.improvement.length > 0) {
       additions.push("Improved");
+    }
+    if (!this.revealed) {
+      additions.push("Unrevealed");
     }
     let nameAddition = "";
     if (additions.length > 0) {

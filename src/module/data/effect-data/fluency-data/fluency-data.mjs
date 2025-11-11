@@ -1,7 +1,11 @@
 import { iconManifest } from "../../../constants/display/_module.mjs";
 import { getIcon } from "../../../helpers/path.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { ExecutableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import {
+  ExecutableDataMixin,
+  RevelationDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _roll } from "./methods/_rolling.mjs";
@@ -16,10 +20,11 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseEffectModel}
  * @mixes ExecutableDataMixin
+ * @mixes RevelationDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockFluencyModel extends WikiDataMixin(
-  ExecutableDataMixin(TeriockBaseEffectModel),
+export default class TeriockFluencyModel extends RevelationDataMixin(
+  WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
 ) {
   /**
    * @inheritDoc
@@ -34,7 +39,8 @@ export default class TeriockFluencyModel extends WikiDataMixin(
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    const schema = super.defineSchema();
+    Object.assign(schema, {
       field: new fields.StringField({
         initial: "artisan",
         label: "Field",
@@ -52,6 +58,7 @@ export default class TeriockFluencyModel extends WikiDataMixin(
         label: "Fluent",
       }),
     });
+    return schema;
   }
 
   /** @inheritDoc */
@@ -60,9 +67,19 @@ export default class TeriockFluencyModel extends WikiDataMixin(
   }
 
   /** @inheritDoc */
+  get nameString() {
+    const nameAddition = this.revealed ? "" : " (Unrevealed)";
+    return this.parent.name + nameAddition;
+  }
+
+  /** @inheritDoc */
   get suppressed() {
     let suppressed = super.suppressed;
-    if (!suppressed && this.parent.parent?.type === "equipment") {
+    if (
+      !suppressed &&
+      this.parent.parent &&
+      this.parent.parent.type === "equipment"
+    ) {
       suppressed = !this.parent.parent.system.isAttuned;
     }
     if (this.actor && this.actor.system.isTransformed) {

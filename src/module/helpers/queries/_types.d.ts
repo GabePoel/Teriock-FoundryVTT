@@ -1,6 +1,7 @@
-import type {
-  TeriockAbility,
-  TeriockConsequence,
+import {
+  type TeriockAbility,
+  type TeriockConsequence,
+  TeriockEquipment,
 } from "../../documents/_documents.mjs";
 import type {
   TeriockActor,
@@ -24,6 +25,10 @@ declare global {
       uuid: Teriock.UUID<TeriockCommon>;
       pseudoHook: Teriock.Parameters.Shared.PseudoHook;
       data: object;
+    };
+
+    export type IdentifyItem = {
+      uuid: Teriock.UUID<TeriockEquipment>;
     };
 
     export type SustainedExpiration = {

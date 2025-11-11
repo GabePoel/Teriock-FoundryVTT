@@ -189,8 +189,16 @@ export default class ChildTypeModel extends CommonTypeModel {
       image: this.parent.img,
       name: this.parent.nameString,
     };
-    const properties = propertySort(this.parent.getProperties());
-    const abilities = abilitySort(this.parent.getAbilities());
+    const properties = propertySort(
+      this.parent
+        .getProperties()
+        .filter((p) => p.system.revealed || game.user.isGM),
+    );
+    const abilities = abilitySort(
+      this.parent
+        .getAbilities()
+        .filter((a) => a.system.revealed || game.user.isGM),
+    );
     quickAddAssociation(
       properties,
       "Properties",

@@ -6,6 +6,7 @@ import { mergeFreeze, safeUuid } from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
   HierarchyDataMixin,
+  RevelationDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
@@ -27,10 +28,13 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @extends {TeriockBaseEffectModel}
  * @mixes ConsumableDataMixin
  * @mixes HierarchyDataMixin
+ * @mixes RevelationDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockAbilityModel extends HierarchyDataMixin(
-  ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+export default class TeriockAbilityModel extends RevelationDataMixin(
+  HierarchyDataMixin(
+    ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+  ),
 ) {
   /**
    * @inheritDoc
@@ -180,6 +184,9 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
     }
     if (this.grantOnly) {
       additions.push("Granted");
+    }
+    if (!this.revealed) {
+      additions.push("Unrevealed");
     }
     let nameAddition = "";
     if (additions.length > 0) {

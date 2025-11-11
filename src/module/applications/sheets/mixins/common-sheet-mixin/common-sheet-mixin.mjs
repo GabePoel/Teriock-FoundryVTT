@@ -455,7 +455,7 @@ export default (Base) => {
           img: this.document.img,
           impactTab: this._impactTab,
           isEditable: this.isEditable,
-          isGm: game.user.isGM,
+          isGM: game.user.isGM,
           limited: this.document.limited,
           name: this.document.name,
           owner: this.document.isOwner,

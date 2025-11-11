@@ -27,6 +27,39 @@ export function _defineSchema() {
       }),
       types: new fields.SetField(new fields.StringField()),
     }),
+    identification: new fields.SchemaField(
+      {
+        name: new fields.StringField({
+          label: "Unidentified Name",
+          initial: "",
+          gmOnly: true,
+        }),
+        notes: new TextField({
+          label: "Unidentified Notes",
+          initial: "",
+          gmOnly: true,
+        }),
+        powerLevel: new fields.StringField({
+          choices: TERIOCK.options.equipment.powerLevelShort,
+          initial: "mundane",
+          label: "Unidentified Power Level",
+          gmOnly: true,
+        }),
+        read: new fields.BooleanField({
+          initial: true,
+          label: "Read",
+          gmOnly: true,
+        }),
+        identified: new fields.BooleanField({
+          initial: true,
+          label: "Identified",
+          gmOnly: true,
+        }),
+      },
+      {
+        gmOnly: true,
+      },
+    ),
     dampened: new fields.BooleanField({
       initial: false,
       label: "Dampened",
@@ -51,10 +84,6 @@ export function _defineSchema() {
     glued: new fields.BooleanField({
       initial: false,
       label: "Glued",
-    }),
-    identified: new fields.BooleanField({
-      initial: true,
-      label: "Identified",
     }),
     minStr: modifiableNumber({
       min: -3,

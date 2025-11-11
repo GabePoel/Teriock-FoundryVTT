@@ -4,6 +4,7 @@ export { default as ConsumableDataMixin } from "./consumable-data-mixin/consumab
 export { default as ExecutableDataMixin } from "./executable-data-mixin/executable-data-mixin.mjs";
 export { default as HierarchyDataMixin } from "./hierarchy-data-mixin/hierarchy-data-mixin.mjs";
 export { default as ImporterDataMixin } from "./importer-data-mixin/importer-data-mixin.mjs";
+export { default as RevelationDataMixin } from "./revelation-data-mixin/revelation-data-mixin.mjs";
 export { default as StatGiverDataMixin } from "./stat-giver-data-mixin/stat-giver-data-mixin.mjs";
 export { default as TransformationDataMixin } from "./transformation-data-mixin/transformation-data-mixin.mjs";
 export { default as WikiDataMixin } from "./wiki-data-mixin/wiki-data-mixin.mjs";

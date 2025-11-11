@@ -216,18 +216,26 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSeetPart(
     const abilities = await this.actor.allAbilities();
     Object.assign(context, {
       abilities: this._getFilteredAbilities(
-        sortAbilities(this.actor, abilities),
+        sortAbilities(
+          this.actor,
+          abilities.filter((a) => a.system.revealed || game.user.isGM),
+        ),
       ),
-      resources: docSort(this.actor.resources, {
-        alphabetical: true,
-      }),
+      resources: docSort(
+        this.actor.resources.filter((r) => r.system.revealed || game.user.isGM),
+        {
+          alphabetical: true,
+        },
+      ),
       equipment: this._getFilteredEquipment(
         sortEquipment(this.actor, this.actor.equipment),
       ),
       powers: docSort(this.actor.powers),
       species: docSort(this.actor.species),
       mounts: docSort(this.actor.mounts),
-      fluencies: docSort(this.actor.fluencies),
+      fluencies: docSort(
+        this.actor.fluencies.filter((f) => f.system.revealed || game.user.isGM),
+      ),
       consequences: docSort(this.actor.consequences, {
         alphabetical: true,
       }),

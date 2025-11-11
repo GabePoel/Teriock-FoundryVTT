@@ -2,6 +2,7 @@ import { mergeFreeze } from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
   ExecutableDataMixin,
+  RevelationDataMixin,
 } from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -10,10 +11,12 @@ import { _migrateData } from "./methods/_migrate-data.mjs";
 /**
  * Resource-specific effect data model.
  * @extends {TeriockBaseEffectModel}
+ * @mixes ConsumableDataMixin
  * @mixes ExecutableDataMixin
+ * @mixes RevelationDataMixin
  */
-export default class TeriockResourceModel extends ConsumableDataMixin(
-  ExecutableDataMixin(TeriockBaseEffectModel),
+export default class TeriockResourceModel extends RevelationDataMixin(
+  ConsumableDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
 ) {
   /**
    * @inheritDoc
@@ -42,6 +45,12 @@ export default class TeriockResourceModel extends ConsumableDataMixin(
       suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
+  }
+
+  /** @inheritDoc */
+  get nameString() {
+    const nameAddition = this.revealed ? "" : " (Unrevealed)";
+    return this.parent.name + nameAddition;
   }
 
   /** @inheritDoc */

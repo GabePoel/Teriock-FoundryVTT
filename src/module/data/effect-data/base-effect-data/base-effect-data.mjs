@@ -29,10 +29,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
         initial: false,
         label: "Delete On Expire",
       }),
-      updateCounter: new fields.BooleanField({
-        initial: false,
-        label: "Update Counter",
-      }),
       suppression: new fields.SchemaField({
         statuses: new fields.SchemaField({
           active: new fields.SetField(
@@ -46,6 +42,10 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
             }),
           ),
         }),
+      }),
+      updateCounter: new fields.BooleanField({
+        initial: false,
+        label: "Update Counter",
       }),
     });
   }
