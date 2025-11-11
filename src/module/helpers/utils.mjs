@@ -218,7 +218,7 @@ export function pureUuid(safeUuid) {
 
 /**
  * Re-pull each provided {@link ChildDocumentMixin} from the wiki.
- * @param {TeriockEffect[]|TeriockItem[]} docs - An array of {@link ChildDocumentMixin}s to pull.
+ * @param {TeriockChild[]} docs - An array of {@link TeriockChild} documents to pull.
  * @param {object} [options]
  * @param {boolean} [options.skipSubs] - Skip any {@link TeriockEffect} subs.
  * @returns {Promise<void>}

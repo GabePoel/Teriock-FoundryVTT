@@ -9,7 +9,6 @@ import {
 
 /**
  * Sheet for a {@link TeriockRank}.
- *
  * @property {TeriockRank} document
  * @property {TeriockRank} item
  */

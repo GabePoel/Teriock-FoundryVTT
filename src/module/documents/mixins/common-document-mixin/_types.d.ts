@@ -1,8 +1,4 @@
-import type {
-  TeriockActor,
-  TeriockEffect,
-  TeriockItem,
-} from "../../_module.mjs";
+import type { TeriockActor, TeriockEffect } from "../../_module.mjs";
 import {
   type TeriockAbility,
   type TeriockProperty,
@@ -88,5 +84,5 @@ export interface CommonDocumentMixinInterface {
    * The document's UUID.
    * @returns The unique identifier for this document
    */
-  get uuid(): Teriock.UUID<TeriockActor | TeriockItem | TeriockEffect>;
+  get uuid(): Teriock.UUID<TeriockCommon>;
 }

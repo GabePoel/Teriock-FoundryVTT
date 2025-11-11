@@ -10,7 +10,6 @@ import {
 
 /**
  * Sheet for a {@link TeriockEquipment}.
- *
  * @property {TeriockEquipment} document
  * @property {TeriockEquipment} item
  */

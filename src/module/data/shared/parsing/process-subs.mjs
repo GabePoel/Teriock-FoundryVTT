@@ -4,7 +4,7 @@ import { copyAbility, copyProperty } from "../../../helpers/fetch.mjs";
  * Generic function to process sub effects from the document.
  * Creates sub effects and applies limitations or improvements as needed.
  * @param {Array} subs - Array of sub effect container elements.
- * @param {TeriockItem | TeriockEffect} doc - The parent document.
+ * @param {TeriockChild} doc - The parent document.
  * @param {object} config - Configuration object for processing.
  * @param {Function} config.createFn - Function to create the sub effect (e.g., createAbility, createProperty).
  * @param {string} config.getMethod - Method to get existing sub effects (e.g., getAbilities, getProperties).
@@ -124,7 +124,7 @@ async function processSubEffects(subs, doc, config) {
  * Processes sub-abilities from the document.
  * Creates sub-abilities and applies limitations or improvements as needed.
  * @param {Array} subs - Array of subability container elements.
- * @param {TeriockItem | TeriockEffect} doc - The parent document.
+ * @param {TeriockChild} doc - The parent document.
  * @returns {Promise<void>} Promise that resolves when all sub-abilities are processed.
  * @private
  */
@@ -142,7 +142,7 @@ export async function processSubAbilities(subs, doc) {
  * Processes sub-properties from the document.
  * Creates sub-properties and applies limitations or improvements as needed.
  * @param {Array} subs - Array of sub-property container elements.
- * @param {TeriockItem | TeriockEffect} doc - The parent document.
+ * @param {TeriockChild} doc - The parent document.
  * @returns {Promise<void>} Promise that resolves when all sub-properties are processed.
  * @private
  */

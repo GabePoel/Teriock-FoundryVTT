@@ -57,7 +57,7 @@ export default (Base) => {
               `Asking GMs to approve reading magic on ${this.parent.name}.`,
             );
             const content = await ux.TextEditor.enrichHTML(
-              `<p>Should @UUID[${game.user.uuid}]{${game.user.name}} read magic on @UUID[${this.parent.uuid}]{${this.identification.name}}?</p>`,
+              `<p>Should @UUID[${game.user.uuid}] read magic on @UUID[${this.parent.uuid}]{${this.identification.name}}?</p>`,
             );
             const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
               content: content,

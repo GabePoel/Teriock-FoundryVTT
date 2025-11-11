@@ -64,7 +64,7 @@ export async function copyAbility(name) {
 
 /**
  * Import a {@link TeriockAbility} from the default {@link CompendiumCollection} to the given document.
- * @param {TeriockActor|TeriockItem} document - Document to give the {@link TeriockAbility} to.
+ * @param {TeriockParent} document - Document to give the {@link TeriockAbility} to.
  * @param {string} name - Name of the {@link TeriockAbility}.
  * @returns {Promise<TeriockAbility>}
  */
@@ -106,7 +106,7 @@ export async function copyProperty(name) {
 
 /**
  * Import a {@link TeriockProperty} from the default {@link CompendiumCollection} to the given document.
- * @param {TeriockActor|TeriockItem} document - Document to give the {@link TeriockProperty} to.
+ * @param {TeriockParent} document - Document to give the {@link TeriockProperty} to.
  * @param {string} name - Name of the {@link TeriockProperty}.
  * @returns {Promise<TeriockProperty>}
  */

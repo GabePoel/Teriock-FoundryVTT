@@ -5,12 +5,12 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Dialog to select what type of macro to make.
- * @param {TeriockItem|TeriockEffect} doc
- * @returns {Promise<string>} Type of macro to be made.
+ * @param {TeriockChild} doc
+ * @returns {Promise<"linked"|"general">} Type of macro to be made.
  */
 export default async function hotbarDropDialog(doc) {
   let macroType = "linked";
-  if (doc.type === "ability") {
+  if (doc.type === "ability" && doc.actor) {
     const context = {
       ability: await TextEditor.enrichHTML(`@UUID[${doc.uuid}]`),
       actor: await TextEditor.enrichHTML(`@UUID[${doc.actor.uuid}]`),

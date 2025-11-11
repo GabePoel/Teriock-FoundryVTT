@@ -13,7 +13,7 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
   const uuid = queryData.uuid;
   const item = await fromUuid(uuid);
   const content = await ux.TextEditor.implementation.enrichHTML(
-    `<p>Should @UUID[${game.user.uuid}]{${game.user.name}} identify @UUID[${item.uuid}]{${item.system.identification.name}}?</p>`,
+    `<p>Should @UUID[${game.user.uuid}] identify @UUID[${item.uuid}]{${item.system.identification.name}}?</p>`,
   );
   const doIdentify = await TeriockDialog.confirm({
     content: content,

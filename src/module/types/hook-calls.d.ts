@@ -1,4 +1,4 @@
-import type { TeriockEffect, TeriockItem } from "../documents/_module.mjs";
+import type { TeriockEffect } from "../documents/_module.mjs";
 import type { AbilityRollConfig } from "../data/effect-data/ability-data/types/roll-config";
 import type {
   TeriockConsequence,
@@ -47,12 +47,12 @@ declare global {
     };
 
     export type DocActivity = Teriock.HookData.BaseHookData & {
-      doc: TeriockEffect | TeriockItem;
+      doc: TeriockChild;
     };
 
     export type DocDuplicate = Teriock.HookData.BaseHookData & {
-      copy: TeriockEffect | TeriockItem;
-      doc: TeriockEffect | TeriockItem;
+      copy: TeriockChild;
+      doc: TeriockChild;
     };
 
     export type EffectActivity = Teriock.HookData.BaseHookData & {

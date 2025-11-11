@@ -21,7 +21,7 @@ export default class TeriockHotbar extends Hotbar {
 
   /**
    * @inheritDoc
-   * @param {TeriockItem|TeriockEffect} doc
+   * @param {TeriockChild} doc
    */
   async _createDocumentSheetToggle(doc) {
     if (["Item", "ActiveEffect"].includes(doc.documentName)) {

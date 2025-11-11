@@ -3,7 +3,7 @@ import { getIcon } from "./path.mjs";
 
 /**
  * Creates a new ability effect and optionally pulls content from the wiki.
- * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
+ * @param {TeriockCommon} document - The document to create the ability in.
  * @param {string|null} name - The name for the new ability. If not provided, defaults to "New Ability".
  * @param {object} options - Additional options for the ability creation.
  * @returns {Promise<TeriockAbility>} The created ability effect.
@@ -73,7 +73,7 @@ export async function createAbility(document, name = null, options = {}) {
 
 /**
  * Creates a new resource effect.
- * @param {TeriockActor|TeriockItem} document - The document to create the resource in.
+ * @param {TeriockParent} document - The document to create the resource in.
  * @returns {Promise<TeriockResource>} The created resource effect.
  */
 export async function createResource(document) {
@@ -95,7 +95,7 @@ export async function createResource(document) {
 
 /**
  * Creates a new property effect with optional predefined content.
- * @param {TeriockItem|TeriockEffect} document - The document to create the property in.
+ * @param {TeriockChild} document - The document to create the property in.
  * @param {string|null} name - The name for the new property. If not provided, defaults to "New Property".
  * @param {object} options
  * @returns {Promise<TeriockProperty>} The created property effect.
@@ -156,7 +156,7 @@ export async function createProperty(document, name = null, options = {}) {
 
 /**
  * Creates a new effect.
- * @param {TeriockActor|TeriockItem} document - The document to create the effect in.
+ * @param {TeriockParent} document - The document to create the effect in.
  * @returns {Promise<TeriockConsequence>} The created effect.
  */
 export async function createConsequence(document) {
@@ -175,7 +175,7 @@ export async function createConsequence(document) {
 
 /**
  * Creates a new fluency effect.
- * @param {TeriockActor|TeriockItem} document - The document to create the fluency in.
+ * @param {TeriockParent} document - The document to create the fluency in.
  * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
  * @returns {Promise<TeriockFluency>} The created fluency effect.
  */
@@ -213,7 +213,7 @@ export async function createFluency(document, tradecraft = "artist") {
 
 /**
  * Creates a new base effect.
- * @param {TeriockActor|TeriockItem} document - The document to create the base in.
+ * @param {TeriockParent} document - The document to create the base in.
  * @returns {Promise<TeriockEffect>} The created base effect.
  */
 export async function createBaseEffect(document) {
