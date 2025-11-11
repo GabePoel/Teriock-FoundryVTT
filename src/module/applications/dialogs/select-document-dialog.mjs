@@ -10,6 +10,7 @@ import { TeriockDocumentSelector } from "../api/_module.mjs";
 export async function selectDocumentsDialog(documents, options = {}) {
   options = foundry.utils.mergeObject(
     {
+      checked: [],
       hint: "",
       idKey: "uuid",
       imgKey: "img",
@@ -55,6 +56,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
         options.tooltipAsync || options.openable
           ? foundry.utils.getProperty(doc, options.tooltipUUID)
           : undefined,
+      checked: options.checked.includes(id),
     };
     if (options.textKey) {
       context.documents[id].text =

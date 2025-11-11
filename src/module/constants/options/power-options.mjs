@@ -1,3 +1,5 @@
+import { colors } from "../display/colors.mjs";
+
 /**
  * @type {Record<string, {name: string; icon: string; color:
  *   Teriock.Parameters.Shared.Color}>}
@@ -5,42 +7,47 @@
 export const powerOptions = {
   backstory: {
     name: "Backstory",
-    icon: "book",
-    color: "green",
+    icon: "book-open-cover",
+    color: colors.green,
   },
   blessing: {
     name: "Blessing",
     icon: "sun-bright",
-    color: "yellow",
+    color: colors.yellow,
   },
   curse: {
     name: "Curse",
     icon: "hand-holding-skull",
-    color: "red",
+    color: colors.red,
   },
   familiar: {
     name: "Familiar",
     icon: "monkey",
-    color: "brown",
+    color: colors.green,
   },
   innate: {
     name: "Innate",
     icon: "person",
-    color: "purple",
+    color: colors.purple,
+  },
+  learned: {
+    name: "Learned",
+    icon: "head-side-brain",
+    color: colors.brown,
   },
   pact: {
     name: "Pact",
     icon: "signature",
-    color: "grey",
+    color: colors.grey,
   },
   traits: {
     name: "Traits",
     icon: "ghost",
-    color: "blue",
+    color: colors.green,
   },
   other: {
     name: "Other",
     icon: "question",
-    color: "orange",
+    color: colors.green,
   },
 };

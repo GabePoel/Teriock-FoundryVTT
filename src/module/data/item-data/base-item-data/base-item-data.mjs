@@ -55,10 +55,10 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
   get messageParts() {
     const parts = super.messageParts;
     const fluencies = docSort(
-      this.parent.fluencies.filter((f) => f.system.revealed || game.user.isGM),
+      this.parent.fluencies.filter((f) => f.system.revealed),
     );
     const resources = docSort(
-      this.parent.resources.filter((r) => r.system.revealed || game.user.isGM),
+      this.parent.resources.filter((r) => r.system.revealed),
     );
     const bodyParts = docSort(this.parent.getBodyParts());
     const equipment = docSort(this.parent.getEquipment());

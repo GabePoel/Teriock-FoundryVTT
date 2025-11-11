@@ -55,12 +55,20 @@ export default (Base) => {
         });
       }
 
-      /** @inheritDoc */
+      /**
+       * @inheritDoc
+       * @returns {TeriockAbility[]}
+       * @abstract
+       */
       getAbilities() {
         return [];
       }
 
-      /** @inheritDoc */
+      /**
+       * @inheritDoc
+       * @returns {TeriockProperty[]}
+       * @abstract
+       */
       getProperties() {
         return [];
       }

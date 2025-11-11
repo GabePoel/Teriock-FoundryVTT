@@ -1,5 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
+import { getItem } from "../../../../helpers/fetch.mjs";
 
 const { ux } = foundry.applications;
 
@@ -92,25 +93,36 @@ export default (Base) => {
         await this.parent.hookCall("equipmentUnidentify", data);
         if (!data.cancel) {
           if (this.identification.identified) {
-            await this.parent.update({
-              name: "Unidentified " + this.equipmentType,
-              "system.notes": "This item has not been identified.",
-              "system.identification.notes": this.notes,
-              "system.identification.identified": false,
-              "system.identification.name": this.parent.name,
-              "system.identification.powerLevel": this.powerLevel,
-              "system.identification.read": false,
-              "system.powerLevel": "unknown",
-            });
+            const uncheckedPropertyNames =
+              TERIOCK.options.equipment.unidentifiedProperties;
+            if (
+              Object.values(TERIOCK.index.equipment).includes(
+                this.equipmentType,
+              )
+            ) {
+              uncheckedPropertyNames.push(
+                ...(await getItem(this.equipmentType, "equipment"))
+                  .getProperties()
+                  .map((p) => p.name),
+              );
+            }
             const revealed = [
-              ...this.parent.properties.filter((p) => p.system.revealed),
-              ...this.parent.abilities.filter((a) => a.system.revealed),
+              ...this.parent.getProperties().filter((p) => p.system.revealed),
+              ...this.parent.getAbilities().filter((a) => a.system.revealed),
               ...this.parent.resources.filter((r) => r.system.revealed),
               ...this.parent.fluencies.filter((f) => f.system.revealed),
             ];
+            const checked = revealed
+              .filter(
+                (e) =>
+                  e.type !== "property" ||
+                  !uncheckedPropertyNames.includes(e.name),
+              )
+              .map((e) => e.uuid);
             const toReveal = await selectDocumentsDialog(revealed, {
               hint: "Select effects to unreveal.",
               tooltipAsync: false,
+              checked: checked,
             });
             await this.parent.updateEmbeddedDocuments(
               "ActiveEffect",
@@ -121,7 +133,19 @@ export default (Base) => {
                 };
               }),
             );
-          } else if (this.parent.type === "equipment") {
+            await this.parent.update({
+              "system.flaws": "",
+              "system.identification.flaws": this.flaws,
+              "system.identification.identified": false,
+              "system.identification.name": this.parent.name,
+              "system.identification.notes": this.notes,
+              "system.identification.powerLevel": this.powerLevel,
+              "system.identification.read": false,
+              "system.notes": "",
+              "system.powerLevel": "unknown",
+              name: "Unidentified " + this.equipmentType,
+            });
+          } else {
             foundry.ui.notifications.warn("This item is already unidentified.");
           }
         }

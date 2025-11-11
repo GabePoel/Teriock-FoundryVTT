@@ -22,6 +22,15 @@
         disabled=(not editable)
         hidden=(not (exists system.description))
       }}
+      {{#if (and isGM (not system.identification.identified))}}
+        {{formGroup
+          systemFields.identification.fields.notes
+          value=system.identification.notes
+          enriched=enriched.identification.notes
+          disabled=(not editable)
+          hidden=(not (exists system.identification.notes))
+        }}
+      {{/if}}
       {{formGroup
         systemFields.notes
         value=system.notes
@@ -29,6 +38,15 @@
         disabled=(not editable)
         hidden=(not (exists system.notes))
       }}
+      {{#if (and isGM (not system.identification.identified))}}
+        {{formGroup
+          systemFields.identification.fields.flaws
+          value=system.identification.flaws
+          enriched=enriched.identification.flaws
+          disabled=(not editable)
+          hidden=(not (exists system.identification.flaws))
+        }}
+      {{/if}}
       {{formGroup
         systemFields.flaws
         value=system.flaws

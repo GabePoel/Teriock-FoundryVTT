@@ -35,6 +35,7 @@ export default class ChildTypeModel extends CommonTypeModel {
     pageNameKey: "name",
     passive: false,
     preservedProperties: [],
+    revealable: false,
     type: "base",
     usable: false,
     wiki: false,
@@ -190,14 +191,10 @@ export default class ChildTypeModel extends CommonTypeModel {
       name: this.parent.nameString,
     };
     const properties = propertySort(
-      this.parent
-        .getProperties()
-        .filter((p) => p.system.revealed || game.user.isGM),
+      this.parent.getProperties().filter((p) => p.system.revealed),
     );
     const abilities = abilitySort(
-      this.parent
-        .getAbilities()
-        .filter((a) => a.system.revealed || game.user.isGM),
+      this.parent.getAbilities().filter((a) => a.system.revealed),
     );
     quickAddAssociation(
       properties,

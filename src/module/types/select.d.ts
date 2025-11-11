@@ -28,6 +28,8 @@ declare global {
     export type DocumentsSelect = Teriock.SelectOptions.DocumentSelect & {
       /** Whether multiple documents can be selected */
       multi?: boolean;
+      /** Which documents are checked? */
+      checked?: string[];
     };
 
     export type SelectDocument = {

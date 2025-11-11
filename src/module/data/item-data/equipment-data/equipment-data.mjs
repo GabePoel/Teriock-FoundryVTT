@@ -1,5 +1,5 @@
 import { getItem } from "../../../helpers/fetch.mjs";
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { formulaExists, mergeFreeze } from "../../../helpers/utils.mjs";
 import {
   ArmamentDataMixin,
   AttunableDataMixin,
@@ -112,10 +112,7 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
    * @returns {boolean}
    */
   get hasTwoHandedAttack() {
-    return (
-      this.damage.twoHanded.saved.trim().length > 0 &&
-      this.damage.twoHanded.saved.trim() !== "0"
-    );
+    return formulaExists(this.damage.twoHanded.saved);
   }
 
   /** @inheritDoc */

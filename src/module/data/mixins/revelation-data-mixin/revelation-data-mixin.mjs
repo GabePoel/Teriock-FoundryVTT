@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../helpers/utils.mjs";
+import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -10,6 +10,9 @@ export default (Base) => {
      * @extends {ChildTypeModel}
      */
     class RevelationDataMixin extends Base {
+      /** @inheritDoc */
+      static metadata = mergeFreeze(Base.metadata, { revealable: true });
+
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
@@ -23,6 +26,14 @@ export default (Base) => {
           }),
         });
         return schema;
+      }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        if (this.parent.source && this.parent.source.metadata.revealable) {
+          this.revealed = this.revealed && this.parent.source.system.revealed;
+        }
       }
 
       get cardContextMenuEntries() {

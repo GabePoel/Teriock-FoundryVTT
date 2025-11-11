@@ -87,13 +87,14 @@ declare global {
 
     export type ChildModelMetadata = Teriock.Documents.ModelMetadata & {
       consumable: boolean;
+      hierarchy: boolean;
       namespace: string;
       pageNameKey: string;
       passive: boolean;
+      revealable: boolean;
       type: Teriock.Documents.ChildType;
       usable: boolean;
       wiki: boolean;
-      hierarchy: boolean;
     };
 
     export type ActorModelMetadata = Teriock.Documents.ModelMetadata & {

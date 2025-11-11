@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { formulaExists } from "../../../../helpers/utils.mjs";
 
 /**
  * Generates message parts for a piece of equipment.
@@ -11,20 +12,20 @@ export function _messageParts(equipmentData) {
   const src = equipmentData;
   let damageString = "";
   let twoHandedDamageString = "";
-  if (src.damage.base.value) {
+  if (formulaExists(src.damage.base.value)) {
     damageString += src.damage.base.value;
   }
-  if (damageString) {
+  if (formulaExists(damageString)) {
     damageString += " damage";
   }
   if (src.hasTwoHandedAttack) {
     twoHandedDamageString = src.damage.twoHanded.value;
   }
-  if (twoHandedDamageString) {
+  if (formulaExists(twoHandedDamageString)) {
     twoHandedDamageString += " damage";
   }
   let rangeString = "";
-  if (src.range.long.raw) {
+  if (formulaExists(src.range.long.raw)) {
     rangeString += src.range.long.raw;
     if (src.range.short.raw) {
       rangeString = src.range.short.raw + " / " + rangeString;

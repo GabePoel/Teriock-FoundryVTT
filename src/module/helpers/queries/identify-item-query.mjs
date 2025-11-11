@@ -25,14 +25,15 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
   });
   if (doIdentify) {
     const unrevealed = [
-      ...item.properties.filter((p) => !p.system.revealed),
-      ...item.abilities.filter((a) => !a.system.revealed),
+      ...item.getProperties().filter((p) => !p.system.revealed),
+      ...item.getAbilities().filter((a) => !a.system.revealed),
       ...item.resources.filter((r) => !r.system.revealed),
       ...item.fluencies.filter((f) => !f.system.revealed),
     ];
     const toReveal = await selectDocumentsDialog(unrevealed, {
       hint: "Select effects to reveal.",
       tooltipAsync: false,
+      checked: unrevealed.map((r) => r.uuid),
     });
     await item.updateEmbeddedDocuments(
       "ActiveEffect",
@@ -44,11 +45,14 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
       }),
     );
     await item.update({
-      name: item.system.identification.name,
-      "system.notes": item.system.identification.notes,
+      "system.flaws": item.system.identification.flaws,
+      "system.identification.flaws": "",
       "system.identification.identified": true,
+      "system.identification.notes": "",
       "system.identification.read": true,
+      "system.notes": item.system.identification.notes,
       "system.powerLevel": item.system.identification.powerLevel,
+      name: item.system.identification.name,
     });
   }
   return doIdentify;
