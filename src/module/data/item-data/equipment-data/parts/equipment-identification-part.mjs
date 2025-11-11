@@ -13,7 +13,7 @@ export default (Base) => {
     /**
      * @extends TeriockEquipmentData
      */
-    class EquipmentUnderstandingPart extends Base {
+    class EquipmentIdentificationPart extends Base {
       /**
        * Identifies the equipment, revealing all its properties.
        * @returns {Promise<void>} Promise that resolves when the equipment is identified.
@@ -57,7 +57,7 @@ export default (Base) => {
               `Asking GMs to approve reading magic on ${this.parent.name}.`,
             );
             const content = await ux.TextEditor.enrichHTML(
-              `<p>Should ${game.user.name} read magic on @UUID[${this.parent.uuid}]{${this.parent.name}}?</p>`,
+              `<p>Should @UUID[${game.user.uuid}]{${game.user.name}} read magic on @UUID[${this.parent.uuid}]{${this.identification.name}}?</p>`,
             );
             const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
               content: content,
@@ -68,9 +68,12 @@ export default (Base) => {
               },
             });
             if (doReadMagic) {
-              await this.parent.update({
-                "system.identification.read": true,
-                "system.powerLevel": this.identification.powerLevel,
+              await game.users.activeGM.query("teriock.update", {
+                uuid: this.parent.uuid,
+                data: {
+                  "system.identification.read": true,
+                  "system.powerLevel": this.identification.powerLevel,
+                },
               });
               foundry.ui.notifications.success(
                 `${this.parent.name} was successfully read.`,
@@ -92,7 +95,7 @@ export default (Base) => {
         const data = { doc: this.parent };
         await this.parent.hookCall("equipmentUnidentify", data);
         if (!data.cancel) {
-          if (this.identification.identified) {
+          if (this.identification.identified && game.user.isGM) {
             const uncheckedPropertyNames =
               TERIOCK.options.equipment.unidentifiedProperties;
             if (

@@ -22,7 +22,7 @@ import * as parsing from "./methods/_parsing.mjs";
 import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
 import EquipmentSuppressionPart from "./parts/equipment-suppression-part.mjs";
-import EquipmentUnderstandingPart from "./parts/equipment-understanding-part.mjs";
+import EquipmentIdentificationPart from "./parts/equipment-identification-part.mjs";
 import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
 
 /**
@@ -36,12 +36,12 @@ import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
  * @mixes AttunableDataMixin
  * @mixes ConsumableDataMixin
  * @mixes EquipmentSuppressionPart
- * @mixes EquipmentUnderstandingPart
+ * @mixes EquipmentIdentificationPart
  * @mixes EquipmentWieldingPart
  * @mixes ExecutableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
+export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   EquipmentSuppressionPart(
     EquipmentWieldingPart(
       ArmamentDataMixin(
