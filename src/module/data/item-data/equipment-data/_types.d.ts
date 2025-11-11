@@ -39,15 +39,6 @@ declare global {
     powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
     /** <schema> Price */
     price: number;
-    /** <schema> Range (ft) (if ranged) */
-    range: {
-      /** <schema> Long range (this is the default range) */
-      long: Teriock.Fields.ModifiableDeterministic;
-      /** <schema> Is the equipment ranged? */
-      ranged: boolean;
-      /** <schema> Short range */
-      short: Teriock.Fields.ModifiableDeterministic;
-    };
     /** <schema> Identification Reference Equipment UUID */
     reference: Teriock.UUID<TeriockEquipment>;
     /** <schema> Is the equipment shattered? */

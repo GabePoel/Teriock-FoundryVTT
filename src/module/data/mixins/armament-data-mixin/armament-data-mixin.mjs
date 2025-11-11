@@ -36,15 +36,15 @@ export default (Base) => {
             }),
             types: new fields.SetField(new fields.StringField()),
           }),
+          description: new TextField({
+            initial: "",
+            label: "Description",
+          }),
           fightingStyle: new fields.StringField({
             initial: null,
             label: "Style Bonus",
             nullable: true,
             choices: TERIOCK.index.weaponFightingStyles,
-          }),
-          description: new TextField({
-            initial: "",
-            label: "Description",
           }),
           flaws: new TextField({
             initial: "",
@@ -53,11 +53,6 @@ export default (Base) => {
           notes: new TextField({
             initial: "",
             label: "Notes",
-          }),
-          spellTurning: new fields.BooleanField({
-            initial: false,
-            label: "Spell Turning",
-            nullable: false,
           }),
           piercing: new fields.SchemaField({
             av0: new fields.BooleanField({
@@ -70,6 +65,23 @@ export default (Base) => {
               nullable: false,
               required: false,
             }),
+          }),
+          range: new fields.SchemaField({
+            long: modifiableFormula(),
+            melee: new fields.BooleanField({
+              initial: true,
+              label: "Melee",
+            }),
+            ranged: new fields.BooleanField({
+              initial: false,
+              label: "Ranged",
+            }),
+            short: modifiableFormula(),
+          }),
+          spellTurning: new fields.BooleanField({
+            initial: false,
+            label: "Spell Turning",
+            nullable: false,
           }),
           virtualProperties: new fields.SetField(new fields.StringField()),
         });
@@ -140,6 +152,9 @@ export default (Base) => {
         deriveModifiableIndeterministic(this.damage.base);
         if (this.piercing.ub) {
           this.piercing.av0 = true;
+        }
+        if (!this.damage.base.value || this.damage.base.value === "0") {
+          this.range.melee = false;
         }
       }
     }

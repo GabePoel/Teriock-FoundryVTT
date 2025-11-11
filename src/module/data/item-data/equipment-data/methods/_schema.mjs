@@ -69,14 +69,6 @@ export function _defineSchema() {
       initial: 0,
       label: "Price",
     }),
-    range: new fields.SchemaField({
-      short: modifiableFormula(),
-      long: modifiableFormula(),
-      ranged: new fields.BooleanField({
-        initial: false,
-        label: "Ranged",
-      }),
-    }),
     reference: new fields.DocumentUUIDField({
       initial: null,
       nullable: true,

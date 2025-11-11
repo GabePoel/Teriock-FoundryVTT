@@ -14,7 +14,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       _checkPreparation() {
-        return !this.actor || this.actor?._embeddedPreparation;
+        return Boolean(!this.actor) || this.actor?._embeddedPreparation;
       }
 
       /** @inheritDoc */
