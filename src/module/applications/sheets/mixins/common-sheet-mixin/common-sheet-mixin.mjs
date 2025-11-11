@@ -111,7 +111,9 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves when debug is complete.
        */
       static async _debug(_event, _target) {
-        console.log("Debug", this.document, this);
+        if (game.settings.get("teriock", "developerMode")) {
+          console.log("Debug", this.document, this);
+        }
       }
 
       /**
@@ -354,7 +356,7 @@ export default (Base) => {
           this.editable = this.isEditable;
         }
         await _connectEmbedded(this.document, this.element, this.editable);
-        this._connect(".chat-button", "contextmenu", (e) => {
+        this._connect(".ab-title", "contextmenu", (e) => {
           CommonSheetMixin._debug.call(this, e, e.currentTarget);
         });
         this._activateMenu();

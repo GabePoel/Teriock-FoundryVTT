@@ -84,32 +84,12 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
     }
   }
 
-  /**
-   * Binds static event handlers for import and chat buttons.
-   * Sets up context menu handlers for bulk wiki pull and debug functionality.
-   */
-  _bindStaticEvents() {
-    const importBtn = this.element.querySelector(".import-button");
-    const chatBtn = this.element.querySelector(".chat-button");
-
-    importBtn?.addEventListener("contextmenu", async (event) => {
-      event.preventDefault();
-      //noinspection JSDeprecatedSymbols
-      await this.item.bulkWikiPull();
-    });
-
-    chatBtn?.addEventListener("contextmenu", (event) => {
-      event.preventDefault();
-    });
-  }
-
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.editable) {
       return;
     }
-    this._bindStaticEvents();
     this._bindCleanInputs();
   }
 

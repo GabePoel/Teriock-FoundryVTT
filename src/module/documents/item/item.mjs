@@ -1,6 +1,3 @@
-import { TeriockDialog } from "../../applications/api/_module.mjs";
-import { createAbility } from "../../helpers/create-effects.mjs";
-import { fetchCategoryMembers } from "../../helpers/wiki/_module.mjs";
 import {
   BlankMixin,
   ChangeableDocumentMixin,
@@ -79,58 +76,6 @@ export default class TeriockItem extends ChangeableDocumentMixin(
     return this.effects.contents;
   }
 
-  /**
-   * Helper method for bulk wiki pulling operations.
-   * @param {string} pullType - The type of pull operation ("pages" or "categories").
-   * @returns {Promise<void>} Promise that resolves when the bulk pull is complete.
-   * @private
-   */
-  async _bulkWikiPullHelper(pullType) {
-    const pullTypeName = pullType === "pages" ? "Ability" : "Category";
-    let toPull;
-    await TeriockDialog.prompt({
-      content: `<input type="text" name="pullInput" placeholder="${pullTypeName} Name" />`,
-      ok: {
-        callback: (_event, button) => {
-          let input = button.form.elements.namedItem("pullInput").value;
-          if (input.startsWith(`${pullTypeName}:`)) {
-            input = input.slice(`${pullTypeName}:`.length);
-          }
-          toPull = input;
-        },
-        label: "Pull",
-      },
-      window: { title: "Pulling " + pullTypeName },
-    });
-    if (pullType === "categories") {
-      const pages = await fetchCategoryMembers(toPull);
-      const progress = foundry.ui.notifications.info(
-        `Pulling Category:${toPull} from wiki.`,
-        { progress: true },
-      );
-      let pct = 0;
-      for (const page of pages) {
-        progress.update({
-          message: `Pulling ${page.title} from wiki.`,
-          pct: pct,
-        });
-        if (page.title.startsWith("Ability:")) {
-          await createAbility(this, page.title.replace(/^Ability:/, ""), {
-            notify: false,
-          });
-        }
-        pct += 1 / pages.length;
-        progress.update({
-          message: `Pulling ${page.title} from wiki.`,
-          pct: pct,
-        });
-      }
-      progress.update({ pct: 1 });
-    } else {
-      await createAbility(this, toPull.replace(/^Ability:/, ""));
-    }
-  }
-
   /** @inheritDoc */
   async _preCreate(data, operations, user) {
     this.updateSource({ sort: game.time.serverTime });
@@ -145,38 +90,6 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   *allApplicableEffects() {
     for (const effect of this.effects) {
       yield effect;
-    }
-  }
-
-  /**
-   * Initiates a bulk wiki pull operation for supported item types.
-   * @returns {Promise<void>} Promise that resolves when the bulk pull dialog is complete.
-   * @deprecated
-   */
-  async bulkWikiPull() {
-    if (["ability", "equipment", "rank", "power"].includes(this.type)) {
-      //noinspection JSUnusedGlobalSymbols
-      const dialog = new TeriockDialog({
-        buttons: [
-          {
-            action: "pages",
-            default: true,
-            label: "Page",
-          },
-          {
-            action: "categories",
-            default: false,
-            label: "Category",
-          },
-        ],
-        content: "What would you like to pull?",
-        submit: async (result) => {
-          await dialog.close();
-          await this._bulkWikiPullHelper(result);
-        },
-        window: { title: "Bulk Wiki Pull" },
-      });
-      await dialog.render(true);
     }
   }
 
