@@ -1,5 +1,5 @@
-import type { StatDieModel } from "../_module.mjs";
-import type { StatDieData } from "../stat-die-model/_types";
+import { StatDieModel } from "../_module.mjs";
+import { StatDieData } from "../stat-die-model/_types";
 
 export interface StatPoolData {
   dice: StatDieData[];

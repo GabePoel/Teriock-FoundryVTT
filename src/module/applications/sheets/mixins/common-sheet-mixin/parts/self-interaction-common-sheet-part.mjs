@@ -6,6 +6,7 @@ export default (Base) => {
      * @property {TeriockCommon} document
      */
     class SelfInteractionCommonSheetPart extends Base {
+      /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           chatThis: this._chatThis,

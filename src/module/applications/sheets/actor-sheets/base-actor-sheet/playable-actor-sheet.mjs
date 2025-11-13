@@ -13,7 +13,12 @@ import {
 
 //noinspection JSUnresolvedReference,JSClosureCompilerSyntax
 /**
- * @extends TeriockBaseActorSheet
+ * @extends {TeriockBaseActorSheet}
+ * @mixes CombatActorSheetPart
+ * @mixes MechanicalActorSheetPart
+ * @mixes RollingActorSheetPart
+ * @mixes TakingActorSheetPart
+ * @mixes TradecraftsActorSheetPart
  */
 export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart(
   MechanicalActorSheetPart(
@@ -116,7 +121,7 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
         e.preventDefault();
         /** @type {HTMLElement} */
         const currentTarget = e.currentTarget;
-        const tab = currentTarget.dataset.tab;
+        const tab = /** @type {ActorTab} */ currentTarget.dataset.tab;
         if (tab === "sidebar") {
           sidebar.classList.toggle("collapsed");
           tabber.classList.toggle("collapsed");

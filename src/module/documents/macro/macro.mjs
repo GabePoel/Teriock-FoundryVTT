@@ -47,7 +47,7 @@ export default class TeriockMacro extends BlankMixin(Macro) {
    */
   static async getUseMacro(doc) {
     const activeGM = game.users.activeGM;
-    await activeGM.query("teriock.createHotbarFolder", {
+    await activeGM?.query("teriock.createHotbarFolder", {
       name: game.user.name,
       id: game.user.id,
     });

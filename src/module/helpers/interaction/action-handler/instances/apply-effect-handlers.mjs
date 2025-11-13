@@ -17,12 +17,10 @@ export class ApplyEffectHandler extends ActionHandler {
   async _addToSustaining(createdConsequences) {
     if (this.dataset.sustaining !== "null") {
       const activeGM = game.users.activeGM;
-      if (activeGM) {
-        await activeGM.query("teriock.addToSustaining", {
-          sustainingUuid: pureUuid(this.dataset.sustaining),
-          sustainedUuids: createdConsequences.map((c) => c.uuid),
-        });
-      }
+      await activeGM?.query("teriock.addToSustaining", {
+        sustainingUuid: pureUuid(this.dataset.sustaining),
+        sustainedUuids: createdConsequences.map((c) => c.uuid),
+      });
     }
   }
 

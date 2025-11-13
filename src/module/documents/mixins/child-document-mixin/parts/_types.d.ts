@@ -1,5 +1,5 @@
 export interface HierarchyDocumentInterface<Self extends TeriockChild> {
-  system: Teriock.Documents.EffectModel | Teriock.Documents.ItemModel;
+  // system: Teriock.Documents.EffectModel | Teriock.Documents.ItemModel;
 
   addSub(sub: Self): Promise<void>;
 
@@ -13,7 +13,7 @@ export interface HierarchyDocumentInterface<Self extends TeriockChild> {
 
   duplicate(): Promise<Self>;
 
-  get metadata(): Teriock.Documents.ChildModelMetadata;
+  get metadata(): Teriock.Documents.ModelMetadata;
 
   get rootAllSubs(): Self[];
 
@@ -21,7 +21,7 @@ export interface HierarchyDocumentInterface<Self extends TeriockChild> {
 
   get rootSubs(): Self[];
 
-  get source(): Self;
+  get source(): Self | null;
 
   get subIds(): Set<Teriock.ID<Self>>;
 

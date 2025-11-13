@@ -563,13 +563,12 @@ export function secondsToReadable(totalSeconds) {
 
 /**
  * Unfreeze, merge, and refreeze two objects.
- * @template T
- * @param {Readonly<T>} original
- * @param {Partial<T>} other
- * @returns Readonly<T>
+ * @param {Readonly<Teriock.Documents.ModelMetadata>} original
+ * @param {Partial<Teriock.Documents.ModelMetadata>} other
+ * @returns {Readonly<Teriock.Documents.ModelMetadata>}
  */
-export function mergeFreeze(original, other) {
-  return foundry.utils.deepFreeze(
+export function mergeMetadata(original, other) {
+  return /** @type {Readonly<Teriock.Documents.ModelMetadata>} */ foundry.utils.deepFreeze(
     foundry.utils.mergeObject(
       foundry.utils.deepClone(original),
       foundry.utils.deepClone(other),

@@ -1,2 +1,2 @@
-import "./base-actor-data/_types";
+import "./base-actor-model/_types";
 import "./character-data/_types";

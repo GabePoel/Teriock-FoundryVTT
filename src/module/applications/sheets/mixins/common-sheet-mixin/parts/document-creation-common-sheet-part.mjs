@@ -19,6 +19,7 @@ export default (Base) => {
      * @property {TeriockCommon} document
      */
     class DocumentCreationCommonSheetPart extends Base {
+      /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           createAbility: this._createAbility,
@@ -253,10 +254,11 @@ export default (Base) => {
           getRank(rankClass, 4),
           getRank(rankClass, 5),
         ]);
-        const referenceRank = await selectDocumentDialog(possibleRanks, {
-          title: "Select Rank",
-          openable: true,
-        });
+        const referenceRank =
+          /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
+            title: "Select Rank",
+            openable: true,
+          });
         const rankNumber = referenceRank.system.classRank;
         let rank = await copyRank(rankClass, rankNumber);
         if (rankNumber <= 2) {
@@ -273,6 +275,7 @@ export default (Base) => {
           }
           return;
         }
+        /** @type {TeriockRank[]} */
         const existingRanks = this.document
           .getRanks()
           .filter((r) => r.system.className === rankClass);

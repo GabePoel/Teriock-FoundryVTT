@@ -5,6 +5,9 @@ import { freeze } from "../../../helpers/utils.mjs";
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
 
+/**
+ * @extends {DataModel}
+ */
 export default class CommonTypeModel extends TypeDataModel {
   /**
    * Metadata.
@@ -14,9 +17,17 @@ export default class CommonTypeModel extends TypeDataModel {
     childEffectTypes: [],
     childItemTypes: [],
     childMacroTypes: [],
-    collection: "",
+    consumable: false,
+    hierarchy: false,
+    modifies: "Actor",
+    namespace: "",
+    pageNameKey: "name",
+    passive: false,
     preservedProperties: [],
+    revealable: false,
     type: "base",
+    usable: false,
+    wiki: false,
   });
 
   /** @inheritDoc */
@@ -112,14 +123,26 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   async getIndexReference() {
     if (
-      this.constructor.metadata.indexCompendiumKey &&
+      this.metadata.indexCompendiumKey &&
       this.parent.documentName === "Item"
     ) {
-      return await copyItem(
-        this.parent.name,
-        this.constructor.metadata.indexCompendiumKey,
-      );
+      return await copyItem(this.parent.name, this.metadata.indexCompendiumKey);
     }
+  }
+
+  /**
+   * Fetch roll data.
+   * @returns {object}
+   */
+  getRollData() {
+    let rollData = {};
+    if (this.parent.actor) {
+      rollData = this.parent.actor.getRollData();
+    }
+    rollData[this.parent.documentName] = this.toObject();
+    rollData[this.parent.documentName]["name"] = this.parent.name;
+    rollData[this.parent.type] = rollData[this.parent.documentName];
+    return rollData;
   }
 
   /**

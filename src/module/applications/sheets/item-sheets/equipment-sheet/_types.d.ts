@@ -1,4 +1,4 @@
-import type { TeriockEquipment } from "../../../../documents/_documents.mjs";
+import { TeriockEquipment } from "../../../../documents/_documents.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 declare module "./equipment-sheet.mjs" {

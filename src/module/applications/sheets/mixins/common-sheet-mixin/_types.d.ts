@@ -1,4 +1,4 @@
-import type { DragDropCommonSheetPartInterface } from "./parts/_types";
+import { DragDropCommonSheetPartInterface } from "./parts/_types";
 
 export interface CommonSheetMixinInterface
   extends DragDropCommonSheetPartInterface {

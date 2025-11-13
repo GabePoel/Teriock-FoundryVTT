@@ -1,7 +1,7 @@
-export { default as AttunementSheet } from "./attunement-sheet/attunement-sheet.mjs";
-export { default as AbilitySheet } from "./ability-sheet/ability-sheet.mjs";
-export { default as ConditionSheet } from "./condition-sheet/condition-sheet.mjs";
-export { default as ConsequenceSheet } from "./consequence-sheet/consequence-sheet.mjs";
-export { default as FluencySheet } from "./fluency-sheet/fluency-sheet.mjs";
-export { default as PropertySheet } from "./property-sheet/property-sheet.mjs";
-export { default as ResourceSheet } from "./resource-sheet/resource-sheet.mjs";
+export { default as TeriockAttunementSheet } from "./attunement-sheet/attunement-sheet.mjs";
+export { default as TeriockAbilitySheet } from "./ability-sheet/ability-sheet.mjs";
+export { default as TeriockConditionSheet } from "./condition-sheet/condition-sheet.mjs";
+export { default as TeriockConsequenceSheet } from "./consequence-sheet/consequence-sheet.mjs";
+export { default as TeriockFluencySheet } from "./fluency-sheet/fluency-sheet.mjs";
+export { default as TeriockPropertySheet } from "./property-sheet/property-sheet.mjs";
+export { default as TeriockResourceSheet } from "./resource-sheet/resource-sheet.mjs";

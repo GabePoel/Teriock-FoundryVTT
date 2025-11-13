@@ -1,5 +1,5 @@
-import type { TeriockDragDrop } from "../../../../ux/_module.mjs";
-import type {
+import { TeriockDragDrop } from "../../../../ux/_module.mjs";
+import {
   TeriockEffect,
   TeriockItem,
   TeriockJournalEntryPage,

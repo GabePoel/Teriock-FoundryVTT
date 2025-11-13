@@ -1,16 +1,20 @@
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { mergeMetadata } from "../../../helpers/utils.mjs";
 import { hierarchyField } from "../../shared/fields/helpers/field-builders.mjs";
 
-export default (Base) => {
+/**
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
+ */
+export default function HierarchyDataMixin(Base) {
   // noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {HierarchyDataMixinInterface}
-     * @extends {ChildTypeModel}
+     * @mixin
      */
-    class HierarchyDataMixin extends Base {
+    class HierarchyData extends Base {
       /** @inheritDoc */
-      static metadata = mergeFreeze(super.metadata, {
+      static metadata = mergeMetadata(super.metadata, {
         hierarchy: true,
       });
 
@@ -25,12 +29,12 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (
-          this.parent.parent?.uuid &&
-          this.parent.parent[this.metadata.collection].has(this.parent.id)
+          this.parent.parent &&
+          this.parent.parent[this.parent.collectionName].has(this.parent.id)
         ) {
           this.hierarchy.rootUuid = this.parent.parent.uuid;
         }
       }
     }
   );
-};
+}

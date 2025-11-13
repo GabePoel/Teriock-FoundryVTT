@@ -1,7 +1,15 @@
 import { TeriockDialog } from "../../../api/_module.mjs";
 
-export default (Base) => {
-  return class IndexButtonSheetMixin extends Base {
+/**
+ * @param {typeof DocumentSheetV2} Base
+ * @constructor
+ */
+export default function IndexButtonSheetMixin(Base) {
+  /**
+   * @mixin
+   */
+  return class IndexButtonSheet extends Base {
+    /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         refreshIndexThisHard: this._refreshIndexThisHard,
@@ -71,4 +79,4 @@ export default (Base) => {
       }
     }
   };
-};
+}

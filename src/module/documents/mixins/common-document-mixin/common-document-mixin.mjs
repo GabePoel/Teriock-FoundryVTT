@@ -1,18 +1,30 @@
 import { systemPath } from "../../../helpers/path.mjs";
+import { TeriockActor } from "../../_module.mjs";
 
 /**
  * Mixin for common functions used across document classes.
- * @param {ClientDocument} Base
- * @mixin
+ * @param {typeof ClientDocument} Base
+ * @constructor
  */
-export default (Base) => {
-  // noinspection JSClosureCompilerSyntax
+export default function CommonDocumentMixin(Base) {
   return (
     /**
      * @implements {CommonDocumentMixinInterface}
      * @extends ClientDocument
+     * @mixin
      */
-    class CommonDocumentMixin extends Base {
+    class CommonDocument extends Base {
+      /** @inheritDoc */
+      get actor() {
+        if (this instanceof TeriockActor) {
+          return this;
+        } else if (this.parent) {
+          return this.parent.actor;
+        } else {
+          return null;
+        }
+      }
+
       /** @inheritDoc */
       get metadata() {
         return this.system.constructor.metadata;
@@ -21,11 +33,6 @@ export default (Base) => {
       /** @inheritDoc */
       get nameString() {
         return this.system.nameString;
-      }
-
-      /** @inheritDoc */
-      get uuid() {
-        return super.uuid;
       }
 
       /** @inheritDoc */
@@ -143,4 +150,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

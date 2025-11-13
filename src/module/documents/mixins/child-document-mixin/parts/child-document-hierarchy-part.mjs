@@ -180,7 +180,7 @@ export default (Base) => {
         const subChildren = [];
         for (const id of this.rootSubIds) {
           const root = fromUuidSync(this.system.hierarchy.rootUuid);
-          subChildren.push(root[this.metadata.collection].get(id));
+          subChildren.push(root[this.collectionName].get(id));
         }
         return subChildren;
       }
@@ -208,7 +208,7 @@ export default (Base) => {
         ) {
           const root = this.parent;
           return this.system.hierarchy.subIds.filter((id) =>
-            root[this.metadata.collection].has(id),
+            root[this.collectionName].has(id),
           );
         }
         return new Set();
@@ -221,7 +221,7 @@ export default (Base) => {
         const subChildren = [];
         for (const id of this.subIds) {
           const root = this.parent;
-          subChildren.push(root[this.metadata.collection].get(id));
+          subChildren.push(root[this.collectionName].get(id));
         }
         return subChildren;
       }
@@ -244,7 +244,7 @@ export default (Base) => {
           this.metadata.hierarchy &&
           this.system.hierarchy.supId &&
           this.parent &&
-          this.parent[this.metadata.collection].has(this.system.hierarchy.supId)
+          this.parent[this.collectionName].has(this.system.hierarchy.supId)
         ) {
           return this.system.hierarchy.supId;
         }

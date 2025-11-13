@@ -1,4 +1,4 @@
-import type { StatPoolModel } from "../../models/stat-pool-model/_module.mjs";
+import { StatPoolModel } from "../../models/stat-pool-model/_module.mjs";
 
 export interface StatGiverMixinInterface {
   statDice: {

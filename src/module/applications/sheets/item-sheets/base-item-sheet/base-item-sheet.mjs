@@ -16,6 +16,8 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  * Base item sheet for Teriock system items.
  * Provides common functionality for all item sheets.
  * @extends {ItemSheetV2}
+ * @mixes ChatButtonSheet
+ * @mixes CommonSheet
  * @property {TeriockItem} document
  * @property {TeriockItem} item
  */

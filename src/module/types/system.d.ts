@@ -1,9 +1,9 @@
-import type {
+import {
   abilityPseudoHooks,
   propertyPseudoHooks,
 } from "../constants/system/pseudo-hooks.mjs";
-import type { TeriockMacro } from "../documents/_module.mjs";
-import type { displayOptions } from "../constants/options/display-options.mjs";
+import { TeriockMacro } from "../documents/_module.mjs";
+import { displayOptions } from "../constants/options/display-options.mjs";
 
 declare global {
   export namespace Teriock.Parameters.Shared {

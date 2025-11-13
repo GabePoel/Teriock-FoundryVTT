@@ -1,4 +1,4 @@
-import type { TeriockJournalEntryPage } from "../../../documents/_module.mjs";
+import { TeriockJournalEntryPage } from "../../../documents/_module.mjs";
 
 declare module "./common-type-model.mjs" {
   export default // @ts-expect-error Not a duplicate identifier

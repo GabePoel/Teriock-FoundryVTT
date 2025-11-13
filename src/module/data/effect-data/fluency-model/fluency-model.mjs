@@ -1,0 +1,138 @@
+import { iconManifest } from "../../../constants/display/_module.mjs";
+import { getIcon } from "../../../helpers/path.mjs";
+import { mergeMetadata } from "../../../helpers/utils.mjs";
+import {
+  ExecutableDataMixin,
+  RevelationDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
+import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
+import { _roll } from "./methods/_rolling.mjs";
+
+const { fields } = foundry.data;
+
+/**
+ * Fluency-specific effect data model.
+ *
+ * Relevant wiki pages:
+ * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
+ *
+ * @extends {TeriockBaseEffectModel}
+ * @mixes ExecutableData
+ * @mixes RevelationData
+ * @mixes WikiData
+ */
+export default class TeriockFluencyModel extends RevelationDataMixin(
+  WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
+) {
+  /** @inheritDoc */
+  static metadata = mergeMetadata(super.metadata, {
+    namespace: "Tradecraft",
+    pageNameKey: "system.tradecraft",
+    type: "fluency",
+    usable: true,
+  });
+
+  /** @inheritDoc */
+  static defineSchema() {
+    const schema = super.defineSchema();
+    Object.assign(schema, {
+      field: new fields.StringField({
+        initial: "artisan",
+        label: "Field",
+      }),
+      tradecraft: new fields.StringField({
+        initial: "artist",
+        label: "Tradecraft",
+      }),
+      proficient: new fields.BooleanField({
+        initial: true,
+        label: "Proficient",
+      }),
+      fluent: new fields.BooleanField({
+        initial: true,
+        label: "Fluent",
+      }),
+    });
+    return schema;
+  }
+
+  /** @inheritDoc */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /** @inheritDoc */
+  get nameString() {
+    const nameAddition = this.revealed ? "" : " (Unrevealed)";
+    return this.parent.name + nameAddition;
+  }
+
+  /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (
+      !suppressed &&
+      this.parent.parent &&
+      this.parent.parent.type === "equipment"
+    ) {
+      suppressed = !this.parent.parent.system.isAttuned;
+    }
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.source.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.ranks
+      ) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    const namespace = this.constructor.metadata.namespace;
+    const pageName =
+      TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft].name;
+    return `${namespace}:${pageName}`;
+  }
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    if (!foundry.utils.hasProperty(data, "img")) {
+      this.parent.updateSource({
+        img: getIcon("tradecrafts", "Artist"),
+      });
+    }
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    if ((await super._preUpdate(changes, options, user)) === false) {
+      return false;
+    }
+    if (
+      Object.values(iconManifest.tradecrafts).includes(this.parent.img) &&
+      !foundry.utils.hasProperty(changes, "img")
+    ) {
+      let tradecraft = this.tradecraft;
+      if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
+        tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
+      }
+      foundry.utils.setProperty(
+        changes,
+        "img",
+        getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+      );
+    }
+  }
+
+  /** @inheritDoc */
+  async roll(options) {
+    await _roll(this, options);
+  }
+}

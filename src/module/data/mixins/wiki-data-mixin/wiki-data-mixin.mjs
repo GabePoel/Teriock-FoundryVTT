@@ -1,23 +1,22 @@
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   fetchWikiPageHTML,
   openWikiPage,
 } from "../../../helpers/wiki/_module.mjs";
 
 /**
- * Mixin that provides wiki integration functionality for document data models.
- * Adds wiki page fetching, parsing, and opening capabilities.
- * @param {typeof ChildTypeModel} Base - The base class to mix in with.
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
  */
-export default (Base) => {
+export default function WikiDataMixin(Base) {
   return (
     /**
      * @implements {WikiDataMixinInterface}
-     * @extends {ChildTypeModel}
+     * @mixin
      */
-    class WikiDataMixin extends Base {
+    class WikiData extends Base {
       /** @inheritDoc */
-      static metadata = mergeFreeze(Base.metadata, { wiki: true });
+      static metadata = mergeMetadata(Base.metadata, { wiki: true });
 
       /** @inheritDoc */
       get wikiPage() {
@@ -76,4 +75,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

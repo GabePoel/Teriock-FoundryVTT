@@ -1,4 +1,4 @@
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { mergeMetadata } from "../../../helpers/utils.mjs";
 import { StatDieModel } from "../../models/_module.mjs";
 import {
   HpPoolModel,
@@ -11,16 +11,20 @@ import {
 
 const { fields } = foundry.data;
 
-export default (Base) => {
+/**
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
+ */
+export default function StatGiverDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {StatGiverMixinInterface}
-     * @extends ChildTypeModel
+     * @mixin
      */
-    class StatGiverDataMixin extends Base {
+    class StatGiverData extends Base {
       /** @inheritDoc */
-      static metadata = mergeFreeze(super.metadata, {
+      static metadata = mergeMetadata(super.metadata, {
         stats: true,
       });
 
@@ -77,4 +81,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

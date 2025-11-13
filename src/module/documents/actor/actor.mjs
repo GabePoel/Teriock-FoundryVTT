@@ -14,11 +14,16 @@ const { Actor } = foundry.documents;
  * The Teriock {@link Actor} implementation.
  * @extends {Actor}
  * @extends {ClientDocument}
- * @mixes ClientDocumentMixin
- * @mixes CommonDocumentMixin
- * @mixes ParentDocumentMixin
+ * @mixes CommonDocument
+ * @mixes ParentDocument
  * @property {Collection<Teriock.UUID<TeriockEffect>, TeriockEffect>} effects
  * @property {Collection<Teriock.UUID<TeriockItem>, TeriockItem>} items
+ * @property {Teriock.Documents.ActorModel} system
+ * @property {Teriock.Documents.ActorType} type
+ * @property {Teriock.ID<TeriockActor>} _id
+ * @property {Teriock.ID<TeriockActor>} id
+ * @property {Teriock.UUID<TeriockActor>} uuid
+ * @property {TeriockBaseActorSheet} sheet
  */
 export default class TeriockActor extends ParentDocumentMixin(
   CommonDocumentMixin(BlankMixin(Actor)),
@@ -70,7 +75,7 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /**
    * Enabled body parts and equipped equipment.
-   * @returns {TeriockArmament[]}
+   * @returns {(TeriockBody|TeriockEquipment)[]}
    */
   get activeArmaments() {
     return [
@@ -79,21 +84,13 @@ export default class TeriockActor extends ParentDocumentMixin(
     ];
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TeriockActor}
-   */
-  get actor() {
-    return this;
-  }
-
   //noinspection JSUnusedGlobalSymbols
   /**
    * Body parts and equipment.
-   * @returns {TeriockArmament[]}
+   * @returns {(TeriockBody|TeriockEquipment)[]}
    */
   get armaments() {
-    return [...this.equipment, ...this.bodyParts];
+    return [...this.bodyParts, ...this.equipment];
   }
 
   /** @returns {TeriockBody[]} */
@@ -174,15 +171,6 @@ export default class TeriockActor extends ParentDocumentMixin(
     return out;
   }
 
-  /**
-   * @inheritDoc
-   * @returns {Readonly<Teriock.Documents.ActorModelMetadata>}
-   */
-  get metadata() {
-    return /** @type {Readonly<Teriock.Documents.ActorModelMetadata>} */ super
-      .metadata;
-  }
-
   /** @returns {TeriockMount[]} */
   get mounts() {
     return this.itemTypes?.mount || [];
@@ -216,7 +204,7 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /**
    * Transformations.
-   * @returns {TeriockConsequence[]}
+   * @returns {(TeriockCondition|TeriockConsequence)[]}
    */
   get transformations() {
     const possibleEffects = [...this.consequences, ...this.conditions];
@@ -323,7 +311,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   async allAbilities() {
     const basicAbilitiesItem = await getItem("Basic Abilities", "essentials");
-    return [...basicAbilitiesItem.abilities, ...this.actor.abilities];
+    return [...basicAbilitiesItem.abilities, ...this.abilities];
   }
 
   /**

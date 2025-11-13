@@ -2,7 +2,6 @@ import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
 import { quickAddAssociation } from "../../../helpers/html.mjs";
 import {
   abilitySort,
-  freeze,
   makeIcon,
   propertySort,
 } from "../../../helpers/utils.mjs";
@@ -21,26 +20,6 @@ const { fields } = foundry.data;
  * @property {Teriock.Parameters.Shared.Font} font
  */
 export default class ChildTypeModel extends CommonTypeModel {
-  /**
-   * @inheritDoc
-   * @type {Readonly<Teriock.Documents.ChildModelMetadata>}
-   */
-  static metadata = freeze({
-    childEffectTypes: [],
-    childItemTypes: [],
-    childMacroTypes: [],
-    consumable: false,
-    hierarchy: false,
-    namespace: "",
-    pageNameKey: "name",
-    passive: false,
-    preservedProperties: [],
-    revealable: false,
-    type: "base",
-    usable: false,
-    wiki: false,
-  });
-
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}
@@ -149,7 +128,8 @@ export default class ChildTypeModel extends CommonTypeModel {
         },
         condition: () =>
           (this.parent.parent.sheet?.editable ||
-            this.parent.source?.sheet?.editable) &&
+            (this.parent.parent.source &&
+              this.parent.source.sheet?.editable)) &&
           this.parent.isOwner,
         group: "document",
       },
@@ -226,7 +206,9 @@ export default class ChildTypeModel extends CommonTypeModel {
    */
   get suppressed() {
     return !!(
-      this.parent.source?.documentName === "Item" && !this.parent.source?.active
+      this.parent.source &&
+      this.parent.source.documentName === "Item" &&
+      !this.parent.source.active
     );
   }
 
@@ -263,21 +245,6 @@ export default class ChildTypeModel extends CommonTypeModel {
     await this.parent.parent.deleteEmbeddedDocuments(this.parent.documentName, [
       this.parent.id,
     ]);
-  }
-
-  /**
-   * Roll data.
-   * @returns {object}
-   */
-  getRollData() {
-    let rollData = {};
-    if (this.parent.actor) {
-      rollData = this.parent.actor.getRollData();
-    }
-    rollData[this.parent.documentName] = this.toObject();
-    rollData[this.parent.documentName]["name"] = this.parent.name;
-    rollData[this.parent.type] = rollData[this.parent.documentName];
-    return rollData;
   }
 
   /**

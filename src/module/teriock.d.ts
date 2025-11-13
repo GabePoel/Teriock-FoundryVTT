@@ -4,7 +4,7 @@ import "./helpers/commands/_types";
 import "./data/_types";
 import "./applications/_types";
 import "./documents/_types";
-import type {
+import {
   TeriockActor,
   TeriockChatMessage,
   TeriockCombat,
@@ -22,16 +22,15 @@ import type {
 import PixiJS from "pixi.js";
 import * as sheets from "./applications/sheets/_module.mjs";
 import * as documents from "./documents/_documents.mjs";
-import { TeriockBody, TeriockEquipment } from "./documents/_documents.mjs";
 import * as data from "./data/_module.mjs";
 import * as placeables from "./canvas/placeables/_module.mjs";
-import type TeriockBaseActorSheet from "./applications/sheets/actor-sheets/base-actor-sheet/base-actor-sheet.mjs";
-import type TeriockBaseEffectSheet from "./applications/sheets/effect-sheets/base-effect-sheet/base-effect-sheet.mjs";
-import type TeriockBaseItemSheet from "./applications/sheets/item-sheets/base-item-sheet/base-item-sheet.mjs";
-import type TeriockBaseActorModel from "./data/actor-data/base-actor-data/base-actor-data.mjs";
-import type TeriockBaseEffectModel from "./data/effect-data/base-effect-data/base-effect-data.mjs";
-import type TeriockBaseItemModel from "./data/item-data/base-item-data/base-item-data.mjs";
-import type TeriockBaseMessageModel from "./data/message-data/base-message-data/base-message-data.mjs";
+import TeriockBaseActorSheet from "./applications/sheets/actor-sheets/base-actor-sheet/base-actor-sheet.mjs";
+import TeriockBaseEffectSheet from "./applications/sheets/effect-sheets/base-effect-sheet/base-effect-sheet.mjs";
+import TeriockBaseItemSheet from "./applications/sheets/item-sheets/base-item-sheet/base-item-sheet.mjs";
+import TeriockBaseActorModel from "./data/actor-data/base-actor-model/base-actor-model.mjs";
+import TeriockBaseEffectModel from "./data/effect-data/base-effect-model/base-effect-model.mjs";
+import TeriockBaseItemModel from "./data/item-data/base-item-model/base-item-model.mjs";
+import TeriockBaseMessageModel from "./data/message-data/base-message-model/base-message-model.mjs";
 
 declare global {
   export import PIXI = PixiJS;
@@ -63,7 +62,6 @@ declare global {
   export type TeriockChild = TeriockItem | TeriockEffect;
   export type TeriockChildName = "Item" | "ActiveEffect";
   export type TeriockCommon = TeriockActor | TeriockItem | TeriockEffect;
-  export type TeriockArmament = TeriockEquipment | TeriockBody;
   export type TeriockDocument =
     | TeriockActor
     | TeriockChatMessage
@@ -161,30 +159,30 @@ declare global {
   // Actor
   // -----
 
-  const TeriockCharacterSheet: sheets.actor.CharacterSheet;
-  const TeriockCreatureSheet: sheets.actor.CreatureSheet;
+  const TeriockCharacterSheet: sheets.actor.TeriockCharacterSheet;
+  const TeriockCreatureSheet: sheets.actor.TeriockCreatureSheet;
 
   // Item
   // ----
 
-  const TeriockBodySheet: sheets.item.BodySheet;
-  const TeriockEquipmentSheet: sheets.item.EquipmentSheet;
-  const TeriockMountSheet: sheets.item.MountSheet;
-  const TeriockPowerSheet: sheets.item.PowerSheet;
-  const TeriockRankSheet: sheets.item.RankSheet;
-  const TeriockSpeciesSheet: sheets.item.SpeciesSheet;
-  const TeriockWrapperSheet: sheets.item.WrapperSheet;
+  const TeriockBodySheet: sheets.item.TeriockBodySheet;
+  const TeriockEquipmentSheet: sheets.item.TeriockEquipmentSheet;
+  const TeriockMountSheet: sheets.item.TeriockMountSheet;
+  const TeriockPowerSheet: sheets.item.TeriockPowerSheet;
+  const TeriockRankSheet: sheets.item.TeriockRankSheet;
+  const TeriockSpeciesSheet: sheets.item.TeriockSpeciesSheet;
+  const TeriockWrapperSheet: sheets.item.TeriockWrapperSheet;
 
   // Effect
   // ------
 
-  const TeriockAbilitySheet: sheets.effect.AbilitySheet;
-  const TeriockAttunementSheet: sheets.effect.AttunementSheet;
-  const TeriockConsequenceSheet: sheets.effect.ConsequenceSheet;
-  const TeriockConditionSheet: sheets.effect.ConditionSheet;
-  const TeriockFluencySheet: sheets.effect.FluencySheet;
-  const TeriockPropertySheet: sheets.effect.PropertySheet;
-  const TeriockResourceSheet: sheets.effect.ResourceSheet;
+  const TeriockAbilitySheet: sheets.effect.TeriockAbilitySheet;
+  const TeriockAttunementSheet: sheets.effect.TeriockAttunementSheet;
+  const TeriockConsequenceSheet: sheets.effect.TeriockConsequenceSheet;
+  const TeriockConditionSheet: sheets.effect.TeriockConditionSheet;
+  const TeriockFluencySheet: sheets.effect.TeriockFluencySheet;
+  const TeriockPropertySheet: sheets.effect.TeriockPropertySheet;
+  const TeriockResourceSheet: sheets.effect.TeriockResourceSheet;
 
   // Placeables
   // ==========

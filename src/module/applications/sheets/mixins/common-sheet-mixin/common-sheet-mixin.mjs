@@ -15,16 +15,24 @@ import SelfInteractionCommonSheetPart from "./parts/self-interaction-common-shee
  * Provides common functionality for all Teriock sheets including event handling,
  * drag and drop, context menus, and form management.
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
+ * @constructor
  */
-export default (Base) => {
+export default function CommonSheetMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {CommonSheetMixinInterface}
      * @extends {DocumentSheetV2}
+     * @mixes DocumentCreationCommonSheetPart
+     * @mixes DocumentInteractionCommonSheetPart
+     * @mixes DragDropCommonSheetPart
+     * @mixes LockingCommonSheetPart
+     * @mixes RichApplicationMixin
+     * @mixes SelfInteractionCommonSheetPart
+     * @mixin
      * @property {TeriockCommon} document
      */
-    class CommonSheetMixin extends IndexButtonSheetMixin(
+    class CommonSheet extends IndexButtonSheetMixin(
       LockingCommonSheetPart(
         SelfInteractionCommonSheetPart(
           DocumentInteractionCommonSheetPart(
@@ -36,10 +44,7 @@ export default (Base) => {
       ),
     ) {
       //noinspection JSValidateTypes
-      /**
-       * Default sheet options.
-       * @type {Partial<ApplicationConfiguration & { dragDrop: object[] }>}
-       */
+      /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           changeImpactTab: this._changeImpactTab,
@@ -101,7 +106,7 @@ export default (Base) => {
        */
       static async _changeImpactTab(_event, target) {
         this._impactTab = target.dataset.tab;
-        this.render();
+        await this.render();
       }
 
       /**
@@ -189,7 +194,7 @@ export default (Base) => {
         const { path } = target.dataset;
         const current = target.dataset.bool === "true";
         foundry.utils.setProperty(this, path, !current);
-        this.render();
+        await this.render();
       }
 
       /**
@@ -199,7 +204,7 @@ export default (Base) => {
        */
       static async _toggleImpacts() {
         this._tab = this._tab === "impacts" ? "overview" : "impacts";
-        this.render();
+        await this.render();
       }
 
       /**
@@ -441,9 +446,7 @@ export default (Base) => {
         });
       }
 
-      /**
-       * @inheritDoc
-       */
+      /** @inheritDoc */
       async _prepareContext(options) {
         const context = await super._prepareContext(options);
         Object.assign(context, {
@@ -521,4 +524,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

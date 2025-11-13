@@ -1,5 +1,4 @@
 import {
-  BlankMixin,
   ChangeableDocumentMixin,
   ChildDocumentMixin,
   CommonDocumentMixin,
@@ -11,18 +10,22 @@ const { Item } = foundry.documents;
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Item} implementation.
+ * @extends {ClientDocument}
  * @extends {Item}
- * @mixes ChangeableDocumentMixin
- * @mixes ChildDocumentMixin
- * @mixes ClientDocumentMixin
- * @mixes CommonDocumentMixin
- * @mixes ParentDocumentMixin
+ * @mixes ChangeableDocument
+ * @mixes ChildDocument
+ * @mixes CommonDocument
+ * @mixes ParentDocument
  * @property {EmbeddedCollection<Teriock.ID<TeriockEffect>, TeriockEffect>} effects
+ * @property {Teriock.Documents.ItemModel} system
+ * @property {Teriock.Documents.ItemType} type
+ * @property {Teriock.ID<TeriockItem>} _id
+ * @property {Teriock.ID<TeriockItem>} id
+ * @property {Teriock.UUID<TeriockItem>} uuid
+ * @property {TeriockBaseItemSheet} sheet
  */
 export default class TeriockItem extends ChangeableDocumentMixin(
-  ParentDocumentMixin(
-    ChildDocumentMixin(CommonDocumentMixin(BlankMixin(Item))),
-  ),
+  ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))),
 ) {
   /** @inheritDoc */
   changesField = "itemChanges";
@@ -33,14 +36,6 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    */
   get active() {
     return !this.isSuppressed && !this.disabled;
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {TeriockActor|null}
-   */
-  get actor() {
-    return super.actor;
   }
 
   /**
@@ -57,15 +52,6 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    */
   get isSuppressed() {
     return this.system.suppressed;
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {Readonly<Teriock.Documents.ItemModelMetadata>}
-   */
-  get metadata() {
-    return /** @type {Readonly<Teriock.Documents.ItemModelMetadata>} */ super
-      .metadata;
   }
 
   /**

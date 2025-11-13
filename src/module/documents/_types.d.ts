@@ -1,7 +1,10 @@
 import "./mixins/_types";
-import type { documentTypes } from "../constants/system/document-types.mjs";
-import type * as models from "../data/_module.mjs";
+import { documentTypes } from "../constants/system/document-types.mjs";
+import * as models from "../data/_module.mjs";
 import { TeriockFolder } from "./_module.mjs";
+import TeriockBaseEffectModel from "../data/effect-data/base-effect-model/base-effect-model.mjs";
+import TeriockBaseItemModel from "../data/item-data/base-item-model/base-item-model.mjs";
+import TeriockBaseActorModel from "../data/actor-data/base-actor-model/base-actor-model.mjs";
 
 declare global {
   namespace Teriock.Documents {
@@ -78,43 +81,27 @@ declare global {
       childEffectTypes: Teriock.Documents.EffectType[];
       childItemTypes: Teriock.Documents.ItemType[];
       childMacroTypes: Teriock.Documents.MacroType[];
-      collection: string;
-      indexCategoryKey?: Teriock.Documents.IndexCategoryKey;
-      indexCompendiumKey?: Teriock.Documents.IndexCompendiumKey;
-      preservedProperties: string[];
-      type: Teriock.Documents.CommonType;
-    };
-
-    export type ChildModelMetadata = Teriock.Documents.ModelMetadata & {
       consumable: boolean;
       hierarchy: boolean;
+      indexCategoryKey?: Teriock.Documents.IndexCategoryKey;
+      indexCompendiumKey?: Teriock.Documents.IndexCompendiumKey;
+      modifies: TeriockParentName;
       namespace: string;
       pageNameKey: string;
       passive: boolean;
+      preservedProperties: string[];
       revealable: boolean;
-      type: Teriock.Documents.ChildType;
+      type: Teriock.Documents.CommonType;
       usable: boolean;
       wiki: boolean;
     };
 
-    export type ActorModelMetadata = Teriock.Documents.ModelMetadata & {
-      type: Teriock.Documents.ActorType;
-    };
-
-    export type ItemModelMetadata = Teriock.Documents.ChildModelMetadata & {
-      stats: boolean;
-      type: Teriock.Documents.ItemType;
-    };
-
-    export type EffectModelMetadata = Teriock.Documents.ChildModelMetadata & {
-      type: Teriock.Documents.EffectType;
-      modifies: TeriockParentName;
-    };
-
-    export type ActorModel = (typeof models.actor)[keyof typeof models.actor];
-    export type ItemModel = (typeof models.item)[keyof typeof models.item];
-    export type EffectModel =
-      (typeof models.effect)[keyof typeof models.effect];
+    export type ActorModel = TeriockBaseActorModel &
+      InstanceType<(typeof models.actor)[keyof typeof models.actor]>;
+    export type ItemModel = TeriockBaseItemModel &
+      InstanceType<(typeof models.item)[keyof typeof models.item]>;
+    export type EffectModel = TeriockBaseEffectModel &
+      InstanceType<(typeof models.effect)[keyof typeof models.effect]>;
   }
 }
 

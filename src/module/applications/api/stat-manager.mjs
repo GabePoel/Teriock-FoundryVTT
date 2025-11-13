@@ -6,7 +6,7 @@ const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 /**
  * @extends {ApplicationV2}
  * @mixes HandlebarsApplicationMixin
- * @mixes HackStatMixin
+ * @mixes HackStatApplication
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */

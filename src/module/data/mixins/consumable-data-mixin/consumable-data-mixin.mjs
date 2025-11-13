@@ -1,4 +1,4 @@
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   deriveModifiableDeterministic,
   modifiableFormula,
@@ -6,21 +6,21 @@ import {
 } from "../../shared/fields/modifiable.mjs";
 
 const { fields } = foundry.data;
+
 /**
- * Mixin that provides consumable document functionality.
- * Adds quantity management, automatic consumption, and quantity validation capabilities.
- * @param {typeof ChildTypeModel} Base - The base class to mix in with.
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
  */
-export default (Base) => {
+export default function ConsumableDataMixin(Base) {
   // noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {ConsumableDataMixinInterface}
-     * @extends {ChildTypeModel}
+     * @mixin
      */
-    class ConsumableDataMixin extends Base {
+    class ConsumableData extends Base {
       /** @inheritDoc */
-      static metadata = mergeFreeze(super.metadata, {
+      static metadata = mergeMetadata(super.metadata, {
         consumable: true,
       });
 
@@ -101,4 +101,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

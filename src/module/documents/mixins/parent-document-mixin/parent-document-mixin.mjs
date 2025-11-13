@@ -1,16 +1,16 @@
 /**
  * Mixin for common functions used across document classes that embed children.
- *
- * @param {CommonDocumentMixin} Base
- * @mixin
+ * @param {typeof CommonDocument} Base
+ * @constructor
  */
-export default (Base) => {
+export default function ParentDocumentMixin(Base) {
   return (
     /**
      * @implements {ParentDocumentMixinInterface}
      * @extends {ClientDocument}
+     * @mixin
      */
-    class ParentDocumentMixin extends Base {
+    class ParentDocument extends Base {
       /**
        * @inheritDoc
        * @returns {TeriockAbility[]}
@@ -171,4 +171,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

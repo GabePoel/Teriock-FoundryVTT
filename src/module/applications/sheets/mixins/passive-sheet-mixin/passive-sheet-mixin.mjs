@@ -2,21 +2,17 @@ import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
 
 /**
  * Mixin for documents that passively modify other documents.
- * @param {TeriockBaseEffectSheet} Base
+ * @param {typeof CommonSheet} Base
  */
-export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+export default function PassiveSheetMixin(Base) {
   return (
     /**
-     * @extends {TeriockBaseEffectSheet}
-     * @mixes CommonSheetMixin
+     * @property {TeriockAbility|TeriockProperty} document
+     * @mixes CommonSheet
+     * @mixin
      */
-    class PassiveSheetMixin extends Base {
-      /**
-       * @inheritDoc
-       * Default sheet options.
-       * @type {Partial<ApplicationConfiguration>}
-       */
+    class PassiveSheet extends Base {
+      /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           unlinkMacro: this._unlinkMacro,
@@ -54,7 +50,6 @@ export default (Base) => {
         }
       }
 
-      //noinspection JSUnusedGlobalSymbols
       /** @inheritDoc */
       async _onDropMacro(_event, data) {
         if (this._impactTab === "custom") {
@@ -65,7 +60,6 @@ export default (Base) => {
         }
       }
 
-      //noinspection JSUnusedGlobalSymbols
       /** @inheritDoc */
       async _prepareMacroContext(context) {
         if (this._impactTab === "custom") {
@@ -86,4 +80,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

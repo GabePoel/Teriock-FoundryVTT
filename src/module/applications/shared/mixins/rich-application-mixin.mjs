@@ -3,19 +3,20 @@ import { bindCommonActions } from "../_module.mjs";
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
- * @param {ApplicationV2} Base
+ * @param {typeof ApplicationV2} Base
+ * @constructor
  */
-export default (Base) => {
+export default function RichApplicationMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @param {ApplicationV2} Base
-     * @mixes HandlebarsApplicationMixin
      * @extends {ApplicationV2}
+     * @mixes HandlebarsApplicationMixin
+     * @mixin
      */
-    class RichApplicationMixin extends HandlebarsApplicationMixin(Base) {
+    class RichApplication extends HandlebarsApplicationMixin(Base) {
       /**
-       * Assigns overall rules to tooltips of tcard containers.
+       * Assigns overall rules to tooltips of card containers.
        * @param {HTMLElement} target
        * @returns {Promise<void>}
        */
@@ -48,4 +49,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

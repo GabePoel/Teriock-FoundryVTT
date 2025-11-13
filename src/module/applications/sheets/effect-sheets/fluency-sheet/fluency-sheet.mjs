@@ -9,7 +9,8 @@ import {
 /**
  * Fluency sheet for Teriock system fluencies.
  * Provides fluency management with context menus for fields and tradecrafts.
- *
+ * @extends {TeriockBaseEffectSheet}
+ * @mixes UseButtonSheet
  * @property {TeriockFluency} document
  */
 export default class TeriockFluencySheet extends UseButtonSheetMixin(

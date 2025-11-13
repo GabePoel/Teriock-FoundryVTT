@@ -3,11 +3,12 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { TeriockRoll } from "../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { dedent, getRollIcon } from "../../../helpers/utils.mjs";
+import BaseDataModel from "../base-data-model/base-data-model.mjs";
 
 const { fields } = foundry.data;
-const { DataModel } = foundry.abstract;
 
-export default class StatDieModel extends DataModel {
+export default class StatDieModel extends BaseDataModel {
+  /** @inheritDoc */
   static defineSchema() {
     return {
       spent: new fields.BooleanField({
@@ -43,7 +44,7 @@ export default class StatDieModel extends DataModel {
       ...["thover", "die-box", this.spent ? "rolled" : "unrolled"],
     );
     element.dataset.document = this.parent.parent.parent.id;
-    element.dataset.collection = this.parent.parent.metadata.collection;
+    element.dataset.collection = this.parent.parent.parent.collectionName;
     element.dataset.stat = this.parent.stat;
     element.dataset.index = this.index.toString();
     element.dataset.action = "rollStatDie";
@@ -74,6 +75,7 @@ export default class StatDieModel extends DataModel {
 
   /** @returns {StatPoolModel} */
   get parent() {
+    //noinspection JSValidateTypes
     return super.parent;
   }
 

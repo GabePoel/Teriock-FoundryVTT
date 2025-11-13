@@ -1,4 +1,5 @@
 import { modifyChangePrefix, secondsToReadable } from "../../helpers/utils.mjs";
+import TeriockItem from "../item/item.mjs";
 import { ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
@@ -7,9 +8,15 @@ const { ActiveEffect } = foundry.documents;
 /**
  * The Teriock {@link ActiveEffect} implementation.
  * @extends {ActiveEffect}
- * @mixes ChildDocumentMixin
- * @mixes ClientDocumentMixin
- * @mixes CommonDocumentMixin
+ * @extends {ClientDocument}
+ * @mixes ChildDocument
+ * @mixes CommonDocument
+ * @property {Teriock.Documents.EffectModel} system
+ * @property {Teriock.Documents.EffectType} type
+ * @property {Teriock.ID<TeriockEffect>} _id
+ * @property {Teriock.ID<TeriockEffect>} id
+ * @property {Teriock.UUID<TeriockEffect>} uuid
+ * @property {TeriockBaseEffectSheet} sheet
  */
 export default class TeriockEffect extends ChildDocumentMixin(
   CommonDocumentMixin(ActiveEffect),
@@ -41,14 +48,6 @@ export default class TeriockEffect extends ChildDocumentMixin(
   tokenChanges = [];
 
   /**
-   * @inheritDoc
-   * @returns {TeriockActor|null}
-   */
-  get actor() {
-    return this.parent ? this.parent.actor : null;
-  }
-
-  /**
    * Alternative to {@link TeriockEffect.isTemporary} that only references duration.
    * @returns {boolean}
    */
@@ -61,10 +60,10 @@ export default class TeriockEffect extends ChildDocumentMixin(
    * @returns {boolean}
    */
   get isOnUse() {
-    return (
-      this.parent.documentName === "Item" &&
-      this.parent.system.onUse.has(this.id)
-    );
+    if (this.parent instanceof TeriockItem) {
+      return this.parent.system.onUse.has(this.id);
+    }
+    return false;
   }
 
   /**
@@ -84,19 +83,13 @@ export default class TeriockEffect extends ChildDocumentMixin(
     return false;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {boolean}
+   */
   get isSuppressed() {
     let suppressed = super.isSuppressed;
     return this.system.suppressed || suppressed;
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {Readonly<Teriock.Documents.EffectModelMetadata>}
-   */
-  get metadata() {
-    return /** @type {Readonly<Teriock.Documents.EffectModelMetadata>} */ super
-      .metadata;
   }
 
   /**
@@ -131,13 +124,24 @@ export default class TeriockEffect extends ChildDocumentMixin(
   }
 
   /** @inheritDoc */
+  async _preDelete(options, user) {
+    if ((await super._preDelete(options, user)) === false) {
+      return false;
+    }
+    if (this.parent.type === "wrapper") {
+      await this.parent.delete();
+      return false;
+    }
+  }
+
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ((await super._preUpdate(changed, options, user)) === false) {
       return false;
     }
     if (
       this.parent.type === "wrapper" &&
-      this.parent.system.effect.id === this.id
+      foundry.utils.getProperty(this.parent, "system.effect.id") === this.id
     ) {
       const wrapperKeys = ["name", "img"];
       const wrapperUpdates = {};

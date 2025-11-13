@@ -1,7 +1,7 @@
-export { default as TeriockBodyModel } from "./body-data/body-data.mjs";
-export { default as TeriockEquipmentModel } from "./equipment-data/equipment-data.mjs";
-export { default as TeriockMountModel } from "./mount-data/mount-data.mjs";
-export { default as TeriockPowerModel } from "./power-data/power-data.mjs";
-export { default as TeriockRankModel } from "./rank-data/rank-data.mjs";
-export { default as TeriockSpeciesModel } from "./species-data/species-data.mjs";
-export { default as TeriockWrapperModel } from "./wrapper-data/wrapper-data.mjs";
+export { default as TeriockBodyModel } from "./body-model/body-model.mjs";
+export { default as TeriockEquipmentModel } from "./equipment-model/equipment-model.mjs";
+export { default as TeriockMountModel } from "./mount-model/mount-model.mjs";
+export { default as TeriockPowerModel } from "./power-model/power-model.mjs";
+export { default as TeriockRankModel } from "./rank-model/rank-model.mjs";
+export { default as TeriockSpeciesModel } from "./species-model/species-model.mjs";
+export { default as TeriockWrapperModel } from "./wrapper-model/wrapper-model.mjs";

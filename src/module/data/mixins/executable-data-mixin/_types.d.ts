@@ -1,4 +1,4 @@
-import type { TeriockMacro } from "../../../documents/_module.mjs";
+import { TeriockMacro } from "../../../documents/_module.mjs";
 
 export interface ExecutableDataMixinInterface {
   /** <schema> Macros that run upon usage */

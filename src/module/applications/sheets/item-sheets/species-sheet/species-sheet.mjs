@@ -5,6 +5,8 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockSpecies}.
+ * @extends {TeriockBaseItemSheet}
+ * @mixes WikiButtonSheet
  * @property {TeriockSpecies} document
  * @property {TeriockSpecies} item
  */

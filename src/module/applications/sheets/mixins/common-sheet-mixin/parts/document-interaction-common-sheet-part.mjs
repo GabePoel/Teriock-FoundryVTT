@@ -8,6 +8,7 @@ export default (Base) => {
      * @property {TeriockCommon} document
      */
     class DocumentInteractionCommonSheetPart extends Base {
+      /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           chatDoc: this._chatDoc,

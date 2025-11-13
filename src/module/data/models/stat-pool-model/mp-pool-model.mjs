@@ -4,7 +4,7 @@ import StatPoolModel from "./stat-pool-model.mjs";
 
 export default class MpPoolModel extends StatPoolModel {
   get callback() {
-    return async (/** @param {number} amount */ amount) => {
+    return /** @param {number} amount */ async (amount) => {
       await this.parent.actor?.system.takeRevitalize(amount);
     };
   }

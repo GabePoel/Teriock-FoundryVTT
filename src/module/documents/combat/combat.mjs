@@ -55,7 +55,7 @@ export default class TeriockCombat extends BlankMixin(Combat) {
           });
         } catch {
           const activeGM = game.users.activeGM;
-          await activeGM.query("teriock.inCombatExpiration", {
+          await activeGM?.query("teriock.inCombatExpiration", {
             effectUuid: effect.uuid,
           });
         }
@@ -90,7 +90,7 @@ export default class TeriockCombat extends BlankMixin(Combat) {
     }
     if (updates.length > 0) {
       const activeGM = game.users.activeGM;
-      await activeGM.query("teriock.updateEmbeddedDocuments", {
+      await activeGM?.query("teriock.updateEmbeddedDocuments", {
         uuid: effectActor.uuid,
         embeddedName: "ActiveEffect",
         updates: updates,
@@ -135,7 +135,7 @@ export default class TeriockCombat extends BlankMixin(Combat) {
         .filter((a) => a),
     ];
     if (activeGM) {
-      await activeGM.query("teriock.resetAttackPenalties", {
+      await activeGM?.query("teriock.resetAttackPenalties", {
         actorUuids: Array.from(new Set(actors.map((a) => a.uuid))),
       });
     }
@@ -159,7 +159,7 @@ export default class TeriockCombat extends BlankMixin(Combat) {
     }
     if (newActor) {
       if (activeGM) {
-        await activeGM.query("teriock.update", {
+        await activeGM?.query("teriock.update", {
           uuid: newActor.uuid,
           data: { "system.combat.hasReaction": true },
         });

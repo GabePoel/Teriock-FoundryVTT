@@ -1,4 +1,4 @@
-import type { TeriockWrapper } from "../../../../documents/_documents.mjs";
+import { TeriockWrapper } from "../../../../documents/_documents.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 declare module "./wrapper-sheet.mjs" {

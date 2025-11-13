@@ -8,14 +8,19 @@ import {
 
 const { fields } = foundry.data;
 
-export default (Base) => {
+/**
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
+ */
+export default function ImporterDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {ImporterDataMixinInterface}
-     * @extends {ChildTypeModel}
+     * @mixin
      */
-    class ImporterDataMixin extends Base {
+    class ImporterData extends Base {
+      /** @inheritDoc */
       static defineSchema() {
         return foundry.utils.mergeObject(super.defineSchema(), {
           imports: new fields.SchemaField({
@@ -251,4 +256,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

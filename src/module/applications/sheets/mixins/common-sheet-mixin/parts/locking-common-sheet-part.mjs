@@ -6,6 +6,7 @@ export default (Base) => {
      * @property {TeriockCommon} document
      */
     class LockingCommonSheetPart extends Base {
+      /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           toggleLockThis: this._toggleLockThis,

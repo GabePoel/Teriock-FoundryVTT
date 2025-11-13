@@ -1,3 +1,3 @@
-export { default as CharacterSheet } from "./character-sheet/character-sheet.mjs";
-export { default as CreatureSheet } from "./creature-sheet/creature-sheet.mjs";
-export { default as InventorySheet } from "./inventory-sheet/inventory-sheet.mjs";
+export { default as TeriockCharacterSheet } from "./character-sheet/character-sheet.mjs";
+export { default as TeriockCreatureSheet } from "./creature-sheet/creature-sheet.mjs";
+export { default as TeriockInventorySheet } from "./inventory-sheet/inventory-sheet.mjs";

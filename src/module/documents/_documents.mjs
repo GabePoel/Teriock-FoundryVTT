@@ -158,7 +158,7 @@ export class TeriockAbility extends BlankMixin(TeriockEffect) {}
  * @property {TeriockConsequenceModel} system
  * @property {TeriockConsequenceSheet} sheet
  */
-export class TeriockConsequence extends BlankMixin(TeriockEffect) {}
+export class TeriockConsequence extends TeriockEffect {}
 
 /**
  * Attunement-specific {@link TeriockEffect} class.
@@ -188,7 +188,7 @@ export class TeriockAttunement extends BlankMixin(TeriockEffect) {}
  * @property {Teriock.UUID<TeriockCondition>} uuid
  * @property {Teriock.ID<TeriockCondition>} id
  */
-export class TeriockCondition extends BlankMixin(TeriockEffect) {}
+export class TeriockCondition extends TeriockEffect {}
 
 /**
  * Fluency-specific {@link TeriockEffect} class.

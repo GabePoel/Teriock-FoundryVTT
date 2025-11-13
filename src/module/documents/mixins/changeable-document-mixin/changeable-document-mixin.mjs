@@ -1,12 +1,18 @@
 import { applyCertainChanges } from "../shared/_module.mjs";
 
-export default (Base) => {
+/**
+ * Mixin for a document that can be changed by a {@link TeriockEffect}.
+ * @param {typeof TeriockDocument} Base
+ * @constructor
+ * @mixin
+ */
+export default function ChangeableDocumentMixin(Base) {
   return (
     /**
      * @implements {ChangeableDocumentMixinInterface}
-     * @extends ClientDocument
+     * @extends {ClientDocument}
      */
-    class ChangeableDocumentMixin extends Base {
+    class ChangeableDocument extends Base {
       changesField = "changes";
 
       //noinspection ES6ClassMemberInitializationOrder
@@ -59,4 +65,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

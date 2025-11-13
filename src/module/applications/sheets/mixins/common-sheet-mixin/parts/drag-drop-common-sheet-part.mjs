@@ -10,6 +10,8 @@ export default (Base) => {
      * @property {TeriockCommon} document
      */
     class DragDropCommonSheetPart extends Base {
+      //noinspection JSValidateTypes
+      /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         dragDrop: [
           {
@@ -137,8 +139,8 @@ export default (Base) => {
         const item =
           /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
         if (item.type === "wrapper") {
-          /** @type {ClientDocument} */
-          const effect = item.system.effect;
+          const wrapperModel = /** @type {TeriockWrapperModel} */ item.system;
+          const effect = wrapperModel.effect;
           await this._onDropActiveEffect(_event, effect.toDragData());
           return;
         }
@@ -150,7 +152,10 @@ export default (Base) => {
           item.parent?.documentName === "Actor" &&
           item.type === "equipment"
         ) {
-          if (item.parent?.documentName === "Actor" && item.system.consumable) {
+          if (
+            item.parent?.documentName === "Actor" &&
+            item.system?.consumable
+          ) {
             const targetItem = this.document.items.getName(item.name);
             if (targetItem && targetItem.system.consumable) {
               targetItem.update({

@@ -4,7 +4,7 @@ import StatPoolModel from "./stat-pool-model.mjs";
 
 export default class HpPoolModel extends StatPoolModel {
   get callback() {
-    return async (/** @param {number} amount */ amount) => {
+    return /** @param {number} amount */ async (amount) => {
       const criticallyWounded =
         this.parent.actor?.statuses.has("criticallyWounded");
       await this.parent.actor?.system.takeHeal(amount);

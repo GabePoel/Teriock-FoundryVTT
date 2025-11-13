@@ -1,11 +1,10 @@
-import type { TeriockActor, TeriockEffect } from "../../_module.mjs";
-import {
-  type TeriockAbility,
-  type TeriockProperty,
-} from "../../_documents.mjs";
+import { TeriockActor, TeriockEffect } from "../../_module.mjs";
+import { TeriockAbility, TeriockProperty } from "../../_documents.mjs";
 
 export interface CommonDocumentMixinInterface {
-  /** The actor associated with this document if there is one */
+  /**
+   * The actor associated with this document if there is one
+   */
   get actor(): TeriockActor | null;
 
   /**
@@ -79,10 +78,4 @@ export interface CommonDocumentMixinInterface {
    * @returns Promise that resolves when the disabled state is toggled
    */
   toggleDisabled(): Promise<void>;
-
-  /**
-   * The document's UUID.
-   * @returns The unique identifier for this document
-   */
-  get uuid(): Teriock.UUID<TeriockCommon>;
 }

@@ -1,4 +1,4 @@
-import type { TeriockEffect } from "../../_module.mjs";
+import { TeriockEffect } from "../../_module.mjs";
 
 export interface ChildDocumentMixinInterface {
   /**

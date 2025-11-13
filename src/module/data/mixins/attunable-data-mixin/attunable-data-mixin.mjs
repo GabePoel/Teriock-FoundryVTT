@@ -4,14 +4,19 @@ import {
   prepareModifiableBase,
 } from "../../shared/fields/modifiable.mjs";
 
-export default (Base) => {
+/**
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
+ */
+export default function AttunableDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {AttunableDataMixinInterface}
-     * @extends {ChildTypeModel}
+     * @mixin
      */
-    class AttunableDataMixin extends Base {
+    class AttunableData extends Base {
+      /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
@@ -156,4 +161,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

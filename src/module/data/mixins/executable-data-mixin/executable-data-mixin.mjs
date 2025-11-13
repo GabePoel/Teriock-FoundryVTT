@@ -1,17 +1,17 @@
 const { fields } = foundry.data;
 
 /**
- * Mixin that provides executable functionality.
- * @param {ChildTypeModel} Base
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
  */
-export default (Base) => {
+export default function ExecutableDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {ExecutableDataMixinInterface}
-     * @extends ChildTypeModel
+     * @mixin
      */
-    class ExecutableDataMixin extends Base {
+    class ExecutableData extends Base {
       /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
@@ -48,4 +48,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

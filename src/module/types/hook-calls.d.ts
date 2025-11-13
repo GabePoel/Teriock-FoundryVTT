@@ -1,6 +1,8 @@
-import type { TeriockEffect } from "../documents/_module.mjs";
-import type { AbilityRollConfig } from "../data/effect-data/ability-data/types/roll-config";
-import type {
+// noinspection JSUnusedGlobalSymbols
+
+import { TeriockEffect } from "../documents/_module.mjs";
+import { AbilityRollConfig } from "../data/effect-data/ability-model/types/roll-config";
+import {
   TeriockConsequence,
   TeriockEquipment,
 } from "../documents/_documents.mjs";

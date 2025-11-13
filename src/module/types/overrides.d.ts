@@ -7,9 +7,9 @@ import {
   TeriockActors,
   TeriockUsers,
 } from "../documents/collections/_module.mjs";
-import type TeriockGame from "../_game.mjs";
+import TeriockGame from "../_game.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
-import type TeriockCanvas from "../_canvas.mjs";
+import TeriockCanvas from "../_canvas.mjs";
 
 declare global {
   // Definition for writing macros.

@@ -1,4 +1,4 @@
-import "./base-item-data/_types";
-import "./equipment-data/_types";
-import "./power-data/_types";
-import "./rank-data/_types";
+import "./base-item-model/_types";
+import "./equipment-model/_types";
+import "./power-model/_types";
+import "./rank-model/_types";

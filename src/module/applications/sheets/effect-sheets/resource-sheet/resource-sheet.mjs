@@ -5,7 +5,8 @@ import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 /**
  * Resource sheet for Teriock system resources.
  * Provides resource management with context menus for callback functions.
- *
+ * @extends {TeriockBaseEffectSheet}
+ * @mixes UseButtonSheet
  * @property {TeriockResource} document
  */
 export default class TeriockResourceSheet extends UseButtonSheetMixin(

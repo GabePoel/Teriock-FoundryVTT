@@ -1,5 +1,5 @@
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
-import type { TeriockProperty } from "../../../../documents/_documents.mjs";
+import { TeriockProperty } from "../../../../documents/_documents.mjs";
 
 declare module "./property-sheet.mjs" {
   export default interface TeriockPropertySheet extends TeriockBaseEffectSheet {

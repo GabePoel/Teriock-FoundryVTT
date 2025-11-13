@@ -1,7 +1,15 @@
 import { TeriockDialog } from "../../../api/_module.mjs";
 
-export default (Base) => {
-  return class WikiButtonSheetMixin extends Base {
+/**
+ * @param {typeof DocumentSheetV2} Base
+ * @constructor
+ */
+export default function WikiButtonSheetMixin(Base) {
+  /**
+   * @mixin
+   */
+  return class WikiButtonSheet extends Base {
+    /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         wikiOpenThis: this._wikiOpenThis,
@@ -58,4 +66,4 @@ export default (Base) => {
       }
     }
   };
-};
+}

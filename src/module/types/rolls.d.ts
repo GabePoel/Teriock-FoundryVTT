@@ -1,11 +1,11 @@
-import type { dieOptions } from "../constants/options/die-options.mjs";
-import type { TeriockToken } from "../canvas/placeables/_module.mjs";
-import type { TeriockActor } from "../documents/_module.mjs";
-import type {
+import { dieOptions } from "../constants/options/die-options.mjs";
+import { TeriockToken } from "../canvas/placeables/_module.mjs";
+import { TeriockActor } from "../documents/_module.mjs";
+import {
   AbilityChatData,
   AbilityUseData,
-} from "../data/effect-data/ability-data/types/roll-config";
-import type TeriockAbilityModel from "../data/effect-data/ability-data/ability-data.mjs";
+} from "../data/effect-data/ability-model/types/roll-config";
+import TeriockAbilityModel from "../data/effect-data/ability-model/ability-model.mjs";
 
 declare global {
   namespace Teriock.RollOptions {

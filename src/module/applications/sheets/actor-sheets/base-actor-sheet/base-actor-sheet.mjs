@@ -21,8 +21,12 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
  * @extends {ActorSheetV2}
- * @mixes HackStatMixin
- * @mixes CommonSheetMixin
+ * @mixes HackStatApplication
+ * @mixes CommonSheet
+ * @mixes HidingCommonSheetPart
+ * @mixes SearchingActorSheetPart
+ * @mixes DocumentCreationActorSheetPart
+ * @mixes DocumentTogglingActorSheetPart
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */

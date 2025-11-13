@@ -2,12 +2,13 @@ import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { getIcon } from "../../../helpers/path.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { modifiableFormula } from "../../shared/fields/modifiable.mjs";
+import BaseDataModel from "../base-data-model/base-data-model.mjs";
 import StatDieModel from "../stat-die-model/stat-die-model.mjs";
 
 const { fields } = foundry.data;
-const { DataModel } = foundry.abstract;
 
-export default class StatPoolModel extends DataModel {
+export default class StatPoolModel extends BaseDataModel {
+  /** @inheritDoc */
   static defineSchema() {
     return {
       disabled: new fields.BooleanField({
@@ -66,7 +67,7 @@ export default class StatPoolModel extends DataModel {
   }
 
   /**
-   * Render a die box HTML element. Creates a clickable pool of dic icon that show whether each die has been used or
+   * Render a die box HTML element. Creates a clickable pool of dic icon that shows whether each die has been used or
    * not.
    * @returns {string}
    */
@@ -96,13 +97,6 @@ export default class StatPoolModel extends DataModel {
         icon: getRollIcon(this.formula),
       },
     ];
-  }
-
-  /**
-   * @returns {StatGiverMixinInterface & ChildTypeModel}
-   */
-  get parent() {
-    return super.parent;
   }
 
   /**

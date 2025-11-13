@@ -1,9 +1,9 @@
 import {
-  type TeriockAbility,
-  type TeriockConsequence,
+  TeriockAbility,
+  TeriockConsequence,
   TeriockEquipment,
 } from "../../documents/_documents.mjs";
-import type {
+import {
   TeriockActor,
   TeriockEffect,
   TeriockItem,

@@ -1,4 +1,4 @@
-import type {
+import {
   TeriockAbility,
   TeriockAttunement,
   TeriockBody,
@@ -13,7 +13,7 @@ import type {
   TeriockResource,
   TeriockSpecies,
 } from "../../_documents.mjs";
-import type { TeriockEffect } from "../../_module.mjs";
+import { TeriockEffect } from "../../_module.mjs";
 
 declare global {
   namespace Teriock.Parent {

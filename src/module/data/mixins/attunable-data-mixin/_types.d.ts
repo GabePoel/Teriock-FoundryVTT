@@ -1,4 +1,4 @@
-import type { TeriockEquipment } from "../../../documents/_documents.mjs";
+import { TeriockEquipment } from "../../../documents/_documents.mjs";
 
 export interface AttunableDataMixinInterface {
   /** <schema> If this is equipment, it may be identified */

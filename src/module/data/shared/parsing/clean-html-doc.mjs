@@ -1,4 +1,4 @@
-import { ROLL_BUTTON_CONFIGS } from "../../effect-data/ability-data/methods/rolling/_roll-build-buttons.mjs";
+import { ROLL_BUTTON_CONFIGS } from "../../effect-data/ability-model/methods/rolling/_roll-build-buttons.mjs";
 
 /**
  * Remove sub-containers and convert .dice spans into enricher rolls.

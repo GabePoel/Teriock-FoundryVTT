@@ -1,4 +1,4 @@
-import type { TeriockActor } from "../../../../documents/_module.mjs";
+import { TeriockActor } from "../../../../documents/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import "./types/settings";
 

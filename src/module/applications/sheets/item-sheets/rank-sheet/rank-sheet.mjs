@@ -1,5 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
+import { WikiButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   archetypeContextMenu,
@@ -9,6 +9,8 @@ import {
 
 /**
  * Sheet for a {@link TeriockRank}.
+ * @extends {TeriockBaseItemSheet}
+ * @mixes WikiButtonSheet
  * @property {TeriockRank} document
  * @property {TeriockRank} item
  */

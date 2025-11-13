@@ -1,4 +1,6 @@
 export interface ArmamentDataMixinInterface {
+  /** <schema> How much this increases an actor's attack penalty by per use */
+  attackPenalty: Teriock.Fields.ModifiableIndeterministic;
   /** <schema> Armor Value */
   av: Teriock.Fields.ModifiableNumber;
   /** <schema> Block Value */

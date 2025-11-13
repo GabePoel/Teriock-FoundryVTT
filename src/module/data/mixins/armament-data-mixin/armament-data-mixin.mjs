@@ -13,21 +13,25 @@ const { fields } = foundry.data;
 
 /**
  * @param {typeof ChildTypeModel} Base
+ * @constructor
  */
-export default (Base) => {
+export default function ArmamentDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
   return (
     /**
      * @implements {ArmamentDataMixinInterface}
-     * @extends {ChildTypeModel}
+     * @mixin
      */
-    class ArmamentDataMixin extends Base {
+    class ArmamentData extends Base {
       /**
        * @inheritDoc
        * @returns {Record<string, DataField>}
        */
       static defineSchema() {
         return foundry.utils.mergeObject(super.defineSchema(), {
+          attackPenalty: modifiableFormula({
+            deterministic: false,
+          }),
           av: modifiableNumber(),
           bv: modifiableNumber(),
           damage: new fields.SchemaField({
@@ -114,6 +118,7 @@ export default (Base) => {
         prepareModifiableBase(this.av);
         prepareModifiableBase(this.bv);
         prepareModifiableBase(this.damage.base);
+        prepareModifiableBase(this.attackPenalty);
         if (this.damage.base.saved.trim() === "0") {
           this.damage.base.raw = "";
         }
@@ -141,6 +146,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
+        deriveModifiableIndeterministic(this.attackPenalty);
         deriveModifiableNumber(this.av, {
           floor: true,
           min: 0,
@@ -159,4 +165,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

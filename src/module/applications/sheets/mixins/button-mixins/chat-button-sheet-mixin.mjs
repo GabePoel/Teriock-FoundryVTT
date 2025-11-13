@@ -1,5 +1,13 @@
-export default (Base) => {
-  return class ChatButtonSheetMixin extends Base {
+/**
+ * @param {typeof DocumentSheetV2} Base
+ * @constructor
+ */
+export default function ChatButtonSheetMixin(Base) {
+  /**
+   * @mixin
+   */
+  return class ChatButtonSheet extends Base {
+    /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       window: {
         controls: [
@@ -12,4 +20,4 @@ export default (Base) => {
       },
     };
   };
-};
+}

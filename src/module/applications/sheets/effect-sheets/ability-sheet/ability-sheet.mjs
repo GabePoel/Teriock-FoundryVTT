@@ -4,8 +4,8 @@ import { durationDialog } from "../../../dialogs/_module.mjs";
 import {
   PassiveSheetMixin,
   UseButtonSheetMixin,
+  WikiButtonSheetMixin,
 } from "../../mixins/_module.mjs";
-import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
@@ -15,7 +15,9 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * tag management, and rich text editing for various ability components.
  * @property {TeriockAbility} document
  * @extends {TeriockBaseEffectSheet}
- * @mixes PassiveSheetMixin
+ * @mixes PassiveSheet
+ * @mixes UseButtonSheet
+ * @mixes WikiButtonSheet
  */
 export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
   UseButtonSheetMixin(PassiveSheetMixin(TeriockBaseEffectSheet)),

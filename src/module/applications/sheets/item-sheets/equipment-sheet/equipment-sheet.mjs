@@ -1,7 +1,9 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { cleanCapitalization } from "../../../../helpers/clean.mjs";
-import { UseButtonSheetMixin } from "../../mixins/_module.mjs";
-import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
+import {
+  UseButtonSheetMixin,
+  WikiButtonSheetMixin,
+} from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   fontContextMenu,
@@ -10,8 +12,11 @@ import {
 
 /**
  * Sheet for a {@link TeriockEquipment}.
+ * @extends {TeriockBaseItemSheet}
  * @property {TeriockEquipment} document
  * @property {TeriockEquipment} item
+ * @mixes UseButtonSheet
+ * @mixes WikiButtonSheet
  */
 export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
   UseButtonSheetMixin(TeriockBaseItemSheet),

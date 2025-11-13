@@ -1,18 +1,23 @@
-import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
+import { makeIcon, mergeMetadata } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
-export default (Base) => {
+/**
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
+ */
+export default function RevelationDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {RevelationDataMixinInterface}
-     * @extends {ChildTypeModel}
+     * @mixin
      */
-    class RevelationDataMixin extends Base {
+    class RevelationData extends Base {
       /** @inheritDoc */
-      static metadata = mergeFreeze(Base.metadata, { revealable: true });
+      static metadata = mergeMetadata(Base.metadata, { revealable: true });
 
+      /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
@@ -26,14 +31,6 @@ export default (Base) => {
           }),
         });
         return schema;
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        if (this.parent.source && this.parent.source.metadata.revealable) {
-          this.revealed = this.revealed && this.parent.source.system.revealed;
-        }
       }
 
       get cardContextMenuEntries() {
@@ -61,6 +58,14 @@ export default (Base) => {
           },
         ];
       }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        if (this.parent.source && this.parent.source.metadata.revealable) {
+          this.revealed = this.revealed && this.parent.source.system.revealed;
+        }
+      }
     }
   );
-};
+}

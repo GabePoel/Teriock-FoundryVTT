@@ -13,6 +13,8 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * Provides common functionality for all effect sheets including change management,
  * context preparation, and effect state handling.
  * @extends ActiveEffectConfig
+ * @mixes ChatButtonSheet
+ * @mixes CommonSheet
  * @property {TeriockEffect} document
  */
 export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(

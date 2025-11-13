@@ -1,5 +1,5 @@
 import { documentOptions } from "../../constants/options/document-options.mjs";
-import { ROLL_BUTTON_CONFIGS } from "../../data/effect-data/ability-data/methods/rolling/_roll-build-buttons.mjs";
+import { ROLL_BUTTON_CONFIGS } from "../../data/effect-data/ability-model/methods/rolling/_roll-build-buttons.mjs";
 import { getAbility } from "../../helpers/fetch.mjs";
 import { dedent } from "../../helpers/utils.mjs";
 

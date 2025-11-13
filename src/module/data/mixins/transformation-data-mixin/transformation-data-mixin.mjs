@@ -1,14 +1,19 @@
 import { makeIcon } from "../../../helpers/utils.mjs";
 import { transformationField } from "../../shared/fields/helpers/field-builders.mjs";
 
-export default (Base) => {
+/**
+ * @param {typeof ChildTypeModel} Base
+ * @constructor
+ */
+export default function TransformationDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {TransformationMixinInterface}
-     * @extends ChildTypeModel
+     * @mixin
      */
-    class TransformationDataMixin extends Base {
+    class TransformationData extends Base {
+      /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
         schema.transformation = transformationField({
@@ -209,4 +214,4 @@ export default (Base) => {
       }
     }
   );
-};
+}

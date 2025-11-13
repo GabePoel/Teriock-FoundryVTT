@@ -6,7 +6,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Dialog that asks the {@link TeriockUser} if their effect should expire.
- * @param {TeriockConsequence|TeriockCondition} effect - The consequence to make the dialog for.
+ * @param {TeriockCondition|TeriockConsequence} effect - The consequence to make the dialog for.
  * @param {boolean} [forceDialog] - Force a dialog to show up.
  * @returns {Promise<void>}
  */
