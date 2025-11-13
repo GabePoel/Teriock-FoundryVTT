@@ -1,4 +1,4 @@
-import { pureUuid } from "../../../utils.mjs";
+import { pureUuid, queryGM } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -16,11 +16,17 @@ export class ApplyEffectHandler extends ActionHandler {
    */
   async _addToSustaining(createdConsequences) {
     if (this.dataset.sustaining !== "null") {
-      const activeGM = game.users.activeGM;
-      await activeGM?.query("teriock.addToSustaining", {
-        sustainingUuid: pureUuid(this.dataset.sustaining),
-        sustainedUuids: createdConsequences.map((c) => c.uuid),
-      });
+      await queryGM(
+        "teriock.addToSustaining",
+        {
+          sustainingUuid: pureUuid(this.dataset.sustaining),
+          sustainedUuids: createdConsequences.map((c) => c.uuid),
+        },
+        {
+          failPrefix:
+            "Could not attach effect to the one that's sustaining it.",
+        },
+      );
     }
   }
 

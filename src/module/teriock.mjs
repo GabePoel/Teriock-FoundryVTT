@@ -335,19 +335,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Item.compendiumIndexFields.push(...hierarchyIndexFields);
 
   // Registering custom queries
-  Object.assign(CONFIG.queries, {
-    "teriock.addToSustaining": helpers.queries.addToSustainingQuery,
-    "teriock.callPseudoHook": helpers.queries.callPseudoHookQuery,
-    "teriock.createHotbarFolder": helpers.queries.createHotbarFolderQuery,
-    "teriock.identifyItem": helpers.queries.identifyItemQuery,
-    "teriock.inCombatExpiration": helpers.queries.inCombatExpirationQuery,
-    "teriock.resetAttackPenalties": helpers.queries.resetAttackPenalties,
-    "teriock.sustainedExpiration": helpers.queries.sustainedExpirationQuery,
-    "teriock.timeAdvance": helpers.queries.timeAdvanceQuery,
-    "teriock.update": helpers.queries.updateQuery,
-    "teriock.updateEmbeddedDocuments":
-      helpers.queries.updateEmbeddedDocumentsQuery,
-  });
+  Object.assign(CONFIG.queries, helpers.queries);
   const packs =
     /** @type {Collection<string,CompendiumCollection>} */ game.packs;
 

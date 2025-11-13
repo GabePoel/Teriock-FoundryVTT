@@ -1,4 +1,4 @@
-import { selectUser } from "../../helpers/utils.mjs";
+import { queryGM, selectUser } from "../../helpers/utils.mjs";
 import { BlankMixin } from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
@@ -54,10 +54,13 @@ export default class TeriockCombat extends BlankMixin(Combat) {
             effectUuid: effect.uuid,
           });
         } catch {
-          const activeGM = game.users.activeGM;
-          await activeGM?.query("teriock.inCombatExpiration", {
-            effectUuid: effect.uuid,
-          });
+          await queryGM(
+            "teriock.inCombatExpiration",
+            {
+              effectUuid: effect.uuid,
+            },
+            { notifyFailure: false },
+          );
         }
       } else if (effect.system.expirations.combat.when.skip > 0) {
         updates.push({
@@ -89,12 +92,17 @@ export default class TeriockCombat extends BlankMixin(Combat) {
       );
     }
     if (updates.length > 0) {
-      const activeGM = game.users.activeGM;
-      await activeGM?.query("teriock.updateEmbeddedDocuments", {
-        uuid: effectActor.uuid,
-        embeddedName: "ActiveEffect",
-        updates: updates,
-      });
+      await queryGM(
+        "teriock.updateEmbeddedDocuments",
+        {
+          uuid: effectActor.uuid,
+          embeddedName: "ActiveEffect",
+          updates: updates,
+        },
+        {
+          failPrefix: "Could not expire effects.",
+        },
+      );
     }
   }
 
@@ -126,7 +134,6 @@ export default class TeriockCombat extends BlankMixin(Combat) {
         );
       }
     }
-    const activeGM = game.users.activeGM;
     const actors = [
       ...Object.values(game.actors.tokens),
       ...this.actors,
@@ -134,11 +141,15 @@ export default class TeriockCombat extends BlankMixin(Combat) {
         .map((t) => t.actor)
         .filter((a) => a),
     ];
-    if (activeGM) {
-      await activeGM?.query("teriock.resetAttackPenalties", {
+    await queryGM(
+      "teriock.resetAttackPenalties",
+      {
         actorUuids: Array.from(new Set(actors.map((a) => a.uuid))),
-      });
-    }
+      },
+      {
+        failPrefix: "Could not reset attack penalties.",
+      },
+    );
     this.updateCombatantActors();
     if (previousActor) {
       const previousUser = selectUser(previousActor);
@@ -158,14 +169,12 @@ export default class TeriockCombat extends BlankMixin(Combat) {
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
     if (newActor) {
-      if (activeGM) {
-        await activeGM?.query("teriock.update", {
+      const newUser = selectUser(newActor);
+      if (newUser) {
+        await newUser.query("teriock.update", {
           uuid: newActor.uuid,
           data: { "system.combat.hasReaction": true },
         });
-      }
-      const newUser = selectUser(newActor);
-      if (newUser) {
         await newUser.query("teriock.callPseudoHook", {
           uuid: newActor.uuid,
           pseudoHook: "turnStart",

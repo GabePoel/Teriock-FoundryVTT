@@ -1,5 +1,5 @@
 import { getItem } from "../../helpers/fetch.mjs";
-import { dedent } from "../../helpers/utils.mjs";
+import { dedent, queryGM } from "../../helpers/utils.mjs";
 import { BlankMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
@@ -46,11 +46,16 @@ export default class TeriockMacro extends BlankMixin(Macro) {
    * @returns {Promise<TeriockMacro>}
    */
   static async getUseMacro(doc) {
-    const activeGM = game.users.activeGM;
-    await activeGM?.query("teriock.createHotbarFolder", {
-      name: game.user.name,
-      id: game.user.id,
-    });
+    await queryGM(
+      "teriock.createHotbarFolder",
+      {
+        name: game.user.name,
+        id: game.user.id,
+      },
+      {
+        failPrefix: "Could not create a hotbar folder.",
+      },
+    );
     const folders =
       /** @type {Collection<Teriock.ID<TeriockFolder>,TeriockFolder>} */ game.folders;
     const macroFolder = folders.find(

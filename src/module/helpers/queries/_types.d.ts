@@ -9,9 +9,20 @@ import {
   TeriockItem,
   TeriockUser,
 } from "../../documents/_module.mjs";
+import type queries from "./_module.mjs";
 
 declare global {
   namespace Teriock.QueryData {
+    export type QueryName = keyof typeof queries;
+
+    export type QueryOptions = {
+      timeout: number;
+      notifyFailure: boolean;
+      failMessage: string;
+      failPrefix: string;
+      failReason: string;
+    };
+
     export type InCombatExpiration = {
       effectUuid: Teriock.UUID<TeriockConsequence>;
     };

@@ -6,6 +6,6 @@ const { Users } = foundry.documents.collections;
 /**
  * @implements {Collection<Teriock.ID<TeriockUser>, TeriockUser>}
  * @implements {DocumentCollection<TeriockUser>}
- * @property {Readonly<TeriockUser|null>} activeGM
+ * @property {TeriockUser|null} activeGM
  */
 export default class TeriockUsers extends BlankMixin(Users) {}

@@ -706,3 +706,26 @@ export function formulaExists(formula) {
     return Boolean(formula);
   }
 }
+
+/**
+ * Helper function to send a query to the active GM if there is one.
+ * @param {Teriock.QueryData.QueryName} queryName
+ * @param {object} queryData
+ * @param {Teriock.QueryData.QueryOptions} [queryOptions]
+ * @returns {Promise<any>}
+ */
+export async function queryGM(queryName, queryData, queryOptions) {
+  let {
+    notifyFailure = true,
+    failPrefix = "Could not complete query.",
+    failReason = "No GM is currently signed in.",
+    failMessage = "",
+  } = queryOptions;
+  if (!failMessage) {
+    failMessage = `${failPrefix} ${failReason}`;
+  }
+  if (!game.users.activeGM && notifyFailure) {
+    ui.notifications.warn(failMessage);
+  }
+  return await game.users.activeGM?.query(queryName, queryData, queryOptions);
+}

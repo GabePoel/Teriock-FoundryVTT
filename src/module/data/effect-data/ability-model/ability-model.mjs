@@ -2,7 +2,7 @@ import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
-import { mergeMetadata, safeUuid } from "../../../helpers/utils.mjs";
+import { mergeMetadata, queryGM, safeUuid } from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
   HierarchyDataMixin,
@@ -260,11 +260,16 @@ export default class TeriockAbilityModel extends RevelationDataMixin(
    */
   async expireSustainedConsequences(force = false) {
     if (!this.parent.active || force) {
-      const activeGM = game.users.activeGM;
       for (const uuid of this.sustaining) {
-        await activeGM?.query("teriock.sustainedExpiration", {
-          sustainedUuid: uuid,
-        });
+        await queryGM(
+          "teriock.sustainedExpiration",
+          {
+            sustainedUuid: uuid,
+          },
+          {
+            failPrefix: "Could not expire sustained consequence.",
+          },
+        );
       }
       try {
         await this.parent.update({ "system.sustaining": new Set() });

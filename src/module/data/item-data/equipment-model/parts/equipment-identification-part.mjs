@@ -1,6 +1,7 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { getItem } from "../../../../helpers/fetch.mjs";
+import { queryGM } from "../../../../helpers/utils.mjs";
 
 const { ux } = foundry.applications;
 
@@ -26,9 +27,14 @@ export default (Base) => {
             foundry.ui.notifications.info(
               `Asking GMs to approve identification of ${this.parent.name}.`,
             );
-            const doIdentify = await game.users.activeGM?.query(
+            const doIdentify = await queryGM(
               "teriock.identifyItem",
-              { uuid: this.parent.uuid },
+              {
+                uuid: this.parent.uuid,
+              },
+              {
+                failPrefix: "Could not ask to identify.",
+              },
             );
             if (doIdentify) {
               ui.notifications.success(
@@ -57,7 +63,8 @@ export default (Base) => {
               `Asking GMs to approve reading magic on ${this.parent.name}.`,
             );
             const content = await ux.TextEditor.enrichHTML(
-              `<p>Should @UUID[${game.user.uuid}] read magic on @UUID[${this.parent.uuid}]{${this.identification.name}}?</p>`,
+              `<p>Should @UUID[${game.user.uuid}] read magic on ` +
+                `@UUID[${this.parent.uuid}]{${this.identification.name}}?</p>`,
             );
             const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
               content: content,
@@ -68,13 +75,19 @@ export default (Base) => {
               },
             });
             if (doReadMagic) {
-              await game.users.activeGM?.query("teriock.update", {
-                uuid: this.parent.uuid,
-                data: {
-                  "system.identification.read": true,
-                  "system.powerLevel": this.identification.powerLevel,
+              await queryGM(
+                "teriock.update",
+                {
+                  uuid: this.parent.uuid,
+                  data: {
+                    "system.identification.read": true,
+                    "system.powerLevel": this.identification.powerLevel,
+                  },
                 },
-              });
+                {
+                  failPrefix: "Could not ask to read magic.",
+                },
+              );
               foundry.ui.notifications.success(
                 `${this.parent.name} was successfully read.`,
               );
