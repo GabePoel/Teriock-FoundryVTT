@@ -5,49 +5,42 @@
   {{#if flavor}}
     <div class="teriock-flavor-text">{{flavor}}</div>
   {{/if}}
-  <div
-    class="dice-result"
-    {{#if (exists targetUuid)}}
-    data-uuid="{{targetUuid}}"
-    {{/if}}
-    {{#if (exists targetName)}}
-    data-name="{{targetName}}"
-    {{/if}}
-    data-tooltip-direction="LEFT"
-  >
-    {{#if (or (exists targetImg) (exists targetName))}}
-      <div class="teriock-target-container dice-formula" data-tooltip="Select Target"
-        {{#if (exists noDice)}}style="margin-bottom: 0;" {{/if}} {{#if
-        (exists targetUuid)}}data-uuid="{{targetUuid}}"{{/if}}>
-        {{#if (exists targetImg)}}
-          <div class="teriock-target-img"
-               {{#if (exists targetUuid)}}data-uuid="{{targetUuid}}"{{/if}} data-action="selectTarget">
-            <img {{#if rescale}}class="rescale"{{/if}} src="{{targetImg}}" alt="" data-openable="true">
+  <div class="dice-result">
+    {{#if (exists targets)}}
+      {{#each targets as |target|}}
+        <div
+          class="teriock-target-container dice-formula"
+          data-tooltip="Select Target"
+          data-tooltip-direction="LEFT"
+          {{#if (exists actorUuid)}}data-actor-uuid="{{actorUuid}}" {{/if}}
+          {{#if (exists tokenUuid)}}data-token-uuid="{{tokenUuid}}" {{/if}}
+          data-action="selectTarget"
+        >
+          <div class="teriock-target-img">
+            <img {{#if rescale}}class="rescale"{{/if}} src="{{img}}" alt="" data-openable="true">
           </div>
-        {{/if}}
-        {{#if (exists targetName)}}
-          <h6 class="teriock-target-name">{{targetName}}</h6>
-        {{/if}}
-      </div>
+          <h6 class="teriock-target-name">{{name}}</h6>
+        </div>
+      {{/each}}
     {{/if}}
-    {{#if (not (exists noDice))}}
+    {{#if (not hideRoll)}}
       <div
-        class="dice-formula teriock-dice-formula {{#if diceClass}}{{diceClass}}{{/if}}"
+        class="dice-formula teriock-dice-formula {{styles.dice.classes}}"
         style="word-break: auto-phrase;"
-        {{#if diceTooltip}}
-        data-tooltip="{{diceTooltip}}"
-        {{/if}}
+        {{#if (exists styles.dice.tooltip)}}data-tooltip="{{styles.dice.tooltip}}"{{/if}}
+        data-tooltip-direction="LEFT"
       >
         {{formula}}
       </div>
       {{{tooltip}}}
       <h4
-        class="dice-total teriock-dice-total {{#if (exists threshold)}}{{#if
-          (gte total threshold)}}success{{else}}failure{{/if}}{{/if}} {{#if totalClass}}{{totalClass}}{{/if}}"
-        {{#if (exists threshold)}}
-        data-tooltip="{{#if (gte total threshold)}}Success{{else}}Failure{{/if}}"
-        {{/if}}
-      >{{total}}</h4>
+        class="dice-total teriock-dice-total {{styles.total.classes}}"
+        {{#if (exists styles.total.tooltip)}}data-tooltip="{{styles.total.tooltip}}"{{/if}}
+        data-tooltip-direction="LEFT"
+      >{{#if (exists styles.total.icon)}}<i class="teriock-dice-total-icon fa-regular fa-fw fa-{{styles.total
+      .icon}}"></i>{{/if}}
+        {{total}}
+      </h4>
     {{/if}}
   </div>
 </div>

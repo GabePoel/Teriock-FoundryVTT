@@ -634,7 +634,7 @@ export function getToken(actor) {
  * @returns {Teriock.RollOptions.CommonRoll | Teriock.RollOptions.EquipmentRoll}
  */
 export function makeCommonRollOptions(event) {
-  let secret = game.settings.get("teriock", "secretArmaments");
+  let secret = game.settings.get("teriock", "secretEquipment");
   if (event.shiftKey) {
     secret = !secret;
   }
@@ -728,4 +728,21 @@ export async function queryGM(queryName, queryData, queryOptions) {
     ui.notifications.warn(failMessage);
   }
   return await game.users.activeGM?.query(queryName, queryData, queryOptions);
+}
+
+/**
+ * Maximum of two transformation levels.
+ * @param {Teriock.Parameters.Shared.TransformationLevel} l1
+ * @param {Teriock.Parameters.Shared.TransformationLevel} l2
+ * @returns {Teriock.Parameters.Shared.TransformationLevel}
+ */
+export function upgradeTransformation(l1, l2) {
+  if (l1 === "minor") {
+    return l2;
+  } else if (l1 === "full") {
+    if (l2 === "greater") {
+      return l2;
+    }
+  }
+  return l1;
 }

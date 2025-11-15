@@ -20,7 +20,11 @@ declare global {
     actors: TeriockActors;
     users: TeriockUsers;
     user: TeriockUser;
-    tooltip: TeriockTooltipManager;
+    tooltip: TeriockTooltipManager; // @ts-expect-error Foundry classes.
+    packs: Collection<
+      string, // @ts-expect-error Foundry classes.
+      CompendiumCollection<RollableTable> & CompendiumHelper<RollableRable>
+    >;
   };
 
   const canvas: TeriockCanvas;

@@ -58,8 +58,6 @@ declare global {
     tier: Teriock.Fields.ModifiableDeterministic;
     /** <schema> <special> Virtual Properties */
     virtualProperties: Set<string>;
-    /** <base> Warded */
-    warded: boolean;
     /** <schema> Weight (lb) */
     weight: Teriock.Fields.ModifiableNumber & {
       /** <special> Weight times quantity */

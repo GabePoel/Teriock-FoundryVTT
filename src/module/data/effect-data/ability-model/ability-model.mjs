@@ -1,5 +1,6 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { AbilityExecution } from "../../../executions/document-executions/_module.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import { mergeMetadata, queryGM, safeUuid } from "../../../helpers/utils.mjs";
@@ -7,6 +8,7 @@ import {
   ConsumableDataMixin,
   HierarchyDataMixin,
   RevelationDataMixin,
+  ThresholdDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
@@ -16,7 +18,6 @@ import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _suppressed } from "./methods/_suppression.mjs";
 import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
-import { _roll } from "./methods/rolling/_rolling.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 
 /**
@@ -29,11 +30,14 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @mixes ConsumableData
  * @mixes HierarchyData
  * @mixes RevelationData
+ * @mixes ThresholdData
  * @mixes WikiData
  */
-export default class TeriockAbilityModel extends RevelationDataMixin(
-  HierarchyDataMixin(
-    ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+export default class TeriockAbilityModel extends ThresholdDataMixin(
+  RevelationDataMixin(
+    HierarchyDataMixin(
+      ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+    ),
   ),
 ) {
   /** @inheritDoc */
@@ -138,6 +142,16 @@ export default class TeriockAbilityModel extends RevelationDataMixin(
       this.delivery.base === "aura" ||
       this.delivery.base === "cone" ||
       this.expansion === "detonate"
+    );
+  }
+
+  /**
+   * Whether this requires contact with a target.
+   * @returns {boolean}
+   */
+  get isContact() {
+    return ["armor", "bite", "hand", "item", "shield", "weapon"].includes(
+      this.delivery.base,
     );
   }
 
@@ -282,6 +296,34 @@ export default class TeriockAbilityModel extends RevelationDataMixin(
     return await copyAbility(this.parent.name);
   }
 
+  /** @inheritDoc */
+  getRollData() {
+    const rollData = super.getRollData();
+    Object.assign(rollData, {
+      av0: 0,
+      "av0.abi": 0,
+      ub: 0,
+      "ub.abi": 0,
+      warded: 0,
+      "warded.abi": 0,
+    });
+    if (this.piercing === "av0") {
+      Object.assign(rollData, {
+        av0: 2,
+        "av0.abi": 2,
+      });
+    }
+    if (this.piercing === "ub") {
+      Object.assign(rollData, {
+        av0: 2,
+        "av0.abi": 2,
+        ub: 1,
+        "ub.abi": 1,
+      });
+    }
+    return rollData;
+  }
+
   /**
    * @inheritDoc
    * @returns {Promise<object>}
@@ -298,10 +340,12 @@ export default class TeriockAbilityModel extends RevelationDataMixin(
 
   /**
    * @inheritDoc
-   * @param {Teriock.RollOptions.CommonRoll} options
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
   async roll(options) {
-    return await _roll(this, options);
+    options.source = this.parent;
+    const execution = new AbilityExecution(options);
+    await execution.execute();
   }
 
   /**

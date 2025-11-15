@@ -1,5 +1,5 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const buttons = data.rollConfig.chatData.system.buttons;
+const buttons = data.execution.buttons;
 const applyButton = buttons.find((b) => b.label === "Apply Effect");
 applyButton.label = "Apply Lighted";
 

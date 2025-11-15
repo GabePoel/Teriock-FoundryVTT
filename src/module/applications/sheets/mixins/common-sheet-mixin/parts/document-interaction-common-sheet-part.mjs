@@ -50,29 +50,8 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves when roll is complete.
        */
       static async _rollDoc(event, target) {
-        const options = event?.altKey
-          ? { advantage: true }
-          : event?.shiftKey
-            ? { disadvantage: true }
-            : {};
-        if (this.document.documentName === "Actor") {
-          options.actor = this.document;
-        } else if (this.document.actor) {
-          options.actor = this.document.actor;
-        }
         const embedded = await _embeddedFromCard(this, target);
-        if (embedded?.type === "equipment" || embedded?.type === "body") {
-          let secret = game.settings.get("teriock", "secretArmaments");
-          if (event?.shiftKey) {
-            secret = !secret;
-          }
-          options.secret = secret;
-        }
-        if (embedded?.type === "equipment") {
-          if (event?.ctrlKey) {
-            options.twoHanded = true;
-          }
-        }
+        const options = embedded?.system?.parseEvent(event) || {};
         await embedded?.use(options);
       }
 

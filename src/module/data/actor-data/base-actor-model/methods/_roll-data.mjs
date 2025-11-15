@@ -153,11 +153,13 @@ function tradecraftData(actorData, data) {
       data[`tc.${short}.pro`] = tc.proficient ? 1 : 0;
       data[`tc.${short}.tal`] = tc.extra >= 1 ? 1 : 0;
       data[`tc.${short}.exp`] = tc.extra >= 2 ? 1 : 0;
+      data[`tc.${short}.kno`] = tc.extra;
     } else {
       data[`tc.${short}`] = 0;
       data[`tc.${short}.pro`] = 0;
       data[`tc.${short}.tal`] = 0;
       data[`tc.${short}.exp`] = 0;
+      data[`tc.${short}.kno`] = 0;
     }
   }
 }

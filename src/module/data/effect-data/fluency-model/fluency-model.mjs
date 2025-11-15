@@ -1,14 +1,15 @@
 import { iconManifest } from "../../../constants/display/_module.mjs";
+import { FluencyExecution } from "../../../executions/document-executions/_module.mjs";
 import { getIcon } from "../../../helpers/path.mjs";
 import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   ExecutableDataMixin,
   RevelationDataMixin,
+  ThresholdDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
-import { _roll } from "./methods/_rolling.mjs";
 
 const { fields } = foundry.data;
 
@@ -21,10 +22,13 @@ const { fields } = foundry.data;
  * @extends {TeriockBaseEffectModel}
  * @mixes ExecutableData
  * @mixes RevelationData
+ * @mixes ThresholdData
  * @mixes WikiData
  */
-export default class TeriockFluencyModel extends RevelationDataMixin(
-  WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
+export default class TeriockFluencyModel extends ThresholdDataMixin(
+  RevelationDataMixin(
+    WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
+  ),
 ) {
   /** @inheritDoc */
   static metadata = mergeMetadata(super.metadata, {
@@ -131,8 +135,13 @@ export default class TeriockFluencyModel extends RevelationDataMixin(
     }
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.DocumentExecutionOptions} options
+   */
   async roll(options) {
-    await _roll(this, options);
+    options.source = this.parent;
+    const execution = new FluencyExecution(options);
+    await execution.execute();
   }
 }

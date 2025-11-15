@@ -11,6 +11,8 @@ export { default as TeriockJournalEntry } from "./journal-entry/journal-entry.mj
 export { default as TeriockJournalEntryCategory } from "./journal-entry-category/journal-entry-category.mjs";
 export { default as TeriockJournalEntryPage } from "./journal-entry-page/journal-entry-page.mjs";
 export { default as TeriockMacro } from "./macro/macro.mjs";
+export { default as TeriockRolLTable } from "./roll-table/roll-table.mjs";
 export { default as TeriockScene } from "./scene/scene.mjs";
+export { default as TeriockTableResult } from "./table-result/table-result.mjs";
 export { default as TeriockTokenDocument } from "./token-document/token-document.mjs";
 export { default as TeriockUser } from "./user/user.mjs";

@@ -1,5 +1,5 @@
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { AbilityImpact } from "./types/ability-impact-field.d.ts";
+import { AbilityImpact } from "./types/ability-impact-field";
 import {
   TeriockAbility,
   TeriockConsequence,

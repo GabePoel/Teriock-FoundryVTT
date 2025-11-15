@@ -1,9 +1,9 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const buttons = data.rollConfig.chatData.system.buttons;
-data.rollConfig.chatData.system.buttons = buttons.filter(
+const buttons = data.execution.buttons;
+data.execution.buttons = buttons.filter(
   (button) => button.dataset.action === "apply-effect",
 );
-const button = data.rollConfig.chatData.system.buttons[0];
+const button = data.execution.buttons[0];
 const effectObject = JSON.parse(button.dataset.normal);
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
 effectObject.changes[0] = {
@@ -13,5 +13,5 @@ effectObject.changes[0] = {
   priority: 10,
 };
 const effectString = JSON.stringify(effectObject);
-data.rollConfig.chatData.system.buttons[0].dataset.normal = effectString;
-data.rollConfig.chatData.system.buttons[0].dataset.crit = effectString;
+data.execution.buttons[0].dataset.normal = effectString;
+data.execution.buttons[0].dataset.crit = effectString;

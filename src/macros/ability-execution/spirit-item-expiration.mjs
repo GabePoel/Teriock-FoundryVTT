@@ -1,5 +1,4 @@
 const spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
-
 if (spiritItem) {
   await spiritItem.setFlag("teriock", "weight", spiritItem.system.weight);
   await spiritItem.update({

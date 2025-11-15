@@ -71,19 +71,27 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
-    rollAttackOnEquipmentUse: {
+    rollAttackOnArmamentUse: {
       config: true,
       default: false,
-      hint: "If enabled, using equipment will automatically roll Basic Attack.",
-      name: "Roll Attack on Equipment Use",
+      hint: "If enabled, using armaments will automatically roll Basic Attack.",
+      name: "Roll Attack on Armament Use",
       scope: "user",
       type: Boolean,
     },
-    secretArmaments: {
+    secretEquipment: {
       config: true,
       default: false,
-      hint: "If enabled, armaments will be secret when used by default.",
+      hint: "If enabled, equipment will be secret when used by default.",
       name: "Secret Armaments",
+      scope: "user",
+      type: Boolean,
+    },
+    twoHandedEquipment: {
+      config: true,
+      default: false,
+      hint: "If enabled, equipment will be two-handed when used by default.",
+      name: "Two-Handed Equipment",
       scope: "user",
       type: Boolean,
     },

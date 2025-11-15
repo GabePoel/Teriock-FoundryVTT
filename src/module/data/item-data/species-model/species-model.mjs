@@ -180,10 +180,10 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
 
   /**
    * Transformation that provides this.
-   * @returns {TeriockCondition|TeriockConsequence|null}
+   * @returns {TeriockLingering|null}
    */
   get transformationEffect() {
-    const transformations = this.parent.actor?.transformations;
+    const transformations = this.parent.actor.transformations;
     for (const transformation of transformations) {
       if (
         transformation.system.transformation.species.includes(this.parent.id)

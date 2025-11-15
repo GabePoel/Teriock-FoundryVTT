@@ -24,6 +24,17 @@ type AbilityExpiration = {
   };
 };
 
+export type AbilityExpirations = {
+  /** <schema> How this effect normally expires */
+  normal: AbilityExpiration;
+  /** <schema> How this effect expires on a crit */
+  crit: AbilityExpiration;
+  /** <schema> If how this effect expires changes on a crit */
+  changeOnCrit: boolean;
+  /** <schema> If this effect expires */
+  doesExpire: boolean;
+};
+
 /**
  * Applies data for different proficiency levels
  */
@@ -39,16 +50,7 @@ export interface AbilityImpact {
   /** <schema> Conditions that this ability could end */
   endStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
   /** <schema> Expiration data for the {@link TeriockConsequence} created by this ability */
-  expiration: {
-    /** <schema> How this effect normally expires */
-    normal: AbilityExpiration;
-    /** <schema> How this effect expires on a crit */
-    crit: AbilityExpiration;
-    /** <schema> If how this effect expires changes on a crit */
-    changeOnCrit: boolean;
-    /** <schema> If this effect expires */
-    doesExpire: boolean;
-  };
+  expiration: AbilityExpirations;
   /** <schema> Hacks that could be caused by this ability */
   hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
   /** <schema> Macro buttons */

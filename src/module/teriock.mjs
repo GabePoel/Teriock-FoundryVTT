@@ -132,7 +132,6 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Register custom core documents
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
-  CONFIG.Actor.collection = documents.collections.TeriockActors;
   CONFIG.Actor.documentClass = documents.TeriockActor;
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.Combat.documentClass = documents.TeriockCombat;
@@ -146,8 +145,13 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Macro.documentClass = documents.TeriockMacro;
   CONFIG.Scene.documentClass = documents.TeriockScene;
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
-  CONFIG.User.collection = documents.collections.TeriockUsers;
   CONFIG.User.documentClass = documents.TeriockUser;
+  CONFIG.RollTable.documentClass = documents.TeriockRolLTable;
+  CONFIG.TableResult.documentClass = documents.TeriockTableResult;
+
+  // Register custom core collections
+  CONFIG.Actor.collection = documents.collections.TeriockActors;
+  CONFIG.User.collection = documents.collections.TeriockUsers;
 
   // Register template classes
   CONFIG.ChatMessage.template = helpers.path.systemPath(

@@ -1,4 +1,4 @@
-import { TeriockEffect } from "../_module.mjs";
+import { TeriockActor, TeriockEffect } from "../_module.mjs";
 import TeriockBaseItemSheet from "../../applications/sheets/item-sheets/base-item-sheet/base-item-sheet.mjs";
 import { HierarchyDocumentInterface } from "../mixins/child-document-mixin/parts/_types";
 
@@ -7,6 +7,8 @@ declare module "./item.mjs" {
     extends Teriock.Documents.Interface<TeriockEffect>,
       HierarchyDocumentInterface<TeriockItem> {
     sheet: TeriockBaseItemSheet;
+
+    get actor(): TeriockActor;
 
     get documentName(): "Item";
 

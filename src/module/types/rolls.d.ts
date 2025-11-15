@@ -1,14 +1,16 @@
 import { dieOptions } from "../constants/options/die-options.mjs";
 import { TeriockToken } from "../canvas/placeables/_module.mjs";
 import { TeriockActor } from "../documents/_module.mjs";
-import {
-  AbilityChatData,
-  AbilityUseData,
-} from "../data/effect-data/ability-model/types/roll-config";
-import TeriockAbilityModel from "../data/effect-data/ability-model/ability-model.mjs";
 
 declare global {
   namespace Teriock.RollOptions {
+    // noinspection SpellCheckingInspection
+    export type RollMode =
+      | "roll"
+      | "publicroll"
+      | "gmroll"
+      | "blindroll"
+      | "selfroll";
     /**
      * Options for performing a d20 roll.
      */
@@ -73,14 +75,11 @@ declare global {
     export type PolyhedralDie = `d${PolyhedralDieFaces}`;
 
     export type MacroScope = {
-      abilityData?: TeriockAbilityModel;
       actor?: TeriockActor;
-      chatData?: AbilityChatData;
       data?: Teriock.HookData.BaseHookData;
       event?: Event;
       speaker?: Teriock.Foundry.ChatSpeakerData;
       token?: TeriockToken;
-      useData?: AbilityUseData;
       document?: TeriockChild;
     };
 

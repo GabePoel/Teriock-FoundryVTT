@@ -40,4 +40,6 @@ export interface ArmamentDataMixinInterface {
   specialRules: string;
   /** <schema> Spell Turning */
   spellTurning: boolean;
+  /** <base> Warded */
+  warded: boolean;
 }

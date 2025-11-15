@@ -8,22 +8,28 @@ const { MeasuredTemplate } = foundry.canvas.placeables;
 export default class TeriockAbilityTemplate extends MeasuredTemplate {
   /**
    * A factory method to create an AbilityTemplate instance using provided data from an Activity instance.
-   * @param {AbilityRollConfig} rollConfig - The roll config to construct the template from.
+   * @param {AbilityExecution} execution - The roll config to construct the template from.
    * @param {object} [options={}] - Options to modify the created template.
    * @returns {TeriockAbilityTemplate|null} The template objects, or null if the item does not produce a template.
    */
-  static fromRollConfig(rollConfig, options = {}) {
+  static fromExecution(execution, options = {}) {
     const templateShape =
-      TERIOCK.options.delivery[rollConfig.abilityData.delivery.base]?.template;
+      TERIOCK.options.delivery[execution.source.system.delivery.base]?.template;
     if (!templateShape) {
       return null;
     }
-    const source = actorToken(rollConfig.useData.actor);
+    const source =
+      execution.executor || execution.actor
+        ? actorToken(execution.actor)
+        : null;
+    if (!source) {
+      return null;
+    }
     let distance = evaluateSync(
-      rollConfig.abilityData.range,
-      rollConfig.useData.rollData,
+      execution.source.system.range,
+      execution.rollData,
     );
-    if (source && rollConfig.abilityData.isAoe) {
+    if (source && execution.source.system.isAoe) {
       distance += source.document.radius;
     }
     const templateData = foundry.utils.mergeObject(
@@ -53,7 +59,7 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
     if (
       foundry.helpers.Hooks.call(
         "teriock.preCreateAbilityTemplate",
-        rollConfig,
+        execution,
         templateData,
       ) === false
     ) {
@@ -64,12 +70,12 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
       parent: canvas.scene,
     });
     const object = new this(template);
-    object.rollConfig = rollConfig;
-    object.ability = rollConfig.abilityData.parent;
-    object.actorSheet = rollConfig.useData.actor?.sheet || null;
+    object.execution = execution;
+    object.ability = execution.source;
+    object.actorSheet = execution.actor?.sheet || null;
     foundry.helpers.Hooks.callAll(
       "teriock.createAbilityTemplate",
-      rollConfig,
+      execution,
       object,
     );
     return object;
@@ -190,7 +196,7 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
         reject,
         rotate: this._onRotatePlacement.bind(this),
       };
-      if (this.rollConfig.abilityData.expansion === "detonate") {
+      if (this.execution.source.system.expansion === "detonate") {
         this.#events.move = this._onMovePlacement.bind(this);
         canvas.stage.on("mousemove", this.#events.move);
       }
@@ -208,7 +214,7 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
    */
   async drawPreview() {
     const initialLayer = canvas.activeLayer;
-    if (this.rollConfig.abilityData.delivery.base === "cone") {
+    if (this.execution.source.system.delivery.base === "cone") {
       // Draw the template and switch to the template layer
       await this.draw();
       this.layer.activate();

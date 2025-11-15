@@ -139,10 +139,21 @@ export default class CommonTypeModel extends TypeDataModel {
     if (this.parent.actor) {
       rollData = this.parent.actor.getRollData();
     }
-    rollData[this.parent.documentName] = this.toObject();
-    rollData[this.parent.documentName]["name"] = this.parent.name;
-    rollData[this.parent.type] = rollData[this.parent.documentName];
+    Object.assign(rollData, this.getSystemRollData());
     return rollData;
+  }
+
+  /**
+   * Fetch roll data specific to this document.
+   * @returns {object}
+   */
+  getSystemRollData() {
+    const object = this.toObject();
+    object.name = this.parent.name;
+    return {
+      [this.parent.documentName]: object,
+      [this.parent.type]: object,
+    };
   }
 
   /**

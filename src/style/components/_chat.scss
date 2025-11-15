@@ -76,6 +76,7 @@
 
 .teriock-dice-total {
   @include mixins.inverse-roll-style;
+  position: relative;
 
   &.success {
     background-color: color-mix(in srgb, #26a269, transparent 90%);
@@ -83,10 +84,24 @@
 
   &.failure {
     background-color: color-mix(in srgb, #a51d2d, transparent 90%);
+    position: relative;
   }
 
   &.feat {
     background-color: color-mix(in srgb, #f6d32d, transparent 90%);
+  }
+
+  .teriock-dice-total-icon {
+    position: absolute;
+    top: 0;
+    left: 4px;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-subtle);
+    opacity: 0.5;
+    font-size: small;
   }
 }
 
@@ -224,5 +239,11 @@
       line-height: 10px;
       margin-bottom: 1px;
     }
+  }
+}
+
+.dice-result :last-child {
+  &.teriock-target-container {
+    margin-bottom: 0;
   }
 }

@@ -30,7 +30,7 @@ export default (Base) =>
       const item = this.document.items.get(id);
       if (item) {
         const options = {
-          secret: game.settings.get("teriock", "secretArmaments"),
+          secret: game.settings.get("teriock", "secretEquipment"),
         };
         if (event.altKey) {
           options.advantage = true;

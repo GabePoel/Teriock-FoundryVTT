@@ -75,7 +75,7 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /**
    * Enabled body parts and equipped equipment.
-   * @returns {(TeriockBody|TeriockEquipment)[]}
+   * @returns {TeriockArmament[]}
    */
   get activeArmaments() {
     return [
@@ -87,7 +87,7 @@ export default class TeriockActor extends ParentDocumentMixin(
   //noinspection JSUnusedGlobalSymbols
   /**
    * Body parts and equipment.
-   * @returns {(TeriockBody|TeriockEquipment)[]}
+   * @returns {TeriockArmament[]}
    */
   get armaments() {
     return [...this.bodyParts, ...this.equipment];
@@ -204,7 +204,7 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /**
    * Transformations.
-   * @returns {(TeriockCondition|TeriockConsequence)[]}
+   * @returns {TeriockLingering[]}
    */
   get transformations() {
     const possibleEffects = [...this.consequences, ...this.conditions];

@@ -19,33 +19,38 @@ if (chosenIllusionLevel === "full") {
 if (chosenIllusionLevel === "greater") {
   dc = 18;
 }
-const buttons = data.rollConfig.chatData.system.buttons.filter(
+const buttons = data.execution.buttons.filter(
   (b) => b.dataset?.action === "feat-save" && b.dataset?.attribute === "int",
 );
 if (typeof dc === "number") {
   for (const b of buttons) {
-    b.dataset.dc = `${dc - 2 * data.rollConfig.useData.modifiers.heightened}`;
+    b.dataset.dc = `${dc - 2 * data.execution.heightened}`;
   }
 }
-for (let i = 0; i < data.rollConfig.chatData.rolls.length; i++) {
-  const r = data.rollConfig.chatData.rolls[i];
-  if (r.context?.diceClass === "feat") {
+for (let i = 0; i < data.execution.rolls.length; i++) {
+  const r = data.execution.rolls[i];
+  if (r.styles.dice.classes === "feat") {
     if (typeof dc === "number") {
       const newRoll = new game.teriock.Roll(
         `${dc} - 2 * @h`,
-        data.rollConfig.useData.rollData,
+        data.execution.rollData,
         {
           flavor: illusionLevels[chosenIllusionLevel] + " DC",
-          context: {
-            diceClass: "feat",
-            totalClass: "feat",
+          styles: {
+            dice: {
+              classes: "feat",
+            },
+            total: {
+              classes: "feat",
+              icon: "star",
+            },
           },
         },
       );
       await newRoll.evaluate();
-      data.rollConfig.chatData.rolls[i] = newRoll;
+      data.execution.rolls[i] = newRoll;
     } else {
-      data.rollConfig.chatData.rolls.pop();
+      data.execution.rolls.pop();
     }
   }
 }

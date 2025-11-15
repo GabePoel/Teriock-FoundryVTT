@@ -1,6 +1,10 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const options = foundry.utils.deepClone(data.rollConfig.useData.rollOptions);
-options.noHeighten = true;
+const options = {
+  advantage: data.execution.advantage,
+  disadvantage: data.execution.disadvantage,
+  actor: data.execution.actor,
+  noHeighten: true,
+};
 const spellNames = [
   "Flame Ray",
   "Light Ray",
@@ -23,5 +27,4 @@ const spell = await tm.dialogs.selectDocumentDialog(spells, {
   title: "Select Spell",
   hint: "Select a spell to cast",
 });
-options.actor = data.rollConfig.abilityData.actor;
 await spell.system.roll(options);

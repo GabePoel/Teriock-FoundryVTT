@@ -22,6 +22,12 @@ import {
 import PixiJS from "pixi.js";
 import * as sheets from "./applications/sheets/_module.mjs";
 import * as documents from "./documents/_documents.mjs";
+import {
+  TeriockBody,
+  TeriockCondition,
+  TeriockConsequence,
+  TeriockEquipment,
+} from "./documents/_documents.mjs";
 import * as data from "./data/_module.mjs";
 import * as placeables from "./canvas/placeables/_module.mjs";
 import TeriockBaseActorSheet from "./applications/sheets/actor-sheets/base-actor-sheet/base-actor-sheet.mjs";
@@ -107,6 +113,12 @@ declare global {
   const TeriockFluency: documents.TeriockFluency;
   const TeriockProperty: documents.TeriockProperty;
   const TeriockResource: documents.TeriockResource;
+
+  // Document Unions
+  // ---------------
+
+  export type TeriockArmament = TeriockBody | TeriockEquipment;
+  export type TeriockLingering = TeriockCondition | TeriockConsequence;
 
   // Data Models
   // ===========

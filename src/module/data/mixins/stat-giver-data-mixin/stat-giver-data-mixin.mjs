@@ -3,7 +3,7 @@ import { StatDieModel } from "../../models/_module.mjs";
 import {
   HpPoolModel,
   MpPoolModel,
-} from "../../models/stat-pool-model/_module.mjs";
+} from "../../models/stat-pool-models/_module.mjs";
 import {
   deriveModifiableDeterministic,
   prepareModifiableBase,

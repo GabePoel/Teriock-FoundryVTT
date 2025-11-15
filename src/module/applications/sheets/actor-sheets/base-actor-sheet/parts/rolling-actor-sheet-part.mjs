@@ -1,5 +1,4 @@
 import { attributePanel } from "../../../../../helpers/html.mjs";
-import { getIcon } from "../../../../../helpers/path.mjs";
 import { makeCommonRollOptions } from "../../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
@@ -83,41 +82,19 @@ export default (Base) =>
      */
     static async _rollResistance(event, target) {
       event.stopPropagation();
-      let messageParts;
-      /** @type {Teriock.MessageData.MessagePanel} */
-      if (target.classList.contains("tcard-image")) {
-        const tcard = target.closest(".tcard");
-        const img = target.querySelector("img");
-        messageParts = {};
-        messageParts.image = img.src || getIcon("effect-types", "Resistance");
-        messageParts.name = "Resistance";
-        messageParts.bars = [
-          {
-            icon: "fa-shield",
-            label: "Resistance",
-            wrappers: [
-              tcard.querySelector(".tcard-title").textContent || "",
-              tcard.querySelector(".tcard-subtitle").textContent || "",
-            ],
-          },
-        ];
-        messageParts.blocks = [
-          {
-            title: "Resistance",
-            text: TERIOCK.content.keywords.resistance,
-          },
-        ];
-        messageParts.icon = "shield-halved";
-        messageParts.label = "Protection";
-      }
-      const panels = messageParts
-        ? [await TeriockTextEditor.enrichPanel(messageParts)]
-        : [];
+      const img = target.querySelector("img");
+      const tcard = target.closest(".tcard");
       const options = {
         advantage: event.altKey,
         disadvantage: event.shiftKey,
-        panels: panels,
+        wrappers: [
+          tcard?.querySelector(".tcard-title")?.textContent || "",
+          tcard?.querySelector(".tcard-subtitle")?.textContent || "",
+        ],
       };
+      if (img?.src) {
+        options.image = img.src;
+      }
       await this.actor.system.rollResistance(options);
     }
 

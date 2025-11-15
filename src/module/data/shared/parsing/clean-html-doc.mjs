@@ -1,4 +1,4 @@
-import { ROLL_BUTTON_CONFIGS } from "../../effect-data/ability-model/methods/rolling/_roll-build-buttons.mjs";
+import { ROLL_BUTTON_CONFIGS } from "../../../executions/document-executions/ability-execution/parts/ability-execution-chat-part.mjs";
 
 /**
  * Remove sub-containers and convert .dice spans into enricher rolls.
@@ -63,6 +63,22 @@ export function cleanHTML(html) {
         const enricherTag = `@L[${titleAttr}]{${display}}`;
         link.replaceWith(document.createTextNode(enricherTag));
       }
+    }
+    const tables = doc.querySelectorAll(
+      "[data-replace-table='true'], .metadata",
+    );
+    for (const table of tables) {
+      const tableName = table.getAttribute("data-table-name");
+      const tablePack = game.packs.get("teriock.tables");
+      //noinspection JSUnresolvedReference
+      const rollableTable = tablePack.index.getName(tableName);
+      if (rollableTable) {
+        const enricherTag = ` @Embed[${rollableTable.uuid}]`;
+        table.replaceWith(enricherTag);
+      }
+    }
+    if (!doc.innerHTML.startsWith("<p>")) {
+      doc.innerHTML = `<p>${doc.innerHTML}</p>`;
     }
   }
 

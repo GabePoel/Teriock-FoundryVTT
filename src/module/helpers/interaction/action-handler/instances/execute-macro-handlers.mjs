@@ -14,7 +14,7 @@ export class ExecuteMacroHandler extends ActionHandler {
             ),
       actors: this.actors,
       data: {
-        rollConfig: {
+        execution: {
           useData: useData,
         },
       },

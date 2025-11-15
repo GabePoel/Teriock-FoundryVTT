@@ -1,0 +1,79 @@
+import { addFormula } from "../../../helpers/formula.mjs";
+import {
+  AbilityExecutionActorUpdatePart,
+  AbilityExecutionChatPart,
+  AbilityExecutionConstructor,
+  AbilityExecutionGetInputPart,
+  AbilityExecutionRollsPart,
+} from "./parts/_module.mjs";
+
+//noinspection JSClosureCompilerSyntax,JSUnresolvedReference
+/**
+ * @extends {AbilityExecutionConstructor}
+ * @extends {BaseDocumentExecution}
+ * @mixes AbilityExecutionActorUpdate
+ * @mixes AbilityExecutionChat
+ * @mixes AbilityExecutionGetInput
+ * @mixes AbilityExecutionRolls
+ * @mixes ThresholdExecution
+ */
+export default class AbilityExecution extends AbilityExecutionChatPart(
+  AbilityExecutionRollsPart(
+    AbilityExecutionActorUpdatePart(
+      AbilityExecutionGetInputPart(AbilityExecutionConstructor),
+    ),
+  ),
+) {
+  /** @inheritDoc */
+  get rollData() {
+    const rollData = super.rollData;
+    const rollAdditions = {
+      av0: this.av0 ? 2 : 0,
+      "av0.wep": this.armament?.system.piercing.av0 ? 2 : 0,
+      ub: this.ub ? 1 : 0,
+      "ub.wep": this.armament?.system.piercing.ub ? 1 : 0,
+      warded: this.warded ? 1 : 0,
+      "warded.wep": this.armament?.system.warded ? 1 : 0,
+    };
+    if (this.armament) {
+      rollAdditions.bv = this.armament.system.bv.value;
+    }
+    Object.assign(rollData, rollAdditions);
+    return rollData;
+  }
+
+  /** @inheritDoc */
+  async _improveFormula() {
+    if (["attack", "feat"].includes(this.source.system.interaction)) {
+      await super._improveFormula();
+      if (this.heightened > 0) {
+        this.formula = addFormula(this.formula, "@h");
+      }
+      if (this.source.system.interaction === "attack") {
+        if (this.av0) {
+          this.formula = addFormula(this.formula, "@av0");
+        }
+        if (this.sb) {
+          this.formula = addFormula(this.formula, "@sb");
+        }
+      }
+    }
+  }
+
+  /** @inheritDoc */
+  async _postExecute() {
+    await this.executePseudoHookMacros("execution");
+    await this.actor?.hookCall("useAbility", { execution: this });
+  }
+
+  /** @inheritDoc */
+  async _prepareBaseFormula() {
+    if (this.source.system.interaction === "attack") {
+      await super._prepareBaseFormula();
+    } else if (this.source.system.interaction === "feat") {
+      this.formula = "10";
+    } else if (this.source.system.interaction === "block") {
+      this.formula = "10 + @av + @bv";
+    }
+  }
+}

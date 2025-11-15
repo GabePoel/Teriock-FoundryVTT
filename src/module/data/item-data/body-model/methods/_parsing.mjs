@@ -2,7 +2,6 @@ import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
 import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
-import { _override } from "./_overrides.mjs";
 
 /**
  * @param {TeriockBodyModel} bodyData
@@ -101,8 +100,6 @@ export async function _parse(bodyData, rawHTML) {
     foundry.ui.notifications.error(`Error creating properties: ${error}`);
     throw error;
   }
-
-  _override(bodyData, parameters);
 
   const oldImg = bodyData.parent.img;
   const newImg = getIcon("body-parts", bodyData.parent.name) || oldImg;

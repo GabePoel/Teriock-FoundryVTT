@@ -401,15 +401,15 @@ export function safeParseHTML(htmlString) {
 }
 
 /**
- * Unpack the consequence of the apply effect button.
- * @param {AbilityRollConfig} rollConfig
+ * Unpack the consequence of the "apply effect" button.
+ * @param {AbilityExecution} execution
  * @param {object} [options]
  * @param {"normal"|"crit"} [options.useType]
  * @returns {TeriockConsequence | null}
  */
-export function unpackEffectButton(rollConfig, options = {}) {
+export function unpackEffectButton(execution, options = {}) {
   const { useType = "normal" } = options;
-  const button = rollConfig.chatData.system.buttons.find((b) => b.dataset);
+  const button = execution.chatData.system.buttons.find((b) => b.dataset);
   if (button) {
     return JSON.parse(button.dataset[useType]);
   }
@@ -417,15 +417,15 @@ export function unpackEffectButton(rollConfig, options = {}) {
 }
 
 /**
- * Pack the consequence of the apply effect button.
- * @param {AbilityRollConfig} rollConfig
+ * Pack the consequence of the "apply effect" button.
+ * @param {AbilityExecution} execution
  * @param {TeriockConsequence} consequence
  * @param {object} [options]
  * @param {string[]} [options.useTypes]
  */
-export function packEffectButton(rollConfig, consequence, options = {}) {
+export function packEffectButton(execution, consequence, options = {}) {
   const { useTypes = ["normal", "crit"] } = options;
-  const button = rollConfig.chatData.system.buttons.find((b) => b.dataset);
+  const button = execution.chatData.system.buttons.find((b) => b.dataset);
   if (button) {
     for (const useType of useTypes) {
       button.dataset[useType] = JSON.stringify(consequence);
@@ -435,12 +435,12 @@ export function packEffectButton(rollConfig, consequence, options = {}) {
 
 /**
  * Add trackers to the roll config.
- * @param {AbilityRollConfig} rollConfig
+ * @param {AbilityExecution} execution
  * @param {string} tracker
  * @param {Teriock.UUID<TeriockTokenDocument|TeriockActor>[]} uuids
  * @returns {Promise<void>}
  */
-export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
+export async function addTrackersToExecution(execution, tracker, uuids) {
   let titleString = toTitleCase(tracker) + " To";
   if (tracker === "frightened") {
     titleString = "Frightened Of";
@@ -448,7 +448,7 @@ export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
   if (tracker === "dueling") {
     titleString = "Dueling With";
   }
-  const buttons = rollConfig.chatData.system.buttons;
+  const buttons = execution.buttons;
   const button = buttons.find((b) => b.dataset.action === "apply-effect");
   if (button) {
     for (const useType of ["normal", "crit"]) {
@@ -487,13 +487,13 @@ export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
 
 /**
  * Add tracker to roll config.
- * @param {AbilityRollConfig} rollConfig
+ * @param {AbilityExecution} execution
  * @param {string} tracker
  * @param {Teriock.UUID<TeriockTokenDocument|TeriockActor>} uuid
  * @returns {Promise<void>}
  */
-export async function addTrackerToRollConfig(rollConfig, tracker, uuid) {
-  await addTrackersToRollConfig(rollConfig, tracker, [uuid]);
+export async function addTrackerToExecution(execution, tracker, uuid) {
+  await addTrackersToExecution(execution, tracker, [uuid]);
 }
 
 /**

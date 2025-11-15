@@ -1,4 +1,5 @@
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { ArmamentExecution } from "../../../executions/document-executions/_module.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import {
@@ -31,6 +32,7 @@ export default function ArmamentDataMixin(Base) {
         return foundry.utils.mergeObject(super.defineSchema(), {
           attackPenalty: modifiableFormula({
             deterministic: false,
+            initial: "-3",
           }),
           av: modifiableNumber(),
           bv: modifiableNumber(),
@@ -87,6 +89,11 @@ export default function ArmamentDataMixin(Base) {
             label: "Spell Turning",
             nullable: false,
           }),
+          warded: new fields.BooleanField({
+            initial: false,
+            label: "Warded",
+            nullable: false,
+          }),
           virtualProperties: new fields.SetField(new fields.StringField()),
         });
       }
@@ -110,6 +117,18 @@ export default function ArmamentDataMixin(Base) {
       /** @inheritDoc */
       get useIcon() {
         return getRollIcon(this.damage.base.value);
+      }
+
+      /**
+       * @inheritDoc
+       * @returns {Teriock.Execution.ArmamentExecutionOptions}
+       */
+      parseEvent(event) {
+        const options = super.parseEvent(event);
+        Object.assign(options, {
+          crit: event.altKey,
+        });
+        return options;
       }
 
       /** @inheritDoc */
@@ -162,6 +181,19 @@ export default function ArmamentDataMixin(Base) {
         if (!this.damage.base.value || this.damage.base.value === "0") {
           this.range.melee = false;
         }
+      }
+
+      /**
+       * @inheritDoc
+       * @param {Teriock.Execution.ArmamentExecutionOptions} options
+       */
+      async roll(options) {
+        if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
+          await this.actor?.useAbility("Basic Attack");
+        }
+        options.source = this.parent;
+        const execution = new ArmamentExecution(options);
+        await execution.execute();
       }
     }
   );

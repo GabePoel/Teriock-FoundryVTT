@@ -248,6 +248,17 @@ export default class ChildTypeModel extends CommonTypeModel {
   }
 
   /**
+   * Parse an event into usable roll data.
+   * @param {PointerEvent} _event
+   * @returns {Teriock.Execution.DocumentExecutionOptions}
+   */
+  parseEvent(_event) {
+    return {
+      source: this.parent,
+    };
+  }
+
+  /**
    * Initiates a roll for the child document.
    * Delegates to the parent document's chat functionality.
    * @param {object} options - Options for the roll operation.

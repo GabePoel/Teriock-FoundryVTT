@@ -1,6 +1,9 @@
-import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { attributePanel, tradecraftPanel } from "../../../../helpers/html.mjs";
+import {
+  FeatSaveExecution,
+  ResistanceExecution,
+  TradecraftExecution,
+} from "../../../../executions/activity-executions/_module.mjs";
 
 /**
  * Actor data model mixin that handles common generic rolls.
@@ -20,9 +23,9 @@ export default (Base) => {
        * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
        *
        * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
-       * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+       * @param {Teriock.Execution.FeatSaveExecutionOptions} [options] - Options for the roll.
        */
-      async rollFeatSave(attribute, options = {}) {
+      async rollFeatSave(attribute, options = { attribute }) {
         const data = {
           attribute,
           options,
@@ -33,38 +36,10 @@ export default (Base) => {
         }
         attribute = data.attribute;
         options = data.options;
-        let rollFormula = "1d20";
-        if (options.advantage && !options.disadvantage) {
-          rollFormula = "2d20kh1";
-        } else if (options.disadvantage && !options.advantage) {
-          rollFormula = "2d20kl1";
-        }
-        rollFormula += ` + @att.${attribute}.save`;
-        const context = {
-          diceClass: "feat",
-        };
-        if (typeof options.threshold === "number") {
-          context.threshold = options.threshold;
-        }
-        const roll = new TeriockRoll(rollFormula, this.parent.getRollData(), {
-          context,
-          flavor:
-            (typeof options.threshold === "number"
-              ? `DC ${options.threshold} `
-              : "") + `${attribute.toUpperCase()} Feat Save`,
-        });
-        await roll.toMessage(
-          {
-            speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
-            system: {
-              avatar: this.parent.img,
-              panels: [await attributePanel(attribute)],
-            },
-          },
-          {
-            rollMode: game.settings.get("core", "rollMode"),
-          },
-        );
+        options.attribute = attribute;
+        options.actor = this.parent;
+        const execution = new FeatSaveExecution(options);
+        await execution.execute();
       }
 
       /**
@@ -104,7 +79,7 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
        *
-       * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+       * @param {Teriock.Execution.ResistanceExecutionOptions} [options] - Options for the roll.
        * @returns {Promise<void>}
        */
       async rollResistance(options = {}) {
@@ -113,35 +88,9 @@ export default (Base) => {
         if (data.cancel) {
           return;
         }
-        let rollFormula = "1d20";
-        if (options.advantage && !options.disadvantage) {
-          rollFormula = "2d20kh1";
-        } else if (options.disadvantage && !options.advantage) {
-          rollFormula = "2d20kl1";
-        }
-        rollFormula += " + @p";
-        const roll = new TeriockRoll(rollFormula, this.parent.getRollData(), {
-          flavor: "Resistance Save",
-          context: {
-            isResistance: true,
-            diceClass: "resist",
-            threshold: 10,
-          },
-        });
-        await roll.evaluate();
-        TeriockChatMessage.create(
-          {
-            speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
-            rolls: [roll],
-            system: {
-              avatar: this.parent.img,
-              panels: options.panels,
-            },
-          },
-          {
-            rollMode: game.settings.get("core", "rollMode"),
-          },
-        );
+        options.actor = this.parent;
+        const execution = new ResistanceExecution(options);
+        await execution.execute();
       }
 
       /**
@@ -151,10 +100,10 @@ export default (Base) => {
        * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
        *
        * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft - The tradecraft to roll for.
-       * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+       * @param {Teriock.Execution.TradecraftExecutionOptions} [options] - Options for the roll.
        * @returns {Promise<void>}
        */
-      async rollTradecraft(tradecraft, options = {}) {
+      async rollTradecraft(tradecraft, options = { tradecraft }) {
         const data = {
           tradecraft,
           options,
@@ -165,41 +114,10 @@ export default (Base) => {
         }
         tradecraft = data.tradecraft;
         options = data.options;
-        const { proficient, extra } = this.tradecrafts[tradecraft] || {};
-        let rollFormula = "1d20";
-        if (options.advantage && !options.disadvantage) {
-          rollFormula = "2d20kh1";
-        } else if (options.disadvantage && !options.advantage) {
-          rollFormula = "2d20kl1";
-        }
-        if (extra) {
-          rollFormula += ` + @tc.${tradecraft.slice(0, 3)}`;
-        }
-        if (proficient) {
-          rollFormula += " + @p";
-        }
-        const context = {};
-        if (typeof options.threshold === "number") {
-          context.threshold = options.threshold;
-        }
-        const roll = new TeriockRoll(rollFormula, this.parent.getRollData(), {
-          flavor: `${TERIOCK.index.tradecrafts[tradecraft]} Check`,
-          context,
-        });
-        await roll.evaluate();
-        TeriockChatMessage.create(
-          {
-            speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
-            rolls: [roll],
-            system: {
-              avatar: this.parent.img,
-              panels: [await tradecraftPanel(tradecraft)],
-            },
-          },
-          {
-            rollMode: game.settings.get("core", "rollMode"),
-          },
-        );
+        options.actor = this.parent;
+        options.tradecraft = tradecraft;
+        const execution = new TradecraftExecution(options);
+        await execution.execute();
       }
     }
   );

@@ -3,11 +3,11 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { TeriockRoll } from "../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { dedent, getRollIcon } from "../../../helpers/utils.mjs";
-import BaseDataModel from "../base-data-model/base-data-model.mjs";
+import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
-export default class StatDieModel extends BaseDataModel {
+export default class StatDieModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {

@@ -1,7 +1,7 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const options = foundry.utils.deepClone(data.rollConfig.useData.rollOptions);
-options.proficient = data.rollConfig.useData.proficient;
-options.fluent = data.rollConfig.useData.fluent;
+const options = data.execution.options;
+options.proficient = data.execution.proficient;
+options.fluent = data.execution.fluent;
 const spellNames = [
   "Burning Touch",
   "Light Touch",
@@ -19,5 +19,4 @@ const spell = await tm.dialogs.selectDocumentDialog(spells, {
   title: "Select Spell",
   hint: "Select a spell to cast",
 });
-options.actor = data.rollConfig.abilityData.actor;
 await spell.system.roll(options);

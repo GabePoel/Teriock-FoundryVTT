@@ -23,6 +23,24 @@ export function _prepareDerivedData(abilityData) {
     }
   }
 
+  // Base duration
+  const finiteUnits = {
+    instant: 0,
+    second: 1,
+    minute: 60,
+    hour: 60 * 60,
+    day: 60 * 60 * 24,
+    week: 60 * 60 * 24 * 7,
+    month: (60 * 60 * 24 * 365) / 12,
+    year: 60 * 60 * 24 * 365,
+  };
+  let baseDuration = 0;
+  if (Object.keys(finiteUnits).includes(abilityData.duration.unit)) {
+    baseDuration =
+      finiteUnits[abilityData.duration.unit] * abilityData.duration.quantity;
+  }
+  abilityData.impacts.base.duration = baseDuration;
+
   // Effect match power sources
   for (const ps of abilityData.powerSources) {
     if (

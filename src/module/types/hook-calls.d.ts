@@ -1,11 +1,11 @@
 // noinspection JSUnusedGlobalSymbols
 
 import { TeriockEffect } from "../documents/_module.mjs";
-import { AbilityRollConfig } from "../data/effect-data/ability-model/types/roll-config";
 import {
   TeriockConsequence,
   TeriockEquipment,
 } from "../documents/_documents.mjs";
+import { AbilityExecution } from "../executions/document-executions/_module.mjs";
 
 declare global {
   namespace Teriock.HookData {
@@ -45,7 +45,7 @@ declare global {
     };
 
     export type UseAbility = Teriock.HookData.BaseHookData & {
-      rollConfig: AbilityRollConfig;
+      execution: AbilityExecution;
     };
 
     export type DocActivity = Teriock.HookData.BaseHookData & {

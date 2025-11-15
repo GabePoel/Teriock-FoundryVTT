@@ -6,7 +6,7 @@ const { JournalEntry } = foundry.documents;
 /**
  * The Teriock {@link JournalEntry} implementation.
  * @extends {JournalEntry}
- * @mixes ClientDocumentMixin
+ * @extends {ClientDocument}
  * @property {EmbeddedCollection<Teriock.ID<TeriockJournalEntryCategory>, TeriockJournalEntryCategory>} categories
  * @property {EmbeddedCollection<Teriock.ID<TeriockJournalEntryPage>, TeriockJournalEntryPage>} pages
  */

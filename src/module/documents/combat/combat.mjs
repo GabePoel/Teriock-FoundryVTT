@@ -117,21 +117,18 @@ export default class TeriockCombat extends BlankMixin(Combat) {
 
   /** @inheritDoc */
   async nextTurn() {
+    const previousActor = this.combatant?.actor;
+
     // Turn change
     const out = await super.nextTurn();
 
     // End of turn
     // This happens after turn change so that the turn change doesn't get stuck
     // waiting for effect expirations.
-    const previousActor = this.combatant?.actor;
     if (previousActor) {
       for (const actor of this.actors) {
-        await this._tryAllEffectExpirations(
-          actor,
-          previousActor,
-          "turn",
-          "end",
-        );
+        //noinspection ES6MissingAwait
+        this._tryAllEffectExpirations(actor, previousActor, "turn", "end");
       }
     }
     const actors = [
@@ -165,8 +162,10 @@ export default class TeriockCombat extends BlankMixin(Combat) {
     // Start of turn
     const newActor = this.combatant?.actor;
     for (const actor of this.actors) {
-      await this._tryAllEffectExpirations(actor, newActor, "action", "start");
-      await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
+      //noinspection ES6MissingAwait
+      this._tryAllEffectExpirations(actor, newActor, "action", "start");
+      //noinspection ES6MissingAwait
+      this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
     if (newActor) {
       const newUser = selectUser(newActor);

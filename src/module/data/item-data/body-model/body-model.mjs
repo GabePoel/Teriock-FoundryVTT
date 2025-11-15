@@ -8,7 +8,6 @@ import {
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
-import { _roll } from "./methods/_rolling.mjs";
 
 /**
  * Body part-specific item data model.
@@ -85,16 +84,5 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
       foundry.utils.setProperty(this, key, damageRoll.formula);
     }
     super.prepareSpecialData();
-  }
-
-  /** @inheritDoc */
-  async roll(options) {
-    if (game.settings.get("teriock", "rollAttackOnEquipmentUse")) {
-      await this.actor?.useAbility("Basic Attack", options);
-      options.advantage = false;
-      options.disadvantage = false;
-      options.crit = false;
-    }
-    await _roll(this, options);
   }
 }

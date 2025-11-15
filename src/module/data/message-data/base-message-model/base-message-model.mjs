@@ -1,4 +1,5 @@
 import { bindCommonActions } from "../../../applications/shared/_module.mjs";
+import { BlankMixin } from "../../../documents/mixins/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
 import {
   associationsField,
@@ -8,10 +9,7 @@ import {
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
-/**
- * @property {TeriockChatMessage} parent;
- */
-export default class TeriockBaseMessageModel extends TypeDataModel {
+export default class TeriockBaseMessageModel extends BlankMixin(TypeDataModel) {
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}
@@ -136,14 +134,6 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
       required: false,
     });
     return schema;
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {TeriockChatMessage}
-   */
-  get parent() {
-    return super.parent;
   }
 
   /**

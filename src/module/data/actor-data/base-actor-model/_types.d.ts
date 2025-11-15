@@ -18,20 +18,7 @@ declare global {
     /** <base> Ability flags */
     abilityFlags: Record<string, string>;
     /** <schema> Attributes */
-    attributes: {
-      /** <schema> Intelligence */
-      int: ActorAttributeData;
-      /** <schema> Movement */
-      mov: ActorAttributeData;
-      /** <schema> Perception */
-      per: ActorAttributeData;
-      /** <schema> Sneak */
-      snk: ActorAttributeData;
-      /** <schema> Strength */
-      str: ActorAttributeData;
-      /** <schema> Unused presence */
-      unp: ActorAttributeData;
-    };
+    attributes: Record<Teriock.Parameters.Actor.Attribute, ActorAttributeData>;
     /** <base> Attunements - IDs of attuned equipment */
     attunements: Set<Teriock.ID<TeriockEquipment>>;
     /** <derived> Carrying capacity */

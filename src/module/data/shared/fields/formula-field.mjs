@@ -1,4 +1,12 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
+import {
+  addFormula,
+  downgradeDeterministicFormula,
+  downgradeIndeterministicFormula,
+  multiplyFormula,
+  upgradeDeterministicFormula,
+  upgradeIndeterministicFormula,
+} from "../../../helpers/formula.mjs";
 
 const { StringField } = foundry.data.fields;
 
@@ -28,9 +36,7 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
-    const operator = delta.startsWith("-") ? "-" : "+";
-    delta = delta.replace(/^[+-]/, "").trim();
-    return `${value} ${operator} ${delta}`;
+    return addFormula(value, delta);
   }
 
   /** @inheritDoc */
@@ -39,18 +45,9 @@ export default class FormulaField extends StringField {
       return delta;
     }
     if (this.deterministic) {
-      const terms = new TeriockRoll(value, {}).terms;
-      if (terms.length === 1 && terms[0]?.fn === "min") {
-        return value.replace(/\)$/, `, ${delta})`);
-      }
-      return `min(${value}, ${delta})`;
-    }
-    const valueTotal = TeriockRoll.meanValue(value);
-    const deltaTotal = TeriockRoll.meanValue(delta);
-    if (deltaTotal <= valueTotal) {
-      return delta;
+      return downgradeDeterministicFormula(value, delta);
     } else {
-      return value;
+      return downgradeIndeterministicFormula(value, delta);
     }
   }
 
@@ -59,11 +56,7 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
-    const terms = new TeriockRoll(value, {}).terms;
-    if (terms.length > 1) {
-      return `(${value}) * ${delta}`;
-    }
-    return `${value} * ${delta}`;
+    return multiplyFormula(value, delta);
   }
 
   /** @inheritDoc */
@@ -72,18 +65,9 @@ export default class FormulaField extends StringField {
       return delta;
     }
     if (this.deterministic) {
-      const terms = new TeriockRoll(value, {}).terms;
-      if (terms.length === 1 && terms[0]?.fn === "max") {
-        return value.replace(/\)$/, `, ${delta})`);
-      }
-      return `max(${value}, ${delta})`;
-    }
-    const valueTotal = TeriockRoll.meanValue(value);
-    const deltaTotal = TeriockRoll.meanValue(delta);
-    if (deltaTotal >= valueTotal) {
-      return delta;
+      upgradeDeterministicFormula(value, delta);
     } else {
-      return value;
+      upgradeIndeterministicFormula(value, delta);
     }
   }
 

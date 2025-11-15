@@ -1,3 +1,4 @@
+import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { getItem } from "../../../helpers/fetch.mjs";
 import { formulaExists, mergeMetadata } from "../../../helpers/utils.mjs";
 import {
@@ -19,7 +20,6 @@ import * as deriving from "./methods/_data-deriving.mjs";
 import * as messages from "./methods/_messages.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
-import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
 import EquipmentIdentificationPart from "./parts/equipment-identification-part.mjs";
 import EquipmentSuppressionPart from "./parts/equipment-suppression-part.mjs";
@@ -154,6 +154,19 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
     return await parsing._parse(this, rawHTML);
   }
 
+  /**
+   * @inheritDoc
+   * @returns {Teriock.Execution.EquipmentExecutionOptions}
+   */
+  parseEvent(event) {
+    const options = super.parseEvent(event);
+    Object.assign(options, {
+      secret: event.shiftKey,
+      twoHanded: event.ctrlKey,
+    });
+    return options;
+  }
+
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
@@ -187,14 +200,16 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
     }
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.EquipmentExecutionOptions} options
+   */
   async roll(options) {
-    if (game.settings.get("teriock", "rollAttackOnEquipmentUse")) {
-      await this.actor?.useAbility("Basic Attack", options);
-      options.advantage = false;
-      options.disadvantage = false;
-      options.crit = false;
+    if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
+      await this.actor?.useAbility("Basic Attack");
     }
-    await rolling._roll(this, options);
+    options.source = this.parent;
+    const execution = new EquipmentExecution(options);
+    await execution.execute();
   }
 }

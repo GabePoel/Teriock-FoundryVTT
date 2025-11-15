@@ -67,7 +67,8 @@
     (path systemFields "impacts.fields" typeKey "fields.duration")
     value=(path system "impacts" typeKey "duration")
     classes="teriock-full-width"
-    disabled=(not editable)
+    disabled=(or (not editable) (eq typeKey "base"))
+    dataset=(ifThen (and editable (eq typeKey "base")) (object tooltip="Edit on the main page.") (object))
   }}
   <!-- Changes UI -->
   <fieldset class="teriock-full-width">
