@@ -48,7 +48,7 @@ command: |-
     const familiarItemFluencyData = {
       name: `${animal} Tamer`,
       type: "fluency",
-      img: tm.path.getIcon("tradecrafts", "Tamer"),
+      img: tm.path.getImage("tradecrafts", "Tamer"),
       system: {
         field: "survivalist",
         tradecraft: "tamer",
@@ -67,7 +67,7 @@ command: |-
         { pack: "teriock.powers" },
       );
     } else {
-      familiarItem = await foundry.utils.fromUuid(familiarItem.uuid);
+      familiarItem = await fromUuid(familiarItem.uuid);
       await familiarItem.update({
         system: familiarItemSystem,
       });
@@ -88,9 +88,9 @@ command: |-
     pct: 1,
     message: "Done.",
   });
-    foundry.ui.notifications.success(
-      `Successfully refreshed ${commonAnimalPages.length} familiar powers.`,
-    );
+  foundry.ui.notifications.success(
+    `Successfully refreshed ${commonAnimalPages.length} familiar powers.`,
+  );
 ownership:
   default: 0
 flags: {}
