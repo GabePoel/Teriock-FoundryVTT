@@ -98,7 +98,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
 
   /** @inheritDoc */
   get color() {
-    if (!this.read) {
+    if (!this.identification.read) {
       return TERIOCK.display.colors.grey;
     }
     return TERIOCK.options.equipment.powerLevel[this.powerLevel].color;
@@ -185,6 +185,9 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
 
   /** @inheritDoc */
   prepareSpecialData() {
+    if (!this.identification.identified && !this.isAttuned) {
+      this.tier.raw = "";
+    }
     super.prepareSpecialData();
     deriveModifiableNumber(this.minStr, { min: -3 });
     deriveModifiableIndeterministic(this.damage.twoHanded);
@@ -204,7 +207,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
    * @inheritDoc
    * @param {Teriock.Execution.EquipmentExecutionOptions} options
    */
-  async roll(options) {
+  async roll(options = {}) {
     if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
       await this.actor?.useAbility("Basic Attack");
     }

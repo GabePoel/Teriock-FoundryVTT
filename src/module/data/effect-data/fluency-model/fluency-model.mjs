@@ -1,6 +1,6 @@
 import { iconManifest } from "../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../executions/document-executions/_module.mjs";
-import { getIcon } from "../../../helpers/path.mjs";
+import { getImage } from "../../../helpers/path.mjs";
 import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   ExecutableDataMixin,
@@ -109,7 +109,7 @@ export default class TeriockFluencyModel extends ThresholdDataMixin(
     }
     if (!foundry.utils.hasProperty(data, "img")) {
       this.parent.updateSource({
-        img: getIcon("tradecrafts", "Artist"),
+        img: getImage("tradecrafts", "Artist"),
       });
     }
   }
@@ -130,7 +130,7 @@ export default class TeriockFluencyModel extends ThresholdDataMixin(
       foundry.utils.setProperty(
         changes,
         "img",
-        getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+        getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
       );
     }
   }
@@ -139,7 +139,7 @@ export default class TeriockFluencyModel extends ThresholdDataMixin(
    * @inheritDoc
    * @param {Teriock.Execution.DocumentExecutionOptions} options
    */
-  async roll(options) {
+  async roll(options = {}) {
     options.source = this.parent;
     const execution = new FluencyExecution(options);
     await execution.execute();

@@ -96,7 +96,7 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.item = this.item;
     context.abilities = abilitySort(

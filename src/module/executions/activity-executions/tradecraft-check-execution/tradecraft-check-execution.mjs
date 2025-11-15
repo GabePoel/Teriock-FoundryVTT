@@ -8,7 +8,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   /**
    * @param {Teriock.Execution.TradecraftExecutionOptions} options
    */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
     this._tradecraft = options.tradecraft;
     if (this.actor) {

@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -6,6 +7,16 @@ import ActionHandler from "../action-handler.mjs";
 export class AwakenHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "awaken";
+
+  /**
+   * @inheritDoc
+   */
+  static buildButton() {
+    const button = super.buildButton();
+    button.icon = makeIconClass("sunrise", "button");
+    button.label = "Awaken";
+    return button;
+  }
 
   /** @inheritDoc */
   async primaryAction() {
@@ -20,6 +31,16 @@ export class AwakenHandler extends ActionHandler {
  */
 export class ReviveHandler extends ActionHandler {
   static ACTION = "revive";
+
+  /**
+   * @inheritDoc
+   */
+  static buildButton() {
+    const button = super.buildButton();
+    button.icon = makeIconClass("heart-plus", "button");
+    button.label = "Revive";
+    return button;
+  }
 
   /** @inheritDoc */
   async primaryAction() {
@@ -36,6 +57,16 @@ export class HealHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "heal";
 
+  /**
+   * @inheritDoc
+   */
+  static buildButton() {
+    const button = super.buildButton();
+    button.icon = makeIconClass("hand-holding-heart", "button");
+    button.label = "Heal";
+    return button;
+  }
+
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
@@ -51,10 +82,42 @@ export class RevitalizeHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "revitalize";
 
+  /**
+   * @inheritDoc
+   */
+  static buildButton() {
+    const button = super.buildButton();
+    button.icon = makeIconClass("hand-holding-droplet", "button");
+    button.label = "Revitalize";
+    return button;
+  }
+
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
       await actor.system.takeNormalRevitalize();
+    }
+  }
+}
+
+export class DeathBagHandler extends ActionHandler {
+  /** @inheritDoc */
+  static ACTION = "death-bag";
+
+  /**
+   * @inheritDoc
+   */
+  static buildButton() {
+    const button = super.buildButton();
+    button.icon = makeIconClass("sack", "button");
+    button.label = "Death Bag";
+    return button;
+  }
+
+  /** @inheritDoc */
+  async primaryAction() {
+    for (const actor of this.actors) {
+      await actor.system.deathBagPull();
     }
   }
 }

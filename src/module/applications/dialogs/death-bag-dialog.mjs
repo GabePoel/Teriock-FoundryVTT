@@ -1,6 +1,6 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { getIcon, systemPath } from "../../helpers/path.mjs";
+import { getImage, systemPath } from "../../helpers/path.mjs";
 import { evaluateAsync } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -131,7 +131,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       };
       /** @type {Teriock.MessageData.MessagePanel} */
       const messageParts = {
-        image: getIcon("misc", "Death Bag"),
+        image: getImage("misc", "Death Bag"),
         name: "Death Bag",
         bars: [
           {

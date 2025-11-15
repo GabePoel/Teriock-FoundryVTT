@@ -1,4 +1,4 @@
-import { getIcon } from "../../../../helpers/path.mjs";
+import { getImage } from "../../../../helpers/path.mjs";
 import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDoc,
@@ -177,7 +177,7 @@ export async function _parse(abilityData, rawHTML) {
   if (abilityData.parent.name.toLowerCase().includes("warded")) {
     parameters.warded = true;
   }
-  const img = getIcon("abilities", abilityData.parent.name);
+  const img = getImage("abilities", abilityData.parent.name);
 
   delete parameters.results.endCondition;
 

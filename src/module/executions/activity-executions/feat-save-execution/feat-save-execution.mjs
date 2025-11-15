@@ -13,7 +13,7 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
   /**
    * @param {Teriock.Execution.FeatSaveExecutionOptions} options
    */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
     this.attribute = options.attribute;
     if (this.actor) {

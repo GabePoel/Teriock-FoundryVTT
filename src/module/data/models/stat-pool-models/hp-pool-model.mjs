@@ -1,4 +1,4 @@
-import { getIcon } from "../../../helpers/path.mjs";
+import { getImage } from "../../../helpers/path.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import StatPoolModel from "./stat-pool-model.mjs";
 
@@ -23,7 +23,7 @@ export default class HpPoolModel extends StatPoolModel {
   get panels() {
     const panels = [
       {
-        image: getIcon("misc", "Hit Die"),
+        image: getImage("misc", "Hit Die"),
         name: "Hit Die",
         bars: [],
         blocks: [
@@ -52,7 +52,7 @@ export default class HpPoolModel extends StatPoolModel {
       });
     } else if (this.parent.actor?.statuses.has("unconscious")) {
       panels.push({
-        image: getIcon("effect-types", "Awakening"),
+        image: getImage("effect-types", "Awakening"),
         icon: "sunrise",
         name: "Awaken",
         bars: [],

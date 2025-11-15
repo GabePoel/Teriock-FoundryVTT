@@ -184,7 +184,7 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSeetPart(
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     this._prepareDisplayContext(context);
     await this._prepareDocumentContext(context);

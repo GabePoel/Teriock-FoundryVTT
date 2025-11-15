@@ -1,5 +1,5 @@
 import TeriockEffect from "../documents/effect/effect.mjs";
-import { getIcon } from "./path.mjs";
+import { getImage } from "./path.mjs";
 
 /**
  * Creates a new ability effect and optionally pulls content from the wiki.
@@ -194,7 +194,7 @@ export async function createFluency(document, tradecraft = "artist") {
     {
       name: `New ${TERIOCK.index.tradecrafts[tradecraft]} Fluency`,
       type: "fluency",
-      img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+      img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
       system: {
         tradecraft: tradecraft,
         field: field,

@@ -4,10 +4,28 @@ import {
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { addFormula } from "../../../../helpers/formula.mjs";
+import { ApplyEffectHandler } from "../../../../helpers/interaction/action-handler/instances/apply-effect-handlers.mjs";
+import { ExecuteMacroHandler } from "../../../../helpers/interaction/action-handler/instances/execute-macro-handlers.mjs";
+import { FeatSaveHandler } from "../../../../helpers/interaction/action-handler/instances/feat-save-handlers.mjs";
+import { TakeHackHandler } from "../../../../helpers/interaction/action-handler/instances/hack-handlers.mjs";
+import {
+  AwakenHandler,
+  DeathBagHandler,
+  HealHandler,
+  RevitalizeHandler,
+  ReviveHandler,
+} from "../../../../helpers/interaction/action-handler/instances/one-off-handlers.mjs";
+import { ResistHandler } from "../../../../helpers/interaction/action-handler/instances/resistance-handlers.mjs";
+import { RollRollableTakeHandler } from "../../../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
+import { StandardDamageHandler } from "../../../../helpers/interaction/action-handler/instances/standard-damage.mjs";
+import {
+  ApplyStatusHandler,
+  RemoveStatusHandler,
+} from "../../../../helpers/interaction/action-handler/instances/status-handlers.mjs";
+import { TradecraftCheckHandler } from "../../../../helpers/interaction/action-handler/instances/tradecraft-check-handlers.mjs";
+import { UseAbilityHandler } from "../../../../helpers/interaction/action-handler/instances/use-ability-handlers.mjs";
 import {
   folderContents,
-  getRollIcon,
-  safeUuid,
   upgradeTransformation,
 } from "../../../../helpers/utils.mjs";
 
@@ -29,16 +47,12 @@ export default function AbilityExecutionChatPart(Base) {
       async _buildButtons() {
         // Feat Save Button
         if (this.source.system.interaction === "feat") {
-          const attribute = this.source.system.featSaveAttribute;
-          this.buttons.push({
-            label: `Roll ${attribute.toUpperCase()} Save`,
-            icon: "fas fa-dice-d20",
-            dataset: {
-              action: "feat-save",
-              attribute: attribute,
-              dc: this.rolls[0].total.toString(),
-            },
-          });
+          this.buttons.push(
+            FeatSaveHandler.buildButton(
+              this.source.system.featSaveAttribute,
+              this.rolls[0].total,
+            ),
+          );
         }
 
         // Apply Effect Button
@@ -48,21 +62,14 @@ export default function AbilityExecutionChatPart(Base) {
           this.source.system.maneuver !== "passive"
         ) {
           const normalEffectData = await this.generateConsequence();
-          const normalEffectJSON = JSON.stringify(normalEffectData);
           const critEffectData = await this.generateConsequence(true);
-          const critEffectJSON = JSON.stringify(critEffectData);
-          this.buttons.push({
-            label: "Apply Effect",
-            icon: "fas fa-disease",
-            dataset: {
-              action: "apply-effect",
-              normal: normalEffectJSON || critEffectJSON,
-              crit: critEffectJSON || normalEffectJSON,
-              sustaining: this.source.system.sustained
-                ? safeUuid(this.source.uuid)
-                : "null",
-            },
-          });
+          this.buttons.push(
+            ApplyEffectHandler.buildButton(
+              normalEffectData,
+              critEffectData,
+              this.source,
+            ),
+          );
         }
 
         // Macro Execution Buttons
@@ -73,8 +80,7 @@ export default function AbilityExecutionChatPart(Base) {
           this.source.system.impacts.heightened,
         ]) {
           for (const uuid of impact.macroButtonUuids) {
-            const macroData = fromUuidSync(uuid);
-            const useData = {
+            const data = {
               rollOptions: this.rollOptions,
               abilityData: this.source.toObject(),
               costs: this.costs,
@@ -82,168 +88,87 @@ export default function AbilityExecutionChatPart(Base) {
               proficient: this.proficient,
               fluent: this.fluent,
             };
-            const useDataset = JSON.stringify(useData);
-            const buttonData = {
-              label: macroData.name,
-              icon: "fas fa-code",
-              dataset: {
-                uuid: macroData.uuid,
-                action: "execute-macro",
-                use: useDataset,
-              },
-            };
-            this.buttons.push(buttonData);
+            this.buttons.push(ExecuteMacroHandler.buildButton(uuid, data));
           }
         }
 
         // Standard Damage Button
         if (this.mergeImpactsSet("common").has("standardDamage")) {
-          const buttonData = {
-            label: "Standard Roll",
-            icon: "fas fa-hammer-crash",
-            dataset: {
-              action: "standard-damage",
-            },
-          };
-          if (this.armament) {
-            buttonData.dataset.attacker = this.armament.uuid;
-          }
-          this.buttons.push(buttonData);
+          this.buttons.push(
+            StandardDamageHandler.buildButton(this.armament?.uuid),
+          );
         }
 
         // Buttons Based on Effect Type
         const effects = this.source.system.effectTypes;
 
-        // Resistance Button
+        // Resistance Buttons
         if (effects.has("resistance")) {
-          this.buttons.push({
-            label: "Roll Resistance",
-            icon: "fas fa-shield-alt",
-            dataset: {
-              action: "resist",
-            },
-          });
+          this.buttons.push(ResistHandler.buildButton());
+        }
+        if (effects.has("hexproof")) {
+          this.buttons.push(ResistHandler.buildButton(true));
         }
 
         // Awaken Button
         if (effects.has("awakening")) {
-          this.buttons.push({
-            label: "Awaken",
-            icon: "fas fa-sunrise",
-            dataset: {
-              action: "awaken",
-            },
-          });
+          this.buttons.push(AwakenHandler.buildButton());
         }
 
         // Revive Buttons
         if (effects.has("revival")) {
-          this.buttons.push({
-            label: "Revive",
-            icon: "fas fa-heart-pulse",
-            dataset: {
-              action: "revive",
-            },
-          });
-          this.buttons.push({
-            label: "Death Bag",
-            icon: "fas fa-sack",
-            dataset: {
-              action: "death-bag",
-            },
-          });
+          this.buttons.push(ReviveHandler.buildButton());
+          this.buttons.push(DeathBagHandler.buildButton());
         }
 
         // Heal Buttons
         if (effects.has("healing")) {
-          this.buttons.push({
-            label: "Heal",
-            icon: "fas fa-hand-holding-heart",
-            dataset: {
-              action: "heal",
-            },
-          });
+          this.buttons.push(HealHandler.buildButton());
         }
 
         // Heal Buttons
         if (effects.has("revitalization")) {
-          this.buttons.push({
-            label: "Revitalize",
-            icon: "fas fa-hand-holding-droplet",
-            dataset: {
-              action: "revitalize",
-            },
-          });
+          this.buttons.push(RevitalizeHandler.buildButton());
         }
 
         // Rollable Take Buttons
         const rolls = this.mergeImpactsRolls("rolls");
         Object.entries(rolls).forEach(([rollType, formula]) => {
           if (formula && TERIOCK.display.buttons.rollButtons[rollType]) {
-            const buttonConfig = foundry.utils.deepClone(
-              TERIOCK.display.buttons.rollButtons[rollType],
+            this.buttons.push(
+              RollRollableTakeHandler.buildButton(rollType, formula),
             );
-            buttonConfig.icon = `fas fa-${getRollIcon(formula)}`;
-            buttonConfig.dataset = {
-              action: "roll-rollable-take",
-              type: rollType,
-              tooltip: formula,
-              formula: formula,
-            };
-            this.buttons.push(buttonConfig);
           }
         });
 
         // Hack Buttons
         const hacks = this.mergeImpactsSet("hacks");
-        for (const hackType of hacks) {
-          const buttonConfig = foundry.utils.deepClone(
-            TERIOCK.display.buttons.hackButtons[hackType],
-          );
-          buttonConfig.dataset = {
-            action: "take-hack",
-            part: hackType,
-          };
-          this.buttons.push(buttonConfig);
+        for (const part of hacks) {
+          this.buttons.push(TakeHackHandler.buildButton(part));
         }
 
         // Apply Condition Buttons
         const startStatuses = this.mergeImpactsSet("startStatuses");
         for (const status of startStatuses) {
-          this.buttons.push({
-            label: `Apply ${TERIOCK.index.conditions[status]}`,
-            icon: "fas fa-plus",
-            dataset: {
-              action: "apply-status",
-              status: status,
-            },
-          });
+          this.buttons.push(ApplyStatusHandler.buildButton(status));
         }
 
         // Remove Condition Buttons
         const endStatuses = this.mergeImpactsSet("endStatuses");
         for (const status of endStatuses) {
-          this.buttons.push({
-            label: `Remove ${TERIOCK.index.conditions[status]}`,
-            icon: "fas fa-xmark",
-            dataset: {
-              action: "remove-status",
-              status: status,
-            },
-          });
+          this.buttons.push(RemoveStatusHandler.buildButton(status));
         }
 
         // Tradecraft Check Buttons
         const checks = this.mergeImpactsSet("checks");
         for (const tradecraft of checks) {
-          this.buttons.push({
-            label: `${TERIOCK.index.tradecrafts[tradecraft]} Check`,
-            icon: "fas fa-compass-drafting",
-            dataset: {
-              action: "tradecraft-check",
-              tradecraft: tradecraft,
-            },
-          });
+          this.buttons.push(TradecraftCheckHandler.buildButton(tradecraft));
+        }
+
+        // Ability Use Buttons
+        const abilityNames = this.mergeImpactsSet("abilityButtonNames");
+        for (const abilityName of abilityNames) {
+          this.buttons.push(UseAbilityHandler.buildButton(abilityName));
         }
       }
 

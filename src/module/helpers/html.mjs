@@ -1,6 +1,7 @@
 import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
-import { getIcon } from "./path.mjs";
+import { ApplyStatusHandler } from "./interaction/action-handler/instances/status-handlers.mjs";
+import { getImage } from "./path.mjs";
 import { toTitleCase } from "./string.mjs";
 
 /**
@@ -111,6 +112,7 @@ export function elderSorceryMask(ability) {
   return null;
 }
 
+//noinspection JSUnusedGlobalSymbols
 /**
  * Add click event listeners to multiple elements.
  *
@@ -152,14 +154,7 @@ export function makeDamageTypeButtons(roll) {
     }
   }
   for (const status of statuses) {
-    buttons.push({
-      label: `Apply ${TERIOCK.index.conditions[status]}`,
-      icon: "fas fa-plus",
-      dataset: {
-        action: "apply-status",
-        status: status,
-      },
-    });
+    buttons.push(ApplyStatusHandler.buildButton(status));
   }
   return buttons;
 }
@@ -173,7 +168,7 @@ export function makeDamageTypePanel(damageType) {
   if (Object.keys(TERIOCK.index.damageTypes).includes(damageType)) {
     return {
       name: TERIOCK.index.damageTypes[damageType] + " Damage",
-      image: getIcon("damage-types", TERIOCK.index.damageTypes[damageType]),
+      image: getImage("damage-types", TERIOCK.index.damageTypes[damageType]),
       icon: "heart-crack",
       blocks: [
         {
@@ -194,7 +189,7 @@ export function makeDrainTypePanel(drainType) {
   if (Object.keys(TERIOCK.index.drainTypes).includes(drainType)) {
     return {
       name: TERIOCK.index.drainTypes[drainType] + " Drain",
-      image: getIcon("drain-types", TERIOCK.index.drainTypes[drainType]),
+      image: getImage("drain-types", TERIOCK.index.drainTypes[drainType]),
       icon: "droplet-slash",
       blocks: [
         {
@@ -306,7 +301,7 @@ export function tidyHTML(html) {
  */
 export async function attributePanel(attribute) {
   return TeriockTextEditor.enrichPanel({
-    image: getIcon("attributes", TERIOCK.index.attributesFull[attribute]),
+    image: getImage("attributes", TERIOCK.index.attributesFull[attribute]),
     name: TERIOCK.index.attributesFull[attribute],
     blocks: [
       {
@@ -332,7 +327,7 @@ export async function tradecraftPanel(tradecraft) {
     }
   }
   return TeriockTextEditor.enrichPanel({
-    image: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+    image: getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
     name: TERIOCK.index.tradecrafts[tradecraft],
     bars: [
       {
@@ -365,7 +360,7 @@ export async function classPanel(className) {
     }
   }
   return await TeriockTextEditor.enrichPanel({
-    image: getIcon("classes", TERIOCK.index.classes[className]),
+    image: getImage("classes", TERIOCK.index.classes[className]),
     name: TERIOCK.index.classes[className],
     bars: [
       {
@@ -400,6 +395,7 @@ export function safeParseHTML(htmlString) {
   return htmlElement;
 }
 
+//noinspection JSUnusedGlobalSymbols
 /**
  * Unpack the consequence of the "apply effect" button.
  * @param {AbilityExecution} execution
@@ -416,6 +412,7 @@ export function unpackEffectButton(execution, options = {}) {
   return null;
 }
 
+//noinspection JSUnusedGlobalSymbols
 /**
  * Pack the consequence of the "apply effect" button.
  * @param {AbilityExecution} execution

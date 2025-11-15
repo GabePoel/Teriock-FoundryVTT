@@ -40,7 +40,7 @@ for (const page of commonAnimalPages) {
   const familiarItemFluencyData = {
     name: `${animal} Tamer`,
     type: "fluency",
-    img: tm.path.getIcon("tradecrafts", "Tamer"),
+    img: tm.path.getImage("tradecrafts", "Tamer"),
     system: {
       field: "survivalist",
       tradecraft: "tamer",

@@ -52,7 +52,7 @@ export default class TeriockChatMessage extends BlankMixin(ChatMessage) {
   }
 
   /** @inheritDoc */
-  async renderHTML(options) {
+  async renderHTML(options = {}) {
     const html = await super.renderHTML(options);
     await this.system.alterMessageHTML(html);
     return html;

@@ -107,7 +107,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   }
 
   /** @inheritDoc */
-  async roll(options) {
+  async roll(options = {}) {
     await this.system.roll(options);
   }
 }

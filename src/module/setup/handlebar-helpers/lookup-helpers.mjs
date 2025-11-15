@@ -1,4 +1,4 @@
-import { getIcon } from "../../helpers/path.mjs";
+import { getImage } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
 
 export default function registerLookupHelpers() {
@@ -50,9 +50,9 @@ export default function registerLookupHelpers() {
       TERIOCK.index[toCamelCase(category)] &&
       TERIOCK.index[toCamelCase(category)][key]
     ) {
-      return getIcon(category, TERIOCK.index[toCamelCase(category)][key]);
+      return getImage(category, TERIOCK.index[toCamelCase(category)][key]);
     } else {
-      return getIcon("effect-types", "Resistance");
+      return getImage("effect-types", "Resistance");
     }
   });
 }

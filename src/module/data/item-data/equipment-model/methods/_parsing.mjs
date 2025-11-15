@@ -1,6 +1,6 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
-import { getIcon } from "../../../../helpers/path.mjs";
+import { getImage } from "../../../../helpers/path.mjs";
 import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
 import { _override } from "./_overrides.mjs";
 
@@ -161,7 +161,7 @@ export async function _parse(equipmentData, rawHTML) {
     oldImg?.startsWith("systems/teriock/src/icons/equipment") ||
     oldImg?.startsWith("icons/svg")
   ) {
-    newImg = getIcon("equipment", equipmentData.equipmentType);
+    newImg = getImage("equipment", equipmentData.equipmentType);
     newImg = newImg.replace("ō", "o");
   }
 

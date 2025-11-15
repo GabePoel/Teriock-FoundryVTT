@@ -27,6 +27,10 @@ export async function selectDocumentsDialog(documents, options = {}) {
     options,
   );
 
+  if (documents.length === 0) {
+    return [];
+  }
+
   const idToDoc = new Map();
   /**
    * @type {Teriock.SelectOptions.DocumentSelectContext}

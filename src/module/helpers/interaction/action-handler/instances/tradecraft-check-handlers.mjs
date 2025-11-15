@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -6,6 +7,25 @@ import ActionHandler from "../action-handler.mjs";
 export class TradecraftCheckHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "tradecraft-check";
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
+   * @param {number} [threshold]
+   */
+  static buildButton(tradecraft, threshold) {
+    const button = super.buildButton();
+    button.icon = makeIconClass(
+      TERIOCK.options.document.fluency.icon,
+      "button",
+    );
+    button.label = `${TERIOCK.index.tradecrafts[tradecraft]} Check`;
+    button.dataset.tradecraft = `${tradecraft}`;
+    if (threshold) {
+      button.dataset.dc = `${threshold}`;
+    }
+    return button;
+  }
 
   /** @inheritDoc */
   async primaryAction() {

@@ -276,7 +276,7 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     const system = this.document.system;
     context.tab = this._tab;

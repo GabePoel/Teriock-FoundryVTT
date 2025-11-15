@@ -10,7 +10,7 @@ export default class FluencyExecution extends TradecraftExecutionMixin(
   BaseDocumentExecution,
 ) {
   /** @param {Teriock.Execution.DocumentExecutionOptions} options */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
     if (options.fluent === undefined) {
       this.fluent = true;

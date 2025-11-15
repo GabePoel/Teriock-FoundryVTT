@@ -1,9 +1,9 @@
-import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import {
   FeatSaveExecution,
   ResistanceExecution,
   TradecraftExecution,
 } from "../../../../executions/activity-executions/_module.mjs";
+import ImmunityExecution from "../../../../executions/activity-executions/immunity-execution/immunity-execution.mjs";
 
 /**
  * Actor data model mixin that handles common generic rolls.
@@ -48,7 +48,7 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
        *
-       * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+       * @param {Teriock.Execution.ImmunityExecutionOptions} [options] - Options for the roll.
        * @returns {Promise<void>}
        */
       async rollImmunity(options = {}) {
@@ -57,20 +57,9 @@ export default (Base) => {
         if (data.cancel) {
           return;
         }
-        options = data.options;
-        const chatData = {
-          speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
-          title: "Immune",
-          system: {
-            avatar: this.parent.img,
-            panels: options.panels,
-          },
-        };
-        TeriockChatMessage.applyRollMode(
-          chatData,
-          game.settings.get("core", "rollMode"),
-        );
-        await TeriockChatMessage.create(chatData);
+        options.actor = this.parent;
+        const execution = new ImmunityExecution(options);
+        await execution.execute();
       }
 
       /**

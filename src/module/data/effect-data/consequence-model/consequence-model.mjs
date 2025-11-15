@@ -183,7 +183,7 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
   }
 
   /** @inheritDoc */
-  async roll(_options) {
+  async roll(_options = {}) {
     await this.inCombatExpiration(true);
   }
 

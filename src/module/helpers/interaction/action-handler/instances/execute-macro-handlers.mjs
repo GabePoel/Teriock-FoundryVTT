@@ -1,7 +1,23 @@
+import { makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 export class ExecuteMacroHandler extends ActionHandler {
   static ACTION = "execute-macro";
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {object} [data]
+   */
+  static buildButton(uuid, data = {}) {
+    const button = super.buildButton();
+    button.icon = makeIconClass("code", "button");
+    const macro = fromUuidSync(uuid);
+    button.label = macro.name;
+    button.dataset.uuid = uuid;
+    button.dataset.use = JSON.stringify(data);
+    return button;
+  }
 
   async primaryAction() {
     const useData = JSON.parse(this.dataset.use);

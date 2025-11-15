@@ -1,6 +1,6 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
-import { getIcon } from "../../../../helpers/path.mjs";
+import { getImage } from "../../../../helpers/path.mjs";
 import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
 
 /**
@@ -102,7 +102,7 @@ export async function _parse(bodyData, rawHTML) {
   }
 
   const oldImg = bodyData.parent.img;
-  const newImg = getIcon("body-parts", bodyData.parent.name) || oldImg;
+  const newImg = getImage("body-parts", bodyData.parent.name) || oldImg;
 
   return {
     system: parameters,

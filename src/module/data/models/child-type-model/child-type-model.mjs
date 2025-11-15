@@ -169,6 +169,7 @@ export default class ChildTypeModel extends CommonTypeModel {
       font: this.font,
       image: this.parent.img,
       name: this.parent.nameString,
+      uuid: this.parent.uuid,
     };
     const properties = propertySort(
       this.parent.getProperties().filter((p) => p.system.revealed),
@@ -264,7 +265,7 @@ export default class ChildTypeModel extends CommonTypeModel {
    * @param {object} options - Options for the roll operation.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    */
-  async roll(options) {
+  async roll(options = {}) {
     await this.parent.toMessage(options);
   }
 
@@ -274,7 +275,7 @@ export default class ChildTypeModel extends CommonTypeModel {
    * @param {object} options - Options for the use operation.
    * @returns {Promise<void>} Promise that resolves when the use is complete.
    */
-  async use(options) {
+  async use(options = {}) {
     const data = { doc: this.parent };
     await this.parent.hookCall("use", data);
     if (!data.cancel) {

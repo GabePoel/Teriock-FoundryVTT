@@ -35,7 +35,7 @@ export default function RichApplicationMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _onRender(options) {
+      async _onRender(options = {}) {
         await super._onRender(options);
         this.element.querySelectorAll(".tcard-container").forEach((element) => {
           element.addEventListener(

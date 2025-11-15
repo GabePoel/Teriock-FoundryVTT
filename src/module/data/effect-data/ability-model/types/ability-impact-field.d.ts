@@ -39,6 +39,8 @@ export type AbilityExpirations = {
  * Applies data for different proficiency levels
  */
 export interface AbilityImpact {
+  /** <schema> Names of abilities that this can activate */
+  abilityButtonNames: Set<string>;
   /** <schema> Changes made to the parent {@link TeriockActor} */
   changes: Teriock.Foundry.EffectChangeData[];
   /** <schema> Tradecraft checks the ability can cause */

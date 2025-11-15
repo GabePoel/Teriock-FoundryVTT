@@ -33,7 +33,7 @@ export default (Base) =>
       });
     }
 
-    async _prepareContext(options) {
+    async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.avatarImagePath = this.settings.avatarImagePath;
       if (context.avatarImagePath === "img") {

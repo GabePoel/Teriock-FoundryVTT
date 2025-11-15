@@ -1,4 +1,4 @@
-import { getIcon } from "../../../helpers/path.mjs";
+import { getImage } from "../../../helpers/path.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import StatPoolModel from "./stat-pool-model.mjs";
 
@@ -18,7 +18,7 @@ export default class MpPoolModel extends StatPoolModel {
   get panels() {
     return [
       {
-        image: getIcon("misc", "Mana Die"),
+        image: getImage("misc", "Mana Die"),
         name: "Mana Die",
         bars: [],
         blocks: [

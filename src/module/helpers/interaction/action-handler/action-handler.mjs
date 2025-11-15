@@ -37,6 +37,20 @@ export default class ActionHandler extends InteractionHandler {
   }
 
   /**
+   * Build a button this handler can fire from.
+   * @returns {Teriock.UI.HTMLButtonConfig}
+   */
+  static buildButton() {
+    return {
+      icon: "fas fa-check",
+      dataset: {
+        action: this.ACTION,
+      },
+      label: "Action",
+    };
+  }
+
+  /**
    * Left-click action.
    * @returns {Promise<void>}
    * @abstract

@@ -15,7 +15,7 @@ export default function ThresholdExecutionMixin(Base) {
     /**
      * @param {Teriock.Execution.ThresholdExecutionOptions} options
      */
-    constructor(options) {
+    constructor(options = {}) {
       super(options);
       const {
         threshold,

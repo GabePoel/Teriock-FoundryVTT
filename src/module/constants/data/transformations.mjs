@@ -1,11 +1,11 @@
-import { getIcon } from "../../helpers/path.mjs";
+import { getImage } from "../../helpers/path.mjs";
 
 export const transformationsData = {
   fullTransformed: {
     _id: "fullTransformed0",
     hud: false,
     id: "fullTransformed",
-    img: getIcon("conditions", "Transformed"),
+    img: getImage("conditions", "Transformed"),
     name: "Full Transformed",
     statuses: ["transformed"],
     type: "base",
@@ -14,7 +14,7 @@ export const transformationsData = {
     _id: "greaterTransform",
     hud: false,
     id: "greaterTransformed",
-    img: getIcon("conditions", "Transformed"),
+    img: getImage("conditions", "Transformed"),
     name: "Greater Transformed",
     statuses: ["transformed"],
     type: "base",
@@ -23,7 +23,7 @@ export const transformationsData = {
     _id: "minorTransformed",
     hud: false,
     id: "minorTransformed",
-    img: getIcon("conditions", "Transformed"),
+    img: getImage("conditions", "Transformed"),
     name: "Minor Transformed",
     statuses: ["transformed"],
     type: "base",
@@ -32,7 +32,7 @@ export const transformationsData = {
     _id: "polymorphed00000",
     hud: false,
     id: "polymorphed",
-    img: getIcon("abilities", "Polymorph"),
+    img: getImage("abilities", "Polymorph"),
     name: "Polymorphed",
     statuses: ["fullTransformed", "transformed"],
     type: "base",
@@ -49,7 +49,7 @@ export const transformationsData = {
     ],
     hud: false,
     id: "treeformed",
-    img: getIcon("abilities", "Treeform Ball"),
+    img: getImage("abilities", "Treeform Ball"),
     name: "Treeformed",
     statuses: ["minorTransformed", "transformed"],
     type: "base",
@@ -57,7 +57,7 @@ export const transformationsData = {
   illusionTransformed: {
     _id: "illusionTransfor",
     hud: false,
-    img: getIcon("abilities", "Illusionary Arts"),
+    img: getImage("abilities", "Illusionary Arts"),
     id: "illusionTransformed",
     name: "Illusion Transformed",
     type: "base",

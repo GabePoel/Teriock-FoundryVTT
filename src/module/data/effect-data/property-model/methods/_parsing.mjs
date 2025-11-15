@@ -1,5 +1,5 @@
 import { tidyHTML } from "../../../../helpers/html.mjs";
-import { getIcon } from "../../../../helpers/path.mjs";
+import { getImage } from "../../../../helpers/path.mjs";
 import {
   cleanHTMLDoc,
   cleanObject,
@@ -79,7 +79,7 @@ export async function _parse(propertyData, rawHTML) {
   parameters.system.description = tidyHTML(rawHTML);
   parameters.system.impacts.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
-  parameters.img = getIcon("properties", propertyData.parent.name);
+  parameters.img = getImage("properties", propertyData.parent.name);
   const toClean = ["description", "limitation", "improvement"];
   cleanObject(parameters.system, toClean);
   return parameters;

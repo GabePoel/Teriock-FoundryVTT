@@ -16,7 +16,7 @@ export function systemPath(path) {
  * @param {string} name
  * @returns {string}
  */
-export function getIcon(category, name) {
+export function getImage(category, name) {
   return (
     iconManifest[toKebabCase(category)][name] ||
     systemPath("icons/documents/uncertainty.svg")

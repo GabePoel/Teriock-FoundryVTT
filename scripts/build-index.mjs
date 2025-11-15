@@ -11,7 +11,7 @@ import {
   tradecrafts,
   weaponFightingStyles,
 } from "../src/module/constants/index/_module.mjs";
-import { getIcon } from "../src/module/helpers/path.mjs";
+import { getImage } from "../src/module/helpers/path.mjs";
 import { toCamelCase, toKebabCase } from "../src/module/helpers/string.mjs";
 import {
   fetchCategoryMembers,
@@ -278,7 +278,7 @@ const createCustomData = async () => {
       _id: (key + "000000000000000").slice(0, 16),
       description: cleanHtml,
       id: key,
-      img: getIcon("conditions", value),
+      img: getImage("conditions", value),
       name: value,
       statuses: statuses,
       type: "condition",

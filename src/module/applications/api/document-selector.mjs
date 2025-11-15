@@ -188,14 +188,14 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
   }
 
   /** @inheritDoc */
-  async _onRender(options) {
+  async _onRender(options = {}) {
     await super._onRender(options);
     this._initSearchFilter();
     this._initTooltipLoader();
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     Object.assign(context, {
       documents: this.docs,

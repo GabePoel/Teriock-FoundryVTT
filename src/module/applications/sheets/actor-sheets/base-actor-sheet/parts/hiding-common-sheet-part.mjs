@@ -48,14 +48,14 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      async _prepareContext(options) {
+      async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         context.hideInactive = this._hideInactive;
         return context;
       }
 
       /** @inheritDoc */
-      async _renderFrame(options) {
+      async _renderFrame(options = {}) {
         const frame = await super._renderFrame(options);
         const toggleButton = document.createElement("button");
         toggleButton.classList.add(

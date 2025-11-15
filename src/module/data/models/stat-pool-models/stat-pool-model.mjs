@@ -1,5 +1,5 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
-import { getIcon } from "../../../helpers/path.mjs";
+import { getImage } from "../../../helpers/path.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { modifiableFormula } from "../../shared/fields/modifiable.mjs";
 import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
@@ -85,7 +85,7 @@ export default class StatPoolModel extends EmbeddedDataModel {
   get panels() {
     return [
       {
-        image: getIcon("equipment", "Die"),
+        image: getImage("equipment", "Die"),
         name: "Stat Die",
         bars: [],
         blocks: [

@@ -168,20 +168,27 @@ function abilityImpactField() {
         type: "Macro",
       }),
       {
-        initial: [],
-        nullable: false,
-        required: false,
-        label: "Macro Execution Buttons",
         hint:
           "Macros to turn into buttons that are displayed in the chat message rather than automatically executed." +
           " These macros do not have the full roll config in their scope. They are missing ability data, chat data," +
           " and some parameters the use data.",
+        initial: [],
+        label: "Macro Execution Buttons",
+        nullable: false,
+        required: false,
       },
     ),
     noTemplate: new fields.BooleanField({
       hint: "Do not place a template when using this ability even if it has an area of effect.",
       initial: false,
       label: "No Template",
+      nullable: false,
+      required: false,
+    }),
+    abilityButtonNames: new fields.SetField(new fields.StringField(), {
+      hint: "Names of specific abilities that this can cause to be used. These will be displayed as chat buttons.",
+      initial: [],
+      label: "Ability Use Buttons",
       nullable: false,
       required: false,
     }),

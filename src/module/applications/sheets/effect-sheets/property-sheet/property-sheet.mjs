@@ -63,7 +63,7 @@ export default class TeriockPropertySheet extends WikiButtonSheetMixin(
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.subProperties = propertySort(
       this.document.getProperties().filter((p) => p.system.revealed),

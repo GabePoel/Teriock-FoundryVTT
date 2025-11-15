@@ -1,11 +1,11 @@
-import { getIcon } from "../../../helpers/path.mjs";
+import { getImage } from "../../../helpers/path.mjs";
 import ArmamentExecution from "../armament-execution/armament-execution.mjs";
 
 export default class EquipmentExecution extends ArmamentExecution {
   /**
    * @param {Teriock.Execution.EquipmentExecutionOptions} options
    */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
     const {
       secret = game.settings.get("teriock", "secretEquipment"),
@@ -30,7 +30,7 @@ export default class EquipmentExecution extends ArmamentExecution {
             text: "Item is used.",
           },
         ],
-        image: getIcon("equipment", this.source.system.equipmentType),
+        image: getImage("equipment", this.source.system.equipmentType),
       };
     } else {
       return super._buildSourcePanel();

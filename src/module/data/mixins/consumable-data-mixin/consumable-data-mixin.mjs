@@ -77,7 +77,7 @@ export default function ConsumableDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      async use(options) {
+      async use(options = {}) {
         await super.use(options);
         if (
           this.parent.isOwner &&

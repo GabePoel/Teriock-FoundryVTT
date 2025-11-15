@@ -1,5 +1,4 @@
 import { ApplyEffectHandler } from "./instances/apply-effect-handlers.mjs";
-import { DeathBagHandler } from "./instances/death-bag-handlers.mjs";
 import { ExecuteMacroHandler } from "./instances/execute-macro-handlers.mjs";
 import { FeatSaveHandler } from "./instances/feat-save-handlers.mjs";
 import {
@@ -8,6 +7,7 @@ import {
 } from "./instances/hack-handlers.mjs";
 import {
   AwakenHandler,
+  DeathBagHandler,
   HealHandler,
   RevitalizeHandler,
   ReviveHandler,

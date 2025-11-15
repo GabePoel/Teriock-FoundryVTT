@@ -27,7 +27,7 @@ const choices = {
 
 const documents = Object.keys(choices).map((key) => {
   return {
-    img: tm.path.getIcon("effect-types", choices[key]),
+    img: tm.path.getImage("effect-types", choices[key]),
     name: choices[key],
     uuid: key,
   };

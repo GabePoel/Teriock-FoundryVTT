@@ -32,7 +32,7 @@ export default function ExecutableDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      async use(options) {
+      async use(options = {}) {
         await super.use(options);
         const macroPromises = Array.from(
           this.macros.map((uuid) => fromUuid(uuid)),

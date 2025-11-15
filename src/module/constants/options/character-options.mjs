@@ -9,11 +9,11 @@ export const characterOptions = {
       text: "Resistance",
     },
     hexproofs: {
-      action: "rollResistance",
+      action: "rollHexproof",
       text: "Hexproof",
     },
     hexseals: {
-      action: "rollImmunity",
+      action: "rollHexseal",
       text: "Hexseal",
     },
   },

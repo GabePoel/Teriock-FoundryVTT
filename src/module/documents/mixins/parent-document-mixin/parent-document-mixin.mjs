@@ -1,3 +1,5 @@
+import { toCamelCase } from "../../../helpers/string.mjs";
+
 /**
  * Mixin for common functions used across document classes that embed children.
  * @param {typeof CommonDocument} Base
@@ -51,7 +53,9 @@ export default function ParentDocumentMixin(Base) {
         const out = {};
         const effectTypes = this.effectTypes;
         for (const key of Object.keys(TERIOCK.system.documentTypes.effects)) {
-          out[key] = new Set(effectTypes[key] || []);
+          out[key] = new Set(
+            (effectTypes[key] || []).map((e) => toCamelCase(e.name)),
+          );
         }
         return out;
       }

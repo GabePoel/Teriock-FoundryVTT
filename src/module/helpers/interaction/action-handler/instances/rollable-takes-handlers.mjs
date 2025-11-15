@@ -5,7 +5,7 @@ import {
   makeDamageDrainTypePanels,
   makeDamageTypeButtons,
 } from "../../../html.mjs";
-import { getActor } from "../../../utils.mjs";
+import { getActor, getRollIcon, makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -14,6 +14,22 @@ import ActionHandler from "../action-handler.mjs";
 export class RollRollableTakeHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "roll-rollable-take";
+
+  /**
+   * @inheritDoc
+   * @param {string} rollType
+   * @param {string} formula
+   * @returns {Teriock.UI.HTMLButtonConfig}
+   */
+  static buildButton(rollType, formula) {
+    const button = super.buildButton();
+    button.icon = makeIconClass(getRollIcon(formula), "button");
+    button.label = TERIOCK.display.buttons.rollButtons[rollType].label;
+    button.dataset.type = rollType;
+    button.dataset.formula = formula;
+    button.dataset.tooltip = formula;
+    return button;
+  }
 
   /**
    * @returns {string}
@@ -42,16 +58,7 @@ export class RollRollableTakeHandler extends ActionHandler {
     }
     await roll.evaluate();
     const buttons = [
-      {
-        label: ROLL_TYPES[this.dataset.type].label || "Apply",
-        icon: `fa-solid fa-${ROLL_TYPES[this.dataset.type].icon || "plus"}`,
-        classes: ["teriock-chat-button", `${this.dataset.type}-button`],
-        dataset: {
-          action: "take-rollable-take",
-          type: this.dataset.type,
-          amount: roll.total.toString(),
-        },
-      },
+      TakeRollableTakeHandler.buildButton(this.dataset.type, roll.total),
     ];
     const damageTypeButtons = makeDamageTypeButtons(roll);
     const damageDrainPanels = await makeDamageDrainTypePanels(roll);
@@ -88,6 +95,21 @@ export class RollRollableTakeHandler extends ActionHandler {
 export class TakeRollableTakeHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "take-rollable-take";
+
+  /**
+   * @inheritDoc
+   * @param {string} rollType
+   * @param {number} amount
+   */
+  static buildButton(rollType, amount) {
+    const button = super.buildButton();
+    button.icon = makeIconClass(ROLL_TYPES[rollType].icon || "plus", "button");
+    button.label = ROLL_TYPES[rollType].label || "Apply";
+    button.classes = ["teriock-chat-button", `${rollType}-button`];
+    button.dataset.type = rollType;
+    button.dataset.amount = amount.toString();
+    return button;
+  }
 
   /** @inheritDoc */
   async primaryAction() {

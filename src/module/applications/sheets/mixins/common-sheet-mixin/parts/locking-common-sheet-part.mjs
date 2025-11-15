@@ -50,7 +50,7 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      async _renderFrame(options) {
+      async _renderFrame(options = {}) {
         const frame = await super._renderFrame(options);
         if (
           this.document.documentName === "Item" ||

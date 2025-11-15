@@ -71,6 +71,8 @@ declare global {
       color?: string;
       /** Additional CSS classes to add */
       classes?: string;
+      /** UUID of a document that can be opened */
+      uuid?: Teriock.UUID<TeriockChild>;
     };
   }
 }

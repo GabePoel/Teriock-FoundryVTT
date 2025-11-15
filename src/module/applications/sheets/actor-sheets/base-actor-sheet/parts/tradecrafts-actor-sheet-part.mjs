@@ -45,7 +45,7 @@ export default (Base) =>
       });
     }
 
-    async _prepareContext(options) {
+    async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.tradecraftTooltips = {};
       for (const tc of Object.keys(TERIOCK.index.tradecrafts)) {

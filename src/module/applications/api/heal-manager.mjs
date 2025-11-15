@@ -96,7 +96,7 @@ export default class TeriockHealManager extends TeriockStatManager {
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.noDice = this._noDice;
     return context;

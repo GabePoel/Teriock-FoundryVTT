@@ -1,3 +1,4 @@
+import { iconStyles } from "../constants/display/_module.mjs";
 import { TeriockRoll } from "../dice/_module.mjs";
 import { systemPath } from "./path.mjs";
 
@@ -334,7 +335,7 @@ export function makeIcon(icon, ...styles) {
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIconClass(icon, ...styles) {
-  const styleClasses = styles.map((s) => TERIOCK.display.iconStyles[s] || s);
+  const styleClasses = styles.map((s) => iconStyles[s] || s);
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
   if (!icon.startsWith("fa-")) {
     icon = `fa-${icon}`;
@@ -481,39 +482,6 @@ export function parseDurationString(durationString) {
 }
 
 /**
- * Parses a time string and returns a number of seconds.
- * @param {string} timeString - The time string to parse.
- * @returns {number|null} A number of seconds corresponding to the duration, or null if invalid.
- */
-export function parseTimeString(timeString) {
-  const cleanStr = timeString.toLowerCase().trim();
-  const match = cleanStr.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)$/);
-  if (!match) {
-    return null;
-  }
-  const value = parseFloat(match[1]);
-  const unit = match[2];
-  const units = {
-    1: ["s", "sec", "secs", "second", "seconds"],
-    60: ["m", "min", "mins", "minute", "minutes"],
-    3600: ["h", "hr", "hrs", "hour", "hours"],
-    86400: ["d", "day", "days"],
-    604800: ["w", "week", "weeks"],
-    31557600: ["y", "yr", "yrs", "year", "years"],
-  };
-
-  const conversions = Object.fromEntries(
-    Object.entries(units).flatMap(([seconds, aliases]) =>
-      aliases.map((alias) => [alias, parseInt(seconds)]),
-    ),
-  );
-  if (!(unit in conversions)) {
-    return null;
-  }
-  return value * conversions[unit];
-}
-
-/**
  * Converts a number of seconds to a human-readable time string.
  * @param {number} totalSeconds - The total number of seconds to convert.
  * @returns {string} A human-readable time string.
@@ -553,7 +521,6 @@ export function secondsToReadable(totalSeconds) {
   for (const unit of units) {
     const count = Math.floor(remaining / unit.seconds);
     if (count > 0) {
-      // parts.push(`${count} ${unit.name}${count > 1 ? "s" : ""}`);
       parts.push(`${count} ${unit.name}`);
       remaining -= count * unit.seconds;
     }

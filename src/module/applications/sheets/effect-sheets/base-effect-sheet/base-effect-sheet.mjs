@@ -136,7 +136,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     Object.assign(context, {
       disabled: this.document.disabled,

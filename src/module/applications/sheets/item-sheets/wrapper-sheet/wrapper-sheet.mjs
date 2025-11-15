@@ -30,7 +30,7 @@ export default class TeriockWrapperSheet extends TeriockBaseItemSheet {
   }
 
   /** @inheritDoc */
-  async render(options) {
+  async render(options = {}) {
     await super.render(options);
     const out = await this.document.system.effect.sheet.render({ force: true });
     await this.close({ animate: false });

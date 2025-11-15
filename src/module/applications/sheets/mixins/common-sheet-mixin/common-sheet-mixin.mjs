@@ -447,7 +447,7 @@ export default function CommonSheetMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _prepareContext(options) {
+      async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         Object.assign(context, {
           TERIOCK: TERIOCK,
@@ -505,7 +505,7 @@ export default function CommonSheetMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _renderFrame(options) {
+      async _renderFrame(options = {}) {
         const frame = await super._renderFrame(options);
         if (this.document.inCompendium) {
           this.window.header.style.backgroundColor =

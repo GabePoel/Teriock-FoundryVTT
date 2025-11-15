@@ -1,5 +1,6 @@
-import { chatImage } from "../../helpers/utils.mjs";
+import { chatImage, makeIcon } from "../../helpers/utils.mjs";
 import { TeriockImagePreviewer } from "../api/_module.mjs";
+import { previewSheet } from "./_module.mjs";
 
 /**
  * Context menu options for image elements.
@@ -9,7 +10,7 @@ import { TeriockImagePreviewer } from "../api/_module.mjs";
 const imageContextMenuOptions = [
   {
     name: "Open Image",
-    icon: '<i class="fa-solid fa-image"></i>',
+    icon: makeIcon("image", "contextMenu"),
     callback: async (target) => {
       const image = new TeriockImagePreviewer(target.getAttribute("src"));
       await image.render(true);
@@ -21,7 +22,7 @@ const imageContextMenuOptions = [
   },
   {
     name: "Share Image",
-    icon: '<i class="fa-solid fa-share"></i>',
+    icon: makeIcon("share", "contextMenu"),
     callback: async (target) => {
       await chatImage(target.getAttribute("src"));
     },
@@ -30,6 +31,21 @@ const imageContextMenuOptions = [
       return src && src.length > 0 && target.getAttribute("data-shareable");
     },
   },
+  {
+    name: "Open Document",
+    icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+    callback: async (target) => {
+      const uuid = target.getAttribute("data-uuid");
+      if (uuid) {
+        const doc = await fromUuid(uuid);
+        if (doc) {
+          await previewSheet(doc);
+        }
+      }
+    },
+    condition: (target) =>
+      target.getAttribute("data-openable-document") &&
+      target.getAttribute("data-uuid"),
+  },
 ];
-
 export default imageContextMenuOptions;

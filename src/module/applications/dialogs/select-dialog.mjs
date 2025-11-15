@@ -1,7 +1,7 @@
 //noinspection JSUnusedGlobalSymbols
 
 import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
-import { getIcon } from "../../helpers/path.mjs";
+import { getImage } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -189,7 +189,7 @@ export async function selectTradecraftDialog() {
       return {
         name: TERIOCK.index.tradecrafts[tc],
         uuid: tc,
-        img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+        img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
         tooltip: await TeriockTextEditor.makeTooltip(await tradecraftPanel(tc)),
       };
     }),
@@ -280,7 +280,7 @@ export async function selectClassDialog() {
       return {
         name: TERIOCK.index.classes[c],
         uuid: c,
-        img: getIcon("classes", TERIOCK.index.classes[c]),
+        img: getImage("classes", TERIOCK.index.classes[c]),
         tooltip: await TeriockTextEditor.makeTooltip(await classPanel(c)),
       };
     }),

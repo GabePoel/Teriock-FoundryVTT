@@ -4,7 +4,7 @@ export default class BaseDocumentExecution extends BaseExecution {
   /**
    * @param {Teriock.Execution.DocumentExecutionOptions} options
    */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
     this._source = options.source;
     if (options.actor === undefined) {

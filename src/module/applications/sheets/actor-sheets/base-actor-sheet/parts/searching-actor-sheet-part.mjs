@@ -47,7 +47,7 @@ export default (Base) =>
       this._initSearchFilters();
     }
 
-    async _prepareContext(options) {
+    async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.searchStrings = foundry.utils.deepClone(this._searchStrings);
       return context;

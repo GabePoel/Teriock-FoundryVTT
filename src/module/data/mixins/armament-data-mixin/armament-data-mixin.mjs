@@ -187,7 +187,7 @@ export default function ArmamentDataMixin(Base) {
        * @inheritDoc
        * @param {Teriock.Execution.ArmamentExecutionOptions} options
        */
-      async roll(options) {
+      async roll(options = {}) {
         if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
           await this.actor?.useAbility("Basic Attack");
         }

@@ -55,7 +55,7 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     await this._enrichAll(context, {
       description: this.item.system.description,

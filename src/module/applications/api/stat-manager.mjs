@@ -56,7 +56,7 @@ export default class TeriockStatManager extends HackStatMixin(
   }
 
   /** @inheritDoc */
-  _initializeApplicationOptions(options) {
+  _initializeApplicationOptions(options = {}) {
     const applicationOptions = super._initializeApplicationOptions(options);
     if (options.title) {
       applicationOptions.window.title = options.title;
@@ -65,7 +65,7 @@ export default class TeriockStatManager extends HackStatMixin(
   }
 
   /** @inheritDoc */
-  _onClose(options) {
+  _onClose(options = {}) {
     super._onClose(options);
     foundry.helpers.Hooks.off("updateActor", this._actorHook);
     foundry.helpers.Hooks.off("updateItem", this._itemHook);
@@ -114,7 +114,7 @@ export default class TeriockStatManager extends HackStatMixin(
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.forHarm = this._forHarm;
     context.forHarmField = this._forHarmField;

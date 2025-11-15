@@ -1,29 +1,33 @@
-import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { getIcon } from "../../../helpers/path.mjs";
-import BaseExecution from "../../base-execution/base-execution.mjs";
+import { UseAbilityHandler } from "../../../helpers/interaction/action-handler/instances/use-ability-handlers.mjs";
+import { getImage } from "../../../helpers/path.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
+import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
 
 /**
  * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
 export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
-  BaseExecution,
+  ImmunityExecution,
 ) {
   /**
    * @param {Teriock.Execution.ResistanceExecutionOptions} options
    */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
-    this.image = options.image || getIcon("effect-types", "Resistance");
-    this.wrappers = options.wrappers;
-    this.wrappers.push("Automatic");
     if (options.proficient === undefined) {
       this.proficient = true;
     }
     if (options.threshold === undefined) {
       this.threshold = 10;
     }
+    this.image =
+      options.image ||
+      (this.hex
+        ? getImage("effect-types", "Hexproof")
+        : getImage("effect-types", "Resistance"));
+    this.rule = this.hex ? "hexproof" : "resistance";
+    this.label = "Resistance";
   }
 
   /** @inheritDoc */
@@ -32,26 +36,7 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
   }
 
   /** @inheritDoc */
-  async _buildPanels() {
-    this.panels.push({
-      image: this.image,
-      name: "Resistance",
-      bars: [
-        {
-          icon: "fa-shield",
-          label: "Resistance",
-          wrappers: this.wrappers,
-        },
-      ],
-      blocks: [
-        {
-          title: "Resistance",
-          text: TERIOCK.content.keywords.resistance,
-        },
-      ],
-      icon: "shield-halved",
-      label: "Protection",
-    });
-    await TeriockTextEditor.enrichPanels(this.panels);
+  async _buildButtons() {
+    this.buttons.push(UseAbilityHandler.buildButton("Resist"));
   }
 }

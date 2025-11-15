@@ -8,7 +8,9 @@ export default (Base) =>
       actions: {
         rollFeatSave: this._rollFeatSave,
         rollImmunity: this._rollImmunity,
+        rollHexproof: this._rollHexproof,
         rollResistance: this._rollResistance,
+        rollHexseal: this._rollHexseal,
         rollStatDie: this._rollStatDie,
       },
     };
@@ -27,49 +29,40 @@ export default (Base) =>
     }
 
     /**
-     * Rolls immunity with optional advantage/disadvantage.
+     * Rolls hexproof resistance with optional advantage/disadvantage.
+     * @param {MouseEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when resistance is rolled.
+     * @static
+     */
+    static async _rollHexproof(event, target) {
+      const options = protectionOptions(event, target);
+      options.hex = true;
+      await this.actor.system.rollResistance(options);
+    }
+
+    /**
+     * Rolls hexseal immunity.
+     * @param {MouseEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when immunity is rolled.
+     * @static
+     */
+    static async _rollHexseal(event, target) {
+      const options = protectionOptions(event, target);
+      options.hex = true;
+      await this.actor.system.rollImmunity(options);
+    }
+
+    /**
+     * Rolls immunity.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when immunity is rolled.
      * @static
      */
     static async _rollImmunity(event, target) {
-      event.stopPropagation();
-      let messageParts;
-      if (target.classList.contains("tcard-image")) {
-        const tcard = target.closest(".tcard");
-        const img = target.querySelector("img");
-        messageParts = {};
-        messageParts.image = img.src;
-        messageParts.name = "Immunity";
-        messageParts.bars = [
-          {
-            icon: "fa-shield",
-            label: "Immunity",
-            wrappers: [
-              tcard.querySelector(".tcard-title").textContent,
-              tcard.querySelector(".tcard-subtitle").textContent,
-            ],
-          },
-        ];
-        messageParts.blocks = [
-          {
-            title: "Immunity",
-            text: TERIOCK.content.keywords.immunity,
-          },
-        ];
-        messageParts.icon = "shield-halved";
-        messageParts.label = "Protection";
-      }
-      const panels = messageParts
-        ? [await TeriockTextEditor.enrichPanel(messageParts)]
-        : [];
-      /** @type {Teriock.RollOptions.CommonRoll} */
-      const options = {
-        advantage: event.altKey,
-        disadvantage: event.shiftKey,
-        panels: panels,
-      };
+      const options = protectionOptions(event, target);
       await this.actor.system.rollImmunity(options);
     }
 
@@ -81,24 +74,11 @@ export default (Base) =>
      * @static
      */
     static async _rollResistance(event, target) {
-      event.stopPropagation();
-      const img = target.querySelector("img");
-      const tcard = target.closest(".tcard");
-      const options = {
-        advantage: event.altKey,
-        disadvantage: event.shiftKey,
-        wrappers: [
-          tcard?.querySelector(".tcard-title")?.textContent || "",
-          tcard?.querySelector(".tcard-subtitle")?.textContent || "",
-        ],
-      };
-      if (img?.src) {
-        options.image = img.src;
-      }
+      const options = protectionOptions(event, target);
       await this.actor.system.rollResistance(options);
     }
 
-    async _prepareContext(options) {
+    async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.attributeTooltips = {};
       for (const attribute of Object.keys(TERIOCK.index.attributes)) {
@@ -108,3 +88,27 @@ export default (Base) =>
       return context;
     }
   };
+
+/**
+ * Get the protection options for a target.
+ * @param {MouseEvent} event - The event object.
+ * @param {HTMLElement} target
+ * @returns {Partial<Teriock.Execution.ImmunityExecutionOptions>}
+ * @private
+ */
+function protectionOptions(event, target) {
+  const img = target.querySelector("img");
+  const tcard = target.closest(".tcard");
+  const options = {
+    advantage: event.altKey,
+    disadvantage: event.shiftKey,
+    wrappers: [
+      tcard?.querySelector(".tcard-title")?.textContent || "",
+      tcard?.querySelector(".tcard-subtitle")?.textContent || "",
+    ],
+  };
+  if (img?.src) {
+    options.image = img.src;
+  }
+  return options;
+}

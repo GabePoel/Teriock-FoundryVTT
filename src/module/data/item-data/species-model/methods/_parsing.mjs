@@ -1,5 +1,5 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import { getIcon } from "../../../../helpers/path.mjs";
+import { getImage } from "../../../../helpers/path.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import {
   cleanHTMLDoc,
@@ -236,7 +236,7 @@ export async function _parse(speciesData, rawHTML) {
     "mpIncrease",
     "innateRanks",
   ]);
-  let icon = getIcon("creatures", speciesData.parent.name);
+  let icon = getImage("creatures", speciesData.parent.name);
   const outData = {
     system: parameters,
   };

@@ -76,7 +76,7 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
   }
 
   /** @inheritDoc */
-  async _prepareContext(options) {
+  async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     await this._enrichAll(context, {
       description: this.item.system.description,

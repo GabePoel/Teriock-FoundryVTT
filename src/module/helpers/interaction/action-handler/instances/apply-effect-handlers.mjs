@@ -1,4 +1,4 @@
-import { pureUuid, queryGM } from "../../../utils.mjs";
+import { makeIconClass, pureUuid, queryGM, safeUuid } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -7,6 +7,26 @@ import ActionHandler from "../action-handler.mjs";
 export class ApplyEffectHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "apply-effect";
+
+  /**
+   * @inheritDoc
+   * @param {object} primaryData
+   * @param {object} [secondaryData]
+   * @param {TeriockAbility} [sustainingAbility]
+   */
+  static buildButton(primaryData, secondaryData = {}, sustainingAbility) {
+    const button = super.buildButton();
+    button.icon = makeIconClass(TERIOCK.options.document.effect.icon, "button");
+    button.label = "Apply Effect";
+    const primaryJSON = JSON.stringify(primaryData);
+    const secondaryJSON = JSON.stringify(secondaryData);
+    button.dataset.normal = primaryJSON || secondaryJSON;
+    button.dataset.crit = secondaryJSON || primaryJSON;
+    button.dataset.sustaining = sustainingAbility?.system?.sustained
+      ? safeUuid(sustainingAbility.uuid)
+      : "null";
+    return button;
+  }
 
   /**
    * Add each {@link TeriockConsequence} to the sustaining {@link TeriockAbility}.

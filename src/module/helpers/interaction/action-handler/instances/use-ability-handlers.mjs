@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -6,6 +7,21 @@ import ActionHandler from "../action-handler.mjs";
 export class UseAbilityHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "use-ability";
+
+  /**
+   * @inheritDoc
+   * @param {string} abilityName
+   */
+  static buildButton(abilityName) {
+    const button = super.buildButton();
+    button.icon = makeIconClass(
+      TERIOCK.options.document.ability.icon,
+      "button",
+    );
+    button.label = `Use ${abilityName}`;
+    button.dataset.ability = abilityName;
+    return button;
+  }
 
   /** @inheritDoc */
   async primaryAction() {

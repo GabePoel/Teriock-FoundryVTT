@@ -4,6 +4,7 @@ import {
   makeDamageDrainTypePanels,
   makeDamageTypeButtons,
 } from "../../../helpers/html.mjs";
+import { TakeRollableTakeHandler } from "../../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
 import { formulaExists } from "../../../helpers/utils.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
@@ -11,7 +12,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /**
    * @param {Teriock.Execution.ArmamentExecutionOptions} options
    */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
     const {
       crit = false,
@@ -49,40 +50,19 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     if (this.rolls.length > 0) {
       const roll = this.rolls[0];
       if (this.damage) {
-        this.buttons.push({
-          label: "Damage",
-          icon: "fas fa-heart-crack",
-          classes: ["teriock-chat-button", "damage-button"],
-          dataset: {
-            action: "take-rollable-take",
-            type: "damage",
-            amount: roll.total.toString(),
-          },
-        });
+        this.buttons.push(
+          TakeRollableTakeHandler.buildButton("damage", roll.total),
+        );
       }
       if (this.drain) {
-        this.buttons.push({
-          label: "Drain",
-          icon: "fas fa-droplet-slash",
-          classes: ["teriock-chat-button", "drain-button"],
-          dataset: {
-            action: "take-rollable-take",
-            type: "drain",
-            amount: roll.total.toString(),
-          },
-        });
+        this.buttons.push(
+          TakeRollableTakeHandler.buildButton("drain", roll.total),
+        );
       }
       if (this.wither) {
-        this.buttons.push({
-          label: "Wither",
-          icon: "fas fa-hourglass-half",
-          classes: ["teriock-chat-button", "wither-button"],
-          dataset: {
-            action: "take-rollable-take",
-            type: "wither",
-            amount: roll.total.toString(),
-          },
-        });
+        this.buttons.push(
+          TakeRollableTakeHandler.buildButton("wither", roll.total),
+        );
       }
       this.buttons.push(...makeDamageTypeButtons(roll));
     }
@@ -127,8 +107,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
           ) {
             await this.source.setFlag("teriock", "dontConsume", true);
           }
-          await ability.use();
         }
+        await ability.use();
       }
     }
   }

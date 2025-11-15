@@ -1,10 +1,10 @@
-import { getIcon } from "../../helpers/path.mjs";
+import { getImage } from "../../helpers/path.mjs";
 
 export const hacksData = {
   arm1: {
     _id: "armHack100000000",
     id: "armHack1",
-    img: getIcon("hacks", "1st Arm Hack"),
+    img: getImage("hacks", "1st Arm Hack"),
     name: "1st Arm Hack",
     statuses: ["hacked"],
     hud: false,
@@ -20,7 +20,7 @@ export const hacksData = {
   arm2: {
     _id: "armHack200000000",
     id: "armHack2",
-    img: getIcon("hacks", "2nd Arm Hack"),
+    img: getImage("hacks", "2nd Arm Hack"),
     name: "2nd Arm Hack",
     statuses: ["hacked"],
     hud: false,
@@ -36,7 +36,7 @@ export const hacksData = {
   body1: {
     _id: "bodyHack00000000",
     id: "bodyHack",
-    img: getIcon("hacks", "Body Hack"),
+    img: getImage("hacks", "Body Hack"),
     name: "Body Hack",
     statuses: ["hacked", "immobilized"],
     hud: false,
@@ -52,7 +52,7 @@ export const hacksData = {
   ear1: {
     _id: "earHack000000000",
     id: "earHack",
-    img: getIcon("hacks", "Ear Hack"),
+    img: getImage("hacks", "Ear Hack"),
     name: "Ear Hack",
     statuses: ["deaf", "hacked"],
     hud: false,
@@ -68,7 +68,7 @@ export const hacksData = {
   eye1: {
     _id: "eyeHack000000000",
     id: "eyeHack",
-    img: getIcon("hacks", "Eye Hack"),
+    img: getImage("hacks", "Eye Hack"),
     name: "Eye Hack",
     statuses: ["blind", "hacked"],
     hud: false,
@@ -84,7 +84,7 @@ export const hacksData = {
   leg1: {
     _id: "legHack100000000",
     id: "legHack1",
-    img: getIcon("hacks", "1st Leg Hack"),
+    img: getImage("hacks", "1st Leg Hack"),
     name: "1st Leg Hack",
     statuses: ["hacked", "slowed"],
     hud: false,
@@ -100,7 +100,7 @@ export const hacksData = {
   leg2: {
     _id: "legHack200000000",
     id: "legHack2",
-    img: getIcon("hacks", "2nd Leg Hack"),
+    img: getImage("hacks", "2nd Leg Hack"),
     name: "2nd Leg Hack",
     statuses: ["hacked", "immobilized"],
     hud: false,
@@ -116,7 +116,7 @@ export const hacksData = {
   mouth1: {
     _id: "mouthHack0000000",
     id: "mouthHack",
-    img: getIcon("hacks", "Mouth Hack"),
+    img: getImage("hacks", "Mouth Hack"),
     name: "Mouth Hack",
     statuses: ["hacked", "mute"],
     hud: false,
@@ -132,7 +132,7 @@ export const hacksData = {
   nose1: {
     _id: "noseHack00000000",
     id: "noseHack",
-    img: getIcon("hacks", "Nose Hack"),
+    img: getImage("hacks", "Nose Hack"),
     name: "Nose Hack",
     statuses: ["hacked", "anosmatic"],
     hud: false,

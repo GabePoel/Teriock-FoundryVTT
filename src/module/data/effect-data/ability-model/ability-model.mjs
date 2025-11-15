@@ -342,7 +342,7 @@ export default class TeriockAbilityModel extends ThresholdDataMixin(
    * @inheritDoc
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
-  async roll(options) {
+  async roll(options = {}) {
     options.source = this.parent;
     const execution = new AbilityExecution(options);
     await execution.execute();

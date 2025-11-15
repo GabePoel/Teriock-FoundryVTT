@@ -29,21 +29,7 @@ export default class TeriockBaseMessageModel extends BlankMixin(TypeDataModel) {
     });
     schema.panels = new fields.ArrayField(
       new fields.SchemaField({
-        color: new fields.StringField({
-          initial: null,
-          nullable: true,
-          required: false,
-        }),
-        image: new fields.StringField({
-          initial: null,
-          nullable: true,
-          required: false,
-        }),
-        name: new fields.StringField({
-          initial: null,
-          nullable: true,
-          required: false,
-        }),
+        associations: associationsField(),
         bars: new fields.ArrayField(
           new fields.SchemaField({
             icon: new fields.StringField({
@@ -65,15 +51,29 @@ export default class TeriockBaseMessageModel extends BlankMixin(TypeDataModel) {
           },
         ),
         blocks: blocksField(),
+        classes: new fields.StringField({
+          nullable: true,
+          initial: null,
+          required: false,
+        }),
+        color: new fields.StringField({
+          initial: null,
+          nullable: true,
+          required: false,
+        }),
         font: new fields.StringField({
           nullable: true,
           initial: null,
           required: false,
         }),
-        associations: associationsField(),
         icon: new fields.StringField({
           nullable: true,
           initial: null,
+          required: false,
+        }),
+        image: new fields.StringField({
+          initial: null,
+          nullable: true,
           required: false,
         }),
         label: new fields.StringField({
@@ -81,9 +81,14 @@ export default class TeriockBaseMessageModel extends BlankMixin(TypeDataModel) {
           initial: null,
           required: false,
         }),
-        classes: new fields.StringField({
-          nullable: true,
+        name: new fields.StringField({
           initial: null,
+          nullable: true,
+          required: false,
+        }),
+        uuid: new fields.DocumentUUIDField({
+          initial: null,
+          nullable: true,
           required: false,
         }),
       }),

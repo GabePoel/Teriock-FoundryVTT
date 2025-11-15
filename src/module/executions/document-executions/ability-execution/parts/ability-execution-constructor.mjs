@@ -13,7 +13,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /**
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
-  constructor(options) {
+  constructor(options = {}) {
     super(options);
     /** @type {TeriockArmament|null} */
     let defaultArmament = null;

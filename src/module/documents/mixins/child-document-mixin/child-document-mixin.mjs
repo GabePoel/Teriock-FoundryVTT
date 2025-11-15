@@ -183,12 +183,12 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      async roll(options) {
+      async roll(options = {}) {
         await this.toMessage(options);
       }
 
       /** @inheritDoc */
-      async toMessage(options) {
+      async toMessage(options = {}) {
         const data = { doc: this.parent };
         await this.hookCall("documentChat", data);
         if (data.cancel) {
@@ -240,7 +240,7 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      async use(options) {
+      async use(options = {}) {
         await this.system.use(options);
       }
 

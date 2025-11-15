@@ -1,5 +1,5 @@
 import { BlankMixin } from "../../documents/mixins/_module.mjs";
-import { getIcon } from "../../helpers/path.mjs";
+import { getImage } from "../../helpers/path.mjs";
 
 const { Token } = foundry.canvas.placeables;
 
@@ -18,7 +18,7 @@ export default class TeriockToken extends BlankMixin(Token) {
       this.document.hasStatusEffect("encumbered") &&
       this.document?.actor.system.encumbranceLevel > 0
     ) {
-      promises.push(this._drawEffect(getIcon("conditions", "Encumbered")));
+      promises.push(this._drawEffect(getImage("conditions", "Encumbered")));
     }
     let overlayImg;
     if (

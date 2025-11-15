@@ -1,6 +1,6 @@
 import { boostDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import { pureUuid } from "../../../utils.mjs";
+import { makeIconClass, pureUuid } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -9,6 +9,20 @@ import ActionHandler from "../action-handler.mjs";
 export class StandardDamageHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "standard-damage";
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.UUID<TeriockArmament>} [attacker]
+   */
+  static buildButton(attacker) {
+    const button = super.buildButton();
+    button.icon = makeIconClass("hammer-crash", "button");
+    button.label = "Standard Damage";
+    if (attacker) {
+      button.dataset.attacker = attacker;
+    }
+    return button;
+  }
 
   /**
    * @param {TeriockActor} actor
