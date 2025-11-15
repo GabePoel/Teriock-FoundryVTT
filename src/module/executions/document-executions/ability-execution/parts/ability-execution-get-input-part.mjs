@@ -121,7 +121,6 @@ export default function AbilityExecutionGetInputPart(Base) {
           ok: {
             label: "Confirm",
             callback: (_event, button) => {
-              console.log(button);
               for (const cost of ["hp", "mp", "gp"]) {
                 if (this.source.system.costs[cost].type === "variable") {
                   this.costs[cost] = Number(

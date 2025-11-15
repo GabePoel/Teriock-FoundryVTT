@@ -91,7 +91,6 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.attackPenaltyFormula = attackPenalty;
     this.attackPenalty = 0;
     this.targets = new Set();
-    console.log(this);
   }
 
   /**

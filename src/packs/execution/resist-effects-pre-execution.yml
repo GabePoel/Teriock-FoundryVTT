@@ -6,7 +6,7 @@ img: icons/svg/dice-target.svg
 scope: global
 command: |-
   const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-  const buttons = data.rollConfig.chatData.system.buttons;
+  const buttons = data.execution.buttons;
   const applyButton = buttons.find((b) => b.label === "Apply Effect");
 
   const choices = {
@@ -47,7 +47,7 @@ command: |-
   function modifyData(data) {
     const effectObject = JSON.parse(data);
     effectObject.changes.push({
-      key: "system.resistances.effects",
+      key: "system.protections.resistances.effects",
       value: choice.uuid,
       mode: 2,
       priority: 10,

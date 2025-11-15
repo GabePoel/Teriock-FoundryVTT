@@ -1,5 +1,5 @@
+import { rollButtons } from "../../constants/display/buttons.mjs";
 import { documentOptions } from "../../constants/options/document-options.mjs";
-import { ROLL_BUTTON_CONFIGS } from "../../executions/document-executions/ability-execution/parts/ability-execution-chat-part.mjs";
 import { getAbility } from "../../helpers/fetch.mjs";
 import { dedent } from "../../helpers/utils.mjs";
 
@@ -234,5 +234,5 @@ export default function registerEnrichers() {
   CONFIG.TextEditor.enrichers.push(rankEnricher);
   CONFIG.TextEditor.enrichers.push(wikiEnricher);
   CONFIG.TextEditor.enrichers.push(wikiLinkEnricher);
-  CONFIG.TextEditor.enrichers.push(makeRollEnricher(ROLL_BUTTON_CONFIGS));
+  CONFIG.TextEditor.enrichers.push(makeRollEnricher(rollButtons));
 }

@@ -64,7 +64,6 @@ export default function AbilityExecutionRollsPart(Base) {
           this.rolls.push(
             new TeriockRoll(this.formula, this.rollData, rollOptions),
           );
-          console.log(this.rolls);
         }
         if (this.rolls.length === 0) {
           this.rolls.push(

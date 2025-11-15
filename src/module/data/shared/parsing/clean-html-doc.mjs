@@ -1,4 +1,4 @@
-import { ROLL_BUTTON_CONFIGS } from "../../../executions/document-executions/ability-execution/parts/ability-execution-chat-part.mjs";
+import { rollButtons } from "../../../constants/display/buttons.mjs";
 
 /**
  * Remove sub-containers and convert .dice spans into enricher rolls.
@@ -14,7 +14,7 @@ export function cleanHTMLDoc(doc) {
     .forEach((el) => el.remove());
 
   const TYPE_LUT = Object.fromEntries(
-    Object.keys(ROLL_BUTTON_CONFIGS).map((k) => [k.toLowerCase(), k]),
+    Object.keys(rollButtons).map((k) => [k.toLowerCase(), k]),
   );
 
   doc.querySelectorAll(".dice").forEach((el) => {
@@ -64,11 +64,13 @@ export function cleanHTML(html) {
         link.replaceWith(document.createTextNode(enricherTag));
       }
     }
-    const tables = doc.querySelectorAll(
-      "[data-replace-table='true'], .metadata",
-    );
-    for (const table of tables) {
-      const tableName = table.getAttribute("data-table-name");
+  }
+  const tables = doc.querySelectorAll(
+    "[data-replace-table='true'], div.metadata",
+  );
+  for (const table of tables) {
+    const tableName = table.getAttribute("data-table-name");
+    if (tableName) {
       const tablePack = game.packs.get("teriock.tables");
       //noinspection JSUnresolvedReference
       const rollableTable = tablePack.index.getName(tableName);
@@ -77,15 +79,17 @@ export function cleanHTML(html) {
         table.replaceWith(enricherTag);
       }
     }
-    if (!doc.innerHTML.startsWith("<p>")) {
-      doc.innerHTML = `<p>${doc.innerHTML}</p>`;
-    }
   }
-
   [...doc.querySelectorAll("span")]
     .reverse()
     .forEach((s) => s.replaceWith(s.textContent));
-  return cleanDoubleLineBreaks(doc.innerHTML);
+  let out = cleanDoubleLineBreaks(doc.innerHTML);
+  if (!out.startsWith("<p>")) {
+    out = `<p>${out}</p>`;
+  }
+  out = foundry.utils.cleanHTML(out);
+  out = out.replace(/<p>\s*<\/p>/g, "");
+  return out;
 }
 
 /**
