@@ -46,6 +46,18 @@
               label="BV"
               unselected=system.bv.value
             }}
+            {{formBox
+              (formInput
+                systemFields.attackPenalty.fields.saved
+                dataset=(object tooltip="Attack Penalty")
+                disabled=(not editable)
+                value=system.attackPenalty.saved
+              )
+              icon=(path TERIOCK.display.icons "ap")
+              include=(exists system.attackPenalty.saved)
+              label="AP"
+              unselected=system.attackPenalty.value
+            }}
           </div>
         {{/if}}
       </div>

@@ -27,27 +27,6 @@
     }}
     {{formBox
       (formInput
-        systemFields.range.fields.long.fields.saved
-        dataset=(object tooltip="Range")
-        disabled=(not editable)
-        value=system.range.long.saved
-      )
-      secondary=(formInput
-        systemFields.range.fields.short.fields.saved
-        dataset=(object tooltip="Short Range")
-        disabled=(not editable)
-        value=system.range.short.saved
-      )
-      after=false
-      icon=(path TERIOCK.display.icons "range")
-      include=(exists system.range.long.raw)
-      includeSecondary=(exists system.range.short.raw)
-      label="ft"
-      unselected=system.range.long.raw
-      unselectedSecondary=system.range.short.raw
-    }}
-    {{formBox
-      (formInput
         systemFields.av.fields.saved
         dataset=(object tooltip="Armor Value")
         disabled=(not editable)
@@ -69,6 +48,18 @@
       include=(exists system.bv.saved)
       label="BV"
       unselected=system.bv.value
+    }}
+    {{formBox
+      (formInput
+        systemFields.attackPenalty.fields.saved
+        dataset=(object tooltip="Attack Penalty")
+        disabled=(not editable)
+        value=system.attackPenalty.saved
+      )
+      icon=(path TERIOCK.display.icons "ap")
+      include=(exists system.attackPenalty.saved)
+      label="AP"
+      unselected=system.attackPenalty.value
     }}
   </div>
 {{/if}}

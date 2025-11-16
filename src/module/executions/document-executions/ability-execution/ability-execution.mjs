@@ -70,6 +70,7 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
   async _prepareBaseFormula() {
     if (this.source.system.interaction === "attack") {
       await super._prepareBaseFormula();
+      this.formula = addFormula(this.formula, "@ap");
     } else if (this.source.system.interaction === "feat") {
       this.formula = "10";
     } else if (this.source.system.interaction === "block") {

@@ -354,7 +354,7 @@ function offenseData(actorData, data) {
     ward: weaponWarded ? 1 : 0,
     "ward.wep": weaponWarded ? 1 : 0,
     "ward.abi": 0, // Determined by ability used.
-    atkPen: actorData.combat.attackPenalty,
+    ap: actorData.combat.attackPenalty,
   });
 }
 

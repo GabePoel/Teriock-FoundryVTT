@@ -40,6 +40,7 @@ export function _messageParts(equipmentData) {
         ref.powerLevel[src.powerLevel].name,
         src.shattered ? "Shattered" : "",
         src.equipmentType,
+        rangeString,
       ],
     },
     {
@@ -48,7 +49,9 @@ export function _messageParts(equipmentData) {
       wrappers: [
         damageString,
         twoHandedDamageString,
-        rangeString,
+        formulaExists(equipmentData.attackPenalty.raw)
+          ? equipmentData.attackPenalty.raw + " AP"
+          : "",
         TERIOCK.index.weaponFightingStyles[src.fightingStyle],
       ],
     },

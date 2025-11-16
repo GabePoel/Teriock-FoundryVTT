@@ -20,7 +20,6 @@ export function _defineCombat(schema) {
       integer: true,
       label: "Attack Penalty",
       max: 0,
-      step: 3,
     }),
     hasReaction: new fields.BooleanField({
       initial: true,

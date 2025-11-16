@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { formulaExists } from "../../../../helpers/utils.mjs";
 
 /**
  * Generates message parts for a body part.
@@ -14,6 +15,9 @@ export function _messageParts(bodyData) {
       wrappers: [
         bodyData.damage.base.value +
           (bodyData.damage.base.value ? " damage" : ""),
+        formulaExists(bodyData.attackPenalty.raw)
+          ? bodyData.attackPenalty.raw + " AP"
+          : "",
         TERIOCK.index.weaponFightingStyles[bodyData.fightingStyle],
       ],
     },

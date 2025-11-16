@@ -29,12 +29,25 @@
     tooltip="Equipment Type"
     icon="staff"
   }}
-  {{#if document.actor}}
-    {{formBox
-      (ifThen system.equipped "Equipped" "Unequipped")
-      icon=(ifThen system.equipped "check" "xmark")
-      tooltip="Equipped?"
-      action=(ifThen editable "toggleEquipped")
-    }}
-  {{/if}}
+  {{formBox
+    (formInput
+      systemFields.range.fields.long.fields.saved
+      dataset=(object tooltip="Range")
+      disabled=(not editable)
+      value=system.range.long.saved
+    )
+    secondary=(formInput
+      systemFields.range.fields.short.fields.saved
+      dataset=(object tooltip="Short Range")
+      disabled=(not editable)
+      value=system.range.short.saved
+    )
+    after=false
+    icon=(path TERIOCK.display.icons "range")
+    include=(exists system.range.long.raw)
+    includeSecondary=(exists system.range.short.raw)
+    label="ft"
+    unselected=system.range.long.raw
+    unselectedSecondary=system.range.short.raw
+  }}
 </div>

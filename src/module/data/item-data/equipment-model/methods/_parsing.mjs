@@ -77,8 +77,21 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Add piercing property if present
   const piercing = getValue(".piercing");
-  if (piercing) {
-    properties.add(piercing.toUpperCase());
+  if (piercing === "ub") {
+    properties.add("Unblockable");
+  } else if (piercing === "ap") {
+    properties.add("Armor Piercing");
+  } else if (piercing === "av0") {
+    properties.add("AV0");
+  }
+
+  // Add attack penalty property if present
+  const attackPenalty = getValue(".attack-penalty");
+  console.log(attackPenalty);
+  if (attackPenalty) {
+    parameters.attackPenalty = {
+      saved: attackPenalty,
+    };
   }
 
   // Add ranged properties if present

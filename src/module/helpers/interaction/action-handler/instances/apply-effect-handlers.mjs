@@ -101,7 +101,6 @@ export class ApplyEffectHandler extends ActionHandler {
       }
       const foundIds = Array.from(foundEffects.map((effect) => effect.id));
       if (foundIds.length > 0) {
-        // await actor.deleteEmbeddedDocuments("ActiveEffect", foundIds);
         foundry.ui.notifications.info(`Removed ${effectObj.name}`);
       } else {
         foundry.ui.notifications.warn(`${effectObj.name} not found`);
