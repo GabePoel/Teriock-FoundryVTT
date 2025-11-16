@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   deriveModifiableDeterministic,
   modifiableFormula,
@@ -20,9 +19,11 @@ export default function ConsumableDataMixin(Base) {
      */
     class ConsumableData extends Base {
       /** @inheritDoc */
-      static metadata = mergeMetadata(super.metadata, {
-        consumable: true,
-      });
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, {
+          consumable: true,
+        });
+      }
 
       /** @inheritDoc */
       static defineSchema() {

@@ -1,9 +1,5 @@
 import { getRank } from "../../../helpers/fetch.mjs";
-import {
-  getRollIcon,
-  makeIcon,
-  mergeMetadata,
-} from "../../../helpers/utils.mjs";
+import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
 import { StatGiverDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
@@ -26,13 +22,15 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   WikiDataMixin(TeriockBaseItemModel),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    namespace: "Class",
-    pageNameKey: "system.className",
-    type: "rank",
-    indexCategoryKey: "classes",
-    indexCompendiumKey: "classes",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      namespace: "Class",
+      pageNameKey: "system.className",
+      type: "rank",
+      indexCategoryKey: "classes",
+      indexCompendiumKey: "classes",
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

@@ -94,6 +94,7 @@ declare global {
       type: Teriock.Documents.CommonType;
       usable: boolean;
       wiki: boolean;
+      armament: boolean;
     };
 
     export type ActorModel = TeriockBaseActorModel &

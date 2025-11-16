@@ -1,5 +1,4 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   ArmamentDataMixin,
   ExecutableDataMixin,
@@ -24,15 +23,17 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
   WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    namespace: "Body",
-    pageNameKey: "name",
-    type: "body",
-    usable: true,
-    childEffectTypes: ["property"],
-    indexCategoryKey: "bodyParts",
-    indexCompendiumKey: "bodyParts",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      namespace: "Body",
+      pageNameKey: "name",
+      type: "body",
+      usable: true,
+      childEffectTypes: ["property"],
+      indexCategoryKey: "bodyParts",
+      indexCompendiumKey: "bodyParts",
+    });
+  }
 
   /** @inheritDoc */
   get messageParts() {

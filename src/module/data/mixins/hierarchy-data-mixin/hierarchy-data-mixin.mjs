@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import { hierarchyField } from "../../shared/fields/helpers/field-builders.mjs";
 
 /**
@@ -14,9 +13,11 @@ export default function HierarchyDataMixin(Base) {
      */
     class HierarchyData extends Base {
       /** @inheritDoc */
-      static metadata = mergeMetadata(super.metadata, {
-        hierarchy: true,
-      });
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, {
+          hierarchy: true,
+        });
+      }
 
       /** @inheritDoc */
       static defineSchema() {

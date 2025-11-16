@@ -1,6 +1,5 @@
 import { TeriockJournalEntry } from "../../../documents/_module.mjs";
 import { copyItem, getAbility, getProperty } from "../../../helpers/fetch.mjs";
-import { freeze } from "../../../helpers/utils.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -11,24 +10,27 @@ const { fields } = foundry.data;
 export default class CommonTypeModel extends TypeDataModel {
   /**
    * Metadata.
-   * @type {Readonly<Teriock.Documents.ModelMetadata>}
+   * @returns {Teriock.Documents.ModelMetadata}
    */
-  static metadata = freeze({
-    childEffectTypes: [],
-    childItemTypes: [],
-    childMacroTypes: [],
-    consumable: false,
-    hierarchy: false,
-    modifies: "Actor",
-    namespace: "",
-    pageNameKey: "name",
-    passive: false,
-    preservedProperties: [],
-    revealable: false,
-    type: "base",
-    usable: false,
-    wiki: false,
-  });
+  static get metadata() {
+    return {
+      childEffectTypes: [],
+      childItemTypes: [],
+      childMacroTypes: [],
+      consumable: false,
+      hierarchy: false,
+      modifies: "Actor",
+      namespace: "",
+      pageNameKey: "name",
+      passive: false,
+      preservedProperties: [],
+      revealable: false,
+      type: "base",
+      usable: false,
+      wiki: false,
+      armament: false,
+    };
+  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -59,7 +61,7 @@ export default class CommonTypeModel extends TypeDataModel {
 
   /**
    * Metadata.
-   * @returns {Readonly<Teriock.Documents.ModelMetadata>}
+   * @returns {Teriock.Documents.ModelMetadata}
    */
   get metadata() {
     return this.constructor.metadata;

@@ -1,4 +1,4 @@
-import { makeIcon, mergeMetadata } from "../../../helpers/utils.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,7 +15,11 @@ export default function RevelationDataMixin(Base) {
      */
     class RevelationData extends Base {
       /** @inheritDoc */
-      static metadata = mergeMetadata(Base.metadata, { revealable: true });
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, {
+          revealable: true,
+        });
+      }
 
       /** @inheritDoc */
       static defineSchema() {

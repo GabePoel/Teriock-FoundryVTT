@@ -1,7 +1,6 @@
 import { iconManifest } from "../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../executions/document-executions/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   ExecutableDataMixin,
   RevelationDataMixin,
@@ -31,12 +30,14 @@ export default class TeriockFluencyModel extends ThresholdDataMixin(
   ),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    namespace: "Tradecraft",
-    pageNameKey: "system.tradecraft",
-    type: "fluency",
-    usable: true,
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      namespace: "Tradecraft",
+      pageNameKey: "system.tradecraft",
+      type: "fluency",
+      usable: true,
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

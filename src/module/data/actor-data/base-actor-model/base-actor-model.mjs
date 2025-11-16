@@ -1,4 +1,3 @@
-import { freeze } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
@@ -34,20 +33,28 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   ),
 ) {
   /** @inheritDoc */
-  static metadata = freeze({
-    childEffectTypes: [
-      "ability",
-      "attunement",
-      "base",
-      "condition",
-      "consequence",
-      "fluency",
-      "resource",
-    ],
-    childItemTypes: ["body", "equipment", "power", "rank", "species", "mount"],
-    childMacroTypes: [],
-    type: "base",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      childEffectTypes: [
+        "ability",
+        "attunement",
+        "base",
+        "condition",
+        "consequence",
+        "fluency",
+        "resource",
+      ],
+      childItemTypes: [
+        "body",
+        "equipment",
+        "power",
+        "rank",
+        "species",
+        "mount",
+      ],
+      childMacroTypes: [],
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

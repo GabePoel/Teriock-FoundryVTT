@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import { StatDieModel } from "../../models/_module.mjs";
 import {
   HpPoolModel,
@@ -24,9 +23,11 @@ export default function StatGiverDataMixin(Base) {
      */
     class StatGiverData extends Base {
       /** @inheritDoc */
-      static metadata = mergeMetadata(super.metadata, {
-        stats: true,
-      });
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, {
+          stats: true,
+        });
+      }
 
       /** @inheritDoc */
       static defineSchema() {

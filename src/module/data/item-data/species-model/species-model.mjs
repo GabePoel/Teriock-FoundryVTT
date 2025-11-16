@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { copyAbility, getItem } from "../../../helpers/fetch.mjs";
-import { makeIcon, mergeMetadata } from "../../../helpers/utils.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
   ImporterDataMixin,
@@ -29,13 +29,15 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
   StatGiverDataMixin(WikiDataMixin(HierarchyDataMixin(TeriockBaseItemModel))),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    namespace: "Creature",
-    type: "species",
-    indexCategoryKey: "creatures",
-    indexCompendiumKey: "species",
-    childItemTypes: ["body", "equipment", "rank"],
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      namespace: "Creature",
+      type: "species",
+      indexCategoryKey: "creatures",
+      indexCompendiumKey: "species",
+      childItemTypes: ["body", "equipment", "rank"],
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

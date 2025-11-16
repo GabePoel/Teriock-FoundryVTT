@@ -1,6 +1,6 @@
 import { attunementOptions } from "../../../constants/options/attunement-options.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { evaluateSync, mergeMetadata } from "../../../helpers/utils.mjs";
+import { evaluateSync } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
@@ -13,9 +13,11 @@ const { fields } = foundry.data;
  */
 export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    type: "attunement",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "attunement",
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

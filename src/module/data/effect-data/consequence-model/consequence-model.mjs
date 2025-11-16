@@ -1,5 +1,5 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
-import { getRollIcon, mergeMetadata } from "../../../helpers/utils.mjs";
+import { getRollIcon } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
   TransformationDataMixin,
@@ -21,10 +21,12 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
   HierarchyDataMixin(TeriockBaseEffectModel),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    type: "consequence",
-    usable: true,
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "consequence",
+      usable: true,
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

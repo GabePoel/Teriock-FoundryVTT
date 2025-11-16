@@ -1,6 +1,6 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { getItem } from "../../../helpers/fetch.mjs";
-import { formulaExists, mergeMetadata } from "../../../helpers/utils.mjs";
+import { formulaExists } from "../../../helpers/utils.mjs";
 import {
   ArmamentDataMixin,
   AttunableDataMixin,
@@ -55,28 +55,30 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   ),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    namespace: "Equipment",
-    pageNameKey: "system.equipmentType",
-    type: "equipment",
-    usable: true,
-    childEffectTypes: ["ability", "fluency", "property", "resource"],
-    indexCategoryKey: "equipment",
-    indexCompendiumKey: "equipment",
-    preservedProperties: [
-      "name",
-      "img",
-      "system.consumable",
-      "system.description",
-      "system.flaws",
-      "system.fluent",
-      "system.maxQuantity",
-      "system.notes",
-      "system.powerLevel",
-      "system.proficient",
-      "system.quantity",
-    ],
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      namespace: "Equipment",
+      pageNameKey: "system.equipmentType",
+      type: "equipment",
+      usable: true,
+      childEffectTypes: ["ability", "fluency", "property", "resource"],
+      indexCategoryKey: "equipment",
+      indexCompendiumKey: "equipment",
+      preservedProperties: [
+        "name",
+        "img",
+        "system.consumable",
+        "system.description",
+        "system.flaws",
+        "system.fluent",
+        "system.maxQuantity",
+        "system.notes",
+        "system.powerLevel",
+        "system.proficient",
+        "system.quantity",
+      ],
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

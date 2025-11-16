@@ -1,6 +1,6 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import { makeIcon, mergeMetadata } from "../../../helpers/utils.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 import {
   TransformationDataMixin,
   WikiDataMixin,
@@ -24,10 +24,12 @@ export default class TeriockConditionModel extends TransformationDataMixin(
   WikiDataMixin(TeriockBaseEffectModel),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    namespace: "Condition",
-    type: "condition",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      namespace: "Condition",
+      type: "condition",
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

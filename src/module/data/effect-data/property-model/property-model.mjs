@@ -1,7 +1,7 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { copyProperty } from "../../../helpers/fetch.mjs";
-import { mergeMetadata, pureUuid, safeUuid } from "../../../helpers/utils.mjs";
+import { pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
   RevelationDataMixin,
@@ -36,22 +36,24 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   HierarchyDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    childEffectTypes: ["property"],
-    modifies: "Item",
-    namespace: "Property",
-    type: "property",
-    passive: true,
-    indexCategoryKey: "properties",
-    indexCompendiumKey: "properties",
-    preservedProperties: [
-      "system.fluent",
-      "system.hierarchy",
-      "system.improvement",
-      "system.limitation",
-      "system.proficient",
-    ],
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      childEffectTypes: ["property"],
+      modifies: "Item",
+      namespace: "Property",
+      type: "property",
+      passive: true,
+      indexCategoryKey: "properties",
+      indexCompendiumKey: "properties",
+      preservedProperties: [
+        "system.fluent",
+        "system.hierarchy",
+        "system.improvement",
+        "system.limitation",
+        "system.proficient",
+      ],
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

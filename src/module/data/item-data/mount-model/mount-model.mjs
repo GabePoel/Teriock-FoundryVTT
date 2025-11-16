@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   AttunableDataMixin,
   StatGiverDataMixin,
@@ -18,10 +17,12 @@ export default class TeriockMountModel extends StatGiverDataMixin(
   AttunableDataMixin(TeriockBaseItemModel),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    type: "mount",
-    childEffectTypes: ["ability", "fluency", "resource"],
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "mount",
+      childEffectTypes: ["ability", "fluency", "resource"],
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

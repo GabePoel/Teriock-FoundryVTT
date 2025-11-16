@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
   ExecutableDataMixin,
@@ -19,10 +18,12 @@ export default class TeriockResourceModel extends RevelationDataMixin(
   ConsumableDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    type: "resource",
-    usable: true,
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "resource",
+      usable: true,
+    });
+  }
 
   /** @inheritDoc */
   static migrateData(data) {

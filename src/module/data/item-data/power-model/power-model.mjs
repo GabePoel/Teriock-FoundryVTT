@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -10,9 +9,11 @@ const { fields } = foundry.data;
  */
 export default class TeriockPowerModel extends TeriockBaseItemModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    type: "power",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "power",
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

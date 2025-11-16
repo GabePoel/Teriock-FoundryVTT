@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import {
   fetchWikiPageHTML,
   openWikiPage,
@@ -16,7 +15,9 @@ export default function WikiDataMixin(Base) {
      */
     class WikiData extends Base {
       /** @inheritDoc */
-      static metadata = mergeMetadata(Base.metadata, { wiki: true });
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, { wiki: true });
+      }
 
       /** @inheritDoc */
       get wikiPage() {

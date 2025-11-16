@@ -3,7 +3,7 @@ import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { AbilityExecution } from "../../../executions/document-executions/_module.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
-import { mergeMetadata, queryGM, safeUuid } from "../../../helpers/utils.mjs";
+import { queryGM, safeUuid } from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
   HierarchyDataMixin,
@@ -41,29 +41,31 @@ export default class TeriockAbilityModel extends ThresholdDataMixin(
   ),
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    childEffectTypes: ["ability"],
-    hierarchy: true,
-    namespace: "Ability",
-    type: "ability",
-    usable: true,
-    passive: true,
-    indexCategoryKey: "abilities",
-    indexCompendiumKey: "abilities",
-    preservedProperties: [
-      "system.adept",
-      "system.consumable",
-      "system.fluent",
-      "system.gifted",
-      "system.grantOnly",
-      "system.hierarchy",
-      "system.improvement",
-      "system.limitation",
-      "system.maxQuantity",
-      "system.proficient",
-      "system.quantity",
-    ],
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      childEffectTypes: ["ability"],
+      hierarchy: true,
+      namespace: "Ability",
+      type: "ability",
+      usable: true,
+      passive: true,
+      indexCategoryKey: "abilities",
+      indexCompendiumKey: "abilities",
+      preservedProperties: [
+        "system.adept",
+        "system.consumable",
+        "system.fluent",
+        "system.gifted",
+        "system.grantOnly",
+        "system.hierarchy",
+        "system.improvement",
+        "system.limitation",
+        "system.maxQuantity",
+        "system.proficient",
+        "system.quantity",
+      ],
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -344,6 +346,9 @@ export default class TeriockAbilityModel extends ThresholdDataMixin(
    */
   async roll(options = {}) {
     options.source = this.parent;
+    if (this.grantOnly && this.parent.parent.metadata.armament) {
+      options.armament = this.parent.parent;
+    }
     const execution = new AbilityExecution(options);
     await execution.execute();
   }

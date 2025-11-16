@@ -1,5 +1,5 @@
 import { quickAddAssociation } from "../../../helpers/html.mjs";
-import { docSort, mergeMetadata } from "../../../helpers/utils.mjs";
+import { docSort } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin } from "../../mixins/_module.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 
@@ -15,10 +15,12 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
   ChildTypeModel,
 ) {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    childEffectTypes: ["ability", "fluency", "resource"],
-    stats: false,
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      childEffectTypes: ["ability", "fluency", "resource"],
+      stats: false,
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

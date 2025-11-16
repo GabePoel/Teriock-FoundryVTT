@@ -24,6 +24,13 @@ export default function ArmamentDataMixin(Base) {
      * @mixin
      */
     class ArmamentData extends Base {
+      /** @inheritDoc */
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, {
+          armament: true,
+        });
+      }
+
       /**
        * @inheritDoc
        * @returns {Record<string, DataField>}

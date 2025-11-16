@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -8,9 +7,11 @@ const { fields } = foundry.data;
  */
 export default class TeriockBaseEffectModel extends ChildTypeModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    modifies: "Actor",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      modifies: "Actor",
+    });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

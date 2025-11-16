@@ -1,5 +1,4 @@
 import { getItem } from "../../../helpers/fetch.mjs";
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import TeriockBaseActorModel from "../base-actor-model/base-actor-model.mjs";
 
 /**
@@ -13,11 +12,13 @@ import TeriockBaseActorModel from "../base-actor-model/base-actor-model.mjs";
  */
 export default class TeriockCreatureModel extends TeriockBaseActorModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    type: "creature",
-    indexCategoryKey: "creatures",
-    indexCompendiumKey: "creatures",
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "creature",
+      indexCategoryKey: "creatures",
+      indexCompendiumKey: "creatures",
+    });
+  }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {

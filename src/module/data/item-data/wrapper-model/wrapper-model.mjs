@@ -1,4 +1,3 @@
-import { mergeMetadata } from "../../../helpers/utils.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 /**
@@ -6,10 +5,12 @@ import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
  */
 export default class TeriockWrapperModel extends TeriockBaseItemModel {
   /** @inheritDoc */
-  static metadata = mergeMetadata(super.metadata, {
-    type: "wrapper",
-    childEffectTypes: ["ability", "property", "resource", "fluency"],
-  });
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "wrapper",
+      childEffectTypes: ["ability", "property", "resource", "fluency"],
+    });
+  }
 
   /**
    * The wrapped effect.

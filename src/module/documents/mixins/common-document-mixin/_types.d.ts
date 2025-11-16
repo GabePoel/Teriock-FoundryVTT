@@ -55,9 +55,8 @@ export interface CommonDocumentMixinInterface {
 
   /**
    * Metadata.
-   * @returns The document metadata
    */
-  get metadata(): Readonly<Teriock.Documents.ModelMetadata>;
+  get metadata(): Teriock.Documents.ModelMetadata;
 
   /**
    * A modified version of this document's name that displays additional text if needed.
