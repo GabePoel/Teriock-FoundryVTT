@@ -1,4 +1,5 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
+import { dotJoin, suffix } from "../../../helpers/string.mjs";
 import {
   ArmamentDataMixin,
   ExecutableDataMixin,
@@ -33,6 +34,19 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
       indexCategoryKey: "bodyParts",
       indexCompendiumKey: "bodyParts",
     });
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = "Body part";
+    parts.text = dotJoin([
+      suffix(this.damage.base.value, "Damage"),
+      suffix(this.bv.value, "BV"),
+      suffix(this.av.value, "AV"),
+      this.parent.source ? this.parent.source.nameString : "",
+    ]);
+    return parts;
   }
 
   /** @inheritDoc */

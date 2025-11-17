@@ -6,9 +6,19 @@
         {{tcardOptions settings.menus.consequenceOptions null null settings.consequenceFilters.search "consequence"
                        key="effects"}}
       </div>
-      {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/results/ch-consequence-results.hbs'}}
+      {{> "systems/teriock/src/templates/embed-templates/embed-results.hbs"
+        docs=consequences
+        searchKey="effects"
+        displayKey="consequence"
+        empty="consequences"
+      }}
       <div class="tcard-display-divider"></div>
-      {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/results/ch-attunement-results.hbs'}}
+      {{> "systems/teriock/src/templates/embed-templates/embed-results.hbs"
+        docs=attunements
+        searchKey="effects"
+        displayKey="consequence"
+        empty="attunements"
+      }}
       <div class="tcard-display-divider"></div>
       {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/results/ch-condition-results.hbs'}}
     </div>

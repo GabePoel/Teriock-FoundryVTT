@@ -12,18 +12,18 @@ declare global {
 
     /** Pieces of a block within a chat message. */
     export type MessageBlock = {
-      /** The title of the message block. */
-      title: string;
-      /** The main text content of the message block. */
-      text?: string;
-      /** Special information for formatting. */
-      special?: "ES" | "embedded-block";
+      /** Additional CSS classes to add */
+      classes?: string;
       /** Elder Sorcery elements for formatting. */
       elements?: string;
       /** Make this block italic. */
       italic?: boolean;
-      /** Additional CSS classes to add */
-      classes?: string;
+      /** Special information for formatting. */
+      special?: "ES" | "embedded-block";
+      /** The main text content of the message block. */
+      text?: string;
+      /** The title of the message block. */
+      title: string;
     };
 
     /** Definition for an association card. */

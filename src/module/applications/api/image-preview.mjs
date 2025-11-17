@@ -1,6 +1,7 @@
 import { imageContextMenuOptions } from "../shared/_module.mjs";
+import { TeriockContextMenu } from "../ux/_module.mjs";
 
-const { ux, api } = foundry.applications;
+const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
 // noinspection JSClosureCompilerSyntax
 /**
@@ -8,8 +9,8 @@ const { ux, api } = foundry.applications;
  * Provides image display functionality with context menus for image interactions.
  * @extends {ApplicationV2}
  */
-export default class TeriockImagePreviewer extends api.HandlebarsApplicationMixin(
-  api.ApplicationV2,
+export default class TeriockImagePreviewer extends HandlebarsApplicationMixin(
+  ApplicationV2,
 ) {
   /**
    * Default options for the image sheet.
@@ -61,7 +62,7 @@ export default class TeriockImagePreviewer extends api.HandlebarsApplicationMixi
    */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    new ux.ContextMenu(this.element, ".timage", imageContextMenuOptions, {
+    new TeriockContextMenu(this.element, ".timage", imageContextMenuOptions, {
       eventName: "contextmenu",
       jQuery: false,
       fixed: true,

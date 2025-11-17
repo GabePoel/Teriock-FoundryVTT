@@ -18,8 +18,9 @@ export function _entries(equipmentData) {
       ),
       callback: equipmentData.roll.bind(equipmentData, { twoHanded: true }),
       condition:
+        equipmentData.parent.isOwner &&
         equipmentData.damage.twoHanded.value !==
-        equipmentData.damage.base.value,
+          equipmentData.damage.base.value,
       group: "usage",
     },
     {
@@ -34,6 +35,7 @@ export function _entries(equipmentData) {
       icon: makeIcon("hand", "contextMenu"),
       callback: equipmentData.readMagic.bind(equipmentData),
       condition:
+        equipmentData.parent.isOwner &&
         !equipmentData.identification.identified &&
         !equipmentData.identification.read,
       group: "usage",
@@ -49,70 +51,59 @@ export function _entries(equipmentData) {
       name: "Unequip",
       icon: makeIcon("xmark", "contextMenu"),
       callback: equipmentData.unequip.bind(equipmentData),
-      condition: equipmentData.canUnequip,
-      group: "control",
-    },
-    {
-      name: "Attune",
-      icon: makeIcon("handshake-simple", "contextMenu"),
-      callback: equipmentData.attune.bind(equipmentData),
-      condition: !equipmentData.isAttuned,
-      group: "control",
-    },
-    {
-      name: "Deattune",
-      icon: makeIcon("handshake-simple-slash", "contextMenu"),
-      callback: equipmentData.deattune.bind(equipmentData),
-      condition: equipmentData.isAttuned,
+      condition: equipmentData.parent.isOwner && equipmentData.canUnequip,
       group: "control",
     },
     {
       name: "Glue",
       icon: makeIcon("link", "contextMenu"),
       callback: equipmentData.glue.bind(equipmentData),
-      condition: !equipmentData.glued,
+      condition: equipmentData.parent.isOwner && !equipmentData.glued,
       group: "control",
     },
     {
       name: "Unglue",
       icon: makeIcon("link-slash", "contextMenu"),
       callback: equipmentData.unglue.bind(equipmentData),
-      condition: equipmentData.glued,
+      condition: equipmentData.parent.isOwner && equipmentData.glued,
       group: "control",
     },
     {
       name: "Shatter",
       icon: makeIcon("wine-glass-crack", "contextMenu"),
       callback: equipmentData.shatter.bind(equipmentData),
-      condition: !equipmentData.shattered,
+      condition: equipmentData.parent.isOwner && !equipmentData.shattered,
       group: "control",
     },
     {
       name: "Repair",
       icon: makeIcon("wine-glass", "contextMenu"),
       callback: equipmentData.repair.bind(equipmentData),
-      condition: equipmentData.shattered,
+      condition: equipmentData.parent.isOwner && equipmentData.shattered,
       group: "control",
     },
     {
       name: "Dampen",
       icon: makeIcon("bell-slash", "contextMenu"),
       callback: equipmentData.dampen.bind(equipmentData),
-      condition: !equipmentData.dampened,
+      condition: equipmentData.parent.isOwner && !equipmentData.dampened,
       group: "control",
     },
     {
       name: "Undampen",
       icon: makeIcon("bell", "contextMenu"),
       callback: equipmentData.undampen.bind(equipmentData),
-      condition: equipmentData.dampened,
+      condition: equipmentData.parent.isOwner && equipmentData.dampened,
       group: "control",
     },
     {
       name: "Unidentify",
       icon: makeIcon("eye-slash", "contextMenu"),
       callback: equipmentData.unidentify.bind(equipmentData),
-      condition: equipmentData.identification.identified && game.user.isGM,
+      condition:
+        equipmentData.parent.isOwner &&
+        equipmentData.identification.identified &&
+        game.user.isGM,
       group: "usage",
     },
   ];

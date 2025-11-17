@@ -1,3 +1,5 @@
+import { formulaExists } from "./utils.mjs";
+
 /**
  * Converts a string to camelCase format.
  * @param {string} str - The string to convert.
@@ -58,4 +60,36 @@ export function toInt(str) {
     return 0;
   }
   return result;
+}
+
+/**
+ * Join with a dot.
+ * @param {string[]} strings
+ * @returns {string}
+ */
+export function dotJoin(strings) {
+  strings = strings.filter((s) => s);
+  return strings.join(" · ");
+}
+
+/**
+ * Add a suffix to a string if it exists.
+ * @param {string|number} base
+ * @param {string} suffix
+ */
+export function suffix(base, suffix) {
+  if (formulaExists(base)) {
+    return `${base} ${suffix}`;
+  }
+}
+
+/**
+ * Add a suffix to a string if it exists.
+ * @param {string|number} base
+ * @param {string} prefix
+ */
+export function prefix(base, prefix) {
+  if (formulaExists(base)) {
+    return `${prefix} ${base}`;
+  }
 }

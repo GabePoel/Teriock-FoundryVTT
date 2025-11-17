@@ -2,18 +2,29 @@
   <div class="tcard-results">
     <div class="tcard-container">
       {{#each macros as |val|}}
-        {{tcard
-          img=(path val.macro "img")
-          title=(path val.macro "name")
-          subtitle=(concat "Runs upon " (path ../TERIOCK.system.pseudoHooks val.pseudoHook))
-          text="Macro"
-          icons=(concat
-            (ticon "link-slash" tooltip="Unlink Macro" action="unlinkMacro" parentId=(pureUuid val.safeUuid))
-            (ticon "gear-code" tooltip="Change Run Hook" action="changeMacroRunHook" parentId=(pureUuid val.safeUuid))
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs"
+          (object
+            img=(path val.macro "img")
+            title=(path val.macro "name")
+            subtitle=(concat "Runs upon " (path ../TERIOCK.system.pseudoHooks val.pseudoHook))
+            text="Macro"
+            openable=true
+            icons=(object
+              0=(object
+                icon="link-slash"
+                tooltip="Unlink Macro"
+                action="unlinkMacro"
+              )
+              1=(object
+                icon="gear-code"
+                tooltip="Change Run Hook"
+                action="changeMacroRunHook"
+              )
+            )
+            type="macro"
+            uuid=(pureUuid val.safeUuid)
+            classes="macro-card hooked-macro-card"
           )
-          type="macro"
-          id=(pureUuid val.safeUuid)
-          classes="macro-card hooked-macro-card"
         }}
       {{/each}}
       {{#if (not (exists macros))}}

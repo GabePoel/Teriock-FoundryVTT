@@ -1,6 +1,6 @@
-import { RichApplicationMixin } from "../shared/mixins/_module.mjs";
+import { bindCommonActions } from "../shared/_module.mjs";
 
-const { ApplicationV2 } = foundry.applications.api;
+const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const { SearchFilter } = foundry.applications.ux;
 
 // noinspection JSClosureCompilerSyntax
@@ -8,7 +8,7 @@ const { SearchFilter } = foundry.applications.ux;
  * @extends {ApplicationV2}
  * @mixes HandlebarsApplicationMixin
  */
-export default class TeriockDocumentSelector extends RichApplicationMixin(
+export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   ApplicationV2,
 ) {
   /**
@@ -59,7 +59,6 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
     this.tooltip = tooltip;
     this.tooltipAsync = tooltipAsync;
     this.openable = openable;
-
     this._resolve = null;
     this._result = new Promise((resolve) => (this._resolve = resolve));
   }
@@ -109,6 +108,25 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
   }
 
   /**
+   * Initialize the tooltip loader.
+   * @private
+   */
+  _initClickLoader() {
+    this.element.querySelectorAll("[data-uuid]").forEach(
+      /** @param {HTMLElement} el */ (el) => {
+        if (this.openable) {
+          el.addEventListener("dblclick", async (ev) => {
+            const target = /** @type {HTMLElement} */ ev.currentTarget;
+            const uuid = target.dataset.uuid;
+            const doc = /** @type {TeriockChild} */ await fromUuid(uuid);
+            await doc.sheet.render(true);
+          });
+        }
+      },
+    );
+  }
+
+  /**
    * Initialize the search filter.
    * @private
    */
@@ -140,48 +158,6 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
     searchFilter.bind(root);
   }
 
-  /**
-   * Initialize the tooltip loader.
-   * @private
-   */
-  _initTooltipLoader() {
-    this.element.querySelectorAll("[data-uuid]").forEach(
-      /** @param {HTMLElement} el */ (el) => {
-        if (this.openable) {
-          el.addEventListener("dblclick", async (ev) => {
-            const target = /** @type {HTMLElement} */ ev.currentTarget;
-            const uuid = target.dataset.uuid;
-            const doc = /** @type {TeriockChild} */ await fromUuid(uuid);
-            await doc.sheet.render(true);
-          });
-        }
-        if (this.tooltipAsync) {
-          el.addEventListener("mouseover", async (ev) => {
-            const target = /** @type {HTMLElement} */ ev.currentTarget;
-            const uuid =
-              /** @type {Teriock.UUID<TeriockChild>} */ target.dataset.uuid;
-            const fetched = target.dataset.tooltipFetched === "true";
-            if (!fetched) {
-              target.setAttribute("data-tooltip-fetched", "true");
-              const doc = await fromUuid(uuid);
-              if (doc && typeof doc.toTooltip === "function") {
-                const tooltip = await doc.toTooltip();
-                target.setAttribute("data-tooltip-html", tooltip);
-                const tooltipManager = game.tooltip;
-                if (
-                  tooltipManager.tooltip.getAttribute("data-linked-uuid") ===
-                  uuid
-                ) {
-                  tooltipManager.activate(target);
-                }
-              }
-            }
-          });
-        }
-      },
-    );
-  }
-
   /** @inheritDoc */
   _onClose() {
     this._finish(this.multi ? [] : null);
@@ -190,8 +166,9 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
   /** @inheritDoc */
   async _onRender(options = {}) {
     await super._onRender(options);
+    bindCommonActions(this.element);
     this._initSearchFilter();
-    this._initTooltipLoader();
+    this._initClickLoader();
   }
 
   /** @inheritDoc */

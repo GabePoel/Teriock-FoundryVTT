@@ -222,8 +222,10 @@
       {{#if (or editable (exists subAbilities))}}
         <div class="ab-main">
           {{#if editable}}
-            <button class="createAbility" data-action="createAbility">Add Child Ability</button>{{/if}}
-          {{abilityCards subAbilities system}}
+            <button class="createAbility" data-action="createAbility">Add Ability</button>{{/if}}
+          {{#each subAbilities as |doc|}}
+            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+          {{/each}}
         </div>
       {{/if}}
     </div>

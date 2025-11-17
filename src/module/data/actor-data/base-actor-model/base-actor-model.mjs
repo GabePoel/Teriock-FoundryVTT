@@ -1,3 +1,4 @@
+import { dotJoin, prefix } from "../../../helpers/string.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
@@ -66,6 +67,18 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = this.metadata.type;
+    parts.text = dotJoin([
+      prefix(this.scaling.lvl, "LVL"),
+      prefix(this.scaling.br, "BR"),
+      prefix(this.size.number.value, "Size"),
+    ]);
+    return parts;
   }
 
   /**

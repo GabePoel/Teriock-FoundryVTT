@@ -74,6 +74,14 @@ export default class TeriockActor extends ParentDocumentMixin(
   specialEffects = [];
 
   /**
+   * Is this actor active?
+   * @returns {boolean}
+   */
+  get active() {
+    return !this.statuses.has("down");
+  }
+
+  /**
    * Enabled body parts and equipped equipment.
    * @returns {TeriockArmament[]}
    */
@@ -495,7 +503,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   prepareVirtualConditionInformation() {
     for (const e of this.appliedEffects) {
       for (const s of e.statuses) {
-        this.system.conditionInformation[s]?.reasons.add(e.name);
+        if (!e.id.startsWith(s)) {
+          this.system.conditionInformation[s]?.reasons.add(e.name);
+        }
       }
     }
     if (this.system.conditionInformation.hacked.reasons.has("2nd Arm Hack")) {

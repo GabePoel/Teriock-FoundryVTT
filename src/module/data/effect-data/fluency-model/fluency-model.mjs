@@ -1,8 +1,10 @@
 import { iconManifest } from "../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../executions/document-executions/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
+import { dotJoin } from "../../../helpers/string.mjs";
 import {
   ExecutableDataMixin,
+  ProficiencyDataMixin,
   RevelationDataMixin,
   ThresholdDataMixin,
   WikiDataMixin,
@@ -20,13 +22,16 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseEffectModel}
  * @mixes ExecutableData
+ * @mixes ProficiencyData
  * @mixes RevelationData
  * @mixes ThresholdData
  * @mixes WikiData
  */
-export default class TeriockFluencyModel extends ThresholdDataMixin(
-  RevelationDataMixin(
-    WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
+export default class TeriockFluencyModel extends ProficiencyDataMixin(
+  ThresholdDataMixin(
+    RevelationDataMixin(
+      WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
+    ),
   ),
 ) {
   /** @inheritDoc */
@@ -61,6 +66,19 @@ export default class TeriockFluencyModel extends ThresholdDataMixin(
       }),
     });
     return schema;
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = `${this.tradecraft}`;
+    parts.text = dotJoin([
+      this.field,
+      (this.parent.source?.documentName !== "ActiveEffect"
+        ? this.parent.source?.name
+        : "") || "",
+    ]);
+    return parts;
   }
 
   /** @inheritDoc */

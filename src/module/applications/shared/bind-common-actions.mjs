@@ -31,8 +31,38 @@ export default function bindCommonActions(rootElement) {
       await handler.secondaryAction();
     });
   }
-  rootElement.querySelectorAll(".teriock-panel-association-card").forEach(
+  queryAll(rootElement, "[data-make-tooltip], [data-rich-tooltip]").forEach(
     /** @param {HTMLElement} el */ (el) => {
+      // Determine tooltip direction
+      el.addEventListener("pointerenter", (ev) => {
+        const rect = el.getBoundingClientRect();
+        const leftSpace = rect.left;
+        const rightSpace = window.innerWidth - rect.right;
+        if (el.dataset.tooltipLeft) {
+          if (leftSpace >= 350) {
+            el.dataset.tooltipDirection = "LEFT";
+          } else {
+            el.dataset.tooltipDirection =
+              rightSpace > leftSpace ? "RIGHT" : "LEFT";
+          }
+        } else {
+          if (rightSpace >= 350) {
+            el.dataset.tooltipDirection = "RIGHT";
+          } else {
+            el.dataset.tooltipDirection =
+              leftSpace > rightSpace ? "LEFT" : "RIGHT";
+          }
+        }
+        const target = /** @type {HTMLElement} */ ev.currentTarget;
+        if (target.dataset.tooltip || target.dataset.tooltipHtml) {
+          game.tooltip.activate(target);
+        }
+      });
+    },
+  );
+  queryAll(rootElement, "[data-make-tooltip]").forEach(
+    /** @param {HTMLElement} el */ (el) => {
+      // Add tooltip listener
       el.addEventListener("mouseover", async (ev) => {
         const target = /** @type {HTMLElement} */ ev.currentTarget;
         const uuid =
@@ -44,11 +74,15 @@ export default function bindCommonActions(rootElement) {
           if (doc && typeof doc.toTooltip === "function") {
             const tooltip = await doc.toTooltip();
             target.setAttribute("data-tooltip-html", tooltip);
-            const tooltipManager = game.tooltip;
-            tooltipManager.activate(target);
+            game.tooltip.activate(target);
           }
         }
       });
+    },
+  );
+  rootElement.querySelectorAll(".teriock-panel-association-card").forEach(
+    /** @param {HTMLElement} el */ (el) => {
+      // Add preview listener
       el.addEventListener("click", async (event) => {
         event.stopPropagation();
         const uuid = /** @type {Teriock.UUID<TeriockChild>} */ el.dataset.uuid;
@@ -63,4 +97,19 @@ export default function bindCommonActions(rootElement) {
       });
     },
   );
+}
+
+/**
+ * Like querySelectorAll, but includes the root element if it matches.
+ * @param {HTMLElement} root
+ * @param {string} selector
+ * @returns {HTMLElement[]} An array of matching elements (root + descendants).
+ */
+export function queryAll(root, selector) {
+  const result = [];
+  if (root.matches(selector)) {
+    result.push(root);
+  }
+  result.push(...root.querySelectorAll(selector));
+  return result;
 }

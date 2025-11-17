@@ -1,13 +1,14 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import {
   conditionSort,
   docSort,
   rankSort,
 } from "../../../../helpers/utils.mjs";
+import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
-import AvatarImageActorSeetPart from "./parts/avatar-image-actor-seet-part.mjs";
+import AvatarImageActorSheetPart from "./parts/avatar-image-actor-sheet-part.mjs";
 import DocumentCreationActorSheetPart from "./parts/document-creation-actor-sheet-part.mjs";
-import DocumentTogglingActorSheetPart from "./parts/document-toggling-actor-sheet-part.mjs";
 import HidingCommonSheetPart from "./parts/hiding-common-sheet-part.mjs";
 import SearchingActorSheetPart from "./parts/searching-actor-sheet-part.mjs";
 import { filterAbilities, filterEquipment } from "./tools/filters.mjs";
@@ -26,16 +27,13 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  * @mixes HidingCommonSheetPart
  * @mixes SearchingActorSheetPart
  * @mixes DocumentCreationActorSheetPart
- * @mixes DocumentTogglingActorSheetPart
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends AvatarImageActorSeetPart(
+export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
   HidingCommonSheetPart(
     SearchingActorSheetPart(
-      DocumentCreationActorSheetPart(
-        DocumentTogglingActorSheetPart(CommonSheetMixin(ActorSheetV2)),
-      ),
+      DocumentCreationActorSheetPart(CommonSheetMixin(ActorSheetV2)),
     ),
   ),
 ) {
@@ -163,7 +161,7 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSeetPart(
    * @param {object} context
    * @private
    */
-  _prepareConditionContext(context) {
+  async _prepareConditionContext(context) {
     const conditions = conditionSort(
       Array.from(this.actor.statuses || []).filter((c) =>
         Object.keys(TERIOCK.index.conditions).includes(c),
@@ -175,11 +173,54 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSeetPart(
         this.actor.effectKeys.condition.has(c),
       ),
     });
+    context.conditionsMap = {};
+    for (const c of this.actor.conditions) {
+      context.conditionsMap[toCamelCase(c.name)] = c;
+    }
     context.conditionProviders = {};
+    context.conditionTooltips = {};
     for (const condition of Object.keys(TERIOCK.index.conditions)) {
       context.conditionProviders[condition] = Array.from(
         this.document.system.conditionInformation[condition].reasons,
       );
+      const messageParts = {
+        bars: [],
+        blocks: [
+          {
+            text: TERIOCK.data.conditions[condition].description,
+            title: "Description",
+          },
+        ],
+        image: TERIOCK.data.conditions[condition].img,
+        name: TERIOCK.data.conditions[condition].name,
+        associations: [],
+        icon: TERIOCK.options.document.condition.icon,
+      };
+      /** @type {TeriockTokenDocument[]} */
+      const tokenDocs = (this.document.system.trackers[condition] || []).map(
+        (uuid) => fromUuidSync(uuid),
+      );
+      if (tokenDocs.length > 0) {
+        /** @type {Teriock.MessageData.MessageAssociation} */
+        const association = {
+          title: "Associated Creatures",
+          icon: TERIOCK.options.document.creature.icon,
+          cards: [],
+        };
+        for (const tokenDoc of tokenDocs) {
+          association.cards.push({
+            name: tokenDoc.name,
+            uuid: tokenDoc.uuid,
+            img: tokenDoc.texture.src,
+            id: tokenDoc.id,
+            type: "base",
+            rescale: tokenDoc.rescale,
+          });
+        }
+        messageParts.associations.push(association);
+      }
+      context.conditionTooltips[condition] =
+        await TeriockTextEditor.makeTooltip(messageParts);
     }
   }
 
@@ -188,12 +229,15 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSeetPart(
     const context = await super._prepareContext(options);
     this._prepareDisplayContext(context);
     await this._prepareDocumentContext(context);
-    this._prepareConditionContext(context);
+    await this._prepareConditionContext(context);
     context.enrichedNotes = await this._enrich(
       this.document.system.sheet.notes,
     );
     context.enrichedSpecialRules = await this._enrich(
       this.document.system.primaryAttacker?.system?.specialRules,
+    );
+    context.inventory = await TeriockTextEditor.enrichHTML(
+      context.equipment.map((e) => `@Embed[${e.uuid}]`).join(""),
     );
     return context;
   }

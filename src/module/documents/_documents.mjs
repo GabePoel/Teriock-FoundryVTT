@@ -67,7 +67,7 @@ export class TeriockBody extends BlankMixin(TeriockItem) {}
  * @property {Teriock.UUID<TeriockEquipment>} uuid
  * @property {Teriock.ID<TeriockEquipment>} id
  */
-export class TeriockEquipment extends BlankMixin(TeriockItem) {}
+export class TeriockEquipment extends TeriockItem {}
 
 /**
  * Power-specific {@link TeriockItem} class.
@@ -120,7 +120,7 @@ export class TeriockSpecies extends BlankMixin(TeriockItem) {}
  * @property {Teriock.UUID<TeriockMount>} uuid
  * @property {Teriock.ID<TeriockMount>} id
  */
-export class TeriockMount extends BlankMixin(TeriockItem) {}
+export class TeriockMount extends TeriockItem {}
 
 /**
  * Wrapper-specific {@link TeriockItem} class.
@@ -146,7 +146,7 @@ export class TeriockWrapper extends BlankMixin(TeriockItem) {}
  * @property {Teriock.UUID<TeriockAbility>} uuid
  * @property {Teriock.ID<TeriockAbility>} id
  */
-export class TeriockAbility extends BlankMixin(TeriockEffect) {}
+export class TeriockAbility extends TeriockEffect {}
 
 /**
  * Consequence-specific {@link TeriockEffect} class.

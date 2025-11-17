@@ -44,6 +44,29 @@ export default function ConsumableDataMixin(Base) {
       }
 
       /** @inheritDoc */
+      get embedActions() {
+        return {
+          ...super.embedActions,
+          useOneDoc: () => this.useOne(),
+        };
+      }
+
+      /** @inheritDoc */
+      get embedParts() {
+        const parts = super.embedParts;
+        if (this.consumable) {
+          parts.subtitleAction = "useOneDoc";
+          parts.subtitleTooltip = "Consume One";
+          parts.subtitle = `${this.quantity} ${
+            this.maxQuantity.value && this.maxQuantity.value !== Infinity
+              ? `/ ${this.maxQuantity.value}`
+              : "remaining"
+          }`;
+        }
+        return parts;
+      }
+
+      /** @inheritDoc */
       async gainOne() {
         if (this.consumable) {
           await this.parent.update({

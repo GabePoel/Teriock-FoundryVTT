@@ -1,7 +1,5 @@
 import { makeIcon } from "../../../../../helpers/utils.mjs";
-import _embeddedFromCard from "./_embedded-from-card.mjs";
-
-const { ux } = foundry.applications;
+import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
 /**
  * Connects embedded documents to their UI elements with context menus and event handlers.
@@ -15,71 +13,48 @@ const { ux } = foundry.applications;
  */
 export default async function _connectEmbedded(document, element) {
   const cards = element.querySelectorAll(".tcard");
-
-  await Promise.all(
-    Array.from(cards).map(
-      /** @param {HTMLElement} el */ async (el) => {
-        const embedded = await _embeddedFromCard(document.sheet, el);
-        if (
-          embedded &&
-          ["Item", "ActiveEffect"].includes(embedded.documentName)
-        ) {
-          new ux.ContextMenu(
-            el,
-            ".tcard",
-            embedded.system.cardContextMenuEntries,
+  cards.forEach(
+    /** @param {HTMLElement} target */ (target) => {
+      if (target.classList.contains("macro-card")) {
+        new TeriockContextMenu(
+          target,
+          ".tcard",
+          [
             {
-              eventName: "contextmenu",
-              jQuery: false,
-              fixed: true,
-            },
-          );
-
-          el.querySelectorAll('[data-action="useOneDoc"]').forEach(
-            (actionEl) => {
-              actionEl.addEventListener("contextmenu", (event) => {
-                event.stopPropagation();
-                embedded.system.gainOne();
-              });
-            },
-          );
-        } else if (el.classList.contains("macro-card")) {
-          new ux.ContextMenu(
-            el,
-            ".tcard",
-            [
-              {
-                name: "Unlink",
-                icon: makeIcon("link-slash", "contextMenu"),
-                callback: async () => {
-                  const uuid = el.dataset.id;
-                  await document.system.unlinkMacro(uuid);
-                },
-                condition: () => document.sheet.editable && document.isOwner,
-                group: "document",
+              name: "Unlink",
+              icon: makeIcon("link-slash", "contextMenu"),
+              callback: async () => {
+                const uuidElement =
+                  /** @type {HTMLElement} */ target.closest("[data-uuid]");
+                const uuid = uuidElement.dataset.uuid;
+                await document.system.unlinkMacro(uuid);
               },
-              {
-                name: "Change Run Hook",
-                icon: makeIcon("gear-code", "contextMenu"),
-                callback: async () => {
-                  const uuid = el.dataset.id;
-                  await document.system.changeMacroRunHook(uuid);
-                },
-                condition: () =>
-                  document.sheet.editable &&
-                  document.isOwner &&
-                  el.classList.contains("hooked-macro-card"),
-                group: "document",
-              },
-            ],
+              condition: () => document.sheet.editable && document.isOwner,
+              group: "document",
+            },
             {
-              eventName: "contextmenu",
-              jQuery: false,
-              fixed: true,
+              name: "Change Run Hook",
+              icon: makeIcon("gear-code", "contextMenu"),
+              callback: async () => {
+                const uuidElement =
+                  /** @type {HTMLElement} */ target.closest("[data-uuid]");
+                const uuid = uuidElement.dataset.uuid;
+                await document.system.changeMacroRunHook(uuid);
+              },
+              condition: () =>
+                document.sheet.editable &&
+                document.isOwner &&
+                target.classList.contains("hooked-macro-card"),
+              group: "document",
             },
-          );
-        }
-      },
-    ),
+          ],
+          {
+            eventName: "contextmenu",
+            jQuery: false,
+            fixed: true,
+          },
+        );
+      }
+    },
   );
 }

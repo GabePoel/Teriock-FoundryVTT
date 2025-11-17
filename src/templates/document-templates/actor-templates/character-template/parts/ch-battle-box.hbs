@@ -38,6 +38,12 @@
           ></i>
           {{#if (exists system.primaryBlocker)}}
             <i
+              class="fa-regular fa-shield thover"
+              data-action="useAbility"
+              data-ability="Basic Block"
+              data-tooltip="Roll Block"
+            ></i>
+            <i
               class="fa-regular fa-arrow-up-right-from-square thover"
               data-action="openPrimaryBlocker"
               data-tooltip="Open"
@@ -47,7 +53,12 @@
       </div>
       <div
         class="thover character-primary-blocker-select"
-        data-tooltip="Block Item"
+        data-make-tooltip="true"
+        data-tooltip-direction="LEFT"
+        data-tooltip-left="true"
+        {{#if (exists system.primaryBlocker)}}
+        data-uuid="{{system.primaryBlocker.uuid}}"
+        {{/if}}
       >
         {{#if (exists system.primaryBlocker)}}
           {{{system.primaryBlocker.name}}}
@@ -140,8 +151,8 @@
         <div class="title-right">
           <i
             class="fa-regular fa-dice-d20 thover"
-            data-action="attack"
-            data-id="{{system.primaryAttacker._id}}"
+            data-action="useAbility"
+            data-ability="Basic Attack"
             data-tooltip="Roll Attack"
           ></i>
           {{#if (exists system.primaryAttacker)}}
@@ -162,7 +173,12 @@
 
       <div
         class="thover character-primary-attacker-select"
-        data-tooltip="Attack Item"
+        data-make-tooltip="true"
+        data-tooltip-direction="LEFT"
+        data-tooltip-left="true"
+        {{#if (exists system.primaryAttacker)}}
+        data-uuid="{{system.primaryAttacker.uuid}}"
+        {{/if}}
       >
         {{#if (exists system.primaryAttacker)}}
           {{{system.primaryAttacker.name}}}

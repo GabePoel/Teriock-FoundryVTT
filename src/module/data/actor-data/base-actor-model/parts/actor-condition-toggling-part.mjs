@@ -1,5 +1,5 @@
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+  //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
   return (
     /**
      * @extends TeriockBaseActorData

@@ -52,7 +52,7 @@ export default class TeriockConditionModel extends TransformationDataMixin(
         name: this.useText,
         icon: makeIcon(this.useIcon, "contextMenu"),
         callback: this.use.bind(this),
-        condition: this.constructor.metadata.usable,
+        condition: this.parent.isOwner,
         group: "usage",
       },
       {
@@ -89,14 +89,28 @@ export default class TeriockConditionModel extends TransformationDataMixin(
     }
   }
 
+  get embedIcons() {
+    return [
+      {
+        icon: "dice-d4",
+        tooltip: "Roll to Remove",
+        condition: true,
+        callback: async () => this.parent.use(),
+        action: "removeConditionDoc",
+      },
+    ];
+  }
+
   /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,
+      icon: TERIOCK.options.document.condition.icon,
+      label: TERIOCK.options.document.condition.name,
       blocks: [
         {
+          text: this.parent.description,
           title: "Description",
-          text: this.description,
         },
       ],
     };
@@ -135,6 +149,10 @@ export default class TeriockConditionModel extends TransformationDataMixin(
 
   /** @inheritDoc */
   async roll(_options = {}) {
-    await this.inCombatExpiration(true);
+    if (this.parent.id.includes("dead") && this.parent.actor) {
+      await this.parent.actor.system.deathBagPull();
+    } else {
+      await this.inCombatExpiration(true);
+    }
   }
 }

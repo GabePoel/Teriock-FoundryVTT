@@ -6,8 +6,6 @@
 export default async function _setupEventListeners(sheet) {
   setupUpdateHandlers(sheet);
   setupRecordFieldHandlers(sheet);
-  setupSetFieldHandlers(sheet);
-  setupArrayFieldHandlers(sheet);
   setupChangeHandlers(sheet);
 }
 
@@ -97,67 +95,6 @@ function setupRecordFieldHandlers(sheet) {
 }
 
 /**
- * Sets up handlers for set field components.
- * Configures multi-select inputs and remove buttons for set fields.
- * @param {DocumentSheetV2} sheet
- */
-function setupSetFieldHandlers(sheet) {
-  sheet.element.querySelectorAll(".teriock-update-set").forEach((container) => {
-    const select = container.querySelector("select");
-    if (!select) {
-      return;
-    }
-
-    const name = container.getAttribute("name");
-    const getValues = () =>
-      Array.from(select.parentElement.querySelectorAll(".tag")).map(
-        (tag) => tag.dataset.key,
-      );
-
-    select.addEventListener("input", async () => {
-      const values = getValues();
-      const selectedValue = select.value;
-      if (selectedValue && !values.includes(selectedValue)) {
-        values.push(selectedValue);
-      }
-      await updateSetField(sheet, name, values);
-    });
-
-    container.querySelectorAll(".remove").forEach((btn) => {
-      btn.addEventListener("click", async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const target = /** @type {HTMLElement} */ e.currentTarget;
-        const closest = /** @type {HTMLElement} */ target.closest(".tag");
-        const key = closest.dataset.key;
-        const values = getValues().filter((k) => k !== key);
-        await updateSetField(sheet, name, values);
-      });
-    });
-  });
-}
-
-/**
- * Sets up handlers for array field components.
- * Configures add buttons for array fields.
- * @param {DocumentSheetV2} sheet
- */
-function setupArrayFieldHandlers(sheet) {
-  sheet.element.querySelectorAll(".teriock-array-field-add").forEach(
-    /** @param {HTMLButtonElement} button */ (button) => {
-      button.addEventListener("click", async (e) => {
-        e.preventDefault();
-        await addToArrayField(
-          sheet,
-          button.getAttribute("name"),
-          button.dataset.path,
-        );
-      });
-    },
-  );
-}
-
-/**
  * Sets up handlers for change field components.
  * Configures change inputs and remove buttons for change arrays.
  * @param {DocumentSheetV2} sheet
@@ -240,36 +177,4 @@ async function cleanRecordField(sheet, name, allowedKeys = []) {
   });
 
   await sheet.document.update(updateData);
-}
-
-/**
- * Adds an item to an array field.
- * @param {DocumentSheetV2} sheet
- * @param {string} name - The field name.
- * @param {string} fieldPath - The path to the field schema.
- * @returns {Promise<void>} Promise that resolves when the item is added.
- */
-async function addToArrayField(sheet, name, fieldPath) {
-  const cleanFieldPath = fieldPath.startsWith("system.")
-    ? fieldPath.slice(7)
-    : fieldPath;
-  const copy =
-    foundry.utils.deepClone(foundry.utils.getProperty(sheet.document, name)) ||
-    [];
-  const field = sheet.document.system.schema.getField(cleanFieldPath).element;
-  const initial = field.getInitialValue();
-
-  copy.push(initial);
-  await sheet.document.update({ [name]: copy });
-}
-
-/**
- * Updates a set field with new values.
- * @param {DocumentSheetV2} sheet
- * @param {string} name - The field name.
- * @param {Array} values - Array of values for the set.
- * @returns {Promise<void>} Promise that resolves when the set is updated.
- */
-async function updateSetField(sheet, name, values = []) {
-  await sheet.document.update({ [name]: new Set(values) });
 }

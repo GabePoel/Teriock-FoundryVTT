@@ -93,7 +93,7 @@ export default (Base) => {
       }
 
       /**
-       * Adds a new embedded {@link TeriockChild} to the current {@link TeriockDocument}.
+       * Adds new embedded {@link TeriockChild} to the current {@link TeriockDocument}.
        * Creates documents based on the specified tab type.
        * @param {MouseEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.

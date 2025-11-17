@@ -19,11 +19,19 @@ export default function registerExistenceHelpers() {
     return new Handlebars.SafeString(block.repeat(n));
   });
 
+  Handlebars.registerHelper("defined", (val) => {
+    return typeof val !== "undefined";
+  });
+
   Handlebars.registerHelper("repeat", function (n, options) {
     let result = "";
     for (let i = 0; i < n; i++) {
       result += options.fn(this);
     }
     return new Handlebars.SafeString(result);
+  });
+
+  Handlebars.registerHelper("merge", (a, b) => {
+    return foundry.utils.mergeObject(a, b);
   });
 }

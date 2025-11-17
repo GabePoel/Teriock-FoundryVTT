@@ -22,14 +22,17 @@ export default function PassiveSheetMixin(Base) {
 
       /**
        * Change the run pseudo-hook for a given macro
-       * @param {Event} _event - The event object.
+       * @param {Event} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        * @private
        */
-      static async _changeMacroRunHook(_event, target) {
+      static async _changeMacroRunHook(event, target) {
+        event.stopPropagation();
         if (this.editable) {
-          const uuid = target.dataset.parentId;
+          const uuidElement =
+            /** @type {HTMLElement} */ target.closest("[data-uuid]");
+          const uuid = uuidElement.dataset.uuid;
           await this.document.system.changeMacroRunHook(uuid);
         } else {
           foundry.ui.notifications.warn(
@@ -39,9 +42,12 @@ export default function PassiveSheetMixin(Base) {
       }
 
       /** @inheritDoc */
-      static async _unlinkMacro(_event, target) {
+      static async _unlinkMacro(event, target) {
+        event.stopPropagation();
         if (this.editable) {
-          const uuid = target.dataset.parentId;
+          const uuidElement =
+            /** @type {HTMLElement} */ target.closest("[data-uuid]");
+          const uuid = uuidElement.dataset.uuid;
           await this.document.system.unlinkMacro(uuid);
         } else {
           foundry.ui.notifications.warn(

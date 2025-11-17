@@ -7,11 +7,7 @@ import {
   RevelationDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import {
-  FormulaField,
-  ListField,
-  TextField,
-} from "../../shared/fields/_module.mjs";
+import { FormulaField, TextField } from "../../shared/fields/_module.mjs";
 import { changeField } from "../../shared/fields/helpers/field-builders.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -70,7 +66,7 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
       extraDamage: new FormulaField({ deterministic: false }),
       form: new fields.StringField({ initial: "normal" }),
       impacts: new fields.SchemaField({
-        changes: new ListField(changeField(), {
+        changes: new fields.ArrayField(changeField(), {
           label: "Changes",
           hint: "Changes made to the target equipment as part of the property's ongoing effect.",
         }),
@@ -104,6 +100,13 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   /** @inheritDoc */
   get color() {
     return TERIOCK.options.ability.form[this.form].color;
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = TERIOCK.options.ability.form[this.form].name;
+    return parts;
   }
 
   /** @inheritDoc */

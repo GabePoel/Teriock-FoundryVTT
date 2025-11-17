@@ -1,11 +1,286 @@
 @use "../../mixins";
 
-.tcard-container {
-  --tcard-border-color: var(--color-tcard-container-border);
-  --tcard-border-radius: var(--tcard-outer-border-radius);
-  border-radius: var(--tcard-outer-border-radius);
-  --tcard-box-shadow: 0 0 6px var(--color-tcard-shadow);
-  box-shadow: var(--tcard-container-box-shadow);
+@mixin tcard-tiny() {
+  --tcard-content-align-items: center;
+  --tcard-content-flex-direction: row;
+  --tcard-content-gap: 8px;
+  --tcard-content-padding: 0;
+  --tcard-content-right-padding: 8px;
+  --tcard-height: 28px;
+  --tcard-icons-gap: 6px;
+  --tcard-image-padding: 4px;
+  --tcard-titles-align-items: center;
+  --tcard-titles-flex-direction: row;
+  --tcard-titles-gap: 8px;
+  --tcard-titles-padding-left: 2px;
+}
+
+@mixin tcard-base {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: var(--tcard-outer-border-width) solid
+    var(--color-tcard-container-border);
+  border-radius: var(--tcard-border-radius);
+  border-top-width: var(--tcard-inner-border-width);
+  box-shadow: var(--tcard-box-shadow);
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  height: var(--tcard-height);
+  justify-content: flex-start;
+  --tcard-opacity: 1;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.15s ease-in-out;
+  width: 100%;
+  user-select: none;
+
+  &.inactive {
+    background-color: rgba(255, 255, 255, 0.05);
+    --tcard-opacity: 0.5;
+  }
+
+  &.visible-first,
+  &:first-child {
+    border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
+    border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
+  }
+
+  &.visible-last,
+  &:last-child {
+    border-bottom-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
+    border-bottom-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
+  }
+
+  .tcard-background {
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    opacity: var(--tcard-opacity);
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &.shattered {
+    .tcard-background {
+      //noinspection CssUnknownTarget
+      background: url("../src/assets/shattered.png") no-repeat top center;
+      background-size: cover;
+    }
+  }
+
+  &.struck {
+    .tcard-title {
+      text-decoration: line-through;
+    }
+  }
+
+  &:hover:not(:has(.tcard-image.usable:hover)) {
+    background-color: rgba(255, 255, 255, 0.15);
+
+    &.inactive {
+      background-color: rgba(255, 255, 255, 0.075);
+    }
+
+    &::after {
+      bottom: 0;
+      box-shadow: inset 0 0 8px var(--color-tcard-hover-inset);
+      content: "";
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  &:active:not(:has(.tcard-image.usable:hover)) {
+    background-color: rgba(255, 255, 255, 0.1);
+
+    &.inactive {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    &::after {
+      box-shadow: inset 0 0 8px var(--color-tcard-active-inset);
+    }
+  }
+
+  .tcard-marker {
+    height: 100%;
+    opacity: var(--tcard-opacity);
+    width: 0;
+    z-index: -1;
+  }
+
+  .tcard-image {
+    @include mixins.warm-image-container-background;
+    @include mixins.image-border;
+    border-radius: 3px;
+    height: calc(var(--tcard-height) - 12px);
+    margin-left: var(--tcard-image-margin-left);
+    margin-right: var(--tcard-image-padding);
+    opacity: var(--tcard-opacity);
+    overflow: hidden;
+    position: relative;
+    width: calc(var(--tcard-height) - 12px);
+    user-select: none;
+
+    &.usable {
+      cursor: pointer;
+      transition: 250ms;
+
+      &:hover {
+        outline-color: var(--color-warm-2) !important;
+        box-shadow: 0 0 10px var(--color-warm-3);
+      }
+
+      &:active {
+        outline-color: var(--color-warm-1) !important;
+        box-shadow: none;
+      }
+    }
+
+    img {
+      @include mixins.warm-drop-shadow;
+      @include mixins.image-position;
+      border: none;
+      height: 100%;
+      max-height: 100%;
+      max-width: 100%;
+      transition: filter 0.15s ease-in-out;
+      -webkit-user-drag: none;
+      width: 100%;
+      user-select: none;
+
+      &:hover {
+        filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
+      }
+
+      &:active {
+        filter: drop-shadow(0 0 1.5px rgba(0, 0, 0, 0.3));
+      }
+    }
+  }
+
+  .tcard-body {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-between;
+    min-width: 0; // Allow proper shrinking of child elements
+    opacity: var(--tcard-opacity);
+
+    .tcard-titles {
+      align-items: var(--tcard-titles-align-items);
+      display: flex;
+      flex-direction: var(--tcard-titles-flex-direction);
+      flex-shrink: 0; // Keep rigid to prevent wrapping and overlapping
+      gap: var(--tcard-titles-gap);
+      max-width: 60%; // Prevent titles from taking up too much space
+      padding-left: var(--tcard-titles-padding-left);
+
+      .tcard-title {
+        color: var(--color-text);
+        font-size: var(--tcard-title-font-size);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .tcard-subtitle {
+        color: var(--color-text-subtle);
+        font-size: var(--tcard-subtitle-font-size);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        white-space: nowrap;
+        user-select: none;
+
+        &.tcard-clickable {
+          cursor: pointer;
+
+          &:hover {
+            color: var(--color-tcard-hover-inset);
+          }
+
+          &:active {
+            color: var(--color-text-secondary);
+          }
+        }
+      }
+    }
+
+    .tcard-content {
+      align-items: var(--tcard-content-align-items);
+      display: flex;
+      flex-direction: var(--tcard-content-flex-direction);
+      flex-shrink: 1; // Allow content to shrink when needed
+      gap: var(--tcard-content-gap);
+      height: 100%;
+      justify-content: space-between;
+      min-width: 0; // Allow shrinking below content size
+      overflow: hidden;
+      padding: var(--tcard-content-padding);
+      padding-right: var(--tcard-content-right-padding);
+
+      .tcard-text {
+        color: var(--color-text-subtle);
+        flex-shrink: 1;
+        font-size: 0.8em;
+        margin-left: var(--tcard-content-gap);
+        overflow: hidden;
+        text-align: right;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .tcard-icons {
+        color: var(--color-text-subtle);
+        display: flex;
+        flex-direction: row;
+        flex-shrink: 0;
+        font-size: 0.8em;
+        gap: var(--tcard-icons-gap);
+        text-transform: uppercase;
+        user-select: none;
+
+        i {
+          &:hover {
+            color: var(--color-tcard-hover-inset);
+          }
+
+          &:active {
+            color: var(--color-text-secondary);
+          }
+        }
+      }
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  .no-results {
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.075);
+    border: var(--tcard-outer-border-width) solid
+      var(--color-tcard-container-border);
+    border-radius: var(--tcard-outer-border-radius);
+    border-top-width: var(--tcard-inner-border-width);
+    box-shadow: var(--tcard-box-shadow);
+  }
+}
+
+:root {
   --tcard-container-box-shadow: none;
   --tcard-content-align-items: end;
   --tcard-content-flex-direction: column;
@@ -13,9 +288,6 @@
   --tcard-content-gap: 0;
   --tcard-content-padding: 10px;
   --tcard-content-right-padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   --tcard-height: 56px;
   --tcard-icons-gap: 4px;
   --tcard-image-hide-width: 249px;
@@ -30,7 +302,17 @@
   --tcard-titles-flex-direction: column;
   --tcard-titles-gap: 0;
   --tcard-titles-padding-left: 0;
+  --tcard-border-color: var(--color-tcard-container-border);
+  --tcard-border-radius: var(--tcard-outer-border-radius);
+  --tcard-box-shadow: 0 0 6px var(--color-tcard-shadow);
+}
 
+.tcard-container {
+  border-radius: var(--tcard-outer-border-radius);
+  box-shadow: var(--tcard-container-box-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
 
   &:not(.large):not(.small):not(.tiny),
@@ -180,18 +462,7 @@
   }
 
   &.tiny {
-    --tcard-content-align-items: center;
-    --tcard-content-flex-direction: row;
-    --tcard-content-gap: 8px;
-    --tcard-content-padding: 0;
-    --tcard-content-right-padding: 8px;
-    --tcard-height: 28px;
-    --tcard-icons-gap: 6px;
-    --tcard-image-padding: 4px;
-    --tcard-titles-align-items: center;
-    --tcard-titles-flex-direction: row;
-    --tcard-titles-gap: 8px;
-    --tcard-titles-padding-left: 2px;
+    @include tcard-tiny;
 
     // Progressive collapsing for tiny size
     @container (max-width: 350px) {
@@ -242,261 +513,7 @@
   }
 
   .tcard {
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: var(--tcard-outer-border-width) solid
-      var(--color-tcard-container-border);
-    border-radius: var(--tcard-border-radius);
-    border-top-width: var(--tcard-inner-border-width);
-    box-shadow: var(--tcard-box-shadow);
-    cursor: default;
-    display: flex;
-    flex-direction: row;
-    height: var(--tcard-height);
-    justify-content: flex-start;
-    --tcard-opacity: 1;
-    overflow: hidden;
-    position: relative;
-    transition: all 0.15s ease-in-out;
-    width: 100%;
-
-    &.inactive {
-      background-color: rgba(255, 255, 255, 0.05);
-      --tcard-opacity: 0.5;
-    }
-
-    &.visible-first,
-    &:first-child {
-      border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
-      border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
-    }
-
-    &.visible-last,
-    &:last-child {
-      border-bottom-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
-      border-bottom-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
-    }
-
-    .tcard-background {
-      background-size: cover;
-      bottom: 0;
-      left: 0;
-      opacity: var(--tcard-opacity);
-      pointer-events: none;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    &.shattered {
-      .tcard-background {
-        //noinspection CssUnknownTarget
-        background: url("../src/assets/shattered.png") no-repeat top center;
-        background-size: cover;
-      }
-    }
-
-    &.struck {
-      .tcard-title {
-        text-decoration: line-through;
-      }
-    }
-
-    &:hover:not(:has(.tcard-image.usable:hover)) {
-      background-color: rgba(255, 255, 255, 0.15);
-
-      &.inactive {
-        background-color: rgba(255, 255, 255, 0.075);
-      }
-
-      &::after {
-        bottom: 0;
-        box-shadow: inset 0 0 8px var(--color-tcard-hover-inset);
-        content: "";
-        left: 0;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-    }
-
-    &:active:not(:has(.tcard-image.usable:hover)) {
-      background-color: rgba(255, 255, 255, 0.1);
-
-      &.inactive {
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-
-      &::after {
-        box-shadow: inset 0 0 8px var(--color-tcard-active-inset);
-      }
-    }
-
-    .tcard-marker {
-      height: 100%;
-      opacity: var(--tcard-opacity);
-      width: 0;
-      z-index: -1;
-    }
-
-    .tcard-image {
-      @include mixins.warm-image-container-background;
-      @include mixins.image-border;
-      border-radius: 3px;
-      height: calc(var(--tcard-height) - 12px);
-      margin-left: var(--tcard-image-margin-left);
-      margin-right: var(--tcard-image-padding);
-      opacity: var(--tcard-opacity);
-      overflow: hidden;
-      position: relative;
-      width: calc(var(--tcard-height) - 12px);
-
-      &.usable {
-        cursor: pointer;
-        transition: 250ms;
-
-        &:hover {
-          outline-color: var(--color-warm-2) !important;
-          box-shadow: 0 0 10px var(--color-warm-3);
-        }
-
-        &:active {
-          outline-color: var(--color-warm-1) !important;
-          box-shadow: none;
-        }
-      }
-
-      img {
-        @include mixins.warm-drop-shadow;
-        @include mixins.image-position;
-        border: none;
-        height: 100%;
-        max-height: 100%;
-        max-width: 100%;
-        transition: filter 0.15s ease-in-out;
-        -webkit-user-drag: none;
-        width: 100%;
-
-        &:hover {
-          filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
-        }
-
-        &:active {
-          filter: drop-shadow(0 0 1.5px rgba(0, 0, 0, 0.3));
-        }
-      }
-    }
-
-    .tcard-body {
-      align-items: center;
-      display: flex;
-      flex: 1;
-      flex-direction: row;
-      height: 100%;
-      justify-content: space-between;
-      min-width: 0; // Allow proper shrinking of child elements
-      opacity: var(--tcard-opacity);
-
-      .tcard-titles {
-        align-items: var(--tcard-titles-align-items);
-        display: flex;
-        flex-direction: var(--tcard-titles-flex-direction);
-        flex-shrink: 0; // Keep rigid to prevent wrapping and overlapping
-        gap: var(--tcard-titles-gap);
-        max-width: 60%; // Prevent titles from taking up too much space
-        padding-left: var(--tcard-titles-padding-left);
-
-        .tcard-title {
-          color: var(--color-text);
-          font-size: var(--tcard-title-font-size);
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .tcard-subtitle {
-          color: var(--color-text-subtle);
-          font-size: var(--tcard-subtitle-font-size);
-          overflow: hidden;
-          text-overflow: ellipsis;
-          text-transform: uppercase;
-          white-space: nowrap;
-
-          &.tcard-clickable {
-            cursor: pointer;
-
-            &:hover {
-              color: var(--color-tcard-hover-inset);
-            }
-
-            &:active {
-              color: var(--color-text-secondary);
-            }
-          }
-        }
-      }
-
-      .tcard-content {
-        align-items: var(--tcard-content-align-items);
-        display: flex;
-        flex-direction: var(--tcard-content-flex-direction);
-        flex-shrink: 1; // Allow content to shrink when needed
-        gap: var(--tcard-content-gap);
-        height: 100%;
-        justify-content: space-between;
-        min-width: 0; // Allow shrinking below content size
-        overflow: hidden;
-        padding: var(--tcard-content-padding);
-        padding-right: var(--tcard-content-right-padding);
-
-        .tcard-text {
-          color: var(--color-text-subtle);
-          flex-shrink: 1; // Allow text to shrink
-          font-size: 0.8em;
-          margin-left: var(--tcard-content-gap);
-          overflow: hidden;
-          text-align: right;
-          text-overflow: ellipsis;
-          text-transform: uppercase;
-          white-space: nowrap;
-        }
-
-        .tcard-icons {
-          color: var(--color-text-subtle);
-          display: flex;
-          flex-direction: row;
-          flex-shrink: 0; // Icons never shrink - highest priority
-          font-size: 0.8em;
-          gap: var(--tcard-icons-gap);
-          text-transform: uppercase;
-
-          i {
-            &:hover {
-              color: var(--color-tcard-hover-inset);
-            }
-
-            &:active {
-              color: var(--color-text-secondary);
-            }
-          }
-        }
-      }
-    }
-
-    &.hidden {
-      display: none;
-    }
-
-    .no-results {
-      align-items: center;
-      background-color: rgba(255, 255, 255, 0.075);
-      border: var(--tcard-outer-border-width) solid
-        var(--color-tcard-container-border);
-      border-radius: var(--tcard-outer-border-radius);
-      border-top-width: var(--tcard-inner-border-width);
-      box-shadow: var(--tcard-box-shadow);
-    }
+    @include tcard-base;
   }
 
   .no-results {
@@ -520,6 +537,29 @@
 
   .tcard-container-start + .no-results {
     display: flex;
+  }
+}
+
+.tcard {
+  @include tcard-base;
+}
+
+.teriock-panel {
+  @include tcard-tiny;
+
+  .tcard {
+    .tcard-body {
+      .tcard-titles {
+        max-width: 100%;
+        width: 100%;
+        justify-content: space-between;
+        padding-right: var(--tcard-content-right-padding);
+      }
+
+      .tcard-content {
+        display: none;
+      }
+    }
   }
 }
 

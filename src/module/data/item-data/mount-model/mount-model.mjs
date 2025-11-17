@@ -1,3 +1,4 @@
+import { prefix } from "../../../helpers/string.mjs";
 import {
   AttunableDataMixin,
   StatGiverDataMixin,
@@ -40,9 +41,43 @@ export default class TeriockMountModel extends StatGiverDataMixin(
     return schema;
   }
 
+  get embedIcons() {
+    return [
+      ...super.embedIcons.filter(
+        (i) => !i.action.toLowerCase().includes("disabled"),
+      ),
+      {
+        icon: this.mounted ? "circle-check" : "circle",
+        action: "toggleMountedDoc",
+        tooltip: this.mounted ? "Mounted" : "Unmounted",
+        condition: this.parent.isOwner,
+        callback: async () => {
+          if (this.mounted) {
+            await this.unmount();
+          } else {
+            await this.mount();
+          }
+        },
+      },
+    ];
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = this.mountType;
+    parts.text = prefix(this.tier.value, "Tier");
+    return parts;
+  }
+
   /** @inheritDoc */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /** @inheritDoc */
+  get suppressed() {
+    return super.suppressed || !this.mounted;
   }
 
   /**

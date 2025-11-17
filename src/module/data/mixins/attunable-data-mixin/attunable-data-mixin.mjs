@@ -1,3 +1,4 @@
+import { makeIcon } from "../../../helpers/utils.mjs";
 import {
   deriveModifiableDeterministic,
   modifiableFormula,
@@ -36,6 +37,49 @@ export default function AttunableDataMixin(Base) {
           );
         }
         return null;
+      }
+
+      /** @inheritDoc */
+      get cardContextMenuEntries() {
+        return [
+          ...super.cardContextMenuEntries,
+          {
+            name: "Attune",
+            icon: makeIcon("handshake-simple", "contextMenu"),
+            callback: this.attune.bind(this),
+            condition: this.parent.isOwner && !this.isAttuned,
+            group: "control",
+          },
+          {
+            name: "Deattune",
+            icon: makeIcon("handshake-simple-slash", "contextMenu"),
+            callback: this.deattune.bind(this),
+            condition: this.parent.isOwner && this.isAttuned,
+            group: "control",
+          },
+        ];
+      }
+
+      /** @inheritDoc */
+      get embedIcons() {
+        return [
+          {
+            icon: this.isAttuned
+              ? "handshake-simple"
+              : "handshake-simple-slash",
+            action: "toggleAttunedDoc",
+            tooltip: this.isAttuned ? "Attuned" : "Deattuned",
+            condition: this.parent.isOwner,
+            callback: async () => {
+              if (this.isAttuned) {
+                await this.deattune();
+              } else {
+                await this.attune();
+              }
+            },
+          },
+          ...super.embedIcons,
+        ];
       }
 
       /**

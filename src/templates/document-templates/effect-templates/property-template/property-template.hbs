@@ -37,8 +37,9 @@
         <div class="ab-main">
           {{#if editable}}
             <button class="createProperty" data-action="createProperty">Add Child Property</button>{{/if}}
-          {{abilityCards subProperties system}}
-        </div>
+          {{#each subProperties as |doc|}}
+            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+          {{/each}}        </div>
       {{/if}}
     </div>
   {{/if}}

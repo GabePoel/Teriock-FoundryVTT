@@ -7,6 +7,7 @@ import { queryGM, safeUuid } from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
   HierarchyDataMixin,
+  ProficiencyDataMixin,
   RevelationDataMixin,
   ThresholdDataMixin,
   WikiDataMixin,
@@ -29,14 +30,17 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @extends {TeriockBaseEffectModel}
  * @mixes ConsumableData
  * @mixes HierarchyData
+ * @mixes ProficiencyData
  * @mixes RevelationData
  * @mixes ThresholdData
  * @mixes WikiData
  */
-export default class TeriockAbilityModel extends ThresholdDataMixin(
-  RevelationDataMixin(
-    HierarchyDataMixin(
-      ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+export default class TeriockAbilityModel extends ProficiencyDataMixin(
+  ThresholdDataMixin(
+    RevelationDataMixin(
+      HierarchyDataMixin(
+        ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+      ),
     ),
   ),
 ) {
@@ -104,6 +108,43 @@ export default class TeriockAbilityModel extends ThresholdDataMixin(
   /** @inheritDoc */
   get color() {
     return TERIOCK.options.ability.form[this.form].color;
+  }
+
+  get embedIcons() {
+    let icons = super.embedIcons;
+    if (this.parent.source?.type === "equipment") {
+      const newIcon = {
+        icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
+        action: "toggleOnUseDoc",
+        tooltip: this.parent.isOnUse
+          ? "Activates Only on Use"
+          : "Always Active",
+        condition: this.parent.isOwner,
+        callback: async () => {
+          const onUseSet = this.parent.parent.system.onUse;
+          if (onUseSet.has(this.parent.id)) {
+            onUseSet.delete(this.parent.id);
+          } else {
+            onUseSet.add(this.parent.id);
+          }
+          await this.parent.parent.update({
+            "system.onUse": Array.from(onUseSet),
+          });
+        },
+      };
+      icons = [newIcon, ...icons];
+    }
+    return icons;
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle =
+      TERIOCK.options.ability.executionTime[this.maneuver]?.[
+        this.executionTime
+      ] ?? this.executionTime;
+    return parts;
   }
 
   /**

@@ -1,7 +1,6 @@
 import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
 import {
   FormulaField,
-  ListField,
   RecordField,
 } from "../../../../shared/fields/_module.mjs";
 import { fieldBuilders } from "../../../../shared/fields/helpers/_module.mjs";
@@ -47,7 +46,7 @@ export function impactRollsField() {
  *
  * This field defines changes that are applied to the target as part of the consequence.
  *
- * @returns {ListField} Field for configuring consequence changes
+ * @returns {ArrayField} Field for configuring consequence changes
  * @private
  *
  * @example
@@ -55,7 +54,7 @@ export function impactRollsField() {
  * const changesField = consequenceChangesField();
  */
 export function impactChangesField() {
-  return new ListField(fieldBuilders.changeField(), {
+  return new fields.ArrayField(fieldBuilders.changeField(), {
     label: "Changes",
     hint: "Changes made to the target actor as part of the ability's ongoing effect.",
   });

@@ -1,5 +1,6 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { getItem } from "../../../helpers/fetch.mjs";
+import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
 import { formulaExists } from "../../../helpers/utils.mjs";
 import {
   ArmamentDataMixin,
@@ -104,6 +105,86 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
       return TERIOCK.display.colors.grey;
     }
     return TERIOCK.options.equipment.powerLevel[this.powerLevel].color;
+  }
+
+  /** @inheritDoc */
+  get embedIcons() {
+    return [
+      {
+        icon: this.glued ? "link" : "link-slash",
+        action: "toggleGluedDoc",
+        tooltip: this.glued ? "Glued" : "Unglued",
+        condition: this.parent.isOwner,
+        callback: async () => {
+          if (this.glued) {
+            await this.unglue();
+          } else {
+            await this.glue();
+          }
+        },
+      },
+      {
+        icon: this.dampened ? "bell-slash" : "bell",
+        action: "toggleDampenedDoc",
+        tooltip: this.dampened ? "Dampened" : "Undampened",
+        condition: this.parent.isOwner,
+        callback: async () => {
+          if (this.dampened) {
+            await this.undampen();
+          } else {
+            await this.dampen();
+          }
+        },
+      },
+      {
+        icon: this.shattered ? "wine-glass-crack" : "wine-glass",
+        action: "toggleShatteredDoc",
+        tooltip: this.shattered ? "Shattered" : "Shattered",
+        condition: this.parent.isOwner,
+        callback: async () => {
+          if (this.shattered) {
+            await this.repair();
+          } else {
+            await this.shatter();
+          }
+        },
+      },
+      ...super.embedIcons.filter(
+        (i) => !i.action.toLowerCase().includes("disabled"),
+      ),
+      {
+        icon: this.equipped ? "circle-check" : "circle",
+        action: "toggleEquippedDoc",
+        tooltip: this.equipped ? "Equipped" : "Unequipped",
+        condition: this.parent.isOwner,
+        callback: async () => {
+          if (this.equipped) {
+            await this.unequip();
+          } else {
+            await this.equip();
+          }
+        },
+      },
+    ];
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    if (!this.consumable) {
+      parts.subtitle = this.equipmentType;
+    }
+    parts.struck = !this.isEquipped;
+    parts.shattered = this.shattered;
+    parts.text = dotJoin([
+      suffix(this.damage.base.value, "Damage"),
+      suffix(this.bv.value, "BV"),
+      suffix(this.av.value, "AV"),
+      prefix(this.tier.value, "Tier"),
+      suffix(this.weight.value, "lb"),
+      this.sup?.nameString || "",
+    ]);
+    return parts;
   }
 
   /**

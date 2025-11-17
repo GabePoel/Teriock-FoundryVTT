@@ -12,6 +12,7 @@ export default (Base) => {
           chatThis: this._chatThis,
           reloadThis: this._reloadThis,
           rollThis: this._rollThis,
+          openDoc: this._openDoc,
         },
       };
 

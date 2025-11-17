@@ -2,25 +2,28 @@
   {{#if (or editable (exists abilities))}}
     <div class="ab-main">
       {{#if editable}}
-        <button class="createAbility" data-action="createAbility">Add Ability
-        </button>{{/if}}
-      {{abilityCards abilities system skipDescendants=true onUseToggle=true}}
+        <button class="createAbility" data-action="createAbility">Add Ability</button>{{/if}}
+      {{#each abilities as |doc|}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+      {{/each}}
     </div>
   {{/if}}
   {{#if (or editable (exists resources))}}
     <div class="ab-main">
       {{#if editable}}
-        <button class="createResource" data-action="createResource">Add Resource
-        </button>{{/if}}
-      {{abilityCards resources system}}
+        <button class="createResource" data-action="createResource">Add Resource</button>{{/if}}
+      {{#each resources as |doc|}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+      {{/each}}
     </div>
   {{/if}}
   {{#if (or editable (exists fluencies))}}
     <div class="ab-main">
       {{#if editable}}
-        <button class="createFluency" data-action="createFluency">Add Fluency
-        </button>{{/if}}
-      {{abilityCards fluencies system}}
+        <button class="createFluency" data-action="createFluency">Add Fluency</button>{{/if}}
+      {{#each fluencies as |doc|}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+      {{/each}}
     </div>
   {{/if}}
 </div>

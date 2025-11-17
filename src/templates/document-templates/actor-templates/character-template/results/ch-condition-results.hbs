@@ -2,26 +2,46 @@
   <div class="tcard-container {{{system.sheet.display.consequence.size}}} {{#if
     system.sheet.display.consequence.gapless}}gapless{{/if}}">
     {{#each conditions as |condition|}}
-      {{tcard
-        img=(path ../TERIOCK.data.conditions condition "img")
-        title=(path ../TERIOCK.data.conditions condition "name")
-        subtitle=""
-        text=(dotJoinArray (lookup ../conditionProviders condition))
-        id=(ifThen (includes ../removableConditions condition) (path ../TERIOCK.data.conditions condition "_id") condition)
-        action=(ifThen (eq "dead" condition) "deathBagPull" (ifThen (includes ../removableConditions condition) "rollDoc" ""))
-        tooltip=(ifThen (eq "dead" condition) "Pull from Death Bag" (ifThen (includes ../removableConditions condition) "Roll to Remove" ""))
-        icons=(concat
-          (ifThen (includes ../removableConditions condition)
-            (ticon "dice-d4" action="rollDoc" tooltip="Roll to Remove")
-            (ticon "lock" tooltip="Locked")
+      {{#if (not (path ../system.conditionInformation condition "locked"))}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs"
+          (merge
+            (path ../conditionsMap condition "system.embedParts")
+            (object
+              text=(dotJoinArray (lookup ../conditionProviders condition))
+              hidden=(rgx (lookup @root.searchStrings ../../searchKey) doc.name)
+            )
           )
-        )
-        type=(ifThen (includes ../removableConditions condition) "conditionUnlocked" "conditionLocked")
-        parentId=../id
-        draggable=false
-        openable=false
-        usable=(or (eq "dead" condition) (includes ../removableConditions condition))
-      }}
+        }}
+      {{else}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs"
+          (object
+            img=(path ../TERIOCK.data.conditions condition "img")
+            title=(path ../TERIOCK.data.conditions condition "name")
+            subtitle=""
+            text=(dotJoinArray (lookup ../conditionProviders condition))
+            id=(ifThen
+              (includes ../removableConditions condition)
+              (path ../TERIOCK.data.conditions condition "_id")
+              condition
+            )
+            action=(ifThen
+              (eq "dead" condition)
+              "deathBagPull"
+              (ifThen (includes ../removableConditions condition) "rollDoc" "")
+            )
+            tooltip=(lookup ../conditionTooltips condition)
+            icons=(object 0=(object
+              icon="lock"
+              tooltip="Locked"
+            ))
+            type="conditionLocked"
+            parentId=../id
+            draggable=false
+            openable=false
+            usable=(eq "dead" condition)
+          )
+        }}
+      {{/if}}
     {{/each}}
     <div class="no-results {{{system.sheet.display.consequence.size}}}">
       <p>No conditions found.</p>

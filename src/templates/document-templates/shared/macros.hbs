@@ -3,15 +3,17 @@
     <div class="tcard-results">
       <div class="tcard-container">
         {{#each macros as |macro|}}
-          {{tcard
-            img=macro.img
-            title=macro.name
-            subtitle=(concat "Runs upon using this " ../document.type)
-            text="Macro"
-            icons=(ticon "link-slash" tooltip="Unlink Macro" action="unlinkMacro" parentId=macro.uuid)
-            type="macro"
-            id=macro.uuid
-            classes="macro-card"
+          {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs"
+            (object
+              img=macro.img
+              title=macro.name
+              subtitle=(concat "Runs upon using this " ../document.type)
+              text="Macro"
+              icons=(ticon "link-slash" tooltip="Unlink Macro" action="unlinkMacro" parentId=macro.uuid)
+              type="macro"
+              id=macro.uuid
+              classes="macro-card"
+            )
           }}
         {{/each}}
         {{#if (not (exists macros))}}

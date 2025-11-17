@@ -63,12 +63,9 @@
           {{#if editable}}
             <button class="createBodyPart" data-action="createBodyPart">Add Body Part
             </button>{{/if}}
-          <div class="tcard-container">
-            {{> "systems/teriock/src/templates/document-templates/shared/body-parts.hbs"}}
-            <div class="no-results">
-              <p>No results found.</p>
-            </div>
-          </div>
+          {{#each bodyParts as |doc|}}
+            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+          {{/each}}
         </div>
       {{/if}}
       {{#if (and (or editable (exists equipment)) (exists document.actor))}}
@@ -76,12 +73,9 @@
           {{#if editable}}
             <button class="createEquipment" data-action="createEquipment">Add Equipment
             </button>{{/if}}
-          <div class="tcard-container">
-            {{> "systems/teriock/src/templates/document-templates/shared/equipment.hbs"}}
-            <div class="no-results">
-              <p>No results found.</p>
-            </div>
-          </div>
+          {{#each equipment as |doc|}}
+            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+          {{/each}}
         </div>
       {{/if}}
       {{#if (and (or editable (exists ranks)) (exists document.actor))}}
@@ -89,12 +83,9 @@
           {{#if editable}}
             <button class="createRank" data-action="createRank">Add Rank
             </button>{{/if}}
-          <div class="tcard-container">
-            {{> "systems/teriock/src/templates/document-templates/shared/ranks.hbs"}}
-            <div class="no-results">
-              <p>No results found.</p>
-            </div>
-          </div>
+          {{#each ranks as |doc|}}
+            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+          {{/each}}
         </div>
       {{/if}}
     </div>

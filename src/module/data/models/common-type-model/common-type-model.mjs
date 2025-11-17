@@ -1,5 +1,6 @@
 import { TeriockJournalEntry } from "../../../documents/_module.mjs";
 import { copyItem, getAbility, getProperty } from "../../../helpers/fetch.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -57,6 +58,52 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   get color() {
     return null;
+  }
+
+  /**
+   * Actions that can fire from an embedded element representing this.
+   * @returns {Record<string, function>}
+   */
+  get embedActions() {
+    const actions = {
+      openDoc: async () => this.parent.sheet.render(true),
+    };
+    for (const embedIcon of this.embedIcons) {
+      if (embedIcon.action && embedIcon.callback) {
+        actions[embedIcon.action] = embedIcon.callback;
+      }
+    }
+    return actions;
+  }
+
+  /**
+   * Interactive icons to display in embedded elements.
+   * @returns {Teriock.EmbedData.EmbedIcon[]}
+   */
+  get embedIcons() {
+    return [];
+  }
+
+  /**
+   * Parts that will be passed into a handlebars helper to asynchronously make an embedded element.
+   * @returns {Teriock.EmbedData.EmbedParts}
+   */
+  get embedParts() {
+    return {
+      title: this.parent.nameString,
+      img: this.parent.img,
+      text: this.parent.source?.nameString,
+      color: this.color,
+      openable: true,
+      draggable: true,
+      inactive: !this.parent.active,
+      struck: this.parent.disabled,
+      makeTooltip: false,
+      uuid: this.parent.uuid,
+      id: this.parent.id,
+      parentId: this.parent.parent?.id,
+      icons: this.embedIcons,
+    };
   }
 
   /**
@@ -212,6 +259,9 @@ export default class CommonTypeModel extends TypeDataModel {
                 name: this.parent.name,
                 type: "text",
                 category: notesCategory.id,
+                text: {
+                  content: `<p>@Embed[${this.parent.uuid}]</p>`,
+                },
               },
             ],
           );
@@ -326,5 +376,20 @@ export default class CommonTypeModel extends TypeDataModel {
         await item.system.refreshFromIndex();
       }
     }
+  }
+
+  /** @inheritDoc */
+  async toEmbed(config, options = {}) {
+    const embedContext = this.embedParts;
+    if (options.relativeTo) {
+      embedContext.relative = options.relativeTo.uuid;
+    }
+    const html = await foundry.applications.handlebars.renderTemplate(
+      systemPath("templates/embed-templates/embed-card.hbs"),
+      embedContext,
+    );
+    config.caption = false;
+    config.cite = false;
+    return foundry.utils.parseHTML(html);
   }
 }

@@ -1,8 +1,6 @@
 <div class="character-tab tradecrafts">
   <h1>Tradecrafts</h1>
-
-  <div class="character-tab-page">
-
+  <div class="character-tab-page tcard-results" data-search-key="fluencies">
     <div class="tcard-display" data-tooltip-direction="LEFT">
       <div class="tradecraft-panels tgrid g2">
         {{#each TERIOCK.options.tradecraft as |field|}}
@@ -25,8 +23,13 @@
                   <div class="tradecraft-container gi6 tgrid g6"
                        data-tooltip-html="{{{escapeAttr (path @root/tradecraftTooltips name)}}}"
                        data-tooltip-class="teriock teriock-rich-tooltip"
-                       data-tooltip-direction="{{#if (and (not (eq ../name "Artisan")) (not (eq ../name "Scholar")))
-                       }}RIGHT{{else}}LEFT{{/if}}"
+                       data-rich-tooltip="true"
+                    {{#if (and (not (eq ../name "Artisan")) (not (eq ../name "Scholar")))}}
+                       data-tooltip-direction="RIGHT"
+                    {{else}}
+                       data-tooltip-direction="LEFT"
+                       data-tooltip-left="true"
+                    {{/if}}
                   >
 
                     <div class="tradecraft-panel-symbol ch-tradecraft-pro-box" data-action="quickToggle"
@@ -68,13 +71,17 @@
         {{/each}}
       </div>
     </div>
-
     <div class="tcard-display">
       <div class="tcard-options">
         {{tcardOptions settings.menus.fluencyOptions null null settings.fluencyFilters.search "fluency"
                        key="fluencies" addAction="createFluency"}}
       </div>
-      {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/results/ch-fluency-results.hbs'}}
+      {{> "systems/teriock/src/templates/embed-templates/embed-results.hbs"
+        docs=fluencies
+        searchKey="fluencies"
+        displayKey="fluency"
+        empty="fluencies"
+      }}
     </div>
   </div>
 </div>

@@ -326,7 +326,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Type icons
   for (const [k, v] of Object.entries(constants.options.document)) {
     if (v.doc) {
-      CONFIG[v.doc].typeIcons[k] = `fa-${v.icon}`;
+      CONFIG[v.doc].typeIcons[k] = `fa-fw fas fa-${v.icon}`;
     }
   }
 

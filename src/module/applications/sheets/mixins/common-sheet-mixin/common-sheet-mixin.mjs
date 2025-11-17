@@ -1,14 +1,14 @@
-import { RichApplicationMixin } from "../../../shared/mixins/_module.mjs";
+import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
 import { IndexButtonSheetMixin } from "../_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
-import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
 import DocumentCreationCommonSheetPart from "./parts/document-creation-common-sheet-part.mjs";
-import DocumentInteractionCommonSheetPart from "./parts/document-interaction-common-sheet-part.mjs";
 import DragDropCommonSheetPart from "./parts/drag-drop-common-sheet-part.mjs";
+import SelfInteractionCommonSheetPart from "./parts/interaction-common-sheet-part.mjs";
 import LockingCommonSheetPart from "./parts/locking-common-sheet-part.mjs";
-import SelfInteractionCommonSheetPart from "./parts/self-interaction-common-sheet-part.mjs";
+
+const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * Base sheet mixin for Teriock system applications.
@@ -24,10 +24,8 @@ export default function CommonSheetMixin(Base) {
      * @implements {CommonSheetMixinInterface}
      * @extends {DocumentSheetV2}
      * @mixes DocumentCreationCommonSheetPart
-     * @mixes DocumentInteractionCommonSheetPart
      * @mixes DragDropCommonSheetPart
      * @mixes LockingCommonSheetPart
-     * @mixes RichApplicationMixin
      * @mixes SelfInteractionCommonSheetPart
      * @mixin
      * @property {TeriockCommon} document
@@ -35,10 +33,8 @@ export default function CommonSheetMixin(Base) {
     class CommonSheet extends IndexButtonSheetMixin(
       LockingCommonSheetPart(
         SelfInteractionCommonSheetPart(
-          DocumentInteractionCommonSheetPart(
-            DocumentCreationCommonSheetPart(
-              DragDropCommonSheetPart(RichApplicationMixin(Base)),
-            ),
+          DocumentCreationCommonSheetPart(
+            DragDropCommonSheetPart(HandlebarsApplicationMixin(Base)),
           ),
         ),
       ),
@@ -56,6 +52,7 @@ export default function CommonSheetMixin(Base) {
           sheetToggle: this._sheetToggle,
           toggleImpacts: this._toggleImpacts,
           unlinkMacro: this._unlinkMacro,
+          openDoc: this._openDoc,
         },
         classes: ["teriock", "ability"],
         form: {
@@ -156,6 +153,19 @@ export default function CommonSheetMixin(Base) {
       }
 
       /**
+       * Open a linked document.
+       * @param {PointerEvent} _event
+       * @param {HTMLEmbedElement} target
+       * @returns {Promise<void>}
+       * @private
+       */
+      static async _openDoc(_event, target) {
+        const uuid = target.dataset.uuid;
+        const doc = await fromUuid(uuid);
+        await doc.sheet.render(true);
+      }
+
+      /**
        * Toggles a boolean field on the current document.
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
@@ -217,7 +227,9 @@ export default function CommonSheetMixin(Base) {
       static async _unlinkMacro(_event, target) {
         if (this.editable) {
           if (this.document.system.macros) {
-            const uuid = target.dataset.parentId;
+            const uuidElement =
+              /** @type {HTMLElement} */ target.closest("[data-uuid]");
+            const uuid = uuidElement.dataset.uuid;
             await this.document.system.unlinkMacro(uuid);
           } else {
             foundry.ui.notifications.warn(
@@ -357,6 +369,7 @@ export default function CommonSheetMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
+        bindCommonActions(this.element);
         if (typeof this.editable !== "boolean") {
           this.editable = this.isEditable;
         }
@@ -374,76 +387,12 @@ export default function CommonSheetMixin(Base) {
         });
         _setupEventListeners(this);
 
-        const elements = Array.from(this.element.querySelectorAll(".tcard"));
-        const embeddedResults = await Promise.all(
-          elements.map((element) => _embeddedFromCard(this, element)),
+        this.element.querySelectorAll(".tcard[data-uuid]").forEach(
+          /** @param {HTMLElement} el */ (el) => {
+            const uuid = el.dataset.uuid;
+            fromUuid(uuid).then((doc) => doc.onEmbed(el));
+          },
         );
-        const tooltipPromises = embeddedResults.map(async (embedded, index) => {
-          const element = elements[index];
-
-          if (!embedded) {
-            return;
-          }
-
-          if (embedded?.type === "condition") {
-            /** @type {Teriock.MessageData.MessagePanel} */
-            const messageParts = {
-              bars: [],
-              blocks: [
-                {
-                  text: embedded?.description,
-                  title: "Description",
-                },
-              ],
-              image: embedded?.img,
-              name: embedded?.name,
-              associations: [],
-              icon: TERIOCK.options.document.condition.icon,
-            };
-
-            if (embedded?.id) {
-              /** @type {TeriockTokenDocument[]} */
-              const tokenDocs = (
-                this.document.system.trackers[embedded.id] || []
-              ).map((uuid) => fromUuidSync(uuid));
-              if (tokenDocs.length > 0) {
-                /** @type {Teriock.MessageData.MessageAssociation} */
-                const association = {
-                  title: "Associated Creatures",
-                  icon: TERIOCK.options.document.creature.icon,
-                  cards: [],
-                };
-                for (const tokenDoc of tokenDocs) {
-                  association.cards.push({
-                    name: tokenDoc.name,
-                    uuid: tokenDoc.uuid,
-                    img: tokenDoc.texture.src,
-                    id: tokenDoc.id,
-                    type: "base",
-                    rescale: tokenDoc.rescale,
-                  });
-                }
-                messageParts.associations.push(association);
-              }
-            }
-            element.dataset.tooltipHtml =
-              await TeriockTextEditor.makeTooltip(messageParts);
-            element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
-          } else if (typeof embedded?.toTooltip === "function") {
-            element.dataset.tooltipHtml = await embedded?.toTooltip();
-          }
-        });
-
-        await Promise.all(tooltipPromises);
-
-        this.element.querySelectorAll(".tcard-container").forEach((element) => {
-          element.addEventListener(
-            "pointerenter",
-            async function () {
-              await this._initRichTooltipOrientation(element);
-            }.bind(this),
-          );
-        });
       }
 
       /** @inheritDoc */

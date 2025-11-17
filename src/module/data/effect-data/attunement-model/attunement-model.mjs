@@ -1,6 +1,7 @@
 import { attunementOptions } from "../../../constants/options/attunement-options.mjs";
 import { documentOptions } from "../../../constants/options/document-options.mjs";
-import { evaluateSync } from "../../../helpers/utils.mjs";
+import { dotJoin } from "../../../helpers/string.mjs";
+import { evaluateSync, makeIcon } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
@@ -45,6 +46,40 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
         initial: 0,
       }),
     });
+  }
+
+  /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [
+      ...super.cardContextMenuEntries,
+      {
+        name: "Deattune",
+        icon: makeIcon("handshake-simple-slash", "contextMenu"),
+        callback: async () => await this.deattune(),
+      },
+    ];
+  }
+
+  /** @inheritDoc */
+  get embedIcons() {
+    return [
+      {
+        icon: "handshake-simple-slash",
+        action: "deattuneDoc",
+        tooltip: "Deattune",
+        condition: this.parent.isOwner,
+        callback: async () => await this.deattune(),
+      },
+      ...super.embedIcons,
+    ];
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = `Tier ${this.tier || 0}`;
+    parts.text = dotJoin([this.type, this.usage]);
+    return parts;
   }
 
   /** @inheritDoc */
@@ -99,6 +134,14 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
     } else {
       return "Not on Character";
     }
+  }
+
+  /**
+   * Removes attunement.
+   * @returns {Promise<void>}
+   */
+  async deattune() {
+    await this.parent.delete();
   }
 
   /** @inheritDoc */

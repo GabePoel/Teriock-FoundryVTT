@@ -70,7 +70,10 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: "Enable",
         icon: makeIcon("check", "contextMenu"),
         callback: this.parent.enable.bind(this.parent),
-        condition: this.parent.disabled && this.parent.type !== "equipment",
+        condition:
+          this.parent.parent.isOwner &&
+          this.parent.disabled &&
+          this.parent.type !== "equipment",
         group: "control",
       },
       {
@@ -78,6 +81,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         icon: makeIcon("xmark-large", "contextMenu"),
         callback: this.parent.disable.bind(this.parent),
         condition:
+          this.parent.parent.isOwner &&
           !this.parent.disabled &&
           this.parent.type !== "equipment" &&
           this.parent.type !== "mount" &&
@@ -105,7 +109,8 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: "Open Source",
         icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
         callback: async () => await this.parent.source.sheet.render(true),
-        condition: this.parent.source.documentName !== "Actor",
+        condition:
+          this.parent.isOwner && this.parent.source.documentName !== "Actor",
         group: "open",
       },
       {
@@ -127,6 +132,7 @@ export default class ChildTypeModel extends CommonTypeModel {
           await this.deleteThis();
         },
         condition: () =>
+          this.parent.isOwner &&
           (this.parent.parent.sheet?.editable ||
             (this.parent.parent.source &&
               this.parent.source.sheet?.editable)) &&
@@ -144,6 +150,45 @@ export default class ChildTypeModel extends CommonTypeModel {
         group: "document",
       },
     ];
+  }
+
+  get embedActions() {
+    return {
+      ...super.embedActions,
+      useDoc: async (event) => this.parent.use(this.parseEvent(event)),
+    };
+  }
+
+  get embedIcons() {
+    return [
+      ...super.embedIcons,
+      {
+        icon: "comment",
+        action: "chatDoc",
+        tooltip: "Send to Chat",
+        callback: async () => {
+          await this.parent.toMessage();
+        },
+        condition: this.parent.isViewer,
+      },
+      {
+        icon: this.parent.disabled ? "circle" : "circle-check",
+        action: "toggleDisabledDoc",
+        callback: () => this.parent.toggleDisabled(),
+        tooltip: this.parent.disabled ? "Disabled" : "Enabled",
+        condition: this.parent.isOwner,
+      },
+    ];
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.makeTooltip = true;
+    parts.action = "useDoc";
+    parts.struck = this.parent.disabled;
+    parts.usable = true;
+    return parts;
   }
 
   /**

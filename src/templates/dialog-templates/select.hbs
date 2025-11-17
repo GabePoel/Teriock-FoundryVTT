@@ -24,12 +24,13 @@
         {{#each documents as |doc id|}}
           <li class="doc-select-item">
             <label class="doc-select-row tcard"
+                   data-rich-tooltip="true"
+                   data-tooltip-direction="RIGHT"
               {{#if (exists doc.uuid)}}
                    data-uuid="{{{doc.uuid}}}"
                      {{#if ../tooltipAsync}}
-                   data-tooltip-async="true"
-                   data-tooltip-fetched="false"
                    data-tooltip-html="{{doc.tooltip}}"
+                   data-make-tooltip="true"
                      {{/if}}
               {{/if}}
               {{#if ../tooltip}}

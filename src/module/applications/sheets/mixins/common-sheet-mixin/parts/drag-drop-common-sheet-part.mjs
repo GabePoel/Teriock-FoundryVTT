@@ -1,5 +1,4 @@
 import { TeriockDragDrop, TeriockTextEditor } from "../../../../ux/_module.mjs";
-import _embeddedFromCard from "../methods/_embedded-from-card.mjs";
 
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
@@ -80,7 +79,7 @@ export default (Base) => {
       async _onDragOver(_event) {}
 
       async _onDragStart(event) {
-        const embedded = await _embeddedFromCard(this, event.currentTarget);
+        const embedded = await fromUuid(event.currentTarget.dataset.uuid);
         const dragData = embedded?.toDragData();
         dragData.startSheet = this.id;
         if (dragData) {

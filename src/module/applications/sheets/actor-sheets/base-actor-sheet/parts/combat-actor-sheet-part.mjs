@@ -1,10 +1,13 @@
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
 export default (Base) =>
+  /**
+   * @property {TeriockActor} document
+   */
   class CombatActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        attack: this._attack,
+        useAbility: this._useAbility,
         openPrimaryAttacker: this._openPrimaryAttacker,
         openPrimaryBlocker: this._openPrimaryBlocker,
         selectAttacker: this._selectAttacker,
@@ -13,22 +16,6 @@ export default (Base) =>
         toggleSb: this._toggleSb,
       },
     };
-
-    /**
-     * Performs a basic attack with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
-     * @returns {Promise<void>} Promise that resolves when attack is performed.
-     * @static
-     */
-    static async _attack(event) {
-      event.stopPropagation();
-      /** @type {Teriock.RollOptions.CommonRoll} */
-      const options = {
-        advantage: Boolean(event.altKey),
-        disadvantage: Boolean(event.shiftKey),
-      };
-      await this.actor.useAbility("Basic Attack", options);
-    }
 
     /**
      * Opens the primary attacker's sheet.
@@ -118,6 +105,21 @@ export default (Base) =>
     static async _toggleSb() {
       await this.document.update({
         "system.offense.sb": !this.document.system.offense.sb,
+      });
+    }
+
+    /**
+     * Use the specified ability.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     * @private
+     */
+    static async _useAbility(event, target) {
+      const abilityName = target.dataset.ability;
+      await this.actor.useAbility(abilityName, {
+        advantage: event.altKey,
+        disadvantage: event.shiftKey,
       });
     }
   };

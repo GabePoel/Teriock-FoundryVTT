@@ -1,3 +1,5 @@
+import { bindCommonActions } from "../../../applications/shared/_module.mjs";
+import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import { TeriockActor } from "../../_module.mjs";
 
@@ -23,6 +25,14 @@ export default function CommonDocumentMixin(Base) {
         } else {
           return null;
         }
+      }
+
+      /**
+       * Can this be viewed?
+       * @returns {boolean}
+       */
+      get isViewer() {
+        return this.permission >= 2;
       }
 
       /** @inheritDoc */
@@ -125,6 +135,51 @@ export default function CommonDocumentMixin(Base) {
           await this.actor.hookCall(pseudoHook, data, effect, skipCall);
         }
         return /** @type {Teriock.HookData.BaseHookData} */ data;
+      }
+
+      /** @inheritDoc */
+      onEmbed(element) {
+        bindCommonActions(element);
+        const menuEntries = this.system.cardContextMenuEntries;
+        if (menuEntries) {
+          new TeriockContextMenu(
+            element,
+            ".tcard",
+            this.system.cardContextMenuEntries,
+            {
+              eventName: "contextmenu",
+              jQuery: false,
+              fixed: true,
+            },
+          );
+        }
+        element.addEventListener("click", async (event) => {
+          const target = /** @type {HTMLElement} */ event.target;
+          const card =
+            /** @type {HTMLElement} */ target.closest("[data-relative]");
+          const relativeUuid = card?.dataset.relative;
+          let relative;
+          if (relativeUuid) {
+            relative = await fromUuid(relativeUuid);
+          }
+          const actionButton =
+            /** @type {HTMLElement} */ target.closest("[data-action]");
+          if (actionButton) {
+            event.stopPropagation();
+            if (
+              Object.keys(this.system.embedActions).includes(
+                actionButton.dataset.action,
+              )
+            ) {
+              await this.system.embedActions[actionButton.dataset.action](
+                event,
+              );
+              if (relative) {
+                await relative.sheet.render();
+              }
+            }
+          }
+        });
       }
 
       /** @inheritDoc */
