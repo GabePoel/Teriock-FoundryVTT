@@ -146,8 +146,11 @@ export default function EmbedCardDocumentMixin(Base) {
                 event,
                 relative,
               );
-              if (relative) {
+              if (relative && relative.permission >= 2) {
                 await relative.sheet.render();
+              }
+              if (relative?.parent && relative.permission >= 2) {
+                await relative.parent.sheet.render();
               }
             }
           }
