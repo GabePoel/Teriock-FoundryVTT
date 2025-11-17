@@ -1,4 +1,4 @@
-const equipmentPack = game.teriock.packs.equipment();
+const equipmentPack = game.teriock.packs.equipment;
 
 const progress = foundry.ui.notifications.info(
   "Pulling all equipment from wiki.",

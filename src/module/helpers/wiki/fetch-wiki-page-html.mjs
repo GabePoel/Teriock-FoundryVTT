@@ -158,7 +158,7 @@ export default async function fetchWikiPageHTML(title, options = {}) {
 
         if (needsUuidCheck.has(type)) {
           try {
-            const packIndex = game.teriock.packs.rules().index.getName(type);
+            const packIndex = game.teriock.packs.rules.index.getName(type);
             const pack = await fromUuid(packIndex.uuid);
             if (pack) {
               const page = pack.pages.getName(fileName);

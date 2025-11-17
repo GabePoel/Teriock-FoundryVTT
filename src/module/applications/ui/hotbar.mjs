@@ -15,7 +15,6 @@ export default class TeriockHotbar extends Hotbar {
     if (!macroId) {
       return null;
     }
-    //noinspection JSUnresolvedReference
     return game.macros.get(macroId) ?? null;
   }
 
@@ -49,7 +48,6 @@ export default class TeriockHotbar extends Hotbar {
           macro.getFlag("teriock", "macroDocumentName"),
           macro.getFlag("teriock", "macroDocumentType"),
         );
-        //noinspection JSUnresolvedReference
         await doc?.sheet.render(true);
       },
     });

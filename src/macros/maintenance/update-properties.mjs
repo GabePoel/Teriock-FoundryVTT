@@ -1,4 +1,4 @@
-const propertiesPack = game.teriock.packs.properties();
+const propertiesPack = game.teriock.packs.properties;
 
 const progress = ui.notifications.info(`Pulling all properties from wiki.`, {
   progress: true,

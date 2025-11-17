@@ -146,11 +146,18 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Scene.documentClass = documents.TeriockScene;
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
   CONFIG.User.documentClass = documents.TeriockUser;
-  CONFIG.RollTable.documentClass = documents.TeriockRolLTable;
+  CONFIG.RollTable.documentClass = documents.TeriockRollTable;
   CONFIG.TableResult.documentClass = documents.TeriockTableResult;
 
   // Register custom core collections
   CONFIG.Actor.collection = documents.collections.TeriockActors;
+  CONFIG.ChatMessage.collection = documents.collections.TeriockChatMessages;
+  CONFIG.Folder.collection = documents.collections.TeriockFolders;
+  CONFIG.Item.collection = documents.collections.TeriockItems;
+  CONFIG.JournalEntry.collection = documents.collections.TeriockJournal;
+  CONFIG.Macro.collection = documents.collections.TeriockMacros;
+  CONFIG.RollTable.collection = documents.collections.TeriockRollTables;
+  CONFIG.Scene.collection = documents.collections.TeriockScenes;
   CONFIG.User.collection = documents.collections.TeriockUsers;
 
   // Register template classes
@@ -340,8 +347,6 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Registering custom queries
   Object.assign(CONFIG.queries, helpers.queries);
-  const packs =
-    /** @type {Collection<string,CompendiumCollection>} */ game.packs;
 
   // noinspection JSUndefinedPropertyAssignment
   game.teriock = {
@@ -359,47 +364,7 @@ foundry.helpers.Hooks.once("init", function () {
     JournalEntryCategory: documents.TeriockJournalEntryCategory,
     Roll: dice.TeriockRoll,
     data: data,
-    packs: {
-      abilities: () =>
-        /** @type {CompendiumCollection<TeriockWrapper> & CompendiumHelper<TeriockWrapper>} */
-        packs.get("teriock.abilities"),
-      bodyParts: () =>
-        /** @type {CompendiumCollection<TeriockBody> & CompendiumHelper<TeriockBody>} */
-        packs.get("teriock.bodyParts"),
-      classes: () =>
-        /** @type {CompendiumCollection<TeriockRank> & CompendiumHelper<TeriockRank>} */
-        packs.get("teriock.classes"),
-      creatures: () =>
-        /** @type {CompendiumCollection<TeriockCreature> & CompendiumHelper<TeriockCreature>} */
-        packs.get("teriock.creatures"),
-      equipment: () =>
-        /** @type {CompendiumCollection<TeriockEquipment> & CompendiumHelper<TeriockEquipment>} */
-        packs.get("teriock.equipment"),
-      essentials: () =>
-        /** @type {CompendiumCollection<TeriockPower> & CompendiumHelper<TeriockPower>} */
-        packs.get("teriock.essentials"),
-      execution: () =>
-        /** @type {CompendiumCollection<TeriockMacro> & CompendiumHelper<TeriockMacro>} */
-        packs.get("teriock.execution"),
-      magicItems: () =>
-        /** @type {CompendiumCollection<TeriockEquipment> & CompendiumHelper<TeriockEquipment>} */
-        packs.get("teriock.magicItems"),
-      maintenance: () =>
-        /** @type {CompendiumCollection<TeriockMacro> & CompendiumHelper<TeriockMacro>} */
-        packs.get("teriock.maintenance"),
-      powers: () =>
-        /** @type {CompendiumCollection<TeriockPower> & CompendiumHelper<TeriockPower>} */
-        packs.get("teriock.powers"),
-      properties: () =>
-        /** @type {CompendiumCollection<TeriockWrapper> & CompendiumHelper<TeriockWrapper>} */
-        packs.get("teriock.properties"),
-      rules: () =>
-        /** @type {CompendiumCollection<TeriockJournalEntry> & CompendiumHelper<TeriockJournalEntry>} */
-        packs.get("teriock.rules"),
-      species: () =>
-        /** @type {CompendiumCollection<TeriockSpecies> & CompendiumHelper<TeriockSpecies>} */
-        packs.get("teriock.species"),
-    },
+    packs: new documents.collections.TeriockPacks(),
   };
 
   // Register settings

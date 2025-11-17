@@ -1,4 +1,4 @@
-import { BlankMixin } from "../mixins/_module.mjs";
+import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Users } = foundry.documents.collections;
 
@@ -8,4 +8,4 @@ const { Users } = foundry.documents.collections;
  * @implements {DocumentCollection<TeriockUser>}
  * @property {TeriockUser|null} activeGM
  */
-export default class TeriockUsers extends BlankMixin(Users) {}
+export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {}

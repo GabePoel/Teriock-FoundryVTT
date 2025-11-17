@@ -8,7 +8,7 @@ if (!spiritItem) {
     const equipmentTypeName =
       TERIOCK.options.equipment.equipmentType[equipmentType];
     const spiritItemReference = await fromUuid(
-      game.teriock.packs.equipment().index.getName(equipmentTypeName).uuid,
+      game.teriock.packs.equipment.index.getName(equipmentTypeName).uuid,
     );
     const spiritItemCopy = spiritItemReference.clone();
     spiritItemCopy.updateSource({

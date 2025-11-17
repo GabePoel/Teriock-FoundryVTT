@@ -66,8 +66,8 @@ export async function _parse(speciesData, rawHTML) {
       },
     );
 
-  const bodyPartsPack = game.teriock.packs.bodyParts();
-  const equipmentPack = game.teriock.packs.equipment();
+  const bodyPartsPack = game.teriock.packs.bodyParts;
+  const equipmentPack = game.teriock.packs.equipment;
   const importedBodyPartUUIDs = importedBodyPartNames
     .map((n) => bodyPartsPack.index.getName(n)?.uuid)
     .filter((b) => b);

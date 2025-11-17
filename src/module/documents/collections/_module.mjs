@@ -1,2 +1,10 @@
 export { default as TeriockActors } from "./actors.mjs";
+export { default as TeriockChatMessages } from "./chat-messages.mjs";
+export { default as TeriockFolders } from "./folders.mjs";
+export { default as TeriockItems } from "./items.mjs";
+export { default as TeriockJournal } from "./journal.mjs";
+export { default as TeriockMacros } from "./macros.mjs";
+export { default as TeriockPacks } from "./packs.mjs";
+export { default as TeriockRollTables } from "./roll-tables.mjs";
+export { default as TeriockScenes } from "./scenes.mjs";
 export { default as TeriockUsers } from "./users.mjs";

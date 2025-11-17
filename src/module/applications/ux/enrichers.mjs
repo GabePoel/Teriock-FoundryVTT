@@ -3,8 +3,6 @@ import { documentOptions } from "../../constants/options/document-options.mjs";
 import { getAbility } from "../../helpers/fetch.mjs";
 import { dedent } from "../../helpers/utils.mjs";
 
-//TODO: Unify `ROLL_BUTTON_CONFIGS` and similar rollable takes options.
-
 const enricherIcons = {
   Core: "circle-info",
   Keyword: "quote-left",
@@ -21,7 +19,7 @@ const rulesEnrichers = Object.keys(enricherIcons).map((type) => ({
     const fileName = match[1];
     const title = match[2];
 
-    const compendiumIndex = game.teriock.packs.rules().index.getName(type);
+    const compendiumIndex = game.teriock.packs.rules.index.getName(type);
     if (!compendiumIndex) {
       return null;
     }
@@ -86,9 +84,9 @@ const classEnricher = {
     if (!title) {
       title = fileName;
     }
-    const uuid = game.teriock.packs
-      .classes()
-      .index.getName(`Rank 1 ${fileName}`).uuid;
+    const uuid = game.teriock.packs.classes.index.getName(
+      `Rank 1 ${fileName}`,
+    ).uuid;
     const wrapper = document.createElement("div");
     wrapper.innerHTML = dedent(`
       <a
@@ -112,7 +110,7 @@ const rankEnricher = {
     if (!fileName.includes("Rank")) {
       fileName = `Rank 1 ${fileName}`;
     }
-    const uuid = game.teriock.packs.classes().index.getName(fileName).uuid;
+    const uuid = game.teriock.packs.classes.index.getName(fileName).uuid;
     const wrapper = document.createElement("div");
     wrapper.innerHTML = dedent(`
       <a
@@ -171,7 +169,7 @@ const equipmentEnricher = {
   enricher: async (match, _options) => {
     const fileName = match[1];
     const title = match[2];
-    const uuid = game.teriock.packs.equipment().index.getName(fileName).uuid;
+    const uuid = game.teriock.packs.equipment.index.getName(fileName).uuid;
     const wrapper = document.createElement("div");
     wrapper.innerHTML = dedent(`
       <a

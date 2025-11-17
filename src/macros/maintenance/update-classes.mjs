@@ -1,4 +1,4 @@
-const classPack = game.teriock.packs.classes();
+const classPack = game.teriock.packs.classes;
 const classFolders = classPack.folders;
 
 const progress = ui.notifications.info(`Pulling classes from wiki.`, {

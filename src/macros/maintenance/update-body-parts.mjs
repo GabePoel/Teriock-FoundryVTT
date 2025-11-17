@@ -1,4 +1,4 @@
-const bodyPack = game.teriock.packs.bodyParts();
+const bodyPack = game.teriock.packs.bodyParts;
 
 foundry.ui.notifications.info("Pulling all body parts from wiki.");
 

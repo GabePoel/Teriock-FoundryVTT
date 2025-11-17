@@ -1,5 +1,5 @@
-const speciesCompendium = game.teriock.packs.species();
-const creatureCompendium = game.teriock.packs.creatures();
+const speciesCompendium = game.teriock.packs.species;
+const creatureCompendium = game.teriock.packs.creatures;
 
 const allSpecies = speciesCompendium.index.contents;
 const speciesFolders = speciesCompendium.folders;

@@ -165,7 +165,7 @@ export async function selectConditionDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey|null>}
  */
 export async function selectPropertyDialog() {
-  const choices = game.teriock.packs.properties().index.contents;
+  const choices = game.teriock.packs.properties.index.contents;
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a property.",
     title: "Select Property",
@@ -212,7 +212,7 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectAbilityDialog() {
-  const choices = game.teriock.packs.abilities().index.contents;
+  const choices = game.teriock.packs.abilities.index.contents;
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an ability.",
     title: "Select Ability",
@@ -231,7 +231,7 @@ export async function selectAbilityDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectEquipmentTypeDialog() {
-  const choices = game.teriock.packs.equipment().index.contents;
+  const choices = game.teriock.packs.equipment.index.contents;
   let chosen = await selectDocumentDialog(choices, {
     hint: "Please select an equipment type.",
     title: "Select Equipment Type",
@@ -251,7 +251,7 @@ export async function selectEquipmentTypeDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectBodyPartDialog() {
-  const choices = game.teriock.packs.bodyParts().index.contents;
+  const choices = game.teriock.packs.bodyParts.index.contents;
   let chosen = await selectDocumentDialog(choices, {
     hint: "Please select a body part.",
     title: "Select Body Part",

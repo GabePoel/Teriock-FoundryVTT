@@ -1,4 +1,4 @@
-const magicItemsPack = game.teriock.packs.magicItems();
+const magicItemsPack = game.teriock.packs.magicItems;
 
 const progress = foundry.ui.notifications.info("Refreshing all magic items.", {
   pct: 0.01,

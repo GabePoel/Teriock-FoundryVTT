@@ -249,7 +249,6 @@ export default class CommonTypeModel extends TypeDataModel {
         "teriock",
         "gmDocumentNotesJournalName",
       );
-      //noinspection JSUnresolvedReference
       let notesJournal = game.journal.getName(journalEntryName);
       if (!notesJournal) {
         notesJournal = await TeriockJournalEntry.create({

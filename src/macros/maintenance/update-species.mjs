@@ -1,4 +1,4 @@
-const speciesPack = game.teriock.packs.species();
+const speciesPack = game.teriock.packs.species;
 const speciesFolders = speciesPack.folders;
 
 // Folder configuration
@@ -49,13 +49,13 @@ async function processSpecies(speciesName) {
   let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
 
   // Determine folder based on species type
-  let folder = folders.allSpeciesFolder;
+  let folder = folders["allSpeciesFolder"];
   if (Object.values(TERIOCK.index.humanoids).includes(speciesName)) {
-    folder = folders.characterSpeciesFolder;
+    folder = folders["characterSpeciesFolder"];
   } else if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName)) {
-    folder = folders.commonAnimalSpeciesFolder;
+    folder = folders["commonAnimalSpeciesFolder"];
   } else if (Object.values(TERIOCK.index.undead).includes(speciesName)) {
-    folder = folders.undeadSpeciesFolder;
+    folder = folders["undeadSpeciesFolder"];
   }
 
   // Create or fetch species item

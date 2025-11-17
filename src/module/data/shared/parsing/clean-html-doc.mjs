@@ -71,9 +71,8 @@ export function cleanHTML(html) {
   for (const table of tables) {
     const tableName = table.getAttribute("data-table-name");
     if (tableName) {
-      const tablePack = game.packs.get("teriock.tables");
-      //noinspection JSUnresolvedReference
-      const rollableTable = tablePack.index.getName(tableName);
+      const tablesPack = game.teriock.packs.tables;
+      const rollableTable = tablesPack.index.getName(tableName);
       if (rollableTable) {
         const enricherTag = ` @Embed[${rollableTable.uuid}]`;
         table.replaceWith(enricherTag);

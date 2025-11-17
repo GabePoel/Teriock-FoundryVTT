@@ -1,13 +1,14 @@
-import { BlankMixin } from "../mixins/_module.mjs";
+import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Actors } = foundry.documents.collections;
 
 //noinspection JSUnusedGlobalSymbols,JSClosureCompilerSyntax
 /**
- * @implements {DocumentCollection<TeriockActor>}
+ * @implements {Collection<Teriock.ID<TeriockActor>, TeriockActor>}
+ * @mixes BaseWorldCollection
  * @property {Record<Teriock.ID<TeriockActor>, TeriockActor>} tokens
  */
-export default class TeriockActors extends BlankMixin(Actors) {
+export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
   get characters() {
     return this.contents.filter((a) => a.type === "character");
   }

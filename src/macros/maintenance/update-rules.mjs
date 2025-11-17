@@ -1,4 +1,4 @@
-const coreRulesPack = game.teriock.packs.rules();
+const coreRulesPack = game.teriock.packs.rules;
 
 const namespaceCategoryMap = {
   Core: "Core rules",

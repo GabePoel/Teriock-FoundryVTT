@@ -1,4 +1,4 @@
-const powersPack = game.teriock.packs.powers();
+const powersPack = game.teriock.packs.powers;
 const familiarsFolder = powersPack.folders.getName("Familiars");
 
 let commonAnimalPages = await teriock.helpers.wiki.fetchCategoryMembers(

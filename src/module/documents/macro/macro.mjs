@@ -4,7 +4,6 @@ import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Macro} implementation.
  * @extends {ClientDocument}
@@ -57,17 +56,13 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(Macro) {
         failPrefix: "Could not create a hotbar folder.",
       },
     );
-    const folders =
-      /** @type {Collection<Teriock.ID<TeriockFolder>,TeriockFolder>} */ game.folders;
-    const macroFolder = folders.find(
+    const macroFolder = game.folders.find(
       (f) =>
         f.getFlag("teriock", "user") === game.user.id &&
         f.getFlag("teriock", "hotbarFolder") &&
         f.type === "Macro",
     );
-    const macros =
-      /** @type {Collection<Teriock.ID<TeriockMacro>,TeriockMacro>} */ game.macros;
-    let macro = macros.find(
+    const macro = game.macros.find(
       (m) =>
         m.getFlag("teriock", "user") === game.user.id &&
         m.getFlag("teriock", "macroType") === "use" &&
@@ -108,9 +103,7 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(Macro) {
    */
   static async useDocuments(name, options) {
     const { actor, type, event } = options;
-    //noinspection JSUnresolvedReference
-    /** @type {TeriockToken[]} */
-    const tokens = game.canvas.tokens.controlled;
+    const tokens = /** @type {TeriockToken[]} */ game.canvas.tokens.controlled;
     const actors = tokens.map((t) => t.actor);
     if (actors.length === 0 && options.actor) {
       actors.push(actor);

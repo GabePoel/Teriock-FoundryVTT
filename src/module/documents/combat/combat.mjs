@@ -37,18 +37,18 @@ export default class TeriockCombat extends BlankMixin(Combat) {
     actorUuid,
     updates = [],
   ) {
+    const expirations = effect.system.expirations.combat;
     if (
-      effect.system.expirations.combat.what.type !== "none" &&
-      effect.system.expirations.combat.when.trigger === trigger &&
-      effect.system.expirations.combat.when.time === time &&
-      (effect.system.expirations.combat.who.type === "everyone" ||
-        (effect.system.expirations.combat.who.type === "executor" &&
-          actorUuid === effect.system.expirations.combat.who.source) ||
-        (effect.system.expirations.combat.who.type === "target" &&
-          actorUuid === effect.actor.uuid))
+      expirations.what.type !== "none" &&
+      expirations.when.trigger === trigger &&
+      expirations.when.time === time &&
+      (expirations.who.type === "everyone" ||
+        (expirations.who.type === "executor" &&
+          actorUuid === expirations.who.source) ||
+        (expirations.who.type === "target" && actorUuid === effect.actor.uuid))
     ) {
       const user = selectUser(effect.actor);
-      if (effect.system.expirations.combat.when.skip <= 0 && user) {
+      if (expirations.when.skip <= 0 && user) {
         try {
           await user.query("teriock.inCombatExpiration", {
             effectUuid: effect.uuid,
@@ -62,11 +62,10 @@ export default class TeriockCombat extends BlankMixin(Combat) {
             { notifyFailure: false },
           );
         }
-      } else if (effect.system.expirations.combat.when.skip > 0) {
+      } else if (expirations.when.skip > 0) {
         updates.push({
           _id: effect.id,
-          "system.expirations.combat.when.skip":
-            effect.system.expirations.combat.when.skip - 1,
+          "system.expirations.combat.when.skip": expirations.when.skip - 1,
         });
       }
     }
@@ -124,11 +123,15 @@ export default class TeriockCombat extends BlankMixin(Combat) {
 
     // End of turn
     // This happens after turn change so that the turn change doesn't get stuck
-    // waiting for effect expirations.
+    // waiting for effect expirations. This is also why we don't await.
     if (previousActor) {
       for (const actor of this.actors) {
-        //noinspection ES6MissingAwait
-        this._tryAllEffectExpirations(actor, previousActor, "turn", "end");
+        this._tryAllEffectExpirations(
+          actor,
+          previousActor,
+          "turn",
+          "end",
+        ).then();
       }
     }
     const actors = [
@@ -162,10 +165,8 @@ export default class TeriockCombat extends BlankMixin(Combat) {
     // Start of turn
     const newActor = this.combatant?.actor;
     for (const actor of this.actors) {
-      //noinspection ES6MissingAwait
-      this._tryAllEffectExpirations(actor, newActor, "action", "start");
-      //noinspection ES6MissingAwait
-      this._tryAllEffectExpirations(actor, newActor, "turn", "start");
+      this._tryAllEffectExpirations(actor, newActor, "action", "start").then();
+      this._tryAllEffectExpirations(actor, newActor, "turn", "start").then();
     }
     if (newActor) {
       const newUser = selectUser(newActor);
@@ -182,7 +183,6 @@ export default class TeriockCombat extends BlankMixin(Combat) {
       }
     }
 
-    // Finish
     return out;
   }
 
