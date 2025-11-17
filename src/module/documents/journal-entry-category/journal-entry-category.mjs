@@ -5,8 +5,8 @@ const { JournalEntryCategory } = foundry.documents;
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link JournalEntryCategory} implementation.
+ * @extends {ClientDocument}
  * @extends {JournalEntryCategory}
- * @mixes ClientDocumentMixin
  */
 export default class TeriockJournalEntryCategory extends BlankMixin(
   JournalEntryCategory,

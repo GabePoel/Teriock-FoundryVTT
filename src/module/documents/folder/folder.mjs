@@ -5,8 +5,8 @@ const { Folder } = foundry.documents;
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Folder} implementation.
+ * @extends {ClientDocument}
  * @extends {Folder}
- * @mixes ClientDocumentMixin
  */
 export default class TeriockFolder extends BlankMixin(Folder) {
   /**

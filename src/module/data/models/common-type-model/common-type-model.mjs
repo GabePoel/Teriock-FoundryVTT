@@ -1,6 +1,6 @@
 import { TeriockJournalEntry } from "../../../documents/_module.mjs";
 import { copyItem, getAbility, getProperty } from "../../../helpers/fetch.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -50,6 +50,24 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   get actor() {
     return this.parent.actor;
+  }
+
+  /**
+   * Context menu entries to display for cards that represent the parent document.
+   * @returns {Teriock.Foundry.ContextMenuEntry[]}
+   */
+  get cardContextMenuEntries() {
+    return [
+      {
+        name: "Delete",
+        icon: makeIcon("trash", "contextMenu"),
+        callback: async () => {
+          await this.deleteThis();
+        },
+        condition: () => this.parent.isOwner,
+        group: "document",
+      },
+    ];
   }
 
   /**
@@ -128,6 +146,14 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   get parent() {
     return /** @type {TeriockCommon} */ super.parent;
+  }
+
+  /**
+   * Delete this document from its parent.
+   * @returns {Promise<void>}
+   */
+  async deleteThis() {
+    await this.parent.delete();
   }
 
   /**
@@ -376,20 +402,5 @@ export default class CommonTypeModel extends TypeDataModel {
         await item.system.refreshFromIndex();
       }
     }
-  }
-
-  /** @inheritDoc */
-  async toEmbed(config, options = {}) {
-    const embedContext = this.embedParts;
-    if (options.relativeTo) {
-      embedContext.relative = options.relativeTo.uuid;
-    }
-    const html = await foundry.applications.handlebars.renderTemplate(
-      systemPath("templates/embed-templates/embed-card.hbs"),
-      embedContext,
-    );
-    config.caption = false;
-    config.cite = false;
-    return foundry.utils.parseHTML(html);
   }
 }

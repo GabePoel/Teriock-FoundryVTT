@@ -4,7 +4,8 @@
       {{#if editable}}
         <button class="createAbility" data-action="createAbility">Add Ability</button>{{/if}}
       {{#each abilities as |doc|}}
-        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+          relative=../document.uuid))}}
       {{/each}}
     </div>
   {{/if}}
@@ -13,7 +14,8 @@
       {{#if editable}}
         <button class="createResource" data-action="createResource">Add Resource</button>{{/if}}
       {{#each resources as |doc|}}
-        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+          relative=../document.uuid))}}
       {{/each}}
     </div>
   {{/if}}
@@ -22,7 +24,8 @@
       {{#if editable}}
         <button class="createFluency" data-action="createFluency">Add Fluency</button>{{/if}}
       {{#each fluencies as |doc|}}
-        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
+        {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+          relative=../document.uuid))}}
       {{/each}}
     </div>
   {{/if}}

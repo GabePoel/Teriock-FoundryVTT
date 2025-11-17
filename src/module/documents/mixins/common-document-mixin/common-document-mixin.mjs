@@ -1,7 +1,6 @@
-import { bindCommonActions } from "../../../applications/shared/_module.mjs";
-import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import { TeriockActor } from "../../_module.mjs";
+import EmbedCardDocumentMixin from "../embed-card-document-mixin/embed-card-document-mixin.mjs";
 
 /**
  * Mixin for common functions used across document classes.
@@ -13,9 +12,10 @@ export default function CommonDocumentMixin(Base) {
     /**
      * @implements {CommonDocumentMixinInterface}
      * @extends ClientDocument
+     * @mixes EmbedCardDocument
      * @mixin
      */
-    class CommonDocument extends Base {
+    class CommonDocument extends EmbedCardDocumentMixin(Base) {
       /** @inheritDoc */
       get actor() {
         if (this instanceof TeriockActor) {
@@ -27,12 +27,23 @@ export default function CommonDocumentMixin(Base) {
         }
       }
 
-      /**
-       * Can this be viewed?
-       * @returns {boolean}
-       */
-      get isViewer() {
-        return this.permission >= 2;
+      /** @inheritDoc */
+      get cardContextMenuEntries() {
+        return [...this.system.cardContextMenuEntries];
+      }
+
+      /** @inheritDoc */
+      get embedActions() {
+        return { ...super.embedActions, ...this.system.embedActions };
+      }
+
+      /** @inheritDoc */
+      get embedIcons() {
+        return [...super.embedIcons, this.system.embedIcons];
+      }
+
+      get embedParts() {
+        return { ...super.embedParts, ...this.system.embedParts };
       }
 
       /** @inheritDoc */
@@ -135,51 +146,6 @@ export default function CommonDocumentMixin(Base) {
           await this.actor.hookCall(pseudoHook, data, effect, skipCall);
         }
         return /** @type {Teriock.HookData.BaseHookData} */ data;
-      }
-
-      /** @inheritDoc */
-      onEmbed(element) {
-        bindCommonActions(element);
-        const menuEntries = this.system.cardContextMenuEntries;
-        if (menuEntries) {
-          new TeriockContextMenu(
-            element,
-            ".tcard",
-            this.system.cardContextMenuEntries,
-            {
-              eventName: "contextmenu",
-              jQuery: false,
-              fixed: true,
-            },
-          );
-        }
-        element.addEventListener("click", async (event) => {
-          const target = /** @type {HTMLElement} */ event.target;
-          const card =
-            /** @type {HTMLElement} */ target.closest("[data-relative]");
-          const relativeUuid = card?.dataset.relative;
-          let relative;
-          if (relativeUuid) {
-            relative = await fromUuid(relativeUuid);
-          }
-          const actionButton =
-            /** @type {HTMLElement} */ target.closest("[data-action]");
-          if (actionButton) {
-            event.stopPropagation();
-            if (
-              Object.keys(this.system.embedActions).includes(
-                actionButton.dataset.action,
-              )
-            ) {
-              await this.system.embedActions[actionButton.dataset.action](
-                event,
-              );
-              if (relative) {
-                await relative.sheet.render();
-              }
-            }
-          }
-        });
       }
 
       /** @inheritDoc */

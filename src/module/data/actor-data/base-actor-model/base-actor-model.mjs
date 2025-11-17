@@ -1,4 +1,5 @@
 import { dotJoin, prefix } from "../../../helpers/string.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
@@ -67,6 +68,19 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [
+      {
+        name: "Open Token",
+        icon: makeIcon("user-circle", "contextMenu"),
+        condition: () => this.parent.token && this.parent.token.isViewer,
+        callback: async () => this.parent.token.sheet.render(true),
+      },
+      ...super.cardContextMenuEntries,
+    ];
   }
 
   /** @inheritDoc */

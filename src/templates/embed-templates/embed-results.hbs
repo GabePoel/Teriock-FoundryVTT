@@ -1,12 +1,12 @@
 {{~#with (lookup @root.system.sheet.display displayKey) as |display|~}}
   <div class="tcard-container
               {{#if display.gapless}}gapless{{/if}}
-              {{display.size}}">
+    {{display.size}}">
     {{#each ../docs as |doc|}}
       {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs"
         (merge
-          doc.system.embedParts
-          (object hidden=(rgx (lookup @root.searchStrings ../../searchKey) doc.name))
+          doc.embedParts
+          (object hidden=(rgx (lookup @root.searchStrings ../../searchKey) doc.name) relative=../../document.uuid)
         )
       }}
     {{/each}}

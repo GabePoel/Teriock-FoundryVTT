@@ -5,7 +5,7 @@ const { JournalEntryPage } = foundry.documents;
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link JournalEntry} implementation.
- * @mixes ClientDocumentMixin
+ * @extends {ClientDocument}
  */
 export default class TeriockJournalEntryPage extends BlankMixin(
   JournalEntryPage,

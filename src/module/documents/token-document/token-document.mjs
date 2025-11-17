@@ -1,5 +1,5 @@
-import { convertUnits, ringImage } from "../../helpers/utils.mjs";
-import { BlankMixin } from "../mixins/_module.mjs";
+import { convertUnits, makeIcon, ringImage } from "../../helpers/utils.mjs";
+import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
 
@@ -7,10 +7,26 @@ const { TokenDocument } = foundry.documents;
 /**
  * The Teriock {@link TokenDocument} implementation.
  * @extends {TokenDocument}
- * @mixes ChangeableDocumentMixin
- * @mixes ClientDocumentMixin
+ * @extends {ClientDocument}
+ * @mixes EmbedCardDocument
  */
-export default class TeriockTokenDocument extends BlankMixin(TokenDocument) {
+export default class TeriockTokenDocument extends EmbedCardDocumentMixin(
+  TokenDocument,
+) {
+  /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [
+      {
+        name: "Open Actor",
+        icon: makeIcon("user", "contextMenu"),
+        condition: () => this.actor && this.actor.isViewer,
+        callback: async () => this.actor.sheet.render(true),
+      },
+      ...super.cardContextMenuEntries,
+    ];
+  }
+
+  //noinspection JSUnusedGlobalSymbols
   /**
    * Center of this token.
    * @returns {Point}
@@ -20,6 +36,18 @@ export default class TeriockTokenDocument extends BlankMixin(TokenDocument) {
       x: this.x + this.sizeX / 2,
       y: this.y + this.sizeY / 2,
     };
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.img = this.imageLive;
+    if (this.actor) {
+      if (this.actor.nameString !== parts.title) {
+        parts.text = this.actor.nameString;
+      }
+    }
+    return parts;
   }
 
   /**

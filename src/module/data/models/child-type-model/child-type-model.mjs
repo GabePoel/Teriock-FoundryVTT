@@ -53,11 +53,14 @@ export default class ChildTypeModel extends CommonTypeModel {
     return super.migrateData(data);
   }
 
-  /**
-   * Context menu entries to display for cards that represent the parent document.
-   * @returns {Teriock.Foundry.ContextMenuEntry[]}
-   */
+  /** @inheritDoc */
   get cardContextMenuEntries() {
+    const entries = super.cardContextMenuEntries;
+    const deleteEntry = entries.find((e) => e.name === "Delete");
+    deleteEntry.condition = () =>
+      this.parent.isOwner &&
+      (this.parent.parent.sheet?.editable ||
+        (this.parent.parent.source && this.parent.source.sheet?.editable));
     return [
       {
         name: this.useText,
@@ -126,39 +129,33 @@ export default class ChildTypeModel extends CommonTypeModel {
         group: "share",
       },
       {
-        name: "Delete",
-        icon: makeIcon("trash", "contextMenu"),
-        callback: async () => {
-          await this.deleteThis();
-        },
-        condition: () =>
-          this.parent.isOwner &&
-          (this.parent.parent.sheet?.editable ||
-            (this.parent.parent.source &&
-              this.parent.source.sheet?.editable)) &&
-          this.parent.isOwner,
-        group: "document",
-      },
-      {
         name: "Duplicate",
         icon: makeIcon("copy", "contextMenu"),
         callback: async () => {
-          await this.parent.duplicate();
+          await this.duplicate();
         },
         condition: () =>
-          this.parent.parent.sheet?.editable && this.parent.isOwner,
+          this.parent?.parent.sheet?.editable && this.parent.isOwner,
         group: "document",
       },
+      ...entries,
     ];
   }
 
   get embedActions() {
     return {
       ...super.embedActions,
-      useDoc: async (event) => this.parent.use(this.parseEvent(event)),
+      useDoc: async (event, relative) => {
+        const options = this.parseEvent(event);
+        if (relative?.actor) {
+          options.actor = relative.actor;
+        }
+        await this.parent.use(options);
+      },
     };
   }
 
+  /** @inheritDoc */
   get embedIcons() {
     return [
       ...super.embedIcons,
@@ -283,14 +280,16 @@ export default class ChildTypeModel extends CommonTypeModel {
     return messageElement;
   }
 
-  /**
-   * Delete this document from its parent.
-   * @returns {Promise<void>}
-   */
+  /** @inheritDoc */
   async deleteThis() {
-    await this.parent.parent.deleteEmbeddedDocuments(this.parent.documentName, [
-      this.parent.id,
-    ]);
+    if (this.parent.parent) {
+      await this.parent.parent.deleteEmbeddedDocuments(
+        this.parent.documentName,
+        [this.parent.id],
+      );
+    } else {
+      await super.deleteThis();
+    }
   }
 
   /**

@@ -6,8 +6,8 @@ const { Combat } = foundry.documents;
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Combat} implementation.
+ * @extends {ClientDocument}
  * @extends {Combat}
- * @mixes ClientDocumentMixin
  * @property {Collection<Teriock.UUID<TeriockCombatant>, TeriockCombatant>} combatants
  */
 export default class TeriockCombat extends BlankMixin(Combat) {

@@ -38,8 +38,10 @@
           {{#if editable}}
             <button class="createProperty" data-action="createProperty">Add Child Property</button>{{/if}}
           {{#each subProperties as |doc|}}
-            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" doc.system.embedParts}}
-          {{/each}}        </div>
+            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+              relative=../document.uuid))}}
+          {{/each}}
+        </div>
       {{/if}}
     </div>
   {{/if}}

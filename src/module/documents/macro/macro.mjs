@@ -1,16 +1,17 @@
 import { getItem } from "../../helpers/fetch.mjs";
-import { dedent, queryGM } from "../../helpers/utils.mjs";
-import { BlankMixin } from "../mixins/_module.mjs";
+import { dedent, getActor, getToken, queryGM } from "../../helpers/utils.mjs";
+import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Macro} implementation.
+ * @extends {ClientDocument}
  * @extends {Macro}
- * @mixes ClientDocumentMixin
+ * @mixes EmbedCardDocument
  */
-export default class TeriockMacro extends BlankMixin(Macro) {
+export default class TeriockMacro extends EmbedCardDocumentMixin(Macro) {
   /**
    * Get a document from an actor.
    * @param {TeriockActor} actor - The actor to get the document from.
@@ -142,11 +143,33 @@ export default class TeriockMacro extends BlankMixin(Macro) {
     }
   }
 
+  /** @inheritDoc */
+  get embedActions() {
+    return {
+      ...super.embedActions,
+      execute: async (event) => await this.scopedExecute(event),
+    };
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.usable = true;
+    parts.action = "execute";
+    return parts;
+  }
+
   /**
-   * @inheritDoc
-   * @param {Teriock.RollOptions.MacroScope} scope
+   * Generate a scope and execute.
+   * @returns {Promise<void>}
    */
-  async execute(scope = {}) {
-    await super.execute(scope);
+  async scopedExecute(event) {
+    const actor = getActor();
+    const token = actor ? getToken(actor) : undefined;
+    await this.execute({
+      actor,
+      token,
+      event,
+    });
   }
 }

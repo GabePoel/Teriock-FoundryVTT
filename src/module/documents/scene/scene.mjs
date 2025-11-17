@@ -5,7 +5,7 @@ const { Scene } = foundry.documents;
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Scene} implementation.
- * @mixes ClientDocumentMixin
+ * @extends {ClientDocument}
  * @extends {Scene}
  * @property {Collection<Teriock.UUID<TeriockTokenDocument>, TeriockTokenDocument>} tokens
  */
