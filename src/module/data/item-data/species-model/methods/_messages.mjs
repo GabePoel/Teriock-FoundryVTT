@@ -1,5 +1,3 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
-
 /**
  * Generates message parts for a species.
  * @param {TeriockSpeciesModel} speciesData
@@ -55,32 +53,7 @@ export function _messageParts(speciesData) {
       ],
     },
   ];
-  const blocks = [
-    {
-      title: "Hit increase",
-      text: speciesData.hpIncrease,
-    },
-    {
-      title: "Attribute increase",
-      text: speciesData.attributeIncrease,
-    },
-    {
-      title: "Innate ranks",
-      text: speciesData.innateRanks,
-    },
-    {
-      title: "Appearance",
-      text: speciesData.appearance,
-    },
-    {
-      title: "Description",
-      text: speciesData.description,
-    },
-  ];
   return {
     bars: bars,
-    blocks: blocks,
-    icon: documentOptions.species.icon,
-    label: documentOptions.species.name,
   };
 }

@@ -9,6 +9,7 @@ export type FeatSaveImprovementAmount = "proficiency" | "fluency";
 export interface AttributeImprovement {
   attribute: Teriock.Parameters.Actor.StatAttribute | null;
   minVal: number;
+  text: string;
 }
 
 /**
@@ -17,6 +18,7 @@ export interface AttributeImprovement {
 export interface FeatSaveImprovement {
   amount: FeatSaveImprovementAmount;
   attribute: Teriock.Parameters.Actor.Attribute | null;
+  text: string;
 }
 
 /**

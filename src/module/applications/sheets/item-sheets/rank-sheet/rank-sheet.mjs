@@ -74,14 +74,4 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
       this._connectContextMenu(selector, menu(this.item), "click");
     });
   }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    await this._enrichAll(context, {
-      description: this.item.system.description,
-      flaws: this.item.system.flaws,
-    });
-    return context;
-  }
 }

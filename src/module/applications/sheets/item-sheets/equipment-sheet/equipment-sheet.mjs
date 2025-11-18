@@ -176,24 +176,5 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
     });
 
     this._activateTags();
-    const buttonMap = {
-      ".ab-special-rules-button": "system.specialRules",
-      ".ab-description-button": "system.description",
-      ".ab-flaws-button": "system.flaws",
-      ".ab-notes-button": "system.notes",
-    };
-    this._connectButtonMap(buttonMap);
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    await this._enrichAll(context, {
-      specialRules: this.item.system.specialRules,
-      description: this.item.system.description,
-      flaws: this.item.system.flaws,
-      notes: this.item.system.notes,
-    });
-    return context;
   }
 }

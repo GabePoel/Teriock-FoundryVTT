@@ -216,7 +216,10 @@ export function _defineGeneral(schema) {
       initial: false,
       label: "Elder Sorcery",
     }),
-    elderSorceryIncant: new fields.HTMLField({ initial: "" }),
+    elderSorceryIncant: new TextField({
+      initial: "",
+      label: "With Elder Sorcery...",
+    }),
     elements: new fields.SetField(
       new fields.StringField({
         choices: TERIOCK.index.elements,
@@ -269,6 +272,10 @@ export function _defineGeneral(schema) {
           choices: TERIOCK.index.statAttributes,
         }),
         minVal: new fields.NumberField({ initial: 0 }),
+        text: new TextField({
+          initial: "",
+          label: "Attribute Improvement",
+        }),
       }),
       featSaveImprovement: new fields.SchemaField({
         attribute: new fields.StringField({
@@ -277,6 +284,10 @@ export function _defineGeneral(schema) {
           choices: TERIOCK.index.attributes,
         }),
         amount: new fields.StringField({ initial: "proficient" }),
+        text: new TextField({
+          initial: "",
+          label: "Feat Save Improvement",
+        }),
       }),
     }),
     interaction: new fields.StringField({

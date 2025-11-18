@@ -18,6 +18,10 @@ export default class TeriockTooltipManager extends TooltipManager {
     } else {
       this.tooltip.setAttribute("data-linked-uuid", "none");
     }
+    //noinspection JSUnresolvedReference
+    if (this.tooltip?.firstElementChild?.classList.contains("teriock-panel")) {
+      this.tooltip.classList.toggle("teriock-rich-tooltip", true);
+    }
     bindCommonActions(this.tooltip);
   }
 }

@@ -280,23 +280,6 @@ export default function CommonSheetMixin(Base) {
       }
 
       /**
-       * Connects button elements to document updates.
-       * @param {object} map - Object mapping selectors to attribute paths.
-       */
-      _connectButtonMap(map) {
-        const container = this.element;
-        for (const [selector, path] of Object.entries(map)) {
-          const elements = container.querySelectorAll(selector);
-          elements.forEach((el) => {
-            el.addEventListener("click", async (e) => {
-              e.preventDefault();
-              await this.document.update({ [path]: "Insert text here." });
-            });
-          });
-        }
-      }
-
-      /**
        * Creates a context menu for elements.
        * @param {string} cssClass - The CSS class for elements to attach the menu to.
        * @param {object[]} menuItems - The context menu items.
@@ -350,20 +333,6 @@ export default function CommonSheetMixin(Base) {
               relativeTo: this.document,
             })
           : undefined;
-      }
-
-      /**
-       * Enrich an object of HTML content for display.
-       * @param {object} context - Context object to put enrichments into.
-       * @param {Promise<Record<string, string>>} obj - Keys and values corresponding to text that needs enrichment.
-       * @returns {Promise<void>}
-       */
-      async _enrichAll(context, obj) {
-        if (Object.keys(context).includes("enriched")) {
-          for (const [key, value] of Object.entries(obj)) {
-            context.enriched[key] = await this._enrich(value);
-          }
-        }
       }
 
       /** @inheritDoc */

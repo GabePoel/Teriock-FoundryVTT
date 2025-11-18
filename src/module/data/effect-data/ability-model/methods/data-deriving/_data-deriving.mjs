@@ -66,4 +66,25 @@ export function _prepareDerivedData(abilityData) {
   if (applyChanges) {
     abilityData.parent.changes = abilityData.changes;
   }
+
+  if (abilityData.improvements.attributeImprovement.attribute) {
+    const att = abilityData.improvements.attributeImprovement.attribute;
+    const minVal = abilityData.improvements.attributeImprovement.minVal;
+    abilityData.improvements.attributeImprovement.text =
+      `This ability sets your @L[Core:${att.toUpperCase()}] score ` +
+      `to a minimum of ${minVal}.`;
+  } else {
+    abilityData.improvements.attributeImprovement.text = "";
+  }
+
+  if (abilityData.improvements.featSaveImprovement.attribute) {
+    const att = abilityData.improvements.featSaveImprovement.attribute;
+    const amount = abilityData.improvements.featSaveImprovement.amount;
+    const amountVal = TERIOCK.options.ability.featSaveImprovementAmount[amount];
+    abilityData.improvements.featSaveImprovement.text =
+      `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in ` +
+      `@L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
+  } else {
+    abilityData.improvements.featSaveImprovement.text = "";
+  }
 }

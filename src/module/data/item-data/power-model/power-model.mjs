@@ -1,6 +1,5 @@
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
 
 const { fields } = foundry.data;
 
@@ -49,10 +48,26 @@ export default class TeriockPowerModel extends TeriockBaseItemModel {
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ..._messageParts(this),
-    };
+  get displayFields() {
+    return ["system.description", "system.flaws"];
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.text = TERIOCK.options.power[this.type].name;
+    parts.subtitle = "Power";
+    return parts;
+  }
+
+  /** @inheritDoc */
+  get messageBars() {
+    return [
+      {
+        icon: "fa-" + TERIOCK.options.power[this.type].icon,
+        label: "Power Type",
+        wrappers: [TERIOCK.options.power[this.type].name],
+      },
+    ];
   }
 }

@@ -112,9 +112,9 @@ export default class TeriockEffect extends ChildDocumentMixin(
   get remainingString() {
     const remaining = this.remaining;
     if (remaining !== null) {
-      return secondsToReadable(remaining);
+      return secondsToReadable(remaining) + " remaining";
     }
-    return null;
+    return "No time limit";
   }
 
   /** @inheritDoc */

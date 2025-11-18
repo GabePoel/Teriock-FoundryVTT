@@ -2,6 +2,8 @@ import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
 import { quickAddAssociation } from "../../../helpers/html.mjs";
 import {
   abilitySort,
+  fancifyFields,
+  getSchema,
   makeIcon,
   propertySort,
 } from "../../../helpers/utils.mjs";
@@ -142,6 +144,14 @@ export default class ChildTypeModel extends CommonTypeModel {
     ];
   }
 
+  /**
+   * Fields to display in panels and sheets.
+   * @returns {Teriock.Sheet.DisplayField[]}
+   */
+  get displayFields() {
+    return ["system.description"];
+  }
+
   get embedActions() {
     return {
       ...super.embedActions,
@@ -197,6 +207,34 @@ export default class ChildTypeModel extends CommonTypeModel {
   }
 
   /**
+   * Message panel bars.
+   * @returns {Teriock.MessageData.MessageBar[]}
+   */
+  get messageBars() {
+    return [];
+  }
+
+  /**
+   * Message panel blocks.
+   * @returns {Teriock.MessageData.MessageBlock[]}
+   */
+  get messageBlocks() {
+    return fancifyFields(this.displayFields)
+      .map((f) => {
+        const schema = getSchema(this.parent, f.path);
+        const value = foundry.utils.getProperty(this.parent, f.path);
+        if (value && !schema.gmOnly) {
+          return {
+            title: f.label || schema.label,
+            text: value,
+            classes: f.classes,
+          };
+        }
+      })
+      .filter((f) => f);
+  }
+
+  /**
    * Gets the message rules-parts for displaying the child document in chat.
    * Includes image, name, and font information from the parent document.
    * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.
@@ -204,14 +242,16 @@ export default class ChildTypeModel extends CommonTypeModel {
   get messageParts() {
     const parts = {
       associations: [],
-      bars: [],
-      blocks: [],
+      bars: this.messageBars,
+      blocks: this.messageBlocks,
       buttons: [],
       color: this.color,
       font: this.font,
       image: this.parent.img,
       name: this.parent.nameString,
       uuid: this.parent.uuid,
+      icon: TERIOCK.options.document[this.metadata.type].icon,
+      label: TERIOCK.options.document[this.metadata.type].name,
     };
     const properties = propertySort(
       this.parent.getProperties().filter((p) => p.system.revealed),

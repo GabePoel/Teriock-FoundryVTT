@@ -698,3 +698,51 @@ export function upgradeTransformation(l1, l2) {
   }
   return l1;
 }
+
+/**
+ * Get a specific schema field from a document.
+ * @param {TeriockDocument} doc
+ * @param {string} path
+ * @returns {DataSchema}
+ */
+export function getSchema(doc, path) {
+  let schema;
+  if (path.startsWith("system")) {
+    schema = doc.system.schema.getField(path.replace("system.", ""));
+  } else {
+    schema = doc.schema.getField(path);
+  }
+  return schema;
+}
+
+/**
+ * Make fields fancy.
+ * @param {Teriock.Sheet.DisplayField[]} displayFields
+ * @returns {Teriock.Sheet.FancyDisplayField[]}
+ */
+export function fancifyFields(displayFields) {
+  return displayFields
+    .map((f) => {
+      let fancy;
+      if (typeof f === "string") {
+        fancy = { path: f };
+      } else {
+        fancy = f;
+      }
+      const {
+        path = fancy.path,
+        visible = true,
+        classes = "",
+        editable = true,
+        label = "",
+      } = fancy;
+      return {
+        path,
+        visible,
+        classes,
+        editable,
+        label,
+      };
+    })
+    .filter((f) => f.visible);
+}

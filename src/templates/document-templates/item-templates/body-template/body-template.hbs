@@ -79,40 +79,7 @@
           </div>
         </div>
       </div>
-      {{formGroup
-        systemFields.description
-        value=system.description
-        enriched=enriched.description
-        disabled=(not editable)
-        hidden=(not (exists system.description))
-      }}
-      {{formGroup
-        systemFields.notes
-        value=system.notes
-        enriched=enriched.notes
-        disabled=(not editable)
-        hidden=(not (exists system.notes))
-      }}
-      {{formGroup
-        systemFields.flaws
-        value=system.flaws
-        enriched=enriched.flaws
-        disabled=(not editable)
-        hidden=(not (exists system.flaws))
-      }}
-      {{#if (exists system.fightingStyle)}}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title ab-section-title-dynamic">{{path
-              TERIOCK.index.weaponFightingStyles
-              system.fightingStyle}}
-              Fighting Style</span>
-          </div>
-          <div class="ab-improvement-bar ab-fighting-style">
-            {{{enriched.specialRules}}}
-          </div>
-        </div>
-      {{/if}}
+      {{> (template "document-templates/shared/display-fields.hbs")}}
     </div>
     {{#if (or editable (exists properties))}}
       <div class="ab-main">

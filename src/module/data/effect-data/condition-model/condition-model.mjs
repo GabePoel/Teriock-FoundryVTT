@@ -89,6 +89,11 @@ export default class TeriockConditionModel extends TransformationDataMixin(
     }
   }
 
+  /** @inheritDoc */
+  get displayFields() {
+    return ["description"];
+  }
+
   get embedIcons() {
     return [
       {
@@ -99,21 +104,6 @@ export default class TeriockConditionModel extends TransformationDataMixin(
         action: "removeConditionDoc",
       },
     ];
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      icon: TERIOCK.options.document.condition.icon,
-      label: TERIOCK.options.document.condition.name,
-      blocks: [
-        {
-          text: this.parent.description,
-          title: "Description",
-        },
-      ],
-    };
   }
 
   /** @inheritDoc */

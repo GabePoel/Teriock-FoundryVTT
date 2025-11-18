@@ -312,6 +312,7 @@ export function blocksField() {
   return new fields.ArrayField(
     new fields.SchemaField({
       elements: new fields.StringField({ nullable: true }),
+      classes: new fields.StringField({ initial: "" }),
       italic: new fields.BooleanField({
         initial: false,
         required: false,

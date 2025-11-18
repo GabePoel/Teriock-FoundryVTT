@@ -1,0 +1,13 @@
+{{#each displayFieldButtons}}
+  {{#if editable}}
+    <div class="tgrid-item">
+      <button
+        data-action="populateField"
+        data-path="{{fieldPath}}"
+        {{#if (not ../editable)}}
+        disabled="disabled"
+        {{/if}}
+      >{{{../TERIOCK.display.icons.add}}}{{name}}</button>
+    </div>
+  {{/if}}
+{{/each}}

@@ -123,6 +123,13 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
     return this.expirations.dawn;
   }
 
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = this.parent.remainingString;
+    return parts;
+  }
+
   /**
    * Gets the maneuver type for this effect.
    * Effects are always passive maneuvers.
@@ -130,6 +137,11 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
    */
   get maneuver() {
     return "passive";
+  }
+
+  /** @inheritDoc */
+  get messageBlocks() {
+    return this.blocks;
   }
 
   /** @inheritDoc */

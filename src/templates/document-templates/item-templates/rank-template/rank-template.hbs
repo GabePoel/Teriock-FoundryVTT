@@ -8,22 +8,7 @@
         {{> (template "document-templates/item-templates/rank-template/bars/rk-bar-details.hbs" )}}
       </div>
     </div>
-    <div class="ab-main">
-      {{formGroup
-        systemFields.description
-        value=system.description
-        enriched=enriched.description
-        disabled=(not editable)
-        hidden=(not (exists system.description))
-      }}
-      {{formGroup
-        systemFields.flaws
-        value=system.flaws
-        enriched=enriched.flaws
-        disabled=(not editable)
-        hidden=(not (exists system.flaws))
-      }}
-    </div>
+    {{> (template "document-templates/shared/simple-menu.hbs")}}
     {{> (template "document-templates/shared/effects.hbs")}}
   </div>
 </div>

@@ -1,5 +1,4 @@
 import { attunementOptions } from "../../../constants/options/attunement-options.mjs";
-import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { dotJoin } from "../../../helpers/string.mjs";
 import { evaluateSync, makeIcon } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
@@ -83,6 +82,11 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   }
 
   /** @inheritDoc */
+  get messageBlocks() {
+    return [];
+  }
+
+  /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,
@@ -95,10 +99,6 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
           },
         ],
       }),
-      name: this.parent.name,
-      image: this.parent.img,
-      icon: documentOptions.attunement.icon,
-      label: documentOptions.attunement.name,
     };
   }
 

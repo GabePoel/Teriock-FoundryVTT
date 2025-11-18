@@ -15,58 +15,7 @@
       <div class="ab-tags-all">
         {{> (template "document-templates/item-templates/equipment-template/tags/eq-classes-tags.hbs")}}
       </div>
-      {{formGroup
-        systemFields.description
-        value=system.description
-        enriched=enriched.description
-        disabled=(not editable)
-        hidden=(not (exists system.description))
-      }}
-      {{#if (and isGM (not system.identification.identified))}}
-        {{formGroup
-          systemFields.identification.fields.notes
-          value=system.identification.notes
-          enriched=enriched.identification.notes
-          disabled=(not editable)
-          hidden=(not (exists system.identification.notes))
-        }}
-      {{/if}}
-      {{formGroup
-        systemFields.notes
-        value=system.notes
-        enriched=enriched.notes
-        disabled=(not editable)
-        hidden=(not (exists system.notes))
-      }}
-      {{#if (and isGM (not system.identification.identified))}}
-        {{formGroup
-          systemFields.identification.fields.flaws
-          value=system.identification.flaws
-          enriched=enriched.identification.flaws
-          disabled=(not editable)
-          hidden=(not (exists system.identification.flaws))
-        }}
-      {{/if}}
-      {{formGroup
-        systemFields.flaws
-        value=system.flaws
-        enriched=enriched.flaws
-        disabled=(not editable)
-        hidden=(not (exists system.flaws))
-      }}
-      {{#if (exists system.fightingStyle)}}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title ab-section-title-dynamic">{{path
-              TERIOCK.index.weaponFightingStyles
-              system.fightingStyle}}
-              Fighting Style</span>
-          </div>
-          <div class="ab-improvement-bar ab-fighting-style">
-            {{{enriched.specialRules}}}
-          </div>
-        </div>
-      {{/if}}
+      {{> (template "document-templates/shared/display-fields.hbs")}}
     </div>
     {{#if (or editable (exists properties))}}
       <div class="ab-main">

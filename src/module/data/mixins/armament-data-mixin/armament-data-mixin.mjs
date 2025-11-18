@@ -59,6 +59,10 @@ export default function ArmamentDataMixin(Base) {
             nullable: true,
             choices: TERIOCK.index.weaponFightingStyles,
           }),
+          specialRules: new TextField({
+            initial: "",
+            label: "Fighting Style",
+          }),
           flaws: new TextField({
             initial: "",
             label: "Flaws",
@@ -103,6 +107,21 @@ export default function ArmamentDataMixin(Base) {
           }),
           virtualProperties: new fields.SetField(new fields.StringField()),
         });
+      }
+
+      /** @inheritDoc */
+      get displayFields() {
+        return [
+          "system.description",
+          "system.notes",
+          "system.flaws",
+          {
+            classes: "italic-display-field",
+            editable: false,
+            label: `${TERIOCK.index.weaponFightingStyles[this.fightingStyle]} Fighting Style`,
+            path: "system.specialRules",
+          },
+        ];
       }
 
       /**

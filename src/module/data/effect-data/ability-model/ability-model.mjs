@@ -85,19 +85,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   }
 
   /**
-   * Gets this ability's attribute improvement text.
-   * @returns {string}
-   */
-  get attributeImprovementText() {
-    if (this.improvements.attributeImprovement.attribute) {
-      const att = this.improvements.attributeImprovement.attribute;
-      const minVal = this.improvements.attributeImprovement.minVal;
-      return `This ability sets your @L[Core:${att.toUpperCase()}] score to a minimum of ${minVal}.`;
-    }
-    return "";
-  }
-
-  /**
    * Gets the changes this ability would provide.
    * @returns {EffectChangeData[]}
    */
@@ -108,6 +95,98 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   /** @inheritDoc */
   get color() {
     return TERIOCK.options.ability.form[this.form].color;
+  }
+
+  get displayFields() {
+    const fields = [
+      {
+        path: "system.elderSorceryIncant",
+        label: `With the Elder Sorcery of ${this.elementString}...`,
+        visible: this.elderSorcery,
+        classes: "elder-sorcery-display-field",
+      },
+      {
+        path: "system.costs.mp.value.variable",
+        visible: this.costs.mp.type === "variable",
+      },
+      {
+        path: "system.costs.hp.value.variable",
+        visible: this.costs.hp.type === "variable",
+      },
+      {
+        path: "system.costs.gp.value.variable",
+        visible: this.costs.gp.type === "variable",
+      },
+      "system.costs.materialCost",
+      "system.trigger",
+      "system.requirements",
+      "system.limitation",
+      "system.improvement",
+      "system.overview.base",
+      {
+        path: "system.overview.proficient",
+        classes: this.parent.isProficient ? "" : "faded-display-field",
+      },
+      {
+        path: "system.overview.fluent",
+        classes: this.parent.isFluent ? "" : "faded-display-field",
+      },
+    ];
+    if (this.interaction === "attack") {
+      fields.push(
+        ...[
+          "system.results.hit",
+          "system.results.critHit",
+          "system.results.miss",
+          "system.results.critMiss",
+        ],
+      );
+    } else if (this.interaction === "feat") {
+      fields.push(
+        ...[
+          "system.results.fail",
+          "system.results.critFail",
+          "system.results.save",
+          "system.results.critSave",
+        ],
+      );
+    } else {
+      fields.push(...["system.results.save", "system.results.fail"]);
+    }
+    fields.push(
+      ...[
+        "system.heightened",
+        "system.endCondition",
+        {
+          path: "system.improvements.attributeImprovement.text",
+          classes: "italic-display-field ab-improvement-attribute",
+          editable: false,
+        },
+        {
+          path: "system.improvements.featSaveImprovement.text",
+          classes: "italic-display-field ab-improvement-feat-save",
+          editable: false,
+        },
+      ],
+    );
+    return fields;
+  }
+
+  /**
+   * A string representing the elements for this ability.
+   * @returns {string}
+   */
+  get elementString() {
+    if (this.elements.size === 0) {
+      return "Celestial";
+    } else if (this.elements.size === 1) {
+      return Array.from(this.elements)[0];
+    } else {
+      const elements = Array.from(this.elements).sort((a, b) =>
+        a.localeCompare(b),
+      );
+      return `${elements.slice(0, -1).join(", ")}${this.elements.size > 2 ? "," : ""} and ${elements.at(-1)}`;
+    }
   }
 
   get embedIcons() {
@@ -145,24 +224,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
         this.executionTime
       ] ?? this.executionTime;
     return parts;
-  }
-
-  /**
-   * Gets this ability's feat save improvement text.
-   * @returns {string}
-   */
-  get featSaveImprovementText() {
-    if (this.improvements.featSaveImprovement.attribute) {
-      const att = this.improvements.featSaveImprovement.attribute;
-      const amount = this.improvements.featSaveImprovement.amount;
-      const amountVal =
-        TERIOCK.options.ability.featSaveImprovementAmount[amount];
-      return (
-        `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in @L[Core:${att.toUpperCase()}] ` +
-        "@L[Core:Feat Interaction]{feat saves}."
-      );
-    }
-    return "";
   }
 
   /**

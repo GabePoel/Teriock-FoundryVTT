@@ -1,5 +1,6 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { copyAbility, getItem } from "../../../helpers/fetch.mjs";
+import { dotJoin } from "../../../helpers/string.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
@@ -134,6 +135,28 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
     } else {
       return super.color;
     }
+  }
+
+  get displayFields() {
+    return [
+      "system.hpIncrease",
+      "system.mpIncrease",
+      "system.attributeIncrease",
+      "system.innateRanks",
+      "system.appearance",
+      "system.description",
+    ];
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.text = dotJoin([
+      ...Array.from(this.traits),
+      this.size.enabled ? `Size ${this.size.value}` : "",
+    ]);
+    parts.subtitle = "Species";
+    return parts;
   }
 
   /**

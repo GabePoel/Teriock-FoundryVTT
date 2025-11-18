@@ -111,27 +111,5 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
       return;
     }
     this._activateTags();
-    const buttonMap = {
-      ".ab-description-button": "system.description",
-      ".ab-appearance-button": "system.appearance",
-      ".ab-attribute-increase-button": "system.attributeIncrease",
-      ".ab-hp-increase-button": "system.hpIncrease",
-      ".ab-mp-increase-button": "system.mpIncrease",
-      ".ab-innate-ranks-button": "system.innateRanks",
-    };
-    this._connectButtonMap(buttonMap);
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    await this._enrichAll(context, {
-      description: this.item.system.description,
-      appearance: this.item.system.appearance,
-      innateRanks: this.item.system.innateRanks,
-      hpIncrease: this.item.system.hpIncrease,
-      attributeIncrease: this.item.system.attributeIncrease,
-    });
-    return context;
   }
 }

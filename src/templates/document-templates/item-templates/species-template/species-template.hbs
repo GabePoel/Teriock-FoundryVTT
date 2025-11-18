@@ -14,48 +14,7 @@
         <div class="ab-tags-all">
           {{> (template "document-templates/item-templates/species-template/tags/sp-traits-tags.hbs")}}
         </div>
-        {{formGroup
-          systemFields.hpIncrease
-          value=system.hpIncrease
-          enriched=enriched.hpIncrease
-          disabled=(not editable)
-          hidden=(not (exists system.hpIncrease))
-        }}
-        {{formGroup
-          systemFields.mpIncrease
-          value=system.mpIncrease
-          enriched=enriched.mpIncrease
-          disabled=(not editable)
-          hidden=(not (exists system.mpIncrease))
-        }}
-        {{formGroup
-          systemFields.attributeIncrease
-          value=system.attributeIncrease
-          enriched=enriched.attributeIncrease
-          disabled=(not editable)
-          hidden=(not (exists system.attributeIncrease))
-        }}
-        {{formGroup
-          systemFields.innateRanks
-          value=system.innateRanks
-          enriched=enriched.innateRanks
-          disabled=(not editable)
-          hidden=(not (exists system.innateRanks))
-        }}
-        {{formGroup
-          systemFields.appearance
-          value=system.appearance
-          enriched=enriched.appearance
-          disabled=(not editable)
-          hidden=(not (exists system.appearance))
-        }}
-        {{formGroup
-          systemFields.description
-          value=system.description
-          enriched=enriched.description
-          disabled=(not editable)
-          hidden=(not (exists system.description))
-        }}
+        {{> (template "document-templates/shared/display-fields.hbs")}}
       </div>
       {{> (template "document-templates/shared/effects.hbs")}}
       {{#if (and (or editable (exists bodyParts)) (exists document.actor))}}

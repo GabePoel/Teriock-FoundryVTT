@@ -179,42 +179,6 @@
             </button>
           </div>
         {{/if}}
-        {{#if (not (exists system.description))}}
-          <div class="tgrid-item">
-            <button class="ab-menu-button ab-description-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{{TERIOCK.display.icons.add}}}
-              Description
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.notes))}}
-          <div class="tgrid-item">
-            <button class="ab-menu-button ab-notes-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{{TERIOCK.display.icons.add}}}
-              Notes
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.flaws))}}
-          <div class="tgrid-item">
-            <button class="ab-menu-button ab-flaws-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{{TERIOCK.display.icons.add}}}
-              Flaws
-            </button>
-          </div>
-        {{/if}}
         {{#if (not (exists system.tier.saved))}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-tier-button"
@@ -227,6 +191,7 @@
             </button>
           </div>
         {{/if}}
+        {{> (template "document-templates/shared/display-field-buttons.hbs")}}
       </div>
     </div>
   </div>

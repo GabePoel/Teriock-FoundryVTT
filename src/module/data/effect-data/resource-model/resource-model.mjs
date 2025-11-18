@@ -4,7 +4,6 @@ import {
   RevelationDataMixin,
 } from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 
 /**
@@ -29,11 +28,6 @@ export default class TeriockResourceModel extends RevelationDataMixin(
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
   }
 
   /** @inheritDoc */

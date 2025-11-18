@@ -53,14 +53,4 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
     const powerContextMenuOptions = powerContextMenu(this.item);
     this._connectContextMenu(".power-box", powerContextMenuOptions, "click");
   }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    await this._enrichAll(context, {
-      description: this.item.system.description,
-      flaws: this.item.system.flaws,
-    });
-    return context;
-  }
 }

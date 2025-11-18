@@ -1,4 +1,3 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { formulaExists } from "../../../../helpers/utils.mjs";
 
 /**
@@ -81,32 +80,7 @@ export function _messageParts(equipmentData) {
       ],
     },
   ];
-  const blocks = [
-    {
-      title: "Description",
-      text: src.description,
-    },
-    {
-      title: "Notes",
-      text: src.notes,
-    },
-    {
-      title: "Flaws",
-      text: src.flaws,
-    },
-  ];
-  if (equipmentData.fightingStyle && equipmentData.fightingStyle.length > 0) {
-    blocks.push({
-      title:
-        TERIOCK.index.weaponFightingStyles[equipmentData.fightingStyle] +
-        " Fighting Style",
-      text: equipmentData.specialRules,
-    });
-  }
   return {
     bars: bars,
-    blocks: blocks,
-    icon: documentOptions.equipment.icon,
-    label: documentOptions.equipment.name,
   };
 }

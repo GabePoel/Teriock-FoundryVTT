@@ -1,6 +1,3 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { secondsToReadable } from "../../../../helpers/utils.mjs";
-
 /**
  * Generates message parts for a consequence effect, including bars and blocks for display.
  * Creates formatted display elements for tradecraft information and description.
@@ -13,18 +10,11 @@ export function _messageParts(consequenceData) {
     {
       icon: "fa-hourglass",
       label: "Duration",
-      /** @type string[] */
-      wrappers: [
-        !consequenceData.parent.isTemporary ||
-        consequenceData.parent.remaining === null
-          ? "No Time Limit"
-          : secondsToReadable(consequenceData.parent.remaining) + " Remaining",
-      ],
+      wrappers: [consequenceData.parent.remainingString],
     },
     {
       icon: "fa-disease",
       label: "Conditions",
-      /** @type string[] */
       wrappers: [
         ...Array.from(
           consequenceData.parent.statuses.map(
@@ -43,8 +33,5 @@ export function _messageParts(consequenceData) {
   return {
     associations: consequenceData.associations,
     bars: bars,
-    blocks: consequenceData.blocks,
-    icon: documentOptions.consequence.icon,
-    label: documentOptions.consequence.name,
   };
 }

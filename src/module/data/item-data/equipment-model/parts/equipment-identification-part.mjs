@@ -7,6 +7,7 @@ const { ux } = foundry.applications;
 
 /**
  * Equipment data model mixin that handles identifying and reading magic.
+ * @param {typeof ChildTypeModel} Base
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
@@ -15,6 +16,23 @@ export default (Base) => {
      * @extends TeriockEquipmentData
      */
     class EquipmentIdentificationPart extends Base {
+      /** @inheritDoc */
+      get displayFields() {
+        return [
+          {
+            path: "system.identification.notes",
+            visible: game.user.isGM && !this.identification.identified,
+            classes: "faded-display-field",
+          },
+          {
+            path: "system.identification.flaws",
+            visible: game.user.isGM && !this.identification.identified,
+            classes: "faded-display-field",
+          },
+          ...super.displayFields,
+        ];
+      }
+
       /**
        * Identifies the equipment, revealing all its properties.
        * @returns {Promise<void>} Promise that resolves when the equipment is identified.

@@ -3,6 +3,7 @@ import * as createEffects from "../../../../helpers/create-effects.mjs";
 import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
 import {
   ChatButtonSheetMixin,
+  ChildSheetMixin,
   CommonSheetMixin,
 } from "../../mixins/_module.mjs";
 
@@ -18,7 +19,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @property {TeriockEffect} document
  */
 export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
-  CommonSheetMixin(ActiveEffectConfig),
+  ChildSheetMixin(CommonSheetMixin(ActiveEffectConfig)),
 ) {
   /**
    * @inheritDoc
@@ -152,9 +153,6 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
         4: "Upgrade",
         5: "Override",
       },
-    });
-    await this._enrichAll(context, {
-      description: this.document.system.description,
     });
     return context;
   }

@@ -7,6 +7,7 @@ import {
 } from "../../../../helpers/utils.mjs";
 import {
   ChatButtonSheetMixin,
+  ChildSheetMixin,
   CommonSheetMixin,
 } from "../../mixins/_module.mjs";
 
@@ -18,11 +19,12 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  * @extends {ItemSheetV2}
  * @mixes ChatButtonSheet
  * @mixes CommonSheet
+ * @mixes ChildSheet
  * @property {TeriockItem} document
  * @property {TeriockItem} item
  */
 export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
-  CommonSheetMixin(ItemSheetV2),
+  ChildSheetMixin(CommonSheetMixin(ItemSheetV2)),
 ) {
   /**
    * @inheritDoc

@@ -10,7 +10,6 @@ import {
 import { FormulaField, TextField } from "../../shared/fields/_module.mjs";
 import { changeField } from "../../shared/fields/helpers/field-builders.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import { _suppressed } from "./methods/_suppression.mjs";
@@ -103,6 +102,11 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   }
 
   /** @inheritDoc */
+  get displayFields() {
+    return ["system.description", "system.improvement", "system.limitation"];
+  }
+
+  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.options.ability.form[this.form].name;
@@ -110,8 +114,14 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
+  get messageBars() {
+    return [
+      {
+        icon: "fa-" + TERIOCK.options.ability.form[this.form].icon,
+        label: "Property Type",
+        wrappers: [TERIOCK.options.ability.form[this.form].name],
+      },
+    ];
   }
 
   /**

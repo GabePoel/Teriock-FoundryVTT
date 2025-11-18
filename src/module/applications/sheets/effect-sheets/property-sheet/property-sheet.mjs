@@ -55,11 +55,6 @@ export default class TeriockPropertySheet extends WikiButtonSheetMixin(
       propertyContextMenuOptions,
       "click",
     );
-    const buttonMap = {
-      ".ab-limitation-button": "system.limitation",
-      ".ab-improvement-button": "system.improvement",
-    };
-    this._connectButtonMap(buttonMap);
   }
 
   /** @inheritDoc */
@@ -69,10 +64,6 @@ export default class TeriockPropertySheet extends WikiButtonSheetMixin(
       this.document.getProperties().filter((p) => p.system.revealed),
     );
     context.supProperty = this.document.sup;
-    await this._enrichAll(context, {
-      limitation: this.document.system.limitation,
-      improvement: this.document.system.improvement,
-    });
     return context;
   }
 }

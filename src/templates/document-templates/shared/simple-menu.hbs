@@ -1,0 +1,31 @@
+{{#if (exists displayFieldButtons)}}
+  <div class="ab-menu">
+    <div class="ab-menu-content">
+      <div class="ab-menu-bar">
+        <div class="tgrid g2">
+          {{> (template "document-templates/shared/display-field-buttons.hbs")}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}
+<div class="ab-main">
+  <div class="ab-tags-all">
+    <div class="ab-tags-container">
+      <div class="ab-tags">
+        <span class="ab-tag tsubtle">{{#if document.active}}Active{{else}}Inactive{{/if}}</span>
+      </div>
+      {{#if (exists displayFieldButtons)}}
+        <div class="ab-icon ab-menu-toggle">
+          <div class="ab-menu-closed-container" data-tooltip="Open Menu">
+            {{{TERIOCK.display.icons.menuOpen}}}
+          </div>
+          <div class="ab-menu-open-container" data-tooltip="Close Menu">
+            {{{TERIOCK.display.icons.menuClose}}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  {{> (template "document-templates/shared/display-fields.hbs")}}
+</div>

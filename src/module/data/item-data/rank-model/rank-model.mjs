@@ -3,7 +3,6 @@ import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
 import { StatGiverDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 
 const { fields } = foundry.data;
@@ -121,6 +120,18 @@ export default class TeriockRankModel extends StatGiverDataMixin(
     }
   }
 
+  /** @inheritDoc */
+  get displayFields() {
+    return ["system.description", "system.flaws"];
+  }
+
+  /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.subtitle = TERIOCK.options.rank[this.archetype].name;
+    return parts;
+  }
+
   /**
    * The singular hit die.
    * @returns {StatDieModel}
@@ -129,9 +140,36 @@ export default class TeriockRankModel extends StatGiverDataMixin(
     return this.statDice.hp.dice[0];
   }
 
-  /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
+  get messageBars() {
+    return [
+      {
+        icon:
+          "fa-" +
+          TERIOCK.options.rank[this.archetype].classes[this.className].icon,
+        label: "Class",
+        wrappers: [
+          TERIOCK.options.rank[this.archetype].name,
+          TERIOCK.options.rank[this.archetype].classes[this.className].name,
+          "Rank " + this.classRank,
+        ],
+      },
+      {
+        icon: "fa-dice",
+        label: "Stat Dice",
+        wrappers: [
+          this.statDice.hp.formula + " Hit Dice",
+          this.statDice.mp.formula + " Mana Dice",
+        ],
+      },
+      {
+        icon: "fa-helmet-battle",
+        label: "Details",
+        wrappers: [
+          this.maxAv === 0 ? "No Armor" : this.maxAv + " Max AV",
+          this.innate ? "Innate" : "Learned",
+        ],
+      },
+    ];
   }
 
   /**

@@ -3,8 +3,8 @@ import {
   AttunableDataMixin,
   StatGiverDataMixin,
 } from "../../mixins/_module.mjs";
+import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
 
 const { fields } = foundry.data;
 
@@ -37,8 +37,17 @@ export default class TeriockMountModel extends StatGiverDataMixin(
         initial: false,
         required: false,
       }),
+      flaws: new TextField({
+        initial: "",
+        label: "Flaws",
+      }),
     });
     return schema;
+  }
+
+  /** @inheritDoc */
+  get displayFields() {
+    return ["system.description", "system.flaws"];
   }
 
   get embedIcons() {
@@ -71,8 +80,22 @@ export default class TeriockMountModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
+  get messageBars() {
+    return [
+      {
+        icon: "fa-dice",
+        label: "Stat Dice",
+        wrappers: [
+          this.statDice.hp.formula + " Hit Dice",
+          this.statDice.mp.formula + " Mana Dice",
+        ],
+      },
+      {
+        icon: "fa-trophy",
+        label: "Load",
+        wrappers: ["Tier " + this.tier.raw || "0", this.mountType],
+      },
+    ];
   }
 
   /** @inheritDoc */

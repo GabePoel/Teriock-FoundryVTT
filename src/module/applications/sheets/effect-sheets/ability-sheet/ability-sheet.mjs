@@ -221,27 +221,6 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
 
     this._activateContextMenus();
     this._activateTags();
-    const buttonMap = {
-      ".ab-material-cost-button": "system.costs.materialCost",
-      ".ab-trigger-button": "system.trigger",
-      ".ab-limitation-button": "system.limitation",
-      ".ab-improvement-button": "system.improvement",
-      ".ab-base-button": "system.overview.base",
-      ".ab-proficient-button": "system.overview.proficient",
-      ".ab-fluent-button": "system.overview.fluent",
-      ".ab-heightened-button": "system.heightened",
-      ".ab-crit-hit-button": "system.results.critHit",
-      ".ab-hit-button": "system.results.hit",
-      ".ab-miss-button": "system.results.miss",
-      ".ab-crit-miss-button": "system.results.critMiss",
-      ".ab-crit-fail-button": "system.results.critFail",
-      ".ab-fail-button": "system.results.fail",
-      ".ab-save-button": "system.results.save",
-      ".ab-crit-save-button": "system.results.critSave",
-      ".ab-end-condition-button": "system.endCondition",
-      ".ab-requirements-button": "system.requirements",
-    };
-    this._connectButtonMap(buttonMap);
 
     /** @type {NodeListOf<HTMLInputElement|HTMLSelectElement>} */
     const elements = this.element.querySelectorAll(".change-box-entry");
@@ -291,33 +270,6 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
     context.effectTags = Array.from(
       effectsSet.difference(new Set(system.powerSources)),
     );
-    await this._enrichAll(context, {
-      mpCost: system.costs.mp.value.variable,
-      hpCost: system.costs.hp.value.variable,
-      gpCost: system.costs.gp.value.variable,
-      materialCost: system.costs.materialCost,
-      trigger: system.trigger,
-      baseOverview: system.overview.base,
-      proficientOverview: system.overview.proficient,
-      fluentOverview: system.overview.fluent,
-      heightened: system.heightened,
-      onCriticalHit: system.results.critHit,
-      onHit: system.results.hit,
-      onMiss: system.results.miss,
-      onCriticalMiss: system.results.critMiss,
-      onCriticalFail: system.results.critFail,
-      onFail: system.results.fail,
-      onSave: system.results.save,
-      onCriticalSave: system.results.critSave,
-      endCondition: system.endCondition,
-      requirements: system.requirements,
-      elderSorceryIncant: system.elderSorceryIncant,
-      limitation: system.limitation,
-      grantOnly: system.grantOnlyText,
-      improvement: system.improvement,
-      attributeImprovement: system.attributeImprovementText,
-      featSaveImprovement: system.featSaveImprovementText,
-    });
     return context;
   }
 }

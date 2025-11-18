@@ -9,6 +9,7 @@ import {
   ThresholdDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
+import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 
@@ -64,8 +65,24 @@ export default class TeriockFluencyModel extends ProficiencyDataMixin(
         initial: true,
         label: "Fluent",
       }),
+      tradecraftDescription: new TextField({
+        initial: "",
+        label: "Tradecraft",
+      }),
     });
     return schema;
+  }
+
+  get displayFields() {
+    return [
+      "system.description",
+      {
+        classes: "italic-display-field",
+        editable: false,
+        label: TERIOCK.index.tradecrafts[this.tradecraft],
+        path: "system.tradecraftDescription",
+      },
+    ];
   }
 
   /** @inheritDoc */
@@ -152,6 +169,10 @@ export default class TeriockFluencyModel extends ProficiencyDataMixin(
         getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
       );
     }
+  }
+
+  prepareDerivedData() {
+    this.tradecraftDescription = TERIOCK.content.tradecrafts[this.tradecraft];
   }
 
   /**
