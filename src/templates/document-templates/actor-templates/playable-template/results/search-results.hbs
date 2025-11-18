@@ -1,0 +1,18 @@
+{{~#with (lookup @root.system.sheet.display displayKey) as |display|~}}
+  <div class="teriock-block-container
+              {{#if display.gapless}}gapless{{/if}}
+    {{display.size}}">
+    {{#each ../docs as |doc|}}
+      {{> (template "ui-templates/block.hbs")
+        (merge
+          doc.embedParts
+          (object hidden=(rgx (lookup @root.searchStrings ../../searchKey) doc.name) relative=../../document.uuid)
+        )
+      }}
+    {{/each}}
+
+    <div class="no-results {{display.size}}">
+      <p>No {{../empty}} found.</p>
+    </div>
+  </div>
+{{/with}}

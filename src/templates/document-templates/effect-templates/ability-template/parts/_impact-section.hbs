@@ -80,7 +80,7 @@
   <!-- Changes UI -->
   <fieldset class="teriock-full-width">
     <legend>Changes</legend>
-    {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"
+    {{> (template "document-templates/shared/changes.hbs")
       changesPath=(concat "system.impacts." typeKey ".changes")
       changesData=(path system "impacts" typeKey "changes")
       fieldDefs=(path systemFields "impacts.fields" typeKey "fields.changes.element.fields")
@@ -98,7 +98,7 @@
   {{#if (path system "impacts" typeKey "expiration.doesExpire")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Normal Combat Expiration</legend>
-      {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs"
+      {{> (template "document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs")
         editable=editable
         expirationKey="normal"
         system=system
@@ -117,7 +117,7 @@
   {{#if (path system "impacts" typeKey "expiration.changeOnCrit")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Crit Combat Expiration</legend>
-      {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs"
+      {{> (template "document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs")
         editable=editable
         expirationKey="crit"
         system=system

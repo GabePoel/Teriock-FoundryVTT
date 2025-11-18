@@ -39,7 +39,7 @@ export default (Base) =>
     static async _tradecraftExtra(_event, target) {
       const tradecraft = target.dataset.tradecraft;
       const extra = this.document.system.tradecrafts[tradecraft].extra;
-      const newExtra = (extra + 1) % 3;
+      const newExtra = (extra + 1) % 4;
       await this.document.update({
         [`system.tradecrafts.${tradecraft}.extra`]: newExtra,
       });

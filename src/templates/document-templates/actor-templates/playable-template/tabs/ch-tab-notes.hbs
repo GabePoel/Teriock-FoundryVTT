@@ -1,0 +1,292 @@
+<div class="character-tab notes">
+  <h1>Details</h1>
+  <div class="character-tab-page">
+    <div class="tgrid g2" style="gap: 1em;">
+      <div class="teriock-block-display">
+        <div class="character-shortbox character-movement-box">
+          <div class="tsubtle tcenter">
+            Movement Speed
+          </div>
+          <div class="character-shortbox-value">{{{system.movementSpeed.value}}}
+            ft / action
+          </div>
+        </div>
+        <div class="teriock-block-display-divider"></div>
+        <div class="tgrid g3" style="padding-inline: 0.5em;">
+          <div class="gi2">
+            Walk
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.walk
+            }}}
+          </div>
+          <div class="gi2">
+            Difficult Terrain
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.difficultTerrain
+            }}}
+          </div>
+          <div class="gi2">
+            Crawl
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.crawl
+            }}}
+          </div>
+          <div class="gi2">
+            Swim
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.swim
+            }}}
+          </div>
+          <div class="gi2">
+            Climb
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.climb
+            }}}
+          </div>
+          <div class="gi2">
+            Hidden
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.hidden
+            }}}
+          </div>
+          <div class="gi2">
+            Leap (Horizontal)
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.leapHorizontal
+            }}}
+          </div>
+          <div class="gi2">
+            Leap (Vertical)
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.leapVertical
+            }}}
+          </div>
+          <div class="gi2">
+            Fly
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.fly
+            }}}
+          </div>
+          <div class="gi2">
+            Dig
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.dig
+            }}}
+          </div>
+          <div class="gi2">
+            Dive
+          </div>
+          <div class="tcolored">
+            {{{lookup
+              TERIOCK.options.character.speedAdjustments
+              system.speedAdjustments.dive
+            }}}
+          </div>
+        </div>
+      </div>
+      <div class="tgrid-item" style="display: flex; flex-direction: column; gap: 1em;">
+        <div class="teriock-block-display" style="padding: 1em;">
+          <div class="tgrid g3" style="padding-inline: 0.5em;">
+            <div class="gi2 tsubtle">
+              Sense
+            </div>
+            <div class="tcenter tsubtle">
+              Range
+            </div>
+            {{#each TERIOCK.options.character.senses as |name key|}}
+              <div class="gi2">
+                {{{name}}}
+              </div>
+              <div class="tcenter affix">
+                <div class="unselected">
+                  <span class="tcolored tcenter ttransparent">{{path ../system.senses key}} ft</span>
+                </div>
+                <div class="tcolored">
+                  {{formInput
+                    (path ../systemFields "senses.fields" key)
+                    value=(path ../system._source.senses key)
+                    classes="tcolored tcenter ttransparent selected"
+                  }}
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+        <div class="teriock-block-display" style="padding-top: 0.75em;">
+          <div class="carrying-box-main" style="display: flex; flex-direction: row;">
+            <div class="character-shortbox character-size-box">
+              <div class="tsubtle tcenter">
+                Size
+              </div>
+              <div class="affix">
+                <div class="unselected">
+                  <span class="character-size-input character-smallbox-value">{{{system.size.number.value}}}</span>
+                </div>
+                {{formInput
+                  systemFields.size.fields.number.fields.saved
+                  value=system.size.number.saved
+                  classes="character-size-input character-smallbox-value selected"
+                  dataset=(object tooltip=(ucFirst system.size.category))
+                }}
+              </div>
+            </div>
+            <div class="character-shortbox character-weight-box">
+              <div class="tsubtle tcenter">
+                Weight
+              </div>
+              <div class="affix">
+                <div class="unselected">
+                  <span class="character-weight-input character-smallbox-value">{{{system.weight.self.value}}} lb</span>
+                </div>
+                {{formInput
+                  systemFields.weight.fields.self.fields.saved
+                  value=system.weight.self.saved
+                  classes="character-weight-input character-smallbox-value selected"
+                  dataset=(object tooltip=(concat "Including Equipment: " system.weight.value " lb"))
+                }}
+              </div>
+            </div>
+            <div class="character-shortbox character-carrying-box">
+              <div class="tsubtle tcenter">
+                Carrying
+              </div>
+              <div class="character-smallbox-value tcenter"
+                   data-tooltip="Including Self: {{{system.weight.value}}} lb" style="height: 2rem;">{{{system.weight
+              .carried}}} lb
+              </div>
+            </div>
+          </div>
+          <div class="teriock-block-display-divider" style="margin-top: 0.125em; margin-bottom: 0.625em;"></div>
+          <div class="tgrid g3">
+            <div class="tsubtle tcenter">
+              Light
+            </div>
+            <div class="tsubtle tcenter">
+              Heavy
+            </div>
+            <div class="tsubtle tcenter">
+              Max
+            </div>
+            <div class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.light)}}tred{{/if}}"
+                 data-tooltip="Light Carrying Capacity">
+              {{{system.carryingCapacity.light}}}
+              lb
+            </div>
+            <div class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}tred{{/if}}"
+                 data-tooltip="Heavy Carrying Capacity">
+              {{{system.carryingCapacity.heavy}}}
+              lb
+            </div>
+            <div class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.max)}}tred{{/if}}"
+                 data-tooltip="Maximum Carrying Capacity">
+              {{{system.carryingCapacity.max}}}
+              lb
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teriock-block-display" style=" padding-bottom: 0.25em; padding-top: 0.75em;">
+        <div class="tgrid g2">
+          <div class="character-shortbox">
+            <div class="tsubtle tcenter">
+              Curses
+            </div>
+            <div class="character-smallbox-value tcenter" style="height: 2rem;">
+              {{{system.curses.value}}} / {{{system.curses.max}}}
+            </div>
+          </div>
+          <div class="character-shortbox">
+            <div class="tsubtle tcenter">
+              Max Rotators
+            </div>
+            <div class="affix">
+              <div class="unselected">
+                <span class="character-smallbox-value">{{{system.magic.maxRotators.value}}}</span>
+              </div>
+              {{formInput
+                systemFields.magic.fields.maxRotators.fields.saved
+                value=system.magic.maxRotators.saved
+                classes="character-smallbox-value selected"
+                dataset=(object tooltip=system.magic.maxRotators.raw)
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="teriock-block-display" style="flex-direction: row; padding-bottom: 0.25em; padding-top: 0.75em;">
+        <div class="character-shortbox">
+          <div class="tsubtle tcenter">
+            Hiding Score
+          </div>
+          <div class="affix">
+            <div class="unselected">
+                <span
+                  class="character-detection-input character-smallbox-value">{{{system.detection.hiding.value}}}</span>
+            </div>
+            {{formInput
+              systemFields.detection.fields.hiding.fields.saved
+              value=system.detection.hiding.saved
+              classes="character-detection-input character-smallbox-value selected"
+              dataset=(object tooltip=system.detection.hiding.saved)
+            }}
+          </div>
+        </div>
+        <div class="character-shortbox">
+          <div class="tsubtle tcenter">
+            Perceiving Score
+          </div>
+          <div class="affix">
+            <div class="unselected">
+          <span class="character-detection-input character-smallbox-value">{{{system.detection.perceiving
+          .value}}}</span>
+            </div>
+            {{formInput
+              systemFields.detection.fields.perceiving.fields.saved
+              value=system.detection.perceiving.saved
+              classes="character-detection-input character-smallbox-value selected"
+              dataset=(object tooltip=system.detection.perceiving.saved)
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="teriock-block-display character-notes-content">
+      <prose-mirror
+        name="system.sheet.notes"
+        value="{{system.sheet.notes}}"
+        toggled="true"
+        editable="editable"
+      >{{{enrichedNotes}}}</prose-mirror>
+    </div>
+  </div>
+</div>

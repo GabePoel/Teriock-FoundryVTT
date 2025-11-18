@@ -1,6 +1,6 @@
 <div class="ab-impacts-tab ab-sheet-everything" style="width: 100%;">
   <div class="ab-sheet-top" style="border-bottom: 1px solid var(--color-border);">
-    {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+    {{> (template "document-templates/shared/header.hbs")}}
   </div>
   <div class="ab-impacts" style="padding: 1rem; width: 100%;">
     <nav class="sheet-tabs tabs">
@@ -17,14 +17,14 @@
     </nav>
     <div class="ab-impacts-config" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
       {{#if (eq impactTab "base")}}
-        {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"
+        {{> (template "document-templates/shared/changes.hbs")
           changesPath="system.impacts.changes"
           changesData=(path system "impacts" "changes")
           fieldDefs=(path systemFields "impacts.fields.changes.element.fields")
         }}
       {{/if}}
       {{#if (eq impactTab "custom")}}
-        {{> "systems/teriock/src/templates/document-templates/shared/_impact-macros.hbs"}}
+        {{> (template "document-templates/shared/_impact-macros.hbs")}}
       {{/if}}
     </div>
     <button

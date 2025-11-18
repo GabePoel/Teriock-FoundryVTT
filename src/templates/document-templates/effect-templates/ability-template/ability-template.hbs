@@ -5,26 +5,26 @@
     {{/if}}
     <div class="ab-sheet-everything">
       <div class="ab-sheet-top">
-        {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+        {{> (template "document-templates/shared/header.hbs")}}
         <div class="ab-bars">
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-status-bar.hbs"}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-delivery-bar.hbs"}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-targeting-bar.hbs"}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-expansion-bar.hbs"}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-costs-bar.hbs"}}
+          {{> (template "document-templates/effect-templates/ability-template/bars/ab-status-bar.hbs")}}
+          {{> (template "document-templates/effect-templates/ability-template/bars/ab-delivery-bar.hbs")}}
+          {{> (template "document-templates/effect-templates/ability-template/bars/ab-targeting-bar.hbs")}}
+          {{> (template "document-templates/effect-templates/ability-template/bars/ab-expansion-bar.hbs")}}
+          {{> (template "document-templates/effect-templates/ability-template/bars/ab-costs-bar.hbs")}}
           {{#if
-            system.consumable}}{{> "systems/teriock/src/templates/document-templates/shared/consumable-bar.hbs"}}{{/if}}
+            system.consumable}}{{> (template "document-templates/shared/consumable-bar.hbs")}}{{/if}}
         </div>
       </div>
-      {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/ab-menu.hbs"}}
+      {{> (template "document-templates/effect-templates/ability-template/parts/ab-menu.hbs")}}
       <div class="ab-main">
         <div class="ab-tags-all">
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/tags/ab-summary-tags.hbs"}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/tags/ab-effects-tags.hbs"}}
+          {{> (template "document-templates/effect-templates/ability-template/tags/ab-summary-tags.hbs")}}
+          {{> (template "document-templates/effect-templates/ability-template/tags/ab-effects-tags.hbs")}}
         </div>
         {{#if (and system.elderSorcery (exists system.elderSorceryIncant))}}
           <div class="es-incant">
-            {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/ab-elder-sorcery.hbs"}}
+            {{> (template "document-templates/effect-templates/ability-template/parts/ab-elder-sorcery.hbs")}}
           </div>
         {{/if}}
         <!-- Costs -->
@@ -217,14 +217,14 @@
           hidden=(not (exists system.endCondition))
         }}
         <!-- Improvements -->
-        {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-improvements-entries.hbs"}}
+        {{> (template "document-templates/effect-templates/ability-template/entries/ab-improvements-entries.hbs")}}
       </div>
       {{#if (or editable (exists subAbilities))}}
         <div class="ab-main">
           {{#if editable}}
             <button class="createAbility" data-action="createAbility">Add Ability</button>{{/if}}
           {{#each subAbilities as |doc|}}
-            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+            {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
               relative=../document.uuid))}}
           {{/each}}
         </div>
@@ -232,6 +232,6 @@
     </div>
   {{/if}}
   {{#if (eq tab "impacts")}}
-    {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/ab-impacts.hbs"}}
+    {{> (template "document-templates/effect-templates/ability-template/parts/ab-impacts.hbs")}}
   {{/if}}
 </div>

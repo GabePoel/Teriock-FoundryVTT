@@ -162,7 +162,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Register template classes
   CONFIG.ChatMessage.template = helpers.path.systemPath(
-    "templates/message-templates/chat-message.hbs",
+    "templates/ui-templates/chat-message.hbs",
   );
 
   // Data models

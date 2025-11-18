@@ -1,4 +1,10 @@
+import { systemPath } from "../../helpers/path.mjs";
+
 export default function registerUiHelpers() {
+  Handlebars.registerHelper("template", (str) => {
+    return systemPath("templates/" + str);
+  });
+
   Handlebars.registerHelper("tabActive", (active, tab) =>
     active === tab ? "active" : "inactive",
   );
@@ -54,7 +60,7 @@ export default function registerUiHelpers() {
       tooltip ? `data-tooltip="${tooltip}"` : "",
     ].join(" ");
     return new Handlebars.SafeString(
-      `<i class="ticon tcard-clickable ${cssClass} fa-fw fa-${style} fa-${icon}" ${attrs}></i>`,
+      `<i class="ticon teriock-block-clickable ${cssClass} fa-fw fa-${style} fa-${icon}" ${attrs}></i>`,
     );
   });
 
@@ -90,7 +96,7 @@ export default function registerUiHelpers() {
           : "";
 
       return new Handlebars.SafeString(`
-        <i class="ticon tcard-clickable ${cssClass} fa-fw fa-light fa-${icon}" 
+        <i class="ticon teriock-block-clickable ${cssClass} fa-fw fa-light fa-${icon}" 
         ${id ? `data-id="${id}"` : ""} 
         ${parentId ? `data-parent-id="${parentId}"` : ""} 
         ${actionAttr}
@@ -100,7 +106,7 @@ export default function registerUiHelpers() {
   );
 
   Handlebars.registerHelper(
-    "tcardOptions",
+    "blockOptions",
     function (
       optionsToggle,
       filterToggle,
@@ -145,7 +151,7 @@ export default function registerUiHelpers() {
       const tabDisplay = tab.charAt(0).toUpperCase() + tab.slice(1);
 
       return new Handlebars.SafeString(`
-      <div class="tcard-options-header">
+      <div class="teriock-block-options-header">
         <button
           class="${tab}-options-menu-toggle options-menu-toggle ${ttoggle(optionsToggle)}" 
           data-bool="${optionsToggle}"
@@ -187,7 +193,7 @@ export default function registerUiHelpers() {
         }
         
         <input
-          class="${tab}-search tcard-search"
+          class="${tab}-search teriock-block-search"
           type="text"
           placeholder="Search"
           data-type="${tab}"
@@ -210,7 +216,7 @@ export default function registerUiHelpers() {
       ${
         optionsToggle
           ? `
-        <div class="tcard-options-content">
+        <div class="teriock-block-options-content">
           <div class="tgrid g4">
             <div class="tgrid-item">
               <label for="${tab}-gapless">Gapless</label>
@@ -235,7 +241,7 @@ export default function registerUiHelpers() {
       ${
         sortToggle
           ? `
-        <div class="tcard-options-content">
+        <div class="teriock-block-options-content">
           <div class="tgrid g4">
             <div class="tgrid-item">
               <label for="${tab}-ascending">Ascending</label>

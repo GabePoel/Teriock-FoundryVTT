@@ -387,7 +387,7 @@ export default function CommonSheetMixin(Base) {
         });
         _setupEventListeners(this);
 
-        this.element.querySelectorAll(".tcard[data-uuid]").forEach(
+        this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(
           /** @param {HTMLElement} el */ (el) => {
             const uuid = el.dataset.uuid;
             fromUuid(uuid).then((doc) => doc.onEmbed(el));

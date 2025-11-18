@@ -44,7 +44,7 @@ export default class TeriockTextEditor extends TextEditor {
   static async makeTooltip(parts) {
     await this.enrichPanel(parts);
     return await foundry.applications.handlebars.renderTemplate(
-      systemPath("templates/message-templates/panel.hbs"),
+      systemPath("templates/ui-templates/panel.hbs"),
       parts,
     );
   }

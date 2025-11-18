@@ -12,13 +12,13 @@ import { TeriockContextMenu } from "../../../../ux/_module.mjs";
  * @returns {Promise<void>}
  */
 export default async function _connectEmbedded(document, element) {
-  const cards = element.querySelectorAll(".tcard");
+  const cards = element.querySelectorAll(".teriock-block");
   cards.forEach(
     /** @param {HTMLElement} target */ (target) => {
       if (target.classList.contains("macro-card")) {
         new TeriockContextMenu(
           target,
-          ".tcard",
+          ".teriock-block",
           [
             {
               name: "Unlink",

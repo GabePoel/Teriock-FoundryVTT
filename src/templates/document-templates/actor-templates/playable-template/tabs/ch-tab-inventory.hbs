@@ -1,0 +1,101 @@
+<div class="character-tab inventory">
+  <h1>Inventory</h1>
+  <div class="character-tab-page teriock-block-results" data-search-key="equipment">
+    {{!
+    <div class="teriock-block-display">
+      <div class="carrying-display">
+        <div class="carrying-bar">
+          <div class="carrying-grid carrying-progress">
+            <div class="carrying-cell"></div>
+            <div class="carrying-cell"></div>
+            <div class="carrying-cell"></div>
+          </div>
+        </div>
+        <div class="carrying-bar carrying-labels">
+          <div class="carrying-grid">
+            <div class="carrying-cell"><span class="tsubtle carrying-label">Light</span></div>
+            <div class="carrying-cell"><span class="tsubtle carrying-label">Heavy</span></div>
+            <div class="carrying-cell"><span class="tsubtle carrying-label">Max</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }}
+    <div class="teriock-block-display">
+      <div class="money-panels tgrid g3">
+        {{#each TERIOCK.options.currency as |currency id|}}
+          <div class="money-panel tgrid g4">
+            {{formInput
+              (path ../systemFields.money "fields" id)
+              value=(path ../system.money id)
+              classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+            }}
+            <div class="money-info tsubtle tcenter tgrid-item gi3">
+              <div class="money-name">
+                {{currency.name}}
+              </div>
+              <div class="money-value">
+                ({{currency.value}} ₲, {{currency.weight}} lb)
+              </div>
+            </div>
+          </div>
+        {{/each}}
+        <div class="money-panel tgrid g4">
+          {{formInput
+            systemFields.money.fields.debt
+            value=system.money.debt
+            classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+          }}
+          <div class="money-info tsubtle tcenter tgrid-item gi3">
+            <div class="money-name">
+              Debt
+            </div>
+            <div class="money-value">
+              (-1 ₲, {{system.interestRate}}% daily)
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="money-total {{#if (lt system.money.total 0)}}tred{{/if}}">
+        {{system.money.total}} ₲&nbsp;&nbsp;&nbsp;&nbsp;{{system.weight.money}} lb
+      </div>
+    </div>
+
+    <div class="teriock-block-display">
+      <div class="teriock-block-options">
+        {{blockOptions settings.menus.equipmentOptions settings.menus.equipmentFilters
+                               settings.menus.equipmentSort
+                               settings.equipmentFilters.search "equipment"
+                               sortOptions=TERIOCK.options.display.equipmentSortOrders
+                               sortValue=settings.equipmentSortOption
+                               addAction="createEquipment" key="equipment"}}
+        {{#if settings.menus.equipmentFilters}}
+          <div class="teriock-block-options-content">
+            {{> (template "document-templates/actor-templates/playable-template/filters/ch-equipment-filter.hbs")}}
+          </div>
+        {{/if}}
+      </div>
+
+      {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
+        docs=equipment
+        searchKey="equipment"
+        displayKey="equipment"
+        empty="equipment"
+      }}
+      <div class="teriock-block-display-divider"></div>
+      {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
+        docs=bodyParts
+        searchKey="equipment"
+        displayKey="equipment"
+        empty="body parts"
+      }}
+      <div class="teriock-block-display-divider"></div>
+      {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
+        docs=mounts
+        searchKey="equipment"
+        displayKey="equipment"
+        empty="mounts"
+      }}
+    </div>
+  </div>
+</div>

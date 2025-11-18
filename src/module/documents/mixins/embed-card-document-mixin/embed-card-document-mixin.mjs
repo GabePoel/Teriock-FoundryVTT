@@ -99,7 +99,7 @@ export default function EmbedCardDocumentMixin(Base) {
             embedContext.relative = options.relativeTo.uuid;
           }
           const html = await foundry.applications.handlebars.renderTemplate(
-            systemPath("templates/embed-templates/embed-card.hbs"),
+            systemPath("templates/ui-templates/block.hbs"),
             embedContext,
           );
           config.caption = false;
@@ -115,7 +115,7 @@ export default function EmbedCardDocumentMixin(Base) {
         if (menuEntries) {
           new TeriockContextMenu(
             element,
-            ".tcard",
+            ".teriock-block",
             this.cardContextMenuEntries,
             {
               eventName: "contextmenu",

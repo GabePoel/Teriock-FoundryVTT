@@ -98,13 +98,13 @@ export default (Base) =>
  */
 function protectionOptions(event, target) {
   const img = target.querySelector("img");
-  const tcard = target.closest(".tcard");
+  const block = target.closest(".teriock-block");
   const options = {
     advantage: event.altKey,
     disadvantage: event.shiftKey,
     wrappers: [
-      tcard?.querySelector(".tcard-title")?.textContent || "",
-      tcard?.querySelector(".tcard-subtitle")?.textContent || "",
+      block?.querySelector(".teriock-block-title")?.textContent || "",
+      block?.querySelector(".teriock-block-subtitle")?.textContent || "",
     ],
   };
   if (img?.src) {

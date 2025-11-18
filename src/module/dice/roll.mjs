@@ -5,7 +5,7 @@ const { Roll } = foundry.dice;
 /** @inheritDoc */
 export default class TeriockRoll extends Roll {
   /** @inheritDoc */
-  static CHAT_TEMPLATE = systemPath("templates/message-templates/roll.hbs");
+  static CHAT_TEMPLATE = systemPath("templates/ui-templates/roll.hbs");
 
   /**
    * @param {string} formula

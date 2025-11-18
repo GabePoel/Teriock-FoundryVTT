@@ -1,0 +1,94 @@
+<div class="character-sidebar">
+  <div class="character-sidebar-container">
+    <div class="character-intro-box">
+      <div
+        class="character-avatar timage {{#if
+          (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}ring{{/if}}"
+        data-src="{{img}}"
+      >
+        <div class="character-avatar-shadow">
+          <div class="character-avatar-buttons take-harm-button">
+            {{#if (eq avatarImagePath "prototypeToken.texture.src")}}
+              <div
+                class="thover"
+                data-tooltip="Ring {{#if document.prototypeToken.ring.enabled}}Enabled{{else}}Disabled{{/if}}"
+                data-action="toggleRing"
+              >
+                <i class="fa-fw fa-circle-{{#if document.prototypeToken.ring.enabled}}check{{else}}xmark{{/if}}
+              fa-light"></i>
+              </div>
+            {{/if}}
+            <div class="thover" data-tooltip="{{avatarTooltip}}" data-action="switchImage">
+              <i class="fa-fw {{avatarIcon}} fa-light"></i>
+            </div>
+          </div>
+        </div>
+        <img
+          class="character-avatar-img"
+          src="{{path document avatarImagePath}}"
+          data-edit="{{avatarImagePath}}"
+          data-action="editImage"
+          data-openable="true"
+          data-shareable="true"
+          alt="{{name}}"
+        >
+        <div class="character-avatar-background">
+          {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
+            <div class="character-avatar-token-circle inner"></div>
+            <div class="character-avatar-token-circle outer"></div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="character-name {{#if
+        (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}ring{{/if}}">
+        {{formInput
+          fields.name
+          value=name
+          classes="character-name-text"
+        }}
+      </div>
+      <div class="character-basics">
+        <div class="character-shortbox character-level-box">
+          {{formInput
+            systemFields.scaling.fields.lvl
+            value=system.scaling.lvl
+            classes="character-level-input character-shortbox-value"
+          }}
+          <div class="character-level-label character-shortbox-label">LVL</div>
+        </div>
+        <div class="character-shortbox character-rank-box"
+             data-tooltip="Scales off LVL">
+          {{numberInput
+            system.scaling.rank
+            class="character-fluency-input character-shortbox-value"
+            disabled=true
+          }}
+          <div class="character-class-label character-shortbox-label">RANK</div>
+        </div>
+        <div class="character-shortbox character-proficiency-box"
+             data-tooltip="{{#if system.scaling.brScale}}Scales
+             off BR ({{system.scaling.br}}){{else}}Scales off LVL{{/if}}">
+          {{numberInput
+            system.scaling.p
+            class="character-fluency-input character-shortbox-value"
+            disabled=true
+          }}
+          <div class="character-level-label character-shortbox-label">PRO</div>
+        </div>
+        <div class="character-shortbox character-fluency-box"
+             data-tooltip="{{#if system.scaling.brScale}}Scales
+             off BR ({{system.scaling.br}}){{else}}Scales off LVL{{/if}}">
+          {{numberInput
+            system.scaling.f
+            class="character-fluency-input character-shortbox-value"
+            disabled=true
+          }}
+          <div class="character-fluency-label character-shortbox-label">FLU</div>
+        </div>
+      </div>
+    </div>
+    {{> (template "document-templates/actor-templates/playable-template/parts/ch-status-box.hbs")}}
+    {{> (template "document-templates/actor-templates/playable-template/parts/ch-battle-box.hbs")}}
+    {{> (template "document-templates/actor-templates/playable-template/parts/ch-attribute-box.hbs")}}
+  </div>
+</div>

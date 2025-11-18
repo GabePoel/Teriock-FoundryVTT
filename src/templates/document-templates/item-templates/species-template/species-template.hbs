@@ -2,17 +2,17 @@
   {{#if (eq tab "overview")}}
     <div class="ab-sheet-everything">
       <div class="ab-sheet-top">
-        {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+        {{> (template "document-templates/shared/header.hbs")}}
         <div class="ab-bars">
-          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-stats-bar.hbs"}}
-          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-lifespan-bar.hbs"}}
-          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-size-bar.hbs"}}
+          {{> (template "document-templates/item-templates/species-template/bars/sp-stats-bar.hbs")}}
+          {{> (template "document-templates/item-templates/species-template/bars/sp-lifespan-bar.hbs")}}
+          {{> (template "document-templates/item-templates/species-template/bars/sp-size-bar.hbs")}}
         </div>
       </div>
-      {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-menu.hbs"}}
+      {{> (template "document-templates/item-templates/species-template/parts/sp-menu.hbs")}}
       <div class="ab-main">
         <div class="ab-tags-all">
-          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/tags/sp-traits-tags.hbs"}}
+          {{> (template "document-templates/item-templates/species-template/tags/sp-traits-tags.hbs")}}
         </div>
         {{formGroup
           systemFields.hpIncrease
@@ -57,14 +57,14 @@
           hidden=(not (exists system.description))
         }}
       </div>
-      {{> "systems/teriock/src/templates/document-templates/shared/effects.hbs"}}
+      {{> (template "document-templates/shared/effects.hbs")}}
       {{#if (and (or editable (exists bodyParts)) (exists document.actor))}}
         <div class="ab-main">
           {{#if editable}}
             <button class="createBodyPart" data-action="createBodyPart">Add Body Part
             </button>{{/if}}
           {{#each bodyParts as |doc|}}
-            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+            {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
               relative=../document.uuid))}}
           {{/each}}
         </div>
@@ -75,7 +75,7 @@
             <button class="createEquipment" data-action="createEquipment">Add Equipment
             </button>{{/if}}
           {{#each equipment as |doc|}}
-            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+            {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
               relative=../document.uuid))}}
           {{/each}}
         </div>
@@ -86,7 +86,7 @@
             <button class="createRank" data-action="createRank">Add Rank
             </button>{{/if}}
           {{#each ranks as |doc|}}
-            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+            {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
               relative=../document.uuid))}}
           {{/each}}
         </div>
@@ -94,6 +94,6 @@
     </div>
   {{/if}}
   {{#if (eq tab "impacts")}}
-    {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-impacts.hbs"}}
+    {{> (template "document-templates/item-templates/species-template/parts/sp-impacts.hbs")}}
   {{/if}}
 </div>

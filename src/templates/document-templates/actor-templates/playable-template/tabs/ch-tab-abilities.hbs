@@ -1,0 +1,24 @@
+<div class="character-tab abilities">
+  <h1>Abilities</h1>
+  <div class="character-tab-page teriock-block-results" data-search-key="abilities">
+    <div class="teriock-block-display">
+      <div class="teriock-block-options">
+        {{blockOptions settings.menus.abilityOptions settings.menus.abilityFilters settings.menus.abilitySort
+                               settings.abilityFilters.search "ability"
+                               sortOptions=TERIOCK.options.display.abilitySortOrders
+                               sortValue=settings.abilitySortOption showAddButton=false key="abilities"}}
+        {{#if settings.menus.abilityFilters}}
+          <div class="teriock-block-options-content">
+            {{> (template "document-templates/actor-templates/playable-template/filters/ch-ability-filter.hbs")}}
+          </div>
+        {{/if}}
+      </div>
+      {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
+        docs=abilities
+        searchKey="abilities"
+        displayKey="ability"
+        empty="abilities"
+      }}
+    </div>
+  </div>
+</div>

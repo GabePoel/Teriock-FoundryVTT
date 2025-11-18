@@ -1,0 +1,70 @@
+@use "../mixins" as mixins;
+
+.condition-toggle-container {
+  gap: 6px;
+}
+
+.condition-toggle {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-block-container-border);
+  border-radius: 6px;
+  box-shadow: 0 0 6px var(--color-block-shadow);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  height: 32px;
+  justify-content: left;
+  overflow: hidden;
+  padding: 3px;
+  position: relative;
+  width: 100%;
+
+  &.inactive {
+    background-color: rgba(255, 255, 255, 0.05);
+
+    * {
+      opacity: 50%;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+
+    &.inactive {
+      background-color: rgba(255, 255, 255, 0.075);
+    }
+
+    &::after {
+      bottom: 0;
+      box-shadow: inset 0 0 8px var(--color-block-hover-inset);
+      content: "";
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.1);
+
+    &.inactive {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    &::after {
+      box-shadow: inset 0 0 8px var(--color-block-active-inset);
+    }
+  }
+}
+
+.condition-image {
+  @include mixins.image-border;
+  height: 24px;
+  margin-right: 6px;
+  max-height: 24px;
+  max-width: 24px;
+  width: 24px;
+}

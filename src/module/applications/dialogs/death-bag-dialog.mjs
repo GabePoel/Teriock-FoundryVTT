@@ -154,7 +154,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         label: "Death Bag",
       };
       const pullContent = await foundry.applications.handlebars.renderTemplate(
-        systemPath("templates/message-templates/death-bag.hbs"),
+        systemPath("templates/ui-templates/death-bag.hbs"),
         context,
       );
       const panel = await TeriockTextEditor.enrichPanel(messageParts);

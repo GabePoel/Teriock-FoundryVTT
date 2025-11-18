@@ -1,7 +1,7 @@
 <div class="{{cssClass}} tsheet-page">
   <div class="ab-sheet-everything">
     <div class="ab-sheet-top">
-      {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+      {{> (template "document-templates/shared/header.hbs")}}
       <div class="ab-bars">
         {{#if
           (or
@@ -61,7 +61,7 @@
           </div>
         {{/if}}
       </div>
-      {{> "systems/teriock/src/templates/document-templates/item-templates/body-template/parts/bo-menu.hbs"}}
+      {{> (template "document-templates/item-templates/body-template/parts/bo-menu.hbs")}}
     </div>
     <div class="ab-main">
       <div class="ab-tags-all">
@@ -119,11 +119,11 @@
         {{#if editable}}
           <button class="createProperty" data-action="createProperty">Add Property</button>{{/if}}
         {{#each properties as |doc|}}
-          {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+          {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
             relative=../document.uuid))}}
         {{/each}}
       </div>
     {{/if}}
-    {{> "systems/teriock/src/templates/document-templates/shared/macros.hbs"}}
+    {{> (template "document-templates/shared/macros.hbs")}}
   </div>
 </div>

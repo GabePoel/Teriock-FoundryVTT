@@ -2,15 +2,15 @@
   {{#if (eq tab "overview")}}
     <div class="ab-sheet-everything">
       <div class="ab-sheet-top">
-        {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+        {{> (template "document-templates/shared/header.hbs")}}
         <div class="ab-bars">
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/bars/pr-status-bar.hbs"}}
+          {{> (template "document-templates/effect-templates/property-template/bars/pr-status-bar.hbs")}}
         </div>
       </div>
-      {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/parts/pr-menu.hbs"}}
+      {{> (template "document-templates/effect-templates/property-template/parts/pr-menu.hbs")}}
       <div class="ab-main">
         <div class="ab-tags-all">
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/tags/pr-tags.hbs"}}
+          {{> (template "document-templates/effect-templates/property-template/tags/pr-tags.hbs")}}
         </div>
         {{formGroup
           systemFields.limitation
@@ -38,7 +38,7 @@
           {{#if editable}}
             <button class="createProperty" data-action="createProperty">Add Child Property</button>{{/if}}
           {{#each subProperties as |doc|}}
-            {{> "systems/teriock/src/templates/embed-templates/embed-card.hbs" (merge doc.embedParts (object
+            {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
               relative=../document.uuid))}}
           {{/each}}
         </div>
@@ -46,6 +46,6 @@
     </div>
   {{/if}}
   {{#if (eq tab "impacts")}}
-    {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/parts/pr-impacts.hbs"}}
+    {{> (template "document-templates/effect-templates/property-template/parts/pr-impacts.hbs")}}
   {{/if}}
 </div>
