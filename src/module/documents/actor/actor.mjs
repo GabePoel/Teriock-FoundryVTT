@@ -562,6 +562,9 @@ export default class TeriockActor extends ParentDocumentMixin(
         this.system.conditionInformation.encumbered.reasons.add(
           "Cannot Carry More",
         );
+        this.system.conditionInformation.slowed.reasons.add(
+          "Heavily Encumbered",
+        );
         this.statuses.add("slowed");
       }
     }
