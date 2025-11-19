@@ -1,5 +1,5 @@
 import { rollButtons } from "../../constants/display/buttons.mjs";
-import { RollRollableTakeHandler } from "../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
+import handlers from "../../helpers/interaction/action-handler/_module.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
 const { fields } = foundry.data;
@@ -56,7 +56,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
     const statDie = this.actor.items.get(parentId)["system"][`${stat}Dice`][id];
     //noinspection JSUnresolvedReference
     if (this._forHarm) {
-      const takeHandler = new RollRollableTakeHandler(event, target);
+      const takeHandler = new handlers["roll-rollable-takes"](event, target);
       takeHandler.dataset = {
         type: "drain",
         formula: `${statDie.formula}`,
