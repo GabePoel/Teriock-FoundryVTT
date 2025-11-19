@@ -2,7 +2,7 @@ import { copyItem, getItem } from "../../helpers/fetch.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { pureUuid, ringImage, selectUser } from "../../helpers/utils.mjs";
 import {
-  BlankMixin,
+  BaseDocumentMixin,
   CommonDocumentMixin,
   ParentDocumentMixin,
 } from "../mixins/_module.mjs";
@@ -14,6 +14,7 @@ const { Actor } = foundry.documents;
  * The Teriock {@link Actor} implementation.
  * @extends {Actor}
  * @extends {ClientDocument}
+ * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ParentDocument
  * @property {Collection<Teriock.UUID<TeriockEffect>, TeriockEffect>} effects
@@ -26,7 +27,7 @@ const { Actor } = foundry.documents;
  * @property {TeriockBaseActorSheet} sheet
  */
 export default class TeriockActor extends ParentDocumentMixin(
-  CommonDocumentMixin(BlankMixin(Actor)),
+  CommonDocumentMixin(BaseDocumentMixin(Actor)),
 ) {
   /**
    * The default weight for a given size.

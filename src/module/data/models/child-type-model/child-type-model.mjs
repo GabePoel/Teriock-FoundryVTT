@@ -57,12 +57,6 @@ export default class ChildTypeModel extends CommonTypeModel {
 
   /** @inheritDoc */
   get cardContextMenuEntries() {
-    const entries = super.cardContextMenuEntries;
-    const deleteEntry = entries.find((e) => e.name === "Delete");
-    deleteEntry.condition = () =>
-      this.parent.isOwner &&
-      (this.parent.parent.sheet?.editable ||
-        (this.parent.parent.source && this.parent.source.sheet?.editable));
     return [
       {
         name: this.useText,
@@ -140,7 +134,6 @@ export default class ChildTypeModel extends CommonTypeModel {
           this.parent?.parent.sheet?.editable && this.parent.isOwner,
         group: "document",
       },
-      ...entries,
     ];
   }
 

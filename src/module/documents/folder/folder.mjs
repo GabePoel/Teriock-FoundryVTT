@@ -1,4 +1,4 @@
-import { BlankMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Folder } = foundry.documents;
 
@@ -7,8 +7,9 @@ const { Folder } = foundry.documents;
  * The Teriock {@link Folder} implementation.
  * @extends {ClientDocument}
  * @extends {Folder}
+ * @mixes BaseDocument
  */
-export default class TeriockFolder extends BlankMixin(Folder) {
+export default class TeriockFolder extends BaseDocumentMixin(Folder) {
   /**
    * Get all the entries recursively from a child node.
    * @param {FolderChildNode} node

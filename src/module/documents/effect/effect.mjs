@@ -1,6 +1,10 @@
 import { modifyChangePrefix, secondsToReadable } from "../../helpers/utils.mjs";
 import TeriockItem from "../item/item.mjs";
-import { ChildDocumentMixin, CommonDocumentMixin } from "../mixins/_module.mjs";
+import {
+  BaseDocumentMixin,
+  ChildDocumentMixin,
+  CommonDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
 
@@ -9,6 +13,7 @@ const { ActiveEffect } = foundry.documents;
  * The Teriock {@link ActiveEffect} implementation.
  * @extends {ActiveEffect}
  * @extends {ClientDocument}
+ * @mixes BaseDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
  * @property {Teriock.Documents.EffectModel} system
@@ -19,7 +24,7 @@ const { ActiveEffect } = foundry.documents;
  * @property {TeriockBaseEffectSheet} sheet
  */
 export default class TeriockEffect extends ChildDocumentMixin(
-  CommonDocumentMixin(ActiveEffect),
+  CommonDocumentMixin(BaseDocumentMixin(ActiveEffect)),
 ) {
   /** @inheritDoc */
   static migrateData(data) {

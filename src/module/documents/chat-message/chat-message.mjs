@@ -1,5 +1,5 @@
 import { systemPath } from "../../helpers/path.mjs";
-import { BlankMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { ChatMessage } = foundry.documents;
 
@@ -8,8 +8,9 @@ const { ChatMessage } = foundry.documents;
  * The Teriock {@link ChatMessage} implementation.
  * @extends {ChatMessage}
  * @extends {ClientDocument}
+ * @mixes BaseDocument
  */
-export default class TeriockChatMessage extends BlankMixin(ChatMessage) {
+export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
   /**
    * Whether the avatar image should be rescaled.
    * @returns {boolean}

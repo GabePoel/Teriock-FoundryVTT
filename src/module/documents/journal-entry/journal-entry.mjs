@@ -1,4 +1,7 @@
-import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
+import {
+  BaseDocumentMixin,
+  EmbedCardDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { JournalEntry } = foundry.documents;
 
@@ -7,12 +10,13 @@ const { JournalEntry } = foundry.documents;
  * The Teriock {@link JournalEntry} implementation.
  * @extends {JournalEntry}
  * @extends {ClientDocument}
+ * @mixes BaseDocument
  * @mixes EmbedCardDocument
  * @property {EmbeddedCollection<Teriock.ID<TeriockJournalEntryCategory>, TeriockJournalEntryCategory>} categories
  * @property {EmbeddedCollection<Teriock.ID<TeriockJournalEntryPage>, TeriockJournalEntryPage>} pages
  */
 export default class TeriockJournalEntry extends EmbedCardDocumentMixin(
-  JournalEntry,
+  BaseDocumentMixin(JournalEntry),
 ) {
   /** @inheritDoc */
   get embedParts() {

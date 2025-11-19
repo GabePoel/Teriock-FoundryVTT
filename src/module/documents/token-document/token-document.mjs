@@ -1,5 +1,8 @@
 import { convertUnits, makeIcon, ringImage } from "../../helpers/utils.mjs";
-import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
+import {
+  BaseDocumentMixin,
+  EmbedCardDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
 
@@ -9,9 +12,10 @@ const { TokenDocument } = foundry.documents;
  * @extends {TokenDocument}
  * @extends {ClientDocument}
  * @mixes EmbedCardDocument
+ * @mixes BaseDocument
  */
 export default class TeriockTokenDocument extends EmbedCardDocumentMixin(
-  TokenDocument,
+  BaseDocumentMixin(TokenDocument),
 ) {
   /** @inheritDoc */
   get cardContextMenuEntries() {

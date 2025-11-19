@@ -1,4 +1,4 @@
-import { BlankMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Scene } = foundry.documents;
 
@@ -7,6 +7,7 @@ const { Scene } = foundry.documents;
  * The Teriock {@link Scene} implementation.
  * @extends {ClientDocument}
  * @extends {Scene}
+ * @mixes BaseDocument
  * @property {Collection<Teriock.UUID<TeriockTokenDocument>, TeriockTokenDocument>} tokens
  */
-export default class TeriockScene extends BlankMixin(Scene) {}
+export default class TeriockScene extends BaseDocumentMixin(Scene) {}

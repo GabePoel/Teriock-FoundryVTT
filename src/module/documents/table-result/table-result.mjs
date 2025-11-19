@@ -1,5 +1,8 @@
 import { makeIcon } from "../../helpers/utils.mjs";
-import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
+import {
+  BaseDocumentMixin,
+  EmbedCardDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
 
@@ -8,9 +11,10 @@ const { TableResult } = foundry.documents;
  * @extends {TableResult}
  * @extends {ClientDocument}
  * @mixes EmbedCardDocument
+ * @mixes BaseDocument
  */
 export default class TeriockTableResult extends EmbedCardDocumentMixin(
-  TableResult,
+  BaseDocumentMixin(TableResult),
 ) {
   /** @inheritDoc */
   get cardContextMenuEntries() {

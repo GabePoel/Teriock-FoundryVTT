@@ -28,11 +28,6 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      get cardContextMenuEntries() {
-        return [...this.system.cardContextMenuEntries];
-      }
-
-      /** @inheritDoc */
       get embedActions() {
         return { ...super.embedActions, ...this.system.embedActions };
       }

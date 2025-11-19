@@ -1,6 +1,9 @@
 import { getItem } from "../../helpers/fetch.mjs";
 import { dedent, getActor, getToken, queryGM } from "../../helpers/utils.mjs";
-import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
+import {
+  BaseDocumentMixin,
+  EmbedCardDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
@@ -8,9 +11,12 @@ const { Macro } = foundry.documents;
  * The Teriock {@link Macro} implementation.
  * @extends {ClientDocument}
  * @extends {Macro}
+ * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
-export default class TeriockMacro extends EmbedCardDocumentMixin(Macro) {
+export default class TeriockMacro extends EmbedCardDocumentMixin(
+  BaseDocumentMixin(Macro),
+) {
   /**
    * Get a document from an actor.
    * @param {TeriockActor} actor - The actor to get the document from.

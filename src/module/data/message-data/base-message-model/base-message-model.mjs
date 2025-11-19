@@ -1,5 +1,4 @@
 import { bindCommonActions } from "../../../applications/shared/_module.mjs";
-import { BlankMixin } from "../../../documents/mixins/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
 import {
   associationsField,
@@ -9,7 +8,7 @@ import {
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
-export default class TeriockBaseMessageModel extends BlankMixin(TypeDataModel) {
+export default class TeriockBaseMessageModel extends TypeDataModel {
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}

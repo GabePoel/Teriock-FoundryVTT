@@ -55,19 +55,6 @@ export default class TeriockConditionModel extends TransformationDataMixin(
         condition: this.parent.isOwner,
         group: "usage",
       },
-      {
-        name: "Delete",
-        icon: makeIcon("trash", "contextMenu"),
-        callback: async () => {
-          await this.parent.parent.deleteEmbeddedDocuments(
-            this.parent.documentName,
-            [this.parent.id],
-          );
-        },
-        condition: () =>
-          this.parent.parent.sheet?.editable && this.parent.isOwner,
-        group: "document",
-      },
     ];
   }
 

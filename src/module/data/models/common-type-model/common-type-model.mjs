@@ -1,6 +1,5 @@
 import { TeriockJournalEntry } from "../../../documents/_module.mjs";
 import { copyItem, getAbility, getProperty } from "../../../helpers/fetch.mjs";
-import { makeIcon } from "../../../helpers/utils.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -57,17 +56,7 @@ export default class CommonTypeModel extends TypeDataModel {
    * @returns {Teriock.Foundry.ContextMenuEntry[]}
    */
   get cardContextMenuEntries() {
-    return [
-      {
-        name: "Delete",
-        icon: makeIcon("trash", "contextMenu"),
-        callback: async () => {
-          await this.deleteThis();
-        },
-        condition: () => this.parent.isOwner,
-        group: "document",
-      },
-    ];
+    return [];
   }
 
   /**

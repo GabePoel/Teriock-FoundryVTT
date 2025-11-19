@@ -1,5 +1,8 @@
 import { dotJoin } from "../../helpers/string.mjs";
-import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
+import {
+  BaseDocumentMixin,
+  EmbedCardDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { Combatant } = foundry.documents;
 
@@ -7,10 +10,11 @@ const { Combatant } = foundry.documents;
  * The Teriock {@link Combatant} implementation.
  * @extends {ClientDocument}
  * @extends {Combatant}
+ * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
 export default class TeriockCombatant extends EmbedCardDocumentMixin(
-  Combatant,
+  BaseDocumentMixin(Combatant),
 ) {
   /** @inheritDoc */
   get embedParts() {

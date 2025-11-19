@@ -2,7 +2,6 @@ import { bindCommonActions } from "../../../applications/shared/_module.mjs";
 import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
 import { toTitleCase } from "../../../helpers/string.mjs";
-import { makeIcon } from "../../../helpers/utils.mjs";
 
 /**
  * Mixin that provides support for embedding as a card.
@@ -13,33 +12,10 @@ export default function EmbedCardDocumentMixin(Base) {
   return (
     /**
      * @extends ClientDocument
+     * @mixes BaseDocument
      * @mixin
      */
     class EmbedCardDocument extends Base {
-      /**
-       * Context menu entries to display for cards that represent this document.
-       * @returns {Teriock.Foundry.ContextMenuEntry[]}
-       */
-      get cardContextMenuEntries() {
-        return [
-          {
-            name: "Open Parent",
-            icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
-            callback: async () => await this.parent.sheet.render(true),
-            condition: () => this.parent && this.parent.permission >= 2,
-          },
-          {
-            name: "Delete",
-            icon: makeIcon("trash", "contextMenu"),
-            callback: async () => {
-              await this.delete();
-            },
-            condition: () => this.isOwner,
-            group: "document",
-          },
-        ];
-      }
-
       /**
        * Actions that can fire from an embedded element representing this.
        * @returns {Record<string, function>}
@@ -78,14 +54,6 @@ export default function EmbedCardDocumentMixin(Base) {
           makeTooltip: false,
           openable: true,
         };
-      }
-
-      /**
-       * Can this be viewed?
-       * @returns {boolean}
-       */
-      get isViewer() {
-        return this.permission >= 2;
       }
 
       /** @inheritDoc */
@@ -146,10 +114,10 @@ export default function EmbedCardDocumentMixin(Base) {
                 event,
                 relative,
               );
-              if (relative && relative.permission >= 2) {
+              if (relative && relative.isViewer) {
                 await relative.sheet.render();
               }
-              if (relative?.parent && relative.permission >= 2) {
+              if (relative?.parent && relative.isViewer) {
                 await relative.parent.sheet.render();
               }
             }

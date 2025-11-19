@@ -1,4 +1,4 @@
-import { BlankMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
 
@@ -6,7 +6,8 @@ const { JournalEntryPage } = foundry.documents;
 /**
  * The Teriock {@link JournalEntry} implementation.
  * @extends {ClientDocument}
+ * @mixes BaseDocument
  */
-export default class TeriockJournalEntryPage extends BlankMixin(
+export default class TeriockJournalEntryPage extends BaseDocumentMixin(
   JournalEntryPage,
 ) {}

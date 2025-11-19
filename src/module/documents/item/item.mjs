@@ -1,4 +1,5 @@
 import {
+  BaseDocumentMixin,
   ChangeableDocumentMixin,
   ChildDocumentMixin,
   CommonDocumentMixin,
@@ -12,6 +13,7 @@ const { Item } = foundry.documents;
  * The Teriock {@link Item} implementation.
  * @extends {ClientDocument}
  * @extends {Item}
+ * @mixes BaseDocument
  * @mixes ChangeableDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
@@ -25,7 +27,9 @@ const { Item } = foundry.documents;
  * @property {TeriockBaseItemSheet} sheet
  */
 export default class TeriockItem extends ChangeableDocumentMixin(
-  ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))),
+  ParentDocumentMixin(
+    ChildDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(Item))),
+  ),
 ) {
   /** @inheritDoc */
   changesField = "itemChanges";

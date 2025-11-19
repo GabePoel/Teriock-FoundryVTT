@@ -1,5 +1,5 @@
 import { queryGM, selectUser } from "../../helpers/utils.mjs";
-import { BlankMixin } from "../mixins/_module.mjs";
+import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
 
@@ -8,9 +8,10 @@ const { Combat } = foundry.documents;
  * The Teriock {@link Combat} implementation.
  * @extends {ClientDocument}
  * @extends {Combat}
+ * @mixes BaseDocument
  * @property {Collection<Teriock.UUID<TeriockCombatant>, TeriockCombatant>} combatants
  */
-export default class TeriockCombat extends BlankMixin(Combat) {
+export default class TeriockCombat extends BaseDocumentMixin(Combat) {
   /**
    * The actors in this combat.
    * @returns {TeriockActor[]}

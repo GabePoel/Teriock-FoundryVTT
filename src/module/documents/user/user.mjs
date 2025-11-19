@@ -1,5 +1,8 @@
 import { makeIcon } from "../../helpers/utils.mjs";
-import { EmbedCardDocumentMixin } from "../mixins/_module.mjs";
+import {
+  BaseDocumentMixin,
+  EmbedCardDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
 
@@ -8,8 +11,11 @@ const { User } = foundry.documents;
  * The Teriock {@link User} implementation.
  * @extends {User}
  * @extends {ClientDocument}
+ * @mixes BaseDocument
  */
-export default class TeriockUser extends EmbedCardDocumentMixin(User) {
+export default class TeriockUser extends EmbedCardDocumentMixin(
+  BaseDocumentMixin(User),
+) {
   /** @inheritDoc */
   get cardContextMenuEntries() {
     return [
