@@ -20,17 +20,15 @@
                   Bonus
                 </div>
                 {{#each field.tradecrafts as |tradecraft name|}}
-                  <div class="tradecraft-container gi6 tgrid g6"
-                       data-tooltip-html="{{{escapeAttr (path @root/tradecraftTooltips name)}}}"
-                       data-tooltip-class="teriock teriock-rich-tooltip"
-                       data-make-tooltip="true"
-                       data-uuid="{{lookup @root/TERIOCK.system.uuids.tradecrafts name}}"
+                  <div class="tradecraft-container tgrid g6 gi6"
                     {{#if (and (not (eq ../name "Artisan")) (not (eq ../name "Scholar")))}}
                        data-tooltip-direction="RIGHT"
                     {{else}}
                        data-tooltip-direction="LEFT"
                        data-tooltip-left="true"
                     {{/if}}
+                       data-make-tooltip="true"
+                       data-uuid="{{lookup @root/TERIOCK.system.uuids.tradecrafts name}}"
                   >
 
                     <div class="tradecraft-panel-symbol ch-tradecraft-pro-box" data-action="quickToggle"
@@ -38,16 +36,16 @@
                          data-bool="{{path ../../system.tradecrafts name 'proficient'}}"
                          data-tooltip-direction="LEFT"
                     >
-                      {{{ifThen
-                        (path ../../system.tradecrafts name 'proficient')
-                        '<i class="thover fa-regular fa-circle-dot" data-tooltip="Proficient"></i>'
-                        '<i class="thover fa-regular fa-circle" data-tooltip="None"></i>'
-                      }}}
+                      {{#if (path ../../system.tradecrafts name 'proficient')}}
+                        <i class="thover fa-regular fa-circle-dot" data-tooltip="Proficient"></i>
+                      {{else}}
+                        <i class="thover fa-regular fa-circle" data-tooltip="Normal"></i>
+                      {{/if}}
                     </div>
                     <div class="tradecraft-panel-symbol thover" data-action="tradecraftExtra"
                          data-tradecraft="{{name}}" data-tooltip-direction="LEFT">
                       {{#if (eq (path ../../system.tradecrafts name 'extra') 0)}}
-                        <i class="thover fa-fw fa-regular fa-xmark" data-tooltip="None"></i>
+                        <i class="thover fa-fw fa-regular fa-xmark" data-tooltip="Normal"></i>
                       {{/if}}
                       {{#if (eq (path ../../system.tradecrafts name 'extra') 1)}}
                         <i class="thover fa-fw fa-regular fa-check" data-tooltip="Talented"></i>
