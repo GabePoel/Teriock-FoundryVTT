@@ -1,7 +1,11 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { getItem } from "../../../helpers/fetch.mjs";
-import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
-import { formulaExists } from "../../../helpers/utils.mjs";
+import {
+  dotJoin,
+  formulaExists,
+  prefix,
+  suffix,
+} from "../../../helpers/string.mjs";
 import {
   ArmamentDataMixin,
   AttunableDataMixin,

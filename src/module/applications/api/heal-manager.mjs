@@ -1,4 +1,4 @@
-import handlers from "../../helpers/interaction/action-handler/_module.mjs";
+import { actionHandlers } from "../../helpers/interaction/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
@@ -63,16 +63,17 @@ export default class TeriockHealManager extends TeriockStatManager {
       /** @type {StatDieModel} */ item.system.statDice[stat].dice[
         Number(index)
       ];
-    //noinspection JSUnresolvedReference
     if (this._forHarm) {
-      const takeHandler = new handlers["roll-rollable-takes"](event, target);
+      const takeHandler = new actionHandlers["roll-rollable-takes"](
+        event,
+        target,
+      );
       takeHandler.dataset = {
         type: "damage",
         formula: `${statDie.formula}[holy]`,
       };
       await takeHandler.secondaryAction();
     } else {
-      //noinspection JSUnresolvedReference
       await statDie.use(this._consumeStatDice);
     }
   }

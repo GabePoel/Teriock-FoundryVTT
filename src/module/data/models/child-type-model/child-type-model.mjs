@@ -43,7 +43,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         hint: "The font to be used for this document's name on its sheet and in chat messages.",
       }),
       description: new TextField({
-        initial: "<p>None.</p>",
+        initial: "",
         label: "Description",
       }),
     });

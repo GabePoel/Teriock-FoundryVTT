@@ -22,7 +22,7 @@ export default class TeriockPowerModel extends TeriockBaseItemModel {
         label: "Power Type",
       }),
       flaws: new TextField({
-        initial: "<p>None.</p>",
+        initial: "",
         label: "Flaws",
       }),
       proficient: new fields.BooleanField({

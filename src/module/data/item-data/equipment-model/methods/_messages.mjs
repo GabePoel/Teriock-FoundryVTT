@@ -1,4 +1,4 @@
-import { formulaExists } from "../../../../helpers/utils.mjs";
+import { formulaExists } from "../../../../helpers/string.mjs";
 
 /**
  * Generates message parts for a piece of equipment.

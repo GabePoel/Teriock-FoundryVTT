@@ -1,6 +1,6 @@
-import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { TeriockChatMessage } from "../../_module.mjs";
+import PanelDocumentMixin from "../panel-document-mixin/panel-document-mixin.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
 import ChildDocumentHierarchyPart from "./parts/child-document-hierarchy-part.mjs";
 
@@ -17,8 +17,11 @@ export default function ChildDocumentMixin(Base) {
      * @implements {ChildDocumentMixinInterface}
      * @extends {ClientDocument}
      * @extends {ChildDocumentHierarchyPart}
+     * @mixes PanelDocument
      */
-    class ChildDocument extends ChildDocumentHierarchyPart(Base) {
+    class ChildDocument extends ChildDocumentHierarchyPart(
+      PanelDocumentMixin(Base),
+    ) {
       //noinspection ES6ClassMemberInitializationOrder
       overrides = this.overrides ?? {};
 
@@ -29,6 +32,16 @@ export default function ChildDocumentMixin(Base) {
           fluent = true;
         }
         return fluent;
+      }
+
+      /** @inheritDoc */
+      async toMessage(options = {}) {
+        const data = { doc: this.parent };
+        await this.hookCall("documentChat", data);
+        if (data.cancel) {
+          return;
+        }
+        return await super.toMessage(options);
       }
 
       /** @inheritDoc */
@@ -128,6 +141,11 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
+      async roll(options = {}) {
+        await this.toMessage(options);
+      }
+
+      /** @inheritDoc */
       async chatImage() {
         const img = this.img;
         if (img) {
@@ -183,65 +201,13 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      async roll(options = {}) {
-        await this.toMessage(options);
-      }
-
-      /** @inheritDoc */
-      async toMessage(options = {}) {
-        const data = { doc: this.parent };
-        await this.hookCall("documentChat", data);
-        if (data.cancel) {
-          return;
-        }
-        const panel = await this.toPanel();
-        const actor =
-          options?.actor ||
-          this.actor ||
-          TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
-        const messageData = {
-          speaker: TeriockChatMessage.getSpeaker({
-            actor: actor,
-          }),
-          system: {
-            avatar: actor?.img,
-            bars: [],
-            blocks: [],
-            buttons: [],
-            extraContent: "",
-            panels: [panel],
-            source: null,
-            tags: [],
-          },
-        };
-        TeriockChatMessage.applyRollMode(
-          messageData,
-          game.settings.get("core", "rollMode"),
-        );
-        await TeriockChatMessage.create(messageData);
-      }
-
-      /** @inheritDoc */
-      async toPanel() {
-        let parts = this.system.messageParts;
-        // If this is part of a preview, it won't have a real UUID.
-        if (this.getFlag("teriock", "previewUuid")) {
-          const doc = await fromUuid(this.getFlag("teriock", "previewUuid"));
-          if (doc) {
-            parts = doc.system.messageParts;
-          }
-        }
-        return await TeriockTextEditor.enrichPanel(parts);
-      }
-
-      /** @inheritDoc */
-      async toTooltip() {
-        return await TeriockTextEditor.makeTooltip(this.system.messageParts);
-      }
-
-      /** @inheritDoc */
       async use(options = {}) {
         await this.system.use(options);
+      }
+
+      /** @inheritDoc */
+      get messageParts() {
+        return this.system.messageParts;
       }
 
       /** @inheritDoc */

@@ -5,7 +5,7 @@ author: teriockBuilder00
 img: systems/teriock/src/icons/documents/property.svg
 scope: global
 command: |-
-  const propertiesPack = game.teriock.packs.properties();
+  const propertiesPack = game.teriock.packs.properties;
 
   const progress = ui.notifications.info(`Pulling all properties from wiki.`, {
     progress: true,
@@ -22,7 +22,7 @@ command: |-
         { pack: "teriock.properties" },
       );
     } else {
-      propertyItem = await foundry.utils.fromUuid(propertyItem.uuid);
+      propertyItem = await fromUuid(propertyItem.uuid);
     }
     let propertyEffect = propertyItem.properties.find(
       (a) => a.name === propertyName,
@@ -31,6 +31,7 @@ command: |-
     if (!propertyEffect) {
       propertyEffect = await tm.create.property(propertyItem, propertyName, {
         notify: false,
+        fromWiki: true,
       });
     } else {
       await propertyEffect.system.wikiPull({ notify: false });

@@ -1,5 +1,5 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import { formulaExists } from "../../../../helpers/utils.mjs";
+import { formulaExists } from "../../../../helpers/string.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base

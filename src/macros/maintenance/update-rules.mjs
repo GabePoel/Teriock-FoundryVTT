@@ -76,13 +76,15 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
     let journalPage = rulesJournal.pages.getName(rulesName);
 
     if (!journalPage) {
-      await rulesJournal.createEmbeddedDocuments("JournalEntryPage", [
-        {
-          name: rulesName,
-          type: "text",
-          text: { content: html },
-        },
-      ]);
+      journalPage = (
+        await rulesJournal.createEmbeddedDocuments("JournalEntryPage", [
+          {
+            name: rulesName,
+            type: "text",
+            text: { content: html },
+          },
+        ])
+      )[0];
       console.log(`Created: ${namespace}:${rulesName}`);
     } else {
       await journalPage.update({
@@ -90,6 +92,59 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
       });
       console.log(`Updated: ${namespace}:${rulesName}`);
     }
+
+    if (namespace === "Tradecraft") {
+      await journalPage.setFlag(
+        "teriock",
+        "journalImage",
+        tm.path.getImage("tradecrafts", journalPage.name),
+      );
+      await journalPage.setFlag(
+        "teriock",
+        "journalIcon",
+        TERIOCK.options.document.fluency.icon,
+      );
+    } else if (namespace === "Core") {
+      if (
+        [
+          "Movement",
+          "Intelligence",
+          "Perception",
+          "Sneak",
+          "Strength",
+          "Presence",
+        ].includes(journalPage.name)
+      ) {
+        let iconName = journalPage.name;
+        if (iconName === "Presence") {
+          iconName = "Unused Presence";
+        }
+        await journalPage.setFlag(
+          "teriock",
+          "journalImage",
+          tm.path.getImage("attributes", iconName),
+        );
+        await journalPage.setFlag("teriock", "journalIcon", "star");
+      } else if (namespace === "Damage") {
+        await journalPage.setFlag(
+          "teriock",
+          "journalImage",
+          tm.path.getImage("damage-types", journalPage.name),
+        );
+        await journalPage.setFlag("teriock", "journalIcon", "droplet-slash");
+      } else if (namespace === "Drain") {
+        await journalPage.setFlag(
+          "teriock",
+          "journalImage",
+          tm.path.getImage("drain-types", journalPage.name),
+        );
+        await journalPage.setFlag("teriock", "journalIcon", "heart-crack");
+      } else {
+        await journalPage.unsetFlag("teriock", "journalImage");
+        await journalPage.unsetFlag("teriock", "journalIcon");
+      }
+    }
+
     let pages = 0;
     const toUpdate = [];
     for (const page of rulesJournal.pages.contents.sort((a, b) =>

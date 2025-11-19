@@ -8,6 +8,7 @@ const { SearchFilter } = foundry.applications.ux;
 /**
  * @extends {ApplicationV2}
  * @mixes HandlebarsApplicationMixin
+ * @property {Function} _finish
  */
 export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   ApplicationV2,
@@ -71,7 +72,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
    */
   static async _cancel(event) {
     event?.preventDefault();
-    // noinspection JSUnresolvedReference
     this._finish(this.multi ? [] : null);
     await this.close();
   }
@@ -95,7 +95,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
         ids = [radio.value];
       }
     }
-    // noinspection JSUnresolvedReference
     this._finish(ids);
     await this.close();
   }

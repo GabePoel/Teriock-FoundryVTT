@@ -1,6 +1,6 @@
 import { rollButtons } from "../../constants/display/buttons.mjs";
-import handlers from "../../helpers/interaction/action-handler/_module.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
+import { actionHandlers } from "../../helpers/interaction/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -54,9 +54,11 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
     const stat = target.dataset.stat;
     /** @type {StatDieModel} */
     const statDie = this.actor.items.get(parentId)["system"][`${stat}Dice`][id];
-    //noinspection JSUnresolvedReference
     if (this._forHarm) {
-      const takeHandler = new handlers["roll-rollable-takes"](event, target);
+      const takeHandler = new actionHandlers["roll-rollable-takes"](
+        event,
+        target,
+      );
       takeHandler.dataset = {
         type: "drain",
         formula: `${statDie.formula}`,
@@ -64,8 +66,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       await takeHandler.secondaryAction();
     } else {
       let criticallyWounded = this.actor.statuses.has("criticallyWounded");
-      //noinspection JSUnresolvedReference
-      await statDie.rollStatDie(this._consumeStatDice);
+      await statDie.use(this._consumeStatDice);
       if (!criticallyWounded) {
         await this.actor.system.takeAwaken();
       }

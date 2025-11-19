@@ -1,6 +1,4 @@
-import { attributePanel } from "../../../../../helpers/html.mjs";
 import { makeCommonRollOptions } from "../../../../../helpers/utils.mjs";
-import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 export default (Base) =>
   class RollingActorSheetPart extends Base {
@@ -76,16 +74,6 @@ export default (Base) =>
     static async _rollResistance(event, target) {
       const options = protectionOptions(event, target);
       await this.actor.system.rollResistance(options);
-    }
-
-    async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      context.attributeTooltips = {};
-      for (const attribute of Object.keys(TERIOCK.index.attributes)) {
-        context.attributeTooltips[attribute] =
-          await TeriockTextEditor.makeTooltip(await attributePanel(attribute));
-      }
-      return context;
     }
   };
 

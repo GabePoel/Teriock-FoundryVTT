@@ -23,7 +23,8 @@
                   <div class="tradecraft-container gi6 tgrid g6"
                        data-tooltip-html="{{{escapeAttr (path @root/tradecraftTooltips name)}}}"
                        data-tooltip-class="teriock teriock-rich-tooltip"
-                       data-rich-tooltip="true"
+                       data-make-tooltip="true"
+                       data-uuid="{{lookup @root/TERIOCK.system.uuids.tradecrafts name}}"
                     {{#if (and (not (eq ../name "Artisan")) (not (eq ../name "Scholar")))}}
                        data-tooltip-direction="RIGHT"
                     {{else}}
@@ -77,7 +78,7 @@
     <div class="teriock-block-display">
       <div class="teriock-block-options">
         {{blockOptions settings.menus.fluencyOptions null null settings.fluencyFilters.search "fluency"
-                               key="fluencies" addAction="createFluency"}}
+                       key="fluencies" addAction="createFluency"}}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
         docs=fluencies

@@ -171,7 +171,7 @@ export async function _parse(rankData, rawHTML) {
   const parameters = {
     maxAv: metaData.getAttribute("data-av"),
     archetype: metaData.getAttribute("data-archetype"),
-    flaws: getHTML(".class-flaws") || "None.",
+    flaws: getHTML(".class-flaws") || "",
     description: getHTML(".class-description") || "",
     statDice: {
       hp: {

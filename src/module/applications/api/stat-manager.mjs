@@ -9,6 +9,8 @@ const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
  * @mixes HackStatApplication
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
+ * @property {boolean} _consumeStatDice
+ * @property {boolean} _forHarm
  */
 export default class TeriockStatManager extends HackStatMixin(
   HandlebarsApplicationMixin(ApplicationV2),

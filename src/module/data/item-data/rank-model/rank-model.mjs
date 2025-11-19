@@ -41,7 +41,7 @@ export default class TeriockRankModel extends StatGiverDataMixin(
         label: "Description",
       }),
       flaws: new TextField({
-        initial: "<p>None.</p>",
+        initial: "",
         label: "Flaws",
       }),
       archetype: new fields.StringField({

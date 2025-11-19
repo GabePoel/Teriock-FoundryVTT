@@ -643,23 +643,6 @@ export async function folderContents(folder, options = {}) {
 }
 
 /**
- * Check if a formula would exist.
- * @param {string|number} formula
- * @returns {boolean}
- */
-export function formulaExists(formula) {
-  if (!formula) {
-    return false;
-  }
-  if (typeof formula === "string") {
-    formula = formula.trim();
-    return Boolean(formula.length > 0 && formula !== "0");
-  } else {
-    return Boolean(formula);
-  }
-}
-
-/**
  * Helper function to send a query to the active GM if there is one.
  * @param {Teriock.QueryData.QueryName} queryName
  * @param {object} queryData

@@ -152,9 +152,9 @@
   --panel-padding: 4px;
 }
 [role=tooltip] .teriock-panel {
-  padding: 4px;
   background: none;
   border: none;
+  padding: 4px;
   width: 300px;
 }
 [role=tooltip] .teriock-panel .teriock-panel-header {
@@ -390,6 +390,25 @@
   font-size: smaller;
   text-align: left;
   user-select: none;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-text h1, .teriock-panel .teriock-panel-block .teriock-panel-block-text h2, .teriock-panel .teriock-panel-block .teriock-panel-block-text h3, .teriock-panel .teriock-panel-block .teriock-panel-block-text h4, .teriock-panel .teriock-panel-block .teriock-panel-block-text h5, .teriock-panel .teriock-panel-block .teriock-panel-block-text h6 {
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  font-size: smaller;
+  border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
+  font-size: smaller;
+  margin: 10px 0 2px;
+  padding: 10px 0 0;
+  font-style: normal;
+  font-weight: unset;
+  text-transform: uppercase;
+  font-family: unset;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-text h1 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h2 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h3 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h4 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h5 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h6 + p {
+  margin-top: 0;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-text .design-note {
+  display: none;
 }
 .teriock-panel .teriock-panel-block .teriock-panel-block-text {
   text-align: left;
@@ -4874,29 +4893,31 @@ table {
 .teriock .message-content .es-mask-container {
   display: none;
 }
-.teriock .overlay.elder-sorcery, .teriock .es-mask-rotator {
+.teriock .overlay.elder-sorcery,
+.teriock .es-mask-rotator {
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
+  left: 0;
   opacity: 0.5;
   pointer-events: none;
-}
-.teriock .overlay.elder-sorcery::before, .teriock .es-mask-rotator::before {
-  content: "";
   position: absolute;
-  inset: 0;
-  background-image: url("../src/assets/spell-circle.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+  top: 0;
+  width: 100%;
+}
+.teriock .overlay.elder-sorcery::before,
+.teriock .es-mask-rotator::before {
   animation: spin 120s linear infinite;
-  z-index: 0;
+  background-image: url("../src/assets/spell-circle.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
   filter: contrast(0);
-  width: 150%;
   height: 200%;
+  inset: 0;
+  position: absolute;
+  width: 150%;
+  z-index: 0;
 }
 .teriock .collapse .es-mask-rotator::before {
   opacity: 0;
@@ -5092,13 +5113,18 @@ table {
   max-width: 24px;
   width: 24px;
 }
-.teriock .italic-display-field .form-fields, .teriock .italic-display-field .teriock-panel-block-text {
+.teriock .italic-display-field .form-fields,
+.teriock .italic-display-field .teriock-panel-block-text {
   font-style: italic;
 }
-.teriock .faded-display-field .ab-section, .teriock .faded-display-field .form-fields, .teriock .faded-display-field .teriock-panel-block-title, .teriock .faded-display-field .teriock-panel-block-text {
+.teriock .faded-display-field .ab-section,
+.teriock .faded-display-field .form-fields,
+.teriock .faded-display-field .teriock-panel-block-title,
+.teriock .faded-display-field .teriock-panel-block-text {
   opacity: 0.5;
 }
-.teriock .elder-sorcery-display-field .form-fields, .teriock .elder-sorcery-display-field .teriock-panel-block-text {
+.teriock .elder-sorcery-display-field .form-fields,
+.teriock .elder-sorcery-display-field .teriock-panel-block-text {
   font-family: "Quintessential", serif;
 }
 

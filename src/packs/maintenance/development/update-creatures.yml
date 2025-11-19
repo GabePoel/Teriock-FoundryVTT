@@ -6,9 +6,9 @@ author: teriockBuilder00
 img: systems/teriock/src/icons/documents/creature.svg
 scope: global
 command: >-
-  const speciesCompendium = game.teriock.packs.species();
+  const speciesCompendium = game.teriock.packs.species;
 
-  const creatureCompendium = game.teriock.packs.creatures();
+  const creatureCompendium = game.teriock.packs.creatures;
 
 
   const allSpecies = speciesCompendium.index.contents;
@@ -36,9 +36,7 @@ command: >-
 
 
   for (const folderEntry of speciesFolders.values()) {
-    const speciesFolder = /** @type {TeriockFolder} */ await fromUuid(
-      folderEntry.uuid,
-    );
+    const speciesFolder = await fromUuid(folderEntry.uuid);
     if (speciesFolder.folder) {
       const parentFolderName = speciesFolder.folder.name;
       const parentFolderId = creaturesFolders.getName(parentFolderName).id;
@@ -67,7 +65,7 @@ command: >-
     speciesFolders,
     creaturesFolders,
   ) {
-    const species = /** @type {TeriockSpecies} */ await foundry.utils.fromUuid(
+    const species = /** @type {TeriockSpecies} */ await fromUuid(
       speciesEntry.uuid,
     );
     const creatureEntry = allCreatures.find((c) => c.name === speciesEntry.name);
@@ -86,7 +84,7 @@ command: >-
         { pack: "teriock.creatures" },
       );
     } else {
-      creature = await foundry.utils.fromUuid(creatureEntry.uuid);
+      creature = await fromUuid(creatureEntry.uuid);
     }
     const mechanics = creature.items.filter((i) => i.type === "mechanic");
     const mechanicIds = mechanics.map((m) => m.id);

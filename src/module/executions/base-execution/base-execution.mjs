@@ -1,7 +1,8 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { addFormula } from "../../helpers/formula.mjs";
-import { formulaExists, getActor } from "../../helpers/utils.mjs";
+import { formulaExists } from "../../helpers/string.mjs";
+import { getActor } from "../../helpers/utils.mjs";
 
 export default class BaseExecution {
   /**

@@ -1,6 +1,3 @@
-import { tradecraftPanel } from "../../../../../helpers/html.mjs";
-import { TeriockTextEditor } from "../../../../ux/_module.mjs";
-
 export default (Base) =>
   class TradecraftsActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
@@ -43,16 +40,5 @@ export default (Base) =>
       await this.document.update({
         [`system.tradecrafts.${tradecraft}.extra`]: newExtra,
       });
-    }
-
-    async _prepareContext(options = {}) {
-      const context = await super._prepareContext(options);
-      context.tradecraftTooltips = {};
-      for (const tc of Object.keys(TERIOCK.index.tradecrafts)) {
-        context.tradecraftTooltips[tc] = await TeriockTextEditor.makeTooltip(
-          await tradecraftPanel(tc),
-        );
-      }
-      return context;
     }
   };

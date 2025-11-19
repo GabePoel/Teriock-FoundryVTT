@@ -1,5 +1,5 @@
 import { addFormula } from "../../../helpers/formula.mjs";
-import { formulaExists } from "../../../helpers/utils.mjs";
+import { formulaExists } from "../../../helpers/string.mjs";
 
 /**
  * Mixin for executions involving a d20 roll.

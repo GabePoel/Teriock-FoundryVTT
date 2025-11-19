@@ -6,7 +6,7 @@ author: teriockBuilder00
 img: systems/teriock/src/icons/documents/body.svg
 scope: global
 command: |-
-  const bodyPack = game.teriock.packs.bodyParts();
+  const bodyPack = game.teriock.packs.bodyParts;
 
   foundry.ui.notifications.info("Pulling all body parts from wiki.");
 
@@ -21,7 +21,7 @@ command: |-
         { pack: "teriock.bodyParts" },
       );
     } else {
-      bodyItem = await foundry.utils.fromUuid(bodyItem.uuid);
+      bodyItem = await fromUuid(bodyItem.uuid);
     }
     await bodyItem.system.wikiPull({ notify: false });
     await bodyItem.update({ "system.description": "" });
