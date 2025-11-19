@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { getItem } from "../../../../helpers/fetch.mjs";
-import { queryGM } from "../../../../helpers/utils.mjs";
+import { makeIconClass, queryGM } from "../../../../helpers/utils.mjs";
 
 const { ux } = foundry.applications;
 
@@ -88,7 +88,7 @@ export default (Base) => {
               content: content,
               modal: false,
               window: {
-                icon: "fa-solid fa-magnifying-glass",
+                icon: makeIconClass("magnifying-glass", "title"),
                 title: "Read Magic",
               },
             });

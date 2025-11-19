@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { TeriockDialog } from "../../../api/_module.mjs";
 
 /**
@@ -18,12 +19,12 @@ export default function IndexButtonSheetMixin(Base) {
       window: {
         controls: [
           {
-            icon: "fa-solid fa-book-atlas",
+            icon: makeIconClass("book-atlas", "contextMenu"),
             label: "Soft Index Refresh",
             action: "refreshIndexThisSoft",
           },
           {
-            icon: "fa-solid fa-book-copy",
+            icon: makeIconClass("book-copy", "contextMenu"),
             label: "Hard Index Refresh",
             action: "refreshIndexThisHard",
           },

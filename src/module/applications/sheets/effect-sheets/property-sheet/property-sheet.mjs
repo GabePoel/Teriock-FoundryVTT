@@ -1,5 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { propertySort } from "../../../../helpers/utils.mjs";
+import { makeIconClass, propertySort } from "../../../../helpers/utils.mjs";
 import {
   PassiveSheetMixin,
   WikiButtonSheetMixin,
@@ -26,7 +26,7 @@ export default class TeriockPropertySheet extends WikiButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["property"],
     window: {
-      icon: "fa-solid fa-" + documentOptions.property.icon,
+      icon: makeIconClass(documentOptions.property.icon, "title"),
     },
   };
 

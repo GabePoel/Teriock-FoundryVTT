@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
 import { IndexButtonSheetMixin } from "../_module.mjs";
@@ -67,7 +68,7 @@ export default function CommonSheetMixin(Base) {
           resizable: true,
           controls: [
             {
-              icon: "fa-solid fa-rotate-right",
+              icon: makeIconClass("rotate-right", "contextMenu"),
               label: "Reload Sheet",
               action: "reloadThis",
             },

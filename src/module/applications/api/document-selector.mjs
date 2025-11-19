@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { bindCommonActions } from "../shared/_module.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -22,7 +23,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
       cancel: this._cancel,
     },
     window: {
-      icon: "fa-solid fa-circle-check",
+      icon: makeIconClass("circle-check", "title"),
       title: "Select Document",
       resizable: true,
     },

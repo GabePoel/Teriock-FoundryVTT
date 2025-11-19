@@ -1,4 +1,5 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const { fields } = foundry.data;
@@ -67,11 +68,11 @@ export default async function boostDialog(rollFormula, options = {}) {
             formula = `sb(${formula}, ${setboostNumber})`;
           }
         },
-        icon: "fas fa-dice",
+        icon: makeIconClass("dice", "title"),
         label: label,
       },
       window: {
-        icon: "fas fa-dice",
+        icon: makeIconClass("dice", "title"),
         title: "Modify Roll Formula",
       },
     });

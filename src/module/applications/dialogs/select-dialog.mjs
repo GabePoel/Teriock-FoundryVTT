@@ -3,6 +3,7 @@
 import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 import { selectDocumentDialog } from "./select-document-dialog.mjs";
@@ -63,7 +64,7 @@ export async function selectDialog(choices, options = {}) {
   if (!other) {
     return await TeriockDialog.prompt({
       window: {
-        icon: "fa-solid fa-circle-check",
+        icon: makeIconClass("circle-question", "title"),
         title,
       },
       modal: true,
@@ -86,7 +87,7 @@ export async function selectDialog(choices, options = {}) {
 
   return await TeriockDialog.prompt({
     window: {
-      icon: "fa-solid fa-circle-check",
+      icon: makeIconClass("circle-question", "title"),
       title,
     },
     modal: true,
@@ -108,7 +109,7 @@ export async function selectDialog(choices, options = {}) {
 
           return await TeriockDialog.prompt({
             window: {
-              icon: "fa-solid fa-circle-check",
+              icon: makeIconClass("circle-question", "title"),
               title,
             },
             modal: true,

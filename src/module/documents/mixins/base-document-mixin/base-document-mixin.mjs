@@ -25,11 +25,11 @@ export default function BaseDocumentMixin(Base) {
         entries.push(
           ...[
             {
-              name: "Open Parent",
+              name: "Open Source",
               icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
-              callback: async () => await this.parent.sheet.render(true),
-              condition: () => this.parent && this.parent.permission >= 2,
-              group: "document",
+              callback: async () => await this.source.sheet.render(true),
+              condition: () => this.source?.isViewer,
+              group: "open",
             },
             {
               name: "Delete",
@@ -49,6 +49,13 @@ export default function BaseDocumentMixin(Base) {
        */
       get isViewer() {
         return this.permission >= 2;
+      }
+
+      /**
+       * The document this descends from, either determined by Foundry or the system.
+       */
+      get source() {
+        return this.parent;
       }
 
       /**

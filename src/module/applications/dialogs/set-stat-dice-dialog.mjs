@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 /**
@@ -60,11 +61,11 @@ export default async function setStatDiceDialog(pool) {
           });
         }
       },
-      icon: "fas fa-check",
+      icon: makeIconClass("check", "button"),
       label: "Confirm",
     },
     window: {
-      icon: "fas fa-dice",
+      icon: makeIconClass("dice", "title"),
       title: `Set ${pool.dieName}`,
     },
   });

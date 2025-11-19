@@ -1,5 +1,6 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -22,7 +23,7 @@ export default async function inCombatExpirationDialog(
     expire = await TeriockDialog.confirm({
       window: {
         title: `${effect.system.nameString} Expiration`,
-        icon: "fa-solid fa-circle-question",
+        icon: makeIconClass("circle-question", "title"),
       },
       content: `Should ${effect.system.nameString} expire?`,
       modal: true,
@@ -71,7 +72,7 @@ export default async function inCombatExpirationDialog(
       await new TeriockDialog({
         window: {
           title: `${effect.name} Expiration`,
-          icon: "fa-solid fa-dice-d4",
+          icon: makeIconClass("dice-d4", "title"),
         },
         content: contentHtml,
         buttons: [

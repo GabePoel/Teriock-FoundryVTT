@@ -1,3 +1,5 @@
+import { makeIconClass } from "../../../../helpers/utils.mjs";
+
 /**
  * @param {typeof DocumentSheetV2} Base
  * @constructor
@@ -12,7 +14,7 @@ export default function UseButtonSheetMixin(Base) {
       window: {
         controls: [
           {
-            icon: "fa-solid fa-dice",
+            icon: makeIconClass("dice", "contextMenu"),
             label: "Use This",
             action: "rollThis",
           },

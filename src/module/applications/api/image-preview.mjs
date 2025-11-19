@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { imageContextMenuOptions } from "../shared/_module.mjs";
 import { TeriockContextMenu } from "../ux/_module.mjs";
 
@@ -20,7 +21,7 @@ export default class TeriockImagePreviewer extends HandlebarsApplicationMixin(
   static DEFAULT_OPTIONS = {
     classes: ["teriock", "image-preview"],
     window: {
-      icon: "fa-solid fa-image",
+      icon: makeIconClass("image", "title"),
       title: "Image Preview",
       resizable: true,
     },

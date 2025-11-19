@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { WikiButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
@@ -24,7 +25,7 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["rank"],
     window: {
-      icon: "fa-solid fa-" + documentOptions.rank.icon,
+      icon: makeIconClass(documentOptions.rank.icon, "title"),
     },
     actions: {
       toggleInnate: this._toggleInnate,

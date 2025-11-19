@@ -1,4 +1,5 @@
 import { RollRollableTakeHandler } from "../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
 const { fields } = foundry.data;
@@ -14,7 +15,7 @@ export default class TeriockHealManager extends TeriockStatManager {
       takeHack: this._takeUnhack,
     },
     window: {
-      icon: "fa-solid fa-hand-holding-heart",
+      icon: makeIconClass("hand-holding-heart", "title"),
       title: "Healing",
       resizable: false,
     },

@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { setStatDiceDialog } from "../../../dialogs/_module.mjs";
 import { WikiButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
@@ -20,7 +21,7 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["species"],
     window: {
-      icon: "fa-solid fa-" + documentOptions.species.icon,
+      icon: makeIconClass(documentOptions.species.icon, "title"),
     },
     actions: {
       setHpDice: this._setHpDice,

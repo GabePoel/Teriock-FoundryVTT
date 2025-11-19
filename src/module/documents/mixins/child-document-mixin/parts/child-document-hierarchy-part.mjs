@@ -185,10 +185,7 @@ export default (Base) => {
         return subChildren;
       }
 
-      /**
-       * Gets the document that most directly applies this child. If it's a child, return that.
-       * Otherwise, gets what Foundry considers to be the parent.
-       */
+      /** @inheritDoc */
       get source() {
         let source = this.sup;
         if (!source) {

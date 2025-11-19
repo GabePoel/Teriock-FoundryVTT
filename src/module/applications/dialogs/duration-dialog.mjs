@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 /**
@@ -64,7 +65,10 @@ export default async function durationDialog(ability) {
   );
   try {
     await TeriockDialog.prompt({
-      window: { title: `Set ${ability.system.nameString} Duration` },
+      window: {
+        title: `Set ${ability.system.nameString} Duration`,
+        icon: makeIconClass("hourglass", "title"),
+      },
       modal: true,
       content: contentHtml,
       ok: {

@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -17,7 +18,7 @@ export default async function changeSizeDialog(actor, species) {
     const dialog = new TeriockDialog({
       window: {
         title: "Change Size",
-        icon: "fa-solid fa-circle-question",
+        icon: makeIconClass("circle-question", "title"),
       },
       modal: true,
       buttons: [

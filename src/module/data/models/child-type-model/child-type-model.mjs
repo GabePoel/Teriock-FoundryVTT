@@ -105,14 +105,6 @@ export default class ChildTypeModel extends CommonTypeModel {
         group: "open",
       },
       {
-        name: "Open Source",
-        icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
-        callback: async () => await this.parent.source.sheet.render(true),
-        condition:
-          this.parent.isOwner && this.parent.source.documentName !== "Actor",
-        group: "open",
-      },
-      {
         name: "Share Image",
         icon: makeIcon("comment-image", "contextMenu"),
         callback: this.parent.chatImage.bind(this.parent),

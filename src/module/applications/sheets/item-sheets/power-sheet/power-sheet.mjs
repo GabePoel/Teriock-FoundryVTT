@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { powerContextMenu } from "./connections/_context-menus.mjs";
 
@@ -18,7 +19,7 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
       toggleProficient: this._toggleProficient,
     },
     window: {
-      icon: "fa-solid fa-" + documentOptions.power.icon,
+      icon: makeIconClass(documentOptions.power.icon, "title"),
     },
   };
 

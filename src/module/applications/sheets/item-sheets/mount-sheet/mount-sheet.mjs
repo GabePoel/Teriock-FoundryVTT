@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
@@ -14,7 +15,7 @@ export default class TeriockMountSheet extends TeriockBaseItemSheet {
       toggleMounted: this._toggleMounted,
     },
     window: {
-      icon: "fa-solid fa-" + documentOptions.mount.icon,
+      icon: makeIconClass(documentOptions.mount.icon, "title"),
     },
   };
 

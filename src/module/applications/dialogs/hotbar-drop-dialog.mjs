@@ -1,4 +1,5 @@
 import { systemPath } from "../../helpers/path.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -22,7 +23,7 @@ export default async function hotbarDropDialog(doc) {
     macroType = "general";
     macroType = await TeriockDialog.prompt({
       window: {
-        icon: "fa-solid fa-circle-question",
+        icon: makeIconClass("circle-question", "title"),
         title: `Macro Type Selection`,
       },
       modal: true,

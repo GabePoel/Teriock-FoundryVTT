@@ -8,6 +8,7 @@
           {{#each protection.damageTypes as |damageType|}}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "damage-types" damageType)
                 title=(ucFirst damageType)
                 subtitle="Damage type"
@@ -19,6 +20,7 @@
           {{#each protection.drainTypes as |drainType|}}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "drain-types" drainType)
                 title=(ucFirst drainType)
                 subtitle="Drain type"
@@ -30,6 +32,7 @@
           {{#each protection.statuses as |condition|}}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "conditions" condition)
                 title=(path @root/TERIOCK.index.conditions condition)
                 subtitle="Condition"
@@ -41,6 +44,7 @@
           {{#each protection.elements as |element|}}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "elements" element)
                 title=(path @root/TERIOCK.options.ability.elements element)
                 subtitle="Element"
@@ -52,6 +56,7 @@
           {{#each protection.effects as |effect|}}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "effect-types" effect)
                 title=(path @root/TERIOCK.options.ability.effectTypes effect)
                 subtitle="Effect"
@@ -63,6 +68,7 @@
           {{#each protection.powerSources as |powerSource|}}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "effect-types" powerSource)
                 title=(path @root/TERIOCK.options.ability.powerSources powerSource)
                 subtitle="Power source"
@@ -72,6 +78,7 @@
             }}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "effect-types" powerSource)
                 title=(path @root/TERIOCK.options.ability.powerSources powerSource)
                 subtitle="Power source"
@@ -83,6 +90,7 @@
           {{#each protection.other as |other|}}
             {{> (template "ui-templates/block.hbs")
               (object
+                usable=true
                 img=(getIconKey "effect-types" "Immunity")
                 title=other
                 subtitle="Other"

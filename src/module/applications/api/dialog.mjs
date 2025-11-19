@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { bindCommonActions } from "../shared/_module.mjs";
 
 const { DialogV2 } = foundry.applications.api;
@@ -10,7 +11,7 @@ export default class TeriockDialog extends DialogV2 {
    */
   static DEFAULT_OPTIONS = {
     window: {
-      icon: "fa-solid fa-pen",
+      icon: makeIconClass("pen", "title"),
     },
   };
 

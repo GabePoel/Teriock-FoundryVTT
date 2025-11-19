@@ -1,3 +1,5 @@
+import { makeIconClass } from "../../../../helpers/utils.mjs";
+
 /**
  * @param {typeof DocumentSheetV2} Base
  * @constructor
@@ -12,7 +14,7 @@ export default function ChatButtonSheetMixin(Base) {
       window: {
         controls: [
           {
-            icon: "fa-solid fa-comment",
+            icon: makeIconClass("comment", "contextMenu"),
             label: "Share in Chat",
             action: "chatThis",
           },

@@ -1,5 +1,6 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../applications/dialogs/select-document-dialog.mjs";
+import { makeIconClass } from "../utils.mjs";
 
 const { ux } = foundry.applications;
 
@@ -19,7 +20,7 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
     content: content,
     modal: false,
     window: {
-      icon: "fa-solid fa-magnifying-glass",
+      icon: makeIconClass("magnifying-glass", "title"),
       title: "Identify Item",
     },
   });

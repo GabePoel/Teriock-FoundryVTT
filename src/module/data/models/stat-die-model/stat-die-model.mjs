@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { TeriockRoll } from "../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { dedent, getRollIcon } from "../../../helpers/utils.mjs";
+import { dedent, getRollIcon, makeIconClass } from "../../../helpers/utils.mjs";
 import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -126,7 +126,7 @@ export default class StatDieModel extends EmbeddedDataModel {
         proceed = await TeriockDialog.confirm({
           window: {
             title: "Reroll Stat Die?",
-            icon: `fas fa-${getRollIcon(this.formula)}`,
+            icon: makeIconClass(getRollIcon(this.formula), "title"),
           },
           content:
             "This stat die is already spent. Would you like to roll it anyways?",

@@ -23,7 +23,7 @@ export async function harmRoll(
   const buttons = /** @type {Teriock.UI.HTMLButtonConfig[]} */ [
     {
       label: "Damage",
-      icon: "fas fa-heart-crack",
+      icon: TERIOCK.display.buttons.rollButtons.damage.icon,
       classes: ["teriock-chat-button", "damage-button"],
       dataset: {
         action: "take-rollable-take",
@@ -33,7 +33,7 @@ export async function harmRoll(
     },
     {
       label: "Drain",
-      icon: "fas fa-droplet-slash",
+      icon: TERIOCK.display.buttons.rollButtons.drain.icon,
       classes: ["teriock-chat-button", "drain-button"],
       dataset: {
         action: "take-rollable-take",
@@ -43,7 +43,7 @@ export async function harmRoll(
     },
     {
       label: "Wither",
-      icon: "fas fa-hourglass-half",
+      icon: TERIOCK.display.buttons.rollButtons.wither.icon,
       classes: ["teriock-chat-button", "wither-button"],
       dataset: {
         action: "take-rollable-take",

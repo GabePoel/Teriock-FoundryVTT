@@ -3,6 +3,7 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockAbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -113,7 +114,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         const title = `${execution} ${this.source.name}`;
         await TeriockDialog.prompt({
           window: {
-            icon: "fa-solid fa-burst",
+            icon: makeIconClass("burst", "title"),
             title: title,
           },
           content: dialogs.join(""),

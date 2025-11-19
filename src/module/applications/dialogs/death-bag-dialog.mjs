@@ -1,7 +1,7 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { getImage, systemPath } from "../../helpers/path.mjs";
-import { evaluateAsync } from "../../helpers/utils.mjs";
+import { evaluateAsync, makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
@@ -42,7 +42,7 @@ export default async function deathBagDialog(actor) {
   try {
     await new TeriockDialog({
       window: {
-        icon: "fa-solid fa-sack",
+        icon: makeIconClass("sack", "title"),
         title: "Death Bag",
       },
       content: contentHTML,

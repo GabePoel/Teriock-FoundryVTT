@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { UseButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import {
@@ -23,7 +24,7 @@ export default class TeriockFluencySheet extends UseButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["fluency"],
     window: {
-      icon: "fa-solid fa-" + documentOptions.fluency.icon,
+      icon: makeIconClass(documentOptions.fluency.icon, "title"),
     },
   };
 

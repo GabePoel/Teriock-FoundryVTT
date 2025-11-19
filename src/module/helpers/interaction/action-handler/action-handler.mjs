@@ -1,5 +1,6 @@
 //noinspection JSUnusedGlobalSymbols
 
+import { makeIconClass } from "../../utils.mjs";
 import InteractionHandler from "../interaction-handler.mjs";
 
 /**
@@ -42,7 +43,7 @@ export default class ActionHandler extends InteractionHandler {
    */
   static buildButton() {
     return {
-      icon: "fas fa-check",
+      icon: makeIconClass("check", "button"),
       dataset: {
         action: this.ACTION,
       },

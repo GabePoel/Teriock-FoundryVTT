@@ -1,3 +1,4 @@
+import { rollButtons } from "../../constants/display/buttons.mjs";
 import { RollRollableTakeHandler } from "../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
@@ -13,7 +14,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       rollStatDie: this._rollStatDie,
     },
     window: {
-      icon: "fa-solid fa-hand-holding-droplet",
+      icon: rollButtons.revitalize.icon,
       title: "Revitalizing",
       resizable: false,
     },
