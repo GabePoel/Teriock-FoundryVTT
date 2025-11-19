@@ -1,5 +1,5 @@
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { AbilityImpact } from "./types/ability-impact-field";
+import { type AbilityImpacts } from "./types/ability-impact-field";
 import {
   TeriockAbility,
   TeriockConsequence,
@@ -63,18 +63,7 @@ declare module "./ability-model.mjs" {
     /** <schema> Description of how this ability changes if heightened */
     heightened: string;
     /** <schema> Impacts of using this ability */
-    impacts: {
-      /** <schema> Base impact of using this ability */
-      base: AbilityImpact;
-      /** <schema> How the impacts change if fluent in this ability */
-      fluent: AbilityImpact;
-      /** <schema> How the impacts change if this ability is heightened */
-      heightened: AbilityImpact;
-      /** <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockActor} */
-      macros: Teriock.Parameters.Shared.MacroHookRecord;
-      /** <schema> How the impacts change if proficient in this ability */
-      proficient: AbilityImpact;
-    };
+    impacts: AbilityImpacts;
     /**
      * <schema> Description of any improvement that makes this ability better than it would otherwise be
      * (not to be confused with {@link TeriockAbilityModel.improvements})

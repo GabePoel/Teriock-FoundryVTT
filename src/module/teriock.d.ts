@@ -219,6 +219,17 @@ declare global {
       [__brand]: T;
     };
   }
+
+  // Utilities
+  // =========
+
+  type ArrayToSet<T> = {
+    [K in keyof T]: T[K] extends (infer U)[] ? Set<U> : T[K];
+  };
+
+  type ArrayToSetFor<T, K extends keyof T> = Omit<T, K> & {
+    [P in K]: T[P] extends (infer U)[] ? Set<U> : T[P];
+  };
 }
 
 export {};

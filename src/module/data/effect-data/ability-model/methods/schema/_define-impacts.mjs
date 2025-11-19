@@ -217,6 +217,17 @@ function abilityImpactField() {
           "but merged into an ongoing effect.",
       },
     ),
+    critStatuses: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.index.conditions,
+      }),
+      {
+        label: "Critical Conditions",
+        hint:
+          "Conditions applied as part of the ability's ongoing effect if it crits. These are not applied as separate" +
+          " conditions, but merged into an ongoing effect.",
+      },
+    ),
     transformation: fieldBuilders.transformationField({
       configuration: true,
     }),

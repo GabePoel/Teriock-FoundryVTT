@@ -4,3 +4,4 @@ export * from "./get-categories.mjs";
 export * from "./get-text.mjs";
 export * from "./process-subs.mjs";
 export * from "./tag-tree.mjs";
+export * from "./extract-metadata.mjs";

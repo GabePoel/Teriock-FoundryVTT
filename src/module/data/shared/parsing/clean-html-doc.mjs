@@ -7,16 +7,34 @@ import { rollButtons } from "../../../constants/display/buttons.mjs";
  * @returns {Document}
  */
 export function cleanHTMLDoc(doc) {
+  doc = cleanHTMLSubs(doc);
+  doc = cleanHTMLDice(doc);
+  return doc;
+}
+
+/**
+ * Remove sub-containers.
+ * @param {Document} doc
+ * @returns {Document}
+ */
+export function cleanHTMLSubs(doc) {
   doc
     .querySelectorAll(
       ".ability-sub-container, .expandable-container, .expandable-table",
     )
     .forEach((el) => el.remove());
+  return doc;
+}
 
+/**
+ * Turn dice into something enrichable.
+ * @param {Document} doc
+ * @returns {Document}
+ */
+export function cleanHTMLDice(doc) {
   const TYPE_LUT = Object.fromEntries(
     Object.keys(rollButtons).map((k) => [k.toLowerCase(), k]),
   );
-
   doc.querySelectorAll(".dice").forEach((el) => {
     const fullRoll = el.getAttribute("data-full-roll");
     const quickRoll = el.getAttribute("data-quick-roll");
@@ -29,7 +47,6 @@ export function cleanHTMLDoc(doc) {
     const tagType = canonical || "roll";
     el.textContent = `[[/${tagType} ${formula}]]`;
   });
-
   return doc;
 }
 

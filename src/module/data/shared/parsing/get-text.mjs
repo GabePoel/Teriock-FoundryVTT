@@ -30,6 +30,20 @@ export function getBarText(htmlElement, selector, clean = false) {
 }
 
 /**
+ * Helper function to get the HTML element for a given ability bar.
+ * @param {HTMLElement} htmlElement
+ * @param {string} selector
+ * @returns {HTMLElement|null}
+ */
+export function getBarElement(htmlElement, selector) {
+  return (
+    htmlElement.querySelector(
+      `.ability-bar-${selector} .ability-bar-content`,
+    ) || null
+  );
+}
+
+/**
  * Helper function to get text content from elements.
  * @param {Document} doc - The parsed HTML document.
  * @param {string} selector - The CSS selector for the element.

@@ -1,13 +1,15 @@
 import { getImage } from "../../../../helpers/path.mjs";
 import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
 import {
-  cleanHTMLDoc,
+  cleanHTMLDice,
+  cleanHTMLSubs,
   cleanObject,
 } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
+import { _parseMetadata } from "./parsing/_parse-metadata.mjs";
 
 /**
  * Cost value templates for different cost types.
@@ -56,7 +58,7 @@ const COST_TEMPLATES = Object.freeze({
  * @returns {AbilityImpact} The default consequence structure.
  * @private
  */
-function defaultConsequence() {
+function defaultImpact() {
   return {
     changes: [],
     checks: new Set(),
@@ -85,10 +87,10 @@ function defaultConsequence() {
  */
 function defaultImpacts() {
   return {
-    base: defaultConsequence(),
-    proficient: defaultConsequence(),
-    fluent: defaultConsequence(),
-    heightened: defaultConsequence(),
+    base: defaultImpact(),
+    proficient: defaultImpact(),
+    fluent: defaultImpact(),
+    heightened: defaultImpact(),
   };
 }
 
@@ -113,8 +115,14 @@ export async function _parse(abilityData, rawHTML) {
     return !element.parentElement?.closest(".subber");
   });
 
-  // Remove sub-containers and process dice
-  cleanHTMLDoc(doc);
+  // Remove sub-containers.
+  cleanHTMLSubs(doc);
+
+  // TODO: Finish improved metadata parsing.
+  _parseMetadata(doc, defaultImpacts());
+
+  // Prepare dice for enrichment.
+  cleanHTMLDice(doc);
 
   // Build the tag tree
   const tagTree = buildTagTree(doc);
@@ -601,6 +609,30 @@ function extractHacksFromHTML(html) {
 }
 
 /**
+ * Extracts abilites to be used from HTML content.
+ * @param {string} html - The HTML content to extract hacks from.
+ * @returns {Set} Set of hack parts found in the content.
+ * @private
+ */
+function extractAbilitiesFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const abilities = new Set();
+  tempDiv
+    .querySelectorAll("span.metadata[data-type='ability']")
+    .forEach((el) => {
+      if (!(el instanceof HTMLElement)) {
+        return;
+      }
+      const part = el.dataset.ability;
+      if (part) {
+        abilities.add(part);
+      }
+    });
+  return abilities;
+}
+
+/**
  * Extracts condition information from HTML content.
  * Finds condition metadata elements and extracts their conditions.
  * @param {string} html - The HTML content to extract conditions from.
@@ -844,6 +876,14 @@ function processDiceAndEffectExtraction(parameters) {
       target.hacks = new Set([...(target.hacks || []), ...hacks]);
     }
 
+    const abilities = extractAbilitiesFromHTML(source);
+    if (abilities.size > 0) {
+      target.abilityButtonNames = new Set([
+        ...(target.abilityButtonNames || []),
+        ...abilities,
+      ]);
+    }
+
     const conditions = extractConditionsFromHTML(source);
     if (conditions.size > 0) {
       target.statuses = new Set([...(target.statuses || []), ...conditions]);
@@ -895,6 +935,7 @@ function processDiceAndEffectExtraction(parameters) {
 
   // Extract dice and effects from results
   let resultDice = {};
+  let resultAbilities = new Set();
   let resultHacks = new Set();
   let resultConditions = new Set();
   let resultStartConditions = new Set();
@@ -932,6 +973,9 @@ function processDiceAndEffectExtraction(parameters) {
       const currentConditions = extractConditionsFromHTML(
         parameters.results[resultType],
       );
+      const currentAbilities = extractAbilitiesFromHTML(
+        parameters.results[resultType],
+      );
       const currentStartConditions = extractStartConditionsFromHTML(
         parameters.results[resultType],
       );
@@ -956,6 +1000,7 @@ function processDiceAndEffectExtraction(parameters) {
 
       // Merge all results
       if (resultType !== "endCondition") {
+        resultAbilities = new Set([...resultAbilities, ...currentAbilities]);
         resultHacks = new Set([...resultHacks, ...currentHacks]);
         resultConditions = new Set([...resultConditions, ...currentConditions]);
         resultStartConditions = new Set([
@@ -994,6 +1039,13 @@ function processDiceAndEffectExtraction(parameters) {
     parameters.impacts.base.hacks = new Set([
       ...(parameters.impacts.base.hacks || []),
       ...resultHacks,
+    ]);
+  }
+
+  if (resultAbilities.size > 0) {
+    parameters.impacts.base.abilityButtonNames = new Set([
+      ...(parameters.impacts.base.abilityButtonNames || []),
+      ...resultAbilities,
     ]);
   }
 

@@ -441,22 +441,25 @@ export function parseDurationString(durationString) {
   let parsedAbsentConditions = new Set();
   let parsedPresentConditions = new Set();
   // Handle special cases first
-  if (parsingString === "while up") {
+  if (parsingString.includes("while up")) {
     parsedAbsentConditions.add("down");
-  } else if (parsingString === "while alive") {
+  }
+  if (parsingString.includes("while alive")) {
     parsedAbsentConditions.add("dead");
-  } else if (parsingString === "instant") {
+  }
+  if (parsingString.includes("instant")) {
     parsedUnit = "instant";
-  } else if (parsingString === "until dawn") {
+  }
+  if (parsingString.includes("until dawn")) {
     parsedUnit = "untilDawn";
-  } else {
-    // General condition parsing
-    for (const condition of Object.keys(TERIOCK.index.conditions)) {
-      if (parsingString.includes("not " + condition)) {
-        parsedAbsentConditions.add(condition);
-      } else if (parsingString.includes(condition)) {
-        parsedPresentConditions.add(condition);
-      }
+  }
+
+  // General condition parsing
+  for (const condition of Object.keys(TERIOCK.index.conditions)) {
+    if (parsingString.includes("not " + condition)) {
+      parsedAbsentConditions.add(condition);
+    } else if (parsingString.includes(condition)) {
+      parsedPresentConditions.add(condition);
     }
   }
   const parsedStationary = parsingString.includes("stationary");
@@ -728,4 +731,30 @@ export function fancifyFields(displayFields) {
       };
     })
     .filter((f) => f.visible);
+}
+
+/**
+ * Merge two objects and their arrays.
+ * @param {object} original
+ * @param {object} other
+ * @returns {object}
+ */
+export function deepMerge(original, other) {
+  const out = foundry.utils.deepClone(original);
+  for (const [k, v] of Object.entries(other)) {
+    const v1 = foundry.utils.deepClone(v);
+    if (k in out) {
+      const v0 = out[k];
+      if (Array.isArray(v0) && Array.isArray(v1)) {
+        v0.push(...v1);
+      } else if (typeof v0 === "object" && typeof v1 === "object") {
+        out[k] = deepMerge(out[v0], other[v1]);
+      } else {
+        out[k] = v1;
+      }
+    } else {
+      out[k] = v1;
+    }
+  }
+  return out;
 }

@@ -35,26 +35,25 @@ export type AbilityExpirations = {
   doesExpire: boolean;
 };
 
-/**
- * Applies data for different proficiency levels
- */
-export interface AbilityImpact {
+export type AbilityImpactData = {
   /** <schema> Names of abilities that this can activate */
-  abilityButtonNames: Set<string>;
+  abilityButtonNames: string[];
   /** <schema> Changes made to the parent {@link TeriockActor} */
   changes: Teriock.Foundry.EffectChangeData[];
   /** <schema> Tradecraft checks the ability can cause */
-  checks: Set<Teriock.Parameters.Fluency.Tradecraft>;
+  checks: Teriock.Parameters.Fluency.Tradecraft[];
   /** <schema> Possible common impacts of using an ability */
-  common: Set<Teriock.Parameters.Consequence.CommonImpactKey>;
+  common: Teriock.Parameters.Consequence.CommonImpactKey[];
+  /** <schema> Conditions caused by the {@link TeriockConsequence} created by this ability when it crits */
+  critStatuses: Teriock.Parameters.Condition.ConditionKey[];
   /** <schema> Duration of the impact of this ability in seconds */
   duration: number;
   /** <schema> Conditions that this ability could end */
-  endStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+  endStatuses: Teriock.Parameters.Condition.ConditionKey[];
   /** <schema> Expiration data for the {@link TeriockConsequence} created by this ability */
   expiration: AbilityExpirations;
   /** <schema> Hacks that could be caused by this ability */
-  hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
+  hacks: Teriock.Parameters.Actor.HackableBodyPart[];
   /** <schema> Macro buttons */
   macroButtonUuids: Teriock.UUID<TeriockMacro>;
   /** <schema> Don't place a template */
@@ -64,9 +63,45 @@ export interface AbilityImpact {
   /** <schema> Rolls that could be caused by this ability */
   rolls: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
   /** <schema> Conditions that this ability could start */
-  startStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+  startStatuses: Teriock.Parameters.Condition.ConditionKey[];
   /** <schema> Conditions caused by the {@link TeriockConsequence} created by this ability */
-  statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+  statuses: Teriock.Parameters.Condition.ConditionKey[];
   /** <schema> Transformation configuration */
   transformation: TransformationConfigurationField;
-}
+};
+
+/**
+ * Impacts data for different proficiency levels
+ */
+export type AbilityImpact = ArrayToSetFor<
+  AbilityImpactData,
+  | "abilityButtonNames"
+  | "checks"
+  | "critStatuses"
+  | "common"
+  | "endStatuses"
+  | "hacks"
+  | "startStatuses"
+  | "statuses"
+>;
+
+export type AbilityImpactsData = {
+  base: AbilityImpactData;
+  fluent: AbilityImpactData;
+  heightened: AbilityImpactData;
+  macros: Teriock.Parameters.Shared.MacroHookRecord;
+  proficient: AbilityImpactData;
+};
+
+export type AbilityImpacts = AbilityImpactData & {
+  /** <schema> Base impact of using this ability */
+  base: AbilityImpact;
+  /** <schema> How the impacts change if fluent in this ability */
+  fluent: AbilityImpact;
+  /** <schema> How the impacts change if this ability is heightened */
+  heightened: AbilityImpact;
+  /** <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockActor} */
+  macros: Teriock.Parameters.Shared.MacroHookRecord;
+  /** <schema> How the impacts change if proficient in this ability */
+  proficient: AbilityImpact;
+};

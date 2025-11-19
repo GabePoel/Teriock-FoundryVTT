@@ -204,6 +204,12 @@ export default function AbilityExecutionChatPart(Base) {
 
       async generateConsequence(crit = false) {
         const statuses = this.mergeImpactsSet("statuses");
+        if (crit) {
+          const critStatuses = this.mergeImpactsSet("critStatuses");
+          for (const status of critStatuses) {
+            statuses.add(status);
+          }
+        }
         const seconds = this.mergeImpactsNumber("duration");
         const expirations = this.mergeImpactsExpiration("expiration", crit);
         expirations.normal.combat.who.source = this.actor?.uuid;
