@@ -381,6 +381,32 @@ export default class CommonTypeModel extends TypeDataModel {
     }
     for (const a of this.parent.getAbilities()) {
       await a.system.hardRefreshFromIndex();
+      if (reference) {
+        const referenceAbility = reference
+          .getAbilities()
+          .find((r) => r.name === a.name);
+        if (referenceAbility) {
+          const referenceObject = referenceAbility.toObject();
+          const abilityUpdates = {};
+          for (const p of [
+            "system.adept",
+            "system.consumable",
+            "system.fluent",
+            "system.gifted",
+            "system.grantOnly",
+            "system.improvement",
+            "system.limitation",
+            "system.maxQuantity",
+            "system.proficient",
+            "system.quantity",
+          ]) {
+            abilityUpdates[p] = foundry.utils.getProperty(referenceObject, p);
+          }
+          if (Object.keys(abilityUpdates).length > 0) {
+            await a.update(abilityUpdates);
+          }
+        }
+      }
     }
     for (const p of this.parent.getProperties()) {
       await p.system.hardRefreshFromIndex();

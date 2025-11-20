@@ -9,7 +9,6 @@ import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
-import { _parseMetadata } from "./parsing/_parse-metadata.mjs";
 
 /**
  * Cost value templates for different cost types.
@@ -119,7 +118,7 @@ export async function _parse(abilityData, rawHTML) {
   cleanHTMLSubs(doc);
 
   // TODO: Finish improved metadata parsing.
-  _parseMetadata(doc, defaultImpacts());
+  //_parseMetadata(doc, defaultImpacts());
 
   // Prepare dice for enrichment.
   cleanHTMLDice(doc);

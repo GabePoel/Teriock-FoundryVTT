@@ -133,7 +133,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
     if ((await super._preDelete(options, user)) === false) {
       return false;
     }
-    if (this.parent.type === "wrapper") {
+    if (this.source?.type === "wrapper") {
       await this.parent.delete();
       return false;
     }

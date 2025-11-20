@@ -60,6 +60,7 @@ async function processSubEffects(subs, doc, config) {
       if (doc.documentName === "ActiveEffect") {
         await doc.addSub(newEffect);
       }
+      subEffect = newEffect;
     }
 
     const limitation = el.querySelector(".limited-modifier");
