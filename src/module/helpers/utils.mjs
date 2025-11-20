@@ -532,16 +532,6 @@ export function secondsToReadable(totalSeconds) {
 }
 
 /**
- * Wrapper to freeze an object with proper typing.
- * @template T
- * @param {T} obj
- * @returns {Readonly<T>}
- */
-export function freeze(obj) {
-  return foundry.utils.deepFreeze(obj);
-}
-
-/**
  * Check if the {@link TeriockUser} owns and uses the given document.
  * @param {ClientDocument} document
  * @param {Teriock.ID<TeriockUser>} userId
