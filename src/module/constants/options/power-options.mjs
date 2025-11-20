@@ -20,6 +20,11 @@ export const powerOptions = {
     icon: "hand-holding-skull",
     color: colors.red,
   },
+  deathScar: {
+    name: "Death Scar",
+    icon: "scythe",
+    color: colors.red,
+  },
   familiar: {
     name: "Familiar",
     icon: "monkey",
