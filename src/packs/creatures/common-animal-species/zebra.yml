@@ -19,8 +19,8 @@ system:
     attackPenalty: 0
     hasReaction: true
   wielding:
-    attacker: QD47xmKLzJRcgN6y
-    blocker: QD47xmKLzJRcgN6y
+    attacker: Npdg1dJ1nPq0n4Lo
+    blocker: 7P09dQqsDg0JRmYl
   hp:
     value: 6
   mp:
@@ -137,8 +137,8 @@ items:
           classes: {}
           general: 0
         items:
+          - Compendium.teriock.bodyParts.Item.GE5naUZJD5MqKU8y
           - Compendium.teriock.bodyParts.Item.IrYMgwHyfm2xq4oa
-          - Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
       statDice:
         mp:
           faces: 6
@@ -146,6 +146,7 @@ items:
         subIds:
           - Npdg1dJ1nPq0n4Lo
           - QD47xmKLzJRcgN6y
+          - 7P09dQqsDg0JRmYl
     effects:
       - name: Advanced Hearing
         type: ability
@@ -3842,9 +3843,11 @@ items:
           range: Your Weapon's Range
           overview:
             base: >-
-              <div class="note"><b>Note:</b> A target moving due to Battle
-              Charge can still provoke reactions like @L[Ability:Opportunity
-              Attack]{Opportunity Attack}.</div>
+              <p>If you use <a class="mw-selflink selflink">Trample</a> with a
+              @L[Body:Hoof]{hoof}, it deals an extra [[/damage 1d4]]
+              @L[Core:Damage]{damage},</p><div class="note"><b>Note:</b> A
+              target moving due to Battle Charge can still provoke reactions
+              like @L[Ability:Opportunity Attack]{Opportunity Attack}.</div>
             proficient: ''
             fluent: ''
           results:
@@ -3928,7 +3931,8 @@ items:
               statuses: []
               startStatuses: []
               endStatuses: []
-              rolls: {}
+              rolls:
+                damage: 1d4
               hacks: []
               checks: []
               duration: 0
@@ -4153,7 +4157,7 @@ items:
             changes: []
             macros: {}
         _id: G0tdQXSp86EwqkNT
-        img: systems/teriock/src/icons/properties/biting.webp
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
         changes: []
         disabled: false
         duration:
@@ -4227,67 +4231,85 @@ items:
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!actors.items!NyNXoJxWTbt8KXND.Npdg1dJ1nPq0n4Lo'
-  - name: Sharp Claw
+  - name: Hoof
     type: body
-    _id: QD47xmKLzJRcgN6y
-    img: systems/teriock/src/icons/body-parts/sharp-claw.webp
+    _id: 7P09dQqsDg0JRmYl
+    img: systems/teriock/src/icons/body-parts/hoof.webp
     system:
-      description: ''
-      onUse: []
-      macros: []
-      av:
-        saved: 0
-        raw: 0
-      bv:
-        saved: 1
-        raw: 0
-      damage:
-        base:
-          saved: 1d6
-          raw: ''
-        types: []
-      fightingStyle: savage
-      flaws: ''
-      notes: ''
-      spellTurning: false
-      virtualProperties: []
       gmNotes: null
+      description: ''
       hierarchy:
         rootUuid: Compendium.teriock.creatures.Actor.NyNXoJxWTbt8KXND
         subIds: []
         supId: CGpoJDOgsQ4uq5nd
+      onUse: []
+      macros: []
+      attackPenalty:
+        saved: '-3'
+        raw: '-3'
+      av:
+        saved: 0
+        raw: 0
+      bv:
+        saved: 0
+        raw: 0
+      damage:
+        base:
+          saved: '1'
+          raw: ''
+        types: []
+      fightingStyle: savage
+      specialRules: ''
+      flaws: ''
+      notes: ''
+      piercing:
+        av0: false
+        ub: false
+      range:
+        long:
+          saved: ''
+          raw: ''
+        melee: true
+        ranged: false
+        short:
+          saved: ''
+          raw: ''
+      spellTurning: false
+      warded: false
+      virtualProperties: []
     effects:
-      - name: Handy
+      - name: Bashing
         type: property
         system:
+          gmNotes: null
           description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            <p>An item with the <b>bashing</b> property is not a weapon, but can
+            still be used to make a @L[Ability:Basic Attack]{Basic Attack}.</p>
           hierarchy:
-            rootUuid: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
+            rootUuid: Compendium.teriock.bodyParts.Item.GE5naUZJD5MqKU8y
             subIds: []
             supId: null
-          form: intrinsic
+          revealed: true
+          applyIfDampened: false
+          applyIfShattered: false
           damageType: ''
           extraDamage: ''
-          applyIfShattered: false
-          applyIfDampened: false
-          modifiesActor: false
-          limitation: ''
-          improvement: ''
-          gmNotes: null
+          form: intrinsic
           impacts:
             changes: []
             macros: {}
-        _id: Wez1JXmo9LjBU1oA
-        img: systems/teriock/src/icons/properties/handy.webp
+          improvement: ''
+          limitation: ''
+          modifiesActor: false
+        _id: rmFNHwPQuCaV2q8q
+        img: systems/teriock/src/icons/properties/bashing.webp
         changes: []
         disabled: false
         duration:
-          startTime: 175
+          startTime: 150
           combat: null
-          startRound: 36
-          startTurn: 0
+          startRound: 31
+          startTurn: 2
         origin: null
         transfer: true
         statuses: []
@@ -4298,38 +4320,45 @@ items:
           systemVersion: 0.9.1
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!NyNXoJxWTbt8KXND.QD47xmKLzJRcgN6y.Wez1JXmo9LjBU1oA
-      - name: Weapon
+          !actors.items.effects!NyNXoJxWTbt8KXND.7P09dQqsDg0JRmYl.rmFNHwPQuCaV2q8q
+      - name: Small
         type: property
         system:
+          gmNotes: null
           description: >-
-            <p>A <b>weapon</b> is an item that can be used to @L[Category:Attack
-            abilities]{attack}.</p>
+            <p>An item with this property is easily concealed and can be used in
+            the same hand as a @L[Category:Shields]{shield}. If not used with a
+            @L[Category:Shields]{shield}, a second @L[Category:Attack
+            abilities]{attack} made with a small item per @L[Core:Turns]{turn}
+            does not suffer from an @L[Core:Attack Penalty]{attack penalty}. In
+            order to not incur an @L[Core:Attack Penalty]{attack penalty}, this
+            item must not be used in the same hand as a
+            @L[Category:Shields]{shield}.</p>
           hierarchy:
-            rootUuid: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
+            rootUuid: Compendium.teriock.bodyParts.Item.GE5naUZJD5MqKU8y
             subIds: []
             supId: null
-          form: intrinsic
+          revealed: true
+          applyIfDampened: false
+          applyIfShattered: false
           damageType: ''
           extraDamage: ''
-          applyIfShattered: false
-          applyIfDampened: false
-          modifiesActor: false
-          limitation: ''
-          improvement: ''
-          gmNotes: null
+          form: intrinsic
           impacts:
             changes: []
             macros: {}
-        _id: 6CVqlpk3uf4VDbFY
-        img: systems/teriock/src/icons/properties/weapon.webp
+          improvement: ''
+          limitation: ''
+          modifiesActor: false
+        _id: sstVVZlXOTxriXsr
+        img: systems/teriock/src/icons/properties/small.webp
         changes: []
         disabled: false
         duration:
-          startTime: 175
+          startTime: 150
           combat: null
-          startRound: 36
-          startTurn: 0
+          startRound: 31
+          startTurn: 2
         origin: null
         transfer: true
         statuses: []
@@ -4340,20 +4369,20 @@ items:
           systemVersion: 0.9.1
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!NyNXoJxWTbt8KXND.QD47xmKLzJRcgN6y.6CVqlpk3uf4VDbFY
-    folder: xoD1UXk48Xwohy6q
+          !actors.items.effects!NyNXoJxWTbt8KXND.7P09dQqsDg0JRmYl.sstVVZlXOTxriXsr
+    folder: z6Tq65718Fiz7Dxn
     ownership:
       default: 0
     flags:
       teriock:
-        importReference: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
+        importReference: Compendium.teriock.bodyParts.Item.GE5naUZJD5MqKU8y
         importedBy: CGpoJDOgsQ4uq5nd
     _stats:
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!NyNXoJxWTbt8KXND.QD47xmKLzJRcgN6y'
+    _key: '!actors.items!NyNXoJxWTbt8KXND.7P09dQqsDg0JRmYl'
 effects: []
 ownership:
   default: 0

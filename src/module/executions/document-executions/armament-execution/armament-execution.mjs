@@ -51,7 +51,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       const roll = this.rolls[0];
       if (this.damage) {
         this.buttons.push(
-          actionHandlers["take-rollable-takes"].buildButton(
+          actionHandlers["take-rollable-take"].buildButton(
             "damage",
             roll.total,
           ),
@@ -59,15 +59,12 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       }
       if (this.drain) {
         this.buttons.push(
-          actionHandlers["take-rollable-takes"].buildButton(
-            "drain",
-            roll.total,
-          ),
+          actionHandlers["take-rollable-take"].buildButton("drain", roll.total),
         );
       }
       if (this.wither) {
         this.buttons.push(
-          actionHandlers["take-rollable-takes"].buildButton(
+          actionHandlers["take-rollable-take"].buildButton(
             "wither",
             roll.total,
           ),
