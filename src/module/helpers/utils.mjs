@@ -706,18 +706,20 @@ export function fancifyFields(displayFields) {
         fancy = f;
       }
       const {
-        path = fancy.path,
-        visible = true,
         classes = "",
+        dataset = {},
         editable = true,
         label = "",
+        path = fancy.path,
+        visible = true,
       } = fancy;
       return {
-        path,
-        visible,
         classes,
+        dataset,
         editable,
         label,
+        path,
+        visible,
       };
     })
     .filter((f) => f.visible);

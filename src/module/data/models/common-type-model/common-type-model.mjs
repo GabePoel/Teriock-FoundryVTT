@@ -114,6 +114,27 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * Gets the message rules-parts for displaying the child document in chat.
+   * Includes image, name, and font information from the parent document.
+   * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.
+   */
+  get messageParts() {
+    return {
+      associations: [],
+      bars: this.messageBars,
+      blocks: this.messageBlocks,
+      buttons: [],
+      color: this.color,
+      font: this.font,
+      image: this.parent.img,
+      name: this.parent.nameString,
+      uuid: this.parent.uuid,
+      icon: TERIOCK.options.document[this.metadata.type].icon,
+      label: TERIOCK.options.document[this.metadata.type].name,
+    };
+  }
+
+  /**
    * Metadata.
    * @returns {Teriock.Documents.ModelMetadata}
    */

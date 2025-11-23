@@ -38,6 +38,11 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
   }
 
   /** @inheritDoc */
+  get displayToggles() {
+    return [...super.displayToggles, "system.disabled"];
+  }
+
+  /** @inheritDoc */
   get messageParts() {
     const parts = super.messageParts;
     const fluencies = docSort(

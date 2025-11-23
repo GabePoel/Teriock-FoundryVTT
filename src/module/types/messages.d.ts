@@ -31,6 +31,7 @@ declare global {
       rescale?: boolean;
       name: string;
       uuid?: Teriock.UUID<TeriockCommon>;
+      makeTooltip?: boolean;
       tooltip?: string;
       img: string;
       color?: string;

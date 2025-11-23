@@ -112,6 +112,35 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   }
 
   /** @inheritDoc */
+  get displayToggles() {
+    return [
+      "system.glued",
+      {
+        path: "system.shattered",
+        dataset: {
+          action: "toggleShattered",
+        },
+      },
+      {
+        path: "system.dampened",
+        dataset: {
+          action: "toggleDampened",
+        },
+      },
+      "system.consumable",
+      {
+        path: "system.equipped",
+        dataset: {
+          action: "toggleEquipped",
+        },
+      },
+      "system.proficient",
+      "system.fluent",
+      "system.disabled",
+    ];
+  }
+
+  /** @inheritDoc */
   get embedIcons() {
     return [
       {
@@ -154,7 +183,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
         },
       },
       ...super.embedIcons.filter(
-        (i) => !i.action.toLowerCase().includes("disabled"),
+        (i) => !i.action?.toLowerCase().includes("disabled"),
       ),
       {
         icon: this.equipped ? "circle-check" : "circle",

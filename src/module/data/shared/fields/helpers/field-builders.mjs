@@ -271,6 +271,10 @@ export function associationsField() {
           }),
           id: new fields.DocumentIdField(),
           img: new fields.StringField(),
+          makeTooltip: new fields.BooleanField({
+            initial: false,
+            required: false,
+          }),
           name: new fields.StringField(),
           rescale: new fields.BooleanField({
             initial: false,

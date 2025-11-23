@@ -28,10 +28,31 @@ export default function ChildSheetMixin(Base) {
         });
       }
 
+      /**
+       * Expand fancy display fields into their schema and value.
+       * @param {Teriock.Sheet.FancyDisplayField[]} fields
+       * @returns {(Teriock.Sheet.FancyDisplayField & { schema: DataSchema; value: any })[]}
+       */
+      #expandFields(fields) {
+        return fancifyFields(fields).map((f) => {
+          return {
+            ...f,
+            ...{
+              schema: getSchema(this.document, f.path),
+              value: foundry.utils.getProperty(this.document, f.path),
+              label: f.label || getSchema(this.document, f.path).label,
+            },
+          };
+        });
+      }
+
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         await this._prepareDisplayFields(context);
+        context.displayToggles = this.#expandFields(
+          this.document.system.displayToggles,
+        );
         return context;
       }
 
@@ -42,20 +63,9 @@ export default function ChildSheetMixin(Base) {
        * @private
        */
       async _prepareDisplayFields(context) {
-        /** @type {Teriock.Sheet.FancyDisplayField[]} */
-        const fancyDisplayFields = fancifyFields(
+        const expandedDisplayFields = this.#expandFields(
           this.document.system.displayFields,
         );
-        const expandedDisplayFields = fancyDisplayFields.map((f) => {
-          return {
-            path: f.path,
-            classes: f.classes,
-            value: foundry.utils.getProperty(this.document, f.path),
-            schema: getSchema(this.document, f.path),
-            editable: f.editable,
-            label: f.label,
-          };
-        });
         const displayFieldButtons = expandedDisplayFields
           .filter((f) => !f.value)
           .map((f) => {
@@ -71,12 +81,8 @@ export default function ChildSheetMixin(Base) {
               .filter((f) => f.value)
               .map(async (f) => {
                 return {
-                  schema: f.schema,
-                  classes: f.classes,
-                  value: f.value,
+                  ...f,
                   enriched: await TeriockTextEditor.enrichHTML(f.value),
-                  editable: f.editable,
-                  label: f.label || f.schema.label,
                 };
               }),
           );

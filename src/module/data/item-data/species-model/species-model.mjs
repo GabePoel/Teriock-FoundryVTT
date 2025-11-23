@@ -5,6 +5,7 @@ import { makeIcon } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
   ImporterDataMixin,
+  ProficiencyDataMixin,
   StatGiverDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
@@ -22,12 +23,15 @@ const { fields } = foundry.data;
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {TeriockBaseItemModel}
- * @mixes StatGiverDataMixin
- * @mixes WikiDataMixin
- * @mixes ImporterDataMixin
+ * @mixes StatGiverData
+ * @mixes WikiData
+ * @mixes ImporterData
+ * @mixes ProficiencyData
  */
-export default class TeriockSpeciesModel extends ImporterDataMixin(
-  StatGiverDataMixin(WikiDataMixin(HierarchyDataMixin(TeriockBaseItemModel))),
+export default class TeriockSpeciesModel extends ProficiencyDataMixin(
+  ImporterDataMixin(
+    StatGiverDataMixin(WikiDataMixin(HierarchyDataMixin(TeriockBaseItemModel))),
+  ),
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -137,6 +141,7 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
     }
   }
 
+  /** @inheritDoc */
   get displayFields() {
     return [
       "system.hpIncrease",
@@ -145,6 +150,16 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
       "system.innateRanks",
       "system.appearance",
       "system.description",
+    ];
+  }
+
+  /** @inheritDoc */
+  get displayToggles() {
+    return [
+      "system.size.enabled",
+      "system.proficient",
+      "system.fluent",
+      "system.disabled",
     ];
   }
 
@@ -336,13 +351,8 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
     return await _parse(this, rawHTML);
   }
 
+  /** @inheritDoc */
   prepareSpecialData() {
-    if (
-      this.transformationLevel === "minor" ||
-      this.transformationLevel === "full"
-    ) {
-      this.statDice.mp.disabled = true;
-    }
     if (this.parent.actor) {
       if (this.parent.actor.system.isTransformed) {
         if (!this.isTransformation) {

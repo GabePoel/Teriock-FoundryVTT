@@ -41,6 +41,17 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
     });
   }
 
+  /** @inheritDoc */
+  get displayToggles() {
+    return [
+      ...super.displayToggles,
+      {
+        label: "Disabled",
+        path: "disabled",
+      },
+    ];
+  }
+
   /**
    * What this modifies.
    * @returns {TeriockParentName}

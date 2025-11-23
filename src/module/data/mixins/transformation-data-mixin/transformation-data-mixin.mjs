@@ -121,6 +121,10 @@ export default function TransformationDataMixin(Base) {
             );
             speciesData.forEach((s) => {
               s.system.transformationLevel = this.transformation.level;
+              if (this.transformation.level !== "greater") {
+                s.system.statDice.mp.disabled = true;
+                s.system.proficient = false;
+              }
               if (s.system.size.min && s.system.size.max) {
                 s.system.size.value = Math.min(
                   s.system.size.max,

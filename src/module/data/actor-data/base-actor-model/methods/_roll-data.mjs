@@ -126,7 +126,8 @@ function ageData(_actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function attributeData(actorData, data) {
-  for (const [key, attr] of Object.entries(actorData.attributes)) {
+  for (const key of Object.keys(TERIOCK.index.attributesFull)) {
+    const attr = actorData.attributes[key];
     for (const ak of [key, `att.${key}`]) {
       data[`${ak}`] = attr.score.value;
       data[`${ak}.pro`] = attr.saveProficient ? 1 : 0;

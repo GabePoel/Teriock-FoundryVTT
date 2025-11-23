@@ -65,9 +65,9 @@ export default class FormulaField extends StringField {
       return delta;
     }
     if (this.deterministic) {
-      upgradeDeterministicFormula(value, delta);
+      return upgradeDeterministicFormula(value, delta);
     } else {
-      upgradeIndeterministicFormula(value, delta);
+      return upgradeIndeterministicFormula(value, delta);
     }
   }
 

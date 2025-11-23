@@ -67,7 +67,7 @@ export class RollRollableTakeHandler extends ActionHandler {
       speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
       rolls: [roll],
       system: {
-        avatar: actor.img,
+        avatar: actor?.img,
         buttons: buttons,
         panels: damageDrainPanels,
       },

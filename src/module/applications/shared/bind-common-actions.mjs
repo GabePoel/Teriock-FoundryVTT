@@ -80,23 +80,26 @@ export default function bindCommonActions(rootElement) {
       });
     },
   );
-  rootElement.querySelectorAll(".teriock-panel-association-card").forEach(
-    /** @param {HTMLElement} el */ (el) => {
-      // Add preview listener
-      el.addEventListener("click", async (event) => {
-        event.stopPropagation();
-        const uuid = /** @type {Teriock.UUID<TeriockChild>} */ el.dataset.uuid;
-        if (!uuid) {
-          return;
-        }
-        const doc = await fromUuid(uuid);
-        if (!doc) {
-          return;
-        }
-        await previewSheet(doc);
-      });
-    },
-  );
+  rootElement
+    .querySelectorAll(".teriock-panel-association-card[data-make-tooltip]")
+    .forEach(
+      /** @param {HTMLElement} el */ (el) => {
+        // Add preview listener
+        el.addEventListener("click", async (event) => {
+          event.stopPropagation();
+          const uuid =
+            /** @type {Teriock.UUID<TeriockChild>} */ el.dataset.uuid;
+          if (!uuid) {
+            return;
+          }
+          const doc = await fromUuid(uuid);
+          if (!doc) {
+            return;
+          }
+          await previewSheet(doc);
+        });
+      },
+    );
 }
 
 /**

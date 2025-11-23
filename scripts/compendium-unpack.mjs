@@ -92,7 +92,6 @@ function cleanEntry(doc) {
   if (doc._stats) {
     delete doc._stats.createdTime;
     delete doc._stats.modifiedTime;
-    delete doc._stats.compendiumSource;
     delete doc._stats.duplicateSource;
     delete doc._stats.exportSource;
     if (doc._stats.coreVersion) {

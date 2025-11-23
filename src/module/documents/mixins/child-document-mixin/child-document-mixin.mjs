@@ -1,6 +1,5 @@
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { TeriockChatMessage } from "../../_module.mjs";
-import PanelDocumentMixin from "../panel-document-mixin/panel-document-mixin.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
 import ChildDocumentHierarchyPart from "./parts/child-document-hierarchy-part.mjs";
 
@@ -18,10 +17,9 @@ export default function ChildDocumentMixin(Base) {
      * @extends {ClientDocument}
      * @extends {ChildDocumentHierarchyPart}
      * @mixes PanelDocument
+     * @mixes CommonDocument
      */
-    class ChildDocument extends ChildDocumentHierarchyPart(
-      PanelDocumentMixin(Base),
-    ) {
+    class ChildDocument extends ChildDocumentHierarchyPart(Base) {
       //noinspection ES6ClassMemberInitializationOrder
       overrides = this.overrides ?? {};
 
@@ -32,16 +30,6 @@ export default function ChildDocumentMixin(Base) {
           fluent = true;
         }
         return fluent;
-      }
-
-      /** @inheritDoc */
-      async toMessage(options = {}) {
-        const data = { doc: this.parent };
-        await this.hookCall("documentChat", data);
-        if (data.cancel) {
-          return;
-        }
-        return await super.toMessage(options);
       }
 
       /** @inheritDoc */
@@ -141,11 +129,6 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      async roll(options = {}) {
-        await this.toMessage(options);
-      }
-
-      /** @inheritDoc */
       async chatImage() {
         const img = this.img;
         if (img) {
@@ -201,13 +184,23 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      async use(options = {}) {
-        await this.system.use(options);
+      async roll(options = {}) {
+        await this.toMessage(options);
       }
 
       /** @inheritDoc */
-      get messageParts() {
-        return this.system.messageParts;
+      async toMessage(options = {}) {
+        const data = { doc: this.parent };
+        await this.hookCall("documentChat", data);
+        if (data.cancel) {
+          return;
+        }
+        return await super.toMessage(options);
+      }
+
+      /** @inheritDoc */
+      async use(options = {}) {
+        await this.system.use(options);
       }
 
       /** @inheritDoc */

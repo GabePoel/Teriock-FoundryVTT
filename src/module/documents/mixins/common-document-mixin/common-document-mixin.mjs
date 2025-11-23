@@ -1,6 +1,7 @@
 import { systemPath } from "../../../helpers/path.mjs";
 import { TeriockActor } from "../../_module.mjs";
 import EmbedCardDocumentMixin from "../embed-card-document-mixin/embed-card-document-mixin.mjs";
+import PanelDocumentMixin from "../panel-document-mixin/panel-document-mixin.mjs";
 
 /**
  * Mixin for common functions used across document classes.
@@ -13,9 +14,12 @@ export default function CommonDocumentMixin(Base) {
      * @implements {CommonDocumentMixinInterface}
      * @extends ClientDocument
      * @mixes EmbedCardDocument
+     * @mixes PanelDocument
      * @mixin
      */
-    class CommonDocument extends EmbedCardDocumentMixin(Base) {
+    class CommonDocument extends EmbedCardDocumentMixin(
+      PanelDocumentMixin(Base),
+    ) {
       /** @inheritDoc */
       get actor() {
         if (this instanceof TeriockActor) {
@@ -39,6 +43,11 @@ export default function CommonDocumentMixin(Base) {
 
       get embedParts() {
         return { ...super.embedParts, ...this.system.embedParts };
+      }
+
+      /** @inheritDoc */
+      get messageParts() {
+        return this.system.messageParts;
       }
 
       /** @inheritDoc */

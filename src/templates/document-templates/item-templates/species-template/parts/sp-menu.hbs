@@ -1,37 +1,12 @@
 <div class="ab-menu">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid ap-check-grid g2">
-        {{formGroup
-          systemFields.size.fields.enabled
-          value=system.size.enabled
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
-        {{formGroup
-          systemFields.proficient
-          value=system.proficient
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
-        {{formGroup
-          systemFields.fluent
-          value=system.fluent
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
-        {{formGroup
-          systemFields.disabled
-          value=system.disabled
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
+      <div class="tgrid ab-check-grid">
+        {{> (template "document-templates/shared/display-toggles.hbs")}}
       </div>
-      <div class="tgrid g2">
+    </div>
+    <div class="ab-menu-bar">
+      <div class="tgrid ab-select-grid g2">
         <div class="tgrid-item gi1">
           <div class="ab-multi-select-label">
             <label class="tsubtle">Traits</label>
@@ -58,6 +33,10 @@
             }}
           </div>
         </div>
+      </div>
+    </div>
+    <div class="ab-menu-bar">
+      <div class="tgrid ab-button-grid">
         {{#if (not (and (exists system.size.min) (exists system.size.max)))}}
           <div class="tgrid-item">
             <button

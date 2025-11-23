@@ -192,15 +192,6 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
         e.stopPropagation();
       });
     });
-
-    this.element
-      .querySelector(".character-name")
-      ?.addEventListener("contextmenu", async (e) => {
-        e.preventDefault();
-        console.log("Debug", this.document, this);
-        e.stopPropagation();
-      });
-
     this._connectContextMenu(
       ".character-piercing-box",
       piercingContextMenu(this.actor),

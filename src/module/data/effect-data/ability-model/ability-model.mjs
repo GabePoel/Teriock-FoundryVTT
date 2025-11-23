@@ -97,6 +97,7 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
     return TERIOCK.options.ability.form[this.form].color;
   }
 
+  /** @inheritDoc */
   get displayFields() {
     const fields = [
       {
@@ -170,6 +171,32 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
       ],
     );
     return fields;
+  }
+
+  /** @inheritDoc */
+  get displayToggles() {
+    return [
+      "system.basic",
+      "system.standard",
+      "system.skill",
+      "system.spell",
+      "system.ritual",
+      "system.rotator",
+      "system.sustained",
+      "system.invoked",
+      "system.costs.verbal",
+      "system.costs.somatic",
+      "system.proficient",
+      "system.fluent",
+      "system.elderSorcery",
+      "system.adept.enabled",
+      "system.gifted.enabled",
+      "system.consumable",
+      "system.grantOnly",
+      "system.warded",
+      "system.secret",
+      "system.prepared",
+    ];
   }
 
   /**

@@ -7,17 +7,6 @@ export default class TeriockTooltipManager extends TooltipManager {
   /** @inheritDoc */
   activate(element, options = {}) {
     super.activate(element, options);
-    if (
-      element.getAttribute("data-tooltip-async") &&
-      element.getAttribute("data-uuid")
-    ) {
-      this.tooltip.setAttribute(
-        "data-linked-uuid",
-        element.getAttribute("data-uuid"),
-      );
-    } else {
-      this.tooltip.setAttribute("data-linked-uuid", "none");
-    }
     //noinspection JSUnresolvedReference
     if (this.tooltip?.firstElementChild?.classList.contains("teriock-panel")) {
       this.tooltip.classList.toggle("teriock-rich-tooltip", true);

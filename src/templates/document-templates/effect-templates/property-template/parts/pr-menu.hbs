@@ -25,30 +25,7 @@
         }}
       </div>
       <div class="tgrid ap-check-grid g2">
-        {{#if (not (exists system.limitation))}}
-          <div class="tgrid-item">
-            <button class="ab-menu-button ab-limitation-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{{TERIOCK.display.icons.add}}}
-              Limitation
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.improvement))}}
-          <div class="tgrid-item">
-            <button class="ab-menu-button ab-improvement-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{{TERIOCK.display.icons.add}}}
-              Improvement
-            </button>
-          </div>
-        {{/if}}
+        {{> (template "document-templates/shared/display-field-buttons.hbs")}}
       </div>
     </div>
   </div>

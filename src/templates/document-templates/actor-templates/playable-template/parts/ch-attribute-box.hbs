@@ -12,7 +12,7 @@
     <div class="tsubtle tcenter">
       Save
     </div>
-    {{#each system.attributes as |attribute name|}}
+    {{#each TERIOCK.index.attributesFull as |attribute name|}}
       <div class="tradecraft-container tgrid g4 gi4"
            data-tooltip-direction="LEFT"
            data-tooltip-left="true"
@@ -22,13 +22,13 @@
         <div class="tcolored tcenter ch-attribute-save-box"
              data-action="quickToggle"
              data-attribute="{{name}}"
-             data-bool="{{attribute.saveProficient}}"
+             data-bool="{{path @root/system.attributes name "saveProficient"}}"
              data-path="system.attributes.{{name}}.saveProficient"
         >
-          {{#if attribute.saveFluent}}
+          {{#if (path @root/system.attributes name "saveFluent")}}
             <i class="thover fa-solid fa-circle-dot" data-tooltip="Fluent"></i>
           {{else}}
-            {{#if attribute.saveProficient}}
+            {{#if (path @root/system.attributes name "saveProficient")}}
               <i class="thover fa-regular fa-circle-dot" data-tooltip="Proficient"></i>
             {{else}}
               <i class="thover fa-regular fa-circle" data-tooltip="None"></i>
@@ -45,17 +45,19 @@
         </div>
         <div class="tcenter affix">
           <div class="unselected">
-            <span class="ch-attribute-input tcolored tcenter ttransparent">{{{attribute.score.value}}}</span>
+            <span
+              class="ch-attribute-input tcolored tcenter ttransparent"
+            >{{{path @root/system.attributes name "score.value"}}}</span>
           </div>
           {{formInput
-            (path ../systemFields "attributes.fields" name "fields.score.fields.saved")
-            value=attribute.score.saved
+            (path @root/systemFields "attributes.fields" name "fields.score.fields.saved")
+            value=(path @root/system.attributes name "score.saved")
             classes="ch-attribute-input tcolored tcenter ttransparent selected"
             disabled=(eq name "unp")
           }}
         </div>
         <div class="tcolored tcenter">
-          {{attribute.saveBonus}}
+          {{path @root/system.attributes name "saveBonus"}}
         </div>
       </div>
     {{/each}}

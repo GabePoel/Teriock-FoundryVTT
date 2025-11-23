@@ -137,6 +137,14 @@ export default class ChildTypeModel extends CommonTypeModel {
     return ["system.description"];
   }
 
+  /**
+   * Toggles to display in sheets.
+   * @returns {Teriock.Sheet.DisplayField[]}
+   */
+  get displayToggles() {
+    return ["system.proficient", "system.fluent"];
+  }
+
   get embedActions() {
     return {
       ...super.embedActions,
@@ -219,25 +227,9 @@ export default class ChildTypeModel extends CommonTypeModel {
       .filter((f) => f);
   }
 
-  /**
-   * Gets the message rules-parts for displaying the child document in chat.
-   * Includes image, name, and font information from the parent document.
-   * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.
-   */
+  /** @inheritDoc */
   get messageParts() {
-    const parts = {
-      associations: [],
-      bars: this.messageBars,
-      blocks: this.messageBlocks,
-      buttons: [],
-      color: this.color,
-      font: this.font,
-      image: this.parent.img,
-      name: this.parent.nameString,
-      uuid: this.parent.uuid,
-      icon: TERIOCK.options.document[this.metadata.type].icon,
-      label: TERIOCK.options.document[this.metadata.type].name,
-    };
+    const parts = super.messageParts;
     const properties = propertySort(
       this.parent.getProperties().filter((p) => p.system.revealed),
     );

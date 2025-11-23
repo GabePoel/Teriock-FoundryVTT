@@ -197,9 +197,9 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
         icon: TERIOCK.options.document.condition.icon,
       };
       /** @type {TeriockTokenDocument[]} */
-      const tokenDocs = (this.document.system.trackers[condition] || []).map(
-        (uuid) => fromUuidSync(uuid),
-      );
+      const tokenDocs = (this.document.system.trackers[condition] || [])
+        .map((uuid) => fromUuidSync(uuid))
+        .filter((t) => t);
       if (tokenDocs.length > 0) {
         /** @type {Teriock.MessageData.MessageAssociation} */
         const association = {
@@ -213,8 +213,9 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
             uuid: tokenDoc.uuid,
             img: tokenDoc.texture.src,
             id: tokenDoc.id,
-            type: "base",
+            type: "TokenDocument",
             rescale: tokenDoc.rescale,
+            makeTooltip: false,
           });
         }
         messageParts.associations.push(association);

@@ -14,7 +14,7 @@ export default class TeriockTextEditor extends TextEditor {
     }
     for (const association of panel.associations || []) {
       for (const card of association.cards || []) {
-        if (card.uuid) {
+        if (card.uuid && card.makeTooltip) {
           card.tooltip = foundry.utils.escapeHTML(
             TERIOCK.display.panel.loading,
           );

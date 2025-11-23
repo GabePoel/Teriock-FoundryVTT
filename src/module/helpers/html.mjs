@@ -499,8 +499,16 @@ export async function addTrackerToExecution(execution, tracker, uuid) {
  * @param {string} title
  * @param {string} icon
  * @param {Array} associations
+ * @param {object} options
+ * @param {boolean} [options.makeTooltip]
  */
-export function quickAddAssociation(docs, title, icon, associations) {
+export function quickAddAssociation(
+  docs,
+  title,
+  icon,
+  associations,
+  options = { makeTooltip: true },
+) {
   if (docs.length > 0) {
     const association = {
       title: title,
@@ -514,6 +522,7 @@ export function quickAddAssociation(docs, title, icon, associations) {
           rescale: false,
           type: d.documentName,
           uuid: d.uuid,
+          makeTooltip: options.makeTooltip,
         };
       }),
     };

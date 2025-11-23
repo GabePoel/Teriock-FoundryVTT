@@ -41,7 +41,9 @@ globalThis.tm = {
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = constants;
 
+  CONFIG.ui.actors = applications.sidebar.TeriockActorDirectory;
   CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
+  CONFIG.ui.items = applications.sidebar.TeriockItemDirectory;
 
   applications.ux.registerEnrichers();
 
@@ -372,6 +374,12 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Register custom handlebars templates
   helpers.maintenance.registerTemplates();
+});
+
+foundry.helpers.Hooks.once("setup", function () {
+  for (const pack of game.packs) {
+    pack.applicationClass = applications.sidebar.TeriockCompendium;
+  }
 });
 
 for (const hook of Object.values(setup.hookManagement)) {

@@ -45,7 +45,6 @@ export default function CommonSheetMixin(Base) {
       static DEFAULT_OPTIONS = {
         actions: {
           changeImpactTab: this._changeImpactTab,
-          debug: this._debug,
           editImage: this._editImage,
           gmNotesOpen: this._gmNotesOpen,
           quickToggle: this._quickToggle,
@@ -105,18 +104,6 @@ export default function CommonSheetMixin(Base) {
       static async _changeImpactTab(_event, target) {
         this._impactTab = target.dataset.tab;
         await this.render();
-      }
-
-      /**
-       * Debug action for development purposes.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when debug is complete.
-       */
-      static async _debug(_event, _target) {
-        if (game.settings.get("teriock", "developerMode")) {
-          console.log("Debug", this.document, this);
-        }
       }
 
       /**
@@ -274,6 +261,7 @@ export default function CommonSheetMixin(Base) {
       _connect(selector, eventType, handler) {
         this.element.querySelectorAll(selector).forEach((el) =>
           el.addEventListener(eventType, (e) => {
+            e.stopPropagation();
             e.preventDefault();
             handler(e);
           }),
@@ -344,17 +332,12 @@ export default function CommonSheetMixin(Base) {
           this.editable = this.isEditable;
         }
         await _connectEmbedded(this.document, this.element, this.editable);
-        this._connect(".ab-title", "contextmenu", (e) => {
-          CommonSheetMixin._debug.call(this, e, e.currentTarget);
-        });
-        this._activateMenu();
-        this._connect('[data-action="sheetSelect"]', "change", (e) => {
-          const { path } = e.currentTarget.dataset;
-          if (path) {
-            foundry.utils.setProperty(this, path, e.currentTarget.value);
-            this.render();
+        this._connect("[data-action='toggleControls']", "contextmenu", () => {
+          if (game.settings.get("teriock", "developerMode")) {
+            console.log("Debug", this.document, this);
           }
         });
+        this._activateMenu();
         _setupEventListeners(this);
 
         this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(
