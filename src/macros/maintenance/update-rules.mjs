@@ -35,7 +35,9 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
     );
   }
 
-  for (const rulesPage of allRulesPages) {
+  for (const rulesPage of allRulesPages.filter(
+    (p) => !(p.title.includes("Routine") && namespace === "Core"),
+  )) {
     const title = rulesPage.title;
 
     // Extract rule name after the namespace prefix
@@ -69,11 +71,19 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
     selectorsToRemove.forEach((selector) => {
       doc.querySelectorAll(selector).forEach((el) => el.remove());
     });
+    doc.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((el) => {
+      if (el.textContent.includes("Routine")) {
+        el.remove();
+      }
+    });
 
     const html = doc.body.innerHTML;
 
-    // Create or update journal page
-    let journalPage = rulesJournal.pages.getName(rulesName);
+    // Create or update a journal page
+    let journalPage =
+      /** @type {TeriockJournalEntryPage} */ rulesJournal.pages.getName(
+        rulesName,
+      );
 
     if (!journalPage) {
       journalPage = (
@@ -93,17 +103,12 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
       console.log(`Updated: ${namespace}:${rulesName}`);
     }
 
+    let icon;
+    let image;
+
     if (namespace === "Tradecraft") {
-      await journalPage.setFlag(
-        "teriock",
-        "journalImage",
-        tm.path.getImage("tradecrafts", journalPage.name),
-      );
-      await journalPage.setFlag(
-        "teriock",
-        "journalIcon",
-        TERIOCK.options.document.fluency.icon,
-      );
+      icon = TERIOCK.options.document.fluency.icon;
+      image = tm.path.getImage("tradecrafts", journalPage.name);
     } else if (namespace === "Core") {
       if (
         [
@@ -115,34 +120,32 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
           "Presence",
         ].includes(journalPage.name)
       ) {
-        let iconName = journalPage.name;
-        if (iconName === "Presence") {
-          iconName = "Unused Presence";
+        icon = "star";
+        let imageName = journalPage.name;
+        if (imageName === "Presence") {
+          imageName = "Unused Presence";
         }
-        await journalPage.setFlag(
-          "teriock",
-          "journalImage",
-          tm.path.getImage("attributes", iconName),
-        );
-        await journalPage.setFlag("teriock", "journalIcon", "star");
-      } else if (namespace === "Damage") {
-        await journalPage.setFlag(
-          "teriock",
-          "journalImage",
-          tm.path.getImage("damage-types", journalPage.name),
-        );
-        await journalPage.setFlag("teriock", "journalIcon", "droplet-slash");
-      } else if (namespace === "Drain") {
-        await journalPage.setFlag(
-          "teriock",
-          "journalImage",
-          tm.path.getImage("drain-types", journalPage.name),
-        );
-        await journalPage.setFlag("teriock", "journalIcon", "heart-crack");
-      } else {
-        await journalPage.unsetFlag("teriock", "journalImage");
-        await journalPage.unsetFlag("teriock", "journalIcon");
+        image = tm.path.getImage("attributes", imageName);
       }
+    } else if (namespace === "Damage") {
+      icon = "heart-crack";
+      image = tm.path.getImage("damage-types", journalPage.name);
+    } else if (namespace === "Drain") {
+      icon = "droplet-slash";
+      image = tm.path.getImage("drain-types", journalPage.name);
+    } else if (namespace === "Condition") {
+      icon = TERIOCK.options.document.condition.icon;
+      image = tm.path.getImage("conditions", journalPage.name);
+    }
+    if (icon) {
+      await journalPage.setFlag("teriock", "journalIcon", icon);
+    } else {
+      await journalPage.unsetFlag("teriock", "journalIcon");
+    }
+    if (image) {
+      await journalPage.setFlag("teriock", "journalImage", image);
+    } else {
+      await journalPage.unsetFlag("teriock", "journalImage");
     }
 
     let pages = 0;

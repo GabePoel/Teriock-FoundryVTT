@@ -47,7 +47,10 @@ export default function ConsumableDataMixin(Base) {
       get embedActions() {
         return {
           ...super.embedActions,
-          useOneDoc: () => this.useOne(),
+          useOneDoc: {
+            primary: async () => await this.useOne(),
+            secondary: async () => await this.gainOne(),
+          },
         };
       }
 

@@ -1,6 +1,20 @@
 :root,
 .theme-light {
   --color-bar-border: var(--color-block-container-border);
+  --color-block-active-inset: color-mix(
+      in srgb,
+      var(--color-warm-3),
+      transparent 50%
+  );
+  --color-block-container-border: var(--color-block-display-border);
+  --color-block-display-background: var(--color-panel-background);
+  --color-block-display-border: var(--color-panel-edge);
+  --color-block-hover-inset: color-mix(
+      in srgb,
+      var(--color-warm-2),
+      transparent 50%
+  );
+  --color-block-shadow: rgba(0, 0, 0, 0.15);
   --panel-divider-style: solid;
   --color-input-blue-bg: rgb(210.4541484716, 227.8755458515, 249.0458515284);
   --color-input-grey-bg: rgb(229.5, 229.5, 229.5);
@@ -16,24 +30,29 @@
   --color-sheet-header-background: var(--color-panel-background);
   --compendium-sheet-header-background-color: var(--color-cool-4);
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.2);
-  --color-block-active-inset: color-mix(
-    in srgb,
-    var(--color-warm-3),
-    transparent 50%
-  );
-  --color-block-container-border: var(--color-block-display-border);
-  --color-block-display-background: var(--color-panel-background);
-  --color-block-display-border: var(--color-panel-edge);
-  --color-block-hover-inset: color-mix(
-    in srgb,
-    var(--color-warm-2),
-    transparent 50%
-  );
-  --color-block-shadow: rgba(0, 0, 0, 0.15);
+  --color-text-accent: var(--color-warm-2);
 }
 
 .theme-dark {
   --color-bar-border: var(--color-block-container-border);
+  --color-block-active-inset: color-mix(
+      in srgb,
+      var(--color-warm-3),
+      transparent 50%
+  );
+  --color-block-container-border: color-mix(
+      in srgb,
+      var(--color-text-subtle),
+      transparent 90%
+  );
+  --color-block-display-background: rgba(255, 255, 255, 0.1);
+  --color-block-display-border: var(--color-border);
+  --color-block-hover-inset: color-mix(
+      in srgb,
+      var(--color-warm-2),
+      transparent 50%
+  );
+  --color-block-shadow: rgba(0, 0, 0, 0.4);
   --panel-divider-style: dotted;
   --color-input-blue-bg: rgb(0, 0, 20);
   --color-input-grey-bg: rgba(0, 0, 0, 0.75);
@@ -42,43 +61,26 @@
   --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
   --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
   --color-panel-associations-border: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 75%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 75%
   );
   --color-panel-associations-shadow-color: transparent;
   --color-panel-background: transparent;
   --color-panel-divider: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 50%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 50%
   );
   --color-panel-edge: var(--color-text-subtle);
   --color-sheet-header-background: rgba(255, 255, 255, 0.03);
   --compendium-sheet-header-background-color: color-mix(
-    in srgb,
-    var(--color-level-error-bg),
-    black 75%
+      in srgb,
+      var(--color-level-error-bg),
+      black 75%
   );
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.6);
-  --color-block-active-inset: color-mix(
-    in srgb,
-    var(--color-warm-3),
-    transparent 50%
-  );
-  --color-block-container-border: color-mix(
-    in srgb,
-    var(--color-text-subtle),
-    transparent 90%
-  );
-  --color-block-display-background: rgba(255, 255, 255, 0.1);
-  --color-block-display-border: var(--color-border);
-  --color-block-hover-inset: color-mix(
-    in srgb,
-    var(--color-warm-2),
-    transparent 50%
-  );
-  --color-block-shadow: rgba(0, 0, 0, 0.4);
+  --color-text-accent: var(--color-warm-1);
 }
 
 :root,
@@ -149,6 +151,7 @@
 }
 
 [role=tooltip] {
+  max-height: calc(100% - 200px);
   --panel-padding: 4px;
 }
 [role=tooltip] .teriock-panel {
@@ -806,9 +809,55 @@ img.rescale {
   min-height: 2.3em;
 }
 
+.content-link {
+  text-decoration: underline currentColor;
+  white-space: nowrap;
+  word-break: break-all;
+  background: none;
+  border: none;
+  color: var(--content-link-text-color);
+}
+.content-link i {
+  color: var(--content-link-icon-color);
+  font-size: 0.8em;
+  margin-right: 0.1em;
+}
+
+.inline-roll {
+  text-decoration: underline currentColor;
+  white-space: nowrap;
+  word-break: break-all;
+  background: none;
+  border: none;
+  color: var(--content-link-text-color);
+}
+.inline-roll i {
+  color: var(--content-link-icon-color);
+  font-size: 0.8em;
+  margin-right: 0.1em;
+}
+
 .theme-light {
   --content-link-background: rgba(255, 255, 255, 0.5);
   --content-link-border-color: var(--color-panel-edge);
+}
+
+.teriock-content-link {
+  text-decoration: underline currentColor;
+  white-space: nowrap;
+  word-break: break-all;
+  background: none;
+  border: none;
+  color: var(--content-link-text-color);
+}
+.teriock-content-link i {
+  color: var(--content-link-icon-color);
+  font-size: 0.8em;
+  margin-right: 0.1em;
+}
+
+.teriock-not-content-link i {
+  display: none;
 }
 
 .teriock-chat-button {

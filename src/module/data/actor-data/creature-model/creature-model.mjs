@@ -21,6 +21,15 @@ export default class TeriockCreatureModel extends TeriockBaseActorModel {
   }
 
   /** @inheritDoc */
+  get messageParts() {
+    const parts = super.messageParts;
+    for (const species of this.parent.species) {
+      parts.blocks.push(...species.system.messageParts.blocks);
+    }
+    return parts;
+  }
+
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ((await super._preCreate(data, options, user)) === false) {
       return false;

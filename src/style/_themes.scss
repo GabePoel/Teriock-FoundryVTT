@@ -3,6 +3,20 @@
 :root,
 .theme-light {
   --color-bar-border: var(--color-block-container-border);
+  --color-block-active-inset: color-mix(
+    in srgb,
+    var(--color-warm-3),
+    transparent 50%
+  );
+  --color-block-container-border: var(--color-block-display-border);
+  --color-block-display-background: var(--color-panel-background);
+  --color-block-display-border: var(--color-panel-edge);
+  --color-block-hover-inset: color-mix(
+    in srgb,
+    var(--color-warm-2),
+    transparent 50%
+  );
+  --color-block-shadow: rgba(0, 0, 0, 0.15);
   --panel-divider-style: solid;
   --color-input-blue-bg: #{lighten(colors.$mp-blue, 35%)};
   --color-input-grey-bg: #{darken(white, 10%)};
@@ -18,24 +32,29 @@
   --color-sheet-header-background: var(--color-panel-background);
   --compendium-sheet-header-background-color: var(--color-cool-4);
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.2);
+  --color-text-accent: var(--color-warm-2);
+}
+
+.theme-dark {
+  --color-bar-border: var(--color-block-container-border);
   --color-block-active-inset: color-mix(
     in srgb,
     var(--color-warm-3),
     transparent 50%
   );
-  --color-block-container-border: var(--color-block-display-border);
-  --color-block-display-background: var(--color-panel-background);
-  --color-block-display-border: var(--color-panel-edge);
+  --color-block-container-border: color-mix(
+    in srgb,
+    var(--color-text-subtle),
+    transparent 90%
+  );
+  --color-block-display-background: rgba(255, 255, 255, 0.1);
+  --color-block-display-border: var(--color-border);
   --color-block-hover-inset: color-mix(
     in srgb,
     var(--color-warm-2),
     transparent 50%
   );
-  --color-block-shadow: rgba(0, 0, 0, 0.15);
-}
-
-.theme-dark {
-  --color-bar-border: var(--color-block-container-border);
+  --color-block-shadow: rgba(0, 0, 0, 0.4);
   --panel-divider-style: dotted;
   --color-input-blue-bg: #{colors.$mp-blue-drawer};
   --color-input-grey-bg: #{transparentize(black, 0.25)};
@@ -63,24 +82,7 @@
     black 75%
   );
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.6);
-  --color-block-active-inset: color-mix(
-    in srgb,
-    var(--color-warm-3),
-    transparent 50%
-  );
-  --color-block-container-border: color-mix(
-    in srgb,
-    var(--color-text-subtle),
-    transparent 90%
-  );
-  --color-block-display-background: rgba(255, 255, 255, 0.1);
-  --color-block-display-border: var(--color-border);
-  --color-block-hover-inset: color-mix(
-    in srgb,
-    var(--color-warm-2),
-    transparent 50%
-  );
-  --color-block-shadow: rgba(0, 0, 0, 0.4);
+  --color-text-accent: var(--color-warm-1);
 }
 
 :root,

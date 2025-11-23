@@ -256,6 +256,10 @@ export function _defineGeneral(schema) {
       initial: false,
       label: "Granter Only",
     }),
+    grantOnlyText: new TextField({
+      initial: "",
+      label: "Granter Only",
+    }),
     heightened: new TextField({
       initial: "",
       label: "Heightened",

@@ -1,6 +1,10 @@
 import { actionHandlers } from "../../helpers/interaction/_module.mjs";
 import { TeriockContextMenu } from "../ux/_module.mjs";
-import { imageContextMenuOptions, previewSheet } from "./_module.mjs";
+import {
+  imageContextMenuOptions,
+  previewSheet,
+  wikiContextMenuOptions,
+} from "./_module.mjs";
 
 /**
  * Bind common actions to some element.
@@ -12,6 +16,16 @@ export default function bindCommonActions(rootElement) {
     jQuery: false,
     fixed: true,
   });
+  new TeriockContextMenu(
+    rootElement,
+    "[data-wiki-context]",
+    wikiContextMenuOptions,
+    {
+      eventName: "contextmenu",
+      jQuery: false,
+      fixed: true,
+    },
+  );
   const actionElements = rootElement.querySelectorAll("[data-action]");
   for (const /** @type {HTMLElement} */ element of actionElements) {
     const action = element.dataset.action;
@@ -31,6 +45,30 @@ export default function bindCommonActions(rootElement) {
       await handler.secondaryAction();
     });
   }
+  queryAll(rootElement, "[data-teriock-content-link]").forEach(
+    /** @param {HTMLLinkElement} el */ (el) => {
+      if (game.settings.get("teriock", "systemLinks")) {
+        el.dataset.makeTooltip = "true";
+        el.classList.add("teriock-content-link");
+        el.classList.remove("teriock-not-content-link");
+        el.addEventListener("click", async () => {
+          const uuid = el.dataset.uuid;
+          const doc = await fromUuid(uuid);
+          if (doc) {
+            await doc.sheet.render(true);
+          }
+        });
+      } else {
+        el.classList.remove("teriock-content-link");
+        el.classList.add("teriock-not-content-link");
+        el.href = el.dataset.wikiAddress;
+      }
+      if (!game.settings.get("teriock", "systemTooltips")) {
+        el.removeAttribute("data-make-tooltip");
+        el.removeAttribute("data-tooltip-html");
+      }
+    },
+  );
   queryAll(rootElement, "[data-make-tooltip], [data-rich-tooltip]").forEach(
     /** @param {HTMLElement} el */ (el) => {
       // Determine tooltip direction

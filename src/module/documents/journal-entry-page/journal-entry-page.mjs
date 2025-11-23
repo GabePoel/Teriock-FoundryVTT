@@ -7,6 +7,7 @@ const { JournalEntryPage } = foundry.documents;
 /**
  * The Teriock {@link JournalEntry} implementation.
  * @extends {ClientDocument}
+ * @extends {JournalEntryPage}
  * @mixes BaseDocument
  */
 export default class TeriockJournalEntryPage extends PanelDocumentMixin(

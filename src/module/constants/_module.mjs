@@ -4,3 +4,4 @@ export * as display from "./display/_module.mjs";
 export * as index from "./index/_module.mjs";
 export * as options from "./options/_module.mjs";
 export * as system from "./system/_module.mjs";
+export * as aliases from "./aliases/_module.mjs";

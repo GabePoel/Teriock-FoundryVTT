@@ -70,7 +70,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         icon: makeIcon("check", "contextMenu"),
         callback: this.parent.enable.bind(this.parent),
         condition:
-          this.parent.parent.isOwner &&
+          this.parent.parent?.isOwner &&
           this.parent.disabled &&
           this.parent.type !== "equipment",
         group: "control",
@@ -80,7 +80,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         icon: makeIcon("xmark-large", "contextMenu"),
         callback: this.parent.disable.bind(this.parent),
         condition:
-          this.parent.parent.isOwner &&
+          this.parent.parent?.isOwner &&
           !this.parent.disabled &&
           this.parent.type !== "equipment" &&
           this.parent.type !== "mount" &&
@@ -148,12 +148,14 @@ export default class ChildTypeModel extends CommonTypeModel {
   get embedActions() {
     return {
       ...super.embedActions,
-      useDoc: async (event, relative) => {
-        const options = this.parseEvent(event);
-        if (relative?.actor) {
-          options.actor = relative.actor;
-        }
-        await this.parent.use(options);
+      useDoc: {
+        primary: async (event, relative) => {
+          const options = this.parseEvent(event);
+          if (relative?.actor) {
+            options.actor = relative.actor;
+          }
+          await this.parent.use(options);
+        },
       },
     };
   }

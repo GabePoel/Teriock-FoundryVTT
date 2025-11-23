@@ -60,6 +60,8 @@ declare module "./ability-model.mjs" {
     gifted: CostAdjustment;
     /** <schema> Can only be used with the item that grants it. */
     grantOnly: boolean;
+    /** <derived> Text describing this being granted. */
+    grantOnlyText: string;
     /** <schema> Description of how this ability changes if heightened */
     heightened: string;
     /** <schema> Impacts of using this ability */

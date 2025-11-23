@@ -69,15 +69,15 @@ export default class CommonTypeModel extends TypeDataModel {
 
   /**
    * Actions that can fire from an embedded element representing this.
-   * @returns {Record<string, function>}
+   * @returns {Record<string, Teriock.EmbedData.EmbedAction>}
    */
   get embedActions() {
     const actions = {
-      openDoc: async () => this.parent.sheet.render(true),
+      openDoc: { primary: async () => this.parent.sheet.render(true) },
     };
     for (const embedIcon of this.embedIcons) {
       if (embedIcon.action && embedIcon.callback) {
-        actions[embedIcon.action] = embedIcon.callback;
+        actions[embedIcon.action] = { primary: embedIcon.callback };
       }
     }
     return actions;

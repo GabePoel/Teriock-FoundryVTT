@@ -39,6 +39,7 @@ export async function _parse(equipmentData, rawHTML) {
   delete parameters.powerLevel;
   delete parameters.quantity;
   delete parameters.maxQuantity;
+  delete parameters.onUse;
 
   // Parse damage
   const damageText = getText(".damage");

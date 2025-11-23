@@ -146,7 +146,7 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(
   get embedActions() {
     return {
       ...super.embedActions,
-      execute: async (event) => await this.scopedExecute(event),
+      execute: { primary: async (event) => await this.scopedExecute(event) },
     };
   }
 

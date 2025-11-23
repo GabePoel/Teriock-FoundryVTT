@@ -63,6 +63,22 @@ export function registerSettings() {
       scope: "user",
       type: Number,
     },
+    systemLinks: {
+      config: true,
+      default: false,
+      hint: "If enabled, links that can be opened within Foundry will do so instead of to the wiki.",
+      name: "System Links",
+      scope: "user",
+      type: Boolean,
+    },
+    systemTooltips: {
+      config: true,
+      default: false,
+      hint: "If enabled, links that can be opened within Foundry will display tooltips.",
+      name: "System Tooltips",
+      scope: "user",
+      type: Boolean,
+    },
     compendiumTooltips: {
       config: true,
       default: true,

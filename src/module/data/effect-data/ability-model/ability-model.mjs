@@ -159,6 +159,11 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
         "system.heightened",
         "system.endCondition",
         {
+          path: "system.grantOnlyText",
+          classes: "italic-display-field ab-improvement-attribute",
+          editable: false,
+        },
+        {
           path: "system.improvements.attributeImprovement.text",
           classes: "italic-display-field ab-improvement-attribute",
           editable: false,
@@ -251,17 +256,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
         this.executionTime
       ] ?? this.executionTime;
     return parts;
-  }
-
-  /**
-   * Gets the granting text.
-   * @returns {string}
-   */
-  get grantOnlyText() {
-    if (this.grantOnly) {
-      return `This ability can only be used with @UUID[${this.parent.parent.uuid}].`;
-    }
-    return "";
   }
 
   /**

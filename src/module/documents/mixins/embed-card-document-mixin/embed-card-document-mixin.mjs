@@ -18,15 +18,15 @@ export default function EmbedCardDocumentMixin(Base) {
     class EmbedCardDocument extends Base {
       /**
        * Actions that can fire from an embedded element representing this.
-       * @returns {Record<string, function>}
+       * @returns {Record<string, Teriock.EmbedData.EmbedAction>}
        */
       get embedActions() {
         const actions = {
-          openDoc: async () => this.sheet.render(true),
+          openDoc: { primary: async () => this.sheet.render(true) },
         };
         for (const embedIcon of this.embedIcons) {
           if (embedIcon.action && embedIcon.callback) {
-            actions[embedIcon.action] = embedIcon.callback;
+            actions[embedIcon.action] = { primary: embedIcon.callback };
           }
         }
         return actions;
@@ -41,7 +41,7 @@ export default function EmbedCardDocumentMixin(Base) {
       }
 
       /**
-       * Parts that will be passed into a handlebars helper to asynchronously make an embedded element.
+       * Parts that will be passed into a handlebar helper to asynchronously make an embedded element.
        * @returns {Teriock.EmbedData.EmbedParts}
        */
       get embedParts() {
@@ -79,6 +79,38 @@ export default function EmbedCardDocumentMixin(Base) {
       /** @inheritDoc */
       onEmbed(element) {
         bindCommonActions(element);
+        element.querySelectorAll("[data-action]").forEach((el) => {
+          const action = el.dataset.action;
+          if (this.embedActions[action]) {
+            for (const [type, callback] of Object.entries({
+              click: "primary",
+              contextmenu: "secondary",
+            })) {
+              if (this.embedActions[action][callback]) {
+                el.addEventListener(type, async (event) => {
+                  event.stopPropagation();
+                  const target = /** @type {HTMLElement} */ event.target;
+                  const card =
+                    /** @type {HTMLElement} */ target.closest(
+                      "[data-relative]",
+                    );
+                  const relativeUuid = card?.dataset.relative;
+                  let relative;
+                  if (relativeUuid) {
+                    relative = await fromUuid(relativeUuid);
+                  }
+                  await this.embedActions[action][callback](event, relative);
+                  if (relative && relative.isViewer) {
+                    await relative.sheet.render();
+                  }
+                  if (relative?.parent && relative.isViewer) {
+                    await relative.parent.sheet.render();
+                  }
+                });
+              }
+            }
+          }
+        });
         const menuEntries = this.cardContextMenuEntries;
         if (menuEntries) {
           new TeriockContextMenu(
@@ -92,37 +124,6 @@ export default function EmbedCardDocumentMixin(Base) {
             },
           );
         }
-        element.addEventListener("click", async (event) => {
-          const target = /** @type {HTMLElement} */ event.target;
-          const card =
-            /** @type {HTMLElement} */ target.closest("[data-relative]");
-          const relativeUuid = card?.dataset.relative;
-          let relative;
-          if (relativeUuid) {
-            relative = await fromUuid(relativeUuid);
-          }
-          const actionButton =
-            /** @type {HTMLElement} */ target.closest("[data-action]");
-          if (actionButton) {
-            event.stopPropagation();
-            if (
-              Object.keys(this.embedActions).includes(
-                actionButton.dataset.action,
-              )
-            ) {
-              await this.embedActions[actionButton.dataset.action](
-                event,
-                relative,
-              );
-              if (relative && relative.isViewer) {
-                await relative.sheet.render();
-              }
-              if (relative?.parent && relative.isViewer) {
-                await relative.parent.sheet.render();
-              }
-            }
-          }
-        });
       }
     }
   );

@@ -87,4 +87,10 @@ export function _prepareDerivedData(abilityData) {
   } else {
     abilityData.improvements.featSaveImprovement.text = "";
   }
+
+  if (abilityData.grantOnly) {
+    abilityData.grantOnlyText = `This ability can only be used with @UUID[${abilityData.parent.parent.uuid}].`;
+  } else {
+    abilityData.grantOnlyText = "";
+  }
 }
