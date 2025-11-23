@@ -94,6 +94,7 @@ function cleanEntry(doc) {
     delete doc._stats.modifiedTime;
     delete doc._stats.duplicateSource;
     delete doc._stats.exportSource;
+    delete doc._stats.compendiumSource;
     if (doc._stats.coreVersion) {
       doc._stats.coreVersion = doc._stats.coreVersion.split(".")[0];
       doc._stats.coreVersion = "13";
@@ -109,8 +110,10 @@ function cleanEntry(doc) {
     delete doc.system.proficient;
     delete doc.system.fluent;
     delete doc.system.disabled;
+    delete doc.system.gmNotes;
     delete doc.tint;
     delete doc.sort;
+    delete doc.system.virtualProperties;
     delete doc.system.hpDice;
     delete doc.system.mpDice;
     delete doc.system.hpDiceBase;

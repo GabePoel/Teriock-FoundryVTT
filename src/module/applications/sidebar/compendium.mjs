@@ -8,6 +8,8 @@ export default class TeriockCompendium extends Compendium {
 
   async _onRender(context, options) {
     await super._onRender(context, options);
-    bindCommonActions(this.element);
+    if (game.settings.get("teriock", "compendiumTooltips")) {
+      bindCommonActions(this.element);
+    }
   }
 }

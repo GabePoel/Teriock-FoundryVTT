@@ -1,6 +1,6 @@
 import { rollButtons } from "../../constants/display/buttons.mjs";
-import TeriockStatManager from "./stat-manager.mjs";
 import { actionHandlers } from "../../helpers/interaction/_module.mjs";
+import TeriockStatManager from "./stat-manager.mjs";
 
 const { fields } = foundry.data;
 

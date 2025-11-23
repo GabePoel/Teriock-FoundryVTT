@@ -10,6 +10,17 @@ export default function PanelDocumentMixin(Base) {
      * @mixin
      */
     class PanelDocument extends Base {
+      /** @returns {Teriock.MessageData.MessagePanel} */
+      get messageParts() {
+        return {
+          name: this.nameString || this.name,
+          image: systemPath("icons/documents/uncertainty.svg"),
+          icon: "file",
+          blocks: [],
+          bars: [],
+        };
+      }
+
       /** @inheritDoc */
       async toMessage(options = {}) {
         const panel = await this.toPanel();
@@ -55,17 +66,6 @@ export default function PanelDocumentMixin(Base) {
       /** @inheritDoc */
       async toTooltip() {
         return await TeriockTextEditor.makeTooltip(this.messageParts);
-      }
-
-      /** @returns {Teriock.MessageData.MessagePanel} */
-      get messageParts() {
-        return {
-          name: this.nameString || this.name,
-          image: systemPath("icons/documents/uncertainty.svg"),
-          icon: "file",
-          blocks: [],
-          bars: [],
-        };
       }
     }
   );

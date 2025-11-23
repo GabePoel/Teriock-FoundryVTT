@@ -332,7 +332,7 @@ export default function CommonSheetMixin(Base) {
           this.editable = this.isEditable;
         }
         await _connectEmbedded(this.document, this.element, this.editable);
-        this._connect("[data-action='toggleControls']", "contextmenu", () => {
+        this._connect("[data-debug]", "contextmenu", () => {
           if (game.settings.get("teriock", "developerMode")) {
             console.log("Debug", this.document, this);
           }

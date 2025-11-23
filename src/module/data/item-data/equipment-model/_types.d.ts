@@ -56,8 +56,6 @@ declare global {
     shattered: boolean;
     /** <schema> Presence Tier */
     tier: Teriock.Fields.ModifiableDeterministic;
-    /** <schema> <special> Virtual Properties */
-    virtualProperties: Set<string>;
     /** <schema> Weight (lb) */
     weight: Teriock.Fields.ModifiableNumber & {
       /** <special> Weight times quantity */
@@ -69,6 +67,7 @@ declare global {
 }
 
 declare module "./equipment-model.mjs" {
+  //@ts-expect-error Context menu entries.
   export default interface TeriockEquipmentModel extends TeriockEquipmentData {
     get parent(): TeriockEquipment;
   }

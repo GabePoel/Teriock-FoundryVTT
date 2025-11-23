@@ -63,6 +63,22 @@ export function registerSettings() {
       scope: "user",
       type: Number,
     },
+    compendiumTooltips: {
+      config: true,
+      default: true,
+      hint: "If enabled, tooltips will be displayed for compendium entries.",
+      name: "Compendium Tooltips",
+      scope: "user",
+      type: Boolean,
+    },
+    sidebarTooltips: {
+      config: true,
+      default: true,
+      hint: "If enabled, tooltips will be displayed for sidebar entries.",
+      name: "Sidebar Tooltips",
+      scope: "user",
+      type: Boolean,
+    },
     placeTemplateOnAbilityUse: {
       config: true,
       default: true,

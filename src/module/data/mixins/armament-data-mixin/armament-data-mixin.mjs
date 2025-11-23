@@ -105,7 +105,6 @@ export default function ArmamentDataMixin(Base) {
             label: "Warded",
             nullable: false,
           }),
-          virtualProperties: new fields.SetField(new fields.StringField()),
         });
       }
 

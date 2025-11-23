@@ -8,6 +8,8 @@ export default class TeriockItemDirectory extends ItemDirectory {
 
   async _onRender(context, options) {
     await super._onRender(context, options);
-    bindCommonActions(this.element);
+    if (game.settings.get("teriock", "sidebarTooltips")) {
+      bindCommonActions(this.element);
+    }
   }
 }

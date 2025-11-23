@@ -114,6 +114,12 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   /** @inheritDoc */
   get messageParts() {
     const parts = super.messageParts;
+    parts.blocks = [
+      {
+        title: "Notes",
+        text: this.sheet.notes,
+      },
+    ];
     quickAddAssociation(
       docSort(this.parent.equipment),
       "Equipment",

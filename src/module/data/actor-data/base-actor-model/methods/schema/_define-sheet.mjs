@@ -30,7 +30,7 @@ export function _defineSheet(schema) {
       rank: displayField(),
       resource: displayField(),
     }),
-    notes: new fields.HTMLField({ initial: "Notes can be added here." }),
+    notes: new fields.HTMLField({ initial: "" }),
   });
   return schema;
 }
