@@ -15,6 +15,11 @@ command: >-
   });
 
 
+  const classJournalUuid =
+    "Compendium.teriock.rules.JournalEntry.oVIOjeytcScUC2QJ";
+  const classJournal =
+    /** @type {TeriockJournalEntry} */ await fromUuid(classJournalUuid);
+
   /**
    * Processes a single rank item
    * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key
@@ -35,7 +40,7 @@ command: >-
       rankItem = await fromUuid(rankItem.uuid);
     }
 
-    // Create new item
+    // Create a new item
     const itemData = {
       name,
       type: "rank",
@@ -105,11 +110,40 @@ command: >-
 
     // Create promises for all ranks (1-5) in parallel
     const rankPromises = [];
+    const rankNames = [];
     for (let r = 1; r < 6; r++) {
+      rankNames.push(`Rank ${r} ${classObj.name}`);
       rankPromises.push(
         processRank(archetype, className, classObj, r, classFolder),
       );
     }
+
+    const classPage = classJournal.pages.getName(classObj.name);
+    const rankUuids = rankNames
+      .map((n) => classPack.index.find((e) => e.name === n)?.uuid)
+      .filter((n) => n);
+    const rankText = rankUuids.map((u) => `@Embed[${u}]`).join(`\n`);
+    const archetypeText = `@Embed[${classPack.index.getName(tm.string.toTitleCase(archetype)).uuid}]`;
+    const flaws = (await fromUuid(rankUuids[0]))?.system.flaws;
+    const text = tm.utils.dedent(`
+      ${TERIOCK.content.classes[className]}${flaws ? `\n<h2>Flaws</h2>\n${flaws}` : ""}
+      <h2>Archetype</h2>
+      <p>Every ${archetype} class gets the following power.</p>
+      ${archetypeText}
+      <h2>Ranks</h2>
+      <p>For ranks 3, 4, and 5, choose one combat ability and one support ability to gain at each rank.</p>
+      ${rankText}`);
+    await classPage.update({ "text.content": text });
+    await classPage.setFlag(
+      "teriock",
+      "journalImage",
+      tm.path.getImage("classes", classObj.name),
+    );
+    await classPage.setFlag(
+      "teriock",
+      "journalIcon",
+      TERIOCK.options.rank[archetype].classes[className].icon,
+    );
 
     try {
       const rankResults = await Promise.all(rankPromises);

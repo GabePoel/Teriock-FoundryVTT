@@ -135,12 +135,13 @@ export function addClickHandler(elements, handler) {
  */
 export function makeDamageTypeButtons(roll) {
   const damage = {
+    dirtydark: ["terrored"],
+    financial: ["hollied", "terrored"],
     fire: ["burned"],
     holy: ["hollied"],
     ice: ["frozen"],
     terror: ["terrored"],
     vine: ["snared"],
-    financial: ["hollied", "terrored"],
   };
   const buttons = [];
   const statuses = new Set();

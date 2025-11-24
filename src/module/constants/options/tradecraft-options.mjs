@@ -143,6 +143,10 @@ export const tradecraftOptions = {
         name: "Metaphysicist",
         icon: "book-sparkles",
       },
+      tinkerer: {
+        name: "Tinkerer",
+        icon: "screwdriver-wrench",
+      },
     },
   },
 };
