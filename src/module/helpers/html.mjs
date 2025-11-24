@@ -484,7 +484,7 @@ export async function addTrackersToExecution(execution, tracker, uuids) {
 }
 
 /**
- * Add tracker to roll config.
+ * Add a tracker to roll config.
  * @param {AbilityExecution} execution
  * @param {string} tracker
  * @param {Teriock.UUID<TeriockTokenDocument|TeriockActor>} uuid

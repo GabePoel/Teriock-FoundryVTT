@@ -467,10 +467,12 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
    * @inheritDoc
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
-  async roll(options = {}) {
+  async roll(
+    options = /** @type {Teriock.Execution.AbilityExecutionOptions} */ {},
+  ) {
     options.source = this.parent;
     if (this.grantOnly && this.parent.parent.metadata.armament) {
-      options.armament = this.parent.parent;
+      options.armament = /** @type {TeriockArmament} */ this.parent.parent;
     }
     const execution = new AbilityExecution(options);
     await execution.execute();

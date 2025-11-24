@@ -7,8 +7,10 @@ export default class TeriockTooltipManager extends TooltipManager {
   /** @inheritDoc */
   activate(element, options = {}) {
     super.activate(element, options);
-    //noinspection JSUnresolvedReference
-    if (this.tooltip?.firstElementChild?.classList.contains("teriock-panel")) {
+    if (
+      this.tooltip.firstElementChild &&
+      this.tooltip.firstElementChild.classList.contains("teriock-panel")
+    ) {
       this.tooltip.classList.toggle("teriock-rich-tooltip", true);
     }
     bindCommonActions(this.tooltip);

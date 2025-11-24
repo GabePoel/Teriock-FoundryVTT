@@ -8,24 +8,14 @@ import { fieldBuilders } from "../../../../shared/fields/helpers/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * Creates a field for consequence rolls configuration.
- *
- * This field allows defining various roll formulas for different effect types:
- * - Damage, drain, wither rolls
- * - Healing and revitalization rolls
- * - Temporary HP/MP manipulation
- * - Sleep, kill, and other special effects
+ * Creates a field for impact rolls configuration.
  *
  * Relevant wiki pages:
  * - [Damage types](https://wiki.teriock.com/index.php/Category:Damage_types)
  * - [Drain types](https://wiki.teriock.com/index.php/Category:Drain_types)
  *
- * @returns {RecordField} Field for configuring consequence rolls
+ * @returns {RecordField} Field for configuring impact rolls
  * @private
- *
- * @example
- * // Create roll fields
- * const rollsField = consequenceRollsField();
  */
 export function impactRollsField() {
   return new RecordField(
@@ -42,16 +32,9 @@ export function impactRollsField() {
 }
 
 /**
- * Creates a field for consequence changes configuration.
- *
- * This field defines changes that are applied to the target as part of the consequence.
- *
- * @returns {ArrayField} Field for configuring consequence changes
+ * Creates a field for impact changes configuration.
+ * @returns {ArrayField} Field for configuring impact changes
  * @private
- *
- * @example
- * // Create changes field
- * const changesField = consequenceChangesField();
  */
 export function impactChangesField() {
   return new fields.ArrayField(fieldBuilders.changeField(), {
@@ -62,7 +45,6 @@ export function impactChangesField() {
 
 /**
  * Creates a field for ability-specific expiration data.
- *
  * @returns {SchemaField}
  */
 function impactExpirationField() {
@@ -78,19 +60,8 @@ function impactExpirationField() {
 }
 
 /**
- * Creates a field for consequence data configuration.
- *
- * This field defines what effects apply to targets at different proficiency levels:
- * - **Statuses**: Conditions applied to the target
- * - **Damage**: Damage formulas applied
- * - **Drain**: Drain formulas effects
- * - **Changes**: Effect changes to target properties
- *
+ * Creates a field for impact data configuration.
  * @returns {SchemaField} Field for configuring impacts data
- *
- * @example
- * // Create impacts field
- * const impactsField = impactsField();
  */
 function abilityImpactField() {
   return new fields.SchemaField({
@@ -235,7 +206,7 @@ function abilityImpactField() {
 }
 
 /**
- * Defines the consequence fields for Teriock ability data schema.
+ * Defines the impact fields for ability data schema.
  *
  * This function creates schema fields for data that applies to targets at different
  * proficiency levels:
@@ -244,16 +215,9 @@ function abilityImpactField() {
  * - **Proficient**: Enhanced effects when proficient with the ability
  * - **Fluent**: Maximum effects when fluent with the ability
  *
- * Each level can have different status effects, damage formulas, drain effects,
- * and property changes applied to targets.
- *
  * @param {object} schema - The base schema object to extend.
  * @returns {object} Schema object with consequence fields added.
  * @private
- *
- * @example
- * // Add consequence fields to a schema.
- * const schema = _defineConsequences(schema);
  */
 export function _defineImpacts(schema) {
   schema.impacts = new fields.SchemaField({

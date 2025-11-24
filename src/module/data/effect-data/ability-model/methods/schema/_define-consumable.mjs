@@ -1,9 +1,9 @@
 const { fields } = foundry.data;
 
 /**
- * Defines the consumable fields for Teriock ability data schema.
- * @param {object} schema - The base schema object to extend.
- * @returns {object} Schema object with consumable fields added.
+ * Defines the consumable fields for ability data schema.
+ * @param {object} schema
+ * @returns {object}
  * @private
  */
 export function _defineConsumable(schema) {

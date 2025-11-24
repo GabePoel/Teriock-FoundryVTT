@@ -144,7 +144,7 @@ export default function bindCommonActions(rootElement) {
  * Like querySelectorAll, but includes the root element if it matches.
  * @param {HTMLElement} root
  * @param {string} selector
- * @returns {HTMLElement[]} An array of matching elements (root + descendants).
+ * @returns {HTMLElement[]} An array of matching elements (root and descendants).
  */
 export function queryAll(root, selector) {
   const result = [];

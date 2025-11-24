@@ -3,37 +3,9 @@ import { FormulaField, TextField } from "../../../../shared/fields/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * Defines the general fields for Teriock ability data schema.
- *
- * This function creates the core schema fields for ability data, including:
- *
- * **Basic Properties:**
- * - Identification and parent/child relationships
- * - Elder Sorcery configuration
- * - Core ability mechanics (interaction, delivery, targets)
- *
- * **Combat Properties:**
- * - Maneuver types and execution times
- * - Piercing and improvement systems
- * - Range and duration configuration
- *
- * **Ability Types:**
- * - Skill, spell, standard, ritual classifications
- * - Basic abilities and special types
- * - Class associations and rotator abilities
- *
- * **Costs and Effects:**
- * - MP and HP cost systems (static, formula, variable)
- * - Component costs (verbal, somatic, material)
- * - Effect arrays and expansion mechanics
- *
- * **Text Content:**
- * - Overview text for different proficiency levels
- * - Results text for various outcomes
- * - Requirements, limitations, and improvements
- *
- * @param {object} schema - The base schema object to extend
- * @returns {object} Schema object with general ability fields added
+ * General purpose ability schema.
+ * @param {object} schema
+ * @returns {object}
  * @private
  */
 export function _defineGeneral(schema) {

@@ -17,7 +17,7 @@ const classJournal =
  * @param {object} classObj - The class object
  * @param {number} rank - The rank number
  * @param {TeriockFolder} classFolder - The class folder object
- * @returns {Promise<Object>} Promise that resolves with processing result
+ * @returns {Promise<Object>} Promise that resolves with the processing result
  */
 async function processRank(archetype, className, classObj, rank, classFolder) {
   const name = `Rank ${rank} ${classObj.name}`;
@@ -74,7 +74,7 @@ async function processRank(archetype, className, classObj, rank, classFolder) {
  * @returns {Promise<Object>} Promise that resolves with processing results
  */
 async function processClass(archetype, className, classObj, archetypeFolder) {
-  // Find or create class folder
+  // Find or create a class folder
   let classFolder = classFolders.getName(classObj.name);
   if (!classFolder) {
     try {
@@ -106,7 +106,10 @@ async function processClass(archetype, className, classObj, archetypeFolder) {
     );
   }
 
-  const classPage = classJournal.pages.getName(classObj.name);
+  const classPage =
+    /** @type {TeriockJournalEntryPage} */ classJournal.pages.getName(
+      classObj.name,
+    );
   const rankUuids = rankNames
     .map((n) => classPack.index.find((e) => e.name === n)?.uuid)
     .filter((n) => n);
@@ -157,7 +160,7 @@ async function processClass(archetype, className, classObj, archetypeFolder) {
  * @returns {Promise<Object>} Promise that resolves with processing results
  */
 async function processArchetype(archetype, archetypeObj) {
-  // Find or create archetype folder
+  // Find or create an archetype folder
   let archetypeFolder = classFolders.getName(archetypeObj.name);
   if (!archetypeFolder) {
     try {

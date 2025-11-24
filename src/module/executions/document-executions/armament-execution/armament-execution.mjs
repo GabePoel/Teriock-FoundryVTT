@@ -12,7 +12,9 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /**
    * @param {Teriock.Execution.ArmamentExecutionOptions} options
    */
-  constructor(options = {}) {
+  constructor(
+    options = /** @type {Teriock.Execution.ArmamentExecutionOptions} */ {},
+  ) {
     super(options);
     const {
       crit = false,
