@@ -21,17 +21,23 @@ export default class TeriockPowerModel extends ProficiencyDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      type: new fields.StringField({
-        initial: "other",
-        label: "Power Type",
-      }),
       flaws: new TextField({
         initial: "",
         label: "Flaws",
       }),
+      maxAv: new fields.NumberField({
+        initial: 4,
+        integer: true,
+        label: "Max AV",
+        min: 0,
+      }),
       proficient: new fields.BooleanField({
         initial: true,
         label: "Proficient",
+      }),
+      type: new fields.StringField({
+        initial: "other",
+        label: "Power Type",
       }),
     });
   }
@@ -70,8 +76,37 @@ export default class TeriockPowerModel extends ProficiencyDataMixin(
       {
         icon: "fa-" + TERIOCK.options.power[this.type].icon,
         label: "Power Type",
-        wrappers: [TERIOCK.options.power[this.type].name],
+        wrappers: [
+          TERIOCK.options.power[this.type].name,
+          this.maxAv === 0 ? "No Armor" : this.maxAv + " Max AV",
+        ],
       },
     ];
+  }
+
+  /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (
+      game.settings.get("teriock", "armorSuppressesRanks") &&
+      this.actor &&
+      !this.innate &&
+      this.actor.system.defense.av.base > this.maxAv
+    ) {
+      suppressed = true;
+    }
+    return suppressed;
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if (
+      game.settings.get("teriock", "armorWeakensRanks") &&
+      this.actor &&
+      this.actor.system.defense.av.base > this.maxAv
+    ) {
+      this.proficient = false;
+    }
   }
 }

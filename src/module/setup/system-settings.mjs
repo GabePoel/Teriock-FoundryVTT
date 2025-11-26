@@ -134,6 +134,22 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    armorSuppressesRanks: {
+      config: true,
+      default: false,
+      hint: "Alternate rule. If enabled, wearing AV above a rank's maximum suppresses it.",
+      scope: "world",
+      name: "Armor Suppresses Ranks",
+      type: Boolean,
+    },
+    armorWeakensRanks: {
+      config: true,
+      default: false,
+      hint: "Alternate rule. If enabled, wearing AV above a rank's maximum removes proficiency.",
+      scope: "world",
+      name: "Armor Weakens Ranks",
+      type: Boolean,
+    },
     automaticTokenMagicConditionEffects: {
       config: true,
       default: true,

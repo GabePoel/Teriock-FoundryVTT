@@ -1,9 +1,9 @@
-name: Trap Lore
+name: Primal Form
 type: wrapper
-_id: qMuVAVhx1gXUFIVH
-img: systems/teriock/src/icons/abilities/trap-lore.webp
+_id: 0DHPMRg7GbtM3Ezt
+img: systems/teriock/src/icons/abilities/primal-form.webp
 effects:
-  - name: Trap Lore
+  - name: Primal Form
     type: ability
     system:
       consumable: false
@@ -12,15 +12,18 @@ effects:
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.qMuVAVhx1gXUFIVH
+        rootUuid: Compendium.teriock.abilities.Item.0DHPMRg7GbtM3Ezt
         subIds: []
         supId: null
       revealed: true
       impacts:
         base:
-          changes: []
-          checks:
-            - investigator
+          changes:
+            - key: system.defense.ac
+              mode: 2
+              value: '1'
+              priority: 10
+          checks: []
           common: []
           duration: 0
           endStatuses: []
@@ -260,9 +263,9 @@ effects:
         somatic: false
         material: false
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -280,33 +283,33 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: sight
+        base: self
         parent: null
         package: null
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
-      effectTypes:
-        - truthDetecting
+        description: Always Active
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: special
+      form: normal
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
+      grantOnlyText: ''
       heightened: ''
       improvement: ''
       improvements:
@@ -321,28 +324,16 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: passive
       overview:
-        base: >-
-          <p>You recognize details about traps by sight. For a given trap, you
-          know the following.</p><ul><li>How lethal it is.</li><li>If it sets
-          off some effect when disarmed.</li><li>What it was built for (keeping
-          people out, part of a puzzle, and so on).</li><li>How lethal it is
-          (roughly).</li><li>If it's designed to trigger once, a handful of
-          times, or many times.</li><li>Any noteworthy features of of the
-          trap.</li></ul><p>You may also make an
-          @L[Tradecraft:Investigator]{investigator} @L[Core:Tradecrafts]{check}
-          to learn more about the trap, its purpose, its construction, or other
-          details the @L[Core:GM]{GM} allows.</p><p>At @L[Core:GM]{GM}
-          discretion, you can also spend 10 minutes studying a trap up close to
-          get additional information.</p>
+        base: <p>Your @L[Core:Armor Class]{AC} is increased by 1.</p>
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - martial
+        - primal
       prepared: true
-      range: '120'
+      range: Self.
       requirements: ''
       results:
         hit: ''
@@ -361,11 +352,12 @@ effects:
       standard: true
       sustained: false
       targets:
-        - other
+        - self
       trigger: ''
       warded: false
-    _id: Hod3H4mLnYPLmdUH
-    img: systems/teriock/src/icons/abilities/trap-lore.webp
+      class: berserker
+    _id: xJUpwQNtExcohm4x
+    img: systems/teriock/src/icons/abilities/primal-form.webp
     changes: []
     disabled: false
     duration:
@@ -380,7 +372,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!qMuVAVhx1gXUFIVH.Hod3H4mLnYPLmdUH'
+    _key: '!items.effects!0DHPMRg7GbtM3Ezt.xJUpwQNtExcohm4x'
 ownership:
   default: 0
 flags: {}
@@ -389,4 +381,4 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!qMuVAVhx1gXUFIVH'
+_key: '!items!0DHPMRg7GbtM3Ezt'

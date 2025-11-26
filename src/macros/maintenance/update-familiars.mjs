@@ -36,6 +36,7 @@ for (const page of commonAnimalPages) {
     type: "familiar",
     description:
       "<p>Select one @L[Category:Abilities]{ability} from this to gain and delete the other one.</p>",
+    maxAv: 0,
   };
   const familiarItemFluencyData = {
     name: `${animal} Tamer`,

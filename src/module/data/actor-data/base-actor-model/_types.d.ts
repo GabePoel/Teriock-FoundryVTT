@@ -72,6 +72,8 @@ declare global {
     defense: {
       /** <base> Armor value */
       av: {
+        /** <base> Base worn armor value */
+        base: number;
         /** <base> Natural armor value */
         natural: number;
         /** <derived> Armor value */

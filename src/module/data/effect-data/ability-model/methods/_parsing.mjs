@@ -382,6 +382,10 @@ function processTags(parameters, tagTree, doc) {
     parameters.rotator = true;
     parameters.form = "special";
   }
+  if (tagTree.guildmaster) {
+    parameters.guildmaster = true;
+    parameters.form = "special";
+  }
   if (tagTree.deliveryPackage?.includes("ritual")) {
     parameters.ritual = true;
   }

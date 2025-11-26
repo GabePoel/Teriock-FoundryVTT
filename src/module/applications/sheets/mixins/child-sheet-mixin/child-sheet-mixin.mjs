@@ -39,7 +39,10 @@ export default function ChildSheetMixin(Base) {
             ...f,
             ...{
               schema: getSchema(this.document, f.path),
-              value: foundry.utils.getProperty(this.document, f.path),
+              value: foundry.utils.getProperty(
+                this.document,
+                f.path.replace(".system.", "._schema.system."),
+              ),
               label: f.label || getSchema(this.document, f.path).label,
             },
           };

@@ -1,9 +1,9 @@
-name: Trap Lore
+name: Wild Strike
 type: wrapper
-_id: qMuVAVhx1gXUFIVH
-img: systems/teriock/src/icons/abilities/trap-lore.webp
+_id: fRVQPg0UdUBFcEfP
+img: systems/teriock/src/icons/abilities/wild-strike.webp
 effects:
-  - name: Trap Lore
+  - name: Wild Strike
     type: ability
     system:
       consumable: false
@@ -12,15 +12,14 @@ effects:
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.qMuVAVhx1gXUFIVH
+        rootUuid: Compendium.teriock.abilities.Item.fRVQPg0UdUBFcEfP
         subIds: []
         supId: null
       revealed: true
       impacts:
         base:
           changes: []
-          checks:
-            - investigator
+          checks: []
           common: []
           duration: 0
           endStatuses: []
@@ -28,11 +27,11 @@ effects:
             normal:
               combat:
                 who:
-                  type: target
+                  type: executor
                 what:
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
+                  type: forced
                 when:
                   skip: 0
                   time: start
@@ -50,8 +49,11 @@ effects:
                   time: start
                   trigger: turn
             changeOnCrit: false
-            doesExpire: false
-          hacks: []
+            doesExpire: true
+          hacks:
+            - arm
+            - leg
+            - body
           macroButtonUuids: []
           noTemplate: false
           abilityButtonNames: []
@@ -260,13 +262,13 @@ effects:
         somatic: false
         material: false
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
-          type: none
+          type: hack
           value:
             static: 0
             formula: ''
@@ -280,33 +282,35 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: sight
+        base: self
         parent: null
         package: null
       duration:
-        unit: instant
-        quantity: 0
+        unit: second
+        quantity: 5
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
-      effectTypes:
-        - truthDetecting
+        description: 5 Seconds
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
-      endCondition: ''
+      endCondition: >-
+        <p>The start of your next @L[Core:Turn]{turn}. This also ends the next
+        time you make a melee @L[Category:Attack abilities]{attack}.</p>
       executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: special
+      form: normal
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
+      grantOnlyText: ''
       heightened: ''
       improvement: ''
       improvements:
@@ -324,25 +328,19 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You recognize details about traps by sight. For a given trap, you
-          know the following.</p><ul><li>How lethal it is.</li><li>If it sets
-          off some effect when disarmed.</li><li>What it was built for (keeping
-          people out, part of a puzzle, and so on).</li><li>How lethal it is
-          (roughly).</li><li>If it's designed to trigger once, a handful of
-          times, or many times.</li><li>Any noteworthy features of of the
-          trap.</li></ul><p>You may also make an
-          @L[Tradecraft:Investigator]{investigator} @L[Core:Tradecrafts]{check}
-          to learn more about the trap, its purpose, its construction, or other
-          details the @L[Core:GM]{GM} allows.</p><p>At @L[Core:GM]{GM}
-          discretion, you can also spend 10 minutes studying a trap up close to
-          get additional information.</p>
+          <p>The next melee @L[Category:Attack abilities]{attack} you make
+          before the start of your next @L[Core:Turns]{turn} is
+          @L[Keyword:Boosted]{boosted} and @L[Keyword:AV0]{AV0}. As you make
+          this @L[Category:Attack abilities]{attack}, take a limb or body
+          @L[Condition:Hacked]{hack} as a cost. You do not pay this cost unless
+          you make the corresponding @L[Category:Attack abilities]{attack}.</p>
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
         - martial
       prepared: true
-      range: '120'
+      range: Self.
       requirements: ''
       results:
         hit: ''
@@ -361,11 +359,12 @@ effects:
       standard: true
       sustained: false
       targets:
-        - other
+        - self
       trigger: ''
       warded: false
-    _id: Hod3H4mLnYPLmdUH
-    img: systems/teriock/src/icons/abilities/trap-lore.webp
+      class: berserker
+    _id: DAsuTF8QUCUyrqrb
+    img: systems/teriock/src/icons/abilities/wild-strike.webp
     changes: []
     disabled: false
     duration:
@@ -380,7 +379,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!qMuVAVhx1gXUFIVH.Hod3H4mLnYPLmdUH'
+    _key: '!items.effects!fRVQPg0UdUBFcEfP.DAsuTF8QUCUyrqrb'
 ownership:
   default: 0
 flags: {}
@@ -389,4 +388,4 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!qMuVAVhx1gXUFIVH'
+_key: '!items!fRVQPg0UdUBFcEfP'

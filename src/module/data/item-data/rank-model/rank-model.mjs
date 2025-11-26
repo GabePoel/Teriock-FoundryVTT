@@ -1,6 +1,10 @@
 import { getRank } from "../../../helpers/fetch.mjs";
 import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
-import { StatGiverDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import {
+  ProficiencyDataMixin,
+  StatGiverDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _parse } from "./methods/_parsing.mjs";
@@ -18,7 +22,7 @@ const { fields } = foundry.data;
  * @mixes WikiData
  */
 export default class TeriockRankModel extends StatGiverDataMixin(
-  WikiDataMixin(TeriockBaseItemModel),
+  WikiDataMixin(ProficiencyDataMixin(TeriockBaseItemModel)),
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -191,6 +195,14 @@ export default class TeriockRankModel extends StatGiverDataMixin(
         suppressed = true;
       }
     }
+    if (
+      game.settings.get("teriock", "armorSuppressesRanks") &&
+      this.actor &&
+      !this.innate &&
+      this.actor.system.defense.av.base > this.maxAv
+    ) {
+      suppressed = true;
+    }
     return suppressed;
   }
 
@@ -235,7 +247,20 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if (
+      game.settings.get("teriock", "armorWeakensRanks") &&
+      this.actor &&
+      this.actor.system.defense.av.base > this.maxAv
+    ) {
+      this.proficient = false;
+    }
+  }
+
+  /** @inheritDoc */
   prepareDerivedData() {
+    super.prepareDerivedData();
     for (const pool of Object.values(this.statDice)) {
       if (this.innate) {
         pool.disabled = true;
