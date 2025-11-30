@@ -84,7 +84,7 @@ export function contextMenus(ability) {
             "system.maneuver": "active",
             "system.executionTime": "a1",
           });
-          await ability.deleteSubs();
+          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
       },
       {
@@ -95,7 +95,7 @@ export function contextMenus(ability) {
             "system.maneuver": "reactive",
             "system.executionTime": "r1",
           });
-          await ability.deleteSubs();
+          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
       },
       {
@@ -115,7 +115,7 @@ export function contextMenus(ability) {
             "system.maneuver": "slow",
             "system.executionTime": "10 Minutes",
           });
-          await ability.deleteSubs();
+          await ability.deleteSubDocuments(ability.subs.map((s) => s._id));
         },
       },
     ],

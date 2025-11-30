@@ -27,8 +27,8 @@ export default function BaseDocumentMixin(Base) {
             {
               name: "Open Source",
               icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
-              callback: async () => await this.source.sheet.render(true),
-              condition: () => this.source?.isViewer,
+              callback: async () => await this.elder.sheet.render(true),
+              condition: () => this.elder?.isViewer,
               group: "open",
             },
             {
@@ -49,13 +49,6 @@ export default function BaseDocumentMixin(Base) {
        */
       get isViewer() {
         return this.permission >= 2;
-      }
-
-      /**
-       * The document this descends from, either determined by Foundry or the system.
-       */
-      get source() {
-        return this.parent;
       }
 
       /**

@@ -63,23 +63,41 @@ function cleanDoubleLineBreaks(html) {
 
 /**
  * @param {string} html
+ * @param {string} [name]
  * @returns {string}
  */
-export function cleanHTML(html) {
+export function cleanHTML(html, name) {
   const doc = document.createElement("div");
   doc.innerHTML = html;
+  if (name) {
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(escapedName, "g");
+    const walker = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT, {
+      acceptNode: (node) => {
+        if (node.parentElement && node.parentElement.closest("a")) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      },
+    });
+
+    let node;
+    while ((node = walker.nextNode())) {
+      if (node.nodeValue && regex.test(node.nodeValue)) {
+        node.nodeValue = node.nodeValue.replace(regex, "[[lookup name]]");
+      }
+    }
+  }
   const links = doc.querySelectorAll("a");
   for (const link of links) {
     const href = link.getAttribute("href");
     const titleAttr = link.getAttribute("title");
     const textContent = link.textContent || "";
     const isWikiLink = href?.includes("wiki.teriock.com");
-    if (isWikiLink) {
-      if (titleAttr) {
-        const display = textContent || titleAttr;
-        const enricherTag = `@L[${titleAttr}]{${display}}`;
-        link.replaceWith(document.createTextNode(enricherTag));
-      }
+    if (isWikiLink && titleAttr) {
+      const display = textContent || titleAttr;
+      const enricherTag = `@L[${titleAttr}]{${display}}`;
+      link.replaceWith(document.createTextNode(enricherTag));
     }
   }
   const tables = doc.querySelectorAll(
@@ -92,7 +110,7 @@ export function cleanHTML(html) {
       const rollableTable = tablesPack.index.getName(tableName);
       if (rollableTable) {
         const enricherTag = ` @Embed[${rollableTable.uuid}]`;
-        table.replaceWith(enricherTag);
+        table.replaceWith(document.createTextNode(enricherTag));
       }
     }
   }
@@ -111,14 +129,15 @@ export function cleanHTML(html) {
 /**
  * @param {object} obj
  * @param {string[]} keys
+ * @param {string} [name]
  */
-export function cleanObject(obj, keys) {
+export function cleanObject(obj, keys, name) {
   for (const key of keys) {
     if (foundry.utils.getProperty(obj, key)) {
       foundry.utils.setProperty(
         obj,
         key,
-        cleanHTML(foundry.utils.getProperty(obj, key)),
+        cleanHTML(foundry.utils.getProperty(obj, key), name),
       );
     }
   }

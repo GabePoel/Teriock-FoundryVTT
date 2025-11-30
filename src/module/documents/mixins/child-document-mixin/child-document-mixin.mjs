@@ -1,7 +1,6 @@
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { TeriockChatMessage } from "../../_module.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
-import ChildDocumentHierarchyPart from "./parts/child-document-hierarchy-part.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -15,18 +14,28 @@ export default function ChildDocumentMixin(Base) {
     /**
      * @implements {ChildDocumentMixinInterface}
      * @extends {ClientDocument}
-     * @extends {ChildDocumentHierarchyPart}
      * @mixes PanelDocument
      * @mixes CommonDocument
      */
-    class ChildDocument extends ChildDocumentHierarchyPart(Base) {
+    class ChildDocument extends Base {
       //noinspection ES6ClassMemberInitializationOrder
       overrides = this.overrides ?? {};
+
+      /**
+       * Treat this document as if it doesn't exist.
+       * @returns {boolean}
+       */
+      get isEphemeral() {
+        return this.system.makeEphemeral;
+      }
 
       /** @inheritDoc */
       get isFluent() {
         let fluent = false;
         if (this.system.fluent) {
+          fluent = true;
+        }
+        if (this.elder?.system.fluent) {
           fluent = true;
         }
         return fluent;
@@ -38,7 +47,7 @@ export default function ChildDocumentMixin(Base) {
         if (this.system.proficient) {
           proficient = true;
         }
-        if (this.parent?.system.proficient) {
+        if (this.elder?.system.proficient) {
           proficient = true;
         }
         if (this.isFluent) {
@@ -80,6 +89,7 @@ export default function ChildDocumentMixin(Base) {
         }
       }
 
+      /** @inheritDoc */
       applySpecialEffects() {
         const overrides = foundry.utils.deepClone(this.overrides ?? {});
         const changes = [];

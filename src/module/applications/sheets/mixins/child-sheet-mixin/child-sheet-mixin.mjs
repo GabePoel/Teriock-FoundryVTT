@@ -1,13 +1,15 @@
 import { fancifyFields, getSchema } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
+import QualifierButtonSheetMixin from "../button-mixins/qualifier-button-sheet-mixin.mjs";
 
 export default function ChildSheetMixin(Base) {
   return (
     /**
      * @property {TeriockChild} document
      * @mixes CommonSheet
+     * @mixes QualifierButtonSheet
      */
-    class ChildSheetMixin extends Base {
+    class ChildSheet extends QualifierButtonSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
@@ -85,7 +87,9 @@ export default function ChildSheetMixin(Base) {
               .map(async (f) => {
                 return {
                   ...f,
-                  enriched: await TeriockTextEditor.enrichHTML(f.value),
+                  enriched: await TeriockTextEditor.enrichHTML(f.value, {
+                    relativeTo: this.document,
+                  }),
                 };
               }),
           );

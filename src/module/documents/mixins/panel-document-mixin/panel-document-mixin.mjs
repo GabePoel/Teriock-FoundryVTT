@@ -60,12 +60,14 @@ export default function PanelDocumentMixin(Base) {
             parts = doc.messageParts;
           }
         }
-        return await TeriockTextEditor.enrichPanel(parts);
+        return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
       }
 
       /** @inheritDoc */
       async toTooltip() {
-        return await TeriockTextEditor.makeTooltip(this.messageParts);
+        return await TeriockTextEditor.makeTooltip(this.messageParts, {
+          relativeTo: this,
+        });
       }
     }
   );

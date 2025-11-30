@@ -114,22 +114,11 @@ export default (Base) => {
         if (!this._canDrop(effect)) {
           return;
         }
-        if (this.document.documentName === "ActiveEffect") {
-          effect.updateSource({ "system.hierarchy.supId": this.document.id });
-        }
-        const target =
-          this.document.documentName === "ActiveEffect"
-            ? this.document.parent
-            : this.document;
-        const newEffects = await target.createEmbeddedDocuments(
+        const created = await this.document.createChildDocuments(
           "ActiveEffect",
-          [effect],
+          [effect.toObject()],
         );
-        const newEffect = newEffects[0];
-        if (this.document.documentName === "ActiveEffect") {
-          await this.document.addSub(newEffect);
-        }
-        return newEffect;
+        return created[0];
       }
 
       async _onDropItem(_event, data) {
@@ -146,42 +135,10 @@ export default (Base) => {
         if (!this._canDrop(item)) {
           return;
         }
-        const source = await fromUuid(data.uuid);
-        if (
-          item.parent?.documentName === "Actor" &&
-          item.type === "equipment"
-        ) {
-          if (
-            item.parent?.documentName === "Actor" &&
-            item.system?.consumable
-          ) {
-            const targetItem = this.document.items.getName(item.name);
-            if (targetItem && targetItem.system.consumable) {
-              targetItem.update({
-                "system.quantity":
-                  targetItem.system.quantity + item.system.quantity,
-              });
-              await source.delete();
-              return targetItem;
-            }
-          }
-          if (source) {
-            await source.delete();
-          }
-        }
-        const newItems =
-          /** @type {TeriockItem[]} */ await this.document.actor.createEmbeddedDocuments(
-            "Item",
-            [item],
-            {
-              keepId: true,
-              keepEmbeddedIds: true,
-            },
-          );
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(newItems);
-        }
-        return newItems[0];
+        const created = await this.document.createChildDocuments("Item", [
+          item.toObject(),
+        ]);
+        return created[0];
       }
 
       async _onDropJournalEntryPage(_event, data) {

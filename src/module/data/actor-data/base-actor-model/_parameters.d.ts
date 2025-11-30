@@ -61,7 +61,7 @@ declare global {
 
     export type HookedActorMacros = Record<
       Teriock.Parameters.Shared.PseudoHook,
-      Teriock.UUID<TeriockMacro>[]
+      UUID<TeriockMacro>[]
     >;
 
     export type PayMode = "exact" | "greedy";

@@ -4,9 +4,6 @@ import { copyItem, getAbility, getProperty } from "../../../helpers/fetch.mjs";
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
 
-/**
- * @extends {DataModel}
- */
 export default class CommonTypeModel extends TypeDataModel {
   /**
    * Metadata.
@@ -14,6 +11,7 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   static get metadata() {
     return {
+      armament: false,
       childEffectTypes: [],
       childItemTypes: [],
       childMacroTypes: [],
@@ -27,12 +25,15 @@ export default class CommonTypeModel extends TypeDataModel {
       revealable: false,
       type: "base",
       usable: false,
+      visibleTypes: [],
       wiki: false,
-      armament: false,
     };
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {DataSchema}
+   */
   static defineSchema() {
     return {
       gmNotes: new fields.DocumentUUIDField({
@@ -92,14 +93,14 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Parts that will be passed into a handlebars helper to asynchronously make an embedded element.
+   * Parts that will be passed into a handlebar helper to asynchronously make an embedded element.
    * @returns {Teriock.EmbedData.EmbedParts}
    */
   get embedParts() {
     return {
       title: this.parent.nameString,
       img: this.parent.img,
-      text: this.parent.source?.nameString,
+      text: this.parent.elder?.nameString,
       color: this.color,
       openable: true,
       draggable: true,
@@ -123,7 +124,6 @@ export default class CommonTypeModel extends TypeDataModel {
       associations: [],
       bars: this.messageBars,
       blocks: this.messageBlocks,
-      buttons: [],
       color: this.color,
       font: this.font,
       image: this.parent.img,
@@ -182,10 +182,14 @@ export default class CommonTypeModel extends TypeDataModel {
         "effects",
         "flags",
         "folder",
-        "hierarchy",
         "items",
         "origin",
         "sort",
+        "system._ref",
+        "system._sup",
+        "system.qualifiers",
+        "system.qualifiers.ephemeral",
+        "system.qualifiers.suppressed",
         "tint",
         "transfer",
         "type",
@@ -221,8 +225,8 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   getRollData() {
     let rollData = {};
-    if (this.parent.actor) {
-      rollData = this.parent.actor.getRollData();
+    if (this.parent.parent) {
+      rollData = this.parent.parent.getRollData();
     }
     Object.assign(rollData, this.getSystemRollData());
     return rollData;
@@ -303,8 +307,8 @@ export default class CommonTypeModel extends TypeDataModel {
           notesPage = pages[0];
         }
         if (notesPage) {
-          await notesJournal.sheet.render(true);
-          notesJournal.sheet.goToPage(notesPage.id);
+          await notesJournal?.sheet.render(true);
+          notesJournal?.sheet.goToPage(notesPage.id);
           if (!this.parent.inCompendium) {
             await this.parent.update({
               "system.gmNotes": notesPage.uuid,
@@ -322,14 +326,12 @@ export default class CommonTypeModel extends TypeDataModel {
   async hardRefreshFromIndex() {
     const reference = await this.getIndexReference();
     if (reference) {
-      const indexAbilityNames = reference.getAbilities().map((a) => a.name);
-      const toDeleteAbilities = this.parent
-        .getAbilities()
+      const indexAbilityNames = reference.abilities.map((a) => a.name);
+      const toDeleteAbilities = this.parent.abilities
         .filter((a) => !indexAbilityNames.includes(a.name))
         .map((a) => a.id);
-      const indexPropertyNames = reference.getProperties().map((p) => p.name);
-      const toDeleteProperties = this.parent
-        .getProperties()
+      const indexPropertyNames = reference.properties.map((p) => p.name);
+      const toDeleteProperties = this.parent.properties
         .filter((p) => !indexPropertyNames.includes(p.name))
         .map((p) => p.id);
       const toDelete = [...toDeleteAbilities, ...toDeleteProperties];
@@ -346,7 +348,7 @@ export default class CommonTypeModel extends TypeDataModel {
 
   /**
    * Apply transformations of derivations to the values of the source data object. Compute data fields whose values are
-   * not stored to the database. This happens after the actor has completed all operations.
+   * not stored in the database. This happens after the actor has completed all operations.
    */
   prepareSpecialData() {}
 
@@ -358,54 +360,36 @@ export default class CommonTypeModel extends TypeDataModel {
     const indexObject = await this.getIndexObject();
     if (Object.keys(indexObject).length > 0) {
       delete indexObject.flags;
+      delete indexObject.system._ref;
+      delete indexObject.system._sup;
       delete indexObject.system.hierarchy;
       await this.parent.update(indexObject);
     }
     const reference = await this.getIndexReference();
     if (reference) {
-      const indexAbilityNames = reference.getAbilities().map((a) => a.name);
-      const indexPropertyNames = reference.getProperties().map((p) => p.name);
-      let effectParent = this.parent;
-      if (this.parent.documentName === "ActiveEffect") {
-        effectParent = this.parent.parent;
-      }
+      const indexAbilityNames = reference.abilities.map((a) => a.name);
+      const indexPropertyNames = reference.properties.map((p) => p.name);
       const abilitiesToCreate = await Promise.all(
         indexAbilityNames
-          .filter(
-            (n) =>
-              !this.parent
-                .getAbilities()
-                .map((a) => a.name)
-                .includes(n),
-          )
+          .filter((n) => !this.parent.abilities.map((a) => a.name).includes(n))
           .map((n) => getAbility(n)),
       );
       const propertiesToCreate = await Promise.all(
         indexPropertyNames
-          .filter(
-            (n) =>
-              !this.parent
-                .getProperties()
-                .map((p) => p.name)
-                .includes(n),
-          )
+          .filter((n) => !this.parent.properties.map((p) => p.name).includes(n))
           .map((n) => getProperty(n)),
       );
       const toCreate = [...abilitiesToCreate, ...propertiesToCreate];
-      const createdEffects = await effectParent.createEmbeddedDocuments(
-        "ActiveEffect",
-        toCreate,
-      );
-      if (this.parent.documentName === "ActiveEffect") {
-        await this.parent.addSubs(createdEffects);
-      }
+      await this.parent.createChildDocuments("ActiveEffect", toCreate);
     }
-    for (const a of this.parent.getAbilities()) {
+    const referenceAbilities = reference ? await reference.getAbilities() : [];
+    const abilities = await this.parent.getAbilities();
+    for (const a of abilities) {
       await a.system.hardRefreshFromIndex();
       if (reference) {
-        const referenceAbility = reference
-          .getAbilities()
-          .find((r) => r.name === a.name);
+        const referenceAbility = referenceAbilities.find(
+          (r) => r.name === a.name,
+        );
         if (referenceAbility) {
           const referenceObject = referenceAbility.toObject();
           const abilityUpdates = {};
@@ -429,7 +413,7 @@ export default class CommonTypeModel extends TypeDataModel {
         }
       }
     }
-    for (const p of this.parent.getProperties()) {
+    for (const p of await this.parent.getProperties()) {
       await p.system.hardRefreshFromIndex();
     }
     if (this.parent.documentName === "Actor") {

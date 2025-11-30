@@ -20,13 +20,15 @@ async function processAbility(abilityName, _index, _total) {
   let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
 
   if (!abilityEffect) {
-    abilityEffect = await tm.create.ability(abilityItem, abilityName, {
-      notify: false,
-      fromWiki: true,
-    });
-  } else {
-    await abilityEffect.system.wikiPull({ notify: false });
+    const abilityData = {
+      name: abilityName,
+      type: "ability",
+    };
+    abilityEffect = await abilityItem.createChildDocuments("ActiveEffect", [
+      abilityData,
+    ]);
   }
+  await abilityEffect.system.wikiPull({ notify: false });
 
   if (abilityItem.img !== abilityEffect.img) {
     await abilityItem.update({ img: abilityEffect.img });

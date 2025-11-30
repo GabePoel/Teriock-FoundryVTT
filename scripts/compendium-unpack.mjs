@@ -11,6 +11,9 @@ const expandAdventures = true;
 const folders = true;
 const BUILDER_NAME = "teriockBuilder00";
 
+const tree = {};
+let packTree = {};
+
 // noinspection JSVoidFunctionReturnValueUsed
 const packs = /** @type {string[]} */ await fs.readdir("./packs");
 for (const pack of packs) {
@@ -33,6 +36,8 @@ for (const pack of packs) {
       console.log(error);
     }
   }
+  packTree = {};
+  tree[pack] = packTree;
   await extractPack(
     `${MODULE_ID}/packs/${pack}`,
     `${MODULE_ID}/src/packs/${toKebabCaseFull(pack)}`,
@@ -45,6 +50,7 @@ for (const pack of packs) {
       folders,
     },
   );
+  console.log(tree);
 }
 
 /**
@@ -77,6 +83,7 @@ function transformFolderName(doc) {
  * @param {object} doc - The document to clean.
  */
 function cleanEntry(doc) {
+  packTree[doc._id] = toKebabCase(doc.name);
   if (doc.type !== "text") {
     delete doc.sort;
   }

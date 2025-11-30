@@ -81,7 +81,7 @@ export async function _parse(propertyData, rawHTML) {
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.img = getImage("properties", propertyData.parent.name);
   const toClean = ["description", "limitation", "improvement"];
-  cleanObject(parameters.system, toClean);
+  cleanObject(parameters.system, toClean, propertyData.parent.name);
   return parameters;
 }
 

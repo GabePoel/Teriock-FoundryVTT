@@ -1,13 +1,13 @@
 declare module "./folder.mjs" {
   export default interface TeriockFolder
     extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
-    _id: Teriock.ID<TeriockFolder>;
+    _id: ID<TeriockFolder>;
 
     get documentName(): "Folder";
 
-    get id(): Teriock.ID<TeriockFolder>;
+    get id(): ID<TeriockFolder>;
 
-    get uuid(): Teriock.UUID<TeriockFolder>;
+    get uuid(): UUID<TeriockFolder>;
   }
 }
 

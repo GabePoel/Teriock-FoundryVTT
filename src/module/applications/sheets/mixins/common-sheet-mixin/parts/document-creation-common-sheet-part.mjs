@@ -1,6 +1,5 @@
 import * as createEffects from "../../../../../helpers/create-effects.mjs";
-import { copyRank, getItem, getRank } from "../../../../../helpers/fetch.mjs";
-import { toTitleCase } from "../../../../../helpers/string.mjs";
+import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
 import {
   selectAbilityDialog,
   selectBodyPartDialog,
@@ -24,7 +23,7 @@ export default (Base) => {
         actions: {
           createAbility: this._createAbility,
           createBaseEffect: this._createBaseEffect,
-          createBodyPart: this._createBodyPart,
+          createBody: this._createBody,
           createEmbedded: this._createEmbedded,
           createEquipment: this._createEquipment,
           createFluency: this._createFluency,
@@ -41,16 +40,10 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves to the created ability.
        */
       static async _createAbility(_event, _target) {
-        const abilityKey = await selectAbilityDialog();
-        let abilityName = "New Ability";
-        if (abilityKey) {
-          if (abilityKey !== "other") {
-            abilityName = TERIOCK.index.abilities[abilityKey];
-            await tm.fetch.importAbility(this.document, abilityName);
-          } else {
-            await createEffects.createAbility(this.document, abilityName);
-          }
-        }
+        const out = await selectAbilityDialog();
+        const o = out.toObject();
+        console.log(o);
+        await this.document.createChildDocuments("ActiveEffect", [o]);
       }
 
       /**
@@ -68,28 +61,10 @@ export default (Base) => {
        * @returns {Promise<void>}
        * @private
        */
-      static async _createBodyPart() {
-        let bodyPartKey = await selectBodyPartDialog();
-        let created;
-        if (Object.keys(TERIOCK.index.bodyParts).includes(bodyPartKey)) {
-          const bodyPart = await getItem(
-            TERIOCK.index.bodyParts[bodyPartKey],
-            "bodyParts",
-          );
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            bodyPart,
-          ]);
-        } else {
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            {
-              name: toTitleCase(bodyPartKey),
-              type: "body",
-            },
-          ]);
-        }
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(created);
-        }
+      static async _createBody() {
+        await this.document.createChildDocuments("Item", [
+          (await selectBodyPartDialog())?.toObject(),
+        ]);
       }
 
       /**
@@ -158,13 +133,10 @@ export default (Base) => {
           return;
         }
         const docs =
-          /** @type {(Document|ClientDocument)[]} */ await this.document.actor.createEmbeddedDocuments(
+          /** @type {(Document|ClientDocument)[]} */ await this.document.createChildDocuments(
             entry.docType,
             [entry.data],
           );
-        if (entry.docType === this.document.documentName) {
-          await this.document.addSubs(docs);
-        }
         await docs[0].sheet?.render(true);
       }
 
@@ -174,31 +146,9 @@ export default (Base) => {
        * @private
        */
       static async _createEquipment(_event, _target) {
-        let equipmentType = await selectEquipmentTypeDialog();
-        let created;
-        if (Object.keys(TERIOCK.index.equipment).includes(equipmentType)) {
-          const equipment = await getItem(
-            TERIOCK.index.equipment[equipmentType],
-            "equipment",
-          );
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            equipment,
-          ]);
-        } else {
-          equipmentType = toTitleCase(equipmentType);
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            {
-              name: equipmentType,
-              system: {
-                equipmentType: equipmentType,
-              },
-              type: "equipment",
-            },
-          ]);
-        }
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(created);
-        }
+        await this.document.createChildDocuments("Item", [
+          (await selectEquipmentTypeDialog())?.toObject(),
+        ]);
       }
 
       /**
@@ -222,16 +172,9 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves to the created property.
        */
       static async _createProperty(_event, _target) {
-        const propertyKey = await selectPropertyDialog();
-        let propertyName = "New Property";
-        if (propertyKey) {
-          if (propertyKey !== "other") {
-            propertyName = TERIOCK.index.properties[propertyKey];
-            await tm.fetch.importProperty(this.document, propertyName);
-          } else {
-            await createEffects.createProperty(this.document, propertyName);
-          }
-        }
+        await this.document.createChildDocuments("ActiveEffect", [
+          (await selectPropertyDialog())?.toObject(),
+        ]);
       }
 
       /**
@@ -266,13 +209,7 @@ export default (Base) => {
           toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
             innate: innate,
           });
-          const created = await this.document.actor.createEmbeddedDocuments(
-            "Item",
-            [toCreate],
-          );
-          if (this.document.documentName !== "Actor") {
-            await this.document.addSubs(created);
-          }
+          await this.document.createChildDocuments("Item", [toCreate]);
           return;
         }
         /** @type {TeriockRank[]} */
@@ -352,13 +289,7 @@ export default (Base) => {
         toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
           innate: innate,
         });
-        const created = await this.document.actor.createEmbeddedDocuments(
-          "Item",
-          [toCreate],
-        );
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(created);
-        }
+        await this.document.createChildDocuments("Item", [toCreate]);
       }
 
       /**
@@ -368,7 +299,12 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves to the created resource.
        */
       static async _createResource(_event, _target) {
-        await createEffects.createResource(this.document);
+        await this.document.createChildDocuments("ActiveEffect", [
+          {
+            name: "New Resource",
+            type: "resource",
+          },
+        ]);
       }
     }
   );

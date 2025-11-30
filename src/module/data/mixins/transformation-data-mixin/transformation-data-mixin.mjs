@@ -60,8 +60,8 @@ export default function TransformationDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      get suppressed() {
-        let suppressed = super.suppressed;
+      get makeSuppressed() {
+        let suppressed = super.makeSuppressed;
         if (this.isTransformation && this.parent.actor) {
           suppressed = suppressed || !this.isPrimaryTransformation;
         }

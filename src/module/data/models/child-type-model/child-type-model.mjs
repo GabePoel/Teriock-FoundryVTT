@@ -8,10 +8,16 @@ import {
   propertySort,
 } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
+import {
+  deriveModifiableDeterministic,
+  modifiableFormula,
+  prepareModifiableBase,
+} from "../../shared/fields/modifiable.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Data model shared by items and effects.
  * @implements {ChildTypeModelInterface}
@@ -22,10 +28,7 @@ const { fields } = foundry.data;
  * @property {Teriock.Parameters.Shared.Font} font
  */
 export default class ChildTypeModel extends CommonTypeModel {
-  /**
-   * @inheritDoc
-   * @returns {Record<string, DataField>}
-   */
+  /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {
@@ -45,6 +48,20 @@ export default class ChildTypeModel extends CommonTypeModel {
       description: new TextField({
         initial: "",
         label: "Description",
+      }),
+      qualifiers: new fields.SchemaField({
+        ephemeral: modifiableFormula({
+          deterministic: true,
+          initial: "0",
+          label: "Ephemeral Formula",
+          hint: "When this formula is true, the document will be hidden and treated as if it doesn't exist.",
+        }),
+        suppressed: modifiableFormula({
+          deterministic: true,
+          initial: "0",
+          label: "Suppressed Formula",
+          hint: "When this formula is true, the document will be made inactive.",
+        }),
       }),
     });
     return schema;
@@ -123,7 +140,7 @@ export default class ChildTypeModel extends CommonTypeModel {
           await this.duplicate();
         },
         condition: () =>
-          this.parent?.parent.sheet?.editable && this.parent.isOwner,
+          this.parent?.elder?.sheet?.editable && this.parent.isOwner,
         group: "document",
       },
     ];
@@ -202,6 +219,28 @@ export default class ChildTypeModel extends CommonTypeModel {
   }
 
   /**
+   * Make this document ephemeral.
+   * @returns {boolean}
+   */
+  get makeEphemeral() {
+    return (
+      !!this.parent.elder?.isEphemeral || !!this.qualifiers.ephemeral.value
+    );
+  }
+
+  /**
+   * Make this document suppressed.
+   * @returns {boolean}
+   */
+  get makeSuppressed() {
+    return (
+      !!(this.parent.elder && !this.parent.elder?.active) ||
+      !!this.qualifiers.suppressed.value ||
+      !!this.parent.isEphemeral
+    );
+  }
+
+  /**
    * Message panel bars.
    * @returns {Teriock.MessageData.MessageBar[]}
    */
@@ -233,10 +272,10 @@ export default class ChildTypeModel extends CommonTypeModel {
   get messageParts() {
     const parts = super.messageParts;
     const properties = propertySort(
-      this.parent.getProperties().filter((p) => p.system.revealed),
+      this.parent.properties.filter((p) => p.system.revealed),
     );
     const abilities = abilitySort(
-      this.parent.getAbilities().filter((a) => a.system.revealed),
+      this.parent.abilities.filter((a) => a.system.revealed),
     );
     quickAddAssociation(
       properties,
@@ -259,19 +298,6 @@ export default class ChildTypeModel extends CommonTypeModel {
    */
   get parent() {
     return /** @type {TeriockChild} */ super.parent;
-  }
-
-  /**
-   * Checks if the child is suppressed.
-   * Children are suppressed if their parents are suppressed.
-   * @returns {boolean} True if the effect is suppressed, false otherwise.
-   */
-  get suppressed() {
-    return !!(
-      this.parent.source &&
-      this.parent.source.documentName === "Item" &&
-      !this.parent.source.active
-    );
   }
 
   /**
@@ -322,11 +348,28 @@ export default class ChildTypeModel extends CommonTypeModel {
     };
   }
 
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    prepareModifiableBase(this.qualifiers.ephemeral);
+    prepareModifiableBase(this.qualifiers.suppressed);
+    deriveModifiableDeterministic(this.qualifiers.suppressed, this.parent, {
+      min: 0,
+      max: 1,
+      floor: true,
+    });
+    deriveModifiableDeterministic(this.qualifiers.ephemeral, this.parent, {
+      min: 0,
+      max: 1,
+      floor: true,
+    });
+  }
+
   /**
    * Initiates a roll for the child document.
    * Delegates to the parent document's chat functionality.
    * @param {object} options - Options for the roll operation.
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
+   * @returns {Promise<void>}
    */
   async roll(options = {}) {
     await this.parent.toMessage(options);
@@ -334,9 +377,9 @@ export default class ChildTypeModel extends CommonTypeModel {
 
   /**
    * Uses the child document, which triggers a roll.
-   * Alias for the roll method to provide consistent interface.
+   * Alias for the roll method to provide a consistent interface.
    * @param {object} options - Options for the use operation.
-   * @returns {Promise<void>} Promise that resolves when the use is complete.
+   * @returns {Promise<void>}
    */
   async use(options = {}) {
     const data = { doc: this.parent };

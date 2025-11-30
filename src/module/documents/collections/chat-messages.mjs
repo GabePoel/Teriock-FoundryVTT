@@ -4,7 +4,7 @@ const { ChatMessages } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Collection<Teriock.ID<TeriockChatMessage>, TeriockChatMessage>}
+ * @implements {Collection<ID<TeriockChatMessage>, TeriockChatMessage>}
  * @implements {DocumentCollection<TeriockChatMessage>}
  */
 export default class TeriockChatMessages extends BaseWorldCollectionMixin(

@@ -30,13 +30,13 @@ declare global {
     export type MessageAssociationCard = {
       rescale?: boolean;
       name: string;
-      uuid?: Teriock.UUID<TeriockCommon>;
+      uuid?: UUID<TeriockCommon>;
       makeTooltip?: boolean;
       tooltip?: string;
       img: string;
       color?: string;
       icon?: string;
-      id?: Teriock.ID<TeriockCommon>;
+      id?: ID<TeriockCommon>;
       type:
         | Teriock.Documents.ActorType
         | Teriock.Documents.ItemType
@@ -73,7 +73,7 @@ declare global {
       /** Additional CSS classes to add */
       classes?: string;
       /** UUID of a document that can be opened */
-      uuid?: Teriock.UUID<TeriockChild>;
+      uuid?: UUID<TeriockChild>;
     };
   }
 }

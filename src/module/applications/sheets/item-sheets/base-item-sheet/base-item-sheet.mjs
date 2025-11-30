@@ -1,10 +1,5 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
-import {
-  abilitySort,
-  docSort,
-  propertySort,
-  refreshDocuments,
-} from "../../../../helpers/utils.mjs";
+import { refreshDocuments } from "../../../../helpers/utils.mjs";
 import {
   ChatButtonSheetMixin,
   ChildSheetMixin,
@@ -101,30 +96,7 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.item = this.item;
-    context.abilities = abilitySort(
-      this.document
-        .getAbilities()
-        .filter((a) => a.system.revealed || game.user.isGM),
-    );
     context.baseEffects = this.document.effectTypes?.base || [];
-    context.bodyParts = docSort(this.document.getBodyParts());
-    context.equipment = docSort(this.document.getEquipment());
-    context.fluencies = docSort(
-      this.document.fluencies.filter(
-        (f) => f.system.revealed || game.user.isGM,
-      ),
-    );
-    context.properties = propertySort(
-      this.document
-        .getProperties()
-        .filter((p) => p.system.revealed || game.user.isGM),
-    );
-    context.ranks = docSort(this.document.getRanks());
-    context.resources = docSort(
-      this.document.resources.filter(
-        (r) => r.system.revealed || game.user.isGM,
-      ),
-    );
     return context;
   }
 }

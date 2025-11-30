@@ -1,4 +1,9 @@
-import { makeIconClass } from "../../../../helpers/utils.mjs";
+import {
+  abilitySort,
+  docSort,
+  makeIconClass,
+  rankSort,
+} from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
 import { IndexButtonSheetMixin } from "../_module.mjs";
@@ -351,6 +356,34 @@ export default function CommonSheetMixin(Base) {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
+        let children = await this.document.getChildArray();
+        children = children.filter((c) => {
+          if (foundry.utils.hasProperty(c, "system.revealed")) {
+            return (
+              foundry.utils.getProperty(c, "system.revealed") || game.user.isGM
+            );
+          } else {
+            return true;
+          }
+        });
+        Object.assign(context, {
+          abilities: abilitySort(children.filter((c) => c.type === "ability")),
+          attunements: docSort(children.filter((c) => c.type === "attunement")),
+          bodyParts: docSort(children.filter((c) => c.type === "body")),
+          conditions: docSort(children.filter((c) => c.type === "condition")),
+          consequences: docSort(
+            children.filter((c) => c.type === "consequence"),
+          ),
+          equipment: docSort(children.filter((c) => c.type === "equipment")),
+          fluencies: docSort(children.filter((c) => c.type === "fluency")),
+          mounts: docSort(children.filter((c) => c.type === "mount")),
+          powers: docSort(children.filter((c) => c.type === "power")),
+          properties: docSort(children.filter((c) => c.type === "property")),
+          ranks: rankSort(children.filter((c) => c.type === "rank")),
+          resources: docSort(children.filter((c) => c.type === "resource")),
+          species: docSort(children.filter((c) => c.type === "species")),
+          wrappers: docSort(children.filter((c) => c.type === "wrapper")),
+        });
         Object.assign(context, {
           TERIOCK: TERIOCK,
           document: this.document,
@@ -364,11 +397,12 @@ export default function CommonSheetMixin(Base) {
           isEditable: this.isEditable,
           isGM: game.user.isGM,
           limited: this.document.limited,
+          metadata: this.document.metadata,
           name: this.document.name,
           owner: this.document.isOwner,
           settings: this.settings,
-          system: this.document.system,
           source: this.document._source,
+          system: this.document.system,
           systemFields: this.document.system.schema.fields,
           systemSource: this.document.system._source,
           tab: this._tab,

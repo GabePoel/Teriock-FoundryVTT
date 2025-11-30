@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../helpers/utils.mjs";
+import { isOwnerAndCurrentUser, makeIcon } from "../../../helpers/utils.mjs";
 import {
   deriveModifiableDeterministic,
   modifiableFormula,
@@ -91,6 +91,20 @@ export default function AttunableDataMixin(Base) {
           return this.parent.actor.system.attunements.has(this.parent._id);
         }
         return false;
+      }
+
+      /** @inheritDoc */
+      _onUpdate(options, userId) {
+        super._onUpdate(options, userId);
+        if (isOwnerAndCurrentUser(this.parent, userId)) {
+          if (this.attunement) {
+            this.attunement
+              .update({
+                "system.tier": this.tier.value,
+              })
+              .then();
+          }
+        }
       }
 
       /**

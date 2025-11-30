@@ -34,12 +34,11 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["property"],
-      modifies: "Item",
-      namespace: "Property",
-      type: "property",
-      passive: true,
       indexCategoryKey: "properties",
       indexCompendiumKey: "properties",
+      modifies: "Item",
+      namespace: "Property",
+      passive: true,
       preservedProperties: [
         "system.fluent",
         "system.hierarchy",
@@ -47,6 +46,8 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
         "system.limitation",
         "system.proficient",
       ],
+      type: "property",
+      visibleTypes: ["property"],
     });
   }
 
@@ -114,6 +115,11 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   }
 
   /** @inheritDoc */
+  get makeSuppressed() {
+    return _suppressed(this);
+  }
+
+  /** @inheritDoc */
   get messageBars() {
     return [
       {
@@ -154,14 +160,9 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
     return this.parent.name + nameAddition;
   }
 
-  /** @inheritDoc */
-  get suppressed() {
-    return _suppressed(this);
-  }
-
   /**
    * Change a macro's run hook.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
    */
   async changeMacroRunHook(uuid) {
@@ -221,7 +222,7 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
 
   /**
    * Unlink a macro.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
    */
   async unlinkMacro(uuid) {

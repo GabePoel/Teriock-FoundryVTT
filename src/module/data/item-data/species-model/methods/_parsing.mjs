@@ -1,6 +1,7 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
+import { ensureChildren } from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDoc,
   cleanObject,
@@ -46,41 +47,71 @@ export async function _parse(speciesData, rawHTML) {
   // Remove sub-containers and process dice
   cleanHTMLDoc(doc);
 
+  const sizeStepAbilities = {};
+
   const parameters = {
     lifespan: null,
     adult: null,
-    sizeStepAbilities: {},
   };
 
   doc
     .querySelectorAll("span.metadata[data-type='size-attribute-increase']")
     .forEach(
       /** @param {HTMLSpanElement} el */ (el) => {
-        const gainAbilities = new Set([el.dataset.gain]);
-        const loseAbilities = new Set([el.dataset.lose]);
+        const gain = el.dataset.gain;
+        const lose = el.dataset.lose;
         const size = Number(el.dataset.size);
-        parameters.sizeStepAbilities[size] = {
-          gain: gainAbilities,
-          lose: loseAbilities,
-        };
+        if (gain && !sizeStepAbilities[gain]) {
+          sizeStepAbilities[gain] = {
+            min: 0,
+            max: 99,
+            formula: "",
+          };
+        }
+        if (lose && !sizeStepAbilities[lose]) {
+          sizeStepAbilities[lose] = {
+            min: 0,
+            max: 99,
+            formula: "",
+          };
+        }
+        if (gain) {
+          sizeStepAbilities[gain].min = size;
+        }
+        if (lose) {
+          sizeStepAbilities[lose].max = size;
+        }
       },
     );
 
-  const bodyPartsPack = game.teriock.packs.bodyParts;
-  const equipmentPack = game.teriock.packs.equipment;
-  const importedBodyPartUUIDs = importedBodyPartNames
-    .map((n) => bodyPartsPack.index.getName(n)?.uuid)
-    .filter((b) => b);
-  const importedEquipmentUUIDs = importedEquipmentNames
-    .map((n) => equipmentPack.index.getName(n)?.uuid)
-    .filter((e) => e);
+  for (const value of Object.values(sizeStepAbilities)) {
+    value.formula = `or(lt(@size, ${value.min}), gte(@size, ${value.max}))`;
+  }
+  await ensureChildren(
+    speciesData.parent,
+    "ability",
+    Object.keys(sizeStepAbilities),
+  );
+  const updateData = [];
+  for (const [key, value] of Object.entries(sizeStepAbilities)) {
+    const ability = speciesData.parent.abilities.find((a) => a.name === key);
+    if (ability) {
+      updateData.push({
+        _id: ability._id,
+        "system.qualifiers.ephemeral.saved": value.formula,
+      });
+    }
+  }
+  await speciesData.parent.updateChildDocuments("ActiveEffect", updateData);
+  await ensureChildren(speciesData.parent, "body", importedBodyPartNames);
+  await ensureChildren(speciesData.parent, "equipment", importedEquipmentNames);
+
   parameters.imports = {
     ranks: {
       classes: {},
       archetypes: {},
       general: 0,
     },
-    items: [...importedBodyPartUUIDs, ...importedEquipmentUUIDs],
   };
   doc.querySelectorAll("span.metadata[data-type='import']").forEach(
     /** @param {HTMLSpanElement} el */ (el) => {
@@ -228,14 +259,18 @@ export async function _parse(speciesData, rawHTML) {
     }${baseMpDieNumber !== 0 ? ` ${baseMpDieNumber < 0 ? "-" : "+"} ${Math.abs(baseMpDieNumber)}` : ""}`;
     parameters.statDice.mp["number.saved"] = mpDieNumberFormula;
   }
-  cleanObject(parameters, [
-    "appearance",
-    "attributeIncrease",
-    "description",
-    "hpIncrease",
-    "mpIncrease",
-    "innateRanks",
-  ]);
+  cleanObject(
+    parameters,
+    [
+      "appearance",
+      "attributeIncrease",
+      "description",
+      "hpIncrease",
+      "mpIncrease",
+      "innateRanks",
+    ],
+    speciesData.parent.name,
+  );
   let icon = getImage("creatures", speciesData.parent.name);
   const outData = {
     system: parameters,

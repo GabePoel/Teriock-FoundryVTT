@@ -28,6 +28,8 @@ export default function ArmamentDataMixin(Base) {
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
           armament: true,
+          childEffectTypes: ["ability", "fluency", "property", "resource"],
+          visibleTypes: ["ability", "fluency", "property", "resource"],
         });
       }
 

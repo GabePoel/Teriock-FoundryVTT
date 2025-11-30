@@ -12,7 +12,7 @@ export class StandardDamageHandler extends ActionHandler {
 
   /**
    * @inheritDoc
-   * @param {Teriock.UUID<TeriockArmament>} [attacker]
+   * @param {UUID<TeriockArmament>} [attacker]
    */
   static buildButton(attacker) {
     const button = super.buildButton();

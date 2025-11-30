@@ -4,7 +4,9 @@ import { pureUuid, ringImage, selectUser } from "../../helpers/utils.mjs";
 import {
   BaseDocumentMixin,
   CommonDocumentMixin,
+  HierarchyDocumentMixin,
   ParentDocumentMixin,
+  RetrievalDocumentMixin,
 } from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -16,18 +18,22 @@ const { Actor } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes CommonDocument
+ * @mixes HierarchyDocument
  * @mixes ParentDocument
- * @property {Collection<Teriock.UUID<TeriockEffect>, TeriockEffect>} effects
- * @property {Collection<Teriock.UUID<TeriockItem>, TeriockItem>} items
+ * @mixes RetrievalDocument
+ * @property {Collection<UUID<TeriockEffect>, TeriockEffect>} effects
+ * @property {Collection<UUID<TeriockItem>, TeriockItem>} items
  * @property {Teriock.Documents.ActorModel} system
  * @property {Teriock.Documents.ActorType} type
- * @property {Teriock.ID<TeriockActor>} _id
- * @property {Teriock.ID<TeriockActor>} id
- * @property {Teriock.UUID<TeriockActor>} uuid
+ * @property {ID<TeriockActor>} _id
+ * @property {ID<TeriockActor>} id
+ * @property {UUID<TeriockActor>} uuid
  * @property {TeriockBaseActorSheet} sheet
  */
-export default class TeriockActor extends ParentDocumentMixin(
-  CommonDocumentMixin(BaseDocumentMixin(Actor)),
+export default class TeriockActor extends RetrievalDocumentMixin(
+  ParentDocumentMixin(
+    HierarchyDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(Actor))),
+  ),
 ) {
   /**
    * The default weight for a given size.
@@ -102,9 +108,13 @@ export default class TeriockActor extends ParentDocumentMixin(
     return [...this.bodyParts, ...this.equipment];
   }
 
-  /** @returns {TeriockBody[]} */
-  get bodyParts() {
-    return this.itemTypes?.body || [];
+  /** @inheritDoc */
+  get childArray() {
+    return [
+      ...this.validEffects,
+      ...this.items.contents,
+      ...(this.subs.contents || []),
+    ].filter((c) => !c.isEphemeral);
   }
 
   /**
@@ -144,11 +154,6 @@ export default class TeriockActor extends ParentDocumentMixin(
     return this.consequences.filter((effect) => effect.hasDuration);
   }
 
-  /** @returns {TeriockEquipment[]} */
-  get equipment() {
-    return this.itemTypes?.equipment || [];
-  }
-
   /**
    * Is this actor damaged?
    * @returns {boolean}
@@ -180,11 +185,6 @@ export default class TeriockActor extends ParentDocumentMixin(
     return out;
   }
 
-  /** @returns {TeriockMount[]} */
-  get mounts() {
-    return this.itemTypes?.mount || [];
-  }
-
   /**
    * Gets effects that expire based on movement.
    * @returns {TeriockConsequence[]} Array of movement expiration effects.
@@ -194,21 +194,6 @@ export default class TeriockActor extends ParentDocumentMixin(
       this.consequences.filter((effect) => effect.system.movementExpiration) ||
       []
     );
-  }
-
-  /** @returns {TeriockPower[]} */
-  get powers() {
-    return this.itemTypes?.power || [];
-  }
-
-  /** @returns {TeriockRank[]} */
-  get ranks() {
-    return this.itemTypes?.rank || [];
-  }
-
-  /** @returns {TeriockSpecies[]} */
-  get species() {
-    return this.itemTypes?.species || [];
   }
 
   /**
@@ -226,11 +211,6 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   get validEffects() {
     return Array.from(this.allApplicableEffects());
-  }
-
-  /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
   }
 
   /**

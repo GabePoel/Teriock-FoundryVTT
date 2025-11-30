@@ -1,9 +1,11 @@
+import { isOwnerAndCurrentUser } from "../../helpers/utils.mjs";
 import {
   BaseDocumentMixin,
   ChangeableDocumentMixin,
   ChildDocumentMixin,
   CommonDocumentMixin,
   ParentDocumentMixin,
+  RetrievalDocumentMixin,
 } from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
@@ -17,18 +19,22 @@ const { Item } = foundry.documents;
  * @mixes ChangeableDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
+ * @mixes HierarchyDocument
  * @mixes ParentDocument
- * @property {EmbeddedCollection<Teriock.ID<TeriockEffect>, TeriockEffect>} effects
+ * @mixes RetrievalDocument
+ * @property {Collection<ID<TeriockEffect>, TeriockEffect>} effects
  * @property {Teriock.Documents.ItemModel} system
  * @property {Teriock.Documents.ItemType} type
- * @property {Teriock.ID<TeriockItem>} _id
- * @property {Teriock.ID<TeriockItem>} id
- * @property {Teriock.UUID<TeriockItem>} uuid
+ * @property {ID<TeriockItem>} _id
+ * @property {ID<TeriockItem>} id
+ * @property {UUID<TeriockItem>} uuid
  * @property {TeriockBaseItemSheet} sheet
  */
-export default class TeriockItem extends ChangeableDocumentMixin(
-  ParentDocumentMixin(
-    ChildDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(Item))),
+export default class TeriockItem extends RetrievalDocumentMixin(
+  ChangeableDocumentMixin(
+    ParentDocumentMixin(
+      ChildDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(Item))),
+    ),
   ),
 ) {
   /** @inheritDoc */
@@ -40,6 +46,25 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    */
   get active() {
     return !this.isSuppressed && !this.disabled;
+  }
+
+  /** @inheritDoc */
+  get apps() {
+    if (this.type === "wrapper" && this.system?.effect) {
+      return {
+        [this.system?.effect.sheet.id]: this.system?.effect.sheet,
+      };
+    } else {
+      return super.apps;
+    }
+  }
+
+  /** @inheritDoc */
+  get childArray() {
+    return [
+      ...this.validEffects.filter((e) => !e.system._sup),
+      ...(this.subs.contents || []),
+    ].filter((c) => !c.isEphemeral);
   }
 
   /**
@@ -55,7 +80,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    * @returns {boolean} True if the item is suppressed, false otherwise.
    */
   get isSuppressed() {
-    return this.system.suppressed;
+    return this.system.makeSuppressed;
   }
 
   /**
@@ -64,6 +89,16 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    */
   get validEffects() {
     return this.effects.contents;
+  }
+
+  /** @inheritDoc */
+  _onUpdate(options, userId) {
+    super._onUpdate(options, userId);
+    if (isOwnerAndCurrentUser(this, userId)) {
+      for (const a of this.abilities) {
+        a.system?.expireSustainedConsequences().then();
+      }
+    }
   }
 
   /** @inheritDoc */
@@ -93,21 +128,6 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
     this._filterDocumentCreationData(embeddedName, data);
     return await super.createEmbeddedDocuments(embeddedName, data, operation);
-  }
-
-  /** @inheritDoc */
-  getBodyParts() {
-    return this.subs.filter((s) => s.type === "body");
-  }
-
-  /** @inheritDoc */
-  getEquipment() {
-    return this.subs.filter((s) => s.type === "equipment");
-  }
-
-  /** @inheritDoc */
-  getRanks() {
-    return this.subs.filter((s) => s.type === "rank");
   }
 
   /** @inheritDoc */

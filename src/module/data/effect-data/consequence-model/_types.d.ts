@@ -36,7 +36,7 @@ declare module "./consequence-model.mjs" {
           /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */
           type: CombatExpirationSourceType;
           /** <schema> What {@link TeriockActor} is the one that triggers expirations? */
-          source: Teriock.UUID<TeriockActor>;
+          source: UUID<TeriockActor>;
         };
         /** <schema> What is the method of this expiration? */
         what: CombatExpirationMethod;
@@ -56,7 +56,7 @@ declare module "./consequence-model.mjs" {
     heightened: number;
     movementExpiration: boolean;
     /** <schema> {@link TeriockEffect} that's the source of this consequence */
-    source: Teriock.UUID<TeriockEffect>;
+    source: UUID<TeriockEffect>;
     /** <schema> Source description */
     sourceDescription: string;
     /** <schema> If this expires when its source is inactive */

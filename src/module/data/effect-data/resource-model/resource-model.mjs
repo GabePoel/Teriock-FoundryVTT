@@ -31,18 +31,18 @@ export default class TeriockResourceModel extends RevelationDataMixin(
   }
 
   /** @inheritDoc */
-  get nameString() {
-    const nameAddition = this.revealed ? "" : " (Unrevealed)";
-    return this.parent.name + nameAddition;
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
     if (!suppressed && this.parent.parent.type === "equipment") {
       suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
+  }
+
+  /** @inheritDoc */
+  get nameString() {
+    const nameAddition = this.revealed ? "" : " (Unrevealed)";
+    return this.parent.name + nameAddition;
   }
 
   /** @inheritDoc */

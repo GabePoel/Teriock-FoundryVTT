@@ -435,7 +435,7 @@ export function packEffectButton(execution, consequence, options = {}) {
  * Add trackers to the roll config.
  * @param {AbilityExecution} execution
  * @param {string} tracker
- * @param {Teriock.UUID<TeriockTokenDocument|TeriockActor>[]} uuids
+ * @param {UUID<TeriockTokenDocument|TeriockActor>[]} uuids
  * @returns {Promise<void>}
  */
 export async function addTrackersToExecution(execution, tracker, uuids) {
@@ -487,7 +487,7 @@ export async function addTrackersToExecution(execution, tracker, uuids) {
  * Add a tracker to roll config.
  * @param {AbilityExecution} execution
  * @param {string} tracker
- * @param {Teriock.UUID<TeriockTokenDocument|TeriockActor>} uuid
+ * @param {UUID<TeriockTokenDocument|TeriockActor>} uuid
  * @returns {Promise<void>}
  */
 export async function addTrackerToExecution(execution, tracker, uuid) {
@@ -519,7 +519,7 @@ export function quickAddAssociation(
           color: d.system.color,
           id: d._id,
           img: d.img,
-          name: d.system.nameString,
+          name: d.system.nameString || d.name,
           rescale: false,
           type: d.documentName,
           uuid: d.uuid,

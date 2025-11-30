@@ -55,6 +55,7 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
         name: "Deattune",
         icon: makeIcon("handshake-simple-slash", "contextMenu"),
         callback: async () => await this.deattune(),
+        group: "attunement",
       },
     ];
   }

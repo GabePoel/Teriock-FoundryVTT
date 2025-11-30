@@ -4,7 +4,7 @@ declare module "./common-type-model.mjs" {
   export default // @ts-expect-error Not a duplicate identifier
   class CommonTypeModel {
     /** <schema> Journal entry page only accessible to GM */
-    gmNotes: Teriock.UUID<TeriockJournalEntryPage>;
+    gmNotes: UUID<TeriockJournalEntryPage>;
 
     get parent(): TeriockCommon;
   }

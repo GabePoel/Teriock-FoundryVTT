@@ -9,26 +9,8 @@ const basicAbilityNames =
 const progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {
   progress: true,
 });
-let pct = 0;
 
-for (const basicAbilityName of basicAbilityNames) {
-  let basicAbility = basicAbilitiesItem.abilities.find(
-    (a) => a.name === basicAbilityName,
-  );
-  if (!basicAbility) {
-    basicAbility = await tm.create.ability(
-      basicAbilitiesItem,
-      basicAbilityName,
-    );
-  } else {
-    await basicAbility.system.wikiPull({ notify: false });
-  }
-  pct += 1 / basicAbilityNames.length;
-  progress.update({
-    pct: pct,
-    message: `Pulling ${basicAbilityName} from wiki.`,
-  });
-}
+await tm.utils.ensureChildren(basicAbilitiesItem, "ability", basicAbilityNames);
 const toDelete = basicAbilitiesItem.abilities
   .filter((a) => !basicAbilityNames.includes(a.name))
   .map((a) => a.id);

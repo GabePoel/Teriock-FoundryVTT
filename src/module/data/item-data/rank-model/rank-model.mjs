@@ -144,6 +144,28 @@ export default class TeriockRankModel extends StatGiverDataMixin(
     return this.statDice.hp.dice[0];
   }
 
+  /** @inheritDoc */
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.elder?.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.ranks
+      ) {
+        suppressed = true;
+      }
+    }
+    if (
+      game.settings.get("teriock", "armorSuppressesRanks") &&
+      this.actor &&
+      !this.innate &&
+      this.actor.system.defense.av.base > this.maxAv
+    ) {
+      suppressed = true;
+    }
+    return suppressed;
+  }
+
   get messageBars() {
     return [
       {
@@ -185,28 +207,6 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.source.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.ranks
-      ) {
-        suppressed = true;
-      }
-    }
-    if (
-      game.settings.get("teriock", "armorSuppressesRanks") &&
-      this.actor &&
-      !this.innate &&
-      this.actor.system.defense.av.base > this.maxAv
-    ) {
-      suppressed = true;
-    }
-    return suppressed;
-  }
-
-  /** @inheritDoc */
   get wikiPage() {
     const prefix = this.constructor.metadata.namespace;
     const pageName =
@@ -228,14 +228,9 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   async hardRefreshFromIndex() {
     await this.refreshFromIndex();
     const reference = await this.getIndexReference();
-    const toDelete = this.parent
-      .getAbilities()
+    const toDelete = this.parent.abilities
       .filter(
-        (a) =>
-          !reference.parent
-            .getAbilities()
-            .map((a) => a.name)
-            .includes(a.name),
+        (a) => !reference.parent.abilities.map((a) => a.name).includes(a.name),
       )
       .map((a) => a.id);
     await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);

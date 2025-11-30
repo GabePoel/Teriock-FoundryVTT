@@ -1,40 +1,55 @@
 import { hierarchyField } from "../../shared/fields/helpers/field-builders.mjs";
 
+const { fields } = foundry.data;
+
 /**
+ * Data mixin to support hierarchies of the same document type.
  * @param {typeof ChildTypeModel} Base
  * @constructor
  */
 export default function HierarchyDataMixin(Base) {
-  // noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {HierarchyDataMixinInterface}
      * @mixin
+     * @property {UUID<TeriockCommon>} _ref
+     * @property {ID<TeriockCommon>} _sup
+     * @implements {HierarchyDataMixinInterface}
      */
     class HierarchyData extends Base {
-      /** @inheritDoc */
-      static get metadata() {
-        return foundry.utils.mergeObject(super.metadata, {
-          hierarchy: true,
-        });
-      }
-
       /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
         schema.hierarchy = hierarchyField();
+        Object.assign(schema, {
+          _sup: new fields.DocumentIdField({
+            nullable: true,
+            required: false,
+          }),
+          _ref: new fields.DocumentUUIDField({
+            nullable: true,
+            required: false,
+          }),
+        });
         return schema;
       }
 
       /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
+      static migrateData(data) {
         if (
-          this.parent.parent &&
-          this.parent.parent[this.parent.collectionName].has(this.parent.id)
+          typeof data?.hierarchy?.supId === "string" &&
+          typeof data._sup !== "string"
         ) {
-          this.hierarchy.rootUuid = this.parent.parent.uuid;
+          data._sup = data.hierarchy.supId;
+          delete data.hierarchy;
         }
+        return super.migrateData(data);
+      }
+
+      /** @inheritDoc */
+      toObject() {
+        const out = super.toObject();
+        out._ref = this.parent.uuid;
+        return out;
       }
     }
   );

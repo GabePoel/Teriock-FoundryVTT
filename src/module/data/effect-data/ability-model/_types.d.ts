@@ -113,7 +113,7 @@ declare module "./ability-model.mjs" {
     /** <schema> If this ability is sustained */
     sustained: boolean;
     /** <schema> What consequences this is ability is currently sustaining */
-    sustaining: Set<Teriock.UUID<TeriockConsequence>>;
+    sustaining: Set<UUID<TeriockConsequence>>;
     /** <schema> Appropriate targets */
     targets: Set<Teriock.Parameters.Ability.Target>;
     /** <schema> Description of this ability's trigger */

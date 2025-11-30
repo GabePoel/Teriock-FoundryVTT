@@ -1,5 +1,6 @@
 import { systemPath } from "../../../helpers/path.mjs";
 import { TeriockActor } from "../../_module.mjs";
+import { HierarchyDocumentMixin } from "../_module.mjs";
 import EmbedCardDocumentMixin from "../embed-card-document-mixin/embed-card-document-mixin.mjs";
 import PanelDocumentMixin from "../panel-document-mixin/panel-document-mixin.mjs";
 
@@ -18,7 +19,7 @@ export default function CommonDocumentMixin(Base) {
      * @mixin
      */
     class CommonDocument extends EmbedCardDocumentMixin(
-      PanelDocumentMixin(Base),
+      PanelDocumentMixin(HierarchyDocumentMixin(Base)),
     ) {
       /** @inheritDoc */
       get actor() {
@@ -90,7 +91,6 @@ export default function CommonDocumentMixin(Base) {
       /**
        * @inheritDoc
        * @returns {TeriockAbility[]}
-       * @abstract
        */
       getAbilities() {
         return [];
@@ -99,7 +99,6 @@ export default function CommonDocumentMixin(Base) {
       /**
        * @inheritDoc
        * @returns {TeriockProperty[]}
-       * @abstract
        */
       getProperties() {
         return [];

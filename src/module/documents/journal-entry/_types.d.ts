@@ -8,13 +8,13 @@ declare module "./journal-entry.mjs" {
     extends Teriock.Documents.Interface<
       TeriockJournalEntryCategory | TeriockJournalEntryPage
     > {
-    _id: Teriock.ID<TeriockJournalEntry>;
+    _id: ID<TeriockJournalEntry>;
 
     get documentName(): "JournalEntry";
 
-    get id(): Teriock.ID<TeriockJournalEntry>;
+    get id(): ID<TeriockJournalEntry>;
 
-    get uuid(): Teriock.UUID<TeriockJournalEntry>;
+    get uuid(): UUID<TeriockJournalEntry>;
   }
 }
 

@@ -19,6 +19,7 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability", "fluency", "resource"],
       stats: false,
+      visibleTypes: ["ability", "fluency", "resource"],
     });
   }
 
@@ -51,9 +52,9 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
     const resources = docSort(
       this.parent.resources.filter((r) => r.system.revealed),
     );
-    const bodyParts = docSort(this.parent.getBodyParts());
-    const equipment = docSort(this.parent.getEquipment());
-    const ranks = docSort(this.parent.getRanks());
+    const bodyParts = docSort(this.parent.bodyParts);
+    const equipment = docSort(this.parent.equipment);
+    const ranks = docSort(this.parent.ranks);
     quickAddAssociation(
       fluencies,
       "Fluencies",

@@ -7,7 +7,6 @@ const { fields } = foundry.data;
  * @constructor
  */
 export default function RevelationDataMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {RevelationDataMixinInterface}
@@ -37,6 +36,7 @@ export default function RevelationDataMixin(Base) {
         return schema;
       }
 
+      /** @inheritDoc */
       get cardContextMenuEntries() {
         return [
           ...super.cardContextMenuEntries,
@@ -66,8 +66,8 @@ export default function RevelationDataMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.parent.source && this.parent.source.metadata.revealable) {
-          this.revealed = this.revealed && this.parent.source.system.revealed;
+        if (this.parent.elder && this.parent.elder?.metadata.revealable) {
+          this.revealed = this.revealed && this.parent.elder?.system.revealed;
         }
       }
     }

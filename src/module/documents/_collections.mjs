@@ -1,6 +1,6 @@
 /**
  * @template T
  * @typedef {object} CompendiumHelper
- * @property {Collection<Teriock.ID<T>, Teriock.Documents.Index<T>> & { contents: Teriock.Documents.Index<T>[] }} index
- * @property {Collection<Teriock.ID<TeriockFolder>,TeriockFolder>} folders
+ * @property {Collection<ID<T>, Index<T>> & { contents: Index<T>[] }} index
+ * @property {Collection<ID<TeriockFolder>,TeriockFolder>} folders
  */

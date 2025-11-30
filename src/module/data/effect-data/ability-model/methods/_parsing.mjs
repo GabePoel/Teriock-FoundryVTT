@@ -212,7 +212,7 @@ export async function _parse(abilityData, rawHTML) {
     "limitation",
     "improvement",
   ];
-  cleanObject(parameters, toClean);
+  cleanObject(parameters, toClean, abilityData.parent.name);
 
   return {
     changes,
@@ -771,7 +771,7 @@ function extractDurationFromHTML(html) {
 /**
  * Extracts macro from raw document content.
  * @param doc - The raw document content to extract macro from.
- * @returns {Record<Teriock.SafeUUID<TeriockMacro>, string>} The macro name.
+ * @returns {Record<SafeUUID<TeriockMacro>, string>} The macro name.
  */
 function extractMacroFromHTML(doc) {
   const elements = doc.querySelectorAll("span.metadata[data-type='macro']");

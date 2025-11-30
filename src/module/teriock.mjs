@@ -23,13 +23,6 @@ globalThis.teriock = {
 };
 /** Useful helpers brought to the top level for easy access by macros. */
 globalThis.tm = {
-  create: {
-    ability: helpers.createEffects.createAbility,
-    consequence: helpers.createEffects.createConsequence,
-    fluency: helpers.createEffects.createFluency,
-    property: helpers.createEffects.createProperty,
-    resource: helpers.createEffects.createResource,
-  },
   dialogs: applications.dialogs,
   fetch: helpers.fetch,
   html: helpers.html,
@@ -344,6 +337,7 @@ foundry.helpers.Hooks.once("init", function () {
     "system.hierarchy.rootUuid",
     "system.hierarchy.subIds",
     "system.hierarchy.supId",
+    "system._sup",
   ];
   CONFIG.Item.compendiumIndexFields.push(...hierarchyIndexFields);
 

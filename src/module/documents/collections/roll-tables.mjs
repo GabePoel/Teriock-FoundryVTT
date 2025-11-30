@@ -4,7 +4,7 @@ const { RollTables } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Collection<Teriock.ID<TeriockRollTable>, TeriockRollTable>}
+ * @implements {Collection<ID<TeriockRollTable>, TeriockRollTable>}
  * @implements {DocumentCollection<TeriockRollTable>}
  * @property {TeriockRollTable|null} activeGM
  */

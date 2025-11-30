@@ -1,7 +1,7 @@
 export interface ImporterDataMixinInterface {
   imports: {
     /** <schema> Specific items to import */
-    items: Set<Teriock.UUID<TeriockChild>>;
+    items: Set<UUID<TeriockChild>>;
     /** <schema> Categories of ranks to import */
     ranks: {
       /** <schema> General archetype ranks */

@@ -55,7 +55,7 @@ export type AbilityImpactData = {
   /** <schema> Hacks that could be caused by this ability */
   hacks: Teriock.Parameters.Actor.HackableBodyPart[];
   /** <schema> Macro buttons */
-  macroButtonUuids: Teriock.UUID<TeriockMacro>;
+  macroButtonUuids: UUID<TeriockMacro>;
   /** <schema> Don't place a template */
   noTemplate: boolean;
   /** <schema> Range */

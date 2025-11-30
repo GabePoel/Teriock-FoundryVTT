@@ -8,7 +8,7 @@ import {
 
 export type DropData<T> = {
   data?: T;
-  uuid: Teriock.UUID<T>;
+  uuid: UUID<T>;
   type: "ActiveEffect" | "Item" | "Macro" | "Actor";
   systemType?: Teriock.Documents.CommonType;
 };

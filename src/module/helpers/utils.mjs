@@ -1,6 +1,10 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { TeriockRoll } from "../dice/_module.mjs";
+import { TypeCollection } from "../documents/collections/_module.mjs";
+import { getAbility, getItem, getProperty } from "./fetch.mjs";
 import { systemPath } from "./path.mjs";
+
+const { Document } = foundry.abstract;
 
 /**
  * Convert the given unit to feet.
@@ -200,28 +204,28 @@ export function dedent(str) {
 /**
  * Convert a UUID to a string that can be safely used as a key in some document's system data.
  * @template T
- * @param {Teriock.UUID<T>} uuid - The UUID to convert.
- * @returns {Teriock.SafeUUID<T>} The converted safe UUID.
+ * @param {UUID<T>} uuid - The UUID to convert.
+ * @returns {SafeUUID<T>} The converted safe UUID.
  */
 export function safeUuid(uuid) {
-  return /** @type {Teriock.SafeUUID<*>} */ (uuid.replace(/\./g, "_"));
+  return /** @type {SafeUUID<*>} */ (uuid.replace(/\./g, "_"));
 }
 
 /**
  * Convert a UUID to a string that can be safely used as a key in some document's system data.
  * @template T
- * @param {Teriock.SafeUUID<T>} safeUuid - The safe UUID to convert.
- * @returns {Teriock.UUID<T>} The original UUID.
+ * @param {SafeUUID<T>} safeUuid - The safe UUID to convert.
+ * @returns {UUID<T>} The original UUID.
  */
 export function pureUuid(safeUuid) {
-  return /** @type {Teriock.UUID<T>} */ (safeUuid.replace(/_/g, "."));
+  return /** @type {UUID<T>} */ (safeUuid.replace(/_/g, "."));
 }
 
 /**
  * Re-pull each provided {@link ChildDocumentMixin} from the wiki.
  * @param {TeriockChild[]} docs - An array of {@link TeriockChild} documents to pull.
  * @param {object} [options]
- * @param {boolean} [options.skipSubs] - Skip any {@link TeriockEffect} subs.
+ * @param {boolean} [options.skipSubs] - Skip any {@link TeriockEffect} findSubs.
  * @returns {Promise<void>}
  */
 export async function refreshDocuments(docs, options = { skipSubs: true }) {
@@ -534,7 +538,7 @@ export function secondsToReadable(totalSeconds) {
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
  * @param {ClientDocument} document
- * @param {Teriock.ID<TeriockUser>} userId
+ * @param {ID<TeriockUser>} userId
  * @returns {boolean}
  */
 export function isOwnerAndCurrentUser(document, userId) {
@@ -609,11 +613,11 @@ export function ringImage(path) {
 
 /**
  * Get the contents of a folder from its UUID.
- * @param {Teriock.UUID<TeriockFolder>|TeriockFolder} folder
+ * @param {UUID<TeriockFolder>|TeriockFolder} folder
  * @param {object} [options]
  * @param {Teriock.Documents.CommonType[]} [options.types] - Subset of types to filter for.
  * @param {boolean} [options.uuids] - Get the UUIDs instead of the documents.
- * @returns {Promise<Teriock.UUID<TeriockDocument>[]|TeriockDocument[]>}
+ * @returns {Promise<UUID<TeriockDocument>[]|TeriockDocument[]>}
  */
 export async function folderContents(folder, options = {}) {
   const { types, uuids = true } = options;
@@ -749,4 +753,64 @@ export function deepMerge(original, other) {
     }
   }
   return out;
+}
+
+/**
+ * Ensure a document is not an index.
+ * @param {TeriockDocument|Index<TeriockDocument>} syncDoc
+ * @returns {Promise<TeriockDocument|void>}
+ */
+export async function resolveDocument(syncDoc) {
+  if (!syncDoc) return;
+  if (syncDoc instanceof Document) {
+    return syncDoc;
+  } else {
+    return fromUuid(syncDoc.uuid);
+  }
+}
+
+/**
+ * Ensure all documents in an array are not indexes.
+ * @param {(TeriockDocument|Index<TeriockDocument>)[]} syncDocs
+ * @returns {Promise<TeriockDocument[]>}
+ */
+export async function resolveDocuments(syncDocs) {
+  return Promise.all(syncDocs.map(async (syncDoc) => resolveDocument(syncDoc)));
+}
+
+/**
+ * Ensure all documents in a collection are not indexes.
+ * @param {TypeCollection} typeCollection
+ * @returns {Promise<TypeCollection>}
+ */
+export async function resolveCollection(typeCollection) {
+  const syncDocs = await resolveDocuments(typeCollection.contents);
+  return new TypeCollection(syncDocs.map((d) => [d.id, d]));
+}
+
+/**
+ * Ensure a document has all the predefined documents named.
+ * @param {TeriockCommon} document
+ * @param {Teriock.Documents.CommonType} type
+ * @param {string[]} names
+ * @returns {Promise<TeriockChild[]>}
+ */
+export async function ensureChildren(document, type, names) {
+  const existing = document.childArray.filter((c) => c.type === type);
+  names = names.filter((n) => !existing.map((e) => e.name).includes(n));
+  let docs = [];
+  let documentName = "Item";
+  if (type === "ability") {
+    documentName = "ActiveEffect";
+    docs = await Promise.all(names.map((n) => getAbility(n)));
+  } else if (type === "property") {
+    documentName = "ActiveEffect";
+    docs = await Promise.all(names.map((n) => getProperty(n)));
+  } else if (type === "body") {
+    docs = await Promise.all(names.map((n) => getItem(n, "bodyParts")));
+  } else if (type === "equipment") {
+    docs = await Promise.all(names.map((n) => getItem(n, "equipment")));
+  }
+  const data = docs.map((d) => d.toObject());
+  return document.createChildDocuments(documentName, data);
 }

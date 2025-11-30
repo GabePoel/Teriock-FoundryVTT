@@ -8,6 +8,6 @@ const { Scene } = foundry.documents;
  * @extends {ClientDocument}
  * @extends {Scene}
  * @mixes BaseDocument
- * @property {Collection<Teriock.UUID<TeriockTokenDocument>, TeriockTokenDocument>} tokens
+ * @property {Collection<UUID<TeriockTokenDocument>, TeriockTokenDocument>} tokens
  */
 export default class TeriockScene extends BaseDocumentMixin(Scene) {}

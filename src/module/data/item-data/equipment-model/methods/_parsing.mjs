@@ -1,8 +1,7 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
-import { createProperty } from "../../../../helpers/create-effects.mjs";
-import { getAbility } from "../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
+import { ensureChildren } from "../../../../helpers/utils.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**
@@ -76,7 +75,7 @@ export async function _parse(equipmentData, rawHTML) {
   // Parse arrays
   let equipmentClasses = new Set(getTextAll(".equipment-class"));
   let properties = new Set(getTextAll(".property"));
-  let abilities = new Set(getTextAll(".ability"));
+  let abilitiesToCreate = new Set(getTextAll(".ability"));
 
   // Add piercing property if present
   const piercing = getValue(".piercing");
@@ -121,71 +120,15 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.equipmentClasses = new Set(
     Array.from(equipmentClasses).map((s) => toCamelCase(s)),
   );
-  const toCreate = Array.from(properties);
-  const filteredProperties = toCreate.filter((p) =>
+  const propertiesToCreate = Array.from(properties);
+  const filteredProperties = propertiesToCreate.filter((p) =>
     Object.values(allValidProperties).includes(p),
   );
-  toCreate.length = 0;
-  toCreate.push(...filteredProperties);
+  propertiesToCreate.length = 0;
+  propertiesToCreate.push(...filteredProperties);
 
-  abilities = abilities.filter(
-    (an) => !equipmentData.parent.abilities.map((a) => a.name).includes(an),
-  );
-  const abilitiesData = [];
-
-  /**
-   * Creates a single abilities data.
-   * @param abilityName
-   * @returns {Promise<void>}
-   */
-  async function createSingleAbility(abilityName) {
-    const abilityData = (await getAbility(abilityName)).toObject();
-    abilityData.system.grantOnly = true;
-    abilityData.system.form = "intrinsic";
-    abilitiesData.push(abilityData);
-  }
-
-  /**
-   * Creates a single property.
-   * @param {string} propertyName - The name of the property to create
-   * @returns {Promise<Object>} Promise that resolves with property creation result
-   */
-  async function createSingleProperty(propertyName) {
-    let property = equipmentData.parent
-      .getProperties()
-      .find((a) => a.name === propertyName);
-    if (property) {
-      await property.system.wikiPull({ notify: false });
-    } else {
-      await createProperty(equipmentData.parent, propertyName, {
-        notify: false,
-      });
-    }
-    return {
-      propertyName: propertyName,
-      success: true,
-    };
-  }
-
-  const propertyPromises = toCreate.map((propertyName) =>
-    createSingleProperty(propertyName),
-  );
-  const abilityPromises = abilities.map((abilityName) =>
-    createSingleAbility(abilityName),
-  );
-  try {
-    await Promise.all([...propertyPromises, ...abilityPromises]);
-    await equipmentData.parent.createEmbeddedDocuments(
-      "ActiveEffect",
-      abilitiesData,
-    );
-    // Optional property deletion.
-    // const toDelete = equipmentData.parent.getProperties().filter((p) => !toCreate.includes(p.name)).map((p) => p.id);
-    // await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-  } catch (error) {
-    foundry.ui.notifications.error(`Error creating properties: ${error}`);
-    throw error;
-  }
+  await ensureChildren(equipmentData.parent, "property", propertiesToCreate);
+  await ensureChildren(equipmentData.parent, "ability", abilitiesToCreate);
 
   parameters.properties = [];
 

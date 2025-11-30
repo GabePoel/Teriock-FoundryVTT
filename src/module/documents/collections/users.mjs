@@ -4,7 +4,7 @@ const { Users } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Collection<Teriock.ID<TeriockUser>, TeriockUser>}
+ * @implements {Collection<ID<TeriockUser>, TeriockUser>}
  * @implements {DocumentCollection<TeriockUser>}
  * @property {TeriockUser|null} activeGM
  */

@@ -11,14 +11,7 @@ declare global {
       visible: boolean;
     };
 
-    export type FancyDisplayToggle = {
-      path: string;
-      label: string;
-    };
-
     export type DisplayField = Partial<FancyDisplayField> | string;
-
-    export type DisplayToggle = FancyDisplayToggle | string;
 
     export type EnrichedDisplayField = {
       schema: TextField;

@@ -27,7 +27,7 @@ declare global {
     /** Hooked equipment macros */
     export type HookedEquipmentMacros = Record<
       Teriock.Parameters.Shared.PropertyPseudoHook,
-      Teriock.UUID<TeriockMacro>[]
+      UUID<TeriockMacro>[]
     >;
   }
 }

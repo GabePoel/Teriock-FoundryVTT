@@ -91,11 +91,32 @@ export default class TeriockFluencyModel extends ProficiencyDataMixin(
     parts.subtitle = `${this.tradecraft}`;
     parts.text = dotJoin([
       this.field,
-      (this.parent.source?.documentName !== "ActiveEffect"
-        ? this.parent.source?.name
+      (this.parent.elder?.documentName !== "ActiveEffect"
+        ? this.parent.elder?.name
         : "") || "",
     ]);
     return parts;
+  }
+
+  /** @inheritDoc */
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
+    if (
+      !suppressed &&
+      this.parent.parent &&
+      this.parent.parent.type === "equipment"
+    ) {
+      suppressed = !this.parent.parent.system.isAttuned;
+    }
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.elder?.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.ranks
+      ) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
   }
 
   /** @inheritDoc */
@@ -107,27 +128,6 @@ export default class TeriockFluencyModel extends ProficiencyDataMixin(
   get nameString() {
     const nameAddition = this.revealed ? "" : " (Unrevealed)";
     return this.parent.name + nameAddition;
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (
-      !suppressed &&
-      this.parent.parent &&
-      this.parent.parent.type === "equipment"
-    ) {
-      suppressed = !this.parent.parent.system.isAttuned;
-    }
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.source.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.ranks
-      ) {
-        suppressed = true;
-      }
-    }
-    return suppressed;
   }
 
   /** @inheritDoc */

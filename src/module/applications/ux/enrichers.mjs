@@ -1,5 +1,10 @@
 import { rollButtons } from "../../constants/display/buttons.mjs";
 import { documentOptions } from "../../constants/options/document-options.mjs";
+import {
+  toCamelCase,
+  toKebabCase,
+  toTitleCase,
+} from "../../helpers/string.mjs";
 
 const enricherIcons = {
   Core: "book",
@@ -14,10 +19,11 @@ const enricherIcons = {
 const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /**
- * Create a roll enricher that recognizes all takes in `ROLL_BUTTON_CONFIGS`.
+ * Create a roll enricher that recognizes all roll button takes.
+ * @type {(buttons: Record<string, Teriock.UI.ButtonDefinition>) => Teriock.Foundry.TextEditorEnricherConfig}
  */
-export const makeRollEnricher = (BUTTONS) => {
-  const keys = Object.keys(BUTTONS);
+const makeRollEnricher = (buttons) => {
+  const keys = Object.keys(buttons);
   const lookup = Object.fromEntries(keys.map((k) => [k.toLowerCase(), k]));
   const keyAlt = keys.map(escapeRx).join("|");
   const any = "([^]*)";
@@ -31,7 +37,7 @@ export const makeRollEnricher = (BUTTONS) => {
         return null;
       }
       const formula = (match[2] ?? "").trim();
-      const { label, icon } = BUTTONS[typeKey];
+      const { label, icon } = buttons[typeKey];
       const a = document.createElement("a");
       a.className = "content-link";
       a.draggable = false;
@@ -47,9 +53,14 @@ export const makeRollEnricher = (BUTTONS) => {
     replaceParent: false,
   };
 };
+
+/**
+ * Wiki link enricher. Designed to mimic the `@EMBED` and `@UUID` enrichers as well as the `{{L}}` wiki syntax.
+ * @type {Teriock.Foundry.TextEditorEnricherConfig}
+ */
 const wikiLinkEnricher = {
   pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
-  enricher: async (match, _options) => {
+  enricher: async (match) => {
     const pageName = match[1];
     let displayText = match[2];
     const namespace = pageName.split(":")[0];
@@ -128,10 +139,69 @@ const wikiLinkEnricher = {
   },
   replaceParent: false,
 };
+
+/**
+ * Enricher to look up data in the document.
+ * @type {Teriock.Foundry.TextEditorEnricherConfig}
+ */
+const lookupEnricher = {
+  pattern: /\[\[lookup\s+([^\]\s]+)(?:\s+((?:[^\]\s=]+=[^\]\s=]+\s*)+))?\]\]/gi,
+  enricher: async (match, options) => {
+    const lookupKey = match[1];
+    const optionsString = match[2] || "";
+    const formatOptions = optionsString
+      .trim()
+      .split(/\s+/)
+      .reduce((acc, curr) => {
+        if (!curr) return acc;
+        const [key, value] = curr.split("=");
+        if (key && value) {
+          acc[key] = value;
+        }
+        return acc;
+      }, {});
+
+    const rawValue = foundry.utils.getProperty(options.relativeTo, lookupKey);
+    let text = rawValue !== undefined ? String(rawValue) : "";
+
+    if (formatOptions["style"] === "upper") {
+      formatOptions["style"] = "uc";
+    } else if (formatOptions["style"] === "lower") {
+      formatOptions["style"] = "lc";
+    }
+    switch ((formatOptions["style"] || "").toLowerCase()) {
+      case "uc":
+        text = text.toUpperCase();
+        break;
+      case "lc":
+        text = text.toLowerCase();
+        break;
+      case "title":
+        text = toTitleCase(text);
+        break;
+      case "camel":
+        text = toCamelCase(text);
+        break;
+      case "kebab":
+        text = toKebabCase(text);
+        break;
+      case "ucf":
+        text = text.charAt(0).toUpperCase() + text.slice(1);
+        break;
+    }
+
+    const span = document.createElement("span");
+    span.textContent = text;
+    return span;
+  },
+  replaceParent: false,
+};
+
 /**
  * Register all enrichers.
  */
 export default function registerEnrichers() {
   CONFIG.TextEditor.enrichers.push(wikiLinkEnricher);
   CONFIG.TextEditor.enrichers.push(makeRollEnricher(rollButtons));
+  CONFIG.TextEditor.enrichers.push(lookupEnricher);
 }

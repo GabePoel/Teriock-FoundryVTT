@@ -4,7 +4,7 @@ const { Items } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Collection<Teriock.ID<TeriockItem>, TeriockItem>}
+ * @implements {Collection<ID<TeriockItem>, TeriockItem>}
  * @implements {DocumentCollection<TeriockItem>}
  */
 export default class TeriockItems extends BaseWorldCollectionMixin(Items) {}

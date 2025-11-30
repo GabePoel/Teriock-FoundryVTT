@@ -16,7 +16,7 @@ declare global {
       /** <schema> Panels to render */
       panels: Teriock.MessageData.MessagePanel[];
       /** <schema> Document that the message is sourced from */
-      source: Teriock.UUID<TeriockCommon>;
+      source: UUID<TeriockCommon>;
       /** <schema> Strings to be wrapped as tags at the bottom of the message */
       tags: string[];
     }

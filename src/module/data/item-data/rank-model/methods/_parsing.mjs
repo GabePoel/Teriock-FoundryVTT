@@ -1,5 +1,5 @@
-import { createAbility } from "../../../../helpers/create-effects.mjs";
 import { getRankIcon } from "../../../../helpers/path.mjs";
+import { ensureChildren } from "../../../../helpers/utils.mjs";
 import { cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 
 /**
@@ -70,22 +70,22 @@ export async function _parse(rankData, rawHTML) {
     "3s": extractAbilityNames(metaData, "data-r3s"),
   };
 
-  const toCreate = [];
+  let abilitiesToCreate = [];
 
   // Create abilities
   for (const rank of [0, 1, 2]) {
     if (classRank === rank) {
       for (const name of rankNames[rank]) {
-        toCreate.push(name);
+        abilitiesToCreate.push(name);
       }
     }
   }
   if (classRank >= 3) {
     for (const name of rankNames["3c"]) {
-      toCreate.push(name);
+      abilitiesToCreate.push(name);
     }
     for (const name of rankNames["3s"]) {
-      toCreate.push(name);
+      abilitiesToCreate.push(name);
     }
   }
 
@@ -93,40 +93,20 @@ export async function _parse(rankData, rawHTML) {
     progress: true,
   });
 
-  /**
-   * Creates a single ability
-   * @param {string} abilityName - The name of the ability to create
-   * @returns {Promise<Object>} Promise that resolves with ability creation result
-   */
-  async function createSingleAbility(abilityName) {
-    let ability = rankData.parent
-      .getAbilities()
-      .find((a) => a.name === abilityName);
-    if (ability) {
-      await ability.system.wikiPull({ notify: false });
-    } else {
-      await createAbility(rankData.parent, abilityName, { notify: false });
-    }
-    return {
-      abilityName,
-      success: true,
-    };
-  }
-
-  // Create an array of promises for parallel processing
-  const abilityPromises = toCreate.map((abilityName) =>
-    createSingleAbility(abilityName),
+  const results = await ensureChildren(
+    rankData.parent,
+    "ability",
+    abilitiesToCreate,
   );
 
   // Update progress to show processing has started
   progress.update({
     pct: 0.1,
-    message: `Creating ${toCreate.length} abilities in parallel...`,
+    message: `Creating ${abilitiesToCreate.length} abilities in parallel...`,
   });
 
   // Execute all ability creation in parallel
   try {
-    const results = await Promise.all(abilityPromises);
     const a3c = rankData.parent.abilities.filter((a) =>
       rankNames["3c"].includes(a.name),
     );
@@ -140,10 +120,9 @@ export async function _parse(rankData, rawHTML) {
       a3s.map((a) => a.setFlag("teriock", "category", "support")),
     );
 
-    const toDelete = rankData.parent
-      .getAbilities()
-      .filter((a) => !toCreate.includes(a.name))
-      .map((a) => a.id);
+    const toDelete = rankData.parent.abilities
+      .filter((a) => !abilitiesToCreate.includes(a.name))
+      .map((a) => a._id);
     await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
     // Update progress to completion
@@ -154,7 +133,7 @@ export async function _parse(rankData, rawHTML) {
 
     console.log(
       `Created abilities for rank:`,
-      results.map((r) => r.abilityName),
+      results.map((r) => r.nameString),
     );
   } catch (error) {
     progress.update({
@@ -192,7 +171,11 @@ export async function _parse(rankData, rawHTML) {
 
   progress.update({ pct: 1 });
 
-  cleanObject(parameters, ["description", "flaws"]);
+  cleanObject(
+    parameters,
+    ["description", "flaws"],
+    TERIOCK.index.classes[rankData.className],
+  );
 
   return {
     system: parameters,

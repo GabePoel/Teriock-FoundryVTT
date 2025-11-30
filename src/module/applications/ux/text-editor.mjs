@@ -6,11 +6,12 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Enrich all the blocks within a panel.
    * @param {Teriock.MessageData.MessagePanel} panel
+   * @param {object} [options]
    * @returns {Promise<Teriock.MessageData.MessagePanel>}
    */
-  static async enrichPanel(panel) {
+  static async enrichPanel(panel, options = {}) {
     for (const block of panel.blocks || []) {
-      block.text = await this.enrichHTML(block.text);
+      block.text = await this.enrichHTML(block.text, options);
     }
     for (const association of panel.associations || []) {
       for (const card of association.cards || []) {
@@ -27,11 +28,12 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Enrich an array of panels.
    * @param {Teriock.MessageData.MessagePanel[]} panels
+   * @param {object} [options]
    * @returns {Promise<Teriock.MessageData.MessagePanel[]>}
    */
-  static async enrichPanels(panels) {
+  static async enrichPanels(panels, options = {}) {
     for (const panel of panels) {
-      await this.enrichPanel(panel);
+      await this.enrichPanel(panel, options);
     }
     return panels;
   }
@@ -39,10 +41,11 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Convert the panel to an HTML string.
    * @param {Teriock.MessageData.MessagePanel} parts
+   * @param {object} [options]
    * @returns {Promise<string>}
    */
-  static async makeTooltip(parts) {
-    await this.enrichPanel(parts);
+  static async makeTooltip(parts, options = {}) {
+    await this.enrichPanel(parts, options);
     return await foundry.applications.handlebars.renderTemplate(
       systemPath("templates/ui-templates/panel.hbs"),
       parts,

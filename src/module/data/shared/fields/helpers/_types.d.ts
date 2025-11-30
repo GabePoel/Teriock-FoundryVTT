@@ -7,11 +7,11 @@ export type HierarchyField = {
    * <schema> <derived> The UUID of the {@link TeriockParent} this {@link TeriockAbility} is
    * embedded in. This is calculated when the {@link TeriockAbility} is created and should not be set manually.
    */
-  rootUuid: Teriock.UUID<TeriockParent>;
+  rootUuid: UUID<TeriockParent>;
   /** <schema> The IDs for each {@link TeriockEffect} that could be descended from this. */
-  subIds: Set<Teriock.ID<TeriockChild>>;
+  subIds: Set<ID<TeriockChild>>;
   /** <schema> The ID of the {@link TeriockEffect} that this is descended from, if there is one. */
-  supId: Teriock.ID<TeriockChild> | null;
+  supId: ID<TeriockChild> | null;
 };
 
 /** <schema> Transformation configuration */
@@ -38,7 +38,7 @@ export type TransformationField = {
     ranks: boolean;
   };
   /** <schema> UUID of specific species to transform into */
-  uuids: Set<Teriock.UUID<TeriockSpecies>>;
+  uuids: Set<UUID<TeriockSpecies>>;
 };
 
 export type TransformationConfigurationField = TransformationField & {
@@ -46,14 +46,14 @@ export type TransformationConfigurationField = TransformationField & {
   /** <schema> Use a folder instead of a set of species UUIDS. */
   useFolder: boolean /** <schema> Documents to suppress */;
   /** <schema> UUID of folder to use. */
-  uuid: Teriock.UUID<TeriockFolder>;
+  uuid: UUID<TeriockFolder>;
   /** <schema> Allow selection of multiple species. */
   multiple: boolean;
 };
 
 export type TransformationImplementationField = TransformationField & {
   /** <schema> The actual species items this is associated with on the actor */
-  species: Teriock.ID<TeriockSpecies>[];
+  species: ID<TeriockSpecies>[];
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */

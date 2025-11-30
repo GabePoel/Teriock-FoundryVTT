@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { abilitySort } from "../../../../helpers/utils.mjs";
 import { durationDialog } from "../../../dialogs/_module.mjs";
 import {
   PassiveSheetMixin,
@@ -259,12 +258,6 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
     const context = await super._prepareContext(options);
     const system = this.document.system;
     context.tab = this._tab;
-    context.subAbilities = abilitySort(
-      this.document
-        .getAbilities()
-        .filter((a) => a.system.revealed || game.user.isGM),
-    );
-    context.supAbility = this.document.sup;
     const effectsSet = new Set(system.effectTypes);
     //noinspection JSUnresolvedReference
     context.effectTags = Array.from(

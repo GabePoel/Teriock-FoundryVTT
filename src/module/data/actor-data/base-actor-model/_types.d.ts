@@ -20,7 +20,7 @@ declare global {
     /** <schema> Attributes */
     attributes: Record<Teriock.Parameters.Actor.Attribute, ActorAttributeData>;
     /** <base> Attunements - IDs of attuned equipment */
-    attunements: Set<Teriock.ID<TeriockEquipment>>;
+    attunements: Set<ID<TeriockEquipment>>;
     /** <derived> Carrying capacity */
     carryingCapacity: {
       /** <derived> Light carrying capacity */
@@ -116,6 +116,8 @@ declare global {
       /** <schema> Current HP */
       value: number;
     };
+    /** <schema> Interest rate */
+    interestRate: number;
     /** <base> Light */
     light: object & {
       angle?: number;
@@ -298,7 +300,7 @@ declare global {
     /** <base> Trackers */
     trackers: Record<
       Teriock.Parameters.Condition.ConditionKey,
-      Teriock.UUID<TeriockTokenDocument>[]
+      UUID<TeriockTokenDocument>[]
     >;
     /** <schema> Tradecrafts */
     tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftData>;
@@ -307,7 +309,7 @@ declare global {
       /** <base> Transformed token art */
       image: string | null;
       /** <schema> */
-      primary: Teriock.ID<TeriockConsequence> | null;
+      primary: ID<TeriockConsequence> | null;
       /** <base> */
       effect: TeriockConsequence | null;
       /** <base> */
@@ -344,9 +346,9 @@ declare global {
     /** <schema> Wielding */
     wielding: {
       /** <schema> Primary attacker ID */
-      attacker: Teriock.ID<TeriockEquipment> | null;
+      attacker: ID<TeriockEquipment> | null;
       /** <schema> Primary blocker ID */
-      blocker: Teriock.ID<TeriockEquipment> | null;
+      blocker: ID<TeriockEquipment> | null;
     };
     /** <schema> Wither */
     wither: BarData;

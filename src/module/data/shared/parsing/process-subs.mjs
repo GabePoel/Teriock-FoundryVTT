@@ -1,4 +1,5 @@
-import { copyAbility, copyProperty } from "../../../helpers/fetch.mjs";
+import { getAbility, getProperty } from "../../../helpers/fetch.mjs";
+import { cleanObject } from "./clean-html-doc.mjs";
 
 /**
  * Generic function to process sub effects from the document.
@@ -23,7 +24,7 @@ async function processSubEffects(subs, doc, config) {
     getMethod = "getAbilities",
   } = config;
   /** @type {TeriockEffect[]} */
-  const existingSubs = doc[getMethod]();
+  const existingSubs = await doc[getMethod]();
   /** @type {Set<string>} */
   const newSubNames = new Set();
 
@@ -48,19 +49,10 @@ async function processSubEffects(subs, doc, config) {
       await subEffect.system.hardRefreshFromIndex();
     } else {
       subEffect = await createFn(subName);
-      let parentDocument = doc;
-      if (doc.documentName === "ActiveEffect") {
-        parentDocument = doc.parent;
-      }
-      const newEffects = await parentDocument.createEmbeddedDocuments(
-        "ActiveEffect",
-        [subEffect],
-      );
-      const newEffect = newEffects[0];
-      if (doc.documentName === "ActiveEffect") {
-        await doc.addSub(newEffect);
-      }
-      subEffect = newEffect;
+      const newEffects = await doc.createChildDocuments("ActiveEffect", [
+        subEffect.toObject(),
+      ]);
+      subEffect = newEffects[0];
     }
 
     const limitation = el.querySelector(".limited-modifier");
@@ -76,7 +68,7 @@ async function processSubEffects(subs, doc, config) {
       if (improvementSpans) {
         const improvementSpan = improvementSpans[0];
         if (improvementSpan) {
-          improvementText = improvementSpan.textContent.trim();
+          improvementText = improvementSpan.innerHTML;
         }
       }
     }
@@ -86,7 +78,7 @@ async function processSubEffects(subs, doc, config) {
       if (limitationSpans) {
         const limitationSpan = limitationSpans[0];
         if (limitationSpan) {
-          limitationText = limitationSpan.textContent.trim();
+          limitationText = limitationSpan.innerHTML;
         }
       }
     }
@@ -104,6 +96,12 @@ async function processSubEffects(subs, doc, config) {
         updateData["system.adept.enabled"] = true;
         updateData["system.adept.amount"] = 1;
       }
+      foundry.utils.expandObject(updateData);
+      cleanObject(
+        updateData,
+        ["system.improvement", "system.limitation"],
+        subEffect.name,
+      );
       await subEffect.update(updateData);
     }
   }
@@ -131,7 +129,7 @@ async function processSubEffects(subs, doc, config) {
  */
 export async function processSubAbilities(subs, doc) {
   return processSubEffects(subs, doc, {
-    createFn: copyAbility,
+    createFn: getAbility,
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
     includeNamespace: "Ability",
@@ -149,7 +147,7 @@ export async function processSubAbilities(subs, doc) {
  */
 export async function processSubProperties(subs, doc) {
   return processSubEffects(subs, doc, {
-    createFn: copyProperty,
+    createFn: getProperty,
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
     includeNamespace: "Property",

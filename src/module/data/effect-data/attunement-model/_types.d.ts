@@ -10,7 +10,7 @@ declare module "./attunement-model.mjs" {
     /** <schema> Should this inherit the tier of the target entity? */
     inheritTier: boolean;
     /** <schema> The entity that this attunement corresponds to */
-    target: Teriock.ID<TeriockEquipment> | null;
+    target: ID<TeriockEquipment> | null;
     /** <schema> Presence tier of the target entity */
     tier: number;
     /** <schema> What type of entity this attunement corresponds to */

@@ -48,9 +48,9 @@ declare global {
 
   const ChatMessage: typeof TeriockChatMessage;
 
-  function fromUuidSync<T>(uuid: Teriock.UUID<T>): T | undefined;
+  function fromUuidSync<T>(uuid: UUID<T>): T | undefined;
 
-  function fromUuid<T>(uuid: Teriock.UUID<T>): Promise<T> | undefined;
+  function fromUuid<T>(uuid: UUID<T>): Promise<T> | undefined;
 }
 
 export {};

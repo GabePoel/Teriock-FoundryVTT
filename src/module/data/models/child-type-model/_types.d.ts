@@ -7,4 +7,9 @@ export interface ChildTypeModelInterface {
   font: Teriock.Parameters.Shared.Font;
   /** <schema> If this is forced to be proficient */
   proficient: boolean;
+  /** <schema> <base> Qualifier formulas which are resolved before changes are applied */
+  qualifiers: {
+    ephemeral: Teriock.Fields.ModifiableDeterministic;
+    suppressed: Teriock.Fields.ModifiableDeterministic;
+  };
 }

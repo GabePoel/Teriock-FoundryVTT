@@ -5,7 +5,7 @@ import { selectDocumentsDialog } from "./select-document-dialog.mjs";
  * @param {object} options
  * @param {string} options.[title] - Title for dialog.
  * @param {string} options.[hint] - Text for dialog.
- * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
+ * @returns {Promise<UUID<TeriockTokenDocument>[]>}
  */
 export async function selectTokensDialog(options = {}) {
   options = foundry.utils.mergeObject(
@@ -34,7 +34,7 @@ export async function selectTokensDialog(options = {}) {
 
 /**
  * Select some number of visible tokens for target to be lighted to.
- * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
+ * @returns {Promise<UUID<TeriockTokenDocument>[]>}
  */
 export async function lightedToDialog() {
   return await selectTokensDialog({
@@ -45,7 +45,7 @@ export async function lightedToDialog() {
 
 /**
  * Select some number of visible tokens for target to be goaded to.
- * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
+ * @returns {Promise<UUID<TeriockTokenDocument>[]>}
  */
 export async function goadedToDialog() {
   return await selectTokensDialog({
@@ -56,7 +56,7 @@ export async function goadedToDialog() {
 
 /**
  * Select some number of visible tokens for target to be frightened of.
- * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
+ * @returns {Promise<UUID<TeriockTokenDocument>[]>}
  */
 export async function frightenedOfDialog() {
   return await selectTokensDialog({

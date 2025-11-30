@@ -4,9 +4,9 @@ const { Actors } = foundry.documents.collections;
 
 //noinspection JSUnusedGlobalSymbols,JSClosureCompilerSyntax
 /**
- * @implements {Collection<Teriock.ID<TeriockActor>, TeriockActor>}
+ * @implements {Collection<ID<TeriockActor>, TeriockActor>}
  * @mixes BaseWorldCollection
- * @property {Record<Teriock.ID<TeriockActor>, TeriockActor>} tokens
+ * @property {Record<ID<TeriockActor>, TeriockActor>} tokens
  */
 export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
   get characters() {

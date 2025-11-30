@@ -11,7 +11,7 @@ declare global {
     export type PropertyPseudoHook = keyof typeof propertyPseudoHooks;
     export type PseudoHook = AbilityPseudoHook | PropertyPseudoHook;
     export type MacroHookRecord = Record<
-      Teriock.SafeUUID<TeriockMacro>,
+      SafeUUID<TeriockMacro>,
       Teriock.Parameters.Shared.PropertyPseudoHook
     >;
     export type CardDisplaySize = keyof typeof displayOptions.sizes;
