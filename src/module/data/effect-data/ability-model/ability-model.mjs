@@ -1,7 +1,6 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { AbilityExecution } from "../../../executions/document-executions/_module.mjs";
-import { copyAbility } from "../../../helpers/fetch.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import {
   isOwnerAndCurrentUser,
@@ -63,7 +62,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
         "system.fluent",
         "system.gifted",
         "system.grantOnly",
-        "system.hierarchy",
         "system.improvement",
         "system.limitation",
         "system.maxQuantity",
@@ -446,11 +444,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
         await this.parent.update({ "system.sustaining": [] });
       } catch {}
     }
-  }
-
-  /** @inheritDoc */
-  async getIndexReference() {
-    return await copyAbility(this.parent.name);
   }
 
   /** @inheritDoc */

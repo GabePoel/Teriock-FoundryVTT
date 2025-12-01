@@ -59,14 +59,6 @@ export default class TeriockItem extends RetrievalDocumentMixin(
     }
   }
 
-  /** @inheritDoc */
-  get childArray() {
-    return [
-      ...this.validEffects.filter((e) => !e.system._sup),
-      ...(this.subs.contents || []),
-    ].filter((c) => !c.isEphemeral);
-  }
-
   /**
    * Checks if the item is disabled.
    * @returns {boolean} True if the item is disabled, false otherwise.

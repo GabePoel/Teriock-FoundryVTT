@@ -8,6 +8,7 @@ export const documentOptions = {
     getter: "abilities",
     icon: "hand-sparkles",
     name: "Ability",
+    pack: "abilities",
   },
   attunement: {
     doc: "ActiveEffect",
@@ -20,6 +21,7 @@ export const documentOptions = {
     getter: "bodyParts",
     icon: "boot",
     name: "Body Part",
+    pack: "bodyParts",
   },
   character: {
     doc: "Actor",
@@ -44,6 +46,7 @@ export const documentOptions = {
     getter: "creatures",
     icon: "octopus",
     name: "Creature",
+    pack: "creatures",
   },
   effect: {
     doc: "ActiveEffect",
@@ -56,6 +59,7 @@ export const documentOptions = {
     getter: "equipment",
     icon: "treasure-chest",
     name: "Equipment",
+    pack: "equipment",
   },
   fluency: {
     doc: "ActiveEffect",
@@ -80,6 +84,7 @@ export const documentOptions = {
     getter: "properties",
     icon: "atom-simple",
     name: "Property",
+    pack: "properties",
   },
   protection: {
     icon: "shield-halved",
@@ -90,6 +95,7 @@ export const documentOptions = {
     getter: "ranks",
     icon: "wreath-laurel",
     name: "Rank",
+    pack: "classes",
   },
   resource: {
     doc: "ActiveEffect",
@@ -102,5 +108,6 @@ export const documentOptions = {
     getter: "species",
     icon: "skull-cow",
     name: "Species",
+    pack: "species",
   },
 };

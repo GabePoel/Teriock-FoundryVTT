@@ -1,3 +1,6 @@
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
+const { WorldCollection } = foundry.abstract;
+
 /**
  * @param {typeof WorldCollection} Base
  * @constructor

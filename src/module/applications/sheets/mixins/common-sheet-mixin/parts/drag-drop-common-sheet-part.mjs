@@ -111,12 +111,16 @@ export default (Base) => {
           await foundry.utils.getDocumentClass("ActiveEffect");
         const effect =
           /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
+        const obj = effect.toObject();
+        if (effect.sup?.type === "wrapper") {
+          obj["_stats.compendiumSource"] = effect.sup.uuid;
+        }
         if (!this._canDrop(effect)) {
           return;
         }
         const created = await this.document.createChildDocuments(
           "ActiveEffect",
-          [effect.toObject()],
+          [obj],
         );
         return created[0];
       }
@@ -136,7 +140,7 @@ export default (Base) => {
           return;
         }
         const created = await this.document.createChildDocuments("Item", [
-          item.toObject(),
+          game.items.fromCompendium(item),
         ]);
         return created[0];
       }

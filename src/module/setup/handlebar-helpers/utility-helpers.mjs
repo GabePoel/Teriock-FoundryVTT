@@ -119,7 +119,7 @@ export default function registerUiHelpers() {
         showAddButton = true,
         sortOptions = {},
         sortValue = "",
-        addAction = "createEmbedded",
+        addAction = "",
         key = null,
       } = options.hash;
       const context = options.data.root;

@@ -1,4 +1,4 @@
-const basicAbilitiesItem = await tm.fetch.getItem(
+const basicAbilitiesItem = await tm.fetch.getDocument(
   "Basic Abilities",
   "essentials",
 );

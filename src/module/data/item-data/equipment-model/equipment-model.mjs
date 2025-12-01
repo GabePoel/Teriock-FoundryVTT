@@ -1,5 +1,5 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
-import { getItem } from "../../../helpers/fetch.mjs";
+import { getDocument } from "../../../helpers/fetch.mjs";
 import {
   dotJoin,
   formulaExists,
@@ -261,7 +261,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
 
   /** @inheritDoc */
   async getIndexReference() {
-    return await getItem(this.equipmentType, "equipment");
+    return await getDocument(this.equipmentType, "equipment");
   }
 
   /** @inheritDoc */

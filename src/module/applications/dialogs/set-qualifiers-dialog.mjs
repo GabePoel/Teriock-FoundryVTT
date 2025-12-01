@@ -16,18 +16,36 @@ export default async function setQualifiersDialog(doc) {
       {},
       { name: "suppressed", value: doc.system.qualifiers.suppressed.saved },
     );
+  const compendiumSourceForm =
+    doc.schema.fields._stats.fields.compendiumSource.toFormGroup(
+      {
+        label: "Compendium Source",
+        hint:
+          "An unembedded document in a compendium that this is sourced from. If this is refreshed, it pulls data" +
+          " from the document defined here.",
+      },
+      {
+        name: "compendiumSource",
+        value: doc._stats.compendiumSource,
+      },
+    );
   const contentElement = document.createElement("div");
-  contentElement.append(...[ephemeralForm, suppressedForm]);
+  contentElement.append(
+    ...[ephemeralForm, suppressedForm, compendiumSourceForm],
+  );
   await TeriockDialog.prompt({
     content: contentElement,
-    modal: true,
+    modal: false,
     ok: {
       callback: async (_event, button) => {
         const ephemeral = button.form.elements.namedItem("ephemeral").value;
         const suppressed = button.form.elements.namedItem("suppressed").value;
+        const compendiumSource =
+          button.form.elements.namedItem("compendiumSource").value;
         await doc.update({
           "system.qualifiers.ephemeral.saved": ephemeral,
           "system.qualifiers.suppressed.saved": suppressed,
+          "_stats.compendiumSource": compendiumSource,
         });
       },
       icon: makeIconClass("check", "button"),

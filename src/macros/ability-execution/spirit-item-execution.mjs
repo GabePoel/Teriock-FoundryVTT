@@ -37,5 +37,5 @@ if (!spiritItem) {
     "system.weight.saved": 0,
     "system.disabled": true,
   });
-  await tm.fetch.importProperty(spiritItem, "Master Crafted");
+  await tm.utils.ensureChildren(spiritItem, "property", "Master Crafted");
 }

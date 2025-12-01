@@ -106,7 +106,7 @@ export async function _parse(speciesData, rawHTML) {
   await ensureChildren(speciesData.parent, "body", importedBodyPartNames);
   await ensureChildren(speciesData.parent, "equipment", importedEquipmentNames);
 
-  parameters.imports = {
+  const imports = {
     ranks: {
       classes: {},
       archetypes: {},
@@ -120,12 +120,30 @@ export async function _parse(speciesData, rawHTML) {
       if (parameterKey !== "ranks.general") {
         const nameKey = toCamelCase(el.dataset.name);
         const key = parameterKey + "." + nameKey;
-        foundry.utils.setProperty(parameters.imports, key, number);
+        foundry.utils.setProperty(imports, key, number);
       } else {
-        parameters.imports.ranks.general = number;
+        imports.ranks.general = number;
       }
     },
   );
+  for (const [classKey, rankNumber] of Object.entries(imports.ranks.classes)) {
+    const className = TERIOCK.index.classes[classKey];
+    const rankNames = [];
+    for (let i = 0; i < rankNumber; i++) {
+      rankNames.push(`Rank ${i + 1} ${className}`);
+    }
+    await ensureChildren(speciesData.parent, "rank", rankNames);
+  }
+  for (const rank of speciesData.parent.ranks.filter(
+    (r) => r.system.classRank >= 3 && r.system.classRank <= 5,
+  )) {
+    await rank.deleteChildDocuments(
+      "ActiveEffect",
+      rank.abilities
+        .filter((a) => !a.getFlag("teriock", "defaultAbility"))
+        .map((r) => r._id),
+    );
+  }
 
   const tagTree = buildTagTree(doc);
   console.log(tagTree);

@@ -1,7 +1,6 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { TeriockRoll } from "../dice/_module.mjs";
 import { TypeCollection } from "../documents/collections/_module.mjs";
-import { getAbility, getItem, getProperty } from "./fetch.mjs";
 import { systemPath } from "./path.mjs";
 
 const { Document } = foundry.abstract;
@@ -771,8 +770,9 @@ export async function resolveDocument(syncDoc) {
 
 /**
  * Ensure all documents in an array are not indexes.
- * @param {(TeriockDocument|Index<TeriockDocument>)[]} syncDocs
- * @returns {Promise<TeriockDocument[]>}
+ * @template T
+ * @param {Index<T>[]} syncDocs
+ * @returns {Promise<T[]>}
  */
 export async function resolveDocuments(syncDocs) {
   return Promise.all(syncDocs.map(async (syncDoc) => resolveDocument(syncDoc)));
@@ -796,21 +796,23 @@ export async function resolveCollection(typeCollection) {
  * @returns {Promise<TeriockChild[]>}
  */
 export async function ensureChildren(document, type, names) {
+  if (names.length === 0) return [];
   const existing = document.childArray.filter((c) => c.type === type);
   names = names.filter((n) => !existing.map((e) => e.name).includes(n));
-  let docs = [];
-  let documentName = "Item";
-  if (type === "ability") {
-    documentName = "ActiveEffect";
-    docs = await Promise.all(names.map((n) => getAbility(n)));
-  } else if (type === "property") {
-    documentName = "ActiveEffect";
-    docs = await Promise.all(names.map((n) => getProperty(n)));
-  } else if (type === "body") {
-    docs = await Promise.all(names.map((n) => getItem(n, "bodyParts")));
-  } else if (type === "equipment") {
-    docs = await Promise.all(names.map((n) => getItem(n, "equipment")));
-  }
-  const data = docs.map((d) => d.toObject());
+  const packName = TERIOCK.options.document[type]["pack"];
+  if (!packName) return [];
+  const pack = game.packs.get(`teriock.${packName}`);
+  if (!pack) return [];
+  const docs = await resolveDocuments(names.map((n) => pack.index.getName(n)));
+  const data = docs.map((d) => {
+    const uuid = d?.uuid;
+    const doc = d?.type === "wrapper" ? d?.system.effect : d;
+    const out = doc.toObject();
+    foundry.utils.setProperty(out, "_stats.compendiumSource", uuid);
+    return out;
+  });
+  if (data.length === 0) return [];
+  const documentName =
+    docs[0]?.type === "wrapper" ? "ActiveEffect" : docs[0]?.documentName;
   return document.createChildDocuments(documentName, data);
 }

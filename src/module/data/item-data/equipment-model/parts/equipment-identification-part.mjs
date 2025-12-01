@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
-import { getItem } from "../../../../helpers/fetch.mjs";
+import { getDocument } from "../../../../helpers/fetch.mjs";
 import { makeIconClass, queryGM } from "../../../../helpers/utils.mjs";
 
 const { ux } = foundry.applications;
@@ -135,7 +135,7 @@ export default (Base) => {
               )
             ) {
               uncheckedPropertyNames.push(
-                ...(await getItem(this.equipmentType, "equipment"))
+                ...(await getDocument(this.equipmentType, "equipment"))
                   .getProperties()
                   .map((p) => p.name),
               );

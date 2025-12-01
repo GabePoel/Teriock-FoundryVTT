@@ -11,7 +11,7 @@ import {
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+  //noinspection JSClosureCompilerSyntax,JSValidateJSDoc
   return (
     /**
      * @extends {DocumentSheetV2}
@@ -22,9 +22,7 @@ export default (Base) => {
       static DEFAULT_OPTIONS = {
         actions: {
           createAbility: this._createAbility,
-          createBaseEffect: this._createBaseEffect,
           createBody: this._createBody,
-          createEmbedded: this._createEmbedded,
           createEquipment: this._createEquipment,
           createFluency: this._createFluency,
           createProperty: this._createProperty,
@@ -41,19 +39,11 @@ export default (Base) => {
        */
       static async _createAbility(_event, _target) {
         const out = await selectAbilityDialog();
-        const o = out.toObject();
-        console.log(o);
-        await this.document.createChildDocuments("ActiveEffect", [o]);
-      }
-
-      /**
-       * Creates a new base effect for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created fluency.
-       */
-      static async _createBaseEffect(_event, _target) {
-        await createEffects.createBaseEffect(this.document);
+        const obj = out.toObject();
+        if (out.sup?.type === "wrapper") {
+          obj["_stats.compendiumSource"] = out.sup.uuid;
+        }
+        await this.document.createChildDocuments("ActiveEffect", [obj]);
       }
 
       /**
@@ -63,81 +53,8 @@ export default (Base) => {
        */
       static async _createBody() {
         await this.document.createChildDocuments("Item", [
-          (await selectBodyPartDialog())?.toObject(),
+          game.items.fromCompendium(await selectBodyPartDialog()),
         ]);
-      }
-
-      /**
-       * Adds new embedded {@link TeriockChild} to the current {@link TeriockDocument}.
-       * Creates documents based on the specified tab type.
-       * @param {MouseEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when the document is created.
-       * @static
-       */
-      static async _createEmbedded(_event, target) {
-        const tab = target.dataset.tab;
-        const tabMap = {
-          ability: {
-            data: {
-              name: "New Ability",
-              type: "ability",
-            },
-            docType: "ActiveEffect",
-          },
-          consequence: {
-            data: {
-              name: "New Consequence",
-              type: "consequence",
-            },
-            docType: "ActiveEffect",
-          },
-          equipment: {
-            data: {
-              name: "New Equipment",
-              type: "equipment",
-            },
-            docType: "Item",
-          },
-          fluency: {
-            data: {
-              name: "New Fluency",
-              type: "fluency",
-            },
-            docType: "ActiveEffect",
-          },
-          power: {
-            data: {
-              name: "New Power",
-              type: "power",
-            },
-            docType: "Item",
-          },
-          rank: {
-            data: {
-              name: "New Rank",
-              type: "rank",
-            },
-            docType: "Item",
-          },
-          resource: {
-            data: {
-              name: "New Resource",
-              type: "resource",
-            },
-            docType: "ActiveEffect",
-          },
-        };
-        const entry = tabMap[tab];
-        if (!entry) {
-          return;
-        }
-        const docs =
-          /** @type {(Document|ClientDocument)[]} */ await this.document.createChildDocuments(
-            entry.docType,
-            [entry.data],
-          );
-        await docs[0].sheet?.render(true);
       }
 
       /**
@@ -147,7 +64,7 @@ export default (Base) => {
        */
       static async _createEquipment(_event, _target) {
         await this.document.createChildDocuments("Item", [
-          (await selectEquipmentTypeDialog())?.toObject(),
+          game.items.fromCompendium(await selectEquipmentTypeDialog()),
         ]);
       }
 
@@ -172,9 +89,12 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves to the created property.
        */
       static async _createProperty(_event, _target) {
-        await this.document.createChildDocuments("ActiveEffect", [
-          (await selectPropertyDialog())?.toObject(),
-        ]);
+        const out = await selectPropertyDialog();
+        const obj = out.toObject();
+        if (out.sup?.type === "wrapper") {
+          obj["_stats.compendiumSource"] = out.sup.uuid;
+        }
+        await this.document.createChildDocuments("ActiveEffect", [obj]);
       }
 
       /**
@@ -213,9 +133,9 @@ export default (Base) => {
           return;
         }
         /** @type {TeriockRank[]} */
-        const existingRanks = this.document
-          .getRanks()
-          .filter((r) => r.system.className === rankClass);
+        const existingRanks = (await this.document.getRanks()).filter(
+          (r) => r.system.className === rankClass,
+        );
         const combatAbilityNames = new Set(
           referenceRank.abilities
             .filter((a) => a.getFlag("teriock", "category") === "combat")
@@ -285,7 +205,7 @@ export default (Base) => {
             abilities.delete(ability.id);
           }
         }
-        const toCreate = rank.toObject();
+        const toCreate = game.items.fromCompendium(rank);
         toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
           innate: innate,
         });

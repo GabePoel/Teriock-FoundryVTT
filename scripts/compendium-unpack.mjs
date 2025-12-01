@@ -13,10 +13,14 @@ const BUILDER_NAME = "teriockBuilder00";
 
 const tree = {};
 let packTree = {};
+let buildTree = true;
 
 // noinspection JSVoidFunctionReturnValueUsed
 const packs = /** @type {string[]} */ await fs.readdir("./packs");
 for (const pack of packs) {
+  if (!pack.includes("species")) {
+    continue;
+  }
   const directory = `./src/packs/${toKebabCaseFull(pack)}`;
   console.log("Unpacking " + pack + " to " + directory);
   try {
@@ -36,6 +40,7 @@ for (const pack of packs) {
       console.log(error);
     }
   }
+  buildTree = true;
   packTree = {};
   tree[pack] = packTree;
   await extractPack(
@@ -50,7 +55,19 @@ for (const pack of packs) {
       folders,
     },
   );
-  console.log(tree);
+  buildTree = false;
+  await extractPack(
+    `${MODULE_ID}/packs/${pack}`,
+    `${MODULE_ID}/src/packs/${toKebabCaseFull(pack)}`,
+    {
+      yaml,
+      transformName,
+      transformFolderName,
+      transformEntry,
+      expandAdventures,
+      folders,
+    },
+  );
 }
 
 /**
@@ -60,7 +77,10 @@ for (const pack of packs) {
  * @returns {string}
  */
 function transformName(doc, context) {
-  const safeFileName = toKebabCase(doc.name);
+  let safeFileName = toKebabCase(doc.name);
+  if (!buildTree && doc.system?._sup) {
+    safeFileName = packTree[doc.system._sup] + "-" + toKebabCase(doc.name);
+  }
   let name = `${doc.name ? `${safeFileName}` : doc._id}.${yaml ? "yml" : "json"}`;
   name = name.replace("---", "-");
   if (context.folder) {
@@ -83,7 +103,9 @@ function transformFolderName(doc) {
  * @param {object} doc - The document to clean.
  */
 function cleanEntry(doc) {
-  packTree[doc._id] = toKebabCase(doc.name);
+  if (buildTree) {
+    packTree[doc._id] = toKebabCase(doc.name);
+  }
   if (doc.type !== "text") {
     delete doc.sort;
   }
@@ -101,7 +123,6 @@ function cleanEntry(doc) {
     delete doc._stats.modifiedTime;
     delete doc._stats.duplicateSource;
     delete doc._stats.exportSource;
-    delete doc._stats.compendiumSource;
     if (doc._stats.coreVersion) {
       doc._stats.coreVersion = doc._stats.coreVersion.split(".")[0];
       doc._stats.coreVersion = "13";
@@ -112,6 +133,10 @@ function cleanEntry(doc) {
     delete doc.prototypeToken.disposition;
   }
   if (doc.system) {
+    if (doc.system.hierarchy?.supId) {
+      doc.system._sup = doc.system.hierarchy.supId;
+    }
+    delete doc.system.hierarchy;
     delete doc.system.font;
     delete doc.system.updateCounter;
     delete doc.system.proficient;
@@ -248,6 +273,9 @@ function cleanEntry(doc) {
  * @param {object} doc - The document to transform.
  */
 function transformEntry(doc) {
+  if (buildTree && doc.system?._sup) {
+    return false;
+  }
   cleanEntry(doc);
   if (doc.pages) {
     doc.pages.forEach((d) => transformEntry(d));

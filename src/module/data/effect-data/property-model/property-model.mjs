@@ -1,6 +1,5 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-import { copyProperty } from "../../../helpers/fetch.mjs";
 import { pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
@@ -175,11 +174,6 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
     const updateData = {};
     updateData[`system.impacts.macros.${safeUuid(uuid)}`] = pseudoHook;
     await this.parent.update(updateData);
-  }
-
-  /** @inheritDoc */
-  async getIndexReference() {
-    return await copyProperty(this.parent.name);
   }
 
   /** @inheritDoc */

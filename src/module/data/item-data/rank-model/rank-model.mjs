@@ -1,4 +1,3 @@
-import { getRank } from "../../../helpers/fetch.mjs";
 import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
 import {
   ProficiencyDataMixin,
@@ -217,23 +216,6 @@ export default class TeriockRankModel extends StatGiverDataMixin(
         )
       ];
     return `${prefix}:${pageName}`;
-  }
-
-  /** @inheritDoc */
-  async getIndexReference() {
-    return await getRank(this.system.className, this.system.classRank);
-  }
-
-  /** @inheritDoc */
-  async hardRefreshFromIndex() {
-    await this.refreshFromIndex();
-    const reference = await this.getIndexReference();
-    const toDelete = this.parent.abilities
-      .filter(
-        (a) => !reference.parent.abilities.map((a) => a.name).includes(a.name),
-      )
-      .map((a) => a.id);
-    await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
   }
 
   /** @inheritDoc */

@@ -204,7 +204,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (!collection) {
           collection = document.siblingCollection;
         }
-        if (document.system._sup) {
+        if (document.system?._sup) {
           return collection.get(document.system._sup);
         }
       }
@@ -226,15 +226,23 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Array containing all children.
+       * Array containing all children or their indexes.
        * @returns {TeriockChild[]}
        */
       get childArray() {
         return [
-          ...(this.effects?.contents || []),
-          ...(this.items?.contents || []),
+          ...(this.effects?.contents || []).filter((e) => !e.sup),
+          ...(this.items?.contents || []).filter((i) => !i.sup),
           ...(this.subs.contents || []),
-        ].filter((c) => !c.isEphemeral);
+        ];
+      }
+
+      /**
+       * Collection containing all children or their indexes.
+       * @returns {TypeCollection}
+       */
+      get children() {
+        return new TypeCollection(this.childArray.map((c) => [c._id, c]));
       }
 
       /**
@@ -279,6 +287,21 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
+       * Array containing all visible children.
+       * @returns {TeriockChild[]}
+       */
+      get visibleChildren() {
+        return this.childArray
+          .filter((c) => !c.isEphemeral)
+          .filter(
+            (c) =>
+              c.documentName !== "ActiveEffect" ||
+              c.system.revealed ||
+              game.user.isGM,
+          );
+      }
+
+      /**
        * Render the sheets of all the sups.
        */
       #renderSupSheets() {
@@ -318,7 +341,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Create multiple child Document instances descendant from a Document using provided input data.
-       * @param {"ActiveEffect" | "Item"} embeddedName
+       * @param {TeriockChildName} embeddedName
        * @param {object[]} data
        * @param {DatabaseCreateOperation} operation
        * @returns {Promise<TeriockCommon[]>}
@@ -365,7 +388,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Delete multiple child Document instances descendant from a Document using provided string ids.
-       * @param {"ActiveEfect" | "Item"} embeddedName
+       * @param {TeriockChildName} embeddedName
        * @param {ID<TeriockCommon>[]} ids
        * @param {DatabaseDeleteOperation} operation
        * @returns {Promise<TeriockCommon>}
@@ -431,6 +454,15 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
+       * Resolved collection containing all children.
+       * @returns {Promise<TypeCollection>}
+       */
+      async getChildren() {
+        const children = await resolveDocuments(this.childArray);
+        return new TypeCollection(children.map((c) => [c._id, c]));
+      }
+
+      /**
        * The document that provides this document.
        * @returns {Promise<TeriockDocument|void>}
        */
@@ -454,6 +486,14 @@ export default function HierarchyDocumentMixin(Base) {
         return await resolveDocument(this.sup);
       }
 
+      /**
+       * Resolved visible children.
+       * @returns {Promise<TeriockCommon[]>}
+       */
+      async getVisibleChildren() {
+        return resolveDocuments(this.visibleChildren);
+      }
+
       /** @inheritDoc */
       toObject() {
         const out = super.toObject();
@@ -463,7 +503,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Update multiple child Document instances descendant from a Document using provided differential data.
-       * @param {"ActiveEffect" | "Item"} embeddedName
+       * @param {TeriockChildName} embeddedName
        * @param {object[]} updates
        * @param {DatabaseUpdateOperation} operation
        * @returns {Promise<TeriockCommon[]>}

@@ -356,7 +356,7 @@ export default function CommonSheetMixin(Base) {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
-        let children = await this.document.getChildArray();
+        let children = await this.document.getVisibleChildren();
         children = children.filter((c) => {
           if (foundry.utils.hasProperty(c, "system.revealed")) {
             return (

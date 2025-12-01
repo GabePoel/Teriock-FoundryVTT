@@ -1,7 +1,26 @@
+const { Collection } = foundry.utils;
+
+//noinspection JSClosureCompilerSyntax
+/**
+ * @template T
+ * @extends {Collection<ID<T>, T>}
+ */
+export class TeriockCompendiumCollection extends Collection {
+  /**
+   * @type {Collection<ID<TeriockFolder>, TeriockFolder>}
+   */
+  folders;
+
+  /**
+   * @type {Collection<ID<T>, Index<T>>}
+   */
+  index;
+}
+
 export default class TeriockPacks {
   /**
    * Official abilities.
-   * @returns {CompendiumCollection<TeriockAbility> & CompendiumHelper<TeriockAbility>}
+   * @returns {TeriockCompendiumCollection<TeriockWrapper<TeriockAbility>>}
    */
   get abilities() {
     return game.packs.get("teriock.abilities");
@@ -9,7 +28,7 @@ export default class TeriockPacks {
 
   /**
    * Official body parts.
-   * @returns {CompendiumCollection<TeriockBody> & CompendiumHelper<TeriockBody>}
+   * @returns {TeriockCompendiumCollection<TeriockBody>}
    */
   get bodyParts() {
     return game.packs.get("teriock.bodyParts");
@@ -17,7 +36,7 @@ export default class TeriockPacks {
 
   /**
    * Official classes.
-   * @returns {CompendiumCollection<TeriockRank> & CompendiumHelper<TeriockRank>}
+   * @returns {TeriockCompendiumCollection<TeriockRank>}
    */
   get classes() {
     return game.packs.get("teriock.classes");
@@ -25,7 +44,7 @@ export default class TeriockPacks {
 
   /**
    * Official creatures.
-   * @returns {CompendiumCollection<TeriockCreature> & CompendiumHelper<TeriockCreature>}
+   * @returns {TeriockCompendiumCollection<TeriockCreature>}
    */
   get creatures() {
     return game.packs.get("teriock.creatures");
@@ -33,7 +52,7 @@ export default class TeriockPacks {
 
   /**
    * Official equipment.
-   * @returns {CompendiumCollection<TeriockEquipment> & CompendiumHelper<TeriockEquipment>}
+   * @returns {TeriockCompendiumCollection<TeriockEquipment>}
    */
   get equipment() {
     return game.packs.get("teriock.equipment");
@@ -41,7 +60,7 @@ export default class TeriockPacks {
 
   /**
    * Official powers common many things.
-   * @returns {CompendiumCollection<TeriockPower> & CompendiumHelper<TeriockPower>}
+   * @returns {TeriockCompendiumCollection<TeriockPower>}
    */
   get essentials() {
     return game.packs.get("teriock.essentials");
@@ -49,7 +68,7 @@ export default class TeriockPacks {
 
   /**
    * Official ability execution macros.
-   * @returns {CompendiumCollection<TeriockMacro> & CompendiumHelper<TeriockMacro>}
+   * @returns {TeriockCompendiumCollection<TeriockMacro>}
    */
   get execution() {
     return game.packs.get("teriock.execution");
@@ -57,7 +76,7 @@ export default class TeriockPacks {
 
   /**
    * Official magic items.
-   * @returns {CompendiumCollection<TeriockEquipment> & CompendiumHelper<TeriockEquipment>}
+   * @returns {TeriockCompendiumCollection<TeriockEquipment>}
    */
   get magicItems() {
     return game.packs.get("teriock.magicItems");
@@ -65,7 +84,7 @@ export default class TeriockPacks {
 
   /**
    * Official maintenance macros.
-   * @returns {CompendiumCollection<TeriockMacro> & CompendiumHelper<TeriockMacro>}
+   * @returns {TeriockCompendiumCollection<TeriockMacro>}
    */
   get maintenance() {
     return game.packs.get("teriock.maintenance");
@@ -73,7 +92,7 @@ export default class TeriockPacks {
 
   /**
    * Official powers.
-   * @returns {CompendiumCollection<TeriockPower> & CompendiumHelper<TeriockPower>}
+   * @returns {TeriockCompendiumCollection<TeriockPower>}
    */
   get powers() {
     return game.packs.get("teriock.powers");
@@ -81,7 +100,7 @@ export default class TeriockPacks {
 
   /**
    * Official properties.
-   * @returns {CompendiumCollection<TeriockPower> & CompendiumHelper<TeriockPower>}
+   * @returns {TeriockCompendiumCollection<TeriockWrapper<TeriockProperty>>}
    */
   get properties() {
     return game.packs.get("teriock.properties");
@@ -89,7 +108,7 @@ export default class TeriockPacks {
 
   /**
    * Official rules.
-   * @returns {CompendiumCollection<TeriockJournalEntry> & CompendiumHelper<TeriockJournalEntry>}
+   * @returns {TeriockCompendiumCollection<TeriockJournalEntry>}
    */
   get rules() {
     return game.packs.get("teriock.rules");
@@ -97,7 +116,7 @@ export default class TeriockPacks {
 
   /**
    * Official species.
-   * @returns {CompendiumCollection<TeriockSpecies> & CompendiumHelper<TeriockSpecies>}
+   * @returns {TeriockCompendiumCollection<TeriockSpecies>}
    */
   get species() {
     return game.packs.get("teriock.species");
@@ -105,7 +124,7 @@ export default class TeriockPacks {
 
   /**
    * Official tables.
-   * @returns {CompendiumCollection<TeriockRollTable> & CompendiumHelper<TeriockRollTable>}
+   * @returns {TeriockCompendiumCollection<TeriockRollTable>}
    */
   get tables() {
     return game.packs.get("teriock.tables");

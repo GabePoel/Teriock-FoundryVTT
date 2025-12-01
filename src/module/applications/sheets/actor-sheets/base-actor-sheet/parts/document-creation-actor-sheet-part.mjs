@@ -1,3 +1,5 @@
+import { changeSizeDialog } from "../../../../dialogs/_module.mjs";
+
 export default (Base) =>
   class DocumentCreationActorSheetPart extends Base {
     //noinspection JSUnusedGlobalSymbols
@@ -10,13 +12,13 @@ export default (Base) =>
     }
 
     //noinspection JSUnusedGlobalSymbols
-    //async _onDropItem(event, data) {
-    //  const item = await super._onDropItem(event, data);
-    //  if (item?.type === "species") {
-    //    await item?.system?.importDeterministic();
-    //    if (item?.system?.size?.enabled) {
-    //      await changeSizeDialog(this.actor, item);
-    //    }
-    //  }
-    //}
+    async _onDropItem(event, data) {
+      const item = await super._onDropItem(event, data);
+      if (item?.type === "species") {
+        if (item?.system?.size?.enabled) {
+          await changeSizeDialog(this.actor, item);
+        }
+      }
+      return item;
+    }
   };

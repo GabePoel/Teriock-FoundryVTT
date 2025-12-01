@@ -1,5 +1,4 @@
 const abilitiesPack = game.teriock.packs.abilities;
-
 const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
   progress: true,
 });

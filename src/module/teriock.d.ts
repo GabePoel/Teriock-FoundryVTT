@@ -4,6 +4,7 @@ import "./helpers/commands/_types";
 import "./data/_types";
 import "./applications/_types";
 import "./documents/_types";
+import "./documents/_documents";
 import { TypeCollection } from "./documents/collections/_module.mjs";
 import {
   TeriockActor,
@@ -22,13 +23,6 @@ import {
 } from "./documents/_module.mjs";
 import PixiJS from "pixi.js";
 import * as sheets from "./applications/sheets/_module.mjs";
-import * as documents from "./documents/_documents.mjs";
-import {
-  TeriockBody,
-  TeriockCondition,
-  TeriockConsequence,
-  TeriockEquipment,
-} from "./documents/_documents.mjs";
 import * as data from "./data/_module.mjs";
 import * as placeables from "./canvas/placeables/_module.mjs";
 import TeriockBaseActorSheet from "./applications/sheets/actor-sheets/base-actor-sheet/base-actor-sheet.mjs";
@@ -69,6 +63,7 @@ declare global {
   export type TeriockChild = TeriockItem | TeriockEffect;
   export type TeriockChildName = "Item" | "ActiveEffect";
   export type TeriockCommon = TeriockActor | TeriockItem | TeriockEffect;
+  export type TeriockCommonName = "Actor" | "Item" | "ActiveEffect";
   export type TeriockDocument =
     | TeriockActor
     | TeriockChatMessage
@@ -83,37 +78,6 @@ declare global {
     | TeriockScene
     | TeriockTokenDocument
     | TeriockUser;
-
-  // Virtual document classes
-  // ========================
-
-  // Actor
-  // -----
-
-  const TeriockCharacter: documents.TeriockCharacter;
-  const TeriockCreature: documents.TeriockCreature;
-
-  // Item
-  // ----
-
-  const TeriockBody: documents.TeriockBody;
-  const TeriockEquipment: documents.TeriockEquipment;
-  const TeriockMount: documents.TeriockMount;
-  const TeriockPower: documents.TeriockPower;
-  const TeriockRank: documents.TeriockRank;
-  const TeriockSpecies: documents.TeriockSpecies;
-  const TeriockWrapper: documents.TeriockWrapper;
-
-  // Effect
-  // ------
-
-  const TeriockAbility: documents.TeriockAbility;
-  const TeriockAttunement: documents.TeriockAttunement;
-  const TeriockConsequence: documents.TeriockConsequence;
-  const TeriockCondition: documents.TeriockCondition;
-  const TeriockFluency: documents.TeriockFluency;
-  const TeriockProperty: documents.TeriockProperty;
-  const TeriockResource: documents.TeriockResource;
 
   // Document Unions
   // ---------------

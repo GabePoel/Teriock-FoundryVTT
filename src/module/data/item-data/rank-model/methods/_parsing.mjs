@@ -81,6 +81,8 @@ export async function _parse(rankData, rawHTML) {
     }
   }
   if (classRank >= 3) {
+    rankNames["3c"].sort((a, b) => a.localeCompare(b));
+    rankNames["3s"].sort((a, b) => a.localeCompare(b));
     for (const name of rankNames["3c"]) {
       abilitiesToCreate.push(name);
     }
@@ -119,6 +121,12 @@ export async function _parse(rankData, rawHTML) {
     await Promise.all(
       a3s.map((a) => a.setFlag("teriock", "category", "support")),
     );
+    await a3c
+      .find((a) => a.name === rankNames["3c"][classRank - 3])
+      ?.setFlag("teriock", "defaultAbility", true);
+    await a3s
+      .find((a) => a.name === rankNames["3s"][classRank - 3])
+      ?.setFlag("teriock", "defaultAbility", true);
 
     const toDelete = rankData.parent.abilities
       .filter((a) => !abilitiesToCreate.includes(a.name))

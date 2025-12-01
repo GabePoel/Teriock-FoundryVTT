@@ -18,7 +18,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockAbility[]}
        */
       get abilities() {
-        return this.childArray.filter((c) => c.type === "ability");
+        return this.visibleChildren.filter((c) => c.type === "ability");
       }
 
       /**
@@ -26,7 +26,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockAttunement[]}
        */
       get attunements() {
-        return this.childArray.filter((c) => c.type === "attunement");
+        return this.visibleChildren.filter((c) => c.type === "attunement");
       }
 
       /**
@@ -34,7 +34,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockBody[]}
        */
       get bodyParts() {
-        return this.childArray.filter((c) => c.type === "body");
+        return this.visibleChildren.filter((c) => c.type === "body");
       }
 
       /**
@@ -42,7 +42,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockCondition[]}
        */
       get conditions() {
-        return this.childArray.filter((c) => c.type === "condition");
+        return this.visibleChildren.filter((c) => c.type === "condition");
       }
 
       /**
@@ -50,7 +50,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockConsequence[]}
        */
       get consequences() {
-        return this.childArray.filter((c) => c.type === "consequence");
+        return this.visibleChildren.filter((c) => c.type === "consequence");
       }
 
       /**
@@ -58,7 +58,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockEquipment[]}
        */
       get equipment() {
-        return this.childArray.filter((c) => c.type === "equipment");
+        return this.visibleChildren.filter((c) => c.type === "equipment");
       }
 
       /**
@@ -66,7 +66,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockFluency[]}
        */
       get fluencies() {
-        return this.childArray.filter((c) => c.type === "fluency");
+        return this.visibleChildren.filter((c) => c.type === "fluency");
       }
 
       /**
@@ -74,7 +74,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockMount[]}
        */
       get mounts() {
-        return this.childArray.filter((c) => c.type === "mount");
+        return this.visibleChildren.filter((c) => c.type === "mount");
       }
 
       /**
@@ -82,7 +82,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockPower[]}
        */
       get powers() {
-        return this.childArray.filter((c) => c.type === "power");
+        return this.visibleChildren.filter((c) => c.type === "power");
       }
 
       /**
@@ -90,7 +90,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockProperty[]}
        */
       get properties() {
-        return this.childArray.filter((c) => c.type === "property");
+        return this.visibleChildren.filter((c) => c.type === "property");
       }
 
       /**
@@ -98,7 +98,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockRank[]}
        */
       get ranks() {
-        return this.childArray.filter((c) => c.type === "rank");
+        return this.visibleChildren.filter((c) => c.type === "rank");
       }
 
       /**
@@ -106,7 +106,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockResource[]}
        */
       get resources() {
-        return this.childArray.filter((c) => c.type === "resource");
+        return this.visibleChildren.filter((c) => c.type === "resource");
       }
 
       /**
@@ -114,7 +114,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockSpecies[]}
        */
       get species() {
-        return this.childArray.filter((c) => c.type === "species");
+        return this.visibleChildren.filter((c) => c.type === "species");
       }
 
       /**
@@ -122,7 +122,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockWrapper[]}
        */
       get wrappers() {
-        return this.childArray.filter((c) => c.type === "wrapper");
+        return this.visibleChildren.filter((c) => c.type === "wrapper");
       }
 
       /**

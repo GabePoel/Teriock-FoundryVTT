@@ -1,6 +1,10 @@
-import { copyItem, getItem } from "../../helpers/fetch.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { pureUuid, ringImage, selectUser } from "../../helpers/utils.mjs";
+import {
+  pureUuid,
+  resolveDocument,
+  ringImage,
+  selectUser,
+} from "../../helpers/utils.mjs";
 import {
   BaseDocumentMixin,
   CommonDocumentMixin,
@@ -21,8 +25,8 @@ const { Actor } = foundry.documents;
  * @mixes HierarchyDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
- * @property {Collection<UUID<TeriockEffect>, TeriockEffect>} effects
- * @property {Collection<UUID<TeriockItem>, TeriockItem>} items
+ * @property {Collection<ID<TeriockEffect>, TeriockEffect>} effects
+ * @property {Collection<ID<TeriockItem>, TeriockItem>} items
  * @property {Teriock.Documents.ActorModel} system
  * @property {Teriock.Documents.ActorType} type
  * @property {ID<TeriockActor>} _id
@@ -106,15 +110,6 @@ export default class TeriockActor extends RetrievalDocumentMixin(
    */
   get armaments() {
     return [...this.bodyParts, ...this.equipment];
-  }
-
-  /** @inheritDoc */
-  get childArray() {
-    return [
-      ...this.validEffects,
-      ...this.items.contents,
-      ...(this.subs.contents || []),
-    ].filter((c) => !c.isEphemeral);
   }
 
   /**
@@ -213,6 +208,22 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     return Array.from(this.allApplicableEffects());
   }
 
+  /** @inheritDoc */
+  get visibleChildren() {
+    return [
+      ...this.validEffects,
+      ...this.items.contents,
+      ...(this.subs.contents || []),
+    ]
+      .filter((c) => !c.isEphemeral)
+      .filter(
+        (c) =>
+          c.documentName !== "ActiveEffect" ||
+          c.system.revealed ||
+          game.user.isGM,
+      );
+  }
+
   /**
    * @inheritDoc
    * @param {ActorData} data
@@ -299,7 +310,9 @@ export default class TeriockActor extends RetrievalDocumentMixin(
    * @returns {Promise<TeriockAbility[]>}
    */
   async allAbilities() {
-    const basicAbilitiesItem = await getItem("Basic Abilities", "essentials");
+    const basicAbilitiesItem = await resolveDocument(
+      game.teriock.packs.essentials.index.getName("Basic Abilities"),
+    );
     return [...basicAbilitiesItem.abilities, ...this.abilities];
   }
 
@@ -345,7 +358,13 @@ export default class TeriockActor extends RetrievalDocumentMixin(
         ) {
           if (!this.itemKeys.power.has(archetype)) {
             data.push(
-              await copyItem(TERIOCK.options.rank[archetype].name, "classes"),
+              game.items.fromCompendium(
+                await resolveDocument(
+                  game.teriock.packs.classes.index.getName(
+                    TERIOCK.options.rank[archetype].name,
+                  ),
+                ),
+              ),
             );
           }
         }

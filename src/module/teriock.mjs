@@ -36,6 +36,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   CONFIG.ui.actors = applications.sidebar.TeriockActorDirectory;
   CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
+  CONFIG.ui.notifications = applications.ui.TeriockNotifications;
   CONFIG.ui.items = applications.sidebar.TeriockItemDirectory;
 
   applications.ux.registerEnrichers();

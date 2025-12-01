@@ -49,7 +49,12 @@ export async function _parse(bodyData, rawHTML) {
   // Add piercing property if present
   const piercing = getValue(".piercing");
   if (piercing) {
-    properties.add(piercing.toUpperCase());
+    properties.add(
+      piercing
+        .toUpperCase()
+        .replace("UB", "Unblockable")
+        .replace("AP", "Armor Piercing"),
+    );
   }
 
   // Parse sb, av, bv

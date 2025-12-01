@@ -223,6 +223,7 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
+    context.abilities = await this.document.allAbilities();
     this._prepareDisplayContext(context);
     await this._prepareDocumentContext(context);
     await this._prepareConditionContext(context);
@@ -231,9 +232,6 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
     );
     context.enrichedSpecialRules = await this._enrich(
       this.document.system.primaryAttacker?.system?.specialRules,
-    );
-    context.inventory = await TeriockTextEditor.enrichHTML(
-      context.equipment.map((e) => `@Embed[${e.uuid}]`).join(""),
     );
     return context;
   }
