@@ -1,6 +1,3 @@
-import { DragDropCommonSheetPartInterface } from "./parts/_types";
-
-export interface CommonSheetMixinInterface
-  extends DragDropCommonSheetPartInterface {
+export interface CommonSheetMixinInterface {
   get document(): TeriockCommon;
 }

@@ -6,6 +6,7 @@ const { fields } = foundry.data;
 
 /**
  * Power-specific item data model.
+ * @extends {TeriockBaseItemModel}
  * @mixes ProficiencyData
  */
 export default class TeriockPowerModel extends ProficiencyDataMixin(

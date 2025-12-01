@@ -7,13 +7,13 @@ const { ux } = foundry.applications;
 
 /**
  * Equipment data model mixin that handles identifying and reading magic.
- * @param {typeof ChildTypeModel} Base
+ * @param {typeof TeriockEquipmentModel} Base
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends TeriockEquipmentData
+     * @extends TeriockEquipmentModel
      */
     class EquipmentIdentificationPart extends Base {
       /** @inheritDoc */
@@ -42,7 +42,7 @@ export default (Base) => {
         await this.parent.hookCall("equipmentIdentify", data);
         if (!data.cancel) {
           if (!this.identification.identified) {
-            foundry.ui.notifications.info(
+            ui.notifications.info(
               `Asking GMs to approve identification of ${this.parent.name}.`,
             );
             const doIdentify = await queryGM(
@@ -77,7 +77,7 @@ export default (Base) => {
         if (!data.cancel) {
           if (!this.identification.identified && !this.identification.read) {
             const activeGM = game.users.activeGM;
-            foundry.ui.notifications.info(
+            ui.notifications.info(
               `Asking GMs to approve reading magic on ${this.parent.name}.`,
             );
             const content = await ux.TextEditor.enrichHTML(
@@ -106,11 +106,11 @@ export default (Base) => {
                   failPrefix: "Could not ask to read magic.",
                 },
               );
-              foundry.ui.notifications.success(
+              ui.notifications.success(
                 `${this.parent.name} was successfully read.`,
               );
             } else {
-              foundry.ui.notifications.error(
+              ui.notifications.error(
                 `${this.parent.name} was not successfully read.`,
               );
             }
@@ -135,14 +135,14 @@ export default (Base) => {
               )
             ) {
               uncheckedPropertyNames.push(
-                ...(await getDocument(this.equipmentType, "equipment"))
-                  .getProperties()
-                  .map((p) => p.name),
+                ...(
+                  await getDocument(this.equipmentType, "equipment")
+                ).properties.map((p) => p.name),
               );
             }
             const revealed = [
-              ...this.parent.getProperties().filter((p) => p.system.revealed),
-              ...this.parent.getAbilities().filter((a) => a.system.revealed),
+              ...this.parent.properties.filter((p) => p.system.revealed),
+              ...this.parent.abilities.filter((a) => a.system.revealed),
               ...this.parent.resources.filter((r) => r.system.revealed),
               ...this.parent.fluencies.filter((f) => f.system.revealed),
             ];
@@ -180,7 +180,7 @@ export default (Base) => {
               name: "Unidentified " + this.equipmentType,
             });
           } else {
-            foundry.ui.notifications.warn("This item is already unidentified.");
+            ui.notifications.warn("This item is already unidentified.");
           }
         }
       }

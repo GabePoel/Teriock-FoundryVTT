@@ -9,6 +9,7 @@ export default function ExecutableDataMixin(Base) {
   return (
     /**
      * @implements {ExecutableDataMixinInterface}
+     * @extends {ChildTypeModel}
      * @mixin
      */
     class ExecutableData extends Base {
@@ -21,7 +22,11 @@ export default function ExecutableDataMixin(Base) {
         return schema;
       }
 
-      /** @inheritDoc */
+      /**
+       * Unlink a macro.
+       * @param {UUID<TeriockMacro>} uuid
+       * @returns {Promise<void>}
+       */
       async unlinkMacro(uuid) {
         const macroUuids = new Set(Array.from(this.macros));
         macroUuids.delete(uuid);

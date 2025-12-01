@@ -52,7 +52,7 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
    */
   static async _toggleOnUseDoc(_event, target) {
     if (!this.editable) {
-      foundry.ui.notifications.warn(
+      ui.notifications.warn(
         `Cannot toggle if ability activates on use. Sheet is not editable.`,
       );
       return;

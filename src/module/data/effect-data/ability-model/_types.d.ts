@@ -1,24 +1,12 @@
-import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { type AbilityImpacts } from "./types/ability-impact-field";
-import {
-  TeriockAbility,
-  TeriockConsequence,
-} from "../../../documents/_documents.mjs";
-import { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
-import { ConsumableDataMixinInterface } from "../../mixins/consumable-data-mixin/_types";
+import { AbilityImpacts } from "./types/ability-impact-field";
 import { OverviewText, ResultsText } from "./types/summary";
 import { ImprovementsConfig } from "./types/improvements";
 import { Duration } from "./types/duration";
 import { DeliveryConfig } from "./types/interaction";
 import { CostAdjustment, CostsConfig } from "./types/costs";
-import { ExecutableDataMixinInterface } from "../../mixins/executable-data-mixin/_types";
 
 declare module "./ability-model.mjs" {
-  export default interface TeriockAbilityModel
-    extends TeriockBaseEffectModel,
-      ConsumableDataMixinInterface,
-      ExecutableDataMixinInterface,
-      HierarchyDataMixinInterface {
+  export default interface TeriockAbilityModel {
     /** <schema> If this ability is adept and how much it costs if so */
     adept: CostAdjustment;
     /** <schema> If this is a basic ability */

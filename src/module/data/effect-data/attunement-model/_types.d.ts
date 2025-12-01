@@ -1,16 +1,9 @@
-import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import {
-  TeriockAttunement,
-  TeriockEquipment,
-} from "../../../documents/_documents.mjs";
-
 declare module "./attunement-model.mjs" {
-  export default interface TeriockAttunementModel
-    extends TeriockBaseEffectModel {
+  export default interface TeriockAttunementModel {
     /** <schema> Should this inherit the tier of the target entity? */
     inheritTier: boolean;
     /** <schema> The entity that this attunement corresponds to */
-    target: ID<TeriockEquipment> | null;
+    target: ID<TeriockEquipment | TeriockMount> | null;
     /** <schema> Presence tier of the target entity */
     tier: number;
     /** <schema> What type of entity this attunement corresponds to */
@@ -19,3 +12,5 @@ declare module "./attunement-model.mjs" {
     get parent(): TeriockAttunement;
   }
 }
+
+export {};

@@ -229,12 +229,9 @@ export function pureUuid(safeUuid) {
  */
 export async function refreshDocuments(docs, options = { skipSubs: true }) {
   const skipSubs = options?.skipSubs;
-  const progress = foundry.ui.notifications.info(
-    `Refreshing documents from wiki.`,
-    {
-      progress: true,
-    },
-  );
+  const progress = ui.notifications.info(`Refreshing documents from wiki.`, {
+    progress: true,
+  });
   let pct = 0;
   for (const doc of docs) {
     progress.update({

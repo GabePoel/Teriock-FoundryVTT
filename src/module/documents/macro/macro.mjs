@@ -118,7 +118,7 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(
       actors.push(actor);
     }
     if (actors.length === 0) {
-      foundry.ui.notifications.warn("No actors selected.");
+      ui.notifications.warn("No actors selected.");
     }
     for (const a of actors) {
       const doc = await this.getDocument(a, name, type);
@@ -138,7 +138,7 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(
         }
         await doc.system.use(useOptions);
       } else {
-        foundry.ui.notifications.warn(
+        ui.notifications.warn(
           `${a.name} has no ${type ? TERIOCK.options.document[type].name.toLowerCase() : "document"} called ${name}.`,
         );
       }

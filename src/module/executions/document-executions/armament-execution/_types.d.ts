@@ -6,7 +6,7 @@ declare global {
       drain?: boolean;
       damage?: boolean;
       wither?: boolean;
-      source: TeriockArmament;
+      source?: TeriockArmament;
     };
   }
 }

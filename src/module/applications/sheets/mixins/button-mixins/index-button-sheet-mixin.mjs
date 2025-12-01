@@ -48,9 +48,9 @@ export default function IndexButtonSheetMixin(Base) {
         if (proceed) {
           await this.document.system.hardRefreshFromIndex();
         }
-        foundry.ui.notifications.success(`Refreshed ${this.document.name}.`);
+        ui.notifications.success(`Refreshed ${this.document.name}.`);
       } else {
-        foundry.ui.notifications.warn(
+        ui.notifications.warn(
           `Cannot refresh ${this.document.name}. Sheet is not editable.`,
         );
       }
@@ -72,9 +72,9 @@ export default function IndexButtonSheetMixin(Base) {
         if (proceed) {
           await this.document.system.refreshFromIndex();
         }
-        foundry.ui.notifications.success(`Refreshed ${this.document.name}.`);
+        ui.notifications.success(`Refreshed ${this.document.name}.`);
       } else {
-        foundry.ui.notifications.warn(
+        ui.notifications.warn(
           `Cannot refresh ${this.document.name}. Sheet is not editable.`,
         );
       }

@@ -202,8 +202,10 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
     if (
       this.damageType &&
       this.damageType.length > 0 &&
-      this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0)
-        .length === 0
+      this.parent.allSups.filter(
+        /** @param {TeriockProperty} p */ (p) =>
+          p.system.damageType?.trim().length > 0,
+      ).length === 0
     ) {
       this.parent.changes.push({
         key: "item.system.damage.types",

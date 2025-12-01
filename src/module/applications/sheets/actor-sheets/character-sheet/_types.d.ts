@@ -1,5 +1,4 @@
 import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
-import { TeriockCharacter } from "../../../../documents/_documents.mjs";
 
 declare module "./character-sheet.mjs" {
   export default interface TeriockBaseCharacterSheet

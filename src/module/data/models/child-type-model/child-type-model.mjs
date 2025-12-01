@@ -17,15 +17,8 @@ import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Data model shared by items and effects.
- * @implements {ChildTypeModelInterface}
- * @property {TeriockChild} parent
- * @property {string} description
- * @property {boolean} proficient
- * @property {boolean} fluent
- * @property {Teriock.Parameters.Shared.Font} font
  */
 export default class ChildTypeModel extends CommonTypeModel {
   /** @inheritDoc */
@@ -74,76 +67,80 @@ export default class ChildTypeModel extends CommonTypeModel {
 
   /** @inheritDoc */
   get cardContextMenuEntries() {
-    return [
-      {
-        name: this.useText,
-        icon: makeIcon(this.useIcon, "contextMenu"),
-        callback: this.use.bind(this),
-        condition: this.isUsable,
-        group: "usage",
-      },
-      {
-        name: "Enable",
-        icon: makeIcon("check", "contextMenu"),
-        callback: this.parent.enable.bind(this.parent),
-        condition:
-          this.parent.parent?.isOwner &&
-          this.parent.disabled &&
-          this.parent.type !== "equipment",
-        group: "control",
-      },
-      {
-        name: "Disable",
-        icon: makeIcon("xmark-large", "contextMenu"),
-        callback: this.parent.disable.bind(this.parent),
-        condition:
-          this.parent.parent?.isOwner &&
-          !this.parent.disabled &&
-          this.parent.type !== "equipment" &&
-          this.parent.type !== "mount" &&
-          !(this.parent.type === "ability" && this.isVirtual),
-        group: "control",
-      },
-      {
-        name: "Open GM Notes",
-        icon: makeIcon("notes", "contextMenu"),
-        callback: async () => {
-          await this.gmNotesOpen();
+    const entries = super.cardContextMenuEntries;
+    entries.push(
+      ...[
+        {
+          name: this.useText,
+          icon: makeIcon(this.useIcon, "contextMenu"),
+          callback: this.use.bind(this),
+          condition: this.isUsable,
+          group: "usage",
         },
-        condition: game.user.isGM,
-        group: "open",
-      },
-      {
-        name: "Open Image",
-        icon: makeIcon("image", "contextMenu"),
-        callback: async () => {
-          await new TeriockImagePreviewer(this.parent.img).render(true);
+        {
+          name: "Enable",
+          icon: makeIcon("check", "contextMenu"),
+          callback: this.parent.enable.bind(this.parent),
+          condition:
+            this.parent.parent?.isOwner &&
+            this.parent.disabled &&
+            this.parent.type !== "equipment",
+          group: "control",
         },
-        group: "open",
-      },
-      {
-        name: "Share Image",
-        icon: makeIcon("comment-image", "contextMenu"),
-        callback: this.parent.chatImage.bind(this.parent),
-        group: "share",
-      },
-      {
-        name: "Share Writeup",
-        icon: makeIcon("comment-lines", "contextMenu"),
-        callback: this.parent.toMessage.bind(this.parent),
-        group: "share",
-      },
-      {
-        name: "Duplicate",
-        icon: makeIcon("copy", "contextMenu"),
-        callback: async () => {
-          await this.duplicate();
+        {
+          name: "Disable",
+          icon: makeIcon("xmark-large", "contextMenu"),
+          callback: this.parent.disable.bind(this.parent),
+          condition:
+            this.parent.parent?.isOwner &&
+            !this.parent.disabled &&
+            this.parent.type !== "equipment" &&
+            this.parent.type !== "mount" &&
+            !(this.parent.type === "ability" && this.isVirtual),
+          group: "control",
         },
-        condition: () =>
-          this.parent?.elder?.sheet?.editable && this.parent.isOwner,
-        group: "document",
-      },
-    ];
+        {
+          name: "Open GM Notes",
+          icon: makeIcon("notes", "contextMenu"),
+          callback: async () => {
+            await this.gmNotesOpen();
+          },
+          condition: game.user.isGM,
+          group: "open",
+        },
+        {
+          name: "Open Image",
+          icon: makeIcon("image", "contextMenu"),
+          callback: async () => {
+            await new TeriockImagePreviewer(this.parent.img).render(true);
+          },
+          group: "open",
+        },
+        {
+          name: "Share Image",
+          icon: makeIcon("comment-image", "contextMenu"),
+          callback: this.parent.chatImage.bind(this.parent),
+          group: "share",
+        },
+        {
+          name: "Share Writeup",
+          icon: makeIcon("comment-lines", "contextMenu"),
+          callback: this.parent.toMessage.bind(this.parent),
+          group: "share",
+        },
+        {
+          name: "Duplicate",
+          icon: makeIcon("copy", "contextMenu"),
+          callback: async () => {
+            await this.duplicate();
+          },
+          condition: () =>
+            this.parent?.elder?.sheet?.editable && this.parent.isOwner,
+          group: "document",
+        },
+      ],
+    );
+    return entries;
   }
 
   /**
@@ -162,9 +159,10 @@ export default class ChildTypeModel extends CommonTypeModel {
     return ["system.proficient", "system.fluent"];
   }
 
+  /** @inheritDoc */
   get embedActions() {
-    return {
-      ...super.embedActions,
+    const embedActions = super.embedActions;
+    Object.assign(embedActions, {
       useDoc: {
         primary: async (event, relative) => {
           const options = this.parseEvent(event);
@@ -174,7 +172,8 @@ export default class ChildTypeModel extends CommonTypeModel {
           await this.parent.use(options);
         },
       },
-    };
+    });
+    return embedActions;
   }
 
   /** @inheritDoc */

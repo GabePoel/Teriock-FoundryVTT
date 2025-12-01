@@ -1,11 +1,13 @@
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { Collection } = foundry.utils;
+const { CompendiumCollection } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
  * @template T
  * @extends {Collection<ID<T>, T>}
  */
-export class TeriockCompendiumCollection extends Collection {
+export class TeriockCompendiumCollection extends CompendiumCollection {
   /**
    * @type {Collection<ID<TeriockFolder>, TeriockFolder>}
    */

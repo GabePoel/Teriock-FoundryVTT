@@ -1,5 +1,4 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
-import { getDocument } from "../../../helpers/fetch.mjs";
 import {
   dotJoin,
   formulaExists,
@@ -30,6 +29,7 @@ import EquipmentIdentificationPart from "./parts/equipment-identification-part.m
 import EquipmentSuppressionPart from "./parts/equipment-suppression-part.mjs";
 import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Equipment-specific item data model.
  *
@@ -232,7 +232,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
     let suppressed = super.makeSuppressed || !this.isEquipped;
     if (this.actor && this.actor.system.isTransformed) {
       if (
-        this.parent.elder.documentName === "Actor" &&
+        this.parent.elder?.documentName === "Actor" &&
         this.actor.system.transformation.suppression.equipment
       ) {
         suppressed = true;
@@ -260,11 +260,6 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   }
 
   /** @inheritDoc */
-  async getIndexReference() {
-    return await getDocument(this.equipmentType, "equipment");
-  }
-
-  /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
   }
@@ -274,7 +269,9 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
    * @returns {Teriock.Execution.EquipmentExecutionOptions}
    */
   parseEvent(event) {
-    const options = super.parseEvent(event);
+    const options =
+      /** @type {Teriock.Execution.EquipmentExecutionOptions} */
+      super.parseEvent(event);
     Object.assign(options, {
       secret: event.shiftKey,
       twoHanded: event.ctrlKey,

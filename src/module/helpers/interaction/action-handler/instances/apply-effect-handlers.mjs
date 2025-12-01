@@ -64,7 +64,7 @@ export class ApplyEffectHandler extends ActionHandler {
     try {
       return JSON.parse(jsonData);
     } catch {
-      foundry.ui.notifications.error("Failed to parse effect data.");
+      ui.notifications.error("Failed to parse effect data.");
       return null;
     }
   }
@@ -95,7 +95,7 @@ export class ApplyEffectHandler extends ActionHandler {
         { keepId: true },
       );
       createdConsequences.push(...newConsequences);
-      foundry.ui.notifications.info(`Applied ${effectObj.name}`);
+      ui.notifications.info(`Applied ${effectObj.name}`);
     }
     await this._addToSustaining(createdConsequences);
   }
@@ -117,9 +117,9 @@ export class ApplyEffectHandler extends ActionHandler {
       }
       const foundIds = Array.from(foundEffects.map((effect) => effect.id));
       if (foundIds.length > 0) {
-        foundry.ui.notifications.info(`Removed ${effectObj.name}`);
+        ui.notifications.info(`Removed ${effectObj.name}`);
       } else {
-        foundry.ui.notifications.warn(`${effectObj.name} not found`);
+        ui.notifications.warn(`${effectObj.name} not found`);
       }
     }
     await this._addToSustaining(createdConsequences);

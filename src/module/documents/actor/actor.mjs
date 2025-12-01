@@ -1,4 +1,5 @@
 import { systemPath } from "../../helpers/path.mjs";
+import { toCamelCase } from "../../helpers/string.mjs";
 import {
   pureUuid,
   resolveDocument,
@@ -173,9 +174,11 @@ export default class TeriockActor extends RetrievalDocumentMixin(
    */
   get itemKeys() {
     const out = {};
-    const effectTypes = this.itemTypes;
+    const itemTypes = this.itemTypes;
     for (const key of Object.keys(TERIOCK.system.documentTypes.items)) {
-      out[key] = new Set(effectTypes[key] || []);
+      out[key] = new Set(
+        (itemTypes[key] || []).map((i) => toCamelCase(i.name)),
+      );
     }
     return out;
   }
@@ -235,7 +238,10 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     if ((await super._preCreate(data, options, user)) === false) {
       return false;
     }
-    // Update Prototype Token
+    const elder = await this.getElder();
+    if (elder && !elder.metadata.childActorTypes.includes(this.type)) {
+      return false;
+    }
     const prototypeToken = {};
     const size = this.system.size.length;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled")) {
@@ -348,28 +354,6 @@ export default class TeriockActor extends RetrievalDocumentMixin(
    * @returns {Promise<TeriockChild[]>}
    */
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    this._filterDocumentCreationData(embeddedName, data);
-    if (embeddedName === "Item") {
-      for (const archetype of ["mage", "semi", "warrior"]) {
-        if (
-          data.find(
-            (d) => d.type === "rank" && d.system?.archetype === archetype,
-          )
-        ) {
-          if (!this.itemKeys.power.has(archetype)) {
-            data.push(
-              game.items.fromCompendium(
-                await resolveDocument(
-                  game.teriock.packs.classes.index.getName(
-                    TERIOCK.options.rank[archetype].name,
-                  ),
-                ),
-              ),
-            );
-          }
-        }
-      }
-    }
     if (
       embeddedName === "ActiveEffect" &&
       data.find((d) => d.type === "consequence")
@@ -399,51 +383,6 @@ export default class TeriockActor extends RetrievalDocumentMixin(
       }
     }
     return await super.createEmbeddedDocuments(embeddedName, data, operation);
-  }
-
-  /**
-   * Overridden with special handling to allow for archetype abilities.
-   * @inheritDoc
-   */
-  async deleteEmbeddedDocuments(embeddedName, ids = [], operation = {}) {
-    if (embeddedName === "Item") {
-      const ranksBeingDeleted =
-        this.ranks.filter((i) => ids.includes(i.id)) ?? [];
-      const archetypesDeleted = new Set(
-        ranksBeingDeleted.map((i) => i.system.archetype).filter(Boolean),
-      );
-      for (const archetype of ["mage", "semi", "warrior"]) {
-        if (!archetypesDeleted.has(archetype)) {
-          continue;
-        }
-        const remaining = this.ranks.some(
-          (i) => i.system.archetype === archetype && !ids.includes(i.id),
-        );
-        if (!remaining) {
-          const powerName = TERIOCK.options.rank[archetype].name;
-          const powerItem = this.powers.find((i) => i.name === powerName);
-          if (powerItem && !ids.includes(powerItem.id)) {
-            ids.push(powerItem.id);
-          }
-        }
-      }
-    }
-    return await super.deleteEmbeddedDocuments(embeddedName, ids, operation);
-  }
-
-  /** @inheritDoc */
-  getBodyParts() {
-    return this.bodyParts.filter((b) => !b.sup);
-  }
-
-  /** @inheritDoc */
-  getEquipment() {
-    return this.equipment.filter((e) => !e.sup);
-  }
-
-  /** @inheritDoc */
-  getRanks() {
-    return this.ranks.filter((r) => !r.sup);
   }
 
   /**
@@ -702,9 +641,7 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     if (ability) {
       await ability.use(options);
     } else {
-      foundry.ui.notifications.warn(
-        `${this.name} does not have ${abilityName}.`,
-      );
+      ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
     }
   }
 }

@@ -1,9 +1,4 @@
 import {
-  TeriockAbility,
-  TeriockConsequence,
-  TeriockEquipment,
-} from "../../documents/_documents.mjs";
-import {
   TeriockActor,
   TeriockEffect,
   TeriockItem,

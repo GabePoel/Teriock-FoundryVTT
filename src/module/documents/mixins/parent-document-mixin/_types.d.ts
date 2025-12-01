@@ -1,18 +1,3 @@
-import {
-  TeriockAbility,
-  TeriockAttunement,
-  TeriockBody,
-  TeriockCondition,
-  TeriockConsequence,
-  TeriockEquipment,
-  TeriockFluency,
-  TeriockMount,
-  TeriockPower,
-  TeriockProperty,
-  TeriockRank,
-  TeriockResource,
-  TeriockSpecies,
-} from "../../_documents.mjs";
 import { TeriockEffect } from "../../_module.mjs";
 
 declare global {

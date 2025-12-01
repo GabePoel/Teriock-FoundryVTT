@@ -1,15 +1,5 @@
-import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { TeriockEquipment } from "../../../documents/_documents.mjs";
-import { ExecutableDataMixinInterface } from "../../mixins/executable-data-mixin/_types";
-import { ConsumableDataMixinInterface } from "../../mixins/consumable-data-mixin/_types";
-import { ArmamentDataMixinInterface } from "../../mixins/armament-data-mixin/_types";
-
-declare global {
-  interface TeriockEquipmentData
-    extends TeriockBaseItemModel,
-      ConsumableDataMixinInterface,
-      ExecutableDataMixinInterface,
-      ArmamentDataMixinInterface {
+declare module "./equipment-model.mjs" {
+  export default interface TeriockEquipmentModel {
     /** <schema> Damage Dice */
     damage: {
       /** <schema> Damage this always deals */
@@ -66,9 +56,4 @@ declare global {
   }
 }
 
-declare module "./equipment-model.mjs" {
-  //@ts-expect-error Context menu entries.
-  export default interface TeriockEquipmentModel extends TeriockEquipmentData {
-    get parent(): TeriockEquipment;
-  }
-}
+export {};

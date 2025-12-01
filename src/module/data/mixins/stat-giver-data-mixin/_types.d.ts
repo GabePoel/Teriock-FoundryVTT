@@ -5,6 +5,4 @@ export interface StatGiverMixinInterface {
     hp: StatPoolModel;
     mp: StatPoolModel;
   };
-
-  get parent(): TeriockChild;
 }

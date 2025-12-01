@@ -1,5 +1,4 @@
 import { TeriockActor, TeriockEffect } from "../../_module.mjs";
-import { TeriockAbility, TeriockProperty } from "../../_documents.mjs";
 
 export interface CommonDocumentMixinInterface {
   /**

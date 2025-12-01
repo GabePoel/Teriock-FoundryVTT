@@ -7,7 +7,6 @@ import {
 import { fieldBuilders } from "../../shared/fields/helpers/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
 
 const { fields } = foundry.data;
 
@@ -146,10 +145,33 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
 
   /** @inheritDoc */
   get messageParts() {
-    return {
-      ...super.messageParts,
-      ..._messageParts(this),
-    };
+    const parts = super.messageParts;
+    parts.bars = [
+      {
+        icon: "fa-hourglass",
+        label: "Duration",
+        wrappers: [this.parent.remainingString],
+      },
+      {
+        icon: "fa-disease",
+        label: "Conditions",
+        wrappers: [
+          ...Array.from(
+            this.parent.statuses.map(
+              (status) => TERIOCK.index.conditions[status],
+            ),
+          ),
+          this.critical ? "Critical" : "",
+          this.heightened
+            ? `Heightened ${this.heightened} Time${
+                this.heightened === 1 ? "" : "s"
+              }`
+            : "",
+        ],
+      },
+    ];
+    parts.associations.push(...this.associations);
+    return parts;
   }
 
   /**

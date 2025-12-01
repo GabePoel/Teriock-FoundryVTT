@@ -91,7 +91,7 @@ export async function _parse(rankData, rawHTML) {
     }
   }
 
-  const progress = foundry.ui.notifications.info(`Pulling Rank from wiki.`, {
+  const progress = ui.notifications.info(`Pulling Rank from wiki.`, {
     progress: true,
   });
 

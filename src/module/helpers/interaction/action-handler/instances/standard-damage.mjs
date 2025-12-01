@@ -67,7 +67,7 @@ export class StandardDamageHandler extends ActionHandler {
   async primaryAction() {
     for (const actor of this.selectedActors) {
       if (!(actor.system.primaryAttacker || this.dataset.attacker)) {
-        foundry.ui.notifications.error(
+        ui.notifications.error(
           `${actor.name} doesn't have a default attack weapon.`,
         );
         continue;
@@ -84,7 +84,7 @@ export class StandardDamageHandler extends ActionHandler {
   async secondaryAction() {
     for (const actor of this.selectedActors) {
       if (!(actor.system.primaryAttacker || this.dataset.attacker)) {
-        foundry.ui.notifications.error(
+        ui.notifications.error(
           `${actor.name} doesn't have a default attack weapon.`,
         );
         continue;

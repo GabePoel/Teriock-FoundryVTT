@@ -94,9 +94,14 @@ export default class TeriockItem extends RetrievalDocumentMixin(
   }
 
   /** @inheritDoc */
-  async _preCreate(data, operations, user) {
-    this.updateSource({ sort: game.time.serverTime });
-    return await super._preCreate(data, operations, user);
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    const elder = await this.getElder();
+    if (elder && !elder.metadata.childItemTypes.includes(this.type)) {
+      return false;
+    }
   }
 
   /**
@@ -108,18 +113,6 @@ export default class TeriockItem extends RetrievalDocumentMixin(
     for (const effect of this.effects) {
       yield effect;
     }
-  }
-
-  /**
-   * @inheritDoc
-   * @param {"ActiveEffect"} embeddedName
-   * @param {object[]} data
-   * @param {DatabaseCreateOperation} [operation={}]
-   * @returns {Promise<TeriockEffect[]>}
-   */
-  async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    this._filterDocumentCreationData(embeddedName, data);
-    return await super.createEmbeddedDocuments(embeddedName, data, operation);
   }
 
   /** @inheritDoc */

@@ -35,7 +35,7 @@ export default function PassiveSheetMixin(Base) {
           const uuid = uuidElement.dataset.uuid;
           await this.document.system.changeMacroRunHook(uuid);
         } else {
-          foundry.ui.notifications.warn(
+          ui.notifications.warn(
             "Sheet must be editable to change when a macro runs.",
           );
         }
@@ -50,9 +50,7 @@ export default function PassiveSheetMixin(Base) {
           const uuid = uuidElement.dataset.uuid;
           await this.document.system.unlinkMacro(uuid);
         } else {
-          foundry.ui.notifications.warn(
-            "Sheet must be editable to unlink macro.",
-          );
+          ui.notifications.warn("Sheet must be editable to unlink macro.");
         }
       }
 

@@ -21,5 +21,25 @@ declare global {
       editable: boolean;
       label: string;
     };
+
+    export type DragDropSelector = {
+      dragSelector: string | null;
+      dropSelector: string | null;
+    };
+
+    export type DragDropConfiguration = {
+      dragDrop: Teriock.Sheet.DragDropSelector[];
+    };
+
+    export type DropData<T> = {
+      data?: T;
+      uuid: UUID<T>;
+      type: "ActiveEffect" | "Item" | "Macro" | "Actor" | "JournalEntryPage";
+      systemType?: Teriock.Documents.CommonType;
+    };
+
+    export interface EmbedDragEvent extends DragEvent {
+      currentTarget: HTMLElement;
+    }
   }
 }

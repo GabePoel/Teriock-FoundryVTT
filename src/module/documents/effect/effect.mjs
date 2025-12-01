@@ -119,9 +119,14 @@ export default class TeriockEffect extends RetrievalDocumentMixin(
   }
 
   /** @inheritDoc */
-  async _preCreate(data, operations, user) {
-    this.updateSource({ sort: game.time.serverTime });
-    return await super._preCreate(data, operations, user);
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    const elder = await this.getElder();
+    if (elder && !elder.metadata.childEffectTypes.includes(this.type)) {
+      return false;
+    }
   }
 
   /** @inheritDoc */

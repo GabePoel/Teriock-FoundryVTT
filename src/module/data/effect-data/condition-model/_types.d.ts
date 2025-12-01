@@ -1,12 +1,7 @@
-import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { TeriockCondition } from "../../../documents/_documents.mjs";
-import { TransformationMixinInterface } from "../../mixins/transformation-data-mixin/_types";
 import { CombatExpirationMethod } from "../../shared/fields/helpers/_types";
 
 declare module "./condition-model.mjs" {
-  export default interface TeriockConditionModel
-    extends TeriockBaseEffectModel,
-      TransformationMixinInterface {
+  export default interface TeriockConditionModel {
     /** <schema> Expirations */
     expirations: {
       /** <schema> Combat expirations */
@@ -18,6 +13,6 @@ declare module "./condition-model.mjs" {
       description?: string;
     };
 
-    readonly parent: TeriockCondition;
+    get parent(): TeriockCondition;
   }
 }

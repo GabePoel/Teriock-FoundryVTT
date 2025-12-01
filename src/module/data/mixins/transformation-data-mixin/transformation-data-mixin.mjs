@@ -1,3 +1,4 @@
+import { quickAddAssociation } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import { transformationField } from "../../shared/fields/helpers/field-builders.mjs";
 
@@ -10,6 +11,7 @@ export default function TransformationDataMixin(Base) {
   return (
     /**
      * @implements {TransformationMixinInterface}
+     * @extends {ChildTypeModel}
      * @mixin
      */
     class TransformationData extends Base {
@@ -69,6 +71,28 @@ export default function TransformationDataMixin(Base) {
       }
 
       /** @inheritDoc */
+      get messageParts() {
+        const parts = super.messageParts;
+        quickAddAssociation(
+          this.species,
+          "Species",
+          TERIOCK.options.document.species.icon,
+          parts.associations,
+        );
+        return parts;
+      }
+
+      /**
+       * This species this is transforming an actor into.
+       * @returns {TeriockSpecies[]}
+       */
+      get species() {
+        return /** @type {TeriockSpecies[]} */ this.transformation.species
+          .map((id) => this.actor.items.get(id))
+          .filter((s) => s);
+      }
+
+      /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
         if (game.user.id !== userId) {
@@ -80,6 +104,7 @@ export default function TransformationDataMixin(Base) {
         const actor = this.parent.actor;
         const updateData = {
           "system.transformation.primary": this.parent.id,
+          "flags.teriock.lastTransformation": this.parent.id,
         };
         // This high number is included because just setting to `system.hp.max` or `system.mp.max` uses the former
         // values. This requires explicit filtering when rendering numbers on the actor's tokens.
@@ -89,9 +114,7 @@ export default function TransformationDataMixin(Base) {
         if (this.transformation.resetMp) {
           updateData["system.mp.value"] = 99999999;
         }
-        actor
-          .setFlag("teriock", "transformationApplied", this.parent.key)
-          .then(() => actor.update(updateData));
+        actor.update(updateData).then();
       }
 
       /** @inheritDoc */
@@ -140,9 +163,6 @@ export default function TransformationDataMixin(Base) {
                 "Item",
                 speciesData,
               );
-            for (const species of created) {
-              await species.system.importDeterministic();
-            }
             this.parent.updateSource({
               "system.transformation.species": created.map((s) => s.id),
             });

@@ -1,5 +1,4 @@
 import { TeriockToken } from "../../../../canvas/placeables/_module.mjs";
-import { TeriockAbility } from "../../../../documents/_documents.mjs";
 import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
 
 declare global {
@@ -14,6 +13,7 @@ declare global {
         sb?: boolean;
         ub?: boolean;
         warded?: boolean;
+        source?: TeriockAbility;
       };
   }
 }

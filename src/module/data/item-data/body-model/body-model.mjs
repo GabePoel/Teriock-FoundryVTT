@@ -45,7 +45,7 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
       suffix(this.damage.base.value, "Damage"),
       suffix(this.bv.value, "BV"),
       suffix(this.av.value, "AV"),
-      this.parent.elder ? this.parent.elder.nameString : "",
+      this.parent.elder ? this.parent.elder?.nameString : "",
     ]);
     return parts;
   }
@@ -55,7 +55,7 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
     let suppressed = super.makeSuppressed;
     if (this.actor && this.actor.system.isTransformed) {
       if (
-        this.parent.elder.documentName === "Actor" &&
+        this.parent.elder?.documentName === "Actor" &&
         this.actor.system.transformation.suppression.bodyParts
       ) {
         suppressed = true;

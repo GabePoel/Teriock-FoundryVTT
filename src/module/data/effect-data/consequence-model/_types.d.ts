@@ -1,19 +1,12 @@
-import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { TeriockConsequence } from "../../../documents/_documents.mjs";
 import {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
 } from "../../shared/fields/helpers/_types";
 import { TeriockActor, TeriockEffect } from "../../../documents/_module.mjs";
-import { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
-import { TransformationMixinInterface } from "../../mixins/transformation-data-mixin/_types";
 
 declare module "./consequence-model.mjs" {
-  export default interface TeriockConsequenceModel
-    extends TeriockBaseEffectModel,
-      HierarchyDataMixinInterface,
-      TransformationMixinInterface {
+  export default interface TeriockConsequenceModel {
     /** <schema> Associations */
     associations: Teriock.MessageData.MessageAssociation[];
     /** <schema> Blocks representing the source */

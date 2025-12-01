@@ -3,6 +3,4 @@ import { TransformationImplementationField } from "../../shared/fields/helpers/_
 export interface TransformationMixinInterface {
   /** <schema> Transformation configuration */
   transformation: TransformationImplementationField;
-
-  get parent(): TeriockChild;
 }

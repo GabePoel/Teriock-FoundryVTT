@@ -3,7 +3,6 @@ export { default as AttunableDataMixin } from "./attunable-data-mixin/attunable-
 export { default as ConsumableDataMixin } from "./consumable-data-mixin/consumable-data-mixin.mjs";
 export { default as ExecutableDataMixin } from "./executable-data-mixin/executable-data-mixin.mjs";
 export { default as HierarchyDataMixin } from "./hierarchy-data-mixin/hierarchy-data-mixin.mjs";
-export { default as ImporterDataMixin } from "./importer-data-mixin/importer-data-mixin.mjs";
 export { default as RevelationDataMixin } from "./revelation-data-mixin/revelation-data-mixin.mjs";
 export { default as StatGiverDataMixin } from "./stat-giver-data-mixin/stat-giver-data-mixin.mjs";
 export { default as ThresholdDataMixin } from "./threshold-data-mixin/threshold-data-mixin.mjs";

@@ -52,39 +52,6 @@ export default function ParentDocumentMixin(Base) {
         return [];
       }
 
-      /**
-       * Remove documents that aren't valid child types from creation data.
-       * @param {TeriockChildName} embeddedName
-       * @param {object[]} data
-       */
-      _filterDocumentCreationData(embeddedName, data) {
-        if (embeddedName === "ActiveEffect") {
-          for (let i = data.length - 1; i >= 0; i--) {
-            const effectData = data[i];
-            if (
-              foundry.utils.hasProperty(effectData, "type") &&
-              !this.metadata.childEffectTypes.includes(
-                foundry.utils.getProperty(effectData, "type"),
-              )
-            ) {
-              data.splice(i, 1);
-            }
-          }
-        } else if (embeddedName === "Item") {
-          for (let i = data.length - 1; i >= 0; i--) {
-            const itemData = data[i];
-            if (
-              foundry.utils.hasProperty(itemData, "type") &&
-              !this.metadata.childItemTypes.includes(
-                foundry.utils.getProperty(itemData, "type"),
-              )
-            ) {
-              data.splice(i, 1);
-            }
-          }
-        }
-      }
-
       /** @inheritDoc */
       prepareSpecialData() {
         this.effects.forEach((e) => {

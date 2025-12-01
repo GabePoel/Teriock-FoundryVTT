@@ -1,11 +1,5 @@
-import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { TeriockFluency } from "../../../documents/_documents.mjs";
-import { ExecutableDataMixinInterface } from "../../mixins/executable-data-mixin/_types";
-
 declare module "./fluency-model.mjs" {
-  export default interface TeriockFluencyModel
-    extends TeriockBaseEffectModel,
-      ExecutableDataMixinInterface {
+  export default interface TeriockFluencyModel {
     /** <schema> Tradecraft field */
     field: Teriock.Parameters.Fluency.Field;
     /** <schema> Tradecraft */
@@ -14,3 +8,5 @@ declare module "./fluency-model.mjs" {
     get parent(): TeriockFluency;
   }
 }
+
+export {};

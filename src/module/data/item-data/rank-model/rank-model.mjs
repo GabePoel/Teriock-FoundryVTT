@@ -1,4 +1,10 @@
-import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
+import {
+  getRollIcon,
+  isOwnerAndCurrentUser,
+  makeIcon,
+  resolveDocument,
+} from "../../../helpers/utils.mjs";
 import {
   ProficiencyDataMixin,
   StatGiverDataMixin,
@@ -216,6 +222,47 @@ export default class TeriockRankModel extends StatGiverDataMixin(
         )
       ];
     return `${prefix}:${pageName}`;
+  }
+
+  /** @inheritDoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if (isOwnerAndCurrentUser(this.parent, userId) && this.actor) {
+      const needsArchetype =
+        !this.actor.itemKeys.power.has(this.archetype) &&
+        this.archetype !== "everyman";
+      if (needsArchetype) {
+        const archetypeName = TERIOCK.options.rank[this.archetype].name;
+        resolveDocument(
+          game.teriock.packs.classes.index.getName(archetypeName),
+        ).then((p) =>
+          this.actor.createChildDocuments("Item", [
+            game.items.fromCompendium(p),
+          ]),
+        );
+      }
+    }
+  }
+
+  /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if (isOwnerAndCurrentUser(this.parent, userId) && this.actor) {
+      const archetypePowers = this.actor.powers.filter(
+        (p) => toCamelCase(p.name) === this.archetype,
+      );
+      const needsArchetype =
+        this.actor.ranks.filter((r) => r.system.archetype === this.archetype)
+          .length > 0;
+      if (!needsArchetype && archetypePowers.length > 0) {
+        this.actor
+          .deleteChildDocuments(
+            "Item",
+            archetypePowers.map((p) => p.id),
+          )
+          .then();
+      }
+    }
   }
 
   /** @inheritDoc */

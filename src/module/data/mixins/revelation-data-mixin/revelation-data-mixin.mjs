@@ -3,13 +3,15 @@ import { makeIcon } from "../../../helpers/utils.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof ChildTypeModel} Base
+ * @param {typeof TeriockBaseEffectModel} Base
  * @constructor
  */
 export default function RevelationDataMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {RevelationDataMixinInterface}
+     * @extends {TeriockBaseEffectModel}
      * @mixin
      */
     class RevelationData extends Base {

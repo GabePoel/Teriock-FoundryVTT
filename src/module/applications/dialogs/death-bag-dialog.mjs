@@ -100,7 +100,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     wrappers.push(`${startingStones[color]} ${TERIOCK.index.deathBag[color]}`);
   }
   if (totalStonesCount > 99) {
-    foundry.ui.notifications.error(
+    ui.notifications.error(
       `Bag has ${totalStonesCount} stones. Maximum of 99 allowed.`,
     );
   } else {
@@ -111,7 +111,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     }
     wrappers.push(`${bag.length} total`);
     if (bag.length < toPullCount) {
-      foundry.ui.notifications.error(
+      ui.notifications.error(
         `Bag has ${bag.length} stones. Cannot pull ${toPullCount} stones from it.`,
       );
     } else {

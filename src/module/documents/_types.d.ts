@@ -67,6 +67,7 @@ declare global {
 
     export type ModelMetadata = {
       armament: boolean;
+      childActorTypes: Teriock.Documents.ActorType[];
       childEffectTypes: Teriock.Documents.EffectType[];
       childItemTypes: Teriock.Documents.ItemType[];
       childMacroTypes: Teriock.Documents.MacroType[];

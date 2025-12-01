@@ -225,9 +225,7 @@ export default function CommonSheetMixin(Base) {
             const uuid = uuidElement.dataset.uuid;
             await this.document.system.unlinkMacro(uuid);
           } else {
-            foundry.ui.notifications.warn(
-              "Sheet must be editable to unlink macro.",
-            );
+            ui.notifications.warn("Sheet must be editable to unlink macro.");
           }
         }
       }

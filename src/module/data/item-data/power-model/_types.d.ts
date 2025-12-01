@@ -1,8 +1,5 @@
-import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { TeriockPower } from "../../../documents/_documents.mjs";
-
 declare module "./power-model.mjs" {
-  export default interface TeriockPowerModel extends TeriockBaseItemModel {
+  export default interface TeriockPowerModel {
     /** <schema> Flaws */
     flaws: string;
     /** <schema> Max Armor Value */
@@ -13,3 +10,5 @@ declare module "./power-model.mjs" {
     get parent(): TeriockPower;
   }
 }
+
+export {};

@@ -71,6 +71,7 @@ export default function CommonDocumentMixin(Base) {
             img: systemPath(`icons/documents/${data.type}.svg`),
           });
         }
+        this.updateSource({ sort: game.time.serverTime });
       }
 
       /** @inheritDoc */

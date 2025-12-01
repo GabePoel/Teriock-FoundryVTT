@@ -3,6 +3,9 @@ import { TeriockJournalEntry } from "../../../documents/_module.mjs";
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
 
+/**
+ * @extends {TypeDataModel}
+ */
 export default class CommonTypeModel extends TypeDataModel {
   /**
    * Metadata.
@@ -11,6 +14,7 @@ export default class CommonTypeModel extends TypeDataModel {
   static get metadata() {
     return {
       armament: false,
+      childActorTypes: [],
       childEffectTypes: [],
       childItemTypes: [],
       childMacroTypes: [],

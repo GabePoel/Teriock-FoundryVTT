@@ -1,4 +1,3 @@
-import { toCamelCase } from "../../../helpers/string.mjs";
 import { TeriockChatMessage } from "../../_module.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
 
@@ -35,7 +34,7 @@ export default function ChildDocumentMixin(Base) {
         if (this.system.fluent) {
           fluent = true;
         }
-        if (this.elder?.system.fluent) {
+        if (this.elder?.isFluent) {
           fluent = true;
         }
         return fluent;
@@ -47,29 +46,13 @@ export default function ChildDocumentMixin(Base) {
         if (this.system.proficient) {
           proficient = true;
         }
-        if (this.elder?.system.proficient) {
+        if (this.elder?.isProficient) {
           proficient = true;
         }
         if (this.isFluent) {
           proficient = true;
         }
         return proficient;
-      }
-
-      /**
-       * Get the key that defines this in the index, if appropriate.
-       * @returns {string}
-       */
-      get key() {
-        const pageName = foundry.utils.getProperty(
-          this,
-          this.metadata.pageNameKey,
-        );
-        if (pageName) {
-          return toCamelCase(pageName);
-        } else {
-          return toCamelCase(this.name);
-        }
       }
 
       /** @inheritDoc */
@@ -215,16 +198,12 @@ export default function ChildDocumentMixin(Base) {
 
       /** @inheritDoc */
       async wikiOpen() {
-        foundry.ui.notifications.error(
-          `There are no ${this.type} pages on the wiki.`,
-        );
+        ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
       }
 
       /** @inheritDoc */
       async wikiPull() {
-        foundry.ui.notifications.error(
-          `There are no ${this.type} pages on the wiki.`,
-        );
+        ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
       }
     }
   );

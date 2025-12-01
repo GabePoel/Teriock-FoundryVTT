@@ -61,7 +61,7 @@ export default function WikiButtonSheetMixin(Base) {
           this.document.system.wikiPull();
         }
       } else {
-        foundry.ui.notifications.warn(
+        ui.notifications.warn(
           `Cannot pull ${this.document.name} from wiki. Sheet is not editable.`,
         );
       }

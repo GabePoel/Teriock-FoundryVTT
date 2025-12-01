@@ -3,11 +3,6 @@ import {
   TeriockTokenDocument,
 } from "../../../documents/_module.mjs";
 import { ActorAttributeData, BarData, HackDataCollection } from "./types/stats";
-import {
-  TeriockConsequence,
-  TeriockEquipment,
-  TeriockSpecies,
-} from "../../../documents/_documents.mjs";
 import { ProtectionData } from "./types/protections";
 import { SheetData } from "./types/sheet";
 import { TradecraftData } from "./types/tradecrafts";

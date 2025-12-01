@@ -89,6 +89,7 @@ export default function EmbedCardDocumentMixin(Base) {
               if (this.embedActions[action][callback]) {
                 el.addEventListener(type, async (event) => {
                   event.stopPropagation();
+                  event.preventDefault();
                   const target = /** @type {HTMLElement} */ event.target;
                   const card =
                     /** @type {HTMLElement} */ target.closest(

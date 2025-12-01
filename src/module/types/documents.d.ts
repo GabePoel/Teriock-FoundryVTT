@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import {
   TeriockAbilityModel,
   TeriockAttunementModel,
@@ -16,7 +18,21 @@ import {
   TeriockPropertySheet,
   TeriockResourceSheet,
 } from "../applications/sheets/effect-sheets/_module.mjs";
-import { TeriockActor, TeriockEffect, TeriockItem } from "./_module.mjs";
+import {
+  TeriockActor,
+  TeriockChatMessage,
+  TeriockCombat,
+  TeriockEffect,
+  TeriockFolder,
+  TeriockItem,
+  TeriockJournalEntry,
+  TeriockJournalEntryCategory,
+  TeriockJournalEntryPage,
+  TeriockMacro,
+  TeriockScene,
+  TeriockTokenDocument,
+  TeriockUser,
+} from "../documents/_module.mjs";
 import {
   TeriockBodySheet,
   TeriockEquipmentSheet,
@@ -44,7 +60,28 @@ import {
   TeriockCreatureModel,
 } from "../data/actor-data/_module.mjs";
 
+// Base Document Classes
+// =====================
+
+declare global {
+  const TeriockActor: TeriockActor;
+  const TeriockChatMessage: TeriockChatMessage;
+  const TeriockCombat: TeriockCombat;
+  const TeriockEffect: TeriockEffect;
+  const TeriockFolder: TeriockFolder;
+  const TeriockItem: TeriockItem;
+  const TeriockJournalEntry: TeriockJournalEntry;
+  const TeriockJournalEntryCategory: TeriockJournalEntryCategory;
+  const TeriockJournalEntryPage: TeriockJournalEntryPage;
+  const TeriockMacro: TeriockMacro;
+  const TeriockScene: TeriockScene;
+  const TeriockTokenDocument: TeriockTokenDocument;
+  const TeriockUser: TeriockUser;
+}
+
 // Actors
+// ======
+
 declare global {
   export type TeriockCharacter = TeriockActor & {
     sheet: TeriockCharacterSheet;
@@ -65,6 +102,8 @@ declare global {
 }
 
 // Items
+// =====
+
 declare global {
   export type TeriockBody = TeriockItem & {
     sheet: TeriockBodySheet;
@@ -127,6 +166,8 @@ declare global {
 }
 
 // Effects
+// =======
+
 declare global {
   export type TeriockAbility = TeriockEffect & {
     sheet: TeriockAbilitySheet;
@@ -184,4 +225,38 @@ declare global {
     get id(): ID<TeriockResource>;
     get uuid(): UUID<TeriockResource>;
   };
+}
+
+// Specific Unions
+// ===============
+
+declare global {
+  export type TeriockArmament = TeriockBody | TeriockEquipment;
+  export type TeriockLingering = TeriockCondition | TeriockConsequence;
+}
+
+// General Unions
+// ==============
+
+declare global {
+  export type TeriockParent = TeriockActor | TeriockItem;
+  export type TeriockParentName = "Actor" | "Item";
+  export type TeriockChild = TeriockItem | TeriockEffect;
+  export type TeriockChildName = "Item" | "ActiveEffect";
+  export type TeriockCommon = TeriockActor | TeriockItem | TeriockEffect;
+  export type TeriockCommonName = "Actor" | "Item" | "ActiveEffect";
+  export type TeriockDocument =
+    | TeriockActor
+    | TeriockChatMessage
+    | TeriockCombat
+    | TeriockEffect
+    | TeriockFolder
+    | TeriockItem
+    | TeriockJournalEntry
+    | TeriockJournalEntryCategory
+    | TeriockJournalEntryPage
+    | TeriockMacro
+    | TeriockScene
+    | TeriockTokenDocument
+    | TeriockUser;
 }
