@@ -1,3 +1,4 @@
+import { inferChildCompendiumSources } from "../../../helpers/utils.mjs";
 import {
   fetchWikiPageHTML,
   openWikiPage,
@@ -86,6 +87,7 @@ export default function WikiDataMixin(Base) {
               ui.notifications.error(`${pageTitle} not found on wiki.`);
             }
           }
+          await inferChildCompendiumSources(this.parent);
         } else if (notify) {
           ui.notifications.error(`Only developers can pull from the wiki.`);
         }

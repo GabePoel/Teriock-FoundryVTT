@@ -1,11 +1,13 @@
 const speciesCompendium = game.teriock.packs.species;
 const creatureCompendium = game.teriock.packs.creatures;
-
+await speciesCompendium.getIndex();
 const allSpecies = speciesCompendium.index.contents.filter(
   (i) => i.type === "species",
 );
 const speciesFolders = speciesCompendium.folders;
-const allCreatures = creatureCompendium.index.contents;
+const allCreatures = creatureCompendium.index.contents.filter(
+  (a) => a.type === "creature",
+);
 const creaturesFolders = creatureCompendium.folders;
 
 for (const folderEntry of speciesFolders.values()) {
@@ -42,7 +44,7 @@ const progress = ui.notifications.info(`Synchronizing all creatures.`, {
 });
 
 // Helper function to process a single species
-async function processSpecies(
+async function processCreature(
   speciesEntry,
   allCreatures,
   speciesFolders,
@@ -98,7 +100,7 @@ for (let i = 0; i < allSpecies.length; i += batchSize) {
 
   await Promise.all(
     batch.map((speciesEntry) =>
-      processSpecies(
+      processCreature(
         speciesEntry,
         allCreatures,
         speciesFolders,

@@ -48,7 +48,7 @@ export async function _parse(bodyData, rawHTML) {
 
   // Add piercing property if present
   const piercing = getValue(".piercing");
-  if (piercing) {
+  if (piercing && piercing !== "normal") {
     properties.add(
       piercing
         .toUpperCase()
@@ -64,7 +64,7 @@ export async function _parse(bodyData, rawHTML) {
   parameters.bv = { saved: toInt(cleanValue(getValue(".bv"))) || 0 };
 
   const toCreate = Array.from(properties);
-  await ensureChildren(bodyData.parent, "property", toCreate);
+  await ensureChildren(bodyData.parent, "property", toCreate || []);
 
   const oldImg = bodyData.parent.img;
   const newImg = getImage("body-parts", bodyData.parent.name) || oldImg;

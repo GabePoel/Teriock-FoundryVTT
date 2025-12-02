@@ -3630,18 +3630,79 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.abilities.Item.Y9K7pgX7rnZMaQ4y
     _key: '!items.effects!wJ4uGwuTgQgEP1C0.ti6azVkUg5wLBA2p'
-  - name: Weapon Mastery
+  - name: Weapons Mastery
     type: ability
+    img: systems/teriock/src/icons/abilities/weapons-mastery.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
+          are @L[Property:AV0]{AV0} for you. You may change which class of
+          weapons you choose during a @L[Core:Long Rest]{long rest}. Whenever
+          you attempt a @L[Category:Single action abilities]{single action}
+          @L[Category:Weapon delivery abilities]{weapon} @L[Category:Attack
+          abilities]{attack} with a weapon of the chosen @L[Category:Weapon
+          classes]{class}, you may trigger a @L[Category:Single action
+          abilities]{single action} non-attack @L[Category:Basic
+          abilities]{basic ability} as a @L[Core:Reactive Maneuvers]{free
+          reaction} as well.</p>
+        proficient: >-
+          <p>You may also trigger @L[Category:Single action abilities]{single
+          action} non-attack @L[Category:Assassin class abilities]{Assassin
+          abilities} as @L[Core:Reactive Maneuvers]{free reactions} in this
+          way.</p>
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: assassin
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -3666,75 +3727,25 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: weapon
-        parent: null
-        package: null
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: a1
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
-      maneuver: active
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources: []
-      prepared: true
-      range: null
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - creature
       trigger: ''
+      basic: false
+      form: normal
+      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+      improvement: ''
+      prepared: true
       warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
       impacts:
         base:
           statuses: []
@@ -3752,27 +3763,32 @@ effects:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -3783,8 +3799,12 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -3801,27 +3821,32 @@ effects:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -3832,8 +3857,12 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -3850,27 +3879,32 @@ effects:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -3881,8 +3915,12 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -3899,27 +3937,32 @@ effects:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
+                  type: none
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
                 when:
-                  skip: 0
                   time: start
                   trigger: turn
+                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -3930,11 +3973,34 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
-        macros: {}
-    _id: 72y3Ky3AD6b54P7a
-    img: systems/teriock/src/icons/documents/ability.svg
+            select: false
+            useFolder: false
+            uuid: null
+        macros:
+          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
+      qualifiers:
+        ephemeral:
+          saved: '0'
+          raw: '0'
+        suppressed:
+          saved: '0'
+          raw: '0'
+      _ref: >-
+        Compendium.teriock.species.Item.wJ4uGwuTgQgEP1C0.ActiveEffect.2pTkWDwm4qO9nGUR
+      revealed: true
+      adept:
+        enabled: false
+        amount: 1
+      effectTypes: []
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      grantOnlyText: ''
+    _id: GA4gNsgYnazXXDGB
     changes: []
     disabled: false
     duration:
@@ -3945,12 +4011,12 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.JYsa9GvaqfOtXG9k
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!wJ4uGwuTgQgEP1C0.72y3Ky3AD6b54P7a'
+    _key: '!items.effects!wJ4uGwuTgQgEP1C0.GA4gNsgYnazXXDGB'
 ownership:
   default: 0
 flags: {}

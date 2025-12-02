@@ -1,5 +1,6 @@
 const speciesPack = game.teriock.packs.species;
 const speciesFolders = speciesPack.folders;
+await speciesPack.getIndex();
 
 // Folder configuration
 const folderConfigs = [
@@ -46,7 +47,7 @@ const progress = ui.notifications.info("Pulling all species from wiki.", {
 
 // Process a single species
 async function processSpecies(speciesName) {
-  let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
+  let speciesItem = speciesPack.index.getName(speciesName);
 
   // Determine folder based on species type
   let folder = folders["allSpeciesFolder"];
@@ -68,12 +69,9 @@ async function processSpecies(speciesName) {
       },
       { pack: "teriock.species" },
     );
-  } else {
-    speciesItem = /** @type {TeriockSpecies} */ await fromUuid(
-      speciesItem.uuid,
-    );
   }
-
+  speciesItem =
+    /** @type {TeriockSpecies} */ await tm.utils.resolveDocument(speciesItem);
   await speciesItem.system.wikiPull({ notify: false });
 
   return {

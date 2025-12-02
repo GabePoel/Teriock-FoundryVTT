@@ -8,7 +8,7 @@ scope: global
 command: |-
   const bodyPack = game.teriock.packs.bodyParts;
 
-  foundry.ui.notifications.info("Pulling all body parts from wiki.");
+  ui.notifications.info("Pulling all body parts from wiki.");
 
   async function processBody(bodyName) {
     let bodyItem = bodyPack.index.find((e) => e.name === bodyName);
@@ -32,7 +32,7 @@ command: |-
   );
 
   await Promise.all(bodyPromises);
-  foundry.ui.notifications.success("Done.");
+  ui.notifications.success("Done.");
 ownership:
   default: 0
 flags: {}
@@ -41,4 +41,5 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
+  compendiumSource: null
 _key: '!macros!af6Mf4F89zE5GzkU'

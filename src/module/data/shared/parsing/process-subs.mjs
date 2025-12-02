@@ -1,4 +1,5 @@
 import { getAbility, getProperty } from "../../../helpers/fetch.mjs";
+import { inferCompendiumSource } from "../../../helpers/utils.mjs";
 import { cleanObject } from "./clean-html-doc.mjs";
 
 /**
@@ -104,6 +105,7 @@ async function processSubEffects(subs, doc, config) {
       );
       await subEffect.update(updateData);
     }
+    await inferCompendiumSource(subEffect);
   }
 
   const toDelete = [];

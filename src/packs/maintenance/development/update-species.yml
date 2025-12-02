@@ -8,6 +8,7 @@ scope: global
 command: |-
   const speciesPack = game.teriock.packs.species;
   const speciesFolders = speciesPack.folders;
+  await speciesPack.getIndex();
 
   // Folder configuration
   const folderConfigs = [
@@ -54,16 +55,16 @@ command: |-
 
   // Process a single species
   async function processSpecies(speciesName) {
-    let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
+    let speciesItem = speciesPack.index.getName(speciesName);
 
     // Determine folder based on species type
-    let folder = folders.allSpeciesFolder;
+    let folder = folders["allSpeciesFolder"];
     if (Object.values(TERIOCK.index.humanoids).includes(speciesName)) {
-      folder = folders.characterSpeciesFolder;
+      folder = folders["characterSpeciesFolder"];
     } else if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName)) {
-      folder = folders.commonAnimalSpeciesFolder;
+      folder = folders["commonAnimalSpeciesFolder"];
     } else if (Object.values(TERIOCK.index.undead).includes(speciesName)) {
-      folder = folders.undeadSpeciesFolder;
+      folder = folders["undeadSpeciesFolder"];
     }
 
     // Create or fetch species item
@@ -76,12 +77,9 @@ command: |-
         },
         { pack: "teriock.species" },
       );
-    } else {
-      speciesItem = /** @type {TeriockSpecies} */ await fromUuid(
-        speciesItem.uuid,
-      );
     }
-
+    speciesItem =
+      /** @type {TeriockSpecies} */ await tm.utils.resolveDocument(speciesItem);
     await speciesItem.system.wikiPull({ notify: false });
 
     return {
@@ -138,4 +136,5 @@ _stats:
   systemId: teriock
   systemVersion: 0.1.0
   lastModifiedBy: teriockBuilder00
+  compendiumSource: null
 _key: '!macros!U0WfGPoPSLSystNU'

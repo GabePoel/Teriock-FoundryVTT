@@ -18,9 +18,6 @@ let buildTree = true;
 // noinspection JSVoidFunctionReturnValueUsed
 const packs = /** @type {string[]} */ await fs.readdir("./packs");
 for (const pack of packs) {
-  if (!pack.includes("species")) {
-    continue;
-  }
   const directory = `./src/packs/${toKebabCaseFull(pack)}`;
   console.log("Unpacking " + pack + " to " + directory);
   try {

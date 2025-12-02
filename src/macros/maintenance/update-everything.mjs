@@ -15,14 +15,14 @@ const toRun = {
   properties: await fromUuid(
     "Compendium.teriock.maintenance.Macro.lM9iJK0o7R8cVvL9",
   ),
+  equipment: await fromUuid(
+    "Compendium.teriock.maintenance.Macro.NccvZMMNyFS0braS",
+  ),
   species: await fromUuid(
     "Compendium.teriock.maintenance.Macro.U0WfGPoPSLSystNU",
   ),
   creatures: await fromUuid(
     "Compendium.teriock.maintenance.Macro.qhpeHJ0ZJGDfUOPo",
-  ),
-  equipment: await fromUuid(
-    "Compendium.teriock.maintenance.Macro.NccvZMMNyFS0braS",
   ),
   "magic items": await fromUuid(
     "Compendium.teriock.maintenance.Macro.PW6nyzkzO59fogTh",
@@ -35,10 +35,13 @@ const toRun = {
 const macroEntries = Object.entries(toRun);
 const totalMacros = macroEntries.length;
 
-const progress = ui.notifications.info("Running maintenance macros...", {
-  progress: true,
-  pct: 0.01,
-});
+const progress = foundry.ui.notifications.info(
+  "Running maintenance macros...",
+  {
+    progress: true,
+    pct: 0.01,
+  },
+);
 
 let completedCount = 0;
 
@@ -58,6 +61,6 @@ progress.update({
   message: "All maintenance macros completed.",
 });
 
-ui.notifications.success(
+foundry.ui.notifications.success(
   `Successfully executed ${totalMacros} maintenance macros.`,
 );

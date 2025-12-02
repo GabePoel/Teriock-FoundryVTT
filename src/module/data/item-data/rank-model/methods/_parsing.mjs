@@ -179,11 +179,7 @@ export async function _parse(rankData, rawHTML) {
 
   progress.update({ pct: 1 });
 
-  cleanObject(
-    parameters,
-    ["description", "flaws"],
-    TERIOCK.index.classes[rankData.className],
-  );
+  cleanObject(parameters, ["description", "flaws"], rankData.parent.name);
 
   return {
     system: parameters,
