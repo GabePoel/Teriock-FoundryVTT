@@ -48,6 +48,7 @@ export function _messageParts(equipmentData) {
       wrappers: [
         damageString,
         twoHandedDamageString,
+        src.hit.value ? `+${src.hit.value} Hit Bonus` : "",
         formulaExists(equipmentData.attackPenalty.raw)
           ? equipmentData.attackPenalty.raw + " AP"
           : "",

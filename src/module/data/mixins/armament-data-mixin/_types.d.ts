@@ -16,6 +16,8 @@ export interface ArmamentDataMixinInterface {
   fightingStyle: Teriock.Parameters.Equipment.WeaponFightingStyle;
   /** <schema> Flaws */
   flaws: string;
+  /** <schema> Additional Hit Bonus */
+  hit: Teriock.Fields.ModifiableNumber;
   /** <schema> Notes */
   notes: string;
   /** <base> Piercing */

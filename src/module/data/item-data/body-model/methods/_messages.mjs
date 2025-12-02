@@ -14,6 +14,7 @@ export function _messageParts(bodyData) {
       wrappers: [
         bodyData.damage.base.value +
           (bodyData.damage.base.value ? " damage" : ""),
+        bodyData.hit.value ? `+${bodyData.hit.value} Hit Bonus` : "",
         formulaExists(bodyData.attackPenalty.raw)
           ? bodyData.attackPenalty.raw + " AP"
           : "",

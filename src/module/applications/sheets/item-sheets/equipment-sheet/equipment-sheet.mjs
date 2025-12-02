@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { cleanCapitalization } from "../../../../helpers/clean.mjs";
 import {
   UseButtonSheetMixin,
   WikiButtonSheetMixin,
@@ -128,6 +127,7 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
       ".ab-range-button": { "system.range.long.saved": 5 },
       ".ab-av-button": { "system.av.saved": 1 },
       ".ab-bv-button": { "system.bv.saved": 1 },
+      ".ab-hit-button": { "system.hit.saved": 1 },
       ".ab-weight-button": { "system.weight": 1 },
       ".ab-tier-button": { "system.tier.saved": "1" },
     };
@@ -161,20 +161,16 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
     if (!this.editable) {
       return;
     }
-
-    const item = this.item;
-
     this._connectContextMenu(
       ".power-level-box",
-      powerLevelContextMenu(item),
+      powerLevelContextMenu(this.item),
       "click",
     );
-    this._connectContextMenu(".ab-title", fontContextMenu(item), "contextmenu");
-
-    this.element.querySelectorAll(".capitalization-input").forEach((el) => {
-      this._connectInput(el, el.getAttribute("name"), cleanCapitalization);
-    });
-
+    this._connectContextMenu(
+      ".ab-title",
+      fontContextMenu(this.item),
+      "contextmenu",
+    );
     this._activateTags();
   }
 }

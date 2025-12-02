@@ -44,6 +44,7 @@ export default class TeriockBodySheet extends WikiButtonSheetMixin(
       ".ab-damage-button": { "system.damage.base.saved": 1 },
       ".ab-av-button": { "system.av.saved": 1 },
       ".ab-bv-button": { "system.bv.saved": 1 },
+      ".ab-hit-button": { "system.hit.saved": 1 },
     };
 
     for (const [selector, update] of Object.entries(staticUpdates)) {

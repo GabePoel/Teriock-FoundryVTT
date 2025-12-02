@@ -1,5 +1,8 @@
+import type { ArmamentDataMixinInterface } from "../../mixins/armament-data-mixin/_types";
+
 declare module "./equipment-model.mjs" {
-  export default interface TeriockEquipmentModel {
+  export default interface TeriockEquipmentModel
+    extends ArmamentDataMixinInterface {
     /** <schema> Damage Dice */
     damage: {
       /** <schema> Damage this always deals */

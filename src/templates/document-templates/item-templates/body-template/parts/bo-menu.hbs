@@ -60,6 +60,18 @@
             </button>
           </div>
         {{/if}}
+        {{#if (not (exists system.hit.saved))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-hit-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Hit Bonus
+            </button>
+          </div>
+        {{/if}}
         {{> (template "document-templates/shared/display-field-buttons.hbs")}}
       </div>
     </div>

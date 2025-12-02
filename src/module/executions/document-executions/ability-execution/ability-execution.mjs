@@ -37,6 +37,8 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
     };
     if (this.armament) {
       rollAdditions.bv = this.armament.system.bv.value;
+      rollAdditions.hit = this.armament.system.hit.value;
+      rollAdditions["hit.web"] = this.armament.system.hit.value;
     }
     Object.assign(rollData, rollAdditions);
     return rollData;
@@ -55,6 +57,9 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
         }
         if (this.sb) {
           this.formula = addFormula(this.formula, "@sb");
+        }
+        if (this.rollData.hit) {
+          this.formula = addFormula(this.formula, "@hit");
         }
       }
     }

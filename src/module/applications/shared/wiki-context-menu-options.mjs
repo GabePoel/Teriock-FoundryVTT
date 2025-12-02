@@ -20,7 +20,13 @@ const wikiContextMenuOptions = [
       if (uuid) {
         const doc = await fromUuid(uuid);
         if (doc) {
-          doc.sheet.render(true);
+          if (doc.documentName === "JournalEntryPage") {
+            const journalEntry = doc.parent;
+            await journalEntry.sheet.render(true);
+            journalEntry.sheet.goToPage(doc.id);
+          } else {
+            await doc.sheet.render(true);
+          }
         }
       }
     },

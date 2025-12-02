@@ -59,14 +59,11 @@ export default function ArmamentDataMixin(Base) {
             nullable: true,
             choices: TERIOCK.index.weaponFightingStyles,
           }),
-          specialRules: new TextField({
-            initial: "",
-            label: "Fighting Style",
-          }),
           flaws: new TextField({
             initial: "",
             label: "Flaws",
           }),
+          hit: modifiableNumber(),
           notes: new TextField({
             initial: "",
             label: "Notes",
@@ -94,6 +91,10 @@ export default function ArmamentDataMixin(Base) {
               label: "Ranged",
             }),
             short: modifiableFormula(),
+          }),
+          specialRules: new TextField({
+            initial: "",
+            label: "Fighting Style",
           }),
           spellTurning: new fields.BooleanField({
             initial: false,
@@ -161,6 +162,7 @@ export default function ArmamentDataMixin(Base) {
         super.prepareBaseData();
         prepareModifiableBase(this.av);
         prepareModifiableBase(this.bv);
+        prepareModifiableBase(this.hit);
         prepareModifiableBase(this.damage.base);
         prepareModifiableBase(this.attackPenalty);
         if (this.damage.base.saved.trim() === "0") {
@@ -196,6 +198,10 @@ export default function ArmamentDataMixin(Base) {
           min: 0,
         });
         deriveModifiableNumber(this.bv, {
+          floor: true,
+          min: 0,
+        });
+        deriveModifiableNumber(this.hit, {
           floor: true,
           min: 0,
         });

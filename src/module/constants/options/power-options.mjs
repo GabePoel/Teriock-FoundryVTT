@@ -30,6 +30,11 @@ export const powerOptions = {
     icon: "monkey",
     color: colors.green,
   },
+  holiday: {
+    name: "Holiday",
+    icon: "party-bell",
+    color: colors.yellow,
+  },
   innate: {
     name: "Innate",
     icon: "person",
@@ -40,6 +45,11 @@ export const powerOptions = {
     icon: "head-side-brain",
     color: colors.brown,
   },
+  other: {
+    name: "Other",
+    icon: "question",
+    color: colors.green,
+  },
   pact: {
     name: "Pact",
     icon: "signature",
@@ -48,11 +58,6 @@ export const powerOptions = {
   traits: {
     name: "Traits",
     icon: "ghost",
-    color: colors.green,
-  },
-  other: {
-    name: "Other",
-    icon: "question",
     color: colors.green,
   },
 };

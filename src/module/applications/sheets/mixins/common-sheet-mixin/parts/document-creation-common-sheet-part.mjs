@@ -1,5 +1,5 @@
-import * as createEffects from "../../../../../helpers/create-effects.mjs";
 import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
+import { getImage } from "../../../../../helpers/path.mjs";
 import {
   selectAbilityDialog,
   selectBodyPartDialog,
@@ -28,16 +28,16 @@ export default (Base) => {
           createProperty: this._createProperty,
           createRank: this._createRank,
           createResource: this._createResource,
+          createPower: this._createPower,
+          createConsequence: this._createConsequence,
         },
       };
 
       /**
-       * Creates a new ability for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created ability.
+       * Adds a new {@link TeriockAbility} to the current document.
+       * @returns {Promise<void>}
        */
-      static async _createAbility(_event, _target) {
+      static async _createAbility() {
         const out = await selectAbilityDialog();
         const obj = out.toObject();
         if (out.sup?.type === "wrapper") {
@@ -47,9 +47,8 @@ export default (Base) => {
       }
 
       /**
-       * Adds a {@link TeriockBody} to the {@link TeriockDocument}.
+       * Adds a new {@link TeriockBody} to the current document.
        * @returns {Promise<void>}
-       * @private
        */
       static async _createBody() {
         await this.document.createChildDocuments("Item", [
@@ -58,37 +57,70 @@ export default (Base) => {
       }
 
       /**
-       * Adds a {@link TeriockEquipment} to the {@link TeriockDocument}.
+       * Adds a new {@link TeriockConsequence} to the current document.
        * @returns {Promise<void>}
-       * @private
        */
-      static async _createEquipment(_event, _target) {
+      static async _createConsequence() {
+        await this.document.createChildDocuments("ActiveEffect", [
+          {
+            name: "New Consequence",
+            type: "consequence",
+          },
+        ]);
+      }
+
+      /**
+       * Adds a new {@link TeriockEquipment} to the current document.
+       * @returns {Promise<void>}
+       */
+      static async _createEquipment() {
         await this.document.createChildDocuments("Item", [
           game.items.fromCompendium(await selectEquipmentTypeDialog()),
         ]);
       }
 
       /**
-       * Creates new fluency for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created fluency.
+       * Adds a new {@link TeriockFluency} to the current document.
+       * @returns {Promise<void>}
        */
-      static async _createFluency(_event, _target) {
-        const tradecraft = await selectTradecraftDialog();
-        if (tradecraft) {
-          await createEffects.createFluency(this.document, tradecraft);
+      static async _createFluency() {
+        const tc = await selectTradecraftDialog();
+        if (tc) {
+          const f = Object.entries(TERIOCK.options.tradecraft).find(([_k, v]) =>
+            Object.keys(v.tradecrafts).includes(tc),
+          )[0];
+          await this.document.createChildDocuments("ActiveEffect", [
+            {
+              name: `New ${TERIOCK.index.tradecrafts[tc]} Fluency`,
+              type: "fluency",
+              img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+              system: {
+                tradecraft: tc,
+                field: f,
+              },
+            },
+          ]);
         }
       }
 
       /**
-       * Creates a new property for the current document.
-       * Shows a dialog to select a property type or create a new one.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created property.
+       * Adds a new {@link TeriockPower} to the current document.
+       * @returns {Promise<void>}
        */
-      static async _createProperty(_event, _target) {
+      static async _createPower() {
+        await this.document.createChildDocuments("Item", [
+          {
+            name: "New Power",
+            type: "power",
+          },
+        ]);
+      }
+
+      /**
+       * Adds a new {@link TeriockProperty} to the current document.
+       * @returns {Promise<void>}
+       */
+      static async _createProperty() {
         const out = await selectPropertyDialog();
         const obj = out.toObject();
         if (out.sup?.type === "wrapper") {
@@ -98,13 +130,10 @@ export default (Base) => {
       }
 
       /**
-       * Adds a {@link TeriockRank} to the {@link TeriockDocument}.
-       * @param {MouseEvent} _event - The event object.
-       * @param {HTMLElement} _target - The event target.
-       * @returns {Promise<void>} Promise that resolves when the {@link TeriockRank} is added.
-       * @private
+       * Adds a new {@link TeriockRank} to the current document.
+       * @returns {Promise<void>}
        */
-      static async _createRank(_event, _target) {
+      static async _createRank() {
         const rankClass = await selectClassDialog();
         const innate = this.document.documentName !== "Actor";
         if (!rankClass) {
@@ -213,12 +242,10 @@ export default (Base) => {
       }
 
       /**
-       * Creates a new resource for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created resource.
+       * Adds a new {@link TeriockResource} to the current document.
+       * @returns {Promise<void>}
        */
-      static async _createResource(_event, _target) {
+      static async _createResource() {
         await this.document.createChildDocuments("ActiveEffect", [
           {
             name: "New Resource",

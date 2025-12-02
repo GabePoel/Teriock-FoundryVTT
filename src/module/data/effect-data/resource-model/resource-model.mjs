@@ -40,6 +40,20 @@ export default class TeriockResourceModel extends RevelationDataMixin(
   }
 
   /** @inheritDoc */
+  get messageParts() {
+    const parts = super.messageParts;
+    parts.bars.push({
+      icon: "fa-hashtag",
+      label: "Quantity",
+      wrappers: [
+        `${this.quantity} Remaining`,
+        `${this.maxQuantity.value === Infinity ? "No" : this.maxQuantity.value} Maximum`,
+      ],
+    });
+    return parts;
+  }
+
+  /** @inheritDoc */
   get nameString() {
     const nameAddition = this.revealed ? "" : " (Unrevealed)";
     return this.parent.name + nameAddition;

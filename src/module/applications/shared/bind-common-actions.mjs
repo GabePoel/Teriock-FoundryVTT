@@ -55,7 +55,13 @@ export default function bindCommonActions(rootElement) {
           const uuid = el.dataset.uuid;
           const doc = await fromUuid(uuid);
           if (doc) {
-            await doc.sheet.render(true);
+            if (doc.documentName === "JournalEntryPage") {
+              const journalEntry = doc.parent;
+              await journalEntry.sheet.render(true);
+              journalEntry.sheet.goToPage(doc.id);
+            } else {
+              await doc.sheet.render(true);
+            }
           }
         });
       } else {

@@ -51,6 +51,18 @@
     }}
     {{formBox
       (formInput
+        systemFields.hit.fields.saved
+        dataset=(object tooltip="Hit Bonus")
+        disabled=(not editable)
+        value=system.hit.saved
+      )
+      icon=(path TERIOCK.display.icons "hitBonus")
+      include=(exists system.hit.saved)
+      label="HIT"
+      unselected=system.hit.value
+    }}
+    {{formBox
+      (formInput
         systemFields.attackPenalty.fields.saved
         dataset=(object tooltip="Attack Penalty")
         disabled=(not editable)
