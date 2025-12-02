@@ -1,12 +1,5 @@
 import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
-import { quickAddAssociation } from "../../../helpers/html.mjs";
-import {
-  abilitySort,
-  fancifyFields,
-  getSchema,
-  makeIcon,
-  propertySort,
-} from "../../../helpers/utils.mjs";
+import { fancifyFields, getSchema, makeIcon } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import {
   deriveModifiableDeterministic,
@@ -265,30 +258,6 @@ export default class ChildTypeModel extends CommonTypeModel {
         }
       })
       .filter((f) => f);
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    const parts = super.messageParts;
-    const properties = propertySort(
-      this.parent.properties.filter((p) => p.system.revealed),
-    );
-    const abilities = abilitySort(
-      this.parent.abilities.filter((a) => a.system.revealed),
-    );
-    quickAddAssociation(
-      properties,
-      "Properties",
-      TERIOCK.options.document.property.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      abilities,
-      "Abilities",
-      TERIOCK.options.document.ability.icon,
-      parts.associations,
-    );
-    return parts;
   }
 
   /**

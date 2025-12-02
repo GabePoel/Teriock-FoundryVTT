@@ -1,9 +1,4 @@
-import {
-  abilitySort,
-  docSort,
-  makeIconClass,
-  rankSort,
-} from "../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
 import { IndexButtonSheetMixin } from "../_module.mjs";
@@ -364,24 +359,15 @@ export default function CommonSheetMixin(Base) {
             return true;
           }
         });
-        Object.assign(context, {
-          abilities: abilitySort(children.filter((c) => c.type === "ability")),
-          attunements: docSort(children.filter((c) => c.type === "attunement")),
-          bodyParts: docSort(children.filter((c) => c.type === "body")),
-          conditions: docSort(children.filter((c) => c.type === "condition")),
-          consequences: docSort(
-            children.filter((c) => c.type === "consequence"),
-          ),
-          equipment: docSort(children.filter((c) => c.type === "equipment")),
-          fluencies: docSort(children.filter((c) => c.type === "fluency")),
-          mounts: docSort(children.filter((c) => c.type === "mount")),
-          powers: docSort(children.filter((c) => c.type === "power")),
-          properties: docSort(children.filter((c) => c.type === "property")),
-          ranks: rankSort(children.filter((c) => c.type === "rank")),
-          resources: docSort(children.filter((c) => c.type === "resource")),
-          species: docSort(children.filter((c) => c.type === "species")),
-          wrappers: docSort(children.filter((c) => c.type === "wrapper")),
-        });
+        for (const [type, options] of Object.entries(
+          TERIOCK.options.document,
+        )) {
+          if (options.getter) {
+            context[options["getter"]] = TERIOCK.options.document[type].sorter(
+              children.filter((c) => c.type === type),
+            );
+          }
+        }
         Object.assign(context, {
           TERIOCK: TERIOCK,
           document: this.document,

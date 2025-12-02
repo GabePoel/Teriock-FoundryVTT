@@ -1,6 +1,8 @@
+import { docSort, effectSort, rankSort } from "../../helpers/utils.mjs";
+
 /**
  * Options that describe documents.
- * @type {Record<string, {name: string, icon: string, doc?: string}>}
+ * @type {Record<string, {doc?: string, name: string, icon: string, doc?: string, sorter?: Function, getter?: string}>}
  */
 export const documentOptions = {
   ability: {
@@ -9,12 +11,14 @@ export const documentOptions = {
     icon: "hand-sparkles",
     name: "Ability",
     pack: "abilities",
+    sorter: effectSort,
   },
   attunement: {
     doc: "ActiveEffect",
     getter: "attunements",
     icon: "handshake",
     name: "Attunement",
+    sorter: docSort,
   },
   body: {
     doc: "Item",
@@ -22,24 +26,28 @@ export const documentOptions = {
     icon: "boot",
     name: "Body Part",
     pack: "bodyParts",
+    sorter: docSort,
   },
   character: {
     doc: "Actor",
     getter: "characters",
     icon: "user",
     name: "Character",
+    sorter: docSort,
   },
   condition: {
     doc: "ActiveEffect",
     getter: "conditions",
     icon: "disease",
     name: "Condition",
+    sorter: docSort,
   },
   consequence: {
     doc: "ActiveEffect",
     getter: "consequences",
     icon: "explosion",
     name: "Consequence",
+    sorter: docSort,
   },
   creature: {
     doc: "Actor",
@@ -47,12 +55,14 @@ export const documentOptions = {
     icon: "octopus",
     name: "Creature",
     pack: "creatures",
+    sorter: docSort,
   },
   effect: {
     doc: "ActiveEffect",
     getter: "effects",
     icon: "disease",
     name: "Effect",
+    sorter: docSort,
   },
   equipment: {
     doc: "Item",
@@ -60,24 +70,28 @@ export const documentOptions = {
     icon: "treasure-chest",
     name: "Equipment",
     pack: "equipment",
+    sorter: docSort,
   },
   fluency: {
     doc: "ActiveEffect",
     getter: "fluencies",
     icon: "compass-drafting",
     name: "Fluency",
+    sorter: docSort,
   },
   mount: {
     doc: "Item",
     getter: "mounts",
     icon: "horse",
     name: "Mount",
+    sorter: docSort,
   },
   power: {
     doc: "Item",
     getter: "powers",
     icon: "person-rays",
     name: "Power",
+    sorter: docSort,
   },
   property: {
     doc: "ActiveEffect",
@@ -85,6 +99,7 @@ export const documentOptions = {
     icon: "atom-simple",
     name: "Property",
     pack: "properties",
+    sorter: effectSort,
   },
   protection: {
     icon: "shield-halved",
@@ -96,12 +111,14 @@ export const documentOptions = {
     icon: "wreath-laurel",
     name: "Rank",
     pack: "classes",
+    sorter: rankSort,
   },
   resource: {
     doc: "ActiveEffect",
     getter: "resources",
     icon: "hashtag",
     name: "Resource",
+    sorter: docSort,
   },
   species: {
     doc: "Item",
@@ -109,5 +126,6 @@ export const documentOptions = {
     icon: "skull-cow",
     name: "Species",
     pack: "species",
+    sorter: docSort,
   },
 };

@@ -273,6 +273,9 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
+    if (this.parent.sup?.type === "species") {
+      this.innate = true;
+    }
     if (
       game.settings.get("teriock", "armorWeakensRanks") &&
       this.actor &&

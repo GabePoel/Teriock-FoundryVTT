@@ -1,6 +1,5 @@
-import { quickAddAssociation } from "../../../helpers/html.mjs";
 import { dotJoin, prefix } from "../../../helpers/string.mjs";
-import { docSort, makeIcon, rankSort } from "../../../helpers/utils.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
@@ -56,6 +55,14 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
         "mount",
       ],
       childMacroTypes: [],
+      visibleTypes: [
+        "body",
+        "equipment",
+        "mount",
+        "power",
+        "resource",
+        "species",
+      ],
     });
   }
 
@@ -120,48 +127,6 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
         text: this.sheet.notes,
       },
     ];
-    quickAddAssociation(
-      docSort(this.parent.equipment),
-      "Equipment",
-      TERIOCK.options.document.equipment.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      docSort(this.parent.bodyParts),
-      "Body Parts",
-      TERIOCK.options.document.body.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      docSort(this.parent.mounts),
-      "Mounts",
-      TERIOCK.options.document.mount.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      rankSort(this.parent.ranks),
-      "Ranks",
-      TERIOCK.options.document.rank.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      docSort(this.parent.species),
-      "Species",
-      TERIOCK.options.document.species.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      docSort(this.parent.powers),
-      "Powers",
-      TERIOCK.options.document.power.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      docSort(this.parent.resources.filter((r) => r.system.revealed)),
-      "Resources",
-      TERIOCK.options.document.resource.icon,
-      parts.associations,
-    );
     return parts;
   }
 

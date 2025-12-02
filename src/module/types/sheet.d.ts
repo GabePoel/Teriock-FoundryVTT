@@ -41,5 +41,13 @@ declare global {
     export interface EmbedDragEvent extends DragEvent {
       currentTarget: HTMLElement;
     }
+
+    export type EquipmentSorter = (
+      e: TeriockEquipment,
+    ) => number | string | boolean;
+
+    export type AbilitySorter = (
+      a: TeriockAbility,
+    ) => number | string | boolean;
   }
 }

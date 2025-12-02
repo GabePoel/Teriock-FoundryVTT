@@ -1,5 +1,3 @@
-import { quickAddAssociation } from "../../../helpers/html.mjs";
-import { docSort } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin } from "../../mixins/_module.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 
@@ -41,50 +39,5 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
   /** @inheritDoc */
   get displayToggles() {
     return [...super.displayToggles, "system.disabled"];
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    const parts = super.messageParts;
-    const fluencies = docSort(
-      this.parent.fluencies.filter((f) => f.system.revealed),
-    );
-    const resources = docSort(
-      this.parent.resources.filter((r) => r.system.revealed),
-    );
-    const bodyParts = docSort(this.parent.bodyParts);
-    const equipment = docSort(this.parent.equipment);
-    const ranks = docSort(this.parent.ranks);
-    quickAddAssociation(
-      fluencies,
-      "Fluencies",
-      TERIOCK.options.document.fluency.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      resources,
-      "Resources",
-      TERIOCK.options.document.resource.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      bodyParts,
-      "Body Parts",
-      TERIOCK.options.document.body.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      equipment,
-      "Equipment",
-      TERIOCK.options.document.equipment.icon,
-      parts.associations,
-    );
-    quickAddAssociation(
-      ranks,
-      "Ranks",
-      TERIOCK.options.document.rank.icon,
-      parts.associations,
-    );
-    return parts;
   }
 }

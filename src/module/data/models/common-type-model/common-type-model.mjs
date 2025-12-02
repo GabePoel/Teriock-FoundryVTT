@@ -1,4 +1,6 @@
 import { TeriockJournalEntry } from "../../../documents/_module.mjs";
+import { quickAddAssociation } from "../../../helpers/html.mjs";
+import { toTitleCase } from "../../../helpers/string.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -123,7 +125,7 @@ export default class CommonTypeModel extends TypeDataModel {
    * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.
    */
   get messageParts() {
-    return {
+    const parts = {
       associations: [],
       bars: this.messageBars,
       blocks: this.messageBlocks,
@@ -135,6 +137,23 @@ export default class CommonTypeModel extends TypeDataModel {
       icon: TERIOCK.options.document[this.metadata.type].icon,
       label: TERIOCK.options.document[this.metadata.type].name,
     };
+    const typeMap = this.parent.children.typeMap;
+    for (const type of this.metadata.visibleTypes) {
+      if (typeMap[type]) {
+        let docs = typeMap[type];
+        if (TERIOCK.options.document[type].doc === "ActiveEffect") {
+          docs = docs.filter((e) => e.system.revealed);
+        }
+        docs = TERIOCK.options.document[type].sorter(docs);
+        quickAddAssociation(
+          docs,
+          toTitleCase(TERIOCK.options.document[type]["getter"]),
+          TERIOCK.options.document[type].icon,
+          parts.associations,
+        );
+      }
+    }
+    return parts;
   }
 
   /**
