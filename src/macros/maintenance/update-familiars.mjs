@@ -8,7 +8,7 @@ commonAnimalPages = commonAnimalPages.filter((page) =>
   page.title.includes("Creature:"),
 );
 
-const progress = foundry.ui.notifications.info("Refreshing all familiars.", {
+const progress = ui.notifications.info("Refreshing all familiars.", {
   pct: 0.01,
   progress: true,
 });
@@ -81,6 +81,6 @@ progress.update({
   pct: 1,
   message: "Done.",
 });
-foundry.ui.notifications.success(
+ui.notifications.success(
   `Successfully refreshed ${commonAnimalPages.length} familiar powers.`,
 );

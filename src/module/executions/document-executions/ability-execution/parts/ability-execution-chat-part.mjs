@@ -64,11 +64,11 @@ export default function AbilityExecutionChatPart(Base) {
           const normalEffectData = await this.generateConsequence();
           const critEffectData = await this.generateConsequence(true);
           this.buttons.push(
-            ApplyEffectHandler.buildButton(
-              normalEffectData,
-              critEffectData,
-              this.source,
-            ),
+            ApplyEffectHandler.buildButton(normalEffectData, {
+              secondaryData: critEffectData,
+              sustainingAbility: this.source,
+              bonusSubs: new Set(this.source.subs.map((s) => s.uuid)),
+            }),
           );
         }
 
@@ -218,9 +218,15 @@ export default function AbilityExecutionChatPart(Base) {
         );
         changes = await Promise.all(
           changes.map(async (c) => {
-            const roll = new TeriockRoll(c.value, this.rollData);
-            await roll.evaluate();
-            c.value = roll.total.toString();
+            let value;
+            try {
+              const roll = new TeriockRoll(c.value, this.rollData);
+              await roll.evaluate();
+              value = roll.total.toString();
+            } catch {
+              value = c.value;
+            }
+            c.value = value;
             return c;
           }),
         );
@@ -295,12 +301,6 @@ export default function AbilityExecutionChatPart(Base) {
               description: this.source.system.endCondition,
             },
             heightened: this.heightened,
-            hierarchy: {
-              subIds: Array.from(
-                this.source.system.hierarchy.subIds || new Set(),
-              ),
-              rootUuid: this.source.parent.uuid,
-            },
             source: this.source.uuid,
             transformation: transformation,
           },

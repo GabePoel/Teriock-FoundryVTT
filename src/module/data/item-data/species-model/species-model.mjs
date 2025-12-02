@@ -1,10 +1,9 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
-import { copyAbility, getItem } from "../../../helpers/fetch.mjs";
-import { dotJoin } from "../../../helpers/string.mjs";
+import { TeriockActor } from "../../../documents/_module.mjs";
+import { dotJoin, toCamelCase } from "../../../helpers/string.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
-  ImporterDataMixin,
   ProficiencyDataMixin,
   StatGiverDataMixin,
   WikiDataMixin,
@@ -25,22 +24,27 @@ const { fields } = foundry.data;
  * @extends {TeriockBaseItemModel}
  * @mixes StatGiverData
  * @mixes WikiData
- * @mixes ImporterData
  * @mixes ProficiencyData
  */
 export default class TeriockSpeciesModel extends ProficiencyDataMixin(
-  ImporterDataMixin(
-    StatGiverDataMixin(WikiDataMixin(HierarchyDataMixin(TeriockBaseItemModel))),
-  ),
+  StatGiverDataMixin(WikiDataMixin(HierarchyDataMixin(TeriockBaseItemModel))),
 ) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      namespace: "Creature",
-      type: "species",
+      childItemTypes: ["body", "equipment", "rank"],
       indexCategoryKey: "creatures",
       indexCompendiumKey: "species",
-      childItemTypes: ["body", "equipment", "rank"],
+      namespace: "Creature",
+      type: "species",
+      visibleTypes: [
+        "ability",
+        "body",
+        "equipment",
+        "fluency",
+        "rank",
+        "resource",
+      ],
     });
   }
 
@@ -195,13 +199,8 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
     if (this.isTransformation && this.parent.actor) {
       suppressed =
         suppressed ||
@@ -218,6 +217,11 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
     return suppressed;
   }
 
+  /** @inheritDoc */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
   /**
    * Transformation that provides this.
    * @returns {TeriockLingering|null}
@@ -232,86 +236,6 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
       }
     }
     return null;
-  }
-
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
-    if (this.parent.name === "New Species") {
-      this.parent.updateSource({
-        effects: [
-          (await copyAbility("Normal Intelligence")).toObject(),
-          (await copyAbility("Normal Movement")).toObject(),
-          (await copyAbility("Normal Perception")).toObject(),
-          (await copyAbility("Normal Sneak")).toObject(),
-          (await copyAbility("Normal Strength")).toObject(),
-        ],
-      });
-    }
-    return super._preCreate(data, options, user);
-  }
-
-  /** @inheritDoc */
-  async _preUpdate(changes, options, user) {
-    if ((await super._preUpdate(changes, options, user)) === false) {
-      return false;
-    }
-    const size =
-      foundry.utils.getProperty(changes, "system.size.value") ||
-      this.size.value;
-
-    // Handle variable size abilities
-    if (Object.keys(this.sizeStepAbilities).length > 0) {
-      const gainAbilities = new Set();
-      const loseAbilities = new Set();
-      const minSizeStep = Math.min(
-        ...Object.keys(this.sizeStepAbilities).map((k) => Number(k)),
-      );
-      this.sizeStepAbilities[minSizeStep].lose.forEach((a) =>
-        gainAbilities.add(a),
-      );
-      for (const sizeStep of Object.keys(this.sizeStepAbilities)) {
-        if (size >= sizeStep) {
-          this.sizeStepAbilities[sizeStep].lose.forEach((a) => {
-            gainAbilities.delete(a);
-            loseAbilities.add(a);
-          });
-          this.sizeStepAbilities[sizeStep].gain.forEach((a) => {
-            gainAbilities.add(a);
-          });
-        } else {
-          this.sizeStepAbilities[sizeStep].gain.forEach((a) => {
-            loseAbilities.add(a);
-          });
-        }
-      }
-
-      const toDelete = [];
-      for (const abilityName of loseAbilities) {
-        const ids = this.parent.abilities
-          .filter((a) => a.name === abilityName && !a.sup)
-          .map((a) => a.id);
-        toDelete.push(...ids);
-      }
-      if (toDelete.length > 0) {
-        await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-      }
-      const newAbilities = [];
-      for (const abilityName of gainAbilities) {
-        if (
-          !this.parent.abilities.find((a) => a.name === abilityName && !a.sup)
-        ) {
-          const ability = await copyAbility(abilityName);
-          const abilityObject = ability.toObject();
-          newAbilities.push(abilityObject);
-        }
-      }
-      if (newAbilities.length > 0) {
-        await this.parent.createEmbeddedDocuments("ActiveEffect", newAbilities);
-      }
-    }
   }
 
   /** @inheritDoc */
@@ -374,36 +298,6 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
     super.prepareSpecialData();
   }
 
-  /** @inheritDoc */
-  async refreshFromIndex() {
-    const updateData = {};
-    for (const key of Object.keys(this.sizeStepAbilities)) {
-      updateData[`system.sizeStepAbilities.-=${key}`] = null;
-    }
-    await this.parent.update(updateData);
-    const referenceSpecies = await getItem(this.parent.name, "species");
-    if (referenceSpecies) {
-      const toUpdate = [];
-      for (const ability of this.parent.getAbilities()) {
-        const referenceAbility = referenceSpecies
-          .getAbilities()
-          .find((a) => a.name === ability.name);
-        if (referenceAbility) {
-          const referenceData = referenceAbility.toObject();
-          foundry.utils.deleteProperty(referenceData, "_id");
-          foundry.utils.deleteProperty(referenceData, "effects");
-          foundry.utils.deleteProperty(referenceData, "system.hierarchy");
-          toUpdate.push({
-            _id: ability.id,
-            ...referenceData,
-          });
-        }
-      }
-      await this.parent.updateEmbeddedDocuments("ActiveEffect", toUpdate);
-    }
-    await super.refreshFromIndex();
-  }
-
   /**
    * Set the effect controlling this transformation as the primary transformation.
    * @returns {Promise<void>}
@@ -413,5 +307,47 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
     if (transformationEffect) {
       await transformationEffect.system.setPrimaryTransformation();
     }
+  }
+
+  /**
+   * Data that represents this species as a creature.
+   * @returns {object}
+   */
+  toCreature() {
+    const hasTokenImg =
+      !!TERIOCK.index.creatures[toCamelCase(this.parent.name)];
+    const tokenImg = hasTokenImg
+      ? this.parent.img.replace("icons/creatures", "icons/tokens")
+      : this.parent.img;
+    return {
+      name: this.parent.name,
+      type: "creature",
+      img: this.parent.img,
+      prototypeToken: {
+        name: this.parent.name,
+        ring: {
+          enabled: hasTokenImg,
+        },
+        texture: {
+          src: tokenImg,
+        },
+        width: TeriockActor.sizeDefinition(this.size.value).length / 5,
+        height: TeriockActor.sizeDefinition(this.size.value).length / 5,
+      },
+      items: [game.items.fromCompendium(this.parent)],
+      system: {
+        hp: {
+          value: 999999,
+        },
+        mp: {
+          value: 999999,
+        },
+        size: {
+          number: {
+            saved: this.size.value,
+          },
+        },
+      },
+    };
   }
 }

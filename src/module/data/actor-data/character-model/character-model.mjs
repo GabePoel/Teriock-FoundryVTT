@@ -8,8 +8,6 @@ import TeriockBaseActorModel from "../base-actor-model/base-actor-model.mjs";
  * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
  * - [Leveling Up](https://wiki.teriock.com/index.php/Core:Leveling_Up)
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
- *
- * @extends {TeriockBaseActorModel}
  */
 export default class TeriockCharacterModel extends TeriockBaseActorModel {
   /** @inheritDoc */

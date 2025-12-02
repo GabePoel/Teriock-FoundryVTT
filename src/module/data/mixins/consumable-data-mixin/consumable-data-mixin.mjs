@@ -15,6 +15,7 @@ export default function ConsumableDataMixin(Base) {
   return (
     /**
      * @implements {ConsumableDataMixinInterface}
+     * @extends {ChildTypeModel}
      * @mixin
      */
     class ConsumableData extends Base {
@@ -45,13 +46,14 @@ export default function ConsumableDataMixin(Base) {
 
       /** @inheritDoc */
       get embedActions() {
-        return {
-          ...super.embedActions,
+        const embedActions = super.embedActions;
+        Object.assign(embedActions, {
           useOneDoc: {
             primary: async () => await this.useOne(),
             secondary: async () => await this.gainOne(),
           },
-        };
+        });
+        return embedActions;
       }
 
       /** @inheritDoc */
@@ -69,7 +71,11 @@ export default function ConsumableDataMixin(Base) {
         return parts;
       }
 
-      /** @inheritDoc */
+      /**
+       * Adds one unit to the consumable item.
+       * Increments the quantity by 1, respecting maximum quantity limits.
+       * @returns {Promise<void>} Promise that resolves when the gain is complete.
+       */
       async gainOne() {
         if (this.consumable) {
           await this.parent.update({
@@ -118,7 +124,11 @@ export default function ConsumableDataMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
+      /**
+       * Consumes one unit of the consumable item.
+       * Decrements the quantity by 1, ensuring it doesn't go below 0.
+       * @returns {Promise<void>} Promise that resolves when consumption is complete.
+       */
       async useOne() {
         if (this.consumable) {
           await this.parent.update({

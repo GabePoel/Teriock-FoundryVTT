@@ -4,6 +4,10 @@ const { DataModel } = foundry.abstract;
  * Model for data that gets embedded within some parent document.
  */
 export default class EmbeddedDataModel extends DataModel {
+  /** @inheritDoc */
+  static defineSchema() {
+    return {};
+  }
   /**
    * @returns {EmbeddedDataModel|CommonTypeModel}
    */

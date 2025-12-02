@@ -1,7 +1,6 @@
 import "./mixins/_types";
 import { documentTypes } from "../constants/system/document-types.mjs";
 import * as models from "../data/_module.mjs";
-import { TeriockFolder } from "./_module.mjs";
 import TeriockBaseEffectModel from "../data/effect-data/base-effect-model/base-effect-model.mjs";
 import TeriockBaseItemModel from "../data/item-data/base-item-model/base-item-model.mjs";
 import TeriockBaseActorModel from "../data/actor-data/base-actor-model/base-actor-model.mjs";
@@ -10,17 +9,6 @@ declare global {
   namespace Teriock.Documents {
     type NullDocument = {
       readonly documentName: "";
-    };
-
-    type Index<Doc> = {
-      _id: Teriock.ID<Doc>;
-      folder: Teriock.ID<TeriockFolder>;
-      img: string;
-      name: string;
-      pack: string;
-      sort: number;
-      type: Teriock.Documents.CommonType;
-      uuid: Teriock.UUID<Doc>;
     };
 
     interface Interface<
@@ -40,7 +28,7 @@ declare global {
 
       deleteEmbeddedDocuments(
         embeddedName: Embed["documentName"],
-        ids: Teriock.ID<Embed>[],
+        ids: ID<Embed>[],
         operation: object,
       ): Promise<Embed[]>;
 
@@ -78,13 +66,15 @@ declare global {
       | Teriock.Documents.ActorType;
 
     export type ModelMetadata = {
+      armament: boolean;
+      childActorTypes: Teriock.Documents.ActorType[];
       childEffectTypes: Teriock.Documents.EffectType[];
       childItemTypes: Teriock.Documents.ItemType[];
       childMacroTypes: Teriock.Documents.MacroType[];
       consumable: boolean;
       hierarchy: boolean;
-      indexCategoryKey?: Teriock.Documents.IndexCategoryKey;
-      indexCompendiumKey?: Teriock.Documents.IndexCompendiumKey;
+      indexCategoryKey?: IndexCategoryKey;
+      indexCompendiumKey?: IndexCompendiumKey;
       modifies: TeriockParentName;
       namespace: string;
       pageNameKey: string;
@@ -93,8 +83,8 @@ declare global {
       revealable: boolean;
       type: Teriock.Documents.CommonType;
       usable: boolean;
+      visibleTypes: Teriock.Documents.CommonType[];
       wiki: boolean;
-      armament: boolean;
     };
 
     export type ActorModel = TeriockBaseActorModel &

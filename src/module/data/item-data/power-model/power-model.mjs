@@ -6,6 +6,7 @@ const { fields } = foundry.data;
 
 /**
  * Power-specific item data model.
+ * @extends {TeriockBaseItemModel}
  * @mixes ProficiencyData
  */
 export default class TeriockPowerModel extends ProficiencyDataMixin(
@@ -71,6 +72,20 @@ export default class TeriockPowerModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
+    if (
+      game.settings.get("teriock", "armorSuppressesRanks") &&
+      this.actor &&
+      !this.innate &&
+      this.actor.system.defense.av.base > this.maxAv
+    ) {
+      suppressed = true;
+    }
+    return suppressed;
+  }
+
+  /** @inheritDoc */
   get messageBars() {
     return [
       {
@@ -82,20 +97,6 @@ export default class TeriockPowerModel extends ProficiencyDataMixin(
         ],
       },
     ];
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (
-      game.settings.get("teriock", "armorSuppressesRanks") &&
-      this.actor &&
-      !this.innate &&
-      this.actor.system.defense.av.base > this.maxAv
-    ) {
-      suppressed = true;
-    }
-    return suppressed;
   }
 
   /** @inheritDoc */

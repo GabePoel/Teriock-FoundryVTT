@@ -1,5 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { makeIconClass, propertySort } from "../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import {
   PassiveSheetMixin,
   WikiButtonSheetMixin,
@@ -55,15 +55,5 @@ export default class TeriockPropertySheet extends WikiButtonSheetMixin(
       propertyContextMenuOptions,
       "click",
     );
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    context.subProperties = propertySort(
-      this.document.getProperties().filter((p) => p.system.revealed),
-    );
-    context.supProperty = this.document.sup;
-    return context;
   }
 }

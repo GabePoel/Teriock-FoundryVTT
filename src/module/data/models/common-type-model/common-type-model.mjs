@@ -1,11 +1,10 @@
 import { TeriockJournalEntry } from "../../../documents/_module.mjs";
-import { copyItem, getAbility, getProperty } from "../../../helpers/fetch.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
 
 /**
- * @extends {DataModel}
+ * @extends {TypeDataModel}
  */
 export default class CommonTypeModel extends TypeDataModel {
   /**
@@ -14,6 +13,8 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   static get metadata() {
     return {
+      armament: false,
+      childActorTypes: [],
       childEffectTypes: [],
       childItemTypes: [],
       childMacroTypes: [],
@@ -27,12 +28,15 @@ export default class CommonTypeModel extends TypeDataModel {
       revealable: false,
       type: "base",
       usable: false,
+      visibleTypes: [],
       wiki: false,
-      armament: false,
     };
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {DataSchema}
+   */
   static defineSchema() {
     return {
       gmNotes: new fields.DocumentUUIDField({
@@ -92,14 +96,14 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Parts that will be passed into a handlebars helper to asynchronously make an embedded element.
+   * Parts that will be passed into a handlebar helper to asynchronously make an embedded element.
    * @returns {Teriock.EmbedData.EmbedParts}
    */
   get embedParts() {
     return {
       title: this.parent.nameString,
       img: this.parent.img,
-      text: this.parent.source?.nameString,
+      text: this.parent.elder?.nameString,
       color: this.color,
       openable: true,
       draggable: true,
@@ -123,7 +127,6 @@ export default class CommonTypeModel extends TypeDataModel {
       associations: [],
       bars: this.messageBars,
       blocks: this.messageBlocks,
-      buttons: [],
       color: this.color,
       font: this.font,
       image: this.parent.img,
@@ -159,6 +162,56 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * Make a map of documents by `documentName` based on some operation between two maps of documents by their `type`.
+   * @param {Record<Teriock.Documents.CommonType, TeriockCommon[]>} srcTypeMap
+   * @param {Record<Teriock.Documents.CommonType, TeriockCommon[]>} dstTypeMap
+   * @param {"diff" | "union" | "intersect" | "diffSrc" | "diffDst"} mapType
+   * @returns {Record<TeriockCommonName, { src: TeriockCommon[], dst: TeriockCommon[] }>}
+   */
+  #makeChildMap(srcTypeMap, dstTypeMap, mapType) {
+    const childMap = {};
+    for (const type of new Set([
+      ...Object.keys(srcTypeMap),
+      ...Object.keys(dstTypeMap),
+    ])) {
+      const srcChildren = srcTypeMap[type] || [];
+      const dstChildren = dstTypeMap[type] || [];
+      const srcNames = srcChildren.map((s) => s.name);
+      const dstNames = dstChildren.map((d) => d.name);
+      let names = [];
+      if (mapType === "union") {
+        names = Array.from(new Set([...srcNames, ...dstNames]));
+      } else if (mapType === "intersect") {
+        names = srcNames.filter((s) => dstNames.includes(s));
+      } else {
+        const srcDiffNames = srcNames.filter((s) => !dstNames.includes(s));
+        const dstDiffNames = dstNames.filter((d) => !srcNames.includes(d));
+        const diffNames = [...srcNames, ...dstNames];
+        if (mapType === "diffSrc") {
+          names = srcDiffNames;
+        } else if (mapType === "diffDst") {
+          names = dstDiffNames;
+        } else if (mapType === "diff") {
+          names = diffNames;
+        }
+      }
+      const srcDocs = srcChildren.filter((s) => names.includes(s.name));
+      const dstDocs = dstChildren.filter((d) => names.includes(d.name));
+      const docNames = new Set([
+        ...srcDocs.map((s) => s.documentName),
+        ...dstDocs.map((d) => d.documentName),
+      ]);
+      for (const docName of docNames) {
+        childMap[docName] = {
+          src: srcDocs.filter((s) => s.documentName === docName),
+          dst: dstDocs.filter((d) => d.documentName === docName),
+        };
+      }
+    }
+    return childMap;
+  }
+
+  /**
    * Delete this document from its parent.
    * @returns {Promise<void>}
    */
@@ -167,11 +220,27 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * Get a copy of the index reference that this document is based off of if it exists.
+   * @returns {Promise<TeriockCommon|void>}
+   */
+  async getCompendiumSource() {
+    const reference = await fromUuid(this.parent._stats.compendiumSource);
+    if (!reference) return;
+    if (
+      reference.type === "wrapper" &&
+      this.parent.documentName === "ActiveEffect"
+    ) {
+      return reference.system.effect;
+    }
+    return reference;
+  }
+
+  /**
    * Get an object that represents the non-embedded data for the reference of this document.
    * @returns {Promise<object>}
    */
   async getIndexObject() {
-    const reference = await this.getIndexReference();
+    const reference = await this.getCompendiumSource();
     if (reference) {
       const preservedProperties = [
         "_id",
@@ -182,10 +251,12 @@ export default class CommonTypeModel extends TypeDataModel {
         "effects",
         "flags",
         "folder",
-        "hierarchy",
         "items",
         "origin",
         "sort",
+        "system._ref",
+        "system._sup",
+        "system.qualifiers",
         "tint",
         "transfer",
         "type",
@@ -194,7 +265,7 @@ export default class CommonTypeModel extends TypeDataModel {
       for (const property of preservedProperties) {
         foundry.utils.deleteProperty(object, property);
       }
-      for (const property of this.parent.metadata.preservedProperties || []) {
+      for (const property of this.metadata.preservedProperties || []) {
         foundry.utils.deleteProperty(object, property);
       }
       return object;
@@ -203,26 +274,13 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Get a copy of the index reference that this document is based off of if it exists.
-   * @returns {Promise<TeriockCommon|null>}
-   */
-  async getIndexReference() {
-    if (
-      this.metadata.indexCompendiumKey &&
-      this.parent.documentName === "Item"
-    ) {
-      return await copyItem(this.parent.name, this.metadata.indexCompendiumKey);
-    }
-  }
-
-  /**
    * Fetch roll data.
    * @returns {object}
    */
   getRollData() {
     let rollData = {};
-    if (this.parent.actor) {
-      rollData = this.parent.actor.getRollData();
+    if (this.parent.parent) {
+      rollData = this.parent.parent.getRollData();
     }
     Object.assign(rollData, this.getSystemRollData());
     return rollData;
@@ -303,8 +361,8 @@ export default class CommonTypeModel extends TypeDataModel {
           notesPage = pages[0];
         }
         if (notesPage) {
-          await notesJournal.sheet.render(true);
-          notesJournal.sheet.goToPage(notesPage.id);
+          await notesJournal?.sheet.render(true);
+          notesJournal?.sheet.goToPage(notesPage.id);
           if (!this.parent.inCompendium) {
             await this.parent.update({
               "system.gmNotes": notesPage.uuid,
@@ -320,121 +378,99 @@ export default class CommonTypeModel extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async hardRefreshFromIndex() {
-    const reference = await this.getIndexReference();
-    if (reference) {
-      const indexAbilityNames = reference.getAbilities().map((a) => a.name);
-      const toDeleteAbilities = this.parent
-        .getAbilities()
-        .filter((a) => !indexAbilityNames.includes(a.name))
-        .map((a) => a.id);
-      const indexPropertyNames = reference.getProperties().map((p) => p.name);
-      const toDeleteProperties = this.parent
-        .getProperties()
-        .filter((p) => !indexPropertyNames.includes(p.name))
-        .map((p) => p.id);
-      const toDelete = [...toDeleteAbilities, ...toDeleteProperties];
-      let effectParent = this.parent;
-      if (this.parent.documentName === "ActiveEffect") {
-        effectParent = this.parent.parent;
-      }
-      if (toDelete.length > 0) {
-        await effectParent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-      }
-    }
-    await this.refreshFromIndex();
+    await this.refreshFromIndex({ deleteChildren: true });
   }
 
   /**
    * Apply transformations of derivations to the values of the source data object. Compute data fields whose values are
-   * not stored to the database. This happens after the actor has completed all operations.
+   * not stored in the database. This happens after the actor has completed all operations.
    */
   prepareSpecialData() {}
 
   /**
    * Refresh this document from the index.
+   * @param {object} [options]
+   * @param {boolean} [options.deleteChildren] - Delete children that aren't in reference.
+   * @param {boolean} [options.createChildren] - Create children that are missing from reference.
+   * @param {boolean} [options.updateChildren] - Update children to match reference.
+   * @param {boolean} [options.updateDocument] - Update this to match reference.
+   * @param {boolean} [options.recursive] - Update recursively.
    * @returns {Promise<void>}
    */
-  async refreshFromIndex() {
+  async refreshFromIndex(options = {}) {
+    const {
+      deleteChildren = false,
+      createChildren = true,
+      updateChildren = true,
+      updateDocument = true,
+      recursive = true,
+    } = options;
     const indexObject = await this.getIndexObject();
-    if (Object.keys(indexObject).length > 0) {
+    if (updateDocument && Object.keys(indexObject).length > 0) {
       delete indexObject.flags;
-      delete indexObject.system.hierarchy;
+      delete indexObject.system._ref;
+      delete indexObject.system._sup;
       await this.parent.update(indexObject);
     }
-    const reference = await this.getIndexReference();
+    const reference = await this.getCompendiumSource();
     if (reference) {
-      const indexAbilityNames = reference.getAbilities().map((a) => a.name);
-      const indexPropertyNames = reference.getProperties().map((p) => p.name);
-      let effectParent = this.parent;
-      if (this.parent.documentName === "ActiveEffect") {
-        effectParent = this.parent.parent;
-      }
-      const abilitiesToCreate = await Promise.all(
-        indexAbilityNames
-          .filter(
-            (n) =>
-              !this.parent
-                .getAbilities()
-                .map((a) => a.name)
-                .includes(n),
-          )
-          .map((n) => getAbility(n)),
-      );
-      const propertiesToCreate = await Promise.all(
-        indexPropertyNames
-          .filter(
-            (n) =>
-              !this.parent
-                .getProperties()
-                .map((p) => p.name)
-                .includes(n),
-          )
-          .map((n) => getProperty(n)),
-      );
-      const toCreate = [...abilitiesToCreate, ...propertiesToCreate];
-      const createdEffects = await effectParent.createEmbeddedDocuments(
-        "ActiveEffect",
-        toCreate,
-      );
-      if (this.parent.documentName === "ActiveEffect") {
-        await this.parent.addSubs(createdEffects);
-      }
-    }
-    for (const a of this.parent.getAbilities()) {
-      await a.system.hardRefreshFromIndex();
-      if (reference) {
-        const referenceAbility = reference
-          .getAbilities()
-          .find((r) => r.name === a.name);
-        if (referenceAbility) {
-          const referenceObject = referenceAbility.toObject();
-          const abilityUpdates = {};
-          for (const p of [
-            "system.adept",
-            "system.consumable",
-            "system.fluent",
-            "system.gifted",
-            "system.grantOnly",
-            "system.improvement",
-            "system.limitation",
-            "system.maxQuantity",
-            "system.proficient",
-            "system.quantity",
-          ]) {
-            abilityUpdates[p] = foundry.utils.getProperty(referenceObject, p);
-          }
-          if (Object.keys(abilityUpdates).length > 0) {
-            await a.update(abilityUpdates);
-          }
+      const srcChildren = await reference.getChildren();
+      const srcChildTypeMap = srcChildren.typeMap;
+      const dstChildren = await this.parent.getChildren();
+      const dstChildTypeMap = dstChildren.typeMap;
+      if (createChildren) {
+        const createMap = this.#makeChildMap(
+          srcChildTypeMap,
+          dstChildTypeMap,
+          "diffSrc",
+        );
+        for (const [docName, children] of Object.entries(createMap)) {
+          await this.parent.createChildDocuments(
+            docName,
+            children.src.map((s) => s.toObject()),
+          );
         }
       }
-    }
-    for (const p of this.parent.getProperties()) {
-      await p.system.hardRefreshFromIndex();
-    }
-    if (this.parent.documentName === "Actor") {
-      for (const item of this.parent.items.values()) {
-        await item.system.refreshFromIndex();
+      if (deleteChildren) {
+        const deleteMap = this.#makeChildMap(
+          srcChildTypeMap,
+          dstChildTypeMap,
+          "diffDst",
+        );
+        for (const [docName, children] of Object.entries(deleteMap)) {
+          await this.parent.deleteChildDocuments(
+            docName,
+            children.dst.map((d) => d.id),
+          );
+        }
+      }
+      if (updateChildren) {
+        const updateMap = this.#makeChildMap(
+          srcChildTypeMap,
+          dstChildTypeMap,
+          "intersect",
+        );
+        for (const [docName, children] of Object.entries(updateMap)) {
+          const updateArray = await Promise.all(
+            children.dst.map(async (d) => {
+              const obj = await d.system.getIndexObject();
+              obj._id = d.id;
+              return obj;
+            }),
+          );
+          await this.parent.updateChildDocuments(docName, updateArray);
+        }
+      }
+      if (recursive) {
+        for (const child of await this.parent.getChildArray()) {
+          await child.system.refreshFromIndex({
+            deleteChildren,
+            createChildren,
+            updateChildren,
+            updateDocument: false,
+            recursive,
+          });
+        }
       }
     }
   }

@@ -19,6 +19,8 @@ import {
 import TeriockGame from "../_game.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
 import TeriockCanvas from "../_canvas.mjs";
+import { TeriockNotifications } from "../applications/ui/_module.mjs";
+import type { TeriockCompendiumCollection } from "../documents/collections/packs";
 
 declare global {
   // Definition for writing macros.
@@ -33,24 +35,24 @@ declare global {
     items: TeriockItems;
     journal: TeriockJournal;
     macros: TeriockMacros;
-    packs: Collection<
-      string,
-      CompendiumCollection<TeriockDocument> & CompendiumHelper<TeriockDocument>
-    >;
+    packs: Collection<string, TeriockCompendiumCollection<TeriockDocument>>;
     rollTables: TeriockRollTables;
     scenes: TeriockScenes;
     tooltip: TeriockTooltipManager;
     user: TeriockUser;
     users: TeriockUsers;
   };
+  const ui: {
+    notifications: TeriockNotifications;
+  };
 
   const canvas: TeriockCanvas;
 
   const ChatMessage: typeof TeriockChatMessage;
 
-  function fromUuidSync<T>(uuid: Teriock.UUID<T>): T | undefined;
+  function fromUuidSync<T>(uuid: UUID<T>): T | undefined;
 
-  function fromUuid<T>(uuid: Teriock.UUID<T>): Promise<T> | undefined;
+  function fromUuid<T>(uuid: UUID<T>): Promise<T> | undefined;
 }
 
 export {};

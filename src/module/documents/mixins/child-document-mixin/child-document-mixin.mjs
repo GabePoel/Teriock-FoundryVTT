@@ -1,7 +1,5 @@
-import { toCamelCase } from "../../../helpers/string.mjs";
 import { TeriockChatMessage } from "../../_module.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
-import ChildDocumentHierarchyPart from "./parts/child-document-hierarchy-part.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -15,18 +13,28 @@ export default function ChildDocumentMixin(Base) {
     /**
      * @implements {ChildDocumentMixinInterface}
      * @extends {ClientDocument}
-     * @extends {ChildDocumentHierarchyPart}
      * @mixes PanelDocument
      * @mixes CommonDocument
      */
-    class ChildDocument extends ChildDocumentHierarchyPart(Base) {
+    class ChildDocument extends Base {
       //noinspection ES6ClassMemberInitializationOrder
       overrides = this.overrides ?? {};
+
+      /**
+       * Treat this document as if it doesn't exist.
+       * @returns {boolean}
+       */
+      get isEphemeral() {
+        return this.system.makeEphemeral;
+      }
 
       /** @inheritDoc */
       get isFluent() {
         let fluent = false;
         if (this.system.fluent) {
+          fluent = true;
+        }
+        if (this.elder?.isFluent) {
           fluent = true;
         }
         return fluent;
@@ -38,29 +46,13 @@ export default function ChildDocumentMixin(Base) {
         if (this.system.proficient) {
           proficient = true;
         }
-        if (this.parent?.system.proficient) {
+        if (this.elder?.isProficient) {
           proficient = true;
         }
         if (this.isFluent) {
           proficient = true;
         }
         return proficient;
-      }
-
-      /**
-       * Get the key that defines this in the index, if appropriate.
-       * @returns {string}
-       */
-      get key() {
-        const pageName = foundry.utils.getProperty(
-          this,
-          this.metadata.pageNameKey,
-        );
-        if (pageName) {
-          return toCamelCase(pageName);
-        } else {
-          return toCamelCase(this.name);
-        }
       }
 
       /** @inheritDoc */
@@ -80,6 +72,7 @@ export default function ChildDocumentMixin(Base) {
         }
       }
 
+      /** @inheritDoc */
       applySpecialEffects() {
         const overrides = foundry.utils.deepClone(this.overrides ?? {});
         const changes = [];
@@ -205,16 +198,12 @@ export default function ChildDocumentMixin(Base) {
 
       /** @inheritDoc */
       async wikiOpen() {
-        foundry.ui.notifications.error(
-          `There are no ${this.type} pages on the wiki.`,
-        );
+        ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
       }
 
       /** @inheritDoc */
       async wikiPull() {
-        foundry.ui.notifications.error(
-          `There are no ${this.type} pages on the wiki.`,
-        );
+        ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
       }
     }
   );

@@ -8,9 +8,10 @@ import {
  * @constructor
  */
 export default function WikiDataMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {WikiDataMixinInterface}
+     * @extends {ChildTypeModel}
      * @mixin
      */
     class WikiData extends Base {
@@ -19,37 +20,54 @@ export default function WikiDataMixin(Base) {
         return foundry.utils.mergeObject(super.metadata, { wiki: true });
       }
 
-      /** @inheritDoc */
+      /**
+       * Gets the full wiki page path including namespace.
+       * Constructs the wiki page identifier from namespace and parent name.
+       * @returns {string} The complete wiki page path with namespace prefix.
+       */
       get wikiPage() {
-        const prefix = this.constructor.metadata.namespace;
+        const prefix = this.metadata.namespace;
         const pageName = foundry.utils.getProperty(
           this.parent,
-          this.constructor.metadata.pageNameKey,
+          this.metadata.pageNameKey,
         );
         return `${prefix}:${pageName}`;
       }
 
-      /** @inheritDoc */
+      /**
+       * Parses raw HTML content from the wiki into document data updates.
+       * Converts wiki HTML content into structured data for document updates.
+       * @param {string} _rawHTML - The raw HTML content fetched from the wiki.
+       * @returns {Promise<object>} Promise that resolves to an object containing data updates.
+       */
       async parse(_rawHTML) {
         return {
           "system.description": "Description.",
         };
       }
 
-      /** @inheritDoc */
+      /**
+       * Opens the wiki page in the default browser.
+       * Navigates to the wiki page URL for manual viewing and editing.
+       */
       wikiOpen() {
         const pageTitle = this.wikiPage;
-        foundry.ui.notifications.info(`Opening ${pageTitle}.`);
+        ui.notifications.info(`Opening ${pageTitle}.`);
         openWikiPage(pageTitle);
       }
 
-      /** @inheritDoc */
+      /**
+       * Pulls data from the wiki and updates the document.
+       * Fetches wiki page content, parses it, and applies updates to the document.
+       * @param {Teriock.Wiki.PullOptions} [options] - Options for the wiki pull operation.
+       * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
+       */
       async wikiPull(options = {}) {
         const notify = options.notify !== false;
         if (game.settings.get("teriock", "developerMode")) {
           const pageTitle = this.wikiPage;
           if (notify) {
-            foundry.ui.notifications.info(`Pulling ${pageTitle} from wiki.`);
+            ui.notifications.info(`Pulling ${pageTitle} from wiki.`);
           }
 
           const wikiPage = await fetchWikiPageHTML(pageTitle, {
@@ -59,19 +77,17 @@ export default function WikiDataMixin(Base) {
             const parsed = await this.parse(wikiPage);
             await this.parent.update(parsed);
             if (notify) {
-              foundry.ui.notifications.success(
+              ui.notifications.success(
                 `Updated ${this.parent.name} with ${pageTitle} wiki data.`,
               );
             }
           } else {
             if (notify) {
-              foundry.ui.notifications.error(`${pageTitle} not found on wiki.`);
+              ui.notifications.error(`${pageTitle} not found on wiki.`);
             }
           }
         } else if (notify) {
-          foundry.ui.notifications.error(
-            `Only developers can pull from the wiki.`,
-          );
+          ui.notifications.error(`Only developers can pull from the wiki.`);
         }
       }
     }

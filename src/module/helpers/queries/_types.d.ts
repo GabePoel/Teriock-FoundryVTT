@@ -1,9 +1,4 @@
 import {
-  TeriockAbility,
-  TeriockConsequence,
-  TeriockEquipment,
-} from "../../documents/_documents.mjs";
-import {
   TeriockActor,
   TeriockEffect,
   TeriockItem,
@@ -24,26 +19,26 @@ declare global {
     };
 
     export type InCombatExpiration = {
-      effectUuid: Teriock.UUID<TeriockConsequence>;
+      effectUuid: UUID<TeriockConsequence>;
     };
 
     export type AddToSustaining = {
-      sustainingUuid: Teriock.UUID<TeriockAbility>;
-      sustainedUuids: Teriock.UUID<TeriockConsequence>[];
+      sustainingUuid: UUID<TeriockAbility>;
+      sustainedUuids: UUID<TeriockConsequence>[];
     };
 
     export type CallPseudoHook = {
-      uuid: Teriock.UUID<TeriockCommon>;
+      uuid: UUID<TeriockCommon>;
       pseudoHook: Teriock.Parameters.Shared.PseudoHook;
       data: object;
     };
 
     export type IdentifyItem = {
-      uuid: Teriock.UUID<TeriockEquipment>;
+      uuid: UUID<TeriockEquipment>;
     };
 
     export type SustainedExpiration = {
-      sustainedUuid: Teriock.UUID<TeriockConsequence>;
+      sustainedUuid: UUID<TeriockConsequence>;
     };
 
     export type TimeAdvance = {
@@ -51,26 +46,23 @@ declare global {
     };
 
     export type ResetAttackPenalties = {
-      actorUuids: Teriock.UUID<TeriockActor>[];
+      actorUuids: UUID<TeriockActor>[];
     };
 
     export type CreateHotbarFolder = {
       name: string;
-      id: Teriock.ID<TeriockUser>;
+      id: ID<TeriockUser>;
     };
 
     export type UpdateEmbeddedDocuments = {
-      uuid: Teriock.UUID<TeriockActor> | Teriock.UUID<TeriockItem>;
+      uuid: UUID<TeriockActor> | UUID<TeriockItem>;
       embeddedName: "Item" | "ActiveEffect";
       updates: object[];
       operation?: object;
     };
 
     export type Update = {
-      uuid:
-        | Teriock.UUID<TeriockActor>
-        | Teriock.UUID<TeriockItem>
-        | Teriock.UUID<TeriockEffect>;
+      uuid: UUID<TeriockActor> | UUID<TeriockItem> | UUID<TeriockEffect>;
       data: object;
       operation?: object;
     };

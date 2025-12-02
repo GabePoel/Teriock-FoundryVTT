@@ -1,6 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import * as createEffects from "../../../../helpers/create-effects.mjs";
-import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
 import {
   ChatButtonSheetMixin,
   ChildSheetMixin,
@@ -32,7 +30,6 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
     },
     actions: {
       addChange: this._addChange,
-      createAbility: this._createAbility,
       deleteChange: this._deleteChange,
       toggleDisabledThis: this._toggledDisabledThis,
     },
@@ -79,22 +76,6 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
     };
     changes.push(newChange);
     await this.document.update({ changes: changes });
-  }
-
-  /** @inheritDoc */
-  static async _createAbility(_event, _target) {
-    const abilityKey = await selectAbilityDialog();
-    let abilityName = "New Ability";
-    if (abilityKey && abilityKey !== "other") {
-      abilityName = TERIOCK.index.abilities[abilityKey];
-      const ability = await tm.fetch.importAbility(
-        this.document.parent,
-        abilityName,
-      );
-      await this.document.addSub(ability);
-    } else {
-      await createEffects.createAbility(this.document, abilityName);
-    }
   }
 
   /**

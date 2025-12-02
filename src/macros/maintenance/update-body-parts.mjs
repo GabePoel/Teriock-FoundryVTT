@@ -1,6 +1,6 @@
 const bodyPack = game.teriock.packs.bodyParts;
 
-foundry.ui.notifications.info("Pulling all body parts from wiki.");
+ui.notifications.info("Pulling all body parts from wiki.");
 
 async function processBody(bodyName) {
   let bodyItem = bodyPack.index.find((e) => e.name === bodyName);
@@ -24,4 +24,4 @@ const bodyPromises = Object.values(TERIOCK.index.bodyParts).map((bodyName) =>
 );
 
 await Promise.all(bodyPromises);
-foundry.ui.notifications.success("Done.");
+ui.notifications.success("Done.");

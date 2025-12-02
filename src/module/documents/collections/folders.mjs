@@ -4,7 +4,7 @@ const { Folders } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Collection<Teriock.ID<TeriockFolder>, TeriockFolder>}
+ * @implements {Collection<ID<TeriockFolder>, TeriockFolder>}
  * @implements {DocumentCollection<TeriockFolder>}
  */
 export default class TeriockFolders extends BaseWorldCollectionMixin(Folders) {}

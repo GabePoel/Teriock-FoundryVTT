@@ -11,10 +11,13 @@ export class ApplyEffectHandler extends ActionHandler {
   /**
    * @inheritDoc
    * @param {object} primaryData
-   * @param {object} [secondaryData]
-   * @param {TeriockAbility} [sustainingAbility]
+   * @param {object} [options]
+   * @param {object} [options.secondaryData]
+   * @param {TeriockAbility} [options.sustainingAbility]
+   * @param {Set<UUID<TeriockChild>>} [options.bonusSubs]
    */
-  static buildButton(primaryData, secondaryData = {}, sustainingAbility) {
+  static buildButton(primaryData, options = {}) {
+    const { secondaryData, sustainingAbility, bonusSubs = new Set() } = options;
     const button = super.buildButton();
     button.icon = makeIconClass(TERIOCK.options.document.effect.icon, "button");
     button.label = "Apply Effect";
@@ -25,6 +28,7 @@ export class ApplyEffectHandler extends ActionHandler {
     button.dataset.sustaining = sustainingAbility?.system?.sustained
       ? safeUuid(sustainingAbility.uuid)
       : "null";
+    button.dataset.bonusSubs = JSON.stringify([...bonusSubs]);
     return button;
   }
 
@@ -60,7 +64,7 @@ export class ApplyEffectHandler extends ActionHandler {
     try {
       return JSON.parse(jsonData);
     } catch {
-      foundry.ui.notifications.error("Failed to parse effect data.");
+      ui.notifications.error("Failed to parse effect data.");
       return null;
     }
   }
@@ -71,15 +75,27 @@ export class ApplyEffectHandler extends ActionHandler {
     if (this.event.altKey) {
       effectObj = this._toObj(this.dataset.crit);
     }
+    effectObj._id = foundry.utils.randomID();
+    const bonusSubUuids = this._toObj(this.dataset.bonusSubs);
+    const bonusSubs = /** @type {TeriockChild[]} */ await Promise.all(
+      bonusSubUuids.map((uuid) => fromUuid(uuid)),
+    );
+    const bonusSubData = bonusSubs.map((s) => {
+      const obj = s.toObject();
+      obj.system._sup = effectObj._id;
+      return obj;
+    });
+    const toCreate = [effectObj, ...bonusSubData];
     /** @type {TeriockConsequence[]} */
     const createdConsequences = [];
     for (const actor of this.actors) {
       const newConsequences = await actor.createEmbeddedDocuments(
         "ActiveEffect",
-        [effectObj],
+        toCreate,
+        { keepId: true },
       );
       createdConsequences.push(...newConsequences);
-      foundry.ui.notifications.info(`Applied ${effectObj.name}`);
+      ui.notifications.info(`Applied ${effectObj.name}`);
     }
     await this._addToSustaining(createdConsequences);
   }
@@ -101,9 +117,9 @@ export class ApplyEffectHandler extends ActionHandler {
       }
       const foundIds = Array.from(foundEffects.map((effect) => effect.id));
       if (foundIds.length > 0) {
-        foundry.ui.notifications.info(`Removed ${effectObj.name}`);
+        ui.notifications.info(`Removed ${effectObj.name}`);
       } else {
-        foundry.ui.notifications.warn(`${effectObj.name} not found`);
+        ui.notifications.warn(`${effectObj.name} not found`);
       }
     }
     await this._addToSustaining(createdConsequences);

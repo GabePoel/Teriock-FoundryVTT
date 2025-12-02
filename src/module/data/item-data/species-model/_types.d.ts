@@ -1,7 +1,5 @@
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { ImporterDataMixinInterface } from "../../mixins/importer-data-mixin/_types";
 import { StatGiverMixinInterface } from "../../mixins/stat-giver-data-mixin/_types";
-import { TeriockSpecies } from "../../../documents/_documents.mjs";
 
 export type SizeAbilityStep = {
   gain: Set<string>;
@@ -50,7 +48,6 @@ declare module "./species-model.mjs" {
   export default interface TeriockSpeciesModel
     extends TeriockBaseItemModel,
       StatGiverMixinInterface,
-      ImporterDataMixinInterface,
       TeriockSpeciesData {
     get parent(): TeriockSpecies;
   }

@@ -6,14 +6,14 @@
  * @param {boolean} [options.clone] - Fetch a clone instead of the raw {@link TeriockItem}.
  * @returns {Promise<TeriockItem|null>}
  */
-export async function getItem(name, pack, options = {}) {
+export async function getDocument(name, pack, options = {}) {
   if (!pack.includes(".")) {
     pack = `teriock.${pack}`;
   }
   const packs = game.packs;
   const compendium = packs.get(pack);
+  const uuid = compendium?.index.getName(name).uuid;
   try {
-    const uuid = compendium.index.getName(name).uuid;
     const item = await fromUuid(uuid);
     if (item && options.clone) {
       return item.clone();
@@ -31,7 +31,7 @@ export async function getItem(name, pack, options = {}) {
  * @returns {Promise<TeriockItem|null>}
  */
 export async function copyItem(name, pack) {
-  return await getItem(name, pack, { clone: true });
+  return await getDocument(name, pack, { clone: true });
 }
 
 /**
@@ -42,38 +42,8 @@ export async function copyItem(name, pack) {
  * @returns {Promise<TeriockAbility>}
  */
 export async function getAbility(name, options = {}) {
-  const item = await getItem(name, "abilities", options);
+  const item = await getDocument(name, "abilities", options);
   return item.system.effect;
-}
-
-/**
- * Copy a {@link TeriockAbility} from the default {@link CompendiumCollection}.
- * @param {string} name - Name of the {@link TeriockAbility}.
- * @returns {Promise<TeriockAbility>}
- */
-export async function copyAbility(name) {
-  if (Object.keys(TERIOCK.index.abilities).includes(name)) {
-    name = Object.keys(TERIOCK.index.abilities)[name];
-  }
-  if (!Object.values(TERIOCK.index.abilities).includes(name)) {
-    return null;
-  }
-  return await getAbility(name, { clone: true });
-}
-
-/**
- * Import a {@link TeriockAbility} from the default {@link CompendiumCollection} to the given document.
- * @param {TeriockParent} document - Document to give the {@link TeriockAbility} to.
- * @param {string} name - Name of the {@link TeriockAbility}.
- * @returns {Promise<TeriockAbility>}
- */
-export async function importAbility(document, name) {
-  const ability = await copyAbility(name);
-  const abilities =
-    /** @type {TeriockAbility[]} */
-    await document.createEmbeddedDocuments("ActiveEffect", [ability]);
-  await document.forceUpdate();
-  return abilities[0];
 }
 
 /**
@@ -84,38 +54,8 @@ export async function importAbility(document, name) {
  * @returns {Promise<TeriockProperty>}
  */
 export async function getProperty(name, options = {}) {
-  const item = await getItem(name, "properties", options);
+  const item = await getDocument(name, "properties", options);
   return item.effects.getName(name);
-}
-
-/**
- * Copy a {@link TeriockProperty} from the default {@link CompendiumCollection}.
- * @param {string} name - Name of the {@link TeriockProperty}.
- * @returns {Promise<TeriockProperty>}
- */
-export async function copyProperty(name) {
-  if (Object.keys(TERIOCK.index.properties).includes(name)) {
-    name = Object.keys(TERIOCK.index.properties)[name];
-  }
-  if (!Object.values(TERIOCK.index.properties).includes(name)) {
-    return null;
-  }
-  return await getProperty(name, { clone: true });
-}
-
-/**
- * Import a {@link TeriockProperty} from the default {@link CompendiumCollection} to the given document.
- * @param {TeriockParent} document - Document to give the {@link TeriockProperty} to.
- * @param {string} name - Name of the {@link TeriockProperty}.
- * @returns {Promise<TeriockProperty>}
- */
-export async function importProperty(document, name) {
-  const property = await copyProperty(name);
-  const properties =
-    /** @type {TeriockProperty[]} */
-    await document.createEmbeddedDocuments("ActiveEffect", [property]);
-  await document.forceUpdate();
-  return properties[0];
 }
 
 /**
@@ -135,7 +75,7 @@ export async function getRank(classKey, number, options = {}) {
     return null;
   }
   const name = `Rank ${number} ${TERIOCK.index.classes[classKey]}`;
-  return await getItem(name, "classes", options);
+  return await getDocument(name, "classes", options);
 }
 
 /**

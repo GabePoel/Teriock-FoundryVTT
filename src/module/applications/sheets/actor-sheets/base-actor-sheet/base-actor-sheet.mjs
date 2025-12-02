@@ -1,10 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import {
-  conditionSort,
-  docSort,
-  rankSort,
-} from "../../../../helpers/utils.mjs";
+import { conditionSort } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import AvatarImageActorSheetPart from "./parts/avatar-image-actor-sheet-part.mjs";
@@ -115,7 +111,6 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-
     /** @type {NodeListOf<HTMLSelectElement>} */
     const filterSelects = this.element.querySelectorAll(
       'select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]',
@@ -143,12 +138,12 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
       'button[data-action="toggleSwitch"]',
     );
     toggleSwitches.forEach((el) => {
-      // Left click: forward cycle
+      // Left-click: forward cycle
       el.addEventListener("click", async () => {
         this.#cycleToggleSwitch(el, true);
         await this.render();
       });
-      // Right click: reverse cycle
+      // Right-click: reverse cycle
       el.addEventListener("contextmenu", async () => {
         this.#cycleToggleSwitch(el, false);
         await this.render();
@@ -228,6 +223,7 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
+    context.abilities = await this.document.allAbilities();
     this._prepareDisplayContext(context);
     await this._prepareDocumentContext(context);
     await this._prepareConditionContext(context);
@@ -236,9 +232,6 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
     );
     context.enrichedSpecialRules = await this._enrich(
       this.document.system.primaryAttacker?.system?.specialRules,
-    );
-    context.inventory = await TeriockTextEditor.enrichHTML(
-      context.equipment.map((e) => `@Embed[${e.uuid}]`).join(""),
     );
     return context;
   }
@@ -262,37 +255,16 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
    * @private
    */
   async _prepareDocumentContext(context) {
-    const abilities = await this.actor.allAbilities();
     Object.assign(context, {
       abilities: this._getFilteredAbilities(
         sortAbilities(
           this.actor,
-          abilities.filter((a) => a.system.revealed || game.user.isGM),
+          context.abilities.filter((a) => a.system.revealed || game.user.isGM),
         ),
       ),
-      resources: docSort(
-        this.actor.resources.filter((r) => r.system.revealed || game.user.isGM),
-        {
-          alphabetical: true,
-        },
-      ),
       equipment: this._getFilteredEquipment(
-        sortEquipment(this.actor, this.actor.equipment),
+        sortEquipment(this.actor, context.equipment),
       ),
-      powers: docSort(this.actor.powers),
-      species: docSort(this.actor.species),
-      mounts: docSort(this.actor.mounts),
-      fluencies: docSort(
-        this.actor.fluencies.filter((f) => f.system.revealed || game.user.isGM),
-      ),
-      consequences: docSort(this.actor.consequences, {
-        alphabetical: true,
-      }),
-      attunements: docSort(this.actor.attunements, {
-        alphabetical: true,
-      }),
-      bodyParts: docSort(this.actor.bodyParts),
-      ranks: rankSort(this.actor.ranks),
     });
   }
 }

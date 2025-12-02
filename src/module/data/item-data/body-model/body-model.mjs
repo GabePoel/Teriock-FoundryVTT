@@ -26,13 +26,14 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
+      childEffectTypes: ["property"],
+      indexCategoryKey: "bodyParts",
+      indexCompendiumKey: "bodyParts",
       namespace: "Body",
       pageNameKey: "name",
       type: "body",
       usable: true,
-      childEffectTypes: ["property"],
-      indexCategoryKey: "bodyParts",
-      indexCompendiumKey: "bodyParts",
+      visibleTypes: ["property"],
     });
   }
 
@@ -44,9 +45,23 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
       suffix(this.damage.base.value, "Damage"),
       suffix(this.bv.value, "BV"),
       suffix(this.av.value, "AV"),
-      this.parent.source ? this.parent.source.nameString : "",
+      this.parent.elder ? this.parent.elder?.nameString : "",
     ]);
     return parts;
+  }
+
+  /** @inheritDoc */
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.elder?.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.bodyParts
+      ) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
   }
 
   /** @inheritDoc */
@@ -55,20 +70,6 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
       ...super.messageParts,
       ..._messageParts(this),
     };
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.source.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.bodyParts
-      ) {
-        suppressed = true;
-      }
-    }
-    return suppressed;
   }
 
   /** @inheritDoc */

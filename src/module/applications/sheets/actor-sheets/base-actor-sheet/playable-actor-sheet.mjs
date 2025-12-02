@@ -68,7 +68,7 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
     if (this.document.species.length === 0) {
-      foundry.ui.notifications.warn(
+      ui.notifications.warn(
         `${this.document.name} has no species. Add one from the "Species" compendium.`,
       );
     }

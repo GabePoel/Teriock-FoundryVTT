@@ -13,7 +13,7 @@ import {
 const { fields } = foundry.data;
 
 /**
- * @param {typeof ChildTypeModel} Base
+ * @param {typeof TeriockBaseItemModel} Base
  * @constructor
  */
 export default function ArmamentDataMixin(Base) {
@@ -21,6 +21,7 @@ export default function ArmamentDataMixin(Base) {
   return (
     /**
      * @implements {ArmamentDataMixinInterface}
+     * @extends {TeriockBaseItemModel}
      * @mixin
      */
     class ArmamentData extends Base {
@@ -28,13 +29,12 @@ export default function ArmamentDataMixin(Base) {
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
           armament: true,
+          childEffectTypes: ["ability", "fluency", "property", "resource"],
+          visibleTypes: ["ability", "fluency", "property", "resource"],
         });
       }
 
-      /**
-       * @inheritDoc
-       * @returns {Record<string, DataField>}
-       */
+      /** @inheritDoc */
       static defineSchema() {
         return foundry.utils.mergeObject(super.defineSchema(), {
           attackPenalty: modifiableFormula({
@@ -216,7 +216,7 @@ export default function ArmamentDataMixin(Base) {
         if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
           await this.actor?.useAbility("Basic Attack");
         }
-        options.source = this.parent;
+        options.source = /** @type {TeriockArmament} */ this.parent;
         const execution = new ArmamentExecution(options);
         await execution.execute();
       }

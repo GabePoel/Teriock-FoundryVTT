@@ -1,5 +1,4 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
-import { getItem } from "../../../helpers/fetch.mjs";
 import {
   dotJoin,
   formulaExists,
@@ -30,6 +29,7 @@ import EquipmentIdentificationPart from "./parts/equipment-identification-part.m
 import EquipmentSuppressionPart from "./parts/equipment-suppression-part.mjs";
 import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Equipment-specific item data model.
  *
@@ -62,13 +62,10 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      namespace: "Equipment",
-      pageNameKey: "system.equipmentType",
-      type: "equipment",
-      usable: true,
-      childEffectTypes: ["ability", "fluency", "property", "resource"],
       indexCategoryKey: "equipment",
       indexCompendiumKey: "equipment",
+      namespace: "Equipment",
+      pageNameKey: "system.equipmentType",
       preservedProperties: [
         "name",
         "img",
@@ -82,6 +79,8 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
         "system.proficient",
         "system.quantity",
       ],
+      type: "equipment",
+      usable: true,
     });
   }
 
@@ -229,25 +228,25 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ...messages._messageParts(this),
-    };
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed || !this.isEquipped;
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed || !this.isEquipped;
     if (this.actor && this.actor.system.isTransformed) {
       if (
-        this.parent.source.documentName === "Actor" &&
+        this.parent.elder?.documentName === "Actor" &&
         this.actor.system.transformation.suppression.equipment
       ) {
         suppressed = true;
       }
     }
     return suppressed;
+  }
+
+  /** @inheritDoc */
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ...messages._messageParts(this),
+    };
   }
 
   /** @inheritDoc */
@@ -261,11 +260,6 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   }
 
   /** @inheritDoc */
-  async getIndexReference() {
-    return await getItem(this.equipmentType, "equipment");
-  }
-
-  /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
   }
@@ -275,7 +269,9 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
    * @returns {Teriock.Execution.EquipmentExecutionOptions}
    */
   parseEvent(event) {
-    const options = super.parseEvent(event);
+    const options =
+      /** @type {Teriock.Execution.EquipmentExecutionOptions} */
+      super.parseEvent(event);
     Object.assign(options, {
       secret: event.shiftKey,
       twoHanded: event.ctrlKey,

@@ -22,13 +22,15 @@ async function processProperty(propertyName, _index, _total) {
   );
 
   if (!propertyEffect) {
-    propertyEffect = await tm.create.property(propertyItem, propertyName, {
-      notify: false,
-      fromWiki: true,
-    });
-  } else {
-    await propertyEffect.system.wikiPull({ notify: false });
+    const propertyData = {
+      name: propertyName,
+      type: "property",
+    };
+    propertyEffect = await propertyItem.createChildDocuments("ActiveEffect", [
+      propertyData,
+    ]);
   }
+  await propertyEffect.system.wikiPull({ notify: false });
 
   if (propertyItem.img !== propertyEffect.img) {
     await propertyItem.update({ img: propertyEffect.img });

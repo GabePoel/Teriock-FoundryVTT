@@ -1,7 +1,9 @@
 const speciesCompendium = game.teriock.packs.species;
 const creatureCompendium = game.teriock.packs.creatures;
 
-const allSpecies = speciesCompendium.index.contents;
+const allSpecies = speciesCompendium.index.contents.filter(
+  (i) => i.type === "species",
+);
 const speciesFolders = speciesCompendium.folders;
 const allCreatures = creatureCompendium.index.contents;
 const creaturesFolders = creatureCompendium.folders;
@@ -34,7 +36,7 @@ for (const folderEntry of speciesFolders.values()) {
   }
 }
 
-const progress = foundry.ui.notifications.info(`Synchronizing all creatures.`, {
+const progress = ui.notifications.info(`Synchronizing all creatures.`, {
   pct: 0.01,
   progress: true,
 });
@@ -55,71 +57,13 @@ async function processSpecies(
   const speciesFolder = speciesFolders.get(speciesEntry.folder);
   const creatureFolder = creaturesFolders.getName(speciesFolder.name);
   if (!creatureEntry) {
-    creature = await Actor.create(
-      {
-        name: species.name,
-        img: species.img,
-        type: "creature",
-        folder: creatureFolder.id,
-      },
-      { pack: "teriock.creatures" },
-    );
+    creature = await Actor.create(species.system.toCreature(), {
+      pack: "teriock.creatures",
+    });
   } else {
     creature = await fromUuid(creatureEntry.uuid);
   }
-  const mechanics = creature.items.filter((i) => i.type === "mechanic");
-  const mechanicIds = mechanics.map((m) => m.id);
-  const basicAbilitiesItems = creature.items.filter(
-    (i) => i.name === "Basic Abilities" && i.type === "power",
-  );
-  const basicAbilitiesIds = basicAbilitiesItems.map((p) => p.id);
-  const equipmentNames = new Set(creature.equipment.map((e) => e.name));
-  const firstEquipment = [];
-  for (const name of equipmentNames) {
-    firstEquipment.push(creature.equipment.find((e) => e.name === name));
-  }
-  const otherEquipment = creature.equipment.filter(
-    (e) => !firstEquipment.map((e) => e.uuid).includes(e.uuid),
-  );
-  let toDelete = Array.from(
-    new Set([
-      ...mechanicIds,
-      ...basicAbilitiesIds,
-      ...otherEquipment.map((e) => e.id),
-      ...creature.equipment
-        .filter((e) => !e.getFlag("teriock", "importedBy"))
-        .map((e) => e.id),
-      ...creature.ranks
-        .filter((r) => !r.getFlag("teriock", "importedBy"))
-        .map((r) => r.id),
-      ...creature.bodyParts
-        .filter((b) => !b.getFlag("teriock", "importedBy"))
-        .map((b) => b.id),
-    ]),
-  );
-  await creature.deleteEmbeddedDocuments("Item", toDelete);
-  await creature.system.hardRefreshFromIndex();
-  await creature.updateEmbeddedDocuments("Item", [
-    ...creature.equipment.map((e) => {
-      return {
-        _id: e.id,
-        "system.description": "",
-        "system.equipped": true,
-      };
-    }),
-    ...creature.bodyParts.map((b) => {
-      return {
-        _id: b.id,
-        "system.description": "",
-      };
-    }),
-    ...creature.ranks.map((r) => {
-      return {
-        _id: r.id,
-        "system.innate": true,
-      };
-    }),
-  ]);
+  await creature.species[0].system.hardRefreshFromIndex();
   let maxDamage = 0;
   let maxDamageArmament;
   let maxBv = 0;

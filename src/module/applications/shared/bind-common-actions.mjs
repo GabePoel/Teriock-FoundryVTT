@@ -103,8 +103,7 @@ export default function bindCommonActions(rootElement) {
       // Add tooltip listener
       el.addEventListener("mouseover", async (ev) => {
         const target = /** @type {HTMLElement} */ ev.currentTarget;
-        const uuid =
-          /** @type {Teriock.UUID<TeriockChild>} */ target.dataset.uuid;
+        const uuid = /** @type {UUID<TeriockChild>} */ target.dataset.uuid;
         const fetched = target.dataset.tooltipFetched === "true";
         if (!fetched) {
           target.setAttribute("data-tooltip-fetched", "true");
@@ -125,8 +124,7 @@ export default function bindCommonActions(rootElement) {
         // Add preview listener
         el.addEventListener("click", async (event) => {
           event.stopPropagation();
-          const uuid =
-            /** @type {Teriock.UUID<TeriockChild>} */ el.dataset.uuid;
+          const uuid = /** @type {UUID<TeriockChild>} */ el.dataset.uuid;
           if (!uuid) {
             return;
           }

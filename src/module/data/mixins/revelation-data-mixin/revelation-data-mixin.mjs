@@ -3,7 +3,7 @@ import { makeIcon } from "../../../helpers/utils.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof ChildTypeModel} Base
+ * @param {typeof TeriockBaseEffectModel} Base
  * @constructor
  */
 export default function RevelationDataMixin(Base) {
@@ -11,6 +11,7 @@ export default function RevelationDataMixin(Base) {
   return (
     /**
      * @implements {RevelationDataMixinInterface}
+     * @extends {TeriockBaseEffectModel}
      * @mixin
      */
     class RevelationData extends Base {
@@ -37,6 +38,7 @@ export default function RevelationDataMixin(Base) {
         return schema;
       }
 
+      /** @inheritDoc */
       get cardContextMenuEntries() {
         return [
           ...super.cardContextMenuEntries,
@@ -66,8 +68,8 @@ export default function RevelationDataMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.parent.source && this.parent.source.metadata.revealable) {
-          this.revealed = this.revealed && this.parent.source.system.revealed;
+        if (this.parent.elder && this.parent.elder?.metadata.revealable) {
+          this.revealed = this.revealed && this.parent.elder?.system.revealed;
         }
       }
     }

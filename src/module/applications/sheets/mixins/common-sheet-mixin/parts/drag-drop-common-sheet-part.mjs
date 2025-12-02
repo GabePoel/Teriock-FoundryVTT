@@ -1,16 +1,19 @@
 import { TeriockDragDrop, TeriockTextEditor } from "../../../../ux/_module.mjs";
 
+/**
+ * @param {typeof DocumentSheetV2} Base
+ * @constructor
+ */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {DragDropCommonSheetPartInterface}
      * @extends {DocumentSheetV2}
      * @property {TeriockCommon} document
+     * @mixin
      */
     class DragDropCommonSheetPart extends Base {
-      //noinspection JSValidateTypes
-      /** @type {Partial<ApplicationConfiguration>} */
+      /** @type {Partial<ApplicationConfiguration> & Teriock.Sheet.DragDropConfiguration} */
       static DEFAULT_OPTIONS = {
         dragDrop: [
           {
@@ -28,6 +31,10 @@ export default (Base) => {
       /** @type {TeriockDragDrop[]} */
       #dragDrop;
 
+      /**
+       * Gets the drag and drop handlers for this sheet.
+       * @returns {TeriockDragDrop[]} Array of drag and drop handlers.
+       */
       get dragDrop() {
         return this.#dragDrop;
       }
@@ -53,14 +60,28 @@ export default (Base) => {
         });
       }
 
+      /**
+       * Checks if drag and drop is allowed.
+       * @returns {boolean}
+       */
       _canDragDrop() {
         return this.editable;
       }
 
+      /**
+       * Checks if drag start is allowed.
+       * @returns {boolean}
+       */
       _canDragStart() {
         return this.editable;
       }
 
+      /**
+       * Checks if some other document can be dropped on this document.
+       * @param {TeriockCommon} doc
+       * @returns {boolean}
+       * @private
+       */
       _canDrop(doc) {
         const childTypes = new Set([
           ...this.document.metadata.childEffectTypes,
@@ -76,8 +97,20 @@ export default (Base) => {
         );
       }
 
+      /**
+       * Handles drag over events.
+       * @param {Teriock.Sheet.EmbedDragEvent} _event
+       * @returns {Promise<void>}
+       * @private
+       */
       async _onDragOver(_event) {}
 
+      /**
+       * Handles drag start events.
+       * @param {Teriock.Sheet.EmbedDragEvent} event
+       * @returns {Promise<void>}
+       * @private
+       */
       async _onDragStart(event) {
         const embedded = await fromUuid(event.currentTarget.dataset.uuid);
         const dragData = embedded?.toDragData();
@@ -87,16 +120,20 @@ export default (Base) => {
         }
       }
 
+      /**
+       * Handles drop events.
+       * @param {Teriock.Sheet.EmbedDragEvent} event
+       * @returns {Promise<boolean>} Promise that resolves to true if the drop was handled.
+       * @private
+       */
       async _onDrop(event) {
         const dropData = TeriockTextEditor.getDragEventData(event);
         if (dropData.startSheet === this.id) {
           return false;
         }
         let out;
-        if (dropData.type === "ActiveEffect") {
-          out = await this._onDropActiveEffect(event, dropData);
-        } else if (dropData.type === "Item") {
-          out = await this._onDropItem(event, dropData);
+        if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
+          out = await this._onDropChild(event, dropData);
         } else if (dropData.type === "Macro") {
           out = await this._onDropMacro(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
@@ -105,100 +142,62 @@ export default (Base) => {
         return !(!out && Object.keys(dropData).length === 0);
       }
 
-      async _onDropActiveEffect(_event, data) {
+      /**
+       * Handles dropping of potential children.
+       * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
+       * @param {Teriock.Sheet.DropData<TeriockCommon>} dropData - The document drop data.
+       * @returns {Promise<TeriockCommon|void>} Promise that resolves to the created document if successful.
+       * @private
+       */
+      async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */
-        const EffectClass =
-          await foundry.utils.getDocumentClass("ActiveEffect");
-        const effect =
-          /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
-        if (!this._canDrop(effect)) {
-          return;
+        const Cls = foundry.utils.getDocumentClass(dropData.type);
+        let doc = await Cls.fromDropData(dropData);
+        if (doc.type === "wrapper") doc = doc.system.effect;
+        const uuid =
+          doc.documentName === "ActiveEffect" ? doc.parent.uuid : doc.uuid;
+        const obj = doc.toObject();
+        if (doc.inCompendium && !doc._stats.compendiumSource) {
+          obj["_stats.compendiumSource"] = uuid;
         }
-        if (this.document.documentName === "ActiveEffect") {
-          effect.updateSource({ "system.hierarchy.supId": this.document.id });
-        }
-        const target =
-          this.document.documentName === "ActiveEffect"
-            ? this.document.parent
-            : this.document;
-        const newEffects = await target.createEmbeddedDocuments(
-          "ActiveEffect",
-          [effect],
-        );
-        const newEffect = newEffects[0];
-        if (this.document.documentName === "ActiveEffect") {
-          await this.document.addSub(newEffect);
-        }
-        return newEffect;
-      }
-
-      async _onDropItem(_event, data) {
-        /** @type {typeof ClientDocument} */
-        const ItemClass = await foundry.utils.getDocumentClass("Item");
-        const item =
-          /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
-        if (item.type === "wrapper") {
-          const wrapperModel = /** @type {TeriockWrapperModel} */ item.system;
-          const effect = wrapperModel.effect;
-          await this._onDropActiveEffect(_event, effect.toDragData());
-          return;
-        }
-        if (!this._canDrop(item)) {
-          return;
-        }
-        const source = await fromUuid(data.uuid);
-        if (
-          item.parent?.documentName === "Actor" &&
-          item.type === "equipment"
-        ) {
-          if (
-            item.parent?.documentName === "Actor" &&
-            item.system?.consumable
-          ) {
-            const targetItem = this.document.items.getName(item.name);
-            if (targetItem && targetItem.system.consumable) {
-              targetItem.update({
-                "system.quantity":
-                  targetItem.system.quantity + item.system.quantity,
-              });
-              await source.delete();
-              return targetItem;
-            }
-          }
-          if (source) {
-            await source.delete();
-          }
-        }
-        const newItems =
-          /** @type {TeriockItem[]} */ await this.document.actor.createEmbeddedDocuments(
-            "Item",
-            [item],
-            {
-              keepId: true,
-              keepEmbeddedIds: true,
-            },
+        if (this._canDrop(doc)) {
+          const created = await this.document.createChildDocuments(
+            doc.documentName,
+            [obj],
           );
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(newItems);
+          return created[0];
         }
-        return newItems[0];
       }
 
-      async _onDropJournalEntryPage(_event, data) {
+      /**
+       * Handles dropping of journal entry pages.
+       * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
+       * @param {Teriock.Sheet.DropData<TeriockJournalEntryPage>} dropData - The document drop data.
+       * @returns {Promise<TeriockJournalEntryPage|void>} Promise that resolves to the created document if successful.
+       * @private
+       */
+      async _onDropJournalEntryPage(_event, dropData) {
         if (game.user.isGM) {
           const updateData = {
-            "system.gmNotes": data.uuid,
+            "system.gmNotes": dropData.uuid,
           };
           await this.document.update(updateData);
-          return fromUuidSync(data.uuid);
+          return fromUuidSync(dropData.uuid);
         }
       }
 
-      async _onDropMacro(_event, data) {
+      /**
+       * Handles dropping of macros.
+       * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
+       * @param {Teriock.Sheet.DropData<TeriockMacro>} dropData - The document drop data.
+       * @returns {Promise<TeriockMacro|void>} Promise that resolves to the created document if successful.
+       * @private
+       */
+      async _onDropMacro(_event, dropData) {
         if (this.document.system.macros) {
           const macroUuids = Array.from(this.document.system.macros);
-          if (data.uuid) {
-            macroUuids.push(data.uuid);
+          if (dropData.uuid) {
+            macroUuids.push(dropData.uuid);
             const updateData = {
               "system.macros": macroUuids,
             };

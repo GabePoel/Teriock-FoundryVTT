@@ -1,9 +1,12 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { AbilityExecution } from "../../../executions/document-executions/_module.mjs";
-import { copyAbility } from "../../../helpers/fetch.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
-import { queryGM, safeUuid } from "../../../helpers/utils.mjs";
+import {
+  isOwnerAndCurrentUser,
+  queryGM,
+  safeUuid,
+} from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
   HierarchyDataMixin,
@@ -49,25 +52,25 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability"],
       hierarchy: true,
-      namespace: "Ability",
-      type: "ability",
-      usable: true,
-      passive: true,
       indexCategoryKey: "abilities",
       indexCompendiumKey: "abilities",
+      namespace: "Ability",
+      passive: true,
       preservedProperties: [
         "system.adept",
         "system.consumable",
         "system.fluent",
         "system.gifted",
         "system.grantOnly",
-        "system.hierarchy",
         "system.improvement",
         "system.limitation",
         "system.maxQuantity",
         "system.proficient",
         "system.quantity",
       ],
+      type: "ability",
+      usable: true,
+      visibleTypes: ["ability"],
     });
   }
 
@@ -223,7 +226,7 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
 
   get embedIcons() {
     let icons = super.embedIcons;
-    if (this.parent.source?.type === "equipment") {
+    if (this.parent.elder?.type === "equipment") {
       const newIcon = {
         icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
         action: "toggleOnUseDoc",
@@ -281,6 +284,17 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
+  get isReference() {
+    const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
+    for (const sup of sups) {
+      if (sup.system?.maneuver !== "passive") {
+        return true;
+      }
+    }
+    return super.isReference;
+  }
+
+  /** @inheritDoc */
   get isUsable() {
     return super.usable && !this.isVirtual;
   }
@@ -293,6 +307,13 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
     return (
       this.parent.inCompendium && this.parent.parent.name === "Basic Abilities"
     );
+  }
+
+  /** @inheritDoc */
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
+    suppressed = suppressed || _suppressed(this);
+    return suppressed;
   }
 
   /** @inheritDoc */
@@ -331,13 +352,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
     return this.parent.name + nameAddition;
   }
 
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    suppressed = suppressed || _suppressed(this);
-    return suppressed;
-  }
-
   //noinspection JSUnusedGlobalSymbols
   /**
    * String that represents all the valid targets.
@@ -370,6 +384,22 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if (isOwnerAndCurrentUser(this.parent, userId)) {
+      this.expireSustainedConsequences(true).then();
+    }
+  }
+
+  /** @inheritDoc */
+  _onUpdate(options, userId) {
+    super._onUpdate(options, userId);
+    if (isOwnerAndCurrentUser(this.parent, userId)) {
+      this.expireSustainedConsequences().then();
+    }
+  }
+
+  /** @inheritDoc */
   adjustMessage(messageElement) {
     messageElement = super.adjustMessage(messageElement);
     messageElement = insertElderSorceryMask(messageElement, this.parent);
@@ -378,7 +408,7 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
 
   /**
    * Change a macro's run hook.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
    */
   async changeMacroRunHook(uuid) {
@@ -411,14 +441,9 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
         );
       }
       try {
-        await this.parent.update({ "system.sustaining": new Set() });
+        await this.parent.update({ "system.sustaining": [] });
       } catch {}
     }
-  }
-
-  /** @inheritDoc */
-  async getIndexReference() {
-    return await copyAbility(this.parent.name);
   }
 
   /** @inheritDoc */
@@ -467,9 +492,7 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
    * @inheritDoc
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
-  async roll(
-    options = /** @type {Teriock.Execution.AbilityExecutionOptions} */ {},
-  ) {
+  async roll(options = {}) {
     options.source = this.parent;
     if (this.grantOnly && this.parent.parent.metadata.armament) {
       options.armament = /** @type {TeriockArmament} */ this.parent.parent;
@@ -480,7 +503,7 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
 
   /**
    * Unlink a macro.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
    */
   async unlinkMacro(uuid) {

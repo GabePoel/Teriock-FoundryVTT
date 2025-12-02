@@ -8,8 +8,7 @@ export default function registerChatManagementHooks() {
         const handler = new commandHandlers[command](
           message.slice(command.length + 1).trim(),
         );
-        //noinspection JSIgnoredPromiseFromCall
-        handler.execute();
+        handler.execute().then();
         return false;
       }
     }

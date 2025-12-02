@@ -1,10 +1,17 @@
-import { copyItem, getItem } from "../../helpers/fetch.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { pureUuid, ringImage, selectUser } from "../../helpers/utils.mjs";
+import { toCamelCase } from "../../helpers/string.mjs";
+import {
+  pureUuid,
+  resolveDocument,
+  ringImage,
+  selectUser,
+} from "../../helpers/utils.mjs";
 import {
   BaseDocumentMixin,
   CommonDocumentMixin,
+  HierarchyDocumentMixin,
   ParentDocumentMixin,
+  RetrievalDocumentMixin,
 } from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -16,18 +23,22 @@ const { Actor } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes CommonDocument
+ * @mixes HierarchyDocument
  * @mixes ParentDocument
- * @property {Collection<Teriock.UUID<TeriockEffect>, TeriockEffect>} effects
- * @property {Collection<Teriock.UUID<TeriockItem>, TeriockItem>} items
+ * @mixes RetrievalDocument
+ * @property {Collection<ID<TeriockEffect>, TeriockEffect>} effects
+ * @property {Collection<ID<TeriockItem>, TeriockItem>} items
  * @property {Teriock.Documents.ActorModel} system
  * @property {Teriock.Documents.ActorType} type
- * @property {Teriock.ID<TeriockActor>} _id
- * @property {Teriock.ID<TeriockActor>} id
- * @property {Teriock.UUID<TeriockActor>} uuid
+ * @property {ID<TeriockActor>} _id
+ * @property {ID<TeriockActor>} id
+ * @property {UUID<TeriockActor>} uuid
  * @property {TeriockBaseActorSheet} sheet
  */
-export default class TeriockActor extends ParentDocumentMixin(
-  CommonDocumentMixin(BaseDocumentMixin(Actor)),
+export default class TeriockActor extends RetrievalDocumentMixin(
+  ParentDocumentMixin(
+    HierarchyDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(Actor))),
+  ),
 ) {
   /**
    * The default weight for a given size.
@@ -102,11 +113,6 @@ export default class TeriockActor extends ParentDocumentMixin(
     return [...this.bodyParts, ...this.equipment];
   }
 
-  /** @returns {TeriockBody[]} */
-  get bodyParts() {
-    return this.itemTypes?.body || [];
-  }
-
   /**
    * Gets effects that expire based on conditions.
    * @returns {TeriockConsequence[]} Array of condition expiration effects.
@@ -144,11 +150,6 @@ export default class TeriockActor extends ParentDocumentMixin(
     return this.consequences.filter((effect) => effect.hasDuration);
   }
 
-  /** @returns {TeriockEquipment[]} */
-  get equipment() {
-    return this.itemTypes?.equipment || [];
-  }
-
   /**
    * Is this actor damaged?
    * @returns {boolean}
@@ -173,16 +174,13 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   get itemKeys() {
     const out = {};
-    const effectTypes = this.itemTypes;
+    const itemTypes = this.itemTypes;
     for (const key of Object.keys(TERIOCK.system.documentTypes.items)) {
-      out[key] = new Set(effectTypes[key] || []);
+      out[key] = new Set(
+        (itemTypes[key] || []).map((i) => toCamelCase(i.name)),
+      );
     }
     return out;
-  }
-
-  /** @returns {TeriockMount[]} */
-  get mounts() {
-    return this.itemTypes?.mount || [];
   }
 
   /**
@@ -194,21 +192,6 @@ export default class TeriockActor extends ParentDocumentMixin(
       this.consequences.filter((effect) => effect.system.movementExpiration) ||
       []
     );
-  }
-
-  /** @returns {TeriockPower[]} */
-  get powers() {
-    return this.itemTypes?.power || [];
-  }
-
-  /** @returns {TeriockRank[]} */
-  get ranks() {
-    return this.itemTypes?.rank || [];
-  }
-
-  /** @returns {TeriockSpecies[]} */
-  get species() {
-    return this.itemTypes?.species || [];
   }
 
   /**
@@ -229,8 +212,19 @@ export default class TeriockActor extends ParentDocumentMixin(
   }
 
   /** @inheritDoc */
-  _onUpdate(changed, options, userId) {
-    super._onUpdate(changed, options, userId);
+  get visibleChildren() {
+    return [
+      ...this.validEffects,
+      ...this.items.contents,
+      ...(this.subs.contents || []),
+    ]
+      .filter((c) => !c.isEphemeral)
+      .filter(
+        (c) =>
+          c.documentName !== "ActiveEffect" ||
+          c.system.revealed ||
+          game.user.isGM,
+      );
   }
 
   /**
@@ -244,7 +238,10 @@ export default class TeriockActor extends ParentDocumentMixin(
     if ((await super._preCreate(data, options, user)) === false) {
       return false;
     }
-    // Update Prototype Token
+    const elder = await this.getElder();
+    if (elder && !elder.metadata.childActorTypes.includes(this.type)) {
+      return false;
+    }
     const prototypeToken = {};
     const size = this.system.size.length;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled")) {
@@ -319,7 +316,9 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<TeriockAbility[]>}
    */
   async allAbilities() {
-    const basicAbilitiesItem = await getItem("Basic Abilities", "essentials");
+    const basicAbilitiesItem = await resolveDocument(
+      game.teriock.packs.essentials.index.getName("Basic Abilities"),
+    );
     return [...basicAbilitiesItem.abilities, ...this.abilities];
   }
 
@@ -355,22 +354,6 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<TeriockChild[]>}
    */
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    this._filterDocumentCreationData(embeddedName, data);
-    if (embeddedName === "Item") {
-      for (const archetype of ["mage", "semi", "warrior"]) {
-        if (
-          data.find(
-            (d) => d.type === "rank" && d.system?.archetype === archetype,
-          )
-        ) {
-          if (!this.itemKeys.power.has(archetype)) {
-            data.push(
-              await copyItem(TERIOCK.options.rank[archetype].name, "classes"),
-            );
-          }
-        }
-      }
-    }
     if (
       embeddedName === "ActiveEffect" &&
       data.find((d) => d.type === "consequence")
@@ -400,51 +383,6 @@ export default class TeriockActor extends ParentDocumentMixin(
       }
     }
     return await super.createEmbeddedDocuments(embeddedName, data, operation);
-  }
-
-  /**
-   * Overridden with special handling to allow for archetype abilities.
-   * @inheritDoc
-   */
-  async deleteEmbeddedDocuments(embeddedName, ids = [], operation = {}) {
-    if (embeddedName === "Item") {
-      const ranksBeingDeleted =
-        this.ranks.filter((i) => ids.includes(i.id)) ?? [];
-      const archetypesDeleted = new Set(
-        ranksBeingDeleted.map((i) => i.system.archetype).filter(Boolean),
-      );
-      for (const archetype of ["mage", "semi", "warrior"]) {
-        if (!archetypesDeleted.has(archetype)) {
-          continue;
-        }
-        const remaining = this.ranks.some(
-          (i) => i.system.archetype === archetype && !ids.includes(i.id),
-        );
-        if (!remaining) {
-          const powerName = TERIOCK.options.rank[archetype].name;
-          const powerItem = this.powers.find((i) => i.name === powerName);
-          if (powerItem && !ids.includes(powerItem.id)) {
-            ids.push(powerItem.id);
-          }
-        }
-      }
-    }
-    return await super.deleteEmbeddedDocuments(embeddedName, ids, operation);
-  }
-
-  /** @inheritDoc */
-  getBodyParts() {
-    return this.bodyParts.filter((b) => !b.sup);
-  }
-
-  /** @inheritDoc */
-  getEquipment() {
-    return this.equipment.filter((e) => !e.sup);
-  }
-
-  /** @inheritDoc */
-  getRanks() {
-    return this.ranks.filter((r) => !r.sup);
   }
 
   /**
@@ -703,9 +641,7 @@ export default class TeriockActor extends ParentDocumentMixin(
     if (ability) {
       await ability.use(options);
     } else {
-      foundry.ui.notifications.warn(
-        `${this.name} does not have ${abilityName}.`,
-      );
+      ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
     }
   }
 }

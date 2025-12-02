@@ -14,16 +14,7 @@
         </div>
         {{> (template "document-templates/shared/display-fields.hbs")}}
       </div>
-      {{#if (or editable (exists subProperties))}}
-        <div class="ab-main">
-          {{#if editable}}
-            <button class="createProperty" data-action="createProperty">Add Child Property</button>{{/if}}
-          {{#each subProperties as |doc|}}
-            {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
-              relative=../document.uuid))}}
-          {{/each}}
-        </div>
-      {{/if}}
+      {{> (template "document-templates/shared/children.hbs")}}
     </div>
   {{/if}}
   {{#if (eq tab "impacts")}}

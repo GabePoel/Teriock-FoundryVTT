@@ -1,4 +1,8 @@
-export const rollButtons = foundry.utils.deepFreeze({
+/**
+ * Roll button definitions.
+ * @type {Record<string, Teriock.UI.ButtonDefinition>}
+ */
+export const rollButtons = {
   damage: {
     label: "Roll Damage",
     icon: "fas fa-heart-crack",
@@ -47,9 +51,13 @@ export const rollButtons = foundry.utils.deepFreeze({
     label: "Roll Pay",
     icon: "fas fa-coin",
   },
-});
+};
 
-export const hackButtons = foundry.utils.deepFreeze({
+/**
+ * Hack button definitions.
+ * @type {Record<string, Teriock.UI.ButtonDefinition>}
+ */
+export const hackButtons = {
   arm: {
     label: "Hack Arm",
     icon: "fas fa-hand",
@@ -78,4 +86,4 @@ export const hackButtons = foundry.utils.deepFreeze({
     label: "Hack Nose",
     icon: "fas fa-nose",
   },
-});
+};

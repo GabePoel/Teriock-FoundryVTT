@@ -1,5 +1,10 @@
-import { getRank } from "../../../helpers/fetch.mjs";
-import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
+import {
+  getRollIcon,
+  isOwnerAndCurrentUser,
+  makeIcon,
+  resolveDocument,
+} from "../../../helpers/utils.mjs";
 import {
   ProficiencyDataMixin,
   StatGiverDataMixin,
@@ -144,6 +149,28 @@ export default class TeriockRankModel extends StatGiverDataMixin(
     return this.statDice.hp.dice[0];
   }
 
+  /** @inheritDoc */
+  get makeSuppressed() {
+    let suppressed = super.makeSuppressed;
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.elder?.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.ranks
+      ) {
+        suppressed = true;
+      }
+    }
+    if (
+      game.settings.get("teriock", "armorSuppressesRanks") &&
+      this.actor &&
+      !this.innate &&
+      this.actor.system.defense.av.base > this.maxAv
+    ) {
+      suppressed = true;
+    }
+    return suppressed;
+  }
+
   get messageBars() {
     return [
       {
@@ -185,28 +212,6 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.source.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.ranks
-      ) {
-        suppressed = true;
-      }
-    }
-    if (
-      game.settings.get("teriock", "armorSuppressesRanks") &&
-      this.actor &&
-      !this.innate &&
-      this.actor.system.defense.av.base > this.maxAv
-    ) {
-      suppressed = true;
-    }
-    return suppressed;
-  }
-
-  /** @inheritDoc */
   get wikiPage() {
     const prefix = this.constructor.metadata.namespace;
     const pageName =
@@ -220,25 +225,44 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
-  async getIndexReference() {
-    return await getRank(this.system.className, this.system.classRank);
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if (isOwnerAndCurrentUser(this.parent, userId) && this.actor) {
+      const needsArchetype =
+        !this.actor.itemKeys.power.has(this.archetype) &&
+        this.archetype !== "everyman";
+      if (needsArchetype) {
+        const archetypeName = TERIOCK.options.rank[this.archetype].name;
+        resolveDocument(
+          game.teriock.packs.classes.index.getName(archetypeName),
+        ).then((p) =>
+          this.actor.createChildDocuments("Item", [
+            game.items.fromCompendium(p),
+          ]),
+        );
+      }
+    }
   }
 
   /** @inheritDoc */
-  async hardRefreshFromIndex() {
-    await this.refreshFromIndex();
-    const reference = await this.getIndexReference();
-    const toDelete = this.parent
-      .getAbilities()
-      .filter(
-        (a) =>
-          !reference.parent
-            .getAbilities()
-            .map((a) => a.name)
-            .includes(a.name),
-      )
-      .map((a) => a.id);
-    await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if (isOwnerAndCurrentUser(this.parent, userId) && this.actor) {
+      const archetypePowers = this.actor.powers.filter(
+        (p) => toCamelCase(p.name) === this.archetype,
+      );
+      const needsArchetype =
+        this.actor.ranks.filter((r) => r.system.archetype === this.archetype)
+          .length > 0;
+      if (!needsArchetype && archetypePowers.length > 0) {
+        this.actor
+          .deleteChildDocuments(
+            "Item",
+            archetypePowers.map((p) => p.id),
+          )
+          .then();
+      }
+    }
   }
 
   /** @inheritDoc */

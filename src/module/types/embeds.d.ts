@@ -19,13 +19,13 @@ declare global {
       draggable?: boolean;
       hidden?: boolean;
       icons?: Teriock.EmbedData.EmbedIcon[];
-      id?: Teriock.ID<TeriockCommon>;
+      id?: ID<TeriockCommon>;
       img: string;
       inactive?: boolean;
       makeTooltip?: boolean;
       openable?: boolean;
-      parentId?: Teriock.ID<TeriockCommon>;
-      relative?: Teriock.UUID<TeriockDocument>;
+      parentId?: ID<TeriockCommon>;
+      relative?: UUID<TeriockDocument>;
       shattered?: boolean;
       struck?: boolean;
       subtitle?: string;
@@ -35,7 +35,7 @@ declare global {
       title: string;
       tooltip?: string;
       usable?: boolean;
-      uuid?: Teriock.UUID<TeriockCommon>;
+      uuid?: UUID<TeriockCommon>;
     };
     export type EmbedAction = {
       primary: (

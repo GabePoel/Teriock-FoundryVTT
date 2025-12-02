@@ -1,6 +1,6 @@
 const magicItemsPack = game.teriock.packs.magicItems;
 
-const progress = foundry.ui.notifications.info("Refreshing all magic items.", {
+const progress = ui.notifications.info("Refreshing all magic items.", {
   pct: 0.01,
   progress: true,
 });
@@ -31,7 +31,7 @@ try {
     pct: 1,
     message: "Done.",
   });
-  foundry.ui.notifications.success(
+  ui.notifications.success(
     `Successfully refreshed ${numMagicItems} magic items.`,
   );
 } catch (error) {

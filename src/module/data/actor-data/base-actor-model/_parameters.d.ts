@@ -1,4 +1,5 @@
 import { TeriockMacro } from "../../../documents/_module.mjs";
+import { abilityOptions } from "../../../constants/options/ability-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Actor {
@@ -13,7 +14,7 @@ declare global {
       | "nose";
 
     /** Valid stat attributes */
-    export type StatAttribute = keyof typeof TERIOCK.options.ability.attribute;
+    export type StatAttribute = keyof typeof abilityOptions.attribute;
 
     /** Valid attributes */
     export type Attribute = Teriock.Parameters.Actor.StatAttribute | "unp";
@@ -61,7 +62,7 @@ declare global {
 
     export type HookedActorMacros = Record<
       Teriock.Parameters.Shared.PseudoHook,
-      Teriock.UUID<TeriockMacro>[]
+      UUID<TeriockMacro>[]
     >;
 
     export type PayMode = "exact" | "greedy";

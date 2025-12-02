@@ -1,3 +1,4 @@
+export { default as TeriockBaseItemModel } from "./base-item-model/base-item-model.mjs";
 export { default as TeriockBodyModel } from "./body-model/body-model.mjs";
 export { default as TeriockEquipmentModel } from "./equipment-model/equipment-model.mjs";
 export { default as TeriockMountModel } from "./mount-model/mount-model.mjs";

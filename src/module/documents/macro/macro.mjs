@@ -1,4 +1,4 @@
-import { getItem } from "../../helpers/fetch.mjs";
+import { getDocument } from "../../helpers/fetch.mjs";
 import { dedent, getActor, getToken, queryGM } from "../../helpers/utils.mjs";
 import {
   BaseDocumentMixin,
@@ -40,7 +40,10 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(
       doc = actor.items.find((i) => i.name === name && i.type === type);
     }
     if (!doc && type === "ability") {
-      const basicAbilitiesItem = await getItem("Basic Abilities", "essentials");
+      const basicAbilitiesItem = await getDocument(
+        "Basic Abilities",
+        "essentials",
+      );
       doc = basicAbilitiesItem.abilities.find((a) => a.name === name);
     }
     return doc;
@@ -115,7 +118,7 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(
       actors.push(actor);
     }
     if (actors.length === 0) {
-      foundry.ui.notifications.warn("No actors selected.");
+      ui.notifications.warn("No actors selected.");
     }
     for (const a of actors) {
       const doc = await this.getDocument(a, name, type);
@@ -135,7 +138,7 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(
         }
         await doc.system.use(useOptions);
       } else {
-        foundry.ui.notifications.warn(
+        ui.notifications.warn(
           `${a.name} has no ${type ? TERIOCK.options.document[type].name.toLowerCase() : "document"} called ${name}.`,
         );
       }

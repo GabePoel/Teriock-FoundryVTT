@@ -2,13 +2,14 @@ import { getProperty } from "../../../../helpers/fetch.mjs";
 
 /**
  * Equipment data model mixin that handles shattering and dampening.
- * @mixin
+ * @param {typeof TeriockEquipmentModel} Base
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends TeriockEquipmentData
+     * @extends TeriockEquipmentModel
+     * @mixin
      */
     class EquipmentSuppressionPart extends Base {
       /**

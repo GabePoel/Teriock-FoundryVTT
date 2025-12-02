@@ -4,7 +4,7 @@ const { Scenes } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Collection<Teriock.ID<TeriockScene>, TeriockScene>}
+ * @implements {Collection<ID<TeriockScene>, TeriockScene>}
  * @implements {DocumentCollection<TeriockScene>}
  * @property {TeriockScene|null} activeGM
  */

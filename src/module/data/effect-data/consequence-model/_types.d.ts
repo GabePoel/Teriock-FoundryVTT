@@ -1,19 +1,12 @@
-import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { TeriockConsequence } from "../../../documents/_documents.mjs";
 import {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
 } from "../../shared/fields/helpers/_types";
 import { TeriockActor, TeriockEffect } from "../../../documents/_module.mjs";
-import { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
-import { TransformationMixinInterface } from "../../mixins/transformation-data-mixin/_types";
 
 declare module "./consequence-model.mjs" {
-  export default interface TeriockConsequenceModel
-    extends TeriockBaseEffectModel,
-      HierarchyDataMixinInterface,
-      TransformationMixinInterface {
+  export default interface TeriockConsequenceModel {
     /** <schema> Associations */
     associations: Teriock.MessageData.MessageAssociation[];
     /** <schema> Blocks representing the source */
@@ -36,7 +29,7 @@ declare module "./consequence-model.mjs" {
           /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */
           type: CombatExpirationSourceType;
           /** <schema> What {@link TeriockActor} is the one that triggers expirations? */
-          source: Teriock.UUID<TeriockActor>;
+          source: UUID<TeriockActor>;
         };
         /** <schema> What is the method of this expiration? */
         what: CombatExpirationMethod;
@@ -56,7 +49,7 @@ declare module "./consequence-model.mjs" {
     heightened: number;
     movementExpiration: boolean;
     /** <schema> {@link TeriockEffect} that's the source of this consequence */
-    source: Teriock.UUID<TeriockEffect>;
+    source: UUID<TeriockEffect>;
     /** <schema> Source description */
     sourceDescription: string;
     /** <schema> If this expires when its source is inactive */

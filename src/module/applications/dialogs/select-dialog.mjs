@@ -2,8 +2,7 @@
 
 import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
 import { getImage } from "../../helpers/path.mjs";
-import { toCamelCase } from "../../helpers/string.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { makeIconClass, resolveDocument } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 import { selectDocumentDialog } from "./select-document-dialog.mjs";
@@ -126,7 +125,7 @@ export async function selectDialog(choices, options = {}) {
 }
 
 /**
- * Select equipment class dialog.
+ * Dialog to select an equipment class.
  * @returns {Promise<Teriock.Parameters.Equipment.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
@@ -138,7 +137,7 @@ export async function selectEquipmentClassDialog() {
 }
 
 /**
- * Select weapon class dialog.
+ * Dialog to select a weapon class.
  * @returns {Promise<Teriock.Parameters.Equipment.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
@@ -150,7 +149,7 @@ export async function selectWeaponClassDialog() {
 }
 
 /**
- * Select condition dialog.
+ * Dialog to select a condition.
  * @returns {Promise<Teriock.Parameters.Condition.ConditionKey>}
  */
 export async function selectConditionDialog() {
@@ -162,26 +161,24 @@ export async function selectConditionDialog() {
 }
 
 /**
- * Select property dialog.
- * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey|null>}
+ * Dialog to select a property.
+ * @returns {Promise<TeriockProperty|void>}
  */
 export async function selectPropertyDialog() {
-  const choices = game.teriock.packs.properties.index.contents;
-  const chosen = await selectDocumentDialog(choices, {
-    hint: "Please select a property.",
-    title: "Select Property",
-    tooltipAsync: true,
-    openable: true,
-  });
-  if (chosen) {
-    return toCamelCase(chosen.name);
-  } else {
-    return null;
-  }
+  return (
+    await resolveDocument(
+      await selectDocumentDialog(game.teriock.packs.properties.index.contents, {
+        hint: "Please select an property.",
+        title: "Select Property",
+        tooltipAsync: true,
+        openable: true,
+      }),
+    )
+  ).system.effect;
 }
 
 /**
- * Select tradecraft dialog.
+ * Dialog to select a tradecraft.
  * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft|null>}
  */
 export async function selectTradecraftDialog() {
@@ -209,66 +206,54 @@ export async function selectTradecraftDialog() {
 }
 
 /**
- * Select ability dialog.
- * @returns {Promise<string|null>}
+ * Dialog to select an ability.
+ * @returns {Promise<TeriockAbility|void>}
  */
 export async function selectAbilityDialog() {
-  const choices = game.teriock.packs.abilities.index.contents;
-  const chosen = await selectDocumentDialog(choices, {
-    hint: "Please select an ability.",
-    title: "Select Ability",
-    tooltipAsync: true,
-    openable: true,
-  });
-  if (chosen) {
-    return toCamelCase(chosen.name);
-  } else {
-    return null;
-  }
+  return (
+    await resolveDocument(
+      await selectDocumentDialog(game.teriock.packs.abilities.index.contents, {
+        hint: "Please select an ability.",
+        title: "Select Ability",
+        tooltipAsync: true,
+        openable: true,
+      }),
+    )
+  ).system.effect;
 }
 
 /**
- * Select equipment dialog.
- * @returns {Promise<string|null>}
+ * Dialog to select a equipment.
+ * @returns {Promise<TeriockEquipment|void>}
  */
 export async function selectEquipmentTypeDialog() {
-  const choices = game.teriock.packs.equipment.index.contents;
-  let chosen = await selectDocumentDialog(choices, {
-    hint: "Please select an equipment type.",
-    title: "Select Equipment Type",
-    tooltipAsync: true,
-    openable: true,
-  });
-  if (chosen) {
-    chosen = await fromUuid(chosen.uuid);
-    return toCamelCase(chosen.system.equipmentType);
-  } else {
-    return null;
-  }
+  return resolveDocument(
+    await selectDocumentDialog(game.teriock.packs.equipment.index.contents, {
+      hint: "Please select an equipment type.",
+      title: "Select Equipment Type",
+      tooltipAsync: true,
+      openable: true,
+    }),
+  );
 }
 
 /**
- * Select body part dialog.
- * @returns {Promise<string|null>}
+ * Dialog to select a body part.
+ * @returns {Promise<TeriockBody|void>}
  */
 export async function selectBodyPartDialog() {
-  const choices = game.teriock.packs.bodyParts.index.contents;
-  let chosen = await selectDocumentDialog(choices, {
-    hint: "Please select a body part.",
-    title: "Select Body Part",
-    tooltipAsync: true,
-    openable: true,
-  });
-  if (chosen) {
-    chosen = await fromUuid(chosen.uuid);
-    return toCamelCase(chosen.name);
-  } else {
-    return null;
-  }
+  return resolveDocument(
+    await selectDocumentDialog(game.teriock.packs.bodyParts.index.contents, {
+      hint: "Please select a body part.",
+      title: "Select Body Part",
+      tooltipAsync: true,
+      openable: true,
+    }),
+  );
 }
 
 /**
- * Select class dialog.
+ * Dialog to select a class.
  * @returns {Promise<string|null>}
  */
 export async function selectClassDialog() {

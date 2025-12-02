@@ -9,11 +9,11 @@ declare global {
       | TeriockToken
       | Teriock.Dice.RollTarget;
     export type RollTarget = {
-      actorUuid?: Teriock.UUID<TeriockActor>;
+      actorUuid?: UUID<TeriockActor>;
       img: string;
       name: string;
       rescale: boolean;
-      tokenUuid?: Teriock.UUID<TeriockTokenDocument>;
+      tokenUuid?: UUID<TeriockTokenDocument>;
     };
     export type RollOptions = {
       hideRoll?: boolean;

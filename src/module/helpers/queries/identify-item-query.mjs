@@ -26,8 +26,8 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
   });
   if (doIdentify) {
     const unrevealed = [
-      ...item.getProperties().filter((p) => !p.system.revealed),
-      ...item.getAbilities().filter((a) => !a.system.revealed),
+      ...item.properties.filter((p) => !p.system.revealed),
+      ...item.abilities.filter((a) => !a.system.revealed),
       ...item.resources.filter((r) => !r.system.revealed),
       ...item.fluencies.filter((f) => !f.system.revealed),
     ];

@@ -4,6 +4,7 @@ import {
   BaseDocumentMixin,
   ChildDocumentMixin,
   CommonDocumentMixin,
+  RetrievalDocumentMixin,
 } from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
@@ -16,15 +17,17 @@ const { ActiveEffect } = foundry.documents;
  * @mixes BaseDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
+ * @mixes HierarchyDocument
+ * @mixes RetrievalDocument
  * @property {Teriock.Documents.EffectModel} system
  * @property {Teriock.Documents.EffectType} type
- * @property {Teriock.ID<TeriockEffect>} _id
- * @property {Teriock.ID<TeriockEffect>} id
- * @property {Teriock.UUID<TeriockEffect>} uuid
+ * @property {ID<TeriockEffect>} _id
+ * @property {ID<TeriockEffect>} id
+ * @property {UUID<TeriockEffect>} uuid
  * @property {TeriockBaseEffectSheet} sheet
  */
-export default class TeriockEffect extends ChildDocumentMixin(
-  CommonDocumentMixin(BaseDocumentMixin(ActiveEffect)),
+export default class TeriockEffect extends RetrievalDocumentMixin(
+  ChildDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(ActiveEffect))),
 ) {
   /** @inheritDoc */
   static migrateData(data) {
@@ -72,20 +75,14 @@ export default class TeriockEffect extends ChildDocumentMixin(
   }
 
   /**
-   * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
-   * @returns {boolean} True if this is a reference effect, false otherwise.
+   * Whether this effect is a reference and not "real".
+   * @returns {boolean}
    */
   get isReference() {
-    const sups = this.allSups;
     if (this.isOnUse) {
       return true;
     }
-    for (const sup of sups) {
-      if (sup.system.maneuver !== "passive") {
-        return true;
-      }
-    }
-    return false;
+    return this.system.isReference;
   }
 
   /**
@@ -93,8 +90,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
    * @returns {boolean}
    */
   get isSuppressed() {
-    let suppressed = super.isSuppressed;
-    return this.system.suppressed || suppressed;
+    return this.system.makeSuppressed || super.isSuppressed;
   }
 
   /**
@@ -123,9 +119,14 @@ export default class TeriockEffect extends ChildDocumentMixin(
   }
 
   /** @inheritDoc */
-  async _preCreate(data, operations, user) {
-    this.updateSource({ sort: game.time.serverTime });
-    return await super._preCreate(data, operations, user);
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    const elder = await this.getElder();
+    if (elder && !elder.metadata.childEffectTypes.includes(this.type)) {
+      return false;
+    }
   }
 
   /** @inheritDoc */
@@ -133,8 +134,9 @@ export default class TeriockEffect extends ChildDocumentMixin(
     if ((await super._preDelete(options, user)) === false) {
       return false;
     }
-    if (this.source?.type === "wrapper") {
-      await this.parent.delete();
+    if (this.elder?.type === "wrapper") {
+      const elder = await this.getElder();
+      await elder.delete();
       return false;
     }
   }
@@ -145,8 +147,8 @@ export default class TeriockEffect extends ChildDocumentMixin(
       return false;
     }
     if (
-      this.parent.type === "wrapper" &&
-      foundry.utils.getProperty(this.parent, "system.effect.id") === this.id
+      this.elder?.type === "wrapper" &&
+      foundry.utils.getProperty(this.elder, "system.effect.id") === this.id
     ) {
       const wrapperKeys = ["name", "img"];
       const wrapperUpdates = {};
@@ -154,13 +156,13 @@ export default class TeriockEffect extends ChildDocumentMixin(
         if (
           foundry.utils.hasProperty(changed, key) &&
           foundry.utils.getProperty(changed, key) !==
-            foundry.utils.getProperty(this.parent, key)
+            foundry.utils.getProperty(this.elder, key)
         ) {
           wrapperUpdates[key] = foundry.utils.getProperty(changed, key);
         }
       }
       if (Object.keys(wrapperUpdates).length > 0) {
-        await this.parent.update(wrapperUpdates);
+        await this.elder?.update(wrapperUpdates);
       }
     }
   }
@@ -175,29 +177,11 @@ export default class TeriockEffect extends ChildDocumentMixin(
     await this.update({ disabled: false });
   }
 
-  /**
-   * @inheritDoc
-   * @returns {TeriockAbility[]}
-   */
-  getAbilities() {
-    //noinspection JSValidateTypes
-    return this.subs.filter((s) => s.type === "ability");
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {TeriockProperty[]}
-   */
-  getProperties() {
-    //noinspection JSValidateTypes
-    return this.subs.filter((s) => s.type === "property");
-  }
-
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     // Effects can change Actors, Items, and TokenDocuments. By default, they change actors. But if the change key is
-    // prefixed by "item" or "token" then it changes "Items" and "TokenDocuments" respectively.
+    // prefixed by "item" or "token", then it changes "Items" and "TokenDocuments" respectively.
     const actorChanges = [];
     const itemChanges = [];
     const tokenChanges = [];

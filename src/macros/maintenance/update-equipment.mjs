@@ -1,12 +1,9 @@
 const equipmentPack = game.teriock.packs.equipment;
 
-const progress = foundry.ui.notifications.info(
-  "Pulling all equipment from wiki.",
-  {
-    pct: 0.01,
-    progress: true,
-  },
-);
+const progress = ui.notifications.info("Pulling all equipment from wiki.", {
+  pct: 0.01,
+  progress: true,
+});
 
 async function processEquipment(equipmentName) {
   let equipmentItem = equipmentPack.index.find((e) => e.name === equipmentName);
@@ -59,7 +56,7 @@ try {
     message: "Done.",
   });
 
-  foundry.ui.notifications.success(
+  ui.notifications.success(
     `Successfully processed ${allEquipment.length} equipment items.`,
   );
 } catch (error) {

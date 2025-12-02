@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../helpers/utils.mjs";
+import { isOwnerAndCurrentUser, makeIcon } from "../../../helpers/utils.mjs";
 import {
   deriveModifiableDeterministic,
   modifiableFormula,
@@ -6,7 +6,7 @@ import {
 } from "../../shared/fields/modifiable.mjs";
 
 /**
- * @param {typeof ChildTypeModel} Base
+ * @param {typeof TeriockBaseItemModel} Base
  * @constructor
  */
 export default function AttunableDataMixin(Base) {
@@ -14,6 +14,7 @@ export default function AttunableDataMixin(Base) {
   return (
     /**
      * @implements {AttunableDataMixinInterface}
+     * @extends {TeriockBaseItemModel}
      * @mixin
      */
     class AttunableData extends Base {
@@ -93,6 +94,20 @@ export default function AttunableDataMixin(Base) {
         return false;
       }
 
+      /** @inheritDoc */
+      _onUpdate(options, userId) {
+        super._onUpdate(options, userId);
+        if (isOwnerAndCurrentUser(this.parent, userId)) {
+          if (this.attunement) {
+            this.attunement
+              .update({
+                "system.tier": this.tier.value,
+              })
+              .then();
+          }
+        }
+      }
+
       /**
        * Attunes the item to the current character.
        * @returns {Promise<TeriockAttunement | null>} Promise that resolves to the attunement effect or null.
@@ -144,11 +159,11 @@ export default function AttunableDataMixin(Base) {
               "ActiveEffect",
               [attunementData],
             );
-            foundry.ui.notifications.success(
+            ui.notifications.success(
               `${this.parent.name} was successfully attuned.`,
             );
           } else {
-            foundry.ui.notifications.error(
+            ui.notifications.error(
               `You do not have enough unused presence to attune ${this.parent.name}.`,
             );
           }

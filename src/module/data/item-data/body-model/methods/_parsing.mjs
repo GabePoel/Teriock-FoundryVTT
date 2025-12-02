@@ -1,7 +1,7 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
-import { createProperty } from "../../../../helpers/create-effects.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
+import { ensureChildren } from "../../../../helpers/utils.mjs";
 
 /**
  * @param {TeriockBodyModel} bodyData
@@ -10,7 +10,6 @@ import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
  * @private
  */
 export async function _parse(bodyData, rawHTML) {
-  const allValidProperties = foundry.utils.deepClone(TERIOCK.index.properties);
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
   const q = (s) => doc.querySelector(s);
   const getValue = (s) => q(s)?.getAttribute("data-val");
@@ -50,7 +49,12 @@ export async function _parse(bodyData, rawHTML) {
   // Add piercing property if present
   const piercing = getValue(".piercing");
   if (piercing) {
-    properties.add(piercing.toUpperCase());
+    properties.add(
+      piercing
+        .toUpperCase()
+        .replace("UB", "Unblockable")
+        .replace("AP", "Armor Piercing"),
+    );
   }
 
   // Parse sb, av, bv
@@ -60,46 +64,7 @@ export async function _parse(bodyData, rawHTML) {
   parameters.bv = { saved: toInt(cleanValue(getValue(".bv"))) || 0 };
 
   const toCreate = Array.from(properties);
-  const filteredProperties = toCreate.filter((p) =>
-    Object.values(allValidProperties).includes(p),
-  );
-  toCreate.length = 0;
-  toCreate.push(...filteredProperties);
-
-  /**
-   * Creates a single property.
-   * @param {string} propertyName - The name of the property to create
-   * @returns {Promise<Object>} Promise that resolves with property creation result
-   */
-  async function createSingleProperty(propertyName) {
-    let property = bodyData.parent
-      .getProperties()
-      .find((a) => a.name === propertyName);
-    if (property) {
-      await property.system.wikiPull({ notify: false });
-    } else {
-      await createProperty(bodyData.parent, propertyName, {
-        notify: false,
-      });
-    }
-    return {
-      propertyName: propertyName,
-      success: true,
-    };
-  }
-
-  const propertyPromises = toCreate.map((propertyName) =>
-    createSingleProperty(propertyName),
-  );
-  try {
-    await Promise.all(propertyPromises);
-    // Optional property deletion.
-    // const toDelete = equipmentData.parent.getProperties().filter((p) => !toCreate.includes(p.name)).map((p) => p.id);
-    // await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-  } catch (error) {
-    foundry.ui.notifications.error(`Error creating properties: ${error}`);
-    throw error;
-  }
+  await ensureChildren(bodyData.parent, "property", toCreate);
 
   const oldImg = bodyData.parent.img;
   const newImg = getImage("body-parts", bodyData.parent.name) || oldImg;

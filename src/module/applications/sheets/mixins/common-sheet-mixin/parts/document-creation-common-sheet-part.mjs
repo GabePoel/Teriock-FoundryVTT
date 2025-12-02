@@ -1,6 +1,5 @@
 import * as createEffects from "../../../../../helpers/create-effects.mjs";
-import { copyRank, getItem, getRank } from "../../../../../helpers/fetch.mjs";
-import { toTitleCase } from "../../../../../helpers/string.mjs";
+import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
 import {
   selectAbilityDialog,
   selectBodyPartDialog,
@@ -12,7 +11,7 @@ import {
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+  //noinspection JSClosureCompilerSyntax,JSValidateJSDoc
   return (
     /**
      * @extends {DocumentSheetV2}
@@ -23,9 +22,7 @@ export default (Base) => {
       static DEFAULT_OPTIONS = {
         actions: {
           createAbility: this._createAbility,
-          createBaseEffect: this._createBaseEffect,
-          createBodyPart: this._createBodyPart,
-          createEmbedded: this._createEmbedded,
+          createBody: this._createBody,
           createEquipment: this._createEquipment,
           createFluency: this._createFluency,
           createProperty: this._createProperty,
@@ -41,26 +38,12 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves to the created ability.
        */
       static async _createAbility(_event, _target) {
-        const abilityKey = await selectAbilityDialog();
-        let abilityName = "New Ability";
-        if (abilityKey) {
-          if (abilityKey !== "other") {
-            abilityName = TERIOCK.index.abilities[abilityKey];
-            await tm.fetch.importAbility(this.document, abilityName);
-          } else {
-            await createEffects.createAbility(this.document, abilityName);
-          }
+        const out = await selectAbilityDialog();
+        const obj = out.toObject();
+        if (out.sup?.type === "wrapper") {
+          obj["_stats.compendiumSource"] = out.sup.uuid;
         }
-      }
-
-      /**
-       * Creates a new base effect for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created fluency.
-       */
-      static async _createBaseEffect(_event, _target) {
-        await createEffects.createBaseEffect(this.document);
+        await this.document.createChildDocuments("ActiveEffect", [obj]);
       }
 
       /**
@@ -68,104 +51,10 @@ export default (Base) => {
        * @returns {Promise<void>}
        * @private
        */
-      static async _createBodyPart() {
-        let bodyPartKey = await selectBodyPartDialog();
-        let created;
-        if (Object.keys(TERIOCK.index.bodyParts).includes(bodyPartKey)) {
-          const bodyPart = await getItem(
-            TERIOCK.index.bodyParts[bodyPartKey],
-            "bodyParts",
-          );
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            bodyPart,
-          ]);
-        } else {
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            {
-              name: toTitleCase(bodyPartKey),
-              type: "body",
-            },
-          ]);
-        }
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(created);
-        }
-      }
-
-      /**
-       * Adds new embedded {@link TeriockChild} to the current {@link TeriockDocument}.
-       * Creates documents based on the specified tab type.
-       * @param {MouseEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when the document is created.
-       * @static
-       */
-      static async _createEmbedded(_event, target) {
-        const tab = target.dataset.tab;
-        const tabMap = {
-          ability: {
-            data: {
-              name: "New Ability",
-              type: "ability",
-            },
-            docType: "ActiveEffect",
-          },
-          consequence: {
-            data: {
-              name: "New Consequence",
-              type: "consequence",
-            },
-            docType: "ActiveEffect",
-          },
-          equipment: {
-            data: {
-              name: "New Equipment",
-              type: "equipment",
-            },
-            docType: "Item",
-          },
-          fluency: {
-            data: {
-              name: "New Fluency",
-              type: "fluency",
-            },
-            docType: "ActiveEffect",
-          },
-          power: {
-            data: {
-              name: "New Power",
-              type: "power",
-            },
-            docType: "Item",
-          },
-          rank: {
-            data: {
-              name: "New Rank",
-              type: "rank",
-            },
-            docType: "Item",
-          },
-          resource: {
-            data: {
-              name: "New Resource",
-              type: "resource",
-            },
-            docType: "ActiveEffect",
-          },
-        };
-        const entry = tabMap[tab];
-        if (!entry) {
-          return;
-        }
-        const docs =
-          /** @type {(Document|ClientDocument)[]} */ await this.document.actor.createEmbeddedDocuments(
-            entry.docType,
-            [entry.data],
-          );
-        if (entry.docType === this.document.documentName) {
-          await this.document.addSubs(docs);
-        }
-        await docs[0].sheet?.render(true);
+      static async _createBody() {
+        await this.document.createChildDocuments("Item", [
+          game.items.fromCompendium(await selectBodyPartDialog()),
+        ]);
       }
 
       /**
@@ -174,31 +63,9 @@ export default (Base) => {
        * @private
        */
       static async _createEquipment(_event, _target) {
-        let equipmentType = await selectEquipmentTypeDialog();
-        let created;
-        if (Object.keys(TERIOCK.index.equipment).includes(equipmentType)) {
-          const equipment = await getItem(
-            TERIOCK.index.equipment[equipmentType],
-            "equipment",
-          );
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            equipment,
-          ]);
-        } else {
-          equipmentType = toTitleCase(equipmentType);
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            {
-              name: equipmentType,
-              system: {
-                equipmentType: equipmentType,
-              },
-              type: "equipment",
-            },
-          ]);
-        }
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(created);
-        }
+        await this.document.createChildDocuments("Item", [
+          game.items.fromCompendium(await selectEquipmentTypeDialog()),
+        ]);
       }
 
       /**
@@ -222,16 +89,12 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves to the created property.
        */
       static async _createProperty(_event, _target) {
-        const propertyKey = await selectPropertyDialog();
-        let propertyName = "New Property";
-        if (propertyKey) {
-          if (propertyKey !== "other") {
-            propertyName = TERIOCK.index.properties[propertyKey];
-            await tm.fetch.importProperty(this.document, propertyName);
-          } else {
-            await createEffects.createProperty(this.document, propertyName);
-          }
+        const out = await selectPropertyDialog();
+        const obj = out.toObject();
+        if (out.sup?.type === "wrapper") {
+          obj["_stats.compendiumSource"] = out.sup.uuid;
         }
+        await this.document.createChildDocuments("ActiveEffect", [obj]);
       }
 
       /**
@@ -266,19 +129,13 @@ export default (Base) => {
           toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
             innate: innate,
           });
-          const created = await this.document.actor.createEmbeddedDocuments(
-            "Item",
-            [toCreate],
-          );
-          if (this.document.documentName !== "Actor") {
-            await this.document.addSubs(created);
-          }
+          await this.document.createChildDocuments("Item", [toCreate]);
           return;
         }
         /** @type {TeriockRank[]} */
-        const existingRanks = this.document
-          .getRanks()
-          .filter((r) => r.system.className === rankClass);
+        const existingRanks = (await this.document.getRanks()).filter(
+          (r) => r.system.className === rankClass,
+        );
         const combatAbilityNames = new Set(
           referenceRank.abilities
             .filter((a) => a.getFlag("teriock", "category") === "combat")
@@ -348,17 +205,11 @@ export default (Base) => {
             abilities.delete(ability.id);
           }
         }
-        const toCreate = rank.toObject();
+        const toCreate = game.items.fromCompendium(rank);
         toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
           innate: innate,
         });
-        const created = await this.document.actor.createEmbeddedDocuments(
-          "Item",
-          [toCreate],
-        );
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(created);
-        }
+        await this.document.createChildDocuments("Item", [toCreate]);
       }
 
       /**
@@ -368,7 +219,12 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves to the created resource.
        */
       static async _createResource(_event, _target) {
-        await createEffects.createResource(this.document);
+        await this.document.createChildDocuments("ActiveEffect", [
+          {
+            name: "New Resource",
+            type: "resource",
+          },
+        ]);
       }
     }
   );

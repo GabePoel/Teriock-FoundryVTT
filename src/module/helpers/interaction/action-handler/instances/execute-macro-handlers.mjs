@@ -6,7 +6,7 @@ export class ExecuteMacroHandler extends ActionHandler {
 
   /**
    * @inheritDoc
-   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {UUID<TeriockMacro>} uuid
    * @param {object} [data]
    */
   static buildButton(uuid, data = {}) {

@@ -29,7 +29,7 @@ export function _baseData(actorData) {
   _prepBaseMagic(actorData);
   actorData.abilityFlags = {};
   actorData.trackers =
-    /** @type {Record<Teriock.Parameters.Condition.ConditionKey, Teriock.UUID<TeriockTokenDocument>[]>} */ {};
+    /** @type {Record<Teriock.Parameters.Condition.ConditionKey, UUID<TeriockTokenDocument>[]>} */ {};
   for (const key of Object.keys(TERIOCK.index.conditions)) {
     actorData.trackers[key] = [];
   }

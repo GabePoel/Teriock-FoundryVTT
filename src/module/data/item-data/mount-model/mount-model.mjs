@@ -80,6 +80,11 @@ export default class TeriockMountModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
+  get makeSuppressed() {
+    return super.makeSuppressed || !this.mounted;
+  }
+
+  /** @inheritDoc */
   get messageBars() {
     return [
       {
@@ -96,11 +101,6 @@ export default class TeriockMountModel extends StatGiverDataMixin(
         wrappers: ["Tier " + this.tier.raw || "0", this.mountType],
       },
     ];
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    return super.suppressed || !this.mounted;
   }
 
   /**

@@ -23,13 +23,6 @@ globalThis.teriock = {
 };
 /** Useful helpers brought to the top level for easy access by macros. */
 globalThis.tm = {
-  create: {
-    ability: helpers.createEffects.createAbility,
-    consequence: helpers.createEffects.createConsequence,
-    fluency: helpers.createEffects.createFluency,
-    property: helpers.createEffects.createProperty,
-    resource: helpers.createEffects.createResource,
-  },
   dialogs: applications.dialogs,
   fetch: helpers.fetch,
   html: helpers.html,
@@ -43,6 +36,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   CONFIG.ui.actors = applications.sidebar.TeriockActorDirectory;
   CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
+  CONFIG.ui.notifications = applications.ui.TeriockNotifications;
   CONFIG.ui.items = applications.sidebar.TeriockItemDirectory;
 
   applications.ux.registerEnrichers();
@@ -344,6 +338,7 @@ foundry.helpers.Hooks.once("init", function () {
     "system.hierarchy.rootUuid",
     "system.hierarchy.subIds",
     "system.hierarchy.supId",
+    "system._sup",
   ];
   CONFIG.Item.compendiumIndexFields.push(...hierarchyIndexFields);
 

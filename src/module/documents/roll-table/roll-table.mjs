@@ -7,7 +7,7 @@ const { RollTable } = foundry.documents;
  * @extends {RollTable}
  * @extends {ClientDocument}
  * @mixes BaseDocument
- * @property {EmbeddedCollection<Teriock.ID<TeriockTableResult>, TeriockTableResult>} results
+ * @property {Collection<ID<TeriockTableResult>, TeriockTableResult>} results
  */
 export default class TeriockRollTable extends BaseDocumentMixin(RollTable) {
   /** @inheritDoc */

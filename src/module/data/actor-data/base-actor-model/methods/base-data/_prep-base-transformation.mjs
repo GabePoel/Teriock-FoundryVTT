@@ -1,6 +1,6 @@
 /**
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @private
  */
 export function _prepBaseTransformation(actorData) {
@@ -27,7 +27,7 @@ export function _prepBaseTransformation(actorData) {
       effect.system.transformation.suppression,
     );
   }
-  if (actorData.transformation.species.length > 0) {
+  if (actorData.isTransformed && actorData.transformation.species.length > 0) {
     actorData.size.number.raw =
       actorData.transformation.species[0].system.size.value?.toString() ||
       actorData.size.number.raw;

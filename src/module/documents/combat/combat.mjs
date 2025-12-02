@@ -9,7 +9,7 @@ const { Combat } = foundry.documents;
  * @extends {ClientDocument}
  * @extends {Combat}
  * @mixes BaseDocument
- * @property {Collection<Teriock.UUID<TeriockCombatant>, TeriockCombatant>} combatants
+ * @property {Collection<UUID<TeriockCombatant>, TeriockCombatant>} combatants
  */
 export default class TeriockCombat extends BaseDocumentMixin(Combat) {
   /**
@@ -26,7 +26,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @param {TeriockConsequence} effect - Effect to check expiration for.
    * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
    * @param {"start"|"end"} time - When this effect might expire.
-   * @param {Teriock.UUID<TeriockActor>|null} actorUuid - UUID of some {@link TeriockActor} to compare against.
+   * @param {UUID<TeriockActor>|null} actorUuid - UUID of some {@link TeriockActor} to compare against.
    * @param {object[]} [updates] - Optional array to mutate with additional updates.
    * @returns {Promise<void>}
    * @private

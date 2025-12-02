@@ -1,6 +1,5 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-import { copyProperty } from "../../../helpers/fetch.mjs";
 import { pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
@@ -34,12 +33,11 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["property"],
-      modifies: "Item",
-      namespace: "Property",
-      type: "property",
-      passive: true,
       indexCategoryKey: "properties",
       indexCompendiumKey: "properties",
+      modifies: "Item",
+      namespace: "Property",
+      passive: true,
       preservedProperties: [
         "system.fluent",
         "system.hierarchy",
@@ -47,6 +45,8 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
         "system.limitation",
         "system.proficient",
       ],
+      type: "property",
+      visibleTypes: ["property"],
     });
   }
 
@@ -114,6 +114,11 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
   }
 
   /** @inheritDoc */
+  get makeSuppressed() {
+    return _suppressed(this);
+  }
+
+  /** @inheritDoc */
   get messageBars() {
     return [
       {
@@ -154,14 +159,9 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
     return this.parent.name + nameAddition;
   }
 
-  /** @inheritDoc */
-  get suppressed() {
-    return _suppressed(this);
-  }
-
   /**
    * Change a macro's run hook.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
    */
   async changeMacroRunHook(uuid) {
@@ -174,11 +174,6 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
     const updateData = {};
     updateData[`system.impacts.macros.${safeUuid(uuid)}`] = pseudoHook;
     await this.parent.update(updateData);
-  }
-
-  /** @inheritDoc */
-  async getIndexReference() {
-    return await copyProperty(this.parent.name);
   }
 
   /** @inheritDoc */
@@ -207,8 +202,10 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
     if (
       this.damageType &&
       this.damageType.length > 0 &&
-      this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0)
-        .length === 0
+      this.parent.allSups.filter(
+        /** @param {TeriockProperty} p */ (p) =>
+          p.system.damageType?.trim().length > 0,
+      ).length === 0
     ) {
       this.parent.changes.push({
         key: "item.system.damage.types",
@@ -221,7 +218,7 @@ export default class TeriockPropertyModel extends RevelationDataMixin(
 
   /**
    * Unlink a macro.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @param {UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
    */
   async unlinkMacro(uuid) {

@@ -1,10 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
 import { TeriockEffect } from "../documents/_module.mjs";
-import {
-  TeriockConsequence,
-  TeriockEquipment,
-} from "../documents/_documents.mjs";
 import { AbilityExecution } from "../executions/document-executions/_module.mjs";
 
 declare global {

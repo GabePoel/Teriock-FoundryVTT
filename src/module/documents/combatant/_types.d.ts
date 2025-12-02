@@ -3,14 +3,14 @@ import { TeriockActor } from "../_module.mjs";
 declare module "./combatant.mjs" {
   export default interface TeriockCombatant
     extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
-    _id: Teriock.ID<TeriockCombatant>;
+    _id: ID<TeriockCombatant>;
     readonly actor: TeriockActor | null;
 
     get documentName(): "Combatant";
 
-    get id(): Teriock.ID<TeriockCombatant>;
+    get id(): ID<TeriockCombatant>;
 
-    get uuid(): Teriock.UUID<TeriockCombatant>;
+    get uuid(): UUID<TeriockCombatant>;
   }
 }
 

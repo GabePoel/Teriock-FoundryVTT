@@ -1,6 +1,4 @@
-import { HierarchyField } from "../../shared/fields/helpers/_types";
-
 export interface HierarchyDataMixinInterface {
-  /** <schema> Effects hierarchy */
-  hierarchy: HierarchyField;
+  _ref: UUID<TeriockCommon>;
+  _sup: UUID<TeriockCommon>;
 }

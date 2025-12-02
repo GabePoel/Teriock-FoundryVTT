@@ -53,6 +53,14 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
   }
 
   /**
+   * Whether this effect is a reference and not "real".
+   * @returns {boolean}
+   */
+  get isReference() {
+    return false;
+  }
+
+  /**
    * What this modifies.
    * @returns {TeriockParentName}
    */

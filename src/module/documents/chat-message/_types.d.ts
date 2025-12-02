@@ -15,15 +15,15 @@ declare global {
 declare module "./chat-message.mjs" {
   export default interface TeriockChatMessage
     extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
-    _id: Teriock.ID<TeriockChatMessage>;
+    _id: ID<TeriockChatMessage>;
     rolls: TeriockRoll[];
     readonly speakerActor: TeriockActor | null;
 
     get documentName(): "ChatMessage";
 
-    get id(): Teriock.ID<TeriockChatMessage>;
+    get id(): ID<TeriockChatMessage>;
 
-    get uuid(): Teriock.UUID<TeriockChatMessage>;
+    get uuid(): UUID<TeriockChatMessage>;
   }
 }
 

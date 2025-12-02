@@ -13,6 +13,7 @@ const { TokenDocument } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes EmbedCardDocument
  * @mixes BaseDocument
+ * @property {DocumentSheetV2} sheet
  */
 export default class TeriockTokenDocument extends EmbedCardDocumentMixin(
   BaseDocumentMixin(TokenDocument),

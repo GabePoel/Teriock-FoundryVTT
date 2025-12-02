@@ -11,7 +11,7 @@ import {
 const { fields } = foundry.data;
 
 /**
- * @param {typeof ChildTypeModel} Base
+ * @param {typeof TeriockBaseItemModel} Base
  * @constructor
  */
 export default function StatGiverDataMixin(Base) {
@@ -19,6 +19,7 @@ export default function StatGiverDataMixin(Base) {
   return (
     /**
      * @implements {StatGiverMixinInterface}
+     * @extends {TeriockBaseItemModel}
      * @mixin
      */
     class StatGiverData extends Base {
