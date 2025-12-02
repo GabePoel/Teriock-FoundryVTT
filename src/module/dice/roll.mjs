@@ -133,6 +133,21 @@ export default class TeriockRoll extends Roll {
     return null;
   }
 
+  /**
+   * Apply additional options based on damage type. This allows for styled Dice So Nice integration.
+   */
+  #applyDiceStyles() {
+    for (const die of this.dice) {
+      for (const [type, options] of Object.entries(
+        TERIOCK.options.die.styles,
+      )) {
+        if (die.flavor.includes(type)) {
+          die.options.appearance = options;
+        }
+      }
+    }
+  }
+
   /** @inheritDoc */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
@@ -153,5 +168,23 @@ export default class TeriockRoll extends Roll {
       }
     }
     return context;
+  }
+
+  /** @inheritDoc */
+  async evaluate({
+    minimize = false,
+    maximize = false,
+    allowStrings = false,
+    allowInteractive = true,
+    ...options
+  } = {}) {
+    this.#applyDiceStyles();
+    return super.evaluate({
+      minimize,
+      maximize,
+      allowStrings,
+      allowInteractive,
+      ...options,
+    });
   }
 }

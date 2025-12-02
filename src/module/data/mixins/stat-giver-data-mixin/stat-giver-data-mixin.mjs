@@ -72,6 +72,7 @@ export default function StatGiverDataMixin(Base) {
             die.stat = stat;
             die.index = Number(i);
             die.faces = pool.faces;
+            die.flavor = pool.flavor;
             if (!die.rolled || die.value > die.faces) {
               die.value = Math.ceil(die.faces / 2) + 1;
             }

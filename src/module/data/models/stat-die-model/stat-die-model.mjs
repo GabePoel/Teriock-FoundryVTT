@@ -23,6 +23,10 @@ export default class StatDieModel extends EmbeddedDataModel {
         initial: false,
         required: false,
       }),
+      flavor: new fields.StringField({
+        initial: "",
+        required: false,
+      }),
     };
   }
 
@@ -31,7 +35,7 @@ export default class StatDieModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get formula() {
-    return `1${this.polyhedral}`;
+    return `1${this.polyhedral}${this.flavor ? `[${this.flavor}]` : ""}`;
   }
 
   /**

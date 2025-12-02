@@ -59,6 +59,14 @@ export default class StatPoolModel extends EmbeddedDataModel {
   }
 
   /**
+   * Flavor to apply to stat dice.
+   * @returns {string}
+   */
+  get flavor() {
+    return "";
+  }
+
+  /**
    * Formula that describes the dice in this pool.
    * @returns {string}
    */

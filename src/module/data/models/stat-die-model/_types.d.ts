@@ -1,6 +1,7 @@
 export interface StatDieData {
   disabled: boolean;
   faces: number;
+  flavor: string;
   index: number;
   path: string;
   rolled: boolean;

@@ -15,6 +15,11 @@ export default class MpPoolModel extends StatPoolModel {
   }
 
   /** @inheritDoc */
+  get flavor() {
+    return "mp";
+  }
+
+  /** @inheritDoc */
   get panels() {
     return [
       {

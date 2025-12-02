@@ -20,6 +20,11 @@ export default class HpPoolModel extends StatPoolModel {
   }
 
   /** @inheritDoc */
+  get flavor() {
+    return "hp";
+  }
+
+  /** @inheritDoc */
   get panels() {
     const panels = [
       {
