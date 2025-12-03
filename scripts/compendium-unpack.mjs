@@ -116,6 +116,7 @@ function cleanEntry(doc) {
     delete doc.folder;
   }
   if (doc._stats) {
+    delete doc.ownership;
     delete doc._stats.createdTime;
     delete doc._stats.modifiedTime;
     delete doc._stats.duplicateSource;
@@ -132,6 +133,12 @@ function cleanEntry(doc) {
   if (doc.system) {
     if (doc.system.hierarchy?.supId) {
       doc.system._sup = doc.system.hierarchy.supId;
+    }
+    if (typeof doc.system.combat?.attackPenalty === "number") {
+      doc.system.combat.attackPenalty = 0;
+    }
+    if (typeof doc.system.combat?.hasReaction === "boolean") {
+      doc.system.combat.hasReaction = true;
     }
     delete doc.system.hierarchy;
     delete doc.system.font;

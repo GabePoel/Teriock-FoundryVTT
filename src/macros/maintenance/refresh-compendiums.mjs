@@ -28,10 +28,9 @@ for (const p of packs) {
       pct: indexPct,
     });
     const doc = await tm.utils.resolveDocument(index);
-    await doc.update({ "_stats.compendiumSource": null });
-    //if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
-    //  await doc.system.refreshFromCompendiumSource();
-    //}
+    if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
+      await doc.system.refreshFromCompendiumSource();
+    }
   }
   indexProgress.update({ pct: 1 });
 }

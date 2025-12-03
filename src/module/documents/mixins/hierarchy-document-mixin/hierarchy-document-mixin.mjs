@@ -25,7 +25,7 @@ export default function HierarchyDocumentMixin(Base) {
       /**
        * @inheritDoc
        * @param {TeriockCommon[]} documents
-       * @param {DatabaseCreateOperation} operation
+       * @param {DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
        * @private
@@ -58,7 +58,7 @@ export default function HierarchyDocumentMixin(Base) {
                   { folder: newDoc.folder },
                   { keepId },
                 );
-                if (!subClone._id) {
+                if (!subClone._id && !operation.forceKeepId) {
                   subClone.updateSource({ _id: foundry.utils.randomID() });
                 }
                 idMap[sub.id] = subClone._id;
@@ -343,7 +343,7 @@ export default function HierarchyDocumentMixin(Base) {
        * Create multiple child Document instances descendant from a Document using provided input data.
        * @param {TeriockChildName} embeddedName
        * @param {object[]} data
-       * @param {DatabaseCreateOperation} operation
+       * @param {DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation} operation
        * @returns {Promise<TeriockCommon[]>}
        */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
@@ -361,7 +361,7 @@ export default function HierarchyDocumentMixin(Base) {
       /**
        * Create multiple sub Document instances in a findSup Document's collection using provided input data.
        * @param {object[]} data
-       * @param {DatabaseCreateOperation} operation
+       * @param {DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation} operation
        * @returns {Promise<TeriockCommon[]>}
        */
       async createSubDocuments(data = [], operation = {}) {

@@ -36,16 +36,13 @@ command: |-
         pct: indexPct,
       });
       const doc = await tm.utils.resolveDocument(index);
-      await doc.update({ "_stats.compendiumSource": null });
-      //if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
-      //  await doc.system.refreshFromCompendiumSource();
-      //}
+      if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
+        await doc.system.refreshFromCompendiumSource();
+      }
     }
     indexProgress.update({ pct: 1 });
   }
   packProgress.update({ pct: 1 });
-ownership:
-  default: 0
 flags: {}
 _stats:
   compendiumSource: null

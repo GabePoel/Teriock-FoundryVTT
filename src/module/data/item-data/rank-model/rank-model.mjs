@@ -234,7 +234,11 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (isOwnerAndCurrentUser(this.parent, userId) && this.actor) {
+    if (
+      isOwnerAndCurrentUser(this.parent, userId) &&
+      this.actor &&
+      this.classRank === 1
+    ) {
       const needsArchetype =
         !this.actor.itemKeys.power.has(this.archetype) &&
         this.archetype !== "everyman";
@@ -243,9 +247,11 @@ export default class TeriockRankModel extends StatGiverDataMixin(
         resolveDocument(
           game.teriock.packs.classes.index.getName(archetypeName),
         ).then((p) =>
-          this.actor.createChildDocuments("Item", [
-            game.items.fromCompendium(p),
-          ]),
+          this.actor.createChildDocuments(
+            "Item",
+            [game.items.fromCompendium(p, { clearSort: true, keepId: true })],
+            { keepId: true },
+          ),
         );
       }
     }

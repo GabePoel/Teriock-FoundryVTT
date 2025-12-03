@@ -1,8 +1,8 @@
 const speciesCompendium = game.teriock.packs.species;
 const creatureCompendium = game.teriock.packs.creatures;
 await speciesCompendium.getIndex();
-const allSpecies = speciesCompendium.index.contents.filter(
-  (i) => i.type === "species",
+const allSpecies = tm.utils.docSort(
+  speciesCompendium.index.contents.filter((i) => i.type === "species"),
 );
 const speciesFolders = speciesCompendium.folders;
 const allCreatures = creatureCompendium.index.contents.filter(
@@ -67,22 +67,19 @@ async function processCreature(
   } else {
     creature = await fromUuid(creatureEntry.uuid);
   }
-  console.log(
-    creature.species.map((s) => {
-      return {
-        name: s.name,
-        id: s.id,
-      };
-    }),
-  );
   await creature.deleteChildDocuments(
     "Item",
-    creature.childArray.map((s) => s.id),
+    creature.items.map((c) => c._id),
   );
-  await creature.createChildDocuments("Item", [species.toObject()], {
-    keepId: true,
-    keepEmbeddedIds: true,
-  });
+  await creature.createChildDocuments(
+    "Item",
+    [game.items.fromCompendium(species, { keepId: true, clearSort: true })],
+    {
+      keepId: true,
+      keepEmbeddedIds: true,
+      forceKeepIds: true,
+    },
+  );
   let maxDamage = 0;
   let maxDamageArmament;
   let maxBv = 0;
@@ -109,7 +106,7 @@ async function processCreature(
   });
 }
 
-const batchSize = 1;
+const batchSize = 10;
 let processedCount = 0;
 
 for (let i = 0; i < allSpecies.length; i += batchSize) {

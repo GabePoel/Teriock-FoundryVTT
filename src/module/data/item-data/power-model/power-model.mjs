@@ -100,6 +100,19 @@ export default class TeriockPowerModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    if (
+      this.actor?.powers.map((p) => p.name).includes(this.parent.name) &&
+      ["Warrior", "Semi", "Mage"].includes(this.parent.name)
+    ) {
+      return false;
+    }
+  }
+
+  /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
     if (

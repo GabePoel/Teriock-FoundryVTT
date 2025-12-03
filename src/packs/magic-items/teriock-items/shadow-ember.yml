@@ -55,8 +55,8 @@ effects:
     type: property
     system:
       description: >-
-        A <b>weapon</b> is an item that can be used to @L[Category:Attack
-        abilities]{attack}.
+        <p>A <b>weapon</b> is an item that can be used to @L[Category:Attack
+        abilities]{attack}.</p>
       form: intrinsic
       damageType: ''
       extraDamage: ''
@@ -82,9 +82,9 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
+      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
     _key: '!items.effects!TeU0Z1MwBNFR67qd.A7JvIXUEmGC4U67D'
   - name: Disarm
     type: ability
@@ -117,8 +117,8 @@ effects:
       range: Your Weapon's Range
       overview:
         base: >-
-          Anything held in the targeted arm is knocked out of their hand. This
-          triggers @L[Ability:Catch Item]{Catch Item}.
+          <p>Anything held in the targeted arm is knocked out of their hand.
+          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
         proficient: ''
         fluent: ''
       results:
@@ -358,9 +358,9 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
+      compendiumSource: Compendium.teriock.abilities.Item.zkchimO4lWtXMTww
     _key: '!items.effects!TeU0Z1MwBNFR67qd.FiSNgjACXxhy51cC'
   - name: Catch Item
     type: ability
@@ -392,11 +392,11 @@ effects:
       range: Your Hand's Range
       overview:
         base: >-
-          You catch the item. If multiple creatures are all trying to catch the
-          same item, they all roll [[/roll 1d20 + @p]]. The creature with the
-          highest roll catches the item.
-        proficient: ''
-        fluent: ''
+          <p>You catch the item. If multiple creatures are all trying to catch
+          the same item, they all roll [[/roll 1d20]]. The creature with the
+          highest roll catches the item.</p>
+        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
       results:
         hit: ''
         critHit: ''
@@ -450,7 +450,7 @@ effects:
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: An item within range is falling or flying by.
+      trigger: <p>An item within range is falling or flying by.</p>
       basic: true
       form: intrinsic
       limitation: ''
@@ -634,9 +634,9 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
+      compendiumSource: Compendium.teriock.abilities.Item.uHCqoTmeCnveY98Y
     _id: h7t0LCA1Gpm30JlL
     _key: '!items.effects!TeU0Z1MwBNFR67qd.h7t0LCA1Gpm30JlL'
   - name: Duel
@@ -670,19 +670,19 @@ effects:
       range: '30'
       overview:
         base: >-
-          You challenge the target to advance and fight you. They may
+          <p>You challenge the target to advance and fight you. They may
           immediately @L[Ability:Move]{Move} towards you as a @L[Core:Reactive
           Maneuvers]{free reaction} to this and begin
           @L[Condition:Dueling]{dueling} with you. If they choose not to or are
           unable to do so, then they are considered to have "forfeited" the duel
           (but are not considered to have "lost" it) and become
           @L[Condition:Lighted]{lighted} to you until the end of your next
-          @L[Core:Turns]{turn}.
+          @L[Core:Turns]{turn}.</p>
         proficient: >-
-          You may also make @L[Ability:Move]{Move} or make a @L[Category:Single
+          <p>You may also @L[Ability:Move]{Move} or make a @L[Category:Single
           action abilities]{single action} @L[Category:Duelist class
           abilities]{Duelist ability} as a @L[Core:Reactive Maneuvers]{free
-          reaction} to the target's decision and subsequent movement.
+          reaction} to the target's decision and subsequent movement.</p>
         fluent: ''
       results:
         hit: ''
@@ -734,7 +734,9 @@ effects:
         materialCost: ''
       heightened: ''
       endCondition: ''
-      requirements: ''
+      requirements: >-
+        <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
+        an opponent.</p>
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -775,7 +777,7 @@ effects:
             normal:
               combat:
                 who:
-                  type: target
+                  type: executor
                 what:
                   type: forced
                   roll: 2d4kh1
@@ -835,6 +837,8 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          abilityButtonNames:
+            - Move
         fluent:
           statuses: []
           startStatuses: []
@@ -924,9 +928,9 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
+      compendiumSource: Compendium.teriock.abilities.Item.y0vCZhuJEduO943v
     _key: '!items.effects!TeU0Z1MwBNFR67qd.DI3hrm9tJWEGUHcj'
   - name: Slay
     type: ability
@@ -959,12 +963,12 @@ effects:
       range: Your Weapon's Range
       overview:
         base: >-
-          Target takes an additional [[/damage 5[lethal]]]
+          <p>Target takes an additional [[/damage 5[lethal]]]
           @L[Core:Damage]{damage}. This also has all @L[Category:Damage
           types]{damage types} of the triggering @L[Category:Attack
           abilities]{attack}. If the triggering @L[Category:Attack
           abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.
+          @L[Core:Damage]{damage} instead.</p>
         proficient: ''
         fluent: ''
       results:
@@ -1022,8 +1026,8 @@ effects:
       expansionRange: null
       expansionSaveAttribute: mov
       trigger: >-
-        You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.
+        <p>You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
       basic: false
       form: normal
       limitation: <p>With @L[Equipment:Dagger]{daggers} only.</p>
@@ -1038,6 +1042,7 @@ effects:
         derived: 0
       effectTypes:
         - killing
+        - damaging
       gifted:
         enabled: false
         amount: 1
@@ -1208,9 +1213,9 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
+      compendiumSource: Compendium.teriock.abilities.Item.RGGT3fiMwTbMwQWu
     _key: '!items.effects!TeU0Z1MwBNFR67qd.ZpS051RhVoapWJDU'
   - name: Weapons Mastery
     type: ability
@@ -1243,7 +1248,7 @@ effects:
       range: Self.
       overview:
         base: >-
-          Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
+          <p>Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
           are @L[Property:AV0]{AV0} for you. You may change which class of
           weapons you choose during a @L[Core:Long Rest]{long rest}. Whenever
           you attempt a @L[Category:Single action abilities]{single action}
@@ -1252,11 +1257,12 @@ effects:
           classes]{class}, you may trigger a @L[Category:Single action
           abilities]{single action} non-attack @L[Category:Basic
           abilities]{basic ability} as a @L[Core:Reactive Maneuvers]{free
-          reaction} as well.
+          reaction} as well.</p>
         proficient: >-
-          You may also trigger @L[Category:Single action abilities]{single
+          <p>You may also trigger @L[Category:Single action abilities]{single
           action} non-attack @L[Category:Assassin class abilities]{Assassin
-          abilities} as @L[Core:Reactive Maneuvers]{free reactions} in this way.
+          abilities} as @L[Core:Reactive Maneuvers]{free reactions} in this
+          way.</p>
         fluent: ''
       results:
         hit: ''
@@ -1496,9 +1502,9 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
+      compendiumSource: Compendium.teriock.abilities.Item.JYsa9GvaqfOtXG9k
     _key: '!items.effects!TeU0Z1MwBNFR67qd.O0mxfYVztMnFVFOX'
   - name: Incapable of Life Spells
     type: ability
@@ -1850,8 +1856,6 @@ effects:
       compendiumSource: null
     _key: '!items.effects!TeU0Z1MwBNFR67qd.1ENXjeayGVq9JiJ0'
 folder: X3rVK7Ngg1mHq1vl
-ownership:
-  default: 0
 flags: {}
 _stats:
   coreVersion: '13'

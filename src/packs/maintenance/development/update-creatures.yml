@@ -9,12 +9,12 @@ command: |-
   const speciesCompendium = game.teriock.packs.species;
   const creatureCompendium = game.teriock.packs.creatures;
   await speciesCompendium.getIndex();
-  const allSpecies = speciesCompendium.index.contents.filter(
-    (i) => i.type === "species"
+  const allSpecies = tm.utils.docSort(
+    speciesCompendium.index.contents.filter((i) => i.type === "species"),
   );
   const speciesFolders = speciesCompendium.folders;
   const allCreatures = creatureCompendium.index.contents.filter(
-    (a) => a.type === "creature"
+    (a) => a.type === "creature",
   );
   const creaturesFolders = creatureCompendium.folders;
 
@@ -23,11 +23,11 @@ command: |-
       await Folder.create(
         {
           name: folderEntry.name,
-          type: "Actor"
+          type: "Actor",
         },
         {
-          pack: "teriock.creatures"
-        }
+          pack: "teriock.creatures",
+        },
       );
     }
   }
@@ -38,17 +38,17 @@ command: |-
       const parentFolderName = speciesFolder.folder.name;
       const parentFolderId = creaturesFolders.getName(parentFolderName).id;
       const creatureFolder = await fromUuid(
-        creaturesFolders.getName(speciesFolder.name).uuid
+        creaturesFolders.getName(speciesFolder.name).uuid,
       );
       await creatureFolder.update({
-        folder: parentFolderId
+        folder: parentFolderId,
       });
     }
   }
 
   const progress = ui.notifications.info(`Synchronizing all creatures.`, {
     pct: 0.01,
-    progress: true
+    progress: true,
   });
 
   // Helper function to process a single species
@@ -56,10 +56,10 @@ command: |-
     speciesEntry,
     allCreatures,
     speciesFolders,
-    creaturesFolders
+    creaturesFolders,
   ) {
     const species = /** @type {TeriockSpecies} */ await fromUuid(
-      speciesEntry.uuid
+      speciesEntry.uuid,
     );
     const creatureEntry = allCreatures.find((c) => c.name === speciesEntry.name);
     /** @type {TeriockActor} */
@@ -70,27 +70,24 @@ command: |-
       creature = await Actor.create(species.system.toCreature(), {
         keepEmbeddedIds: true,
         keepId: true,
-        pack: "teriock.creatures"
+        pack: "teriock.creatures",
       });
     } else {
       creature = await fromUuid(creatureEntry.uuid);
     }
-    console.log(
-      creature.species.map((s) => {
-        return {
-          name: s.name,
-          id: s.id
-        };
-      })
-    );
     await creature.deleteChildDocuments(
       "Item",
-      creature.childArray.map((c) => c.id)
+      creature.items.map((c) => c._id),
     );
-    await creature.createChildDocuments("Item", [ species.toObject() ], {
-      keepId: true,
-      keepEmbeddedIds: true
-    });
+    await creature.createChildDocuments(
+      "Item",
+      [game.items.fromCompendium(species, { keepId: true, clearSort: true })],
+      {
+        keepId: true,
+        keepEmbeddedIds: true,
+        forceKeepIds: true,
+      },
+    );
     let maxDamage = 0;
     let maxDamageArmament;
     let maxBv = 0;
@@ -113,11 +110,11 @@ command: |-
       "system.mp.value": creature.system.mp.max,
       "system.wither.value": 20,
       "system.wielding.attacker": maxDamageArmament?.id,
-      "system.wielding.blocker": maxBvArmament?.id
+      "system.wielding.blocker": maxBvArmament?.id,
     });
   }
 
-  const batchSize = 1;
+  const batchSize = 10;
   let processedCount = 0;
 
   for (let i = 0; i < allSpecies.length; i += batchSize) {
@@ -129,25 +126,23 @@ command: |-
           speciesEntry,
           allCreatures,
           speciesFolders,
-          creaturesFolders
-        )
-      )
+          creaturesFolders,
+        ),
+      ),
     );
 
     processedCount += batch.length;
     const pct = processedCount / allSpecies.length;
     progress.update({
       pct: pct,
-      message: `Synchronized ${processedCount} of ${allSpecies.length} creatures.`
+      message: `Synchronized ${processedCount} of ${allSpecies.length} creatures.`,
     });
   }
 
   progress.update({
     pct: 1,
-    message: "Synchronization complete."
+    message: "Synchronization complete.",
   });
-ownership:
-  default: 0
 flags: {}
 _stats:
   coreVersion: '13'

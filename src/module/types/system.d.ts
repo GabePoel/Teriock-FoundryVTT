@@ -16,4 +16,11 @@ declare global {
     >;
     export type CardDisplaySize = keyof typeof displayOptions.sizes;
   }
+
+  export namespace Teriock.System {
+    export type _DatabaseCreateOperation = {
+      /** Force even subs to keep their _id. May cause _id collisions. */
+      forceKeepIds?: boolean;
+    };
+  }
 }
