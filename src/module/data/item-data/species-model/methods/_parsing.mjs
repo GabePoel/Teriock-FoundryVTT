@@ -4,12 +4,9 @@ import { toCamelCase } from "../../../../helpers/string.mjs";
 import { ensureChildren } from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDoc,
-  cleanObject
+  cleanObject,
 } from "../../../shared/parsing/clean-html-doc.mjs";
-import {
-  getBarText,
-  getText
-} from "../../../shared/parsing/get-text.mjs";
+import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 
