@@ -225,6 +225,13 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
+  async _createFromChildDeltaMap(createMap) {
+    if (this.classRank < 3 || this.parent.abilities.length !== 2) {
+      await super._createFromChildDeltaMap(createMap);
+    }
+  }
+
+  /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if (isOwnerAndCurrentUser(this.parent, userId) && this.actor) {
@@ -306,20 +313,5 @@ export default class TeriockRankModel extends StatGiverDataMixin(
       }
     }
     super.prepareSpecialData();
-  }
-
-  ///** @inheritDoc */
-  //async refreshFromCompendiumSource(options = {}) {
-  //  if (this.classRank >= 3) {
-  //    options.createChildren = false;
-  //  }
-  //  await super.refreshFromCompendiumSource(options);
-  //}
-
-  /** @inheritDoc */
-  async refreshFromIndex() {
-    for (const a of this.parent.abilities) {
-      await a.system.refreshFromCompendiumSource();
-    }
   }
 }

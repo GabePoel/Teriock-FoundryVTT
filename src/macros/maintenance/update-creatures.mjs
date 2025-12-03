@@ -60,22 +60,29 @@ async function processCreature(
   const creatureFolder = creaturesFolders.getName(speciesFolder.name);
   if (!creatureEntry) {
     creature = await Actor.create(species.system.toCreature(), {
+      keepEmbeddedIds: true,
+      keepId: true,
       pack: "teriock.creatures",
     });
   } else {
     creature = await fromUuid(creatureEntry.uuid);
   }
-  await creature.system.refreshFromCompendiumSource();
-  for (const s of creature.species) {
-    for (const r of s.ranks.filter((r) => r.system.classRank >= 3)) {
-      await r.deleteChildDocuments(
-        "ActiveEffect",
-        r.abilities
-          .filter((a) => !a.getFlag("teriock", "defaultAbility"))
-          .map((a) => a.id),
-      );
-    }
-  }
+  console.log(
+    creature.species.map((s) => {
+      return {
+        name: s.name,
+        id: s.id,
+      };
+    }),
+  );
+  await creature.deleteChildDocuments(
+    "Item",
+    creature.childArray.map((s) => s.id),
+  );
+  await creature.createChildDocuments("Item", [species.toObject()], {
+    keepId: true,
+    keepEmbeddedIds: true,
+  });
   let maxDamage = 0;
   let maxDamageArmament;
   let maxBv = 0;
@@ -102,7 +109,7 @@ async function processCreature(
   });
 }
 
-const batchSize = 10;
+const batchSize = 1;
 let processedCount = 0;
 
 for (let i = 0; i < allSpecies.length; i += batchSize) {

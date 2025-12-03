@@ -23,6 +23,7 @@ export const documentTypes = {
   actors: {
     base: "Actors",
     character: "Characters",
+    creature: "Creatures",
   },
   macros: {
     script: "Scripts",

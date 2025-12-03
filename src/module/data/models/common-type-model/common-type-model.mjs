@@ -185,9 +185,9 @@ export default class CommonTypeModel extends TypeDataModel {
    * @param {Record<Teriock.Documents.CommonType, TeriockCommon[]>} srcTypeMap
    * @param {Record<Teriock.Documents.CommonType, TeriockCommon[]>} dstTypeMap
    * @param {"diff" | "union" | "intersect" | "diffSrc" | "diffDst"} mapType
-   * @returns {Record<TeriockCommonName, { src: TeriockCommon[], dst: TeriockCommon[] }>}
+   * @returns {ChildDeltaMap}
    */
-  #makeChildMap(srcTypeMap, dstTypeMap, mapType) {
+  #makeChildDeltaMap(srcTypeMap, dstTypeMap, mapType) {
     const childMap = {};
     for (const type of new Set([
       ...Object.keys(srcTypeMap),
@@ -228,6 +228,55 @@ export default class CommonTypeModel extends TypeDataModel {
       }
     }
     return childMap;
+  }
+
+  /**
+   * Create children from delta map.
+   * @param {ChildDeltaMap} createMap
+   * @returns {Promise<void>}
+   * @private
+   */
+  async _createFromChildDeltaMap(createMap) {
+    for (const [docName, children] of Object.entries(createMap)) {
+      await this.parent.createChildDocuments(
+        docName,
+        children.src.map((s) => s.toObject()),
+      );
+    }
+  }
+
+  /**
+   * Delete children from delta map.
+   * @param {ChildDeltaMap} deleteMap
+   * @returns {Promise<void>}
+   * @private
+   */
+  async _deleteFromChildDeltaMap(deleteMap) {
+    for (const [docName, children] of Object.entries(deleteMap)) {
+      await this.parent.deleteChildDocuments(
+        docName,
+        children.dst.map((d) => d.id),
+      );
+    }
+  }
+
+  /**
+   * Update children from delta map.
+   * @param {ChildDeltaMap} updateMap
+   * @returns {Promise<void>}
+   * @private
+   */
+  async _updateFromChildDeltaMap(updateMap) {
+    for (const [docName, children] of Object.entries(updateMap)) {
+      const updateArray = await Promise.all(
+        children.dst.map(async (d) => {
+          const obj = await d.system.getCompendiumSourceRefreshObject();
+          obj._id = d.id;
+          return obj;
+        }),
+      );
+      await this.parent.updateChildDocuments(docName, updateArray);
+    }
   }
 
   /**
@@ -431,47 +480,28 @@ export default class CommonTypeModel extends TypeDataModel {
         const dstChildren = await this.parent.getChildren();
         const dstChildTypeMap = dstChildren.typeMap;
         if (createChildren) {
-          const createMap = this.#makeChildMap(
+          const createMap = this.#makeChildDeltaMap(
             srcChildTypeMap,
             dstChildTypeMap,
             "diffSrc",
           );
-          for (const [docName, children] of Object.entries(createMap)) {
-            await this.parent.createChildDocuments(
-              docName,
-              children.src.map((s) => s.toObject()),
-            );
-          }
+          await this._createFromChildDeltaMap(createMap);
         }
         if (deleteChildren) {
-          const deleteMap = this.#makeChildMap(
+          const deleteMap = this.#makeChildDeltaMap(
             srcChildTypeMap,
             dstChildTypeMap,
             "diffDst",
           );
-          for (const [docName, children] of Object.entries(deleteMap)) {
-            await this.parent.deleteChildDocuments(
-              docName,
-              children.dst.map((d) => d.id),
-            );
-          }
+          await this._deleteFromChildDeltaMap(deleteMap);
         }
         if (updateChildren) {
-          const updateMap = this.#makeChildMap(
+          const updateMap = this.#makeChildDeltaMap(
             srcChildTypeMap,
             dstChildTypeMap,
             "intersect",
           );
-          for (const [docName, children] of Object.entries(updateMap)) {
-            const updateArray = await Promise.all(
-              children.dst.map(async (d) => {
-                const obj = await d.system.getCompendiumSourceRefreshObject();
-                obj._id = d.id;
-                return obj;
-              }),
-            );
-            await this.parent.updateChildDocuments(docName, updateArray);
-          }
+          await this._updateFromChildDeltaMap(updateMap);
         }
       }
     }

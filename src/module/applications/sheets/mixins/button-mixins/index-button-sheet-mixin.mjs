@@ -19,7 +19,7 @@ export default function IndexButtonSheetMixin(Base) {
         controls: [
           {
             icon: makeIconClass("book-atlas", "contextMenu"),
-            label: "Refresh From Compendium",
+            label: "Compendium Refresh",
             action: "refreshFromCompendium",
           },
         ],
