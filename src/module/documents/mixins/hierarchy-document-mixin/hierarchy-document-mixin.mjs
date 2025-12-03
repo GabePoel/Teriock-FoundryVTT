@@ -58,7 +58,7 @@ export default function HierarchyDocumentMixin(Base) {
                   { folder: newDoc.folder },
                   { keepId },
                 );
-                if (!subClone._id && !operation.forceKeepId) {
+                if (!subClone._id && !operation.keepSubIds) {
                   subClone.updateSource({ _id: foundry.utils.randomID() });
                 }
                 idMap[sub.id] = subClone._id;

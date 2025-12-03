@@ -77,7 +77,7 @@ async function processCreature(
     {
       keepId: true,
       keepEmbeddedIds: true,
-      forceKeepIds: true,
+      keepSubIds: true,
     },
   );
   let maxDamage = 0;
