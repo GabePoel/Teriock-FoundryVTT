@@ -52,7 +52,7 @@ export default async function inCombatExpirationDialog(
     }
     contentHtml.append(
       effect.system.schema.fields.expirations.fields.combat.fields.what.fields.roll.toFormGroup(
-        {},
+        { rootId: foundry.utils.randomID() },
         {
           name: "roll",
           value: effect.system.expirations.combat.what.roll,
@@ -61,7 +61,7 @@ export default async function inCombatExpirationDialog(
     );
     contentHtml.append(
       effect.system.schema.fields.expirations.fields.combat.fields.what.fields.threshold.toFormGroup(
-        {},
+        { rootId: foundry.utils.randomID() },
         {
           name: "threshold",
           value: effect.system.expirations.combat.what.threshold,

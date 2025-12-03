@@ -14,7 +14,7 @@ export default async function deathBagDialog(actor) {
   const contentHTML = document.createElement("div");
   contentHTML.append(
     actor.system.schema.fields.deathBag.fields.pull.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       {
         name: "pull",
         value: actor.system.deathBag.pull,
@@ -30,7 +30,7 @@ export default async function deathBagDialog(actor) {
       actor.system.schema.fields.deathBag.fields.stones.fields[
         color
       ].toFormGroup(
-        {},
+        { rootId: foundry.utils.randomID() },
         {
           name: color,
           value: actor.system.deathBag.stones[color],

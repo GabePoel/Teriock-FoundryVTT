@@ -258,7 +258,7 @@ export default class CommonTypeModel extends TypeDataModel {
    * Get an object that represents the non-embedded data for the reference of this document.
    * @returns {Promise<object>}
    */
-  async getIndexObject() {
+  async getCompendiumSourceRefreshObject() {
     const reference = await this.getCompendiumSource();
     if (reference) {
       const preservedProperties = [
@@ -393,14 +393,6 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Destructively refresh this document from the index.
-   * @returns {Promise<void>}
-   */
-  async hardRefreshFromIndex() {
-    await this.refreshFromIndex({ deleteChildren: true });
-  }
-
-  /**
    * Apply transformations of derivations to the values of the source data object. Compute data fields whose values are
    * not stored in the database. This happens after the actor has completed all operations.
    */
@@ -416,80 +408,82 @@ export default class CommonTypeModel extends TypeDataModel {
    * @param {boolean} [options.recursive] - Update recursively.
    * @returns {Promise<void>}
    */
-  async refreshFromIndex(options = {}) {
+  async refreshFromCompendiumSource(options = {}) {
     const {
-      deleteChildren = false,
+      deleteChildren = true,
       createChildren = true,
       updateChildren = true,
       updateDocument = true,
       recursive = true,
     } = options;
-    const indexObject = await this.getIndexObject();
-    if (updateDocument && Object.keys(indexObject).length > 0) {
-      delete indexObject.flags;
-      delete indexObject.system._ref;
-      delete indexObject.system._sup;
-      await this.parent.update(indexObject);
+    if (this.parent._stats.compendiumSource) {
+      if (updateDocument) {
+        const indexObject = await this.getCompendiumSourceRefreshObject();
+        delete indexObject.flags;
+        delete indexObject.system._ref;
+        delete indexObject.system._sup;
+        await this.parent.update(indexObject);
+      }
+      const reference = await this.getCompendiumSource();
+      if (reference) {
+        const srcChildren = await reference.getChildren();
+        const srcChildTypeMap = srcChildren.typeMap;
+        const dstChildren = await this.parent.getChildren();
+        const dstChildTypeMap = dstChildren.typeMap;
+        if (createChildren) {
+          const createMap = this.#makeChildMap(
+            srcChildTypeMap,
+            dstChildTypeMap,
+            "diffSrc",
+          );
+          for (const [docName, children] of Object.entries(createMap)) {
+            await this.parent.createChildDocuments(
+              docName,
+              children.src.map((s) => s.toObject()),
+            );
+          }
+        }
+        if (deleteChildren) {
+          const deleteMap = this.#makeChildMap(
+            srcChildTypeMap,
+            dstChildTypeMap,
+            "diffDst",
+          );
+          for (const [docName, children] of Object.entries(deleteMap)) {
+            await this.parent.deleteChildDocuments(
+              docName,
+              children.dst.map((d) => d.id),
+            );
+          }
+        }
+        if (updateChildren) {
+          const updateMap = this.#makeChildMap(
+            srcChildTypeMap,
+            dstChildTypeMap,
+            "intersect",
+          );
+          for (const [docName, children] of Object.entries(updateMap)) {
+            const updateArray = await Promise.all(
+              children.dst.map(async (d) => {
+                const obj = await d.system.getCompendiumSourceRefreshObject();
+                obj._id = d.id;
+                return obj;
+              }),
+            );
+            await this.parent.updateChildDocuments(docName, updateArray);
+          }
+        }
+      }
     }
-    const reference = await this.getCompendiumSource();
-    if (reference) {
-      const srcChildren = await reference.getChildren();
-      const srcChildTypeMap = srcChildren.typeMap;
-      const dstChildren = await this.parent.getChildren();
-      const dstChildTypeMap = dstChildren.typeMap;
-      if (createChildren) {
-        const createMap = this.#makeChildMap(
-          srcChildTypeMap,
-          dstChildTypeMap,
-          "diffSrc",
-        );
-        for (const [docName, children] of Object.entries(createMap)) {
-          await this.parent.createChildDocuments(
-            docName,
-            children.src.map((s) => s.toObject()),
-          );
-        }
-      }
-      if (deleteChildren) {
-        const deleteMap = this.#makeChildMap(
-          srcChildTypeMap,
-          dstChildTypeMap,
-          "diffDst",
-        );
-        for (const [docName, children] of Object.entries(deleteMap)) {
-          await this.parent.deleteChildDocuments(
-            docName,
-            children.dst.map((d) => d.id),
-          );
-        }
-      }
-      if (updateChildren) {
-        const updateMap = this.#makeChildMap(
-          srcChildTypeMap,
-          dstChildTypeMap,
-          "intersect",
-        );
-        for (const [docName, children] of Object.entries(updateMap)) {
-          const updateArray = await Promise.all(
-            children.dst.map(async (d) => {
-              const obj = await d.system.getIndexObject();
-              obj._id = d.id;
-              return obj;
-            }),
-          );
-          await this.parent.updateChildDocuments(docName, updateArray);
-        }
-      }
-      if (recursive) {
-        for (const child of await this.parent.getChildArray()) {
-          await child.system.refreshFromIndex({
-            deleteChildren,
-            createChildren,
-            updateChildren,
-            updateDocument: false,
-            recursive,
-          });
-        }
+    if (recursive) {
+      for (const child of await this.parent.getChildArray()) {
+        await child.system.refreshFromCompendiumSource({
+          deleteChildren,
+          createChildren,
+          updateChildren,
+          updateDocument,
+          recursive,
+        });
       }
     }
   }

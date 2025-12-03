@@ -65,7 +65,17 @@ async function processCreature(
   } else {
     creature = await fromUuid(creatureEntry.uuid);
   }
-  await creature.species[0].system.hardRefreshFromIndex();
+  await creature.system.refreshFromCompendiumSource();
+  for (const s of creature.species) {
+    for (const r of s.ranks.filter((r) => r.system.classRank >= 3)) {
+      await r.deleteChildDocuments(
+        "ActiveEffect",
+        r.abilities
+          .filter((a) => !a.getFlag("teriock", "defaultAbility"))
+          .map((a) => a.id),
+      );
+    }
+  }
   let maxDamage = 0;
   let maxDamageArmament;
   let maxBv = 0;

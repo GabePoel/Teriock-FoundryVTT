@@ -15,4 +15,6 @@ const toDelete = basicAbilitiesItem.abilities
   .filter((a) => !basicAbilityNames.includes(a.name))
   .map((a) => a.id);
 await basicAbilitiesItem.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+await tm.utils.inferChildCompendiumSources(basicAbilitiesItem);
+await basicAbilitiesItem.system.refreshFromCompendiumSource();
 progress.update({ pct: 1 });

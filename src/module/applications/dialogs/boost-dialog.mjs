@@ -38,10 +38,30 @@ export default async function boostDialog(rollFormula, options = {}) {
     hint: "Double the number of dice rolled. This applies after boosts and deboosts.",
   });
   const contentHtml = document.createElement("div");
-  contentHtml.append(formulaField.toFormGroup({}, { name: "formula" }));
-  contentHtml.append(boostsField.toFormGroup({}, { name: "boosts" }));
-  contentHtml.append(deboostsField.toFormGroup({}, { name: "deboosts" }));
-  contentHtml.append(critField.toFormGroup({}, { name: "crit" }));
+  contentHtml.append(
+    formulaField.toFormGroup(
+      { rootId: foundry.utils.randomID() },
+      { name: "formula" },
+    ),
+  );
+  contentHtml.append(
+    boostsField.toFormGroup(
+      { rootId: foundry.utils.randomID() },
+      { name: "boosts" },
+    ),
+  );
+  contentHtml.append(
+    deboostsField.toFormGroup(
+      { rootId: foundry.utils.randomID() },
+      { name: "deboosts" },
+    ),
+  );
+  contentHtml.append(
+    critField.toFormGroup(
+      { rootId: foundry.utils.randomID() },
+      { name: "crit" },
+    ),
+  );
   try {
     await TeriockDialog.prompt({
       content: contentHtml,

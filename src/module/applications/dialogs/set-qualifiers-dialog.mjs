@@ -3,22 +3,24 @@ import { TeriockDialog } from "../api/_module.mjs";
 
 /**
  * Dialog that sets qualifiers.
- * @param {TeriockChild} doc
+ * @param {TeriockCommon} doc
+ * @returns {Promise<void>}
  */
 export default async function setQualifiersDialog(doc) {
   const ephemeralForm =
     doc.system.schema.fields.qualifiers.fields.ephemeral.fields.saved.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       { name: "ephemeral", value: doc.system.qualifiers.ephemeral.saved },
     );
   const suppressedForm =
     doc.system.schema.fields.qualifiers.fields.suppressed.fields.saved.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       { name: "suppressed", value: doc.system.qualifiers.suppressed.saved },
     );
   const compendiumSourceForm =
     doc.schema.fields._stats.fields.compendiumSource.toFormGroup(
       {
+        rootId: foundry.utils.randomID(),
         label: "Compendium Source",
         hint:
           "An unembedded document in a compendium that this is sourced from. If this is refreshed, it pulls data" +

@@ -104,12 +104,31 @@ dl:not(:first-child) {
   }
 }
 
-.cards-config header img,
-.macro-config header img,
-.roll-table-sheet header img,
-.active-effect-config header img {
-  @include mixins.image-border;
-  @include mixins.warm-image-background;
+.cards-config,
+.macro-config,
+.roll-table-sheet,
+.active-effect-config {
+  header {
+    input {
+      @include mixins.title-text-styling;
+      @include mixins.sheet-entry-hover;
+    }
+
+    img {
+      @include mixins.image-border(12px, 0.5, 5px);
+      @include mixins.warm-image-background;
+    }
+  }
+}
+
+.cards-config,
+.macro-config,
+.active-effect-config {
+  header {
+    input {
+      @include mixins.title-text-spacing(calc(64px + 1rem));
+    }
+  }
 }
 
 #action-bar {

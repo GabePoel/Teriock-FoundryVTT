@@ -2369,6 +2369,7 @@ table {
   left: 0;
   position: absolute;
   top: 0;
+  user-select: none;
   width: 100%;
 }
 .teriock .ab-box-content .selected,
@@ -4316,9 +4317,9 @@ table {
 .teriock .ab-header .ab-profile-img {
   display: block;
   flex: 0 0 auto;
-  height: 4em;
+  height: 64px;
   left: 0;
-  margin: 0.75em;
+  margin: 1rem;
   overflow: hidden;
   position: relative;
   position: relative;
@@ -4329,7 +4330,7 @@ table {
   outline: 1px solid var(--color-light-6);
   overflow: hidden;
   top: 0;
-  width: 4em;
+  width: 64px;
 }
 .teriock .ab-header .ab-profile-img::before {
   position: absolute;
@@ -4369,22 +4370,18 @@ table {
 }
 .teriock .ab-header .ab-title input,
 .teriock .ab-header .ab-title .ab-title-text {
-  background: none;
-  border: none;
-  box-shadow: none;
   font-size: clamp(1rem, 4vw, 2rem);
   font-weight: lighter;
   height: 100%;
   overflow: hidden;
-  padding-right: 2em;
-  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: calc(100% - 14px);
-}
-.teriock .ab-header .ab-title input.tfont, .teriock .ab-header .ab-title input.tfont-,
-.teriock .ab-header .ab-title .ab-title-text.tfont,
-.teriock .ab-header .ab-title .ab-title-text.tfont- {
+  text-align: center;
+  padding-right: calc(64px + 1rem);
+  background: none;
+  border: none;
+  box-shadow: none;
   font-family: var(--font-h1), serif;
 }
 .teriock .ab-header .ab-title input:hover {
@@ -4392,6 +4389,9 @@ table {
 }
 .teriock .ab-header .ab-title input:active {
   background-color: color-mix(in srgb, var(--color-text-primary), transparent 80%);
+}
+.teriock .ab-header .ab-title input:focus:not(:active) {
+  background-color: color-mix(in srgb, var(--color-text-primary), transparent 90%);
 }
 .teriock .ab-bars {
   border-bottom: 1px solid var(--color-bar-border);
@@ -5256,16 +5256,50 @@ dl:not(:first-child) {
   border-color: var(--color-panel-edge);
 }
 
+.cards-config header input,
+.macro-config header input,
+.roll-table-sheet header input,
+.active-effect-config header input {
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-family: var(--font-h1), serif;
+}
+.cards-config header input:hover,
+.macro-config header input:hover,
+.roll-table-sheet header input:hover,
+.active-effect-config header input:hover {
+  background-color: color-mix(in srgb, var(--color-text-primary), transparent 90%);
+}
+.cards-config header input:active,
+.macro-config header input:active,
+.roll-table-sheet header input:active,
+.active-effect-config header input:active {
+  background-color: color-mix(in srgb, var(--color-text-primary), transparent 80%);
+}
+.cards-config header input:focus:not(:active),
+.macro-config header input:focus:not(:active),
+.roll-table-sheet header input:focus:not(:active),
+.active-effect-config header input:focus:not(:active) {
+  background-color: color-mix(in srgb, var(--color-text-primary), transparent 90%);
+}
 .cards-config header img,
 .macro-config header img,
 .roll-table-sheet header img,
 .active-effect-config header img {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
-  border-radius: 100%;
+  border-radius: 5px;
   outline: 1px solid var(--color-light-6);
   overflow: hidden;
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
+}
+
+.cards-config header input,
+.macro-config header input,
+.active-effect-config header input {
+  text-align: center;
+  padding-right: calc(64px + 1rem);
 }
 
 #action-bar .slot .slot-icon {

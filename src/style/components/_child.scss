@@ -33,15 +33,15 @@
   .ab-profile-img {
     display: block;
     flex: 0 0 auto;
-    height: 4em;
+    height: 64px;
     left: 0;
-    margin: 0.75em;
+    margin: 1rem;
     overflow: hidden;
     position: relative;
     @include mixins.warm-image-container-background;
     @include mixins.image-border(12px, 0.5, 5px);
     top: 0;
-    width: 4em;
+    width: 64px;
 
     img {
       @include mixins.warm-drop-shadow;
@@ -68,52 +68,25 @@
   }
 
   .ab-title {
-    // height: clamp(3em, 6vw, 6em);
     flex: 1 1 auto;
     min-width: 0;
     padding-inline: 0.5em;
 
     input,
     .ab-title-text {
-      //   font-size: clamp(1.25rem, 4vw, var(--font-size-48));
-      background: none;
-      border: none;
-      box-shadow: none;
       font-size: clamp(1rem, 4vw, 2rem);
       font-weight: lighter;
       height: 100%;
-      //margin: 0 0 0 14px;
       overflow: hidden;
-      //padding: 0;
-      padding-right: 2em;
-      text-align: center;
-      //padding-left: 1em;
       text-overflow: ellipsis;
       white-space: nowrap;
       width: calc(100% - 14px);
-
-      &.tfont,
-      &.tfont- {
-        font-family: var(--font-h1), serif;
-      }
+      @include mixins.title-text-spacing(calc(64px + 1rem));
+      @include mixins.title-text-styling;
     }
 
     input {
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--color-text-primary),
-          transparent 90%
-        );
-      }
-
-      &:active {
-        background-color: color-mix(
-          in srgb,
-          var(--color-text-primary),
-          transparent 80%
-        );
-      }
+      @include mixins.sheet-entry-hover;
     }
   }
 }
@@ -144,7 +117,6 @@
         width: 1px;
       }
 
-      //   border-left: 1px solid var(--color-border);
       .ab-box {
         align-items: center;
         border: 1px solid transparent;
@@ -184,9 +156,9 @@
 
         &:hover {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 90%
+              in srgb,
+              var(--color-text-primary),
+              transparent 90%
           );
 
           .ab-box-icon {
@@ -196,9 +168,9 @@
 
         &:active {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 80%
+              in srgb,
+              var(--color-text-primary),
+              transparent 80%
           );
 
           .ab-box-icon {
@@ -255,9 +227,9 @@
   @include mixins.collapsible;
   @include mixins.collapsible-closed;
   background-color: color-mix(
-    in srgb,
-    var(--color-sheet-header-background),
-    transparent 50%
+      in srgb,
+      var(--color-sheet-header-background),
+      transparent 50%
   );
   border-bottom: 0 solid var(--color-bar-border);
   box-shadow: inset 0 0 5px var(--color-sheet-header-shadow);
@@ -431,17 +403,17 @@
 
         &:hover {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 90%
+              in srgb,
+              var(--color-text-primary),
+              transparent 90%
           );
         }
 
         &:active {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 80%
+              in srgb,
+              var(--color-text-primary),
+              transparent 80%
           );
         }
 
@@ -526,9 +498,9 @@
 
   &:hover {
     background-color: color-mix(
-      in srgb,
-      var(--color-text-primary),
-      transparent 90%
+        in srgb,
+        var(--color-text-primary),
+        transparent 90%
     );
 
     i {
@@ -538,9 +510,9 @@
 
   &:active {
     background-color: color-mix(
-      in srgb,
-      var(--color-text-primary),
-      transparent 80%
+        in srgb,
+        var(--color-text-primary),
+        transparent 80%
     );
 
     i {

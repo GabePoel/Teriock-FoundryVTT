@@ -43,7 +43,12 @@ export async function selectDialog(choices, options = {}) {
     choices,
     initial,
   });
-  selectContentHtml.append(selectField.toFormGroup({}, { name: "selected" }));
+  selectContentHtml.append(
+    selectField.toFormGroup(
+      { rootId: foundry.utils.randomID() },
+      { name: "selected" },
+    ),
+  );
   if (hintHtml.length > 0) {
     const appendHtmlString = await TextEditor.enrichHTML(hintHtml);
     const appendHtmlElement = document.createElement("div");
@@ -81,7 +86,10 @@ export async function selectDialog(choices, options = {}) {
     hint,
   });
   otherContentHtml.append(
-    otherField.toFormGroup({ units: "other" }, { name: "other" }),
+    otherField.toFormGroup(
+      { rootId: foundry.utils.randomID(), units: "other" },
+      { name: "other" },
+    ),
   );
 
   return await TeriockDialog.prompt({

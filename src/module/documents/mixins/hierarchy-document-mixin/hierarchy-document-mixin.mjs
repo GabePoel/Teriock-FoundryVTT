@@ -447,7 +447,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Resolved array containing all children.
-       * @returns {Promise<TeriockDocument[]>}
+       * @returns {Promise<TeriockCommon[]>}
        */
       async getChildArray() {
         return resolveDocuments(this.childArray);
@@ -464,7 +464,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The document that provides this document.
-       * @returns {Promise<TeriockDocument|void>}
+       * @returns {Promise<TeriockCommon|void>}
        */
       async getElder() {
         return await resolveDocument(this.elder);

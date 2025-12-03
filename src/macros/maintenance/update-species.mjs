@@ -73,7 +73,6 @@ async function processSpecies(speciesName) {
   speciesItem =
     /** @type {TeriockSpecies} */ await tm.utils.resolveDocument(speciesItem);
   await speciesItem.system.wikiPull({ notify: false });
-
   return {
     speciesName,
     success: true,

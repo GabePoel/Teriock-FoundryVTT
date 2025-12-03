@@ -7,21 +7,21 @@ import { TeriockDialog } from "../api/_module.mjs";
  */
 export default async function setStatDiceDialog(pool) {
   const numberForm = pool.schema.fields.number.fields.saved.toFormGroup(
-    {},
+    { rootId: foundry.utils.randomID() },
     {
       name: "number",
       value: pool.number.saved,
     },
   );
   const facesForm = pool.schema.fields.faces.toFormGroup(
-    {},
+    { rootId: foundry.utils.randomID() },
     {
       name: "faces",
       value: pool.faces,
     },
   );
   const disabledForm = pool.schema.fields.disabled.toFormGroup(
-    {},
+    { rootId: foundry.utils.randomID() },
     {
       name: "disabled",
       value: pool.disabled,

@@ -13,3 +13,4 @@ export { default as hotbarDropDialog } from "./hotbar-drop-dialog.mjs";
 export { default as inCombatExpirationDialog } from "./in-combat-expiration-dialog.mjs";
 export { default as setStatDiceDialog } from "./set-stat-dice-dialog.mjs";
 export { default as setQualifiersDialog } from "./set-qualifiers-dialog.mjs";
+export { default as refreshFromCompendiumDialog } from "./refresh-from-compendium-dialog.mjs";

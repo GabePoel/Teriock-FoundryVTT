@@ -32,6 +32,7 @@ export default class RecordField extends TypedObjectField {
       const itemInput = this.element.toFormGroup(
         {
           label: inputConfig.choices[item],
+          rootId: groupConfig.rootId,
         },
         {
           name: `${this.fieldPath}.${item}`,

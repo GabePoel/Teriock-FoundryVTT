@@ -30,6 +30,44 @@
   overflow: hidden;
 }
 
+@mixin sheet-entry-hover() {
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--color-text-primary),
+      transparent 90%
+    );
+  }
+
+  &:active {
+    background-color: color-mix(
+      in srgb,
+      var(--color-text-primary),
+      transparent 80%
+    );
+  }
+
+  &:focus:not(:active) {
+    background-color: color-mix(
+      in srgb,
+      var(--color-text-primary),
+      transparent 90%
+    );
+  }
+}
+
+@mixin title-text-spacing($right: 0) {
+  text-align: center;
+  padding-right: $right;
+}
+
+@mixin title-text-styling() {
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-family: var(--font-h1), serif;
+}
+
 @mixin image-right-border() {
   border-right: 1px solid var(--color-border);
   left: 1px solid var(--color-border);

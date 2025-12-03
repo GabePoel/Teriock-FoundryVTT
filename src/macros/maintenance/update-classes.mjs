@@ -10,6 +10,13 @@ const classJournalUuid =
 const classJournal =
   /** @type {TeriockJournalEntry} */ await fromUuid(classJournalUuid);
 
+const powers = /** @type {TeriockPower[]} */ await tm.utils.resolveDocuments(
+  classPack.index.contents.filter((i) => i.type === "power"),
+);
+for (const power of powers) {
+  await power.system.refreshFromCompendiumSource();
+}
+
 /**
  * Processes a single rank item
  * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key

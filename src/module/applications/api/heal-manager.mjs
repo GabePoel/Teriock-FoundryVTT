@@ -60,9 +60,8 @@ export default class TeriockHealManager extends TeriockStatManager {
       /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
       this.actor[collection].get(id);
     const statDie =
-      /** @type {StatDieModel} */ item.system.statDice[stat].dice[
-        Number(index)
-      ];
+      /** @type {StatDieModel} */
+      item.system.statDice[stat].dice[Number(index)];
     if (this._forHarm) {
       const takeHandler = new actionHandlers["roll-rollable-takes"](
         event,
@@ -89,8 +88,8 @@ export default class TeriockHealManager extends TeriockStatManager {
           return;
         }
         const part =
-          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
-            .part;
+          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */
+          el.dataset.part;
         await this.actor.system.takeHack(part);
         e.stopPropagation();
       });

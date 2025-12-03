@@ -11,7 +11,7 @@ export default async function durationDialog(ability) {
   const contentHtml = document.createElement("div");
   contentHtml.append(
     ability.system.schema.fields.duration.fields.unit.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       {
         name: "unit",
         value: ability.system.duration.unit,
@@ -20,7 +20,7 @@ export default async function durationDialog(ability) {
   );
   contentHtml.append(
     ability.system.schema.fields.duration.fields.quantity.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       {
         name: "quantity",
         value: ability.system.duration.quantity,
@@ -29,7 +29,7 @@ export default async function durationDialog(ability) {
   );
   contentHtml.append(
     ability.system.schema.fields.duration.fields.conditions.fields.present.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       {
         name: "present",
         value: ability.system.duration.conditions.present,
@@ -38,7 +38,7 @@ export default async function durationDialog(ability) {
   );
   contentHtml.append(
     ability.system.schema.fields.duration.fields.conditions.fields.absent.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       {
         name: "absent",
         value: ability.system.duration.conditions.absent,
@@ -47,7 +47,7 @@ export default async function durationDialog(ability) {
   );
   contentHtml.append(
     ability.system.schema.fields.duration.fields.stationary.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       {
         name: "stationary",
         value: ability.system.duration.stationary,
@@ -56,7 +56,7 @@ export default async function durationDialog(ability) {
   );
   contentHtml.append(
     ability.system.schema.fields.duration.fields.description.toFormGroup(
-      {},
+      { rootId: foundry.utils.randomID() },
       {
         name: "description",
         value: ability.system.duration.description,

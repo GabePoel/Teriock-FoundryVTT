@@ -20,6 +20,15 @@ command: >-
   const classJournal =
     /** @type {TeriockJournalEntry} */ await fromUuid(classJournalUuid);
 
+  const powers = /** @type {TeriockPower[]} */ await tm.utils.resolveDocuments(
+    classPack.index.contents.filter((i) => i.type === "power"),
+  );
+
+  for (const power of powers) {
+    await power.system.refreshFromCompendiumSource();
+  }
+
+
   /**
    * Processes a single rank item
    * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key
@@ -27,7 +36,7 @@ command: >-
    * @param {object} classObj - The class object
    * @param {number} rank - The rank number
    * @param {TeriockFolder} classFolder - The class folder object
-   * @returns {Promise<Object>} Promise that resolves with processing result
+   * @returns {Promise<Object>} Promise that resolves with the processing result
    */
   async function processRank(archetype, className, classObj, rank, classFolder)
   {
@@ -86,7 +95,7 @@ command: >-
    * @returns {Promise<Object>} Promise that resolves with processing results
    */
   async function processClass(archetype, className, classObj, archetypeFolder) {
-    // Find or create class folder
+    // Find or create a class folder
     let classFolder = classFolders.getName(classObj.name);
     if (!classFolder) {
       try {
@@ -118,7 +127,10 @@ command: >-
       );
     }
 
-    const classPage = classJournal.pages.getName(classObj.name);
+    const classPage =
+      /** @type {TeriockJournalEntryPage} */ classJournal.pages.getName(
+        classObj.name,
+      );
     const rankUuids = rankNames
       .map((n) => classPack.index.find((e) => e.name === n)?.uuid)
       .filter((n) => n);
@@ -170,7 +182,7 @@ command: >-
    * @returns {Promise<Object>} Promise that resolves with processing results
    */
   async function processArchetype(archetype, archetypeObj) {
-    // Find or create archetype folder
+    // Find or create an archetype folder
     let archetypeFolder = classFolders.getName(archetypeObj.name);
     if (!archetypeFolder) {
       try {

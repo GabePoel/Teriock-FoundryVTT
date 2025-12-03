@@ -76,6 +76,7 @@ for (const page of commonAnimalPages) {
     await fluency.update(familiarItemFluencyData);
   }
   await teriock.data.shared.parsing.processSubAbilities(subs, familiarItem);
+  await familiarItem.system.refreshFromCompendiumSource();
 }
 progress.update({
   pct: 1,

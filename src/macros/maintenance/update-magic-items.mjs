@@ -8,7 +8,7 @@ const progress = ui.notifications.info("Refreshing all magic items.", {
 async function processMagicItem(id) {
   let item =
     /** @type {TeriockEquipment} */ await magicItemsPack.getDocument(id);
-  await item.system.refreshFromIndex();
+  await item.system.refreshFromCompendiumSource();
 }
 
 const numMagicItems = magicItemsPack.index.contents.length;

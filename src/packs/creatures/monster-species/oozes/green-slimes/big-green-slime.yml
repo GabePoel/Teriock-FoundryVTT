@@ -5076,7 +5076,7 @@ items:
               rest} questions receive a @L[Keyword:Visions]{greater vision}. If
               you are at a place of great power or significance to the deity or
               entity you are asking, your visions are made even more powerful at
-              @L[Core:GM]{GM} discretion.</p>
+              @L[Core:Game Master]{GM} discretion.</p>
           results:
             hit: ''
             critHit: ''
@@ -5418,10 +5418,10 @@ items:
               in general.</p>
             proficient: >-
               <p>You also gain an @L[Category:Abilities]{ability} chosen by the
-              @L[Core:GM]{GM} when your familiar is within 100 feet of you. The
-              @L[Category:Abilities]{ability} is something your familiar can do
-              naturally, is symbolic of, or that is related to your relationship
-              with it.</p>
+              @L[Core:Game Master]{GM} when your familiar is within 100 feet of
+              you. The @L[Category:Abilities]{ability} is something your
+              familiar can do naturally, is symbolic of, or that is related to
+              your relationship with it.</p>
             fluent: ''
           results:
             hit: ''
@@ -6838,13 +6838,13 @@ items:
               <p>You may create 1 custom "rotator" @L[Category:Spells]{spells}
               using @L[Core:Elder Sorcery]{Elder Sorcery} words that you know
               using whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation
-              rules are dictated to you by your @L[Core:GM]{GM}. As with other
-              rotators, this spell is not always available to you. You have to
-              "rotate" into having it prepared. This spell may have a maximum
-              number of words equal to your @L[Core:Leveling Up]{level}. Your
-              @L[Core:GM]{GM} may allow you to "improvise"
-              @L[Category:Spells]{spells} as well, using whatever rules they
-              wish.</p>
+              rules are dictated to you by your @L[Core:Game Master]{GM}. As
+              with other rotators, this spell is not always available to you.
+              You have to "rotate" into having it prepared. This spell may have
+              a maximum number of words equal to your @L[Core:Leveling
+              Up]{level}. Your @L[Core:Game Master]{GM} may allow you to
+              "improvise" @L[Category:Spells]{spells} as well, using whatever
+              rules they wish.</p>
             proficient: >-
               <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1)
               custom "rotator" @L[Category:Spells]{spells} where
@@ -10352,7 +10352,7 @@ items:
     _id: g1LlrPl6H4nutRyP
     img: systems/teriock/src/icons/ranks/rank-3-nature-mage.webp
     effects:
-      - name: Nature Rotator Fluency
+      - name: Additional Nature Rotators
         type: ability
         system:
           elderSorcery: false
@@ -10382,15 +10382,10 @@ items:
           range: Self.
           overview:
             base: >-
-              <p>You may rotate between @L[Category:Nature element
-              spells]{nature} rotator @L[Category:Spells]{spells} during a
-              @L[Core:Short Rest]{short rest} instead of a @L[Core:Long
-              Rest]{long rest}.</p>
-            proficient: >-
-              <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Nature
-              Rotators]{Nature Rotators}. (This does not make you
-              @L[Core:Fluency Bonus]{fluent} in the @L[Category:Spells]{spells}
-              themselves.)</p>
+              <p>Add @L[Ability:Advanced Hack Healing]{Advanced Hack Healing}
+              and @L[Ability:Transmute]{Transmute} to your list of possible
+              @L[Category:Rotator spells]{rotator spells}.</p>
+            proficient: ''
             fluent: ''
           results:
             hit: ''
@@ -10406,12 +10401,14 @@ items:
             attributeImprovement:
               attribute: null
               minVal: 0
+              text: ''
             featSaveImprovement:
               attribute: null
               amount: proficient
+              text: ''
           skill: true
           spell: false
-          standard: true
+          standard: false
           ritual: false
           class: natureMage
           rotator: false
@@ -10462,11 +10459,6 @@ items:
           maxQuantity:
             raw: ''
             saved: ''
-          adept:
-            enabled: false
-            amount: 1
-          effectTypes: []
-          grantOnly: false
           impacts:
             base:
               statuses: []
@@ -10505,6 +10497,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -10515,8 +10512,12 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             proficient:
               statuses: []
               startStatuses: []
@@ -10525,15 +10526,7 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes:
-                - key: '!ability__name__eq__Nature Rotators__system.fluent'
-                  mode: 5
-                  value: 'true'
-                  priority: 10
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: 2 * (@rank.mag - 1) + @p
-                  priority: 10
+              changes: []
               common: []
               expiration:
                 normal:
@@ -10562,6 +10555,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -10572,8 +10570,12 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             fluent:
               statuses: []
               startStatuses: []
@@ -10611,6 +10613,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -10621,8 +10628,12 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             heightened:
               statuses: []
               startStatuses: []
@@ -10660,6 +10671,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -10670,32 +10686,835 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             macros: {}
-        _id: TTrrPTaidhZ4oZ07
-        img: systems/teriock/src/icons/abilities/nature-rotator-fluency.webp
+          qualifiers:
+            ephemeral:
+              saved: '0'
+              raw: '0'
+            suppressed:
+              saved: '0'
+              raw: '0'
+          _ref: >-
+            Compendium.teriock.creatures.Actor.KfnZ0SkYgXGGMUFh.Item.g1LlrPl6H4nutRyP.ActiveEffect.ugF2BF9KUpWK8Jr5
+          revealed: true
+          adept:
+            enabled: false
+            amount: 1
+          effectTypes: []
+          grantOnly: false
+          grantOnlyText: ''
+        img: systems/teriock/src/icons/abilities/additional-nature-rotators.webp
         changes: []
         disabled: false
         duration:
-          startTime: 175
+          startTime: null
           combat: null
-          startRound: 36
-          startTurn: 0
         origin: null
         transfer: true
         statuses: []
         flags:
           teriock:
             category: combat
+            defaultAbility: true
         _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.NvBiIrpOXLq9wUin
           coreVersion: '13'
           systemId: teriock
           systemVersion: 0.9.1
           lastModifiedBy: teriockBuilder00
-          compendiumSource: Compendium.teriock.abilities.Item.vDArJIJXFn2DaVAT
+        _id: ugF2BF9KUpWK8Jr5
         _key: >-
-          !actors.items.effects!KfnZ0SkYgXGGMUFh.g1LlrPl6H4nutRyP.TTrrPTaidhZ4oZ07
+          !actors.items.effects!KfnZ0SkYgXGGMUFh.g1LlrPl6H4nutRyP.ugF2BF9KUpWK8Jr5
+      - name: Advanced Hack Healing
+        type: ability
+        system:
+          elderSorcery: false
+          elderSorceryIncant: ''
+          powerSources:
+            - magical
+            - primal
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: active
+          executionTime: a1
+          delivery:
+            base: self
+            parent: null
+            package: null
+          targets:
+            - self
+          elements:
+            - nature
+          duration:
+            unit: hour
+            quantity: 8
+            conditions:
+              present: []
+              absent: []
+            stationary: false
+            description: 8 Hours
+          sustained: false
+          range: Self.
+          overview:
+            base: >-
+              <p>Whenever you @L[Core:Healing]{heal}, you may
+              @L[Core:Healing]{heal} a @L[Damage:Hack]{hack} as well.</p>
+            proficient: ''
+            fluent: ''
+          results:
+            hit: ''
+            critHit: ''
+            miss: ''
+            critMiss: ''
+            save: ''
+            critSave: ''
+            fail: ''
+            critFail: ''
+          piercing: normal
+          improvements:
+            attributeImprovement:
+              attribute: null
+              minVal: 0
+              text: ''
+            featSaveImprovement:
+              attribute: null
+              amount: proficient
+              text: ''
+          skill: false
+          spell: true
+          standard: true
+          ritual: false
+          class: natureMage
+          rotator: true
+          invoked: false
+          costs:
+            verbal: true
+            somatic: true
+            material: false
+            mp:
+              type: static
+              value:
+                static: 1
+                formula: ''
+                variable: ''
+            hp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            gp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            break: ''
+            materialCost: ''
+          heightened: ''
+          endCondition: ''
+          requirements: ''
+          expansion: null
+          expansionRange: null
+          expansionSaveAttribute: mov
+          trigger: ''
+          basic: false
+          form: special
+          limitation: ''
+          improvement: ''
+          prepared: true
+          warded: false
+          secret: false
+          gifted:
+            enabled: false
+            amount: 1
+          consumable: false
+          quantity: 1
+          maxQuantity:
+            raw: ''
+            saved: ''
+          effectTypes:
+            - healing
+            - regeneration
+          impacts:
+            base:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            proficient:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            fluent:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            heightened:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            macros: {}
+          qualifiers:
+            ephemeral:
+              saved: '0'
+              raw: '0'
+            suppressed:
+              saved: '0'
+              raw: '0'
+          _sup: ugF2BF9KUpWK8Jr5
+          _ref: >-
+            Compendium.teriock.classes.Item.ZJVf7Q3lQAqCuyzW.ActiveEffect.wvsy2xa90xVdxL6i
+          revealed: true
+          adept:
+            enabled: false
+            amount: 1
+          grantOnly: false
+          grantOnlyText: ''
+        img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.RX60K5QVsmwlhg32
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _id: wvsy2xa90xVdxL6i
+        _key: >-
+          !actors.items.effects!KfnZ0SkYgXGGMUFh.g1LlrPl6H4nutRyP.wvsy2xa90xVdxL6i
+      - name: Transmute
+        type: ability
+        system:
+          elderSorcery: false
+          elderSorceryIncant: ''
+          powerSources:
+            - magical
+            - primal
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: reactive
+          executionTime: r1
+          delivery:
+            base: self
+            parent: null
+            package: null
+          targets:
+            - self
+          elements:
+            - nature
+          duration:
+            unit: instant
+            quantity: 0
+            conditions:
+              present: []
+              absent: []
+            stationary: false
+            description: Instant
+          sustained: false
+          range: Self.
+          overview:
+            base: >-
+              <p>The triggering @L[Category:Standard abilities]{ability} is
+              "transformed" into a @L[Damage:Hack]{hack} instead of its normal
+              effect. The type of the @L[Damage:Hack]{hack} is determined by the
+              target of the triggering ability.</p><dl><dt>@L[Category:Creature
+              target abilities]{Creature target abilities}</dt><dd>Transformed
+              into a body hack.</dd><dt>@L[Category:Vitals target
+              abilities]{Vitals target abilities}</dt><dd>Transformed into a
+              vitals hack of your choice.</dd><dt>@L[Category:Arm target
+              abilities]{Arm target abilities}</dt><dd>Transformed into an arm
+              hack.</dd><dt>@L[Category:Leg target abilities]{Leg target
+              abilities}</dt><dd>Transformed into a leg
+              hack.</dd><dt>@L[Category:Limb target abilities]{Limb target
+              abilities}</dt><dd>If no limb is specified in either the target or
+              the effect, it is transformed into a limb hack of your
+              choice.</dd></dl><p>If the triggering @L[Category:Standard
+              abilities]{ability} was @L[Keyword:UB]{UB}, but you otherwise
+              would have been able to @L[Ability:Basic Block]{Block} it, you may
+              treat it as though it targeted your arm. </p>
+            proficient: ''
+            fluent: ''
+          results:
+            hit: ''
+            critHit: ''
+            miss: ''
+            critMiss: ''
+            save: ''
+            critSave: ''
+            fail: ''
+            critFail: ''
+          piercing: normal
+          improvements:
+            attributeImprovement:
+              attribute: null
+              minVal: 0
+              text: ''
+            featSaveImprovement:
+              attribute: null
+              amount: proficient
+              text: ''
+          skill: false
+          spell: true
+          standard: true
+          ritual: false
+          class: natureMage
+          rotator: true
+          invoked: false
+          costs:
+            verbal: false
+            somatic: false
+            material: false
+            mp:
+              type: static
+              value:
+                static: 1
+                formula: ''
+                variable: ''
+            hp:
+              type: hack
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            gp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            break: ''
+            materialCost: ''
+          heightened: ''
+          endCondition: ''
+          requirements: ''
+          expansion: null
+          expansionRange: null
+          expansionSaveAttribute: mov
+          trigger: >-
+            <p>You would take a @L[Category:Standard abilities]{standard
+            ability}.</p>
+          basic: false
+          form: special
+          limitation: ''
+          improvement: ''
+          prepared: true
+          warded: false
+          secret: false
+          gifted:
+            enabled: false
+            amount: 1
+          consumable: false
+          quantity: 1
+          maxQuantity:
+            raw: ''
+            saved: ''
+          effectTypes:
+            - transformation
+          impacts:
+            base:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks:
+                - arm
+                - leg
+                - body
+                - eye
+                - ear
+                - mouth
+                - nose
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            proficient:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            fluent:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            heightened:
+              statuses: []
+              startStatuses: []
+              endStatuses: []
+              rolls: {}
+              hacks: []
+              checks: []
+              duration: 0
+              changes: []
+              common: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      type: none
+                      roll: 2d4kh1
+                      threshold: 4
+                    when:
+                      time: start
+                      trigger: turn
+                      skip: 0
+                changeOnCrit: false
+                doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            macros: {}
+          qualifiers:
+            ephemeral:
+              saved: '0'
+              raw: '0'
+            suppressed:
+              saved: '0'
+              raw: '0'
+          _sup: ugF2BF9KUpWK8Jr5
+          _ref: >-
+            Compendium.teriock.classes.Item.ZJVf7Q3lQAqCuyzW.ActiveEffect.3PG0ldfFOiyUwiRe
+          revealed: true
+          adept:
+            enabled: false
+            amount: 1
+          grantOnly: false
+          grantOnlyText: ''
+        img: systems/teriock/src/icons/abilities/transmute.webp
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          combat: null
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.Y5ciVQQxNGybydyh
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _id: 3PG0ldfFOiyUwiRe
+        _key: >-
+          !actors.items.effects!KfnZ0SkYgXGGMUFh.g1LlrPl6H4nutRyP.3PG0ldfFOiyUwiRe
       - name: Expanded Nature Elder Sorcery
         type: ability
         system:
@@ -10734,14 +11553,14 @@ items:
               @L[Core:INT]{INT} @L[Core:Feat Interaction]{feat save} to attempt
               to learn it. If you succeed, you can add it to your rotator spell
               list. If you fail, you are @L[Keyword:Incapable]{incapable} of
-              attempting to learn that spell again. The @L[Core:GM]{GM} may
-              modify the DC based on the spell's complexity, your knowledge of
-              the spell, any special training you receive, if the spell's
+              attempting to learn that spell again. The @L[Core:Game Master]{GM}
+              may modify the DC based on the spell's complexity, your knowledge
+              of the spell, any special training you receive, if the spell's
               creator is there to assist you, or for any other factors they see
               fit. You may also attempt to learn words that you come across as
               long as they are of elements you are @L[Core:Fluency
-              Bonus]{fluent} in. The @L[Core:GM]{GM} may adjust the DC for these
-              as they see fit as well, but the default is DC 15 + OP
+              Bonus]{fluent} in. The @L[Core:Game Master]{GM} may adjust the DC
+              for these as they see fit as well, but the default is DC 15 + OP
               @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
               save}.</p>
             proficient: >-
@@ -10767,9 +11586,11 @@ items:
             attributeImprovement:
               attribute: null
               minVal: 0
+              text: ''
             featSaveImprovement:
               attribute: null
               amount: proficient
+              text: ''
           skill: true
           spell: false
           standard: true
@@ -10823,11 +11644,6 @@ items:
           maxQuantity:
             raw: ''
             saved: ''
-          adept:
-            enabled: false
-            amount: 1
-          effectTypes: []
-          grantOnly: false
           impacts:
             base:
               statuses: []
@@ -10866,6 +11682,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -10876,8 +11697,12 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             proficient:
               statuses: []
               startStatuses: []
@@ -10915,6 +11740,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -10925,8 +11755,12 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             fluent:
               statuses: []
               startStatuses: []
@@ -10964,6 +11798,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -10974,8 +11813,12 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             heightened:
               statuses: []
               startStatuses: []
@@ -11013,6 +11856,11 @@ items:
                       skip: 0
                 changeOnCrit: false
                 doesExpire: false
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              critStatuses: []
               transformation:
                 enabled: false
                 image: null
@@ -11023,30 +11871,49 @@ items:
                   fluencies: true
                   ranks: true
                 uuids: []
+                multiple: false
                 resetHp: true
                 resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
             macros: {}
+          qualifiers:
+            ephemeral:
+              saved: '0'
+              raw: '0'
+            suppressed:
+              saved: '0'
+              raw: '0'
+          _ref: >-
+            Compendium.teriock.creatures.Actor.KfnZ0SkYgXGGMUFh.Item.g1LlrPl6H4nutRyP.ActiveEffect.tMYU1C4aUoYRmC2e
+          revealed: true
+          adept:
+            enabled: false
+            amount: 1
+          effectTypes: []
+          grantOnly: false
+          grantOnlyText: ''
         _id: tMYU1C4aUoYRmC2e
         img: systems/teriock/src/icons/abilities/expanded-nature-elder-sorcery.webp
         changes: []
         disabled: false
         duration:
-          startTime: 175
+          startTime: null
           combat: null
-          startRound: 36
-          startTurn: 0
         origin: null
         transfer: true
         statuses: []
         flags:
           teriock:
             category: support
+            defaultAbility: true
         _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.f5h0v4S7y8W6X1Wg
           coreVersion: '13'
           systemId: teriock
           systemVersion: 0.9.1
           lastModifiedBy: teriockBuilder00
-          compendiumSource: Compendium.teriock.abilities.Item.f5h0v4S7y8W6X1Wg
         _key: >-
           !actors.items.effects!KfnZ0SkYgXGGMUFh.g1LlrPl6H4nutRyP.tMYU1C4aUoYRmC2e
     ownership:

@@ -4,9 +4,12 @@ import { toCamelCase } from "../../../../helpers/string.mjs";
 import { ensureChildren } from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDoc,
-  cleanObject,
+  cleanObject
 } from "../../../shared/parsing/clean-html-doc.mjs";
-import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
+import {
+  getBarText,
+  getText
+} from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 
@@ -134,7 +137,7 @@ export async function _parse(speciesData, rawHTML) {
     }
     await ensureChildren(speciesData.parent, "rank", rankNames);
   }
-  for (const rank of speciesData.parent.ranks.filter(
+  for (const rank of (await speciesData.parent.getRanks()).filter(
     (r) => r.system.classRank >= 3 && r.system.classRank <= 5,
   )) {
     await rank.deleteChildDocuments(

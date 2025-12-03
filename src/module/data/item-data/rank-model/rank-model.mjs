@@ -308,10 +308,18 @@ export default class TeriockRankModel extends StatGiverDataMixin(
     super.prepareSpecialData();
   }
 
+  ///** @inheritDoc */
+  //async refreshFromCompendiumSource(options = {}) {
+  //  if (this.classRank >= 3) {
+  //    options.createChildren = false;
+  //  }
+  //  await super.refreshFromCompendiumSource(options);
+  //}
+
   /** @inheritDoc */
   async refreshFromIndex() {
     for (const a of this.parent.abilities) {
-      await a.system.refreshFromIndex();
+      await a.system.refreshFromCompendiumSource();
     }
   }
 }

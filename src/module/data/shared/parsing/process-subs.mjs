@@ -47,7 +47,9 @@ async function processSubEffects(subs, doc, config) {
     newSubNames.add(subName);
     let subEffect = existingSubs.find((s) => s.name === subName);
     if (subEffect) {
-      await subEffect.system.hardRefreshFromIndex();
+      await subEffect.system.refreshFromCompendiumSource({
+        deleteChildren: true,
+      });
     } else {
       subEffect = await createFn(subName);
       const newEffects = await doc.createChildDocuments("ActiveEffect", [
