@@ -77,8 +77,9 @@ export default function bindCommonActions(rootElement) {
   );
   queryAll(rootElement, "[data-make-tooltip], [data-rich-tooltip]").forEach(
     /** @param {HTMLElement} el */ (el) => {
-      // Determine tooltip direction
+      // Determine tooltip direction and style
       el.addEventListener("pointerenter", (ev) => {
+        el.dataset.tooltipClass = "teriock-rich-tooltip";
         const rect = el.getBoundingClientRect();
         const leftSpace = rect.left;
         const rightSpace = window.innerWidth - rect.right;

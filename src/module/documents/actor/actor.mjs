@@ -220,10 +220,7 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     ]
       .filter((c) => !c.isEphemeral)
       .filter(
-        (c) =>
-          c.documentName !== "ActiveEffect" ||
-          c.system.revealed ||
-          game.user.isGM,
+        (c) => !c.metadata.revealable || c.system.revealed || game.user.isGM,
       );
   }
 

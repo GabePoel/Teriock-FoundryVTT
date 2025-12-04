@@ -27,7 +27,6 @@ export default function RevelationDataMixin(Base) {
         const schema = super.defineSchema();
         Object.assign(schema, {
           revealed: new fields.BooleanField({
-            gmOnly: true,
             hint: "Whether this has been revealed from an identify or other.",
             initial: true,
             label: "Revealed",

@@ -41,6 +41,7 @@ declare global {
         | Teriock.Documents.ActorType
         | Teriock.Documents.ItemType
         | Teriock.Documents.EffectType;
+      draggable?: boolean;
     };
 
     /** Pieces of a group of associations within a chat message. */

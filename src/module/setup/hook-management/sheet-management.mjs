@@ -11,4 +11,15 @@ export default function registerSheetManagementHooks() {
       bindCommonActions(element);
     },
   );
+
+  foundry.helpers.Hooks.on(
+    "renderRollTableSheet",
+    /**
+     * @param {ApplicationV2} _application
+     * @param {HTMLElement} element
+     */
+    (_application, element) => {
+      bindCommonActions(element);
+    },
+  );
 }

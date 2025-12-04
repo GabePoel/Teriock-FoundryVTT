@@ -1,4 +1,5 @@
 const powersPack = game.teriock.packs.powers;
+const creaturesPack = game.teriock.packs.creatures;
 const familiarsFolder = powersPack.folders.getName("Familiars");
 
 let commonAnimalPages = await teriock.helpers.wiki.fetchCategoryMembers(
@@ -31,13 +32,17 @@ for (const page of commonAnimalPages) {
   );
   console.log(subs);
   const name = animal + " Familiar";
-  let familiarItem = powersPack.index.find((p) => p.name === name);
+  let familiarItem = powersPack.index.getName(name);
   const familiarItemSystem = {
     type: "familiar",
     description:
-      "<p>Select one @L[Category:Abilities]{ability} from this to gain and delete the other one.</p>",
+      "<p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>",
     maxAv: 0,
   };
+  const creature = creaturesPack.index.getName(animal);
+  if (creature) {
+    familiarItemSystem.description += `<p>@Embed[${creature.uuid}]</p>`;
+  }
   const familiarItemFluencyData = {
     name: `${animal} Tamer`,
     type: "fluency",

@@ -48,44 +48,33 @@ export function _defineSchema() {
       initial: false,
       label: "Glued",
     }),
-    identification: new fields.SchemaField(
-      {
-        flaws: new TextField({
-          gmOnly: true,
-          initial: "",
-          label: "Unidentified Flaws",
-        }),
-        identified: new fields.BooleanField({
-          gmOnly: true,
-          initial: true,
-          label: "Identified",
-        }),
-        name: new fields.StringField({
-          gmOnly: true,
-          initial: "",
-          label: "Unidentified Name",
-        }),
-        notes: new TextField({
-          gmOnly: true,
-          initial: "",
-          label: "Unidentified Notes",
-        }),
-        powerLevel: new fields.StringField({
-          choices: TERIOCK.options.equipment.powerLevelShort,
-          gmOnly: true,
-          initial: "mundane",
-          label: "Unidentified Power Level",
-        }),
-        read: new fields.BooleanField({
-          gmOnly: true,
-          initial: true,
-          label: "Read",
-        }),
-      },
-      {
-        gmOnly: true,
-      },
-    ),
+    identification: new fields.SchemaField({
+      flaws: new TextField({
+        initial: "",
+        label: "Unidentified Flaws",
+      }),
+      identified: new fields.BooleanField({
+        initial: true,
+        label: "Identified",
+      }),
+      name: new fields.StringField({
+        initial: "",
+        label: "Unidentified Name",
+      }),
+      notes: new TextField({
+        initial: "",
+        label: "Unidentified Notes",
+      }),
+      powerLevel: new fields.StringField({
+        choices: TERIOCK.options.equipment.powerLevelShort,
+        initial: "mundane",
+        label: "Unidentified Power Level",
+      }),
+      read: new fields.BooleanField({
+        initial: true,
+        label: "Read",
+      }),
+    }),
     minStr: new EvaluationField({
       min: -3,
       initial: -3,

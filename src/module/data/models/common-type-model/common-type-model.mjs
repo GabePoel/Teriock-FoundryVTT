@@ -45,7 +45,6 @@ export default class CommonTypeModel extends TypeDataModel {
         required: false,
         nullable: true,
         initial: null,
-        gmOnly: true,
       }),
     };
   }

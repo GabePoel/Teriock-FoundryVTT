@@ -1,9 +1,6 @@
 // noinspection JSValidateTypes
 
-import {
-  getRollIcon,
-  makeIcon
-} from "../../../../helpers/utils.mjs";
+import { getRollIcon, makeIcon } from "../../../../helpers/utils.mjs";
 
 /**
  * Context menu entries.

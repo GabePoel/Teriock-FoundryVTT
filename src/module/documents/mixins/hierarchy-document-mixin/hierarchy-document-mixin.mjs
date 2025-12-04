@@ -283,7 +283,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /** @inheritDoc */
       get visible() {
-        return !this.sup;
+        return super.visible && !this.sup;
       }
 
       /**

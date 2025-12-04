@@ -105,6 +105,7 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
       prefix(this.scaling.br, "BR"),
       prefix(this.size.number.value, "Size"),
     ]);
+    parts.makeTooltip = this.parent.isViewer;
     return parts;
   }
 
