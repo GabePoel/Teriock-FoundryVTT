@@ -93,8 +93,8 @@ command: |-
     let maxBv = 0;
     let maxBvArmament;
     for (const a of creature.activeArmaments) {
-      const damage = game.teriock.Roll.meanValue(a.system.damage.base.value, {});
-      const bv = a.system.bv.value;
+      const damage = a.system.damage.base.currentValue;
+      const bv = a.system.bv.currentValue;
       if (damage >= maxDamage) {
         maxDamageArmament = a;
         maxDamage = damage;

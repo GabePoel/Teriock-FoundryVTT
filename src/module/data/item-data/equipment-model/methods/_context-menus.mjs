@@ -1,6 +1,9 @@
 // noinspection JSValidateTypes
 
-import { getRollIcon, makeIcon } from "../../../../helpers/utils.mjs";
+import {
+  getRollIcon,
+  makeIcon
+} from "../../../../helpers/utils.mjs";
 
 /**
  * Context menu entries.
@@ -13,7 +16,7 @@ export function _entries(equipmentData) {
     {
       name: "Use in Two Hands",
       icon: makeIcon(
-        getRollIcon(equipmentData.damage.twoHanded.value),
+        getRollIcon(equipmentData.damage.twoHanded.formula),
         "contextMenu",
       ),
       callback: equipmentData.roll.bind(equipmentData, { twoHanded: true }),

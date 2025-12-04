@@ -1,4 +1,4 @@
-import TeriockRoll from "../../../dice/roll.mjs";
+import { TeriockRoll } from "../../../dice/_module.mjs";
 import { FormulaField } from "../../shared/fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 

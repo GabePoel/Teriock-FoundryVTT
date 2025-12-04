@@ -9,10 +9,7 @@ command: |-
   const options = data.execution.options;
   const actor = data.execution.actor;
   const armaments = actor.activeArmaments.filter(
-    (e) =>
-      e.system.damage.base.value &&
-      e.system.damage.base.value !== "0" &&
-      actor.system.primaryAttacker !== e.id,
+    (e) => actor.system.primaryAttacker !== e.id,
   );
   if (armaments.length > 0) {
     const selectedArmament = await tm.dialogs.selectDocumentDialog(armaments, {

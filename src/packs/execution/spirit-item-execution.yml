@@ -12,15 +12,18 @@ command: |-
     const equipmentType = await tm.dialogs.selectEquipmentTypeDialog();
     let spiritItems;
     if (equipmentType in TERIOCK.options.equipment.equipmentType) {
-      const equipmentTypeName = TERIOCK.options.equipment.equipmentType[equipmentType];
-      const spiritItemReference = await fromUuid(game.teriock.packs.equipment().index.getName(equipmentTypeName).uuid);
+      const equipmentTypeName =
+        TERIOCK.options.equipment.equipmentType[equipmentType];
+      const spiritItemReference = await fromUuid(
+        game.teriock.packs.equipment.index.getName(equipmentTypeName).uuid,
+      );
       const spiritItemCopy = spiritItemReference.clone();
       spiritItemCopy.updateSource({
         name: "Spirit Item",
         "system.powerLevel": "magic",
         "system.consumable": false,
       });
-      spiritItems = await actor.createEmbeddedDocuments("Item", [ spiritItemCopy ]);
+      spiritItems = await actor.createEmbeddedDocuments("Item", [spiritItemCopy]);
     } else {
       spiritItems = await actor.createEmbeddedDocuments("Item", [
         {
@@ -37,11 +40,11 @@ command: |-
     spiritItem = spiritItems[0];
     await spiritItem.setFlag("teriock", "weight", spiritItem.system.weight);
     await spiritItem.update({
-      "system.tier.saved": "1",
-      "system.weight.saved": 0,
+      "system.tier.raw": "1",
+      "system.weight.raw": "0",
       "system.disabled": true,
     });
-    await tm.fetch.importProperty(spiritItem, "Master Crafted");
+    await tm.utils.ensureChildren(spiritItem, "property", "Master Crafted");
   }
 flags: {}
 _stats:

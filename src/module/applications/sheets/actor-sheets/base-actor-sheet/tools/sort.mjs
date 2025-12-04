@@ -60,7 +60,7 @@ export function sortEquipment(actor, equipment) {
     av: (e) => e.system.av.value ?? 0,
     bv: (e) => e.system.bv.value ?? 0,
     consumable: (e) => Number(e.system.consumable),
-    damage: (e) => e.system.damage.base.value ?? 0,
+    damage: (e) => e.system.damage.base.currentValue ?? 0,
     identified: (e) => Number(e.system.identified),
     equipmentType: (e) => e.system.equipmentType ?? "",
     equipped: (e) => Number(e.system.equipped),
