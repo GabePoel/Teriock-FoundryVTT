@@ -81,7 +81,6 @@ export default class FormulaField extends StringField {
     if (this.deterministic) {
       const roll = new TeriockRoll(value, {});
       if (!roll.isDeterministic) {
-        console.log("uh oh", this);
         throw new Error(`must not contain dice terms: ${value}`);
       }
     }
