@@ -41,10 +41,10 @@ export default class TeriockBodySheet extends WikiButtonSheetMixin(
     }
 
     const staticUpdates = {
-      ".ab-damage-button": { "system.damage.base.saved": 1 },
-      ".ab-av-button": { "system.av.saved": 1 },
-      ".ab-bv-button": { "system.bv.saved": 1 },
-      ".ab-hit-button": { "system.hit.saved": 1 },
+      ".ab-damage-button": { "system.damage.base.raw": 1 },
+      ".ab-av-button": { "system.av.raw": "1" },
+      ".ab-bv-button": { "system.bv.raw": "1" },
+      ".ab-hit-button": { "system.hit.raw": "1" },
     };
 
     for (const [selector, update] of Object.entries(staticUpdates)) {

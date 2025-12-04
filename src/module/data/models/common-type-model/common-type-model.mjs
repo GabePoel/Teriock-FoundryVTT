@@ -145,6 +145,7 @@ export default class CommonTypeModel extends TypeDataModel {
           docs = docs.filter((e) => e.system.revealed);
         }
         docs = TERIOCK.options.document[type].sorter(docs);
+        docs = docs.filter((d) => !d.isEphemeral);
         quickAddAssociation(
           docs,
           toTitleCase(TERIOCK.options.document[type]["getter"]),

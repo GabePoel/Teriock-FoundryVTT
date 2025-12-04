@@ -8,14 +8,17 @@ import { TeriockDialog } from "../api/_module.mjs";
  */
 export default async function setQualifiersDialog(doc) {
   const ephemeralForm =
-    doc.system.schema.fields.qualifiers.fields.ephemeral.fields.saved.toFormGroup(
+    doc.system.schema.fields.qualifiers.fields.ephemeral.fields.raw.toFormGroup(
       { rootId: foundry.utils.randomID() },
-      { name: "ephemeral", value: doc.system.qualifiers.ephemeral.saved },
+      { name: "ephemeral", value: doc.system._source.qualifiers.ephemeral.raw },
     );
   const suppressedForm =
-    doc.system.schema.fields.qualifiers.fields.suppressed.fields.saved.toFormGroup(
+    doc.system.schema.fields.qualifiers.fields.suppressed.fields.raw.toFormGroup(
       { rootId: foundry.utils.randomID() },
-      { name: "suppressed", value: doc.system.qualifiers.suppressed.saved },
+      {
+        name: "suppressed",
+        value: doc.system._source.qualifiers.suppressed.raw,
+      },
     );
   const compendiumSourceForm =
     doc.schema.fields._stats.fields.compendiumSource.toFormGroup(
@@ -45,8 +48,8 @@ export default async function setQualifiersDialog(doc) {
         const compendiumSource =
           button.form.elements.namedItem("compendiumSource").value;
         await doc.update({
-          "system.qualifiers.ephemeral.saved": ephemeral,
-          "system.qualifiers.suppressed.saved": suppressed,
+          "system.qualifiers.ephemeral.raw": ephemeral,
+          "system.qualifiers.suppressed.raw": suppressed,
           "_stats.compendiumSource": compendiumSource,
         });
       },

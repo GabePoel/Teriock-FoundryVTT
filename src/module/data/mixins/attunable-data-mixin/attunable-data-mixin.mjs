@@ -1,9 +1,5 @@
 import { isOwnerAndCurrentUser, makeIcon } from "../../../helpers/utils.mjs";
-import {
-  deriveModifiableDeterministic,
-  modifiableFormula,
-  prepareModifiableBase,
-} from "../../shared/fields/modifiable.mjs";
+import { EvaluationField } from "../../shared/fields/_module.mjs";
 
 /**
  * @param {typeof TeriockBaseItemModel} Base
@@ -22,7 +18,7 @@ export default function AttunableDataMixin(Base) {
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
-          tier: modifiableFormula(),
+          tier: new EvaluationField(),
         });
         return schema;
       }
@@ -151,7 +147,7 @@ export default function AttunableDataMixin(Base) {
               const ref = await fromUuid(this.reference);
               if (ref) {
                 await this.parent.update({
-                  "system.tier.saved": ref.system.tier.saved,
+                  "system.tier.saved": ref.system.tier.raw,
                 });
               }
             }
@@ -210,13 +206,14 @@ export default function AttunableDataMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        prepareModifiableBase(this.tier);
       }
 
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        deriveModifiableDeterministic(this.tier, this.parent);
+        this.tier.evaluate();
+        this.range.long.evaluate();
+        this.range.short.evaluate();
       }
     }
   );

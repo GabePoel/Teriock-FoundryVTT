@@ -6,7 +6,7 @@ import { ActorAttributeData, BarData, HackDataCollection } from "./types/stats";
 import { ProtectionData } from "./types/protections";
 import { SheetData } from "./types/sheet";
 import { TradecraftData } from "./types/tradecrafts";
-import { StatDieModel } from "../../models/_module.mjs";
+import { EvaluationModel, StatDieModel } from "../../models/_module.mjs";
 
 declare global {
   interface TeriockBaseActorData {
@@ -86,9 +86,9 @@ declare global {
     /** <schema> Detection parameters */
     detection: {
       /** <schema> Hiding based on sneak */
-      hiding: Teriock.Fields.ModifiableDeterministic;
+      hiding: EvaluationModel;
       /** <schema> Perceiving based on perception */
-      perceiving: Teriock.Fields.ModifiableDeterministic;
+      perceiving: EvaluationModel;
     };
     /** <base> <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
     encumbranceLevel: number;
@@ -120,7 +120,7 @@ declare global {
     /** <schema> Magic */
     magic: {
       /** <schema> Maximum number of rotators */
-      maxRotators: Teriock.Fields.ModifiableDeterministic;
+      maxRotators: EvaluationModel;
     };
     /** <schema> Money */
     money: {
@@ -249,7 +249,7 @@ declare global {
     /** <schema> Size */
     size: {
       /** <schema> Numbered size */
-      number: Teriock.Fields.ModifiableDeterministic;
+      number: EvaluationModel;
       /** <derived> Named size category */
       category: string;
       /** <derived> */
@@ -334,7 +334,7 @@ declare global {
       /** <derived> Weight of the actor's money */
       money: number;
       /** <schema> Weight of the actor */
-      self: Teriock.Fields.ModifiableDeterministic;
+      self: EvaluationModel;
       /** <derived> Total weight of the actor and everything they carry (self + carried) */
       value: number;
     };

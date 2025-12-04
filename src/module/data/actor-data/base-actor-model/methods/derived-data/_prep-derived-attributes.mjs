@@ -1,5 +1,4 @@
 import { TeriockActor } from "../../../../../documents/_module.mjs";
-import { deriveModifiableDeterministic } from "../../../../shared/fields/modifiable.mjs";
 
 /**
  * Prepares attribute saves and movement-related derived data.
@@ -10,20 +9,8 @@ import { deriveModifiableDeterministic } from "../../../../shared/fields/modifia
  */
 export function _prepDerivedAttributes(actorData) {
   for (const att of Object.keys(TERIOCK.index.attributes)) {
-    deriveModifiableDeterministic(
-      actorData.attributes[att].score,
-      actorData.parent,
-      {
-        floor: true,
-        min: -3,
-        max: 5,
-      },
-    );
-    deriveModifiableDeterministic(
-      actorData.attributes[att].passive,
-      actorData.parent,
-      { floor: true },
-    );
+    actorData.attributes[att].score.evaluate();
+    actorData.attributes[att].passive.evaluate();
   }
   _preparePresence(actorData);
   const { attributes, scaling } = actorData;
@@ -35,13 +22,8 @@ export function _prepDerivedAttributes(actorData) {
         : 0;
     attr.saveBonus = attr.score.value * 2 + bonus;
   });
-  deriveModifiableDeterministic(actorData.size.number, actorData.parent, {
-    min: 0,
-    max: 30,
-  });
-  deriveModifiableDeterministic(actorData.weight.self, actorData.parent, {
-    min: 0,
-  });
+  actorData.size.number.evaluate();
+  actorData.weight.self.evaluate();
   const sizeDefinition = TeriockActor.sizeDefinition(
     actorData.size.number.value,
   );

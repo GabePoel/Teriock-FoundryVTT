@@ -80,24 +80,6 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
           initial: 3,
         }),
       }),
-      sizeStepAbilities: new fields.TypedObjectField(
-        new fields.SchemaField({
-          gain: new fields.SetField(new fields.StringField()),
-          lose: new fields.SetField(new fields.StringField()),
-        }),
-      ),
-      sizeStepHp: new fields.NumberField({
-        hint: "Size interval at which this species' HP increases.",
-        initial: null,
-        label: "HP Size Interval",
-        nullable: true,
-      }),
-      sizeStepMp: new fields.NumberField({
-        hint: "Size interval at which this species' MP increases.",
-        initial: null,
-        label: "MP Size Interval",
-        nullable: true,
-      }),
       traits: new fields.SetField(
         new fields.StringField({ choices: TERIOCK.index.traits }),
         {

@@ -285,9 +285,9 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     }
     const tokenUpdates =
       foundry.utils.getProperty(changed, "prototypeToken") || {};
-    if (foundry.utils.hasProperty(changed, "system.size.saved")) {
+    if (foundry.utils.hasProperty(changed, "system.size.raw")) {
       const tokenSize = this.constructor.sizeDefinition(
-        changed.size.saved,
+        changed.size.raw,
       ).length;
       if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
         tokenUpdates["prototypeToken.width"] = tokenSize;

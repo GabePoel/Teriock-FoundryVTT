@@ -162,11 +162,11 @@ export async function _parse(rankData, rawHTML) {
     description: getHTML(".class-description") || "",
     statDice: {
       hp: {
-        "number.saved": "1",
+        "number.raw": "1",
         faces: ARCHETYPE_FACES[archetype]["hp"],
       },
       mp: {
-        "number.saved": "1",
+        "number.raw": "1",
         faces: ARCHETYPE_FACES[archetype]["mp"],
       },
     },

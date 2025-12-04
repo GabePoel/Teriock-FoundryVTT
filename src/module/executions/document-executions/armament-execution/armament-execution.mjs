@@ -29,7 +29,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     this.wither = wither;
     this.bonusDamage = bonusDamage;
     if (options.formula === undefined) {
-      this.formula = this.source.system.damage.base.value;
+      this.formula = this.source.system.damage.base.formula;
     }
   }
 

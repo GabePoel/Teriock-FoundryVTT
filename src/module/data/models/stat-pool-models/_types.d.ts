@@ -1,11 +1,11 @@
-import { StatDieModel } from "../_module.mjs";
+import { EvaluationModel, StatDieModel } from "../_module.mjs";
 import { StatDieData } from "../stat-die-model/_types";
 
 export interface StatPoolData {
   dice: StatDieData[];
   disabled: boolean;
   faces: number;
-  number: Teriock.Fields.ModifiableDeterministic;
+  number: EvaluationModel;
   stat: string;
 }
 

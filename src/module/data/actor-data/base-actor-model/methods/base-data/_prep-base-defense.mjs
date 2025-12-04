@@ -7,7 +7,7 @@ export function _prepBaseDefense(actorData) {
   const armor = actorData.parent.equipment.filter(
     (e) => e.system.isEquipped && e.system.equipmentClasses.has("armor"),
   );
-  const baseAv = Math.max(armor.map((a) => a.system.av.saved));
+  const baseAv = Math.max(armor.map((a) => a.system.av.value));
   actorData.defense = {
     av: {
       base: baseAv,

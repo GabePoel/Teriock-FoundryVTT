@@ -48,9 +48,9 @@ export async function _parse(equipmentData, rawHTML) {
   };
   if (damageText) {
     const match = damageText.match(/^([^(]+)\s*\(([^)]+)\)/);
-    parameters.damage.base.saved = match ? match[1].trim() : damageText;
+    parameters.damage.base.raw = match ? match[1].trim() : damageText;
     if (match) {
-      parameters.damage.twoHanded.saved = match[2].trim();
+      parameters.damage.twoHanded.raw = match[2].trim();
     }
   }
 
@@ -60,11 +60,11 @@ export async function _parse(equipmentData, rawHTML) {
     short: {},
     ranged: false,
   };
-  parameters.weight = { saved: cleanValue(getValue(".weight")) };
-  parameters.range.short = { saved: cleanValue(getText(".short-range")) };
-  parameters.range.long = { saved: cleanValue(getText(".normal-range")) };
-  parameters.range.long = { saved: cleanValue(getText(".long-range")) };
-  parameters.minStr = { saved: cleanValue(getValue(".min-str")) };
+  parameters.weight = { raw: cleanValue(getValue(".weight")) };
+  parameters.range.short = { raw: cleanValue(getText(".short-range")) };
+  parameters.range.long = { raw: cleanValue(getText(".normal-range")) };
+  parameters.range.long = { raw: cleanValue(getText(".long-range")) };
+  parameters.minStr = { raw: cleanValue(getValue(".min-str")) };
   const consumableElement = doc.querySelector(
     ".metadata[data-type='consumable']",
   );
@@ -92,7 +92,7 @@ export async function _parse(equipmentData, rawHTML) {
   console.log(attackPenalty);
   if (attackPenalty) {
     parameters.attackPenalty = {
-      saved: attackPenalty,
+      raw: attackPenalty,
     };
   }
 
@@ -113,8 +113,8 @@ export async function _parse(equipmentData, rawHTML) {
   // Parse sb, av, bv
   parameters.fightingStyle =
     toCamelCase(getValue(".sb") || "") ?? parameters.fightingStyle;
-  parameters.av = { saved: toInt(cleanValue(getValue(".av"))) || 0 };
-  parameters.bv = { saved: toInt(cleanValue(getValue(".bv"))) || 0 };
+  parameters.av = { raw: toInt(cleanValue(getValue(".av"))) || 0 };
+  parameters.bv = { raw: toInt(cleanValue(getValue(".bv"))) || 0 };
 
   // Sort and filter properties and equipment classes
   parameters.equipmentClasses = new Set(

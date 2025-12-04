@@ -91,20 +91,24 @@ export function formulaExists(formula) {
  * Add a suffix to a string if it exists.
  * @param {string|number} base
  * @param {string} suffix
+ * @param {string} space
  */
-export function suffix(base, suffix) {
+export function suffix(base, suffix, space = " ") {
   if (formulaExists(base)) {
-    return `${base} ${suffix}`;
+    return `${base}${space}${suffix}`;
   }
+  return "";
 }
 
 /**
  * Add a suffix to a string if it exists.
  * @param {string|number} base
  * @param {string} prefix
+ * @param {string} space
  */
-export function prefix(base, prefix) {
+export function prefix(base, prefix, space = " ") {
   if (formulaExists(base)) {
-    return `${prefix} ${base}`;
+    return `${prefix}${space}${base}`;
   }
+  return "";
 }

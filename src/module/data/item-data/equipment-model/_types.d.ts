@@ -1,4 +1,5 @@
-import type { ArmamentDataMixinInterface } from "../../mixins/armament-data-mixin/_types";
+import { ArmamentDataMixinInterface } from "../../mixins/armament-data-mixin/_types";
+import { EvaluationModel } from "../../models/_module.mjs";
 
 declare module "./equipment-model.mjs" {
   export default interface TeriockEquipmentModel
@@ -6,9 +7,9 @@ declare module "./equipment-model.mjs" {
     /** <schema> Damage Dice */
     damage: {
       /** <schema> Damage this always deals */
-      base: Teriock.Fields.ModifiableIndeterministic;
+      base: EvaluationModel;
       /** <schema> Damage this deals in two hands */
-      twoHanded: Teriock.Fields.ModifiableIndeterministic;
+      twoHanded: EvaluationModel;
       /** <schema> Additional damage types to be added to all the base damage */
       types: Set<string>;
     };
@@ -40,17 +41,15 @@ declare module "./equipment-model.mjs" {
       read: boolean;
     };
     /** <schema> Minimum STR */
-    minStr: Teriock.Fields.ModifiableNumber;
+    minStr: EvaluationModel;
     /** <schema> Power Level */
     powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
     /** <schema> Price */
     price: number;
     /** <schema> Is the equipment shattered? */
     shattered: boolean;
-    /** <schema> Presence Tier */
-    tier: Teriock.Fields.ModifiableDeterministic;
     /** <schema> Weight (lb) */
-    weight: Teriock.Fields.ModifiableNumber & {
+    weight: EvaluationModel & {
       /** <special> Weight times quantity */
       total: number;
     };

@@ -1,14 +1,16 @@
+import { EvaluationModel } from "../../models/_module.mjs";
+
 export interface ArmamentDataMixinInterface {
   /** <schema> How much this increases an actor's attack penalty by per use */
-  attackPenalty: Teriock.Fields.ModifiableIndeterministic;
+  attackPenalty: EvaluationModel;
   /** <schema> Armor Value */
-  av: Teriock.Fields.ModifiableNumber;
+  av: EvaluationModel;
   /** <schema> Block Value */
-  bv: Teriock.Fields.ModifiableNumber;
+  bv: EvaluationModel;
   /** <schema> Damage Dice */
   damage: {
     /** <schema> Damage this always deals */
-    base: Teriock.Fields.ModifiableIndeterministic;
+    base: EvaluationModel;
     /** <schema> Additional damage types to be added to all the base damage */
     types: Set<string>;
   };
@@ -17,7 +19,7 @@ export interface ArmamentDataMixinInterface {
   /** <schema> Flaws */
   flaws: string;
   /** <schema> Additional Hit Bonus */
-  hit: Teriock.Fields.ModifiableNumber;
+  hit: EvaluationModel;
   /** <schema> Notes */
   notes: string;
   /** <base> Piercing */
@@ -30,13 +32,13 @@ export interface ArmamentDataMixinInterface {
   /** <schema> Range (ft) (if ranged) */
   range: {
     /** <schema> Long range (this is the default range) */
-    long: Teriock.Fields.ModifiableDeterministic;
+    long: EvaluationModel;
     /** <schema> Is the equipment melee? */
     melee: boolean;
     /** <schema> Is the equipment ranged? */
     ranged: boolean;
     /** <schema> Short range */
-    short: Teriock.Fields.ModifiableDeterministic;
+    short: EvaluationModel;
   };
   /** <derived> Special Rules (Weapon Fighting Style) */
   specialRules: string;

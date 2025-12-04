@@ -1,10 +1,5 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
-import {
-  dotJoin,
-  formulaExists,
-  prefix,
-  suffix,
-} from "../../../helpers/string.mjs";
+import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
 import {
   ArmamentDataMixin,
   AttunableDataMixin,
@@ -12,12 +7,6 @@ import {
   ExecutableDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import {
-  deriveModifiableDeterministic,
-  deriveModifiableIndeterministic,
-  deriveModifiableNumber,
-  prepareModifiableBase,
-} from "../../shared/fields/modifiable.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
@@ -209,7 +198,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
     parts.struck = !this.isEquipped;
     parts.shattered = this.shattered;
     parts.text = dotJoin([
-      suffix(this.damage.base.value, "Damage"),
+      suffix(this.damage.base.text, "damage"),
       suffix(this.bv.value, "BV"),
       suffix(this.av.value, "AV"),
       prefix(this.tier.value, "Tier"),
@@ -224,7 +213,10 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
    * @returns {boolean}
    */
   get hasTwoHandedAttack() {
-    return formulaExists(this.damage.twoHanded.saved);
+    return (
+      this.damage.twoHanded.nonZero &&
+      this.damage.twoHanded.formula !== this.damage.base.formula
+    );
   }
 
   /** @inheritDoc */
@@ -280,16 +272,6 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   }
 
   /** @inheritDoc */
-  prepareBaseData() {
-    super.prepareBaseData();
-    prepareModifiableBase(this.weight);
-    prepareModifiableBase(this.minStr);
-    prepareModifiableBase(this.damage.twoHanded);
-    prepareModifiableBase(this.range.long);
-    prepareModifiableBase(this.range.short);
-  }
-
-  /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     deriving._prepareDerivedData(this);
@@ -301,17 +283,14 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
       this.tier.raw = "";
     }
     super.prepareSpecialData();
-    deriveModifiableNumber(this.minStr, { min: -3 });
-    deriveModifiableIndeterministic(this.damage.twoHanded);
-    deriveModifiableDeterministic(this.range.long, this.parent);
-    deriveModifiableDeterministic(this.range.short, this.parent);
-    deriveModifiableNumber(this.weight, { min: 0 });
+    this.minStr.evaluate();
+    this.weight.evaluate();
     this.weight.total = this.weight.value;
     if (this.consumable) {
       this.weight.total = this.weight.value * this.quantity;
     }
     if (!this.hasTwoHandedAttack) {
-      this.damage.twoHanded.value = this.damage.base.value;
+      this.damage.twoHanded.raw = this.damage.base.raw;
     }
   }
 

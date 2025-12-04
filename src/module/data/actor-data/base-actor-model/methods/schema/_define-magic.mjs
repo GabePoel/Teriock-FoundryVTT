@@ -1,4 +1,4 @@
-import { modifiableFormula } from "../../../../shared/fields/modifiable.mjs";
+import { EvaluationField } from "../../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -10,8 +10,8 @@ const { fields } = foundry.data;
  */
 export function _defineMagic(schema) {
   schema.magic = new fields.SchemaField({
-    maxRotators: modifiableFormula({
-      deterministic: true,
+    maxRotators: new EvaluationField({
+      floor: true,
     }),
   });
   return schema;

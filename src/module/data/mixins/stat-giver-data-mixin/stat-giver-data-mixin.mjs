@@ -3,10 +3,6 @@ import {
   HpPoolModel,
   MpPoolModel,
 } from "../../models/stat-pool-models/_module.mjs";
-import {
-  deriveModifiableDeterministic,
-  prepareModifiableBase,
-} from "../../shared/fields/modifiable.mjs";
 
 const { fields } = foundry.data;
 
@@ -42,19 +38,16 @@ export default function StatGiverDataMixin(Base) {
 
       /** @inheritDoc */
       prepareBaseData() {
+        super.prepareBaseData();
         for (const pool of Object.values(this.statDice)) {
-          prepareModifiableBase(pool.number);
+          pool.number.evaluate();
         }
       }
 
       /** @inheritDoc */
       prepareSpecialData() {
         for (const [stat, pool] of Object.entries(this.statDice)) {
-          deriveModifiableDeterministic(pool.number, this.parent, {
-            floor: true,
-            min: 0,
-            blank: 1,
-          });
+          pool.number.evaluate();
           pool.stat = stat;
           if (pool.dice.length < pool.number.value) {
             for (let i = pool.dice.length; i < pool.number.value; i++) {

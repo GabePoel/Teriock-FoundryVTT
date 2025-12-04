@@ -40,7 +40,7 @@ export async function _parse(bodyData, rawHTML) {
       damageText = damageText.split(" ")[0];
     }
     const match = damageText.match(/^([^(]+)\s*\(([^)]+)\)/);
-    parameters.damage.base.saved = match ? match[1].trim() : damageText;
+    parameters.damage.base.raw = match ? match[1].trim() : damageText;
   }
 
   //  Parse arrays
@@ -60,8 +60,8 @@ export async function _parse(bodyData, rawHTML) {
   // Parse sb, av, bv
   parameters.fightingStyle =
     toCamelCase(getValue(".sb") || "") ?? parameters.fightingStyle;
-  parameters.av = { saved: toInt(cleanValue(getValue(".av"))) || 0 };
-  parameters.bv = { saved: toInt(cleanValue(getValue(".bv"))) || 0 };
+  parameters.av = { raw: toInt(cleanValue(getValue(".av"))) || 0 };
+  parameters.bv = { raw: toInt(cleanValue(getValue(".bv"))) || 0 };
 
   const toCreate = Array.from(properties);
   await ensureChildren(bodyData.parent, "property", toCreate || []);

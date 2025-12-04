@@ -11,14 +11,14 @@
   }}
   {{formBox
     (formInput
-      systemFields.maxQuantity.fields.saved
+      systemFields.maxQuantity
       dataset=(object tooltip="Maximum Quantity")
       disabled=(not editable)
-      value=system.maxQuantity.saved
+      value=system._source.maxQuantity.raw
     )
     icon="infinity"
     unselected=(concat
-      (ifThen system.maxQuantity.saved system.maxQuantity.value "No") " Maximum"
+      (ifThen system.maxQuantity.raw system.maxQuantity.value "No") " Maximum"
     )
   }}
 </div>

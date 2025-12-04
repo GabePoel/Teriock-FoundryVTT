@@ -51,6 +51,7 @@ export default class TeriockPowerModel extends ProficiencyDataMixin(
     ) {
       foundry.utils.setProperty(data, "type", "other");
     }
+    return super.migrateData(data);
   }
 
   /** @inheritDoc */

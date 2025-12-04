@@ -1,4 +1,4 @@
-import { formulaExists } from "../../../../helpers/string.mjs";
+import { prefix, suffix } from "../../../../helpers/string.mjs";
 
 /**
  * Generates message parts for a piece of equipment.
@@ -9,25 +9,15 @@ import { formulaExists } from "../../../../helpers/string.mjs";
 export function _messageParts(equipmentData) {
   const ref = TERIOCK.options.equipment;
   const src = equipmentData;
-  let damageString = "";
-  let twoHandedDamageString = "";
-  if (formulaExists(src.damage.base.value)) {
-    damageString += src.damage.base.value;
-  }
-  if (formulaExists(damageString)) {
-    damageString += " damage";
-  }
-  if (src.hasTwoHandedAttack) {
-    twoHandedDamageString = src.damage.twoHanded.value;
-  }
-  if (formulaExists(twoHandedDamageString)) {
-    twoHandedDamageString += " damage";
-  }
+  const damageString = suffix(src.damage.base.text, "damage");
+  const twoHandedDamageString = src.hasTwoHandedAttack
+    ? suffix(src.damage.twoHanded.text, "damage")
+    : "";
   let rangeString = "";
-  if (formulaExists(src.range.long.raw)) {
-    rangeString += src.range.long.raw;
-    if (src.range.short.raw) {
-      rangeString = src.range.short.raw + " / " + rangeString;
+  if (src.range.long.nonZero) {
+    rangeString += src.range.long.formula;
+    if (src.range.short.nonZero) {
+      rangeString = src.range.short.formula + " / " + rangeString;
     }
     rangeString += " ft";
   }
@@ -49,8 +39,8 @@ export function _messageParts(equipmentData) {
         damageString,
         twoHandedDamageString,
         src.hit.value ? `+${src.hit.value} Hit Bonus` : "",
-        formulaExists(equipmentData.attackPenalty.raw)
-          ? equipmentData.attackPenalty.raw + " AP"
+        equipmentData.attackPenalty.nonZero
+          ? equipmentData.attackPenalty.formula + " AP"
           : "",
         TERIOCK.index.weaponFightingStyles[src.fightingStyle],
       ],
@@ -69,7 +59,7 @@ export function _messageParts(equipmentData) {
       wrappers: [
         src.weight.value + " lb",
         src.minStr.value + " min STR",
-        src.tier.raw ? "Tier " + src.tier.raw : "",
+        prefix(src.tier.text, "Tier"),
       ],
     },
     {

@@ -99,7 +99,7 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
   /** @inheritDoc */
   static migrateData(data) {
     data = migrateHierarchy(data);
-    return data;
+    return super.migrateData(data);
   }
 
   /**

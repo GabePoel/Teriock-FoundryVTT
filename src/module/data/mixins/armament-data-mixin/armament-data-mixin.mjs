@@ -1,14 +1,7 @@
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { ArmamentExecution } from "../../../executions/document-executions/_module.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
-import { TextField } from "../../shared/fields/_module.mjs";
-import {
-  deriveModifiableIndeterministic,
-  deriveModifiableNumber,
-  modifiableFormula,
-  modifiableNumber,
-  prepareModifiableBase,
-} from "../../shared/fields/modifiable.mjs";
+import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -37,14 +30,21 @@ export default function ArmamentDataMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return foundry.utils.mergeObject(super.defineSchema(), {
-          attackPenalty: modifiableFormula({
+          attackPenalty: new EvaluationField({
             deterministic: false,
             initial: "-3",
+            blank: "-3",
           }),
-          av: modifiableNumber(),
-          bv: modifiableNumber(),
+          av: new EvaluationField({
+            floor: true,
+            min: 0,
+          }),
+          bv: new EvaluationField({
+            floor: true,
+            min: 0,
+          }),
           damage: new fields.SchemaField({
-            base: modifiableFormula({
+            base: new EvaluationField({
               deterministic: false,
             }),
             types: new fields.SetField(new fields.StringField()),
@@ -63,7 +63,10 @@ export default function ArmamentDataMixin(Base) {
             initial: "",
             label: "Flaws",
           }),
-          hit: modifiableNumber(),
+          hit: new EvaluationField({
+            floor: true,
+            deterministic: false,
+          }),
           notes: new TextField({
             initial: "",
             label: "Notes",
@@ -81,7 +84,7 @@ export default function ArmamentDataMixin(Base) {
             }),
           }),
           range: new fields.SchemaField({
-            long: modifiableFormula(),
+            long: new EvaluationField(),
             melee: new fields.BooleanField({
               initial: true,
               label: "Melee",
@@ -90,7 +93,7 @@ export default function ArmamentDataMixin(Base) {
               initial: false,
               label: "Ranged",
             }),
-            short: modifiableFormula(),
+            short: new EvaluationField(),
           }),
           specialRules: new TextField({
             initial: "",
@@ -129,7 +132,7 @@ export default function ArmamentDataMixin(Base) {
        * @returns {string}
        */
       get summarizedAttack() {
-        return `${this.damage.base.value || 0} damage`;
+        return `${this.damage.base.formula} damage`;
       }
 
       /**
@@ -142,7 +145,7 @@ export default function ArmamentDataMixin(Base) {
 
       /** @inheritDoc */
       get useIcon() {
-        return getRollIcon(this.damage.base.value);
+        return getRollIcon(this.damage.base.formula);
       }
 
       /**
@@ -150,7 +153,9 @@ export default function ArmamentDataMixin(Base) {
        * @returns {Teriock.Execution.ArmamentExecutionOptions}
        */
       parseEvent(event) {
-        const options = super.parseEvent(event);
+        const options =
+          /** @type {Teriock.Execution.ArmamentExecutionOptions} */
+          super.parseEvent(event);
         Object.assign(options, {
           crit: event.altKey,
         });
@@ -160,14 +165,6 @@ export default function ArmamentDataMixin(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        prepareModifiableBase(this.av);
-        prepareModifiableBase(this.bv);
-        prepareModifiableBase(this.hit);
-        prepareModifiableBase(this.damage.base);
-        prepareModifiableBase(this.attackPenalty);
-        if (this.damage.base.saved.trim() === "0") {
-          this.damage.base.raw = "";
-        }
         this.piercing = {
           av0: false,
           ub: false,
@@ -192,24 +189,13 @@ export default function ArmamentDataMixin(Base) {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        deriveModifiableIndeterministic(this.attackPenalty);
-        deriveModifiableNumber(this.av, {
-          floor: true,
-          min: 0,
-        });
-        deriveModifiableNumber(this.bv, {
-          floor: true,
-          min: 0,
-        });
-        deriveModifiableNumber(this.hit, {
-          floor: true,
-          min: 0,
-        });
-        deriveModifiableIndeterministic(this.damage.base);
+        this.av.evaluate();
+        this.bv.evaluate();
+        this.hit.evaluate();
         if (this.piercing.ub) {
           this.piercing.av0 = true;
         }
-        if (!this.damage.base.value || this.damage.base.value === "0") {
+        if (!this.damage.base.nonZero) {
           this.range.melee = false;
         }
       }

@@ -1,4 +1,4 @@
-import { modifiableFormula } from "../../../../shared/fields/modifiable.mjs";
+import { EvaluationField } from "../../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,8 +12,9 @@ const { fields } = foundry.data;
  */
 function attributeField(name) {
   return new fields.SchemaField({
-    passive: modifiableFormula({
+    passive: new EvaluationField({
       deterministic: true,
+      floor: true,
       initial: `@att.${name.toLowerCase()} * 2 + 10`,
       label: `Passive ${name} Value`,
     }),
@@ -25,10 +26,13 @@ function attributeField(name) {
       initial: false,
       label: `Proficient in ${name} Saves`,
     }),
-    score: modifiableFormula({
+    score: new EvaluationField({
       deterministic: true,
+      floor: true,
       initial: "-3",
       label: `${name} Save Bonus`,
+      max: 5,
+      min: -3,
     }),
   });
 }
@@ -59,12 +63,12 @@ export function _defineAttributes(schema) {
     }),
   });
   schema.size = new fields.SchemaField({
-    number: modifiableFormula({
+    number: new EvaluationField({
+      floor: false,
       initial: "3",
       label: "Size",
-      min: 0,
       max: 30,
-      deterministic: true,
+      min: 0,
     }),
   });
   schema.attributes = new fields.SchemaField({

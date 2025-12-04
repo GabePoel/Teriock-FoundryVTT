@@ -56,9 +56,9 @@ export class StandardDamageHandler extends ActionHandler {
     if (this.dataset.attacker) {
       attacker = await fromUuid(pureUuid(this.dataset.attacker));
     }
-    let formula = attacker.system.damage.base.value;
+    let formula = attacker.system.damage.base.formula;
     if (this.event.ctrlKey) {
-      formula = attacker.system.damage.twoHanded.value;
+      formula = attacker.system.damage.twoHanded.formula;
     }
     return formula;
   }

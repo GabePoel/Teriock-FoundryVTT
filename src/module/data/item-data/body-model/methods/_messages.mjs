@@ -1,4 +1,4 @@
-import { formulaExists } from "../../../../helpers/string.mjs";
+import { prefix, suffix } from "../../../../helpers/string.mjs";
 
 /**
  * Generates message parts for a body part.
@@ -12,12 +12,9 @@ export function _messageParts(bodyData) {
       icon: "fa-crosshairs-simple",
       label: "Attack",
       wrappers: [
-        bodyData.damage.base.value +
-          (bodyData.damage.base.value ? " damage" : ""),
-        bodyData.hit.value ? `+${bodyData.hit.value} Hit Bonus` : "",
-        formulaExists(bodyData.attackPenalty.raw)
-          ? bodyData.attackPenalty.raw + " AP"
-          : "",
+        suffix(bodyData.damage.base.text, "damage"),
+        suffix(prefix(bodyData.hit.text, "+", ""), "hit bonus"),
+        suffix(bodyData.attackPenalty.text, "AP"),
         TERIOCK.index.weaponFightingStyles[bodyData.fightingStyle],
       ],
     },

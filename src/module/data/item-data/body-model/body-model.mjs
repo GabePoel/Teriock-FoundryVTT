@@ -42,7 +42,7 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
     const parts = super.embedParts;
     parts.subtitle = "Body part";
     parts.text = dotJoin([
-      suffix(this.damage.base.value, "Damage"),
+      suffix(this.damage.base.formula, "Damage"),
       suffix(this.bv.value, "BV"),
       suffix(this.av.value, "AV"),
       this.parent.elder ? this.parent.elder?.nameString : "",

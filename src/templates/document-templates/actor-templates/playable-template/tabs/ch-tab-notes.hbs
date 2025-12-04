@@ -153,8 +153,8 @@
                   <span class="character-size-input character-smallbox-value">{{{system.size.number.value}}}</span>
                 </div>
                 {{formInput
-                  systemFields.size.fields.number.fields.saved
-                  value=system.size.number.saved
+                  systemFields.size.fields.number
+                  value=system._source.size.number.raw
                   classes="character-size-input character-smallbox-value selected"
                   dataset=(object tooltip=(concat (ucFirst system.size.category) ": " system.size.reach " ft
                   reach"))
@@ -170,8 +170,8 @@
                   <span class="character-weight-input character-smallbox-value">{{{system.weight.self.value}}} lb</span>
                 </div>
                 {{formInput
-                  systemFields.weight.fields.self.fields.saved
-                  value=system.weight.self.saved
+                  systemFields.weight.fields.self
+                  value=system._source.weight.self.raw
                   classes="character-weight-input character-smallbox-value selected"
                   dataset=(object tooltip=(concat "Including Equipment: " system.weight.value " lb"))
                 }}
@@ -235,10 +235,10 @@
                 <span class="character-smallbox-value">{{{system.magic.maxRotators.value}}}</span>
               </div>
               {{formInput
-                systemFields.magic.fields.maxRotators.fields.saved
-                value=system.magic.maxRotators.saved
+                systemFields.magic.fields.maxRotators
+                value=system._source.magic.maxRotators.raw
                 classes="character-smallbox-value selected"
-                dataset=(object tooltip=system.magic.maxRotators.raw)
+                dataset=(object tooltip=system.magic.maxRotators.formula)
               }}
             </div>
           </div>
@@ -255,10 +255,10 @@
                   class="character-detection-input character-smallbox-value">{{{system.detection.hiding.value}}}</span>
             </div>
             {{formInput
-              systemFields.detection.fields.hiding.fields.saved
-              value=system.detection.hiding.saved
+              systemFields.detection.fields.hiding
+              value=system._source.detection.hiding.raw
               classes="character-detection-input character-smallbox-value selected"
-              dataset=(object tooltip=system.detection.hiding.saved)
+              dataset=(object tooltip=system.detection.hiding.formula)
             }}
           </div>
         </div>
@@ -272,10 +272,10 @@
           .value}}}</span>
             </div>
             {{formInput
-              systemFields.detection.fields.perceiving.fields.saved
-              value=system.detection.perceiving.saved
+              systemFields.detection.fields.perceiving
+              value=system._source.detection.perceiving.raw
               classes="character-detection-input character-smallbox-value selected"
-              dataset=(object tooltip=system.detection.perceiving.saved)
+              dataset=(object tooltip=system.detection.perceiving.formula)
             }}
           </div>
         </div>

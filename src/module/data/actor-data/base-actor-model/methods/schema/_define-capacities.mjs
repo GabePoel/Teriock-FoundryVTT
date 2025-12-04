@@ -1,4 +1,4 @@
-import { modifiableFormula } from "../../../../shared/fields/modifiable.mjs";
+import { EvaluationField } from "../../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -44,8 +44,10 @@ export function _defineCapacities(schema) {
     }),
   });
   schema.weight = new fields.SchemaField({
-    self: modifiableFormula({
+    self: new EvaluationField({
+      blank: "pow(3 + @size, 3)",
       initial: "pow(3 + @size, 3)",
+      min: 0,
     }),
   });
   schema.attunements = new fields.SetField(new fields.DocumentIdField(), {

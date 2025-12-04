@@ -2,10 +2,7 @@ const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const options = data.execution.options;
 const actor = data.execution.actor;
 const armaments = actor.activeArmaments.filter(
-  (e) =>
-    e.system.damage.base.value &&
-    e.system.damage.base.value !== "0" &&
-    actor.system.primaryAttacker !== e.id,
+  (e) => e.system.damage.base.nonZero && actor.system.primaryAttacker !== e.id,
 );
 if (armaments.length > 0) {
   const selectedArmament = await tm.dialogs.selectDocumentDialog(armaments, {

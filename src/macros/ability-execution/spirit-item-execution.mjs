@@ -33,8 +33,8 @@ if (!spiritItem) {
   spiritItem = spiritItems[0];
   await spiritItem.setFlag("teriock", "weight", spiritItem.system.weight);
   await spiritItem.update({
-    "system.tier.saved": "1",
-    "system.weight.saved": 0,
+    "system.tier.raw": "1",
+    "system.weight.raw": "0",
     "system.disabled": true,
   });
   await tm.utils.ensureChildren(spiritItem, "property", "Master Crafted");

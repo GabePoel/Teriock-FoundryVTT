@@ -18,9 +18,7 @@ export function _entries(equipmentData) {
       ),
       callback: equipmentData.roll.bind(equipmentData, { twoHanded: true }),
       condition:
-        equipmentData.parent.isOwner &&
-        equipmentData.damage.twoHanded.value !==
-          equipmentData.damage.base.value,
+        equipmentData.parent.isOwner && equipmentData.hasTwoHandedAttack,
       group: "usage",
     },
     {

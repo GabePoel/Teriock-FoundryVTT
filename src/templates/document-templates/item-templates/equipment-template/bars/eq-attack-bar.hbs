@@ -9,69 +9,68 @@
   <div class="ab-bar">
     {{formBox
       (formInput
-        systemFields.damage.fields.base.fields.saved
+        systemFields.damage.fields.base
         dataset=(object tooltip="Damage")
         disabled=(not editable)
-        value=system.damage.base.saved
+        value=system._source.damage.base.raw
       )
       secondary=(formInput
-        systemFields.damage.fields.twoHanded.fields.saved
+        systemFields.damage.fields.twoHanded
         dataset=(object tooltip="Two-Handed Damage")
         disabled=(not editable)
-        value=system.damage.twoHanded.saved
+        value=system._source.damage.twoHanded.raw
       )
-      icon=(firstDie system.damage.base.saved)
-      include=(exists system.damage.base.saved)
+      icon=(firstDie system.damage.base.formula)
+      include=(exists system.damage.base.raw)
       includeSecondary=system.hasTwoHandedAttack
       label="DMG"
     }}
     {{formBox
       (formInput
-        systemFields.av.fields.saved
+        systemFields.av
         dataset=(object tooltip="Armor Value")
         disabled=(not editable)
-        value=system.av.saved
+        value=system._source.av.raw
       )
       icon=(path TERIOCK.display.icons "av")
-      include=(exists system.av.saved)
+      include=(exists system.av.raw)
       label="AV"
       unselected=system.av.value
     }}
     {{formBox
       (formInput
-        systemFields.bv.fields.saved
+        systemFields.bv
         dataset=(object tooltip="Block Value")
         disabled=(not editable)
-        value=system.bv.saved
+        value=system._source.bv.raw
       )
       icon=(path TERIOCK.display.icons "bv")
-      include=(exists system.bv.saved)
+      include=(exists system.bv.raw)
       label="BV"
       unselected=system.bv.value
     }}
     {{formBox
       (formInput
-        systemFields.hit.fields.saved
+        systemFields.hit
         dataset=(object tooltip="Hit Bonus")
         disabled=(not editable)
-        value=system.hit.saved
+        value=system._source.hit.raw
       )
       icon=(path TERIOCK.display.icons "hitBonus")
-      include=(exists system.hit.saved)
+      include=(exists system.hit.raw)
       label="HIT"
-      unselected=system.hit.value
+      unselected=system.hit.raw
     }}
     {{formBox
       (formInput
-        systemFields.attackPenalty.fields.saved
+        systemFields.attackPenalty
         dataset=(object tooltip="Attack Penalty")
         disabled=(not editable)
-        value=system.attackPenalty.saved
+        value=system._source.attackPenalty.raw
       )
       icon=(path TERIOCK.display.icons "ap")
-      include=(exists system.attackPenalty.saved)
       label="AP"
-      unselected=system.attackPenalty.value
+      unselected=system.attackPenalty.formula
     }}
   </div>
 {{/if}}

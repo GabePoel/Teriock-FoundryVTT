@@ -1,8 +1,4 @@
-import {
-  deriveModifiableDeterministic,
-  modifiableFormula,
-  prepareModifiableBase,
-} from "../../shared/fields/modifiable.mjs";
+import { EvaluationField } from "../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -34,7 +30,11 @@ export default function ConsumableDataMixin(Base) {
             initial: true,
             label: "Consumable",
           }),
-          maxQuantity: modifiableFormula(),
+          maxQuantity: new EvaluationField({
+            blank: Infinity,
+            floor: true,
+            min: 0,
+          }),
           quantity: new fields.NumberField({
             integer: true,
             initial: 1,
@@ -88,19 +88,9 @@ export default function ConsumableDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        prepareModifiableBase(this.maxQuantity);
-      }
-
-      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        deriveModifiableDeterministic(this.maxQuantity, this.parent, {
-          blank: Infinity,
-          floor: true,
-          min: 0,
-        });
+        this.maxQuantity.evaluate();
         if (this.consumable) {
           this.quantity = Math.max(
             Math.min(this.maxQuantity.value, this.quantity),

@@ -1,8 +1,4 @@
-import { TextField } from "../../../shared/fields/_module.mjs";
-import {
-  modifiableFormula,
-  modifiableNumber,
-} from "../../../shared/fields/modifiable.mjs";
+import { EvaluationField, TextField } from "../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,10 +15,10 @@ export function _defineSchema() {
       label: "Consumable",
     }),
     damage: new fields.SchemaField({
-      base: modifiableFormula({
+      base: new EvaluationField({
         deterministic: false,
       }),
-      twoHanded: modifiableFormula({
+      twoHanded: new EvaluationField({
         deterministic: false,
       }),
       types: new fields.SetField(new fields.StringField()),
@@ -90,7 +86,7 @@ export function _defineSchema() {
         gmOnly: true,
       },
     ),
-    minStr: modifiableNumber({
+    minStr: new EvaluationField({
       min: -3,
       initial: -3,
     }),
@@ -107,7 +103,6 @@ export function _defineSchema() {
       initial: false,
       label: "Shattered",
     }),
-    tier: modifiableFormula(),
-    weight: modifiableNumber(),
+    weight: new EvaluationField(),
   };
 }

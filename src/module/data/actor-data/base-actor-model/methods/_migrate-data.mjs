@@ -51,7 +51,7 @@ export function _migrateData(data) {
   ) {
     foundry.utils.setProperty(
       data,
-      "size.number.saved",
+      "size.number.raw",
       data.size.number.saved.toString(),
     );
   }

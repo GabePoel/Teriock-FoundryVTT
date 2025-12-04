@@ -1,3 +1,5 @@
+import { EvaluationModel } from "../_module.mjs";
+
 declare module "./child-type-model" {
   export default interface ChildTypeModelInterface {
     /** <schema> Description */
@@ -10,8 +12,8 @@ declare module "./child-type-model" {
     proficient: boolean;
     /** <schema> <base> Qualifier formulas which are resolved before changes are applied */
     qualifiers: {
-      ephemeral: Teriock.Fields.ModifiableDeterministic;
-      suppressed: Teriock.Fields.ModifiableDeterministic;
+      ephemeral: EvaluationModel;
+      suppressed: EvaluationModel;
     };
 
     get parent(): TeriockChild;

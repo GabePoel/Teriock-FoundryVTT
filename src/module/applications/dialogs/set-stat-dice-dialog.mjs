@@ -6,11 +6,11 @@ import { TeriockDialog } from "../api/_module.mjs";
  * @param {StatPoolModel} pool
  */
 export default async function setStatDiceDialog(pool) {
-  const numberForm = pool.schema.fields.number.fields.saved.toFormGroup(
+  const numberForm = pool.schema.fields.number.toFormGroup(
     { rootId: foundry.utils.randomID() },
     {
       name: "number",
-      value: pool.number.saved,
+      value: pool.number._source.raw,
     },
   );
   const facesForm = pool.schema.fields.faces.toFormGroup(
@@ -50,12 +50,12 @@ export default async function setStatDiceDialog(pool) {
         const faces = Number(facesInput.value);
         const disabled = disabledInput.checked;
         if (
-          number !== pool.number.saved ||
+          number !== pool.number._source.raw ||
           faces !== pool.faces ||
           disabled === pool.disabled
         ) {
           await pool.update({
-            "number.saved": number,
+            "number.raw": number,
             faces: faces,
             disabled: disabled,
           });

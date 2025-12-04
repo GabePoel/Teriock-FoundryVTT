@@ -98,10 +98,11 @@ export async function _parse(speciesData, rawHTML) {
     if (ability) {
       updateData.push({
         _id: ability._id,
-        "system.qualifiers.ephemeral.saved": value.formula,
+        "system.qualifiers.ephemeral.raw": value.formula,
       });
     }
   }
+  console.log(updateData);
   await speciesData.parent.updateChildDocuments("ActiveEffect", updateData);
   await ensureChildren(speciesData.parent, "body", importedBodyPartNames);
   await ensureChildren(speciesData.parent, "equipment", importedEquipmentNames);
@@ -151,12 +152,12 @@ export async function _parse(speciesData, rawHTML) {
   const mpDiceFormula = tagTree["mp-dice"][0];
   parameters.statDice = {
     hp: {
-      "number.saved": "1",
+      "number.raw": "1",
       faces: 10,
       disabled: false,
     },
     mp: {
-      "number.saved": "1",
+      "number.raw": "1",
       faces: 10,
       disabled: false,
     },
@@ -168,7 +169,7 @@ export async function _parse(speciesData, rawHTML) {
     if (hpRoll.dice.length > 0) {
       const number = hpRoll.dice[0].number;
       const faces = hpRoll.dice[0].faces;
-      parameters.statDice.hp["number.saved"] = number.toString();
+      parameters.statDice.hp["number.raw"] = number.toString();
       parameters.statDice.hp.faces = faces;
     }
   }
@@ -179,7 +180,7 @@ export async function _parse(speciesData, rawHTML) {
     if (mpRoll.dice.length > 0) {
       const number = mpRoll.dice[0].number;
       const faces = mpRoll.dice[0].faces;
-      parameters.statDice.mp["number.saved"] = number.toString();
+      parameters.statDice.mp["number.raw"] = number.toString();
       parameters.statDice.mp.faces = faces;
     }
   }
@@ -248,13 +249,13 @@ export async function _parse(speciesData, rawHTML) {
     const sizeStep = Number(
       sizeStepHpText.split("every ")[1].split(" additional")[0],
     );
-    let hpDieNumberFormula = parameters.statDice.hp["number.saved"];
+    let hpDieNumberFormula = parameters.statDice.hp["number.raw"];
     let baseHpDieNumber = Number(hpDieNumberFormula);
     baseHpDieNumber -= diceStep * (parameters.size.value / sizeStep);
     hpDieNumberFormula = `${diceStep > 1 ? `${diceStep} * ` : ""}${
       sizeStep > 1 ? `(@size) / ${sizeStep})` : `@size`
     }${baseHpDieNumber !== 0 ? ` ${baseHpDieNumber < 0 ? "-" : "+"} ${Math.abs(baseHpDieNumber)}` : ""}`;
-    parameters.statDice.hp["number.saved"] = hpDieNumberFormula;
+    parameters.statDice.hp["number.raw"] = hpDieNumberFormula;
   }
   const sizeStepMpText = getBarText(doc, "mp-increase");
   if (sizeStepMpText) {
@@ -269,13 +270,13 @@ export async function _parse(speciesData, rawHTML) {
     const sizeStep = Number(
       sizeStepMpText.split("every ")[1].split(" additional")[0],
     );
-    let mpDieNumberFormula = parameters.statDice.mp["number.saved"];
+    let mpDieNumberFormula = parameters.statDice.mp["number.raw"];
     let baseMpDieNumber = Number(mpDieNumberFormula);
     baseMpDieNumber -= diceStep * (parameters.size.value / sizeStep);
     mpDieNumberFormula = `${diceStep > 1 ? `${diceStep} * ` : ""}${
       sizeStep > 1 ? `(@size) / ${sizeStep})` : `@size`
     }${baseMpDieNumber !== 0 ? ` ${baseMpDieNumber < 0 ? "-" : "+"} ${Math.abs(baseMpDieNumber)}` : ""}`;
-    parameters.statDice.mp["number.saved"] = mpDieNumberFormula;
+    parameters.statDice.mp["number.raw"] = mpDieNumberFormula;
   }
   cleanObject(
     parameters,

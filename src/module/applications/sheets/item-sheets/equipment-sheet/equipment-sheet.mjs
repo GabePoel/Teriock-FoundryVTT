@@ -119,17 +119,18 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
     }
 
     const staticUpdates = {
-      ".ab-damage-button": { "system.damage.base.saved": 1 },
+      ".ab-damage-button": { "system.damage.base.raw": "1" },
       ".ab-two-handed-damage-button": {
-        "system.damage.twoHanded.saved": this.item.system.damage.base.saved,
+        "system.damage.twoHanded.raw":
+          this.item.system.damage.base.formula || "1",
       },
-      ".ab-short-range-button": { "system.range.short.saved": 5 },
-      ".ab-range-button": { "system.range.long.saved": 5 },
-      ".ab-av-button": { "system.av.saved": 1 },
-      ".ab-bv-button": { "system.bv.saved": 1 },
-      ".ab-hit-button": { "system.hit.saved": 1 },
-      ".ab-weight-button": { "system.weight": 1 },
-      ".ab-tier-button": { "system.tier.saved": "1" },
+      ".ab-short-range-button": { "system.range.short.raw": "5" },
+      ".ab-range-button": { "system.range.long.raw": "5" },
+      ".ab-av-button": { "system.av.raw": "1" },
+      ".ab-bv-button": { "system.bv.raw": "1" },
+      ".ab-hit-button": { "system.hit.raw": "1" },
+      ".ab-weight-button": { "system.weight.raw": "1" },
+      ".ab-tier-button": { "system.tier.raw": "1" },
     };
 
     for (const [selector, update] of Object.entries(staticUpdates)) {

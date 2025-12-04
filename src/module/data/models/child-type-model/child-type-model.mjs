@@ -1,11 +1,6 @@
 import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
 import { fancifyFields, getSchema, makeIcon } from "../../../helpers/utils.mjs";
-import { TextField } from "../../shared/fields/_module.mjs";
-import {
-  deriveModifiableDeterministic,
-  modifiableFormula,
-  prepareModifiableBase,
-} from "../../shared/fields/modifiable.mjs";
+import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
 const { fields } = foundry.data;
@@ -36,17 +31,15 @@ export default class ChildTypeModel extends CommonTypeModel {
         label: "Description",
       }),
       qualifiers: new fields.SchemaField({
-        ephemeral: modifiableFormula({
-          deterministic: true,
+        ephemeral: new EvaluationField({
+          hint: "When this formula is true, the document will be hidden and treated as if it doesn't exist.",
           initial: "0",
           label: "Ephemeral Formula",
-          hint: "When this formula is true, the document will be hidden and treated as if it doesn't exist.",
         }),
-        suppressed: modifiableFormula({
-          deterministic: true,
+        suppressed: new EvaluationField({
+          hint: "When this formula is true, the document will be made inactive.",
           initial: "0",
           label: "Suppressed Formula",
-          hint: "When this formula is true, the document will be made inactive.",
         }),
       }),
     });
@@ -55,6 +48,12 @@ export default class ChildTypeModel extends CommonTypeModel {
 
   /** @inheritDoc */
   static migrateData(data) {
+    if (typeof data?.qualifiers?.ephemeral !== "object") {
+      foundry.utils.setProperty(data, "qualifiers.ephemeral", { raw: "0" });
+    }
+    if (typeof data?.qualifiers?.suppressed !== "object") {
+      foundry.utils.setProperty(data, "qualifiers.suppressed", { raw: "0" });
+    }
     return super.migrateData(data);
   }
 
@@ -319,18 +318,8 @@ export default class ChildTypeModel extends CommonTypeModel {
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    prepareModifiableBase(this.qualifiers.ephemeral);
-    prepareModifiableBase(this.qualifiers.suppressed);
-    deriveModifiableDeterministic(this.qualifiers.suppressed, this.parent, {
-      min: 0,
-      max: 1,
-      floor: true,
-    });
-    deriveModifiableDeterministic(this.qualifiers.ephemeral, this.parent, {
-      min: 0,
-      max: 1,
-      floor: true,
-    });
+    this.qualifiers.suppressed.evaluate();
+    this.qualifiers.ephemeral.evaluate();
   }
 
   /**

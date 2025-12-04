@@ -6,10 +6,10 @@
  */
 const equipmentMap = {
   Torch: {
-    "damage.base.saved": "1",
+    "damage.base.raw": "1",
   },
   Stinger: {
-    "damage.base.saved": "1d4",
+    "damage.base.raw": "1d4",
     "damage.types": ["toxic"],
   },
   Boulder: {

@@ -64,7 +64,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     if (options.attackPenalty === undefined) {
       if (this.source.system.interaction === "attack") {
         if (this.source.system.isContact && this.armament) {
-          attackPenalty = this.armament.system.attackPenalty.value;
+          attackPenalty = this.armament.system.attackPenalty.formula;
         } else {
           attackPenalty = "-3";
         }

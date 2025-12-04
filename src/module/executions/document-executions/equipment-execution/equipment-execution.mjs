@@ -12,7 +12,7 @@ export default class EquipmentExecution extends ArmamentExecution {
       twoHanded = game.settings.get("teriock", "twoHandedEquipment"),
     } = options;
     if (options.formula === undefined && options.twoHanded) {
-      this.formula = this.source.system.damage.twoHanded.value;
+      this.formula = this.source.system.damage.twoHanded.formula;
     }
     this.secret = secret;
     this.twoHanded = twoHanded;

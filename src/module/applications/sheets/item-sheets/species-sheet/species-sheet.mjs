@@ -47,7 +47,7 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
     await setStatDiceDialog(
       this.document,
       "hp",
-      this.document.system.statDice.hp.number.saved,
+      this.document._source.system.statDice.hp.number.raw,
       this.document.system.statDice.hp.faces,
     );
   }
@@ -61,7 +61,7 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
     await setStatDiceDialog(
       this.document,
       "mp",
-      this.document.system.statDice.mp.number.saved,
+      this.document._source.system.statDice.mp.number.raw,
       this.document.system.statDice.mp.faces,
     );
   }

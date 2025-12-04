@@ -1,7 +1,7 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
-import { modifiableFormula } from "../../shared/fields/modifiable.mjs";
+import { EvaluationField } from "../../shared/fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 import StatDieModel from "../stat-die-model/stat-die-model.mjs";
 
@@ -24,11 +24,14 @@ export default class StatPoolModel extends EmbeddedDataModel {
         hint: "Number of faces on each die.",
         choices: TERIOCK.options.die.faces,
       }),
-      number: modifiableFormula({
-        initial: "1",
-        required: false,
-        label: "Number",
+      number: new EvaluationField({
+        blank: 1,
+        floor: true,
         hint: "Number of dice.",
+        initial: "1",
+        label: "Number",
+        min: 0,
+        required: false,
       }),
       dice: new fields.ArrayField(new fields.EmbeddedDataField(StatDieModel)),
     };
