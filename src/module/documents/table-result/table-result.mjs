@@ -33,6 +33,15 @@ export default class TeriockTableResult extends EmbedCardDocumentMixin(
   }
 
   /** @inheritDoc */
+  get embedParts() {
+    const parts = super.embedParts;
+    parts.makeTooltip = true;
+    parts.subtitle = this.type;
+    parts.text = this.parent.name || "";
+    return parts;
+  }
+
+  /** @inheritDoc */
   get messageParts() {
     /** @type {Teriock.MessageData.MessagePanel} */
     const parts = super.messageParts;

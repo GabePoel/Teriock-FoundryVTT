@@ -57,6 +57,13 @@ export default class TeriockRollTable extends BaseDocumentMixin(RollTable) {
     if (roll) {
       messageData.rolls.push(roll);
     }
+    messageData.system.panels.forEach((panel) => {
+      panel.blocks.push({
+        title: this.name,
+        text: this.description,
+        classes: "italic-display-field",
+      });
+    });
     messageData.system.panels = await TeriockTextEditor.enrichPanels(
       messageData.system.panels,
     );
