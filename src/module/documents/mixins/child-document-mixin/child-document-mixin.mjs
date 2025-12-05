@@ -137,7 +137,8 @@ export default function ChildDocumentMixin(Base) {
 
       /** @inheritDoc */
       async duplicate() {
-        const copy = foundry.utils.duplicate(this);
+        const copy = foundry.utils.duplicate(this.toObject());
+        copy._stats.duplicateSource = this.uuid;
         const data = {
           doc: this.parent,
           copy: copy,

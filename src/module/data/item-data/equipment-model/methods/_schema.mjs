@@ -23,10 +23,6 @@ export function _defineSchema() {
       }),
       types: new fields.SetField(new fields.StringField()),
     }),
-    dampened: new fields.BooleanField({
-      initial: false,
-      label: "Dampened",
-    }),
     description: new TextField({
       initial: "",
       label: "Description",
@@ -40,45 +36,6 @@ export function _defineSchema() {
       initial: "Equipment Type",
       label: "Equipment Type",
     }),
-    equipped: new fields.BooleanField({
-      initial: false,
-      label: "Equipped",
-    }),
-    glued: new fields.BooleanField({
-      initial: false,
-      label: "Glued",
-    }),
-    identification: new fields.SchemaField({
-      flaws: new TextField({
-        initial: "",
-        label: "Unidentified Flaws",
-      }),
-      identified: new fields.BooleanField({
-        initial: true,
-        label: "Identified",
-      }),
-      name: new fields.StringField({
-        initial: "",
-        label: "Unidentified Name",
-      }),
-      notes: new TextField({
-        initial: "",
-        label: "Unidentified Notes",
-      }),
-      powerLevel: new fields.StringField({
-        choices: TERIOCK.options.equipment.powerLevelShort,
-        initial: "mundane",
-        label: "Unidentified Power Level",
-      }),
-      read: new fields.BooleanField({
-        initial: true,
-        label: "Read",
-      }),
-    }),
-    minStr: new EvaluationField({
-      min: -3,
-      initial: -3,
-    }),
     powerLevel: new fields.StringField({
       choices: TERIOCK.options.equipment.powerLevelShort,
       initial: "mundane",
@@ -87,10 +44,6 @@ export function _defineSchema() {
     price: new fields.NumberField({
       initial: 0,
       label: "Price",
-    }),
-    shattered: new fields.BooleanField({
-      initial: false,
-      label: "Shattered",
     }),
     weight: new EvaluationField(),
   };

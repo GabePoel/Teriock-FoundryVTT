@@ -231,12 +231,9 @@
     .teriock-panel-block-text {
       text-align: left;
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
+      $headings: h1, h2, h3, h4, h5, h6;
+
+      #{$headings} {
         @include mixins.text-subtle;
         border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
         font-family: unset;
@@ -249,6 +246,11 @@
 
         + p {
           margin-top: 0;
+        }
+
+        &:last-child,
+        &:has(+ :is(#{$headings})) {
+          display: none;
         }
       }
 
@@ -307,11 +309,19 @@
         border-top: 1px dotted var(--color-panel-associations-border);
       }
 
+      .teriock-panel-association-card-name {
+        text-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .teriock-panel-association-row-image {
         @include mixins.image-border;
         height: 1.5em;
         margin: 0.25em;
         width: 1.5em;
+        min-width: 1.5em;
+        min-height: 1.5em;
 
         img {
           @include mixins.warm-image-background;

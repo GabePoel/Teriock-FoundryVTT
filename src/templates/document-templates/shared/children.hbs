@@ -7,7 +7,7 @@
             @root/TERIOCK.options.document type "name"}}</button>{{/if}}
         {{#each (lookup @root (path @root/TERIOCK.options.document type "getter")) as |doc|}}
           {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
-            relative=../document.uuid))}}
+            relative=@root/document.uuid))}}
         {{/each}}
       </div>
     {{/if}}

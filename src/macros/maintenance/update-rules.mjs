@@ -10,8 +10,21 @@ const namespaceCategoryMap = {
   Tradecraft: "Tradecrafts",
 };
 
+let categoryPct = 0.01;
+
+const categoryProgress = ui.notifications.info(
+  "Pulling rules pages from wiki.",
+  {
+    progress: true,
+    pct: categoryPct,
+  },
+);
+
 for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
-  console.log(`Processing namespace: ${namespace} (category: ${category})`);
+  categoryProgress.update({
+    message: `Processing Namespace: ${namespace}`,
+    pct: categoryPct,
+  });
 
   // Fetch all pages in the category
   let allRulesPages = await teriock.helpers.wiki.fetchCategoryMembers(category);
@@ -34,6 +47,12 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
       { pack: "teriock.rules" },
     );
   }
+
+  let pagePct = 0.01;
+  const pageProgress = ui.notifications.info("Processing pages", {
+    progress: true,
+    pct: pagePct,
+  });
 
   for (const rulesPage of allRulesPages.filter(
     (p) => !(p.title.includes("Routine") && namespace === "Core"),
@@ -67,10 +86,20 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
       ".mw-editsection-divider",
       ".mw-file-description",
       ".mw-default-size",
+      ".metadata",
     ];
     selectorsToRemove.forEach((selector) => {
       doc.querySelectorAll(selector).forEach((el) => el.remove());
     });
+
+    // Remove empty <p> tags
+    doc.querySelectorAll("p").forEach((p) => {
+      const normalized = p.innerHTML.replace(/&nbsp;|\s/g, "");
+      if (!normalized) {
+        p.remove();
+      }
+    });
+
     doc.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((el) => {
       if (el.textContent.includes("Routine")) {
         el.remove();
@@ -102,6 +131,10 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
       });
       console.log(`Updated: ${namespace}:${rulesName}`);
     }
+    pageProgress.update({
+      message: `Processing Page: ${namespace}:${rulesName}`,
+      pct: pagePct,
+    });
 
     let icon;
     let image;
@@ -126,6 +159,15 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
           imageName = "Unused Presence";
         }
         image = tm.path.getImage("attributes", imageName);
+      }
+    } else if (namespace === "Keyword") {
+      if (
+        ["Hexproof", "Hexseal", "Immunity", "Resistance"].includes(
+          journalPage.name,
+        )
+      ) {
+        icon = "shield-halved";
+        image = tm.path.getImage("effect-types", journalPage.name);
       }
     } else if (namespace === "Damage") {
       icon = "heart-crack";
@@ -160,5 +202,9 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
       pages++;
     }
     await rulesJournal.updateEmbeddedDocuments("JournalEntryPage", toUpdate);
+    pagePct += 1 / allRulesPages.length;
   }
+  pageProgress.update({ pct: 1 });
+  categoryPct += 1 / Object.keys(namespaceCategoryMap).length;
 }
+categoryProgress.update({ pct: 1 });

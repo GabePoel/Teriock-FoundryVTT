@@ -11,7 +11,7 @@ const { Collection } = foundry.utils;
 
 /**
  * Document mixin to support hierarchies of the same document type.
- * @param {typeof CommonDocument} Base
+ * @param {typeof BaseDocument} Base
  * @constructor
  */
 export default function HierarchyDocumentMixin(Base) {
@@ -98,6 +98,15 @@ export default function HierarchyDocumentMixin(Base) {
         }
         for (const doc of documents) {
           operation.ids.push(...doc.allSubs.contents.map((s) => s._id));
+        }
+      }
+
+      /** @inheritDoc */
+      checkAncestor(doc) {
+        if (doc?.uuid === this.uuid) {
+          return true;
+        } else {
+          return this.elder?.checkAncestor(doc) || false;
         }
       }
 

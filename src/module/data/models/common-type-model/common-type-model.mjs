@@ -58,9 +58,10 @@ export default class CommonTypeModel extends TypeDataModel {
 
   /**
    * Context menu entries to display for cards that represent the parent document.
+   * @param {TeriockDocument} _doc
    * @returns {Teriock.Foundry.ContextMenuEntry[]}
    */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(_doc) {
     return [];
   }
 
@@ -321,6 +322,7 @@ export default class CommonTypeModel extends TypeDataModel {
         "folder",
         "items",
         "origin",
+        "ownership",
         "sort",
         "system._ref",
         "system._sup",

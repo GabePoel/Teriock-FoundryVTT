@@ -1,5 +1,6 @@
 import { copyRank, getRank } from "../../../../../helpers/fetch.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
+import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
 import {
   selectAbilityDialog,
   selectBodyPartDialog,
@@ -38,12 +39,21 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _createAbility() {
-        const out = await selectAbilityDialog();
-        const obj = out.toObject();
-        if (out.sup?.type === "wrapper") {
-          obj["_stats.compendiumSource"] = out.sup.uuid;
+        const decision = await newDocumentDialog("ability");
+        let obj = {
+          name: "New Ability",
+          type: "ability",
+        };
+        if (decision === "import") {
+          const out = await selectAbilityDialog();
+          obj = out.toObject();
+          if (out.sup?.type === "wrapper") {
+            obj["_stats.compendiumSource"] = out.sup.uuid;
+          }
         }
-        await this.document.createChildDocuments("ActiveEffect", [obj]);
+        if (decision && obj) {
+          await this.document.createChildDocuments("ActiveEffect", [obj]);
+        }
       }
 
       /**
@@ -51,9 +61,17 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _createBody() {
-        await this.document.createChildDocuments("Item", [
-          game.items.fromCompendium(await selectBodyPartDialog()),
-        ]);
+        const decision = await newDocumentDialog("body");
+        let obj = {
+          name: "New Body Part",
+          type: "body",
+        };
+        if (decision === "import") {
+          obj = game.items.fromCompendium(await selectBodyPartDialog());
+        }
+        if (decision && obj) {
+          await this.document.createChildDocuments("Item", [obj]);
+        }
       }
 
       /**
@@ -74,9 +92,17 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _createEquipment() {
-        await this.document.createChildDocuments("Item", [
-          game.items.fromCompendium(await selectEquipmentTypeDialog()),
-        ]);
+        const decision = await newDocumentDialog("equipment");
+        let obj = {
+          name: "New Equipment",
+          type: "equipment",
+        };
+        if (decision === "import") {
+          obj = game.items.fromCompendium(await selectEquipmentTypeDialog());
+        }
+        if (decision && obj) {
+          await this.document.createChildDocuments("Item", [obj]);
+        }
       }
 
       /**
@@ -121,12 +147,21 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _createProperty() {
-        const out = await selectPropertyDialog();
-        const obj = out.toObject();
-        if (out.sup?.type === "wrapper") {
-          obj["_stats.compendiumSource"] = out.sup.uuid;
+        const decision = await newDocumentDialog("property");
+        let obj = {
+          name: "New Property",
+          type: "property",
+        };
+        if (decision === "import") {
+          const out = await selectPropertyDialog();
+          obj = out.toObject();
+          if (out.sup?.type === "wrapper") {
+            obj["_stats.compendiumSource"] = out.sup.uuid;
+          }
         }
-        await this.document.createChildDocuments("ActiveEffect", [obj]);
+        if (decision && obj) {
+          await this.document.createChildDocuments("ActiveEffect", [obj]);
+        }
       }
 
       /**

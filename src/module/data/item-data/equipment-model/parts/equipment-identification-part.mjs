@@ -2,8 +2,10 @@ import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { getDocument } from "../../../../helpers/fetch.mjs";
 import { makeIconClass, queryGM } from "../../../../helpers/utils.mjs";
+import { TextField } from "../../../shared/fields/_module.mjs";
 
 const { ux } = foundry.applications;
+const { fields } = foundry.data;
 
 /**
  * Equipment data model mixin that handles identifying and reading magic.
@@ -64,6 +66,54 @@ export default (Base) => {
           ui.notifications.error(
             `${this.parent.name} was not successfully identified.`,
           );
+        }
+      }
+
+      /** @inheritDoc */
+      static defineSchema() {
+        const schema = super.defineSchema();
+        Object.assign(schema, {
+          identification: new fields.SchemaField({
+            flaws: new TextField({
+              initial: "",
+              label: "Unidentified Flaws",
+              gmOnly: true,
+              required: false,
+            }),
+            identified: new fields.BooleanField({
+              initial: true,
+              label: "Identified",
+            }),
+            name: new fields.StringField({
+              initial: "",
+              label: "Unidentified Name",
+            }),
+            notes: new TextField({
+              initial: "",
+              label: "Unidentified Notes",
+              gmOnly: true,
+              required: false,
+            }),
+            powerLevel: new fields.StringField({
+              choices: TERIOCK.options.equipment.powerLevelShort,
+              initial: "mundane",
+              label: "Unidentified Power Level",
+            }),
+            read: new fields.BooleanField({
+              initial: true,
+              label: "Read",
+            }),
+          }),
+        });
+        return schema;
+      }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        if (!this.identification.identified) {
+          this.parent._stats.compendiumSource = null;
+          this.parent._stats.duplicateSource = null;
         }
       }
 

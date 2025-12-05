@@ -1,7 +1,6 @@
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
-
-const TextEditor = foundry.applications.ux.TextEditor.implementation;
+import { TeriockTextEditor } from "../ux/_module.mjs";
 
 /**
  * Ask if an actor's size should be updated to that of their new species.
@@ -14,7 +13,7 @@ export default async function changeSizeDialog(actor, species) {
     let content =
       `<p>@UUID[${actor.uuid}] is size ${actor.system.size.number.raw} and @UUID[${species.uuid}] is size` +
       ` ${species.system.size.value} by default. Would you like to update the actor's size?</p>`;
-    content = await TextEditor.enrichHTML(content);
+    content = await TeriockTextEditor.enrichHTML(content);
     const dialog = new TeriockDialog({
       window: {
         title: "Change Size",
@@ -24,16 +23,18 @@ export default async function changeSizeDialog(actor, species) {
       buttons: [
         {
           action: "yes",
-          label: "Yes",
-          default: true,
           callback: async () => {
             await actor.update({
               "system.size.number.raw": species.system.size.value,
             });
           },
+          default: true,
+          icon: makeIconClass("check", "button"),
+          label: "Yes",
         },
         {
           action: "no",
+          icon: makeIconClass("xmark", "button"),
           label: "No",
         },
       ],

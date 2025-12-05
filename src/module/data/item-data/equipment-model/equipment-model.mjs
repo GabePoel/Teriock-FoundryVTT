@@ -7,16 +7,18 @@ import {
   ExecutableDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
+import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
 import * as messages from "./methods/_messages.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
-import * as schema from "./methods/_schema.mjs";
 import EquipmentIdentificationPart from "./parts/equipment-identification-part.mjs";
 import EquipmentSuppressionPart from "./parts/equipment-suppression-part.mjs";
 import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
+
+const { fields } = foundry.data;
 
 //noinspection JSClosureCompilerSyntax
 /**
@@ -75,9 +77,46 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
 
   /** @inheritDoc */
   static defineSchema() {
-    const s = super.defineSchema();
-    Object.assign(s, schema._defineSchema());
-    return s;
+    const schema = super.defineSchema();
+    Object.assign(schema, {
+      consumable: new fields.BooleanField({
+        initial: false,
+        label: "Consumable",
+      }),
+      damage: new fields.SchemaField({
+        base: new EvaluationField({
+          deterministic: false,
+        }),
+        twoHanded: new EvaluationField({
+          deterministic: false,
+        }),
+        types: new fields.SetField(new fields.StringField()),
+      }),
+      description: new TextField({
+        initial: "",
+        label: "Description",
+      }),
+      equipmentClasses: new fields.SetField(
+        new fields.StringField({
+          choices: TERIOCK.index.equipmentClasses,
+        }),
+      ),
+      equipmentType: new fields.StringField({
+        initial: "Equipment Type",
+        label: "Equipment Type",
+      }),
+      powerLevel: new fields.StringField({
+        choices: TERIOCK.options.equipment.powerLevelShort,
+        initial: "mundane",
+        label: "Power Level",
+      }),
+      price: new fields.NumberField({
+        initial: 0,
+        label: "Price",
+      }),
+      weight: new EvaluationField(),
+    });
+    return schema;
   }
 
   /** @inheritDoc */
@@ -87,8 +126,11 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   }
 
   /** @inheritDoc */
-  get cardContextMenuEntries() {
-    return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
+  getCardContextMenuEntries(doc) {
+    return [
+      ...contextMenus._entries(this),
+      ...super.getCardContextMenuEntries(doc),
+    ];
   }
 
   /** @inheritDoc */
@@ -283,7 +325,6 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
       this.tier.raw = "";
     }
     super.prepareSpecialData();
-    this.minStr.evaluate();
     this.weight.evaluate();
     this.weight.total = this.weight.value;
     if (this.consumable) {

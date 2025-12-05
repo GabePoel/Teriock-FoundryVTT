@@ -43,10 +43,9 @@ export default class TeriockConditionModel extends TransformationDataMixin(
   }
 
   /**
-   * Context menu entries to display for cards that represent the parent document.
-   * @returns {Teriock.Foundry.ContextMenuEntry[]}
+   * @inheritDoc
    */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(_doc) {
     return [
       {
         name: this.useText,

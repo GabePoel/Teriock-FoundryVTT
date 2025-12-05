@@ -98,9 +98,9 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(doc) {
     return [
-      ...super.cardContextMenuEntries,
+      ...super.getCardContextMenuEntries(doc),
       {
         name: "Set Primary Transformation",
         icon: makeIcon("tree", "contextMenu"),

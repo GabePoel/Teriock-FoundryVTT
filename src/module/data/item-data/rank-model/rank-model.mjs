@@ -86,9 +86,9 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(doc) {
     return [
-      ...super.cardContextMenuEntries,
+      ...super.getCardContextMenuEntries(doc),
       {
         name: "Roll Hit Die",
         icon: makeIcon(getRollIcon(this.hpDie.polyhedral), "contextMenu"),

@@ -58,8 +58,8 @@ export default class ChildTypeModel extends CommonTypeModel {
   }
 
   /** @inheritDoc */
-  get cardContextMenuEntries() {
-    const entries = super.cardContextMenuEntries;
+  getCardContextMenuEntries(doc) {
+    const entries = super.getCardContextMenuEntries(doc);
     entries.push(
       ...[
         {
@@ -124,7 +124,7 @@ export default class ChildTypeModel extends CommonTypeModel {
           name: "Duplicate",
           icon: makeIcon("copy", "contextMenu"),
           callback: async () => {
-            await this.duplicate();
+            await this.parent.duplicate();
           },
           condition: () =>
             this.parent?.elder?.sheet?.editable && this.parent.isOwner,

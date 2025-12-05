@@ -101,10 +101,10 @@ export default function EmbedCardDocumentMixin(Base) {
                     relative = await fromUuid(relativeUuid);
                   }
                   await this.embedActions[action][callback](event, relative);
-                  if (relative && relative.isViewer) {
+                  if (relative && relative.sheet?.isVisible) {
                     await relative.sheet.render();
                   }
-                  if (relative?.parent && relative.isViewer) {
+                  if (relative?.parent && relative.parent.sheet?.isVisible) {
                     await relative.parent.sheet.render();
                   }
                 });
@@ -112,18 +112,15 @@ export default function EmbedCardDocumentMixin(Base) {
             }
           }
         });
-        const menuEntries = this.cardContextMenuEntries;
+        const relativeUuid = element.dataset.relative;
+        const relative = relativeUuid ? fromUuidSync(relativeUuid) : null;
+        const menuEntries = this.getCardContextMenuEntries(relative);
         if (menuEntries) {
-          new TeriockContextMenu(
-            element,
-            ".teriock-block",
-            this.cardContextMenuEntries,
-            {
-              eventName: "contextmenu",
-              jQuery: false,
-              fixed: true,
-            },
-          );
+          new TeriockContextMenu(element, ".teriock-block", menuEntries, {
+            eventName: "contextmenu",
+            jQuery: false,
+            fixed: true,
+          });
         }
       }
     }

@@ -38,9 +38,9 @@ export default function RevelationDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      get cardContextMenuEntries() {
+      getCardContextMenuEntries(doc) {
         return [
-          ...super.cardContextMenuEntries,
+          ...super.getCardContextMenuEntries(doc),
           {
             name: "Reveal",
             icon: makeIcon("fa-eye", "contextMenu"),

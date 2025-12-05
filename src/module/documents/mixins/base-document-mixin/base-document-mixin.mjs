@@ -15,12 +15,13 @@ export default function BaseDocumentMixin(Base) {
     class BaseDocument extends Base {
       /**
        * Context menu entries to display for cards that represent this document.
+       * @param {TeriockDocument} doc
        * @returns {Teriock.Foundry.ContextMenuEntry[]}
        */
-      get cardContextMenuEntries() {
+      getCardContextMenuEntries(doc) {
         const entries = [];
-        if (this.system?.cardContextMenuEntries) {
-          entries.push(...this.system.cardContextMenuEntries);
+        if (this.system?.getCardContextMenuEntries) {
+          entries.push(...this.system.getCardContextMenuEntries(doc));
         }
         entries.push(
           ...[
@@ -28,14 +29,16 @@ export default function BaseDocumentMixin(Base) {
               name: "Open Source",
               icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
               callback: async () => await this.elder.sheet.render(true),
-              condition: () => this.elder?.isViewer,
+              condition: () =>
+                this.elder?.isViewer && doc?.uuid !== this.elder?.uuid,
               group: "open",
             },
             {
               name: "Delete",
               icon: makeIcon("trash", "contextMenu"),
               callback: async () => await this.safeDelete(),
-              condition: () => this.isOwner,
+              condition: () =>
+                this.isOwner && this.checkAncestor(doc) && doc?.sheet.editable,
               group: "document",
             },
           ],
@@ -49,6 +52,18 @@ export default function BaseDocumentMixin(Base) {
        */
       get isViewer() {
         return this.permission >= 2;
+      }
+
+      /**
+       * Check whether the provided document or its index is an ancestor of this one.
+       * @param {TeriockDocument|Index<TeriockDocument>} doc
+       */
+      checkAncestor(doc) {
+        if (doc?.uuid === this.uuid) {
+          return true;
+        } else {
+          return this.parent?.checkAncestor(doc) || false;
+        }
       }
 
       /**

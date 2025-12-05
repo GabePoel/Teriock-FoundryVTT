@@ -19,7 +19,7 @@ export default class TeriockTableResult extends EmbedCardDocumentMixin(
   PanelDocumentMixin(BaseDocumentMixin(TableResult)),
 ) {
   /** @inheritDoc */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(doc) {
     return [
       {
         name: "Open Referenced Document",
@@ -28,7 +28,7 @@ export default class TeriockTableResult extends EmbedCardDocumentMixin(
         callback: async () =>
           await (await fromUuid(this.documentUuid))?.sheet.render(true),
       },
-      ...super.cardContextMenuEntries,
+      ...super.getCardContextMenuEntries(doc),
     ];
   }
 

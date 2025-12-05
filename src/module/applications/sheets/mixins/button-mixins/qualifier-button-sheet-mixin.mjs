@@ -1,5 +1,5 @@
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import { setQualifiersDialog } from "../../../dialogs/_module.mjs";
+import { configureDocumentDialog } from "../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof DocumentSheetV2} Base
@@ -13,21 +13,21 @@ export default function QualifierButtonSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
-        setQualifiers: this._setQualifiers,
+        configureDocument: this._configureDocument,
       },
       window: {
         controls: [
           {
-            icon: makeIconClass("eye-low-vision", "contextMenu"),
-            label: "Set Qualifiers",
-            action: "setQualifiers",
+            icon: makeIconClass("sliders", "contextMenu"),
+            label: "Configure Document",
+            action: "configureDocument",
           },
         ],
       },
     };
 
-    static async _setQualifiers() {
-      await setQualifiersDialog(this.document);
+    static async _configureDocument() {
+      await configureDocumentDialog(this.document);
     }
   };
 }

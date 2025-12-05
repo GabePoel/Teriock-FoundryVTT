@@ -3,7 +3,7 @@ type: equipment
 folder: X3rVK7Ngg1mHq1vl
 system:
   equipmentType: Pickaxe
-  equipped: true
+  equipped: false
   consumable: false
   quantity: 1
   maxQuantity:
@@ -45,12 +45,16 @@ system:
   macros: []
   tier:
     saved: 1 + min(@rank.mag, 1)
-  description: >-
+    raw: ''
+  description: ''
+  notes: >-
     <p>Made by the @L[Creature:Dwarf]{dwarves} of the Teriock mountains, these
     items are only found in the Far East near Odilathen. Sometimes use by
     pirates on the Inner Sea, these weapons are not often encountered anymore
     due to the retreat of the dwarves to their ancestral caves in the early
     Second Age.</p>
+  attackPenalty:
+    raw: '-4'
 img: systems/teriock/src/assets/items/ice-axe-of-crom.webp
 effects:
   - name: Versatile
@@ -124,25 +128,33 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
     _key: '!items.effects!NRx4igusRRoAHFwx.lU4awaXin8c9SC60'
-  - name: AP
+  - name: Armor Piercing
     type: property
+    img: systems/teriock/src/icons/properties/armor-piercing.webp
     system:
       description: >-
-        An item with this property is @L[Property:AV0]{AV0} when wielded in two
-        hands.
+        <p>An item with this property is @L[Property:AV0]{AV0} when wielded in
+        two hands.</p>
       form: intrinsic
       damageType: ''
       extraDamage: ''
       applyIfShattered: false
       applyIfDampened: false
       modifiesActor: false
-      limitation: ''
-      improvement: ''
+      qualifiers:
+        ephemeral:
+          raw: ''
+        suppressed:
+          raw: ''
+      _ref: >-
+        Compendium.teriock.magicItems.Item.NRx4igusRRoAHFwx.ActiveEffect.9aLCEcPtUYli9TaB
+      revealed: true
       impacts:
         changes: []
         macros: {}
-    _id: ruHyL3heUMqfiJsC
-    img: systems/teriock/src/icons/properties/ap.webp
+      improvement: ''
+      limitation: ''
+    _id: UOgFBVrt5unmCZlb
     changes: []
     disabled: false
     duration:
@@ -153,297 +165,12 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.dQ4dHCWEvbEaRqfz
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!NRx4igusRRoAHFwx.ruHyL3heUMqfiJsC'
-  - name: Ice Attack
-    type: ability
-    img: icons/magic/water/projectiles-ice-faceted-salvo-blue.webp
-    system:
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        parent: null
-        package: ball
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        description: 1 Minute
-        stationary: false
-      sustained: false
-      range: '30'
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: Target is @L[Condition:Frozen]{frozen}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: stormMage
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: static
-          value:
-            static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well."
-      endCondition: >-
-        At the start of each of the target's actions, they roll [[/roll 2d4]].
-        If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: gifted
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - magical
-        - temporal
-      gifted:
-        enabled: false
-        amount: 1
-      adept:
-        enabled: false
-        amount: 1
-      grantOnly: true
-      impacts:
-        base:
-          statuses:
-            - frozen
-          startStatuses: []
-          endStatuses: []
-          rolls:
-            endCon: 2d4
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: action
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: action
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls:
-            damage: 1d4[magic ice]
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
-    _id: Tn6Lwhp3Yv37HUuW
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags:
-      teriock:
-        dontConsume: false
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!NRx4igusRRoAHFwx.Tn6Lwhp3Yv37HUuW'
+    _key: '!items.effects!NRx4igusRRoAHFwx.UOgFBVrt5unmCZlb'
 flags:
   teriock:
     dontConsume: false
@@ -452,6 +179,6 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
+  compendiumSource: Compendium.teriock.equipment.Item.sm20H2opIgCv1DgS
 _id: NRx4igusRRoAHFwx
 _key: '!items!NRx4igusRRoAHFwx'

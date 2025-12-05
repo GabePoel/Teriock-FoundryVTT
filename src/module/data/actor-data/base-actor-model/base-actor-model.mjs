@@ -55,14 +55,7 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
         "mount",
       ],
       childMacroTypes: [],
-      visibleTypes: [
-        "body",
-        "equipment",
-        "mount",
-        "power",
-        "resource",
-        "species",
-      ],
+      visibleTypes: ["power", "rank", "species"],
     });
   }
 
@@ -79,7 +72,7 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   }
 
   /** @inheritDoc */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(doc) {
     return [
       {
         name: "Open Token",
@@ -87,7 +80,7 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
         condition: () => this.parent.token && this.parent.token.isViewer,
         callback: async () => this.parent.token.sheet.render(true),
       },
-      ...super.cardContextMenuEntries,
+      ...super.getCardContextMenuEntries(doc),
     ];
   }
 

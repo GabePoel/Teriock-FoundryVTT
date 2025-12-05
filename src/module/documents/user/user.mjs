@@ -17,7 +17,7 @@ export default class TeriockUser extends EmbedCardDocumentMixin(
   BaseDocumentMixin(User),
 ) {
   /** @inheritDoc */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(doc) {
     return [
       {
         name: "Open Character",
@@ -25,7 +25,7 @@ export default class TeriockUser extends EmbedCardDocumentMixin(
         callback: async () => await this.character.sheet.render(true),
         condition: () => this.character && this.character.isViewer,
       },
-      ...super.cardContextMenuEntries,
+      ...super.getCardContextMenuEntries(doc),
     ];
   }
 

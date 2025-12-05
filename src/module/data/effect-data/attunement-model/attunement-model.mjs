@@ -48,9 +48,12 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   }
 
   /** @inheritDoc */
-  get cardContextMenuEntries() {
+  getCardContextMenuEntries(doc) {
+    const entries = super
+      .getCardContextMenuEntries(doc)
+      .filter((e) => !["Delete", "Duplicate"].includes(e.name));
     return [
-      ...super.cardContextMenuEntries,
+      ...entries,
       {
         name: "Deattune",
         icon: makeIcon("handshake-simple-slash", "contextMenu"),
@@ -89,18 +92,33 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
 
   /** @inheritDoc */
   get messageParts() {
-    return {
-      ...super.messageParts,
-      ...(this.targetDocument?.system?.messageParts || {
-        bars: [
-          {
-            icon: "fa-weight-hanging",
-            label: "Tier",
-            wrappers: [`Tier ${this.tier}`],
-          },
-        ],
-      }),
-    };
+    const parts = super.messageParts;
+    parts.bars = [
+      {
+        icon: "fa-weight-hanging",
+        label: "Tier",
+        wrappers: [`Tier ${this.tier}`],
+      },
+    ];
+    if (this.targetDocument) {
+      parts.associations = [
+        {
+          title: "Attunement For",
+          icon: TERIOCK.options.document.attunement.icon,
+          cards: [
+            {
+              name: this.targetDocument.nameString,
+              uuid: this.targetDocument.uuid,
+              makeTooltip: true,
+              img: this.targetDocument.img,
+              color: this.targetDocument.system.color,
+              type: this.targetDocument.type,
+            },
+          ],
+        },
+      ];
+    }
+    return parts;
   }
 
   /**

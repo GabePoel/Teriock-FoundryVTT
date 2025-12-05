@@ -1,15 +1,13 @@
 import { fancifyFields, getSchema } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
-import QualifierButtonSheetMixin from "../button-mixins/qualifier-button-sheet-mixin.mjs";
 
 export default function ChildSheetMixin(Base) {
   return (
     /**
      * @property {TeriockChild} document
-     * @mixes CommonSheet
      * @mixes QualifierButtonSheet
      */
-    class ChildSheet extends QualifierButtonSheetMixin(Base) {
+    class ChildSheet extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {

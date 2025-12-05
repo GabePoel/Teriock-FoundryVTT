@@ -25,9 +25,9 @@ export default function TransformationDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      get cardContextMenuEntries() {
+      getCardContextMenuEntries(doc) {
         return [
-          ...super.cardContextMenuEntries,
+          ...super.getCardContextMenuEntries(doc),
           {
             name: "Set Primary Transformation",
             icon: makeIcon("tree", "contextMenu"),

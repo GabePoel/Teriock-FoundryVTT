@@ -45,13 +45,22 @@ system:
   macros: []
   tier:
     saved: '3'
-  description: >-
+    raw: ''
+  description: ''
+  notes: >-
     <p>The origin of these incredible javalins is a mystery, though they are
     more encountered in Teriock than in Roekron. Some theorize that these were
     made by renegade @L[Class:Storm Mage]{Storm Mages} of Temnor who went
     eastward in the Second Age, but this is mere speculation. Others believe
     these to be weapons brought here and left by @L[Category:Elemental
     creatures]{lightning elementals}.</p>
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  attackPenalty:
+    raw: '-2'
 img: systems/teriock/src/assets/items/javelin-of-devastation.webp
 effects:
   - name: Weapon
@@ -1318,8 +1327,8 @@ effects:
       basic: false
       form: normal
       limitation: >-
-        <p>Can only be used with Javelin of Devastation and on
-        @L[Category:Spells]{spells} provided by it.</p>
+        <p>Can only be used on @L[Category:Spells]{spells} provided by the item
+        that @L[Property:Granting]{grants} this.</p>
       improvement: ''
       prepared: true
       warded: false
@@ -1329,7 +1338,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-      effectTypes: []
+      effectTypes:
+        - magical
       gifted:
         enabled: false
         amount: 1
@@ -1486,6 +1496,7 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
+      grantOnly: true
     _id: 3ZP0r8x7Ibw7Q5MN
     changes: []
     disabled: false
@@ -1503,12 +1514,111 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.abilities.Item.E0kDW8VNZFbrTmwx
     _key: '!items.effects!6tu6NPO8fsDJZIY1.3ZP0r8x7Ibw7Q5MN'
+  - name: Thrown
+    type: property
+    img: systems/teriock/src/icons/properties/thrown.webp
+    system:
+      description: >-
+        <p>A weapon with this property can be thrown to make a
+        @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
+        be used to make melee attacks.</p>
+      form: intrinsic
+      damageType: ''
+      extraDamage: ''
+      applyIfShattered: false
+      applyIfDampened: false
+      modifiesActor: false
+      qualifiers:
+        ephemeral:
+          raw: ''
+        suppressed:
+          raw: ''
+      _ref: >-
+        Compendium.teriock.magicItems.Item.6tu6NPO8fsDJZIY1.ActiveEffect.2dXH2jxURSr7hRYp
+      revealed: true
+      impacts:
+        changes: []
+        macros: {}
+      improvement: ''
+      limitation: ''
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.GxpMTePEVU970bWo
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _id: 2dXH2jxURSr7hRYp
+    _key: '!items.effects!6tu6NPO8fsDJZIY1.2dXH2jxURSr7hRYp'
+  - name: Ranged
+    type: property
+    img: systems/teriock/src/icons/properties/ranged.webp
+    system:
+      description: >-
+        <p>Weapons with this property can hit targets at a distance. A weapon
+        that can be used to make a ranged attack has a range in parentheses
+        after specifying if it requires @L[Property:Ammunition]{ammunition} or
+        if is @L[Property:Thrown]{thrown}. The range lists two numbers. The
+        first is the weapon's normal range in feet, and the second indicates the
+        weapon's long range. When attacking a target beyond normal range, you
+        have @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
+        Interaction]{attack roll}. You can't attack a target beyond the weapon's
+        long range.</p>
+      form: intrinsic
+      damageType: ''
+      extraDamage: ''
+      applyIfShattered: false
+      applyIfDampened: false
+      modifiesActor: false
+      impacts:
+        changes:
+          - key: item.system.range.ranged
+            mode: 5
+            value: 'true'
+            priority: 10
+        macros: {}
+      improvement: ''
+      limitation: ''
+      _sup: 2dXH2jxURSr7hRYp
+      qualifiers:
+        ephemeral:
+          raw: ''
+        suppressed:
+          raw: ''
+      _ref: >-
+        Compendium.teriock.properties.Item.GxpMTePEVU970bWo.ActiveEffect.qm2HG2WMyxxCzoXL
+      revealed: true
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _id: qm2HG2WMyxxCzoXL
+    _key: '!items.effects!6tu6NPO8fsDJZIY1.qm2HG2WMyxxCzoXL'
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
+  compendiumSource: Compendium.teriock.equipment.Item.k0M8BvbWeRlL0hjL
 _id: 6tu6NPO8fsDJZIY1
 _key: '!items!6tu6NPO8fsDJZIY1'

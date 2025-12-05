@@ -1,4 +1,7 @@
 import { getProperty } from "../../../../helpers/fetch.mjs";
+import { EvaluationField } from "../../../shared/fields/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Equipment data model mixin that handles equipping, gluing, and attunement.
@@ -12,6 +15,26 @@ export default (Base) => {
      * @mixin
      */
     class EquipmentWieldingPart extends Base {
+      /** @inheritDoc */
+      static defineSchema() {
+        const schema = super.defineSchema();
+        Object.assign(schema, {
+          equipped: new fields.BooleanField({
+            initial: false,
+            label: "Equipped",
+          }),
+          glued: new fields.BooleanField({
+            initial: false,
+            label: "Glued",
+          }),
+          minStr: new EvaluationField({
+            min: -3,
+            initial: -3,
+          }),
+        });
+        return schema;
+      }
+
       /**
        * Checks if equipping is a valid operation.
        * @returns {boolean}
@@ -19,7 +42,8 @@ export default (Base) => {
       get canEquip() {
         return (
           ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-          !this.isEquipped
+          !this.isEquipped &&
+          this.actor?.system.attributes.str.score >= this.minStr
         );
       }
 
@@ -46,11 +70,16 @@ export default (Base) => {
         }
       }
 
-      //noinspection JSUnusedGlobalSymbols
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
         this.unglue().then();
+      }
+
+      /** @inheritDoc */
+      prepareSpecialData() {
+        super.prepareSpecialData();
+        this.minStr.evaluate();
       }
 
       /**

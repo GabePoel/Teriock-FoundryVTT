@@ -27,7 +27,7 @@ export default (Base) =>
         }
       } else if (created?.type === "equipment") {
         const doc = await Item.fromDropData(dropData);
-        if (doc.isOwner) {
+        if (doc.isOwner && doc.elder?.documentName === "Actor") {
           await doc.delete();
         }
       }

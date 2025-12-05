@@ -488,6 +488,15 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
     _prepareDerivedData(this);
   }
 
+  /** @inheritDoc */
+  async getCompendiumSourceRefreshObject() {
+    const obj = await super.getCompendiumSourceRefreshObject();
+    if (!["normal", "special", "flaw"].includes(this.form)) {
+      foundry.utils.deleteProperty(obj, "system.form");
+    }
+    return obj;
+  }
+
   /**
    * @inheritDoc
    * @param {Teriock.Execution.AbilityExecutionOptions} options

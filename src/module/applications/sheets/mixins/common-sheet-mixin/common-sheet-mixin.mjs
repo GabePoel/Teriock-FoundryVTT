@@ -1,7 +1,9 @@
-import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
-import { IndexButtonSheetMixin } from "../_module.mjs";
+import {
+  IndexButtonSheetMixin,
+  QualifierButtonSheetMixin,
+} from "../_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
 import DocumentCreationCommonSheetPart from "./parts/document-creation-common-sheet-part.mjs";
@@ -35,7 +37,9 @@ export default function CommonSheetMixin(Base) {
       LockingCommonSheetPart(
         SelfInteractionCommonSheetPart(
           DocumentCreationCommonSheetPart(
-            DragDropCommonSheetPart(HandlebarsApplicationMixin(Base)),
+            DragDropCommonSheetPart(
+              QualifierButtonSheetMixin(HandlebarsApplicationMixin(Base)),
+            ),
           ),
         ),
       ),
@@ -65,13 +69,6 @@ export default function CommonSheetMixin(Base) {
         },
         window: {
           resizable: true,
-          controls: [
-            {
-              icon: makeIconClass("rotate-right", "contextMenu"),
-              label: "Reload Sheet",
-              action: "reloadThis",
-            },
-          ],
         },
       };
 

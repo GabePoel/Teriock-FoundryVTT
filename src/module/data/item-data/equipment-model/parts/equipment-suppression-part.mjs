@@ -1,5 +1,7 @@
 import { getProperty } from "../../../../helpers/fetch.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * Equipment data model mixin that handles shattering and dampening.
  * @param {typeof TeriockEquipmentModel} Base
@@ -22,6 +24,22 @@ export default (Base) => {
         if (!data.cancel) {
           await this.parent.update({ "system.dampened": true });
         }
+      }
+
+      /** @inheritDoc */
+      static defineSchema() {
+        const schema = super.defineSchema();
+        Object.assign(schema, {
+          dampened: new fields.BooleanField({
+            initial: false,
+            label: "Dampened",
+          }),
+          shattered: new fields.BooleanField({
+            initial: false,
+            label: "Shattered",
+          }),
+        });
+        return schema;
       }
 
       /**

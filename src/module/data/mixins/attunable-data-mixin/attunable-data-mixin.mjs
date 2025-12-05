@@ -37,9 +37,9 @@ export default function AttunableDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      get cardContextMenuEntries() {
+      getCardContextMenuEntries(doc) {
         return [
-          ...super.cardContextMenuEntries,
+          ...super.getCardContextMenuEntries(doc),
           {
             name: "Attune",
             icon: makeIcon("handshake-simple", "contextMenu"),
@@ -156,11 +156,11 @@ export default function AttunableDataMixin(Base) {
               [attunementData],
             );
             ui.notifications.success(
-              `${this.parent.name} was successfully attuned.`,
+              `${this.parent.nameString} was successfully attuned.`,
             );
           } else {
             ui.notifications.error(
-              `You do not have enough unused presence to attune ${this.parent.name}.`,
+              `You do not have enough unused presence to attune ${this.parent.nameString}.`,
             );
           }
           return attunement;
@@ -199,6 +199,9 @@ export default function AttunableDataMixin(Base) {
           const attunement = this.attunement;
           if (attunement) {
             await attunement.delete();
+            ui.notifications.success(
+              `${this.parent.nameString} was successfully deattuned.`,
+            );
           }
         }
       }

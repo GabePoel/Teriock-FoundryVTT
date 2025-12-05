@@ -29,7 +29,17 @@ for (const p of packs) {
     });
     const doc = await tm.utils.resolveDocument(index);
     if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
-      await doc.system.refreshFromCompendiumSource();
+      const options = {};
+      if (p.collection === "teriock.magicItems") {
+        options.deleteChildren = false;
+        options.recursive = false;
+      }
+      await doc.system.refreshFromCompendiumSource(options);
+      if (p.collection === "teriock.magicItems") {
+        for (const child of await doc.getChildArray()) {
+          await child.system.refreshFromCompendiumSource();
+        }
+      }
     }
   }
   indexProgress.update({ pct: 1 });

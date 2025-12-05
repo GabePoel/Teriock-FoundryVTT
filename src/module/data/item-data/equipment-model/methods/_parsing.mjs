@@ -130,6 +130,21 @@ export async function _parse(equipmentData, rawHTML) {
   await ensureChildren(equipmentData.parent, "property", propertiesToCreate);
   await ensureChildren(equipmentData.parent, "ability", abilitiesToCreate);
 
+  const abilityUpdates = equipmentData.parent.abilities
+    .filter((a) => abilitiesToCreate.has(a.name))
+    .map((a) => {
+      return {
+        _id: a._id,
+        "system.form": "intrinsic",
+      };
+    });
+  if (abilityUpdates.length > 0) {
+    await equipmentData.parent.updateChildDocuments(
+      "ActiveEffect",
+      abilityUpdates,
+    );
+  }
+
   parameters.properties = [];
 
   parameters.editable = false;

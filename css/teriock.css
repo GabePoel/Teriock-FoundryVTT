@@ -400,12 +400,7 @@
 .teriock-panel .teriock-panel-block .teriock-panel-block-text {
   text-align: left;
 }
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h1,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h2,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h3,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h4,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h5,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h6 {
+.teriock-panel .teriock-panel-block .teriock-panel-block-text h1, .teriock-panel .teriock-panel-block .teriock-panel-block-text h2, .teriock-panel .teriock-panel-block .teriock-panel-block-text h3, .teriock-panel .teriock-panel-block .teriock-panel-block-text h4, .teriock-panel .teriock-panel-block .teriock-panel-block-text h5, .teriock-panel .teriock-panel-block .teriock-panel-block-text h6 {
   color: var(--color-text-subtle);
   text-transform: uppercase;
   font-size: smaller;
@@ -418,13 +413,11 @@
   padding: 10px 0 0;
   text-transform: uppercase;
 }
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h1 + p,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h2 + p,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h3 + p,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h4 + p,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h5 + p,
-.teriock-panel .teriock-panel-block .teriock-panel-block-text h6 + p {
+.teriock-panel .teriock-panel-block .teriock-panel-block-text h1 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h2 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h3 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h4 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h5 + p, .teriock-panel .teriock-panel-block .teriock-panel-block-text h6 + p {
   margin-top: 0;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-text h1:last-child, .teriock-panel .teriock-panel-block .teriock-panel-block-text h1:has(+ :is(h1, h2, h3, h4, h5, h6)), .teriock-panel .teriock-panel-block .teriock-panel-block-text h2:last-child, .teriock-panel .teriock-panel-block .teriock-panel-block-text h2:has(+ :is(h1, h2, h3, h4, h5, h6)), .teriock-panel .teriock-panel-block .teriock-panel-block-text h3:last-child, .teriock-panel .teriock-panel-block .teriock-panel-block-text h3:has(+ :is(h1, h2, h3, h4, h5, h6)), .teriock-panel .teriock-panel-block .teriock-panel-block-text h4:last-child, .teriock-panel .teriock-panel-block .teriock-panel-block-text h4:has(+ :is(h1, h2, h3, h4, h5, h6)), .teriock-panel .teriock-panel-block .teriock-panel-block-text h5:last-child, .teriock-panel .teriock-panel-block .teriock-panel-block-text h5:has(+ :is(h1, h2, h3, h4, h5, h6)), .teriock-panel .teriock-panel-block .teriock-panel-block-text h6:last-child, .teriock-panel .teriock-panel-block .teriock-panel-block-text h6:has(+ :is(h1, h2, h3, h4, h5, h6)) {
+  display: none;
 }
 .teriock-panel .teriock-panel-block .teriock-panel-block-text .design-note {
   display: none;
@@ -477,6 +470,11 @@
 .teriock-panel .teriock-panel-association .teriock-panel-association-row:not(.teriock-panel-association-title) {
   border-top: 1px dotted var(--color-panel-associations-border);
 }
+.teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-card-name {
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-row-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
@@ -486,6 +484,8 @@
   height: 1.5em;
   margin: 0.25em;
   width: 1.5em;
+  min-width: 1.5em;
+  min-height: 1.5em;
 }
 .teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-row-image img {
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));

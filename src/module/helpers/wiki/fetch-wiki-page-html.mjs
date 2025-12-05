@@ -1,3 +1,4 @@
+import { cleanHTML } from "../../data/shared/parsing/clean-html-doc.mjs";
 import cleanWikiHTML from "./clean-wiki-html.mjs";
 
 let isNode = typeof window === "undefined";
@@ -36,6 +37,7 @@ export default async function fetchWikiPageHTML(title, options = {}) {
     noSubs = false,
     simplifyWikiLinks = true,
     cleanSpans = false,
+    fullClean = false,
   } = options;
 
   let enricherKeys = [];
@@ -200,8 +202,11 @@ export default async function fetchWikiPageHTML(title, options = {}) {
         .reverse()
         .forEach((s) => s.replaceWith(s.textContent));
     }
-
-    return cleanWikiHTML(doc.body.innerHTML, { noSubs });
+    let cleanedHTML = await cleanWikiHTML(doc.body.innerHTML, { noSubs });
+    if (fullClean) {
+      cleanedHTML = cleanHTML(cleanedHTML, null, { useFoundry: false });
+    }
+    return cleanedHTML;
   } catch (error) {
     console.error("Error fetching HTML:", title, error);
     return null;
