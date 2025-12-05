@@ -28,10 +28,6 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
         initial: false,
         label: "Disabled",
       }),
-      updateCounter: new fields.BooleanField({
-        initial: false,
-        label: "Update Counter",
-      }),
       onUse: new fields.SetField(new fields.DocumentIdField()),
     });
   }

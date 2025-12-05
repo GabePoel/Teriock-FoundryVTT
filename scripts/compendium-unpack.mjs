@@ -142,7 +142,6 @@ function cleanEntry(doc) {
     }
     delete doc.system.hierarchy;
     delete doc.system.font;
-    delete doc.system.updateCounter;
     delete doc.system.proficient;
     delete doc.system.fluent;
     delete doc.system.disabled;

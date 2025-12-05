@@ -323,8 +323,6 @@ declare global {
         ranks: boolean;
       };
     };
-    /** <schema> Update counter - used to force an update when adding/removing effects */
-    updateCounter: boolean;
     /** <schema> Weight of the actor and what they carry */
     weight: {
       /** <derived> Total weight carried by the actor (equipment + money) */

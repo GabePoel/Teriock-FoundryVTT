@@ -19,13 +19,6 @@ export interface CommonDocumentMixinInterface {
   enable(): Promise<void>;
 
   /**
-   * Forces an update of the document by toggling the update counter.
-   * This is useful for triggering reactive updates in the UI.
-   * @returns Promise that resolves when the document is updated
-   */
-  forceUpdate(): Promise<void>;
-
-  /**
    * Get the abilities that are directly descendent from this.
    * @returns {TeriockAbility[]}
    */

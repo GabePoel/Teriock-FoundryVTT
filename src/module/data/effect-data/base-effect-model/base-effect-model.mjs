@@ -34,10 +34,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
           ),
         }),
       }),
-      updateCounter: new fields.BooleanField({
-        initial: false,
-        label: "Update Counter",
-      }),
     });
   }
 

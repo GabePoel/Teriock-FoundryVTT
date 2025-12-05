@@ -151,7 +151,6 @@ export default function ChildDocumentMixin(Base) {
           this.documentName,
           [data.copy],
         );
-        await this.parent.forceUpdate();
         return copyDocument[0];
       }
 

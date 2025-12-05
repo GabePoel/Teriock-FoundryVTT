@@ -15,7 +15,6 @@ export default function registerTimeManagementHooks() {
       const user = game.user;
       if (user.id === userId && user.isActiveGM) {
         for (const actor of getActors()) {
-          const num = actor.durationExpirationEffects.length;
           for (const effect of actor.durationExpirationEffects) {
             await effect.system.checkExpiration();
           }
@@ -30,9 +29,6 @@ export default function registerTimeManagementHooks() {
               // Round to 2 decimal places
               "system.money.debt": Math.round(newDebt * 100) / 100,
             });
-          }
-          if (num > 0) {
-            await actor.forceUpdate();
           }
         }
       }

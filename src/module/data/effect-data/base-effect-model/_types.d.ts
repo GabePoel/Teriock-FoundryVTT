@@ -14,8 +14,6 @@ declare module "./base-effect-model.mjs" {
         inactive: Set<Teriock.Parameters.Condition.ConditionKey>;
       };
     };
-    /** <schema> Update counter - used to force an update when adding/removing effects */
-    updateCounter: boolean;
 
     get parent(): TeriockEffect;
   }

@@ -79,10 +79,6 @@ export function _defineAttributes(schema) {
     str: attributeField("STR"),
     unp: attributeField("UNP"),
   });
-  schema.updateCounter = new fields.BooleanField({
-    initial: false,
-    label: "Update Counter",
-  });
   schema.abilityFlags = new fields.TypedObjectField(new fields.StringField());
   return schema;
 }

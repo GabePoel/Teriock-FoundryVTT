@@ -84,13 +84,6 @@ export default function CommonDocumentMixin(Base) {
         await this.update({ "system.disabled": false });
       }
 
-      /** @inheritDoc */
-      async forceUpdate() {
-        await this.update({
-          "system.updateCounter": !this.system.updateCounter,
-        });
-      }
-
       /**
        * @inheritDoc
        * @returns {TeriockAbility[]}
