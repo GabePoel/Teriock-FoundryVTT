@@ -5,7 +5,7 @@
  * @returns {Partial<Teriock.MessageData.MessagePanel>} Object containing bars and blocks for the ability message.
  * @private
  */
-export function _messageParts(abilityData) {
+export function _panelParts(abilityData) {
   const src = abilityData;
   const ref = TERIOCK.options.ability;
   let mpCost = "";

@@ -17,7 +17,7 @@ import {
 } from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _generateChanges } from "./methods/_generate-changes.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
+import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _suppressed } from "./methods/_suppression.mjs";
@@ -317,10 +317,10 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
+  get panelParts() {
     return {
-      ...super.messageParts,
-      ..._messageParts(this),
+      ...super.panelParts,
+      ..._panelParts(this),
     };
   }
 

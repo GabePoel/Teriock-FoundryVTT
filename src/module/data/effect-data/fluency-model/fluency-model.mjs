@@ -11,7 +11,7 @@ import {
 } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
+import { _panelParts } from "./methods/_panel-parts.mjs";
 
 const { fields } = foundry.data;
 
@@ -120,8 +120,8 @@ export default class TeriockFluencyModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
+  get panelParts() {
+    return { ...super.panelParts, ..._panelParts(this) };
   }
 
   /** @inheritDoc */

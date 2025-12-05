@@ -11,7 +11,7 @@ import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
-import * as messages from "./methods/_messages.mjs";
+import * as messages from "./methods/_panel-parts.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import EquipmentIdentificationPart from "./parts/equipment-identification-part.mjs";
@@ -276,10 +276,10 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   }
 
   /** @inheritDoc */
-  get messageParts() {
+  get panelParts() {
     return {
-      ...super.messageParts,
-      ...messages._messageParts(this),
+      ...super.panelParts,
+      ...messages._panelParts(this),
     };
   }
 

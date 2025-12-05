@@ -42,9 +42,9 @@ export default class TeriockTableResult extends EmbedCardDocumentMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
+  get panelParts() {
     /** @type {Teriock.MessageData.MessagePanel} */
-    const parts = super.messageParts;
+    const parts = super.panelParts;
     parts.icon = "table-rows";
     parts.label = "Table Result";
     parts.image = this.icon;

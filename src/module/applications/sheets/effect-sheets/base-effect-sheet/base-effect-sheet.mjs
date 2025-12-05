@@ -1,3 +1,4 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import {
   ChatButtonSheetMixin,
@@ -26,7 +27,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["effect"],
     window: {
-      icon: makeIconClass(TERIOCK.options.document.effect.icon, "title"),
+      icon: makeIconClass(documentOptions.effect.icon, "title"),
     },
     actions: {
       addChange: this._onAddChange,

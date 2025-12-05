@@ -47,8 +47,8 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      get messageParts() {
-        return this.system.messageParts;
+      get panelParts() {
+        return this.system.panelParts;
       }
 
       /** @inheritDoc */

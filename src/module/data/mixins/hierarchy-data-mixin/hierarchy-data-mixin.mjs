@@ -1,12 +1,9 @@
-import { hierarchyField } from "../../shared/fields/helpers/field-builders.mjs";
-
 const { fields } = foundry.data;
 
 /**
  * Data mixin to support hierarchies of the same document type.
  * @param {typeof ChildTypeModel} Base
  * @constructor
- * @deprecated
  */
 export default function HierarchyDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
@@ -16,13 +13,11 @@ export default function HierarchyDataMixin(Base) {
      * @property {UUID<TeriockCommon>} _ref
      * @property {ID<TeriockCommon>} _sup
      * @implements {HierarchyDataMixinInterface}
-     * @deprecated
      */
     class HierarchyData extends Base {
       /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
-        schema.hierarchy = hierarchyField();
         Object.assign(schema, {
           _sup: new fields.DocumentIdField({
             nullable: true,

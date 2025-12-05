@@ -49,7 +49,7 @@ export default class TeriockRollTable extends BaseDocumentMixin(RollTable) {
           avatar: TeriockChatMessage.getSpeakerActor(
             TeriockChatMessage.getSpeaker(),
           )?.img,
-          panels: results.map((r) => r.messageParts),
+          panels: results.map((r) => r.panelParts),
         },
       },
       messageData,

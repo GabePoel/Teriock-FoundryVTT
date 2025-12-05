@@ -6,7 +6,7 @@ import { prefix, suffix } from "../../../../helpers/string.mjs";
  * @returns {Partial<Teriock.MessageData.MessagePanel>} Object containing bars and blocks for the body part message.
  * @private
  */
-export function _messageParts(bodyData) {
+export function _panelParts(bodyData) {
   const bars = [
     {
       icon: "fa-crosshairs-simple",

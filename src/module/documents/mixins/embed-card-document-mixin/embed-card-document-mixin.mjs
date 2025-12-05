@@ -113,13 +113,16 @@ export default function EmbedCardDocumentMixin(Base) {
           }
         });
         const relativeUuid = element.dataset.relative;
-        const relative = relativeUuid ? fromUuidSync(relativeUuid) : null;
-        const menuEntries = this.getCardContextMenuEntries(relative);
-        if (menuEntries) {
-          new TeriockContextMenu(element, ".teriock-block", menuEntries, {
-            eventName: "contextmenu",
-            jQuery: false,
-            fixed: true,
+        if (relativeUuid) {
+          fromUuid(relativeUuid).then((relative) => {
+            const menuEntries = this.getCardContextMenuEntries(relative);
+            if (menuEntries) {
+              new TeriockContextMenu(element, ".teriock-block", menuEntries, {
+                eventName: "contextmenu",
+                jQuery: false,
+                fixed: true,
+              });
+            }
           });
         }
       }

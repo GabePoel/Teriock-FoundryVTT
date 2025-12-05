@@ -113,8 +113,8 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    const parts = super.messageParts;
+  get panelParts() {
+    const parts = super.panelParts;
     parts.blocks = [
       {
         title: "Notes",

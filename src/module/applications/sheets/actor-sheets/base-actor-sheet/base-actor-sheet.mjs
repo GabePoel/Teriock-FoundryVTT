@@ -178,7 +178,7 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
       context.conditionProviders[condition] = Array.from(
         this.document.system.conditionInformation[condition].reasons,
       );
-      const messageParts = {
+      const panelParts = {
         bars: [],
         blocks: [
           {
@@ -213,10 +213,10 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
             makeTooltip: false,
           });
         }
-        messageParts.associations.push(association);
+        panelParts.associations.push(association);
       }
       context.conditionTooltips[condition] =
-        await TeriockTextEditor.makeTooltip(messageParts);
+        await TeriockTextEditor.makeTooltip(panelParts);
     }
   }
 

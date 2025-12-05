@@ -10,7 +10,7 @@ import {
 } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
+import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 
 const { fields } = foundry.data;
@@ -200,8 +200,8 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
+  get panelParts() {
+    return { ...super.panelParts, ..._panelParts(this) };
   }
 
   /**

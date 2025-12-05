@@ -71,8 +71,8 @@ export default function TransformationDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      get messageParts() {
-        const parts = super.messageParts;
+      get panelParts() {
+        const parts = super.panelParts;
         quickAddAssociation(
           this.species,
           "Species",

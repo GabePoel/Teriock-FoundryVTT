@@ -18,10 +18,10 @@ export default class TeriockCreatureModel extends TeriockBaseActorModel {
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    const parts = super.messageParts;
+  get panelParts() {
+    const parts = super.panelParts;
     for (const species of this.parent.species) {
-      parts.blocks.push(...species.system.messageParts.blocks);
+      parts.blocks.push(...species.system.panelParts.blocks);
     }
     return parts;
   }

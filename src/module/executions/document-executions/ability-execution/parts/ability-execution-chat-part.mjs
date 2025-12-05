@@ -282,7 +282,7 @@ export default function AbilityExecutionChatPart(Base) {
           statuses: Array.from(statuses),
           system: {
             associations: [],
-            blocks: this.source.system.messageParts.blocks,
+            blocks: this.source.system.panelParts.blocks,
             critical: crit,
             deleteOnExpire: true,
             expirations: {

@@ -1,18 +1,5 @@
 import { TeriockFolder } from "../../../../documents/_module.mjs";
 
-/** <schema> {@link TeriockEffect} hierarchy */
-export type HierarchyField = {
-  /**
-   * <schema> <derived> The UUID of the {@link TeriockParent} this {@link TeriockAbility} is
-   * embedded in. This is calculated when the {@link TeriockAbility} is created and should not be set manually.
-   */
-  rootUuid: UUID<TeriockParent>;
-  /** <schema> The IDs for each {@link TeriockEffect} that could be descended from this. */
-  subIds: Set<ID<TeriockChild>>;
-  /** <schema> The ID of the {@link TeriockEffect} that this is descended from, if there is one. */
-  supId: ID<TeriockChild> | null;
-};
-
 /** <schema> Transformation configuration */
 export type TransformationField = {
   /** <schema> Whether transformation is enabled */

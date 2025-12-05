@@ -14,13 +14,13 @@ export default class TeriockJournalEntryPage extends PanelDocumentMixin(
   BaseDocumentMixin(JournalEntryPage),
 ) {
   /** @inheritDoc */
-  get messageParts() {
+  get panelParts() {
     const div = document.createElement("div");
     div.innerHTML = this.text.content;
     div.querySelectorAll("table").forEach((t) => t.remove());
     const html = div.innerHTML;
     return {
-      ...super.messageParts,
+      ...super.panelParts,
       image:
         this.getFlag("teriock", "journalImage") ||
         getImage("powers", "Learned Elder Sorceries"),

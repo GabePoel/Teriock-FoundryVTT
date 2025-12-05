@@ -6,7 +6,7 @@ import { prefix, suffix } from "../../../../helpers/string.mjs";
  * @returns {Partial<Teriock.MessageData.MessagePanel>} Object containing bars and blocks for the equipment message.
  * @private
  */
-export function _messageParts(equipmentData) {
+export function _panelParts(equipmentData) {
   const ref = TERIOCK.options.equipment;
   const src = equipmentData;
   const damageString = suffix(src.damage.base.text, "damage");

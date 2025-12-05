@@ -91,8 +91,8 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    const parts = super.messageParts;
+  get panelParts() {
+    const parts = super.panelParts;
     parts.bars = [
       {
         icon: "fa-weight-hanging",

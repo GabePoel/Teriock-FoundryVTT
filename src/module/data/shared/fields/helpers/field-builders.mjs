@@ -3,29 +3,6 @@ import { arrayTypeValidator, typeValidator } from "./field-validators.mjs";
 const { fields } = foundry.data;
 
 /**
- * Field for an effect hierarchy.
- * @returns {SchemaField} Hierarchy field.
- */
-export function hierarchyField() {
-  return new fields.SchemaField({
-    rootUuid: new fields.DocumentUUIDField({
-      hint: "The UUID of the document this ability is embedded in.",
-      label: "Root UUID",
-    }),
-    subIds: new fields.SetField(new fields.DocumentIdField(), {
-      hint: "The IDs of the abilities that this ability provides, if there are any.",
-      label: "Sub IDs",
-    }),
-    supId: new fields.DocumentIdField({
-      hint: "The ID of the ability or effect that provides this ability, if there is one.",
-      initial: null,
-      label: "Super Ability ID",
-      nullable: true,
-    }),
-  });
-}
-
-/**
  * Field for source portion of combat expiration.
  * @returns {StringField}
  */

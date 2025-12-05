@@ -4,7 +4,7 @@
  * @returns {Partial<Teriock.MessageData.MessagePanel>}
  * @private
  */
-export function _messageParts(speciesData) {
+export function _panelParts(speciesData) {
   const bars = [
     {
       icon: "fa-dice",

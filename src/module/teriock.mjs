@@ -334,12 +334,7 @@ foundry.helpers.Hooks.once("init", function () {
   }
 
   // Modifying index fields
-  const hierarchyIndexFields = [
-    "system.hierarchy.rootUuid",
-    "system.hierarchy.subIds",
-    "system.hierarchy.supId",
-    "system._sup",
-  ];
+  const hierarchyIndexFields = ["system._sup"];
   CONFIG.Item.compendiumIndexFields.push(...hierarchyIndexFields);
 
   // Registering custom queries

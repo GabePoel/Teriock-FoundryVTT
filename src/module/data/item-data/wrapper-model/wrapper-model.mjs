@@ -21,7 +21,7 @@ export default class TeriockWrapperModel extends TeriockBaseItemModel {
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    return this.effect.system.messageParts;
+  get panelParts() {
+    return this.effect.system.panelParts;
   }
 }

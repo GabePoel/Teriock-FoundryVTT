@@ -124,7 +124,7 @@ export default class CommonTypeModel extends TypeDataModel {
    * Includes image, name, and font information from the parent document.
    * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.
    */
-  get messageParts() {
+  get panelParts() {
     const parts = {
       associations: [],
       bars: this.messageBars,

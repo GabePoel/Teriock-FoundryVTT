@@ -144,8 +144,8 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
-    const parts = super.messageParts;
+  get panelParts() {
+    const parts = super.panelParts;
     parts.bars = [
       {
         icon: "fa-hourglass",

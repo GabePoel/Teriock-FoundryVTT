@@ -6,7 +6,7 @@ import {
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _messageParts } from "./methods/_messages.mjs";
+import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 
 /**
@@ -65,10 +65,10 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
   }
 
   /** @inheritDoc */
-  get messageParts() {
+  get panelParts() {
     return {
-      ...super.messageParts,
-      ..._messageParts(this),
+      ...super.panelParts,
+      ..._panelParts(this),
     };
   }
 

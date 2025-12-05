@@ -5,7 +5,7 @@
  * @returns {Partial<Teriock.MessageData.MessagePanel>} Object containing bars and blocks for the fluency message.
  * @private
  */
-export function _messageParts(fluencyData) {
+export function _panelParts(fluencyData) {
   const ref = TERIOCK.options.tradecraft;
   const src = fluencyData;
   const bars = [

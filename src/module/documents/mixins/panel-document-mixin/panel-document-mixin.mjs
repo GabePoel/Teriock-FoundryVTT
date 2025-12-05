@@ -11,7 +11,7 @@ export default function PanelDocumentMixin(Base) {
      */
     class PanelDocument extends Base {
       /** @returns {Teriock.MessageData.MessagePanel} */
-      get messageParts() {
+      get panelParts() {
         return {
           name: this.nameString || this.name,
           image: systemPath("icons/documents/uncertainty.svg"),
@@ -52,12 +52,12 @@ export default function PanelDocumentMixin(Base) {
 
       /** @returns {Promise<Teriock.MessageData.MessagePanel>} */
       async toPanel() {
-        let parts = this.messageParts;
+        let parts = this.panelParts;
         // If this is part of a preview, it won't have a real UUID.
         if (this.getFlag("teriock", "previewUuid")) {
           const doc = await fromUuid(this.getFlag("teriock", "previewUuid"));
           if (doc) {
-            parts = doc.messageParts;
+            parts = doc.panelParts;
           }
         }
         return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
@@ -65,7 +65,7 @@ export default function PanelDocumentMixin(Base) {
 
       /** @inheritDoc */
       async toTooltip() {
-        return await TeriockTextEditor.makeTooltip(this.messageParts, {
+        return await TeriockTextEditor.makeTooltip(this.panelParts, {
           relativeTo: this,
         });
       }

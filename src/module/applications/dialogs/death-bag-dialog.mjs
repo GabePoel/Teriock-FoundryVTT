@@ -130,7 +130,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         pulledStones,
       };
       /** @type {Teriock.MessageData.MessagePanel} */
-      const messageParts = {
+      const panelParts = {
         image: getImage("misc", "Death Bag"),
         name: "Death Bag",
         bars: [
@@ -157,7 +157,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         systemPath("templates/ui-templates/death-bag.hbs"),
         context,
       );
-      const panel = await TeriockTextEditor.enrichPanel(messageParts);
+      const panel = await TeriockTextEditor.enrichPanel(panelParts);
       const chatMessageData = {
         speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
         content: pullContent,

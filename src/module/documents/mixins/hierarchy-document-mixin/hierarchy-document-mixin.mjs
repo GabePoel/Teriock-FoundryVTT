@@ -106,7 +106,9 @@ export default function HierarchyDocumentMixin(Base) {
         if (doc?.uuid === this.uuid) {
           return true;
         } else {
-          return this.elder?.checkAncestor(doc) || false;
+          return this.elder?.checkAncestor
+            ? this.elder?.checkAncestor(doc) || false
+            : false;
         }
       }
 
