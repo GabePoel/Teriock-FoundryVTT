@@ -12,7 +12,7 @@ export default class TeriockMountSheet extends TeriockBaseItemSheet {
   static DEFAULT_OPTIONS = {
     classes: ["mount"],
     actions: {
-      toggleMounted: this._toggleMounted,
+      toggleMounted: this.#onToggleMounted,
     },
     window: {
       icon: makeIconClass(documentOptions.mount.icon, "title"),
@@ -33,7 +33,7 @@ export default class TeriockMountSheet extends TeriockBaseItemSheet {
    * @returns {Promise<void>} - Promise that resolves when the mounted state is toggled.
    * @private
    */
-  static async _toggleMounted() {
+  static async #onToggleMounted() {
     if (this.document.system.mounted) {
       await this.document.system.unmount();
     } else {

@@ -2,8 +2,8 @@ export default (Base) =>
   class TradecraftsActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        tradecraftExtra: this._tradecraftExtra,
-        rollTradecraft: this._rollTradecraft,
+        tradecraftExtra: this._onTradecraftExtra,
+        rollTradecraft: this._onRollTradecraft,
       },
     };
 
@@ -14,7 +14,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when tradecraft is rolled.
      * @static
      */
-    static async _rollTradecraft(event, target) {
+    static async _onRollTradecraft(event, target) {
       const tradecraft = target.dataset.tradecraft;
       const options = {};
       if (event.altKey) {
@@ -33,7 +33,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when tradecraft extra is updated.
      * @static
      */
-    static async _tradecraftExtra(_event, target) {
+    static async _onTradecraftExtra(_event, target) {
       const tradecraft = target.dataset.tradecraft;
       const extra = this.document.system.tradecrafts[tradecraft].extra;
       const newExtra = (extra + 1) % 4;

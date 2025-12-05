@@ -27,9 +27,9 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["equipment"],
     actions: {
-      toggleEquipped: this._toggleEquipped,
-      toggleShattered: this._toggleShattered,
-      toggleDampened: this._toggleDampened,
+      toggleEquipped: this.#onToggleEquipped,
+      toggleShattered: this.#onToggleShattered,
+      toggleDampened: this.#onToggleDampened,
     },
     window: {
       icon: `fa-solid fa-${documentOptions.equipment.icon}`,
@@ -50,7 +50,7 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when dampened state is toggled.
    * @static
    */
-  static async _toggleDampened() {
+  static async #onToggleDampened() {
     if (this.document.system.dampened) {
       await this.document.system.undampen();
     } else {
@@ -63,7 +63,7 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when equipped state is toggled.
    * @static
    */
-  static async _toggleEquipped() {
+  static async #onToggleEquipped() {
     if (this.document.system.equipped) {
       await this.document.system.unequip();
     } else {
@@ -76,7 +76,7 @@ export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when shattered state is toggled.
    * @static
    */
-  static async _toggleShattered() {
+  static async #onToggleShattered() {
     if (this.document.system.shattered) {
       await this.document.system.repair();
     } else {

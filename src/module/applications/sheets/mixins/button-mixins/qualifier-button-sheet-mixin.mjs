@@ -13,20 +13,21 @@ export default function QualifierButtonSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
-        configureDocument: this._configureDocument,
+        configureDocument: this._onConfigureDocument,
       },
       window: {
         controls: [
           {
+            action: "configureDocument",
             icon: makeIconClass("sliders", "contextMenu"),
             label: "Configure Document",
-            action: "configureDocument",
+            ownership: "OWNER",
           },
         ],
       },
     };
 
-    static async _configureDocument() {
+    static async _onConfigureDocument() {
       await configureDocumentDialog(this.document);
     }
   };

@@ -14,9 +14,9 @@ export default function UseButtonSheetMixin(Base) {
       window: {
         controls: [
           {
+            action: "rollThis",
             icon: makeIconClass("dice", "contextMenu"),
             label: "Use This",
-            action: "rollThis",
           },
         ],
       },

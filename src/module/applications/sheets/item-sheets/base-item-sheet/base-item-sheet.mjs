@@ -28,8 +28,8 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],
     actions: {
-      toggleOnUseDoc: this._toggleOnUseDoc,
-      refreshThis: this._refreshThis,
+      toggleOnUseDoc: this._onToggleOnUseDoc,
+      refreshThis: this._onRefreshThis,
     },
   };
 
@@ -38,7 +38,7 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _refreshThis() {
+  static async _onRefreshThis() {
     const toRefresh = [...this.document.abilities, ...this.document.properties];
     await refreshDocuments(toRefresh);
   }
@@ -50,7 +50,7 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when marked.
    * @private
    */
-  static async _toggleOnUseDoc(_event, target) {
+  static async _onToggleOnUseDoc(_event, target) {
     if (!this.editable) {
       ui.notifications.warn(
         `Cannot toggle if ability activates on use. Sheet is not editable.`,

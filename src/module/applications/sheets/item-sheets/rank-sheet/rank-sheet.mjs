@@ -28,7 +28,7 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
       icon: makeIconClass(documentOptions.rank.icon, "title"),
     },
     actions: {
-      toggleInnate: this._toggleInnate,
+      toggleInnate: this.#onToggleInnate,
     },
   };
 
@@ -46,7 +46,7 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _toggleInnate() {
+  static async #onToggleInnate() {
     await this.document.update({
       "system.innate": !this.document.system.innate,
     });

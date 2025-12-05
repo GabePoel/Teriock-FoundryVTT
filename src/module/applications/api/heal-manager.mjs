@@ -11,8 +11,8 @@ export default class TeriockHealManager extends TeriockStatManager {
    */
   static DEFAULT_OPTIONS = {
     actions: {
-      rollStatDie: this._rollStatDie,
-      takeHack: this._takeUnhack,
+      rollStatDie: this._onRollStatDie,
+      takeHack: this._onTakeUnhack,
     },
     window: {
       icon: makeIconClass("hand-holding-heart", "title"),
@@ -51,7 +51,7 @@ export default class TeriockHealManager extends TeriockStatManager {
   }
 
   /** @inheritDoc */
-  static async _rollStatDie(event, target) {
+  static async _onRollStatDie(event, target) {
     const id = target.dataset.document;
     const collection = target.dataset.collection;
     const stat = target.dataset.stat;

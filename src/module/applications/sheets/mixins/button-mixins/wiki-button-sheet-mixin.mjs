@@ -13,20 +13,22 @@ export default function WikiButtonSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
-        wikiOpenThis: this._wikiOpenThis,
-        wikiPullThis: this._wikiPullThis,
+        wikiOpenThis: this.#onWikiOpenThis,
+        wikiPullThis: this.#onWikiPullThis,
       },
       window: {
         controls: [
           {
+            action: "wikiOpenThis",
             icon: makeIconClass("globe", "contextMenu"),
             label: "View on Wiki",
-            action: "wikiOpenThis",
+            ownership: "OWNER",
           },
           {
+            action: "wikiPullThis",
             icon: makeIconClass("arrow-down-to-line", "contextMenu"),
             label: "Pull from Wiki",
-            action: "wikiPullThis",
+            ownership: "OWNER",
           },
         ],
       },
@@ -34,21 +36,17 @@ export default function WikiButtonSheetMixin(Base) {
 
     /**
      * Opens the wiki page for the current document.
-     * @param {PointerEvent} _event - The event object.
-     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki page is opened.
      */
-    static async _wikiOpenThis(_event, _target) {
+    static async #onWikiOpenThis() {
       this.document.system.wikiOpen();
     }
 
     /**
      * Pulls data from wiki for the current document.
-     * @param {PointerEvent} _event - The event object.
-     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
      */
-    static async _wikiPullThis(_event, _target) {
+    static async #onWikiPullThis() {
       if (this.editable) {
         const proceed = await TeriockDialog.confirm({
           content:

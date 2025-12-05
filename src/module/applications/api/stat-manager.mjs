@@ -22,7 +22,7 @@ export default class TeriockStatManager extends HackStatMixin(
   static DEFAULT_OPTIONS = {
     classes: ["teriock", "dialog"],
     actions: {
-      ok: this._done,
+      ok: this._onDone,
     },
     position: {
       width: 425,
@@ -52,7 +52,7 @@ export default class TeriockStatManager extends HackStatMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _done(event) {
+  static async _onDone(event) {
     event.preventDefault();
     await this.close();
   }

@@ -24,8 +24,8 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
       icon: makeIconClass(documentOptions.species.icon, "title"),
     },
     actions: {
-      setHpDice: this._setHpDice,
-      setMpDice: this._setMpDice,
+      setHpDice: this._onSetHpDice,
+      setMpDice: this._onSetMpDice,
     },
   };
 
@@ -43,7 +43,7 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _setHpDice() {
+  static async _onSetHpDice() {
     await setStatDiceDialog(
       this.document,
       "hp",
@@ -57,7 +57,7 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _setMpDice() {
+  static async _onSetMpDice() {
     await setStatDiceDialog(
       this.document,
       "mp",

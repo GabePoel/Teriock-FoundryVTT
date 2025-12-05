@@ -20,8 +20,8 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   static DEFAULT_OPTIONS = {
     classes: ["teriock", "dynamic-select", "dialog"],
     actions: {
-      ok: this._getSelected,
-      cancel: this._cancel,
+      ok: this._onGetSelected,
+      cancel: this._onCancel,
     },
     window: {
       icon: makeIconClass("circle-check", "title"),
@@ -70,7 +70,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _cancel(event) {
+  static async _onCancel(event) {
     event?.preventDefault();
     this._finish(this.multi ? [] : null);
     await this.close();
@@ -81,7 +81,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _getSelected(event) {
+  static async _onGetSelected(event) {
     event?.preventDefault();
     const root = this.element;
     let ids = [];

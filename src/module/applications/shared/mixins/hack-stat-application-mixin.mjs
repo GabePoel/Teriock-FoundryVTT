@@ -18,7 +18,7 @@ export default function HackStatApplicationMixin(Base) {
        * @returns {Promise<void>} Promise that resolves when hit die is rolled.
        * @static
        */
-      static async _rollStatDie(_event, target) {
+      static async _onRollStatDie(_event, target) {
         const id = target.dataset.document;
         const collection = target.dataset.collection;
         const stat = target.dataset.stat;
@@ -41,7 +41,7 @@ export default function HackStatApplicationMixin(Base) {
        * @returns {Promise<void>} Promise that resolves when hack is applied.
        * @static
        */
-      static async _takeHack(event, target) {
+      static async _onTakeHack(event, target) {
         event.stopPropagation();
         const part =
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target
@@ -56,7 +56,7 @@ export default function HackStatApplicationMixin(Base) {
        * @returns {Promise<void>} Promise that resolves when hack is applied.
        * @static
        */
-      static async _takeUnhack(event, target) {
+      static async _onTakeUnhack(event, target) {
         event.stopPropagation();
         const part =
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target

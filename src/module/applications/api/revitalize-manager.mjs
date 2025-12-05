@@ -11,7 +11,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
    */
   static DEFAULT_OPTIONS = {
     actions: {
-      rollStatDie: this._rollStatDie,
+      rollStatDie: this._onRollStatDie,
     },
     window: {
       icon: rollButtons.revitalize.icon,
@@ -48,7 +48,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
   }
 
   /** @inheritDoc */
-  static async _rollStatDie(event, target) {
+  static async _onRollStatDie(event, target) {
     const id = target.dataset.id;
     const parentId = target.dataset.parentId;
     const stat = target.dataset.stat;

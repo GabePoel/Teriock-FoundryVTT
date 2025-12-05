@@ -9,19 +9,17 @@ export default (Base) => {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          chatThis: this._chatThis,
-          rollThis: this._rollThis,
-          openDoc: this._openDoc,
+          chatThis: this._onChatThis,
+          rollThis: this._onRollThis,
+          openDoc: this._onOpenDoc,
         },
       };
 
       /**
        * Sends the current document to chat.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
        * @returns {Promise<void>} Promise that resolves when chat is sent.
        */
-      static async _chatThis(_event, _target) {
+      static async _onChatThis() {
         await this.document.toMessage({
           actor: this.actor,
         });
@@ -30,10 +28,9 @@ export default (Base) => {
       /**
        * Rolls the current document with optional advantage/disadvantage.
        * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} _target - The target element.
        * @returns {Promise<void>} Promise that resolves when roll is complete.
        */
-      static async _rollThis(event, _target) {
+      static async _onRollThis(event) {
         const options = event?.altKey
           ? { advantage: true }
           : event?.shiftKey

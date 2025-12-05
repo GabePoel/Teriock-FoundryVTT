@@ -9,7 +9,7 @@ export default (Base) => {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          toggleLockThis: this._toggleLockThis,
+          toggleLockThis: this._onToggleLockThis,
         },
       };
 
@@ -24,7 +24,7 @@ export default (Base) => {
        * @param {HTMLElement} _target - The target element.
        * @returns {Promise<void>} Promise that resolves when lock is toggled.
        */
-      static async _toggleLockThis(_event, _target) {
+      static async _onToggleLockThis(_event, _target) {
         this._locked = !this._locked;
         this.editable = Boolean(this.isEditable && !this._locked);
         this.render();

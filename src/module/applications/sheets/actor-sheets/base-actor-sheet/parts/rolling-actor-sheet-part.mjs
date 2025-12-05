@@ -4,12 +4,12 @@ export default (Base) =>
   class RollingActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        rollFeatSave: this._rollFeatSave,
-        rollImmunity: this._rollImmunity,
-        rollHexproof: this._rollHexproof,
-        rollResistance: this._rollResistance,
-        rollHexseal: this._rollHexseal,
-        rollStatDie: this._rollStatDie,
+        rollFeatSave: this._onRollFeatSave,
+        rollImmunity: this._onRollImmunity,
+        rollHexproof: this._onRollHexproof,
+        rollResistance: this._onRollResistance,
+        rollHexseal: this._onRollHexseal,
+        rollStatDie: this._onRollStatDie,
       },
     };
 
@@ -20,7 +20,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when feat save is rolled.
      * @static
      */
-    static async _rollFeatSave(event, target) {
+    static async _onRollFeatSave(event, target) {
       const attribute = target.dataset.attribute;
       const options = makeCommonRollOptions(event);
       await this.actor.system.rollFeatSave(attribute, options);
@@ -33,7 +33,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when resistance is rolled.
      * @static
      */
-    static async _rollHexproof(event, target) {
+    static async _onRollHexproof(event, target) {
       const options = protectionOptions(event, target);
       options.hex = true;
       await this.actor.system.rollResistance(options);
@@ -46,7 +46,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when immunity is rolled.
      * @static
      */
-    static async _rollHexseal(event, target) {
+    static async _onRollHexseal(event, target) {
       const options = protectionOptions(event, target);
       options.hex = true;
       await this.actor.system.rollImmunity(options);
@@ -59,7 +59,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when immunity is rolled.
      * @static
      */
-    static async _rollImmunity(event, target) {
+    static async _onRollImmunity(event, target) {
       const options = protectionOptions(event, target);
       await this.actor.system.rollImmunity(options);
     }
@@ -71,7 +71,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when resistance is rolled.
      * @static
      */
-    static async _rollResistance(event, target) {
+    static async _onRollResistance(event, target) {
       const options = protectionOptions(event, target);
       await this.actor.system.rollResistance(options);
     }

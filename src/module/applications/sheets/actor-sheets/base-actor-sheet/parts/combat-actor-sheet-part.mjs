@@ -7,13 +7,13 @@ export default (Base) =>
   class CombatActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        useAbility: this._useAbility,
-        openPrimaryAttacker: this._openPrimaryAttacker,
-        openPrimaryBlocker: this._openPrimaryBlocker,
-        selectAttacker: this._selectAttacker,
-        selectBlocker: this._selectBlocker,
-        toggleReaction: this._toggleReaction,
-        toggleSb: this._toggleSb,
+        useAbility: this._onUseAbility,
+        openPrimaryAttacker: this.#onOpenPrimaryAttacker,
+        openPrimaryBlocker: this.#onOpenPrimaryBlocker,
+        selectAttacker: this.#onSelectAttacker,
+        selectBlocker: this.#onSelectBlocker,
+        toggleReaction: this.#onToggleReaction,
+        toggleSb: this.#onToggleSb,
       },
     };
 
@@ -23,7 +23,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when the sheet is opened.
      * @static
      */
-    static async _openPrimaryAttacker(event) {
+    static async #onOpenPrimaryAttacker(event) {
       event.stopPropagation();
       await this.document.system.primaryAttacker?.sheet.render(true);
     }
@@ -34,7 +34,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when the sheet is opened.
      * @static
      */
-    static async _openPrimaryBlocker(event) {
+    static async #onOpenPrimaryBlocker(event) {
       event.stopPropagation();
       await this.document.system.primaryBlocker?.sheet.render(true);
     }
@@ -44,7 +44,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      * @private
      */
-    static async _selectAttacker() {
+    static async #onSelectAttacker() {
       const attacker = await selectDocumentDialog(
         [
           ...this.document.equipment.filter((e) => e.system.isEquipped),
@@ -69,7 +69,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      * @private
      */
-    static async _selectBlocker() {
+    static async #onSelectBlocker() {
       const attacker = await selectDocumentDialog(
         this.document.activeArmaments,
         {
@@ -91,7 +91,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when sb is toggled.
      * @static
      */
-    static async _toggleReaction() {
+    static async #onToggleReaction() {
       await this.document.update({
         "system.combat.hasReaction": !this.document.system.combat.hasReaction,
       });
@@ -102,7 +102,7 @@ export default (Base) =>
      * @returns {Promise<void>} Promise that resolves when sb is toggled.
      * @static
      */
-    static async _toggleSb() {
+    static async #onToggleSb() {
       await this.document.update({
         "system.offense.sb": !this.document.system.offense.sb,
       });
@@ -115,7 +115,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      * @private
      */
-    static async _useAbility(event, target) {
+    static async _onUseAbility(event, target) {
       const abilityName = target.dataset.ability;
       await this.actor.useAbility(abilityName, {
         advantage: event.altKey,

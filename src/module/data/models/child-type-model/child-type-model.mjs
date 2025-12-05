@@ -1,9 +1,9 @@
-import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
 import { fancifyFields, getSchema, makeIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
 const { fields } = foundry.data;
+const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Data model shared by items and effects.
@@ -104,7 +104,11 @@ export default class ChildTypeModel extends CommonTypeModel {
           name: "Open Image",
           icon: makeIcon("image", "contextMenu"),
           callback: async () => {
-            await new TeriockImagePreviewer(this.parent.img).render(true);
+            await new ImagePopout({
+              src: this.parent.img,
+              uuid: this.parent.uuid,
+              window: { title: this.parent.nameString },
+            }).render(true);
           },
           group: "open",
         },

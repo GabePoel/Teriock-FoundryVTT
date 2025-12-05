@@ -22,15 +22,15 @@ export default (Base) => {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          createAbility: this._createAbility,
-          createBody: this._createBody,
-          createEquipment: this._createEquipment,
-          createFluency: this._createFluency,
-          createProperty: this._createProperty,
-          createRank: this._createRank,
-          createResource: this._createResource,
-          createPower: this._createPower,
-          createConsequence: this._createConsequence,
+          createAbility: this._onCreateAbility,
+          createBody: this._onCreateBody,
+          createEquipment: this._onCreateEquipment,
+          createFluency: this._onCreateFluency,
+          createProperty: this._onCreateProperty,
+          createRank: this._onCreateRank,
+          createResource: this._onCreateResource,
+          createPower: this._onCreatePower,
+          createConsequence: this._onCreateConsequence,
         },
       };
 
@@ -38,7 +38,7 @@ export default (Base) => {
        * Adds a new {@link TeriockAbility} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createAbility() {
+      static async _onCreateAbility() {
         const decision = await newDocumentDialog("ability");
         let obj = {
           name: "New Ability",
@@ -60,7 +60,7 @@ export default (Base) => {
        * Adds a new {@link TeriockBody} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createBody() {
+      static async _onCreateBody() {
         const decision = await newDocumentDialog("body");
         let obj = {
           name: "New Body Part",
@@ -78,7 +78,7 @@ export default (Base) => {
        * Adds a new {@link TeriockConsequence} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createConsequence() {
+      static async _onCreateConsequence() {
         await this.document.createChildDocuments("ActiveEffect", [
           {
             name: "New Consequence",
@@ -91,7 +91,7 @@ export default (Base) => {
        * Adds a new {@link TeriockEquipment} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createEquipment() {
+      static async _onCreateEquipment() {
         const decision = await newDocumentDialog("equipment");
         let obj = {
           name: "New Equipment",
@@ -109,7 +109,7 @@ export default (Base) => {
        * Adds a new {@link TeriockFluency} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createFluency() {
+      static async _onCreateFluency() {
         const tc = await selectTradecraftDialog();
         if (tc) {
           const f = Object.entries(TERIOCK.options.tradecraft).find(([_k, v]) =>
@@ -133,7 +133,7 @@ export default (Base) => {
        * Adds a new {@link TeriockPower} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createPower() {
+      static async _onCreatePower() {
         await this.document.createChildDocuments("Item", [
           {
             name: "New Power",
@@ -146,7 +146,7 @@ export default (Base) => {
        * Adds a new {@link TeriockProperty} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createProperty() {
+      static async _onCreateProperty() {
         const decision = await newDocumentDialog("property");
         let obj = {
           name: "New Property",
@@ -168,7 +168,7 @@ export default (Base) => {
        * Adds a new {@link TeriockRank} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createRank() {
+      static async _onCreateRank() {
         const rankClass = await selectClassDialog();
         const innate = this.document.documentName !== "Actor";
         if (!rankClass) {
@@ -280,7 +280,7 @@ export default (Base) => {
        * Adds a new {@link TeriockResource} to the current document.
        * @returns {Promise<void>}
        */
-      static async _createResource() {
+      static async _onCreateResource() {
         await this.document.createChildDocuments("ActiveEffect", [
           {
             name: "New Resource",

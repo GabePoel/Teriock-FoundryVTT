@@ -90,7 +90,7 @@ export default class TeriockActor extends RetrievalDocumentMixin(
    * @returns {boolean}
    */
   get active() {
-    return !this.statuses.has("down");
+    return true;
   }
 
   /**
@@ -437,7 +437,7 @@ export default class TeriockActor extends RetrievalDocumentMixin(
    * Prepare condition information now that all virtual statuses have been applied.
    */
   prepareVirtualConditionInformation() {
-    for (const e of this.appliedEffects) {
+    for (const e of this.validEffects) {
       for (const s of e.statuses) {
         if (!e.id.startsWith(s)) {
           this.system.conditionInformation[s]?.reasons.add(e.name);

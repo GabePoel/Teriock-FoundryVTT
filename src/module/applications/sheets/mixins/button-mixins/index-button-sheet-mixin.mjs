@@ -13,14 +13,15 @@ export default function IndexButtonSheetMixin(Base) {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
-        refreshFromCompendium: this._refreshFromCompendium,
+        refreshFromCompendium: this._onRefreshFromCompendium,
       },
       window: {
         controls: [
           {
+            action: "refreshFromCompendium",
             icon: makeIconClass("book-atlas", "contextMenu"),
             label: "Compendium Refresh",
-            action: "refreshFromCompendium",
+            ownership: "OWNER",
           },
         ],
       },
@@ -30,7 +31,7 @@ export default function IndexButtonSheetMixin(Base) {
      * Refresh this document from the index.
      * @returns {Promise<void>}
      */
-    static async _refreshFromCompendium() {
+    static async _onRefreshFromCompendium() {
       await refreshFromCompendiumDialog(this.document);
     }
   };

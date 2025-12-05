@@ -14,9 +14,9 @@ export default function ChatButtonSheetMixin(Base) {
       window: {
         controls: [
           {
+            action: "chatThis",
             icon: makeIconClass("comment", "contextMenu"),
             label: "Share in Chat",
-            action: "chatThis",
           },
         ],
       },

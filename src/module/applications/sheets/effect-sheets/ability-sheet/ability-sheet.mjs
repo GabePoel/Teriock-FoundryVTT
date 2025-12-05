@@ -28,7 +28,7 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
     actions: {
-      setDuration: this._setDuration,
+      setDuration: this._onSetDuration,
     },
     window: {
       icon: `fa-solid fa-${documentOptions.ability.icon}`,
@@ -57,7 +57,7 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
    * @returns {Promise<void>}
    * @private
    */
-  static async _setDuration() {
+  static async _onSetDuration() {
     if (!this.editable) {
       return;
     }

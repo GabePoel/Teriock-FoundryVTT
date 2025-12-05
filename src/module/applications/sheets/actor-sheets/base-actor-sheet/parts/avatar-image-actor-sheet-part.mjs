@@ -2,8 +2,8 @@ export default (Base) =>
   class AvatarImageActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
-        switchImage: this._switchImage,
-        toggleRing: this._toggleRing,
+        switchImage: this.#onSwitchImage,
+        toggleRing: this.#onToggleRing,
       },
     };
 
@@ -12,7 +12,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      * @private
      */
-    static async _switchImage() {
+    static async #onSwitchImage() {
       if (this.settings.avatarImagePath === "img") {
         this.settings.avatarImagePath = "prototypeToken.texture.src";
       } else {
@@ -26,7 +26,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      * @private
      */
-    static async _toggleRing() {
+    static async #onToggleRing() {
       await this.document.update({
         "prototypeToken.ring.enabled":
           !this.document.prototypeToken.ring.enabled,

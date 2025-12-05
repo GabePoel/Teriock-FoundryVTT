@@ -1,6 +1,7 @@
 import { chatImage, makeIcon } from "../../helpers/utils.mjs";
-import { TeriockImagePreviewer } from "../api/_module.mjs";
 import { previewSheet } from "./_module.mjs";
+
+const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Context menu options for image elements.
@@ -12,8 +13,10 @@ const imageContextMenuOptions = [
     name: "Open Image",
     icon: makeIcon("image", "contextMenu"),
     callback: async (target) => {
-      const image = new TeriockImagePreviewer(target.getAttribute("src"));
-      await image.render(true);
+      await new ImagePopout({
+        src: target.getAttribute("src"),
+        window: { title: "Image Preview" },
+      }).render(true);
     },
     condition: (target) => {
       const src = target.getAttribute("src");

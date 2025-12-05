@@ -15,8 +15,8 @@ export default function PassiveSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          unlinkMacro: this._unlinkMacro,
-          changeMacroRunHook: this._changeMacroRunHook,
+          unlinkMacro: this._onUnlinkMacro,
+          changeMacroRunHook: this._onChangeMacroRunHook,
         },
       };
 
@@ -27,7 +27,7 @@ export default function PassiveSheetMixin(Base) {
        * @returns {Promise<void>}
        * @private
        */
-      static async _changeMacroRunHook(event, target) {
+      static async _onChangeMacroRunHook(event, target) {
         event.stopPropagation();
         if (this.editable) {
           const uuidElement =
@@ -42,7 +42,7 @@ export default function PassiveSheetMixin(Base) {
       }
 
       /** @inheritDoc */
-      static async _unlinkMacro(event, target) {
+      static async _onUnlinkMacro(event, target) {
         event.stopPropagation();
         if (this.editable) {
           const uuidElement =

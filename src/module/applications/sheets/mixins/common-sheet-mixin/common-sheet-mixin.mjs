@@ -48,15 +48,15 @@ export default function CommonSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          changeImpactTab: this._changeImpactTab,
-          editImage: this._editImage,
-          gmNotesOpen: this._gmNotesOpen,
-          quickToggle: this._quickToggle,
-          setStatDice: this._setStatDice,
-          sheetToggle: this._sheetToggle,
-          toggleImpacts: this._toggleImpacts,
-          unlinkMacro: this._unlinkMacro,
-          openDoc: this._openDoc,
+          changeImpactTab: this._onChangeImpactTab,
+          editImage: this._onEditImage,
+          gmNotesOpen: this._onGmNotesOpen,
+          quickToggle: this._onQuickToggle,
+          setStatDice: this._onSetStatDice,
+          sheetToggle: this._onSheetToggle,
+          toggleImpacts: this._onToggleImpacts,
+          unlinkMacro: this._onUnlinkMacro,
+          openDoc: this._onOpenDoc,
         },
         classes: ["teriock", "ability"],
         form: {
@@ -98,7 +98,7 @@ export default function CommonSheetMixin(Base) {
        * @returns {Promise<void>} Promise that resolves when tab is switched.
        * @static
        */
-      static async _changeImpactTab(_event, target) {
+      static async _onChangeImpactTab(_event, target) {
         this._impactTab = target.dataset.tab;
         await this.render();
       }
@@ -109,7 +109,7 @@ export default function CommonSheetMixin(Base) {
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>} Promise that resolves when image picker is opened.
        */
-      static async _editImage(event, target) {
+      static async _onEditImage(event, target) {
         event.stopPropagation();
         const attr = target.dataset.edit;
         const current = foundry.utils.getProperty(this.document, attr);
@@ -133,7 +133,7 @@ export default function CommonSheetMixin(Base) {
        * @returns {Promise<void>}
        * @private
        */
-      static async _gmNotesOpen() {
+      static async _onGmNotesOpen() {
         await this.document.system.gmNotesOpen();
       }
 
@@ -144,7 +144,7 @@ export default function CommonSheetMixin(Base) {
        * @returns {Promise<void>}
        * @private
        */
-      static async _openDoc(_event, target) {
+      static async _onOpenDoc(_event, target) {
         const uuid = target.dataset.uuid;
         const doc = await fromUuid(uuid);
         await doc.sheet.render(true);
@@ -156,7 +156,7 @@ export default function CommonSheetMixin(Base) {
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>} Promise that resolves when toggle is complete.
        */
-      static async _quickToggle(_event, target) {
+      static async _onQuickToggle(_event, target) {
         const { path } = target.dataset;
         const current = target.dataset.bool === "true";
         await this.document.update({ [path]: !current });
@@ -169,7 +169,7 @@ export default function CommonSheetMixin(Base) {
        * @returns {Promise<void>}
        * @private
        */
-      static async _setStatDice(_event, target) {
+      static async _onSetStatDice(_event, target) {
         if (!this.editable) {
           return;
         }
@@ -185,7 +185,7 @@ export default function CommonSheetMixin(Base) {
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>} Promise that resolves when toggle is complete.
        */
-      static async _sheetToggle(_event, target) {
+      static async _onSheetToggle(_event, target) {
         const { path } = target.dataset;
         const current = target.dataset.bool === "true";
         foundry.utils.setProperty(this, path, !current);
@@ -197,7 +197,7 @@ export default function CommonSheetMixin(Base) {
        * @returns {Promise<void>} Promise that resolves when tab is toggled.
        * @static
        */
-      static async _toggleImpacts() {
+      static async _onToggleImpacts() {
         this._tab = this._tab === "impacts" ? "overview" : "impacts";
         await this.render();
       }
@@ -209,7 +209,7 @@ export default function CommonSheetMixin(Base) {
        * @returns {Promise<void>}
        * @private
        */
-      static async _unlinkMacro(_event, target) {
+      static async _onUnlinkMacro(_event, target) {
         if (this.editable) {
           if (this.document.system.macros) {
             const uuidElement =

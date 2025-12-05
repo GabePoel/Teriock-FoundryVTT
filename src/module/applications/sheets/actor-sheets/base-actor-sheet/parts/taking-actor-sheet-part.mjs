@@ -6,8 +6,8 @@ export default (Base) =>
   class TakingActorSheetPart extends HackStatMixin(Base) {
     static DEFAULT_OPTIONS = {
       actions: {
-        takeHack: this._takeHack,
-        takeRollable: this._takeRollable,
+        takeHack: this._onTakeHack,
+        takeRollable: this._onTakeRollable,
       },
     };
 
@@ -18,7 +18,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      * @private
      */
-    static async _takeRollable(_event, target) {
+    static async _onTakeRollable(_event, target) {
       const type = target.dataset.type;
       await TeriockDialog.prompt({
         window: {

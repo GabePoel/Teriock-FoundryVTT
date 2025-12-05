@@ -8,7 +8,7 @@ export default (Base) => {
     class HidingCommonSheetPart extends Base {
       static DEFAULT_OPTIONS = {
         actions: {
-          toggleHideThis: this._toggleHideThis,
+          toggleHideThis: this._onToggleHideThis,
         },
       };
 
@@ -24,7 +24,7 @@ export default (Base) => {
        * Toggles the lock state of the current sheet.
        * @returns {Promise<void>} Promise that resolves when lock is toggled.
        */
-      static async _toggleHideThis() {
+      static async _onToggleHideThis() {
         this._hideInactive = !this._hideInactive;
         this.render();
       }

@@ -11,7 +11,7 @@ export default function ChildSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          populateField: this._populateField,
+          populateField: this._onPopulateField,
         },
       };
 
@@ -22,7 +22,7 @@ export default function ChildSheetMixin(Base) {
        * @returns {Promise<void>}
        * @private
        */
-      static async _populateField(_event, target) {
+      static async _onPopulateField(_event, target) {
         await this.document.update({
           [target.dataset.path]: "<p>Add text here.</p>",
         });

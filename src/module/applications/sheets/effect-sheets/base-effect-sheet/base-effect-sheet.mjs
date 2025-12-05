@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import {
   ChatButtonSheetMixin,
   ChildSheetMixin,
@@ -26,12 +26,12 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
   static DEFAULT_OPTIONS = {
     classes: ["effect"],
     window: {
-      icon: `fa-solid fa-${documentOptions.effect.icon}`,
+      icon: makeIconClass(TERIOCK.options.document.effect.icon, "title"),
     },
     actions: {
-      addChange: this._addChange,
-      deleteChange: this._deleteChange,
-      toggleDisabledThis: this._toggledDisabledThis,
+      addChange: this._onAddChange,
+      deleteChange: this._onDeleteChange,
+      toggleDisabledThis: this._onToggledDisabledThis,
     },
   };
 
@@ -42,7 +42,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when change is added.
    * @static
    */
-  static async _addChange(_event, target) {
+  static async _onAddChange(_event, target) {
     const path = target.dataset.path;
     if (!path) {
       console.error("No path specified for addChange action");
@@ -66,7 +66,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when change is added.
    * @static
    */
-  static async _addRootChange(_event, _target) {
+  static async _onAddRootChange(_event, _target) {
     const changes = this.document.changes;
     const newChange = {
       key: "",
@@ -85,7 +85,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when change is deleted.
    * @static
    */
-  static async _deleteChange(_event, target) {
+  static async _onDeleteChange(_event, target) {
     const index = parseInt(target.dataset.index, 10);
     const path = target.dataset.path;
     if (!path) {
@@ -108,7 +108,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
    * @returns {Promise<void>} Promise that resolves when disabled state is toggled.
    * @static
    */
-  static async _toggledDisabledThis() {
+  static async _onToggledDisabledThis() {
     await this.document.update({ disabled: !this.document.disabled });
   }
 
