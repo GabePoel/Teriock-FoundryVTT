@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../../dice/_module.mjs";
+import { TeriockRoll } from "../../dice/_module.mjs";
 import {
   addFormula,
   downgradeDeterministicFormula,
@@ -6,7 +6,7 @@ import {
   multiplyFormula,
   upgradeDeterministicFormula,
   upgradeIndeterministicFormula,
-} from "../../../helpers/formula.mjs";
+} from "../../helpers/formula.mjs";
 
 const { StringField } = foundry.data.fields;
 

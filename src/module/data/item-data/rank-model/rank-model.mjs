@@ -10,7 +10,7 @@ import {
   StatGiverDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import { TextField } from "../../shared/fields/_module.mjs";
+import { TextField } from "../../fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 
@@ -74,7 +74,7 @@ export default class TeriockRankModel extends StatGiverDataMixin(
       maxAv: new fields.NumberField({
         initial: 2,
         integer: true,
-        label: "Max AV",
+        label: "Maximum AV",
         min: 0,
       }),
       proficient: new fields.BooleanField({

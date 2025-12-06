@@ -3,7 +3,7 @@ import {
   AttunableDataMixin,
   StatGiverDataMixin,
 } from "../../mixins/_module.mjs";
-import { TextField } from "../../shared/fields/_module.mjs";
+import { TextField } from "../../fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 const { fields } = foundry.data;

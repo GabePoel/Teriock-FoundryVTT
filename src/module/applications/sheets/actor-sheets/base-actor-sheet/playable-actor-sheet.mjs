@@ -31,8 +31,10 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
   constructor(...args) {
     super(...args);
     this._sidebarOpen = true;
-    this._hpDrawerOpen = true;
-    this._mpDrawerOpen = true;
+    this._tabberOpen = true;
+    for (const stat of Object.keys(TERIOCK.options.die.stats)) {
+      this[`_${stat}DrawerOpen`] = true;
+    }
   }
 
   /** @inheritDoc */
@@ -85,36 +87,19 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
    * @private
    */
   _onRenderSidebar() {
-    /** @type {HTMLDivElement} */
-    const sidebar = this.element.querySelector(".character-sidebar");
-    /** @type {HTMLDivElement} */
-    const tabber = this.element.querySelector(
-      ".character-sidebar-tabber-container",
-    );
-    /** @type {HTMLDivElement} */
-    const hpDrawer = this.element.querySelector(".hp-die-drawer");
-    /** @type {HTMLDivElement} */
-    const mpDrawer = this.element.querySelector(".mp-die-drawer");
-
-    sidebar?.classList.add("no-transition");
-    tabber?.classList.add("no-transition");
-    hpDrawer?.classList.add("no-transition");
-    mpDrawer?.classList.add("no-transition");
-
-    sidebar?.classList.toggle("collapsed", !this._sidebarOpen);
-    tabber?.classList.toggle("collapsed", !this._sidebarOpen);
-    hpDrawer?.classList.toggle("closed", !this._hpDrawerOpen);
-    mpDrawer?.classList.toggle("closed", !this._mpDrawerOpen);
-
-    sidebar?.offsetHeight;
-    tabber?.offsetHeight;
-    hpDrawer?.offsetHeight;
-    mpDrawer?.offsetHeight;
-
-    sidebar?.classList.remove("no-transition");
-    tabber?.classList.remove("no-transition");
-    hpDrawer?.classList.remove("no-transition");
-    mpDrawer?.classList.remove("no-transition");
+    /** @type {Record<string, HTMLElement} */
+    const interactiveElements = {
+      sidebar: this.element.querySelector(".character-sidebar"),
+      tabber: this.element.querySelector(".character-sidebar-tabber-container"),
+      hpDrawer: this.element.querySelector(".hp-die-drawer"),
+      mpDrawer: this.element.querySelector(".mp-die-drawer"),
+    };
+    for (const [key, el] of Object.entries(interactiveElements)) {
+      el?.classList.add("no-transition");
+      el?.classList.toggle("collapsed", !this[`_${key}Open`]);
+      el?.offsetHeight;
+      el?.classList.remove("no-transition");
+    }
 
     this.element.querySelectorAll(".character-tabber").forEach((el) => {
       el.addEventListener("click", async (e) => {
@@ -123,9 +108,10 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
         const currentTarget = e.currentTarget;
         const tab = /** @type {ActorTab} */ currentTarget.dataset.tab;
         if (tab === "sidebar") {
-          sidebar.classList.toggle("collapsed");
-          tabber.classList.toggle("collapsed");
+          interactiveElements.sidebar.classList.toggle("collapsed");
+          interactiveElements.tabber.classList.toggle("collapsed");
           this._sidebarOpen = !this._sidebarOpen;
+          this._tabberOpen = !this._tabberOpen;
         } else {
           this._activeTab = tab;
           await this.render();
@@ -134,27 +120,18 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
       });
     });
 
-    this.element
-      .querySelectorAll(".character-hit-bar-overlay-row")
-      .forEach((el) => {
-        el.addEventListener("contextmenu", (e) => {
-          e.preventDefault();
-          hpDrawer.classList.toggle("closed");
-          this._hpDrawerOpen = !this._hpDrawerOpen;
-          e.stopPropagation();
+    for (const [stat, name] of Object.entries(TERIOCK.options.die.stats)) {
+      this.element
+        .querySelectorAll(`.character-${name}-bar-overlay-row`)
+        .forEach((el) => {
+          el.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            interactiveElements[`${stat}Drawer`].classList.toggle("collapsed");
+            this[`_${stat}DrawerOpen`] = !this[`_${stat}DrawerOpen`];
+            e.stopPropagation();
+          });
         });
-      });
-
-    this.element
-      .querySelectorAll(".character-mana-bar-overlay-row")
-      .forEach((el) => {
-        el.addEventListener("contextmenu", (e) => {
-          e.preventDefault();
-          mpDrawer.classList.toggle("closed");
-          this._mpDrawerOpen = !this._mpDrawerOpen;
-          e.stopPropagation();
-        });
-      });
+    }
 
     this.element.querySelectorAll(".ch-attribute-save-box").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {

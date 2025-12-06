@@ -1,6 +1,11 @@
 import { fancifyFields, getSchema } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 
+/**
+ * {@link TeriockChild} sheet mixin.
+ * @param {typeof CommonSheet} Base
+ * @constructor
+ */
 export default function ChildSheetMixin(Base) {
   return (
     /**

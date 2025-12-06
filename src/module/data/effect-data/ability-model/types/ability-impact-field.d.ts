@@ -3,7 +3,7 @@ import {
   CombatExpirationSourceType,
   CombatExpirationTiming,
   TransformationConfigurationField,
-} from "../../../shared/fields/helpers/_types";
+} from "../../../fields/helpers/_types";
 import { TeriockMacro } from "../../../../documents/_module.mjs";
 
 /**

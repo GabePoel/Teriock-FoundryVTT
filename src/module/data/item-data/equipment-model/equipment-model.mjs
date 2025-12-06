@@ -1,5 +1,6 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
+import { EvaluationField, TextField } from "../../fields/_module.mjs";
 import {
   ArmamentDataMixin,
   AttunableDataMixin,
@@ -7,14 +8,14 @@ import {
   ExecutableDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
-import * as messages from "./methods/_panel-parts.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
+import * as messages from "./methods/_panel-parts.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import EquipmentIdentificationPart from "./parts/equipment-identification-part.mjs";
+import EquipmentContainerPart from "./parts/equipment-storage-part.mjs";
 import EquipmentSuppressionPart from "./parts/equipment-suppression-part.mjs";
 import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
 
@@ -37,13 +38,15 @@ const { fields } = foundry.data;
  * @mixes ExecutableData
  * @mixes WikiData
  */
-export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
-  EquipmentSuppressionPart(
-    EquipmentWieldingPart(
-      ArmamentDataMixin(
-        AttunableDataMixin(
-          ConsumableDataMixin(
-            WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
+export default class TeriockEquipmentModel extends EquipmentContainerPart(
+  EquipmentIdentificationPart(
+    EquipmentSuppressionPart(
+      EquipmentWieldingPart(
+        ArmamentDataMixin(
+          AttunableDataMixin(
+            ConsumableDataMixin(
+              WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
+            ),
           ),
         ),
       ),
@@ -53,6 +56,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
+      childItemTypes: ["equipment"],
       indexCategoryKey: "equipment",
       indexCompendiumKey: "equipment",
       namespace: "Equipment",
@@ -72,6 +76,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
       ],
       type: "equipment",
       usable: true,
+      visibleTypes: ["ability", "equipment", "fluency", "property", "resource"],
     });
   }
 
@@ -114,7 +119,10 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
         initial: 0,
         label: "Price",
       }),
-      weight: new EvaluationField(),
+      weight: new EvaluationField({
+        floor: false,
+        ceil: false,
+      }),
     });
     return schema;
   }
@@ -135,6 +143,9 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
 
   /** @inheritDoc */
   get color() {
+    if (this.isOverCapacity) {
+      return TERIOCK.display.colors.red;
+    }
     if (!this.identification.read) {
       return TERIOCK.display.colors.grey;
     }
@@ -158,15 +169,13 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
         },
       },
       "system.consumable",
-      {
-        path: "system.equipped",
-        dataset: {
-          action: "toggleEquipped",
-        },
-      },
-      "system.proficient",
-      "system.fluent",
-      "system.disabled",
+      //{
+      //  path: "system.equipped",
+      //  dataset: {
+      //    action: "toggleEquipped",
+      //  },
+      //},
+      ...super.displayToggles,
     ];
   }
 
@@ -244,7 +253,7 @@ export default class TeriockEquipmentModel extends EquipmentIdentificationPart(
       suffix(this.bv.value, "BV"),
       suffix(this.av.value, "AV"),
       prefix(this.tier.value, "Tier"),
-      suffix(this.weight.value, "lb"),
+      suffix(this.weight.total + this.storage.carriedWeight, "lb"),
       this.sup?.nameString || "",
     ]);
     return parts;

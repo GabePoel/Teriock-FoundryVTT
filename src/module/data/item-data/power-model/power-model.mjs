@@ -1,5 +1,5 @@
 import { ProficiencyDataMixin } from "../../mixins/_module.mjs";
-import { TextField } from "../../shared/fields/_module.mjs";
+import { TextField } from "../../fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 const { fields } = foundry.data;
@@ -29,7 +29,7 @@ export default class TeriockPowerModel extends ProficiencyDataMixin(
       maxAv: new fields.NumberField({
         initial: 4,
         integer: true,
-        label: "Max AV",
+        label: "Maximum AV",
         min: 0,
       }),
       proficient: new fields.BooleanField({

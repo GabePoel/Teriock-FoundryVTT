@@ -1,4 +1,4 @@
-import { TeriockFolder } from "../../../../documents/_module.mjs";
+import { TeriockFolder } from "../../../documents/_module.mjs";
 
 /** <schema> Transformation configuration */
 export type TransformationField = {

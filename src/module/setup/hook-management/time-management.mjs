@@ -1,6 +1,6 @@
 /**
  * Get each {@link TeriockActor} in the current scene.
- * @returns {TeriockActor[]}
+ * @returns {Immutable.Collection<UUID<TeriockTokenDocument>, TeriockActor>}
  */
 function getActors() {
   return game.scenes.viewed.tokens
@@ -18,7 +18,6 @@ export default function registerTimeManagementHooks() {
           for (const effect of actor.durationExpirationEffects) {
             await effect.system.checkExpiration();
           }
-
           if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {
             const daysElapsed = dt / 86400;
             const newDebt =

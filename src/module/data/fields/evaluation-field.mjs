@@ -1,4 +1,4 @@
-import { EvaluationModel } from "../../models/_module.mjs";
+import { EvaluationModel } from "../models/_module.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;
 

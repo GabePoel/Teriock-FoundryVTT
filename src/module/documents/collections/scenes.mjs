@@ -6,6 +6,6 @@ const { Scenes } = foundry.documents.collections;
 /**
  * @implements {Collection<ID<TeriockScene>, TeriockScene>}
  * @implements {DocumentCollection<TeriockScene>}
- * @property {TeriockScene|null} activeGM
+ * @property {TeriockScene|null} viewed
  */
 export default class TeriockScenes extends BaseWorldCollectionMixin(Scenes) {}

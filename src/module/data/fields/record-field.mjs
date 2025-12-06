@@ -1,22 +1,22 @@
 const { TypedObjectField, StringField } = foundry.data.fields;
 
 /**
- * Custom record field for the Teriock system with multi-select and individual item inputs.
- * Extends Foundry's TypedObjectField to provide enhanced record editing capabilities.
+ * A custom {@link TypedObjectField} that provides an easy form group for cases where the record's values have simple
+ * form inputs.
  */
 export default class RecordField extends TypedObjectField {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @param {FormInputConfig & {value: Record<string, any>, override?: string}} config
+   */
   _toInput(config) {
-    // noinspection JSValidateTypes
     config.value = Object.keys(config.value ?? {});
     config.classes = "teriock-record-field";
     StringField._prepareChoiceConfig(config);
-
     if (config.override) {
       config.name = config.override;
       config.dataset = { path: this.fieldPath };
     }
-
     const out = foundry.applications.fields.createMultiSelectInput(config);
     out.classList.add("teriock-update-input");
     return out;

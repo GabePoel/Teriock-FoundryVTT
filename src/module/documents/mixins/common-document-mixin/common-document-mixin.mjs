@@ -56,6 +56,14 @@ export default function CommonDocumentMixin(Base) {
         return this.system.constructor.metadata;
       }
 
+      /**
+       * Types that can be shown on this document's sheet.
+       * @returns {Teriock.Documents.CommonType[]}
+       */
+      get visibleTypes() {
+        return this.system.visibleTypes;
+      }
+
       /** @inheritDoc */
       get nameString() {
         return this.system.nameString;

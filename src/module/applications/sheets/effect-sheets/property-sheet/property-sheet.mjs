@@ -8,9 +8,7 @@ import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { propertyContextMenu } from "./connections/_context-menus.mjs";
 
 /**
- * Property sheet for Teriock system properties.
- * Provides property management with context menus for property types.
- *
+ * {@link TeriockProperty} sheet.
  * @property {TeriockProperty} document
  * @extends {TeriockBaseEffectSheet}
  * @mixes PassiveSheet

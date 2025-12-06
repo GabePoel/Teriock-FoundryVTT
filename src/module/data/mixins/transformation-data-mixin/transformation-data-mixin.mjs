@@ -1,6 +1,6 @@
 import { quickAddAssociation } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
-import { transformationField } from "../../shared/fields/helpers/field-builders.mjs";
+import { transformationField } from "../../fields/helpers/builders.mjs";
 
 /**
  * @param {typeof ChildTypeModel} Base

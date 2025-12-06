@@ -49,6 +49,8 @@ export const icons = {
   item: '<i class="fa-fw fa-solid fa-ring"></i>',
   locked: '<i class="fa-fw fa-solid fa-lock"></i>',
   manifest: '<i class="fa-fw fa-solid fa-magic"></i>',
+  maxCount: '<i class="fa-fw fa-light fa-abacus"></i>',
+  maxWeight: '<i class="fa-fw fa-light fa-backpack"></i>',
   menuClose: '<i class="fa-fw fa-solid fa-chevron-up"></i>',
   menuOpen: '<i class="fa-fw fa-solid fa-chevron-down"></i>',
   minStr: '<i class="fa-fw fa-light fa-dumbbell"></i>',
@@ -88,5 +90,6 @@ export const icons = {
   variable: '<i class="fa-fw fa-solid fa-question"></i>',
   weapon: '<i class="fa-fw fa-solid fa-sword"></i>',
   weight: '<i class="fa-fw fa-light fa-weight-hanging"></i>',
+  weightMultiplier: '<i class="fa-fw fa-light fa-xmark"></i>',
   wiki: '<i class="fa-fw fa-solid fa-globe"></i>',
 };

@@ -2,7 +2,7 @@ import {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
-} from "../../shared/fields/helpers/_types";
+} from "../../fields/helpers/_types";
 import { TeriockActor, TeriockEffect } from "../../../documents/_module.mjs";
 
 declare module "./consequence-model.mjs" {

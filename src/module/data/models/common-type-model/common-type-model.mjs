@@ -120,6 +120,14 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * Types that can be shown on this parent's sheet.
+   * @returns {Teriock.Documents.CommonType[]}
+   */
+  get visibleTypes() {
+    return this.metadata.visibleTypes;
+  }
+
+  /**
    * Gets the message rules-parts for displaying the child document in chat.
    * Includes image, name, and font information from the parent document.
    * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.

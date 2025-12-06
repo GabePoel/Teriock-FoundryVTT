@@ -6,8 +6,8 @@ import {
   RevelationDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import { FormulaField, TextField } from "../../shared/fields/_module.mjs";
-import { changeField } from "../../shared/fields/helpers/field-builders.mjs";
+import { FormulaField, TextField } from "../../fields/_module.mjs";
+import { changeField } from "../../fields/helpers/builders.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";

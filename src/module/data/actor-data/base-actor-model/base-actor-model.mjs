@@ -2,7 +2,6 @@ import { dotJoin, prefix } from "../../../helpers/string.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
-import * as postUpdate from "./methods/_post-update.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
 import { _baseData } from "./methods/base-data/_base-data.mjs";
 import { _prepareDerivedData } from "./methods/derived-data/_derived-data.mjs";
@@ -16,8 +15,7 @@ import ActorPayPart from "./parts/actor-pay-part.mjs";
 import ActorRollableTakesPart from "./parts/actor-rollable-takes-part.mjs";
 
 /**
- * Base actor data model for the Teriock system.
- * Handles all core actor functionality including damage, healing, rolling, and data management.
+ * Base {@link TeriockActor} data model.
  * @mixes CommonTypeModel
  * @mixes ActorConditionTogglingPart
  * @mixes ActorGenericRollsPart
@@ -278,11 +276,15 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
 
   /**
    * Performs post-update operations for the actor.
-   * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.
-   * @returns {Promise<void>} Resolves when all post-update operations are complete
+   * @returns {Promise<void>}
    */
-  async postUpdate(skipFunctions) {
-    await postUpdate._postUpdate(this, skipFunctions);
+  async postUpdate() {
+    for (const effect of this.parent.conditionExpirationEffects) {
+      await effect.system.checkExpiration();
+    }
+    for (const token of this.parent.getDependentTokens()) {
+      await token.postActorUpdate();
+    }
   }
 
   /** @inheritDoc */

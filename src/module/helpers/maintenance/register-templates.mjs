@@ -51,6 +51,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/bars/eq-attack-bar.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/bars/eq-load-bar.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/bars/eq-status-bar.hbs",
+    "systems/teriock/src/templates/document-templates/item-templates/equipment-template/bars/eq-storage-bar.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/equipment-template.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/parts/eq-menu.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/tags/eq-classes-tags.hbs",

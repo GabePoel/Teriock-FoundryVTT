@@ -9,7 +9,7 @@ import {
   ThresholdDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import { TextField } from "../../shared/fields/_module.mjs";
+import { TextField } from "../../fields/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _panelParts } from "./methods/_panel-parts.mjs";
 

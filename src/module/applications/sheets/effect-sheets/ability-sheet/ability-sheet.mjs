@@ -9,9 +9,7 @@ import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
 /**
- * Ability sheet for Teriock system abilities.
- * Provides comprehensive ability management including consequences, context menus,
- * tag management, and rich text editing for various ability components.
+ * {@link TeriockAbility} sheet.
  * @property {TeriockAbility} document
  * @extends {TeriockBaseEffectSheet}
  * @mixes PassiveSheet

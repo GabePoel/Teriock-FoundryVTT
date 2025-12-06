@@ -1,4 +1,4 @@
-import { TextField } from "../data/shared/fields/_module.mjs";
+import { TextField } from "../data/fields/_module.mjs";
 
 declare global {
   namespace Teriock.Sheet {

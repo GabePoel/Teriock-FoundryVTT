@@ -2,7 +2,7 @@ import { default as iconManifest } from "../../icons/icon-manifest.json" with { 
 import { toKebabCase } from "./string.mjs";
 
 /**
- * Get a path relative to the Teriock system.
+ * Get a path relative to the Teriock system root.
  * @param path
  * @returns {string}
  */

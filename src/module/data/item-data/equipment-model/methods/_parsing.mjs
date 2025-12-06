@@ -39,6 +39,7 @@ export async function _parse(equipmentData, rawHTML) {
   delete parameters.quantity;
   delete parameters.maxQuantity;
   delete parameters.onUse;
+  delete parameters.storage;
 
   // Parse damage
   const damageText = getText(".damage");

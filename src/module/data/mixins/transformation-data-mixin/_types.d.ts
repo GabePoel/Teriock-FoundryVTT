@@ -1,4 +1,4 @@
-import { TransformationImplementationField } from "../../shared/fields/helpers/_types";
+import { TransformationImplementationField } from "../../fields/helpers/_types";
 
 export interface TransformationMixinInterface {
   /** <schema> Transformation configuration */

@@ -1,7 +1,7 @@
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { ArmamentExecution } from "../../../executions/document-executions/_module.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
-import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
+import { EvaluationField, TextField } from "../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 

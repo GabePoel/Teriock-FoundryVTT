@@ -84,8 +84,8 @@ export default class TeriockItem extends RetrievalDocumentMixin(
   }
 
   /** @inheritDoc */
-  _onUpdate(options, userId) {
-    super._onUpdate(options, userId);
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
     if (isOwnerAndCurrentUser(this, userId)) {
       for (const a of this.abilities) {
         a.system?.expireSustainedConsequences().then();

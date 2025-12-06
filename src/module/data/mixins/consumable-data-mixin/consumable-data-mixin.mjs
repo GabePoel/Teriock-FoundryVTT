@@ -1,4 +1,4 @@
-import { EvaluationField } from "../../shared/fields/_module.mjs";
+import { EvaluationField } from "../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 

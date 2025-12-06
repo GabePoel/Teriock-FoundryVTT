@@ -2,9 +2,11 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { conditionSort } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
-import { CommonSheetMixin } from "../../mixins/_module.mjs";
+import {
+  CommonSheetMixin,
+  EquipmentDropSheetMixin,
+} from "../../mixins/_module.mjs";
 import AvatarImageActorSheetPart from "./parts/avatar-image-actor-sheet-part.mjs";
-import DocumentCreationActorSheetPart from "./parts/document-creation-actor-sheet-part.mjs";
 import HidingCommonSheetPart from "./parts/hiding-common-sheet-part.mjs";
 import SearchingActorSheetPart from "./parts/searching-actor-sheet-part.mjs";
 import { filterAbilities, filterEquipment } from "./tools/filters.mjs";
@@ -18,18 +20,19 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
  * @extends {ActorSheetV2}
- * @mixes HackStatApplication
  * @mixes CommonSheet
+ * @mixes DragDropCommonSheetPart
+ * @mixes EquipmentDropSheet
+ * @mixes HackStatApplication
  * @mixes HidingCommonSheetPart
  * @mixes SearchingActorSheetPart
- * @mixes DocumentCreationActorSheetPart
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
 export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
   HidingCommonSheetPart(
     SearchingActorSheetPart(
-      DocumentCreationActorSheetPart(CommonSheetMixin(ActorSheetV2)),
+      EquipmentDropSheetMixin(CommonSheetMixin(ActorSheetV2)),
     ),
   ),
 ) {
@@ -87,6 +90,15 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
       obj[key] = ((val + 2) % 3) - 1;
     } else {
       obj[key] = ((val + 3) % 3) - 1;
+    }
+  }
+
+  /** @inheritDoc */
+  _canDrop(doc) {
+    if (doc.type === "ability") {
+      return false;
+    } else {
+      return super._canDrop(doc);
     }
   }
 
@@ -224,6 +236,9 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.abilities = await this.document.allAbilities();
+    context.equipment = context.equipment.filter(
+      (e) => !e.sup || e.sup.type !== "equipment",
+    );
     this._prepareDisplayContext(context);
     await this._prepareDocumentContext(context);
     await this._prepareConditionContext(context);

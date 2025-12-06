@@ -1,4 +1,4 @@
-import { arrayTypeValidator, typeValidator } from "./field-validators.mjs";
+import { arrayTypeValidator, typeValidator } from "./validators.mjs";
 
 const { fields } = foundry.data;
 

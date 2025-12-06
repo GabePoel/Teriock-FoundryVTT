@@ -1,4 +1,4 @@
-import { CombatExpirationMethod } from "../../shared/fields/helpers/_types";
+import { CombatExpirationMethod } from "../../fields/helpers/_types";
 
 declare module "./condition-model.mjs" {
   export default interface TeriockConditionModel {

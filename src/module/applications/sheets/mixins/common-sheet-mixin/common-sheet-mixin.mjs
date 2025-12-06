@@ -14,9 +14,7 @@ import LockingCommonSheetPart from "./parts/locking-common-sheet-part.mjs";
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
- * Base sheet mixin for Teriock system applications.
- * Provides common functionality for all Teriock sheets including event handling,
- * drag and drop, context menus, and form management.
+ * {@link TeriockCommon} sheet mixin.
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
  * @constructor
  */

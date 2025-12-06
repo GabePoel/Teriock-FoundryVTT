@@ -1,0 +1,46 @@
+{{#if system.storage.enabled}}
+  <div class="ab-bar">
+    {{formBox
+      (formInput
+        systemFields.storage.fields.maxCount
+        dataset=(object tooltip="Maximum Number of Items Carried")
+        disabled=(not editable)
+        value=system._source.storage.maxCount.raw
+      )
+      icon=(path TERIOCK.display.icons "maxCount")
+      unselected=(concat system.storage.carriedCount " / " system.storage.maxCount.value)
+      label="NUM"
+      iconColor=(ifThen
+        system.isOverCountCapacity
+        TERIOCK.display.colors.red
+        null
+      )
+    }}
+    {{formBox
+      (formInput
+        systemFields.storage.fields.maxWeight
+        dataset=(object tooltip="Maximum Weight Carried")
+        disabled=(not editable)
+        value=system._source.storage.maxWeight.raw
+      )
+      icon=(path TERIOCK.display.icons "maxWeight")
+      unselected=(concat system.storage.carriedWeight " / " system.storage.maxWeight.value)
+      label="lb"
+      iconColor=(ifThen
+        system.isOverWeightCapacity
+        TERIOCK.display.colors.red
+        null
+      )
+    }}
+    {{formBox
+      (formInput
+        systemFields.storage.fields.weightMultiplier
+        dataset=(object tooltip="Weight Multiplier")
+        disabled=(not editable)
+        value=system._source.storage.weightMultiplier
+      )
+      icon=(path TERIOCK.display.icons "weightMultiplier")
+      unselected=system.storage.weightMultiplier
+    }}
+  </div>
+{{/if}}

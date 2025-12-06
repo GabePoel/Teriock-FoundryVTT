@@ -392,8 +392,8 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  _onUpdate(options, userId) {
-    super._onUpdate(options, userId);
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
     if (isOwnerAndCurrentUser(this.parent, userId)) {
       this.expireSustainedConsequences().then();
     }

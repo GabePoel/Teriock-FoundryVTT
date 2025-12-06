@@ -49,6 +49,9 @@ export function downgradeIndeterministicFormula(value, delta) {
  * @returns {string}
  */
 export function multiplyFormula(value, delta) {
+  if (Number(delta) === 1) {
+    return value;
+  }
   const terms = new TeriockRoll(value, {}).terms;
   if (terms.length > 1) {
     return `(${value}) * ${delta}`;

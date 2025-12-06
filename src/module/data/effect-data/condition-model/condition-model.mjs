@@ -5,7 +5,7 @@ import {
   TransformationDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import { combatExpirationMethodField } from "../../shared/fields/helpers/field-builders.mjs";
+import { combatExpirationMethodField } from "../../fields/helpers/builders.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;

@@ -1,7 +1,7 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
-import { EvaluationField } from "../../shared/fields/_module.mjs";
+import { EvaluationField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 import StatDieModel from "../stat-die-model/stat-die-model.mjs";
 

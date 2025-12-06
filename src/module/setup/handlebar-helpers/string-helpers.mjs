@@ -48,6 +48,10 @@ export default function registerStringHelpers() {
     return out;
   });
 
+  Handlebars.registerHelper("replace", (a, b, c) => {
+    return `${a}`.replace(b, c);
+  });
+
   Handlebars.registerHelper("concatArray", (...args) => {
     args.pop();
     let out = "";

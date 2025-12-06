@@ -1,9 +1,11 @@
 import { ArmamentDataMixinInterface } from "../../mixins/armament-data-mixin/_types";
-import { EvaluationModel } from "../../models/_module.mjs";
+import { EvaluationModel, StorageModel } from "../../models/_module.mjs";
 
 declare module "./equipment-model.mjs" {
   export default interface TeriockEquipmentModel
     extends ArmamentDataMixinInterface {
+    /** <schema> Container schema */
+    storage: StorageModel;
     /** <schema> Damage Dice */
     damage: {
       /** <schema> Damage this always deals */

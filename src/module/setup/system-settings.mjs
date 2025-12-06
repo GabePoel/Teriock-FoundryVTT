@@ -134,14 +134,6 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
-    synchronizeSpeciesSizeWithActor: {
-      config: true,
-      default: false,
-      hint: "Experimental! Sizes for relevant species change to match actor.",
-      name: "Synchronize Species Size with Actor",
-      scope: "user",
-      type: Boolean,
-    },
     armorSuppressesRanks: {
       config: true,
       default: false,

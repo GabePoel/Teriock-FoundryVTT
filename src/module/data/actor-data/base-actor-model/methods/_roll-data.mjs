@@ -261,26 +261,26 @@ function speedData(actorData, data) {
     const systemKey = speedMap[key];
     const adjustment = actorData.speedAdjustments[systemKey] || 0;
     data[`speed.${key}`] = adjustment;
-    // Calculate feet per turn based on adjustment level
-    let feetPerTurn = 0;
+    // Calculate feet per Move based on adjustment level
+    let feetPerMove = 0;
     switch (adjustment) {
       case 0:
-        feetPerTurn = 0;
+        feetPerMove = 0;
         break;
       case 1:
-        feetPerTurn = actorData.movementSpeed.value / 4;
+        feetPerMove = actorData.movementSpeed.value / 4;
         break;
       case 2:
-        feetPerTurn = actorData.movementSpeed.value / 2;
+        feetPerMove = actorData.movementSpeed.value / 2;
         break;
       case 3:
-        feetPerTurn = actorData.movementSpeed.value;
+        feetPerMove = actorData.movementSpeed.value;
         break;
       case 4:
-        feetPerTurn = actorData.movementSpeed.value * 2;
+        feetPerMove = actorData.movementSpeed.value * 2;
         break;
     }
-    data[`speed.feet`] = Math.floor(feetPerTurn);
+    data[`speed.feet`] = Math.floor(feetPerMove);
   }
 }
 
@@ -463,7 +463,7 @@ function equipmentData(actorData, data) {
  * @param {TeriockEquipment|null} equipment - The equipment item.
  */
 function addEquipmentData(data, slot, equipment) {
-  const equipmentData = equipment.system;
+  const equipmentData = equipment?.system;
   data[`${slot}.dmg`] = equipmentData?.damage?.base?.value || "0";
   data[`${slot}.dmg.2h`] = equipmentData?.damage?.twoHanded?.value || "0";
   data[`${slot}.range`] = equipmentData?.range?.long?.value || 0;
@@ -477,7 +477,7 @@ function addEquipmentData(data, slot, equipment) {
   data[`${slot}.dampened`] = equipmentData?.dampened ? 1 : 0;
   data[`${slot}.consumable`] = equipmentData?.consumable ? 1 : 0;
   data[`${slot}.quantity`] = equipmentData?.quantity || 1;
-  if (equipment?.effectKeys?.property) {
+  if (equipment && equipment.effectKeys?.property) {
     for (const p of equipment.effectKeys.property) {
       data[`${slot}.prop.${p}`] = 1;
     }

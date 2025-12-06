@@ -152,7 +152,8 @@ export default (Base) => {
       async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
-        let doc = await Cls.fromDropData(dropData);
+        let doc =
+          /** @type {TeriockDocument} */ await Cls.fromDropData(dropData);
         if (doc.type === "wrapper") doc = doc.system.effect;
         const uuid =
           doc.documentName === "ActiveEffect" ? doc.parent.uuid : doc.uuid;

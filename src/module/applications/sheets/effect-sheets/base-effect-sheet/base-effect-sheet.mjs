@@ -9,10 +9,8 @@ import {
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
- * Base effect sheet for Teriock system active effects.
- * Provides common functionality for all effect sheets including change management,
- * context preparation, and effect state handling.
- * @extends ActiveEffectConfig
+ * Base {@link TeriockEffect} sheet.
+ * @extends {ActiveEffectConfig}
  * @mixes ChatButtonSheet
  * @mixes CommonSheet
  * @property {TeriockEffect} document
@@ -38,7 +36,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
 
   /**
    * Adds a new change at any specified path.
-   * @param {Event} _event - The event object.
+   * @param {PointerEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is added.
    * @static
@@ -62,7 +60,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
 
   /**
    * Adds a new change to an effect.
-   * @param {Event} _event - The event object.
+   * @param {PointerEvent} _event - The event object.
    * @param {HTMLElement} _target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is added.
    * @static
@@ -81,7 +79,7 @@ export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
 
   /**
    * Deletes a change at any specified path.
-   * @param {Event} _event - The event object.
+   * @param {PointerEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is deleted.
    * @static

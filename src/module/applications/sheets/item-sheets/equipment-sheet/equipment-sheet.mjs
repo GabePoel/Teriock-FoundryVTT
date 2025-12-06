@@ -1,5 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import {
+  EquipmentDropSheetMixin,
   UseButtonSheetMixin,
   WikiButtonSheetMixin,
 } from "../../mixins/_module.mjs";
@@ -14,11 +15,12 @@ import {
  * @extends {TeriockBaseItemSheet}
  * @property {TeriockEquipment} document
  * @property {TeriockEquipment} item
+ * @mixes EquipmentDropSheet
  * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
 export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
-  UseButtonSheetMixin(TeriockBaseItemSheet),
+  UseButtonSheetMixin(EquipmentDropSheetMixin(TeriockBaseItemSheet)),
 ) {
   /**
    * @inheritDoc

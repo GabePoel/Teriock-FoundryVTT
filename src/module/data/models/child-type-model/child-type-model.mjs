@@ -1,5 +1,5 @@
 import { fancifyFields, getSchema, makeIcon } from "../../../helpers/utils.mjs";
-import { EvaluationField, TextField } from "../../shared/fields/_module.mjs";
+import { EvaluationField, TextField } from "../../fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
 const { fields } = foundry.data;

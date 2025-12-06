@@ -1,9 +1,6 @@
 import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
-import {
-  FormulaField,
-  RecordField,
-} from "../../../../shared/fields/_module.mjs";
-import { fieldBuilders } from "../../../../shared/fields/helpers/_module.mjs";
+import { FormulaField, RecordField } from "../../../../fields/_module.mjs";
+import { builders } from "../../../../fields/helpers/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -37,7 +34,7 @@ export function impactRollsField() {
  * @private
  */
 export function impactChangesField() {
-  return new fields.ArrayField(fieldBuilders.changeField(), {
+  return new fields.ArrayField(builders.changeField(), {
     label: "Changes",
     hint: "Changes made to the target actor as part of the ability's ongoing effect.",
   });
@@ -51,10 +48,10 @@ function impactExpirationField() {
   return new fields.SchemaField({
     combat: new fields.SchemaField({
       who: new fields.SchemaField({
-        type: fieldBuilders.combatExpirationSourceTypeField(),
+        type: builders.combatExpirationSourceTypeField(),
       }),
-      what: fieldBuilders.combatExpirationMethodField(),
-      when: fieldBuilders.combatExpirationTimingField(),
+      what: builders.combatExpirationMethodField(),
+      when: builders.combatExpirationTimingField(),
     }),
   });
 }
@@ -199,7 +196,7 @@ function abilityImpactField() {
           " conditions, but merged into an ongoing effect.",
       },
     ),
-    transformation: fieldBuilders.transformationField({
+    transformation: builders.transformationField({
       configuration: true,
     }),
   });

@@ -70,6 +70,17 @@ export function _panelParts(equipmentData) {
         src.spellTurning ? "Spell Turning" : "",
       ],
     },
+    {
+      icon: "fa-backpack",
+      label: "Storage",
+      wrappers: src.storage.enabled
+        ? [
+            `${src.storage.carriedCount} / ${src.storage.maxCount.value} Items Carried`,
+            `${src.storage.carriedWeight} / ${src.storage.maxWeight.value} lb Carried`,
+            `× ${src.storage.weightMultiplier} Weight Multiplier`,
+          ]
+        : [],
+    },
   ];
   return {
     bars: bars,

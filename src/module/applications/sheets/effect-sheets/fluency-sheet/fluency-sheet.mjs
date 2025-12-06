@@ -8,8 +8,7 @@ import {
 } from "./connections/_context-menus.mjs";
 
 /**
- * Fluency sheet for Teriock system fluencies.
- * Provides fluency management with context menus for fields and tradecrafts.
+ * {@link TeriockFluency} sheet.
  * @extends {TeriockBaseEffectSheet}
  * @mixes UseButtonSheet
  * @property {TeriockFluency} document

@@ -1,10 +1,10 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
+import { builders } from "../../fields/helpers/_module.mjs";
 import {
   HierarchyDataMixin,
   TransformationDataMixin,
 } from "../../mixins/_module.mjs";
-import { fieldBuilders } from "../../shared/fields/helpers/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
@@ -30,8 +30,8 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      associations: fieldBuilders.associationsField(),
-      blocks: fieldBuilders.blocksField(),
+      associations: builders.associationsField(),
+      blocks: builders.blocksField(),
       critical: new fields.BooleanField({ initial: false }),
       source: new fields.StringField({
         initial: "",
@@ -79,7 +79,7 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
         }),
         combat: new fields.SchemaField({
           who: new fields.SchemaField({
-            type: fieldBuilders.combatExpirationSourceTypeField(),
+            type: builders.combatExpirationSourceTypeField(),
             source: new fields.DocumentUUIDField({
               type: "Actor",
               nullable: true,
@@ -87,8 +87,8 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
               hint: "UUID of actor whose turn or other information is used to trigger an expiration?",
             }),
           }),
-          what: fieldBuilders.combatExpirationMethodField(),
-          when: fieldBuilders.combatExpirationTimingField(),
+          what: builders.combatExpirationMethodField(),
+          when: builders.combatExpirationTimingField(),
         }),
       }),
       sourceDescription: new fields.HTMLField(),
