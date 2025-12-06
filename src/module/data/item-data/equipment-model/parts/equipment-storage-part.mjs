@@ -2,7 +2,7 @@ import { multiplyFormula } from "../../../../helpers/formula.mjs";
 import { isOwnerAndCurrentUser } from "../../../../helpers/utils.mjs";
 import { StorageModel } from "../../../models/_module.mjs";
 
-const { fields } = foundry.data;
+const { EmbeddedDataField } = foundry.data.fields;
 
 /**
  * @param {typeof TeriockEquipmentModel} Base
@@ -16,9 +16,10 @@ export default (Base) => {
     class EquipmentStoragePart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        const schema = super.defineSchema();
-        schema.storage = new fields.EmbeddedDataField(StorageModel);
-        return schema;
+        return {
+          ...super.defineSchema(),
+          storage: new EmbeddedDataField(StorageModel),
+        };
       }
 
       /** @inheritDoc */

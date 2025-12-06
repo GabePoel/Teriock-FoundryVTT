@@ -24,14 +24,18 @@ export function _entries(equipmentData) {
     {
       name: "Identify",
       icon: makeIcon("eye", "contextMenu"),
-      callback: equipmentData.identify.bind(equipmentData),
+      callback: equipmentData.identification.identify.bind(
+        equipmentData.identification,
+      ),
       condition: !equipmentData.identification.identified,
       group: "usage",
     },
     {
       name: "Read Magic",
       icon: makeIcon("hand", "contextMenu"),
-      callback: equipmentData.readMagic.bind(equipmentData),
+      callback: equipmentData.identification.readMagic.bind(
+        equipmentData.identification,
+      ),
       condition:
         equipmentData.parent.isOwner &&
         !equipmentData.identification.identified &&
@@ -97,7 +101,9 @@ export function _entries(equipmentData) {
     {
       name: "Unidentify",
       icon: makeIcon("eye-slash", "contextMenu"),
-      callback: equipmentData.unidentify.bind(equipmentData),
+      callback: equipmentData.identification.unidentify.bind(
+        equipmentData.identification,
+      ),
       condition:
         equipmentData.parent.isOwner &&
         equipmentData.identification.identified &&

@@ -147,7 +147,10 @@ const wikiLinkEnricher = {
 const lookupEnricher = {
   pattern: /\[\[lookup\s+([^\]\s]+)(?:\s+((?:[^\]\s=]+=[^\]\s=]+\s*)+))?\]\]/gi,
   enricher: async (match, options) => {
-    const lookupKey = match[1];
+    let lookupKey = match[1];
+    if (lookupKey.startsWith("@")) {
+      lookupKey = lookupKey.slice(1);
+    }
     const optionsString = match[2] || "";
     const formatOptions = optionsString
       .trim()

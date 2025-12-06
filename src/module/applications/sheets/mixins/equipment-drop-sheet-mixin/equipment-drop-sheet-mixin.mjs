@@ -42,7 +42,7 @@ export default function EquipmentDropSheetMixin(Base) {
           const elder = await doc.getElder();
           if (
             doc.isOwner &&
-            (elder.type === "equipment" || elder.documentName === "Actor") &&
+            (elder?.type === "equipment" || elder?.documentName === "Actor") &&
             doc.uuid
           ) {
             await doc.delete();
