@@ -23,9 +23,9 @@ async function processAbility(abilityName, _index, _total) {
       name: abilityName,
       type: "ability",
     };
-    abilityEffect = await abilityItem.createChildDocuments("ActiveEffect", [
-      abilityData,
-    ]);
+    abilityEffect = (
+      await abilityItem.createChildDocuments("ActiveEffect", [abilityData])
+    )[0];
   }
   await abilityEffect.system.wikiPull({ notify: false });
 

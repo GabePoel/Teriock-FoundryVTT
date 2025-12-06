@@ -2,7 +2,7 @@ import { tidyHTML } from "../../../../helpers/html.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import {
   cleanHTMLDoc,
-  cleanObject,
+  cleanObject
 } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";
@@ -45,9 +45,7 @@ export async function _parse(propertyData, rawHTML) {
     system: foundry.utils.deepClone(referenceProperty.system).toObject(),
   };
   // Clean parameters
-  delete parameters.system.hierarchy.rootUuid;
-  delete parameters.system.hierarchy.supId;
-  delete parameters.system.hierarchy.subIds;
+  delete parameters.system.hierarchy;
 
   console.log(categories);
 

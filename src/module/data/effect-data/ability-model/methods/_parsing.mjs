@@ -1,12 +1,18 @@
 import { getImage } from "../../../../helpers/path.mjs";
-import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
+import {
+  parseDurationString,
+  safeUuid
+} from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDice,
   cleanHTMLSubs,
-  cleanObject,
+  cleanObject
 } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
-import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
+import {
+  getBarText,
+  getText
+} from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 
@@ -140,7 +146,7 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.impacts;
   delete parameters.executionTime;
   delete parameters.maneuver;
-  delete parameters.hierarchy.rootUuid;
+  delete parameters.hierarchy;
   delete parameters.proficient;
   delete parameters.fluent;
 
@@ -167,8 +173,6 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.limitation;
   delete parameters.gifted;
   delete parameters.adept;
-  delete parameters.hierarchy.supId;
-  delete parameters.hierarchy.subIds;
   delete parameters.grantOnly;
 
   // Process dice and effect extraction

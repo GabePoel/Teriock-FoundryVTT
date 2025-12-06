@@ -68,7 +68,7 @@ function cleanDoubleLineBreaks(html) {
  * @param {boolean} [options.useFoundry]
  * @returns {string}
  */
-export function cleanHTML(html, name, { useFoundry = true }) {
+export function cleanHTML(html, name, options = { useFoundry: true }) {
   const doc = document.createElement("div");
   doc.innerHTML = html;
   if (name) {
@@ -123,7 +123,7 @@ export function cleanHTML(html, name, { useFoundry = true }) {
   if (!out.startsWith("<p>")) {
     out = `<p>${out}</p>`;
   }
-  if (useFoundry) {
+  if (options.useFoundry) {
     out = foundry.utils.cleanHTML(out);
   }
   out = out.replace(/<p>\s*<\/p>/g, "");
