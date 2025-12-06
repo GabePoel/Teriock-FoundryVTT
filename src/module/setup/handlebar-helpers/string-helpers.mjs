@@ -1,4 +1,5 @@
 import { toCamelCase, toKebabCase } from "../../helpers/string.mjs";
+import { roundTo } from "../../helpers/utils.mjs";
 
 export default function registerStringHelpers() {
   Handlebars.registerHelper("lc", (str) =>
@@ -51,6 +52,8 @@ export default function registerStringHelpers() {
   Handlebars.registerHelper("replace", (a, b, c) => {
     return `${a}`.replace(b, c);
   });
+
+  Handlebars.registerHelper("roundTo", roundTo);
 
   Handlebars.registerHelper("concatArray", (...args) => {
     args.pop();

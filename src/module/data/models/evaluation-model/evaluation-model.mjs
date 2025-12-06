@@ -1,4 +1,5 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
+import { roundTo } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 
@@ -15,11 +16,12 @@ export default class EvaluationModel extends EmbeddedDataModel {
       min = 0,
       max = Infinity,
       blank = 0,
+      decimals = 0,
       ...options
     } = {},
   ) {
     super(data, { ...options });
-    this._derivationOptions = { floor, ceil, min, max, blank };
+    this._derivationOptions = { floor, ceil, min, max, blank, decimals };
   }
 
   /**
@@ -110,6 +112,9 @@ export default class EvaluationModel extends EmbeddedDataModel {
     }
     if (typeof options.min === "number") {
       value = Math.max(value, options.min);
+    }
+    if (typeof options.decimals === "number") {
+      value = roundTo(value, options.decimals);
     }
     return value;
   }

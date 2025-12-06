@@ -14,6 +14,7 @@ declare global {
       min?: number;
       blank?: number | string;
       bool?: boolean;
+      decimals?: number;
     };
 
     export type _EvaluationFieldOptions = _FormulaFieldOptions &

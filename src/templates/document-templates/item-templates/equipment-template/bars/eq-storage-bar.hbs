@@ -3,15 +3,16 @@
     {{formBox
       (formInput
         systemFields.storage.fields.maxCount
-        dataset=(object tooltip="Maximum Number of Items Carried")
+        dataset=(object tooltip=(concat
+          (ifThen system.storage.isOverCountCapacity "Over " "") "Maximum Number of Items Carried"))
         disabled=(not editable)
         value=system._source.storage.maxCount.raw
       )
       icon=(path TERIOCK.display.icons "maxCount")
       unselected=(concat system.storage.carriedCount " / " system.storage.maxCount.value)
-      label="NUM"
+      label="ITEMS"
       iconColor=(ifThen
-        system.isOverCountCapacity
+        system.storage.isOverCountCapacity
         TERIOCK.display.colors.red
         null
       )
@@ -19,15 +20,16 @@
     {{formBox
       (formInput
         systemFields.storage.fields.maxWeight
-        dataset=(object tooltip="Maximum Weight Carried")
+        dataset=(object tooltip=(concat
+          (ifThen system.storage.isOverWeightCapacity "Over " "") "Maximum Weight Carried"))
         disabled=(not editable)
         value=system._source.storage.maxWeight.raw
       )
       icon=(path TERIOCK.display.icons "maxWeight")
-      unselected=(concat system.storage.carriedWeight " / " system.storage.maxWeight.value)
+      unselected=(concat (roundTo system.storage.carriedWeight 2) " / " system.storage.maxWeight.value)
       label="lb"
       iconColor=(ifThen
-        system.isOverWeightCapacity
+        system.storage.isOverWeightCapacity
         TERIOCK.display.colors.red
         null
       )

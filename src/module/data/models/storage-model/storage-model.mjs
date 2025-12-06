@@ -21,6 +21,7 @@ export default class StorageModel extends EmbeddedDataModel {
       }),
       maxWeight: new EvaluationField({
         blank: Infinity,
+        decimals: 2,
       }),
       weightMultiplier: new FormulaField({
         deterministic: true,

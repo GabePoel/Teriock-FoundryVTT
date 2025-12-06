@@ -1,5 +1,6 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
+import { roundTo } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
 import {
   ArmamentDataMixin,
@@ -122,6 +123,7 @@ export default class TeriockEquipmentModel extends EquipmentContainerPart(
       weight: new EvaluationField({
         floor: false,
         ceil: false,
+        decimals: 2,
       }),
     });
     return schema;
@@ -337,7 +339,7 @@ export default class TeriockEquipmentModel extends EquipmentContainerPart(
     this.weight.evaluate();
     this.weight.total = this.weight.value;
     if (this.consumable) {
-      this.weight.total = this.weight.value * this.quantity;
+      this.weight.total = roundTo(this.weight.value * this.quantity, 2);
     }
     if (!this.hasTwoHandedAttack) {
       this.damage.twoHanded.raw = this.damage.base.raw;

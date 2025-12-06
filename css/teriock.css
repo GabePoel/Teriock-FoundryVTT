@@ -2378,7 +2378,6 @@ table {
 .teriock .ab-box-content .unselected,
 .teriock .affix .unselected {
   align-items: center;
-  display: flex;
   flex-direction: row;
   height: 100%;
   justify-content: center;
@@ -2387,26 +2386,28 @@ table {
   top: 0;
   user-select: none;
   width: 100%;
+  opacity: 1;
+  pointer-events: none;
 }
 .teriock .ab-box-content .selected,
 .teriock .affix .selected {
-  display: flex;
+  opacity: 0;
 }
-.teriock .ab-box-content:focus-within .unselected,
+.teriock .ab-box-content .selected, .teriock .ab-box-content .unselected,
+.teriock .affix .selected,
+.teriock .affix .unselected {
+  display: flex;
+  transition: 50ms;
+}
+.teriock .ab-box-content:hover .unselected, .teriock .ab-box-content:focus-within .unselected,
+.teriock .affix:hover .unselected,
 .teriock .affix:focus-within .unselected {
   opacity: 0;
 }
-.teriock .ab-box-content:focus-within .selected,
+.teriock .ab-box-content:hover .selected, .teriock .ab-box-content:focus-within .selected,
+.teriock .affix:hover .selected,
 .teriock .affix:focus-within .selected {
   opacity: 1;
-}
-.teriock .ab-box-content:not(:focus-within) .unselected,
-.teriock .affix:not(:focus-within) .unselected {
-  opacity: 1;
-}
-.teriock .ab-box-content:not(:focus-within) .selected,
-.teriock .affix:not(:focus-within) .selected {
-  opacity: 0;
 }
 .teriock .unselected {
   left: 2em;
