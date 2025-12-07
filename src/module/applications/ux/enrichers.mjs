@@ -171,6 +171,12 @@ const lookupEnricher = {
       formatOptions["style"] = "uc";
     } else if (formatOptions["style"] === "lower") {
       formatOptions["style"] = "lc";
+    } else if (formatOptions["style"] === "embed") {
+      const doc = await fromUuid(text);
+      if (doc) return doc.toEmbed({});
+    } else if (formatOptions["style"] === "link") {
+      const doc = await fromUuid(text);
+      if (doc) return doc.toAnchor();
     }
     switch ((formatOptions["style"] || "").toLowerCase()) {
       case "uc":

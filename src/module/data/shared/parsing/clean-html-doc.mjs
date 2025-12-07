@@ -72,8 +72,13 @@ export function cleanHTML(html, name, options = { useFoundry: true }) {
   const doc = document.createElement("div");
   doc.innerHTML = html;
   if (name) {
-    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(escapedName, "g");
+    const lowerName = name.toLowerCase();
+    const escapeRegExp = (string) =>
+      string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const escapedName = escapeRegExp(name);
+    const escapedLowerName = escapeRegExp(lowerName);
+    const regex = new RegExp(`${escapedName}|${escapedLowerName}`, "g");
+
     const walker = document.createTreeWalker(doc, NodeFilter.SHOW_TEXT, {
       acceptNode: (node) => {
         if (node.parentElement && node.parentElement.closest("a")) {
@@ -85,8 +90,16 @@ export function cleanHTML(html, name, options = { useFoundry: true }) {
 
     let node;
     while ((node = walker.nextNode())) {
-      if (node.nodeValue && regex.test(node.nodeValue)) {
-        node.nodeValue = node.nodeValue.replace(regex, "[[lookup name]]");
+      if (node.nodeValue) {
+        const newValue = node.nodeValue.replace(regex, (match) => {
+          if (match === lowerName && match !== name) {
+            return "[[lookup name style=lc]]";
+          }
+          return "[[lookup name]]";
+        });
+        if (newValue !== node.nodeValue) {
+          node.nodeValue = newValue;
+        }
       }
     }
   }
