@@ -64,11 +64,13 @@ export function _defineAttributes(schema) {
   });
   schema.size = new fields.SchemaField({
     number: new EvaluationField({
+      blank: "3",
+      ceil: false,
       floor: false,
       initial: "3",
       label: "Size",
       max: 30,
-      min: 0,
+      min: 0.25,
     }),
   });
   schema.attributes = new fields.SchemaField({

@@ -16,7 +16,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
       min = 0,
       max = Infinity,
       blank = 0,
-      decimals = 0,
+      decimals = undefined,
       ...options
     } = {},
   ) {
@@ -96,17 +96,15 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @param {Teriock.Fields.FormulaDerivationOptions} [options]
    * @returns {number}
    */
-  #evaluate(options = this._derivationOptions) {
+  #evaluate(options = {}) {
+    options = {
+      ...this._derivationOptions,
+      ...options,
+    };
     if (this.formula.includes("Infinity")) {
       return Infinity;
     }
     let value = TeriockRoll.meanValue(this.formula, this.getRollData());
-    if (options.floor) {
-      value = Math.floor(value);
-    }
-    if (options.ceil) {
-      value = Math.ceil(value);
-    }
     if (typeof options.max === "number") {
       value = Math.min(value, options.max);
     }
@@ -116,6 +114,12 @@ export default class EvaluationModel extends EmbeddedDataModel {
     if (typeof options.decimals === "number") {
       value = roundTo(value, options.decimals);
     }
+    if (options.floor) {
+      value = Math.floor(value);
+    }
+    if (options.ceil) {
+      value = Math.ceil(value);
+    }
     return value;
   }
 
@@ -123,7 +127,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * Derive value of formula.
    * @param {Teriock.Fields.FormulaDerivationOptions} [options]
    */
-  evaluate(options = this._derivationOptions) {
+  evaluate(options = {}) {
     this.value = this.#evaluate(options);
   }
 }
