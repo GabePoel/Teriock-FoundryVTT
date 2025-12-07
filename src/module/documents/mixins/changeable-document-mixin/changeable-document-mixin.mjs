@@ -9,21 +9,32 @@ import { applyCertainChanges } from "../shared/_module.mjs";
 export default function ChangeableDocumentMixin(Base) {
   return (
     /**
-     * @implements {ChangeableDocumentMixinInterface}
      * @extends {ClientDocument}
      */
     class ChangeableDocument extends Base {
+      /**
+       * What field is used to extract changes from effects.
+       * @type {string}
+       */
       changesField = "changes";
 
       //noinspection ES6ClassMemberInitializationOrder
+      /**
+       * An object that tracks which tracks the changes to the data model which were applied by active effects
+       * @type {object}
+       */
       overrides = this.overrides ?? {};
 
-      /** @inheritDoc */
+      /** Checks if it's okay to prepare. */
       _checkPreparation() {
         return Boolean(!this.actor) || this.actor?._embeddedPreparation;
       }
 
-      /** @inheritDoc */
+      /**
+       * Get all ActiveEffects that may apply to this document.
+       * @yields {TeriockEffect}
+       * @returns {Generator<TeriockEffect, void, void>}
+       */
       *allApplicableEffects() {
         if (this.actor) {
           for (const effect of this.actor.allApplicableEffects()) {
@@ -32,7 +43,9 @@ export default function ChangeableDocumentMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
+      /**
+       * Apply any transformation to the Document data which are caused by ActiveEffects.
+       */
       applyActiveEffects() {
         const overrides = {};
 

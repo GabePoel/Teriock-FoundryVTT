@@ -1,4 +1,3 @@
-import "./mixins/_types";
 import { documentTypes } from "../constants/system/document-types.mjs";
 import * as models from "../data/_module.mjs";
 import TeriockBaseEffectModel from "../data/effect-data/base-effect-model/base-effect-model.mjs";

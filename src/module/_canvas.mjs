@@ -1,11 +1,8 @@
-import { BaseDocumentMixin } from "./documents/mixins/_module.mjs";
-
 const { Canvas } = foundry.canvas;
 
 /**
  * @extends {Canvas}
  * @mixes BaseDocument
- * @property {object} teriock
  * @property {Readonly<TeriockScene>} scene
  * @property {ControlsLayer} controls
  * @property {DrawingsLayer} drawings
@@ -19,4 +16,4 @@ const { Canvas } = foundry.canvas;
  * @property {WallsLayer} walls
  * @property {WeatherEffects} weather
  */
-export default class TeriockCanvas extends BaseDocumentMixin(Canvas) {}
+export default class TeriockCanvas extends Canvas {}

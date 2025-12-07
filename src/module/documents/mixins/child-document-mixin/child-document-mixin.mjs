@@ -11,7 +11,6 @@ export default function ChildDocumentMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {ChildDocumentMixinInterface}
      * @extends {ClientDocument}
      * @mixes PanelDocument
      * @mixes CommonDocument
@@ -28,7 +27,10 @@ export default function ChildDocumentMixin(Base) {
         return this.system.makeEphemeral;
       }
 
-      /** @inheritDoc */
+      /**
+       * Checks for fluency in the document.
+       * @returns {boolean}
+       */
       get isFluent() {
         let fluent = false;
         if (this.system.fluent) {
@@ -40,7 +42,10 @@ export default function ChildDocumentMixin(Base) {
         return fluent;
       }
 
-      /** @inheritDoc */
+      /**
+       * Checks for proficiency in the document.
+       * @returns {boolean}
+       */
       get isProficient() {
         let proficient = false;
         if (this.system.proficient) {
@@ -55,7 +60,11 @@ export default function ChildDocumentMixin(Base) {
         return proficient;
       }
 
-      /** @inheritDoc */
+      /**
+       * Generator that gives every {@link TeriockEffect} that applies to {@link TeriockChild} documents.
+       * @yields {TeriockEffect}
+       * @returns {Generator<TeriockEffect, void, void>}
+       */
       *allSpecialEffects() {
         if (this.actor) {
           for (const effect of this.actor.specialEffects) {
@@ -72,7 +81,9 @@ export default function ChildDocumentMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
+      /**
+       * Apply the special {@link TeriockEffect}s found by {@link TeriockChild} that this document matches.
+       */
       applySpecialEffects() {
         const overrides = foundry.utils.deepClone(this.overrides ?? {});
         const changes = [];
@@ -121,7 +132,10 @@ export default function ChildDocumentMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
+      /**
+       * Sends a chat message with the document's image.
+       * @returns {Promise<void>}
+       */
       async chatImage() {
         const img = this.img;
         if (img) {
@@ -135,7 +149,10 @@ export default function ChildDocumentMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
+      /**
+       * Duplicates the document within its parent.
+       * @returns {Promise<TeriockChild>}
+       */
       async duplicate() {
         const copy = foundry.utils.duplicate(this.toObject());
         copy._stats.duplicateSource = this.uuid;
@@ -176,7 +193,12 @@ export default function ChildDocumentMixin(Base) {
         super.prepareSpecialData();
       }
 
-      /** @inheritDoc */
+      /**
+       * Does whatever the default roll/execution for this document is.
+       * @param {object} options
+       * @returns {Promise<void>}
+       * @deprecated
+       */
       async roll(options = {}) {
         await this.toMessage(options);
       }
@@ -191,17 +213,27 @@ export default function ChildDocumentMixin(Base) {
         return await super.toMessage(options);
       }
 
-      /** @inheritDoc */
-      async use(options = {}) {
+      /**
+       * Does whatever the default roll/execution for this document is.
+       * @param {object} options
+       * @returns {Promise<void>}
+       */ async use(options = {}) {
         await this.system.use(options);
       }
 
-      /** @inheritDoc */
+      /**
+       * Opens the document's page on [the Teriock wiki](https://wiki.teriock.com).
+       * @returns {Promise<void>}
+       */
       async wikiOpen() {
         ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
       }
 
-      /** @inheritDoc */
+      /**
+       * Pulls data for this document from [the Teriock wiki](https://wiki.teriock.com) and updates the document to
+       * match.
+       * @returns {Promise<void>}
+       */
       async wikiPull() {
         ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
       }

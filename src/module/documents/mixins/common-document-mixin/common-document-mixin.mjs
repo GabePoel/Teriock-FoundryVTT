@@ -10,9 +10,9 @@ import PanelDocumentMixin from "../panel-document-mixin/panel-document-mixin.mjs
  * @constructor
  */
 export default function CommonDocumentMixin(Base) {
+  //noinspection JSUnusedGlobalSymbols
   return (
     /**
-     * @implements {CommonDocumentMixinInterface}
      * @extends ClientDocument
      * @mixes EmbedCardDocument
      * @mixes PanelDocument
@@ -21,7 +21,9 @@ export default function CommonDocumentMixin(Base) {
     class CommonDocument extends EmbedCardDocumentMixin(
       PanelDocumentMixin(HierarchyDocumentMixin(Base)),
     ) {
-      /** @inheritDoc */
+      /**
+       * The actor associated with this document if there is one.
+       */
       get actor() {
         if (this instanceof TeriockActor) {
           return this;
@@ -42,18 +44,30 @@ export default function CommonDocumentMixin(Base) {
         return [...super.embedIcons, this.system.embedIcons];
       }
 
+      /** @inheritDoc */
       get embedParts() {
         return { ...super.embedParts, ...this.system.embedParts };
+      }
+
+      /**
+       * The document type's metadata.
+       * @returns {Teriock.Documents.ModelMetadata}
+       */
+      get metadata() {
+        return this.system.constructor.metadata;
+      }
+
+      /**
+       * A modified version of this document's name that displays additional text if needed.
+       * @returns {string}
+       */
+      get nameString() {
+        return this.system.nameString;
       }
 
       /** @inheritDoc */
       get panelParts() {
         return this.system.panelParts;
-      }
-
-      /** @inheritDoc */
-      get metadata() {
-        return this.system.constructor.metadata;
       }
 
       /**
@@ -62,11 +76,6 @@ export default function CommonDocumentMixin(Base) {
        */
       get visibleTypes() {
         return this.system.visibleTypes;
-      }
-
-      /** @inheritDoc */
-      get nameString() {
-        return this.system.nameString;
       }
 
       /** @inheritDoc */
@@ -82,39 +91,29 @@ export default function CommonDocumentMixin(Base) {
         this.updateSource({ sort: game.time.serverTime });
       }
 
-      /** @inheritDoc */
+      /**
+       * Disables the document.
+       * @returns {Promise<void>}
+       */
       async disable() {
         await this.update({ "system.disabled": true });
       }
 
-      /** @inheritDoc */
+      /**
+       * Enables the document.
+       * @returns {Promise<void>}
+       */
       async enable() {
         await this.update({ "system.disabled": false });
       }
 
       /**
-       * @inheritDoc
-       * @returns {TeriockAbility[]}
-       */
-      getAbilities() {
-        return [];
-      }
-
-      /**
-       * @inheritDoc
-       * @returns {TeriockProperty[]}
-       */
-      getProperties() {
-        return [];
-      }
-
-      /**
-       * @inheritDoc
-       * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook
-       * @param {Partial<Teriock.HookData.BaseHookData>} [data]
-       * @param {TeriockEffect} [effect]
-       * @param {boolean} [skipCall]
-       * @returns {Promise<Teriock.HookData.BaseHookData>}
+       * Executes all macros for a given pseudo-hook and calls a regular hook with the same name.
+       * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook - What pseudo-hook to call.
+       * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in each connected {@link TeriockMacro}.
+       * @param {TeriockEffect} [effect] - Only call {@link TeriockMacro}s provided by this {@link TeriockEffect}.
+       * @param {boolean} [skipCall] - Whether to skip calling normal hooks.
+       * @returns {Promise<Teriock.HookData.BaseHookData>} The mutated data.
        */
       async hookCall(pseudoHook, data = {}, effect = null, skipCall = false) {
         data.cancel = false;
@@ -160,7 +159,12 @@ export default function CommonDocumentMixin(Base) {
         super.prepareData();
       }
 
-      /** @inheritDoc */
+      /**
+       * Data preparation that happens after `prepareDerivedData()`. This allows {@link TeriockChild} documents to apply
+       * changes from the parent {@link TeriockActor} and should be primarily used for that purpose.
+       * {@link TeriockActor}s are the only documents that call this directly. In all other cases, it is only called
+       * if the parent document calls it.
+       */
       prepareSpecialData() {
         this.system.prepareSpecialData();
       }
@@ -172,7 +176,10 @@ export default function CommonDocumentMixin(Base) {
         return dragData;
       }
 
-      /** @inheritDoc */
+      /**
+       * Toggles whether this document is disabled.
+       * @returns {Promise<void>}
+       */
       async toggleDisabled() {
         await this.update({ "system.disabled": !this.system.disabled });
       }
