@@ -2,7 +2,7 @@ import { tidyHTML } from "../../../../helpers/html.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import {
   cleanHTMLDoc,
-  cleanObject
+  cleanObject,
 } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";

@@ -1,3 +1,4 @@
+import { toCamelCase } from "../../../helpers/string.mjs";
 import { inferChildCompendiumSources } from "../../../helpers/utils.mjs";
 import {
   fetchWikiPageHTML,
@@ -19,6 +20,20 @@ export default function WikiDataMixin(Base) {
       /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, { wiki: true });
+      }
+
+      /**
+       * Whether this document is on the wiki.
+       * @returns {boolean}
+       */
+      get isOnWiki() {
+        return !!TERIOCK.index[
+          TERIOCK.options.document[this.parent.type].getter
+        ][
+          toCamelCase(
+            foundry.utils.getProperty(this.parent, this.metadata.pageNameKey),
+          )
+        ];
       }
 
       /**
@@ -53,8 +68,12 @@ export default function WikiDataMixin(Base) {
        */
       wikiOpen() {
         const pageTitle = this.wikiPage;
-        ui.notifications.info(`Opening ${pageTitle}.`);
-        openWikiPage(pageTitle);
+        if (this.isOnWiki) {
+          ui.notifications.info(`Opening ${pageTitle}.`);
+          openWikiPage(pageTitle);
+        } else {
+          ui.notifications.error(`${pageTitle} not found on the wiki.`);
+        }
       }
 
       /**

@@ -1,4 +1,3 @@
-import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { TeriockDialog } from "../../../api/_module.mjs";
 
 /**
@@ -15,22 +14,6 @@ export default function WikiButtonSheetMixin(Base) {
       actions: {
         wikiOpenThis: this.#onWikiOpenThis,
         wikiPullThis: this.#onWikiPullThis,
-      },
-      window: {
-        controls: [
-          {
-            action: "wikiOpenThis",
-            icon: makeIconClass("globe", "contextMenu"),
-            label: "View on Wiki",
-            ownership: "OWNER",
-          },
-          {
-            action: "wikiPullThis",
-            icon: makeIconClass("arrow-down-to-line", "contextMenu"),
-            label: "Pull from Wiki",
-            ownership: "OWNER",
-          },
-        ],
       },
     };
 
