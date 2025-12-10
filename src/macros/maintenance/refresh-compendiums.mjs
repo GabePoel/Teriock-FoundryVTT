@@ -1,47 +1,33 @@
-let packPct = 0;
-const packProgress = ui.notifications.info("Refreshing Compendiums", {
-  pct: packPct,
-  progress: true,
-});
-const packs = game.packs.contents.filter(
-  (p) => p.collection !== "teriock.creatures",
-);
-for (const p of packs) {
-  packPct += 1 / packs.length;
-  packProgress.update({
-    message: `Refreshing ${p.title}`,
-    pct: packPct,
-  });
-  await p.getIndex();
-  const indexes = tm.utils.docSort(
-    p.index.contents.filter((d) => !d?.system?._sup),
-  );
-  let indexPct = 0;
-  const indexProgress = ui.notifications.info("Refreshing Documents", {
-    pct: indexPct,
-    progress: true,
-  });
-  for (const index of indexes) {
-    indexPct += 1 / indexes.length;
-    indexProgress.update({
-      message: `Refreshing ${index.name}`,
-      pct: indexPct,
-    });
-    const doc = await tm.utils.resolveDocument(index);
-    if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
-      const options = {};
-      if (p.collection === "teriock.magicItems") {
-        options.deleteChildren = false;
-        options.recursive = false;
-      }
-      await doc.system.refreshFromCompendiumSource(options);
-      if (p.collection === "teriock.magicItems") {
-        for (const child of await doc.getChildArray()) {
-          await child.system.refreshFromCompendiumSource();
-        }
-      }
+await tm.utils.progressBar(
+  game.packs.contents.filter((p) => p.collection !== "teriock.creatures"),
+  "Refreshing Compendiums",
+  /** @param {TeriockCompendiumCollection<TeriockDocument>} p */ async (p) => {
+    if (!p.locked) {
+      await p.getIndex();
+      const indexes = tm.utils.docSort(
+        p.index.contents.filter((d) => !d?.system?._sup),
+      );
+      await tm.utils.progressBar(
+        indexes,
+        `Refreshing ${p.title}`,
+        async (i) => {
+          const doc = await tm.utils.resolveDocument(i);
+          if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
+            const options = {};
+            if (p.collection === "teriock.magicItems") {
+              options.deleteChildren = false;
+              options.recursive = false;
+            }
+            await doc.system.refreshFromCompendiumSource(options);
+            if (p.collection === "teriock.magicItems") {
+              for (const child of await doc.getChildArray()) {
+                await child.system.refreshFromCompendiumSource();
+              }
+            }
+          }
+        },
+        { batch: 20 },
+      );
     }
-  }
-  indexProgress.update({ pct: 1 });
-}
-packProgress.update({ pct: 1 });
+  },
+);

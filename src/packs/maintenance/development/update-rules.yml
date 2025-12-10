@@ -5,8 +5,6 @@ author: teriockBuilder00
 img: icons/svg/book.svg
 scope: global
 command: |-
-  const coreRulesPack = game.teriock.packs.rules;
-
   const namespaceCategoryMap = {
     Core: "Core rules",
     Keyword: "Keywords",
@@ -17,204 +15,147 @@ command: |-
     Tradecraft: "Tradecrafts",
   };
 
-  let categoryPct = 0.01;
+  await tm.utils.progressBar(
+    Object.entries(namespaceCategoryMap),
+    "Pulling Rules",
+    async ([namespace, category]) => {
+      let allRulesPages =
+        await teriock.helpers.wiki.fetchCategoryMembers(category);
+      allRulesPages = allRulesPages.filter((page) =>
+        page.title.startsWith(`${namespace}:`),
+      );
 
-  const categoryProgress = ui.notifications.info(
-    "Pulling rules pages from wiki.",
-    {
-      progress: true,
-      pct: categoryPct,
+      if (namespace === "Core") {
+        allRulesPages = allRulesPages.filter((p) => !p.title.includes("Routine"));
+      }
+
+      let rulesJournal = await fromUuid(
+        game.teriock.packs.rules.index.getName(namespace)?.uuid ?? "",
+      );
+      if (!rulesJournal) {
+        rulesJournal = await JournalEntry.implementation.create(
+          { name: namespace },
+          { pack: "teriock.rules" },
+        );
+      }
+
+      await tm.utils.progressBar(
+        allRulesPages,
+        `Pulling ${namespace} Rules`,
+        async (rulesPage) => {
+          const title = rulesPage.title;
+          const rulesName = title.slice(namespace.length + 1).trim();
+          if (!rulesName) return;
+
+          const rawHtml = await teriock.helpers.wiki.fetchWikiPageHTML(title, {
+            transformDice: true,
+            enrichText: true,
+            removeSubContainers: true,
+          });
+
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(rawHtml, "text/html");
+
+          const selectorsToRemove = [
+            "figure",
+            "#toc",
+            ".mw-editsection-bracket",
+            ".mw-editsection-visualeditor",
+            ".citizen-editsection-icon",
+            ".mw-ui-icon-wikimedia-edit",
+            ".mw-editsection-divider",
+            ".mw-file-description",
+            ".mw-default-size",
+            ".metadata",
+          ];
+          selectorsToRemove.forEach((s) =>
+            doc.querySelectorAll(s).forEach((el) => el.remove()),
+          );
+
+          doc.querySelectorAll("p").forEach((p) => {
+            if (!p.innerHTML.replace(/&nbsp;|\s/g, "")) p.remove();
+          });
+
+          doc.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((el) => {
+            if (el.textContent.includes("Routine")) el.remove();
+          });
+
+          const html = doc.body.innerHTML;
+          let journalPage = rulesJournal.pages.getName(rulesName);
+
+          if (!journalPage) {
+            journalPage = (
+              await rulesJournal.createEmbeddedDocuments("JournalEntryPage", [
+                {
+                  name: rulesName,
+                  type: "text",
+                  text: { content: html },
+                },
+              ])
+            )[0];
+          } else {
+            await journalPage.update({ text: { content: html } });
+          }
+
+          let icon, image;
+          if (namespace === "Tradecraft") {
+            icon = TERIOCK.options.document.fluency.icon;
+            image = tm.path.getImage("tradecrafts", journalPage.name);
+          } else if (namespace === "Core") {
+            if (
+              [
+                "Movement",
+                "Intelligence",
+                "Perception",
+                "Sneak",
+                "Strength",
+                "Presence",
+              ].includes(journalPage.name)
+            ) {
+              icon = "star";
+              const imgName =
+                journalPage.name === "Presence"
+                  ? "Unused Presence"
+                  : journalPage.name;
+              image = tm.path.getImage("attributes", imgName);
+            }
+          } else if (namespace === "Keyword") {
+            if (
+              ["Hexproof", "Hexseal", "Immunity", "Resistance"].includes(
+                journalPage.name,
+              )
+            ) {
+              icon = "shield-halved";
+              image = tm.path.getImage("effect-types", journalPage.name);
+            }
+          } else if (namespace === "Damage") {
+            icon = "heart-crack";
+            image = tm.path.getImage("damage-types", journalPage.name);
+          } else if (namespace === "Drain") {
+            icon = "droplet-slash";
+            image = tm.path.getImage("drain-types", journalPage.name);
+          } else if (namespace === "Condition") {
+            icon = TERIOCK.options.document.condition.icon;
+            image = tm.path.getImage("conditions", journalPage.name);
+          }
+
+          if (icon) await journalPage.setFlag("teriock", "journalIcon", icon);
+          else await journalPage.unsetFlag("teriock", "journalIcon");
+
+          if (image) await journalPage.setFlag("teriock", "journalImage", image);
+          else await journalPage.unsetFlag("teriock", "journalImage");
+        },
+        { batch: 25 },
+      );
+
+      const toUpdate = rulesJournal.pages.contents
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((page, i) => ({ _id: page.id, sort: i * 1000 }));
+
+      if (toUpdate.length)
+        await rulesJournal.updateEmbeddedDocuments("JournalEntryPage", toUpdate);
     },
   );
-
-  for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
-    categoryProgress.update({
-      message: `Processing Namespace: ${namespace}`,
-      pct: categoryPct,
-    });
-
-    // Fetch all pages in the category
-    let allRulesPages = await teriock.helpers.wiki.fetchCategoryMembers(category);
-    allRulesPages = allRulesPages.filter((page) =>
-      page.title.startsWith(`${namespace}:`),
-    );
-
-    // Attempt to load the journal from the pack
-    let rulesJournal = await fromUuid(
-      coreRulesPack.index.getName(namespace)?.uuid ?? "",
-    );
-
-    // Create the journal if it's missing
-    if (!rulesJournal) {
-      console.warn(
-        `Journal for namespace '${namespace}' not found. Creating it...`,
-      );
-      rulesJournal = await JournalEntry.implementation.create(
-        { name: namespace },
-        { pack: "teriock.rules" },
-      );
-    }
-
-    let pagePct = 0.01;
-    const pageProgress = ui.notifications.info("Processing pages", {
-      progress: true,
-      pct: pagePct,
-    });
-
-    for (const rulesPage of allRulesPages.filter(
-      (p) => !(p.title.includes("Routine") && namespace === "Core"),
-    )) {
-      const title = rulesPage.title;
-
-      // Extract rule name after the namespace prefix
-      const rulesName = title.slice(namespace.length + 1).trim();
-      if (!rulesName) {
-        console.warn(`Skipping page with empty rule name: "${title}"`);
-        continue;
-      }
-
-      // Fetch and clean HTML
-      let rawHtml = await teriock.helpers.wiki.fetchWikiPageHTML(title, {
-        transformDice: true,
-        enrichText: true,
-        removeSubContainers: true,
-      });
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(rawHtml, "text/html");
-
-      // Remove unwanted elements
-      const selectorsToRemove = [
-        "figure",
-        "#toc",
-        ".mw-editsection-bracket",
-        ".mw-editsection-visualeditor",
-        ".citizen-editsection-icon",
-        ".mw-ui-icon-wikimedia-edit",
-        ".mw-editsection-divider",
-        ".mw-file-description",
-        ".mw-default-size",
-        ".metadata",
-      ];
-      selectorsToRemove.forEach((selector) => {
-        doc.querySelectorAll(selector).forEach((el) => el.remove());
-      });
-
-      // Remove empty <p> tags
-      doc.querySelectorAll("p").forEach((p) => {
-        const normalized = p.innerHTML.replace(/&nbsp;|\s/g, "");
-        if (!normalized) {
-          p.remove();
-        }
-      });
-
-      doc.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((el) => {
-        if (el.textContent.includes("Routine")) {
-          el.remove();
-        }
-      });
-
-      const html = doc.body.innerHTML;
-
-      // Create or update a journal page
-      let journalPage =
-        /** @type {TeriockJournalEntryPage} */ rulesJournal.pages.getName(
-          rulesName,
-        );
-
-      if (!journalPage) {
-        journalPage = (
-          await rulesJournal.createEmbeddedDocuments("JournalEntryPage", [
-            {
-              name: rulesName,
-              type: "text",
-              text: { content: html },
-            },
-          ])
-        )[0];
-        console.log(`Created: ${namespace}:${rulesName}`);
-      } else {
-        await journalPage.update({
-          text: { content: html },
-        });
-        console.log(`Updated: ${namespace}:${rulesName}`);
-      }
-      pageProgress.update({
-        message: `Processing Page: ${namespace}:${rulesName}`,
-        pct: pagePct,
-      });
-
-      let icon;
-      let image;
-
-      if (namespace === "Tradecraft") {
-        icon = TERIOCK.options.document.fluency.icon;
-        image = tm.path.getImage("tradecrafts", journalPage.name);
-      } else if (namespace === "Core") {
-        if (
-          [
-            "Movement",
-            "Intelligence",
-            "Perception",
-            "Sneak",
-            "Strength",
-            "Presence",
-          ].includes(journalPage.name)
-        ) {
-          icon = "star";
-          let imageName = journalPage.name;
-          if (imageName === "Presence") {
-            imageName = "Unused Presence";
-          }
-          image = tm.path.getImage("attributes", imageName);
-        }
-      } else if (namespace === "Keyword") {
-        if (
-          ["Hexproof", "Hexseal", "Immunity", "Resistance"].includes(
-            journalPage.name,
-          )
-        ) {
-          icon = "shield-halved";
-          image = tm.path.getImage("effect-types", journalPage.name);
-        }
-      } else if (namespace === "Damage") {
-        icon = "heart-crack";
-        image = tm.path.getImage("damage-types", journalPage.name);
-      } else if (namespace === "Drain") {
-        icon = "droplet-slash";
-        image = tm.path.getImage("drain-types", journalPage.name);
-      } else if (namespace === "Condition") {
-        icon = TERIOCK.options.document.condition.icon;
-        image = tm.path.getImage("conditions", journalPage.name);
-      }
-      if (icon) {
-        await journalPage.setFlag("teriock", "journalIcon", icon);
-      } else {
-        await journalPage.unsetFlag("teriock", "journalIcon");
-      }
-      if (image) {
-        await journalPage.setFlag("teriock", "journalImage", image);
-      } else {
-        await journalPage.unsetFlag("teriock", "journalImage");
-      }
-
-      let pages = 0;
-      const toUpdate = [];
-      for (const page of rulesJournal.pages.contents.sort((a, b) =>
-        a.name.localeCompare(b.name),
-      )) {
-        toUpdate.push({
-          _id: page.id,
-          sort: pages * 1000,
-        });
-        pages++;
-      }
-      await rulesJournal.updateEmbeddedDocuments("JournalEntryPage", toUpdate);
-      pagePct += 1 / allRulesPages.length;
-    }
-    pageProgress.update({ pct: 1 });
-    categoryPct += 1 / Object.keys(namespaceCategoryMap).length;
-  }
-  categoryProgress.update({ pct: 1 });
 folder: L08qIbjJoCwEaiEi
 flags: {}
 _stats:

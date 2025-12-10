@@ -6,143 +6,102 @@ author: teriockBuilder00
 img: systems/teriock/src/icons/documents/creature.svg
 scope: global
 command: |-
-  const speciesCompendium = game.teriock.packs.species;
-  const creatureCompendium = game.teriock.packs.creatures;
-  await speciesCompendium.getIndex();
+  const speciesPack = game.teriock.packs.species;
+  const creaturePack = game.teriock.packs.creatures;
+
+  await speciesPack.getIndex();
+  await creaturePack.getIndex();
+
   const allSpecies = tm.utils.docSort(
-    speciesCompendium.index.contents.filter((i) => i.type === "species"),
+    speciesPack.index.contents.filter((i) => i.type === "species"),
   );
-  const speciesFolders = speciesCompendium.folders;
-  const allCreatures = creatureCompendium.index.contents.filter(
+  const allCreatures = creaturePack.index.contents.filter(
     (a) => a.type === "creature",
   );
-  const creaturesFolders = creatureCompendium.folders;
 
-  for (const folderEntry of speciesFolders.values()) {
-    if (!creaturesFolders.getName(folderEntry.name)) {
+  const speciesFolders = speciesPack.folders;
+  const creaturesFolders = creaturePack.folders;
+
+  for (const f of speciesFolders.contents) {
+    if (!creaturesFolders.getName(f.name)) {
       await Folder.create(
-        {
-          name: folderEntry.name,
-          type: "Actor",
-        },
-        {
+        { name: f.name, type: "Actor" },
+        { pack: "teriock.creatures" },
+      );
+    }
+  }
+
+  for (const f of speciesFolders.contents) {
+    if (f.folder) {
+      const parentId = creaturesFolders.getName(f.folder.name)?.id;
+      const child = creaturesFolders.getName(f.name);
+      if (parentId && child) await child.update({ folder: parentId });
+    }
+  }
+
+  await tm.utils.progressBar(
+    allSpecies,
+    "Synchronizing all creatures.",
+    async (speciesEntry) => {
+      const species = await fromUuid(speciesEntry.uuid);
+      const creatureEntry = allCreatures.find(
+        (c) => c.name === speciesEntry.name,
+      );
+
+      const targetFolder = creaturesFolders.getName(
+        speciesFolders.get(speciesEntry.folder)?.name,
+      );
+
+      let creature;
+      if (!creatureEntry) {
+        creature = await teriock.Actor.create(species.system.toCreature(), {
+          keepEmbeddedIds: true,
+          keepId: true,
           pack: "teriock.creatures",
-        },
-      );
-    }
-  }
-
-  for (const folderEntry of speciesFolders.values()) {
-    const speciesFolder = await fromUuid(folderEntry.uuid);
-    if (speciesFolder.folder) {
-      const parentFolderName = speciesFolder.folder.name;
-      const parentFolderId = creaturesFolders.getName(parentFolderName).id;
-      const creatureFolder = await fromUuid(
-        creaturesFolders.getName(speciesFolder.name).uuid,
-      );
-      await creatureFolder.update({
-        folder: parentFolderId,
-      });
-    }
-  }
-
-  const progress = ui.notifications.info(`Synchronizing all creatures.`, {
-    pct: 0.01,
-    progress: true,
-  });
-
-  // Helper function to process a single species
-  async function processCreature(
-    speciesEntry,
-    allCreatures,
-    speciesFolders,
-    creaturesFolders,
-  ) {
-    const species = /** @type {TeriockSpecies} */ await fromUuid(
-      speciesEntry.uuid,
-    );
-    const creatureEntry = allCreatures.find((c) => c.name === speciesEntry.name);
-    /** @type {TeriockActor} */
-    let creature;
-    const speciesFolder = speciesFolders.get(speciesEntry.folder);
-    const creatureFolder = creaturesFolders.getName(speciesFolder.name);
-    if (!creatureEntry) {
-      creature = await Actor.create(species.system.toCreature(), {
-        keepEmbeddedIds: true,
-        keepId: true,
-        pack: "teriock.creatures",
-      });
-    } else {
-      creature = await fromUuid(creatureEntry.uuid);
-    }
-    await creature.deleteChildDocuments(
-      "Item",
-      creature.items.map((c) => c._id),
-    );
-    await creature.createChildDocuments(
-      "Item",
-      [game.items.fromCompendium(species, { keepId: true, clearSort: true })],
-      {
-        keepId: true,
-        keepEmbeddedIds: true,
-        keepSubIds: true,
-      },
-    );
-    let maxDamage = 0;
-    let maxDamageArmament;
-    let maxBv = 0;
-    let maxBvArmament;
-    for (const a of creature.activeArmaments) {
-      const damage = a.system.damage.base.currentValue;
-      const bv = a.system.bv.currentValue;
-      if (damage >= maxDamage) {
-        maxDamageArmament = a;
-        maxDamage = damage;
+        });
+      } else {
+        creature = await fromUuid(creatureEntry.uuid);
       }
-      if (bv >= maxBv) {
-        maxBvArmament = a;
-        maxBv = bv;
+
+      await creature.deleteChildDocuments(
+        "Item",
+        creature.items.map((c) => c.id),
+      );
+      await creature.createChildDocuments(
+        "Item",
+        [game.items.fromCompendium(species, { keepId: true, clearSort: true })],
+        { keepId: true, keepEmbeddedIds: true, keepSubIds: true },
+      );
+
+      let maxDamage = 0,
+        maxDamageId = null;
+      let maxBv = 0,
+        maxBvId = null;
+
+      for (const a of creature.activeArmaments) {
+        const dmg = a.system.damage.base.currentValue;
+        const bv = a.system.bv.currentValue;
+        if (dmg >= maxDamage) {
+          maxDamage = dmg;
+          maxDamageId = a.id;
+        }
+        if (bv >= maxBv) {
+          maxBv = bv;
+          maxBvId = a.id;
+        }
       }
-    }
-    await creature.update({
-      folder: creatureFolder.id,
-      "system.hp.value": creature.system.hp.max,
-      "system.mp.value": creature.system.mp.max,
-      "system.wither.value": 20,
-      "system.wielding.attacker": maxDamageArmament?.id,
-      "system.wielding.blocker": maxBvArmament?.id,
-    });
-  }
 
-  const batchSize = 10;
-  let processedCount = 0;
-
-  for (let i = 0; i < allSpecies.length; i += batchSize) {
-    const batch = allSpecies.slice(i, i + batchSize);
-
-    await Promise.all(
-      batch.map((speciesEntry) =>
-        processCreature(
-          speciesEntry,
-          allCreatures,
-          speciesFolders,
-          creaturesFolders,
-        ),
-      ),
-    );
-
-    processedCount += batch.length;
-    const pct = processedCount / allSpecies.length;
-    progress.update({
-      pct: pct,
-      message: `Synchronized ${processedCount} of ${allSpecies.length} creatures.`,
-    });
-  }
-
-  progress.update({
-    pct: 1,
-    message: "Synchronization complete.",
-  });
+      await creature.update({
+        folder: targetFolder?.id,
+        "system.hp.value": creature.system.hp.max,
+        "system.mp.value": creature.system.mp.max,
+        "system.wither.value": 20,
+        "system.wielding.attacker": maxDamageId,
+        "system.wielding.blocker": maxBvId,
+      });
+    },
+    { batch: 10 },
+  );
 flags: {}
 _stats:
   coreVersion: '13'

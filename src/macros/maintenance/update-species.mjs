@@ -1,121 +1,46 @@
 const speciesPack = game.teriock.packs.species;
-const speciesFolders = speciesPack.folders;
 await speciesPack.getIndex();
 
-// Folder configuration
 const folderConfigs = [
-  {
-    name: "Monster Species",
-    variable: "allSpeciesFolder",
-  },
-  {
-    name: "Character Species",
-    variable: "characterSpeciesFolder",
-  },
-  {
-    name: "Common Animal Species",
-    variable: "commonAnimalSpeciesFolder",
-  },
-  {
-    name: "Undead Species",
-    variable: "undeadSpeciesFolder",
-  },
+  { name: "Monster Species", variable: "allSpeciesFolder" },
+  { name: "Character Species", variable: "characterSpeciesFolder" },
+  { name: "Common Animal Species", variable: "commonAnimalSpeciesFolder" },
+  { name: "Undead Species", variable: "undeadSpeciesFolder" },
 ];
 
-// Create missing folders
 const folders = {};
 for (const config of folderConfigs) {
-  let folder = speciesFolders.getName(config.name);
+  let folder = speciesPack.folders.getName(config.name);
   if (!folder) {
-    folder = await Folder.create(
-      {
-        name: config.name,
-        type: "Item",
-      },
-      {
-        pack: "teriock.species",
-      },
+    folder = await teriock.Folder.create(
+      { name: config.name, type: "Item" },
+      { pack: "teriock.species" },
     );
   }
   folders[config.variable] = folder;
 }
 
-const progress = ui.notifications.info("Pulling all species from wiki.", {
-  pct: 0.01,
-  progress: true,
-});
-
-// Process a single species
-async function processSpecies(speciesName) {
-  let speciesItem = speciesPack.index.getName(speciesName);
-
-  // Determine folder based on species type
-  let folder = folders["allSpeciesFolder"];
-  if (Object.values(TERIOCK.index.humanoids).includes(speciesName)) {
-    folder = folders["characterSpeciesFolder"];
-  } else if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName)) {
-    folder = folders["commonAnimalSpeciesFolder"];
-  } else if (Object.values(TERIOCK.index.undead).includes(speciesName)) {
-    folder = folders["undeadSpeciesFolder"];
-  }
-
-  // Create or fetch species item
-  if (!speciesItem) {
-    speciesItem = /** @type {TeriockSpecies} */ await Item.create(
-      {
-        name: speciesName,
-        type: "species",
-        folder: folder.id,
-      },
-      { pack: "teriock.species" },
-    );
-  }
-  speciesItem =
-    /** @type {TeriockSpecies} */ await tm.utils.resolveDocument(speciesItem);
-  await speciesItem.system.wikiPull({ notify: false });
-  return {
-    speciesName,
-    success: true,
-  };
-}
-
-// Process in batches of 25
-const allSpecies = Object.values(TERIOCK.index.creatures);
-const batchSize = 25;
-const results = [];
-let processedCount = 0;
-
-try {
-  for (let i = 0; i < allSpecies.length; i += batchSize) {
-    const batch = allSpecies.slice(i, i + batchSize);
-
-    const batchResults = await Promise.all(
-      batch.map((speciesName) => processSpecies(speciesName)),
-    );
-
-    results.push(...batchResults);
-    processedCount += batch.length;
-
-    const pct = Math.min(processedCount / allSpecies.length, 0.99);
-    progress.update({
-      pct: pct,
-      message: `Processed ${processedCount} of ${allSpecies.length} species...`,
-    });
-  }
-
-  progress.update({
-    message: `Successfully processed ${results.length} species.`,
-    pct: 1,
-  });
-
-  console.log(
-    `Completed processing ${results.length} species:`,
-    results.map((r) => r.speciesName),
-  );
-} catch (error) {
-  progress.update({
-    message: `Error occurred during processing: ${error.message}`,
-    pct: 1,
-  });
-  console.error("Error processing species:", error);
-}
+await tm.utils.progressBar(
+  Object.values(TERIOCK.index.creatures),
+  "Pulling Species",
+  async (name) => {
+    let item = game.teriock.packs.species.index.getName(name);
+    let folder = folders["allSpeciesFolder"];
+    if (Object.values(TERIOCK.index.humanoids).includes(name)) {
+      folder = folders["characterSpeciesFolder"];
+    } else if (Object.values(TERIOCK.index.commonAnimals).includes(name)) {
+      folder = folders["commonAnimalSpeciesFolder"];
+    } else if (Object.values(TERIOCK.index.undead).includes(name)) {
+      folder = folders["undeadSpeciesFolder"];
+    }
+    if (!item) {
+      item = /** @type {TeriockSpecies} */ await teriock.Item.create(
+        { name: name, type: "species", folder: folder.id },
+        { pack: "teriock.species" },
+      );
+    }
+    item = /** @type {TeriockSpecies} */ await tm.utils.resolveDocument(item);
+    await item.system.wikiPull({ notify: false });
+  },
+  { batch: 25 },
+);

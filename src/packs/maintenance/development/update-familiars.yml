@@ -6,10 +6,6 @@ author: teriockBuilder00
 img: icons/svg/mole.svg
 scope: global
 command: |-
-  const powersPack = game.teriock.packs.powers;
-  const creaturesPack = game.teriock.packs.creatures;
-  const familiarsFolder = powersPack.folders.getName("Familiars");
-
   let commonAnimalPages = await teriock.helpers.wiki.fetchCategoryMembers(
     "Common animal creatures",
   );
@@ -17,86 +13,75 @@ command: |-
     page.title.includes("Creature:"),
   );
 
-  const progress = ui.notifications.info("Refreshing all familiars.", {
-    pct: 0.01,
-    progress: true,
-  });
+  await tm.utils.progressBar(
+    commonAnimalPages,
+    "Pulling Familiars",
+    async (page) => {
+      const animal = page.title.split("Creature:")[1];
+      const html = await teriock.helpers.wiki.fetchWikiPageHTML(page.title);
+      const doc = new DOMParser().parseFromString(html, "text/html");
 
-  let pct = 0;
+      doc.querySelector(".ability-bar-abilities")?.remove();
+      doc.querySelector(".ability-bar-body-parts")?.remove();
+      const subs = Array.from(
+        doc.querySelectorAll(".expandable-container"),
+      ).filter((el) => !el.closest(".expandable-container:not(:scope)"));
 
-  for (const page of commonAnimalPages) {
-    pct += 1 / commonAnimalPages.length;
-    progress.update({
-      pct: pct,
-      message: `Refreshing ${page.title.split("Creature:")[1]} Familiar...`,
-    });
-    const animal = page.title.split("Creature:")[1];
-    const html = await teriock.helpers.wiki.fetchWikiPageHTML(page.title);
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    doc.querySelector(".ability-bar-abilities")?.remove();
-    doc.querySelector(".ability-bar-body-parts")?.remove();
-    const subs = Array.from(doc.querySelectorAll(".expandable-container")).filter(
-      (el) => !el.closest(".expandable-container:not(:scope)"),
-    );
-    console.log(subs);
-    const name = animal + " Familiar";
-    let familiarItem = powersPack.index.getName(name);
-    const familiarItemSystem = {
-      type: "familiar",
-      description:
-        "<p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>",
-      maxAv: 0,
-    };
-    const creature = creaturesPack.index.getName(animal);
-    if (creature) {
-      familiarItemSystem.description += `<p>@Embed[${creature.uuid}]</p>`;
-    }
-    const familiarItemFluencyData = {
-      name: `${animal} Tamer`,
-      type: "fluency",
-      img: tm.path.getImage("tradecrafts", "Tamer"),
-      system: {
-        field: "survivalist",
-        tradecraft: "tamer",
-        description: `<p>You know the way of the @L[Creature:${animal}]{${animal.toLowerCase()}}.</p>`,
-      },
-    };
-    if (!familiarItem) {
-      familiarItem = await game.teriock.Item.create(
-        {
-          folder: familiarsFolder.id,
-          img: "systems/teriock/src/icons/abilities/familiar-bond.webp",
-          name: name,
-          system: familiarItemSystem,
-          type: "power",
+      const name = animal + " Familiar";
+      let familiarItem = game.teriock.packs.powers.index.getName(name);
+
+      const familiarItemSystem = {
+        type: "familiar",
+        description:
+          "<p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>",
+        maxAv: 0,
+      };
+      const creature = game.teriock.packs.creatures.index.getName(animal);
+      if (creature)
+        familiarItemSystem.description += `<p>@Embed[${creature.uuid}]</p>`;
+
+      const familiarItemFluencyData = {
+        name: `${animal} Tamer`,
+        type: "fluency",
+        img: tm.path.getImage("tradecrafts", "Tamer"),
+        system: {
+          field: "survivalist",
+          tradecraft: "tamer",
+          description: `<p>You know the way of the @L[Creature:${animal}]{${animal.toLowerCase()}}.</p>`,
         },
-        { pack: "teriock.powers" },
+      };
+
+      if (!familiarItem) {
+        familiarItem = await game.teriock.Item.create(
+          {
+            folder: game.teriock.packs.powers.folders.getName("Familiars").id,
+            img: "systems/teriock/src/icons/abilities/familiar-bond.webp",
+            name: name,
+            system: familiarItemSystem,
+            type: "power",
+          },
+          { pack: "teriock.powers" },
+        );
+      } else {
+        familiarItem = await fromUuid(familiarItem.uuid);
+        await familiarItem.update({ system: familiarItemSystem });
+      }
+
+      let fluency = familiarItem.fluencies.find(
+        (f) => f.name === animal + " Tamer",
       );
-    } else {
-      familiarItem = await fromUuid(familiarItem.uuid);
-      await familiarItem.update({
-        system: familiarItemSystem,
-      });
-    }
-    let fluency = familiarItem.fluencies.find(
-      (f) => f.name === animal + " Tamer",
-    );
-    if (!fluency) {
-      await familiarItem.createEmbeddedDocuments("ActiveEffect", [
-        familiarItemFluencyData,
-      ]);
-    } else {
-      await fluency.update(familiarItemFluencyData);
-    }
-    await teriock.data.shared.parsing.processSubAbilities(subs, familiarItem);
-    await familiarItem.system.refreshFromCompendiumSource();
-  }
-  progress.update({
-    pct: 1,
-    message: "Done.",
-  });
-  ui.notifications.success(
-    `Successfully refreshed ${commonAnimalPages.length} familiar powers.`,
+      if (!fluency) {
+        await familiarItem.createEmbeddedDocuments("ActiveEffect", [
+          familiarItemFluencyData,
+        ]);
+      } else {
+        await fluency.update(familiarItemFluencyData);
+      }
+
+      await teriock.data.shared.parsing.processSubAbilities(subs, familiarItem);
+      await familiarItem.system.refreshFromCompendiumSource();
+    },
+    { batch: 25 },
   );
 flags: {}
 _stats:

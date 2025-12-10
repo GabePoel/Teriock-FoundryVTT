@@ -856,3 +856,28 @@ export function roundTo(value, decimals) {
   const factor = Math.pow(10, decimals);
   return Math.round(value * factor) / factor;
 }
+
+/**
+ * Iterate through an array with a progress bar using batched processing.
+ * @param {Array} arr
+ * @param {string} message
+ * @param {Function} callback
+ * @param {object} [options]
+ * @param {number} [options.batch=1]
+ * @param {"info"|"success"|"warn"|"error"} [options.style="info"]
+ */
+export async function progressBar(arr, message, callback, options = {}) {
+  const { batch = 1, style = "info" } = options;
+  const count = arr.length;
+  const progress = ui.notifications[style](message, {
+    pct: 0,
+    progress: true,
+  });
+  for (let i = 0; i < count; i += batch) {
+    const chunk = arr.slice(i, i + batch);
+    await Promise.all(chunk.map((item) => callback(item)));
+    ui.notifications.update(progress, {
+      pct: Math.min((i + batch) / count, 1),
+    });
+  }
+}

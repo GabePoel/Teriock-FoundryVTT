@@ -1,67 +1,17 @@
-const equipmentPack = game.teriock.packs.equipment;
-
-const progress = ui.notifications.info("Pulling all equipment from wiki.", {
-  pct: 0.01,
-  progress: true,
-});
-
-async function processEquipment(equipmentName) {
-  let equipmentItem = equipmentPack.index.find((e) => e.name === equipmentName);
-  if (!equipmentItem) {
-    equipmentItem = await game.teriock.Item.create(
-      {
-        name: equipmentName,
-        type: "equipment",
-        system: {
-          equipmentType: equipmentName,
-        },
-      },
-      { pack: "teriock.equipment" },
-    );
-  } else {
-    equipmentItem = await fromUuid(equipmentItem.uuid);
-  }
-  await equipmentItem.system.wikiPull({ notify: false });
-  await equipmentItem.update({ "system.description": "" });
-  return {
-    equipmentName,
-    success: true,
-  };
-}
-
-// Process in batches of 50
-const allEquipment = Object.values(TERIOCK.index.equipment);
-const batchSize = 50;
-let processedCount = 0;
-
-try {
-  for (let i = 0; i < allEquipment.length; i += batchSize) {
-    const batch = allEquipment.slice(i, i + batchSize);
-
-    await Promise.all(
-      batch.map((equipmentName) => processEquipment(equipmentName)),
-    );
-
-    processedCount += batch.length;
-
-    const pct = Math.min(processedCount / allEquipment.length, 0.99);
-    progress.update({
-      pct: pct,
-      message: `Processed ${processedCount} of ${allEquipment.length} equipment items...`,
-    });
-  }
-
-  progress.update({
-    pct: 1,
-    message: "Done.",
-  });
-
-  ui.notifications.success(
-    `Successfully processed ${allEquipment.length} equipment items.`,
-  );
-} catch (error) {
-  progress.update({
-    pct: 1,
-    message: `Error: ${error.message}`,
-  });
-}
+await tm.utils.progressBar(
+  Object.values(TERIOCK.index.equipment),
+  "Pulling Equipment",
+  async (name) => {
+    let item = game.teriock.packs.equipment.index.find((i) => i.name === name);
+    if (!item) {
+      item = await teriock.Item.create(
+        { name, type: "equipment" },
+        { pack: "teriock.equipment" },
+      );
+    } else {
+      item = await fromUuid(item.uuid);
+    }
+    await item.system.wikiPull({ notify: false });
+  },
+  { batch: 50 },
+);

@@ -1,7 +1,5 @@
 export const rankOptions = {
   mage: {
-    name: "Mage",
-    icon: "hat-wizard",
     classes: {
       flameMage: {
         name: "Flame Mage",
@@ -24,10 +22,12 @@ export const rankOptions = {
         icon: "cloud-showers",
       },
     },
+    hp: 8,
+    icon: "hat-wizard",
+    mp: 12,
+    name: "Mage",
   },
   semi: {
-    name: "Semi",
-    icon: "person-running",
     classes: {
       archer: {
         name: "Archer",
@@ -50,10 +50,12 @@ export const rankOptions = {
         icon: "sack",
       },
     },
+    hp: 10,
+    icon: "person-running",
+    mp: 10,
+    name: "Semi",
   },
   warrior: {
-    name: "Warrior",
-    icon: "mace",
     classes: {
       berserker: {
         name: "Berserker",
@@ -76,10 +78,12 @@ export const rankOptions = {
         icon: "helmet-battle",
       },
     },
+    hp: 12,
+    icon: "mace",
+    mp: 8,
+    name: "Warrior",
   },
   everyman: {
-    name: "Everyman",
-    icon: "user",
     classes: {
       tradesman: {
         name: "Tradesman",
@@ -90,5 +94,9 @@ export const rankOptions = {
         icon: "person-hiking",
       },
     },
+    hp: 10,
+    icon: "user",
+    mp: 10,
+    name: "Everyman",
   },
 };

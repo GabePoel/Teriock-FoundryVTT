@@ -2,38 +2,6 @@ import { getRankIcon } from "../../../../helpers/path.mjs";
 import { ensureChildren } from "../../../../helpers/utils.mjs";
 import { cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 
-/**
- * Default stats for different archetypes.
- * @type {object}
- * @private
- */
-const ARCHETYPE_FACES = {
-  mage: {
-    hp: 8,
-    mp: 12,
-  },
-  warrior: {
-    hp: 12,
-    mp: 8,
-  },
-  semi: {
-    hp: 10,
-    mp: 10,
-  },
-  everyman: {
-    hp: 10,
-    mp: 10,
-  },
-};
-
-/**
- * Extracts ability names from metadata attributes.
- * Splits comma-separated values and filters out empty strings.
- * @param {Element} metaData - The metadata element to extract from.
- * @param {string} attr - The attribute name to extract.
- * @returns {string[]} Array of ability names.
- * @private
- */
 function extractAbilityNames(metaData, attr) {
   const val = metaData.getAttribute(attr);
   return val
@@ -44,24 +12,13 @@ function extractAbilityNames(metaData, attr) {
     : [];
 }
 
-/**
- * Parses raw HTML content for a rank, extracting class information and abilities.
- * Creates abilities based on class rank and updates the rank with parsed data.
- * @param {TeriockRankModel} rankData - The rank data to parse content for.
- * @param {string} rawHTML - The raw HTML content to parse.
- * @returns {Promise<object>} Promise that resolves to the parsed parent data.
- * @private
- */
 export async function _parse(rankData, rawHTML) {
   const { className, classRank, archetype } = rankData;
   const classValue = TERIOCK.options.rank[archetype].classes[className].name;
-  // const toDelete = rankData.parent.abilities.map((a) => a.id);
-  // await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
   const metaData = doc.querySelector(".class-metadata");
 
-  // Extract ability names by rank
   const rankNames = {
     0: extractAbilityNames(metaData, "data-r0"),
     1: extractAbilityNames(metaData, "data-r1"),
@@ -72,54 +29,37 @@ export async function _parse(rankData, rawHTML) {
 
   let abilitiesToCreate = [];
 
-  // Create abilities
   for (const rank of [0, 1, 2]) {
-    if (classRank === rank) {
-      for (const name of rankNames[rank]) {
-        abilitiesToCreate.push(name);
-      }
-    }
+    if (classRank === rank) abilitiesToCreate.push(...rankNames[rank]);
   }
   if (classRank >= 3) {
     rankNames["3c"].sort((a, b) => a.localeCompare(b));
     rankNames["3s"].sort((a, b) => a.localeCompare(b));
-    for (const name of rankNames["3c"]) {
-      abilitiesToCreate.push(name);
-    }
-    for (const name of rankNames["3s"]) {
-      abilitiesToCreate.push(name);
-    }
+    abilitiesToCreate.push(...rankNames["3c"], ...rankNames["3s"]);
   }
 
-  const progress = ui.notifications.info(`Pulling Rank from wiki.`, {
-    progress: true,
-  });
+  await ensureChildren(rankData.parent, "ability", abilitiesToCreate);
 
-  const results = await ensureChildren(
-    rankData.parent,
-    "ability",
-    abilitiesToCreate,
+  const a3c = rankData.parent.abilities.filter((a) =>
+    rankNames["3c"].includes(a.name),
+  );
+  const a3s = rankData.parent.abilities.filter((a) =>
+    rankNames["3s"].includes(a.name),
   );
 
-  // Update progress to show processing has started
-  progress.update({
-    pct: 0.1,
-    message: `Creating ${abilitiesToCreate.length} abilities in parallel...`,
-  });
+  const updates = [
+    ...a3c.map((a) => ({ doc: a, cat: "combat" })),
+    ...a3s.map((a) => ({ doc: a, cat: "support" })),
+  ];
 
-  // Execute all ability creation in parallel
-  try {
-    const a3c = rankData.parent.abilities.filter((a) =>
-      rankNames["3c"].includes(a.name),
-    );
-    const a3s = rankData.parent.abilities.filter((a) =>
-      rankNames["3s"].includes(a.name),
-    );
-    await Promise.all(
-      a3c.map((a) => a.setFlag("teriock", "category", "combat")),
-    );
-    await Promise.all(
-      a3s.map((a) => a.setFlag("teriock", "category", "support")),
+  if (updates.length > 0) {
+    await tm.utils.progressBar(
+      updates,
+      "Setting Ability Categories",
+      async ({ doc, cat }) => {
+        await doc.setFlag("teriock", "category", cat);
+      },
+      10,
     );
     await a3c
       .find((a) => a.name === rankNames["3c"][classRank - 3])
@@ -127,32 +67,14 @@ export async function _parse(rankData, rawHTML) {
     await a3s
       .find((a) => a.name === rankNames["3s"][classRank - 3])
       ?.setFlag("teriock", "defaultAbility", true);
-
-    const toDelete = rankData.parent.abilities
-      .filter((a) => !abilitiesToCreate.includes(a.name))
-      .map((a) => a._id);
-    await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-
-    // Update progress to completion
-    progress.update({
-      pct: 0.9,
-      message: `Successfully created ${results.length} abilities.`,
-    });
-
-    console.log(
-      `Created abilities for rank:`,
-      results.map((r) => r.nameString),
-    );
-  } catch (error) {
-    progress.update({
-      pct: 0.9,
-      message: `Error occurred during ability creation: ${error.message}`,
-    });
-    console.error("Error creating abilities:", error);
-    throw error;
   }
 
-  // Helper for HTML/text extraction
+  const toDelete = rankData.parent.abilities
+    .filter((a) => !abilitiesToCreate.includes(a.name))
+    .map((a) => a._id);
+  if (toDelete.length)
+    await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+
   const getHTML = (sel) => doc.querySelector(sel)?.innerHTML.trim();
 
   const parameters = {
@@ -161,23 +83,13 @@ export async function _parse(rankData, rawHTML) {
     flaws: getHTML(".class-flaws") || "",
     description: getHTML(".class-description") || "",
     statDice: {
-      hp: {
-        "number.raw": "1",
-        faces: ARCHETYPE_FACES[archetype]["hp"],
-      },
-      mp: {
-        "number.raw": "1",
-        faces: ARCHETYPE_FACES[archetype]["mp"],
-      },
+      hp: { "number.raw": "1", faces: TERIOCK.options.rank[archetype]["hp"] },
+      mp: { "number.raw": "1", faces: TERIOCK.options.rank[archetype]["mp"] },
     },
   };
 
   let name = `Rank ${classRank} ${classValue}`;
-  if (name.includes("Journeyman")) {
-    name = "Journeyman";
-  }
-
-  progress.update({ pct: 1 });
+  if (name.includes("Journeyman")) name = "Journeyman";
 
   cleanObject(parameters, ["description", "flaws"], rankData.parent.name);
 

@@ -32,35 +32,11 @@ const toRun = {
   ),
 };
 
-const macroEntries = Object.entries(toRun);
-const totalMacros = macroEntries.length;
-
-const progress = foundry.ui.notifications.info(
-  "Running maintenance macros...",
-  {
-    progress: true,
-    pct: 0.01,
+await tm.utils.progressBar(
+  Object.values(toRun),
+  "Updating Compendiums",
+  async (m) => {
+    await m.execute();
   },
-);
-
-let completedCount = 0;
-
-for (const [macroName, macro] of macroEntries) {
-  progress.update({
-    pct: completedCount / totalMacros,
-    message: `Running ${macroName}... (${completedCount + 1}/${totalMacros})`,
-  });
-
-  await macro.execute();
-
-  completedCount++;
-}
-
-progress.update({
-  pct: 1,
-  message: "All maintenance macros completed.",
-});
-
-foundry.ui.notifications.success(
-  `Successfully executed ${totalMacros} maintenance macros.`,
+  { style: "warn" },
 );
