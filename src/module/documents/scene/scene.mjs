@@ -1,4 +1,5 @@
-import { BaseDocumentMixin } from "../mixins/_module.mjs";
+import { mix } from "../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { Scene } = foundry.documents;
 
@@ -10,4 +11,7 @@ const { Scene } = foundry.documents;
  * @mixes BaseDocument
  * @property {Collection<UUID<TeriockTokenDocument>, TeriockTokenDocument>} tokens
  */
-export default class TeriockScene extends BaseDocumentMixin(Scene) {}
+export default class TeriockScene extends mix(
+  Scene,
+  mixins.BaseDocumentMixin,
+) {}

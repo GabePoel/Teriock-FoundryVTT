@@ -1,8 +1,5 @@
-import {
-  ConsumableDataMixin,
-  ExecutableDataMixin,
-  RevelationDataMixin,
-} from "../../mixins/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 
@@ -13,8 +10,11 @@ import { _migrateData } from "./methods/_migrate-data.mjs";
  * @mixes ExecutableData
  * @mixes RevelationData
  */
-export default class TeriockResourceModel extends RevelationDataMixin(
-  ConsumableDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
+export default class TeriockResourceModel extends mix(
+  TeriockBaseEffectModel,
+  mixins.ExecutableDataMixin,
+  mixins.ConsumableDataMixin,
+  mixins.RevelationDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -40,6 +40,12 @@ export default class TeriockResourceModel extends RevelationDataMixin(
   }
 
   /** @inheritDoc */
+  get nameString() {
+    const nameAddition = this.revealed ? "" : " (Unrevealed)";
+    return this.parent.name + nameAddition;
+  }
+
+  /** @inheritDoc */
   get panelParts() {
     const parts = super.panelParts;
     parts.bars.push({
@@ -51,12 +57,6 @@ export default class TeriockResourceModel extends RevelationDataMixin(
       ],
     });
     return parts;
-  }
-
-  /** @inheritDoc */
-  get nameString() {
-    const nameAddition = this.revealed ? "" : " (Unrevealed)";
-    return this.parent.name + nameAddition;
   }
 
   /** @inheritDoc */

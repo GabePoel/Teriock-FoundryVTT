@@ -149,13 +149,13 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
     const footer = document.createElement("footer");
     footer.className = "teriock-message-footer";
 
-    // Create and add tag container
+    // Create and add a tag container
     const tagContainer = this._createTagContainer();
     if (tagContainer) {
       footer.appendChild(tagContainer);
     }
 
-    // Create and add button container
+    // Create and add a button container
     const buttonContainer = this._createButtonContainer();
     if (buttonContainer) {
       footer.appendChild(buttonContainer);
@@ -192,7 +192,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
     const remainder = totalButtons % columns;
 
     if (remainder === 0) {
-      // Clean multiple - all buttons same width
+      // Clean multiple - all buttons the same width
       buttonContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
       buttons.forEach((button) => {
         button.classList.remove("full-width", "full-row");
@@ -203,7 +203,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
       const topRowButtons = remainder;
       const topRowButtonWidth = columns / topRowButtons;
 
-      // Set up grid for the full layout
+      // Set up a grid for the full layout
       buttonContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
 
       // Add top row buttons with special spanning
@@ -214,7 +214,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
         buttonContainer.appendChild(button);
       }
 
-      // Add remaining buttons in normal grid
+      // Add remaining buttons in a normal grid
       for (let i = topRowButtons; i < totalButtons; i++) {
         const button = buttons[i];
         button.classList.remove("full-width", "full-row");
@@ -303,7 +303,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
         });
       });
 
-    // Add extra content div at the start of message-content if it exists
+    // Add an extra content div at the start of message-content if it exists
     if (this.extraContent) {
       const messageContent = htmlElement.querySelector(".message-content");
       if (messageContent) {

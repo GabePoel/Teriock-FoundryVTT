@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+import { mix } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import TeriockBaseActorSheet from "./base-actor-sheet.mjs";
-import CombatActorSheetPart from "./parts/combat-actor-sheet-part.mjs";
-import MechanicalActorSheetPart from "./parts/mechanical-actor-sheet-part.mjs";
-import RollingActorSheetPart from "./parts/rolling-actor-sheet-part.mjs";
-import TakingActorSheetPart from "./parts/taking-actor-sheet-part.mjs";
-import TradecraftsActorSheetPart from "./parts/tradecrafts-actor-sheet-part.mjs";
+import * as parts from "./parts/_module.mjs";
 import {
   piercingContextMenu,
   scalingContextMenu,
@@ -20,12 +17,13 @@ import {
  * @mixes TakingActorSheetPart
  * @mixes TradecraftsActorSheetPart
  */
-export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart(
-  MechanicalActorSheetPart(
-    RollingActorSheetPart(
-      CombatActorSheetPart(TakingActorSheetPart(TeriockBaseActorSheet)),
-    ),
-  ),
+export default class TeriockPlayableActorSheet extends mix(
+  TeriockBaseActorSheet,
+  parts.TakingActorSheetPart,
+  parts.CombatActorSheetPart,
+  parts.RollingActorSheetPart,
+  parts.MechanicalActorSheetPart,
+  parts.TradecraftsActorSheetPart,
 ) {
   /** @inheritDoc */
   constructor(...args) {

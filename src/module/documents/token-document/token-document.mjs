@@ -1,8 +1,10 @@
-import { convertUnits, makeIcon, ringImage } from "../../helpers/utils.mjs";
 import {
-  BaseDocumentMixin,
-  EmbedCardDocumentMixin,
-} from "../mixins/_module.mjs";
+  convertUnits,
+  makeIcon,
+  mix,
+  ringImage,
+} from "../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
 
@@ -15,22 +17,11 @@ const { TokenDocument } = foundry.documents;
  * @mixes BaseDocument
  * @property {DocumentSheetV2} sheet
  */
-export default class TeriockTokenDocument extends EmbedCardDocumentMixin(
-  BaseDocumentMixin(TokenDocument),
+export default class TeriockTokenDocument extends mix(
+  TokenDocument,
+  mixins.BaseDocumentMixin,
+  mixins.EmbedCardDocumentMixin,
 ) {
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      {
-        name: "Open Actor",
-        icon: makeIcon("user", "contextMenu"),
-        condition: () => this.actor && this.actor.isViewer,
-        callback: async () => this.actor.sheet.render(true),
-      },
-      ...super.getCardContextMenuEntries(doc),
-    ];
-  }
-
   //noinspection JSUnusedGlobalSymbols
   /**
    * Center of this token.
@@ -117,11 +108,6 @@ export default class TeriockTokenDocument extends EmbedCardDocumentMixin(
    */
   get rescale() {
     return this.ring.enabled;
-  }
-
-  /** @inheritDoc */
-  _checkPreparation() {
-    return this.actor;
   }
 
   /** @inheritDoc */
@@ -308,6 +294,19 @@ export default class TeriockTokenDocument extends EmbedCardDocumentMixin(
       range,
       angle,
     };
+  }
+
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    return [
+      {
+        name: "Open Actor",
+        icon: makeIcon("user", "contextMenu"),
+        condition: () => this.actor && this.actor.isViewer,
+        callback: async () => this.actor.sheet.render(true),
+      },
+      ...super.getCardContextMenuEntries(doc),
+    ];
   }
 
   /**

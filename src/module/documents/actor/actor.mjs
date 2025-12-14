@@ -1,18 +1,13 @@
 import { systemPath } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
 import {
+  mix,
   pureUuid,
   resolveDocument,
   ringImage,
   selectUser,
 } from "../../helpers/utils.mjs";
-import {
-  BaseDocumentMixin,
-  CommonDocumentMixin,
-  HierarchyDocumentMixin,
-  ParentDocumentMixin,
-  RetrievalDocumentMixin,
-} from "../mixins/_module.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -35,10 +30,13 @@ const { Actor } = foundry.documents;
  * @property {UUID<TeriockActor>} uuid
  * @property {TeriockBaseActorSheet} sheet
  */
-export default class TeriockActor extends RetrievalDocumentMixin(
-  ParentDocumentMixin(
-    HierarchyDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(Actor))),
-  ),
+export default class TeriockActor extends mix(
+  Actor,
+  mixins.BaseDocumentMixin,
+  mixins.CommonDocumentMixin,
+  mixins.HierarchyDocumentMixin,
+  mixins.ParentDocumentMixin,
+  mixins.RetrievalDocumentMixin,
 ) {
   /**
    * The default weight for a given size.
@@ -78,12 +76,6 @@ export default class TeriockActor extends RetrievalDocumentMixin(
       SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax),
     );
   }
-
-  /** @type {number} */
-  evaluateCallNumber;
-
-  /** @type {number} */
-  evaluateCallTime;
 
   /**
    * The {@link TeriockEffect}s that have special changes.
@@ -346,6 +338,23 @@ export default class TeriockActor extends RetrievalDocumentMixin(
   }
 
   /**
+   * Prepare condition information now that all virtual statuses have been applied.
+   */
+  cleanConditionInformation() {
+    if (this.system.conditionInformation.hacked.reasons.has("2nd Arm Hack")) {
+      this.system.conditionInformation.hacked.reasons.delete("1st Arm Hack");
+    }
+    if (this.system.conditionInformation.hacked.reasons.has("2nd Leg Hack")) {
+      this.system.conditionInformation.hacked.reasons.delete("1st Leg Hack");
+    }
+    for (const info of Object.values(this.system.conditionInformation)) {
+      if (info.reasons.size > 0) {
+        info.locked = true;
+      }
+    }
+  }
+
+  /**
    * @inheritDoc
    * @param {TeriockChildName} embeddedName
    * @param {object[]} data
@@ -408,37 +417,13 @@ export default class TeriockActor extends RetrievalDocumentMixin(
 
   /** @inheritDoc */
   prepareData() {
-    this.evaluateCallTime = 0;
-    this.evaluateCallNumber = 0;
-    const dataStart = performance.now();
-    const normalDataStart = performance.now();
     super.prepareData();
-    const normalDataEnd = performance.now();
-    const specialDataStart = performance.now();
     this.prepareSpecialData();
-    const specialDataEnd = performance.now();
-    const virtualEffectsStart = performance.now();
     this.prepareVirtualEffects();
-    const virtualEffectsEnd = performance.now();
-    const postUpdateStart = performance.now();
     const user = selectUser(this);
     if (user?.id) {
       foundry.helpers.Hooks.callAll(`teriock.actorPostUpdate`, this, user.id);
     }
-    const postUpdateEnd = performance.now();
-    const dataEnd = performance.now();
-    console.log(`prepareData: ${dataEnd - dataStart} ms (${this.name})`);
-    console.log(` - super.prepareData: ${normalDataEnd - normalDataStart} ms`);
-    console.log(
-      ` - prepareSpecialData: ${specialDataEnd - specialDataStart} ms`,
-    );
-    console.log(
-      ` - prepareVirtualEffects: ${virtualEffectsEnd - virtualEffectsStart} ms`,
-    );
-    console.log(` - postUpdate: ${postUpdateEnd - postUpdateStart} ms`);
-    console.log(
-      ` - eval: ${this.evaluateCallNumber} calls, ${(dataEnd - dataStart) / this.evaluateCallNumber} ms / call`,
-    );
   }
 
   /** @inheritDoc */
@@ -459,10 +444,8 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     super.prepareSpecialData();
   }
 
-  /**
-   * Prepare condition information now that all virtual statuses have been applied.
-   */
-  prepareVirtualConditionInformation() {
+  /** @inheritDoc */
+  prepareVirtualEffects() {
     for (const e of this.validEffects) {
       for (const s of e.statuses) {
         if (!e.id.startsWith(s)) {
@@ -470,38 +453,9 @@ export default class TeriockActor extends RetrievalDocumentMixin(
         }
       }
     }
-    if (this.system.conditionInformation.hacked.reasons.has("2nd Arm Hack")) {
-      this.system.conditionInformation.hacked.reasons.delete("1st Arm Hack");
-    }
-    if (this.system.conditionInformation.hacked.reasons.has("2nd Leg Hack")) {
-      this.system.conditionInformation.hacked.reasons.delete("1st Leg Hack");
-    }
-    for (const info of Object.values(this.system.conditionInformation)) {
-      if (info.reasons.size > 0) {
-        info.locked = true;
-      }
-    }
-  }
-
-  /** @inheritDoc */
-  prepareVirtualEffects() {
     super.prepareVirtualEffects();
     this.prepareVirtualWounds();
-    this.prepareVirtualMovement();
-    this.prepareVirtualConditionInformation();
-  }
-
-  /**
-   * Apply the effects of being slowed if applicable.
-   */
-  prepareVirtualMovement() {
-    if (this.statuses.has("slowed")) {
-      for (const [type, value] of Object.entries(
-        this.system.speedAdjustments,
-      )) {
-        this.system.speedAdjustments[type] = Math.max(value - 1, 0);
-      }
-    }
+    this.cleanConditionInformation();
   }
 
   /**

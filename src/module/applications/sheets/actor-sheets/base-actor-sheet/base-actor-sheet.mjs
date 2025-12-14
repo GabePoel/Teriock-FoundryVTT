@@ -1,14 +1,9 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { conditionSort } from "../../../../helpers/utils.mjs";
+import { conditionSort, mix } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
-import {
-  CommonSheetMixin,
-  EquipmentDropSheetMixin,
-} from "../../mixins/_module.mjs";
-import AvatarImageActorSheetPart from "./parts/avatar-image-actor-sheet-part.mjs";
-import HidingCommonSheetPart from "./parts/hiding-common-sheet-part.mjs";
-import SearchingActorSheetPart from "./parts/searching-actor-sheet-part.mjs";
+import * as mixins from "../../mixins/_module.mjs";
+import * as parts from "./parts/_module.mjs";
 import { filterAbilities, filterEquipment } from "./tools/filters.mjs";
 import { defaultSheetSettings } from "./tools/settings.mjs";
 import { sortAbilities, sortEquipment } from "./tools/sort.mjs";
@@ -18,23 +13,24 @@ const { ActorSheetV2 } = foundry.applications.sheets;
 /**
  * Base actor sheet for actorsUuids.
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
- * and various interactive features like rolling, damage tracking, and condition management.
+ * and various interactive features like character rolling, damage tracking, and condition management.
  * @extends {ActorSheetV2}
  * @mixes CommonSheet
  * @mixes DragDropCommonSheetPart
  * @mixes EquipmentDropSheet
  * @mixes HackStatApplication
- * @mixes HidingCommonSheetPart
+ * @mixes HidingActorSheetPart
  * @mixes SearchingActorSheetPart
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
-  HidingCommonSheetPart(
-    SearchingActorSheetPart(
-      EquipmentDropSheetMixin(CommonSheetMixin(ActorSheetV2)),
-    ),
-  ),
+export default class TeriockBaseActorSheet extends mix(
+  ActorSheetV2,
+  mixins.CommonSheetMixin,
+  mixins.EquipmentDropSheetMixin,
+  parts.SearchingActorSheetPart,
+  parts.HidingActorSheetPart,
+  parts.AvatarImageActorSheetPart,
 ) {
   /**
    * @inheritDoc

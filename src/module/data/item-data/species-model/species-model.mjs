@@ -1,14 +1,9 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { TeriockActor } from "../../../documents/_module.mjs";
 import { dotJoin, toCamelCase } from "../../../helpers/string.mjs";
-import { makeIcon } from "../../../helpers/utils.mjs";
-import {
-  HierarchyDataMixin,
-  ProficiencyDataMixin,
-  StatGiverDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
+import { makeIcon, mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _parse } from "./methods/_parsing.mjs";
@@ -22,12 +17,15 @@ const { fields } = foundry.data;
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {TeriockBaseItemModel}
+ * @mixes ProficiencyData
  * @mixes StatGiverData
  * @mixes WikiData
- * @mixes ProficiencyData
  */
-export default class TeriockSpeciesModel extends ProficiencyDataMixin(
-  StatGiverDataMixin(WikiDataMixin(HierarchyDataMixin(TeriockBaseItemModel))),
+export default class TeriockSpeciesModel extends mix(
+  TeriockBaseItemModel,
+  mixins.WikiDataMixin,
+  mixins.StatGiverDataMixin,
+  mixins.ProficiencyDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -95,23 +93,6 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
       }),
     });
     return schema;
-  }
-
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      ...super.getCardContextMenuEntries(doc),
-      {
-        name: "Set Primary Transformation",
-        icon: makeIcon("tree", "contextMenu"),
-        callback: this.setPrimaryTransformation.bind(this),
-        condition:
-          this.isTransformation &&
-          !this.isPrimaryTransformation &&
-          Boolean(this.transformationEffect),
-        group: "control",
-      },
-    ];
   }
 
   /** @inheritDoc */
@@ -241,6 +222,23 @@ export default class TeriockSpeciesModel extends ProficiencyDataMixin(
     } else {
       await super.deleteThis();
     }
+  }
+
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    return [
+      ...super.getCardContextMenuEntries(doc),
+      {
+        name: "Set Primary Transformation",
+        icon: makeIcon("tree", "contextMenu"),
+        callback: this.setPrimaryTransformation.bind(this),
+        condition:
+          this.isTransformation &&
+          !this.isPrimaryTransformation &&
+          Boolean(this.transformationEffect),
+        group: "control",
+      },
+    ];
   }
 
   /** @inheritDoc */

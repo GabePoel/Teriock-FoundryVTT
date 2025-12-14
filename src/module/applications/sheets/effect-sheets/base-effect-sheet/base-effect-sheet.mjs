@@ -1,10 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
-import {
-  ChatButtonSheetMixin,
-  ChildSheetMixin,
-  CommonSheetMixin,
-} from "../../mixins/_module.mjs";
+import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -12,11 +8,15 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * Base {@link TeriockEffect} sheet.
  * @extends {ActiveEffectConfig}
  * @mixes ChatButtonSheet
+ * @mixes ChildSheet
  * @mixes CommonSheet
  * @property {TeriockEffect} document
  */
-export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
-  ChildSheetMixin(CommonSheetMixin(ActiveEffectConfig)),
+export default class TeriockBaseEffectSheet extends mix(
+  ActiveEffectConfig,
+  mixins.CommonSheetMixin,
+  mixins.ChildSheetMixin,
+  mixins.ChatButtonSheetMixin,
 ) {
   /**
    * @inheritDoc

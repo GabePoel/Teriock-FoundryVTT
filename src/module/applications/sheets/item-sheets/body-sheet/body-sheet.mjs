@@ -1,7 +1,5 @@
-import {
-  UseButtonSheetMixin,
-  WikiButtonSheetMixin,
-} from "../../mixins/_module.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
@@ -10,8 +8,10 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
  * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
-export default class TeriockBodySheet extends WikiButtonSheetMixin(
-  UseButtonSheetMixin(TeriockBaseItemSheet),
+export default class TeriockBodySheet extends mix(
+  TeriockBaseItemSheet,
+  mixins.UseButtonSheetMixin,
+  mixins.WikiButtonSheetMixin,
 ) {
   /**
    * @inheritDoc
@@ -39,14 +39,12 @@ export default class TeriockBodySheet extends WikiButtonSheetMixin(
     if (!this.editable) {
       return;
     }
-
     const staticUpdates = {
       ".ab-damage-button": { "system.damage.base.raw": 1 },
       ".ab-av-button": { "system.av.raw": "1" },
       ".ab-bv-button": { "system.bv.raw": "1" },
       ".ab-hit-button": { "system.hit.raw": "1" },
     };
-
     for (const [selector, update] of Object.entries(staticUpdates)) {
       this.element.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", () => this.document.update(update));

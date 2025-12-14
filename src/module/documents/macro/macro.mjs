@@ -1,9 +1,12 @@
 import { getDocument } from "../../helpers/fetch.mjs";
-import { dedent, getActor, getToken, queryGM } from "../../helpers/utils.mjs";
 import {
-  BaseDocumentMixin,
-  EmbedCardDocumentMixin,
-} from "../mixins/_module.mjs";
+  dedent,
+  getActor,
+  getToken,
+  mix,
+  queryGM,
+} from "../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
@@ -14,8 +17,10 @@ const { Macro } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
-export default class TeriockMacro extends EmbedCardDocumentMixin(
-  BaseDocumentMixin(Macro),
+export default class TeriockMacro extends mix(
+  Macro,
+  mixins.BaseDocumentMixin,
+  mixins.EmbedCardDocumentMixin,
 ) {
   /**
    * Get a document from an actor.
@@ -44,7 +49,7 @@ export default class TeriockMacro extends EmbedCardDocumentMixin(
         "Basic Abilities",
         "essentials",
       );
-      doc = basicAbilitiesItem.abilities.find((a) => a.name === name);
+      doc = basicAbilitiesItem?.abilities.find((a) => a.name === name);
     }
     return doc;
   }

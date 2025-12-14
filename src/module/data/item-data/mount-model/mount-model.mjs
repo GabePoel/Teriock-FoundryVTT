@@ -1,9 +1,7 @@
 import { prefix } from "../../../helpers/string.mjs";
-import {
-  AttunableDataMixin,
-  StatGiverDataMixin,
-} from "../../mixins/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 const { fields } = foundry.data;
@@ -14,8 +12,10 @@ const { fields } = foundry.data;
  * @mixes AttunableData
  * @mixes StatGiverData
  */
-export default class TeriockMountModel extends StatGiverDataMixin(
-  AttunableDataMixin(TeriockBaseItemModel),
+export default class TeriockMountModel extends mix(
+  TeriockBaseItemModel,
+  mixins.AttunableDataMixin,
+  mixins.StatGiverDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

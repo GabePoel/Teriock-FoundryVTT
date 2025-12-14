@@ -1,10 +1,7 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
 import { dotJoin, suffix } from "../../../helpers/string.mjs";
-import {
-  ArmamentDataMixin,
-  ExecutableDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _parse } from "./methods/_parsing.mjs";
@@ -20,8 +17,11 @@ import { _parse } from "./methods/_parsing.mjs";
  * @mixes ExecutableData
  * @mixes WikiData
  */
-export default class TeriockBodyModel extends ArmamentDataMixin(
-  WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
+export default class TeriockBodyModel extends mix(
+  TeriockBaseItemModel,
+  mixins.ExecutableDataMixin,
+  mixins.WikiDataMixin,
+  mixins.ArmamentDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

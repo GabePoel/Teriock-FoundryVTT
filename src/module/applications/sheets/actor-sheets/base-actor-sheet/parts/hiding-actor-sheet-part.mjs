@@ -5,7 +5,7 @@ export default (Base) => {
      * @extends {DocumentSheetV2}
      * @property {TeriockCommon} document
      */
-    class HidingCommonSheetPart extends Base {
+    class HidingActorSheetPart extends Base {
       static DEFAULT_OPTIONS = {
         actions: {
           toggleHideThis: this._onToggleHideThis,

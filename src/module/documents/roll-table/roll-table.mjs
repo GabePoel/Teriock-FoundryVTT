@@ -1,6 +1,7 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
+import { mix } from "../../helpers/utils.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
-import { BaseDocumentMixin } from "../mixins/_module.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { RollTable } = foundry.documents;
 
@@ -11,7 +12,10 @@ const { RollTable } = foundry.documents;
  * @mixes BaseDocument
  * @property {Collection<ID<TeriockTableResult>, TeriockTableResult>} results
  */
-export default class TeriockRollTable extends BaseDocumentMixin(RollTable) {
+export default class TeriockRollTable extends mix(
+  RollTable,
+  mixins.BaseDocumentMixin,
+) {
   /** @inheritDoc */
   static async fromFolder(folder, options = {}) {
     const table = await super.fromFolder(folder, options);

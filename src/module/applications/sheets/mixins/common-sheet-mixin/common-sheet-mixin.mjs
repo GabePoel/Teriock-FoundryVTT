@@ -1,3 +1,4 @@
+import { mix } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
 import {
@@ -6,10 +7,7 @@ import {
 } from "../_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
-import DocumentCreationCommonSheetPart from "./parts/document-creation-common-sheet-part.mjs";
-import DragDropCommonSheetPart from "./parts/drag-drop-common-sheet-part.mjs";
-import SelfInteractionCommonSheetPart from "./parts/interaction-common-sheet-part.mjs";
-import LockingCommonSheetPart from "./parts/locking-common-sheet-part.mjs";
+import * as parts from "./parts/_module.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -27,20 +25,19 @@ export default function CommonSheetMixin(Base) {
      * @mixes DocumentCreationCommonSheetPart
      * @mixes DragDropCommonSheetPart
      * @mixes LockingCommonSheetPart
-     * @mixes SelfInteractionCommonSheetPart
+     * @mixes InteractionCommonSheetPart
      * @mixin
      * @property {TeriockCommon} document
      */
-    class CommonSheet extends IndexButtonSheetMixin(
-      LockingCommonSheetPart(
-        SelfInteractionCommonSheetPart(
-          DocumentCreationCommonSheetPart(
-            DragDropCommonSheetPart(
-              QualifierButtonSheetMixin(HandlebarsApplicationMixin(Base)),
-            ),
-          ),
-        ),
-      ),
+    class CommonSheet extends mix(
+      Base,
+      HandlebarsApplicationMixin,
+      QualifierButtonSheetMixin,
+      parts.DragDropCommonSheetPart,
+      parts.DocumentCreationCommonSheetPart,
+      parts.InteractionCommonSheetPart,
+      parts.LockingCommonSheetPart,
+      IndexButtonSheetMixin,
     ) {
       //noinspection JSValidateTypes
       /** @type {Partial<ApplicationConfiguration>} */

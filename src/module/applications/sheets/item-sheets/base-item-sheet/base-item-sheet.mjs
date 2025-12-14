@@ -1,10 +1,6 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
-import { refreshDocuments } from "../../../../helpers/utils.mjs";
-import {
-  ChatButtonSheetMixin,
-  ChildSheetMixin,
-  CommonSheetMixin,
-} from "../../mixins/_module.mjs";
+import { mix, refreshDocuments } from "../../../../helpers/utils.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
 
@@ -17,8 +13,11 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  * @property {TeriockItem} document
  * @property {TeriockItem} item
  */
-export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
-  ChildSheetMixin(CommonSheetMixin(ItemSheetV2)),
+export default class TeriockBaseItemSheet extends mix(
+  ItemSheetV2,
+  mixins.CommonSheetMixin,
+  mixins.ChildSheetMixin,
+  mixins.ChatButtonSheetMixin,
 ) {
   /**
    * @inheritDoc
@@ -74,7 +73,6 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
     const cleanMap = {
       ".range-input": cleanFeet,
     };
-
     for (const [selector, cleaner] of Object.entries(cleanMap)) {
       this.element.querySelectorAll(selector).forEach((el) => {
         this._connectInput(el, el.getAttribute("name"), cleaner);

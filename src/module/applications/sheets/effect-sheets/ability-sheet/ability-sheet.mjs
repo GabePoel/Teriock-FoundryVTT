@@ -1,10 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import { durationDialog } from "../../../dialogs/_module.mjs";
-import {
-  PassiveSheetMixin,
-  UseButtonSheetMixin,
-  WikiButtonSheetMixin,
-} from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
@@ -16,8 +13,11 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
-export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
-  UseButtonSheetMixin(PassiveSheetMixin(TeriockBaseEffectSheet)),
+export default class TeriockAbilitySheet extends mix(
+  TeriockBaseEffectSheet,
+  mixins.PassiveSheetMixin,
+  mixins.UseButtonSheetMixin,
+  mixins.WikiButtonSheetMixin,
 ) {
   /**
    * @inheritDoc

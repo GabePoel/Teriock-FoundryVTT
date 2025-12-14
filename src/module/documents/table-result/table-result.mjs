@@ -1,9 +1,5 @@
-import { makeIcon } from "../../helpers/utils.mjs";
-import {
-  BaseDocumentMixin,
-  EmbedCardDocumentMixin,
-  PanelDocumentMixin,
-} from "../mixins/_module.mjs";
+import { makeIcon, mix } from "../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
 
@@ -15,23 +11,12 @@ const { TableResult } = foundry.documents;
  * @mixes BaseDocument
  * @mixes PanelDocument
  */
-export default class TeriockTableResult extends EmbedCardDocumentMixin(
-  PanelDocumentMixin(BaseDocumentMixin(TableResult)),
+export default class TeriockTableResult extends mix(
+  TableResult,
+  mixins.BaseDocumentMixin,
+  mixins.PanelDocumentMixin,
+  mixins.EmbedCardDocumentMixin,
 ) {
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      {
-        name: "Open Referenced Document",
-        icon: makeIcon("file", "contextMenu"),
-        condition: () => this.documentUuid,
-        callback: async () =>
-          await (await fromUuid(this.documentUuid))?.sheet.render(true),
-      },
-      ...super.getCardContextMenuEntries(doc),
-    ];
-  }
-
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
@@ -78,5 +63,19 @@ export default class TeriockTableResult extends EmbedCardDocumentMixin(
       ];
     }
     return parts;
+  }
+
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    return [
+      {
+        name: "Open Referenced Document",
+        icon: makeIcon("file", "contextMenu"),
+        condition: () => this.documentUuid,
+        callback: async () =>
+          await (await fromUuid(this.documentUuid))?.sheet.render(true),
+      },
+      ...super.getCardContextMenuEntries(doc),
+    ];
   }
 }

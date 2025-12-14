@@ -113,7 +113,6 @@ export default class EvaluationModel extends EmbeddedDataModel {
       ...this._derivationOptions,
       ...options,
     };
-    if (this.actor) this.actor.evaluateCallNumber += 1;
     const formula = this.formula;
     let value = TeriockRoll.quickValue(formula);
     if (formula.includes("@")) {

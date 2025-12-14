@@ -1,5 +1,6 @@
-import { ProficiencyDataMixin } from "../../mixins/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 const { fields } = foundry.data;
@@ -9,8 +10,9 @@ const { fields } = foundry.data;
  * @extends {TeriockBaseItemModel}
  * @mixes ProficiencyData
  */
-export default class TeriockPowerModel extends ProficiencyDataMixin(
+export default class TeriockPowerModel extends mix(
   TeriockBaseItemModel,
+  mixins.ProficiencyDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

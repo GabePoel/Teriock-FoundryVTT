@@ -1,5 +1,6 @@
 import { getImage } from "../../helpers/path.mjs";
-import { BaseDocumentMixin, PanelDocumentMixin } from "../mixins/_module.mjs";
+import { mix } from "../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
 
@@ -10,8 +11,10 @@ const { JournalEntryPage } = foundry.documents;
  * @extends {JournalEntryPage}
  * @mixes BaseDocument
  */
-export default class TeriockJournalEntryPage extends PanelDocumentMixin(
-  BaseDocumentMixin(JournalEntryPage),
+export default class TeriockJournalEntryPage extends mix(
+  JournalEntryPage,
+  mixins.BaseDocumentMixin,
+  mixins.PanelDocumentMixin,
 ) {
   /** @inheritDoc */
   get panelParts() {

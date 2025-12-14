@@ -5,7 +5,7 @@ export default (Base) => {
      * @extends {DocumentSheetV2}
      * @property {TeriockCommon} document
      */
-    class SelfInteractionCommonSheetPart extends Base {
+    class InteractionCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {

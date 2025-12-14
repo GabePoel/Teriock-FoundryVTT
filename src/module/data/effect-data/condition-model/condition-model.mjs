@@ -1,11 +1,8 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import { makeIcon } from "../../../helpers/utils.mjs";
+import { makeIcon, mix } from "../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../fields/helpers/builders.mjs";
-import {
-  TransformationDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
@@ -20,8 +17,10 @@ const { fields } = foundry.data;
  * @mixes TransformationData
  * @mixes WikiData
  */
-export default class TeriockConditionModel extends TransformationDataMixin(
-  WikiDataMixin(TeriockBaseEffectModel),
+export default class TeriockConditionModel extends mix(
+  TeriockBaseEffectModel,
+  mixins.WikiDataMixin,
+  mixins.TransformationDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

@@ -1,10 +1,7 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
-import { getRollIcon } from "../../../helpers/utils.mjs";
+import { getRollIcon, mix } from "../../../helpers/utils.mjs";
 import { builders } from "../../fields/helpers/_module.mjs";
-import {
-  HierarchyDataMixin,
-  TransformationDataMixin,
-} from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
@@ -16,8 +13,10 @@ const { fields } = foundry.data;
  * @mixes HierarchyData
  * @mixes TransformationData
  */
-export default class TeriockConsequenceModel extends TransformationDataMixin(
-  HierarchyDataMixin(TeriockBaseEffectModel),
+export default class TeriockConsequenceModel extends mix(
+  TeriockBaseEffectModel,
+  mixins.HierarchyDataMixin,
+  mixins.TransformationDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

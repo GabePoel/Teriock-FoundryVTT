@@ -1,4 +1,5 @@
-import { HierarchyDataMixin } from "../../mixins/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -9,8 +10,9 @@ const { fields } = foundry.data;
  * @extends {ChildTypeModel}
  * @mixes HierarchyData
  */
-export default class TeriockBaseItemModel extends HierarchyDataMixin(
+export default class TeriockBaseItemModel extends mix(
   ChildTypeModel,
+  mixins.HierarchyDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

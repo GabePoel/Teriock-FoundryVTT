@@ -2,14 +2,9 @@ import { iconManifest } from "../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../executions/document-executions/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { dotJoin } from "../../../helpers/string.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
-import {
-  ExecutableDataMixin,
-  ProficiencyDataMixin,
-  RevelationDataMixin,
-  ThresholdDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _panelParts } from "./methods/_panel-parts.mjs";
 
@@ -28,12 +23,13 @@ const { fields } = foundry.data;
  * @mixes ThresholdData
  * @mixes WikiData
  */
-export default class TeriockFluencyModel extends ProficiencyDataMixin(
-  ThresholdDataMixin(
-    RevelationDataMixin(
-      WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)),
-    ),
-  ),
+export default class TeriockFluencyModel extends mix(
+  TeriockBaseEffectModel,
+  mixins.ExecutableDataMixin,
+  mixins.WikiDataMixin,
+  mixins.RevelationDataMixin,
+  mixins.ThresholdDataMixin,
+  mixins.ProficiencyDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

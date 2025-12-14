@@ -75,6 +75,11 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         this.movementSpeed.evaluate();
+      }
+
+      /** @inheritDoc */
+      prepareVirtualEffects() {
+        super.prepareVirtualEffects();
         for (const key of Object.keys(this.speedAdjustments)) {
           if (this.parent.statuses.has("slowed")) {
             this.speedAdjustments[key] -= 1;

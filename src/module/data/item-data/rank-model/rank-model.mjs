@@ -3,14 +3,11 @@ import {
   getRollIcon,
   isOwnerAndCurrentUser,
   makeIcon,
+  mix,
   resolveDocument,
 } from "../../../helpers/utils.mjs";
-import {
-  ProficiencyDataMixin,
-  StatGiverDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
 import { TextField } from "../../fields/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 
@@ -23,11 +20,15 @@ const { fields } = foundry.data;
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
  * @extends {TeriockBaseItemModel}
+ * @mixes ProficiencyData
  * @mixes StatGiverData
  * @mixes WikiData
  */
-export default class TeriockRankModel extends StatGiverDataMixin(
-  WikiDataMixin(ProficiencyDataMixin(TeriockBaseItemModel)),
+export default class TeriockRankModel extends mix(
+  TeriockBaseItemModel,
+  mixins.ProficiencyDataMixin,
+  mixins.WikiDataMixin,
+  mixins.StatGiverDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -83,41 +84,6 @@ export default class TeriockRankModel extends StatGiverDataMixin(
       }),
     });
     return schema;
-  }
-
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      ...super.getCardContextMenuEntries(doc),
-      {
-        name: "Roll Hit Die",
-        icon: makeIcon(getRollIcon(this.hpDie.polyhedral), "contextMenu"),
-        callback: async () => await this.hpDie.use(),
-        condition: !this.hpDie.spent,
-        group: "usage",
-      },
-      {
-        name: "Recover Hit Die",
-        icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.hpDie.unuse(),
-        condition: this.hpDie.spent,
-        group: "usage",
-      },
-      {
-        name: "Roll Mana Die",
-        icon: makeIcon(getRollIcon(this.mpDie.polyhedral), "contextMenu"),
-        callback: async () => await this.mpDie.use(),
-        condition: !this.mpDie.spent,
-        group: "usage",
-      },
-      {
-        name: "Recover Mana Die",
-        icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.mpDie.unuse(),
-        condition: this.mpDie.spent,
-        group: "usage",
-      },
-    ];
   }
 
   /** @inheritDoc */
@@ -276,6 +242,41 @@ export default class TeriockRankModel extends StatGiverDataMixin(
           .then();
       }
     }
+  }
+
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    return [
+      ...super.getCardContextMenuEntries(doc),
+      {
+        name: "Roll Hit Die",
+        icon: makeIcon(getRollIcon(this.hpDie.polyhedral), "contextMenu"),
+        callback: async () => await this.hpDie.use(),
+        condition: !this.hpDie.spent,
+        group: "usage",
+      },
+      {
+        name: "Recover Hit Die",
+        icon: makeIcon("rotate-left", "contextMenu"),
+        callback: async () => await this.hpDie.unuse(),
+        condition: this.hpDie.spent,
+        group: "usage",
+      },
+      {
+        name: "Roll Mana Die",
+        icon: makeIcon(getRollIcon(this.mpDie.polyhedral), "contextMenu"),
+        callback: async () => await this.mpDie.use(),
+        condition: !this.mpDie.spent,
+        group: "usage",
+      },
+      {
+        name: "Recover Mana Die",
+        icon: makeIcon("rotate-left", "contextMenu"),
+        callback: async () => await this.mpDie.unuse(),
+        condition: this.mpDie.spent,
+        group: "usage",
+      },
+    ];
   }
 
   /** @inheritDoc */

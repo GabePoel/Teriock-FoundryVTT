@@ -1,7 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
+import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import { setStatDiceDialog } from "../../../dialogs/_module.mjs";
-import { WikiButtonSheetMixin } from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
@@ -11,8 +11,9 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
  * @property {TeriockSpecies} document
  * @property {TeriockSpecies} item
  */
-export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
+export default class TeriockSpeciesSheet extends mix(
   TeriockBaseItemSheet,
+  mixins.WikiButtonSheetMixin,
 ) {
   /**
    * @inheritDoc

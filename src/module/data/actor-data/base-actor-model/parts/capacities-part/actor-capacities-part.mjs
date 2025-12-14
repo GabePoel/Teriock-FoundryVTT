@@ -111,7 +111,7 @@ export default (Base) => {
         if (this.weight.carried >= this.carryingCapacity.heavy.value) {
           el = 2;
         }
-        if (this.weight.carried >= this.carryingCapacity.heavy.value) {
+        if (this.weight.carried >= this.carryingCapacity.max.value) {
           el = 3;
         }
         this.encumbranceLevel = Math.min(this.encumbranceLevel + el, 3);
@@ -213,24 +213,24 @@ export default (Base) => {
               this.movementSpeed.value - 10,
               0,
             );
-            if (this.encumbranceLevel === 1) {
-              this.conditionInformation.encumbered.reasons.add(
-                "Lightly Encumbered",
-              );
-            }
-          } else if (this.encumbranceLevel >= 2) {
-            this.conditionInformation.slowed.reasons.add("Heavily Encumbered");
-            if (this.encumbranceLevel === 2) {
-              this.conditionInformation.encumbered.reasons.add(
-                "Heavily Encumbered",
-              );
-              this.parent.statuses.add("slowed");
-            }
-          } else if (this.encumbranceLevel >= 3) {
-            this.conditionInformation.encumbered.reasons.add(
-              "Cannot Carry More",
-            );
           }
+          if (this.encumbranceLevel >= 2) {
+            this.parent.statuses.add("slowed");
+            this.conditionInformation.slowed.reasons.add("Heavily Encumbered");
+          }
+          let encumbranceReason = "Encumbered";
+          switch (this.encumbranceLevel) {
+            case 1:
+              encumbranceReason = "Lightly Encumbered";
+              break;
+            case 2:
+              encumbranceReason = "Heavily Encumbered";
+              break;
+            case 3:
+              encumbranceReason = "Cannot Carry More";
+              break;
+          }
+          this.conditionInformation.encumbered.reasons.add(encumbranceReason);
         }
       }
     }

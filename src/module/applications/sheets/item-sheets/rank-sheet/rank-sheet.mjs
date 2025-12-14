@@ -1,6 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
-import { WikiButtonSheetMixin } from "../../mixins/_module.mjs";
+import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   archetypeContextMenu,
@@ -15,8 +15,9 @@ import {
  * @property {TeriockRank} document
  * @property {TeriockRank} item
  */
-export default class TeriockRankSheet extends WikiButtonSheetMixin(
+export default class TeriockRankSheet extends mix(
   TeriockBaseItemSheet,
+  mixins.WikiButtonSheetMixin,
 ) {
   /**
    * @inheritDoc

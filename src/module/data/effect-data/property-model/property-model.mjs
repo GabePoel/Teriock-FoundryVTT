@@ -1,13 +1,9 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-import { pureUuid, safeUuid } from "../../../helpers/utils.mjs";
-import {
-  HierarchyDataMixin,
-  RevelationDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
+import { mix, pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../fields/_module.mjs";
 import { changeField } from "../../fields/helpers/builders.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
@@ -26,8 +22,11 @@ const { fields } = foundry.data;
  * @mixes RevelationData
  * @mixes WikiData
  */
-export default class TeriockPropertyModel extends RevelationDataMixin(
-  HierarchyDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+export default class TeriockPropertyModel extends mix(
+  TeriockBaseEffectModel,
+  mixins.WikiDataMixin,
+  mixins.HierarchyDataMixin,
+  mixins.RevelationDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {

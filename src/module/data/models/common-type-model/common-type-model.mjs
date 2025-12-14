@@ -231,7 +231,7 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Create children from delta map.
+   * Create children from a delta map.
    * @param {ChildDeltaMap} createMap
    * @returns {Promise<void>}
    * @private

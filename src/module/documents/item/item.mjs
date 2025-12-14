@@ -1,12 +1,5 @@
-import { isOwnerAndCurrentUser } from "../../helpers/utils.mjs";
-import {
-  BaseDocumentMixin,
-  ChangeableDocumentMixin,
-  ChildDocumentMixin,
-  CommonDocumentMixin,
-  ParentDocumentMixin,
-  RetrievalDocumentMixin,
-} from "../mixins/_module.mjs";
+import { isOwnerAndCurrentUser, mix } from "../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
 
@@ -30,12 +23,14 @@ const { Item } = foundry.documents;
  * @property {UUID<TeriockItem>} uuid
  * @property {TeriockBaseItemSheet} sheet
  */
-export default class TeriockItem extends RetrievalDocumentMixin(
-  ChangeableDocumentMixin(
-    ParentDocumentMixin(
-      ChildDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(Item))),
-    ),
-  ),
+export default class TeriockItem extends mix(
+  Item,
+  mixins.BaseDocumentMixin,
+  mixins.CommonDocumentMixin,
+  mixins.ChildDocumentMixin,
+  mixins.ParentDocumentMixin,
+  mixins.ChangeableDocumentMixin,
+  mixins.RetrievalDocumentMixin,
 ) {
   /** @inheritDoc */
   changesField = "itemChanges";

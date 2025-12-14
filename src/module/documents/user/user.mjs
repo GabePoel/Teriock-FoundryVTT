@@ -1,8 +1,5 @@
-import { makeIcon } from "../../helpers/utils.mjs";
-import {
-  BaseDocumentMixin,
-  EmbedCardDocumentMixin,
-} from "../mixins/_module.mjs";
+import { makeIcon, mix } from "../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
 
@@ -13,22 +10,11 @@ const { User } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes BaseDocument
  */
-export default class TeriockUser extends EmbedCardDocumentMixin(
-  BaseDocumentMixin(User),
+export default class TeriockUser extends mix(
+  User,
+  mixins.BaseDocumentMixin,
+  mixins.EmbedCardDocumentMixin,
 ) {
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      {
-        name: "Open Character",
-        icon: makeIcon("user", "contextMenu"),
-        callback: async () => await this.character.sheet.render(true),
-        condition: () => this.character && this.character.isViewer,
-      },
-      ...super.getCardContextMenuEntries(doc),
-    ];
-  }
-
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
@@ -50,5 +36,18 @@ export default class TeriockUser extends EmbedCardDocumentMixin(
       (this.lastActivityTime === 0 ||
         (Date.now() - this.lastActivityTime) / 1000 < 120)
     );
+  }
+
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    return [
+      {
+        name: "Open Character",
+        icon: makeIcon("user", "contextMenu"),
+        callback: async () => await this.character.sheet.render(true),
+        condition: () => this.character && this.character.isViewer,
+      },
+      ...super.getCardContextMenuEntries(doc),
+    ];
   }
 }
