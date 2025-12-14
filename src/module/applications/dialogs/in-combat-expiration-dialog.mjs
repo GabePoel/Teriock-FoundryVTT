@@ -86,12 +86,14 @@ export default async function inCombatExpirationDialog(
                 effect.actor.getRollData(),
                 {
                   flavor: `${effect.name} Ending Roll`,
-                  context: {
-                    diceClass: "condition",
-                    threshold: Number(
-                      button.form.elements.namedItem("threshold").value,
-                    ),
+                  styles: {
+                    dice: {
+                      classes: "condition",
+                    },
                   },
+                  threshold: Number(
+                    button.form.elements.namedItem("threshold").value,
+                  ),
                 },
               );
               await expirationRoll.toMessage(

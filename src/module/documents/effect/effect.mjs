@@ -56,6 +56,23 @@ export default class TeriockEffect extends RetrievalDocumentMixin(
   tokenChanges = [];
 
   /**
+   * Expanded changes.
+   * @returns {Teriock.Fields.ExpandedChangeData[]}
+   */
+  get expandedChanges() {
+    return [...this.changes, ...this.itemChanges, ...this.specialChanges].map(
+      (change) => ({
+        ...change,
+        type: null,
+        targets: "all",
+        documentName: null,
+        time: null,
+        effect: this,
+      }),
+    );
+  }
+
+  /**
    * Alternative to {@link TeriockEffect.isTemporary} that only references duration.
    * @returns {boolean}
    */

@@ -96,6 +96,14 @@ export default class EvaluationModel extends EmbeddedDataModel {
   }
 
   /**
+   * A default value to use in quick evaluation.
+   * @returns {number}
+   */
+  get quickValue() {
+    return 0;
+  }
+
+  /**
    * Text that represents this formula.
    * @returns {string}
    */
@@ -114,11 +122,17 @@ export default class EvaluationModel extends EmbeddedDataModel {
       ...options,
     };
     const formula = this.formula;
-    let value = TeriockRoll.quickValue(formula);
-    if (formula.includes("@")) {
-      if (options.skipRollData)
-        value = TeriockRoll.quickValue(this._derivationOptions.blank);
-      else value = TeriockRoll.minValue(this.formula, this.getRollData());
+    let needsEval = false;
+    let value = this.quickValue;
+    if (formula.includes("Infinity")) {
+      value = Infinity;
+    } else if (!isNaN(Number(formula))) {
+      value = Number(formula);
+    } else {
+      needsEval = true;
+    }
+    if (needsEval && !options.skipRollData) {
+      value = TeriockRoll.minValue(formula, this.getRollData());
     }
     if (typeof options.max === "number") {
       value = Math.min(value, options.max);

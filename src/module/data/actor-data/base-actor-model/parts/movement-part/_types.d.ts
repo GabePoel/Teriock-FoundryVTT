@@ -1,7 +1,5 @@
-import { EvaluationModel } from "../../../../models/_module.mjs";
-
 export default interface ActorMovementPartInterface {
-  movementSpeed: EvaluationModel;
+  movementSpeed: number;
   /** <base> Speed adjustments */
   speedAdjustments: {
     /** <base> Climb speed */

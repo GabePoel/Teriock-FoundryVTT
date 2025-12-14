@@ -120,19 +120,6 @@ export default class TeriockRoll extends Roll {
   }
 
   /**
-   * Evaluate a formula without making any rolls.
-   * @param {number|string|undefined|null} formula
-   * @returns {number}
-   */
-  static quickValue(formula) {
-    if (typeof formula === "number") return formula;
-    if (typeof formula !== "string") return 0;
-    if (formula.includes("Infinity")) return Infinity;
-    if (!isNaN(Number(formula))) return Number(formula);
-    return 0;
-  }
-
-  /**
    * Whether this threshold has been met.
    * @returns {null|boolean}
    */

@@ -67,6 +67,11 @@ export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
   }
 
   /** @inheritDoc */
+  get quickValue() {
+    return this.score;
+  }
+
+  /** @inheritDoc */
   get value() {
     return this.#modify(super.value);
   }

@@ -4,10 +4,10 @@ export default interface ActorCapacitiesPartInterface {
   /** <base> Attunements - IDs of attuned equipment */
   attunements: Set<ID<TeriockEquipment>>;
   carryingCapacity: {
-    factor: EvaluationModel;
-    heavy: EvaluationModel;
-    light: EvaluationModel;
-    max: EvaluationModel;
+    factor: number;
+    heavy: number;
+    light: number;
+    max: number;
   };
   /** <base> Encumbrance level */
   encumbranceLevel: number;

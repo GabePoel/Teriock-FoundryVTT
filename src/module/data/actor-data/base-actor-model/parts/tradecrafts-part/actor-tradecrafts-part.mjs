@@ -44,9 +44,9 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        for (const tc of Object.values(this.tradecrafts)) {
-          tc.evaluate();
-        }
+        //for (const tc of Object.values(this.tradecrafts)) {
+        //  tc.evaluate();
+        //}
       }
 
       /**

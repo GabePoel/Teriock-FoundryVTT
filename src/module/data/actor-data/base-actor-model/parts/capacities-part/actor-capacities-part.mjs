@@ -25,29 +25,6 @@ export default (Base) => {
             label: "Attunements",
             hint: "The documents that the actor is attuned to.",
           }),
-          carryingCapacity: new fields.SchemaField({
-            factor: new EvaluationField({
-              deterministic: true,
-              initial: "max(@att.str, pow(min(@att.str - 5, 2), 0))",
-              label: "Carrying Factor",
-              min: 0,
-            }),
-            heavy: new EvaluationField({
-              initial: "2 * (65 + 20 * @carry.factor)",
-              label: "Heavy Carrying Capacity",
-              min: 0,
-            }),
-            light: new EvaluationField({
-              initial: "1 * (65 + 20 * @carry.factor)",
-              label: "Light Carrying Capacity",
-              min: 0,
-            }),
-            max: new EvaluationField({
-              initial: "3 * (65 + 20 * @carry.factor)",
-              label: "Maximum Carrying Capacity",
-              min: 0,
-            }),
-          }),
           size: new fields.SchemaField({
             number: new EvaluationField({
               blank: "3",
@@ -97,10 +74,13 @@ export default (Base) => {
       }
 
       #prepareCarryingCapacity() {
-        this.carryingCapacity.factor.evaluate();
-        this.carryingCapacity.light.evaluate();
-        this.carryingCapacity.heavy.evaluate();
-        this.carryingCapacity.max.evaluate();
+        const factor = 65 + 20 * this.attributes.str.score;
+        this.carryingCapacity = {
+          factor,
+          heavy: factor * 2,
+          light: factor,
+          max: factor * 3,
+        };
       }
 
       #prepareEncumbrance() {
@@ -156,16 +136,15 @@ export default (Base) => {
         const rollData = super.getRollData();
         const weightCarried = this.weight.carried || 0;
         Object.assign(rollData, {
-          "carry.factor": this.carryingCapacity.factor.value,
-          "carry.heavy": this.carryingCapacity.heavy.value,
+          "carry.factor": this.carryingCapacity.factor,
+          "carry.heavy": this.carryingCapacity.heavy,
           "carry.heavy.hit":
-            weightCarried >= this.carryingCapacity.heavy.value ? 1 : 0,
-          "carry.light": this.carryingCapacity.light.value,
+            weightCarried >= this.carryingCapacity.heavy ? 1 : 0,
+          "carry.light": this.carryingCapacity.light,
           "carry.light.hit":
-            weightCarried >= this.carryingCapacity.light.value ? 1 : 0,
-          "carry.max": this.carryingCapacity.max.value,
-          "carry.max.hit":
-            weightCarried >= this.carryingCapacity.max.value ? 1 : 0,
+            weightCarried >= this.carryingCapacity.light ? 1 : 0,
+          "carry.max": this.carryingCapacity.max,
+          "carry.max.hit": weightCarried >= this.carryingCapacity.max ? 1 : 0,
           size: this.size.number.value,
           weight: this.weight.self.value,
         });
@@ -176,6 +155,7 @@ export default (Base) => {
       prepareBaseData() {
         super.prepareBaseData();
         this.encumbranceLevel = 0;
+        this.#prepareCarryingCapacity();
       }
 
       /** @inheritDoc */
@@ -209,10 +189,7 @@ export default (Base) => {
         ) {
           this.parent.statuses.add("encumbered");
           if (this.encumbranceLevel >= 1) {
-            this.movementSpeed._value = Math.max(
-              this.movementSpeed.value - 10,
-              0,
-            );
+            this.movementSpeed = Math.max(this.movementSpeed - 10, 0);
           }
           if (this.encumbranceLevel >= 2) {
             this.parent.statuses.add("slowed");

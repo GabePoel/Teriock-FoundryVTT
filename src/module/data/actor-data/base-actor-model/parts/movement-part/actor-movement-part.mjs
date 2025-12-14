@@ -1,5 +1,3 @@
-import { EvaluationField } from "../../../../fields/_module.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -19,11 +17,6 @@ export default (Base) => {
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
-          movementSpeed: new EvaluationField({
-            deterministic: true,
-            initial: "30 + (10 * @att.mov.score)",
-            min: 0,
-          }),
           speedAdjustments: new fields.SchemaField({
             climb: speedField(1, "Climb"),
             crawl: speedField(1, "Crawl"),
@@ -44,7 +37,7 @@ export default (Base) => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        rollData["speed"] = this.movementSpeed.value;
+        rollData["speed"] = this.movementSpeed;
         for (const [k, v] of Object.entries(SPEED_MAP)) {
           const adjustment = this.speedAdjustments[v] || 0;
           rollData[`speed.${k}`] = adjustment;
@@ -54,16 +47,16 @@ export default (Base) => {
               feetPerMove = 0;
               break;
             case 1:
-              feetPerMove = this.movementSpeed.value / 4;
+              feetPerMove = this.movementSpeed / 4;
               break;
             case 2:
-              feetPerMove = this.movementSpeed.value / 2;
+              feetPerMove = this.movementSpeed / 2;
               break;
             case 3:
-              feetPerMove = this.movementSpeed.value;
+              feetPerMove = this.movementSpeed;
               break;
             case 4:
-              feetPerMove = this.movementSpeed.value * 2;
+              feetPerMove = this.movementSpeed * 2;
               break;
           }
           rollData[`speed.${k}.feet`] = feetPerMove;
@@ -72,9 +65,15 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      prepareBaseData() {
+        super.prepareBaseData();
+        this.movementSpeed = 30 + 10 * this.attributes.mov.score;
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this.movementSpeed.evaluate();
+        this.movementSpeed = 30 + 10 * this.attributes.mov.score;
       }
 
       /** @inheritDoc */

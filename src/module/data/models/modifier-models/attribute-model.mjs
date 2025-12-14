@@ -1,22 +1,9 @@
 import { FeatSaveExecution } from "../../../executions/activity-executions/_module.mjs";
-import { EvaluationField } from "../../fields/_module.mjs";
 import ModifierModel from "./modifier-model.mjs";
 
-/**
- * @property {EvaluationModel} passive
- */
 export default class AttributeModel extends ModifierModel {
-  /** @inheritDoc */
-  static defineSchema(options = {}) {
-    const schema = super.defineSchema(options);
-    schema.passive = new EvaluationField({
-      deterministic: true,
-      floor: true,
-      initial: `@att.${(options?.label || "").toLowerCase()} * 2 + 10`,
-      label: `Passive ${options?.label || ""} Value`,
-    });
-    return schema;
-  }
+  /** @type {number} */
+  passive;
 
   /** @inheritDoc */
   async _use(options) {
@@ -32,8 +19,13 @@ export default class AttributeModel extends ModifierModel {
   /** @inheritDoc */
   getLocalRollData(prefix) {
     const localRollData = super.getLocalRollData(prefix);
-    if (prefix) localRollData[`${prefix}.passive`] = this.passive.value;
-    else localRollData.passive = this.passive.value;
+    if (prefix) {
+      localRollData[`${prefix}.passive`] = this.passive;
+      localRollData[`${prefix}.pas`] = this.passive;
+    } else {
+      localRollData.passive = this.passive;
+      localRollData.pas = this.passive;
+    }
     return localRollData;
   }
 

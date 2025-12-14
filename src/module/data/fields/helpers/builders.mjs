@@ -234,6 +234,50 @@ export function changeField() {
 }
 
 /**
+ * Field that represents an expanded change.
+ * @returns {SchemaField}
+ */
+export function expandedChangeField() {
+  const allTypes = {};
+  for (const v of Object.values(TERIOCK.system.documentTypes)) {
+    Object.assign(allTypes, v);
+  }
+  return new fields.SchemaField({
+    documentName: new fields.StringField({
+      choices: {
+        ActiveEffect: "Effects",
+        Actor: "Actors",
+        Item: "Items",
+      },
+      nullable: true,
+      initial: null,
+    }),
+    key: new fields.StringField({ initial: "" }),
+    mode: new fields.NumberField({
+      choices: TERIOCK.options.effect.changeMode,
+      initial: 4,
+    }),
+    priority: new fields.NumberField({ initial: 20 }),
+    targets: new fields.StringField({
+      choices: TERIOCK.options.change.targets,
+      nullable: true,
+      initial: null,
+    }),
+    time: new fields.StringField({
+      choices: TERIOCK.options.change.time,
+      nullable: true,
+      initial: null,
+    }),
+    type: new fields.StringField({
+      choices: allTypes,
+      nullable: true,
+      initial: null,
+    }),
+    value: new fields.StringField({ initial: "" }),
+  });
+}
+
+/**
  * Field that represents panel associations.
  * @returns {ArrayField}
  */

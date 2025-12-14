@@ -57,8 +57,7 @@ export default (Base) => {
         super.prepareDerivedData();
         this.#preparePresence();
         for (const att of Object.values(this.attributes)) {
-          att.evaluate();
-          att.passive.evaluate();
+          att.passive = 10 + 2 * att.value;
         }
       }
 
