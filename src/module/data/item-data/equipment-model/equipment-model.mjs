@@ -37,6 +37,7 @@ export default class TeriockEquipmentModel extends mix(
   mixins.ConsumableDataMixin,
   mixins.AttunableDataMixin,
   mixins.ArmamentDataMixin,
+  mixins.WikiDataMixin,
   parts.EquipmentWieldingPart,
   parts.EquipmentSuppressionPart,
   parts.EquipmentIdentificationPart,

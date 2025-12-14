@@ -14,7 +14,6 @@ export function cleanValue(value) {
   value = value.replace("+", "").trim();
   value = value.replace("×", "*");
   value = value.replace("STR", "@str");
-  console.log(value);
   return value;
 }
 
