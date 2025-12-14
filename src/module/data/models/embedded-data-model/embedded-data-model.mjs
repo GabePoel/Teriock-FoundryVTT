@@ -8,11 +8,28 @@ export default class EmbeddedDataModel extends DataModel {
   static defineSchema() {
     return {};
   }
+
+  /**
+   * The actor associated with this data model if there is one.
+   * @returns {TeriockActor|null}
+   */
+  get actor() {
+    return this.parent.actor;
+  }
+
   /**
    * @returns {EmbeddedDataModel|CommonTypeModel}
    */
   get parent() {
     return super.parent;
+  }
+
+  /**
+   * Roll data specific to this data model.
+   * @returns {object}
+   */
+  getLocalRollData() {
+    return this.toObject(false);
   }
 
   /**

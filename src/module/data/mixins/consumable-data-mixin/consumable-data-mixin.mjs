@@ -88,6 +88,17 @@ export default function ConsumableDataMixin(Base) {
       }
 
       /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        Object.assign(data, {
+          consumable: this.consumable ? 1 : 0,
+          quantity: this.consumable ? this.quantity : 1,
+          "quantity.max": this.consumable ? this.maxQuantity.value : 1,
+        });
+        return data;
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         this.maxQuantity.evaluate();

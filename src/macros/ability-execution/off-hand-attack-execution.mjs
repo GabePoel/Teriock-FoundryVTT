@@ -24,5 +24,5 @@ if (armaments.length > 0) {
     hint: "Select an ability to use.",
   });
   options.armament = selectedArmament;
-  await ability.system.roll(options);
+  await ability.system.use(options);
 }

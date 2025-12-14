@@ -1,24 +1,15 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
-import { roundTo } from "../../../helpers/utils.mjs";
+import { mix, roundTo } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
-import {
-  ArmamentDataMixin,
-  AttunableDataMixin,
-  ConsumableDataMixin,
-  ExecutableDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
 import * as messages from "./methods/_panel-parts.mjs";
 import * as parsing from "./methods/_parsing.mjs";
-import EquipmentIdentificationPart from "./parts/equipment-identification-part.mjs";
-import EquipmentContainerPart from "./parts/equipment-storage-part.mjs";
-import EquipmentSuppressionPart from "./parts/equipment-suppression-part.mjs";
-import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
+import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -33,26 +24,23 @@ const { fields } = foundry.data;
  * @mixes ArmamentData
  * @mixes AttunableData
  * @mixes ConsumableData
- * @mixes EquipmentSuppressionPart
  * @mixes EquipmentIdentificationPart
+ * @mixes EquipmentStoragePart
+ * @mixes EquipmentSuppressionPart
  * @mixes EquipmentWieldingPart
  * @mixes ExecutableData
  * @mixes WikiData
  */
-export default class TeriockEquipmentModel extends EquipmentContainerPart(
-  EquipmentIdentificationPart(
-    EquipmentSuppressionPart(
-      EquipmentWieldingPart(
-        ArmamentDataMixin(
-          AttunableDataMixin(
-            ConsumableDataMixin(
-              WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
-            ),
-          ),
-        ),
-      ),
-    ),
-  ),
+export default class TeriockEquipmentModel extends mix(
+  TeriockBaseItemModel,
+  mixins.ExecutableDataMixin,
+  mixins.ConsumableDataMixin,
+  mixins.AttunableDataMixin,
+  mixins.ArmamentDataMixin,
+  parts.EquipmentWieldingPart,
+  parts.EquipmentSuppressionPart,
+  parts.EquipmentIdentificationPart,
+  parts.EquipmentStoragePart,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -133,14 +121,6 @@ export default class TeriockEquipmentModel extends EquipmentContainerPart(
   static migrateData(data) {
     data = migrate._migrateData(data);
     return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      ...contextMenus._entries(this),
-      ...super.getCardContextMenuEntries(doc),
-    ];
   }
 
   /** @inheritDoc */
@@ -304,6 +284,38 @@ export default class TeriockEquipmentModel extends EquipmentContainerPart(
     }
   }
 
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.EquipmentExecutionOptions} options
+   */
+  async _use(options = {}) {
+    if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
+      await this.actor?.useAbility("Basic Attack");
+    }
+    options.source = this.parent;
+    const execution = new EquipmentExecution(options);
+    await execution.execute();
+  }
+
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    return [
+      ...contextMenus._entries(this),
+      ...super.getCardContextMenuEntries(doc),
+    ];
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    const data = super.getLocalRollData();
+    Object.assign(data, {
+      "dmg.2h": this.damage.twoHanded.formula,
+      weight: this.weight.formula,
+      str: this.minStr.formula,
+    });
+    return data;
+  }
+
   /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
@@ -344,18 +356,5 @@ export default class TeriockEquipmentModel extends EquipmentContainerPart(
     if (!this.hasTwoHandedAttack) {
       this.damage.twoHanded.raw = this.damage.base.raw;
     }
-  }
-
-  /**
-   * @inheritDoc
-   * @param {Teriock.Execution.EquipmentExecutionOptions} options
-   */
-  async roll(options = {}) {
-    if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
-      await this.actor?.useAbility("Basic Attack");
-    }
-    options.source = this.parent;
-    const execution = new EquipmentExecution(options);
-    await execution.execute();
   }
 }

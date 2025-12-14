@@ -143,6 +143,23 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
     return this.blocks;
   }
 
+  /**
+   * Checks if the effect expires on movement.
+   * @returns {boolean} True if the effect expires on movement, false otherwise.
+   */
+  get movementExpiration() {
+    return this.expirations.movement;
+  }
+
+  /** @inheritDoc */
+  get nameString() {
+    let ns = super.nameString;
+    if (this.critical) {
+      ns += " (Critical)";
+    }
+    return ns;
+  }
+
   /** @inheritDoc */
   get panelParts() {
     const parts = super.panelParts;
@@ -175,23 +192,6 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
   }
 
   /**
-   * Checks if the effect expires on movement.
-   * @returns {boolean} True if the effect expires on movement, false otherwise.
-   */
-  get movementExpiration() {
-    return this.expirations.movement;
-  }
-
-  /** @inheritDoc */
-  get nameString() {
-    let ns = super.nameString;
-    if (this.critical) {
-      ns += " (Critical)";
-    }
-    return ns;
-  }
-
-  /**
    * Checks if the effect expires when its source is deleted or disabled.
    * @returns {boolean} True if the effect expires when sustained, false otherwise.
    */
@@ -209,6 +209,11 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
     return `Roll to Remove ${this.parent.name}`;
   }
 
+  /** @inheritDoc */
+  async _use(_options = {}) {
+    await this.inCombatExpiration(true);
+  }
+
   /**
    * Trigger in-combat expiration.
    * @param {boolean} [forceDialog] - Force a dialog to show up.
@@ -216,11 +221,6 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
    */
   async inCombatExpiration(forceDialog = false) {
     await inCombatExpirationDialog(this.parent, forceDialog);
-  }
-
-  /** @inheritDoc */
-  async roll(_options = {}) {
-    await this.inCombatExpiration(true);
   }
 
   /** @inheritDoc */

@@ -31,6 +31,7 @@ export default class StatPoolModel extends EmbeddedDataModel {
         initial: "1",
         label: "Number",
         min: 0,
+        nullable: false,
         required: false,
       }),
       dice: new fields.ArrayField(new fields.EmbeddedDataField(StatDieModel)),

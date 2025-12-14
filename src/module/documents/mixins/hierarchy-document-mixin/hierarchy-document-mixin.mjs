@@ -101,17 +101,6 @@ export default function HierarchyDocumentMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
-      checkAncestor(doc) {
-        if (doc?.uuid === this.uuid) {
-          return true;
-        } else {
-          return this.elder?.checkAncestor
-            ? this.elder?.checkAncestor(doc) || false
-            : false;
-        }
-      }
-
       /**
        * @inheritDoc
        * @param {TeriockCommon[]} documents
@@ -348,6 +337,17 @@ export default function HierarchyDocumentMixin(Base) {
       _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
         this.#renderSupSheets();
+      }
+
+      /** @inheritDoc */
+      checkAncestor(doc) {
+        if (doc?.uuid === this.uuid) {
+          return true;
+        } else {
+          return this.elder?.checkAncestor
+            ? this.elder?.checkAncestor(doc) || false
+            : false;
+        }
       }
 
       /**

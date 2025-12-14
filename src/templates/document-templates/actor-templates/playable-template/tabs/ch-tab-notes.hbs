@@ -155,7 +155,7 @@
                 {{formInput
                   systemFields.size.fields.number
                   value=system._source.size.number.raw
-                  classes="character-size-input character-smallbox-value selected"
+                  classes="character-size-input character-smallbox-value selected transparent-input"
                   dataset=(object tooltip=(concat (ucFirst system.size.category) ": " system.size.reach " ft
                   reach"))
                 }}
@@ -172,7 +172,7 @@
                 {{formInput
                   systemFields.weight.fields.self
                   value=system._source.weight.self.raw
-                  classes="character-weight-input character-smallbox-value selected"
+                  classes="character-weight-input character-smallbox-value selected transparent-input"
                   dataset=(object tooltip=(concat "Including Equipment: " system.weight.value " lb"))
                 }}
               </div>
@@ -200,17 +200,17 @@
             </div>
             <div class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.light)}}tred{{/if}}"
                  data-tooltip="Light Carrying Capacity">
-              {{{system.carryingCapacity.light}}}
+              {{{system.carryingCapacity.light.value}}}
               lb
             </div>
             <div class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}tred{{/if}}"
                  data-tooltip="Heavy Carrying Capacity">
-              {{{system.carryingCapacity.heavy}}}
+              {{{system.carryingCapacity.heavy.value}}}
               lb
             </div>
             <div class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.max)}}tred{{/if}}"
                  data-tooltip="Maximum Carrying Capacity">
-              {{{system.carryingCapacity.max}}}
+              {{{system.carryingCapacity.max.value}}}
               lb
             </div>
           </div>
@@ -237,7 +237,7 @@
               {{formInput
                 systemFields.magic.fields.maxRotators
                 value=system._source.magic.maxRotators.raw
-                classes="character-smallbox-value selected"
+                classes="character-smallbox-value selected transparent-input"
                 dataset=(object tooltip=system.magic.maxRotators.formula)
               }}
             </div>
@@ -257,7 +257,7 @@
             {{formInput
               systemFields.detection.fields.hiding
               value=system._source.detection.hiding.raw
-              classes="character-detection-input character-smallbox-value selected"
+              classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.hiding.formula)
             }}
           </div>
@@ -274,7 +274,7 @@
             {{formInput
               systemFields.detection.fields.perceiving
               value=system._source.detection.perceiving.raw
-              classes="character-detection-input character-smallbox-value selected"
+              classes="character-detection-input character-smallbox-value selected transparent-input"
               dataset=(object tooltip=system.detection.perceiving.formula)
             }}
           </div>

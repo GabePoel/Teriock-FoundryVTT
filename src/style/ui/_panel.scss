@@ -68,6 +68,28 @@
   margin: 8px var(--panel-padding) var(--panel-padding);
   opacity: 1;
   //overflow: hidden;
+  &:not(:has(*)) {
+    display: none;
+  }
+}
+
+.teriock-panel-content {
+  position: relative;
+
+  &::after {
+    background: transparent;
+    border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
+    content: "";
+    height: 0;
+    left: var(--panel-padding);
+    position: absolute;
+    right: var(--panel-padding);
+    top: 0;
+  }
+
+  &:has(.teriock-panel-spacer .teriock-panel-body:not(:has(*))) {
+    display: none;
+  }
 }
 
 .teriock-panel {
@@ -117,16 +139,16 @@
       }
     }
 
-    &::before {
-      background: transparent;
-      border-bottom: 1px var(--panel-divider-style) var(--color-panel-divider);
-      border-radius: 4px;
-      content: "";
-      left: var(--panel-padding);
-      position: absolute;
-      right: var(--panel-padding);
-      top: 100%;
-    }
+    //&::before {
+    //  background: transparent;
+    //  border-bottom: 1px var(--panel-divider-style) var(--color-panel-divider);
+    //  border-radius: 4px;
+    //  content: "";
+    //  left: var(--panel-padding);
+    //  position: absolute;
+    //  right: var(--panel-padding);
+    //  top: 100%;
+    //}
 
     .teriock-panel-image {
       align-items: center;
@@ -310,18 +332,18 @@
       }
 
       .teriock-panel-association-card-name {
-        text-wrap: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-wrap: nowrap;
       }
 
       .teriock-panel-association-row-image {
         @include mixins.image-border;
         height: 1.5em;
         margin: 0.25em;
-        width: 1.5em;
-        min-width: 1.5em;
         min-height: 1.5em;
+        min-width: 1.5em;
+        width: 1.5em;
 
         img {
           @include mixins.warm-image-background;

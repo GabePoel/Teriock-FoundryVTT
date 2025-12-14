@@ -150,6 +150,45 @@ export default function ArmamentDataMixin(Base) {
 
       /**
        * @inheritDoc
+       * @param {Teriock.Execution.ArmamentExecutionOptions} options
+       */
+      async _use(options = {}) {
+        if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
+          await this.actor?.useAbility("Basic Attack");
+        }
+        options.source = /** @type {TeriockArmament} */ this.parent;
+        const execution = new ArmamentExecution(options);
+        await execution.execute();
+      }
+
+      /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        Object.assign(data, {
+          dmg: this.damage.base.formula,
+          range: this.range.long.formula,
+          "range.short": this.range.short.formula,
+          "range.melee": this.range.melee,
+          "range.ranged": this.range.ranged,
+          av: this.av.formula,
+          bv: this.bv.formula,
+          hit: this.hit.formula,
+        });
+        for (const type of this.damage.types) {
+          data[`dmg.type.${type}`] = 1;
+        }
+        foundry.utils.deleteProperty(data, "damage");
+        const propertyKeys = this.parent.effectKeys.property;
+        if (propertyKeys) {
+          for (const p of propertyKeys) {
+            data[`prop.${p}`] = 1;
+          }
+        }
+        return data;
+      }
+
+      /**
+       * @inheritDoc
        * @returns {Teriock.Execution.ArmamentExecutionOptions}
        */
       parseEvent(event) {
@@ -198,19 +237,6 @@ export default function ArmamentDataMixin(Base) {
         if (!this.damage.base.nonZero) {
           this.range.melee = false;
         }
-      }
-
-      /**
-       * @inheritDoc
-       * @param {Teriock.Execution.ArmamentExecutionOptions} options
-       */
-      async roll(options = {}) {
-        if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
-          await this.actor?.useAbility("Basic Attack");
-        }
-        options.source = /** @type {TeriockArmament} */ this.parent;
-        const execution = new ArmamentExecution(options);
-        await execution.execute();
       }
     }
   );

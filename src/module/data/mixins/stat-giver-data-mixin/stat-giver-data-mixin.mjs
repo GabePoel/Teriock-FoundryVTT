@@ -28,12 +28,20 @@ export default function StatGiverDataMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return foundry.utils.mergeObject(super.defineSchema(), {
+        const schema = super.defineSchema();
+        Object.assign(schema, {
           statDice: new fields.SchemaField({
-            hp: new fields.EmbeddedDataField(HpPoolModel),
-            mp: new fields.EmbeddedDataField(MpPoolModel),
+            hp: new fields.EmbeddedDataField(HpPoolModel, {
+              label: "HP Dice",
+              nullable: false,
+            }),
+            mp: new fields.EmbeddedDataField(MpPoolModel, {
+              label: "MP Dice",
+              nullable: false,
+            }),
           }),
         });
+        return schema;
       }
 
       /** @inheritDoc */
@@ -49,7 +57,7 @@ export default function StatGiverDataMixin(Base) {
         for (const [stat, pool] of Object.entries(this.statDice)) {
           pool.number.evaluate();
           pool.stat = stat;
-          if (pool.dice.length < pool.number.value) {
+          if (pool.dice.length < pool.number.value || 0) {
             for (let i = pool.dice.length; i < pool.number.value; i++) {
               pool.dice.push(
                 new StatDieModel(
@@ -69,7 +77,7 @@ export default function StatGiverDataMixin(Base) {
             if (!die.rolled || die.value > die.faces) {
               die.value = Math.ceil(die.faces / 2) + 1;
             }
-            if (die.index >= pool.number.value || pool.disabled) {
+            if (die.index >= (pool.number?.value || 0) || pool.disabled) {
               die.disabled = true;
             }
           }

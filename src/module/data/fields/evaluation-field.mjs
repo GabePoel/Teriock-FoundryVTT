@@ -9,8 +9,11 @@ export default class EvaluationField extends EmbeddedDataField {
    * @param {DataFieldContext} [context] - Additional context which describes the field.
    */
   constructor(options = {}, context = {}) {
-    const model = EvaluationModel;
-    super(model, options, context);
+    const { model = EvaluationModel } = options;
+    delete options.model;
+    const evaluationOptions = foundry.utils.deepClone(options);
+    delete evaluationOptions.initial;
+    super(model, evaluationOptions, context);
     this.fields = this._initialize(model.defineSchema(options));
     this._derivationOptions = options;
   }
@@ -20,17 +23,17 @@ export default class EvaluationField extends EmbeddedDataField {
 
   /** @inheritDoc */
   clean(value, options) {
-    if (typeof value !== "object") {
-      value = { raw: value };
+    if (typeof value !== "undefined") {
+      if (typeof value !== "object") {
+        value = { raw: value };
+      }
+      if (typeof value.saved !== "undefined") {
+        value.raw = value.saved;
+        delete value.saved;
+      }
+    } else {
+      value = { raw: undefined };
     }
-    if (typeof value.saved !== "undefined") {
-      value.raw = value.saved;
-      delete value.saved;
-    }
-    if (typeof value.raw === "undefined") {
-      value.raw = "";
-    }
-    value.raw = `${value.raw}`;
     return super.clean(value, options);
   }
 

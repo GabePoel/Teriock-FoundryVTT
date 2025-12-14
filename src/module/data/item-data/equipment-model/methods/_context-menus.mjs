@@ -16,7 +16,7 @@ export function _entries(equipmentData) {
         getRollIcon(equipmentData.damage.twoHanded.formula),
         "contextMenu",
       ),
-      callback: equipmentData.roll.bind(equipmentData, { twoHanded: true }),
+      callback: equipmentData.use.bind(equipmentData, { twoHanded: true }),
       condition:
         equipmentData.parent.isOwner && equipmentData.hasTwoHandedAttack,
       group: "usage",

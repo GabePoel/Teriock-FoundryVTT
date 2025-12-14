@@ -434,16 +434,16 @@ export function packEffectButton(execution, consequence, options = {}) {
 /**
  * Add trackers to the roll config.
  * @param {AbilityExecution} execution
- * @param {string} tracker
+ * @param {string} key
  * @param {UUID<TeriockTokenDocument|TeriockActor>[]} uuids
  * @returns {Promise<void>}
  */
-export async function addTrackersToExecution(execution, tracker, uuids) {
-  let titleString = toTitleCase(tracker) + " To";
-  if (tracker === "frightened") {
+export async function addTrackersToExecution(execution, key, uuids) {
+  let titleString = toTitleCase(key) + " To";
+  if (key === "frightened") {
     titleString = "Frightened Of";
   }
-  if (tracker === "dueling") {
+  if (key === "dueling") {
     titleString = "Dueling With";
   }
   const buttons = execution.buttons;
@@ -461,7 +461,7 @@ export async function addTrackersToExecution(execution, tracker, uuids) {
         };
         for (const uuid of uuids) {
           effectObject.changes.push({
-            key: "system.trackers." + tracker,
+            key: `system.conditionInformation.${key}.trackers`,
             value: uuid,
             mode: 2,
             priority: 10,

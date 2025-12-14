@@ -27,7 +27,7 @@ export function _generateChanges(abilityData) {
   }
   if (abilityData.improvements.attributeImprovement.attribute) {
     const attributeImprovementChange = {
-      key: `system.attributes.${abilityData.improvements.attributeImprovement.attribute}.score.raw`,
+      key: `system.attributes.${abilityData.improvements.attributeImprovement.attribute}.score`,
       value: `${abilityData.improvements.attributeImprovement.minVal}`,
       mode: 4,
       priority: 20,
@@ -36,7 +36,7 @@ export function _generateChanges(abilityData) {
   }
   if (abilityData.improvements.featSaveImprovement.attribute) {
     const amount = abilityData.improvements.featSaveImprovement.amount;
-    const saveKey = amount === "fluency" ? "saveFluent" : "saveProficient";
+    const saveKey = amount === "fluency" ? "fluent" : "proficient";
     const featSaveImprovementChange = {
       key: `system.attributes.${abilityData.improvements.featSaveImprovement.attribute}.${saveKey}`,
       value: "true",

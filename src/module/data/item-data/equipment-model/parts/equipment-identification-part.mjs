@@ -39,6 +39,13 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        foundry.utils.deleteProperty(data, "identification");
+        return data;
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         if (!this.identification.identified) {

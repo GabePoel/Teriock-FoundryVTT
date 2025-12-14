@@ -184,6 +184,7 @@ export default function ChildDocumentMixin(Base) {
         super.prepareData();
         if (!this.isEmbedded) {
           this.prepareSpecialData();
+          this.prepareVirtualEffects();
         }
       }
 
@@ -191,16 +192,6 @@ export default function ChildDocumentMixin(Base) {
       prepareSpecialData() {
         this.applySpecialEffects();
         super.prepareSpecialData();
-      }
-
-      /**
-       * Does whatever the default roll/execution for this document is.
-       * @param {object} options
-       * @returns {Promise<void>}
-       * @deprecated
-       */
-      async roll(options = {}) {
-        await this.toMessage(options);
       }
 
       /** @inheritDoc */
@@ -217,7 +208,8 @@ export default function ChildDocumentMixin(Base) {
        * Does whatever the default roll/execution for this document is.
        * @param {object} options
        * @returns {Promise<void>}
-       */ async use(options = {}) {
+       */
+      async use(options = {}) {
         await this.system.use(options);
       }
 

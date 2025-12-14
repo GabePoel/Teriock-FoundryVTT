@@ -77,6 +77,9 @@ export default function bindCommonActions(rootElement) {
   );
   queryAll(rootElement, "[data-make-tooltip], [data-rich-tooltip]").forEach(
     /** @param {HTMLElement} el */ (el) => {
+      if (!(el.dataset.tooltip || el.dataset.tooltipHtml) && el.dataset.uuid) {
+        el.dataset.tooltipHtml = TERIOCK.display.panel.loading;
+      }
       // Determine tooltip direction and style
       el.addEventListener("pointerenter", (ev) => {
         el.dataset.tooltipClass = "teriock-rich-tooltip";
@@ -108,17 +111,17 @@ export default function bindCommonActions(rootElement) {
   queryAll(rootElement, "[data-make-tooltip]").forEach(
     /** @param {HTMLElement} el */ (el) => {
       // Add tooltip listener
-      el.addEventListener("mouseover", async (ev) => {
+      el.addEventListener("pointerenter", async (ev) => {
         const target = /** @type {HTMLElement} */ ev.currentTarget;
         const uuid = /** @type {UUID<TeriockChild>} */ target.dataset.uuid;
-        const fetched = target.dataset.tooltipFetched === "true";
+        const fetched = target.dataset.tooltipFetched;
         if (!fetched) {
           target.setAttribute("data-tooltip-fetched", "true");
           const doc = await fromUuid(uuid);
           if (doc && typeof doc.toTooltip === "function") {
             const tooltip = await doc.toTooltip();
             target.setAttribute("data-tooltip-html", tooltip);
-            game.tooltip.activate(target);
+            if (target === game.tooltip.element) game.tooltip.activate(target);
           }
         }
       });
@@ -132,13 +135,9 @@ export default function bindCommonActions(rootElement) {
         el.addEventListener("click", async (event) => {
           event.stopPropagation();
           const uuid = /** @type {UUID<TeriockChild>} */ el.dataset.uuid;
-          if (!uuid) {
-            return;
-          }
+          if (!uuid) return;
           const doc = await fromUuid(uuid);
-          if (!doc) {
-            return;
-          }
+          if (!doc) return;
           await previewSheet(doc);
         });
       },

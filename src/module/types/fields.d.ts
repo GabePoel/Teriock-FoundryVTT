@@ -1,4 +1,5 @@
 import { comparisons } from "../dice/functions/_module.mjs";
+import { EvaluationModel } from "../data/models/_module.mjs";
 
 declare global {
   namespace Teriock.Fields {
@@ -15,10 +16,13 @@ declare global {
       blank?: number | string;
       bool?: boolean;
       decimals?: number;
+      skipRollData?: boolean;
     };
 
     export type _EvaluationFieldOptions = _FormulaFieldOptions &
-      FormulaDerivationOptions;
+      FormulaDerivationOptions & {
+        model?: typeof EvaluationModel;
+      };
 
     /**
      * Valid comparison operations.

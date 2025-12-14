@@ -9,3 +9,4 @@ export { default as ThresholdDataMixin } from "./threshold-data-mixin/threshold-
 export { default as TransformationDataMixin } from "./transformation-data-mixin/transformation-data-mixin.mjs";
 export { default as WikiDataMixin } from "./wiki-data-mixin/wiki-data-mixin.mjs";
 export { default as ProficiencyDataMixin } from "./proficiency-data-mixin/proficiency-data-mixin.mjs";
+export { default as UsableDataMixin } from "./usable-data-mixin/usable-data-mixin.mjs";

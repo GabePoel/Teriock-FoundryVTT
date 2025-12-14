@@ -2,6 +2,7 @@ import { iconManifest } from "../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../executions/document-executions/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { dotJoin } from "../../../helpers/string.mjs";
+import { TextField } from "../../fields/_module.mjs";
 import {
   ExecutableDataMixin,
   ProficiencyDataMixin,
@@ -9,7 +10,6 @@ import {
   ThresholdDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import { TextField } from "../../fields/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _panelParts } from "./methods/_panel-parts.mjs";
 
@@ -120,14 +120,14 @@ export default class TeriockFluencyModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    return { ...super.panelParts, ..._panelParts(this) };
-  }
-
-  /** @inheritDoc */
   get nameString() {
     const nameAddition = this.revealed ? "" : " (Unrevealed)";
     return this.parent.name + nameAddition;
+  }
+
+  /** @inheritDoc */
+  get panelParts() {
+    return { ...super.panelParts, ..._panelParts(this) };
   }
 
   /** @inheritDoc */
@@ -171,17 +171,17 @@ export default class TeriockFluencyModel extends ProficiencyDataMixin(
     }
   }
 
-  prepareDerivedData() {
-    this.tradecraftDescription = TERIOCK.content.tradecrafts[this.tradecraft];
-  }
-
   /**
    * @inheritDoc
    * @param {Teriock.Execution.DocumentExecutionOptions} options
    */
-  async roll(options = {}) {
+  async _use(options = {}) {
     options.source = this.parent;
     const execution = new FluencyExecution(options);
     await execution.execute();
+  }
+
+  prepareDerivedData() {
+    this.tradecraftDescription = TERIOCK.content.tradecrafts[this.tradecraft];
   }
 }

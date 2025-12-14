@@ -28,7 +28,7 @@ export default function WikiDataMixin(Base) {
        */
       get isOnWiki() {
         return !!TERIOCK.index[
-          TERIOCK.options.document[this.parent.type].getter
+          TERIOCK.options.document[this.parent.type]["pack"]
         ][
           toCamelCase(
             foundry.utils.getProperty(this.parent, this.metadata.pageNameKey),

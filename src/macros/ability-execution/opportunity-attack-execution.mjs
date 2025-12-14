@@ -15,4 +15,4 @@ const ability = await tm.dialogs.selectDocumentDialog(abilities, {
   title: "Select Ability",
   hint: "Select an ability to use.",
 });
-await ability.system.roll(options);
+await ability.system.use(options);

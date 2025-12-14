@@ -207,6 +207,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin: 8px var(--panel-padding) var(--panel-padding);
+  opacity: 1;
 }
 .teriock-panel-body > * {
   position: relative;
@@ -219,9 +221,25 @@
   right: 0;
   border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
 }
-.teriock-panel-body {
-  margin: 8px var(--panel-padding) var(--panel-padding);
-  opacity: 1;
+.teriock-panel-body:not(:has(*)) {
+  display: none;
+}
+
+.teriock-panel-content {
+  position: relative;
+}
+.teriock-panel-content::after {
+  background: transparent;
+  border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
+  content: "";
+  height: 0;
+  left: var(--panel-padding);
+  position: absolute;
+  right: var(--panel-padding);
+  top: 0;
+}
+.teriock-panel-content:has(.teriock-panel-spacer .teriock-panel-body:not(:has(*))) {
+  display: none;
 }
 
 .teriock-panel {
@@ -270,16 +288,6 @@
 }
 .teriock-panel .teriock-panel-header:hover .teriock-panel-header-expander {
   opacity: 1;
-}
-.teriock-panel .teriock-panel-header::before {
-  background: transparent;
-  border-bottom: 1px var(--panel-divider-style) var(--color-panel-divider);
-  border-radius: 4px;
-  content: "";
-  left: var(--panel-padding);
-  position: absolute;
-  right: var(--panel-padding);
-  top: 100%;
 }
 .teriock-panel .teriock-panel-header .teriock-panel-image {
   align-items: center;
@@ -471,9 +479,9 @@
   border-top: 1px dotted var(--color-panel-associations-border);
 }
 .teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-card-name {
-  text-wrap: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-wrap: nowrap;
 }
 .teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-row-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
@@ -483,9 +491,9 @@
   overflow: hidden;
   height: 1.5em;
   margin: 0.25em;
-  width: 1.5em;
-  min-width: 1.5em;
   min-height: 1.5em;
+  min-width: 1.5em;
+  width: 1.5em;
 }
 .teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-row-image img {
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
@@ -1428,17 +1436,6 @@ document-embed + document-embed {
 .teriock-block-container .teriock-block .teriock-block-image {
   position: relative;
   overflow: hidden;
-}
-.teriock-block-container .teriock-block .teriock-block-image::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock-block-container .teriock-block .teriock-block-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
   border-radius: 100%;
@@ -1453,6 +1450,15 @@ document-embed + document-embed {
   position: relative;
   width: calc(var(--teriock-block-height) - 12px);
   user-select: none;
+}
+.teriock-block-container .teriock-block .teriock-block-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 .teriock-block-container .teriock-block .teriock-block-image.usable {
   cursor: pointer;
@@ -1684,17 +1690,6 @@ document-embed + document-embed {
 .teriock-block .teriock-block-image {
   position: relative;
   overflow: hidden;
-}
-.teriock-block .teriock-block-image::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock-block .teriock-block-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
   border-radius: 100%;
@@ -1709,6 +1704,15 @@ document-embed + document-embed {
   position: relative;
   width: calc(var(--teriock-block-height) - 12px);
   user-select: none;
+}
+.teriock-block .teriock-block-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 .teriock-block .teriock-block-image.usable {
   cursor: pointer;
@@ -2129,6 +2133,12 @@ table {
   width: 100%;
 }
 
+.transparent-input {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
 .tcenter {
   align-items: center;
   display: flex;
@@ -2287,6 +2297,13 @@ table {
   width: 28px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  object-fit: cover;
+  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container::before {
   position: absolute;
@@ -2296,15 +2313,6 @@ table {
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock .doc-select .doc-select-row .doc-image-container {
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
-  border-radius: 100%;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
-  object-fit: cover;
-  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container img {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -2393,7 +2401,8 @@ table {
 .teriock .affix .selected {
   opacity: 0;
 }
-.teriock .ab-box-content .selected, .teriock .ab-box-content .unselected,
+.teriock .ab-box-content .selected,
+.teriock .ab-box-content .unselected,
 .teriock .affix .selected,
 .teriock .affix .unselected {
   display: flex;
@@ -2700,17 +2709,6 @@ table {
 .teriock .teriock-block-container .teriock-block .teriock-block-image {
   position: relative;
   overflow: hidden;
-}
-.teriock .teriock-block-container .teriock-block .teriock-block-image::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock .teriock-block-container .teriock-block .teriock-block-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
   border-radius: 100%;
@@ -2725,6 +2723,15 @@ table {
   position: relative;
   width: calc(var(--teriock-block-height) - 12px);
   user-select: none;
+}
+.teriock .teriock-block-container .teriock-block .teriock-block-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 .teriock .teriock-block-container .teriock-block .teriock-block-image.usable {
   cursor: pointer;
@@ -2955,17 +2962,6 @@ table {
 .teriock .teriock-block .teriock-block-image {
   position: relative;
   overflow: hidden;
-}
-.teriock .teriock-block .teriock-block-image::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock .teriock-block .teriock-block-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
   border-radius: 100%;
@@ -2980,6 +2976,15 @@ table {
   position: relative;
   width: calc(var(--teriock-block-height) - 12px);
   user-select: none;
+}
+.teriock .teriock-block .teriock-block-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 .teriock .teriock-block .teriock-block-image.usable {
   cursor: pointer;
@@ -3379,6 +3384,11 @@ table {
   margin: 0;
   padding: 0;
   width: 100%;
+}
+.teriock .transparent-input {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 .teriock .tcenter {
   align-items: center;
@@ -4309,6 +4319,15 @@ table {
   height: 24px;
   width: 24px;
 }
+.teriock .grid-fill {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 .teriock .ab-sheet-sidebar {
   backdrop-filter: blur(4px);
   background-color: rgba(255, 255, 255, 0.3);
@@ -4345,6 +4364,13 @@ table {
   position: relative;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+  border-radius: 5px;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  top: 0;
+  width: 64px;
 }
 .teriock .ab-header .ab-profile-img::before {
   position: absolute;
@@ -4354,15 +4380,6 @@ table {
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock .ab-header .ab-profile-img {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
-  border-radius: 5px;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
-  top: 0;
-  width: 64px;
 }
 .teriock .ab-header .ab-profile-img img {
   filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-cool-4), transparent 60%));

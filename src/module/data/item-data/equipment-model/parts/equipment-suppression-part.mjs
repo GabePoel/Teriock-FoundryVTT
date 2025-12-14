@@ -14,18 +14,6 @@ export default (Base) => {
      * @mixin
      */
     class EquipmentSuppressionPart extends Base {
-      /**
-       * Dampen this equipment.
-       * @returns {Promise<void>}
-       */
-      async dampen() {
-        const data = { doc: this.parent };
-        await this.parent.hookCall("equipmentDampen", data);
-        if (!data.cancel) {
-          await this.parent.update({ "system.dampened": true });
-        }
-      }
-
       /** @inheritDoc */
       static defineSchema() {
         const schema = super.defineSchema();
@@ -40,6 +28,28 @@ export default (Base) => {
           }),
         });
         return schema;
+      }
+
+      /**
+       * Dampen this equipment.
+       * @returns {Promise<void>}
+       */
+      async dampen() {
+        const data = { doc: this.parent };
+        await this.parent.hookCall("equipmentDampen", data);
+        if (!data.cancel) {
+          await this.parent.update({ "system.dampened": true });
+        }
+      }
+
+      /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        Object.assign(data, {
+          dampened: this.dampened ? 1 : 0,
+          shattered: this.shattered ? 1 : 0,
+        });
+        return data;
       }
 
       /**

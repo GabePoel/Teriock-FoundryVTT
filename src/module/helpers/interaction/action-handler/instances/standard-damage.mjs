@@ -43,7 +43,7 @@ export class StandardDamageHandler extends ActionHandler {
       options.formula = roll.formula;
     }
     await roll.evaluate();
-    await attacker.roll(options);
+    await attacker.use(options);
   }
 
   /**

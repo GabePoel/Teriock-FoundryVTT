@@ -6,6 +6,7 @@ const { Compendium } = foundry.applications.sidebar.apps;
 export default class TeriockCompendium extends Compendium {
   static _entryPartial = systemPath("templates/sidebar/index-partial.hbs");
 
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     let docs = this.collection;
@@ -26,5 +27,16 @@ export default class TeriockCompendium extends Compendium {
     if (game.settings.get("teriock", "compendiumTooltips")) {
       bindCommonActions(this.element);
     }
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options = {}) {
+    const context = await super._prepareContext(options);
+    if (
+      ["Actor", "Item", "ActiveEffect"].includes(this.collection?.documentName)
+    ) {
+      context.makeTooltip = true;
+    }
+    return context;
   }
 }

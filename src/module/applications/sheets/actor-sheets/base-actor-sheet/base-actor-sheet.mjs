@@ -204,7 +204,9 @@ export default class TeriockBaseActorSheet extends AvatarImageActorSheetPart(
         icon: TERIOCK.options.document.condition.icon,
       };
       /** @type {TeriockTokenDocument[]} */
-      const tokenDocs = (this.document.system.trackers[condition] || [])
+      const tokenDocs = (
+        this.document.system.conditionInformation[condition].trackers || []
+      )
         .map((uuid) => fromUuidSync(uuid))
         .filter((t) => t);
       if (tokenDocs.length > 0) {

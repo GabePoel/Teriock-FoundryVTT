@@ -1,5 +1,6 @@
 import { fancifyFields, getSchema, makeIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
+import { UsableDataMixin } from "../../mixins/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
 const { fields } = foundry.data;
@@ -7,20 +8,13 @@ const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Data model shared by items and effects.
+ * @mixes UsableData
  */
-export default class ChildTypeModel extends CommonTypeModel {
+export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
   /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {
-      proficient: new fields.BooleanField({
-        initial: false,
-        label: "Proficient",
-      }),
-      fluent: new fields.BooleanField({
-        initial: false,
-        label: "Fluent",
-      }),
       font: new fields.StringField({
         initial: "",
         label: "Font",
@@ -55,88 +49,6 @@ export default class ChildTypeModel extends CommonTypeModel {
       foundry.utils.setProperty(data, "qualifiers.suppressed", { raw: "0" });
     }
     return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    const entries = super.getCardContextMenuEntries(doc);
-    entries.push(
-      ...[
-        {
-          name: this.useText,
-          icon: makeIcon(this.useIcon, "contextMenu"),
-          callback: this.use.bind(this),
-          condition: this.isUsable,
-          group: "usage",
-        },
-        {
-          name: "Enable",
-          icon: makeIcon("check", "contextMenu"),
-          callback: this.parent.enable.bind(this.parent),
-          condition:
-            this.parent.parent?.isOwner &&
-            this.parent.disabled &&
-            this.parent.type !== "equipment",
-          group: "control",
-        },
-        {
-          name: "Disable",
-          icon: makeIcon("xmark-large", "contextMenu"),
-          callback: this.parent.disable.bind(this.parent),
-          condition:
-            this.parent.parent?.isOwner &&
-            !this.parent.disabled &&
-            this.parent.type !== "equipment" &&
-            this.parent.type !== "mount" &&
-            !(this.parent.type === "ability" && this.isVirtual),
-          group: "control",
-        },
-        {
-          name: "Open GM Notes",
-          icon: makeIcon("notes", "contextMenu"),
-          callback: async () => {
-            await this.gmNotesOpen();
-          },
-          condition: game.user.isGM,
-          group: "open",
-        },
-        {
-          name: "Open Image",
-          icon: makeIcon("image", "contextMenu"),
-          callback: async () => {
-            await new ImagePopout({
-              src: this.parent.img,
-              uuid: this.parent.uuid,
-              window: { title: this.parent.nameString },
-            }).render(true);
-          },
-          group: "open",
-        },
-        {
-          name: "Share Image",
-          icon: makeIcon("comment-image", "contextMenu"),
-          callback: this.parent.chatImage.bind(this.parent),
-          group: "share",
-        },
-        {
-          name: "Share Writeup",
-          icon: makeIcon("comment-lines", "contextMenu"),
-          callback: this.parent.toMessage.bind(this.parent),
-          group: "share",
-        },
-        {
-          name: "Duplicate",
-          icon: makeIcon("copy", "contextMenu"),
-          callback: async () => {
-            await this.parent.duplicate();
-          },
-          condition: () =>
-            this.parent?.elder?.sheet?.editable && this.parent.isOwner,
-          group: "document",
-        },
-      ],
-    );
-    return entries;
   }
 
   /**
@@ -271,20 +183,14 @@ export default class ChildTypeModel extends CommonTypeModel {
     return /** @type {TeriockChild} */ super.parent;
   }
 
-  /**
-   * An icon that represents using this.
-   * @returns {string}
-   */
-  get useIcon() {
-    return "dice-d20";
-  }
-
-  /**
-   * A string that represents using this.
-   * @returns {string}
-   */
+  /** @inheritDoc */
   get useText() {
     return `Use ${this.parent.name}`;
+  }
+
+  /** @inheritDoc */
+  async _use(options = {}) {
+    await this.parent.toMessage(options);
   }
 
   /**
@@ -308,6 +214,88 @@ export default class ChildTypeModel extends CommonTypeModel {
     }
   }
 
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    const entries = super.getCardContextMenuEntries(doc);
+    entries.push(
+      ...[
+        {
+          name: this.useText,
+          icon: makeIcon(this.useIcon, "contextMenu"),
+          callback: this.use.bind(this),
+          condition: this.isUsable,
+          group: "usage",
+        },
+        {
+          name: "Enable",
+          icon: makeIcon("check", "contextMenu"),
+          callback: this.parent.enable.bind(this.parent),
+          condition:
+            this.parent.parent?.isOwner &&
+            this.parent.disabled &&
+            this.parent.type !== "equipment",
+          group: "control",
+        },
+        {
+          name: "Disable",
+          icon: makeIcon("xmark-large", "contextMenu"),
+          callback: this.parent.disable.bind(this.parent),
+          condition:
+            this.parent.parent?.isOwner &&
+            !this.parent.disabled &&
+            this.parent.type !== "equipment" &&
+            this.parent.type !== "mount" &&
+            !(this.parent.type === "ability" && this.isVirtual),
+          group: "control",
+        },
+        {
+          name: "Open GM Notes",
+          icon: makeIcon("notes", "contextMenu"),
+          callback: async () => {
+            await this.gmNotesOpen();
+          },
+          condition: game.user.isGM,
+          group: "open",
+        },
+        {
+          name: "Open Image",
+          icon: makeIcon("image", "contextMenu"),
+          callback: async () => {
+            await new ImagePopout({
+              src: this.parent.img,
+              uuid: this.parent.uuid,
+              window: { title: this.parent.nameString },
+            }).render(true);
+          },
+          group: "open",
+        },
+        {
+          name: "Share Image",
+          icon: makeIcon("comment-image", "contextMenu"),
+          callback: this.parent.chatImage.bind(this.parent),
+          group: "share",
+        },
+        {
+          name: "Share Writeup",
+          icon: makeIcon("comment-lines", "contextMenu"),
+          callback: this.parent.toMessage.bind(this.parent),
+          group: "share",
+        },
+        {
+          name: "Duplicate",
+          icon: makeIcon("copy", "contextMenu"),
+          callback: async () => {
+            await this.parent.duplicate();
+          },
+          condition: () =>
+            this.parent?.elder?.sheet?.editable && this.parent.isOwner,
+          group: "document",
+        },
+      ],
+    );
+    return entries;
+  }
+
   /**
    * Parse an event into usable roll data.
    * @param {PointerEvent} _event
@@ -326,22 +314,7 @@ export default class ChildTypeModel extends CommonTypeModel {
     this.qualifiers.ephemeral.evaluate();
   }
 
-  /**
-   * Initiates a roll for the child document.
-   * Delegates to the parent document's chat functionality.
-   * @param {object} options - Options for the roll operation.
-   * @returns {Promise<void>}
-   */
-  async roll(options = {}) {
-    await this.parent.toMessage(options);
-  }
-
-  /**
-   * Uses the child document, which triggers a roll.
-   * Alias for the roll method to provide a consistent interface.
-   * @param {object} options - Options for the use operation.
-   * @returns {Promise<void>}
-   */
+  /** @inheritDoc */
   async use(options = {}) {
     const data = { doc: this.parent };
     await this.parent.hookCall("use", data);
@@ -352,7 +325,7 @@ export default class ChildTypeModel extends CommonTypeModel {
           this.parent.type.slice(1),
         [this.parent],
       );
-      await this.roll(options);
+      await this._use(options);
     }
   }
 }

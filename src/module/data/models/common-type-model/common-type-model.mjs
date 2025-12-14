@@ -57,15 +57,6 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Context menu entries to display for cards that represent the parent document.
-   * @param {TeriockDocument} _doc
-   * @returns {Teriock.Foundry.ContextMenuEntry[]}
-   */
-  getCardContextMenuEntries(_doc) {
-    return [];
-  }
-
-  /**
    * The color that this should be displayed with.
    * @returns {string|null}
    */
@@ -120,11 +111,19 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Types that can be shown on this parent's sheet.
-   * @returns {Teriock.Documents.CommonType[]}
+   * Metadata.
+   * @returns {Teriock.Documents.ModelMetadata}
    */
-  get visibleTypes() {
-    return this.metadata.visibleTypes;
+  get metadata() {
+    return this.constructor.metadata;
+  }
+
+  /**
+   * Type-specific changes to the name string.
+   * @returns {string}
+   */
+  get nameString() {
+    return this.parent.name;
   }
 
   /**
@@ -166,27 +165,19 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Metadata.
-   * @returns {Teriock.Documents.ModelMetadata}
-   */
-  get metadata() {
-    return this.constructor.metadata;
-  }
-
-  /**
-   * Type-specific changes to the name string.
-   * @returns {string}
-   */
-  get nameString() {
-    return this.parent.name;
-  }
-
-  /**
    * @inheritDoc
    * @returns {TeriockCommon}
    */
   get parent() {
     return /** @type {TeriockCommon} */ super.parent;
+  }
+
+  /**
+   * Types that can be shown on this parent's sheet.
+   * @returns {Teriock.Documents.CommonType[]}
+   */
+  get visibleTypes() {
+    return this.metadata.visibleTypes;
   }
 
   /**
@@ -297,6 +288,15 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * Context menu entries to display for cards that represent the parent document.
+   * @param {TeriockDocument} _doc
+   * @returns {Teriock.Foundry.ContextMenuEntry[]}
+   */
+  getCardContextMenuEntries(_doc) {
+    return [];
+  }
+
+  /**
    * Get a copy of the index reference that this document is based off of if it exists.
    * @returns {Promise<TeriockCommon|void>}
    */
@@ -352,12 +352,28 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * Fetch roll data specific to this document.
+   * @returns {object}
+   */
+  getLocalRollData() {
+    const data = this.toObject(false);
+    Object.assign(data, {
+      name: this.parent.name,
+      type: this.parent.type,
+    });
+    foundry.utils.deleteProperty(data, "_ref");
+    foundry.utils.deleteProperty(data, "_sup");
+    foundry.utils.deleteProperty(data, "gmNotes");
+    return data;
+  }
+
+  /**
    * Fetch roll data.
    * @returns {object}
    */
   getRollData() {
     let rollData = {};
-    if (this.parent.parent) {
+    if (this.parent.parent?.getRollData) {
       rollData = this.parent.parent.getRollData();
     }
     Object.assign(rollData, this.getSystemRollData());
@@ -365,15 +381,14 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Fetch roll data specific to this document.
+   * Fetch roll data structured for use regardless of whether this has a parent.
    * @returns {object}
    */
   getSystemRollData() {
-    const object = this.toObject();
-    object.name = this.parent.name;
+    const localRollData = this.getLocalRollData();
     return {
-      [this.parent.documentName]: object,
-      [this.parent.type]: object,
+      [this.parent.documentName]: localRollData,
+      [this.parent.type]: localRollData,
     };
   }
 
@@ -456,6 +471,13 @@ export default class CommonTypeModel extends TypeDataModel {
    * not stored in the database. This happens after the actor has completed all operations.
    */
   prepareSpecialData() {}
+
+  /**
+   * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
+   * {@link TeriockEffect}s, but that we want to be able to add synchronously during the update cycle. Any of these
+   * effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects} as well.
+   */
+  prepareVirtualEffects() {}
 
   /**
    * Refresh this document from the index.

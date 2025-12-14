@@ -93,7 +93,7 @@ export default class TeriockRoll extends Roll {
    */
   static maxValue(formula, data = {}) {
     const maxRoll = new TeriockRoll(formula + " + 0", data);
-    return maxRoll.evaluateSync({ maximize: true }).total;
+    return maxRoll.evaluateSync({ allowStrings: true, maximize: true }).total;
   }
 
   /**
@@ -116,7 +116,20 @@ export default class TeriockRoll extends Roll {
    */
   static minValue(formula, data = {}) {
     const minRoll = new TeriockRoll(formula + " + 0", data);
-    return minRoll.evaluateSync({ minimize: true }).total;
+    return minRoll.evaluateSync({ allowStrings: true, minimize: true }).total;
+  }
+
+  /**
+   * Evaluate a formula without making any rolls.
+   * @param {number|string|undefined|null} formula
+   * @returns {number}
+   */
+  static quickValue(formula) {
+    if (typeof formula === "number") return formula;
+    if (typeof formula !== "string") return 0;
+    if (formula.includes("Infinity")) return Infinity;
+    if (!isNaN(Number(formula))) return Number(formula);
+    return 0;
   }
 
   /**

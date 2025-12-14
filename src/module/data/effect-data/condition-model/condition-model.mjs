@@ -1,11 +1,11 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
+import { combatExpirationMethodField } from "../../fields/helpers/builders.mjs";
 import {
   TransformationDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
-import { combatExpirationMethodField } from "../../fields/helpers/builders.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
@@ -40,21 +40,6 @@ export default class TeriockConditionModel extends TransformationDataMixin(
         }),
       }),
     });
-  }
-
-  /**
-   * @inheritDoc
-   */
-  getCardContextMenuEntries(_doc) {
-    return [
-      {
-        name: this.useText,
-        icon: makeIcon(this.useIcon, "contextMenu"),
-        callback: this.use.bind(this),
-        condition: this.parent.isOwner,
-        group: "usage",
-      },
-    ];
   }
 
   /**
@@ -103,6 +88,15 @@ export default class TeriockConditionModel extends TransformationDataMixin(
   }
 
   /** @inheritDoc */
+  async _use(_options = {}) {
+    if (this.parent.id.includes("dead") && this.parent.actor) {
+      await this.parent.actor.system.deathBagPull();
+    } else {
+      await this.inCombatExpiration(true);
+    }
+  }
+
+  /** @inheritDoc */
   async expire() {
     if (
       Object.values(TERIOCK.index.conditions).includes(this.conditionKey) &&
@@ -115,20 +109,26 @@ export default class TeriockConditionModel extends TransformationDataMixin(
   }
 
   /**
+   * @inheritDoc
+   */
+  getCardContextMenuEntries(_doc) {
+    return [
+      {
+        name: this.useText,
+        icon: makeIcon(this.useIcon, "contextMenu"),
+        callback: this.use.bind(this),
+        condition: this.parent.isOwner,
+        group: "usage",
+      },
+    ];
+  }
+
+  /**
    * Trigger in-combat expiration.
    * @param {boolean} [forceDialog] - Force a dialog to show up.
    * @returns {Promise<void>}
    */
   async inCombatExpiration(forceDialog = false) {
     await inCombatExpirationDialog(this.parent, forceDialog);
-  }
-
-  /** @inheritDoc */
-  async roll(_options = {}) {
-    if (this.parent.id.includes("dead") && this.parent.actor) {
-      await this.parent.actor.system.deathBagPull();
-    } else {
-      await this.inCombatExpiration(true);
-    }
   }
 }

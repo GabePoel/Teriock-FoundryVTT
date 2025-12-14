@@ -114,9 +114,4 @@ export default class TeriockItem extends RetrievalDocumentMixin(
       yield effect;
     }
   }
-
-  /** @inheritDoc */
-  async roll(options = {}) {
-    await this.system.roll(options);
-  }
 }

@@ -4,21 +4,15 @@ import { AbilityExecution } from "../../../executions/document-executions/_modul
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import {
   isOwnerAndCurrentUser,
+  mix,
   queryGM,
   safeUuid,
 } from "../../../helpers/utils.mjs";
-import {
-  ConsumableDataMixin,
-  HierarchyDataMixin,
-  ProficiencyDataMixin,
-  RevelationDataMixin,
-  ThresholdDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _generateChanges } from "./methods/_generate-changes.mjs";
-import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
+import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _suppressed } from "./methods/_suppression.mjs";
 import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
@@ -38,14 +32,14 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @mixes ThresholdData
  * @mixes WikiData
  */
-export default class TeriockAbilityModel extends ProficiencyDataMixin(
-  ThresholdDataMixin(
-    RevelationDataMixin(
-      HierarchyDataMixin(
-        ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
-      ),
-    ),
-  ),
+export default class TeriockAbilityModel extends mix(
+  TeriockBaseEffectModel,
+  mixins.WikiDataMixin,
+  mixins.ConsumableDataMixin,
+  mixins.HierarchyDataMixin,
+  mixins.RevelationDataMixin,
+  mixins.ThresholdDataMixin,
+  mixins.ProficiencyDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -317,14 +311,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
-  get panelParts() {
-    return {
-      ...super.panelParts,
-      ..._panelParts(this),
-    };
-  }
-
-  /** @inheritDoc */
   get nameString() {
     const additions = [];
     if (this.adept.enabled) {
@@ -350,6 +336,14 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
       nameAddition = ` (${additions.join(", ")})`;
     }
     return this.parent.name + nameAddition;
+  }
+
+  /** @inheritDoc */
+  get panelParts() {
+    return {
+      ...super.panelParts,
+      ..._panelParts(this),
+    };
   }
 
   //noinspection JSUnusedGlobalSymbols
@@ -397,6 +391,19 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
     if (isOwnerAndCurrentUser(this.parent, userId)) {
       this.expireSustainedConsequences().then();
     }
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   */
+  async _use(options = {}) {
+    options.source = this.parent;
+    if (this.grantOnly && this.parent.parent.metadata.armament) {
+      options.armament = /** @type {TeriockArmament} */ this.parent.parent;
+    }
+    const execution = new AbilityExecution(options);
+    await execution.execute();
   }
 
   /** @inheritDoc */
@@ -447,6 +454,15 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   }
 
   /** @inheritDoc */
+  async getCompendiumSourceRefreshObject() {
+    const obj = await super.getCompendiumSourceRefreshObject();
+    if (!["normal", "special", "flaw"].includes(this.form)) {
+      foundry.utils.deleteProperty(obj, "system.form");
+    }
+    return obj;
+  }
+
+  /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
     Object.assign(rollData, {
@@ -486,28 +502,6 @@ export default class TeriockAbilityModel extends ProficiencyDataMixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     _prepareDerivedData(this);
-  }
-
-  /** @inheritDoc */
-  async getCompendiumSourceRefreshObject() {
-    const obj = await super.getCompendiumSourceRefreshObject();
-    if (!["normal", "special", "flaw"].includes(this.form)) {
-      foundry.utils.deleteProperty(obj, "system.form");
-    }
-    return obj;
-  }
-
-  /**
-   * @inheritDoc
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   */
-  async roll(options = {}) {
-    options.source = this.parent;
-    if (this.grantOnly && this.parent.parent.metadata.armament) {
-      options.armament = /** @type {TeriockArmament} */ this.parent.parent;
-    }
-    const execution = new AbilityExecution(options);
-    await execution.execute();
   }
 
   /**

@@ -37,27 +37,6 @@ export default function AttunableDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        return [
-          ...super.getCardContextMenuEntries(doc),
-          {
-            name: "Attune",
-            icon: makeIcon("handshake-simple", "contextMenu"),
-            callback: this.attune.bind(this),
-            condition: this.parent.isOwner && !this.isAttuned,
-            group: "control",
-          },
-          {
-            name: "Deattune",
-            icon: makeIcon("handshake-simple-slash", "contextMenu"),
-            callback: this.deattune.bind(this),
-            condition: this.parent.isOwner && this.isAttuned,
-            group: "control",
-          },
-        ];
-      }
-
-      /** @inheritDoc */
       get embedIcons() {
         return [
           {
@@ -204,6 +183,36 @@ export default function AttunableDataMixin(Base) {
             );
           }
         }
+      }
+
+      /** @inheritDoc */
+      getCardContextMenuEntries(doc) {
+        return [
+          ...super.getCardContextMenuEntries(doc),
+          {
+            name: "Attune",
+            icon: makeIcon("handshake-simple", "contextMenu"),
+            callback: this.attune.bind(this),
+            condition: this.parent.isOwner && !this.isAttuned,
+            group: "control",
+          },
+          {
+            name: "Deattune",
+            icon: makeIcon("handshake-simple-slash", "contextMenu"),
+            callback: this.deattune.bind(this),
+            condition: this.parent.isOwner && this.isAttuned,
+            group: "control",
+          },
+        ];
+      }
+
+      /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        Object.assign(data, {
+          tier: this.tier.value || 0,
+        });
+        return data;
       }
 
       /** @inheritDoc */

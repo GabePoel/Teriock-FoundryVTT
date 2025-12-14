@@ -35,10 +35,10 @@ export default (Base) =>
      */
     static async _onTradecraftExtra(_event, target) {
       const tradecraft = target.dataset.tradecraft;
-      const extra = this.document.system.tradecrafts[tradecraft].extra;
-      const newExtra = (extra + 1) % 4;
+      const score = this.document.system.tradecrafts[tradecraft].score;
+      const newScore = (score + 1) % 4;
       await this.document.update({
-        [`system.tradecrafts.${tradecraft}.extra`]: newExtra,
+        [`system.tradecrafts.${tradecraft}.score`]: newScore,
       });
     }
   };

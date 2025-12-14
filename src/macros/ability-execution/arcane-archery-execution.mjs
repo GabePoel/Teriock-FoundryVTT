@@ -27,4 +27,4 @@ const spell = await tm.dialogs.selectDocumentDialog(spells, {
   title: "Select Spell",
   hint: "Select a spell to cast",
 });
-await spell.system.roll(options);
+await spell.system.use(options);

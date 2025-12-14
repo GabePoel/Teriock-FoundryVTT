@@ -79,6 +79,12 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     );
   }
 
+  /** @type {number} */
+  evaluateCallNumber;
+
+  /** @type {number} */
+  evaluateCallTime;
+
   /**
    * The {@link TeriockEffect}s that have special changes.
    * @type {TeriockEffect[]}
@@ -213,11 +219,7 @@ export default class TeriockActor extends RetrievalDocumentMixin(
 
   /** @inheritDoc */
   get visibleChildren() {
-    return [
-      ...this.validEffects,
-      ...this.items.contents,
-      ...(this.subs.contents || []),
-    ]
+    return [...this.validEffects, ...this.items.contents]
       .filter((c) => !c.isEphemeral)
       .filter(
         (c) => !c.metadata.revealable || c.system.revealed || game.user.isGM,
@@ -406,13 +408,37 @@ export default class TeriockActor extends RetrievalDocumentMixin(
 
   /** @inheritDoc */
   prepareData() {
+    this.evaluateCallTime = 0;
+    this.evaluateCallNumber = 0;
+    const dataStart = performance.now();
+    const normalDataStart = performance.now();
     super.prepareData();
+    const normalDataEnd = performance.now();
+    const specialDataStart = performance.now();
     this.prepareSpecialData();
+    const specialDataEnd = performance.now();
+    const virtualEffectsStart = performance.now();
     this.prepareVirtualEffects();
+    const virtualEffectsEnd = performance.now();
+    const postUpdateStart = performance.now();
     const user = selectUser(this);
     if (user?.id) {
       foundry.helpers.Hooks.callAll(`teriock.actorPostUpdate`, this, user.id);
     }
+    const postUpdateEnd = performance.now();
+    const dataEnd = performance.now();
+    console.log(`prepareData: ${dataEnd - dataStart} ms (${this.name})`);
+    console.log(` - super.prepareData: ${normalDataEnd - normalDataStart} ms`);
+    console.log(
+      ` - prepareSpecialData: ${specialDataEnd - specialDataStart} ms`,
+    );
+    console.log(
+      ` - prepareVirtualEffects: ${virtualEffectsEnd - virtualEffectsStart} ms`,
+    );
+    console.log(` - postUpdate: ${postUpdateEnd - postUpdateStart} ms`);
+    console.log(
+      ` - eval: ${this.evaluateCallNumber} calls, ${(dataEnd - dataStart) / this.evaluateCallNumber} ms / call`,
+    );
   }
 
   /** @inheritDoc */
@@ -457,53 +483,12 @@ export default class TeriockActor extends RetrievalDocumentMixin(
     }
   }
 
-  /**
-   * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
-   * {@link TeriockEffect}s, but that we want to be able to add synchronously during the update cycle. Any of these
-   * effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects} as well.
-   */
+  /** @inheritDoc */
   prepareVirtualEffects() {
-    this.prepareVirtualEncumbrance();
+    super.prepareVirtualEffects();
     this.prepareVirtualWounds();
     this.prepareVirtualMovement();
     this.prepareVirtualConditionInformation();
-  }
-
-  /**
-   * Add statuses and explanations for being encumbered.
-   */
-  prepareVirtualEncumbrance() {
-    if (
-      this.system.encumbranceLevel > 0 &&
-      !this.system.isProtected("statuses", "encumbered")
-    ) {
-      this.statuses.add("encumbered");
-      if (this.system.encumbranceLevel === 1) {
-        this.system.conditionInformation.encumbered.reasons.add(
-          "Lightly Encumbered",
-        );
-        this.system.movementSpeed.value = Math.max(
-          this.system.movementSpeed.value - 10,
-          0,
-        );
-      } else if (this.system.encumbranceLevel === 2) {
-        this.system.conditionInformation.encumbered.reasons.add(
-          "Heavily Encumbered",
-        );
-        this.system.conditionInformation.slowed.reasons.add(
-          "Heavily Encumbered",
-        );
-        this.statuses.add("slowed");
-      } else if (this.system.encumbranceLevel === 3) {
-        this.system.conditionInformation.encumbered.reasons.add(
-          "Cannot Carry More",
-        );
-        this.system.conditionInformation.slowed.reasons.add(
-          "Heavily Encumbered",
-        );
-        this.statuses.add("slowed");
-      }
-    }
   }
 
   /**

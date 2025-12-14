@@ -48,7 +48,19 @@ export default class EvaluationModel extends EmbeddedDataModel {
   _derivationOptions;
 
   /** @type {number} */
-  value;
+  _value;
+
+  /**
+   * The latest evaluated value.
+   * @returns {number}
+   */
+  get value() {
+    if (typeof this._value === "number") {
+      return this._value;
+    } else {
+      return this.#evaluate({ skipRollData: true });
+    }
+  }
 
   /**
    * Value as derived from current roll data.
@@ -101,10 +113,14 @@ export default class EvaluationModel extends EmbeddedDataModel {
       ...this._derivationOptions,
       ...options,
     };
-    if (this.formula.includes("Infinity")) {
-      return Infinity;
+    if (this.actor) this.actor.evaluateCallNumber += 1;
+    const formula = this.formula;
+    let value = TeriockRoll.quickValue(formula);
+    if (formula.includes("@")) {
+      if (options.skipRollData)
+        value = TeriockRoll.quickValue(this._derivationOptions.blank);
+      else value = TeriockRoll.minValue(this.formula, this.getRollData());
     }
-    let value = TeriockRoll.meanValue(this.formula, this.getRollData());
     if (typeof options.max === "number") {
       value = Math.min(value, options.max);
     }
@@ -128,6 +144,6 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @param {Teriock.Fields.FormulaDerivationOptions} [options]
    */
   evaluate(options = {}) {
-    this.value = this.#evaluate(options);
+    this._value = this.#evaluate(options);
   }
 }

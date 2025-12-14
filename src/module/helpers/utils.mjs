@@ -881,3 +881,28 @@ export async function progressBar(arr, message, callback, options = {}) {
     });
   }
 }
+
+/**
+ * Prefix all keys in some object.
+ * @param {object} obj
+ * @param {string} prefix
+ * @returns {object}
+ */
+export function prefixObject(obj, prefix) {
+  return Object.fromEntries(
+    Object.entries(foundry.utils.flattenObject(obj)).map(([k, v]) => [
+      `${prefix}.${k}`,
+      v,
+    ]),
+  );
+}
+
+/**
+ * Mixes a base class with any number of mixins.
+ * @param {Class} Base - The class to be extended.
+ * @param {Function[]} Mixins - The mixin functions to apply.
+ * @returns {Class} The combined class.
+ */
+export function mix(Base, ...Mixins) {
+  return Mixins.reduce((cls, mixin) => mixin(cls), Base);
+}

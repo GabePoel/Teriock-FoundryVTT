@@ -13,16 +13,21 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
   /**
    * @param {Teriock.Execution.FeatSaveExecutionOptions} options
    */
-  constructor(options = {}) {
+  constructor(
+    options = /** @type {Teriock.Execution.FeatSaveExecutionOptions} */ {},
+  ) {
     super(options);
     this.attribute = options.attribute;
     if (this.actor) {
-      if (options.proficient !== undefined) {
+      if (options.proficient === undefined) {
         this.proficient =
-          this.actor.system.attributes[this.attribute].saveProficient;
+          this.actor.system.attributes[options.attribute].isProficient;
       }
-      if (options.fluent !== undefined) {
-        this.fluent = this.actor.system.attributes[this.attribute].saveFluent;
+      if (options.fluent === undefined) {
+        this.fluent = this.actor.system.attributes[options.attribute].isFluent;
+      }
+      if (options.bonus === undefined) {
+        this.bonus = this.actor.system.attributes[options.attribute].formula;
       }
     }
   }

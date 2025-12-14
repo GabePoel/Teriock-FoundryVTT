@@ -34,4 +34,6 @@ export default function registerExistenceHelpers() {
   Handlebars.registerHelper("merge", (a, b) => {
     return foundry.utils.mergeObject(a, b);
   });
+
+  Handlebars.registerHelper("bool", (val) => !!val);
 }
