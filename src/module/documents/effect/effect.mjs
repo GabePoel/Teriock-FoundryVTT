@@ -1,11 +1,11 @@
-import { modifyChangePrefix, secondsToReadable } from "../../helpers/utils.mjs";
-import TeriockItem from "../item/item.mjs";
+import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import {
-  BaseDocumentMixin,
-  ChildDocumentMixin,
-  CommonDocumentMixin,
-  RetrievalDocumentMixin,
-} from "../mixins/_module.mjs";
+  mix,
+  modifyChangePrefix,
+  secondsToReadable,
+} from "../../helpers/utils.mjs";
+import TeriockItem from "../item/item.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
 
@@ -19,6 +19,7 @@ const { ActiveEffect } = foundry.documents;
  * @mixes CommonDocument
  * @mixes HierarchyDocument
  * @mixes RetrievalDocument
+ * @mixes SettingsDocument
  * @property {Teriock.Documents.EffectModel} system
  * @property {Teriock.Documents.EffectType} type
  * @property {ID<TeriockEffect>} _id
@@ -26,8 +27,13 @@ const { ActiveEffect } = foundry.documents;
  * @property {UUID<TeriockEffect>} uuid
  * @property {TeriockBaseEffectSheet} sheet
  */
-export default class TeriockEffect extends RetrievalDocumentMixin(
-  ChildDocumentMixin(CommonDocumentMixin(BaseDocumentMixin(ActiveEffect))),
+export default class TeriockEffect extends mix(
+  ActiveEffect,
+  mixins.BaseDocumentMixin,
+  mixins.CommonDocumentMixin,
+  mixins.ChildDocumentMixin,
+  mixins.RetrievalDocumentMixin,
+  mixins.SettingsDocumentMixin,
 ) {
   /** @inheritDoc */
   static migrateData(data) {
@@ -54,6 +60,11 @@ export default class TeriockEffect extends RetrievalDocumentMixin(
    * @type {EffectChangeData[]}
    */
   tokenChanges = [];
+
+  /** @inheritDoc */
+  get _settingsFlagsDataModel() {
+    return ChildSettingsModel;
+  }
 
   /**
    * Expanded changes.

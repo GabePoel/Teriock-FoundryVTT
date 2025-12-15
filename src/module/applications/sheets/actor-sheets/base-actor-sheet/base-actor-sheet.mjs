@@ -1,6 +1,10 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { conditionSort, mix } from "../../../../helpers/utils.mjs";
+import {
+  conditionSort,
+  makeIconClass,
+  mix,
+} from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -43,7 +47,7 @@ export default class TeriockBaseActorSheet extends mix(
       height: 600,
     },
     window: {
-      icon: `fa-solid fa-${documentOptions.character.icon}`,
+      icon: makeIconClass(documentOptions.character.icon, "title"),
     },
   };
 

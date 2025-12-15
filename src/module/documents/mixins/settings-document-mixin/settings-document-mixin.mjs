@@ -1,0 +1,49 @@
+/**
+ * @param {typeof TeriockDocument} Base
+ * @constructor
+ */
+export default function SettingsDocumentMixin(Base) {
+  return (
+    /**
+     * @mixin
+     */
+    class SettingsDocument extends Base {
+      /**
+       * @returns {typeof EmbeddedDataModel|null}
+       * @private
+       */
+      get _settingsFlagsDataModel() {
+        return null;
+      }
+
+      /** @inheritDoc */
+      getFlag(scope, key) {
+        if (scope === "teriockDocumentSettings") {
+          return foundry.utils.getProperty(this.flags, `${scope}.${key}`);
+        } else {
+          return super.getFlag(scope, key);
+        }
+      }
+
+      /**
+       * Convenience helper to get a document settings flag.
+       * @param {string} key
+       * @returns {*}
+       */
+      getSetting(key) {
+        return this.getFlag("teriockDocumentSettings", key);
+      }
+
+      /** @inheritDoc */
+      prepareData() {
+        super.prepareData();
+        if (this._settingsFlagsDataModel) {
+          this.flags.teriockDocumentSettings = new this._settingsFlagsDataModel(
+            this._source.flags.teriockDocumentSettings,
+            { parent: this },
+          );
+        }
+      }
+    }
+  );
+}

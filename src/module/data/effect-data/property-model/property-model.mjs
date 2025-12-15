@@ -5,9 +5,7 @@ import { FormulaField, TextField } from "../../fields/_module.mjs";
 import { changeField } from "../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _migrateData } from "./methods/_migrate-data.mjs";
-import * as parsing from "./methods/_parsing.mjs";
-import { _suppressed } from "./methods/_suppression.mjs";
+import * as parsing from "./parsing/_parsing.mjs";
 
 const { fields } = foundry.data;
 
@@ -91,7 +89,20 @@ export default class TeriockPropertyModel extends mix(
 
   /** @inheritDoc */
   static migrateData(data) {
-    data = _migrateData(data);
+    // Form migration
+    if (foundry.utils.getProperty(data, "propertyType")) {
+      foundry.utils.setProperty(
+        data,
+        "form",
+        foundry.utils.getProperty(data, "propertyType"),
+      );
+    }
+
+    // Impact migration
+    if (foundry.utils.hasProperty(data, "applies")) {
+      data.impacts = foundry.utils.getProperty(data, "applies");
+      foundry.utils.deleteProperty(data, "applies");
+    }
     return super.migrateData(data);
   }
 
@@ -114,7 +125,43 @@ export default class TeriockPropertyModel extends mix(
 
   /** @inheritDoc */
   get makeSuppressed() {
-    return _suppressed(this);
+    let suppressed = false;
+    if (this.parent.elder?.type !== "equipment") {
+      suppressed = !!(
+        this.parent.elder?.documentName === "Item" && !this.parent.elder?.active
+      );
+    }
+    if (!suppressed && this.parent.parent.type === "equipment") {
+      if (
+        !suppressed &&
+        !this.parent.parent.system.equipped &&
+        this.modifies === "Actor"
+      ) {
+        suppressed = true;
+      }
+      if (
+        !suppressed &&
+        this.parent.parent.system.dampened &&
+        this.form !== "intrinsic" &&
+        !this.applyIfDampened
+      ) {
+        suppressed = true;
+      }
+    }
+    if (
+      !suppressed &&
+      this.parent.parent.system.shattered &&
+      !this.applyIfShattered
+    ) {
+      suppressed = true;
+    }
+    if (!suppressed && this.actor && this.parent.sup) {
+      const sups = this.parent.allSups;
+      if (sups.some((sup) => !sup.modifiesActor)) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
   }
 
   /** @inheritDoc */

@@ -1,10 +1,9 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
-import { dotJoin, suffix } from "../../../helpers/string.mjs";
+import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _panelParts } from "./methods/_panel-parts.mjs";
-import { _parse } from "./methods/_parsing.mjs";
+import { _parse } from "./parsing/_parsing.mjs";
 
 /**
  * Body part-specific item data model.
@@ -68,7 +67,35 @@ export default class TeriockBodyModel extends mix(
   get panelParts() {
     return {
       ...super.panelParts,
-      ..._panelParts(this),
+      bars: [
+        {
+          icon: "fa-crosshairs-simple",
+          label: "Attack",
+          wrappers: [
+            suffix(this.damage.base.text, "damage"),
+            suffix(prefix(this.hit.text, "+", ""), "hit bonus"),
+            suffix(this.attackPenalty.text, "AP"),
+            TERIOCK.index.weaponFightingStyles[this.fightingStyle],
+          ],
+        },
+        {
+          icon: "fa-shield",
+          label: "Defense",
+          wrappers: [
+            this.av.value ? `${this.av.value} AV` : "",
+            this.bv.value ? `${this.bv.value} BV` : "",
+          ],
+        },
+        {
+          icon: "fa-flag",
+          label: "Equipment Classes",
+          wrappers: [
+            "Body parts",
+            this.av.value ? "Armor" : "",
+            this.spellTurning ? "Spell Turning" : "",
+          ],
+        },
+      ],
     };
   }
 

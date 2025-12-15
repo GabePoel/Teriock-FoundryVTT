@@ -26,7 +26,7 @@
         {{#each TERIOCK.options.currency as |currency id|}}
           <div class="money-panel-container">
             <div class="money-icon tcenter timage" data-src="{{getIconKey "currency" id}}">
-              <img src="{{getIconKey "currency" id}}" data-openable="true">
+              <img src="{{getIconKey "currency" id}}" data-openable="true" alt="">
             </div>
             <div class="money-panel tgrid g4">
               {{formInput
@@ -47,7 +47,7 @@
         {{/each}}
         <div class="money-panel-container">
           <div class="money-icon tcenter timage" data-src="{{getIconKey "currency" "debt"}}">
-            <img src="{{getIconKey "currency" "debt"}}" data-openable="true">
+            <img src="{{getIconKey "currency" "debt"}}" data-openable="true" alt="">
           </div>
           <div class="money-panel tgrid g4">
             {{formInput
@@ -74,12 +74,16 @@
 
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions settings.menus.equipmentOptions settings.menus.equipmentFilters
-                       settings.menus.equipmentSort
-                       settings.equipmentFilters.search "equipment"
-                       sortOptions=TERIOCK.options.display.equipmentSortOrders
-                       sortValue=settings.equipmentSortOption
-                       addAction="createEquipment" key="equipment"}}
+        {{blockOptions
+          settings.menus.equipmentOptions settings.menus.equipmentFilters
+          settings.menus.equipmentSort
+          settings.equipmentFilters.search "equipment"
+          sortOptions=TERIOCK.options.display.equipmentSortOrders
+          sortValue=settings.equipmentSortOption
+          addAction="createEquipment" key="equipment"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockInventoryGapless"
+          sizePath="flags.teriockDocumentSettings.sheetBlockInventorySize"
+        }}
         {{#if settings.menus.equipmentFilters}}
           <div class="teriock-block-options-content">
             {{> (template "document-templates/actor-templates/playable-template/filters/ch-equipment-filter.hbs")}}
@@ -89,22 +93,25 @@
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
         docs=equipment
         searchKey="equipment"
-        displayKey="equipment"
         empty="equipment"
+        gapless="sheetBlockInventoryGapless"
+        size="sheetBlockInventorySize"
       }}
       <div class="teriock-block-display-divider"></div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
         docs=bodyParts
         searchKey="equipment"
-        displayKey="equipment"
         empty="body parts"
+        gapless="sheetBlockInventoryGapless"
+        size="sheetBlockInventorySize"
       }}
       <div class="teriock-block-display-divider"></div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
         docs=mounts
         searchKey="equipment"
-        displayKey="equipment"
         empty="mounts"
+        gapless="sheetBlockInventoryGapless"
+        size="sheetBlockInventorySize"
       }}
     </div>
   </div>

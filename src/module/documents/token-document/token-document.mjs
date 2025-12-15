@@ -1,3 +1,4 @@
+import { TokenSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import {
   convertUnits,
   makeIcon,
@@ -15,13 +16,20 @@ const { TokenDocument } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes EmbedCardDocument
  * @mixes BaseDocument
+ * @mixes SettingsDocument
  * @property {DocumentSheetV2} sheet
  */
 export default class TeriockTokenDocument extends mix(
   TokenDocument,
   mixins.BaseDocumentMixin,
   mixins.EmbedCardDocumentMixin,
+  mixins.SettingsDocumentMixin,
 ) {
+  /** @inheritDoc */
+  get _settingsFlagsDataModel() {
+    return TokenSettingsModel;
+  }
+
   //noinspection JSUnusedGlobalSymbols
   /**
    * Center of this token.
@@ -37,7 +45,9 @@ export default class TeriockTokenDocument extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.img = this.imageLive;
+    parts.img = this.getSetting("autoTransformation")
+      ? this.imageLive
+      : this.texture.src;
     if (this.actor) {
       if (this.actor.nameString !== parts.title) {
         parts.text = this.actor.nameString;
@@ -166,6 +176,7 @@ export default class TeriockTokenDocument extends mix(
   /** @inheritDoc */
   _prepareDetectionModes() {
     super._prepareDetectionModes();
+    if (!this.getSetting("autoDetectionModes")) return;
     const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
     if (basicMode) {
       basicMode.enabled = false;
@@ -285,7 +296,10 @@ export default class TeriockTokenDocument extends mix(
         this.actor?.system.senses.hearing,
         this.actor?.system.senses.etherealLight,
       );
-      if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
+      if (
+        this.getSetting("autoVisionModes") &&
+        !["down", "dead", "invisibleEthereal"].includes(visionMode)
+      ) {
         this.sight.color = "";
       }
     }
@@ -316,29 +330,39 @@ export default class TeriockTokenDocument extends mix(
   async postActorUpdate() {
     const updateData = {};
     const updateOptions = {};
-    const tint = this.hasStatusEffect("down") ? "#ff0000" : "#ffffff";
-    if (this.texture.tint.css !== tint) {
-      updateData["texture.tint"] = tint;
+    if (this.getSetting("autoColoration")) {
+      const tint = this.hasStatusEffect("down") ? "#ff0000" : "#ffffff";
+      if (this.texture.tint.css !== tint) {
+        updateData["texture.tint"] = tint;
+      }
     }
     const { visionMode, range, angle } = this.deriveVision();
-    if (this.sight.range !== range) {
-      updateData["sight.range"] = range;
+    if (this.getSetting("autoVisionRange")) {
+      if (this.sight.range !== range) {
+        updateData["sight.range"] = range;
+      }
     }
-    if (this.sight.angle !== angle) {
-      updateData["sight.angle"] = angle;
+    if (this.getSetting("autoVisionAngle")) {
+      if (this.sight.angle !== angle) {
+        updateData["sight.angle"] = angle;
+      }
     }
     if (this.actor) {
-      if (this.width !== this.actor.system.size.length) {
-        updateData["width"] = this.actor.system.size.length;
+      if (this.getSetting("autoScale")) {
+        if (this.width !== this.actor.system.size.length) {
+          updateData["width"] = this.actor.system.size.length;
+        }
+        if (this.height !== this.actor.system.size.length) {
+          updateData["height"] = this.actor.system.size.length;
+        }
       }
-      if (this.height !== this.actor.system.size.length) {
-        updateData["height"] = this.actor.system.size.length;
-      }
-      if (this.isTransformed) {
-        updateOptions["transformationUpdate"] = true;
-      }
-      if (this.imageLive !== this.texture.src) {
-        updateData["texture.src"] = this.imageLive;
+      if (this.getSetting("autoTransformation")) {
+        if (this.isTransformed) {
+          updateOptions["transformationUpdate"] = true;
+        }
+        if (this.imageLive !== this.texture.src) {
+          updateData["texture.src"] = this.imageLive;
+        }
       }
     }
     if (Object.keys(updateData).length > 0 && this.id) {
@@ -347,7 +371,8 @@ export default class TeriockTokenDocument extends mix(
     if (
       visionMode !== this.sight.visionMode &&
       game.settings.get("teriock", "automaticallyChangeVisionModes") &&
-      this.id
+      this.id &&
+      this.getSetting("autoVisionModes")
     ) {
       await this.updateVisionMode(visionMode);
     }
@@ -361,7 +386,7 @@ export default class TeriockTokenDocument extends mix(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.deriveVision();
-    this.deriveLighting();
-    this.deriveDetectionModes();
+    if (this.getSetting("autoLighting")) this.deriveLighting();
+    if (this.getSetting("autoDetectionModes")) this.deriveDetectionModes();
   }
 }

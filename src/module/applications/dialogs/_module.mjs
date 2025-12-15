@@ -12,6 +12,5 @@ export { default as revitalizeDialog } from "./revitalize-dialog.mjs";
 export { default as hotbarDropDialog } from "./hotbar-drop-dialog.mjs";
 export { default as inCombatExpirationDialog } from "./in-combat-expiration-dialog.mjs";
 export { default as setStatDiceDialog } from "./set-stat-dice-dialog.mjs";
-export { default as configureDocumentDialog } from "./configure-document-dialog.mjs";
 export { default as refreshFromCompendiumDialog } from "./refresh-from-compendium-dialog.mjs";
 export { default as newDocumentDialog } from "./new-document-dialog.mjs";

@@ -8,3 +8,4 @@ export { default as HierarchyDocumentMixin } from "./hierarchy-document-mixin/hi
 export { default as PanelDocumentMixin } from "./panel-document-mixin/panel-document-mixin.mjs";
 export { default as ParentDocumentMixin } from "./parent-document-mixin/parent-document-mixin.mjs";
 export { default as RetrievalDocumentMixin } from "./retrieval-document-mixin/retrieval-document-mixin.mjs";
+export { default as SettingsDocumentMixin } from "./settings-document-mixin/settings-document-mixin.mjs";

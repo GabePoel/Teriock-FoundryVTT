@@ -37,6 +37,7 @@ export default function registerTokenManagementHooks() {
         tokenEditor = token.isOwner;
       }
       if (
+        token.document.getSetting("autoMagic") &&
         game.modules.get("tokenmagic")?.active &&
         game.settings.get("teriock", "automaticTokenMagicConditionEffects") &&
         tokenEditor

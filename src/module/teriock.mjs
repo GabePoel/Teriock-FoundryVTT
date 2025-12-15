@@ -307,6 +307,13 @@ foundry.helpers.Hooks.once("init", function () {
       makeDefault: false,
       types: ["consequence"],
     },
+    // Tokens
+    {
+      cls: applications.sheets.token.TeriockBaseTokenSheet,
+      doc: documents.TeriockTokenDocument,
+      label: "Token",
+      types: [],
+    },
   ];
   sheetMap.forEach(({ cls, label, types, doc, makeDefault = true }) =>
     DocumentSheetConfig.registerSheet(doc, "teriock", cls, {

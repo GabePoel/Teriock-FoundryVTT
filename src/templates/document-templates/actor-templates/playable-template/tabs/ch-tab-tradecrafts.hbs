@@ -80,14 +80,20 @@
     </div>
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions settings.menus.fluencyOptions null null settings.fluencyFilters.search "fluency"
-                       key="fluencies" addAction="createFluency"}}
+        {{blockOptions
+          settings.menus.fluencyOptions null null settings.fluencyFilters.search "fluency"
+          key="fluencies" addAction="createFluency"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockTradecraftsGapless"
+          sizePath="flags.teriockDocumentSettings.sheetBlockTradecraftsSize"
+        }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
         docs=fluencies
         searchKey="fluencies"
         displayKey="fluency"
         empty="fluencies"
+        gapless="sheetBlockTradecraftsGapless"
+        size="sheetBlockTradecraftsSize"
       }}
     </div>
   </div>

@@ -348,3 +348,35 @@ export function blocksField() {
     }),
   );
 }
+
+/**
+ * Field that sets block sizes.
+ * @param {object} [options]
+ * @param {Teriock.Parameters.Shared.CardDisplaySize} [options.initial]
+ * @param {string} [options.label]
+ * @returns {StringField}
+ */
+export function blockSizeField(options = {}) {
+  const { initial = "medium", label = "Child" } = options;
+  return new fields.StringField({
+    initial,
+    choices: TERIOCK.options.display.sizes,
+    label: `${label} Block Size`,
+    hint: `Size that ${label.toLowerCase()} blocks will be displayed at on this document's sheet.`,
+  });
+}
+
+/**
+ * Field that sets block gaps.
+ * @param {object} [options]
+ * @param {boolean} [options.initial]
+ * @param {string} [options.label] * @returns {BooleanField}
+ */
+export function blockGaplessField(options = {}) {
+  const { initial = false, label = "Child" } = options;
+  return new fields.BooleanField({
+    initial,
+    label: `${label} Block Gapless`,
+    hint: `Whether there shouldn't be gaps between ${label.toLowerCase()} blocks on this document's sheet.`,
+  });
+}

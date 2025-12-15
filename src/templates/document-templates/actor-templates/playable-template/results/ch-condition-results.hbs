@@ -1,6 +1,6 @@
 <div id="condition-results" class="teriock-block-results">
-  <div class="teriock-block-container {{{system.sheet.display.consequence.size}}} {{#if
-    system.sheet.display.consequence.gapless}}gapless{{/if}}">
+  <div class="teriock-block-container {{{document.flags.teriockDocumentSettings.sheetBlockEffectsSize}}} {{#if
+    document.flags.teriockDocumentSettings.sheetBlockEffectsGapless}}gapless{{/if}}">
     {{#each conditions as |condition|}}
       {{#if (not (path ../system.conditionInformation condition "locked"))}}
         {{> (template "ui-templates/block.hbs")
@@ -43,7 +43,7 @@
         }}
       {{/if}}
     {{/each}}
-    <div class="no-results {{{system.sheet.display.consequence.size}}}">
+    <div class="no-results {{{document.flags.teriockDocumentSettings.sheetBlockEffectsSize}}}">
       <p>No conditions found.</p>
     </div>
   </div>

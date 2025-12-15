@@ -115,12 +115,14 @@ export default function registerUiHelpers() {
       tab,
       options,
     ) {
-      const {
+      let {
         showAddButton = true,
         sortOptions = {},
         sortValue = "",
         addAction = "",
         key = null,
+        gaplessPath = undefined,
+        sizePath = undefined,
       } = options.hash;
       const context = options.data.root;
       const ttoggle = Handlebars.helpers.ttoggle;
@@ -131,16 +133,15 @@ export default function registerUiHelpers() {
       const sortPath = `settings.menus.${tab}Sort`;
       const searchKey = key ? `data-search-key=${key}` : "";
 
-      const gaplessPath = `system.sheet.display.${tab}.gapless`;
-      const sizePath = `system.sheet.display.${tab}.size`;
+      gaplessPath = gaplessPath || `system.sheet.display.${tab}.gapless`;
+      sizePath = sizePath || `system.sheet.display.${tab}.size`;
       const ascendingPath = `settings.${tab}SortAscending`;
 
-      const get = (path) =>
-        path.split(".").reduce((obj, key) => obj?.[key], context);
-
-      const gaplessValue = get(gaplessPath);
-      const sizeValue = get(sizePath);
-      const ascendingValue = get(ascendingPath);
+      const gaplessValue = foundry.utils.getProperty(context, gaplessPath);
+      console.log(gaplessValue);
+      const sizeValue = foundry.utils.getProperty(context, sizePath);
+      console.log(sizeValue);
+      const ascendingValue = foundry.utils.getProperty(context, ascendingPath);
 
       const sizeOptions = TERIOCK.options.display.sizes ?? {};
       const sortSelectHTML =

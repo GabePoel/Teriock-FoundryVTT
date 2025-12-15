@@ -3,15 +3,21 @@
   <div class="character-tab-page teriock-block-results" data-search-key="ranks">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions settings.menus.rankOptions null null settings.rankFilters.search "rank"
-                               addAction="createRank"
-                               key="ranks"}}
+        {{blockOptions
+          settings.menus.rankOptions null null settings.rankFilters.search "rank"
+          addAction="createRank"
+          key="ranks"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockClassesGapless"
+          sizePath="flags.teriockDocumentSettings.sheetBlockClassesSize"
+        }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
         docs=ranks
         searchKey="ranks"
         displayKey="rank"
         empty="ranks"
+        gapless="sheetBlockClassesGapless"
+        size="sheetBlockClassesSize"
       }}
     </div>
   </div>

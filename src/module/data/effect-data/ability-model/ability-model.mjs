@@ -10,13 +10,8 @@ import {
 } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _generateChanges } from "./methods/_generate-changes.mjs";
-import { _migrateData } from "./methods/_migrate-data.mjs";
-import { _panelParts } from "./methods/_panel-parts.mjs";
-import { _parse } from "./methods/_parsing.mjs";
-import { _suppressed } from "./methods/_suppression.mjs";
-import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
-import { _defineSchema } from "./methods/schema/_schema.mjs";
+import { _parse } from "./parsing/_parsing.mjs";
+import * as parts from "./parts/_module.mjs";
 
 /**
  * Ability-specific effect data model.
@@ -25,6 +20,9 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
  * @extends {TeriockBaseEffectModel}
+ * @mixes AbilityGeneralPart
+ * @mixes AbilityHierarchyPart
+ * @mixes AbilityPanelPart
  * @mixes ConsumableData
  * @mixes HierarchyData
  * @mixes ProficiencyData
@@ -34,12 +32,18 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  */
 export default class TeriockAbilityModel extends mix(
   TeriockBaseEffectModel,
-  mixins.WikiDataMixin,
   mixins.ConsumableDataMixin,
   mixins.HierarchyDataMixin,
+  mixins.ProficiencyDataMixin,
   mixins.RevelationDataMixin,
   mixins.ThresholdDataMixin,
-  mixins.ProficiencyDataMixin,
+  mixins.WikiDataMixin,
+  parts.AbilityDurationPart,
+  parts.AbilityGeneralPart,
+  parts.AbilityHierarchyPart,
+  parts.AbilityImpactsPart,
+  parts.AbilityImprovementsPart,
+  parts.AbilityPanelPart,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -66,27 +70,6 @@ export default class TeriockAbilityModel extends mix(
       usable: true,
       visibleTypes: ["ability"],
     });
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, _defineSchema());
-    return schema;
-  }
-
-  /** @inheritDoc */
-  static migrateData(data) {
-    data = _migrateData(data);
-    return super.migrateData(data);
-  }
-
-  /**
-   * Gets the changes this ability would provide.
-   * @returns {EffectChangeData[]}
-   */
-  get changes() {
-    return _generateChanges(this);
   }
 
   /** @inheritDoc */
@@ -304,13 +287,6 @@ export default class TeriockAbilityModel extends mix(
   }
 
   /** @inheritDoc */
-  get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    suppressed = suppressed || _suppressed(this);
-    return suppressed;
-  }
-
-  /** @inheritDoc */
   get nameString() {
     const additions = [];
     if (this.adept.enabled) {
@@ -336,14 +312,6 @@ export default class TeriockAbilityModel extends mix(
       nameAddition = ` (${additions.join(", ")})`;
     }
     return this.parent.name + nameAddition;
-  }
-
-  /** @inheritDoc */
-  get panelParts() {
-    return {
-      ...super.panelParts,
-      ..._panelParts(this),
-    };
   }
 
   //noinspection JSUnusedGlobalSymbols
@@ -496,12 +464,6 @@ export default class TeriockAbilityModel extends mix(
    */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
-  }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    _prepareDerivedData(this);
   }
 
   /**

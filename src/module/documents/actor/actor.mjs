@@ -1,3 +1,4 @@
+import { ActorSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
 import {
@@ -21,6 +22,7 @@ const { Actor } = foundry.documents;
  * @mixes HierarchyDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
+ * @mixes SettingsDocument
  * @property {Collection<ID<TeriockEffect>, TeriockEffect>} effects
  * @property {Collection<ID<TeriockItem>, TeriockItem>} items
  * @property {Teriock.Documents.ActorModel} system
@@ -37,6 +39,7 @@ export default class TeriockActor extends mix(
   mixins.HierarchyDocumentMixin,
   mixins.ParentDocumentMixin,
   mixins.RetrievalDocumentMixin,
+  mixins.SettingsDocumentMixin,
 ) {
   /**
    * The default weight for a given size.
@@ -82,6 +85,11 @@ export default class TeriockActor extends mix(
    * @type {TeriockEffect[]}
    */
   specialEffects = [];
+
+  /** @inheritDoc */
+  get _settingsFlagsDataModel() {
+    return ActorSettingsModel;
+  }
 
   /**
    * Is this actor active?
@@ -462,6 +470,7 @@ export default class TeriockActor extends mix(
    * Add statuses and explanations for being wounded.
    */
   prepareVirtualWounds() {
+    if (!this.getSetting("autoWound")) return;
     // Check what states are triggered in normal circumstances
     const hpUncn = this.system.hp.value < 1;
     const hpCrit =

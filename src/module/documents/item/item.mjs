@@ -1,3 +1,4 @@
+import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { isOwnerAndCurrentUser, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -15,6 +16,7 @@ const { Item } = foundry.documents;
  * @mixes HierarchyDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
+ * @mixes SettingsDocument
  * @property {Collection<ID<TeriockEffect>, TeriockEffect>} effects
  * @property {Teriock.Documents.ItemModel} system
  * @property {Teriock.Documents.ItemType} type
@@ -31,9 +33,15 @@ export default class TeriockItem extends mix(
   mixins.ParentDocumentMixin,
   mixins.ChangeableDocumentMixin,
   mixins.RetrievalDocumentMixin,
+  mixins.SettingsDocumentMixin,
 ) {
   /** @inheritDoc */
   changesField = "itemChanges";
+
+  /** @inheritDoc */
+  get _settingsFlagsDataModel() {
+    return ChildSettingsModel;
+  }
 
   /**
    * Checks if the item is active.

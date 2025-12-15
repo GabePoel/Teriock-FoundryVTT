@@ -1,7 +1,6 @@
 import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _migrateData } from "./methods/_migrate-data.mjs";
 
 /**
  * Resource-specific effect data model.
@@ -22,12 +21,6 @@ export default class TeriockResourceModel extends mix(
       type: "resource",
       usable: true,
     });
-  }
-
-  /** @inheritDoc */
-  static migrateData(data) {
-    data = _migrateData(data);
-    return super.migrateData(data);
   }
 
   /** @inheritDoc */

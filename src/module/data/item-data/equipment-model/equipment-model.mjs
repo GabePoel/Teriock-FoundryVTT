@@ -7,8 +7,7 @@ import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
-import * as messages from "./methods/_panel-parts.mjs";
-import * as parsing from "./methods/_parsing.mjs";
+import * as parsing from "./parsing/_parsing.mjs";
 import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
@@ -25,6 +24,7 @@ const { fields } = foundry.data;
  * @mixes AttunableData
  * @mixes ConsumableData
  * @mixes EquipmentIdentificationPart
+ * @mixes EquipmentPanelPart
  * @mixes EquipmentStoragePart
  * @mixes EquipmentSuppressionPart
  * @mixes EquipmentWieldingPart
@@ -33,15 +33,16 @@ const { fields } = foundry.data;
  */
 export default class TeriockEquipmentModel extends mix(
   TeriockBaseItemModel,
-  mixins.ExecutableDataMixin,
-  mixins.ConsumableDataMixin,
-  mixins.AttunableDataMixin,
   mixins.ArmamentDataMixin,
+  mixins.AttunableDataMixin,
+  mixins.ConsumableDataMixin,
+  mixins.ExecutableDataMixin,
   mixins.WikiDataMixin,
-  parts.EquipmentWieldingPart,
-  parts.EquipmentSuppressionPart,
   parts.EquipmentIdentificationPart,
+  parts.EquipmentPanelPart,
   parts.EquipmentStoragePart,
+  parts.EquipmentSuppressionPart,
+  parts.EquipmentWieldingPart,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -265,14 +266,6 @@ export default class TeriockEquipmentModel extends mix(
       }
     }
     return suppressed;
-  }
-
-  /** @inheritDoc */
-  get panelParts() {
-    return {
-      ...super.panelParts,
-      ...messages._panelParts(this),
-    };
   }
 
   /** @inheritDoc */

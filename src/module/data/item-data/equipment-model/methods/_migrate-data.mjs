@@ -23,14 +23,6 @@ export function _migrateData(data) {
       }
     }
   }
-  if (data.maxQuantity && typeof data.maxQuantity === "number") {
-    const rawMaxQuantity = String(data.maxQuantity) || "";
-    const derivedMaxQuantity = Number(data.maxQuantity) || 0;
-    data.maxQuantity = {
-      raw: rawMaxQuantity,
-      derived: derivedMaxQuantity,
-    };
-  }
   if (typeof data.weight === "number") {
     data.weight = { saved: data.weight };
   }

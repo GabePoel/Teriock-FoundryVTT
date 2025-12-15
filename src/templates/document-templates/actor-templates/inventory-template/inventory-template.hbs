@@ -47,11 +47,15 @@
           <div class="teriock-block-display">
             <div class="teriock-block-options">
               {{blockOptions settings.menus.equipmentOptions settings.menus.equipmentFilters
-                                     settings.menus.equipmentSort
-                                     settings.equipmentFilters.search "equipment"
-                                     sortOptions=TERIOCK.options.display.equipmentSortOrders
-                                     sortValue=settings.equipmentSortOption
-                                     addAction="createEquipment" key="equipment"}}
+                             settings.menus.equipmentSort
+                             settings.equipmentFilters.search "equipment"
+                             sortOptions=TERIOCK.options.display.equipmentSortOrders
+                             sortValue=settings.equipmentSortOption
+                             addAction="createEquipment"
+                             key="equipment"
+                             gaplessPath="document.flags.teriockDocumentSettings.sheetBlockInventoryGapless"
+                             sizePath="document.flags.teriockDocumentSettings.sheetBlockInventorySize"
+              }}
               {{#if settings.menus.equipmentFilters}}
                 <div class="teriock-block-options-content">
                   {{> (template "document-templates/actor-templates/playable-template/filters/ch-equipment-filter.hbs")}}

@@ -3,14 +3,20 @@
   <div class="character-tab-page teriock-block-results" data-search-key="powers">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions settings.menus.powerOptions null null settings.powerFilters.search "power" key="powers"
-                       addAction="createPower"}}
+        {{blockOptions
+          settings.menus.powerOptions null null settings.powerFilters.search "power" key="powers"
+          addAction="createPower"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockPowersGapless"
+          sizePath="flags.teriockDocumentSettings.sheetBlockPowersSize"
+        }}
       </div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
         docs=species
         searchKey="powers"
         displayKey="power"
         empty="powers"
+        gapless="sheetBlockPowersGapless"
+        size="sheetBlockPowersSize"
       }}
       <div class="teriock-block-display-divider"></div>
       {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
@@ -18,6 +24,8 @@
         searchKey="powers"
         displayKey="power"
         empty="powers"
+        gapless="sheetBlockPowersGapless"
+        size="sheetBlockPowersSize"
       }}
     </div>
   </div>

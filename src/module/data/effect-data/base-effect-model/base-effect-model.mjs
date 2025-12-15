@@ -37,6 +37,14 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
     });
   }
 
+  /**
+   * Gets the changes this ability would provide.
+   * @returns {EffectChangeData[]}
+   */
+  get changes() {
+    return [];
+  }
+
   /** @inheritDoc */
   get displayToggles() {
     return [

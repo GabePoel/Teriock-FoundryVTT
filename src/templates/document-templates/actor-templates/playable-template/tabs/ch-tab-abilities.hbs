@@ -3,10 +3,14 @@
   <div class="character-tab-page teriock-block-results" data-search-key="abilities">
     <div class="teriock-block-display">
       <div class="teriock-block-options">
-        {{blockOptions settings.menus.abilityOptions settings.menus.abilityFilters settings.menus.abilitySort
-                               settings.abilityFilters.search "ability"
-                               sortOptions=TERIOCK.options.display.abilitySortOrders
-                               sortValue=settings.abilitySortOption showAddButton=false key="abilities"}}
+        {{blockOptions
+          settings.menus.abilityOptions settings.menus.abilityFilters settings.menus.abilitySort
+          settings.abilityFilters.search "ability"
+          sortOptions=TERIOCK.options.display.abilitySortOrders
+          sortValue=settings.abilitySortOption showAddButton=false key="abilities"
+          gaplessPath="flags.teriockDocumentSettings.sheetBlockAbilitiesGapless"
+          sizePath="flags.teriockDocumentSettings.sheetBlockAbilitiesSize"
+        }}
         {{#if settings.menus.abilityFilters}}
           <div class="teriock-block-options-content">
             {{> (template "document-templates/actor-templates/playable-template/filters/ch-ability-filter.hbs")}}
@@ -18,6 +22,8 @@
         searchKey="abilities"
         displayKey="ability"
         empty="abilities"
+        gapless="sheetBlockAbilitiesGapless"
+        size="sheetBlockAbilitiesSize"
       }}
     </div>
   </div>

@@ -1,4 +1,5 @@
 export * from "./modifier-models/_module.mjs";
+export * from "./settings-models/_module.mjs";
 export * from "./stat-pool-models/_module.mjs";
 export { default as ChildTypeModel } from "./child-type-model/child-type-model.mjs";
 export { default as CommonTypeModel } from "./common-type-model/common-type-model.mjs";

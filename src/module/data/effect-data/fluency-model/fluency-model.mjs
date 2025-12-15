@@ -6,7 +6,6 @@ import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _panelParts } from "./methods/_panel-parts.mjs";
 
 const { fields } = foundry.data;
 
@@ -123,7 +122,23 @@ export default class TeriockFluencyModel extends mix(
 
   /** @inheritDoc */
   get panelParts() {
-    return { ...super.panelParts, ..._panelParts(this) };
+    return {
+      ...super.panelParts,
+      bars: [
+        {
+          icon:
+            "fa-" +
+            TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]
+              .icon,
+          label: "Tradecraft",
+          wrappers: [
+            TERIOCK.options.tradecraft[this.field].name,
+            TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]
+              .name,
+          ],
+        },
+      ],
+    };
   }
 
   /** @inheritDoc */

@@ -45,6 +45,19 @@ export default function ConsumableDataMixin(Base) {
       }
 
       /** @inheritDoc */
+      static migrateData(data) {
+        if (data.maxQuantity && typeof data.maxQuantity === "number") {
+          const rawMaxQuantity = String(data.maxQuantity) || "";
+          const derivedMaxQuantity = Number(data.maxQuantity) || 0;
+          data.maxQuantity = {
+            raw: rawMaxQuantity,
+            derived: derivedMaxQuantity,
+          };
+        }
+        super.migrateData(data);
+      }
+
+      /** @inheritDoc */
       get embedActions() {
         const embedActions = super.embedActions;
         Object.assign(embedActions, {

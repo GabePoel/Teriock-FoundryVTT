@@ -1,5 +1,6 @@
 import { TeriockActor, TeriockCombat } from "../_module.mjs";
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
+import { TeriockBaseTokenSheet } from "../../applications/sheets/token-sheets/_module.mjs";
 
 declare module "./token-document.mjs" {
   export default interface TeriockTokenDocument
@@ -8,6 +9,7 @@ declare module "./token-document.mjs" {
     readonly actor: TeriockActor | null;
     readonly combat: TeriockCombat | null;
     readonly object: TeriockToken;
+    sheet: TeriockBaseTokenSheet;
 
     get documentName(): "TokenDocument";
 

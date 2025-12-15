@@ -1,10 +1,7 @@
 import { mix } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
-import {
-  IndexButtonSheetMixin,
-  QualifierButtonSheetMixin,
-} from "../_module.mjs";
+import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -32,7 +29,7 @@ export default function CommonSheetMixin(Base) {
     class CommonSheet extends mix(
       Base,
       HandlebarsApplicationMixin,
-      QualifierButtonSheetMixin,
+      ConfigButtonSheetMixin,
       parts.DragDropCommonSheetPart,
       parts.DocumentCreationCommonSheetPart,
       parts.InteractionCommonSheetPart,

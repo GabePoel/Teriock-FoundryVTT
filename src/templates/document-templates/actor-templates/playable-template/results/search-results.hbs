@@ -1,7 +1,7 @@
-{{~#with (lookup @root.system.sheet.display displayKey) as |display|~}}
+{{~#with @root.document.flags.teriockDocumentSettings as |settings|~}}
   <div class="teriock-block-container
-              {{#if display.gapless}}gapless{{/if}}
-    {{display.size}}">
+              {{#if (lookup settings ../gapless)}}gapless{{/if}}
+    {{lookup settings ../size}}">
     {{#each ../docs as |doc|}}
       {{> (template "ui-templates/block.hbs")
         (merge
@@ -11,7 +11,7 @@
       }}
     {{/each}}
 
-    <div class="no-results {{display.size}}">
+    <div class="no-results {{lookup settings ../size}}">
       <p>No {{../empty}} found.</p>
     </div>
   </div>
