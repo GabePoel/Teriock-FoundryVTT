@@ -3,77 +3,62 @@
 // Compendium background/icon/header map
 $compendiums: (
   abilities: (
-    bg: "../src/icons/abilities/illusive-casting.webp",
     icon: "\e05d",
     name: "Abilities",
   ),
   bodyParts: (
-    bg: "../src/icons/body-parts/tentacle.webp",
     icon: "\f782",
     name: "Body Parts",
   ),
   classes: (
-    bg: "../src/icons/classes/thief.webp",
     icon: "\e5d2",
     name: "Classes",
   ),
   creatures: (
-    bg: "../src/icons/creatures/small-air-elemental.webp",
     icon: "\e688",
     name: "Creatures",
   ),
   equipment: (
-    bg: "../src/icons/equipment/net.webp",
     icon: "\f723",
     name: "Equipment",
   ),
   magicItems: (
-    bg: "../src/icons/consumables/illusion-vial.webp",
     icon: "\f6e1",
     name: "Magic Items",
   ),
   powers: (
-    bg: "../src/icons/abilities/cure-illness.webp",
     icon: "\e54d",
     name: "Powers",
   ),
   properties: (
-    bg: "../src/icons/properties/legendary.webp",
     icon: "\f5d3",
     name: "Properties",
   ),
   species: (
-    bg: "../src/icons/abilities/keen-eye.webp",
     icon: "\f8de",
     name: "Species",
   ),
   tables: (
-    bg: "../src/icons/abilities/compulsive-gambler.webp",
     icon: "\f0ce",
     name: "Tables",
   ),
   maintenance: (
-    bg: "../src/icons/properties/involved.webp",
     icon: "\f085",
     name: "System Maintenance",
   ),
   execution: (
-    bg: "../src/icons/abilities/territorial-casting.webp",
     icon: "\f6e5",
     name: "Ability Execution Macros",
   ),
   essentials: (
-    bg: "../src/icons/equipment/wheel.webp",
     icon: "\f61f",
     name: "Essentials",
   ),
   player: (
-    bg: "../src/icons/abilities/distortion-field.webp",
     icon: "\f4fe",
     name: "Player Utilities",
   ),
   rules: (
-    bg: "../src/icons/powers/learned-elder-sorceries.webp",
     icon: "\f05a",
     name: "Rules",
   ),
@@ -82,13 +67,10 @@ $compendiums: (
 // Compendium header banners
 .header-banner {
   @each $key, $data in $compendiums {
-    $bg: map-get($data, bg);
     $icon: map-get($data, icon);
     $name: map-get($data, name);
 
     img[alt="#{$name}"] {
-      content: url(#{$bg});
-
       + .compendium-name i::before {
         content: $icon;
       }
@@ -111,14 +93,8 @@ $compendiums: (
 // Compendium sidebar entries
 .directory-item.entry.compendium {
   @each $key, $data in $compendiums {
-    $bg: map-get($data, bg);
     $icon: map-get($data, icon);
-
     &[data-pack="teriock.#{$key}"] {
-      img {
-        content: url(#{$bg});
-      }
-
       .entry-name i::before {
         content: $icon;
       }
