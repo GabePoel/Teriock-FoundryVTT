@@ -1,4 +1,4 @@
-import { getRankIcon } from "../../../../helpers/path.mjs";
+import { getRankImage } from "../../../../helpers/path.mjs";
 import { ensureChildren } from "../../../../helpers/resolve.mjs";
 import { cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 
@@ -95,7 +95,7 @@ export async function _parse(rankData, rawHTML) {
 
   return {
     system: parameters,
-    img: getRankIcon(rankData.className, rankData.classRank),
+    img: getRankImage(rankData.className, rankData.classRank),
     name: name,
   };
 }

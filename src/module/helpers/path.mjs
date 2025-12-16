@@ -29,7 +29,7 @@ export function getImage(category, name) {
  * @param {number} rankNumber
  * @returns {string}
  */
-export function getRankIcon(className, rankNumber) {
+export function getRankImage(className, rankNumber) {
   if (rankNumber <= 10) {
     return systemPath(
       `icons/ranks/rank-${rankNumber}-${toKebabCase(className)}.webp`,
