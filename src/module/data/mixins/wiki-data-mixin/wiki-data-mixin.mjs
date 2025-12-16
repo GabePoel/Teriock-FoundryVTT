@@ -27,13 +27,16 @@ export default function WikiDataMixin(Base) {
        * @returns {boolean}
        */
       get isOnWiki() {
-        return !!TERIOCK.index[
-          TERIOCK.options.document[this.parent.type]["pack"]
-        ][
-          toCamelCase(
-            foundry.utils.getProperty(this.parent, this.metadata.pageNameKey),
-          )
-        ];
+        const index =
+          TERIOCK.index[TERIOCK.options.document[this.parent.type]["index"]];
+        if (index) {
+          return !!index[
+            toCamelCase(
+              foundry.utils.getProperty(this.parent, this.metadata.pageNameKey),
+            )
+          ];
+        }
+        return false;
       }
 
       /**

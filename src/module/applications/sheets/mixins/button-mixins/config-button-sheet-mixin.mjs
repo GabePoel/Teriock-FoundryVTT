@@ -19,7 +19,7 @@ export default function ConfigButtonSheetMixin(Base) {
         controls: [
           {
             action: "openDocumentSettings",
-            icon: makeIconClass("sliders", "contextMenu"),
+            icon: makeIconClass("gear-code", "contextMenu"),
             label: "Configure Document",
             ownership: "OWNER",
           },

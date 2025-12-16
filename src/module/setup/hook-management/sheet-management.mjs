@@ -46,4 +46,13 @@ export default function registerSheetManagementHooks() {
     "getHeaderControlsWikiButtonSheet",
     addWikiOpenToHeader,
   );
+
+  foundry.helpers.Hooks.on(
+    "getHeaderControlsDocumentSheetV2",
+    (_application, controls) => {
+      controls.sort((a, b) =>
+        game.i18n.format(a.label).localeCompare(game.i18n.format(b.label)),
+      );
+    },
+  );
 }

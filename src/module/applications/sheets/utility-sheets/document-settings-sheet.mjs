@@ -22,7 +22,7 @@ export default class DocumentSettingsSheet extends HandlebarsApplicationMixin(
     },
     window: {
       resizable: true,
-      icon: makeIconClass("sliders", "title"),
+      icon: makeIconClass("gear-code", "title"),
     },
   };
   /** @inheritDoc */

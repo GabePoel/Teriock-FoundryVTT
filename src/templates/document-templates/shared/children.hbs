@@ -5,13 +5,17 @@
         {{#if @root/editable}}
           <button class="create{{ucFirst type}}" data-action="create{{ucFirst type}}">Add {{path
             @root/TERIOCK.options.document type "name"}}</button>{{/if}}
-        <div class="teriock-block-container {{@root.document.flags.teriockDocumentSettings.sheetBlockChildSize}} {{#if
-          @root.document.flags.teriockDocumentSettings.sheetBlockChildGapless}}gapless{{/if}}">
-          {{#each (lookup @root (path @root/TERIOCK.options.document type "getter")) as |doc|}}
-            {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
-              relative=@root/document.uuid))}}
-          {{/each}}
-        </div>
+        {{#if (exists (lookup @root (path @root/TERIOCK.options.document type "getter")))}}
+          <div
+            class="teriock-block-container {{@root.document.flags.teriockDocumentSettings.sheetBlockChildSize}} {{#if
+              @root.document.flags.teriockDocumentSettings.sheetBlockChildGapless}}gapless{{/if}}"
+          >
+            {{#each (lookup @root (path @root/TERIOCK.options.document type "getter")) as |doc|}}
+              {{> (template "ui-templates/block.hbs") (merge doc.embedParts (object
+                relative=@root/document.uuid))}}
+            {{/each}}
+          </div>
+        {{/if}}
       </div>
     {{/if}}
   {{/each}}
