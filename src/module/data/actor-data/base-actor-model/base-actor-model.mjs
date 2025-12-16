@@ -148,11 +148,11 @@ export default class TeriockBaseActorModel extends mix(
    * @returns {Promise<void>}
    */
   async postUpdate() {
-    for (const effect of this.parent.conditionExpirationEffects) {
-      await effect.system.checkExpiration();
-    }
-    for (const token of this.parent.getDependentTokens()) {
-      await token.postActorUpdate();
-    }
+    await Promise.all([
+      ...this.parent.conditionExpirationEffects.map((e) =>
+        e.system.checkExpiration(),
+      ),
+      ...this.parent.getDependentTokens().map((t) => t.postActorUpdate()),
+    ]);
   }
 }

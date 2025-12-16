@@ -1,11 +1,13 @@
 /**
  * Get each {@link TeriockActor} in the current scene.
- * @returns {Immutable.Collection<UUID<TeriockTokenDocument>, TeriockActor>}
+ * @returns {TeriockActor[]}
  */
 function getActors() {
-  return game.scenes.viewed.tokens
-    .filter((token) => token.actor)
-    .map((token) => token.actor);
+  return Array.from(
+    game.scenes.viewed.tokens
+      .filter((token) => token.actor)
+      .map((token) => token.actor),
+  );
 }
 
 export default function registerTimeManagementHooks() {
@@ -29,6 +31,12 @@ export default function registerTimeManagementHooks() {
               "system.money.debt": Math.round(newDebt * 100) / 100,
             });
           }
+        }
+      }
+
+      for (const actor of getActors()) {
+        if (actor.isViewer && actor.sheet.rendered) {
+          actor.sheet.render(true).then();
         }
       }
     },

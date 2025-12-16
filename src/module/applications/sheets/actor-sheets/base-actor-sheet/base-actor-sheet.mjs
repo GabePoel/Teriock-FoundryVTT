@@ -201,8 +201,8 @@ export default class TeriockBaseActorSheet extends mix(
         icon: TERIOCK.options.document.condition.icon,
       };
       /** @type {TeriockTokenDocument[]} */
-      const tokenDocs = (
-        this.document.system.conditionInformation[condition].trackers || []
+      const tokenDocs = Array.from(
+        this.document.system.conditionInformation[condition]?.trackers,
       )
         .map((uuid) => fromUuidSync(uuid))
         .filter((t) => t);

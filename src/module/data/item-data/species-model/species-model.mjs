@@ -10,6 +10,7 @@ import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Species-specific item data model.
  *
@@ -241,8 +242,8 @@ export default class TeriockSpeciesModel extends mix(
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    if (typeof rollData.size === "undefined") {
-      rollData.size = this.size?.value || 0;
+    if (!this.parent.actor) {
+      rollData.size = this.size.enabled ? this.size.value : 0;
     }
     return rollData;
   }
