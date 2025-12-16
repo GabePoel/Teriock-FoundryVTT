@@ -1,5 +1,5 @@
 import TeriockChatMessage from "../../../../documents/chat-message/chat-message.mjs";
-import { getToken, pureUuid } from "../../../../helpers/utils.mjs";
+import { pureUuid } from "../../../../helpers/resolve.mjs";
 import { ThresholdExecutionMixin } from "../../../mixins/_module.mjs";
 import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
 
@@ -76,7 +76,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     };
     this.warded = warded;
     if (this.actor) {
-      this.executor = getToken(this.actor);
+      this.executor = this.actor.defaultToken;
     }
     this.costs = {
       hp: 0,

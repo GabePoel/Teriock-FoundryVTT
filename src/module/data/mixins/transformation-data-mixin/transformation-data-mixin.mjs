@@ -4,7 +4,6 @@ import { transformationField } from "../../fields/helpers/builders.mjs";
 
 /**
  * @param {typeof ChildTypeModel} Base
- * @constructor
  */
 export default function TransformationDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
@@ -22,20 +21,6 @@ export default function TransformationDataMixin(Base) {
           implementation: true,
         });
         return schema;
-      }
-
-      /** @inheritDoc */
-      getCardContextMenuEntries(doc) {
-        return [
-          ...super.getCardContextMenuEntries(doc),
-          {
-            name: "Set Primary Transformation",
-            icon: makeIcon("tree", "contextMenu"),
-            callback: this.setPrimaryTransformation.bind(this),
-            condition: this.isTransformation && !this.isPrimaryTransformation,
-            group: "usage",
-          },
-        ];
       }
 
       /**
@@ -204,6 +189,20 @@ export default function TransformationDataMixin(Base) {
             await this.parent.actor.update(updateData);
           }
         }
+      }
+
+      /** @inheritDoc */
+      getCardContextMenuEntries(doc) {
+        return [
+          ...super.getCardContextMenuEntries(doc),
+          {
+            name: "Set Primary Transformation",
+            icon: makeIcon("tree", "contextMenu"),
+            callback: this.setPrimaryTransformation.bind(this),
+            condition: this.isTransformation && !this.isPrimaryTransformation,
+            group: "usage",
+          },
+        ];
       }
 
       /** @inheritDoc */

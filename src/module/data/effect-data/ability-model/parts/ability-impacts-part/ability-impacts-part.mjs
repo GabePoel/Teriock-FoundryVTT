@@ -1,5 +1,5 @@
 import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
-import { pureUuid } from "../../../../../helpers/utils.mjs";
+import { pureUuid } from "../../../../../helpers/resolve.mjs";
 import { FormulaField, RecordField } from "../../../../fields/_module.mjs";
 import { builders } from "../../../../fields/helpers/_module.mjs";
 
@@ -8,14 +8,14 @@ const { fields } = foundry.data;
 /**
  * Ability impacts part.
  * @param {typeof TeriockAbilityModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @mixin
+     * @extends {TeriockAbilityModel}
      * @implements {AbilityImpactsPartInterface}
+     * @mixin
      */
     class AbilityImpactsPart extends Base {
       /** @inheritDoc */
@@ -107,8 +107,6 @@ export function impactRollsField() {
 
 /**
  * Creates a field for impact changes configuration.
- * @returns {ArrayField} Field for configuring impact changes
- * @private
  */
 export function impactChangesField() {
   return new fields.ArrayField(builders.changeField(), {
@@ -119,7 +117,6 @@ export function impactChangesField() {
 
 /**
  * Creates a field for ability-specific expiration data.
- * @returns {SchemaField}
  */
 function impactExpirationField() {
   return new fields.SchemaField({
@@ -135,7 +132,6 @@ function impactExpirationField() {
 
 /**
  * Creates a field for impact data configuration.
- * @returns {SchemaField} Field for configuring impacts data
  */
 function abilityImpactField() {
   return new fields.SchemaField({

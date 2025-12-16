@@ -1,11 +1,11 @@
 import * as index from "../../../constants/index/_module.mjs";
 import { TeriockMacro } from "../../../documents/_module.mjs";
+import { equipmentOptions } from "../../../constants/options/equipment-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Equipment {
     /** Equipment power level */
-    export type EquipmentPowerLevel =
-      keyof typeof TERIOCK.options.equipment.powerLevel;
+    export type EquipmentPowerLevel = keyof typeof equipmentOptions.powerLevel;
     /** Equipment classes */
     export type EquipmentClass = keyof typeof index.equipmentClasses;
 

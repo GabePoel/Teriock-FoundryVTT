@@ -1,5 +1,5 @@
 import { TeriockActor } from "../../../../../documents/_module.mjs";
-import { roundTo } from "../../../../../helpers/utils.mjs";
+import { roundTo } from "../../../../../helpers/unit.mjs";
 import { EvaluationField } from "../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -13,8 +13,9 @@ export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @mixin
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorCapacitiesPartInterface}
+     * @mixin
      */
     class ActorCapacitiesPart extends Base {
       /** @inheritDoc */

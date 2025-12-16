@@ -1,7 +1,7 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { getImage, systemPath } from "../../helpers/path.mjs";
-import { evaluateAsync, makeIconClass } from "../../helpers/utils.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
@@ -81,7 +81,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     rollData = actor.getRollData();
   }
   const toPullCount = Math.floor(
-    Math.max(await evaluateAsync(pullFormula, rollData), 0),
+    Math.max(await TeriockRoll.getValue(pullFormula, rollData), 0),
   );
   /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
   const startingStones = {};
@@ -93,7 +93,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   const wrappers = [];
   for (const [color, formula] of Object.entries(stonesFormulas)) {
     startingStones[color] = Math.floor(
-      Math.max(await evaluateAsync(formula, rollData), 0),
+      Math.max(await TeriockRoll.getValue(formula, rollData), 0),
     );
     totalStonesCount += startingStones[color];
     pulledStones[color] = 0;

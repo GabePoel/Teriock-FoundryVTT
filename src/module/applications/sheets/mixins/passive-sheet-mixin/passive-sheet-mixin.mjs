@@ -1,4 +1,4 @@
-import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
+import { pureUuid, safeUuid } from "../../../../helpers/resolve.mjs";
 
 /**
  * Mixin for documents that passively modify other documents.
@@ -7,9 +7,10 @@ import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
 export default function PassiveSheetMixin(Base) {
   return (
     /**
-     * @property {TeriockAbility|TeriockProperty} document
+     * @extends {CommonSheet}
      * @mixes CommonSheet
      * @mixin
+     * @property {TeriockAbility|TeriockProperty} document
      */
     class PassiveSheet extends Base {
       /** @type {Partial<ApplicationConfiguration>} */

@@ -2,7 +2,8 @@
 
 import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
 import { getImage } from "../../helpers/path.mjs";
-import { makeIconClass, resolveDocument } from "../../helpers/utils.mjs";
+import { resolveDocument } from "../../helpers/resolve.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 import { selectDocumentDialog } from "./select-document-dialog.mjs";

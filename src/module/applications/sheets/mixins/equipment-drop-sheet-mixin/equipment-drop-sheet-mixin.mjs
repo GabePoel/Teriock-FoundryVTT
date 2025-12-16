@@ -2,14 +2,14 @@
  * Mixin that handles {@link TeriockEquipment} dropping between actors and other equipment in a way that preserves
  * {@link TeriockAttunement} links.
  * @param {typeof DragDropCommonSheetPart} Base
- * @constructor
  */
 export default function EquipmentDropSheetMixin(Base) {
   return (
     /**
-     * @property {TeriockParent} document
+     * @extends {DragDropCommonSheetPart}
      * @mixes DragDropCommonSheetPart
      * @mixin
+     * @property {TeriockParent} document
      */
     class EquipmentDropSheet extends Base {
       /** @inheritDoc */

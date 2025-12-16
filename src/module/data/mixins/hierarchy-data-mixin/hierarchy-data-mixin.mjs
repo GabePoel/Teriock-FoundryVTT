@@ -3,16 +3,14 @@ const { fields } = foundry.data;
 /**
  * Data mixin to support hierarchies of the same document type.
  * @param {typeof ChildTypeModel} Base
- * @constructor
  */
 export default function HierarchyDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @mixin
-     * @property {UUID<TeriockCommon>} _ref
-     * @property {ID<TeriockCommon>} _sup
+     * @extends {ChildTypeModel}
      * @implements {HierarchyDataMixinInterface}
+     * @mixin
      */
     class HierarchyData extends Base {
       /** @inheritDoc */

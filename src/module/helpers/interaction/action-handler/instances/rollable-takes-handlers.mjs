@@ -5,7 +5,7 @@ import {
   makeDamageDrainTypePanels,
   makeDamageTypeButtons,
 } from "../../../html.mjs";
-import { getActor, getRollIcon, makeIconClass } from "../../../utils.mjs";
+import { getRollIcon, makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -49,7 +49,7 @@ export class RollRollableTakeHandler extends ActionHandler {
    */
   async _makeRoll(formula) {
     const flavor = this._makeFlavor();
-    const actor = getActor();
+    const actor = game.actors.defaultActor;
     const roll = new TeriockRoll(formula, actor?.getRollData() || {}, {
       flavor: flavor,
     });

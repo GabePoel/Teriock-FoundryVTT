@@ -3,10 +3,10 @@ import ThresholdExecutionMixin from "../threshold-execution-mixin/threshold-exec
 
 /**
  * @param {typeof BaseExecution} Base
- * @constructor
  */
 export default function TradecraftExecutionMixin(Base) {
   /**
+   * @extends {BaseExecution}
    * @mixes ThresholdExecution
    * @mixin
    */

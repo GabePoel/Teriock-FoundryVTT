@@ -3,7 +3,6 @@ const { WorldCollection } = foundry.abstract;
 
 /**
  * @param {typeof WorldCollection} Base
- * @constructor
  */
 export default function BaseWorldCollectionMixin(Base) {
   //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols

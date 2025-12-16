@@ -5,12 +5,12 @@ const { fields } = foundry.data;
 /**
  * Actor data model that handles limits.
  * @param {typeof TeriockBaseActorModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorLimitsPartInterface}
      * @mixin
      */

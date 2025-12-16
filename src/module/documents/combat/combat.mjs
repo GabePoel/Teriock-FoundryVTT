@@ -1,4 +1,3 @@
-import { queryGM, selectUser } from "../../helpers/utils.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
@@ -48,14 +47,14 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
           actorUuid === expirations.who.source) ||
         (expirations.who.type === "target" && actorUuid === effect.actor.uuid))
     ) {
-      const user = selectUser(effect.actor);
+      const user = effect.actor?.defaultUser;
       if (expirations.when.skip <= 0 && user) {
         try {
           await user.query("teriock.inCombatExpiration", {
             effectUuid: effect.uuid,
           });
         } catch {
-          await queryGM(
+          await game.users.queryGM(
             "teriock.inCombatExpiration",
             {
               effectUuid: effect.uuid,
@@ -92,7 +91,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
       );
     }
     if (updates.length > 0) {
-      await queryGM(
+      await game.users.queryGM(
         "teriock.updateEmbeddedDocuments",
         {
           uuid: effectActor.uuid,
@@ -142,7 +141,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
         .map((t) => t.actor)
         .filter((a) => a),
     ];
-    await queryGM(
+    await game.users.queryGM(
       "teriock.resetAttackPenalties",
       {
         actorUuids: Array.from(new Set(actors.map((a) => a.uuid))),
@@ -153,7 +152,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     );
     this.updateCombatantActors();
     if (previousActor) {
-      const previousUser = selectUser(previousActor);
+      const previousUser = previousActor.defaultUser;
       if (previousUser) {
         await previousUser.query("teriock.callPseudoHook", {
           uuid: previousActor.uuid,
@@ -170,7 +169,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
       this._tryAllEffectExpirations(actor, newActor, "turn", "start").then();
     }
     if (newActor) {
-      const newUser = selectUser(newActor);
+      const newUser = newActor.defaultUser;
       if (newUser) {
         await newUser.query("teriock.update", {
           uuid: newActor.uuid,

@@ -1,10 +1,7 @@
 import { TokenSettingsModel } from "../../data/models/settings-models/_module.mjs";
-import {
-  convertUnits,
-  makeIcon,
-  mix,
-  ringImage,
-} from "../../helpers/utils.mjs";
+import { systemPath } from "../../helpers/path.mjs";
+import { convertUnits } from "../../helpers/unit.mjs";
+import { makeIcon, mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
@@ -25,6 +22,21 @@ export default class TeriockTokenDocument extends mix(
   mixins.EmbedCardDocumentMixin,
   mixins.SettingsDocumentMixin,
 ) {
+  /**
+   * Convert the image path to one intended for token rings if possible.
+   * @param {string} path
+   * @returns {string}
+   */
+  static ringImage(path) {
+    if (path.startsWith(systemPath("icons/creatures"))) {
+      return path.replace(
+        systemPath("icons/creatures"),
+        systemPath("icons/tokens"),
+      );
+    }
+    return path;
+  }
+
   /** @inheritDoc */
   get _settingsFlagsDataModel() {
     return TokenSettingsModel;
@@ -83,7 +95,7 @@ export default class TeriockTokenDocument extends mix(
   get imageTransformed() {
     let path = this.actor?.system.transformation.image || this.texture.src;
     if (this.ring.enabled) {
-      return ringImage(path);
+      return TeriockTokenDocument.ringImage(path);
     }
     return path;
   }

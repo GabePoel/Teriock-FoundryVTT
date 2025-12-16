@@ -2,10 +2,10 @@ import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
  * @param {typeof DocumentSheetV2} Base
- * @constructor
  */
 export default function ChatButtonSheetMixin(Base) {
   /**
+   * @extends {DocumentSheetV2}
    * @mixin
    */
   return class ChatButtonSheet extends Base {

@@ -1,5 +1,5 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
-import { mix, refreshDocuments } from "../../../../helpers/utils.mjs";
+import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
@@ -27,19 +27,8 @@ export default class TeriockBaseItemSheet extends mix(
     classes: ["teriock"],
     actions: {
       toggleOnUseDoc: this._onToggleOnUseDoc,
-      refreshThis: this._onRefreshThis,
     },
   };
-
-  /**
-   * Refresh each {@link TeriockEffect} embedded in this {@link TeriockItem}.
-   * @returns {Promise<void>}
-   * @private
-   */
-  static async _onRefreshThis() {
-    const toRefresh = [...this.document.abilities, ...this.document.properties];
-    await refreshDocuments(toRefresh);
-  }
 
   /**
    * Marks the {@link TeriockEffect} as being "on use" or not.

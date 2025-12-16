@@ -4,7 +4,7 @@ const creaturePack = game.teriock.packs.creatures;
 await speciesPack.getIndex();
 await creaturePack.getIndex();
 
-const allSpecies = tm.utils.docSort(
+const allSpecies = tm.sort.docSort(
   speciesPack.index.contents.filter((i) => i.type === "species"),
 );
 const allCreatures = creaturePack.index.contents.filter(

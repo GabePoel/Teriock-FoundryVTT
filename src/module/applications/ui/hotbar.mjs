@@ -1,5 +1,5 @@
 import { TeriockMacro } from "../../documents/_module.mjs";
-import { getActor, makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 
 const { Hotbar } = foundry.applications.ui;
 
@@ -42,7 +42,7 @@ export default class TeriockHotbar extends Hotbar {
       },
       callback: async (li) => {
         const macro = this.#getMacroForSlot(li);
-        const actor = getActor();
+        const actor = game.actors.defaultActor;
         const doc = await TeriockMacro.getDocument(
           actor,
           macro.getFlag("teriock", "macroDocumentName"),

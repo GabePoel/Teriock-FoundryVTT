@@ -1,4 +1,4 @@
-import { actorToken, evaluateSync } from "../../helpers/utils.mjs";
+import { TeriockRoll } from "../../dice/_module.mjs";
 
 const { MeasuredTemplate } = foundry.canvas.placeables;
 
@@ -18,14 +18,11 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
     if (!templateShape) {
       return null;
     }
-    const source =
-      execution.executor || execution.actor
-        ? actorToken(execution.actor)
-        : null;
+    const source = execution.executor || execution.actor?.defaultToken;
     if (!source) {
       return null;
     }
-    let distance = evaluateSync(
+    let distance = TeriockRoll.meanValue(
       execution.source.system.range,
       execution.rollData,
     );

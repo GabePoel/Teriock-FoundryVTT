@@ -2,9 +2,12 @@ import { TeriockRoll } from "../../../../dice/_module.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
- * @constructor
  */
 export default function AbilityExecutionRollsPart(Base) {
+  /**
+   * @extends {AbilityExecutionConstructor}
+   * @mixin
+   */
   return class AbilityExecutionRolls extends Base {
     /** @inheritDoc */
     get flavor() {

@@ -1,9 +1,8 @@
-import { isOwnerAndCurrentUser, makeIcon } from "../../../helpers/utils.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField } from "../../fields/_module.mjs";
 
 /**
  * @param {typeof TeriockBaseItemModel} Base
- * @constructor
  */
 export default function AttunableDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
@@ -72,7 +71,7 @@ export default function AttunableDataMixin(Base) {
       /** @inheritDoc */
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
-        if (isOwnerAndCurrentUser(this.parent, userId)) {
+        if (this.parent.checkEditor(userId)) {
           if (this.attunement) {
             this.attunement
               .update({

@@ -2,10 +2,10 @@ import { TeriockDialog } from "../../../api/_module.mjs";
 
 /**
  * @param {typeof DocumentSheetV2} Base
- * @constructor
  */
 export default function WikiButtonSheetMixin(Base) {
   /**
+   * @extends {DocumentSheetV2}
    * @mixin
    */
   return class WikiButtonSheet extends Base {

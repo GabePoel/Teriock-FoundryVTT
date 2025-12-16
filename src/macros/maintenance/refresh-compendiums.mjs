@@ -4,7 +4,7 @@ await tm.utils.progressBar(
   /** @param {TeriockCompendiumCollection<TeriockDocument>} p */ async (p) => {
     if (!p.locked) {
       await p.getIndex();
-      const indexes = tm.utils.docSort(
+      const indexes = tm.sort.docSort(
         p.index.contents.filter((d) => !d?.system?._sup),
       );
       await tm.utils.progressBar(

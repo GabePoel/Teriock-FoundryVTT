@@ -3,12 +3,12 @@ import { prefix, suffix } from "../../../../helpers/string.mjs";
 /**
  * Equipment panel part.
  * @param {typeof TeriockEquipmentModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockEquipmentModel}
      * @mixin
      */
     class EquipmentPanelPart extends Base {

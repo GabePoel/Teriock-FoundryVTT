@@ -3,10 +3,10 @@ import { refreshFromCompendiumDialog } from "../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof DocumentSheetV2} Base
- * @constructor
  */
 export default function IndexButtonSheetMixin(Base) {
   /**
+   * @extends {DocumentSheetV2}
    * @mixin
    */
   return class IndexButtonSheet extends Base {

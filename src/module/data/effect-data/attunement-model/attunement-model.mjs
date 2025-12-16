@@ -48,22 +48,6 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    const entries = super
-      .getCardContextMenuEntries(doc)
-      .filter((e) => !["Delete", "Duplicate"].includes(e.name));
-    return [
-      ...entries,
-      {
-        name: "Deattune",
-        icon: makeIcon("handshake-simple-slash", "contextMenu"),
-        callback: async () => await this.deattune(),
-        group: "attunement",
-      },
-    ];
-  }
-
-  /** @inheritDoc */
   get embedIcons() {
     return [
       {
@@ -161,6 +145,22 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
    */
   async deattune() {
     await this.parent.delete();
+  }
+
+  /** @inheritDoc */
+  getCardContextMenuEntries(doc) {
+    const entries = super
+      .getCardContextMenuEntries(doc)
+      .filter((e) => !["Delete", "Duplicate"].includes(e.name));
+    return [
+      ...entries,
+      {
+        name: "Deattune",
+        icon: makeIcon("handshake-simple-slash", "contextMenu"),
+        callback: async () => await this.deattune(),
+        group: "attunement",
+      },
+    ];
   }
 
   /** @inheritDoc */

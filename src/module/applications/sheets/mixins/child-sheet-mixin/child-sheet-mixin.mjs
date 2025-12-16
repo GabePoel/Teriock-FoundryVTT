@@ -1,16 +1,18 @@
-import { fancifyFields, getSchema } from "../../../../helpers/utils.mjs";
+import { fancifyFields } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 
 /**
  * {@link TeriockChild} sheet mixin.
  * @param {typeof CommonSheet} Base
- * @constructor
  */
 export default function ChildSheetMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {CommonSheet}
+     * @mixes ConfigButtonSheet
+     * @mixin
      * @property {TeriockChild} document
-     * @mixes QualifierButtonSheet
      */
     class ChildSheet extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
@@ -43,12 +45,12 @@ export default function ChildSheetMixin(Base) {
           return {
             ...f,
             ...{
-              schema: getSchema(this.document, f.path),
+              schema: this.document.getSchema(f.path),
               value: foundry.utils.getProperty(
                 this.document,
                 f.path.replace(".system.", "._schema.system."),
               ),
-              label: f.label || getSchema(this.document, f.path).label,
+              label: f.label || this.document.getSchema(f.path).label,
             },
           };
         });

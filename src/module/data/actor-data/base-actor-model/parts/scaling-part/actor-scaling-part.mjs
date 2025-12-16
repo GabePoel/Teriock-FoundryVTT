@@ -3,12 +3,12 @@ const { fields } = foundry.data;
 /**
  * Actor data model that handles scaling.
  * @param {typeof TeriockBaseActorModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorScalingPartInterface}
      * @mixin
      */

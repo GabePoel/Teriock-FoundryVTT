@@ -1,5 +1,5 @@
 import { toCamelCase, toKebabCase } from "../../helpers/string.mjs";
-import { roundTo } from "../../helpers/utils.mjs";
+import { roundTo } from "../../helpers/unit.mjs";
 
 export default function registerStringHelpers() {
   Handlebars.registerHelper("lc", (str) =>

@@ -7,7 +7,6 @@ import PanelDocumentMixin from "../panel-document-mixin/panel-document-mixin.mjs
 /**
  * Mixin for common functions used across document classes.
  * @param {typeof ClientDocument} Base
- * @constructor
  */
 export default function CommonDocumentMixin(Base) {
   //noinspection JSUnusedGlobalSymbols

@@ -1,8 +1,6 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { addFormula } from "../../helpers/formula.mjs";
-import { formulaExists } from "../../helpers/string.mjs";
-import { getActor } from "../../helpers/utils.mjs";
+import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 
 export default class BaseExecution {
   /**
@@ -61,7 +59,7 @@ export default class BaseExecution {
     if (this._actor) {
       return this._actor;
     } else {
-      return getActor();
+      return game.actors.defaultActor;
     }
   }
 

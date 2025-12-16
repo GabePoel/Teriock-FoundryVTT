@@ -11,7 +11,6 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 /**
  * {@link TeriockCommon} sheet mixin.
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
- * @constructor
  */
 export default function CommonSheetMixin(Base) {
   //noinspection JSClosureCompilerSyntax

@@ -14,6 +14,6 @@ export type ConditionInformation = Record<
   {
     locked: boolean;
     reasons: Set<string>;
-    trackers: UUID<TeriockTokenDocument>[];
+    trackers: Set<UUID<TeriockTokenDocument>>;
   }
 >;

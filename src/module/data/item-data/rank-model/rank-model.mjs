@@ -1,11 +1,6 @@
+import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import {
-  getRollIcon,
-  isOwnerAndCurrentUser,
-  makeIcon,
-  mix,
-  resolveDocument,
-} from "../../../helpers/utils.mjs";
+import { getRollIcon, makeIcon, mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
@@ -200,11 +195,7 @@ export default class TeriockRankModel extends mix(
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (
-      isOwnerAndCurrentUser(this.parent, userId) &&
-      this.actor &&
-      this.classRank === 1
-    ) {
+    if (this.parent.checkEditor(userId) && this.actor && this.classRank === 1) {
       const needsArchetype =
         !this.actor.itemKeys.power.has(this.archetype) &&
         this.archetype !== "everyman";
@@ -226,7 +217,7 @@ export default class TeriockRankModel extends mix(
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if (isOwnerAndCurrentUser(this.parent, userId) && this.actor) {
+    if (this.parent.checkEditor(userId) && this.actor) {
       const archetypePowers = this.actor.powers.filter(
         (p) => toCamelCase(p.name) === this.archetype,
       );

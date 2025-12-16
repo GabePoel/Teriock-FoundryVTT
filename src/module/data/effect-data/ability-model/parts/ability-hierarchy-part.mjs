@@ -3,12 +3,12 @@ import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.m
 /**
  * Ability hierarchy part.
  * @param {typeof TeriockAbilityModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockAbilityModel}
      * @mixin
      */
     class AbilityHierarchyPart extends Base {

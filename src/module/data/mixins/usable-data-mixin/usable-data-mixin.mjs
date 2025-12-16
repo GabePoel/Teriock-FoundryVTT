@@ -3,12 +3,12 @@ const { fields } = foundry.data;
 /**
  * Mixin for data models that can be used. This typically involves running an execution.
  * @param {typeof EmbeddedDataModel | typeof CommonTypeModel} Base
- * @constructor
  */
 export default function UsableDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {EmbeddedDataModel | CommonTypeModel}
      * @implements {UsableMixinInterface}
      * @mixin
      */

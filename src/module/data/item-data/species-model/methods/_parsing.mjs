@@ -1,7 +1,7 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
+import { ensureChildren } from "../../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { ensureChildren } from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDoc,
   cleanObject,

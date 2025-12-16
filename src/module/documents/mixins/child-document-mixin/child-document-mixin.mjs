@@ -4,7 +4,6 @@ import { applyCertainChanges } from "../shared/_module.mjs";
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
  * @param {typeof CommonDocument} Base
- * @constructor
  * @mixin
  */
 export default function ChildDocumentMixin(Base) {
@@ -12,8 +11,9 @@ export default function ChildDocumentMixin(Base) {
   return (
     /**
      * @extends {ClientDocument}
-     * @mixes PanelDocument
      * @mixes CommonDocument
+     * @mixes PanelDocument
+     * @mixin
      */
     class ChildDocument extends Base {
       //noinspection ES6ClassMemberInitializationOrder

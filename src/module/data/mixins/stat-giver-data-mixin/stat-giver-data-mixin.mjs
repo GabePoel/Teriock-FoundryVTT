@@ -8,7 +8,6 @@ const { fields } = foundry.data;
 
 /**
  * @param {typeof TeriockBaseItemModel} Base
- * @constructor
  */
 export default function StatGiverDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax

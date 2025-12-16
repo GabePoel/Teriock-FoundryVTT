@@ -138,9 +138,7 @@ export default function registerUiHelpers() {
       const ascendingPath = `settings.${tab}SortAscending`;
 
       const gaplessValue = foundry.utils.getProperty(context, gaplessPath);
-      console.log(gaplessValue);
       const sizeValue = foundry.utils.getProperty(context, sizePath);
-      console.log(sizeValue);
       const ascendingValue = foundry.utils.getProperty(context, ascendingPath);
 
       const sizeOptions = TERIOCK.options.display.sizes ?? {};

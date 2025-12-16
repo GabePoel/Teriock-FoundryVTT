@@ -2,17 +2,14 @@ import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { AbilityExecution } from "../../../executions/document-executions/_module.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
-import {
-  isOwnerAndCurrentUser,
-  mix,
-  queryGM,
-  safeUuid,
-} from "../../../helpers/utils.mjs";
+import { safeUuid } from "../../../helpers/resolve.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import { _parse } from "./parsing/_parsing.mjs";
 import * as parts from "./parts/_module.mjs";
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Ability-specific effect data model.
  *
@@ -348,7 +345,7 @@ export default class TeriockAbilityModel extends mix(
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if (isOwnerAndCurrentUser(this.parent, userId)) {
+    if (this.parent.checkEditor(userId)) {
       this.expireSustainedConsequences(true).then();
     }
   }
@@ -356,7 +353,7 @@ export default class TeriockAbilityModel extends mix(
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    if (isOwnerAndCurrentUser(this.parent, userId)) {
+    if (this.parent.checkEditor(userId)) {
       this.expireSustainedConsequences().then();
     }
   }
@@ -405,7 +402,7 @@ export default class TeriockAbilityModel extends mix(
   async expireSustainedConsequences(force = false) {
     if (!this.parent.active || force) {
       for (const uuid of this.sustaining) {
-        await queryGM(
+        await game.users.queryGM(
           "teriock.sustainedExpiration",
           {
             sustainedUuid: uuid,

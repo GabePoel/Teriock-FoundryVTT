@@ -3,7 +3,7 @@ const buttons = data.execution.buttons;
 const applyButton = buttons.find((b) => b.label === "Apply Effect");
 applyButton.label = "Apply Lighted";
 
-const token = tm.utils.actorToken(actor).document || actor;
+const token = actor?.defaultToken?.document || actor;
 
 function modifyData(data) {
   const effectObject = JSON.parse(data);

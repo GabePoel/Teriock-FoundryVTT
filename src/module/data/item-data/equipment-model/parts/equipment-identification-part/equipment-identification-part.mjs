@@ -1,4 +1,5 @@
-import { IdentificationModel } from "../../../models/_module.mjs";
+import { makeIcon } from "../../../../../helpers/utils.mjs";
+import { IdentificationModel } from "../../../../models/_module.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;
 
@@ -11,6 +12,8 @@ export default (Base) => {
   return (
     /**
      * @extends {TeriockEquipmentModel}
+     * @implements {EquipmentIdentificationPartInterface}
+     * @mixin
      */
     class EquipmentIdentificationPart extends Base {
       /** @inheritDoc */
@@ -35,6 +38,40 @@ export default (Base) => {
             classes: "faded-display-field",
           },
           ...super.displayFields,
+        ];
+      }
+
+      /** @inheritdoc */
+      getCardContextMenuEntries(doc) {
+        return [
+          ...super.getCardContextMenuEntries(doc),
+          {
+            name: "Identify",
+            icon: makeIcon("eye", "contextMenu"),
+            callback: this.identification.identify.bind(this.identification),
+            condition: !this.identification.identified,
+            group: "usage",
+          },
+          {
+            name: "Read Magic",
+            icon: makeIcon("hand", "contextMenu"),
+            callback: this.identification.readMagic.bind(this.identification),
+            condition:
+              this.parent.isOwner &&
+              !this.identification.identified &&
+              !this.identification.read,
+            group: "usage",
+          },
+          {
+            name: "Unidentify",
+            icon: makeIcon("eye-slash", "contextMenu"),
+            callback: this.identification.unidentify.bind(this.identification),
+            condition:
+              this.parent.isOwner &&
+              this.identification.identified &&
+              game.user.isGM,
+            group: "usage",
+          },
         ];
       }
 

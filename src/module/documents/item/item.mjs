@@ -1,5 +1,5 @@
 import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
-import { isOwnerAndCurrentUser, mix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
@@ -89,7 +89,7 @@ export default class TeriockItem extends mix(
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    if (isOwnerAndCurrentUser(this, userId)) {
+    if (this.checkEditor(userId)) {
       for (const a of this.abilities) {
         a.system?.expireSustainedConsequences().then();
       }

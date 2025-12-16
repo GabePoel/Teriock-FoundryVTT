@@ -1,6 +1,5 @@
 /**
  * Colors based on the Adwaita color palette.
- * @type {Record<string, string>}
  */
 export const colors = {
   blue: "#1A5FB4",

@@ -1,5 +1,5 @@
 import { systemPath } from "../../helpers/path.mjs";
-import { dedent } from "../../helpers/utils.mjs";
+import { dedent } from "../../helpers/string.mjs";
 
 export const displayPanel = {
   loading: dedent(`

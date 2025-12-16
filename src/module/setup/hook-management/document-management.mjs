@@ -1,5 +1,3 @@
-import { isOwnerAndCurrentUser } from "../../helpers/utils.mjs";
-
 export default function registerDocumentManagementHooks() {
   foundry.helpers.Hooks.on(
     "teriock.actorPostUpdate",
@@ -9,7 +7,7 @@ export default function registerDocumentManagementHooks() {
      * @returns {Promise<void>}
      */
     async (actor, userId) => {
-      if (isOwnerAndCurrentUser(actor, userId)) {
+      if (actor.checkEditor(userId)) {
         await actor.postUpdate();
       }
     },

@@ -1,4 +1,4 @@
-import { docSort, effectSort, rankSort } from "../../helpers/utils.mjs";
+import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
 
 /**
  * Options that describe documents.

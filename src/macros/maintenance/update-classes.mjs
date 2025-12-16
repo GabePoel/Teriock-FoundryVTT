@@ -85,7 +85,7 @@ await tm.utils.progressBar(
         const archetypeText = `@Embed[${classPack.index.getName(tm.string.toTitleCase(archetype)).uuid}]`;
         const flaws = (await fromUuid(rankUuids[0]))?.system.flaws;
 
-        const text = tm.utils.dedent(`
+        const text = tm.string.dedent(`
           ${TERIOCK.content.classes[className]}${flaws ? `\n<h2>Flaws</h2>\n${flaws}` : ""}
           <h2>Archetype</h2>
           <p>Every ${archetype} class gets the following power.</p>

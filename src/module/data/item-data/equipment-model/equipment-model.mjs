@@ -1,12 +1,9 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
 import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
-import { mix, roundTo } from "../../../helpers/utils.mjs";
-import { EvaluationField, TextField } from "../../fields/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
+import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import * as contextMenus from "./methods/_context-menus.mjs";
-import * as deriving from "./methods/_data-deriving.mjs";
-import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./parsing/_parsing.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -23,7 +20,9 @@ const { fields } = foundry.data;
  * @mixes ArmamentData
  * @mixes AttunableData
  * @mixes ConsumableData
+ * @mixes EquipmentDamagePart
  * @mixes EquipmentIdentificationPart
+ * @mixes EquipmentMigrationPart
  * @mixes EquipmentPanelPart
  * @mixes EquipmentStoragePart
  * @mixes EquipmentSuppressionPart
@@ -38,7 +37,9 @@ export default class TeriockEquipmentModel extends mix(
   mixins.ConsumableDataMixin,
   mixins.ExecutableDataMixin,
   mixins.WikiDataMixin,
+  parts.EquipmentDamagePart,
   parts.EquipmentIdentificationPart,
+  parts.EquipmentMigrationPart,
   parts.EquipmentPanelPart,
   parts.EquipmentStoragePart,
   parts.EquipmentSuppressionPart,
@@ -79,15 +80,6 @@ export default class TeriockEquipmentModel extends mix(
         initial: false,
         label: "Consumable",
       }),
-      damage: new fields.SchemaField({
-        base: new EvaluationField({
-          deterministic: false,
-        }),
-        twoHanded: new EvaluationField({
-          deterministic: false,
-        }),
-        types: new fields.SetField(new fields.StringField()),
-      }),
       description: new TextField({
         initial: "",
         label: "Description",
@@ -110,19 +102,8 @@ export default class TeriockEquipmentModel extends mix(
         initial: 0,
         label: "Price",
       }),
-      weight: new EvaluationField({
-        floor: false,
-        ceil: false,
-        decimals: 2,
-      }),
     });
     return schema;
-  }
-
-  /** @inheritDoc */
-  static migrateData(data) {
-    data = migrate._migrateData(data);
-    return super.migrateData(data);
   }
 
   /** @inheritDoc */
@@ -153,74 +134,7 @@ export default class TeriockEquipmentModel extends mix(
         },
       },
       "system.consumable",
-      //{
-      //  path: "system.equipped",
-      //  dataset: {
-      //    action: "toggleEquipped",
-      //  },
-      //},
       ...super.displayToggles,
-    ];
-  }
-
-  /** @inheritDoc */
-  get embedIcons() {
-    return [
-      {
-        icon: this.glued ? "link" : "link-slash",
-        action: "toggleGluedDoc",
-        tooltip: this.glued ? "Glued" : "Unglued",
-        condition: this.parent.isOwner,
-        callback: async () => {
-          if (this.glued) {
-            await this.unglue();
-          } else {
-            await this.glue();
-          }
-        },
-      },
-      {
-        icon: this.dampened ? "bell-slash" : "bell",
-        action: "toggleDampenedDoc",
-        tooltip: this.dampened ? "Dampened" : "Undampened",
-        condition: this.parent.isOwner,
-        callback: async () => {
-          if (this.dampened) {
-            await this.undampen();
-          } else {
-            await this.dampen();
-          }
-        },
-      },
-      {
-        icon: this.shattered ? "wine-glass-crack" : "wine-glass",
-        action: "toggleShatteredDoc",
-        tooltip: this.shattered ? "Shattered" : "Shattered",
-        condition: this.parent.isOwner,
-        callback: async () => {
-          if (this.shattered) {
-            await this.repair();
-          } else {
-            await this.shatter();
-          }
-        },
-      },
-      ...super.embedIcons.filter(
-        (i) => !i.action?.toLowerCase().includes("disabled"),
-      ),
-      {
-        icon: this.equipped ? "circle-check" : "circle",
-        action: "toggleEquippedDoc",
-        tooltip: this.equipped ? "Equipped" : "Unequipped",
-        condition: this.parent.isOwner,
-        callback: async () => {
-          if (this.equipped) {
-            await this.unequip();
-          } else {
-            await this.equip();
-          }
-        },
-      },
     ];
   }
 
@@ -230,8 +144,6 @@ export default class TeriockEquipmentModel extends mix(
     if (!this.consumable) {
       parts.subtitle = this.equipmentType;
     }
-    parts.struck = !this.isEquipped;
-    parts.shattered = this.shattered;
     parts.text = dotJoin([
       suffix(this.damage.base.text, "damage"),
       suffix(this.bv.value, "BV"),
@@ -241,31 +153,6 @@ export default class TeriockEquipmentModel extends mix(
       this.sup?.nameString || "",
     ]);
     return parts;
-  }
-
-  /**
-   * If this has a two-handed damage attack.
-   * @returns {boolean}
-   */
-  get hasTwoHandedAttack() {
-    return (
-      this.damage.twoHanded.nonZero &&
-      this.damage.twoHanded.formula !== this.damage.base.formula
-    );
-  }
-
-  /** @inheritDoc */
-  get makeSuppressed() {
-    let suppressed = super.makeSuppressed || !this.isEquipped;
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.elder?.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.equipment
-      ) {
-        suppressed = true;
-      }
-    }
-    return suppressed;
   }
 
   /** @inheritDoc */
@@ -292,25 +179,6 @@ export default class TeriockEquipmentModel extends mix(
   }
 
   /** @inheritDoc */
-  getCardContextMenuEntries(doc) {
-    return [
-      ...contextMenus._entries(this),
-      ...super.getCardContextMenuEntries(doc),
-    ];
-  }
-
-  /** @inheritDoc */
-  getLocalRollData() {
-    const data = super.getLocalRollData();
-    Object.assign(data, {
-      "dmg.2h": this.damage.twoHanded.formula,
-      weight: this.weight.formula,
-      str: this.minStr.formula,
-    });
-    return data;
-  }
-
-  /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
   }
@@ -325,7 +193,6 @@ export default class TeriockEquipmentModel extends mix(
       super.parseEvent(event);
     Object.assign(options, {
       secret: event.shiftKey,
-      twoHanded: event.ctrlKey,
     });
     return options;
   }
@@ -333,7 +200,10 @@ export default class TeriockEquipmentModel extends mix(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    deriving._prepareDerivedData(this);
+    if (this.fightingStyle && this.fightingStyle.length > 0) {
+      this.specialRules =
+        TERIOCK.content.weaponFightingStyles[this.fightingStyle];
+    }
   }
 
   /** @inheritDoc */
@@ -342,13 +212,5 @@ export default class TeriockEquipmentModel extends mix(
       this.tier.raw = "";
     }
     super.prepareSpecialData();
-    this.weight.evaluate();
-    this.weight.total = this.weight.value;
-    if (this.consumable) {
-      this.weight.total = roundTo(this.weight.value * this.quantity, 2);
-    }
-    if (!this.hasTwoHandedAttack) {
-      this.damage.twoHanded.raw = this.damage.base.raw;
-    }
   }
 }

@@ -11,11 +11,15 @@ import {
 } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
+/**
+ * @param {typeof DocumentSheetV2} Base
+ */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax,JSValidateJSDoc
   return (
     /**
      * @extends {DocumentSheetV2}
+     * @mixin
      * @property {TeriockCommon} document
      */
     class DocumentCreationCommonSheetPart extends Base {

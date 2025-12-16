@@ -1,4 +1,4 @@
-import { fancifyFields, getSchema, makeIcon } from "../../../helpers/utils.mjs";
+import { fancifyFields, makeIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
 import { UsableDataMixin } from "../../mixins/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
@@ -162,7 +162,7 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
   get messageBlocks() {
     return fancifyFields(this.displayFields)
       .map((f) => {
-        const schema = getSchema(this.parent, f.path);
+        const schema = this.parent.getSchema(f.path);
         const value = foundry.utils.getProperty(this.parent, f.path);
         if (value && !schema.gmOnly) {
           return {

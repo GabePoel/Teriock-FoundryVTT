@@ -1,11 +1,10 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
-import { addFormula } from "../../../helpers/formula.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import {
   makeDamageDrainTypePanels,
   makeDamageTypeButtons,
 } from "../../../helpers/html.mjs";
 import { actionHandlers } from "../../../helpers/interaction/_module.mjs";
-import { formulaExists } from "../../../helpers/string.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 export default class ArmamentExecution extends BaseDocumentExecution {

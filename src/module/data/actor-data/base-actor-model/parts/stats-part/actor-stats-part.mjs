@@ -2,19 +2,19 @@ import {
   healDialog,
   revitalizeDialog,
 } from "../../../../../applications/dialogs/_module.mjs";
-import { docSort } from "../../../../../helpers/utils.mjs";
+import { docSort } from "../../../../../helpers/sort.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * Actor data model that handles stats.
  * @param {typeof TeriockBaseActorModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorStatsPartInterface}
      * @mixin
      */

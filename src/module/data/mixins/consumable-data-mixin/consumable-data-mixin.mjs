@@ -4,7 +4,6 @@ const { fields } = foundry.data;
 
 /**
  * @param {typeof ChildTypeModel} Base
- * @constructor
  */
 export default function ConsumableDataMixin(Base) {
   // noinspection JSClosureCompilerSyntax

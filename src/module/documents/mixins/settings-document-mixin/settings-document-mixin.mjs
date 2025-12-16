@@ -1,10 +1,10 @@
 /**
  * @param {typeof TeriockDocument} Base
- * @constructor
  */
 export default function SettingsDocumentMixin(Base) {
   return (
     /**
+     * @extends {TeriockDocument}
      * @mixin
      */
     class SettingsDocument extends Base {

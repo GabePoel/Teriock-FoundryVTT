@@ -1,4 +1,4 @@
-import { makeCommonRollOptions } from "../../../../../helpers/utils.mjs";
+import { makeCommonRollOptions } from "../../../../../helpers/rolling.mjs";
 
 export default (Base) =>
   class RollingActorSheetPart extends Base {

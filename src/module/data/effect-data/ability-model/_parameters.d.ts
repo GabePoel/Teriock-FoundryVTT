@@ -1,26 +1,28 @@
+import { abilityOptions } from "../../../constants/options/ability-options.mjs";
+
 declare global {
   namespace Teriock.Parameters.Ability {
     /** Valid maneuvers */
-    export type Maneuver = keyof typeof TERIOCK.options.ability.maneuver;
+    export type Maneuver = keyof typeof abilityOptions.maneuver;
 
     /** Valid interactions */
-    export type Interaction = keyof typeof TERIOCK.options.ability.interaction;
+    export type Interaction = keyof typeof abilityOptions.interaction;
 
     /** Valid execution times for active maneuvers */
     export type ActiveExecutionTime =
-      keyof typeof TERIOCK.options.ability.executionTime.active;
+      keyof typeof abilityOptions.executionTime.active;
 
     /** Valid execution times for reactive maneuvers */
     export type ReactiveExecutionTime =
-      keyof typeof TERIOCK.options.ability.executionTime.reactive;
+      keyof typeof abilityOptions.executionTime.reactive;
 
     /** Valid execution times for passive maneuvers */
     export type PassiveExecutionTime =
-      keyof typeof TERIOCK.options.ability.executionTime.passive;
+      keyof typeof abilityOptions.executionTime.passive;
 
     /** Valid execution times for slow maneuvers */
     export type SlowExecutionTime =
-      | keyof typeof TERIOCK.options.ability.executionTime.slow
+      | keyof typeof abilityOptions.executionTime.slow
       | string;
 
     /** Valid execution times */
@@ -33,31 +35,31 @@ declare global {
     /**
      * Effect types
      */
-    export type EffectTag = keyof typeof TERIOCK.options.ability.effectTypes;
+    export type EffectTag = keyof typeof abilityOptions.effectTypes;
 
     /**
      * Targets
      */
-    export type Target = keyof typeof TERIOCK.options.ability.targets;
+    export type Target = keyof typeof abilityOptions.targets;
 
     /**
      * Deliveries
      */
-    export type Delivery = keyof typeof TERIOCK.options.ability.delivery;
+    export type Delivery = keyof typeof abilityOptions.delivery;
 
     /**
      * Valid elements
      */
-    export type Element = keyof typeof TERIOCK.options.ability.elements;
+    export type Element = keyof typeof abilityOptions.elements;
 
     /** Valid power sources */
-    export type PowerSource = keyof typeof TERIOCK.options.ability.powerSources;
+    export type PowerSource = keyof typeof abilityOptions.powerSources;
 
     /** Expansion */
-    export type Expansion = keyof typeof TERIOCK.options.ability.expansion;
+    export type Expansion = keyof typeof abilityOptions.expansion;
 
     /** Piercing */
-    export type Piercing = keyof typeof TERIOCK.options.ability.piercing;
+    export type Piercing = keyof typeof abilityOptions.piercing;
   }
 }
 

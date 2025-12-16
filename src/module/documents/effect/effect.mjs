@@ -1,9 +1,6 @@
 import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
-import {
-  mix,
-  modifyChangePrefix,
-  secondsToReadable,
-} from "../../helpers/utils.mjs";
+import { secondsToReadable } from "../../helpers/unit.mjs";
+import { mix, modifyChangePrefix } from "../../helpers/utils.mjs";
 import TeriockItem from "../item/item.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -144,6 +141,18 @@ export default class TeriockEffect extends mix(
       return secondsToReadable(remaining) + " remaining";
     }
     return "No time limit";
+  }
+
+  /** @inheritDoc */
+  _applyAdd(actor, change, current, delta, changes) {
+    if (foundry.utils.getType(current) === "Set") current.add(delta);
+    else super._applyAdd(actor, change, current, delta, changes);
+  }
+
+  /** @inheritDoc */
+  _applyOverride(actor, change, current, delta, changes) {
+    if (foundry.utils.getType(current) === "Set") delta = new Set([delta]);
+    super._applyOverride(actor, change, current, delta, changes);
   }
 
   /** @inheritDoc */

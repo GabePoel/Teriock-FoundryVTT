@@ -6,7 +6,6 @@ import { toTitleCase } from "../../../helpers/string.mjs";
 /**
  * Mixin that provides support for embedding as a card.
  * @param {typeof ClientDocument} Base
- * @constructor
  */
 export default function EmbedCardDocumentMixin(Base) {
   return (

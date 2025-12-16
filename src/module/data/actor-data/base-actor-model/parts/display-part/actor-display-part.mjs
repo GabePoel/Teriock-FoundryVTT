@@ -8,6 +8,7 @@ export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorDisplayPartInterface}
      * @mixin
      */

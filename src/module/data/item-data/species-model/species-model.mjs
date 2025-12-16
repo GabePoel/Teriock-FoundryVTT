@@ -5,8 +5,8 @@ import { makeIcon, mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _panelParts } from "./methods/_panel-parts.mjs";
 import { _parse } from "./methods/_parsing.mjs";
+import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -18,6 +18,7 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseItemModel}
  * @mixes ProficiencyData
+ * @mixes SpeciesPanelPart
  * @mixes StatGiverData
  * @mixes WikiData
  */
@@ -26,6 +27,7 @@ export default class TeriockSpeciesModel extends mix(
   mixins.WikiDataMixin,
   mixins.StatGiverDataMixin,
   mixins.ProficiencyDataMixin,
+  parts.SpeciesPanelPart,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -178,11 +180,6 @@ export default class TeriockSpeciesModel extends mix(
       return true;
     }
     return suppressed;
-  }
-
-  /** @inheritDoc */
-  get panelParts() {
-    return { ...super.panelParts, ..._panelParts(this) };
   }
 
   /**

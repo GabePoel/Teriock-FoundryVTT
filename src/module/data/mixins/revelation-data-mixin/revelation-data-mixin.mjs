@@ -4,7 +4,6 @@ const { fields } = foundry.data;
 
 /**
  * @param {typeof TeriockBaseEffectModel} Base
- * @constructor
  */
 export default function RevelationDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax

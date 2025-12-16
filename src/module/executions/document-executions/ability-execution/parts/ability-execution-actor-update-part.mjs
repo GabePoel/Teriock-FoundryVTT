@@ -1,12 +1,12 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import { formulaExists } from "../../../../helpers/string.mjs";
+import { formulaExists } from "../../../../helpers/formula.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
- * @constructor
  */
 export default function AbilityExecutionActorUpdatePart(Base) {
   /**
+   * @extends {AbilityExecutionConstructor}
    * @mixin
    */
   return class AbilityExecutionActorUpdate extends Base {

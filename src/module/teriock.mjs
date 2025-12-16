@@ -27,7 +27,10 @@ globalThis.tm = {
   fetch: helpers.fetch,
   html: helpers.html,
   path: helpers.path,
+  resolve: helpers.resolve,
+  sort: helpers.sort,
   string: helpers.string,
+  unit: helpers.unit,
   utils: helpers.utils,
 };
 

@@ -1,5 +1,5 @@
+import { inferChildCompendiumSources } from "../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import { inferChildCompendiumSources } from "../../../helpers/utils.mjs";
 import {
   fetchWikiPageHTML,
   openWikiPage,
@@ -7,7 +7,6 @@ import {
 
 /**
  * @param {typeof ChildTypeModel} Base
- * @constructor
  */
 export default function WikiDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax

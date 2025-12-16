@@ -6,6 +6,7 @@ export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorAutomationPartInterface}
      * @mixin
      */
@@ -24,7 +25,7 @@ export default (Base) => {
           this.conditionInformation[key] = {
             locked: false,
             reasons: new Set(),
-            trackers: [],
+            trackers: new Set(),
           };
         }
       }
@@ -33,9 +34,7 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         for (const uuid of this.conditionInformation.allured.trackers) {
-          if (!this.conditionInformation.bound.trackers.includes(uuid)) {
-            this.conditionInformation.bound.trackers.push(uuid);
-          }
+          this.conditionInformation.bound.trackers.add(uuid);
         }
       }
     }

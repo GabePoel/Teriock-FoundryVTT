@@ -1,6 +1,7 @@
 import { boostDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import { makeIconClass, pureUuid } from "../../../utils.mjs";
+import { pureUuid } from "../../../resolve.mjs";
+import { makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**

@@ -1,9 +1,5 @@
 import { colors } from "../display/colors.mjs";
 
-/**
- * @type {Record<string, {name: string; icon: string; color:
- *   Teriock.Parameters.Shared.Color}>}
- */
 export const powerOptions = {
   backstory: {
     name: "Backstory",

@@ -4,15 +4,44 @@ import { makeIcon, makeIconClass } from "../../../helpers/utils.mjs";
 /**
  * Base mixin.
  * @param {typeof TeriockDocument} Base
- * @constructor
  * @mixin
  */
 export default function BaseDocumentMixin(Base) {
   return (
     /**
      * @extends {ClientDocument}
+     * @mixin
      */
     class BaseDocument extends Base {
+      /**
+       * Can this be viewed?
+       * @returns {boolean}
+       */
+      get isViewer() {
+        return this.permission >= 2;
+      }
+
+      /**
+       * Check whether the provided document or its index is an ancestor of this one.
+       * @param {TeriockDocument|Index<TeriockDocument>} doc
+       */
+      checkAncestor(doc) {
+        if (doc?.uuid === this.uuid) {
+          return true;
+        } else {
+          return this.parent?.checkAncestor(doc) || false;
+        }
+      }
+
+      /**
+       * Check if the {@link TeriockUser} owns and uses this.
+       * @param  {TeriockUser | ID<TeriockUser>} user
+       * @returns {false|boolean|boolean|*}
+       */
+      checkEditor(user) {
+        return game.user.id === (user.id || user._id || user) && this.isOwner;
+      }
+
       /**
        * Context menu entries to display for cards that represent this document.
        * @param {TeriockDocument} doc
@@ -47,23 +76,18 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
-       * Can this be viewed?
-       * @returns {boolean}
+       * Get a specific schema field.
+       * @param {string} path
+       * @returns {DataSchema}
        */
-      get isViewer() {
-        return this.permission >= 2;
-      }
-
-      /**
-       * Check whether the provided document or its index is an ancestor of this one.
-       * @param {TeriockDocument|Index<TeriockDocument>} doc
-       */
-      checkAncestor(doc) {
-        if (doc?.uuid === this.uuid) {
-          return true;
+      getSchema(path) {
+        let schema;
+        if (path.startsWith("system")) {
+          schema = this.system.schema.getField(path.replace("system.", ""));
         } else {
-          return this.parent?.checkAncestor(doc) || false;
+          schema = this.schema.getField(path);
         }
+        return schema;
       }
 
       /**

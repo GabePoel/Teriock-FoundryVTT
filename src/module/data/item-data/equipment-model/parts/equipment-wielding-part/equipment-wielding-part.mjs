@@ -1,5 +1,6 @@
-import { getProperty } from "../../../../helpers/fetch.mjs";
-import { EvaluationField } from "../../../fields/_module.mjs";
+import { getProperty } from "../../../../../helpers/fetch.mjs";
+import { makeIcon } from "../../../../../helpers/utils.mjs";
+import { EvaluationField } from "../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,6 +13,7 @@ export default (Base) => {
   return (
     /**
      * @extends {TeriockEquipmentModel}
+     * @implements {EquipmentWieldingPartInterface}
      * @mixin
      */
     class EquipmentWieldingPart extends Base {
@@ -58,6 +60,49 @@ export default (Base) => {
         );
       }
 
+      /** @inheritDoc */
+      get embedIcons() {
+        return [
+          {
+            icon: this.glued ? "link" : "link-slash",
+            action: "toggleGluedDoc",
+            tooltip: this.glued ? "Glued" : "Unglued",
+            condition: this.parent.isOwner,
+            callback: async () => {
+              if (this.glued) {
+                await this.unglue();
+              } else {
+                await this.glue();
+              }
+            },
+          },
+          ...super.embedIcons,
+          {
+            icon: this.equipped ? "circle-check" : "circle",
+            action: "toggleEquippedDoc",
+            tooltip: this.equipped ? "Equipped" : "Unequipped",
+            condition: this.parent.isOwner,
+            callback: async () => {
+              if (this.equipped) {
+                await this.unequip();
+              } else {
+                await this.equip();
+              }
+            },
+          },
+        ];
+      }
+
+      /** @inheritDoc */
+      get embedParts() {
+        const parts = super.embedParts;
+        Object.assign(parts, {
+          struck: !this.isEquipped,
+          shattered: this.shattered,
+        });
+        return parts;
+      }
+
       /**
        * Checks if the equipment is currently equipped.
        * @returns {boolean} - True if the equipment is equipped, false otherwise.
@@ -76,12 +121,6 @@ export default (Base) => {
         this.unglue().then();
       }
 
-      /** @inheritDoc */
-      prepareSpecialData() {
-        super.prepareSpecialData();
-        this.minStr.evaluate();
-      }
-
       /**
        * Equip this equipment.
        * @returns {Promise<void>}
@@ -92,6 +131,41 @@ export default (Base) => {
         if (!data.cancel) {
           await this.parent.update({ "system.equipped": true });
         }
+      }
+
+      /** @inheritdoc */
+      getCardContextMenuEntries(doc) {
+        return [
+          ...super.getCardContextMenuEntries(doc),
+          {
+            name: "Equip",
+            icon: makeIcon("check", "contextMenu"),
+            callback: this.equip.bind(this),
+            condition: this.canEquip,
+            group: "control",
+          },
+          {
+            name: "Unequip",
+            icon: makeIcon("xmark", "contextMenu"),
+            callback: this.unequip.bind(this),
+            condition: this.parent.isOwner && this.canUnequip,
+            group: "control",
+          },
+          {
+            name: "Glue",
+            icon: makeIcon("link", "contextMenu"),
+            callback: this.glue.bind(this),
+            condition: this.parent.isOwner && !this.glued,
+            group: "control",
+          },
+          {
+            name: "Unglue",
+            icon: makeIcon("link-slash", "contextMenu"),
+            callback: this.unglue.bind(this),
+            condition: this.parent.isOwner && this.glued,
+            group: "control",
+          },
+        ];
       }
 
       /**
@@ -109,6 +183,20 @@ export default (Base) => {
             ]);
           }
         }
+      }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        if (this.consumable && this.quantity === 0) {
+          this.equipped = false;
+        }
+      }
+
+      /** @inheritDoc */
+      prepareSpecialData() {
+        super.prepareSpecialData();
+        this.minStr.evaluate();
       }
 
       /**

@@ -31,22 +31,6 @@ export default class StorageModel extends EmbeddedDataModel {
   }
 
   /**
-   * If this is over its weight capacity.
-   * @returns {boolean}
-   */
-  get isOverWeightCapacity() {
-    return this.carriedWeight > this.maxWeight.value;
-  }
-
-  /**
-   * If this is over its count capacity.
-   * @returns {boolean}
-   */
-  get isOverCountCapacity() {
-    return this.carriedCount > this.maxCount.value;
-  }
-
-  /**
    * Count of items carried.
    * @returns {number}
    */
@@ -72,5 +56,21 @@ export default class StorageModel extends EmbeddedDataModel {
    */
   get isOverCapacity() {
     return this.isOverCountCapacity || this.isOverWeightCapacity;
+  }
+
+  /**
+   * If this is over its count capacity.
+   * @returns {boolean}
+   */
+  get isOverCountCapacity() {
+    return this.carriedCount > this.maxCount.value;
+  }
+
+  /**
+   * If this is over its weight capacity.
+   * @returns {boolean}
+   */
+  get isOverWeightCapacity() {
+    return this.carriedWeight > this.maxWeight.value;
   }
 }

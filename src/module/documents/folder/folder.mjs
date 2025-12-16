@@ -24,6 +24,34 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
   }
 
   /**
+   * Get the contents of a folder from its UUID.
+   * @param {UUID<TeriockFolder>|TeriockFolder} folder
+   * @param {object} [options]
+   * @param {Teriock.Documents.CommonType[]} [options.types] - Subset of types to filter for.
+   * @param {boolean} [options.uuids] - Get the UUIDs instead of the documents.
+   * @returns {Promise<UUID<TeriockDocument>[]|TeriockDocument[]>}
+   */
+  static async getContents(folder, options = {}) {
+    const { types, uuids = true } = options;
+    if (typeof folder === "string") {
+      folder = await fromUuid(folder);
+    }
+    let out = [];
+    if (folder) {
+      out = folder.allContents;
+      if (types) {
+        out = out.filter((d) => types.includes(d.type));
+      }
+      if (uuids) {
+        out = out.map((d) => d.uuid);
+      } else if (folder.inCompendium) {
+        out = Promise.all(out.map((d) => fromUuid(d.uuid)));
+      }
+    }
+    return out;
+  }
+
+  /**
    * All contents of this folder and its descendants.
    * @returns {ClientDocument[]}
    */

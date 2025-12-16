@@ -1,4 +1,5 @@
-import { makeIconClass, pureUuid, queryGM, safeUuid } from "../../../utils.mjs";
+import { pureUuid, safeUuid } from "../../../resolve.mjs";
+import { makeIconClass } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -40,7 +41,7 @@ export class ApplyEffectHandler extends ActionHandler {
    */
   async _addToSustaining(createdConsequences) {
     if (this.dataset.sustaining !== "null") {
-      await queryGM(
+      await game.users.queryGM(
         "teriock.addToSustaining",
         {
           sustainingUuid: pureUuid(this.dataset.sustaining),

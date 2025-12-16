@@ -1,6 +1,5 @@
 /**
  * @param {typeof ChildTypeModel} Base
- * @constructor
  */
 export default function ThresholdDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax

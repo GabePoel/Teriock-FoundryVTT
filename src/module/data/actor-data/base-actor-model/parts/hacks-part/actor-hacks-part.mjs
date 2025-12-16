@@ -6,6 +6,7 @@ export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @mixin
      */
     class ActorGenericRollsPart extends Base {

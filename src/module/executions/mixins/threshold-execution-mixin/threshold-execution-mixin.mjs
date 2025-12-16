@@ -1,10 +1,8 @@
-import { addFormula } from "../../../helpers/formula.mjs";
-import { formulaExists } from "../../../helpers/string.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 
 /**
  * Mixin for executions involving a d20 roll.
  * @param {typeof BaseExecution} Base
- * @constructor
  */
 export default function ThresholdExecutionMixin(Base) {
   /**

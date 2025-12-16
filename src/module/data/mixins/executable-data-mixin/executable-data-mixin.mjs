@@ -2,7 +2,6 @@ const { fields } = foundry.data;
 
 /**
  * @param {typeof ChildTypeModel} Base
- * @constructor
  */
 export default function ExecutableDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax

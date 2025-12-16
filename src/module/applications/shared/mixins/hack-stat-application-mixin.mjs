@@ -1,14 +1,14 @@
 /**
  * Mixin allowing hacks and spending dice stats.
  * @param {typeof DocumentSheetV2} Base
- * @constructor
  */
 export default function HackStatApplicationMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @property {TeriockActor} actor
+     * @extends {DocumentSheetV2}
      * @mixin
+     * @property {TeriockActor} actor
      */
     class HackStatApplication extends Base {
       /**

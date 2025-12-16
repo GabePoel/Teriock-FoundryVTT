@@ -1,11 +1,6 @@
 import { getDocument } from "../../helpers/fetch.mjs";
-import {
-  dedent,
-  getActor,
-  getToken,
-  mix,
-  queryGM,
-} from "../../helpers/utils.mjs";
+import { dedent } from "../../helpers/string.mjs";
+import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
@@ -60,7 +55,7 @@ export default class TeriockMacro extends mix(
    * @returns {Promise<TeriockMacro>}
    */
   static async getUseMacro(doc) {
-    await queryGM(
+    await game.users.queryGM(
       "teriock.createHotbarFolder",
       {
         name: game.user.name,
@@ -171,11 +166,10 @@ export default class TeriockMacro extends mix(
    * @returns {Promise<void>}
    */
   async scopedExecute(event) {
-    const actor = getActor();
-    const token = actor ? getToken(actor) : undefined;
+    const actor = game.actors.defaultActor;
     await this.execute({
       actor,
-      token,
+      token: actor?.defaultToken,
       event,
     });
   }

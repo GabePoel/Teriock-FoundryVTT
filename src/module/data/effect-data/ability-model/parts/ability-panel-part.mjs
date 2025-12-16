@@ -1,12 +1,12 @@
 /**
  * Ability panel part.
  * @param {typeof TeriockAbilityModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockAbilityModel}
      * @mixin
      */
     class AbilityPanelPart extends Base {

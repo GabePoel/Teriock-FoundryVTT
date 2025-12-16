@@ -1,10 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { conditionSort } from "../../../../helpers/sort.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import {
-  conditionSort,
-  makeIconClass,
-  mix,
-} from "../../../../helpers/utils.mjs";
+import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import * as parts from "./parts/_module.mjs";

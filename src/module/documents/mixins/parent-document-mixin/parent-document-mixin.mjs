@@ -3,7 +3,6 @@ import { toCamelCase } from "../../../helpers/string.mjs";
 /**
  * Mixin for common functions used across document classes that embed children.
  * @param {typeof CommonDocument} Base
- * @constructor
  */
 export default function ParentDocumentMixin(Base) {
   return (

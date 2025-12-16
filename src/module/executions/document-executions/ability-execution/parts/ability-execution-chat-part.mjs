@@ -3,6 +3,7 @@ import {
   selectDocumentsDialog,
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { TeriockFolder } from "../../../../documents/_module.mjs";
 import { addFormula } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/action-handler/instances/apply-effect-handlers.mjs";
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/action-handler/instances/execute-macro-handlers.mjs";
@@ -24,22 +25,16 @@ import {
 } from "../../../../helpers/interaction/action-handler/instances/status-handlers.mjs";
 import { TradecraftCheckHandler } from "../../../../helpers/interaction/action-handler/instances/tradecraft-check-handlers.mjs";
 import { UseAbilityHandler } from "../../../../helpers/interaction/action-handler/instances/use-ability-handlers.mjs";
-import {
-  folderContents,
-  upgradeTransformation,
-} from "../../../../helpers/utils.mjs";
+import { upgradeTransformation } from "../../../../helpers/utils.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
- * @constructor
  */
 export default function AbilityExecutionChatPart(Base) {
-  /**
-   * @mixin
-   */
   return (
     /**
      * @extends {AbilityExecutionConstructor}
+     * @mixin
      * @property {TeriockAbility} source
      */
     class AbilityExecutionChat extends Base {
@@ -240,7 +235,9 @@ export default function AbilityExecutionChatPart(Base) {
         );
         for (const folderUuid of folderUuids) {
           nonFolderUuids.push(
-            ...(await folderContents(folderUuid, { types: ["species"] })),
+            ...(await TeriockFolder.getContents(folderUuid, {
+              types: ["species"],
+            })),
           );
         }
         //noinspection JSValidateTypes

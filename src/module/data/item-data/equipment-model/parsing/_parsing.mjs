@@ -1,7 +1,7 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
+import { ensureChildren } from "../../../../helpers/resolve.mjs";
 import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
-import { ensureChildren } from "../../../../helpers/utils.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**

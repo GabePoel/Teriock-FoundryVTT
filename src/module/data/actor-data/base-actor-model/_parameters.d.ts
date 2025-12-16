@@ -1,5 +1,6 @@
 import { TeriockMacro } from "../../../documents/_module.mjs";
 import { abilityOptions } from "../../../constants/options/ability-options.mjs";
+import { dieOptions } from "../../../constants/options/die-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Actor {
@@ -67,8 +68,7 @@ declare global {
 
     export type PayMode = "exact" | "greedy";
 
-    export type DeathBagStoneColor =
-      keyof typeof TERIOCK.options.die.deathBagStoneColor;
+    export type DeathBagStoneColor = keyof typeof dieOptions.deathBagStoneColor;
   }
 }
 

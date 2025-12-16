@@ -1,3 +1,5 @@
+import { formulaExists } from "./formula.mjs";
+
 /**
  * Converts a string to camelCase format.
  * @param {string} str - The string to convert.
@@ -71,23 +73,6 @@ export function dotJoin(strings) {
 }
 
 /**
- * Check if a formula would exist.
- * @param {string|number} formula
- * @returns {boolean}
- */
-export function formulaExists(formula) {
-  if (!formula) {
-    return false;
-  }
-  if (typeof formula === "string") {
-    formula = formula.trim();
-    return Boolean(formula.length > 0 && formula !== "0");
-  } else {
-    return Boolean(formula);
-  }
-}
-
-/**
  * Add a suffix to a string if it exists.
  * @param {string|number} base
  * @param {string} suffix
@@ -111,4 +96,19 @@ export function prefix(base, prefix, space = " ") {
     return `${prefix}${space}${base}`;
   }
   return "";
+}
+/**
+ * Remove indentation from code block.
+ * @param {string} str
+ * @returns {string}
+ */
+export function dedent(str) {
+  const lines = str.split("\n");
+  const minIndent = lines
+    .filter((line) => line.trim())
+    .reduce((min, line) => {
+      const match = line.match(/^(\s*)/);
+      return Math.min(min, match ? match[1].length : 0);
+    }, Infinity);
+  return lines.map((line) => line.slice(minIndent)).join("\n");
 }

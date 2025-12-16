@@ -4,7 +4,7 @@ import {
   resolveCollection,
   resolveDocument,
   resolveDocuments,
-} from "../../../helpers/utils.mjs";
+} from "../../../helpers/resolve.mjs";
 import { TypeCollection } from "../../collections/_module.mjs";
 
 const { Collection } = foundry.utils;
@@ -12,14 +12,13 @@ const { Collection } = foundry.utils;
 /**
  * Document mixin to support hierarchies of the same document type.
  * @param {typeof BaseDocument} Base
- * @constructor
  */
 export default function HierarchyDocumentMixin(Base) {
   return (
     /**
      * @extends TeriockCommon
-     * @property {{ _sup: ID<HierarchyDocument> }} system
      * @mixin
+     * @property {HierarchyData} system
      */
     class HierarchyDocument extends Base {
       /**

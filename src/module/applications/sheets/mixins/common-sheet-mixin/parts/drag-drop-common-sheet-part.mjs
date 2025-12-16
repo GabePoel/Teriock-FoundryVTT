@@ -2,7 +2,6 @@ import { TeriockDragDrop, TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 /**
  * @param {typeof DocumentSheetV2} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax

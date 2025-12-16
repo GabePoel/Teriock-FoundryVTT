@@ -1,5 +1,5 @@
 import { getRankIcon } from "../../../../helpers/path.mjs";
-import { ensureChildren } from "../../../../helpers/utils.mjs";
+import { ensureChildren } from "../../../../helpers/resolve.mjs";
 import { cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 
 function extractAbilityNames(metaData, attr) {

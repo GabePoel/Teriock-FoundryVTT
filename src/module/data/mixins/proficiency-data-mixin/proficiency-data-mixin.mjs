@@ -1,10 +1,10 @@
 /**
  * @param {typeof ChildTypeModel} Base
- * @constructor
  */
 export default function ProficiencyDataMixin(Base) {
   return (
     /**
+     * @extends {ChildTypeModel}
      * @mixin
      */
     class ProficiencyData extends Base {

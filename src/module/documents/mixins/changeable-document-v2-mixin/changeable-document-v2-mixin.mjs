@@ -3,13 +3,13 @@ import { applyCertainChanges } from "../shared/_module.mjs";
 /**
  * Mixin for a document that can be changed by a {@link TeriockEffect}.
  * @param {typeof TeriockDocument} Base
- * @constructor
  * @mixin
  */
 export default function ChangeableDocumentMixin(Base) {
   return (
     /**
      * @extends {ClientDocument}
+     * @mixin
      */
     class ChangeableDocument extends Base {
       /**

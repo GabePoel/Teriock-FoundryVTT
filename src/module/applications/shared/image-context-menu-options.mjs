@@ -1,4 +1,4 @@
-import { chatImage, makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 import { previewSheet } from "./_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;
@@ -52,3 +52,23 @@ const imageContextMenuOptions = [
   },
 ];
 export default imageContextMenuOptions;
+
+/**
+ * Creates a chat message with an image.
+ * @param {string} img - The image URL to display in chat.
+ * @returns {Promise<void>}
+ */
+export async function chatImage(img) {
+  if (img) {
+    await foundry.documents.ChatMessage.create({
+      content: `
+        <div
+          class="timage"
+          data-src="${img}"
+          style="display: flex; justify-content: center;"
+        >
+          <img src="${img}" class="teriock-image" alt="Image">
+        </div>`,
+    });
+  }
+}

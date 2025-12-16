@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { getDocument } from "../../../helpers/fetch.mjs";
-import { makeIconClass, queryGM } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 
@@ -61,7 +61,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
         ui.notifications.info(
           `Asking GMs to approve identification of ${this.parent.parent.nameString}.`,
         );
-        const doIdentify = await queryGM(
+        const doIdentify = await game.users.queryGM(
           "teriock.identifyItem",
           {
             uuid: this.parent.parent.uuid,
@@ -109,7 +109,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
           },
         });
         if (doReadMagic) {
-          await queryGM(
+          await game.users.queryGM(
             "teriock.update",
             {
               uuid: this.parent.parent.uuid,

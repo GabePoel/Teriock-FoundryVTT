@@ -3,12 +3,12 @@ const { fields } = foundry.data;
 /**
  * Actor data model that handles money.
  * @param {typeof TeriockBaseActorModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorMoneyPartInterface}
      * @mixin
      */

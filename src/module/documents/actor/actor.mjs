@@ -1,14 +1,10 @@
 import { ActorSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
+import { pureUuid, resolveDocument } from "../../helpers/resolve.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
-import {
-  mix,
-  pureUuid,
-  resolveDocument,
-  ringImage,
-  selectUser,
-} from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
+import TeriockTokenDocument from "../token-document/token-document.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -138,6 +134,53 @@ export default class TeriockActor extends mix(
     return (
       this.consequences.filter((effect) => effect.system.dawnExpiration) || []
     );
+  }
+
+  /**
+   * Get the best token placeable for this actor.
+   * @returns {TeriockToken|null}
+   */
+  get defaultToken() {
+    if (this.token) return this.token.object;
+    return this.getActiveTokens()[0] || null;
+  }
+
+  /**
+   * Get the best user for this actor.
+   * @returns {TeriockUser|null}
+   */
+  get defaultUser() {
+    let selectedUser = null;
+    // See if any user has the actor as a character
+    game.users.forEach((user) => {
+      if (user.character?.uuid === this.uuid && user.active) {
+        selectedUser = user;
+      }
+    });
+    // See if any players have control over the actor
+    if (!selectedUser) {
+      game.users.forEach((user) => {
+        if (
+          !user.isActiveGM &&
+          this.canUserModify(user, "update") &&
+          user.active
+        ) {
+          selectedUser = user;
+        }
+      });
+    }
+    // See if anyone has control over the actor
+    if (!selectedUser) {
+      game.users.forEach((user) => {
+        if (this.canUserModify(user, "update") && user.active) {
+          selectedUser = user;
+        }
+      });
+    }
+    if (!selectedUser) {
+      selectedUser = game.users.activeGM;
+    }
+    return selectedUser;
   }
 
   /**
@@ -279,7 +322,9 @@ export default class TeriockActor extends mix(
       foundry.utils.setProperty(
         changed,
         "prototypeToken.texture.src",
-        ringImage(foundry.utils.getProperty(changed, "img")),
+        TeriockTokenDocument.ringImage(
+          foundry.utils.getProperty(changed, "img"),
+        ),
       );
     }
     const tokenUpdates =
@@ -428,7 +473,7 @@ export default class TeriockActor extends mix(
     super.prepareData();
     this.prepareSpecialData();
     this.prepareVirtualEffects();
-    const user = selectUser(this);
+    const user = this.defaultUser;
     if (user?.id) {
       foundry.helpers.Hooks.callAll(`teriock.actorPostUpdate`, this, user.id);
     }

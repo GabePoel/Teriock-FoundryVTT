@@ -7,7 +7,6 @@ const { fields } = foundry.data;
 
 /**
  * @param {typeof TeriockBaseItemModel} Base
- * @constructor
  */
 export default function ArmamentDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols

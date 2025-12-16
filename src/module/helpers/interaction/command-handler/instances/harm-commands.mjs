@@ -1,4 +1,4 @@
-import { harmRoll } from "../../../quick-rolls.mjs";
+import { harmRoll } from "../../../rolling.mjs";
 import CommandHandler from "../command-handler.mjs";
 
 export class HarmCommand extends CommandHandler {

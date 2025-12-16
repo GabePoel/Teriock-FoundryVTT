@@ -1,6 +1,7 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-import { mix, pureUuid, safeUuid } from "../../../helpers/utils.mjs";
+import { pureUuid, safeUuid } from "../../../helpers/resolve.mjs";
+import { mix } from "../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../fields/_module.mjs";
 import { changeField } from "../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";

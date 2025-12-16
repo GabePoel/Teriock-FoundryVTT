@@ -86,6 +86,19 @@ export default class TeriockRoll extends Roll {
   }
 
   /**
+   * A value the formula evaluates to.
+   * @param {string} formula
+   * @param {object} data
+   * @param {Teriock.Dice.RollOptions} options
+   * @returns {Promise<number>}
+   */
+  static async getValue(formula, data, options = {}) {
+    const roll = new TeriockRoll(formula, data, options);
+    await roll.evaluate({ allowStrings: true });
+    return roll.total;
+  }
+
+  /**
    * Minimum value formula evaluates to.
    * @param {string} formula
    * @param {object} data

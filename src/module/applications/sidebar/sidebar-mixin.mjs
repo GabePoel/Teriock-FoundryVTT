@@ -3,11 +3,11 @@ import { bindCommonActions } from "../shared/_module.mjs";
 
 /**
  * @param {typeof DocumentDirectory} Base
- * @constructor
  */
 export default function SidebarMixin(Base) {
   return (
     /**
+     * @extends {DocumentDirectory}
      * @mixin
      */
     class Sidebar extends Base {

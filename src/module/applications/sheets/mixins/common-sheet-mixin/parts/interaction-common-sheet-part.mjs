@@ -1,8 +1,12 @@
+/**
+ * @param {typeof DocumentSheetV2} Base
+ */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {DocumentSheetV2}
+     * @mixin
      * @property {TeriockCommon} document
      */
     class InteractionCommonSheetPart extends Base {

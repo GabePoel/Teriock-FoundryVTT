@@ -1,5 +1,5 @@
 import { getAbility, getProperty } from "../../../helpers/fetch.mjs";
-import { inferCompendiumSource } from "../../../helpers/utils.mjs";
+import { inferCompendiumSource } from "../../../helpers/resolve.mjs";
 import { cleanObject } from "./clean-html-doc.mjs";
 
 /**

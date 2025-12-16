@@ -1,8 +1,8 @@
 export default interface ActorDisplayPartInterface {
-  /** <base> HTML strings that get displayed on the sheet */
-  sheet: SheetData;
   /** <schema> Notes about the actor */
   notes: string;
+  /** <base> HTML strings that get displayed on the sheet */
+  sheet: SheetData;
 }
 
 export interface SheetData {

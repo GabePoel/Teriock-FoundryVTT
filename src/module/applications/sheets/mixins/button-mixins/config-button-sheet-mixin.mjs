@@ -3,10 +3,10 @@ import { DocumentSettingsSheet } from "../../utility-sheets/_module.mjs";
 
 /**
  * @param {typeof DocumentSheetV2} Base
- * @constructor
  */
 export default function ConfigButtonSheetMixin(Base) {
   /**
+   * @extends {DocumentSheetV2}
    * @mixin
    */
   return class ConfigButtonSheet extends Base {

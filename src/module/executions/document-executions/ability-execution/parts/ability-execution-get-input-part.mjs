@@ -7,7 +7,6 @@ import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
- * @constructor
  */
 export default function AbilityExecutionGetInputPart(Base) {
   /**

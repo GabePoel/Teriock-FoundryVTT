@@ -1,18 +1,18 @@
-import { parseDurationString } from "../../../../../helpers/utils.mjs";
+import { parseDurationString } from "../../../../../helpers/unit.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * Ability duration part.
  * @param {typeof TeriockAbilityModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @mixin
+     * @extends {TeriockAbilityModel}
      * @implements {AbilityDurationPartInterface}
+     * @mixin
      */
     class AbilityDurationPart extends Base {
       /** @inheritDoc */

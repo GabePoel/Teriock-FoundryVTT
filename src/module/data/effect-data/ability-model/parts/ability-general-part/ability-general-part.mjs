@@ -5,14 +5,14 @@ const { fields } = foundry.data;
 /**
  * Ability general part.
  * @param {typeof TeriockAbilityModel} Base
- * @constructor
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @mixin
+     * @extends {TeriockAbilityModel}
      * @implements {AbilityGeneralPartInterface}
+     * @mixin
      */
     class AbilityGeneralPart extends Base {
       /** @inheritDoc */

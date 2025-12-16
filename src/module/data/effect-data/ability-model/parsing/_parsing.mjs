@@ -1,5 +1,6 @@
 import { getImage } from "../../../../helpers/path.mjs";
-import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
+import { safeUuid } from "../../../../helpers/resolve.mjs";
+import { parseDurationString } from "../../../../helpers/unit.mjs";
 import {
   cleanHTMLDice,
   cleanHTMLSubs,

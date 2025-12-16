@@ -11,6 +11,7 @@ export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
+     * @extends {TeriockBaseActorModel}
      * @implements {ActorTradecraftsPartInterface}
      * @mixin
      */
