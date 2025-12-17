@@ -28,10 +28,11 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
   get rollData() {
     const rollData = super.rollData;
     const rollAdditions = {
-      av0: this.av0 ? 2 : 0,
+      av0: this.piercing.av0 ? 2 : 0,
       "av0.wep": this.armament?.system.piercing.av0 ? 2 : 0,
       h: this.heightened,
-      ub: this.ub ? 1 : 0,
+      sb: this.piercing.sb ? 1 : 0,
+      ub: this.piercing.ub ? 1 : 0,
       "ub.wep": this.armament?.system.piercing.ub ? 1 : 0,
       warded: this.warded ? 1 : 0,
       "warded.wep": this.armament?.system.warded ? 1 : 0,
@@ -53,10 +54,10 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
         this.formula = addFormula(this.formula, "@h");
       }
       if (this.source.system.interaction === "attack") {
-        if (this.av0) {
+        if (this.piercing.av0) {
           this.formula = addFormula(this.formula, "@av0");
         }
-        if (this.sb) {
+        if (this.piercing.sb) {
           this.formula = addFormula(this.formula, "@sb");
         }
         if (this.armament?.system.hit.nonZero) {

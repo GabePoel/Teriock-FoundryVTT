@@ -17,8 +17,11 @@ import * as parts from "./parts/_module.mjs";
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
  * @extends {TeriockBaseEffectModel}
+ * @mixes AbilityDurationPart
  * @mixes AbilityGeneralPart
  * @mixes AbilityHierarchyPart
+ * @mixes AbilityImpactsPart
+ * @mixes AbilityImprovementsPart
  * @mixes AbilityPanelPart
  * @mixes ConsumableData
  * @mixes HierarchyData

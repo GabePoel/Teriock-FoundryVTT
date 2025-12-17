@@ -94,6 +94,14 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   }
 
   /**
+   * @inheritDoc
+   * @returns {TeriockAbility}
+   */
+  get source() {
+    return super.source;
+  }
+
+  /**
    * If the source ability has a macro, execute it.
    * @param {Teriock.Parameters.Shared.AbilityPseudoHook} pseudoHook
    * @returns {Promise<void>}
