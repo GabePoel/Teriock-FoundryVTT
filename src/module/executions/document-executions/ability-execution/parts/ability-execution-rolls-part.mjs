@@ -93,7 +93,7 @@ export default function AbilityExecutionRollsPart(Base) {
       } else if (this.source.system.interaction === "manifest") {
         if (this.targets.size > 0) {
           this.rolls.push(
-            new TeriockRoll(this.formula, this.rollData, {
+            new TeriockRoll("0", this.rollData, {
               flavor: this.flavor,
               hideRoll: true,
               styles: styles,
