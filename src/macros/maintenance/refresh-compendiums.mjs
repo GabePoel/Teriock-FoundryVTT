@@ -11,7 +11,7 @@ await tm.utils.progressBar(
         indexes,
         `Refreshing ${p.title}`,
         async (i) => {
-          const doc = await tm.utils.resolveDocument(i);
+          const doc = await tm.resolve.resolveDocument(i);
           if (typeof doc?.system?.refreshFromCompendiumSource === "function") {
             const options = {};
             if (p.collection === "teriock.magicItems") {

@@ -11,9 +11,9 @@ await tm.utils.progressBar(
         indexes,
         `Refreshing ${p.title} Sources`,
         async (i) => {
-          const doc = await tm.utils.resolveDocument(i);
+          const doc = await tm.resolve.resolveDocument(i);
           if (["Actor", "ActiveEffect", "Item"].includes(doc.documentName)) {
-            await tm.utils.inferChildCompendiumSources(doc);
+            await tm.resolve.inferChildCompendiumSources(doc);
           }
         },
         { batch: 50 },

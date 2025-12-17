@@ -39,7 +39,7 @@ await tm.utils.progressBar(
         { pack: "teriock.species" },
       );
     }
-    item = /** @type {TeriockSpecies} */ await tm.utils.resolveDocument(item);
+    item = /** @type {TeriockSpecies} */ await tm.resolve.resolveDocument(item);
     await item.system.wikiPull({ notify: false });
   },
   { batch: 25 },

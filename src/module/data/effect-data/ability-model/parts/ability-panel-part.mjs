@@ -1,3 +1,5 @@
+import { elementClass } from "../../../../helpers/html.mjs";
+
 /**
  * Ability panel part.
  * @param {typeof TeriockAbilityModel} Base
@@ -126,7 +128,9 @@ export default (Base) => {
         ];
         return {
           ...super.panelParts,
-          classes: this.elderSorcery ? "elder-sorcery" : "",
+          classes: this.elderSorcery
+            ? `elder-sorcery ${elementClass(this.elements)}`
+            : "",
           bars: bars,
         };
       }

@@ -4,7 +4,7 @@ const classJournal = await fromUuid(
   "Compendium.teriock.rules.JournalEntry.oVIOjeytcScUC2QJ",
 );
 
-const powers = await tm.utils.resolveDocuments(
+const powers = await tm.resolve.resolveDocuments(
   classPack.index.contents.filter((i) => i.type === "power"),
 );
 await Promise.all(powers.map((p) => p.system.refreshFromCompendiumSource()));

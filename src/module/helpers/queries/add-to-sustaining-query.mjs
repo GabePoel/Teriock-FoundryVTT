@@ -7,10 +7,8 @@
 export default async function addToSustainingQuery(queryData, { _timeout }) {
   const sustainingAbility = await fromUuid(queryData.sustainingUuid);
   if (sustainingAbility) {
-    const sustainedUuids = sustainingAbility.system.sustaining;
-    for (const uuid of queryData.sustainedUuids) {
-      sustainedUuids.add(uuid);
-    }
+    const sustainedUuids = Array.from(sustainingAbility.system.sustaining);
+    sustainedUuids.push(...queryData.sustainedUuids);
     await sustainingAbility.update({ "system.sustaining": sustainedUuids });
   }
 }

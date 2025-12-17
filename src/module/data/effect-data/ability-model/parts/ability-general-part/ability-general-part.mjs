@@ -34,6 +34,10 @@ export default (Base) => {
           class: new fields.StringField({
             choices: TERIOCK.options.ability.class,
           }),
+          consumable: new fields.BooleanField({
+            initial: false,
+            label: "Consumable",
+          }),
           costs: new fields.SchemaField({
             verbal: new fields.BooleanField({
               initial: false,
@@ -322,6 +326,9 @@ export default (Base) => {
             initial: false,
             label: "Sustained",
           }),
+          sustaining: new fields.SetField(
+            new fields.DocumentUUIDField({ type: "ActiveEffect" }),
+          ),
           targets: new fields.SetField(
             new fields.StringField({
               choices: TERIOCK.options.ability.targets,

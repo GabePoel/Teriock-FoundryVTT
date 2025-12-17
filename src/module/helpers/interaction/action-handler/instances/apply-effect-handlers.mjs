@@ -83,6 +83,7 @@ export class ApplyEffectHandler extends ActionHandler {
     );
     const bonusSubData = bonusSubs.map((s) => {
       const obj = s.toObject();
+      delete obj._id;
       obj.system._sup = effectObj._id;
       return obj;
     });

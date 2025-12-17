@@ -103,6 +103,7 @@ function cleanEntry(doc) {
   if (buildTree) {
     packTree[doc._id] = toKebabCase(doc.name);
   }
+  delete doc.duration;
   if (doc.type !== "text") {
     delete doc.sort;
   }

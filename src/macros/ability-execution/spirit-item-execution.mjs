@@ -37,5 +37,5 @@ if (!spiritItem) {
     "system.weight.raw": "0",
     "system.disabled": true,
   });
-  await tm.utils.ensureChildren(spiritItem, "property", "Master Crafted");
+  await tm.resolve.ensureChildren(spiritItem, "property", "Master Crafted");
 }

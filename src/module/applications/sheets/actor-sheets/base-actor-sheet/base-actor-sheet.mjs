@@ -241,9 +241,7 @@ export default class TeriockBaseActorSheet extends mix(
     this._prepareDisplayContext(context);
     await this._prepareDocumentContext(context);
     await this._prepareConditionContext(context);
-    context.enrichedNotes = await this._enrich(
-      this.document.system.sheet.notes,
-    );
+    context.enrichedNotes = await this._enrich(this.document.system.notes);
     context.enrichedSpecialRules = await this._enrich(
       this.document.system.primaryAttacker?.system?.specialRules,
     );
