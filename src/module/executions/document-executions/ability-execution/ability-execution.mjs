@@ -30,6 +30,7 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
     const rollAdditions = {
       av0: this.av0 ? 2 : 0,
       "av0.wep": this.armament?.system.piercing.av0 ? 2 : 0,
+      h: this.heightened,
       ub: this.ub ? 1 : 0,
       "ub.wep": this.armament?.system.piercing.ub ? 1 : 0,
       warded: this.warded ? 1 : 0,
