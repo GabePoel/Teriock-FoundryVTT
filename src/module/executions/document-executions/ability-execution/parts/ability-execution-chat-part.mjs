@@ -215,9 +215,13 @@ export default function AbilityExecutionChatPart(Base) {
           changes.map(async (c) => {
             let value;
             try {
-              const roll = new TeriockRoll(c.value, this.rollData);
-              await roll.evaluate();
-              value = roll.total.toString();
+              if (c.value.includes("@h")) {
+                const roll = new TeriockRoll(c.value, this.rollData);
+                await roll.evaluate();
+                value = roll.total.toString();
+              } else {
+                value = c.value;
+              }
             } catch {
               value = c.value;
             }

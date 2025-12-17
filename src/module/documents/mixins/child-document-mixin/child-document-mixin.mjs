@@ -91,7 +91,9 @@ export default function ChildDocumentMixin(Base) {
           if (!effect.active) {
             continue;
           }
-          const candidateChanges = effect.specialChanges;
+          const candidateChanges = effect.specialChanges.filter(
+            (c) => c.reference.type === this.type,
+          );
           for (const change of candidateChanges) {
             const reference = change.reference;
             const property = foundry.utils.getProperty(
