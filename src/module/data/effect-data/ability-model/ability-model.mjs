@@ -228,10 +228,12 @@ export default class TeriockAbilityModel extends mix(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle =
-      TERIOCK.options.ability.executionTime[this.maneuver]?.[
-        this.executionTime
-      ] ?? this.executionTime;
+    if (!this.consumable) {
+      parts.subtitle =
+        TERIOCK.options.ability.executionTime[this.maneuver]?.[
+          this.executionTime
+        ] ?? this.executionTime;
+    }
     return parts;
   }
 
