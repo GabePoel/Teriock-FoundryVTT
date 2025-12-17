@@ -205,7 +205,9 @@ export default function AbilityExecutionChatPart(Base) {
             statuses.add(status);
           }
         }
-        const seconds = this.mergeImpactsNumber("duration");
+        let seconds = this.mergeImpactsNumber("duration");
+        const interval = this.source.system.impacts.heightened.duration;
+        if (interval) seconds = Math.round(seconds / interval) * interval;
         const expirations = this.mergeImpactsExpiration("expiration", crit);
         expirations.normal.combat.who.source = this.actor?.uuid;
         let changes = foundry.utils.deepClone(
@@ -213,19 +215,12 @@ export default function AbilityExecutionChatPart(Base) {
         );
         changes = await Promise.all(
           changes.map(async (c) => {
-            let value;
-            try {
-              if (c.value.includes("@h")) {
-                const roll = new TeriockRoll(c.value, this.rollData);
-                await roll.evaluate();
-                value = roll.total.toString();
-              } else {
-                value = c.value;
-              }
-            } catch {
-              value = c.value;
+            if (c.value.includes("@h")) {
+              c.value = c.value.replace(
+                "@h",
+                (this.heightened || 0).toString(),
+              );
             }
-            c.value = value;
             return c;
           }),
         );

@@ -15,6 +15,30 @@
   --teriock-block-titles-padding-left: 2px;
 }
 
+@mixin teriock-block-text-container {
+  display: flex;
+  flex-direction: var(--teriock-block-content-flex-direction);
+  gap: var(--teriock-block-content-gap);
+  min-width: 0;
+  overflow: hidden;
+}
+
+@mixin teriock-block-text-box {
+  font-size: var(--teriock-block-title-font-size);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: none;
+  min-width: 0;
+}
+
+@mixin teriock-block-subtext {
+  color: var(--color-text-subtle);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  align-items: center;
+}
+
 @mixin teriock-block-base {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
@@ -184,31 +208,23 @@
     opacity: var(--teriock-block-opacity);
 
     .teriock-block-titles {
-      align-items: var(--teriock-block-titles-align-items);
-      display: flex;
-      flex-direction: var(--teriock-block-titles-flex-direction);
-      flex-shrink: 0;
-      gap: var(--teriock-block-titles-gap);
-      max-width: 60%;
       padding-left: var(--teriock-block-titles-padding-left);
+      align-items: var(--teriock-block-titles-align-items);
+      @include teriock-block-text-container;
+
+      .teriock-block-title,
+      .teriock-block-subtitle {
+        @include teriock-block-text-box;
+      }
 
       .teriock-block-title {
         color: var(--color-text);
-        font-size: var(--teriock-block-title-font-size);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        user-select: none;
+        flex-shrink: 2;
       }
 
       .teriock-block-subtitle {
-        color: var(--color-text-subtle);
-        font-size: var(--teriock-block-subtitle-font-size);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-transform: uppercase;
-        white-space: nowrap;
-        user-select: none;
+        @include teriock-block-subtext;
+        flex-shrink: 3;
 
         &.teriock-block-clickable {
           cursor: pointer;
@@ -225,29 +241,22 @@
     }
 
     .teriock-block-content {
+      @include teriock-block-text-container;
       align-items: var(--teriock-block-content-align-items);
-      display: flex;
-      flex-direction: var(--teriock-block-content-flex-direction);
-      flex-shrink: 1;
-      gap: var(--teriock-block-content-gap);
-      height: 100%;
       justify-content: space-between;
-      min-width: 0;
-      overflow: hidden;
       padding: var(--teriock-block-content-padding);
       padding-right: var(--teriock-block-content-right-padding);
+      height: 100%;
+
+      .teriock-block-text,
+      .teriock-block-icons {
+        @include teriock-block-text-box;
+        @include teriock-block-subtext;
+      }
 
       .teriock-block-text {
-        color: var(--color-text-subtle);
-        flex-shrink: 1;
-        font-size: 0.8em;
         margin-left: var(--teriock-block-content-gap);
-        overflow: hidden;
-        text-align: right;
-        text-overflow: ellipsis;
-        text-transform: uppercase;
-        white-space: nowrap;
-        user-select: none;
+        flex-shrink: 4;
       }
 
       .teriock-block-icons {
@@ -255,10 +264,8 @@
         display: flex;
         flex-direction: row;
         flex-shrink: 0;
-        font-size: 0.8em;
         gap: var(--teriock-block-icons-gap);
-        text-transform: uppercase;
-        user-select: none;
+        overflow: unset;
 
         i {
           &:hover {
