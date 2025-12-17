@@ -193,9 +193,12 @@ app.use("/images", express.static(PROJECT_ROOT));
 app.use("/src/index/categories", express.static(CATEGORIES_PATH));
 
 // Catch-all handler: send back index.html for any non-API routes
-app.get("*", (req, res) => {
-  if (!req.url.startsWith("/api")) {
+app.use((req, res, next) => {
+  // Only handle GET requests that aren't API routes and haven't been handled yet
+  if (req.method === "GET" && !req.url.startsWith("/api") && !res.headersSent) {
     res.sendFile(path.join(TOOL_DIR, "index.html"));
+  } else {
+    next();
   }
 });
 
