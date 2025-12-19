@@ -29,7 +29,7 @@ export default class EmbeddedDataModel extends DataModel {
    * @returns {object}
    */
   getLocalRollData() {
-    return this.toObject(false);
+    return {};
   }
 
   /**
