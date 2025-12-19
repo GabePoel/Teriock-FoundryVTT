@@ -17,6 +17,7 @@ import * as parts from "./parts/_module.mjs";
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
  * @extends {TeriockBaseEffectModel}
+ * @implements {Teriock.Models.TeriockAbilityModelInterface}
  * @mixes AbilityDurationPart
  * @mixes AbilityGeneralPart
  * @mixes AbilityHierarchyPart
@@ -38,6 +39,7 @@ export default class TeriockAbilityModel extends mix(
   mixins.RevelationDataMixin,
   mixins.ThresholdDataMixin,
   mixins.WikiDataMixin,
+  parts.AbilityCostsPart,
   parts.AbilityDurationPart,
   parts.AbilityGeneralPart,
   parts.AbilityHierarchyPart,

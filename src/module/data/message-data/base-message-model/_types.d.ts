@@ -21,13 +21,11 @@ declare global {
       tags: string[];
     }
   }
-}
 
-declare module "./base-message-model.mjs" {
-  export default interface TeriockBaseMessageModel
-    extends Teriock.Data.BaseMessageData {
-    get parent(): TeriockChatMessage;
+  namespace Teriock.Models {
+    export interface TeriockBaseMessageModelInterface
+      extends Teriock.Data.BaseMessageData {
+      get parent(): TeriockChatMessage;
+    }
   }
 }
-
-export {};

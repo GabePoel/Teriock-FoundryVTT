@@ -5,8 +5,10 @@ import { toTitleCase } from "../../../helpers/string.mjs";
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * @extends {TypeDataModel}
+ * @implements {Teriock.Models.CommonTypeModelInterface}
  */
 export default class CommonTypeModel extends TypeDataModel {
   /**
@@ -356,15 +358,11 @@ export default class CommonTypeModel extends TypeDataModel {
    * @returns {object}
    */
   getLocalRollData() {
-    const data = this.toObject(false);
-    Object.assign(data, {
+    return {
       name: this.parent.name,
       type: this.parent.type,
-    });
-    foundry.utils.deleteProperty(data, "_ref");
-    foundry.utils.deleteProperty(data, "_sup");
-    foundry.utils.deleteProperty(data, "gmNotes");
-    return data;
+      [`type.${this.parent.type}`]: 1,
+    };
   }
 
   /**

@@ -1,6 +1,9 @@
-declare module "./ability-model.mjs" {
-  export default interface TeriockAbilityModel {
-    get parent(): TeriockAbility;
+declare global {
+  namespace Teriock.Models {
+    export interface TeriockAbilityModelInterface
+      extends Teriock.Models.TeriockBaseEffectModelInterface {
+      get parent(): TeriockAbility;
+    }
   }
 }
 

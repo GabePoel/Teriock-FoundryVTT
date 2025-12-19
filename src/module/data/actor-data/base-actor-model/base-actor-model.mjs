@@ -3,8 +3,10 @@ import { makeIcon, mix } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import * as parts from "./parts/_module.mjs";
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Base {@link TeriockActor} data model.
+ * @implements {Teriock.Models.TeriockBaseActorModelInterface}
  * @mixes CommonTypeModel
  * @mixes ActorAttributesPart
  * @mixes ActorAutomationPart

@@ -1,16 +1,23 @@
 import { EvaluationModel, StatDieModel } from "../_module.mjs";
 import { StatDieData } from "../stat-die-model/_types";
 
-export interface StatPoolData {
-  dice: StatDieData[];
+export interface StatPoolTemplate {
   disabled: boolean;
   faces: number;
   number: EvaluationModel;
   stat: string;
 }
 
-declare module "./stat-pool-model.mjs" {
-  export default interface StatPoolModel extends StatPoolData {
-    dice: StatDieModel[];
+export interface StatPoolData extends StatPoolTemplate {
+  dice: StatDieData[];
+}
+
+declare global {
+  namespace Teriock.Models {
+    export interface StatPoolModelInterface extends StatPoolTemplate {
+      dice: StatDieModel[];
+    }
   }
 }
+
+export {};

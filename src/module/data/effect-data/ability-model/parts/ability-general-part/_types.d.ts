@@ -1,12 +1,8 @@
 export default interface AbilityGeneralPartInterface {
-  /** <schema> If this ability is adept and how much it costs if so */
-  adept: CostAdjustment;
   /** <schema> If this is a basic ability */
   basic: boolean;
   /** <schema> What class this ability is associated with */
   class: Teriock.Parameters.Rank.RankClass;
-  /** <schema> Costs that must be spent for this ability to be used */
-  costs: CostsConfig;
   /** <schema> This ability's delivery */
   delivery: DeliveryConfig;
   /**
@@ -34,8 +30,6 @@ export default interface AbilityGeneralPartInterface {
   featSaveAttribute: Teriock.Parameters.Actor.Attribute;
   /** <schema> The "form" of this ability (what color it would be printed on a card) */
   form: Teriock.Parameters.Shared.Form;
-  /** <schema> If this ability is gifted and how much it costs if so */
-  gifted: CostAdjustment;
   /** <schema> Can only be used with the item that grants it. */
   grantOnly: boolean;
   /** <derived> Text describing this being granted. */
@@ -115,52 +109,6 @@ export interface ResultsText {
   miss: string;
   save: string;
 }
-
-/**
- * Valid break costs
- */
-export type BreakCost = "shatter" | "destroy";
-
-/**
- * Valid cost types
- */
-export type CostType = "none" | "static" | "formula" | "variable" | "hack";
-
-/**
- * Numerical cost configuration.
- */
-export interface NumberCost {
-  type: CostType;
-  value: {
-    static: number;
-    formula: string;
-    variable: string;
-  };
-}
-
-/**
- * Complete costs configuration.
- */
-export interface CostsConfig {
-  break: BreakCost;
-  gp: NumberCost;
-  hp: NumberCost;
-  material: boolean;
-  materialCost: string;
-  mp: NumberCost;
-  somatic: boolean;
-  verbal: boolean;
-}
-
-/**
- * Const adjustment.
- */
-export type CostAdjustment = {
-  /** <schema> If the MP cost is changed */
-  enabled: boolean;
-  /** <schema> Mow much the MP cost is changed */
-  amount: number;
-};
 
 /**
  * Valid expansions

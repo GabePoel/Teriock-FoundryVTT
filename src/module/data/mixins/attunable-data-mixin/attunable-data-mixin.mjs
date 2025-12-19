@@ -207,11 +207,11 @@ export default function AttunableDataMixin(Base) {
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = super.getLocalRollData();
-        Object.assign(data, {
+        return {
+          ...super.getLocalRollData(),
           tier: this.tier.value || 0,
-        });
-        return data;
+          attuned: this.isAttuned ? 1 : 0,
+        };
       }
 
       /** @inheritDoc */

@@ -10,6 +10,7 @@ import * as parsing from "./parsing/_parsing.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Property-specific effect data model.
  *
@@ -17,6 +18,7 @@ const { fields } = foundry.data;
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
  * @extends {TeriockBaseEffectModel}
+ * @implements {Teriock.Models.TeriockPropertyModelInterface}
  * @mixes HierarchyData
  * @mixes RevelationData
  * @mixes WikiData
@@ -221,6 +223,18 @@ export default class TeriockPropertyModel extends mix(
     const updateData = {};
     updateData[`system.impacts.macros.${safeUuid(uuid)}`] = pseudoHook;
     await this.parent.update(updateData);
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      form: this.form,
+      [`form.${this.form}`]: 1,
+      "damage.type": this.damageType,
+      [`damage.type.${this.damageType}`]: 1,
+      "damage.extra": this.extraDamage,
+    };
   }
 
   /** @inheritDoc */

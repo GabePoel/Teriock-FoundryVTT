@@ -8,6 +8,11 @@ import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
+/**
+ * @implements {Teriock.Models.StatDieModelInterface}
+ * @implements {StatDieData}
+ */
 export default class StatDieModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {

@@ -1,4 +1,4 @@
-import { FormulaField, TextField } from "../../../../fields/_module.mjs";
+import { TextField } from "../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,14 +19,6 @@ export default (Base) => {
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
-          adept: new fields.SchemaField({
-            enabled: new fields.BooleanField({ label: "Adept" }),
-            amount: new fields.NumberField({
-              initial: 1,
-              min: 1,
-              integer: true,
-            }),
-          }),
           basic: new fields.BooleanField({
             initial: false,
             label: "Basic",
@@ -37,104 +29,6 @@ export default (Base) => {
           consumable: new fields.BooleanField({
             initial: false,
             label: "Consumable",
-          }),
-          costs: new fields.SchemaField({
-            verbal: new fields.BooleanField({
-              initial: false,
-              label: "Verbal",
-            }),
-            somatic: new fields.BooleanField({
-              initial: false,
-              label: "Somatic",
-            }),
-            material: new fields.BooleanField({
-              initial: false,
-              label: "Material",
-            }),
-            mp: new fields.SchemaField({
-              type: new fields.StringField({
-                initial: "none",
-                choices: {
-                  none: "None",
-                  static: "Static",
-                  formula: "Formula",
-                  variable: "Variable",
-                },
-              }),
-              value: new fields.SchemaField({
-                static: new fields.NumberField({
-                  initial: 0,
-                  integer: true,
-                  min: 0,
-                }),
-                formula: new FormulaField({
-                  initial: "",
-                  deterministic: false,
-                }),
-                variable: new TextField({
-                  initial: "",
-                  label: "Mana Cost",
-                }),
-              }),
-            }),
-            hp: new fields.SchemaField({
-              type: new fields.StringField({
-                initial: "none",
-                choices: {
-                  none: "None",
-                  static: "Static",
-                  formula: "Formula",
-                  variable: "Variable",
-                  hack: "Hack",
-                },
-              }),
-              value: new fields.SchemaField({
-                static: new fields.NumberField({
-                  initial: 0,
-                  integer: true,
-                  min: 0,
-                }),
-                formula: new FormulaField({
-                  initial: "",
-                  deterministic: false,
-                }),
-                variable: new TextField({
-                  initial: "",
-                  label: "Hit Cost",
-                }),
-              }),
-            }),
-            gp: new fields.SchemaField({
-              type: new fields.StringField({
-                initial: "none",
-                choices: {
-                  none: "None",
-                  static: "Static",
-                  formula: "Formula",
-                  variable: "Variable",
-                },
-              }),
-              value: new fields.SchemaField({
-                static: new fields.NumberField({
-                  initial: 0,
-                  integer: true,
-                  min: 0,
-                }),
-                formula: new FormulaField({
-                  initial: "",
-                  deterministic: false,
-                }),
-                variable: new TextField({
-                  initial: "",
-                  label: "Gold Cost",
-                }),
-              }),
-            }),
-            break: new fields.StringField({ initial: "" }),
-            materialCost: new TextField({
-              initial: "",
-              label: "Material Cost",
-            }),
           }),
           delivery: new fields.SchemaField({
             base: new fields.StringField({
@@ -189,14 +83,6 @@ export default (Base) => {
             choices: TERIOCK.index.attributes,
           }),
           form: new fields.StringField({ initial: "normal" }),
-          gifted: new fields.SchemaField({
-            enabled: new fields.BooleanField({ label: "Gifted" }),
-            amount: new fields.NumberField({
-              initial: 1,
-              min: 1,
-              integer: true,
-            }),
-          }),
           grantOnly: new fields.BooleanField({
             initial: false,
             label: "Granter Only",
@@ -363,65 +249,6 @@ export default (Base) => {
           );
         }
 
-        // HP and MP cost migration
-        for (const pointCost of ["mp", "hp"]) {
-          if (data.costs) {
-            if (data.costs[pointCost] === null) {
-              data.costs[pointCost] = {
-                type: "none",
-                value: {
-                  static: 0,
-                  formula: "",
-                  variable: "",
-                },
-              };
-            }
-            if (typeof data.costs[pointCost] == "string") {
-              const variableCost = String(
-                pointCost === "mp" ? "manaCost" : "hitCost",
-              );
-              data.costs[pointCost] = {
-                type: "variable",
-                value: {
-                  static: 0,
-                  formula: "",
-                  variable: variableCost || "",
-                },
-              };
-            }
-            if (typeof data.costs[pointCost] == "number") {
-              data.costs[pointCost] = {
-                type: "static",
-                value: {
-                  static: Number(data.costs[pointCost]),
-                  formula: "",
-                  variable: "",
-                },
-              };
-            }
-            if (typeof data.costs[pointCost]?.value == "number") {
-              data.costs[pointCost] = {
-                type: "static",
-                value: {
-                  static: data.costs[pointCost].value,
-                  formula: "",
-                  variable: "",
-                },
-              };
-            }
-            if (typeof data.costs[pointCost]?.value == "string") {
-              data.costs[pointCost] = {
-                type: "variable",
-                value: {
-                  static: 0,
-                  formula: "",
-                  variable: String(data.costs[pointCost].value),
-                },
-              };
-            }
-          }
-        }
-
         // Form migration
         if (foundry.utils.getProperty(data, "abilityType")) {
           foundry.utils.setProperty(
@@ -441,14 +268,84 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        Object.assign(data, {
+          form: this.form,
+          [`form.${this.form}`]: 1,
+          maneuver: this.maneuver,
+          [`maneuver.${this.maneuver}`]: 1,
+          interaction: this.interaction,
+          [`interaction.${this.interaction}`]: 1,
+          time: this.executionTime,
+          [`time.${this.executionTime}`]: 1,
+          av0: ["av0", "ub"].includes(this.piercing) ? 1 : 0,
+          ub: this.piercing === "ub" ? 1 : 0,
+          warded: this.warded ? 1 : 0,
+          range: this.range,
+          basic: this.basic ? 1 : 0,
+          standard: this.standard ? 1 : 0,
+          skill: this.skill ? 1 : 0,
+          spell: this.spell ? 1 : 0,
+          ritual: this.ritual ? 1 : 0,
+          rotator: this.rotator ? 1 : 0,
+          sustained: this.sustained ? 1 : 0,
+          invoked: this.invoked ? 1 : 0,
+          prepared: this.prepared ? 1 : 0,
+          secret: this.secret ? 1 : 0,
+          elderSorcery: this.elderSorcery ? 1 : 0,
+          es: this.elderSorcery ? 1 : 0,
+          grantOnly: this.grantOnly ? 1 : 0,
+        });
+        // Add deliveries
+        if (this.delivery.base) {
+          data[`delivery.${this.delivery.base}`] = 1;
+        }
+        if (this.delivery.parent) {
+          data[`delivery.${this.delivery.parent}`] = 1;
+        }
+        if (this.delivery.package) {
+          data[`delivery.${this.delivery.package}`] = 1;
+        }
+        if (this.interaction === "feat") {
+          data[`attr.${this.featSaveAttribute}`] = 1;
+        }
+        if (this.expansion) {
+          Object.assign(data, {
+            expansion: this.expansion,
+            [`expansion.${this.expansion}`]: 1,
+            [`expansion.attr.${this.expansionSaveAttribute}`]: 1,
+            [`expansion.range`]: this.expansionRange,
+          });
+        }
+        // Add class
+        if (this.parent?.parent?.type === "rank") {
+          const rank = this.parent.parent;
+          data[`class.${rank.system.className.slice(0, 3).toLowerCase()}`] = 1;
+        }
+        // Add elements
+        for (const element of this.elements) {
+          data[`element.${element}`] = 1;
+          data[`element.${element.slice(0, 3).toLowerCase()}`] = 1;
+        }
+        // Add effect types
+        for (const effectType of this.effectTypes) {
+          data[`effect.${effectType}`] = 1;
+        }
+        // Add targets
+        for (const target of this.targets) {
+          data[`target.${target}`] = 1;
+        }
+        // Add power sources
+        for (const powerSource of this.powerSources) {
+          data[`power.${powerSource}`] = 1;
+        }
+        return data;
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-
-        // Enforce invoked costs
-        if (this.invoked) {
-          this.costs.somatic = true;
-          this.costs.verbal = true;
-        }
 
         // Enforce power sources
         for (const ps of this.powerSources) {

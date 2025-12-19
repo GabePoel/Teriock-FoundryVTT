@@ -8,6 +8,10 @@ import {
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
+//noinspection JSClosureCompilerSyntax
+/**
+ * @implements {Teriock.Models.TeriockBaseMessageModelInterface}
+ */
 export default class TeriockBaseMessageModel extends TypeDataModel {
   /**
    * @inheritDoc

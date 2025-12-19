@@ -1,5 +1,6 @@
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { ArmamentExecution } from "../../../executions/document-executions/_module.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
 
@@ -164,24 +165,31 @@ export default function ArmamentDataMixin(Base) {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
+          armament: 1,
           dmg: this.damage.base.formula,
           range: this.range.long.formula,
           "range.short": this.range.short.formula,
           "range.melee": this.range.melee,
           "range.ranged": this.range.ranged,
-          av: this.av.formula,
-          bv: this.bv.formula,
-          hit: this.hit.formula,
+          av: this.av.value,
+          bv: this.bv.value,
+          hit: this.hit.value,
+          ap: this.attackPenalty.value,
+          style: this.fightingStyle,
+          [`style.${this.fightingStyle}`]: 1,
+          av0: this.piercing.av0 || this.piercing.ub ? 1 : 0,
+          ub: this.piercing.ub ? 1 : 0,
+          warded: this.warded ? 1 : 0,
+          spellTurning: this.spellTurning ? 1 : 0,
         });
         for (const type of this.damage.types) {
           data[`dmg.type.${type}`] = 1;
         }
-        foundry.utils.deleteProperty(data, "damage");
-        const propertyKeys = this.parent.effectKeys.property;
-        if (propertyKeys) {
-          for (const p of propertyKeys) {
-            data[`prop.${p}`] = 1;
-          }
+        const properties = this.parent.effects.filter(
+          (e) => e.type === "property",
+        );
+        for (const property of properties) {
+          data[`prop.${toCamelCase(property.name)}`] = 1;
         }
         return data;
       }

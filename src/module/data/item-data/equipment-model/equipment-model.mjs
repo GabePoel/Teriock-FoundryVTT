@@ -1,5 +1,10 @@
 import { EquipmentExecution } from "../../../executions/document-executions/_module.mjs";
-import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
+import {
+  dotJoin,
+  prefix,
+  suffix,
+  toCamelCase,
+} from "../../../helpers/string.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -17,6 +22,7 @@ const { fields } = foundry.data;
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
  * @extends {TeriockBaseItemModel}
+ * @implements {Teriock.Models.TeriockEquipmentModelInterface}
  * @mixes ArmamentData
  * @mixes AttunableData
  * @mixes ConsumableData
@@ -176,6 +182,20 @@ export default class TeriockEquipmentModel extends mix(
     options.source = this.parent;
     const execution = new EquipmentExecution(options);
     await execution.execute();
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    const data = super.getLocalRollData();
+    Object.assign(data, {
+      price: this.price,
+      [`type.${toCamelCase(this.equipmentType)}`]: 1,
+      [`power.${toCamelCase(this.powerLevel)}`]: 1,
+    });
+    for (const equipmentClass of this.equipmentClasses) {
+      data[`class.${equipmentClass}`] = 1;
+    }
+    return data;
   }
 
   /** @inheritDoc */

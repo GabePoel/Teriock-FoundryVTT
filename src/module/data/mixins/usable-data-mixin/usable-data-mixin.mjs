@@ -54,12 +54,11 @@ export default function UsableDataMixin(Base) {
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = super.getLocalRollData();
-        Object.assign(data, {
-          pro: this.proficient ? 1 : 0,
+        return {
+          ...super.getLocalRollData(),
           flu: this.fluent ? 1 : 0,
-        });
-        return data;
+          pro: this.proficient ? 1 : 0,
+        };
       }
 
       /**

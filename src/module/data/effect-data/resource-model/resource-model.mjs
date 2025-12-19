@@ -2,9 +2,11 @@ import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Resource-specific effect data model.
  * @extends {TeriockBaseEffectModel}
+ * @implements {Teriock.Models.TeriockResourceModelInterface}
  * @mixes ConsumableData
  * @mixes ExecutableData
  * @mixes RevelationData

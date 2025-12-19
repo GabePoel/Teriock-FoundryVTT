@@ -168,6 +168,18 @@ export default (Base) => {
         ];
       }
 
+      /** @inheritDoc */
+      getLocalRollData() {
+        const data = super.getLocalRollData();
+        Object.assign(data, {
+          equipped: this.isEquipped ? 1 : 0,
+          glued: this.glued ? 1 : 0,
+          minStr: this.minStr.value,
+          str: this.minStr.value,
+        });
+        return data;
+      }
+
       /**
        * Glue this equipment.
        * @returns {Promise<void>}

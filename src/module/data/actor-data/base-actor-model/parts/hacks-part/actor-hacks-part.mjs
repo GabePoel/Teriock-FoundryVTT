@@ -7,6 +7,7 @@ export default (Base) => {
   return (
     /**
      * @extends {TeriockBaseActorModel}
+     * @implements {ActorHacksPartInterface}
      * @mixin
      */
     class ActorGenericRollsPart extends Base {

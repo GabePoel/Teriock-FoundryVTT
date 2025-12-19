@@ -1,8 +1,10 @@
-import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { TeriockEffect } from "../../../documents/_module.mjs";
 
-declare module "./wrapper-model.mjs" {
-  export default interface TeriockWrapperModel extends TeriockBaseItemModel {
-    get parent(): TeriockWrapper<TeriockEffect>;
+declare global {
+  namespace Teriock.Models {
+    export interface TeriockWrapperModelInterface
+      extends Teriock.Models.TeriockBaseItemModelInterface {
+      get parent(): TeriockWrapper<TeriockEffect>;
+    }
   }
 }

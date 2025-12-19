@@ -9,6 +9,7 @@ import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Fluency-specific effect data model.
  *
@@ -16,6 +17,7 @@ const { fields } = foundry.data;
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
  * @extends {TeriockBaseEffectModel}
+ * @implements {Teriock.Models.TeriockFluencyModelInterface}
  * @mixes ExecutableData
  * @mixes ProficiencyData
  * @mixes RevelationData
@@ -190,6 +192,16 @@ export default class TeriockFluencyModel extends mix(
     options.source = this.parent;
     const execution = new FluencyExecution(options);
     await execution.execute();
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      field: this.field,
+      tc: this.tradecraft,
+      tradecraft: this.tradecraft,
+    };
   }
 
   prepareDerivedData() {

@@ -1,5 +1,4 @@
 import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
-import { prefixObject } from "../../../helpers/utils.mjs";
 import { UsableDataMixin } from "../../mixins/_module.mjs";
 import EvaluationModel from "../evaluation-model/evaluation-model.mjs";
 
@@ -9,6 +8,7 @@ const { fields } = foundry.data;
 /**
  * @mixes UsableData
  * @extends EvaluationModel
+ * @implements {Teriock.Models.ModifierModelInterface}
  * @property {number} score - The modifier score.
  */
 export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
@@ -89,12 +89,10 @@ export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
 
   /**
    * @inheritDoc
-   * @param {string} [prefix]
    */
-  getLocalRollData(prefix) {
+  getLocalRollData() {
     const localRollData = super.getLocalRollData();
     Object.assign(localRollData, { "": this.value });
-    if (!prefix) return localRollData;
-    return prefixObject(localRollData, prefix);
+    return localRollData;
   }
 }

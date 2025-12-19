@@ -4,10 +4,12 @@ import { ChildTypeModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
  * @extends {ChildTypeModel}
+ * @implements {Teriock.Models.TeriockBaseItemModelInterface}
  * @mixes HierarchyData
  */
 export default class TeriockBaseItemModel extends mix(

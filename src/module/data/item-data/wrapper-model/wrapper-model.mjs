@@ -1,7 +1,9 @@
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Wrapper-specific item data model.
+ * @implements {Teriock.Models.TeriockWrapperModelInterface}
  */
 export default class TeriockWrapperModel extends TeriockBaseItemModel {
   /** @inheritDoc */

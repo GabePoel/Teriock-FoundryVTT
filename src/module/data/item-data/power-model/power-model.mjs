@@ -1,3 +1,4 @@
+import { toCamelCase } from "../../../helpers/string.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -5,9 +6,11 @@ import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Power-specific item data model.
  * @extends {TeriockBaseItemModel}
+ * @implements {Teriock.Models.TeriockPowerModelInterface}
  * @mixes ProficiencyData
  */
 export default class TeriockPowerModel extends mix(
@@ -113,6 +116,16 @@ export default class TeriockPowerModel extends mix(
     ) {
       return false;
     }
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      [`type.${toCamelCase(this.type)}`]: 1,
+      maxAv: this.maxAv,
+      av: this.maxAv,
+    };
   }
 
   /** @inheritDoc */

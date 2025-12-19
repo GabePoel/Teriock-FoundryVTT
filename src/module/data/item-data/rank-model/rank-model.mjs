@@ -8,6 +8,7 @@ import { _parse } from "./methods/_parsing.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Rank-specific item data model.
  *
@@ -15,6 +16,7 @@ const { fields } = foundry.data;
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
  * @extends {TeriockBaseItemModel}
+ * @implements {Teriock.Models.TeriockRankModelInterface}
  * @mixes ProficiencyData
  * @mixes StatGiverData
  * @mixes WikiData
@@ -268,6 +270,21 @@ export default class TeriockRankModel extends mix(
         group: "usage",
       },
     ];
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      class: this.className,
+      [`class.${this.className.slice(0, 3).toLowerCase()}`]: 1,
+      number: this.classRank,
+      innate: this.innate ? 1 : 0,
+      maxAv: this.maxAv,
+      av: this.maxAv,
+      archetype: this.archetype,
+      [`archetype.${this.archetype.slice(0, 3).toLowerCase()}`]: 1,
+    };
   }
 
   /** @inheritDoc */

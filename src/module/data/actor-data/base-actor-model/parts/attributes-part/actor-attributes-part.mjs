@@ -1,3 +1,4 @@
+import { prefixObject } from "../../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../../fields/_module.mjs";
 import { AttributeModel } from "../../../../models/_module.mjs";
 
@@ -47,8 +48,9 @@ export default (Base) => {
       getRollData() {
         const rollData = super.getRollData();
         for (const att of Object.values(this.attributes)) {
-          Object.assign(rollData, att.getLocalRollData(`att.${att.key}`));
-          Object.assign(rollData, att.getLocalRollData(att.key));
+          const data = att.getLocalRollData();
+          Object.assign(rollData, prefixObject(data, `att.${att.key}`));
+          Object.assign(rollData, prefixObject(data, `${att.key}`));
         }
         return rollData;
       }

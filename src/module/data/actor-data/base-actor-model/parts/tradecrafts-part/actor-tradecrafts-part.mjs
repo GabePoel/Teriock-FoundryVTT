@@ -1,3 +1,4 @@
+import { prefixObject } from "../../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../../fields/_module.mjs";
 import { TradecraftModel } from "../../../../models/_module.mjs";
 
@@ -37,7 +38,10 @@ export default (Base) => {
       getRollData() {
         const rollData = super.getRollData();
         for (const tc of Object.values(this.tradecrafts)) {
-          Object.assign(rollData, tc.getLocalRollData(`tc.${tc.key}`));
+          Object.assign(
+            rollData,
+            prefixObject(tc.getLocalRollData(), `tc.${tc.key}`),
+          );
         }
         return rollData;
       }

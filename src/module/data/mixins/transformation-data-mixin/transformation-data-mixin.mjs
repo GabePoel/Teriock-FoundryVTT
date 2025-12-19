@@ -206,6 +206,15 @@ export default function TransformationDataMixin(Base) {
       }
 
       /** @inheritDoc */
+      getLocalRollData() {
+        return {
+          ...super.getLocalRollData(),
+          transformation: this.isTransformation ? 1 : 0,
+          "transformation.primary": this.isPrimaryTransformation ? 1 : 0,
+        };
+      }
+
+      /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
         if (this.isTransformation) {

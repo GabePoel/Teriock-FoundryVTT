@@ -2,8 +2,10 @@ import { ChildTypeModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Base effect data model.
+ * @implements {Teriock.Models.TeriockBaseEffectModelInterface}
  */
 export default class TeriockBaseEffectModel extends ChildTypeModel {
   /** @inheritDoc */
@@ -109,6 +111,15 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
     } else {
       await this.parent.update({ disabled: true });
     }
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    const data = super.getLocalRollData();
+    for (const status of this.parent.statuses) {
+      data[`condition.${status}`] = 1;
+    }
+    return data;
   }
 
   /**

@@ -18,6 +18,7 @@ const { fields } = foundry.data;
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {TeriockBaseItemModel}
+ * @implements {Teriock.Models.TeriockSpeciesModelInterface}
  * @mixes ProficiencyData
  * @mixes SpeciesPanelPart
  * @mixes StatGiverData
@@ -237,6 +238,26 @@ export default class TeriockSpeciesModel extends mix(
         group: "control",
       },
     ];
+  }
+
+  getLocalRollData() {
+    const data = super.getLocalRollData();
+    Object.assign(data, {
+      [`transformation.level`]: this.transformationLevel,
+      transformation: this.isTransformation ? 1 : 0,
+      "transformation.primary": this.isPrimaryTransformation ? 1 : 0,
+      size: this.size.enabled ? this.size.value : 0,
+      "size.max": this.size.enabled ? this.size.max : 0,
+      "size.min": this.size.enabled ? this.size.min : 0,
+      "size.enabled": this.size.enabled ? 1 : 0,
+      adult: this.adult,
+      lifespan: this.lifespan,
+      br: this.br,
+    });
+    for (const trait of this.traits) {
+      data[`trait.${toCamelCase(trait)}`] = 1;
+    }
+    return data;
   }
 
   /** @inheritDoc */

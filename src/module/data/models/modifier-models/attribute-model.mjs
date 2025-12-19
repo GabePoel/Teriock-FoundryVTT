@@ -17,15 +17,12 @@ export default class AttributeModel extends ModifierModel {
   }
 
   /** @inheritDoc */
-  getLocalRollData(prefix) {
-    const localRollData = super.getLocalRollData(prefix);
-    if (prefix) {
-      localRollData[`${prefix}.passive`] = this.passive;
-      localRollData[`${prefix}.pas`] = this.passive;
-    } else {
-      localRollData.passive = this.passive;
-      localRollData.pas = this.passive;
-    }
+  getLocalRollData() {
+    const localRollData = super.getLocalRollData();
+    Object.assign(localRollData, {
+      passive: this.passive,
+      pas: this.passive,
+    });
     return localRollData;
   }
 

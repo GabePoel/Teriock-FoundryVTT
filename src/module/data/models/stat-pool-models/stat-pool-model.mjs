@@ -7,6 +7,10 @@ import StatDieModel from "../stat-die-model/stat-die-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
+/**
+ * @implements {Teriock.Models.StatPoolModelInterface}
+ */
 export default class StatPoolModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {

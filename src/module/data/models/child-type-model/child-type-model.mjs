@@ -6,9 +6,11 @@ import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Data model shared by items and effects.
  * @mixes UsableData
+ * @implements {Teriock.Models.ChildTypeModelInterface}
  */
 export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
   /** @inheritDoc */
@@ -294,6 +296,15 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
       ],
     );
     return entries;
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      flu: this.parent.isFluent,
+      pro: this.parent.isProficient,
+    };
   }
 
   /**

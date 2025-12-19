@@ -10,8 +10,12 @@ export interface StatDieData {
   value: number;
 }
 
-declare module "./stat-die-model.mjs" {
-  export default interface StatDieModel extends StatDieData {
-    toObject(): StatDieData;
+declare global {
+  namespace Teriock.Models {
+    export interface StatDieModelInterface extends StatDieData {
+      toObject(): StatDieData;
+    }
   }
 }
+
+export {};

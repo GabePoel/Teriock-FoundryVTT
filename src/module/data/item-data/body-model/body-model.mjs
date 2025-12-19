@@ -5,6 +5,7 @@ import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _parse } from "./parsing/_parsing.mjs";
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Body part-specific item data model.
  *
@@ -12,6 +13,7 @@ import { _parse } from "./parsing/_parsing.mjs";
  * - [Body Parts](https://wiki.teriock.com/index.php/Category:Body_parts)
  *
  * @extends {TeriockBaseItemModel}
+ * @implements {Teriock.Models.TeriockBodyModelInterface}
  * @mixes ConsumableData
  * @mixes ExecutableData
  * @mixes WikiData

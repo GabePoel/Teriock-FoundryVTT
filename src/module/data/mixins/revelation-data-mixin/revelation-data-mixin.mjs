@@ -64,6 +64,14 @@ export default function RevelationDataMixin(Base) {
       }
 
       /** @inheritDoc */
+      getLocalRollData() {
+        return {
+          ...super.getLocalRollData(),
+          revealed: this.revealed ? 1 : 0,
+        };
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.parent.elder && this.parent.elder?.metadata.revealable) {

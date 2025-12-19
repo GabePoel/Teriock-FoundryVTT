@@ -1,15 +1,17 @@
 import { attunementOptions } from "../../../constants/options/attunement-options.mjs";
-import { dotJoin } from "../../../helpers/string.mjs";
+import { dotJoin, toCamelCase } from "../../../helpers/string.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Attunement-specific effect data model.
  *
  * Relevant wiki pages:
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
+ * @implements {Teriock.Models.TeriockAttunementModelInterface}
  */
 export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   /** @inheritDoc */
@@ -161,6 +163,16 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
         group: "attunement",
       },
     ];
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      [`type.${toCamelCase(this.type)}`]: 1,
+      tier: this.tier,
+      target: this.targetDocument ? 1 : 0,
+    };
   }
 
   /** @inheritDoc */

@@ -1,9 +1,11 @@
 import { ArmamentDataMixinInterface } from "../../mixins/armament-data-mixin/_types";
 
-declare module "./body-model.mjs" {
-  export default interface TeriockBodyModel extends ArmamentDataMixinInterface {
-    get parent(): TeriockBody;
+declare global {
+  namespace Teriock.Models {
+    export interface TeriockBodyModelInterface
+      extends Teriock.Models.TeriockBaseItemModelInterface,
+        ArmamentDataMixinInterface {
+      get parent(): TeriockBody;
+    }
   }
 }
-
-export {};

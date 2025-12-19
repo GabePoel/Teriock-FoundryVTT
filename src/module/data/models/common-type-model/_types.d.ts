@@ -8,9 +8,13 @@ export type ChildDeltaMap = Record<
   }
 >;
 
-declare module "./common-type-model.mjs" {
-  export default interface CommonTypeModel {
-    /** <schema> Journal entry page only accessible to GM */
-    gmNotes: UUID<TeriockJournalEntryPage>;
+declare global {
+  namespace Teriock.Models {
+    export interface CommonTypeModelInterface {
+      /** <schema> Journal entry page only accessible to GM */
+      gmNotes: UUID<TeriockJournalEntryPage>;
+    }
   }
 }
+
+export {};

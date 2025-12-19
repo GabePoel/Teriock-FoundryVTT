@@ -7,6 +7,7 @@ import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Condition-specific effect data model.
  *
@@ -14,6 +15,7 @@ const { fields } = foundry.data;
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
  * @extends {TeriockBaseEffectModel}
+ * @implements {Teriock.Models.TeriockConditionModelInterface}
  * @mixes TransformationData
  * @mixes WikiData
  */

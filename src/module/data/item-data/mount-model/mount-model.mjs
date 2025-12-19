@@ -1,4 +1,4 @@
-import { prefix } from "../../../helpers/string.mjs";
+import { prefix, toCamelCase } from "../../../helpers/string.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -6,9 +6,11 @@ import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Mount-specific item data model.
  * @extends {TeriockBaseItemModel}
+ * @implements {Teriock.Models.TeriockMountModelInterface}
  * @mixes AttunableData
  * @mixes StatGiverData
  */
@@ -101,6 +103,15 @@ export default class TeriockMountModel extends mix(
         wrappers: ["Tier " + this.tier.raw || "0", this.mountType],
       },
     ];
+  }
+
+  /** @inheritDoc */
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      mounted: this.mounted ? 1 : 0,
+      [`type.${toCamelCase(this.mountType)}`]: 1,
+    };
   }
 
   /**

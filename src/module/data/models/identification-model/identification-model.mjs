@@ -8,6 +8,10 @@ import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
+/**
+ * @implements {Teriock.Models.IdentificationModelInterface}
+ */
 export default class IdentificationModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {

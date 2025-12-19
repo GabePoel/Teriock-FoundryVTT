@@ -3,8 +3,10 @@ import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Model that provides useful getters for equipment that stores other equipment.
+ * @implements {Teriock.Models.StorageModelInterface}
  */
 export default class StorageModel extends EmbeddedDataModel {
   /** @inheritDoc */

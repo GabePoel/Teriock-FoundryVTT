@@ -1,6 +1,9 @@
-declare module "./creature-model.mjs" {
-  export default interface TeriockCreatureModel {
-    get parent(): TeriockCreature;
+declare global {
+  namespace Teriock.Models {
+    export interface TeriockCreatureModelInterface
+      extends Teriock.Models.TeriockBaseActorModelInterface {
+      get parent(): TeriockCreature;
+    }
   }
 }
 

@@ -7,9 +7,11 @@ import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
 
+//noinspection JSClosureCompilerSyntax
 /**
  * Effect-specific effect data model.
  * @extends {TeriockBaseEffectModel}
+ * @implements {Teriock.Models.TeriockConsequenceModelInterface}
  * @mixes HierarchyData
  * @mixes TransformationData
  */

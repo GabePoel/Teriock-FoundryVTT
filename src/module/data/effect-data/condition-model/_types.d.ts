@@ -1,18 +1,21 @@
 import { CombatExpirationMethod } from "../../fields/helpers/_types";
 
-declare module "./condition-model.mjs" {
-  export default interface TeriockConditionModel {
-    /** <schema> Expirations */
-    expirations: {
-      /** <schema> Combat expirations */
-      combat: {
-        /** <schema> Method of combat expiration */
-        what: CombatExpirationMethod;
+declare global {
+  namespace Teriock.Models {
+    export interface TeriockConditionModelInterface
+      extends Teriock.Models.TeriockBaseEffectModelInterface {
+      /** <schema> Expirations */
+      expirations: {
+        /** <schema> Combat expirations */
+        combat: {
+          /** <schema> Method of combat expiration */
+          what: CombatExpirationMethod;
+        };
+        /** <schema> Expiration description */
+        description?: string;
       };
-      /** <schema> Expiration description */
-      description?: string;
-    };
 
-    get parent(): TeriockCondition;
+      get parent(): TeriockCondition;
+    }
   }
 }
