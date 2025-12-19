@@ -64,23 +64,6 @@ export default class TeriockEffect extends mix(
   }
 
   /**
-   * Expanded changes.
-   * @returns {Teriock.Fields.ExpandedChangeData[]}
-   */
-  get expandedChanges() {
-    return [...this.changes, ...this.itemChanges, ...this.specialChanges].map(
-      (change) => ({
-        ...change,
-        type: null,
-        targets: "all",
-        documentName: null,
-        time: null,
-        effect: this,
-      }),
-    );
-  }
-
-  /**
    * Alternative to {@link TeriockEffect.isTemporary} that only references duration.
    * @returns {boolean}
    */
@@ -116,6 +99,21 @@ export default class TeriockEffect extends mix(
    */
   get isSuppressed() {
     return this.system.makeSuppressed || super.isSuppressed;
+  }
+
+  /**
+   * Expanded changes.
+   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   */
+  get qualifiedChanges() {
+    return [...this.changes, ...this.itemChanges, ...this.specialChanges].map(
+      (change) => ({
+        ...change,
+        target: "Actor",
+        time: "normal",
+        qualifier: "1",
+      }),
+    );
   }
 
   /**

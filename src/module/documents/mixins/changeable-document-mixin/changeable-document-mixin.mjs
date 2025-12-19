@@ -25,23 +25,6 @@ export default function ChangeableDocumentMixin(Base) {
        */
       overrides = this.overrides ?? {};
 
-      /**
-       * The canonical change tree to use.
-       * @returns {Teriock.Fields.ChangeTree}
-       */
-      get changeTree() {
-        if (this.parent?.changeTree) {
-          return this.parent.changeTree;
-        } else if (this._changeTree) {
-          return this._changeTree;
-        } else {
-          this._changeTree = this.constructor.buildChangeTree(
-            this.allApplicableEffects(),
-          );
-          return this._changeTree;
-        }
-      }
-
       /** Checks if it's okay to prepare. */
       _checkPreparation() {
         return Boolean(!this.actor) || this.actor?._embeddedPreparation;

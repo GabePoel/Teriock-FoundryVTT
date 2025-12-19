@@ -7,6 +7,7 @@ import TeriockBaseActorModel from "../base-actor-model/base-actor-model.mjs";
  * Relevant wiki pages:
  * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
+ *
  * @implements {Teriock.Models.TeriockCreatureModelInterface}
  */
 export default class TeriockCreatureModel extends TeriockBaseActorModel {

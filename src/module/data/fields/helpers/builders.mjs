@@ -1,3 +1,4 @@
+import { FormulaField } from "../_module.mjs";
 import { arrayTypeValidator, typeValidator } from "./validators.mjs";
 
 const { fields } = foundry.data;
@@ -237,43 +238,36 @@ export function changeField() {
  * Field that represents an expanded change.
  * @returns {SchemaField}
  */
-export function expandedChangeField() {
-  const allTypes = {};
+export function qualifiedChangeField() {
+  const allTypes = {
+    Actor: "Actors",
+    Item: "Items",
+    ActiveEffect: "Active Effects",
+  };
   for (const v of Object.values(TERIOCK.system.documentTypes)) {
     Object.assign(allTypes, v);
   }
   return new fields.SchemaField({
-    documentName: new fields.StringField({
-      choices: {
-        ActiveEffect: "Effects",
-        Actor: "Actors",
-        Item: "Items",
-      },
-      nullable: true,
-      initial: null,
-    }),
     key: new fields.StringField({ initial: "" }),
     mode: new fields.NumberField({
       choices: TERIOCK.options.effect.changeMode,
       initial: 4,
     }),
     priority: new fields.NumberField({ initial: 20 }),
-    targets: new fields.StringField({
-      choices: TERIOCK.options.change.targets,
-      nullable: true,
-      initial: null,
-    }),
     time: new fields.StringField({
-      choices: TERIOCK.options.change.time,
+      choices: TERIOCK.options.change.timeLabels,
       nullable: true,
       initial: null,
     }),
-    type: new fields.StringField({
+    target: new fields.StringField({
       choices: allTypes,
-      nullable: true,
-      initial: null,
+      initial: "Actor",
     }),
     value: new fields.StringField({ initial: "" }),
+    qualifier: new FormulaField({
+      deterministic: true,
+      initial: "1",
+    }),
   });
 }
 

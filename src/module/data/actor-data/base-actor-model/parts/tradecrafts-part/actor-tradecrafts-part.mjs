@@ -46,14 +46,6 @@ export default (Base) => {
         return rollData;
       }
 
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        //for (const tc of Object.values(this.tradecrafts)) {
-        //  tc.evaluate();
-        //}
-      }
-
       /**
        * Rolls a tradecraft check.
        *
