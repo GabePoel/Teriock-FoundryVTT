@@ -1041,25 +1041,34 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: >-
-                    !body__effectKeys.property__has__weapon__system.damage.base.raw
-                  mode: 4
+                - mode: 4
+                  priority: 10
+                  time: normal
+                  key: system.damage.base.raw
+                  target: body
+                  qualifier: '@prop.weapon'
                   value: 1d10
+                - mode: 5
                   priority: 10
-                - key: '!body__effectKeys.property__has__weapon__system.piercing.av0'
-                  mode: 5
+                  time: normal
+                  key: system.piercing.av0
+                  target: body
+                  qualifier: '@prop.weapon'
                   value: 'true'
+                - mode: 4
                   priority: 10
-                - key: >-
-                    !body__effectKeys.property__has__bashing__system.damage.base.raw
-                  mode: 4
+                  time: normal
+                  key: system.damage.base.raw
+                  target: body
+                  qualifier: '@prop.bashing'
                   value: 1d10
+                - mode: 5
                   priority: 10
-                - key: >-
-                    !body__effectKeys.property__has__bashing__system.piercing.av0
-                  mode: 5
+                  time: normal
+                  key: system.piercing.av0
+                  target: body
+                  qualifier: '@prop.bashing'
                   value: 'true'
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -1798,10 +1807,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.ethereal
-                  mode: 4
-                  value: '120'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.ethereal
+                  target: Actor
+                  qualifier: '1'
+                  value: '120'
               common: []
               expiration:
                 normal:
@@ -2545,10 +2557,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  value: mundane
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.immunities.damageTypes
+                  target: Actor
+                  qualifier: '1'
+                  value: mundane
               common: []
               expiration:
                 normal:
@@ -3302,14 +3317,20 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                - mode: 2
+                  priority: 10
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: frightened
+                - mode: 2
                   priority: 10
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: charmed
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -3687,18 +3708,27 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                - mode: 2
+                  priority: 10
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: unconscious
+                - mode: 2
                   priority: 10
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: suffocating
+                - mode: 2
                   priority: 10
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: poisoned
-                  priority: 10
               common: []
               expiration:
                 normal:

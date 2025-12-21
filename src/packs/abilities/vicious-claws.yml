@@ -119,14 +119,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!ability__name__eq__Martial Arts__system.fluent'
+            - key: system.fluent
               mode: 5
-              value: 'true'
               priority: 10
-            - key: '!ability__name__eq__Hind Claws__system.fluent'
+              target: ability
+              time: fluency
+              qualifier: or(@key.offensiveMartialArts, @key.hindClaws)
+              value: 'true'
+            - key: system.piercing.av0
               mode: 5
-              value: 'true'
               priority: 10
+              target: body
+              time: normal
+              qualifier: or(@prop.handy, @key.foot)
+              value: 'true'
           common: []
           expiration:
             normal:

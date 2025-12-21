@@ -695,20 +695,34 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.damage.base.raw__exists__null__system.damage.base.raw
-              mode: 2
-              value: 1d4[fire magic]
+            - mode: 2
               priority: 30
-            - key: >-
-                !body__system.damage.base.raw__exists__null__system.damage.base.raw
-              mode: 2
+              time: normal
+              key: system.damage.base.raw
+              target: equipment
+              qualifier: '@dmg'
               value: 1d4[fire magic]
+            - mode: 2
               priority: 30
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: fire
+              time: normal
+              key: system.damage.twoHanded.raw
+              target: equipment
+              qualifier: '@dmg.2h'
+              value: 1d4[fire magic]
+            - mode: 2
+              priority: 30
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@dmg'
+              value: 1d4[fire magic]
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.protections.resistances.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: fire
           common: []
           expiration:
             normal:

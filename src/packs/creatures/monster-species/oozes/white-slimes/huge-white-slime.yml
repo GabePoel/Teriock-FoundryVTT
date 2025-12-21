@@ -1023,10 +1023,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.smell
-                  mode: 4
-                  value: '10'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.smell
+                  target: Actor
+                  qualifier: '1'
+                  value: '10'
               common: []
               expiration:
                 normal:
@@ -1400,10 +1403,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.blind
-                  mode: 4
-                  value: '60'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.blind
+                  target: Actor
+                  qualifier: '1'
+                  value: '60'
               common: []
               expiration:
                 normal:
@@ -2137,10 +2143,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.dark
-                  mode: 4
-                  value: '60'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.dark
+                  target: Actor
+                  qualifier: '1'
+                  value: '60'
               common: []
               expiration:
                 normal:
@@ -4362,14 +4371,20 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: '!ability__system.elements__has__life__system.adept.enabled'
-                  mode: 4
+                - mode: 4
+                  priority: 10
+                  time: normal
+                  key: system.adept.enabled
+                  target: ability
+                  qualifier: '@element.lif'
                   value: 'true'
+                - mode: 4
                   priority: 10
-                - key: '!ability__system.elements__has__life__system.adept.amount'
-                  mode: 4
+                  time: normal
+                  key: system.adept.amount
+                  target: ability
+                  qualifier: '@element.lif'
                   value: '1'
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -4740,22 +4755,34 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                - mode: 2
+                  priority: 10
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: frightened
+                - mode: 2
                   priority: 10
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: goaded
+                - mode: 2
                   priority: 10
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: frenzied
+                - mode: 2
                   priority: 10
-                - key: system.protections.immunities.statuses
-                  mode: 2
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
                   value: charmed
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -5881,10 +5908,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  value: unconscious
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
+                  value: unconscious
               common: []
               expiration:
                 normal:
@@ -7428,10 +7458,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: '@rank.mag - 1'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.magic.maxRotators.raw
+                  target: Actor
+                  qualifier: '1'
+                  value: '@rank.mag - 1'
               common: []
               expiration:
                 normal:
@@ -7490,10 +7523,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: 2 * (@rank.mag - 1)
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.magic.maxRotators.raw
+                  target: Actor
+                  qualifier: '1'
+                  value: 2 * (@rank.mag - 1)
               common: []
               expiration:
                 normal:
@@ -7552,10 +7588,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: 2 * (@rank.mag - 1) + @p
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.magic.maxRotators.raw
+                  target: Actor
+                  qualifier: '1'
+                  value: 2 * (@rank.mag - 1) + @p
               common: []
               expiration:
                 normal:
@@ -8956,18 +8995,27 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.light.dim
-                  mode: 4
+                - mode: 4
+                  priority: 3
+                  time: normal
+                  key: system.light.dim
+                  target: Actor
+                  qualifier: '1'
                   value: '0.01'
+                - mode: 5
                   priority: 3
-                - key: system.light.color
-                  mode: 5
+                  time: normal
+                  key: system.light.color
+                  target: Actor
+                  qualifier: '1'
                   value: '#DEDDDA'
+                - mode: 5
                   priority: 3
-                - key: system.light.animation.type
-                  mode: 5
+                  time: normal
+                  key: system.light.animation.type
+                  target: Actor
+                  qualifier: '1'
                   value: sunburst
-                  priority: 3
               common: []
               expiration:
                 normal:
@@ -18193,14 +18241,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: '!ability__name__eq__Life Rotators__system.fluent'
-                  mode: 5
+                - mode: 5
+                  priority: 10
+                  time: fluency
+                  key: system.fluent
+                  target: ability
+                  qualifier: '@key.lifeRotators'
                   value: 'true'
-                  priority: 10
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: 2 * (@rank.mag - 1) + @p
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -19530,10 +19577,10 @@ items:
           adept:
             enabled: false
             amount: 1
-          form: normal
           gifted:
             enabled: false
             amount: 1
+          form: normal
           grantOnly: false
           grantOnlyText: ''
         _id: 4zic6p9YosSdYkev
@@ -19911,11 +19958,11 @@ items:
           adept:
             enabled: false
             amount: 1
-          effectTypes: []
-          form: normal
           gifted:
             enabled: false
             amount: 1
+          effectTypes: []
+          form: normal
           grantOnly: false
           grantOnlyText: ''
         _id: F2UMcg2LvpOBK7Rk

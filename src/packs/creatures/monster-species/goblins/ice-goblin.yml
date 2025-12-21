@@ -278,18 +278,27 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.light.dim
-                  mode: 4
+                - mode: 4
+                  priority: 3
+                  time: normal
+                  key: system.light.dim
+                  target: Actor
+                  qualifier: '1'
                   value: '0.01'
+                - mode: 5
                   priority: 3
-                - key: system.light.color
-                  mode: 5
+                  time: normal
+                  key: system.light.color
+                  target: Actor
+                  qualifier: '1'
                   value: '#3584E4'
+                - mode: 5
                   priority: 3
-                - key: system.light.animation.type
-                  mode: 5
+                  time: normal
+                  key: system.light.animation.type
+                  target: Actor
+                  qualifier: '1'
                   value: sunburst
-                  priority: 3
               common: []
               expiration:
                 normal:
@@ -1406,10 +1415,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.speedAdjustments.dig
-                  mode: 4
-                  value: '1'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.speedAdjustments.dig
+                  target: Actor
+                  qualifier: '1'
+                  value: '1'
               common: []
               expiration:
                 normal:

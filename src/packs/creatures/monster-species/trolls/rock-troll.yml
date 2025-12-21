@@ -2152,10 +2152,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: '!body__system.av.saved__neq__0__system.av.raw'
-                  mode: 2
-                  value: '1'
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.av.raw
+                  target: body
+                  qualifier: '@av'
+                  value: '1'
               common: []
               expiration:
                 normal:
@@ -3997,10 +4000,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  value: unconscious
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
+                  value: unconscious
               common: []
               expiration:
                 normal:

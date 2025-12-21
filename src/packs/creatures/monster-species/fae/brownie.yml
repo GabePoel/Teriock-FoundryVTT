@@ -288,10 +288,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.resistances.other
-                  mode: 2
-                  value: Non-critical Attacks
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.resistances.other
+                  target: Actor
+                  qualifier: '1'
+                  value: Non-critical Attacks
               common: []
               expiration:
                 normal:
@@ -669,7 +672,14 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - mode: 5
+                  priority: 10
+                  time: fluency
+                  key: system.fluent
+                  target: ability
+                  qualifier: '@key.innateElderSorcery'
+                  value: 'true'
               common: []
               expiration:
                 normal:
@@ -1792,10 +1802,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.dark
-                  mode: 4
-                  value: '120'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.dark
+                  target: Actor
+                  qualifier: '1'
+                  value: '120'
               common: []
               expiration:
                 normal:

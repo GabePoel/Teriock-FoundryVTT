@@ -1397,16 +1397,20 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: >-
-                    !ability__parent.system.className__eq__berserker__system.adept.enabled
-                  mode: 5
-                  value: 'true'
+                - mode: 5
                   priority: 10
-                - key: >-
-                    !ability__parent.system.className__eq__berserker__system.adept.amount
-                  mode: 4
+                  time: normal
+                  key: system.adept.enabled
+                  target: ability
+                  qualifier: '@class.ber'
                   value: 'true'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.adept.amount
+                  target: ability
+                  qualifier: '@class.ber'
+                  value: 'true'
               common: []
               expiration:
                 normal:
@@ -1774,10 +1778,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.defense.av.natural
-                  mode: 2
-                  value: '2'
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.defense.av.natural
+                  target: Actor
+                  qualifier: '1'
+                  value: '2'
               common: []
               expiration:
                 normal:
@@ -2146,10 +2153,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.truth
-                  mode: 4
-                  value: Infinity
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.truth
+                  target: Actor
+                  qualifier: '1'
+                  value: Infinity
               common: []
               expiration:
                 normal:
@@ -2902,10 +2912,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.truth
-                  mode: 4
-                  value: Infinity
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.truth
+                  target: Actor
+                  qualifier: '1'
+                  value: Infinity
               common: []
               expiration:
                 normal:
@@ -3638,10 +3651,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.speedAdjustments.fly
-                  mode: 4
-                  value: '2'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.speedAdjustments.fly
+                  target: Actor
+                  qualifier: '1'
+                  value: '2'
               common: []
               expiration:
                 normal:
@@ -3700,10 +3716,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.speedAdjustments.fly
-                  mode: 4
-                  value: '3'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.speedAdjustments.fly
+                  target: Actor
+                  qualifier: '1'
+                  value: '3'
               common: []
               expiration:
                 normal:
@@ -6244,10 +6263,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.dark
-                  mode: 4
-                  value: '120'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.dark
+                  target: Actor
+                  qualifier: '1'
+                  value: '120'
               common: []
               expiration:
                 normal:
@@ -7733,10 +7755,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.resistances.statuses
-                  mode: 2
-                  value: frightened
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.resistances.statuses
+                  target: Actor
+                  qualifier: '1'
+                  value: frightened
               common: []
               expiration:
                 normal:
@@ -8479,10 +8504,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.ethereal
-                  mode: 4
-                  value: '120'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.ethereal
+                  target: Actor
+                  qualifier: '1'
+                  value: '120'
               common: []
               expiration:
                 normal:
@@ -10355,7 +10383,16 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - mode: 5
+                  priority: 10
+                  time: fluency
+                  key: system.fluent
+                  target: ability
+                  qualifier: >-
+                    or(@key.innateElderSorcery, @key.elderSorceryAdept,
+                    @key.dragonSnapcast)
+                  value: 'true'
               common: []
               expiration:
                 normal:
@@ -11110,15 +11147,20 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: >-
-                    !ability__system.elderSorcery__is__true__system.adept.enabled
-                  mode: 4
+                - mode: 4
+                  priority: 10
+                  time: normal
+                  key: system.adept.enabled
+                  target: ability
+                  qualifier: '@es'
                   value: 'true'
+                - mode: 4
                   priority: 10
-                - key: '!ability__system.elderSorcery__is__true__system.adept.amount'
-                  mode: 4
+                  time: normal
+                  key: system.adept.amount
+                  target: ability
+                  qualifier: '@es'
                   value: '1'
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -14135,10 +14177,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.resistances.statuses
-                  mode: 2
-                  value: frightened
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.resistances.statuses
+                  target: Actor
+                  qualifier: '1'
+                  value: frightened
               common: []
               expiration:
                 normal:
@@ -14919,10 +14964,16 @@ items:
                 mode: 5
                 value: 'true'
                 priority: 10
+                time: normal
+                target: Actor
+                qualifier: '1'
               - key: item.system.piercing.av0
                 mode: 5
                 value: 'true'
                 priority: 10
+                time: normal
+                target: Actor
+                qualifier: '1'
             macros: {}
           qualifiers:
             ephemeral:
@@ -15862,10 +15913,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.tradecrafts.enforcer.score
-                  mode: 4
-                  value: '2'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.tradecrafts.enforcer.score
+                  target: Actor
+                  qualifier: '1'
+                  value: '2'
               common: []
               expiration:
                 normal:
@@ -17418,10 +17472,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.hp.base
-                  mode: 2
-                  value: '7'
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.hp.base
+                  target: Actor
+                  qualifier: '1'
+                  value: '7'
               common: []
               expiration:
                 normal:
@@ -17842,10 +17899,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.resistances.other
-                  mode: 2
-                  value: Conjured Spells
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.resistances.other
+                  target: Actor
+                  qualifier: '1'
+                  value: Conjured Spells
               common: []
               expiration:
                 normal:
@@ -18666,10 +18726,16 @@ items:
                 mode: 5
                 value: 'true'
                 priority: 10
+                time: normal
+                target: Actor
+                qualifier: '1'
               - key: item.system.piercing.av0
                 mode: 5
                 value: 'true'
                 priority: 10
+                time: normal
+                target: Actor
+                qualifier: '1'
             macros: {}
           qualifiers:
             ephemeral:
@@ -18863,10 +18929,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.resistances.other
-                  mode: 2
-                  value: Conjured Missile Spells
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.resistances.other
+                  target: Actor
+                  qualifier: '1'
+                  value: Conjured Missile Spells
               common: []
               expiration:
                 normal:
@@ -19237,10 +19306,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.resistances.other
-                  mode: 2
-                  value: Ranged Weapons
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.resistances.other
+                  target: Actor
+                  qualifier: '1'
+                  value: Ranged Weapons
               common: []
               expiration:
                 normal:
@@ -19988,14 +20060,20 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.tradecrafts.tracker.score
-                  mode: 4
+                - mode: 4
+                  priority: 10
+                  time: normal
+                  key: system.tradecrafts.tracker.score
+                  target: Actor
+                  qualifier: '1'
                   value: '2'
+                - mode: 2
                   priority: 10
-                - key: system.protections.resistances.other
-                  mode: 2
+                  time: normal
+                  key: system.protections.resistances.other
+                  target: Actor
+                  qualifier: '1'
                   value: Being Surprised (Outside Towns)
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -20369,10 +20447,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.smell
-                  mode: 4
-                  value: '10'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.smell
+                  target: Actor
+                  qualifier: '1'
+                  value: '10'
               common: []
               expiration:
                 normal:
@@ -21144,10 +21225,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-                  mode: 4
-                  value: '1'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.bv.raw
+                  target: body
+                  qualifier: '@prop.handy'
+                  value: '1'
               common: []
               expiration:
                 normal:
@@ -21206,10 +21290,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-                  mode: 4
-                  value: '2'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.bv.raw
+                  target: body
+                  qualifier: '@prop.handy'
+                  value: '2'
               common: []
               expiration:
                 normal:
@@ -21268,10 +21355,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-                  mode: 4
-                  value: '3'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.bv.raw
+                  target: body
+                  qualifier: '@prop.handy'
+                  value: '3'
               common: []
               expiration:
                 normal:

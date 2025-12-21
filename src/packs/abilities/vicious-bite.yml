@@ -116,14 +116,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__effectKeys.property__has__biting__system.damage.base.raw'
-              mode: 4
-              value: 1d8
-              priority: 10
-            - key: '!ability__name__eq__Bite__system.fluent'
+            - key: system.fluent
               mode: 5
-              value: 'true'
               priority: 10
+              target: ability
+              time: fluency
+              qualifier: '@key.bite'
+              value: 'true'
+            - key: system.piercing.av0
+              mode: 5
+              priority: 10
+              target: body
+              time: normal
+              qualifier: '@prop.biting'
+              value: 'true'
           common: []
           expiration:
             normal:

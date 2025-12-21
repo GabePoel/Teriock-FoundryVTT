@@ -275,10 +275,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.senses.dark
-                  mode: 4
-                  value: '60'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.senses.dark
+                  target: Actor
+                  qualifier: '1'
+                  value: '60'
               common: []
               expiration:
                 normal:
@@ -649,10 +652,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.hexseals.elements
-                  mode: 2
-                  value: flame
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.hexseals.elements
+                  target: Actor
+                  qualifier: '1'
+                  value: flame
               common: []
               expiration:
                 normal:
@@ -1021,10 +1027,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  value: mundane
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.immunities.damageTypes
+                  target: Actor
+                  qualifier: '1'
+                  value: mundane
               common: []
               expiration:
                 normal:
@@ -4359,10 +4368,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  value: unconscious
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.immunities.statuses
+                  target: Actor
+                  qualifier: '1'
+                  value: unconscious
               common: []
               expiration:
                 normal:
@@ -8504,26 +8516,41 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.light.bright
-                  mode: 4
+                - mode: 4
+                  priority: 10
+                  time: normal
+                  key: system.light.bright
+                  target: Actor
+                  qualifier: '1'
                   value: '50'
+                - mode: 4
                   priority: 10
-                - key: system.light.dim
-                  mode: 4
+                  time: normal
+                  key: system.light.dim
+                  target: Actor
+                  qualifier: '1'
                   value: '100'
-                  priority: 10
-                - key: system.light.color
-                  mode: 5
-                  value: '#C64600'
+                - mode: 5
                   priority: 5
-                - key: system.light.animation.type
-                  mode: 5
+                  time: normal
+                  key: system.light.color
+                  target: Actor
+                  qualifier: '1'
+                  value: '#C64600'
+                - mode: 5
+                  priority: 10
+                  time: normal
+                  key: system.light.animation.type
+                  target: Actor
+                  qualifier: '1'
                   value: pulse
+                - mode: 5
                   priority: 10
-                - key: system.light.angle
-                  mode: 5
+                  time: normal
+                  key: system.light.angle
+                  target: Actor
+                  qualifier: '1'
                   value: '60'
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -8900,18 +8927,27 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.light.dim
-                  mode: 4
+                - mode: 4
+                  priority: 5
+                  time: normal
+                  key: system.light.dim
+                  target: Actor
+                  qualifier: '1'
                   value: '10'
+                - mode: 5
                   priority: 5
-                - key: system.light.color
-                  mode: 5
+                  time: normal
+                  key: system.light.color
+                  target: Actor
+                  qualifier: '1'
                   value: '#C64600'
+                - mode: 5
                   priority: 5
-                - key: system.light.animation.type
-                  mode: 5
+                  time: normal
+                  key: system.light.animation.type
+                  target: Actor
+                  qualifier: '1'
                   value: torch
-                  priority: 5
               common: []
               expiration:
                 normal:
@@ -12689,14 +12725,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: '!ability__name__eq__Flame Rotators__system.fluent'
-                  mode: 5
+                - mode: 5
+                  priority: 10
+                  time: fluency
+                  key: system.fluent
+                  target: ability
+                  qualifier: '@key.flameRotators'
                   value: 'true'
-                  priority: 10
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: 2 * (@rank.mag - 1) + @p
-                  priority: 10
               common: []
               expiration:
                 normal:
@@ -13826,10 +13861,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: '@rank.mag - 1'
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.magic.maxRotators.raw
+                  target: Actor
+                  qualifier: '1'
+                  value: '@rank.mag - 1'
               common: []
               expiration:
                 normal:
@@ -13888,10 +13926,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: 2 * (@rank.mag - 1)
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.magic.maxRotators.raw
+                  target: Actor
+                  qualifier: '1'
+                  value: 2 * (@rank.mag - 1)
               common: []
               expiration:
                 normal:
@@ -13950,10 +13991,13 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.magic.maxRotators.raw
-                  mode: 4
-                  value: 2 * (@rank.mag - 1) + @p
+                - mode: 4
                   priority: 10
+                  time: normal
+                  key: system.magic.maxRotators.raw
+                  target: Actor
+                  qualifier: '1'
+                  value: 2 * (@rank.mag - 1) + @p
               common: []
               expiration:
                 normal:
@@ -15348,20 +15392,34 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: >-
-                    !equipment__system.damage.base.raw__exists__null__system.damage.base.raw
-                  mode: 2
-                  value: 1d4[fire magic]
+                - mode: 2
                   priority: 30
-                - key: >-
-                    !body__system.damage.base.raw__exists__null__system.damage.base.raw
-                  mode: 2
+                  time: normal
+                  key: system.damage.base.raw
+                  target: equipment
+                  qualifier: '@dmg'
                   value: 1d4[fire magic]
+                - mode: 2
                   priority: 30
-                - key: system.protections.resistances.damageTypes
-                  mode: 2
-                  value: fire
+                  time: normal
+                  key: system.damage.twoHanded.raw
+                  target: equipment
+                  qualifier: '@dmg.2h'
+                  value: 1d4[fire magic]
+                - mode: 2
+                  priority: 30
+                  time: normal
+                  key: system.damage.base.raw
+                  target: body
+                  qualifier: '@dmg'
+                  value: 1d4[fire magic]
+                - mode: 2
                   priority: 10
+                  time: normal
+                  key: system.protections.resistances.damageTypes
+                  target: Actor
+                  qualifier: '1'
+                  value: fire
               common: []
               expiration:
                 normal:
@@ -16192,18 +16250,27 @@ items:
               checks: []
               duration: 0
               changes:
-                - key: system.light.dim
-                  mode: 4
+                - mode: 4
+                  priority: 3
+                  time: normal
+                  key: system.light.dim
+                  target: Actor
+                  qualifier: '1'
                   value: '0.01'
+                - mode: 5
                   priority: 3
-                - key: system.light.color
-                  mode: 5
+                  time: normal
+                  key: system.light.color
+                  target: Actor
+                  qualifier: '1'
                   value: '#E01B24'
+                - mode: 5
                   priority: 3
-                - key: system.light.animation.type
-                  mode: 5
+                  time: normal
+                  key: system.light.animation.type
+                  target: Actor
+                  qualifier: '1'
                   value: sunburst
-                  priority: 3
               common: []
               expiration:
                 normal:
@@ -18730,10 +18797,10 @@ items:
           adept:
             enabled: false
             amount: 1
-          form: normal
           gifted:
             enabled: false
             amount: 1
+          form: normal
           grantOnly: false
           grantOnlyText: ''
         _id: 4zic6p9YosSdYkev
@@ -19111,11 +19178,11 @@ items:
           adept:
             enabled: false
             amount: 1
-          effectTypes: []
-          form: normal
           gifted:
             enabled: false
             amount: 1
+          effectTypes: []
+          form: normal
           grantOnly: false
           grantOnlyText: ''
         _id: F2UMcg2LvpOBK7Rk

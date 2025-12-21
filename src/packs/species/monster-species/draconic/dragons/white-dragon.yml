@@ -8336,7 +8336,16 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - mode: 5
+              priority: 10
+              time: fluency
+              key: system.fluent
+              target: ability
+              qualifier: >-
+                or(@key.innateElderSorcery, @key.elderSorceryAdept,
+                @key.dragonSnapcast)
+              value: 'true'
           common: []
           expiration:
             normal:
