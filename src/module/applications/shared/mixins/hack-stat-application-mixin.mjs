@@ -1,9 +1,10 @@
+//noinspection JSValidateJSDoc,JSClosureCompilerSyntax
+
 /**
  * Mixin allowing hacks and spending dice stats.
  * @param {typeof DocumentSheetV2} Base
  */
 export default function HackStatApplicationMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {DocumentSheetV2}

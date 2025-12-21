@@ -1,16 +1,17 @@
+//noinspection JSClosureCompilerSyntax
+
 /**
  * Actor data model mixin that handles hacks.
  * @param {typeof TeriockBaseActorModel} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {TeriockBaseActorModel}
      * @implements {ActorHacksPartInterface}
      * @mixin
      */
-    class ActorGenericRollsPart extends Base {
+    class ActorHacksPart extends Base {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();

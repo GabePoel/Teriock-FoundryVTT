@@ -1,3 +1,5 @@
+//noinspection JSValidateJSDoc,JSClosureCompilerSyntax
+
 import { mix } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
@@ -11,7 +13,6 @@ import * as parts from "./parts/_module.mjs";
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
  */
 export default function CommonSheetMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {CommonSheetMixinInterface}

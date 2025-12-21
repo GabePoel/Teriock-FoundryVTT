@@ -97,7 +97,7 @@ export default class TeriockBaseActorModel extends mix(
     parts.blocks = [
       {
         title: "Notes",
-        text: this.sheet.notes,
+        text: this.notes,
       },
     ];
     return parts;

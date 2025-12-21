@@ -27,17 +27,6 @@ declare global {
       panels?: Teriock.MessageData.MessagePanel[];
     };
 
-    export type AbilityRoll = Teriock.RollOptions.CommonRoll & {
-      /** Forced {@link TeriockActor} */
-      actor?: TeriockActor;
-      /** Force fluency on/off */
-      fluent?: boolean;
-      /** Turn off heightening */
-      noHeighten?: boolean;
-      /** Force proficiency on/off */
-      proficient?: boolean;
-    };
-
     /**
      * Options for performing an equipment roll.
      */
@@ -81,19 +70,6 @@ declare global {
       speaker?: Teriock.Foundry.ChatSpeakerData;
       token?: TeriockToken;
       document?: TeriockChild;
-    };
-
-    export type BagComposition = {
-      color: string;
-      count: number;
-      originalTerm: string;
-    };
-
-    export type PendingPullData = {
-      after: string;
-      bagFormula: string;
-      before: string;
-      pullCountExpr: string;
     };
   }
 }

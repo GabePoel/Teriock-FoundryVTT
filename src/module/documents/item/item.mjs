@@ -4,7 +4,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Item} implementation.
  * @extends {ClientDocument}

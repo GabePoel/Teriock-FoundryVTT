@@ -8,7 +8,6 @@ import TeriockTokenDocument from "../token-document/token-document.mjs";
 
 const { Actor } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Actor} implementation.
  * @extends {Actor}
@@ -423,7 +422,7 @@ export default class TeriockActor extends mix(
         }
       }
     }
-    return await super.createEmbeddedDocuments(embeddedName, data, operation);
+    return super.createEmbeddedDocuments(embeddedName, data, operation);
   }
 
   /**

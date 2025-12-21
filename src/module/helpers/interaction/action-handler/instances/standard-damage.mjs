@@ -28,7 +28,7 @@ export class StandardDamageHandler extends ActionHandler {
   /**
    * @param {TeriockActor} actor
    * @param {string} formula - Roll formula
-   * @param {Teriock.RollOptions.EquipmentRoll} options
+   * @param {Teriock.Execution.EquipmentExecutionOptions} options
    */
   async _makeRoll(actor, formula, options = { crit: false }) {
     let attacker = actor.system.primaryAttacker;
