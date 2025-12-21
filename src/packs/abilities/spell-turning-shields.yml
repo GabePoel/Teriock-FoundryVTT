@@ -116,11 +116,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentClasses__has__shields__system.spellTurning
-              mode: 5
-              value: 'true'
+            - key: system.props
+              mode: 2
               priority: 10
+              target: equipment
+              time: normal
+              qualifier: '@class.shields'
+              value: spellTurning
+            - key: system.spellTurning
+              mode: 5
+              priority: 10
+              target: equipment
+              time: normal
+              qualifier: '@class.shields'
+              value: 'true'
           common: []
           expiration:
             normal:

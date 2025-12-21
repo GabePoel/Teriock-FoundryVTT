@@ -116,11 +116,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__effectKeys.property__has__weapon__system.spellTurning
-              mode: 5
-              value: 'true'
+            - key: system.props
+              mode: 2
               priority: 10
+              target: equipment
+              time: normal
+              qualifier: '@prop.weapon'
+              value: spellTurning
+            - key: system.spellTurning
+              mode: 5
+              priority: 10
+              target: equipment
+              time: normal
+              qualifier: '@prop.weapon'
+              value: 'true'
           common: []
           expiration:
             normal:

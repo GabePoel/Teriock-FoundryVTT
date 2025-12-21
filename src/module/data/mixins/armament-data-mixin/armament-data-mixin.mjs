@@ -3,6 +3,7 @@ import { ArmamentExecution } from "../../../executions/document-executions/_modu
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
+import { DefenseModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -39,11 +40,13 @@ export default function ArmamentDataMixin(Base) {
             deterministic: true,
             floor: true,
             min: 0,
+            model: DefenseModel,
           }),
           bv: new EvaluationField({
             deterministic: true,
             floor: true,
             min: 0,
+            model: DefenseModel,
           }),
           damage: new fields.SchemaField({
             base: new EvaluationField({
@@ -187,11 +190,8 @@ export default function ArmamentDataMixin(Base) {
         for (const type of this.damage.types) {
           data[`dmg.type.${type}`] = 1;
         }
-        const properties = this.parent.effects.filter(
-          (e) => e.type === "property",
-        );
-        for (const property of properties) {
-          data[`prop.${toCamelCase(property.name)}`] = 1;
+        for (const p of this.props || new Set()) {
+          data[`prop.${p}`] = 1;
         }
         return data;
       }
@@ -213,6 +213,11 @@ export default function ArmamentDataMixin(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
+        this.props = new Set(
+          Array.from(
+            this.parent.effects.filter((e) => e.type === "property"),
+          ).map((p) => toCamelCase(p.name)),
+        );
         this.piercing = {
           av0: false,
           ub: false,

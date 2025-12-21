@@ -125,28 +125,24 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!equipment__equipmentClasses__has__objects__system.spellTurning'
-              mode: 5
-              value: 'true'
+            - key: system.props
+              mode: 2
               priority: 10
-            - key: >-
-                !equipment__equipmentClasses__has__knickknacks__system.spellTurning
+              target: equipment
+              time: normal
+              qualifier: >-
+                or(@class.objects, @class.knickknacks, @class.tools,
+                @class.containers, @class.clothing)
+              value: spellTurning
+            - key: system.spellTurning
               mode: 5
-              value: 'true'
               priority: 10
-            - key: '!equipment__equipmentClasses__has__tools__system.spellTurning'
-              mode: 5
+              target: equipment
+              time: normal
+              qualifier: >-
+                or(@class.objects, @class.knickknacks, @class.tools,
+                @class.containers, @class.clothing)
               value: 'true'
-              priority: 10
-            - key: >-
-                !equipment__equipmentClasses__has__containers__system.spellTurning
-              mode: 5
-              value: 'true'
-              priority: 10
-            - key: '!equipment__equipmentClasses__has__clothing__system.spellTurning'
-              mode: 5
-              value: 'true'
-              priority: 10
           common: []
           expiration:
             normal:

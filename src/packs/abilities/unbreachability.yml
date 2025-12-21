@@ -113,10 +113,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!equipment__system.equipmentClasses__has__armor__system.av.raw'
-              mode: 2
-              value: '1'
+            - key: system.av.bonus
+              mode: 4
               priority: 10
+              target: equipment
+              time: normal
+              qualifier: '@av'
+              value: '1'
+            - key: system.props
+              mode: 2
+              priority: 10
+              target: body
+              time: normal
+              qualifier: '@av'
+              value: unbreachable
           common: []
           expiration:
             normal:
