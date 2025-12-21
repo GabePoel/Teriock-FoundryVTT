@@ -33,7 +33,6 @@ class BoosterTerm extends FunctionTerm {
   /**
    * Boost the roll.
    * @param {TeriockRoll} roll
-   * @private
    */
   static _boost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
@@ -44,7 +43,6 @@ class BoosterTerm extends FunctionTerm {
   /**
    * Deboost the roll.
    * @param {TeriockRoll} roll
-   * @private
    */
   static _deboost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
@@ -56,7 +54,6 @@ class BoosterTerm extends FunctionTerm {
    * Apply some number of boosts or deboosts. Positive for boosts. Negative for deboosts.
    * @param {TeriockRoll} roll
    * @param {number} number
-   * @private
    */
   static _setboost(roll, number) {
     if (number > 0) {

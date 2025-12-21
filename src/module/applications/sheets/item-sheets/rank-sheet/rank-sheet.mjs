@@ -45,7 +45,6 @@ export default class TeriockRankSheet extends mix(
   /**
    * Toggle whether this is innate.
    * @returns {Promise<void>}
-   * @private
    */
   static async #onToggleInnate() {
     await this.document.update({

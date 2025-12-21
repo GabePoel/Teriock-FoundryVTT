@@ -14,7 +14,6 @@ import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
  * @param {TeriockSpeciesModel} speciesData
  * @param {string} rawHTML
  * @returns {Promise<object>}
- * @private
  */
 export async function _parse(speciesData, rawHTML) {
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");

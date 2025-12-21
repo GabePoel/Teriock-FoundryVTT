@@ -114,7 +114,6 @@ export default class BaseDetectionMode extends DetectionMode {
    * @param {TeriockTokenDocument} src
    * @param {TeriockTokenDocument} [tgt]
    * @returns {boolean}
-   * @private
    */
   _testEthereal(src, tgt) {
     if (tgt) {
@@ -139,7 +138,6 @@ export default class BaseDetectionMode extends DetectionMode {
    * Verify that a target is visible based on whether it is hidden.
    * @param {TeriockTokenDocument} src
    * @param {TeriockTokenDocument} [tgt]
-   * @private
    */
   _testHidden(src, tgt) {
     if (this.hidden && tgt && tgt.hasStatusEffect("hidden")) {
@@ -161,7 +159,6 @@ export default class BaseDetectionMode extends DetectionMode {
    * @param {TeriockTokenDocument} src
    * @param {TeriockTokenDocument} [tgt]
    * @returns {boolean}
-   * @private
    */
   _testStatuses(type, src, tgt) {
     const blockers = this.constructor.BLOCKING_STATUSES;

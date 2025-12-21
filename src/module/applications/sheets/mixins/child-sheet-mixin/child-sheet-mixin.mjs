@@ -27,7 +27,6 @@ export default function ChildSheetMixin(Base) {
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
        * @returns {Promise<void>}
-       * @private
        */
       static async _onPopulateField(_event, target) {
         await this.document.update({
@@ -70,7 +69,6 @@ export default function ChildSheetMixin(Base) {
        * Prepare display fields.
        * @param {object} context
        * @returns {Promise<void>}
-       * @private
        */
       async _prepareDisplayFields(context) {
         const expandedDisplayFields = this.#expandFields(

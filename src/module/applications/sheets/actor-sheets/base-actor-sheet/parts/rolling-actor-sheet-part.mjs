@@ -82,7 +82,6 @@ export default (Base) =>
  * @param {MouseEvent} event - The event object.
  * @param {HTMLElement} target
  * @returns {Partial<Teriock.Execution.ImmunityExecutionOptions>}
- * @private
  */
 function protectionOptions(event, target) {
   const img = target.querySelector("img");

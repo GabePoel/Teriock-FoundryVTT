@@ -26,7 +26,6 @@ export default function PassiveSheetMixin(Base) {
        * @param {Event} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
-       * @private
        */
       static async _onChangeMacroRunHook(event, target) {
         event.stopPropagation();

@@ -74,6 +74,14 @@ export default function ChangeableDocumentMixin(Base) {
        */
       overrides = this.overrides ?? {};
 
+      /**
+       * Whether this can be changed.
+       * @returns {boolean}
+       */
+      get _canChange() {
+        return !this.parent || this.parent._embeddedPreparation;
+      }
+
       /** @type {Teriock.Changes.ChangeTree} */
       _changeTree;
 
@@ -119,6 +127,7 @@ export default function ChangeableDocumentMixin(Base) {
        * @param {Teriock.Changes.ChangeTime} time
        */
       _applyChangesByTime(time) {
+        if (!this._canChange) return;
         const partialTree = this.changeTree[time][this.documentName];
         this._applyChanges([
           ...partialTree.untyped,
@@ -135,11 +144,6 @@ export default function ChangeableDocumentMixin(Base) {
             this.allApplicableEffects(),
           );
         }
-      }
-
-      /** Checks if it's okay to prepare. */
-      _checkPreparation() {
-        return Boolean(!this.actor) || this.actor?._embeddedPreparation;
       }
 
       /** @inheritDoc */
@@ -164,10 +168,10 @@ export default function ChangeableDocumentMixin(Base) {
 
       /** @inheritDoc */
       prepareEmbeddedDocuments() {
+        this._embeddedPreparation = true;
         super.prepareEmbeddedDocuments();
-        if (this._checkPreparation()) {
-          this._applyChangesByTime("normal");
-        }
+        this._applyChangesByTime("normal");
+        delete this._embeddedPreparation;
       }
     }
   );

@@ -37,7 +37,6 @@ export class ApplyEffectHandler extends ActionHandler {
    * Add each {@link TeriockConsequence} to the sustaining {@link TeriockAbility}.
    * @param {TeriockConsequence[]} createdConsequences
    * @returns {Promise<void>}
-   * @private
    */
   async _addToSustaining(createdConsequences) {
     if (this.dataset.sustaining !== "null") {
@@ -59,7 +58,6 @@ export class ApplyEffectHandler extends ActionHandler {
    * Convert to object.
    * @param {string} jsonData
    * @returns {object}
-   * @private
    */
   _toObj(jsonData) {
     try {

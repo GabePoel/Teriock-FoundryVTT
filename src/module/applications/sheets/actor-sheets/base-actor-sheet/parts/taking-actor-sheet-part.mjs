@@ -16,7 +16,6 @@ export default (Base) =>
      * @param {PointerEvent} _event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
-     * @private
      */
     static async _onTakeRollable(_event, target) {
       const type = target.dataset.type;

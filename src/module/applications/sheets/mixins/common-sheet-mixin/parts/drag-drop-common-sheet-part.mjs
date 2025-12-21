@@ -41,7 +41,6 @@ export default (Base) => {
       /**
        * Creates drag and drop handlers for the sheet.
        * @returns {TeriockDragDrop[]} Array of configured drag and drop handlers.
-       * @private
        */
       #createDragDropHandlers() {
         //noinspection JSUnresolvedReference
@@ -79,7 +78,6 @@ export default (Base) => {
        * Checks if some other document can be dropped on this document.
        * @param {TeriockCommon} doc
        * @returns {boolean}
-       * @private
        */
       _canDrop(doc) {
         const childTypes = new Set([
@@ -100,7 +98,6 @@ export default (Base) => {
        * Handles drag over events.
        * @param {Teriock.Sheet.EmbedDragEvent} _event
        * @returns {Promise<void>}
-       * @private
        */
       async _onDragOver(_event) {}
 
@@ -108,7 +105,6 @@ export default (Base) => {
        * Handles drag start events.
        * @param {Teriock.Sheet.EmbedDragEvent} event
        * @returns {Promise<void>}
-       * @private
        */
       async _onDragStart(event) {
         const embedded = await fromUuid(event.currentTarget.dataset.uuid);
@@ -123,7 +119,6 @@ export default (Base) => {
        * Handles drop events.
        * @param {Teriock.Sheet.EmbedDragEvent} event
        * @returns {Promise<boolean>} Promise that resolves to true if the drop was handled.
-       * @private
        */
       async _onDrop(event) {
         const dropData = TeriockTextEditor.getDragEventData(event);
@@ -146,7 +141,6 @@ export default (Base) => {
        * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
        * @param {Teriock.Sheet.DropData<TeriockCommon>} dropData - The document drop data.
        * @returns {Promise<TeriockCommon|void>} Promise that resolves to the created document if successful.
-       * @private
        */
       async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */
@@ -174,7 +168,6 @@ export default (Base) => {
        * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
        * @param {Teriock.Sheet.DropData<TeriockJournalEntryPage>} dropData - The document drop data.
        * @returns {Promise<TeriockJournalEntryPage|void>} Promise that resolves to the created document if successful.
-       * @private
        */
       async _onDropJournalEntryPage(_event, dropData) {
         if (game.user.isGM) {
@@ -191,7 +184,6 @@ export default (Base) => {
        * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
        * @param {Teriock.Sheet.DropData<TeriockMacro>} dropData - The document drop data.
        * @returns {Promise<TeriockMacro|void>} Promise that resolves to the created document if successful.
-       * @private
        */
       async _onDropMacro(_event, dropData) {
         if (this.document.system.macros) {

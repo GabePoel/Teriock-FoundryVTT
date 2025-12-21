@@ -68,7 +68,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   /**
    * @param {MouseEvent} event
    * @returns {Promise<void>}
-   * @private
    */
   static async _onCancel(event) {
     event?.preventDefault();
@@ -79,7 +78,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   /**
    * @param {MouseEvent} event
    * @returns {Promise<void>}
-   * @private
    */
   static async _onGetSelected(event) {
     event?.preventDefault();
@@ -109,7 +107,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
 
   /**
    * Initialize the tooltip loader.
-   * @private
    */
   _initClickLoader() {
     this.element.querySelectorAll("[data-uuid]").forEach(
@@ -128,7 +125,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
 
   /**
    * Initialize the search filter.
-   * @private
    */
   _initSearchFilter() {
     const root = this.element;

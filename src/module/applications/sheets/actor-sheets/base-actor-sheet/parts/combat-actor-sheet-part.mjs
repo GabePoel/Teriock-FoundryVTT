@@ -42,7 +42,6 @@ export default (Base) =>
     /**
      * Select a primary attacker.
      * @returns {Promise<void>}
-     * @private
      */
     static async #onSelectAttacker() {
       const attacker = await selectDocumentDialog(
@@ -67,7 +66,6 @@ export default (Base) =>
     /**
      * Select a primary blocker.
      * @returns {Promise<void>}
-     * @private
      */
     static async #onSelectBlocker() {
       const attacker = await selectDocumentDialog(
@@ -113,7 +111,6 @@ export default (Base) =>
      * @param {PointerEvent} event
      * @param {HTMLElement} target
      * @returns {Promise<void>}
-     * @private
      */
     static async _onUseAbility(event, target) {
       const abilityName = target.dataset.ability;

@@ -50,7 +50,6 @@ export default class TeriockStatManager extends HackStatMixin(
    * Close the manager.
    * @param {MouseEvent} event
    * @returns {Promise<void>}
-   * @private
    */
   static async _onDone(event) {
     event.preventDefault();

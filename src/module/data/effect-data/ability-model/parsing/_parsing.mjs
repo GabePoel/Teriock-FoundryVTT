@@ -15,7 +15,6 @@ import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
  * Cost value templates for different cost types.
  * Provides standardized cost structures for variable, static, formula, and hack costs.
  * @type {object}
- * @private
  */
 const COST_TEMPLATES = Object.freeze({
   variable: (variable) => ({
@@ -56,7 +55,6 @@ const COST_TEMPLATES = Object.freeze({
  * Creates the default consequence structure for ability effects.
  * Provides empty rolls, statuses, start/end statuses, hacks, checks, and duration.
  * @returns {AbilityImpact} The default consequence structure.
- * @private
  */
 function defaultImpact() {
   return {
@@ -83,7 +81,6 @@ function defaultImpact() {
  * Creates the default impacts structure for ability effects.
  * Provides base, proficient, fluent, and heightened consequence fields.
  * @returns {object} The default impacts structure with empty consequence fields.
- * @private
  */
 function defaultImpacts() {
   return {
@@ -101,7 +98,6 @@ function defaultImpacts() {
  * @param {string} rawHTML - The raw HTML content to parse.
  * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityModel>, img: string }>} Promise that resolves to
  *   the parsed ability data.
- * @private
  */
 export async function _parse(abilityData, rawHTML) {
   const parser = new DOMParser();
@@ -226,7 +222,6 @@ export async function _parse(abilityData, rawHTML) {
  * @param {object} parameters - The ability parameters to populate.
  * @param {Record<string, string[]>} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
- * @private
  */
 function processTags(parameters, tagTree, doc) {
   if (tagTree.elderSorcery) {
@@ -406,7 +401,6 @@ function processTags(parameters, tagTree, doc) {
  * Handles attribute improvements and feat save improvements.
  * @param {object} parameters - The ability parameters to populate.
  * @param {Document} doc - The parsed HTML document.
- * @private
  */
 function processImprovements(parameters, doc) {
   // Attribute improvement
@@ -456,7 +450,6 @@ function processImprovements(parameters, doc) {
  * @param {object} parameters - The ability parameters to populate.
  * @param {object} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
- * @private
  */
 function processCosts(parameters, tagTree, doc) {
   if (!tagTree.cost) {
@@ -520,7 +513,6 @@ function processCosts(parameters, tagTree, doc) {
  * @param {object} parameters - The ability parameters to populate.
  * @param {object} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
- * @private
  */
 function processComponents(parameters, tagTree, doc) {
   if (!tagTree.component) {
@@ -550,7 +542,6 @@ function processComponents(parameters, tagTree, doc) {
  * @param {object} parameters - The ability parameters to populate.
  * @param {object} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
- * @private
  */
 function setRemainingParameters(parameters, tagTree, doc) {
   parameters.endCondition = getBarText(doc, "end-condition");
@@ -568,7 +559,6 @@ function setRemainingParameters(parameters, tagTree, doc) {
  * Finds dice elements and extracts their type and roll formula.
  * @param {string} html - The HTML content to extract dice from.
  * @returns {object} Object containing dice types and their roll formulas.
- * @private
  */
 function extractDiceFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -592,7 +582,6 @@ function extractDiceFromHTML(html) {
  * Finds hack metadata elements and extracts their parts.
  * @param {string} html - The HTML content to extract hacks from.
  * @returns {Set} Set of hack parts found in the content.
- * @private
  */
 function extractHacksFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -614,7 +603,6 @@ function extractHacksFromHTML(html) {
  * Extracts abilites to be used from HTML content.
  * @param {string} html - The HTML content to extract hacks from.
  * @returns {Set} Set of hack parts found in the content.
- * @private
  */
 function extractAbilitiesFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -639,7 +627,6 @@ function extractAbilitiesFromHTML(html) {
  * Finds condition metadata elements and extracts their conditions.
  * @param {string} html - The HTML content to extract conditions from.
  * @returns {Set} Set of conditions found in the content.
- * @private
  */
 function extractConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -664,7 +651,6 @@ function extractConditionsFromHTML(html) {
  * Finds start-condition metadata elements and extracts their conditions.
  * @param {string} html - The HTML content to extract start conditions from.
  * @returns {Set} Set of start conditions found in the content.
- * @private
  */
 function extractStartConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -689,7 +675,6 @@ function extractStartConditionsFromHTML(html) {
  * Finds end-condition metadata elements and extracts their conditions.
  * @param {string} html - The HTML content to extract end conditions from.
  * @returns {Set} Set of end conditions found in the content.
- * @private
  */
 function extractEndConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -714,7 +699,6 @@ function extractEndConditionsFromHTML(html) {
  * Find tradecraft-check metadata elements and extract their tradecraft types.
  * @param {string} html - The HTML content to extract tradecraft checks from.
  * @returns {Set} Set of tradecraft checks found in the content.
- * @private
  */
 function extractTradecraftChecksFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -755,7 +739,6 @@ function extractStandardDamageFromHTML(html) {
  * Extracts duration from HTML content. Finds duration metadata elements and extracts its number of seconds.
  * @param html - The HTML content to extract changes from.
  * @returns {number} Number of seconds.
- * @private
  */
 function extractDurationFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -801,7 +784,6 @@ function extractMacroFromHTML(doc) {
  * Finds combat-expiration metadata elements and extracts their configuration.
  * @param {string} html - The HTML content to extract combat expiration from.
  * @returns {object|null} Combat expiration object or null if not found.
- * @private
  */
 function extractCombatExpirationFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -840,7 +822,6 @@ function extractCombatExpirationFromHTML(html) {
  * Processes dice and effect extraction from ability parameters.
  * Extracts dice, hacks, conditions, and changes from overviews and results.
  * @param {object} parameters - The ability parameters to process.
- * @private
  */
 function processDiceAndEffectExtraction(parameters) {
   // Initialize impacts if needed

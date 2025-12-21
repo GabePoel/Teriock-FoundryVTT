@@ -7,7 +7,6 @@ import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
  * @param {TeriockBodyModel} bodyData
  * @param {string} rawHTML
  * @returns {Promise<object>}
- * @private
  */
 export async function _parse(bodyData, rawHTML) {
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");

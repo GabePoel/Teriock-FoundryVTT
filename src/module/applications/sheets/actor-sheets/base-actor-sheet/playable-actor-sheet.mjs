@@ -82,7 +82,6 @@ export default class TeriockPlayableActorSheet extends mix(
 
   /**
    * Connect sidebar listeners.
-   * @private
    */
   _onRenderSidebar() {
     /** @type {Record<string, HTMLElement} */

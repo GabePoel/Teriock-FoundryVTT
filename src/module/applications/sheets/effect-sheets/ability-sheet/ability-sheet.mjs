@@ -53,7 +53,6 @@ export default class TeriockAbilitySheet extends mix(
   /**
    * Set the duration for this ability.
    * @returns {Promise<void>}
-   * @private
    */
   static async _onSetDuration() {
     if (!this.editable) {

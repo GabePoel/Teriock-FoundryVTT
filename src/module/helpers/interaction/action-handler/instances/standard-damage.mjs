@@ -29,7 +29,6 @@ export class StandardDamageHandler extends ActionHandler {
    * @param {TeriockActor} actor
    * @param {string} formula - Roll formula
    * @param {Teriock.RollOptions.EquipmentRoll} options
-   * @private
    */
   async _makeRoll(actor, formula, options = { crit: false }) {
     let attacker = actor.system.primaryAttacker;
@@ -50,7 +49,6 @@ export class StandardDamageHandler extends ActionHandler {
   /**
    * @param {TeriockActor} actor
    * @returns {string}
-   * @private
    */
   async _prepFormula(actor) {
     let attacker = actor.system.primaryAttacker;

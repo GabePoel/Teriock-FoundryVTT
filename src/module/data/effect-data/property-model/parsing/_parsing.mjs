@@ -14,7 +14,6 @@ import { processSubProperties } from "../../../shared/parsing/process-subs.mjs";
  * @param {TeriockPropertyModel} propertyData
  * @param {string} rawHTML
  * @returns {Promise<object>}
- * @private
  */
 export async function _parse(propertyData, rawHTML) {
   const parser = new DOMParser();

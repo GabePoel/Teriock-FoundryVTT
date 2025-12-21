@@ -42,7 +42,6 @@ export default class TeriockSpeciesSheet extends mix(
   /**
    * Set an HP dice formula.
    * @returns {Promise<void>}
-   * @private
    */
   static async _onSetHpDice() {
     await setStatDiceDialog(
@@ -56,7 +55,6 @@ export default class TeriockSpeciesSheet extends mix(
   /**
    * Set an MP dice formula.
    * @returns {Promise<void>}
-   * @private
    */
   static async _onSetMpDice() {
     await setStatDiceDialog(

@@ -33,7 +33,6 @@ export class RollRollableTakeHandler extends ActionHandler {
 
   /**
    * @returns {string}
-   * @private
    */
   _makeFlavor() {
     let flavor = ROLL_TYPES[this.dataset.type].label;

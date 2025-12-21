@@ -10,7 +10,6 @@ export default function SettingsDocumentMixin(Base) {
     class SettingsDocument extends Base {
       /**
        * @returns {typeof EmbeddedDataModel|null}
-       * @private
        */
       get _settingsFlagsDataModel() {
         return null;

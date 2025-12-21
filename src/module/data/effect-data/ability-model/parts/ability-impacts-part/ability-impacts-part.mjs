@@ -95,7 +95,6 @@ export default (Base) => {
  * - [Drain types](https://wiki.teriock.com/index.php/Category:Drain_types)
  *
  * @returns {RecordField} Field for configuring impact rolls
- * @private
  */
 export function impactRollsField() {
   return new RecordField(

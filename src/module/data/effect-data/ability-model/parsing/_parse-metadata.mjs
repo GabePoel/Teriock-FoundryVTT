@@ -6,7 +6,6 @@ import { getBarElement } from "../../../shared/parsing/get-text.mjs";
  * Parse metadata.
  * @param {HTMLElement} htmlElement
  * @param {AbilityImpactsData} impacts
- * @private
  * @todo Finish processing the metadata rather than just printing it to the console.
  */
 export function _parseMetadata(htmlElement, impacts) {

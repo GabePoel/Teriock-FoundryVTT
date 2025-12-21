@@ -4,7 +4,6 @@
  * @param {object} [options]
  * @param {boolean} [options.includeHidden=false] - Include hidden categories as well.
  * @returns {Promise<Array<{ ns: number, title: string, hidden?: string }>>}
- *          An array of category objects (same shape as the API), or [] on failure.
  */
 export default async function fetchPageCategories(
   title,

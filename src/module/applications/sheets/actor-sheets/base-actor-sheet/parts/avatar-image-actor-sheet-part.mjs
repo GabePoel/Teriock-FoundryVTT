@@ -10,7 +10,6 @@ export default (Base) =>
     /**
      * Toggle which image is shown.
      * @returns {Promise<void>}
-     * @private
      */
     static async #onSwitchImage() {
       if (this.settings.avatarImagePath === "img") {
@@ -24,7 +23,6 @@ export default (Base) =>
     /**
      * Toggles whether the prototype token has a ring.
      * @returns {Promise<void>}
-     * @private
      */
     static async #onToggleRing() {
       await this.document.update({

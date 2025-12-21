@@ -13,7 +13,6 @@ export default function AbilityExecutionActorUpdatePart(Base) {
     /**
      * Prepare attack penalty.
      * @returns {Promise<void>}
-     * @private
      */
     async _prepareAttackPenalty() {
       if (

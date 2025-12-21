@@ -43,7 +43,6 @@ export default function ThresholdExecutionMixin(Base) {
     /**
      * Prepare an underlying core formula.
      * @returns {Promise<void>}
-     * @private
      */
     async _prepareBaseFormula() {
       if (this.advantage && !this.disadvantage) {

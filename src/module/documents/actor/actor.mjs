@@ -35,7 +35,6 @@ export default class TeriockActor extends mix(
   mixins.ParentDocumentMixin,
   mixins.RetrievalDocumentMixin,
   mixins.SettingsDocumentMixin,
-  mixins.ChangeableDocumentMixin,
 ) {
   /**
    * The default weight for a given size.
@@ -458,13 +457,6 @@ export default class TeriockActor extends mix(
     if (user?.id) {
       foundry.helpers.Hooks.callAll(`teriock.actorPostUpdate`, this, user.id);
     }
-  }
-
-  /** @inheritDoc */
-  prepareEmbeddedDocuments() {
-    this._embeddedPreparation = true;
-    super.prepareEmbeddedDocuments();
-    delete this._embeddedPreparation;
   }
 
   /** @inheritDoc */

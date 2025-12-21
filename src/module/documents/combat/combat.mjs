@@ -28,7 +28,6 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @param {UUID<TeriockActor>|null} actorUuid - UUID of some {@link TeriockActor} to compare against.
    * @param {object[]} [updates] - Optional array to mutate with additional updates.
    * @returns {Promise<void>}
-   * @private
    */
   async _confirmEffectExpiration(
     effect,
@@ -77,7 +76,6 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @param {"turn"|"combat"|"action"} trigger
    * @param {"start"|"end"} time
    * @returns {Promise<void>}
-   * @private
    */
   async _tryAllEffectExpirations(effectActor, timeActor, trigger, time) {
     const updates = [];

@@ -36,7 +36,6 @@ export default class TeriockBaseItemSheet extends mix(
    * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when marked.
-   * @private
    */
   static async _onToggleOnUseDoc(_event, target) {
     if (!this.editable) {

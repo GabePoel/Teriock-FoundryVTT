@@ -36,7 +36,6 @@ export default function AbilityExecutionGetInputPart(Base) {
     /**
      * Get user input on costs.
      * @returns {Promise<void>}
-     * @private
      */
     async _getCostInput() {
       const dialogs = [];
@@ -149,7 +148,6 @@ export default function AbilityExecutionGetInputPart(Base) {
     /**
      * Get user input on targets.
      * @returns {Promise<void>}
-     * @private
      */
     async _getTargetInput() {
       if (

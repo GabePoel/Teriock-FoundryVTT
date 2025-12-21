@@ -10,7 +10,6 @@ import { _override } from "./_overrides.mjs";
  * @param {TeriockEquipmentModel} equipmentData - The equipment data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
  * @returns {Promise<object>} Promise that resolves to the parsed equipment data.
- * @private
  */
 export async function _parse(equipmentData, rawHTML) {
   const allValidProperties = foundry.utils.deepClone(TERIOCK.index.properties);

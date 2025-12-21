@@ -71,7 +71,6 @@ export default class TeriockBaseActorSheet extends mix(
    * Cycle the value of a three-way switch either forwards or backwards.
    * @param {HTMLButtonElement} toggleSwitch
    * @param {boolean} forward
-   * @private
    */
   #cycleToggleSwitch(toggleSwitch, forward = true) {
     const name = toggleSwitch.getAttribute("data-name");
@@ -165,7 +164,6 @@ export default class TeriockBaseActorSheet extends mix(
   /**
    * Add conditions to rendering context.
    * @param {object} context
-   * @private
    */
   async _prepareConditionContext(context) {
     const conditions = conditionSort(
@@ -253,7 +251,6 @@ export default class TeriockBaseActorSheet extends mix(
   /**
    * Add display configuration to rendering context.
    * @param {object} context
-   * @private
    */
   _prepareDisplayContext(context) {
     context.activeTab = this._activeTab;
@@ -266,7 +263,6 @@ export default class TeriockBaseActorSheet extends mix(
   /**
    * Add documents to rendering context.
    * @param {object} context
-   * @private
    */
   async _prepareDocumentContext(context) {
     Object.assign(context, {

@@ -8,7 +8,6 @@ import { toTitleCase } from "../../../helpers/string.mjs";
  * @param {string} selector - The selector for the bar content.
  * @param {boolean} clean - Whether to clean and format the text.
  * @returns {string|null} The bar text content or null if not found.
- * @private
  */
 export function getBarText(htmlElement, selector, clean = false) {
   const el = htmlElement.querySelector(
@@ -48,7 +47,6 @@ export function getBarElement(htmlElement, selector) {
  * @param {Document} doc - The parsed HTML document.
  * @param {string} selector - The CSS selector for the element.
  * @returns {string|null} The text content or null if not found.
- * @private
  */
 export function getText(doc, selector) {
   return doc.querySelector(`.${selector}`)?.innerHTML || null;

@@ -64,7 +64,6 @@ export function elementClass(elements) {
  * @param {string} name - The name attribute for the input field.
  * @param {number} max - The maximum value for the number input.
  * @returns {string} HTML string for the dialog fieldset.
- * @private
  */
 export function createDialogFieldset(legend, description, name, max) {
   return `

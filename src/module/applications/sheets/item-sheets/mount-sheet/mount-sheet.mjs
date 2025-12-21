@@ -31,7 +31,6 @@ export default class TeriockMountSheet extends TeriockBaseItemSheet {
   /**
    * Toggles the mounted state of the mount.
    * @returns {Promise<void>} - Promise that resolves when the mounted state is toggled.
-   * @private
    */
   static async #onToggleMounted() {
     if (this.document.system.mounted) {

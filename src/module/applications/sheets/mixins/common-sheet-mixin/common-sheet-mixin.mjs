@@ -112,7 +112,6 @@ export default function CommonSheetMixin(Base) {
       /**
        * Opens the GM notes page or makes one if one doesn't already exist.
        * @returns {Promise<void>}
-       * @private
        */
       static async _onGmNotesOpen() {
         await this.document.system.gmNotesOpen();
@@ -123,7 +122,6 @@ export default function CommonSheetMixin(Base) {
        * @param {PointerEvent} _event
        * @param {HTMLEmbedElement} target
        * @returns {Promise<void>}
-       * @private
        */
       static async _onOpenDoc(_event, target) {
         const uuid = target.dataset.uuid;
@@ -148,7 +146,6 @@ export default function CommonSheetMixin(Base) {
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
        * @returns {Promise<void>}
-       * @private
        */
       static async _onSetStatDice(_event, target) {
         if (!this.editable) {
@@ -188,7 +185,6 @@ export default function CommonSheetMixin(Base) {
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
        * @returns {Promise<void>}
-       * @private
        */
       static async _onUnlinkMacro(_event, target) {
         if (this.editable) {
@@ -357,7 +353,6 @@ export default function CommonSheetMixin(Base) {
        * Prepare any macros that should be part of the context.
        * @param {object} context
        * @returns {Promise<void>}
-       * @private
        */
       async _prepareMacroContext(context) {
         if (this.document.system.macros) {

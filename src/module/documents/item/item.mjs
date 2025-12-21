@@ -10,7 +10,6 @@ const { Item } = foundry.documents;
  * @extends {ClientDocument}
  * @extends {Item}
  * @mixes BaseDocument
- * @mixes ChangeableDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
  * @mixes HierarchyDocument
@@ -31,7 +30,6 @@ export default class TeriockItem extends mix(
   mixins.CommonDocumentMixin,
   mixins.ChildDocumentMixin,
   mixins.ParentDocumentMixin,
-  mixins.ChangeableDocumentMixin,
   mixins.RetrievalDocumentMixin,
   mixins.SettingsDocumentMixin,
 ) {

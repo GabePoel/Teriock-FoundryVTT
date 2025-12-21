@@ -236,7 +236,6 @@ export default class CommonTypeModel extends TypeDataModel {
    * Create children from a delta map.
    * @param {ChildDeltaMap} createMap
    * @returns {Promise<void>}
-   * @private
    */
   async _createFromChildDeltaMap(createMap) {
     for (const [docName, children] of Object.entries(createMap)) {
@@ -251,7 +250,6 @@ export default class CommonTypeModel extends TypeDataModel {
    * Delete children from delta map.
    * @param {ChildDeltaMap} deleteMap
    * @returns {Promise<void>}
-   * @private
    */
   async _deleteFromChildDeltaMap(deleteMap) {
     for (const [docName, children] of Object.entries(deleteMap)) {
@@ -266,7 +264,6 @@ export default class CommonTypeModel extends TypeDataModel {
    * Update children from delta map.
    * @param {ChildDeltaMap} updateMap
    * @returns {Promise<void>}
-   * @private
    */
   async _updateFromChildDeltaMap(updateMap) {
     for (const [docName, children] of Object.entries(updateMap)) {

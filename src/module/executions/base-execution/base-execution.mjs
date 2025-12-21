@@ -132,21 +132,18 @@ export default class BaseExecution {
   /**
    * Build buttons displayed in this execution's chat message.
    * @returns {Promise<void>}
-   * @private
    */
   async _buildButtons() {}
 
   /**
    * Build panels displayed in this execution's chat message.
    * @returns {Promise<void>}
-   * @private
    */
   async _buildPanels() {}
 
   /**
    * Build rolls used in this execution.
    * @returns {Promise<void>}
-   * @private
    */
   async _buildRolls() {
     if (formulaExists(this.formula)) {
@@ -159,7 +156,6 @@ export default class BaseExecution {
   /**
    * Build tags displayed in this execution's chat message.
    * @returns {Promise<void>}
-   * @private
    */
   async _buildTags() {}
 
@@ -168,7 +164,6 @@ export default class BaseExecution {
    * @param {object} [options]
    * @param {Teriock.RollOptions.RollMode} [options.rollMode]
    * @returns {Promise<void>}
-   * @private
    */
   async _createChatMessage(options = {}) {
     const { rollMode = game.settings.get("core", "rollMode") } = options;
@@ -180,7 +175,6 @@ export default class BaseExecution {
   /**
    * Evaluate all rolls.
    * @returns {Promise<void>}
-   * @private
    */
   async _evaluateRolls() {
     const rollPromises = [];
@@ -193,14 +187,12 @@ export default class BaseExecution {
   /**
    * Get any user input that is relevant for staging this execution.
    * @returns {Promise<void>}
-   * @private
    */
   async _getInput() {}
 
   /**
    * Improve the formula used in this execution.
    * @returns {Promise<void>}
-   * @private
    */
   async _improveFormula() {
     if (this.fluent) {
@@ -213,21 +205,18 @@ export default class BaseExecution {
   /**
    * The end of the execution.
    * @returns {Promise<void>}
-   * @private
    */
   async _postExecute() {}
 
   /**
    * The start of the execution.
    * @returns {Promise<void>}
-   * @private
    */
   async _preExecute() {}
 
   /**
    * Prepare the primary formula used in this execution.
    * @returns {Promise<void>}
-   * @private
    */
   async _prepareFormula() {
     await this._improveFormula();
@@ -236,14 +225,12 @@ export default class BaseExecution {
   /**
    * Prepare updates that will be applied to the actor.
    * @returns {Promise<void>}
-   * @private
    */
   async _prepareUpdates() {}
 
   /**
    * Update the actor with any costs or other changes as a result of this execution.
    * @returns {Promise<void>}
-   * @private
    */
   async _updateActor() {
     if (this.actor && Object.keys(this.updates).length > 0) {

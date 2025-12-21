@@ -2,7 +2,6 @@
  * Equipment type overrides for specific equipment types.
  * Provides default values for damage, damage types, and consumable properties.
  * @type {object}
- * @private
  */
 const equipmentMap = {
   Torch: {
@@ -23,7 +22,6 @@ const equipmentMap = {
  * @param {TeriockEquipmentModel} equipmentData - The equipment data to apply overrides to.
  * @param {Partial<TeriockEquipmentModel>} parameters - The parameters to override.
  * @returns {Partial<TeriockEquipmentModel>} The parameters with overrides applied.
- * @private
  */
 export function _override(equipmentData, parameters) {
   if (equipmentMap[equipmentData.equipmentType]) {

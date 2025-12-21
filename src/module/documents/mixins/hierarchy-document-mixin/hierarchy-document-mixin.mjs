@@ -27,7 +27,6 @@ export default function HierarchyDocumentMixin(Base) {
        * @param {DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
-       * @private
        */
       static async _preCreateOperation(documents, operation, user) {
         if (
@@ -86,7 +85,6 @@ export default function HierarchyDocumentMixin(Base) {
        * @param {DatabaseDeleteOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
-       * @private
        */
       static async _preDeleteOperation(documents, operation, user) {
         if (
@@ -106,7 +104,6 @@ export default function HierarchyDocumentMixin(Base) {
        * @param {DatabaseUpdateOperation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
-       * @private
        */
       static async _preUpdateOperation(documents, operation, user) {
         if (
@@ -353,25 +350,21 @@ export default function HierarchyDocumentMixin(Base) {
        * Create multiple child Document instances descendant from a Document using provided input data.
        * @param {TeriockChildName} embeddedName
        * @param {object[]} data
-       * @param {DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation} operation
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation>} operation
        * @returns {Promise<TeriockCommon[]>}
        */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
         if (embeddedName === this.documentName) {
           return await this.createSubDocuments(data, operation);
         } else {
-          return await this.createEmbeddedDocuments(
-            embeddedName,
-            data,
-            operation,
-          );
+          return this.createEmbeddedDocuments(embeddedName, data, operation);
         }
       }
 
       /**
        * Create multiple sub Document instances in a findSup Document's collection using provided input data.
        * @param {object[]} data
-       * @param {DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation} operation
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._DatabaseCreateOperation>} operation
        * @returns {Promise<TeriockCommon[]>}
        */
       async createSubDocuments(data = [], operation = {}) {
@@ -381,7 +374,7 @@ export default function HierarchyDocumentMixin(Base) {
           foundry.utils.setProperty(doc, "folder", this.folder?.id || null);
         }
         if (this.parent) {
-          return await this.parent.createEmbeddedDocuments(
+          return this.parent.createEmbeddedDocuments(
             this.documentName,
             data,
             operation,
@@ -407,11 +400,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (embeddedName === this.documentName) {
           return await this.deleteSubDocuments(ids, operation);
         } else {
-          return await this.deleteEmbeddedDocuments(
-            embeddedName,
-            ids,
-            operation,
-          );
+          return this.deleteEmbeddedDocuments(embeddedName, ids, operation);
         }
       }
 
@@ -424,7 +413,7 @@ export default function HierarchyDocumentMixin(Base) {
       async deleteSubDocuments(ids = [], operation = {}) {
         ids = ids.filter((id) => this.subs.map((s) => s.id).includes(id));
         if (this.parent) {
-          return await this.parent.deleteEmbeddedDocuments(
+          return this.parent.deleteEmbeddedDocuments(
             this.documentName,
             ids,
             operation,
@@ -522,11 +511,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (embeddedName === this.documentName) {
           return await this.updateSubDocuments(updates, operation);
         } else {
-          return await this.updateEmbeddedDocuments(
-            embeddedName,
-            updates,
-            operation,
-          );
+          return this.updateEmbeddedDocuments(embeddedName, updates, operation);
         }
       }
 
@@ -541,7 +526,7 @@ export default function HierarchyDocumentMixin(Base) {
           this.subs.map((s) => s.id).includes(update._id),
         );
         if (this.parent) {
-          return await this.parent.updateEmbeddedDocuments(
+          return this.parent.updateEmbeddedDocuments(
             this.documentName,
             updates,
             operation,
