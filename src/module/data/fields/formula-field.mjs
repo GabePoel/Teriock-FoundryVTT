@@ -7,13 +7,12 @@ import {
   upgradeDeterministicFormula,
   upgradeIndeterministicFormula,
 } from "../../helpers/formula.mjs";
-
-const { StringField } = foundry.data.fields;
+import EnhancedStringField from "./enhanced-string-field.mjs";
 
 /**
  * Special case {@link StringField} which represents a formula.
  */
-export default class FormulaField extends StringField {
+export default class FormulaField extends EnhancedStringField {
   /**
    * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options] - Options which configure
    * the behavior of the field.

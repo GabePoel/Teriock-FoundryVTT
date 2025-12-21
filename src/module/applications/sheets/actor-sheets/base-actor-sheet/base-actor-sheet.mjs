@@ -10,6 +10,7 @@ import { defaultSheetSettings } from "./tools/settings.mjs";
 import { sortAbilities, sortEquipment } from "./tools/sort.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
+const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * Base actor sheet for actorsUuids.
@@ -27,6 +28,7 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  */
 export default class TeriockBaseActorSheet extends mix(
   ActorSheetV2,
+  HandlebarsApplicationMixin,
   mixins.CommonSheetMixin,
   mixins.EquipmentDropSheetMixin,
   parts.SearchingActorSheetPart,

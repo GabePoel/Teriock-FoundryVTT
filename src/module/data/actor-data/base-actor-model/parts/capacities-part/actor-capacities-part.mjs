@@ -30,6 +30,7 @@ export default (Base) => {
             number: new EvaluationField({
               blank: "3",
               ceil: false,
+              deterministic: true,
               floor: false,
               initial: "3",
               label: "Size",
@@ -40,6 +41,7 @@ export default (Base) => {
           weight: new fields.SchemaField({
             self: new EvaluationField({
               blank: "pow(3 + @size, 3)",
+              deterministic: true,
               initial: "pow(3 + @size, 3)",
               min: 0,
             }),

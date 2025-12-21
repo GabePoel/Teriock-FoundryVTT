@@ -7,6 +7,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 /**
  * Base {@link TeriockEffect} sheet.
  * @extends {ActiveEffectConfig}
+ * @mixes ChangesSheet
  * @mixes ChatButtonSheet
  * @mixes ChildSheet
  * @mixes CommonSheet
@@ -17,90 +18,21 @@ export default class TeriockBaseEffectSheet extends mix(
   mixins.CommonSheetMixin,
   mixins.ChildSheetMixin,
   mixins.ChatButtonSheetMixin,
+  mixins.ChangesSheetMixin,
 ) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["effect"],
+    classes: ["teriock", "effect"],
     window: {
       icon: makeIconClass(documentOptions.effect.icon, "title"),
     },
     actions: {
-      addChange: this._onAddChange,
-      deleteChange: this._onDeleteChange,
       toggleDisabledThis: this._onToggledDisabledThis,
     },
   };
-
-  /**
-   * Adds a new change at any specified path.
-   * @param {PointerEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when change is added.
-   * @static
-   */
-  static async _onAddChange(_event, target) {
-    const path = target.dataset.path;
-    if (!path) {
-      console.error("No path specified for addChange action");
-      return;
-    }
-    const currentChanges = foundry.utils.getProperty(this.document, path) || [];
-    const newChange = {
-      key: "",
-      mode: 0,
-      value: "",
-      priority: 0,
-    };
-    currentChanges.push(newChange);
-    await this.document.update({ [path]: currentChanges });
-  }
-
-  /**
-   * Adds a new change to an effect.
-   * @param {PointerEvent} _event - The event object.
-   * @param {HTMLElement} _target - The target element.
-   * @returns {Promise<void>} Promise that resolves when change is added.
-   * @static
-   */
-  static async _onAddRootChange(_event, _target) {
-    const changes = this.document.changes;
-    const newChange = {
-      key: "",
-      mode: 0,
-      value: "",
-      priority: 0,
-    };
-    changes.push(newChange);
-    await this.document.update({ changes: changes });
-  }
-
-  /**
-   * Deletes a change at any specified path.
-   * @param {PointerEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when change is deleted.
-   * @static
-   */
-  static async _onDeleteChange(_event, target) {
-    const index = parseInt(target.dataset.index, 10);
-    const path = target.dataset.path;
-    if (!path) {
-      console.error("No path specified for deleteChange action");
-      return;
-    }
-    const changes = foundry.utils.getProperty(this.document, path);
-    if (!changes || !Array.isArray(changes)) {
-      console.error(`No changes array found at path: ${path}`);
-      return;
-    }
-    if (index >= 0 && index < changes.length) {
-      changes.splice(index, 1);
-      await this.document.update({ [path]: changes });
-    }
-  }
 
   /**
    * Toggles the disabled state of the current effect.
@@ -125,14 +57,6 @@ export default class TeriockBaseEffectSheet extends mix(
       isSuppressed: this.document.isSuppressed,
       isProficient: this.document.isProficient,
       isFluent: this.document.isFluent,
-      modes: {
-        0: "Custom",
-        1: "Multiply",
-        2: "Add",
-        3: "Downgrade",
-        4: "Upgrade",
-        5: "Override",
-      },
     });
     return context;
   }

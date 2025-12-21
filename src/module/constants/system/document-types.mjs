@@ -1,8 +1,6 @@
 export const documentTypes = {
   items: {
-    base: "Items",
     body: "Body",
-    curse: "Curse",
     equipment: "Equipment",
     mount: "Mount",
     power: "Powers",
@@ -21,7 +19,6 @@ export const documentTypes = {
     resource: "Resources",
   },
   actors: {
-    base: "Actors",
     character: "Characters",
     creature: "Creatures",
   },

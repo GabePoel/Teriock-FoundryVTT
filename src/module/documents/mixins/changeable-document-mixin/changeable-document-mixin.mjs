@@ -1,4 +1,4 @@
-import { applyCertainChanges } from "../shared/_module.mjs";
+import { TeriockRoll } from "../../../dice/_module.mjs";
 
 /**
  * Mixin for a document that can be changed by a {@link TeriockEffect}.
@@ -13,10 +13,59 @@ export default function ChangeableDocumentMixin(Base) {
      */
     class ChangeableDocument extends Base {
       /**
-       * What field is used to extract changes from effects.
-       * @type {string}
+       * Build a change tree from an array of expanded changes.
+       * @param {TeriockEffect[]} effects
+       * @returns {Teriock.Changes.ChangeTree}
        */
-      changesField = "changes";
+      static buildChangeTree(effects) {
+        const changeTree =
+          /** @type {Teriock.Changes.ChangeTree} */ Object.fromEntries(
+            Object.keys(TERIOCK.options.change.time).map((time) => [
+              time,
+              Object.fromEntries(
+                ["Actor", "Item", "ActiveEffect"].map((documentName) => {
+                  return [
+                    documentName,
+                    {
+                      untyped: [],
+                      typed: Object.fromEntries(
+                        Object.keys(CONFIG[documentName].dataModels).map(
+                          (k) => [k, []],
+                        ),
+                      ),
+                    },
+                  ];
+                }),
+              ),
+            ]),
+          );
+        for (const effect of effects) {
+          if (!effect.active) continue;
+          for (const change of effect.system.changes) {
+            const conditionalChange = {
+              key: change.key,
+              mode: change.mode,
+              priority: change.priority,
+              value: change.value,
+              qualifier: change.qualifier || "1",
+              effect: effect,
+            };
+            const time = change.time || "normal";
+            const target = change.target || "Actor";
+            if (["Actor", "Item", "ActiveEffect"].includes(target)) {
+              changeTree[time][target].untyped.push(conditionalChange);
+            } else {
+              const documentName = TERIOCK.options.document[target]?.doc;
+              if (documentName) {
+                changeTree[time][documentName].typed[target].push(
+                  conditionalChange,
+                );
+              }
+            }
+          }
+        }
+        return changeTree;
+      }
 
       //noinspection ES6ClassMemberInitializationOrder,JSUnusedGlobalSymbols
       /**
@@ -25,55 +74,99 @@ export default function ChangeableDocumentMixin(Base) {
        */
       overrides = this.overrides ?? {};
 
+      /** @type {Teriock.Changes.ChangeTree} */
+      _changeTree;
+
+      /**
+       * The canonical change tree to use.
+       * @returns {Teriock.Changes.ChangeTree}
+       */
+      get changeTree() {
+        if (this.parent?.changeTree) {
+          return this.parent.changeTree;
+        } else if (this._changeTree) {
+          return this._changeTree;
+        } else {
+          this._buildChangeTree();
+          return this._changeTree;
+        }
+      }
+
+      /**
+       * Apply certain changes to this document.
+       * @param {Teriock.Changes.PreparedChangeData[]} changes
+       */
+      _applyChanges(changes) {
+        changes.sort((a, b) => a.priority - b.priority);
+        for (const change of changes) {
+          if (!change.key || !change.qualifier) continue;
+          let shouldApply = change.qualifier === "1";
+          if (!shouldApply) {
+            shouldApply = !!TeriockRoll.minValue(
+              change.qualifier,
+              this.system.getLocalRollData(),
+            );
+          }
+          if (shouldApply) {
+            const changeOverrides = change.effect.apply(this, change);
+            Object.assign(this.overrides, changeOverrides);
+          }
+        }
+      }
+
+      /**
+       * Apply changes to this document based on the time the changes should apply
+       * @param {Teriock.Changes.ChangeTime} time
+       */
+      _applyChangesByTime(time) {
+        const partialTree = this.changeTree[time][this.documentName];
+        this._applyChanges([
+          ...partialTree.untyped,
+          ...partialTree.typed[this.type],
+        ]);
+      }
+
+      /**
+       * Build a change tree even if one already exists.
+       */
+      _buildChangeTree() {
+        if (!this.parent?.changeTree) {
+          this._changeTree = this.constructor.buildChangeTree(
+            this.allApplicableEffects(),
+          );
+        }
+      }
+
       /** Checks if it's okay to prepare. */
       _checkPreparation() {
         return Boolean(!this.actor) || this.actor?._embeddedPreparation;
       }
 
-      /**
-       * Get all ActiveEffects that may apply to this document.
-       * @yields {TeriockEffect}
-       * @returns {Generator<TeriockEffect, void, void>}
-       */
-      *allApplicableEffects() {
-        if (this.actor) {
-          for (const effect of this.actor.allApplicableEffects()) {
-            yield effect;
-          }
-        }
+      /** @inheritDoc */
+      prepareBaseData() {
+        this.overrides = {};
+        this._changeTree = undefined;
+        super.prepareBaseData();
+        this._applyChangesByTime("base");
+        this._applyChangesByTime("proficiency");
+        this._buildChangeTree();
+        this._applyChangesByTime("fluency");
+        this._buildChangeTree();
       }
 
-      /**
-       * Apply any transformation to the Document data which are caused by ActiveEffects.
-       */
-      applyActiveEffects() {
-        const overrides = {};
-
-        // Organize non-disabled effects by their application priority
-        const changes = [];
-        for (const effect of this.allApplicableEffects()) {
-          if (!effect.active) {
-            continue;
-          }
-          /** @type {EffectChangeData[]} */
-          const viableChanges = effect[this.changesField] || [];
-          changes.push(
-            ...viableChanges.map((change) => {
-              const c = foundry.utils.deepClone(change);
-              c.effect = effect;
-              c.priority ??= c.mode * 10;
-              return c;
-            }),
-          );
-        }
-        applyCertainChanges(this, changes, overrides);
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        this._applyChangesByTime("derivation");
+        this._applyChangesByTime("final");
+        this.overrides = foundry.utils.expandObject(this.overrides);
       }
 
       /** @inheritDoc */
       prepareEmbeddedDocuments() {
         super.prepareEmbeddedDocuments();
         if (this._checkPreparation()) {
-          this.applyActiveEffects();
+          this._applyChangesByTime("normal");
         }
       }
     }

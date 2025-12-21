@@ -36,9 +36,6 @@ export default class TeriockItem extends mix(
   mixins.SettingsDocumentMixin,
 ) {
   /** @inheritDoc */
-  changesField = "itemChanges";
-
-  /** @inheritDoc */
   get _settingsFlagsDataModel() {
     return ChildSettingsModel;
   }

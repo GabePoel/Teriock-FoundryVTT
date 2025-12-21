@@ -1,6 +1,6 @@
 import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { secondsToReadable } from "../../helpers/unit.mjs";
-import { mix, modifyChangePrefix } from "../../helpers/utils.mjs";
+import { mix } from "../../helpers/utils.mjs";
 import TeriockItem from "../item/item.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -39,24 +39,6 @@ export default class TeriockEffect extends mix(
     }
     return data;
   }
-
-  /**
-   * Changes that apply to {@link TeriockItem}s.
-   * @type {EffectChangeData[]}
-   */
-  itemChanges = [];
-
-  /**
-   * Changes that apply only to certain {@link TeriockChild} documents.
-   * @type {Teriock.Fields.SpecialChange[]}
-   */
-  specialChanges = [];
-
-  /**
-   * Changes that apply to {@link TeriockItem}s.
-   * @type {EffectChangeData[]}
-   */
-  tokenChanges = [];
 
   /** @inheritDoc */
   get _settingsFlagsDataModel() {
@@ -99,21 +81,6 @@ export default class TeriockEffect extends mix(
    */
   get isSuppressed() {
     return this.system.makeSuppressed || super.isSuppressed;
-  }
-
-  /**
-   * Expanded changes.
-   * @returns {Teriock.Changes.QualifiedChangeData[]}
-   */
-  get qualifiedChanges() {
-    return [...this.changes, ...this.itemChanges, ...this.specialChanges].map(
-      (change) => ({
-        ...change,
-        target: "Actor",
-        time: "normal",
-        qualifier: "1",
-      }),
-    );
   }
 
   /**
@@ -210,69 +177,6 @@ export default class TeriockEffect extends mix(
   /** @inheritDoc */
   async enable() {
     await this.update({ disabled: false });
-  }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    // Effects can change Actors, Items, and TokenDocuments. By default, they change actors. But if the change key is
-    // prefixed by "item" or "token", then it changes "Items" and "TokenDocuments" respectively.
-    const actorChanges = [];
-    const itemChanges = [];
-    const tokenChanges = [];
-    const rawSpecialChanges = [];
-    for (const change of this.changes) {
-      let newChanges = [change];
-      // Make sure changes to the base damage also apply to two-handed damage.
-      if (change.key.includes("system.damage.base.raw")) {
-        const newChange = foundry.utils.deepClone(change);
-        newChange.key = newChange.key.replaceAll(
-          "system.damage.base.raw",
-          "system.damage.twoHanded.raw",
-        );
-        newChanges.push(newChange);
-      }
-      if (change.key.startsWith("item")) {
-        itemChanges.push(
-          ...newChanges.map((c) => modifyChangePrefix(c, "item.", "")),
-        );
-      } else if (change.key.startsWith("token")) {
-        tokenChanges.push(
-          ...newChanges.map((c) => modifyChangePrefix(c, "token.", "")),
-        );
-      } else if (
-        change.key.startsWith("!") &&
-        change.key.split("__").length >= 4
-      ) {
-        rawSpecialChanges.push(
-          ...newChanges.map((c) => modifyChangePrefix(c, "!", "")),
-        );
-      } else {
-        actorChanges.push(...newChanges);
-      }
-    }
-    const specialChanges = [];
-    for (const change of rawSpecialChanges) {
-      const changeParts = change.key.split("__");
-      /** @type {Teriock.Fields.SpecialChange} */
-      const specialChange = {
-        key: changeParts.at(-1),
-        mode: change.mode,
-        priority: change.priority,
-        reference: {
-          key: changeParts[1],
-          check: changeParts[2],
-          type: changeParts[0],
-          value: changeParts.slice(3, -1).join(""),
-        },
-        value: change.value,
-      };
-      specialChanges.push(specialChange);
-    }
-    this.changes = actorChanges;
-    this.itemChanges = itemChanges;
-    this.tokenChanges = tokenChanges;
-    this.specialChanges = specialChanges;
   }
 
   /** @inheritDoc */

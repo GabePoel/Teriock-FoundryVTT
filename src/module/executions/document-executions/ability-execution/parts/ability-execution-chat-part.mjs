@@ -274,7 +274,6 @@ export default function AbilityExecutionChatPart(Base) {
           name: `${this.source.name} Effect`,
           type: "consequence",
           img: this.source.img,
-          changes: changes,
           statuses: Array.from(statuses),
           system: {
             associations: [],
@@ -297,6 +296,9 @@ export default function AbilityExecutionChatPart(Base) {
               description: this.source.system.endCondition,
             },
             heightened: this.heightened,
+            impacts: {
+              changes: changes,
+            },
             source: this.source.uuid,
             transformation: transformation,
           },

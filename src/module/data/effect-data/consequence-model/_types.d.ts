@@ -49,6 +49,11 @@ declare global {
       };
       /** <schema> How much the source was heightened */
       heightened: number;
+      /** <schema> Impacts */
+      impacts: {
+        /** <schema> Changes */
+        changes: Teriock.Changes.QualifiedChangeData[];
+      };
       movementExpiration: boolean;
       /** <schema> {@link TeriockEffect} that's the source of this consequence */
       source: UUID<TeriockEffect>;

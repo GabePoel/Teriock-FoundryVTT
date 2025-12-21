@@ -6,8 +6,6 @@ import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
 import * as parts from "./parts/_module.mjs";
 
-const { HandlebarsApplicationMixin } = foundry.applications.api;
-
 /**
  * {@link TeriockCommon} sheet mixin.
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
@@ -27,7 +25,6 @@ export default function CommonSheetMixin(Base) {
      */
     class CommonSheet extends mix(
       Base,
-      HandlebarsApplicationMixin,
       ConfigButtonSheetMixin,
       parts.DragDropCommonSheetPart,
       parts.DocumentCreationCommonSheetPart,
@@ -49,7 +46,6 @@ export default function CommonSheetMixin(Base) {
           unlinkMacro: this._onUnlinkMacro,
           openDoc: this._onOpenDoc,
         },
-        classes: ["teriock", "ability"],
         form: {
           closeOnSubmit: false,
           submitOnChange: true,
@@ -62,12 +58,6 @@ export default function CommonSheetMixin(Base) {
           resizable: true,
         },
       };
-
-      /**
-       * Template parts configuration.
-       * @type {object}
-       */
-      static PARTS = {};
 
       /**
        * Creates a new Teriock sheet instance.
@@ -277,27 +267,6 @@ export default function CommonSheetMixin(Base) {
       }
 
       /**
-       * Connects input elements with automatic updates.
-       * @param {HTMLElement} element - The input element to connect.
-       * @param {string} attribute - The attribute path to update.
-       * @param {Function} transformer - Function to transform the input value.
-       */
-      _connectInput(element, attribute, transformer) {
-        const update = (e) => {
-          const newValue = transformer(e.currentTarget.value);
-          this.item.update({ [attribute]: newValue });
-        };
-        ["focusout", "change"].forEach((evt) =>
-          element.addEventListener(evt, update),
-        );
-        element.addEventListener("keyup", (e) => {
-          if (e.key === "Enter") {
-            update(e);
-          }
-        });
-      }
-
-      /**
        * Enriches HTML content for display.
        * @param {string} parameter - The HTML content to enrich.
        * @returns {Promise<string|undefined>} Promise that resolves to the enriched HTML or undefined.
@@ -325,7 +294,6 @@ export default function CommonSheetMixin(Base) {
         });
         this._activateMenu();
         _setupEventListeners(this);
-
         this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(
           /** @param {HTMLElement} el */ (el) => {
             const uuid = el.dataset.uuid;
@@ -379,6 +347,7 @@ export default function CommonSheetMixin(Base) {
           systemSource: this.document.system._source,
           tab: this._tab,
           uuid: this.document.uuid,
+          sheetId: this.id,
         });
         await this._prepareMacroContext(context);
         return context;

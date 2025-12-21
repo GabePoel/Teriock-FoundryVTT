@@ -17,7 +17,10 @@ export default function AttunableDataMixin(Base) {
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
-          tier: new EvaluationField(),
+          tier: new EvaluationField({
+            deterministic: true,
+            min: 0,
+          }),
         });
         return schema;
       }

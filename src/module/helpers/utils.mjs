@@ -18,7 +18,7 @@ export function modifyChangePrefix(change, searchValue, replaceValue) {
 }
 
 /**
- * Creates an HTML icon element using Font Awesome classes.
+ * Creates an HTML icon using Font Awesome classes.
  * @param {string} icon - The icon name to use.
  * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
  * @returns {string} The HTML string for the icon element.
@@ -26,6 +26,18 @@ export function modifyChangePrefix(change, searchValue, replaceValue) {
 export function makeIcon(icon, ...styles) {
   const classString = makeIconClass(icon, ...styles);
   return `<i class="${classString}"></i>`;
+}
+
+/**
+ * Creates an HTML icon element using Font Awesome classes.
+ * @param {string} icon - The icon name to use.
+ * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
+ * @returns {HTMLElement}
+ */
+export function makeIconElement(icon, ...styles) {
+  const iconElement = document.createElement("i");
+  iconElement.className = makeIconClass(icon, ...styles);
+  return iconElement;
 }
 
 /**
@@ -40,7 +52,7 @@ export function makeIconClass(icon, ...styles) {
   if (!icon.startsWith("fa-")) {
     icon = `fa-${icon}`;
   }
-  return `${classString} ${icon}`;
+  return `fa-fw ${classString} ${icon}`;
 }
 
 /**
@@ -190,4 +202,16 @@ export function prefixObject(obj, prefix) {
  */
 export function mix(Base, ...Mixins) {
   return Mixins.reduce((cls, mixin) => mixin(cls), Base);
+}
+
+/**
+ * Sort an object by its keys.
+ * @template T
+ * @param {T} obj
+ * @returns {T}
+ */
+export function sortObject(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).sort((a, b) => a[0].localeCompare(b[0])),
+  );
 }

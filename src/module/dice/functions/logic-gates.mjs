@@ -8,6 +8,7 @@ const logicGates = {
   or: (...args) => args.find(Boolean) || 0,
   xnor: (...args) => +(args.filter(Boolean).length % 2 === 0),
   xor: (...args) => +(args.filter(Boolean).length % 2 === 1),
+  if: (...args) => (args[0] ? args[1] : args[2] || 0),
 };
 
 export default logicGates;

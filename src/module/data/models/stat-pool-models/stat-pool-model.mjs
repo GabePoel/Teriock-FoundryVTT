@@ -30,6 +30,7 @@ export default class StatPoolModel extends EmbeddedDataModel {
       }),
       number: new EvaluationField({
         blank: 1,
+        deterministic: true,
         floor: true,
         hint: "Number of dice.",
         initial: "1",

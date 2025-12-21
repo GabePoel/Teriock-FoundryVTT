@@ -21,6 +21,7 @@ export default (Base) => {
         Object.assign(schema, {
           magic: new fields.SchemaField({
             maxRotators: new EvaluationField({
+              deterministic: true,
               floor: true,
             }),
           }),

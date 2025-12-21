@@ -1,5 +1,4 @@
 import { TeriockChatMessage } from "../../_module.mjs";
-import { applyCertainChanges } from "../shared/_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -61,76 +60,15 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /**
-       * Generator that gives every {@link TeriockEffect} that applies to {@link TeriockChild} documents.
+       * Get all ActiveEffects that may apply to this document.
        * @yields {TeriockEffect}
        * @returns {Generator<TeriockEffect, void, void>}
        */
-      *allSpecialEffects() {
+      *allApplicableEffects() {
         if (this.actor) {
-          for (const effect of this.actor.specialEffects) {
-            let shouldYield = false;
-            for (const change of effect.specialChanges) {
-              if (change.reference.type === this.type) {
-                shouldYield = true;
-              }
-            }
-            if (shouldYield) {
-              yield effect;
-            }
+          for (const effect of this.actor.allApplicableEffects()) {
+            yield effect;
           }
-        }
-      }
-
-      /**
-       * Apply the special {@link TeriockEffect}s found by {@link TeriockChild} that this document matches.
-       */
-      applySpecialEffects() {
-        const overrides = foundry.utils.deepClone(this.overrides ?? {});
-        const changes = [];
-        for (const effect of this.allSpecialEffects()) {
-          if (!effect.active) {
-            continue;
-          }
-          const candidateChanges = effect.specialChanges.filter(
-            (c) => c.reference.type === this.type,
-          );
-          for (const change of candidateChanges) {
-            const reference = change.reference;
-            const property = foundry.utils.getProperty(
-              this,
-              change.reference.key,
-            );
-            let shouldInclude = false;
-            if (Object.keys(CONFIG.Dice.functions).includes(reference.check)) {
-              const inclusionFunction = CONFIG.Dice.functions[reference.check];
-              shouldInclude = inclusionFunction(reference.value, property);
-            } else if (reference.check === "has") {
-              const checkSet = new Set(property);
-              shouldInclude = checkSet.has(reference.value);
-            } else if (reference.check === "includes") {
-              const checkArray = Array.from(property);
-              shouldInclude = checkArray.includes(reference.value);
-            } else if (reference.check === "exists") {
-              shouldInclude =
-                (property?.length || "") > 0 &&
-                property !== "0" &&
-                property !== 0;
-            } else if (reference.check === "is") {
-              shouldInclude = property;
-            } else if (reference.check === "isNot") {
-              shouldInclude = !property;
-            }
-            if (shouldInclude) {
-              const fullChange = foundry.utils.deepClone(change);
-              fullChange.effect = effect;
-              fullChange.property ??= fullChange.mode * 10;
-              changes.push(fullChange);
-            }
-          }
-        }
-        applyCertainChanges(this, changes, overrides);
-        if (this._sheet && this.isOwner) {
-          this.sheet.render();
         }
       }
 
@@ -188,12 +126,6 @@ export default function ChildDocumentMixin(Base) {
           this.prepareSpecialData();
           this.prepareVirtualEffects();
         }
-      }
-
-      /** @inheritDoc */
-      prepareSpecialData() {
-        this.applySpecialEffects();
-        super.prepareSpecialData();
       }
 
       /** @inheritDoc */

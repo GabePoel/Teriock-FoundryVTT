@@ -1,8 +1,8 @@
-import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
+const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * Base {@link TeriockItem} sheet.
@@ -15,6 +15,7 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  */
 export default class TeriockBaseItemSheet extends mix(
   ItemSheetV2,
+  HandlebarsApplicationMixin,
   mixins.CommonSheetMixin,
   mixins.ChildSheetMixin,
   mixins.ChatButtonSheetMixin,
@@ -52,30 +53,6 @@ export default class TeriockBaseItemSheet extends mix(
       onUseSet.add(id);
     }
     await this.document.update({ "system.onUse": Array.from(onUseSet) });
-  }
-
-  /**
-   * Binds input cleaning handlers for specific input types.
-   * Applies cleaning functions to inputs that need formatting (e.g., feet to meters).
-   */
-  _bindCleanInputs() {
-    const cleanMap = {
-      ".range-input": cleanFeet,
-    };
-    for (const [selector, cleaner] of Object.entries(cleanMap)) {
-      this.element.querySelectorAll(selector).forEach((el) => {
-        this._connectInput(el, el.getAttribute("name"), cleaner);
-      });
-    }
-  }
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if (!this.editable) {
-      return;
-    }
-    this._bindCleanInputs();
   }
 
   /** @inheritDoc */

@@ -5,6 +5,12 @@ declare global {
   namespace Teriock.Changes {
     export type ChangeTime = keyof typeof change.time;
 
+    export type ChangeTarget =
+      | Teriock.Documents.CommonType
+      | "Actor"
+      | "Item"
+      | "ActiveEffect";
+
     export type PreparedChangeData = Teriock.Foundry.EffectChangeData & {
       qualifier: string;
       effect: TeriockEffect;
@@ -12,7 +18,7 @@ declare global {
 
     export type QualifiedChangeData = Teriock.Foundry.EffectChangeData & {
       qualifier: string;
-      target: Teriock.Documents.CommonType | "Actor" | "Item" | "ActiveEffect";
+      target: ChangeTarget;
       time: ChangeTime;
     };
 

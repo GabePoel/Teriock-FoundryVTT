@@ -53,24 +53,28 @@ export default (Base) => {
       get changes() {
         const changes = super.changes;
         if (this.improvements.attributeImprovement.attribute) {
-          const attributeImprovementChange = {
+          changes.push({
             key: `system.attributes.${this.improvements.attributeImprovement.attribute}.score`,
-            value: `${this.improvements.attributeImprovement.minVal}`,
             mode: 4,
             priority: 20,
-          };
-          changes.push(attributeImprovementChange);
+            qualifier: "1",
+            target: "Actor",
+            time: "normal",
+            value: `${this.improvements.attributeImprovement.minVal}`,
+          });
         }
         if (this.improvements.featSaveImprovement.attribute) {
           const amount = this.improvements.featSaveImprovement.amount;
           const saveKey = amount === "fluency" ? "fluent" : "proficient";
-          const featSaveImprovementChange = {
+          changes.push({
             key: `system.attributes.${this.improvements.featSaveImprovement.attribute}.${saveKey}`,
-            value: "true",
             mode: 4,
             priority: 20,
-          };
-          changes.push(featSaveImprovementChange);
+            qualifier: "1",
+            target: "Actor",
+            time: "normal",
+            value: "true",
+          });
         }
         return changes;
       }

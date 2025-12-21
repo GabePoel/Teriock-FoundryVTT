@@ -1,6 +1,6 @@
 import { TeriockJournalEntry } from "../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../helpers/html.mjs";
-import { toTitleCase } from "../../../helpers/string.mjs";
+import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -360,6 +360,8 @@ export default class CommonTypeModel extends TypeDataModel {
   getLocalRollData() {
     return {
       name: this.parent.name,
+      key: toCamelCase(this.parent.name),
+      [`key.${toCamelCase(this.parent.name)}`]: 1,
       type: this.parent.type,
       [`type.${this.parent.type}`]: 1,
     };

@@ -32,10 +32,10 @@ export default class TeriockActor extends mix(
   Actor,
   mixins.BaseDocumentMixin,
   mixins.CommonDocumentMixin,
-  mixins.HierarchyDocumentMixin,
   mixins.ParentDocumentMixin,
   mixins.RetrievalDocumentMixin,
   mixins.SettingsDocumentMixin,
+  mixins.ChangeableDocumentMixin,
 ) {
   /**
    * The default weight for a given size.
@@ -75,12 +75,6 @@ export default class TeriockActor extends mix(
       SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax),
     );
   }
-
-  /**
-   * The {@link TeriockEffect}s that have special changes.
-   * @type {TeriockEffect[]}
-   */
-  specialEffects = [];
 
   /** @inheritDoc */
   get _settingsFlagsDataModel() {
@@ -378,19 +372,6 @@ export default class TeriockActor extends mix(
   }
 
   /**
-   * The {@link TeriockEffect}s with special changes.
-   * @yields {TeriockEffect}
-   * @returns {Generator<TeriockEffect, void, void>}
-   */
-  *allSpecialEffects() {
-    for (const effect of this.allApplicableEffects()) {
-      if (effect.specialChanges.length > 0) {
-        yield effect;
-      }
-    }
-  }
-
-  /**
    * Prepare condition information now that all virtual statuses have been applied.
    */
   cleanConditionInformation() {
@@ -488,9 +469,6 @@ export default class TeriockActor extends mix(
 
   /** @inheritDoc */
   prepareSpecialData() {
-    this.specialEffects = /** @type {TeriockEffect[]} */ Array.from(
-      this.allSpecialEffects(),
-    );
     this.items.forEach((i) => {
       i.prepareSpecialData();
     });

@@ -3,7 +3,7 @@ import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs"
 import { pureUuid, safeUuid } from "../../../helpers/resolve.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../fields/_module.mjs";
-import { changeField } from "../../fields/helpers/builders.mjs";
+import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import * as parsing from "./parsing/_parsing.mjs";
@@ -65,7 +65,7 @@ export default class TeriockPropertyModel extends mix(
       extraDamage: new FormulaField({ deterministic: false }),
       form: new fields.StringField({ initial: "normal" }),
       impacts: new fields.SchemaField({
-        changes: new fields.ArrayField(changeField(), {
+        changes: new fields.ArrayField(qualifiedChangeField(), {
           label: "Changes",
           hint: "Changes made to the target equipment as part of the property's ongoing effect.",
         }),
@@ -107,6 +107,11 @@ export default class TeriockPropertyModel extends mix(
       foundry.utils.deleteProperty(data, "applies");
     }
     return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
+  get changes() {
+    return this.impacts.changes;
   }
 
   /** @inheritDoc */
@@ -245,7 +250,7 @@ export default class TeriockPropertyModel extends mix(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    const changes = foundry.utils.deepClone(this.impacts.changes);
+    const changes = [];
     let macroPrefix = "system.hookedMacros.";
     if (this.modifies === "Item") {
       macroPrefix = "item." + macroPrefix;

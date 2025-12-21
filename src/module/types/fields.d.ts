@@ -28,29 +28,6 @@ declare global {
      * Valid comparison operations.
      */
     export type ComparisonCheck = keyof typeof comparisons;
-
-    /**
-     * Valid change key comparison operations.
-     */
-    export type SpecialChangeCheck =
-      | ComparisonCheck
-      | "has"
-      | "includes"
-      | "exists"
-      | "is"
-      | "isNot";
-
-    /**
-     * Original special change keys are of the format: `![type]__[key]__[operation]__[value]__[originalKey]`
-     */
-    export type SpecialChange = Teriock.Foundry.EffectChangeData & {
-      reference: {
-        type: string;
-        key: string;
-        check: Teriock.Fields.SpecialChangeCheck;
-        value: string;
-      };
-    };
   }
 }
 

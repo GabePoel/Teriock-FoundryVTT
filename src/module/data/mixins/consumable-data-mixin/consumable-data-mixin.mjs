@@ -31,6 +31,7 @@ export default function ConsumableDataMixin(Base) {
           }),
           maxQuantity: new EvaluationField({
             blank: Infinity,
+            deterministic: true,
             floor: true,
             min: 0,
           }),

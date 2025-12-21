@@ -38,6 +38,9 @@ export default class TeriockConsequenceModel extends mix(
         initial: "",
         nullable: true,
       }),
+      impacts: new fields.SchemaField({
+        changes: new fields.ArrayField(builders.qualifiedChangeField()),
+      }),
       expirations: new fields.SchemaField({
         conditions: new fields.SchemaField({
           present: new fields.SetField(
@@ -101,6 +104,11 @@ export default class TeriockConsequenceModel extends mix(
   static migrateData(data) {
     data = migrateHierarchy(data);
     return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
+  get changes() {
+    return this.impacts.changes;
   }
 
   /**

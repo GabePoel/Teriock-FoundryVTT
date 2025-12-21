@@ -23,9 +23,10 @@ export default (Base) => {
           ...super.defineSchema(),
           storage: new EmbeddedDataField(StorageModel),
           weight: new EvaluationField({
-            floor: false,
             ceil: false,
             decimals: 2,
+            deterministic: true,
+            floor: false,
           }),
         };
       }

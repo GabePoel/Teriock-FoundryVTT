@@ -33,11 +33,13 @@ export default (Base) => {
           detection: new fields.SchemaField({
             hiding: new EvaluationField({
               blank: "@snk.pas",
+              deterministic: true,
               floor: true,
               initial: "@snk.pas",
             }),
             perceiving: new EvaluationField({
               blank: "@per.pas",
+              deterministic: true,
               floor: true,
               initial: "@per.pas",
             }),

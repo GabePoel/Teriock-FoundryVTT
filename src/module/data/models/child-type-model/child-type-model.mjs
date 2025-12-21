@@ -28,11 +28,13 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
       }),
       qualifiers: new fields.SchemaField({
         ephemeral: new EvaluationField({
+          deterministic: true,
           hint: "When this formula is true, the document will be hidden and treated as if it doesn't exist.",
           initial: "0",
           label: "Ephemeral Formula",
         }),
         suppressed: new EvaluationField({
+          deterministic: true,
           hint: "When this formula is true, the document will be made inactive.",
           initial: "0",
           label: "Suppressed Formula",

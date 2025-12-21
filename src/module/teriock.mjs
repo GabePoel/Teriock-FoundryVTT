@@ -307,7 +307,6 @@ foundry.helpers.Hooks.once("init", function () {
       cls: applications.sheets.effect.TeriockConsequenceSheet,
       doc: documents.TeriockEffect,
       label: "Consequence",
-      makeDefault: false,
       types: ["consequence"],
     },
     // Tokens

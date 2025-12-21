@@ -29,12 +29,18 @@ export function extractChangesFromHTML(htmlString) {
       const mode = el.dataset.mode;
       const value = el.dataset.value;
       const priority = el.dataset.priority;
+      const time = el.dataset.time || "normal";
+      const target = el.dataset.target || "Actor";
+      const qualifier = el.dataset.qualifier || "1";
       if (key && mode !== undefined && value !== undefined) {
         changes.push({
           key,
           mode: parseInt(mode, 10),
-          value: value === "true" ? true : value === "false" ? false : value,
           priority: priority ? parseInt(priority, 10) : 20,
+          target,
+          time,
+          qualifier,
+          value: value === "true" ? true : value === "false" ? false : value,
         });
       }
     });

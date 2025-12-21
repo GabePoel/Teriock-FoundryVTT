@@ -41,7 +41,7 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
 
   /**
    * Gets the changes this ability would provide.
-   * @returns {EffectChangeData[]}
+   * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get changes() {
     return [];

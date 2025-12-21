@@ -1,4 +1,9 @@
-import { FormulaField } from "../_module.mjs";
+import { sortObject } from "../../../helpers/utils.mjs";
+import {
+  EnhancedNumberField,
+  EnhancedStringField,
+  FormulaField,
+} from "../_module.mjs";
 import { arrayTypeValidator, typeValidator } from "./validators.mjs";
 
 const { fields } = foundry.data;
@@ -244,29 +249,39 @@ export function qualifiedChangeField() {
     Item: "Items",
     ActiveEffect: "Active Effects",
   };
+  const subTypes = {};
   for (const v of Object.values(TERIOCK.system.documentTypes)) {
-    Object.assign(allTypes, v);
+    Object.assign(subTypes, v);
   }
+  Object.assign(allTypes, sortObject(subTypes));
   return new fields.SchemaField({
-    key: new fields.StringField({ initial: "" }),
-    mode: new fields.NumberField({
+    key: new EnhancedStringField({ initial: "", label: "Key" }),
+    mode: new EnhancedNumberField({
       choices: TERIOCK.options.effect.changeMode,
       initial: 4,
+      label: "Mode",
     }),
-    priority: new fields.NumberField({ initial: 20 }),
-    time: new fields.StringField({
+    priority: new EnhancedNumberField({
+      initial: 20,
+      label: "Priority",
+    }),
+    time: new EnhancedStringField({
       choices: TERIOCK.options.change.timeLabels,
-      nullable: true,
-      initial: null,
+      initial: "normal",
+      label: "Timing",
+      nullable: false,
     }),
-    target: new fields.StringField({
+    target: new EnhancedStringField({
       choices: allTypes,
       initial: "Actor",
+      label: "Target Document Type",
+      nullable: false,
     }),
-    value: new fields.StringField({ initial: "" }),
+    value: new EnhancedStringField({ initial: "", label: "Value" }),
     qualifier: new FormulaField({
       deterministic: true,
       initial: "1",
+      label: "Qualifier",
     }),
   });
 }

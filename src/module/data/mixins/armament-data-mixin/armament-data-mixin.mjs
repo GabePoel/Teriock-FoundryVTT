@@ -36,10 +36,12 @@ export default function ArmamentDataMixin(Base) {
             blank: "-3",
           }),
           av: new EvaluationField({
+            deterministic: true,
             floor: true,
             min: 0,
           }),
           bv: new EvaluationField({
+            deterministic: true,
             floor: true,
             min: 0,
           }),

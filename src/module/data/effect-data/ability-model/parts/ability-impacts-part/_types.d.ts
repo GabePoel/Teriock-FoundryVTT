@@ -44,7 +44,7 @@ export type AbilityImpactData = {
   /** <schema> Names of abilities that this can activate */
   abilityButtonNames: string[];
   /** <schema> Changes made to the parent {@link TeriockActor} */
-  changes: Teriock.Foundry.EffectChangeData[];
+  changes: Teriock.Changes.QualifiedChangeData[];
   /** <schema> Tradecraft checks the ability can cause */
   checks: Teriock.Parameters.Fluency.Tradecraft[];
   /** <schema> Possible common impacts of using an ability */

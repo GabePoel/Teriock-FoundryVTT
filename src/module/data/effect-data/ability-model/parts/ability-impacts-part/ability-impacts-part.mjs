@@ -2,6 +2,7 @@ import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
 import { pureUuid } from "../../../../../helpers/resolve.mjs";
 import { FormulaField, RecordField } from "../../../../fields/_module.mjs";
 import { builders } from "../../../../fields/helpers/_module.mjs";
+import { qualifyChange } from "../../../../shared/migrations/migrate-changes.mjs";
 
 const { fields } = foundry.data;
 
@@ -40,6 +41,7 @@ export default (Base) => {
       /** @inheritDoc */
       static migrateData(data) {
         migrateProtections(data);
+        migrateImpacts(data, changeMigration);
 
         // Impact migration
         if (foundry.utils.hasProperty(data, "applies")) {
@@ -52,30 +54,34 @@ export default (Base) => {
       /** @inheritDoc */
       get changes() {
         const changes = super.changes;
-        if (this.impacts.base.changes.length > 0) {
-          changes.push(...this.impacts.base.changes);
+        if (this.maneuver === "passive") {
+          if (this.impacts.base.changes.length > 0) {
+            changes.push(...this.impacts.base.changes);
+          }
+          if (
+            this.parent.isProficient &&
+            this.impacts.proficient.changes.length > 0
+          ) {
+            changes.push(...this.impacts.proficient.changes);
+          }
+          if (this.parent.isFluent && this.impacts.fluent.changes.length > 0) {
+            changes.push(...this.impacts.fluent.changes);
+          }
+          for (const [safeUuid, pseudoHook] of Object.entries(
+            this.impacts.macros,
+          )) {
+            changes.push({
+              key: `system.hookedMacros.${pseudoHook}`,
+              mode: 2,
+              priority: 5,
+              qualifier: "1",
+              target: "Actor",
+              time: "normal",
+              value: pureUuid(safeUuid),
+            });
+          }
         }
-        if (
-          this.parent.isProficient &&
-          this.impacts.proficient.changes.length > 0
-        ) {
-          changes.push(...this.impacts.proficient.changes);
-        }
-        if (this.parent.isFluent && this.impacts.fluent.changes.length > 0) {
-          changes.push(...this.impacts.fluent.changes);
-        }
-        for (const [safeUuid, pseudoHook] of Object.entries(
-          this.impacts.macros,
-        )) {
-          const change = {
-            key: `system.hookedMacros.${pseudoHook}`,
-            value: pureUuid(safeUuid),
-            mode: 2,
-            priority: 5,
-          };
-          changes.push(change);
-        }
-        return foundry.utils.deepClone(changes);
+        return changes;
       }
     }
   );
@@ -109,7 +115,7 @@ export function impactRollsField() {
  * Creates a field for impact changes configuration.
  */
 export function impactChangesField() {
-  return new fields.ArrayField(builders.changeField(), {
+  return new fields.ArrayField(builders.qualifiedChangeField(), {
     label: "Changes",
     hint: "Changes made to the target actor as part of the ability's ongoing effect.",
   });
@@ -312,6 +318,39 @@ function migrateProtections(data) {
         for (const change of changes) {
           migrateProtection(change);
         }
+      }
+    }
+  }
+}
+
+/**
+ * Migrate impact changes.
+ * @param {AbilityImpact} impact
+ * @returns {AbilityImpact}
+ */
+function changeMigration(impact) {
+  impact.changes = impact.changes.map((c) => qualifyChange(c));
+  return impact;
+}
+
+/**
+ * Migrate impacts.
+ * @param {object} data
+ * @param {Function}migrationFunction
+ */
+function migrateImpacts(data, migrationFunction) {
+  for (const application of ["base", "proficient", "fluent", "heightened"]) {
+    for (const prefix of ["applies", "impacts"]) {
+      if (foundry.utils.hasProperty(data, `${prefix}.${application}`)) {
+        const impact = foundry.utils.getProperty(
+          data,
+          `${prefix}.${application}`,
+        );
+        foundry.utils.setProperty(
+          data,
+          `impacts.${application}`,
+          migrationFunction(impact),
+        );
       }
     }
   }

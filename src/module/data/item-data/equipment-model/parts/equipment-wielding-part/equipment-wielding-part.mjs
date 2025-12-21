@@ -30,8 +30,9 @@ export default (Base) => {
             label: "Glued",
           }),
           minStr: new EvaluationField({
-            min: -3,
+            deterministic: true,
             initial: -3,
+            min: -3,
           }),
         });
         return schema;
