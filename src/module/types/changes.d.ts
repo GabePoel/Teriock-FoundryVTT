@@ -9,7 +9,8 @@ declare global {
       | Teriock.Documents.CommonType
       | "Actor"
       | "Item"
-      | "ActiveEffect";
+      | "ActiveEffect"
+      | "parent";
 
     export type PreparedChangeData = Teriock.Foundry.EffectChangeData & {
       qualifier: string;
@@ -23,6 +24,7 @@ declare global {
     };
 
     export type PartialChangeTypeTree<keys extends string> = {
+      uuids: Record<UUID<TeriockParent>, PreparedChangeData[]>;
       typed: Record<keys, PreparedChangeData[]>;
       untyped: PreparedChangeData[];
     };

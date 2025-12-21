@@ -6,14 +6,24 @@ import {
 } from "../_module.mjs";
 import { arrayTypeValidator, typeValidator } from "./validators.mjs";
 
-const { fields } = foundry.data;
+const {
+  ArrayField,
+  BooleanField,
+  DocumentIdField,
+  DocumentUUIDField,
+  FilePathField,
+  NumberField,
+  SchemaField,
+  SetField,
+  StringField,
+} = foundry.data.fields;
 
 /**
  * Field for source portion of combat expiration.
  * @returns {StringField}
  */
 export function combatExpirationSourceTypeField() {
-  return new fields.StringField({
+  return new StringField({
     choices: {
       target: "Target",
       executor: "Executor",
@@ -27,15 +37,15 @@ export function combatExpirationSourceTypeField() {
 
 /**
  * Field for a transformation.
- * @returns {SchemaField}
  * @param {object} [options]
  * @param {boolean} [options.implementation] - Make this into an implementation.
  * @param {boolean} [options.configuration] - Make this into a configuration.
+ * @returns {SchemaField}
  */
 export function transformationField(options = {}) {
   const { implementation = false, configuration = false } = options;
   const schema = {
-    enabled: new fields.BooleanField({
+    enabled: new BooleanField({
       hint:
         'Whether this ability causes a transformation. Note that this isn\'t just for "transformation effect",' +
         " but for any case in which another species' stats should be applied (such as animating as an undead).",
@@ -44,7 +54,7 @@ export function transformationField(options = {}) {
       nullable: false,
       required: false,
     }),
-    image: new fields.FilePathField({
+    image: new FilePathField({
       categories: ["IMAGE"],
       hint: "Optional overriding art to apply to the target.",
       initial: null,
@@ -53,7 +63,7 @@ export function transformationField(options = {}) {
       required: false,
       trim: true,
     }),
-    level: new fields.StringField({
+    level: new StringField({
       choices: TERIOCK.options.effect.transformationLevel,
       hint: "How strong of a transformation this is.",
       initial: "minor",
@@ -61,29 +71,29 @@ export function transformationField(options = {}) {
       nullable: false,
       required: false,
     }),
-    suppression: new fields.SchemaField({
-      bodyParts: new fields.BooleanField({
+    suppression: new SchemaField({
+      bodyParts: new BooleanField({
         hint: "Whether this should suppress body parts not provided by the transformation.",
         initial: true,
         label: "Suppress Body Parts",
         nullable: false,
         required: false,
       }),
-      equipment: new fields.BooleanField({
+      equipment: new BooleanField({
         hint: "Whether this should suppress equipment not provided by the transformation.",
         initial: true,
         label: "Suppress Equipment",
         nullable: false,
         required: false,
       }),
-      fluencies: new fields.BooleanField({
+      fluencies: new BooleanField({
         hint: "Whether this should suppress fluencies not provided by the transformation.",
         initial: true,
         label: "Suppress Fluencies",
         nullable: false,
         required: false,
       }),
-      ranks: new fields.BooleanField({
+      ranks: new BooleanField({
         hint: "Whether this should suppress ranks not provided by the transformation.",
         initial: true,
         label: "Suppress Ranks",
@@ -91,8 +101,8 @@ export function transformationField(options = {}) {
         required: false,
       }),
     }),
-    uuids: new fields.SetField(
-      new fields.DocumentUUIDField({
+    uuids: new SetField(
+      new DocumentUUIDField({
         hint: "A specific species this transforms the target into.",
         nullable: false,
         type: "Item",
@@ -108,21 +118,21 @@ export function transformationField(options = {}) {
         validationError: "Only species can be transformed into.",
       },
     ),
-    multiple: new fields.BooleanField({
+    multiple: new BooleanField({
       hint: "Allow selection of multiple species to transform into at the same time.",
       initial: false,
       label: "Multiple Selection",
       nullable: false,
       required: false,
     }),
-    resetHp: new fields.BooleanField({
+    resetHp: new BooleanField({
       hint: "Reset HP upon transformation.",
       label: "Reset HP",
       initial: true,
       required: false,
       nullable: false,
     }),
-    resetMp: new fields.BooleanField({
+    resetMp: new BooleanField({
       hint: "Reset MP upon transformation.",
       label: "Reset MP",
       initial: false,
@@ -131,25 +141,25 @@ export function transformationField(options = {}) {
     }),
   };
   if (implementation) {
-    schema.species = new fields.ArrayField(new fields.DocumentIdField());
+    schema.species = new ArrayField(new DocumentIdField());
   }
   if (configuration) {
     Object.assign(schema, {
-      select: new fields.BooleanField({
+      select: new BooleanField({
         hint: "Select a subset of the species to turn into instead of all of them.",
         label: "Select",
         nullable: false,
         required: false,
         initial: false,
       }),
-      useFolder: new fields.BooleanField({
+      useFolder: new BooleanField({
         hint: "Use a folder of species instead of defining each individually.",
         label: "Use Folder",
         nullable: false,
         required: false,
         initial: false,
       }),
-      uuid: new fields.DocumentUUIDField({
+      uuid: new DocumentUUIDField({
         hint: "The folder of candidate species to transform into.",
         label: "Folder",
         nullable: true,
@@ -158,7 +168,7 @@ export function transformationField(options = {}) {
       }),
     });
   }
-  return new fields.SchemaField(schema);
+  return new SchemaField(schema);
 }
 
 /**
@@ -166,18 +176,18 @@ export function transformationField(options = {}) {
  * @returns {SchemaField} Timing field.
  */
 export function combatExpirationMethodField() {
-  return new fields.SchemaField({
-    roll: new fields.StringField({
+  return new SchemaField({
+    roll: new StringField({
       hint: "If this expires on a roll, what is the roll that needs to be made?",
       initial: "2d4kh1",
       label: "Roll",
     }),
-    threshold: new fields.NumberField({
+    threshold: new NumberField({
       hint: "What is the minimum value that needs to be rolled in order for this to expire?",
       initial: 4,
       label: "Threshold",
     }),
-    type: new fields.StringField({
+    type: new StringField({
       choices: {
         forced: "Expires Automatically",
         rolled: "Expires on Roll",
@@ -192,16 +202,16 @@ export function combatExpirationMethodField() {
 
 /**
  * Field for timing portion of combat expiration.
- * @returns {SchemaField} Method field.
+ * @returns {SchemaField}
  */
 export function combatExpirationTimingField() {
-  return new fields.SchemaField({
-    skip: new fields.NumberField({
+  return new SchemaField({
+    skip: new NumberField({
       hint: "A number of instances of the trigger firing to skip before this effect expires.",
       initial: 0,
       label: "Skip",
     }),
-    time: new fields.StringField({
+    time: new StringField({
       choices: {
         start: "Start",
         end: "End",
@@ -210,7 +220,7 @@ export function combatExpirationTimingField() {
       initial: "start",
       label: "When",
     }),
-    trigger: new fields.StringField({
+    trigger: new StringField({
       choices: {
         turn: "Turn",
         combat: "Combat",
@@ -224,22 +234,6 @@ export function combatExpirationTimingField() {
 }
 
 /**
- * Field that represents a change.
- * @returns {SchemaField}
- */
-export function changeField() {
-  return new fields.SchemaField({
-    key: new fields.StringField({ initial: "" }),
-    mode: new fields.NumberField({
-      choices: TERIOCK.options.effect.changeMode,
-      initial: 4,
-    }),
-    priority: new fields.NumberField({ initial: 20 }),
-    value: new fields.StringField({ initial: "" }),
-  });
-}
-
-/**
  * Field that represents an expanded change.
  * @returns {SchemaField}
  */
@@ -248,13 +242,14 @@ export function qualifiedChangeField() {
     Actor: "Actors",
     Item: "Items",
     ActiveEffect: "Active Effects",
+    parent: "Parent",
   };
   const subTypes = {};
   for (const v of Object.values(TERIOCK.system.documentTypes)) {
     Object.assign(subTypes, v);
   }
   Object.assign(allTypes, sortObject(subTypes));
-  return new fields.SchemaField({
+  return new SchemaField({
     key: new EnhancedStringField({ initial: "", label: "Key" }),
     mode: new EnhancedNumberField({
       choices: TERIOCK.options.effect.changeMode,
@@ -291,42 +286,42 @@ export function qualifiedChangeField() {
  * @returns {ArrayField}
  */
 export function associationsField() {
-  return new fields.ArrayField(
-    new fields.SchemaField({
-      cards: new fields.ArrayField(
-        new fields.SchemaField({
-          color: new fields.StringField({
+  return new ArrayField(
+    new SchemaField({
+      cards: new ArrayField(
+        new SchemaField({
+          color: new StringField({
             nullable: true,
             required: false,
           }),
-          id: new fields.DocumentIdField(),
-          img: new fields.StringField(),
-          makeTooltip: new fields.BooleanField({
+          id: new DocumentIdField(),
+          img: new StringField(),
+          makeTooltip: new BooleanField({
             initial: false,
             required: false,
           }),
-          name: new fields.StringField(),
-          rescale: new fields.BooleanField({
+          name: new StringField(),
+          rescale: new BooleanField({
             initial: false,
             required: false,
           }),
-          type: new fields.StringField({
+          type: new StringField({
             initial: "base",
             required: false,
           }),
-          uuid: new fields.DocumentUUIDField(),
+          uuid: new DocumentUUIDField(),
         }),
         {
           initial: [],
           required: false,
         },
       ),
-      icon: new fields.StringField({
+      icon: new StringField({
         nullable: true,
         required: false,
         initial: null,
       }),
-      title: new fields.StringField({
+      title: new StringField({
         initial: "Associations",
         required: false,
       }),
@@ -343,17 +338,17 @@ export function associationsField() {
  * @returns {ArrayField}
  */
 export function blocksField() {
-  return new fields.ArrayField(
-    new fields.SchemaField({
-      elements: new fields.StringField({ nullable: true }),
-      classes: new fields.StringField({ initial: "" }),
-      italic: new fields.BooleanField({
+  return new ArrayField(
+    new SchemaField({
+      elements: new StringField({ nullable: true }),
+      classes: new StringField({ initial: "" }),
+      italic: new BooleanField({
         initial: false,
         required: false,
       }),
-      special: new fields.StringField({ nullable: true }),
-      text: new fields.StringField({ nullable: true }),
-      title: new fields.StringField(),
+      special: new StringField({ nullable: true }),
+      text: new StringField({ nullable: true }),
+      title: new StringField(),
     }),
   );
 }
@@ -367,7 +362,7 @@ export function blocksField() {
  */
 export function blockSizeField(options = {}) {
   const { initial = "medium", label = "Child" } = options;
-  return new fields.StringField({
+  return new StringField({
     initial,
     choices: TERIOCK.options.display.sizes,
     label: `${label} Block Size`,
@@ -379,11 +374,12 @@ export function blockSizeField(options = {}) {
  * Field that sets block gaps.
  * @param {object} [options]
  * @param {boolean} [options.initial]
- * @param {string} [options.label] * @returns {BooleanField}
+ * @param {string} [options.label]
+ * @returns {BooleanField}
  */
 export function blockGaplessField(options = {}) {
   const { initial = false, label = "Child" } = options;
-  return new fields.BooleanField({
+  return new BooleanField({
     initial,
     label: `${label} Block Gapless`,
     hint: `Whether there shouldn't be gaps between ${label.toLowerCase()} blocks on this document's sheet.`,

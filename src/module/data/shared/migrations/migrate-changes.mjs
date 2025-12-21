@@ -8,9 +8,9 @@ import { toCamelCase } from "../../../helpers/string.mjs";
  */
 export function qualifyChange(change) {
   let { target = "Actor", qualifier = "1", key } = change;
-  if (key.startsWith("item")) {
-    target = "Item";
-    key = key.slice(4);
+  if (key.startsWith("item.")) {
+    target = "parent";
+    key = key.slice(5);
   } else if (key.startsWith("!")) {
     const parts = key.split("__");
     target = parts[0].slice(1);

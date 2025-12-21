@@ -28,6 +28,7 @@ export default function ChangeableDocumentMixin(Base) {
                     documentName,
                     {
                       untyped: [],
+                      uuids: {},
                       typed: Object.fromEntries(
                         Object.keys(CONFIG[documentName].dataModels).map(
                           (k) => [k, []],
@@ -52,7 +53,11 @@ export default function ChangeableDocumentMixin(Base) {
             };
             const time = change.time || "normal";
             const target = change.target || "Actor";
-            if (["Actor", "Item", "ActiveEffect"].includes(target)) {
+            if (target === "parent" && effect.parent) {
+              const uuids = changeTree[time][effect.parent.documentName].uuids;
+              if (!uuids[effect.parent.uuid]) uuids[effect.parent.uuid] = [];
+              uuids[effect.parent.uuid].push(conditionalChange);
+            } else if (["Actor", "Item", "ActiveEffect"].includes(target)) {
               changeTree[time][target].untyped.push(conditionalChange);
             } else {
               const documentName = TERIOCK.options.document[target]?.doc;
@@ -132,6 +137,7 @@ export default function ChangeableDocumentMixin(Base) {
         this._applyChanges([
           ...partialTree.untyped,
           ...partialTree.typed[this.type],
+          ...(partialTree.uuids[this.uuid] || []),
         ]);
       }
 
