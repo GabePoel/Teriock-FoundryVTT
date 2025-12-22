@@ -203,10 +203,13 @@ export default class TeriockAbilityModel extends mix(
     }
   }
 
+  /** @inheritDoc */
   get embedIcons() {
-    let icons = super.embedIcons;
+    let icons = super.embedIcons.filter(
+      (i) => !this.basic || !i.action?.toLowerCase().includes("disabled"),
+    );
     if (this.parent.elder?.type === "equipment") {
-      const newIcon = {
+      icons.unshift({
         icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
         action: "toggleOnUseDoc",
         tooltip: this.parent.isOnUse
@@ -224,8 +227,18 @@ export default class TeriockAbilityModel extends mix(
             "system.onUse": Array.from(onUseSet),
           });
         },
-      };
-      icons = [newIcon, ...icons];
+      });
+    }
+    if (this.basic) {
+      icons.push({
+        icon: "lock",
+        action: "toggleDisableLocked",
+        tooltip: "Locked",
+        callback: () => {
+          ui.notifications.error("Basic abilities cannot be disabled.");
+        },
+        condition: this.basic,
+      });
     }
     return icons;
   }

@@ -65,9 +65,7 @@ export default (Base) => {
             },
           },
           ...super.embedIcons.filter(
-            (i) =>
-              !i.action?.toLowerCase().includes("disabled") &&
-              !i.action?.toLowerCase().includes("attuned"),
+            (i) => !i.action?.toLowerCase().includes("attuned"),
           ),
         ];
       }

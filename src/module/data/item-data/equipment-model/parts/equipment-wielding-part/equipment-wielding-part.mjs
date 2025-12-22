@@ -77,7 +77,9 @@ export default (Base) => {
               }
             },
           },
-          ...super.embedIcons,
+          ...super.embedIcons.filter(
+            (i) => !i.action?.toLowerCase().includes("disabled"),
+          ),
           {
             icon: this.equipped ? "circle-check" : "circle",
             action: "toggleEquippedDoc",
