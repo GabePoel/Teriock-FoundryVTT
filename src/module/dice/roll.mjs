@@ -1,4 +1,5 @@
 import { systemPath } from "../helpers/path.mjs";
+import { selectWeightedMaxFaceDie } from "./helpers.mjs";
 
 const { Roll } = foundry.dice;
 
@@ -36,6 +37,7 @@ export default class TeriockRoll extends Roll {
       },
       options,
     );
+    this.id = foundry.utils.randomID();
     this.threshold = userOptions.threshold;
     this.styles = userOptions.styles;
     this.hideRoll = userOptions.hideRoll;
@@ -169,6 +171,7 @@ export default class TeriockRoll extends Roll {
     context.hasThreshold = typeof this.threshold === "number";
     context.styles = this.styles;
     context.hideRoll = this.hideRoll;
+    context.id = this.id;
     if (context.hasThreshold) {
       if (this.success) {
         context.styles.total.classes += " success";
@@ -181,6 +184,62 @@ export default class TeriockRoll extends Roll {
       }
     }
     return context;
+  }
+
+  /**
+   * Boost this roll in place.
+   * @param {object} options
+   * @returns {Promise<TeriockRoll>}
+   */
+  async boost(options = {}) {
+    const clone = this.clone({ evaluated: true });
+    if (!clone._evaluated) {
+      await clone.evaluate();
+    }
+    const die = selectWeightedMaxFaceDie(clone.dice);
+    die._number += 1;
+    const dieRoll = new TeriockRoll(die.formula);
+    await dieRoll.evaluate();
+    die.results.push(dieRoll.dice[0].results.at(-1));
+    return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
+      clone.terms,
+      options,
+    );
+  }
+
+  /**
+   * @inheritDoc
+   * @param {object} [options]
+   * @param {boolean} [options.evaluated]
+   * @returns {TeriockRoll}
+   */
+  clone(options = {}) {
+    const { evaluated } = options;
+    if (evaluated) {
+      return /** @type {TeriockRoll} */ TeriockRoll.fromData(
+        foundry.utils.deepClone(this.toJSON()),
+      );
+    }
+    return /** @type {TeriockRoll} */ super.clone();
+  }
+
+  /**
+   * Deboost this roll in place.
+   * @param {object} [options]
+   * @returns {Promise<TeriockRoll>}
+   */
+  async deboost(options = {}) {
+    const clone = this.clone({ evaluated: true });
+    if (!clone._evaluated) {
+      await clone.evaluate();
+    }
+    const die = selectWeightedMaxFaceDie(clone.dice);
+    die._number = Math.max(0, die._number - 1);
+    die.results.pop();
+    return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
+      clone.terms,
+      options,
+    );
   }
 
   /** @inheritDoc */

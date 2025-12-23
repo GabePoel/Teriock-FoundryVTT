@@ -1,5 +1,7 @@
 import { bindCommonActions } from "../../../applications/shared/_module.mjs";
+import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 import {
   associationsField,
   blocksField,
@@ -387,5 +389,46 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
     );
 
     bindCommonActions(htmlElement);
+
+    for (const roll of this.parent.rolls) {
+      const id = roll.id;
+      new TeriockContextMenu(
+        htmlElement,
+        `.dice-formula[data-id="${id}"]`,
+        [
+          {
+            name: "Boost",
+            icon: makeIcon("arrow-up-from-arc", "contextMenu"),
+            callback: async () => {
+              const boostedRoll = /** @type {TeriockRoll} */ await roll.boost(
+                roll.options,
+              );
+              await boostedRoll.toMessage({
+                system: {
+                  buttons: this.buttons,
+                },
+              });
+            },
+          },
+          {
+            name: "Deboost",
+            icon: makeIcon("arrow-down-from-arc", "contextMenu"),
+            callback: async () => {
+              const deboostedRoll =
+                /** @type {TeriockRoll} */ await roll.deboost(roll.options);
+              await deboostedRoll.toMessage({
+                system: {
+                  buttons: this.buttons,
+                },
+              });
+            },
+          },
+        ],
+        {
+          fixed: true,
+          jQuery: false,
+        },
+      );
+    }
   }
 }
