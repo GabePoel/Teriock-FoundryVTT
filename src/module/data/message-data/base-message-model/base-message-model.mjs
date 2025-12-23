@@ -1,5 +1,6 @@
 import { bindCommonActions } from "../../../applications/shared/_module.mjs";
 import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
+import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import {
@@ -404,6 +405,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
                 roll.options,
               );
               await boostedRoll.toMessage({
+                speaker: TeriockChatMessage.getSpeaker(),
                 system: {
                   buttons: this.buttons,
                 },
@@ -417,6 +419,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
               const deboostedRoll =
                 /** @type {TeriockRoll} */ await roll.deboost(roll.options);
               await deboostedRoll.toMessage({
+                speaker: TeriockChatMessage.getSpeaker(),
                 system: {
                   buttons: this.buttons,
                 },
