@@ -1,14 +1,5 @@
+import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../../helpers/utils.mjs";
-
-/**
- * Capitalizes the first character of a string.
- *
- * @param {string} str - The string to capitalize.
- * @returns {string} The capitalized string.
- */
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
 
 /**
  * Creates context menus for ability configuration.
@@ -17,7 +8,7 @@ function capitalize(str) {
  * @param {TeriockAbility} ability - The ability to create context menus for.
  * @returns {object} Object containing all context menu configurations.
  */
-export function contextMenus(ability) {
+export default function abilityContextMenus(ability) {
   /**
    * Fetches configuration values from `TERIOCK.options.ability`.
    * @param {string} keychain - Dot-separated keychain to traverse.
@@ -37,7 +28,7 @@ export function contextMenus(ability) {
    * @param {string} keychain - The configuration keychain to use.
    * @param {string} updateKey - The system key to update when an option is selected.
    * @param {boolean|null} nullOption - Whether to include a "None" option.
-   * @returns {Array} Array of menu options.
+   * @returns {Teriock.Foundry.ContextMenuEntry[]}
    */
   function quickMenu(keychain, updateKey, nullOption = null) {
     const keys = fetch(keychain);
@@ -423,7 +414,7 @@ export function contextMenus(ability) {
     featSaveImprovementAmount: Object.keys(
       TERIOCK.options.ability.featSaveImprovementAmount,
     ).map((level) => ({
-      name: capitalize(level),
+      name: toTitleCase(level),
       icon: TERIOCK.display.icons[level],
       callback: async () => {
         await ability.update({

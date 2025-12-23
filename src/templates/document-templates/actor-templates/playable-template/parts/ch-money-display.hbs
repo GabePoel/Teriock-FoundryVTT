@@ -1,0 +1,50 @@
+<div class="teriock-block-display">
+  <div class="money-panels tgrid g3">
+    {{#each TERIOCK.options.currency as |currency id|}}
+      <div class="money-panel-container">
+        <div class="money-icon tcenter timage" data-src="{{getIconKey "currency" id}}">
+          <img src="{{getIconKey "currency" id}}" data-openable="true" alt="">
+        </div>
+        <div class="money-panel tgrid g4">
+          {{formInput
+            (path ../systemFields.money "fields" id)
+            value=(path ../system.money id)
+            classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+          }}
+          <div class="money-info tsubtle tcenter gi3">
+            <div class="money-name">
+              {{currency.name}}
+            </div>
+            <div class="money-value">
+              ({{currency.value}} ₲, {{currency.weight}} lb)
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+    <div class="money-panel-container">
+      <div class="money-icon tcenter timage" data-src="{{getIconKey "currency" "debt"}}">
+        <img src="{{getIconKey "currency" "debt"}}" data-openable="true" alt="">
+      </div>
+      <div class="money-panel tgrid g4">
+        {{formInput
+          systemFields.money.fields.debt
+          value=system.money.debt
+          classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+        }}
+        <div class="money-info tsubtle tcenter gi3">
+          <div class="money-name">
+            Debt
+          </div>
+          <div class="money-value">
+            (-1 ₲, {{system.interestRate}}% daily)
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="money-total {{#if (lt system.money.total 0)}}tred{{/if}}">
+    {{system.money.total}} ₲&nbsp;&nbsp;&nbsp;&nbsp;{{system.weight.money}} lb
+  </div>
+</div>

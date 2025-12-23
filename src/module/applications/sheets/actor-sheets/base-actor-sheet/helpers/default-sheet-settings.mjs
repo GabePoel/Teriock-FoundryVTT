@@ -4,7 +4,7 @@ const threeToggleInitial = 0;
 /**
  * @type {BaseActorSheetSettings}
  */
-export function defaultSheetSettings() {
+export default function defaultSheetSettings() {
   return {
     abilityFilters: {
       basic: game.settings.get("teriock", "hideBasicAbilitiesByDefault")

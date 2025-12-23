@@ -253,7 +253,12 @@ export default function registerUiHelpers() {
               >
             </div>
             <div class="tgrid-item gi3">
-              <select data-action="sheetSelect" data-path="settings.${tab}SortOption" id="${tab}-sort">
+              <select 
+                data-action="sheetSelect" 
+                data-path="settings.${tab}SortOption" 
+                id="${tab}-sort"
+                ${selectOptions(sortOptions, { hash: { selected: sortValue } })}
+              >
                 ${sortSelectHTML}
               </select>
             </div>

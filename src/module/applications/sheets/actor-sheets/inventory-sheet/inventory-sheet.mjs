@@ -22,6 +22,7 @@ export default class TeriockInventorySheet extends TeriockBaseActorSheet {
       template: systemPath(
         "templates/document-templates/actor-templates/inventory-template/inventory-template.hbs",
       ),
+      scrollable: [""],
     },
   };
 }

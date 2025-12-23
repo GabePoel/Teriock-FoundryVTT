@@ -4,6 +4,7 @@
  * @param {typeof DragDropCommonSheetPart} Base
  */
 export default function EquipmentDropSheetMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {DragDropCommonSheetPart}

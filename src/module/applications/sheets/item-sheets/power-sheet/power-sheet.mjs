@@ -1,7 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
-import { powerContextMenu } from "./connections/_context-menus.mjs";
 
 /**
  * Sheet for a {@link TeriockPower}.
@@ -51,7 +50,11 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
     if (!this.editable) {
       return;
     }
-    const powerContextMenuOptions = powerContextMenu(this.item);
-    this._connectContextMenu(".power-box", powerContextMenuOptions, "click");
+    this._connectBuildContextMenu(
+      ".power-box",
+      TERIOCK.options.power,
+      "system.type",
+      "click",
+    );
   }
 }

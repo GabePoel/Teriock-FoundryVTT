@@ -1,68 +1,37 @@
-<div class="{{cssClass}} character-window">
+<div class="{{cssClass}} character-window inventory-sheet">
+  {{> (template "document-templates/shared/header.hbs")}}
   <div class="character-page">
     <div class="character-tab-content">
-      {{> (template "document-templates/shared/header.hbs")}}
-      <div class="character-tab inventory" style="padding-top: 0.25em;">
-        <div class="character-tab-page">
-          <div class="teriock-block-display">
-            <div class="money-panels tgrid g3">
-              {{#each TERIOCK.options.currency as |currency id|}}
-                <div class="money-panel tgrid g4">
-                  {{formInput
-                    (path ../systemFields.money "fields" id)
-                    value=(path ../system.money id)
-                    classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
-                  }}
-                  <div class="money-info tsubtle tcenter tgrid-item gi3">
-                    <div class="money-name">
-                      {{currency.name}}
-                    </div>
-                    <div class="money-value">
-                      ({{currency.value}} ₲, {{currency.weight}} lb)
-                    </div>
-                  </div>
-                </div>
-              {{/each}}
-              <div class="money-panel tgrid g4">
-                {{formInput
-                  systemFields.money.fields.debt
-                  value=system.money.debt
-                  classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
-                }}
-                <div class="money-info tsubtle tcenter tgrid-item gi3">
-                  <div class="money-name">
-                    Debt
-                  </div>
-                  <div class="money-value">
-                    (-1 ₲, {{system.interestRate}}% daily)
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="money-total {{#if (lt system.money.total 0)}}tred{{/if}}">
-              {{system.money.total}} ₲&nbsp;&nbsp;&nbsp;&nbsp;{{system.weight.money}} lb
-            </div>
-          </div>
-
+      <div class="character-tab inventory">
+        <div class="character-tab-page teriock-block-results" data-search-key="equipment">
+          {{> (template "document-templates/actor-templates/playable-template/parts/ch-money-display.hbs")}}
           <div class="teriock-block-display">
             <div class="teriock-block-options">
-              {{blockOptions settings.menus.equipmentOptions settings.menus.equipmentFilters
-                             settings.menus.equipmentSort
-                             settings.equipmentFilters.search "equipment"
-                             sortOptions=TERIOCK.options.display.equipmentSortOrders
-                             sortValue=settings.equipmentSortOption
-                             addAction="createEquipment"
-                             key="equipment"
-                             gaplessPath="document.flags.teriockDocumentSettings.sheetBlockInventoryGapless"
-                             sizePath="document.flags.teriockDocumentSettings.sheetBlockInventorySize"
+              {{blockOptions
+                settings.menus.equipmentOptions settings.menus.equipmentFilters
+                settings.menus.equipmentSort
+                settings.equipmentFilters.search "equipment"
+                sortOptions=TERIOCK.options.display.equipmentSortOrders
+                sortValue=settings.equipmentSortOption
+                addAction="createEquipment" key="equipment"
+                gaplessPath="flags.teriockDocumentSettings.sheetBlockInventoryGapless"
+                sizePath="flags.teriockDocumentSettings.sheetBlockInventorySize"
               }}
               {{#if settings.menus.equipmentFilters}}
                 <div class="teriock-block-options-content">
-                  {{> (template "document-templates/actor-templates/playable-template/filters/ch-equipment-filter.hbs")}}
+                  {{> (template
+                    "document-templates/actor-templates/playable-template/filters/ch-equipment-filter.hbs"
+                  )}}
                 </div>
               {{/if}}
             </div>
-            {{> (template "document-templates/actor-templates/playable-template/results/ch-equipment-results.hbs")}}
+            {{> (template "document-templates/actor-templates/playable-template/results/search-results.hbs")
+              docs=equipment
+              searchKey="equipment"
+              empty="equipment"
+              gapless="sheetBlockInventoryGapless"
+              size="sheetBlockInventorySize"
+            }}
           </div>
         </div>
       </div>

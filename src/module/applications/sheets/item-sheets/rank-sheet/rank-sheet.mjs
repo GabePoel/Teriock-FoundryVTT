@@ -6,7 +6,7 @@ import {
   archetypeContextMenu,
   classContextMenu,
   rankContextMenu,
-} from "./connections/_context-menus.mjs";
+} from "./helpers/rank-context-menus.mjs";
 
 /**
  * Sheet for a {@link TeriockRank}.

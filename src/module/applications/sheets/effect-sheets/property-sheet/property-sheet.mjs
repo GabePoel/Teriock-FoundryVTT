@@ -2,7 +2,6 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
-import { propertyContextMenu } from "./connections/_context-menus.mjs";
 
 /**
  * {@link TeriockProperty} sheet.
@@ -46,10 +45,10 @@ export default class TeriockPropertySheet extends mix(
     if (!this.editable) {
       return;
     }
-    const propertyContextMenuOptions = propertyContextMenu(this.document);
-    this._connectContextMenu(
+    this._connectBuildContextMenu(
       ".property-type-box",
-      propertyContextMenuOptions,
+      TERIOCK.options.ability.form,
+      "system.form",
       "click",
     );
   }

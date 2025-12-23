@@ -2,10 +2,6 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
-import {
-  fontContextMenu,
-  powerLevelContextMenu,
-} from "./connections/_context-menus.mjs";
 
 /**
  * Sheet for a {@link TeriockEquipment}.
@@ -164,15 +160,11 @@ export default class TeriockEquipmentSheet extends mix(
     if (!this.editable) {
       return;
     }
-    this._connectContextMenu(
+    this._connectBuildContextMenu(
       ".power-level-box",
-      powerLevelContextMenu(this.item),
+      TERIOCK.options.equipment.powerLevel,
+      "system.powerLevel",
       "click",
-    );
-    this._connectContextMenu(
-      ".ab-title",
-      fontContextMenu(this.item),
-      "contextmenu",
     );
     this._activateTags();
   }

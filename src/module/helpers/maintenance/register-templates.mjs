@@ -12,6 +12,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/actor-templates/playable-template/parts/ch-attribute-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/playable-template/parts/ch-battle-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/playable-template/parts/ch-hack-box.hbs",
+    "systems/teriock/src/templates/document-templates/actor-templates/playable-template/parts/ch-money-display.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/playable-template/parts/ch-sidebar.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/playable-template/parts/ch-status-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/playable-template/parts/ch-tabs.hbs",

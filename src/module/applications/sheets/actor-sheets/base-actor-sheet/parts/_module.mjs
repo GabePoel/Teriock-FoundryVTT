@@ -1,8 +1,13 @@
 export { default as AvatarImageActorSheetPart } from "./avatar-image-actor-sheet-part.mjs";
 export { default as CombatActorSheetPart } from "./combat-actor-sheet-part.mjs";
+export { default as ConditionsActorSheetPart } from "./conditions-actor-sheet-part.mjs";
+export { default as FiltersActorSheetPart } from "./filters-actor-sheet-part.mjs";
 export { default as HidingActorSheetPart } from "./hiding-actor-sheet-part.mjs";
 export { default as MechanicalActorSheetPart } from "./mechanical-actor-sheet-part.mjs";
 export { default as RollingActorSheetPart } from "./rolling-actor-sheet-part.mjs";
 export { default as SearchingActorSheetPart } from "./searching-actor-sheet-part.mjs";
+export { default as SidebarActorSheetPart } from "./sidebar-actor-sheet-part.mjs";
+export { default as SortingActorSheetPart } from "./sorting-actor-sheet-part.mjs";
+export { default as TabsActorSheetPart } from "./tabs-actor-sheet-part.mjs";
 export { default as TakingActorSheetPart } from "./taking-actor-sheet-part.mjs";
 export { default as TradecraftsActorSheetPart } from "./tradecrafts-actor-sheet-part.mjs";

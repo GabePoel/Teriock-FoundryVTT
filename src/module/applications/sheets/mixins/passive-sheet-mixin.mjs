@@ -1,10 +1,11 @@
-import { pureUuid, safeUuid } from "../../../../helpers/resolve.mjs";
+import { pureUuid, safeUuid } from "../../../helpers/resolve.mjs";
 
 /**
  * Mixin for documents that passively modify other documents.
  * @param {typeof CommonSheet} Base
  */
 export default function PassiveSheetMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {CommonSheet}

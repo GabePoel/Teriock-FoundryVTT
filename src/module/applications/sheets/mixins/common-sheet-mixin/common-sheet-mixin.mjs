@@ -1,11 +1,10 @@
 //noinspection JSValidateJSDoc,JSClosureCompilerSyntax
 
-import { mix } from "../../../../helpers/utils.mjs";
+import { toTitleCase } from "../../../../helpers/string.mjs";
+import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../../ux/_module.mjs";
 import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
-import _connectEmbedded from "./methods/_connect-embedded.mjs";
-import _setupEventListeners from "./methods/_setup-handlers.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
@@ -19,8 +18,16 @@ export default function CommonSheetMixin(Base) {
      * @extends {DocumentSheetV2}
      * @mixes DocumentCreationCommonSheetPart
      * @mixes DragDropCommonSheetPart
-     * @mixes LockingCommonSheetPart
+     * @mixes FieldsCommonSheetPart
+     * @mixes GmNotesCommonSheetPart
+     * @mixes ImageEditingCommonSheetPart
+     * @mixes ImpactsTabsCommonSheetPart
      * @mixes InteractionCommonSheetPart
+     * @mixes LockingCommonSheetPart
+     * @mixes MacroCommonSheetPart
+     * @mixes MenuCommonSheetPart
+     * @mixes StatDiceCommonSheetPart
+     * @mixes ToggleCommonSheetPart
      * @mixin
      * @property {TeriockCommon} document
      */
@@ -29,22 +36,22 @@ export default function CommonSheetMixin(Base) {
       ConfigButtonSheetMixin,
       parts.DragDropCommonSheetPart,
       parts.DocumentCreationCommonSheetPart,
+      parts.FieldsCommonSheetPart,
+      parts.GmNotesCommonSheetPart,
+      parts.ImageEditingCommonSheetPart,
+      parts.ImpactsTabsCommonSheetPart,
       parts.InteractionCommonSheetPart,
       parts.LockingCommonSheetPart,
+      parts.MacroCommonSheetPart,
+      parts.MenuCommonSheetPart,
+      parts.StatDiceCommonSheetPart,
+      parts.ToggleCommonSheetPart,
       IndexButtonSheetMixin,
     ) {
       //noinspection JSValidateTypes
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          changeImpactTab: this._onChangeImpactTab,
-          editImage: this._onEditImage,
-          gmNotesOpen: this._onGmNotesOpen,
-          quickToggle: this._onQuickToggle,
-          setStatDice: this._onSetStatDice,
-          sheetToggle: this._onSheetToggle,
-          toggleImpacts: this._onToggleImpacts,
-          unlinkMacro: this._onUnlinkMacro,
           openDoc: this._onOpenDoc,
         },
         form: {
@@ -62,60 +69,12 @@ export default function CommonSheetMixin(Base) {
 
       /**
        * Creates a new Teriock sheet instance.
-       * Initializes sheet state including menu state, context menus, and settings.
+       * Initializes sheet state including settings.
        * @param {...any} args - Arguments to pass to the base constructor.
        */
       constructor(...args) {
         super(...args);
-        this._impactTab = "base";
-        this._menuOpen = false;
-        this._tab = "overview";
         this.settings = {};
-      }
-
-      /**
-       * Switches to a specific impacts tab.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when tab is switched.
-       * @static
-       */
-      static async _onChangeImpactTab(_event, target) {
-        this._impactTab = target.dataset.tab;
-        await this.render();
-      }
-
-      /**
-       * Opens image picker for editing document images.
-       * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when image picker is opened.
-       */
-      static async _onEditImage(event, target) {
-        event.stopPropagation();
-        const attr = target.dataset.edit;
-        const current = foundry.utils.getProperty(this.document, attr);
-        //noinspection JSUnresolvedReference
-        const defaultImg = this.document.constructor.getDefaultArtwork?.(
-          this.document.toObject(),
-        )?.img;
-        const options = {
-          current,
-          type: "image",
-          redirectToRoot: defaultImg ? [defaultImg] : [],
-          callback: (path) => this.document.update({ [attr]: path }),
-          top: this.position.top + 40,
-          left: this.position.left + 10,
-        };
-        await new foundry.applications.apps.FilePicker(options).browse();
-      }
-
-      /**
-       * Opens the GM notes page or makes one if one doesn't already exist.
-       * @returns {Promise<void>}
-       */
-      static async _onGmNotesOpen() {
-        await this.document.system.gmNotesOpen();
       }
 
       /**
@@ -131,101 +90,6 @@ export default function CommonSheetMixin(Base) {
       }
 
       /**
-       * Toggles a boolean field on the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when toggle is complete.
-       */
-      static async _onQuickToggle(_event, target) {
-        const { path } = target.dataset;
-        const current = target.dataset.bool === "true";
-        await this.document.update({ [path]: !current });
-      }
-
-      /**
-       * Modify a specified stat pool.
-       * @param {PointerEvent} _event
-       * @param {HTMLElement} target
-       * @returns {Promise<void>}
-       */
-      static async _onSetStatDice(_event, target) {
-        if (!this.editable) {
-          return;
-        }
-        const stat = target.dataset.stat;
-        const pool =
-          /** @type {StatPoolModel} */ this.document.system.statDice[stat];
-        await pool.setStatDice();
-      }
-
-      /**
-       * Toggles a boolean field on the sheet and re-renders.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when toggle is complete.
-       */
-      static async _onSheetToggle(_event, target) {
-        const { path } = target.dataset;
-        const current = target.dataset.bool === "true";
-        foundry.utils.setProperty(this, path, !current);
-        await this.render();
-      }
-
-      /**
-       * Toggles between overview and impacts tabs.
-       * @returns {Promise<void>} Promise that resolves when tab is toggled.
-       * @static
-       */
-      static async _onToggleImpacts() {
-        this._tab = this._tab === "impacts" ? "overview" : "impacts";
-        await this.render();
-      }
-
-      /**
-       * Unlink a macro from this document.
-       * @param {PointerEvent} _event
-       * @param {HTMLElement} target
-       * @returns {Promise<void>}
-       */
-      static async _onUnlinkMacro(_event, target) {
-        if (this.editable) {
-          if (this.document.system.macros) {
-            const uuidElement =
-              /** @type {HTMLElement} */ target.closest("[data-uuid]");
-            const uuid = uuidElement.dataset.uuid;
-            await this.document.system.unlinkMacro(uuid);
-          } else {
-            ui.notifications.warn("Sheet must be editable to unlink macro.");
-          }
-        }
-      }
-
-      /**
-       * Activates the sheet menu functionality.
-       * Sets up menu toggle behavior and initial state.
-       */
-      _activateMenu() {
-        /** @type {HTMLElement} */
-        const menu = this.element.querySelector(".ab-menu");
-        /** @type {HTMLElement} */
-        const toggle = this.element.querySelector(".ab-menu-toggle");
-
-        if (menu && this._menuOpen) {
-          menu.classList.add("no-transition", "ab-menu-open");
-          //eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          menu.offsetHeight;
-          menu.classList.remove("no-transition");
-          toggle.classList.add("ab-menu-toggle-open");
-        }
-
-        this._connect(".ab-menu-toggle", "click", () => {
-          this._menuOpen = !this._menuOpen;
-          menu.classList.toggle("ab-menu-open", this._menuOpen);
-          toggle.classList.toggle("ab-menu-toggle-open", this._menuOpen);
-        });
-      }
-
-      /**
        * Connects event handlers to elements matching a selector.
        * @param {string} selector - The CSS selector for elements to connect.
        * @param {string} eventType - The event type to listen for.
@@ -238,6 +102,29 @@ export default function CommonSheetMixin(Base) {
             e.preventDefault();
             handler(e);
           }),
+        );
+      }
+
+      /**
+       * Build and connect context menu entries that update this document from some object.
+       * @param {string} cssClass - The CSS class for elements to attach the menu to.
+       * @param {object} obj - Object with keys, names, and icons.
+       * @param {string} path - Path of document to update.
+       * @param {string} eventName - The event name to trigger the menu.
+       */
+      _connectBuildContextMenu(cssClass, obj, path, eventName) {
+        this._connectContextMenu(
+          cssClass,
+          Object.entries(obj).map(([k, v]) => {
+            return {
+              name: v.name || toTitleCase(k),
+              icon: makeIcon(v.icon, "contextMenu"),
+              callback: async () => {
+                await this.document.update({ [path]: k });
+              },
+            };
+          }),
+          eventName,
         );
       }
 
@@ -283,14 +170,11 @@ export default function CommonSheetMixin(Base) {
         if (typeof this.editable !== "boolean") {
           this.editable = this.isEditable;
         }
-        await _connectEmbedded(this.document, this.element, this.editable);
         this._connect("[data-debug]", "contextmenu", () => {
           if (game.settings.get("teriock", "developerMode")) {
             console.log("Debug", this.document, this);
           }
         });
-        this._activateMenu();
-        _setupEventListeners(this);
         this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(
           /** @param {HTMLElement} el */ (el) => {
             const uuid = el.dataset.uuid;
@@ -330,7 +214,6 @@ export default function CommonSheetMixin(Base) {
           flags: this.document.flags,
           id: this.document.id,
           img: this.document.img,
-          impactTab: this._impactTab,
           isEditable: this.isEditable,
           isGM: game.user.isGM,
           limited: this.document.limited,
@@ -342,39 +225,10 @@ export default function CommonSheetMixin(Base) {
           system: this.document.system,
           systemFields: this.document.system.schema.fields,
           systemSource: this.document.system._source,
-          tab: this._tab,
           uuid: this.document.uuid,
           sheetId: this.id,
         });
-        await this._prepareMacroContext(context);
         return context;
-      }
-
-      /**
-       * Prepare any macros that should be part of the context.
-       * @param {object} context
-       * @returns {Promise<void>}
-       */
-      async _prepareMacroContext(context) {
-        if (this.document.system.macros) {
-          context.macros = await Promise.all(
-            Array.from(
-              this.document.system.macros.map(async (uuid) => {
-                let macro = await fromUuid(uuid);
-                if (!macro) {
-                  macro = {
-                    name: "Broken Macro",
-                    uuid: uuid,
-                    img: "icons/svg/hazard.svg",
-                  };
-                }
-                return macro;
-              }),
-            ),
-          );
-        } else {
-          context.macros = [];
-        }
       }
 
       /** @inheritDoc */
@@ -383,15 +237,6 @@ export default function CommonSheetMixin(Base) {
         if (this.document.inCompendium) {
           this.window.header.style.backgroundColor =
             "var(--compendium-sheet-header-background-color)";
-        }
-        if (game.user.isGM) {
-          const notesButton = document.createElement("button");
-          notesButton.classList.add(
-            ...["header-control", "icon", "fa-solid", "fa-notes"],
-          );
-          notesButton.setAttribute("data-action", "gmNotesOpen");
-          notesButton.setAttribute("data-tooltip", "Open GM Notes");
-          this.window.controls.before(notesButton);
         }
         return frame;
       }

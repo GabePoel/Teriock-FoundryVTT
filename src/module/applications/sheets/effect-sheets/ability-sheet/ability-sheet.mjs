@@ -3,7 +3,7 @@ import { mix } from "../../../../helpers/utils.mjs";
 import { durationDialog } from "../../../dialogs/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
-import { contextMenus } from "./connections/_context-menus.mjs";
+import abilityContextMenus from "./helpers/ability-context-menus.mjs";
 
 /**
  * {@link TeriockAbility} sheet.
@@ -66,7 +66,7 @@ export default class TeriockAbilitySheet extends mix(
    * Sets up context menus for delivery, execution, interaction, targets, costs, and improvements.
    */
   _activateContextMenus() {
-    const cm = contextMenus(this.document);
+    const cm = abilityContextMenus(this.document);
     const contextMap = [
       [".delivery-box", cm.delivery, "click"],
       [".delivery-box", cm.piercing, "contextmenu"],
