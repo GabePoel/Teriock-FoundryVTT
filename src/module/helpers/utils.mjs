@@ -2,22 +2,6 @@ import { iconStyles } from "../constants/display/_module.mjs";
 import { TeriockRoll } from "../dice/_module.mjs";
 
 /**
- * Modify a change's prefix.
- * @param {EffectChangeData} change
- * @param {string} searchValue
- * @param {string} replaceValue
- * @returns {EffectChangeData}
- */
-export function modifyChangePrefix(change, searchValue, replaceValue) {
-  return {
-    key: change.key.replace(searchValue, replaceValue),
-    mode: change.mode,
-    priority: change.priority,
-    value: change.value,
-  };
-}
-
-/**
  * Creates an HTML icon using Font Awesome classes.
  * @param {string} icon - The icon name to use.
  * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").

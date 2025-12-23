@@ -31,20 +31,3 @@ export function cleanFeet(feet) {
   feet = feet.trim();
   return feet;
 }
-
-/**
- * Cleans and standardizes capitalization in a string.
- * @param {string} value - The string to clean and capitalize.
- * @returns {string} The cleaned string with proper capitalization.
- */
-export function cleanCapitalization(value) {
-  const words = value.split(" ");
-  const filteredWords = words.filter((word) => word.length > 0);
-  const capitalizedWords = filteredWords.map((word) => {
-    if (word.length > 2) {
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-    }
-    return word.toLowerCase();
-  });
-  return capitalizedWords.join(" ");
-}
