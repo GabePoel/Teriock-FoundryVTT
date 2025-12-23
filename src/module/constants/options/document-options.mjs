@@ -106,10 +106,6 @@ export const documentOptions = {
     pack: "properties",
     sorter: effectSort,
   },
-  protection: {
-    icon: "shield-halved",
-    name: "Protection",
-  },
   rank: {
     doc: "Item",
     getter: "ranks",

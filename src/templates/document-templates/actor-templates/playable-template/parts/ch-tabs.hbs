@@ -1,0 +1,15 @@
+<nav class="character-tabbers">
+  {{#each tabs as |tab|}}
+    {{#if (eq tab.group "primary")}}
+      <div
+        class="character-tabber ui-controls {{tabActive @root/activeTab tab.id}}"
+        data-action="changeTab"
+        data-tab="{{tab.id}}"
+        data-tooltip="{{tab.label}}"
+        data-tooltip-direction="{{#if @root/windowNavigation}}LEFT{{else}}RIGHT{{/if}}"
+      >
+        <i class="{{tab.icon}}"></i>
+      </div>
+    {{/if}}
+  {{/each}}
+</nav>

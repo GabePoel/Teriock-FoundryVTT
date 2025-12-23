@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { mix } from "../../../../helpers/utils.mjs";
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import TeriockBaseActorSheet from "./base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 import {
   piercingContextMenu,
   scalingContextMenu,
-} from "./tools/character-context-menus.mjs";
+} from "./tools/character-context-menus.mjs"; //noinspection JSUnresolvedReference,JSClosureCompilerSyntax
 
 //noinspection JSUnresolvedReference,JSClosureCompilerSyntax
 /**
@@ -25,6 +26,64 @@ export default class TeriockPlayableActorSheet extends mix(
   parts.MechanicalActorSheetPart,
   parts.TradecraftsActorSheetPart,
 ) {
+  static DEFAULT_OPTIONS = {
+    actions: {
+      changeTab: this._onChangeTab,
+    },
+  };
+
+  static TABS = {
+    primary: {
+      tabs: [
+        {
+          id: "tradecrafts",
+          icon: makeIconClass(documentOptions.fluency.icon, "solid"),
+          label: "Tradecrafts",
+        },
+        {
+          id: "abilities",
+          icon: makeIconClass(documentOptions.ability.icon, "solid"),
+          label: "Abilities",
+        },
+        {
+          id: "inventory",
+          icon: makeIconClass(documentOptions.equipment.icon, "solid"),
+          label: "Inventory",
+        },
+        {
+          id: "classes",
+          icon: makeIconClass(documentOptions.rank.icon, "solid"),
+          label: "Classes",
+        },
+        {
+          id: "powers",
+          icon: makeIconClass(documentOptions.power.icon, "solid"),
+          label: "Powers",
+        },
+        {
+          id: "resources",
+          icon: makeIconClass(documentOptions.resource.icon, "solid"),
+          label: "Resources",
+        },
+        {
+          id: "conditions",
+          icon: makeIconClass(documentOptions.condition.icon, "solid"),
+          label: "Effects",
+        },
+        {
+          id: "protections",
+          icon: makeIconClass("shield-halved", "solid"),
+          label: "Protections",
+        },
+        {
+          id: "notes",
+          icon: makeIconClass("list-ul", "solid"),
+          label: "Details",
+        },
+      ],
+    },
+  };
+
   /** @inheritDoc */
   constructor(...args) {
     super(...args);
@@ -33,6 +92,17 @@ export default class TeriockPlayableActorSheet extends mix(
     for (const stat of Object.keys(TERIOCK.options.die.stats)) {
       this[`_${stat}DrawerOpen`] = true;
     }
+  }
+
+  /**
+   * Change tab.
+   * @param {PointerEvent} _event
+   * @param {HTMLElement} target
+   * @returns {Promise<void>}
+   */
+  static async _onChangeTab(_event, target) {
+    this._activeTab = target.dataset.tab;
+    await this.render();
   }
 
   /** @inheritDoc */
@@ -98,24 +168,18 @@ export default class TeriockPlayableActorSheet extends mix(
       el?.classList.remove("no-transition");
     }
 
-    this.element.querySelectorAll(".character-tabber").forEach((el) => {
-      el.addEventListener("click", async (e) => {
-        e.preventDefault();
-        /** @type {HTMLElement} */
-        const currentTarget = e.currentTarget;
-        const tab = /** @type {ActorTab} */ currentTarget.dataset.tab;
-        if (tab === "sidebar") {
+    this.element
+      .querySelectorAll(".character-tabber[data-tab='sidebar']")
+      .forEach((el) => {
+        el.addEventListener("click", async (e) => {
+          e.preventDefault();
           interactiveElements.sidebar.classList.toggle("collapsed");
           interactiveElements.tabber.classList.toggle("collapsed");
           this._sidebarOpen = !this._sidebarOpen;
           this._tabberOpen = !this._tabberOpen;
-        } else {
-          this._activeTab = tab;
-          await this.render();
-        }
-        e.stopPropagation();
+          e.stopPropagation();
+        });
       });
-    });
 
     for (const [stat, name] of Object.entries(TERIOCK.options.die.stats)) {
       this.element
@@ -179,5 +243,15 @@ export default class TeriockPlayableActorSheet extends mix(
       "contextmenu",
       "down",
     );
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options = {}) {
+    const context = await super._prepareContext(options);
+    context.windowNavigation = !game.settings.get(
+      "teriock",
+      "floatingActorTabs",
+    );
+    return context;
   }
 }

@@ -1,42 +1,5 @@
-<div class="{{cssClass}} {{#if hideInactive}}hide-inactive{{/if}} character-window">
-  <div class="character-tabbers">
-    <div class="character-tabber ui-controls {{tabActive activeTab "tradecrafts"}}" data-tab="tradecrafts"
-         data-action="changeTab" data-tooltip="Tradecrafts" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.fluency 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "abilities"}}" data-tab="abilities"
-         data-action="changeTab" data-tooltip="Abilities" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.ability 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "inventory"}}" data-tab="inventory"
-         data-action="changeTab" data-tooltip="Inventory" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.equipment 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "classes"}}" data-tab="classes"
-         data-action="changeTab" data-tooltip="Classes" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.rank 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "powers"}}" data-tab="powers" data-action="changeTab"
-         data-tooltip="Powers" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.power 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "resources"}}" data-tab="resources"
-         data-action="changeTab" data-tooltip="Resources" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.resource 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "conditions"}}" data-tab="conditions"
-         data-action="changeTab" data-tooltip="Effects" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.condition 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "protections"}}" data-tab="protections"
-         data-action="changeTab" data-tooltip="Protections" data-tooltip-direction="RIGHT">
-      {{ticon (lookup TERIOCK.options.document.protection 'icon') style="solid"}}
-    </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "notes"}}" data-tab="notes" data-action="changeTab"
-         data-tooltip="Details" data-tooltip-direction="RIGHT">
-      <i class="fa-solid fa-list-ul"></i>
-    </div>
-  </div>
+<div class="{{cssClass}} {{#if hideInactive}}hide-inactive{{/if}} character-window {{#if
+  windowNavigation}}window-navigation{{/if}}">
   <div class="character-page">
     {{> (template "document-templates/actor-templates/playable-template/parts/ch-sidebar.hbs")}}
     <div class="character-sidebar-tabber-container">
@@ -47,36 +10,10 @@
       </div>
     </div>
     <div class="character-tab-content">
-      {{#if (eq activeTab "overview")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-overview.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "tradecrafts")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-tradecrafts.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "abilities")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-abilities.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "inventory")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-inventory.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "classes")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-classes.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "powers")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-powers.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "resources")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-resources.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "conditions")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-conditions.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "protections")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-protections.hbs")}}
-      {{/if}}
-      {{#if (eq activeTab "notes")}}
-        {{> (template "document-templates/actor-templates/playable-template/tabs/ch-tab-notes.hbs")}}
-      {{/if}}
+      {{> (template (concat "document-templates/actor-templates/playable-template/tabs/ch-tab-" activeTab ".hbs"))}}
+    </div>
+    <div class="character-tabber-background">
+      {{> (template "document-templates/actor-templates/playable-template/parts/ch-tabs.hbs")}}
     </div>
   </div>
 </div>

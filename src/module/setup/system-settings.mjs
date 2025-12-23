@@ -62,6 +62,15 @@ export function registerSettings() {
       scope: "user",
       type: Number,
     },
+    floatingActorTabs: {
+      config: true,
+      default: true,
+      hint: "Whether tabs on actor sheets hover outside the window frame.",
+      name: "Floating Actor Tabs",
+      requiresReload: true,
+      scope: "client",
+      type: Boolean,
+    },
     systemLinks: {
       config: true,
       default: false,
