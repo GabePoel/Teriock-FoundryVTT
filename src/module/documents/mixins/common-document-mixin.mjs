@@ -1,10 +1,12 @@
-import { systemPath } from "../../../helpers/path.mjs";
-import { mix } from "../../../helpers/utils.mjs";
-import { TeriockActor } from "../../_module.mjs";
-import { HierarchyDocumentMixin } from "../_module.mjs";
-import ChangeableDocumentMixin from "../changeable-document-mixin/changeable-document-mixin.mjs";
-import EmbedCardDocumentMixin from "../embed-card-document-mixin/embed-card-document-mixin.mjs";
-import PanelDocumentMixin from "../panel-document-mixin/panel-document-mixin.mjs";
+import { systemPath } from "../../helpers/path.mjs";
+import { mix } from "../../helpers/utils.mjs";
+import { TeriockActor } from "../_module.mjs";
+import {
+  ChangeableDocumentMixin,
+  EmbedCardDocumentMixin,
+  HierarchyDocumentMixin,
+  PanelDocumentMixin,
+} from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes.

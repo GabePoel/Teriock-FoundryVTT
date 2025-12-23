@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../../dice/_module.mjs";
+import { TeriockRoll } from "../../dice/_module.mjs";
 
 /**
  * Mixin for a document that can be changed by a {@link TeriockEffect}.

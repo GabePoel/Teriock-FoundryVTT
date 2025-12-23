@@ -1,8 +1,15 @@
-import { StatPoolModel } from "../../models/stat-pool-models/_module.mjs";
+import {
+  HpPoolModel,
+  MpPoolModel,
+} from "../../models/stat-pool-models/_module.mjs";
 
-export interface StatGiverMixinInterface {
-  statDice: {
-    hp: StatPoolModel;
-    mp: StatPoolModel;
-  };
+declare global {
+  namespace Teriock.Models {
+    export interface StatGiverMixinInterface {
+      statDice: {
+        hp: HpPoolModel;
+        mp: MpPoolModel;
+      };
+    }
+  }
 }

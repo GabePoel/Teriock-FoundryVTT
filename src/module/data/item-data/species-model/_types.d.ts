@@ -1,3 +1,5 @@
+import "./_parameters";
+
 export type SizeAbilityStep = {
   gain: Set<string>;
   lose: Set<string>;
@@ -47,5 +49,3 @@ declare global {
     }
   }
 }
-
-export {};

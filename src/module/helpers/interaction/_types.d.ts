@@ -1,5 +1,9 @@
-import TeriockActor from "../../documents/actor/actor.mjs";
-import TeriockTokenDocument from "../../documents/token-document/token-document.mjs";
+import "./action-handler/_types";
+import "./command-handler/_types";
+import {
+  TeriockActor,
+  TeriockTokenDocument,
+} from "../../documents/_module.mjs";
 
 declare module "./interaction-handler.mjs" {
   export default interface InteractionHandler {

@@ -1,4 +1,4 @@
-import { TeriockChatMessage } from "../../_module.mjs";
+import { TeriockChatMessage } from "../_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.

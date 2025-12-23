@@ -1,3 +1,5 @@
+import "./_parameters";
+
 declare global {
   namespace Teriock.Models {
     export interface TeriockRankModelInterface
@@ -19,5 +21,3 @@ declare global {
     }
   }
 }
-
-export {};

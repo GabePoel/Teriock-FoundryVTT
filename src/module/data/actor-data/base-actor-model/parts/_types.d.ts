@@ -1,0 +1,16 @@
+import "./attributes-part/_types";
+import "./automation-part/_types";
+import "./capacities-part/_types";
+import "./combat-part/_types";
+import "./death-bag-part/_types";
+import "./display-part/_types";
+import "./hacks-part/_types";
+import "./limits-part/_types";
+import "./money-part/_types";
+import "./movement-part/_types";
+import "./protections-part/_types";
+import "./scaling-part/_types";
+import "./senses-part/_types";
+import "./stats-part/_types";
+import "./tradecrafts-part/_types";
+import "./transformation-part/_types";

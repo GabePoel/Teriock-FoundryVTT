@@ -4,8 +4,8 @@ import {
   resolveCollection,
   resolveDocument,
   resolveDocuments,
-} from "../../../helpers/resolve.mjs";
-import { TypeCollection } from "../../collections/_module.mjs";
+} from "../../helpers/resolve.mjs";
+import { TypeCollection } from "../collections/_module.mjs";
 
 const { Collection } = foundry.utils;
 

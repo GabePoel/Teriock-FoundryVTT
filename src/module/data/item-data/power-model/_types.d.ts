@@ -1,3 +1,5 @@
+import "./_parameters";
+
 declare global {
   namespace Teriock.Models {
     export interface TeriockPowerModelInterface
@@ -13,5 +15,3 @@ declare global {
     }
   }
 }
-
-export {};

@@ -1,3 +1,6 @@
+import "./parts/_types";
+import "./_parameters";
+
 declare global {
   namespace Teriock.Models {
     export interface TeriockAbilityModelInterface
@@ -6,5 +9,3 @@ declare global {
     }
   }
 }
-
-export {};

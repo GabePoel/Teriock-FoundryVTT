@@ -1,4 +1,4 @@
-import { resolveDocuments } from "../../../helpers/resolve.mjs";
+import { resolveDocuments } from "../../helpers/resolve.mjs";
 
 /**
  * Document mixin to support retrieving other documents.

@@ -1,10 +1,8 @@
-// noinspection JSUnusedGlobalSymbols
-
-import "./helpers/commands/_types";
 import "./data/_types";
+import "./dice/_types";
 import "./applications/_types";
 import "./documents/_types";
-import { TypeCollection } from "./documents/collections/_module.mjs";
+import "./helpers/_types";
 import { TeriockFolder } from "./documents/_module.mjs";
 import PixiJS from "pixi.js";
 import * as placeables from "./canvas/placeables/_module.mjs";
@@ -13,13 +11,6 @@ declare global {
   export import PIXI = PixiJS;
 
   const TERIOCK: typeof import("./constants/_module.mjs");
-  // Collections
-  // ===========
-
-  const TypeCollection: TypeCollection;
-
-  // Placeables
-  // ==========
 
   const TeriockToken: placeables.TeriockToken;
 
@@ -30,7 +21,6 @@ declare global {
     [__brand]: T;
   };
 
-  // noinspection JSClassNamingConvention
   /** FoundryVTT ID */
   export type ID<T = unknown> = string & {
     [__brand]: T;
@@ -62,16 +52,7 @@ declare global {
    */
   export type SyncDoc<Doc> = Index<Doc> | Doc;
 
-  // Utilities
-  // =========
-
-  type ArrayToSet<T> = {
-    [K in keyof T]: T[K] extends (infer U)[] ? Set<U> : T[K];
-  };
-
   type ArrayToSetFor<T, K extends keyof T> = Omit<T, K> & {
     [P in K]: T[P] extends (infer U)[] ? Set<U> : T[P];
   };
 }
-
-export {};

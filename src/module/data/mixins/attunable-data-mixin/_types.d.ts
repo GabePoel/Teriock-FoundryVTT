@@ -1,10 +1,14 @@
 import { EvaluationModel } from "../../models/_module.mjs";
 
-export interface AttunableDataMixinInterface {
-  /** <schema> If this is equipment, it may be identified */
-  identified?: boolean;
-  /** <schema> If this is equipment, there may be an identification reference */
-  reference?: UUID<TeriockEquipment>;
-  /** <schema> Presence Tier */
-  tier: EvaluationModel;
+declare global {
+  namespace Teriock.Models {
+    export interface AttunableDataMixinInterface {
+      /** <schema> If this is equipment, it may be identified */
+      identified?: boolean;
+      /** <schema> If this is equipment, there may be an identification reference */
+      reference?: UUID<TeriockEquipment>;
+      /** <schema> Presence Tier */
+      tier: EvaluationModel;
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import "./_parameters";
 import { CombatExpirationMethod } from "../../fields/helpers/_types";
 
 declare global {

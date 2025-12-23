@@ -1,3 +1,5 @@
+import "./_parameters";
+
 declare global {
   namespace Teriock.Models {
     export interface TeriockFluencyModelInterface
@@ -11,5 +13,3 @@ declare global {
     }
   }
 }
-
-export {};

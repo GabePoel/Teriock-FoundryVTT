@@ -1,5 +1,5 @@
-import { TeriockDialog } from "../../../applications/api/_module.mjs";
-import { makeIcon, makeIconClass } from "../../../helpers/utils.mjs";
+import { TeriockDialog } from "../../applications/api/_module.mjs";
+import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 /**
  * Base mixin.

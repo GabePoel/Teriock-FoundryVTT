@@ -1,7 +1,7 @@
-import { bindCommonActions } from "../../../applications/shared/_module.mjs";
-import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
-import { toTitleCase } from "../../../helpers/string.mjs";
+import { bindCommonActions } from "../../applications/shared/_module.mjs";
+import { TeriockContextMenu } from "../../applications/ux/_module.mjs";
+import { systemPath } from "../../helpers/path.mjs";
+import { toTitleCase } from "../../helpers/string.mjs";
 
 /**
  * Mixin that provides support for embedding as a card.

@@ -1,3 +1,5 @@
+import "./parts/_types";
+import "./_parameters";
 import { TeriockActor } from "../../../documents/_module.mjs";
 
 declare global {
@@ -8,5 +10,3 @@ declare global {
     }
   }
 }
-
-export {};
