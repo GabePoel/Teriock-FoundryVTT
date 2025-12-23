@@ -1,8 +1,6 @@
 import { TeriockTokenDocument } from "../../../../../documents/_module.mjs";
 
 export default interface ActorAutomationPartInterface {
-  /** <base> Ability flags */
-  abilityFlags: Record<string, string>;
   /** <base> Information explaining conditions in place. */
   conditionInformation: ConditionInformation;
   /** <base> Registered pseudo-hook macros to fire */

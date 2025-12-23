@@ -5,10 +5,10 @@ actor.consequences.map((c) => {
   }
 });
 if (toRemove.length > 0) {
-  await actor.deleteEmbeddedDocuments("ActiveEffect", toRemove);
+  await actor?.deleteEmbeddedDocuments("ActiveEffect", toRemove);
 }
 
-const dieSize = actor.system?.abilityFlags.braceDieSize || 6;
+const dieSize = actor?.flags?.teriockEffect?.braceDieSize || 6;
 
 const ability = actor.abilities.find((a) => a.name === "Brace");
 
@@ -33,4 +33,4 @@ await roll.toMessage(
   },
 );
 
-await actor.system.takeSetTempHp(roll.total);
+await actor?.system.takeSetTempHp(roll.total);

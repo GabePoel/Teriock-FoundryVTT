@@ -67,10 +67,19 @@ export default (Base) => {
           if (this.parent.isFluent && this.impacts.fluent.changes.length > 0) {
             changes.push(...this.impacts.fluent.changes);
           }
-          for (const [safeUuid, pseudoHook] of Object.entries(
-            this.impacts.macros,
-          )) {
-            changes.push({
+          changes.push(...this.pseudoHookChanges);
+        }
+        return changes;
+      }
+
+      /**
+       * Changes corresponding to pseudo-hooks.
+       * @returns {Teriock.Changes.QualifiedChangeData[]}
+       */
+      get pseudoHookChanges() {
+        return Object.entries(this.impacts.macros).map(
+          ([safeUuid, pseudoHook]) => {
+            return {
               key: `system.hookedMacros.${pseudoHook}`,
               mode: 2,
               priority: 5,
@@ -78,10 +87,9 @@ export default (Base) => {
               target: "Actor",
               time: "normal",
               value: pureUuid(safeUuid),
-            });
-          }
-        }
-        return changes;
+            };
+          },
+        );
       }
     }
   );

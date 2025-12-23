@@ -215,15 +215,17 @@ export default function AbilityExecutionChatPart(Base) {
         );
         changes = await Promise.all(
           changes.map(async (c) => {
-            if (c.value.includes("@h")) {
+            const regex = /@h(?![a-zA-Z])/g;
+            if (regex.test(c.value)) {
               c.value = c.value.replace(
-                "@h",
+                regex,
                 (this.heightened || 0).toString(),
               );
             }
             return c;
           }),
         );
+        changes.push(...this.source.system.pseudoHookChanges);
         const transformation =
           this.mergeImpactsTransformation("transformation");
         const folderUuids = transformation.uuids.filter((uuid) =>

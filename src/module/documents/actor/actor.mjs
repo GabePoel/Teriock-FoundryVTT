@@ -401,7 +401,7 @@ export default class TeriockActor extends mix(
       for (const consequenceData of data.filter(
         (d) => d.type === "consequence",
       )) {
-        const changes = consequenceData?.changes;
+        const changes = consequenceData?.system?.impacts?.changes;
         if (changes && changes.length > 0) {
           for (const change of changes) {
             if (change.key === "system.hookedMacros.effectApplication") {

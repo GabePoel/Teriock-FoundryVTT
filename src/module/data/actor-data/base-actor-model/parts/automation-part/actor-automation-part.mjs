@@ -14,7 +14,6 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.abilityFlags = {};
         this.hookedMacros =
           /** @type {Teriock.Parameters.Actor.HookedActorMacros} */ {};
         for (const pseudoHook of Object.keys(TERIOCK.system.pseudoHooks)) {
