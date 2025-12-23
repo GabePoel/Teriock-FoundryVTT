@@ -9,8 +9,8 @@ export default function RevelationDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {RevelationDataMixinInterface}
      * @extends {TeriockBaseEffectModel}
+     * @implements {Teriock.Models.RevelationDataMixinInterface}
      * @mixin
      */
     class RevelationData extends Base {

@@ -5,8 +5,8 @@ export { default as ExecutableDataMixin } from "./executable-data-mixin/executab
 export { default as HierarchyDataMixin } from "./hierarchy-data-mixin/hierarchy-data-mixin.mjs";
 export { default as RevelationDataMixin } from "./revelation-data-mixin/revelation-data-mixin.mjs";
 export { default as StatGiverDataMixin } from "./stat-giver-data-mixin/stat-giver-data-mixin.mjs";
-export { default as ThresholdDataMixin } from "./threshold-data-mixin/threshold-data-mixin.mjs";
+export { default as ThresholdDataMixin } from "./threshold-data-mixin.mjs";
 export { default as TransformationDataMixin } from "./transformation-data-mixin/transformation-data-mixin.mjs";
-export { default as WikiDataMixin } from "./wiki-data-mixin/wiki-data-mixin.mjs";
-export { default as ProficiencyDataMixin } from "./proficiency-data-mixin/proficiency-data-mixin.mjs";
+export { default as WikiDataMixin } from "./wiki-data-mixin.mjs";
+export { default as ProficiencyDataMixin } from "./proficiency-data-mixin.mjs";
 export { default as UsableDataMixin } from "./usable-data-mixin/usable-data-mixin.mjs";

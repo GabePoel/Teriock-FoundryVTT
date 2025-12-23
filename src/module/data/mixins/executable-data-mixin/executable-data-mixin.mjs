@@ -7,8 +7,8 @@ export default function ExecutableDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {ExecutableDataMixinInterface}
      * @extends {ChildTypeModel}
+     * @implements {Teriock.Models.ExecutableDataMixinInterface}
      * @mixin
      */
     class ExecutableData extends Base {

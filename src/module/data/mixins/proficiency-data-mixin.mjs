@@ -2,6 +2,7 @@
  * @param {typeof ChildTypeModel} Base
  */
 export default function ProficiencyDataMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildTypeModel}

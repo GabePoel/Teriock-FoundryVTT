@@ -4,7 +4,6 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
 /**
  * Creates context menus for ability configuration.
  * Provides comprehensive menu options for all ability properties and settings.
- *
  * @param {TeriockAbility} ability - The ability to create context menus for.
  * @returns {object} Object containing all context menu configurations.
  */

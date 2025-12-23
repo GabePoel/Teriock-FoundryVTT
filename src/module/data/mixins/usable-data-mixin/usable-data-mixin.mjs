@@ -9,7 +9,7 @@ export default function UsableDataMixin(Base) {
   return (
     /**
      * @extends {EmbeddedDataModel | CommonTypeModel}
-     * @implements {UsableMixinInterface}
+     * @implements {Teriock.Models.UsableMixinInterface}
      * @mixin
      */
     class UsableData extends Base {

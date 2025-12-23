@@ -8,8 +8,8 @@ export default function AttunableDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {AttunableDataMixinInterface}
      * @extends {TeriockBaseItemModel}
+     * @implements {Teriock.Models.AttunableDataMixinInterface}
      * @mixin
      */
     class AttunableData extends Base {

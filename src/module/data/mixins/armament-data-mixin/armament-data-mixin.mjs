@@ -14,8 +14,8 @@ export default function ArmamentDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
   return (
     /**
-     * @implements {ArmamentDataMixinInterface}
      * @extends {TeriockBaseItemModel}
+     * @implements {Teriock.Models.ArmamentDataMixinInterface}
      * @mixin
      */
     class ArmamentData extends Base {

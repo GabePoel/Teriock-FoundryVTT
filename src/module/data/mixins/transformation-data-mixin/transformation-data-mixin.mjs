@@ -9,8 +9,8 @@ export default function TransformationDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {TransformationMixinInterface}
      * @extends {ChildTypeModel}
+     * @implements {Teriock.Models.TransformationMixinInterface}
      * @mixin
      */
     class TransformationData extends Base {

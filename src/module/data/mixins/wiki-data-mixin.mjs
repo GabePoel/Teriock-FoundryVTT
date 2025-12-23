@@ -1,9 +1,9 @@
-import { inferChildCompendiumSources } from "../../../helpers/resolve.mjs";
-import { toCamelCase } from "../../../helpers/string.mjs";
+import { inferChildCompendiumSources } from "../../helpers/resolve.mjs";
+import { toCamelCase } from "../../helpers/string.mjs";
 import {
   fetchWikiPageHTML,
   openWikiPage,
-} from "../../../helpers/wiki/_module.mjs";
+} from "../../helpers/wiki/_module.mjs";
 
 /**
  * @param {typeof ChildTypeModel} Base

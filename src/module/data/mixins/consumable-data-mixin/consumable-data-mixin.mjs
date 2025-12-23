@@ -9,8 +9,8 @@ export default function ConsumableDataMixin(Base) {
   // noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {ConsumableDataMixinInterface}
      * @extends {ChildTypeModel}
+     * @implements {Teriock.Models.ConsumableDataMixinInterface}
      * @mixin
      */
     class ConsumableData extends Base {

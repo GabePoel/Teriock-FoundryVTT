@@ -9,7 +9,7 @@ export default function HierarchyDataMixin(Base) {
   return (
     /**
      * @extends {ChildTypeModel}
-     * @implements {HierarchyDataMixinInterface}
+     * @implements {Teriock.Models.HierarchyDataMixinInterface}
      * @mixin
      */
     class HierarchyData extends Base {

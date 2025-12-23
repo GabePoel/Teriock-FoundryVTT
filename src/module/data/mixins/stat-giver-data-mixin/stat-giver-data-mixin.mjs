@@ -13,8 +13,8 @@ export default function StatGiverDataMixin(Base) {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {StatGiverMixinInterface}
      * @extends {TeriockBaseItemModel}
+     * @implements {Teriock.Models.StatGiverMixinInterface}
      * @mixin
      */
     class StatGiverData extends Base {
