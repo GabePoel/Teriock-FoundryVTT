@@ -19,9 +19,10 @@ export default class TeriockMacro extends mix(
 ) {
   /**
    * Hotbar folder for the current user.
-   * @returns {TeriockFolder}
+   * @returns {TeriockFolder|null}
    */
   static get hotbarFolder() {
+    if (!game.settings.get("teriock", "sortNewPlayerMacros")) return null;
     return game.folders.find(
       (f) =>
         f.getFlag("teriock", "user") === game.user.id &&
@@ -32,9 +33,10 @@ export default class TeriockMacro extends mix(
 
   /**
    * Get the hotbar folder for the current user.
-   * @returns {Promise<TeriockFolder>}
+   * @returns {Promise<TeriockFolder>|null}
    */
   static async ensureHotbarFolder() {
+    if (!game.settings.get("teriock", "sortNewPlayerMacros")) return null;
     let hotbarFolder = this.hotbarFolder;
     if (hotbarFolder) return hotbarFolder;
     await game.users.queryGM(
@@ -131,7 +133,7 @@ export default class TeriockMacro extends mix(
       type: "script",
       img: doc.img,
       command: command,
-      folder: (await this.ensureHotbarFolder()).id,
+      folder: (await this.ensureHotbarFolder())?.id,
       flags: {
         teriock: {
           user: game.user.id,
@@ -157,7 +159,7 @@ export default class TeriockMacro extends mix(
       type: "script",
       img: doc.img,
       command: command,
-      folder: (await this.ensureHotbarFolder()).id,
+      folder: (await this.ensureHotbarFolder())?.id,
       flags: {
         teriock: {
           user: game.user.id,
@@ -248,13 +250,13 @@ export default class TeriockMacro extends mix(
     if ((await super._preCreate(data, options, user)) === false) {
       return false;
     }
-    if (!this.folder) {
+    if (game.settings.get("teriock", "sortNewPlayerMacros") && !this.folder) {
       if (
         (!game.user.isGM && this.constructor.hotbarFolder) ||
         game.users.activeGM
       ) {
         this.updateSource({
-          folder: (await this.constructor.ensureHotbarFolder()).id,
+          folder: (await this.constructor.ensureHotbarFolder())?.id,
         });
       }
     }

@@ -169,6 +169,14 @@ export function registerSettings() {
       scope: "world",
       type: Boolean,
     },
+    sortNewPlayerMacros: {
+      config: true,
+      default: true,
+      hint: "New player macros will be created in folders corresponding to the individual players.",
+      name: "Sort New Player Macros",
+      scope: "world",
+      type: Boolean,
+    },
     playerMacrosFolderName: {
       config: true,
       default: "Player Macros",
