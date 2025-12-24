@@ -97,10 +97,22 @@ declare global {
       passive: boolean;
       preservedProperties: string[];
       revealable: boolean;
+      tooltip: boolean;
       type: Teriock.Documents.CommonType;
       usable: boolean;
       visibleTypes: Teriock.Documents.CommonType[];
       wiki: boolean;
+    };
+
+    export type DocumentMetadata = {
+      child: boolean;
+      common: boolean;
+      hierarchy: boolean;
+      model?: ModelMetadata;
+      parent: boolean;
+      tooltip: boolean;
+      typed: boolean;
+      types: Teriock.Documents.CommonType[];
     };
 
     export type ActorModel = TeriockBaseActorModel &

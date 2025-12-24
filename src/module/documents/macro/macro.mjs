@@ -18,6 +18,39 @@ export default class TeriockMacro extends mix(
   mixins.EmbedCardDocumentMixin,
 ) {
   /**
+   * Hotbar folder for the current user.
+   * @returns {TeriockFolder}
+   */
+  static get hotbarFolder() {
+    return game.folders.find(
+      (f) =>
+        f.getFlag("teriock", "user") === game.user.id &&
+        f.getFlag("teriock", "hotbarFolder") &&
+        f.type === "Macro",
+    );
+  }
+
+  /**
+   * Get the hotbar folder for the current user.
+   * @returns {Promise<TeriockFolder>}
+   */
+  static async ensureHotbarFolder() {
+    let hotbarFolder = this.hotbarFolder;
+    if (hotbarFolder) return hotbarFolder;
+    await game.users.queryGM(
+      "teriock.createHotbarFolder",
+      {
+        name: game.user.name,
+        id: game.user.id,
+      },
+      {
+        failPrefix: "Could not create a hotbar folder.",
+      },
+    );
+    return this.hotbarFolder;
+  }
+
+  /**
    * Get a document from an actor.
    * @param {TeriockActor} actor - The actor to get the document from.
    * @param {string} name - The name of the document. This is case-sensitive.
@@ -50,51 +83,86 @@ export default class TeriockMacro extends mix(
   }
 
   /**
-   * Create a macro from the given document.
+   * Create a general use macro from the given document.
    * @param {TeriockChild} doc
    * @returns {Promise<TeriockMacro>}
    */
-  static async getUseMacro(doc) {
-    await game.users.queryGM(
-      "teriock.createHotbarFolder",
-      {
-        name: game.user.name,
-        id: game.user.id,
-      },
-      {
-        failPrefix: "Could not create a hotbar folder.",
-      },
-    );
-    const macroFolder = game.folders.find(
-      (f) =>
-        f.getFlag("teriock", "user") === game.user.id &&
-        f.getFlag("teriock", "hotbarFolder") &&
-        f.type === "Macro",
-    );
+  static async getGeneralUseMacro(doc) {
     const macro = game.macros.find(
       (m) =>
         m.getFlag("teriock", "user") === game.user.id &&
-        m.getFlag("teriock", "macroType") === "use" &&
+        m.getFlag("teriock", "macroType") === "useGeneral" &&
         m.getFlag("teriock", "macroDocumentType") === doc.type &&
         m.getFlag("teriock", "macroDocumentName") === doc.name,
     );
     if (macro) {
       return macro;
     }
+    return this.makeGeneralUseMacro(doc);
+  }
+
+  /**
+   * Create a linked use macro from the given document.
+   * @param {TeriockChild} doc
+   * @returns {Promise<TeriockMacro>}
+   */
+  static async getLinkedUseMacro(doc) {
+    const macro = game.macros.find(
+      (m) =>
+        m.getFlag("teriock", "macroType" === "useLinked") &&
+        m.getFlag("teriock", "macroUuid" === doc.uuid),
+    );
+    if (macro) {
+      return macro;
+    }
+    return this.makeLinkedUseMacro(doc);
+  }
+
+  /**
+   * Create a general use macro from the given document.
+   * @param {TeriockChild} doc
+   * @returns {Promise<TeriockMacro>}
+   */
+  static async makeGeneralUseMacro(doc) {
     const command = dedent(`
-    await game.teriock.Macro.useDocuments("${doc.name}", { actor, type: "${doc.type}", event: event })`);
+    await game.teriock.Macro.useDocumentGeneral("${doc.name}", { actor, type: "${doc.type}", event: event })`);
     const macroData = {
       name: `Use ${doc.name}`,
       type: "script",
       img: doc.img,
       command: command,
-      folder: macroFolder.id,
+      folder: (await this.ensureHotbarFolder()).id,
       flags: {
         teriock: {
           user: game.user.id,
-          macroType: "use",
+          macroType: "useGeneral",
           macroDocumentType: doc.type,
           macroDocumentName: doc.name,
+        },
+      },
+    };
+    return this.create(macroData);
+  }
+
+  /**
+   * Create a linked use macro from the given document.
+   * @param {TeriockChild} doc
+   * @returns {Promise<TeriockMacro>}
+   */
+  static async makeLinkedUseMacro(doc) {
+    const command = dedent(`
+    await game.teriock.Macro.useDocumentLinked("${doc.uuid}", { event: event })`);
+    const macroData = {
+      name: `Use ${doc.name}`,
+      type: "script",
+      img: doc.img,
+      command: command,
+      folder: (await this.ensureHotbarFolder()).id,
+      flags: {
+        teriock: {
+          user: game.user.id,
+          macroType: "useLinked",
+          macroDocumentUuid: doc.uuid,
         },
       },
     };
@@ -110,7 +178,7 @@ export default class TeriockMacro extends mix(
    * @param {MouseEvent} [options.event]
    * @returns {Promise<void>}
    */
-  static async useDocuments(name, options) {
+  static async useDocumentGeneral(name, options) {
     const { actor, type, event } = options;
     const tokens = /** @type {TeriockToken[]} */ game.canvas.tokens.controlled;
     const actors = tokens.map((t) => t.actor);
@@ -126,15 +194,8 @@ export default class TeriockMacro extends mix(
         const useOptions = {
           actor: a,
         };
-        let secret = game.settings.get("teriock", "secretEquipment");
-        if (event.shiftKey) {
-          secret = !secret;
-        }
         if (event) {
-          useOptions.advantage = event.altKey;
-          useOptions.disadvantage = event.shiftKey;
-          useOptions.twoHanded = event.ctrlKey;
-          useOptions.secret = secret;
+          Object.assign(useOptions, doc.system.parseEvent(event));
         }
         await doc.system.use(useOptions);
       } else {
@@ -142,6 +203,27 @@ export default class TeriockMacro extends mix(
           `${a.name} has no ${type ? TERIOCK.options.document[type].name.toLowerCase() : "document"} called ${name}.`,
         );
       }
+    }
+  }
+
+  /**
+   * Get a document from its UUID and use it.
+   * @param {UUID<TeriockChild>} uuid
+   * @param {object} [options]
+   * @param {MouseEvent} [options.event]
+   * @returns {Promise<void>}
+   */
+  static async useDocumentLinked(uuid, options) {
+    const { event } = options.event;
+    const doc = await fromUuid(uuid);
+    if (doc) {
+      const useOptions = {
+        actor: doc.actor,
+      };
+      if (event) {
+        Object.assign(useOptions, doc.system.parseEvent(event));
+      }
+      await doc.system.use(useOptions);
     }
   }
 
@@ -159,6 +241,23 @@ export default class TeriockMacro extends mix(
     parts.usable = true;
     parts.action = "execute";
     return parts;
+  }
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    if (!this.folder) {
+      if (
+        (!game.user.isGM && this.constructor.hotbarFolder) ||
+        game.users.activeGM
+      ) {
+        this.updateSource({
+          folder: (await this.constructor.ensureHotbarFolder()).id,
+        });
+      }
+    }
   }
 
   /**

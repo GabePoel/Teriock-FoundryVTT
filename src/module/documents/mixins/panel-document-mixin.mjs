@@ -13,6 +13,13 @@ export default function PanelDocumentMixin(Base) {
      * @mixin
      */
     class PanelDocument extends Base {
+      /** @inheritDoc */
+      static get documentMetadata() {
+        const metadata = super.documentMetadata;
+        metadata.tooltip = true;
+        return metadata;
+      }
+
       /** @returns {Teriock.MessageData.MessagePanel} */
       get panelParts() {
         return {

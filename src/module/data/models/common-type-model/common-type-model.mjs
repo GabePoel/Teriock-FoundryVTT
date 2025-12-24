@@ -30,6 +30,7 @@ export default class CommonTypeModel extends TypeDataModel {
       passive: false,
       preservedProperties: [],
       revealable: false,
+      tooltip: true,
       type: "base",
       usable: false,
       visibleTypes: [],

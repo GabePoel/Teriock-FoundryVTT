@@ -93,6 +93,14 @@ export default class TeriockPacks {
   }
 
   /**
+   * Official player utilities.
+   * @returns {TeriockCompendiumCollection<TeriockMacro>}
+   */
+  get player() {
+    return game.packs.get("teriock.player");
+  }
+
+  /**
    * Official powers.
    * @returns {TeriockCompendiumCollection<TeriockPower>}
    */

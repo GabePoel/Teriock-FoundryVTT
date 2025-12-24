@@ -13,6 +13,24 @@ export default function BaseDocumentMixin(Base) {
      * @mixin
      */
     class BaseDocument extends Base {
+      /** @returns {Teriock.Documents.DocumentMetadata} */
+      static get documentMetadata() {
+        return {
+          child: false,
+          common: false,
+          hierarchy: false,
+          parent: false,
+          tooltip: false,
+          typed: false,
+          types: /** @type {Teriock.Documents.CommonType[]} */ [],
+        };
+      }
+
+      /** @returns {Teriock.Documents.DocumentMetadata} */
+      get documentMetadata() {
+        return this.constructor.documentMetadata;
+      }
+
       /**
        * Can this be viewed?
        * @returns {boolean}
@@ -67,7 +85,9 @@ export default function BaseDocumentMixin(Base) {
               icon: makeIcon("trash", "contextMenu"),
               callback: async () => await this.safeDelete(),
               condition: () =>
-                this.isOwner && this.checkAncestor(doc) && doc?.sheet.editable,
+                this.isOwner &&
+                this.checkAncestor(doc) &&
+                doc?.sheet.isEditable,
               group: "document",
             },
           ],

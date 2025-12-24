@@ -29,6 +29,16 @@ export default function CommonDocumentMixin(Base) {
       EmbedCardDocumentMixin,
       ChangeableDocumentMixin,
     ) {
+      /** @inheritDoc */
+      static get documentMetadata() {
+        const metadata = super.documentMetadata;
+        Object.assign(metadata, {
+          common: true,
+          typed: true,
+        });
+        return metadata;
+      }
+
       /**
        * The actor associated with this document if there is one.
        */

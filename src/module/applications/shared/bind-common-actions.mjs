@@ -78,7 +78,13 @@ export default function bindCommonActions(rootElement) {
   queryAll(rootElement, "[data-make-tooltip], [data-rich-tooltip]").forEach(
     /** @param {HTMLElement} el */ (el) => {
       if (!(el.dataset.tooltip || el.dataset.tooltipHtml) && el.dataset.uuid) {
-        el.dataset.tooltipHtml = TERIOCK.display.panel.loading;
+        const resolvedUuid = foundry.utils.parseUuid(el.dataset.uuid);
+        const documentClass = foundry.utils.getDocumentClass(
+          resolvedUuid?.type,
+        ).implementation;
+        if (documentClass?.documentMetadata?.tooltip) {
+          el.dataset.tooltipHtml = TERIOCK.display.panel.loading;
+        }
       }
       // Determine tooltip direction and style
       el.addEventListener("pointerenter", (ev) => {

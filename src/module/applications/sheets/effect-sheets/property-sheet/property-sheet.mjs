@@ -42,7 +42,7 @@ export default class TeriockPropertySheet extends mix(
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) {
+    if (!this.isEditable) {
       return;
     }
     this._connectBuildContextMenu(

@@ -1,3 +1,4 @@
+import { documentTypes } from "../../constants/system/document-types.mjs";
 import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { secondsToReadable } from "../../helpers/unit.mjs";
 import { mix } from "../../helpers/utils.mjs";
@@ -31,6 +32,13 @@ export default class TeriockEffect extends mix(
   mixins.RetrievalDocumentMixin,
   mixins.SettingsDocumentMixin,
 ) {
+  /** @inheritDoc */
+  static get documentMetadata() {
+    const metadata = super.documentMetadata;
+    metadata.types = Object.keys(documentTypes.effects);
+    return metadata;
+  }
+
   /** @inheritDoc */
   static migrateData(data) {
     if (typeof data?.type === "string" && data.type === "effect") {

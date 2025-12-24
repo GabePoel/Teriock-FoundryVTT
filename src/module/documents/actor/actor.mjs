@@ -1,3 +1,4 @@
+import { documentTypes } from "../../constants/system/_module.mjs";
 import { ActorSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { pureUuid, resolveDocument } from "../../helpers/resolve.mjs";
@@ -35,6 +36,13 @@ export default class TeriockActor extends mix(
   mixins.RetrievalDocumentMixin,
   mixins.SettingsDocumentMixin,
 ) {
+  /** @inheritDoc */
+  static get documentMetadata() {
+    const metadata = super.documentMetadata;
+    metadata.types = Object.keys(documentTypes.actors);
+    return metadata;
+  }
+
   /**
    * The default weight for a given size.
    *

@@ -41,4 +41,17 @@ export default (Base) =>
         [`system.tradecrafts.${tradecraft}.score`]: newScore,
       });
     }
+
+    /** @inheritDoc */
+    async _prepareContext(options = {}) {
+      const context = await super._prepareContext(options);
+      const index = game.teriock.packs.player.index;
+      context.tradecraftMacros = Object.fromEntries(
+        Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [
+          tc,
+          index.getName(`Make ${name} Check`).uuid,
+        ]),
+      );
+      return context;
+    }
   };

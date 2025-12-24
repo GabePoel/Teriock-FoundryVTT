@@ -80,11 +80,11 @@ export default class TeriockBaseActorSheet extends mix(
   }
 
   /** @inheritDoc */
-  _canDrop(doc) {
+  _canDropChild(doc) {
     if (doc.type === "ability") {
       return false;
     } else {
-      return super._canDrop(doc);
+      return super._canDropChild(doc);
     }
   }
 

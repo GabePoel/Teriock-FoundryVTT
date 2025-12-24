@@ -30,8 +30,12 @@ export default (Base) => {
        */
       static async _onToggleLockThis(_event, _target) {
         this._locked = !this._locked;
-        this.editable = Boolean(this.isEditable && !this._locked);
         this.render();
+      }
+
+      /** @inheritDoc */
+      get isEditable() {
+        return super.isEditable && !this._locked;
       }
 
       /** @inheritDoc */
@@ -43,14 +47,13 @@ export default (Base) => {
         if (toggleButton) {
           toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
           toggleButton.classList.add(
-            ...[this.editable ? "fa-lock-open" : "fa-lock"],
+            ...[this.isEditable ? "fa-lock-open" : "fa-lock"],
           );
           toggleButton.setAttribute(
             "data-tooltip",
-            this.editable ? "Unlocked" : "Locked",
+            this.isEditable ? "Unlocked" : "Locked",
           );
         }
-        this.editable = this.isEditable && !this._locked;
       }
 
       /** @inheritDoc */
@@ -66,13 +69,13 @@ export default (Base) => {
               "header-control",
               "icon",
               "fa-solid",
-              this.editable ? "fa-lock-open" : "fa-lock",
+              this.isEditable ? "fa-lock-open" : "fa-lock",
             ],
           );
           toggleButton.setAttribute("data-action", "toggleLockThis");
           toggleButton.setAttribute(
             "data-tooltip",
-            this.editable ? "Unlocked" : "Locked",
+            this.isEditable ? "Unlocked" : "Locked",
           );
           if (
             !this.document.isOwner ||

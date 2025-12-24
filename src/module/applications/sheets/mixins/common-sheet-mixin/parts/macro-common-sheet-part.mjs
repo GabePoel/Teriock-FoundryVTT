@@ -27,7 +27,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onUnlinkMacro(_event, target) {
-        if (this.editable) {
+        if (this.isEditable) {
           if (this.document.system.macros) {
             const uuidElement =
               /** @type {HTMLElement} */ target.closest("[data-uuid]");
@@ -59,7 +59,7 @@ export default (Base) => {
                     const uuid = target.dataset.uuid;
                     await this.document.system.unlinkMacro(uuid);
                   },
-                  condition: () => this.editable && this.document.isOwner,
+                  condition: () => this.isEditable && this.document.isOwner,
                   group: "document",
                 },
                 {
@@ -70,7 +70,7 @@ export default (Base) => {
                     await this.document.system.changeMacroRunHook(uuid);
                   },
                   condition: () =>
-                    this.editable &&
+                    this.isEditable &&
                     this.document.isOwner &&
                     target.classList.contains("hooked-macro-card"),
                   group: "document",

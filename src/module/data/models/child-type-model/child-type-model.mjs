@@ -292,7 +292,7 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
             await this.parent.duplicate();
           },
           condition: () =>
-            this.parent?.elder?.sheet?.editable && this.parent.isOwner,
+            this.parent?.elder?.sheet?.isEditable && this.parent.isOwner,
           group: "document",
         },
       ],

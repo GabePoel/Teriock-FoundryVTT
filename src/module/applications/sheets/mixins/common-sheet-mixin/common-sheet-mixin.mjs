@@ -167,9 +167,6 @@ export default function CommonSheetMixin(Base) {
       async _onRender(context, options) {
         await super._onRender(context, options);
         bindCommonActions(this.element);
-        if (typeof this.editable !== "boolean") {
-          this.editable = this.isEditable;
-        }
         this._connect("[data-debug]", "contextmenu", () => {
           if (game.settings.get("teriock", "developerMode")) {
             console.log("Debug", this.document, this);
@@ -208,13 +205,12 @@ export default function CommonSheetMixin(Base) {
         Object.assign(context, {
           TERIOCK: TERIOCK,
           document: this.document,
-          editable: this.editable,
+          editable: this.isEditable,
           enriched: {},
           fields: this.document.schema.fields,
           flags: this.document.flags,
           id: this.document.id,
           img: this.document.img,
-          isEditable: this.isEditable,
           isGM: game.user.isGM,
           limited: this.document.limited,
           metadata: this.document.metadata,

@@ -12,66 +12,20 @@ export default (Base) => {
      * @mixin
      */
     class DragDropCommonSheetPart extends Base {
-      /** @type {Partial<ApplicationConfiguration> & Teriock.Sheet.DragDropConfiguration} */
-      static DEFAULT_OPTIONS = {
-        dragDrop: [
-          {
-            dragSelector: ".draggable",
-            dropSelector: null,
-          },
-        ],
-      };
-
-      constructor(...args) {
-        super(...args);
-        this.#dragDrop = this.#createDragDropHandlers();
-      }
-
-      /** @type {TeriockDragDrop[]} */
-      #dragDrop;
-
-      /**
-       * Gets the drag and drop handlers for this sheet.
-       * @returns {TeriockDragDrop[]} Array of drag and drop handlers.
-       */
-      get dragDrop() {
-        return this.#dragDrop;
-      }
-
-      /**
-       * Creates drag and drop handlers for the sheet.
-       * @returns {TeriockDragDrop[]} Array of configured drag and drop handlers.
-       */
-      #createDragDropHandlers() {
-        //noinspection JSUnresolvedReference
-        return this.options.dragDrop.map((config) => {
-          config.permissions = {
-            dragstart: this._canDragStart.bind(this),
-            drop: this._canDragDrop.bind(this),
-          };
-          config.callbacks = {
-            dragstart: this._onDragStart.bind(this),
-            dragover: this._onDragOver.bind(this),
-            drop: this._onDrop.bind(this),
-          };
-          return new TeriockDragDrop(config);
-        });
-      }
-
-      /**
-       * Checks if drag and drop is allowed.
-       * @returns {boolean}
-       */
-      _canDragDrop() {
-        return this.editable;
-      }
-
       /**
        * Checks if drag start is allowed.
        * @returns {boolean}
        */
       _canDragStart() {
-        return this.editable;
+        return this.isEditable;
+      }
+
+      /**
+       * Checks if drop is allowed.
+       * @returns {boolean}
+       */
+      _canDrop() {
+        return this.isEditable;
       }
 
       /**
@@ -79,7 +33,7 @@ export default (Base) => {
        * @param {TeriockCommon} doc
        * @returns {boolean}
        */
-      _canDrop(doc) {
+      _canDropChild(doc) {
         const childTypes = new Set([
           ...this.document.metadata.childEffectTypes,
           ...this.document.metadata.childItemTypes,
@@ -106,12 +60,25 @@ export default (Base) => {
        * @param {Teriock.Sheet.EmbedDragEvent} event
        * @returns {Promise<void>}
        */
-      async _onDragStart(event) {
-        const embedded = await fromUuid(event.currentTarget.dataset.uuid);
-        const dragData = embedded?.toDragData();
-        dragData.startSheet = this.id;
-        if (dragData) {
-          event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+      _onDragStart(event) {
+        if (event.currentTarget.dataset.uuid) {
+          const dragData = foundry.utils.parseUuid(
+            event.currentTarget.dataset.uuid,
+          );
+          if (dragData) {
+            dragData.startSheet = this.id;
+            event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+          }
+          fromUuid(event.currentTarget.dataset.uuid).then((embedded) => {
+            const dragData = embedded?.toDragData();
+            if (dragData) {
+              dragData.startSheet = this.id;
+              event.dataTransfer.setData(
+                "text/plain",
+                JSON.stringify(dragData),
+              );
+            }
+          });
         }
       }
 
@@ -200,8 +167,20 @@ export default (Base) => {
 
       /** @inheritDoc */
       async _onRender(context, options) {
+        new TeriockDragDrop({
+          dragSelector: ".draggable",
+          dropSelector: null,
+          callbacks: {
+            dragstart: this._onDragStart.bind(this),
+            dragover: this._onDragOver.bind(this),
+            drop: this._onDrop.bind(this),
+          },
+          permissions: {
+            dragstart: this._canDragStart.bind(this),
+            drop: this._canDrop.bind(this),
+          },
+        }).bind(this.element);
         await super._onRender(context, options);
-        this.dragDrop.forEach((d) => d.bind(this.element));
       }
     }
   );

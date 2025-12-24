@@ -30,7 +30,7 @@ export default function WikiButtonSheetMixin(Base) {
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
      */
     static async #onWikiPullThis() {
-      if (this.editable) {
+      if (this.isEditable) {
         const proceed = await TeriockDialog.confirm({
           content:
             "Are you sure you would like to pull this from the wiki? It will alter its content and may delete" +

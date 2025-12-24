@@ -30,7 +30,7 @@ export default function PassiveSheetMixin(Base) {
        */
       static async _onChangeMacroRunHook(event, target) {
         event.stopPropagation();
-        if (this.editable) {
+        if (this.isEditable) {
           const uuidElement =
             /** @type {HTMLElement} */ target.closest("[data-uuid]");
           const uuid = uuidElement.dataset.uuid;
@@ -45,7 +45,7 @@ export default function PassiveSheetMixin(Base) {
       /** @inheritDoc */
       static async _onUnlinkMacro(event, target) {
         event.stopPropagation();
-        if (this.editable) {
+        if (this.isEditable) {
           const uuidElement =
             /** @type {HTMLElement} */ target.closest("[data-uuid]");
           const uuid = uuidElement.dataset.uuid;

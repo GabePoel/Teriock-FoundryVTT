@@ -75,6 +75,19 @@ export default (Base) =>
       const options = protectionOptions(event, target);
       await this.actor.system.rollResistance(options);
     }
+
+    /** @inheritDoc */
+    async _prepareContext(options = {}) {
+      const context = await super._prepareContext(options);
+      const index = game.teriock.packs.player.index;
+      context.attributeMacros = Object.fromEntries(
+        Object.keys(TERIOCK.index.attributesFull).map((att) => [
+          att,
+          index.getName(`Make ${att.toUpperCase()} Feat Save`).uuid,
+        ]),
+      );
+      return context;
+    }
   };
 
 /**

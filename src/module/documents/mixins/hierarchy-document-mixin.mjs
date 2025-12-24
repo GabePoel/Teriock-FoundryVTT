@@ -21,6 +21,13 @@ export default function HierarchyDocumentMixin(Base) {
      * @property {HierarchyData} system
      */
     class HierarchyDocument extends Base {
+      /** @inheritDoc */
+      static get documentMetadata() {
+        const metadata = super.documentMetadata;
+        metadata.hierarchy = true;
+        return metadata;
+      }
+
       /**
        * @inheritDoc
        * @param {TeriockCommon[]} documents

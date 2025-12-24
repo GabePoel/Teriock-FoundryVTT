@@ -1,3 +1,4 @@
+import { documentTypes } from "../../constants/system/document-types.mjs";
 import { ChildSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { mix } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -32,6 +33,13 @@ export default class TeriockItem extends mix(
   mixins.RetrievalDocumentMixin,
   mixins.SettingsDocumentMixin,
 ) {
+  /** @inheritDoc */
+  static get documentMetadata() {
+    const metadata = super.documentMetadata;
+    metadata.types = Object.keys(documentTypes.items);
+    return metadata;
+  }
+
   /** @inheritDoc */
   get _settingsFlagsDataModel() {
     return ChildSettingsModel;

@@ -15,8 +15,12 @@ export default function ChildDocumentMixin(Base) {
      * @mixin
      */
     class ChildDocument extends Base {
-      //noinspection ES6ClassMemberInitializationOrder
-      overrides = this.overrides ?? {};
+      /** @inheritDoc */
+      static get documentMetadata() {
+        const metadata = super.documentMetadata;
+        metadata.child = true;
+        return metadata;
+      }
 
       /**
        * Treat this document as if it doesn't exist.

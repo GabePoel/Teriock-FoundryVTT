@@ -12,7 +12,7 @@ await tm.utils.progressBar(
         `Refreshing ${p.title} Sources`,
         async (i) => {
           const doc = await tm.resolve.resolveDocument(i);
-          if (["Actor", "ActiveEffect", "Item"].includes(doc.documentName)) {
+          if (doc.documentMetadata.common) {
             await tm.resolve.inferChildCompendiumSources(doc);
           }
         },

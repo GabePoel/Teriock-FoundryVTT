@@ -206,7 +206,7 @@ export default class TeriockAbilityModel extends mix(
   /** @inheritDoc */
   get embedIcons() {
     let icons = super.embedIcons.filter(
-      (i) => !this.basic || !i.action?.toLowerCase().includes("disabled"),
+      (i) => !this.isBasic || !i.action?.toLowerCase().includes("disabled"),
     );
     if (this.parent.elder?.type === "equipment") {
       icons.unshift({
@@ -229,7 +229,7 @@ export default class TeriockAbilityModel extends mix(
         },
       });
     }
-    if (this.basic) {
+    if (this.isBasic) {
       icons.push({
         icon: "lock",
         action: "toggleDisableLocked",
@@ -264,6 +264,18 @@ export default class TeriockAbilityModel extends mix(
       this.delivery.base === "aura" ||
       this.delivery.base === "cone" ||
       this.expansion === "detonate"
+    );
+  }
+
+  /**
+   * If this is a true basic ability.
+   * @returns {boolean}
+   */
+  get isBasic() {
+    return (
+      this.basic &&
+      this.parent.parent.name === "Basic Abilities" &&
+      this.parent.inCompendium
     );
   }
 

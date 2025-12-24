@@ -32,6 +32,7 @@ globalThis.tm = {
   string: helpers.string,
   unit: helpers.unit,
   utils: helpers.utils,
+  rolling: helpers.rolling,
 };
 
 foundry.helpers.Hooks.once("init", function () {

@@ -37,7 +37,7 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
    * @static
    */
   static async _onToggleProficient() {
-    if (this.editable) {
+    if (this.isEditable) {
       await this.item.update({
         "system.proficient": !this.item.system.proficient,
       });
@@ -47,7 +47,7 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) {
+    if (!this.isEditable) {
       return;
     }
     this._connectBuildContextMenu(

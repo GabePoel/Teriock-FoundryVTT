@@ -24,7 +24,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onSetStatDice(_event, target) {
-        if (!this.editable) {
+        if (!this.isEditable) {
           return;
         }
         const stat = target.dataset.stat;

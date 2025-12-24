@@ -342,25 +342,30 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
       /** @param {HTMLElement} container */ (container) => {
         let clickTimeout = null;
 
+        container.addEventListener("contextmenu", async (event) => {
+          event.stopPropagation();
+          const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(
+            container.dataset.tokenUuid,
+          );
+          tokenDocument?.object.release();
+        });
+
         container.addEventListener("click", async (event) => {
           event.stopPropagation();
-          const uuid = container.getAttribute("data-uuid");
-          if (!uuid) {
-            return;
-          }
           if (clickTimeout) {
             clearTimeout(clickTimeout);
             clickTimeout = null;
             return;
           }
           clickTimeout = setTimeout(async () => {
-            const doc = /** @type {TeriockActor} */ await fromUuid(uuid);
-            if (doc.isOwner) {
-              if (doc.token?.object) {
-                doc.token.object.control();
-              } else {
-                doc.getActiveTokens()[0]?.control();
-              }
+            const tokenDocument =
+              /** @type {TeriockTokenDocument} */ await fromUuid(
+                container.dataset.tokenUuid,
+              );
+            if (tokenDocument?.isOwner) {
+              tokenDocument.object.control({
+                releaseOthers: !event.shiftKey,
+              });
             }
             clickTimeout = null;
           }, 200);
@@ -368,22 +373,15 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
 
         container.addEventListener("dblclick", async (event) => {
           event.stopPropagation();
-          const uuid = container.getAttribute("data-uuid");
-          if (!uuid) {
-            return;
-          }
           if (clickTimeout) {
             clearTimeout(clickTimeout);
             clickTimeout = null;
           }
-          const doc = /** @type {TeriockActor} */ await fromUuid(uuid);
-          if (
-            doc &&
-            doc.sheet &&
-            doc.isOwner &&
-            typeof doc.sheet.render === "function"
-          ) {
-            await doc.sheet.render(true);
+          const actor = /** @type {TeriockActor} */ await fromUuid(
+            container.dataset.actorUuid,
+          );
+          if (actor?.isOwner) {
+            await actor.sheet.render(true);
           }
         });
       },

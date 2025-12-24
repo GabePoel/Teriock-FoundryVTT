@@ -10,18 +10,19 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @returns {Promise<"linked"|"general">} Type of macro to be made.
  */
 export default async function hotbarDropDialog(doc) {
-  let macroType = "linked";
-  if (doc.type === "ability" && doc.actor) {
+  let choice = "general";
+  if (doc.actor) {
     const context = {
-      ability: await TextEditor.enrichHTML(`@UUID[${doc.uuid}]`),
+      label: TERIOCK.options.document[doc.type].name.toLowerCase(),
+      name: doc.name,
+      child: await TextEditor.enrichHTML(`@UUID[${doc.uuid}]`),
       actor: await TextEditor.enrichHTML(`@UUID[${doc.actor.uuid}]`),
     };
     const content = await foundry.applications.handlebars.renderTemplate(
       systemPath("templates/dialog-templates/hotbar-drop.hbs"),
       context,
     );
-    macroType = "general";
-    macroType = await TeriockDialog.prompt({
+    choice = await TeriockDialog.prompt({
       window: {
         icon: makeIconClass("circle-question", "title"),
         title: `Macro Type Selection`,
@@ -42,5 +43,5 @@ export default async function hotbarDropDialog(doc) {
       ],
     });
   }
-  return macroType;
+  return choice;
 }

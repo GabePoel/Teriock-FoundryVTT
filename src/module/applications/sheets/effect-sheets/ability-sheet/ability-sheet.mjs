@@ -55,7 +55,7 @@ export default class TeriockAbilitySheet extends mix(
    * @returns {Promise<void>}
    */
   static async _onSetDuration() {
-    if (!this.editable) {
+    if (!this.isEditable) {
       return;
     }
     await durationDialog(this.document);
@@ -211,7 +211,7 @@ export default class TeriockAbilitySheet extends mix(
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) {
+    if (!this.isEditable) {
       return;
     }
 

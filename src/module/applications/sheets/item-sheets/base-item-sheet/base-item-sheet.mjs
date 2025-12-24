@@ -38,7 +38,7 @@ export default class TeriockBaseItemSheet extends mix(
    * @returns {Promise<void>} Promise that resolves when marked.
    */
   static async _onToggleOnUseDoc(_event, target) {
-    if (!this.editable) {
+    if (!this.isEditable) {
       ui.notifications.warn(
         `Cannot toggle if ability activates on use. Sheet is not editable.`,
       );
