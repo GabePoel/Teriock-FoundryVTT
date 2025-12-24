@@ -172,11 +172,6 @@ export default function CommonDocumentMixin(Base) {
         return /** @type {Teriock.HookData.BaseHookData} */ data;
       }
 
-      /** @inheritDoc */
-      prepareData() {
-        super.prepareData();
-      }
-
       /**
        * Data preparation that happens after `prepareDerivedData()`. This allows {@link TeriockChild} documents to apply
        * changes from the parent {@link TeriockActor} and should be primarily used for that purpose.

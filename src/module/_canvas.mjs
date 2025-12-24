@@ -1,3 +1,5 @@
+//noinspection JSValidateJSDoc
+
 const { Canvas } = foundry.canvas;
 
 /**
