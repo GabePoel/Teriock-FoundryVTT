@@ -1,20 +1,27 @@
-name: Vampiric Infect
+name: Knockback Aura
 type: wrapper
-_id: EqHQTyGrw5y91aKo
-img: systems/teriock/src/icons/abilities/vampiric-infect.webp
+_id: 9lqkdYHk7DLtIuze
+img: systems/teriock/src/icons/abilities/knockback-aura.webp
 effects:
-  - name: Vampiric Infect
+  - name: Knockback Aura
     type: ability
+    _id: pYs6OzNZw1g2Ynly
+    img: systems/teriock/src/icons/abilities/knockback-aura.webp
     system:
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
       consumable: false
       maxQuantity:
-        saved: ''
         raw: ''
       quantity: 1
+      _ref: null
+      revealed: true
       adept:
         enabled: false
         amount: 1
-      basic: false
       costs:
         verbal: false
         somatic: false
@@ -39,47 +46,41 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: bite
-        parent: null
-        package: null
+      gifted:
+        enabled: false
+        amount: 1
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: No Limit
-      effectTypes:
-        - disease
+        description: Instant
+      basic: false
+      delivery:
+        base: aura
+        parent: null
+        package: null
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: 10 Minutes
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: unp
-      form: special
-      gifted:
-        enabled: false
-        amount: 1
+      featSaveAttribute: str
+      form: normal
       grantOnly: false
+      grantOnlyText: ''
       heightened: ''
       improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
       interaction: feat
       invoked: false
       limitation: ''
-      maneuver: slow
+      maneuver: active
       overview:
         base: ''
         proficient: ''
@@ -88,7 +89,7 @@ effects:
       powerSources:
         - magical
       prepared: true
-      range: null
+      range: '10'
       requirements: ''
       results:
         hit: ''
@@ -97,20 +98,7 @@ effects:
         critMiss: ''
         save: ''
         critSave: ''
-        fail: >-
-          <p>Target is @L[Condition:Allured]{allured} to you. This effect
-          <i>cannot</i> be removed with @L[Ability:Remove Charm]{Remove Charm},
-          but it <i>can</i> be removed with @L[Ability:Exorcism]{Exorcism} or
-          @L[Ability:Cure Illness]{Cure Illness}. Over the coming month, the
-          target will become @L[Category:Vampires]{vampiric}. The DC for
-          @L[Ability:Cure Illness]{Cure Illness} starts at 1, immediately
-          following the bite. But with every day that passes, the DC increases
-          by 1. After 2 weeks, the target gain @L[Ability:Sunlight
-          Sensitivity]{Sunlight Sensitivity}. After 30 days, they become a
-          @L[Category:Vampires]{vampire}. Roll [[/roll 1d100]] to determine what
-          type of @L[Category:Vampires]{vampire} they
-          become.</p><p>@Embed[Compendium.teriock.tables.RollTable.pv0shqqcaCY7ubnI
-          rollable]</p>
+        fail: <p>Target is moved 10 feet away from you.</p>
         critFail: ''
       ritual: false
       rotator: false
@@ -125,157 +113,247 @@ effects:
       warded: false
       impacts:
         base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
-        macros:
-          Compendium_teriock_execution_Macro_fe9UfpoKyx32BmaC: preExecution
-    _id: rR2QXxLS4EEAjfEN
-    img: systems/teriock/src/icons/abilities/vampiric-infect.webp
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
+        macros: {}
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
     changes: []
     disabled: false
     origin: null
@@ -283,17 +361,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.EqHQTyGrw5y91aKo
-    _key: '!items.effects!EqHQTyGrw5y91aKo.rR2QXxLS4EEAjfEN'
+    _key: '!items.effects!9lqkdYHk7DLtIuze.pYs6OzNZw1g2Ynly'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!EqHQTyGrw5y91aKo'
+_key: '!items!9lqkdYHk7DLtIuze'

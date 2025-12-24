@@ -1,20 +1,27 @@
-name: Haunt Escalation
+name: Mist Manifest
 type: wrapper
-_id: 8TEz1r6I2LaNqlgW
-img: systems/teriock/src/icons/abilities/haunt-escalation.webp
+_id: 0BIgLVAu3Boh1pyJ
+img: systems/teriock/src/icons/abilities/mist-manifest.webp
 effects:
-  - name: Haunt Escalation
+  - name: Mist Manifest
     type: ability
+    _id: r3cVaDWr6MOLiYFm
+    img: systems/teriock/src/icons/abilities/mist-manifest.webp
     system:
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
       consumable: false
       maxQuantity:
-        saved: ''
         raw: ''
       quantity: 1
+      _ref: null
+      revealed: true
       adept:
         enabled: false
         amount: 1
-      basic: false
       costs:
         verbal: false
         somatic: false
@@ -39,67 +46,47 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
+      gifted:
+        enabled: false
+        amount: 1
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
-      effectTypes:
-        - automatic
+        description: Always Active
+      basic: false
+      delivery:
+        base: self
+        parent: null
+        package: null
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: r0
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
       form: special
-      gifted:
-        enabled: false
-        amount: 1
       grantOnly: false
+      grantOnlyText: ''
       heightened: ''
       improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: reactive
+      maneuver: passive
       overview:
         base: >-
-          <p>You remanifest at the start of your next turn as an angrier and
-          more powerful @L[Category:Undead creatures]{undead} being, lashing out
-          at whatever @L[Condition:Dead]{killed} you as well as anything else in
-          your way. This resets all @L[Core:HP]{HP}, @L[Core:MP]{MP}, and
-          temporary effects that may be present on you. Every time you escalate,
-          you move one step forward on the following track. For instance, if you
-          were already a @L[Creature:Phantom]{phantom}, you would escalate into
-          being a @L[Creature:Specter]{specter}.
-          @Embed[Compendium.teriock.tables.RollTable.LHGwqGbefAfHR3so]</p><p>Most
-          @L[Creature:Haunt]{haunts} do not escalate past
-          @L[Creature:Wraith]{wraith}. But the @L[Core:Game Master]{GM} may rule
-          that certain especially angry or powerful ones have additional
-          @L[Category:Abilities]{abilities} or escalation steps. If you escalate
-          while already fully escalated, you do not change @L[Category:Spectral
-          undead creatures]{species} or gain additional
-          @L[Category:Abilities]{abilities}, but you still become more
-          aggressive, harder to solve, and reset all @L[Core:HP]{HP},
-          @L[Core:MP]{MP}, and temporary effects.</p>
+          <p>You gain one random @L[Category:Abilities]{ability} from the
+          @L[Core:Mist Abilities Chart]{mist abilities
+          chart}.</p><p>@Embed[Compendium.teriock.tables.RollTable.O2qUWaSqpw2OyDol
+          rollable]</p>
         proficient: ''
         fluent: ''
       piercing: normal
@@ -107,7 +94,7 @@ effects:
         - unknown
       prepared: true
       range: Self.
-      requirements: <p>You are a @L[Creature:Haunt]{haunt}.</p>
+      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -126,21 +113,15 @@ effects:
       sustained: false
       targets:
         - self
-      trigger: >-
-        <p>You would @L[Condition:Dead]{die}. This triggers automatically. You
-        cannot choose to not use it if you are able to.</p>
+      trigger: ''
       warded: false
       impacts:
         base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
@@ -168,6 +149,15 @@ effects:
                   trigger: turn
             changeOnCrit: false
             doesExpire: false
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -178,18 +168,18 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
@@ -217,6 +207,15 @@ effects:
                   trigger: turn
             changeOnCrit: false
             doesExpire: false
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -227,18 +226,18 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
@@ -266,6 +265,15 @@ effects:
                   trigger: turn
             changeOnCrit: false
             doesExpire: false
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -276,18 +284,18 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes: []
+          checks: []
           common: []
+          duration: 0
+          endStatuses: []
           expiration:
             normal:
               combat:
@@ -315,6 +323,15 @@ effects:
                   trigger: turn
             changeOnCrit: false
             doesExpire: false
+          hacks: []
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          rolls: {}
+          startStatuses: []
+          statuses: []
+          critStatuses: []
           transformation:
             enabled: false
             image: null
@@ -325,11 +342,22 @@ effects:
               fluencies: true
               ranks: true
             uuids: []
+            multiple: false
             resetHp: true
             resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: WqQlhsfEXmdx2x1O
-    img: systems/teriock/src/icons/abilities/haunt-escalation.webp
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
     changes: []
     disabled: false
     origin: null
@@ -337,17 +365,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.8TEz1r6I2LaNqlgW
-    _key: '!items.effects!8TEz1r6I2LaNqlgW.WqQlhsfEXmdx2x1O'
+    _key: '!items.effects!0BIgLVAu3Boh1pyJ.r3cVaDWr6MOLiYFm'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!8TEz1r6I2LaNqlgW'
+_key: '!items!0BIgLVAu3Boh1pyJ'

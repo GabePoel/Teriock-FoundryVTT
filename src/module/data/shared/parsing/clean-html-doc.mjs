@@ -120,12 +120,14 @@ export function cleanHTML(html, name, options = { useFoundry: true }) {
   );
   for (const table of tables) {
     const tableName = table.getAttribute("data-table-name");
+    const rollable = !!table.getAttribute("data-rollable");
     if (tableName) {
       const tablesPack = game.teriock.packs.tables;
       const rollableTable = tablesPack.index.getName(tableName);
       if (rollableTable) {
-        const enricherTag = ` @Embed[${rollableTable.uuid}]`;
-        table.replaceWith(document.createTextNode(enricherTag));
+        const newElement = document.createElement("p");
+        newElement.textContent = `@Embed[${rollableTable.uuid}${rollable ? " rollable" : ""}]`;
+        table.replaceWith(newElement);
       }
     }
   }
