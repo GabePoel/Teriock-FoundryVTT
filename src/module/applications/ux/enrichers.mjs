@@ -1,10 +1,15 @@
-import { rollButtons } from "../../constants/display/buttons.mjs";
 import { documentOptions } from "../../constants/options/document-options.mjs";
+import {
+  commands,
+  interpretArguments,
+  parseArguments,
+} from "../../helpers/interaction/_module.mjs";
 import {
   toCamelCase,
   toKebabCase,
   toTitleCase,
 } from "../../helpers/string.mjs";
+import { makeIconElement } from "../../helpers/utils.mjs";
 
 const enricherIcons = {
   Core: "book",
@@ -13,45 +18,6 @@ const enricherIcons = {
   Drain: "droplet-slash",
   Tradecraft: documentOptions.fluency.icon,
   Class: documentOptions.rank.icon,
-};
-
-/** Generic enricher for `[[/<take> <formula>]]` */
-const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-/**
- * Create a roll enricher that recognizes all roll button takes.
- * @type {(buttons: Record<string, Teriock.UI.ButtonDefinition>) => Teriock.Foundry.TextEditorEnricherConfig}
- */
-const makeRollEnricher = (buttons) => {
-  const keys = Object.keys(buttons);
-  const lookup = Object.fromEntries(keys.map((k) => [k.toLowerCase(), k]));
-  const keyAlt = keys.map(escapeRx).join("|");
-  const any = "([^]*)";
-  const source = String.raw`\[\[\s*\/(${keyAlt})\s+${any}?\s*\]\]`;
-  const pattern = new RegExp(source, "gi");
-  return {
-    pattern,
-    enricher: async (match) => {
-      const typeKey = lookup[match[1].toLowerCase()];
-      if (!typeKey) {
-        return null;
-      }
-      const formula = (match[2] ?? "").trim();
-      const { label, icon } = buttons[typeKey];
-      const a = document.createElement("a");
-      a.className = "content-link";
-      a.draggable = false;
-      a.dataset.action = "roll-rollable-take";
-      a.dataset.type = typeKey;
-      a.dataset.formula = formula;
-      a.dataset.tooltip = label;
-      const i = document.createElement("i");
-      i.className = icon;
-      a.append(i, " ", formula);
-      return a;
-    },
-    replaceParent: false,
-  };
 };
 
 /**
@@ -207,10 +173,119 @@ const lookupEnricher = {
 };
 
 /**
+ * Set up custom text enrichers.
+ */
+export function registerInteractionEnrichers() {
+  const stringNames = Object.keys(commands);
+  CONFIG.TextEditor.enrichers.push({
+    pattern: new RegExp(
+      `\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`,
+      "gi",
+    ),
+    enricher: enrichCommand,
+    id: "executeCommand",
+    onRender: (el) => {
+      const target = /** @type {HTMLLinkElement} */ el.firstElementChild;
+      el.addEventListener("click", async () => {
+        await executeCommandFromElement(target, "primary");
+      });
+      el.addEventListener("contextmenu", async () => {
+        await executeCommandFromElement(target, "secondary");
+      });
+    },
+  });
+}
+
+/**
+ * Find an interaction from a command and execute it.
+ * @param {HTMLElement} target
+ * @param {"primary" | "secondary"} operation
+ * @returns {Promise<void>}
+ */
+async function executeCommandFromElement(target, operation) {
+  const interaction = commands[target.dataset.command];
+  if (!interaction) return;
+  const options = {};
+  for (const [key, value] of Object.entries(target.dataset)) {
+    if (!["action", "command"].includes(key)) {
+      options[key] = value;
+      if (value === "true") options[key] = true;
+    }
+  }
+  let actor;
+  if (target.dataset.relativeTo) {
+    const doc = await fromUuid(target.dataset.relativeTo);
+    actor = doc?.actor;
+  }
+  if (!actor) actor = game.actors.defaultActor;
+  await interaction[operation](actor, options);
+}
+
+/**
+ * Enrich a command.
+ * @param {RegExpMatchArray} match
+ * @param {Teriock.Foundry.EnrichmentOptions} options
+ * @returns {HTMLAnchorElement}
+ */
+function enrichCommand(match, options) {
+  let { type, config, label = "" } = match.groups;
+  const interaction = commands[type];
+  const argumentArray = parseArguments(config);
+  const interactionOptions = interpretArguments(argumentArray, interaction);
+  const link = document.createElement("a");
+  link.dataset.command = interaction.id;
+  link.dataset.action = "executeCommand";
+  link.dataset.tooltip = getInteractionEntryValue(
+    interaction,
+    "tooltip",
+    interactionOptions,
+  );
+  if (!link.dataset.tooltip) {
+    link.dataset.tooltip = getInteractionEntryValue(
+      interaction,
+      "label",
+      interactionOptions,
+    );
+  }
+  if (options.relativeTo) link.dataset.relativeTo = options.relativeTo.uuid;
+  for (const [key, value] of Object.entries(interactionOptions)) {
+    link.dataset[key] = value.toString();
+  }
+  link.className = "teriock-inline-command";
+  link.prepend(
+    makeIconElement(
+      getInteractionEntryValue(interaction, "icon", interactionOptions),
+      "inline",
+    ),
+  );
+  if (!label) {
+    label = getInteractionEntryValue(interaction, "label", interactionOptions);
+  }
+  link.appendChild(document.createTextNode(label));
+  return link;
+}
+
+/**
+ * Get a value from a specified property of an interaction.
+ * @param {Teriock.Interactions.CommandEntry} interaction
+ * @param {string} property
+ * @param {object} options
+ * @returns {string}
+ */
+function getInteractionEntryValue(interaction, property, options) {
+  if (!interaction[property]) return "";
+  if (typeof interaction[property] === "string") {
+    return interaction[property];
+  } else {
+    return interaction[property](options);
+  }
+}
+
+/**
  * Register all enrichers.
  */
 export default function registerEnrichers() {
+  registerInteractionEnrichers();
   CONFIG.TextEditor.enrichers.push(wikiLinkEnricher);
-  CONFIG.TextEditor.enrichers.push(makeRollEnricher(rollButtons));
   CONFIG.TextEditor.enrichers.push(lookupEnricher);
 }

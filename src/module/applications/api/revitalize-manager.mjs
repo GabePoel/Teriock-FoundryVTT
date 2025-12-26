@@ -1,5 +1,6 @@
-import { rollButtons } from "../../constants/display/buttons.mjs";
-import { actionHandlers } from "../../helpers/interaction/_module.mjs";
+import { takeOptions } from "../../constants/options/take-options.mjs";
+import { buttonHandlers } from "../../helpers/interaction/_module.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
 const { fields } = foundry.data;
@@ -14,7 +15,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       rollStatDie: this._onRollStatDie,
     },
     window: {
-      icon: rollButtons.revitalize.icon,
+      icon: makeIconClass(takeOptions.revitalizing.icon, "title"),
       title: "Revitalizing",
       resizable: false,
     },
@@ -49,13 +50,9 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
 
   /** @inheritDoc */
   static async _onRollStatDie(event, target) {
-    const id = target.dataset.id;
-    const parentId = target.dataset.parentId;
-    const stat = target.dataset.stat;
-    /** @type {StatDieModel} */
-    const statDie = this.actor.items.get(parentId)["system"][`${stat}Dice`][id];
+    const statDie = this._getStatDie(target);
     if (this._forHarm) {
-      const takeHandler = new actionHandlers["roll-rollable-takes"](
+      const takeHandler = new buttonHandlers["roll-rollable-takes"](
         event,
         target,
       );
@@ -65,11 +62,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       };
       await takeHandler.secondaryAction();
     } else {
-      let criticallyWounded = this.actor.statuses.has("criticallyWounded");
-      await statDie.use(this._consumeStatDice);
-      if (!criticallyWounded) {
-        await this.actor.system.takeAwaken();
-      }
+      await super._onRollStatDie(event, target);
     }
   }
 }

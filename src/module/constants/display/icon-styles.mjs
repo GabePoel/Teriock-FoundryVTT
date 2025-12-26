@@ -3,6 +3,7 @@ export const iconStyles = {
   contextMenu: "solid",
   duotone: "duotone",
   fullWidth: "fw",
+  inline: "fw fa-solid",
   light: "light",
   message: "light",
   regular: "regular",

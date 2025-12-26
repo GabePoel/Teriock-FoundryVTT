@@ -5,4 +5,3 @@ export { iconStyles } from "./icon-styles.mjs";
 export { icons } from "./icons.mjs";
 export { default as tokenMagic } from "./token-magic.mjs";
 export { colors } from "./colors.mjs";
-export * as buttons from "./buttons.mjs";

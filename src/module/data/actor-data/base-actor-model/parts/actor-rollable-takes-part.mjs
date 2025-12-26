@@ -1,14 +1,15 @@
 /**
  * Actor data model mixin that handles rollable takes.
- * @mixin
+ * @param {typeof TeriockBaseActorModel} Base
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends TeriockBaseActorData
+     * @extends TeriockBaseActorModel
+     * @mixin
      */
-    class ActorGenericRollsPart extends Base {
+    class ActorRollableTakesPart extends Base {
       /**
        * Applies damage to the actor's hit points.
        *

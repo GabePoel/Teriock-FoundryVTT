@@ -10,6 +10,7 @@ export default function HackStatApplicationMixin(Base) {
      * @extends {DocumentSheetV2}
      * @mixin
      * @property {TeriockActor} actor
+     * @property {boolean} _consumeStatDie
      */
     class HackStatApplication extends Base {
       /**
@@ -20,19 +21,13 @@ export default function HackStatApplicationMixin(Base) {
        * @static
        */
       static async _onRollStatDie(_event, target) {
-        const id = target.dataset.document;
-        const collection = target.dataset.collection;
-        const stat = target.dataset.stat;
-        const index = target.dataset.index;
-        const item =
-          /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
-          this.actor[collection].get(id);
-        const statDie =
-          /** @type {StatDieModel} */ item.system.statDice[stat].dice[
-            Number(index)
-          ];
         //noinspection JSUnresolvedReference
-        await statDie.use(this._consumeStatDie);
+        const statDie = this._getStatDie(target);
+        let criticallyWounded = this.actor.statuses.has("criticallyWounded");
+        await statDie.use(this._consumeStatDie ?? true);
+        if (!criticallyWounded) {
+          await this.actor.system.takeAwaken();
+        }
       }
 
       /**
@@ -63,6 +58,22 @@ export default function HackStatApplicationMixin(Base) {
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target
             .dataset.part;
         await this.actor.system.takeUnhack(part);
+      }
+
+      /**
+       * Get a stat die from an HTML element.
+       * @param {HTMLElement} target
+       * @returns {StatDieModel}
+       */
+      _getStatDie(target) {
+        const id = target.dataset.document;
+        const collection = target.dataset.collection;
+        const stat = target.dataset.stat;
+        const index = target.dataset.index;
+        const item =
+          /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
+          this.actor[collection].get(id);
+        return item.system.statDice[stat].dice[Number(index)];
       }
 
       /** @inheritDoc */

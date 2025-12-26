@@ -4,7 +4,7 @@ import {
   makeDamageDrainTypePanels,
   makeDamageTypeButtons,
 } from "../../../helpers/html.mjs";
-import { actionHandlers } from "../../../helpers/interaction/_module.mjs";
+import { buttonHandlers } from "../../../helpers/interaction/_module.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 export default class ArmamentExecution extends BaseDocumentExecution {
@@ -52,7 +52,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       const roll = this.rolls[0];
       if (this.damage) {
         this.buttons.push(
-          actionHandlers["take-rollable-take"].buildButton(
+          buttonHandlers["take-rollable-take"].buildButton(
             "damage",
             roll.total,
           ),
@@ -60,12 +60,12 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       }
       if (this.drain) {
         this.buttons.push(
-          actionHandlers["take-rollable-take"].buildButton("drain", roll.total),
+          buttonHandlers["take-rollable-take"].buildButton("drain", roll.total),
         );
       }
       if (this.wither) {
         this.buttons.push(
-          actionHandlers["take-rollable-take"].buildButton(
+          buttonHandlers["take-rollable-take"].buildButton(
             "wither",
             roll.total,
           ),

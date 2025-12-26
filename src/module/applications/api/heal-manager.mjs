@@ -1,4 +1,5 @@
-import { actionHandlers } from "../../helpers/interaction/_module.mjs";
+import { takeOptions } from "../../constants/options/take-options.mjs";
+import { buttonHandlers } from "../../helpers/interaction/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
@@ -15,7 +16,7 @@ export default class TeriockHealManager extends TeriockStatManager {
       takeHack: this._onTakeUnhack,
     },
     window: {
-      icon: makeIconClass("hand-holding-heart", "title"),
+      icon: makeIconClass(takeOptions.healing.icon, "title"),
       title: "Healing",
       resizable: false,
     },
@@ -52,18 +53,10 @@ export default class TeriockHealManager extends TeriockStatManager {
 
   /** @inheritDoc */
   static async _onRollStatDie(event, target) {
-    const id = target.dataset.document;
-    const collection = target.dataset.collection;
-    const stat = target.dataset.stat;
-    const index = target.dataset.index;
-    const item =
-      /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
-      this.actor[collection].get(id);
-    const statDie =
-      /** @type {StatDieModel} */
-      item.system.statDice[stat].dice[Number(index)];
+    //noinspection JSUnresolvedReference
+    const statDie = this._getStatDie(target);
     if (this._forHarm) {
-      const takeHandler = new actionHandlers["roll-rollable-takes"](
+      const takeHandler = new buttonHandlers["roll-rollable-takes"](
         event,
         target,
       );

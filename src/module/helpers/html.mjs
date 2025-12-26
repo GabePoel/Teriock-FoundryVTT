@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
-import { ApplyStatusHandler } from "./interaction/action-handler/instances/status-handlers.mjs";
+import { ApplyStatusHandler } from "./interaction/button-handlers/status-handlers.mjs";
 import { getImage } from "./path.mjs";
 import { toTitleCase } from "./string.mjs";
 
@@ -128,7 +128,7 @@ export function addClickHandler(elements, handler) {
 }
 
 /**
- * Make buttons for damage types done by some roll.
+ * Make button-handlers for damage types done by some roll.
  * @param {TeriockRoll} roll
  * @returns {Teriock.UI.HTMLButtonConfig[]}
  */

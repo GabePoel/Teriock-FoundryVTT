@@ -1,4 +1,4 @@
-import { rollButtons } from "../../../constants/display/buttons.mjs";
+import { takeOptions } from "../../../constants/options/take-options.mjs";
 
 /**
  * Remove sub-containers and convert .dice spans into enricher rolls.
@@ -33,7 +33,7 @@ export function cleanHTMLSubs(doc) {
  */
 export function cleanHTMLDice(doc) {
   const TYPE_LUT = Object.fromEntries(
-    Object.keys(rollButtons).map((k) => [k.toLowerCase(), k]),
+    Object.keys(takeOptions).map((k) => [k.toLowerCase(), k]),
   );
   doc.querySelectorAll(".dice").forEach((el) => {
     const fullRoll = el.getAttribute("data-full-roll");

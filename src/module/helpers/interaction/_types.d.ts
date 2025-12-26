@@ -1,4 +1,4 @@
-import "./action-handler/_types";
+import "./button-handlers/_types";
 import "./command-handler/_types";
 import {
   TeriockActor,

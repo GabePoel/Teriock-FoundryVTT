@@ -5,26 +5,26 @@ import {
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockFolder } from "../../../../documents/_module.mjs";
 import { addFormula } from "../../../../helpers/formula.mjs";
-import { ApplyEffectHandler } from "../../../../helpers/interaction/action-handler/instances/apply-effect-handlers.mjs";
-import { ExecuteMacroHandler } from "../../../../helpers/interaction/action-handler/instances/execute-macro-handlers.mjs";
-import { FeatSaveHandler } from "../../../../helpers/interaction/action-handler/instances/feat-save-handlers.mjs";
-import { TakeHackHandler } from "../../../../helpers/interaction/action-handler/instances/hack-handlers.mjs";
+import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
+import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
+import { FeatSaveHandler } from "../../../../helpers/interaction/button-handlers/feat-save-handlers.mjs";
+import { TakeHackHandler } from "../../../../helpers/interaction/button-handlers/hack-handlers.mjs";
 import {
   AwakenHandler,
   DeathBagHandler,
   HealHandler,
   RevitalizeHandler,
   ReviveHandler,
-} from "../../../../helpers/interaction/action-handler/instances/one-off-handlers.mjs";
-import { ResistHandler } from "../../../../helpers/interaction/action-handler/instances/resistance-handlers.mjs";
-import { RollRollableTakeHandler } from "../../../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
-import { StandardDamageHandler } from "../../../../helpers/interaction/action-handler/instances/standard-damage.mjs";
+} from "../../../../helpers/interaction/button-handlers/one-off-handlers.mjs";
+import { ResistHandler } from "../../../../helpers/interaction/button-handlers/resistance-handlers.mjs";
+import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
+import { StandardDamageHandler } from "../../../../helpers/interaction/button-handlers/standard-damage.mjs";
 import {
   ApplyStatusHandler,
   RemoveStatusHandler,
-} from "../../../../helpers/interaction/action-handler/instances/status-handlers.mjs";
-import { TradecraftCheckHandler } from "../../../../helpers/interaction/action-handler/instances/tradecraft-check-handlers.mjs";
-import { UseAbilityHandler } from "../../../../helpers/interaction/action-handler/instances/use-ability-handlers.mjs";
+} from "../../../../helpers/interaction/button-handlers/status-handlers.mjs";
+import { TradecraftCheckHandler } from "../../../../helpers/interaction/button-handlers/tradecraft-check-handlers.mjs";
+import { UseAbilityHandler } from "../../../../helpers/interaction/button-handlers/use-ability-handlers.mjs";
 import { upgradeTransformation } from "../../../../helpers/utils.mjs";
 
 /**
@@ -129,7 +129,7 @@ export default function AbilityExecutionChatPart(Base) {
         // Rollable Take Buttons
         const rolls = this.mergeImpactsRolls("rolls");
         Object.entries(rolls).forEach(([rollType, formula]) => {
-          if (formula && TERIOCK.display.buttons.rollButtons[rollType]) {
+          if (formula && TERIOCK.options.take[rollType]) {
             this.buttons.push(
               RollRollableTakeHandler.buildButton(rollType, formula),
             );

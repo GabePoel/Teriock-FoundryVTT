@@ -1,4 +1,4 @@
-import { actionHandlers } from "../../helpers/interaction/_module.mjs";
+import { buttonHandlers } from "../../helpers/interaction/_module.mjs";
 import { TeriockContextMenu } from "../ux/_module.mjs";
 import {
   imageContextMenuOptions,
@@ -29,7 +29,7 @@ export default function bindCommonActions(rootElement) {
   const actionElements = rootElement.querySelectorAll("[data-action]");
   for (const /** @type {HTMLElement} */ element of actionElements) {
     const action = element.dataset.action;
-    const HandlerClass = Object.values(actionHandlers).find(
+    const HandlerClass = Object.values(buttonHandlers).find(
       (Handler) => Handler.ACTION === action,
     );
     if (!HandlerClass) {

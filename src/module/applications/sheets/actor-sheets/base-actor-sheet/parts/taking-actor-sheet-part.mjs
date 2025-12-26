@@ -22,7 +22,7 @@ export default (Base) =>
       await TeriockDialog.prompt({
         window: {
           title: `Take ${toTitleCase(type)}`,
-          icon: TERIOCK.display.buttons.rollButtons[type].icon,
+          icon: TERIOCK.options.take[type].icon,
         },
         content: `<input type="number" name="${type}" placeholder="${toTitleCase(type)} Amount">`,
         ok: {
