@@ -6,6 +6,7 @@ import { hackCommand, unhackCommand } from "./hack-command.mjs";
 import healCommand from "./heal-command.mjs";
 import resistCommand from "./resist-command.mjs";
 import revitalizeCommand from "./revitalize-command.mjs";
+import reviveCommand from "./revive-command.mjs";
 import rollableTakeCommands from "./rollable-take-commands.mjs";
 import standardDamageCommand from "./standard-damage-command.mjs";
 import {
@@ -28,6 +29,7 @@ const commandArray = [
   removeStatusCommand,
   resistCommand,
   revitalizeCommand,
+  reviveCommand,
   standardDamageCommand,
   toggleStatusCommand,
   tradecraftCommand,

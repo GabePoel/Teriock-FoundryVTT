@@ -3,17 +3,17 @@
  * @returns {Promise<void>}
  */
 async function primary(actor) {
-  await actor.system.deathBagPull();
+  await actor.system.takeRevive();
 }
 
 /**
- * Bag command
+ * Awaken command
  * @type {Teriock.Interactions.CommandEntry}
  */
 const command = {
-  icon: "sack",
-  id: "bag",
-  label: "Death Bag Pull",
+  icon: "heart-pulse",
+  id: "revive",
+  label: "Revive",
   primary,
 };
 

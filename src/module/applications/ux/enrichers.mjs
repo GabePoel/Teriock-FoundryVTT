@@ -1,6 +1,7 @@
 import { documentOptions } from "../../constants/options/document-options.mjs";
 import {
   commands,
+  getInteractionEntryValue,
   interpretArguments,
   parseArguments,
 } from "../../helpers/interaction/_module.mjs";
@@ -263,22 +264,6 @@ function enrichCommand(match, options) {
   }
   link.appendChild(document.createTextNode(label));
   return link;
-}
-
-/**
- * Get a value from a specified property of an interaction.
- * @param {Teriock.Interactions.CommandEntry} interaction
- * @param {string} property
- * @param {object} options
- * @returns {string}
- */
-function getInteractionEntryValue(interaction, property, options) {
-  if (!interaction[property]) return "";
-  if (typeof interaction[property] === "string") {
-    return interaction[property];
-  } else {
-    return interaction[property](options);
-  }
 }
 
 /**

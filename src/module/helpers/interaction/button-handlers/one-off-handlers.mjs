@@ -1,123 +1,35 @@
-import { makeIconClass } from "../../utils.mjs";
-import AbstractButtonHandler from "./abstract-button-handler.mjs";
+import commands from "../commands/_module.mjs";
+import { CommandButtonHandlerBuilder } from "../interaction-tools.mjs";
 
 /**
  * Action to trigger awaken.
  */
-export class AwakenHandler extends AbstractButtonHandler {
-  /** @inheritDoc */
-  static ACTION = "awaken";
-
-  /**
-   * @inheritDoc
-   */
-  static buildButton() {
-    const button = super.buildButton();
-    button.icon = makeIconClass("sunrise", "button");
-    button.label = "Awaken";
-    return button;
-  }
-
-  /** @inheritDoc */
-  async primaryAction() {
-    for (const actor of this.actors) {
-      await actor.system.takeAwaken();
-    }
-  }
-}
+export class AwakenHandler extends CommandButtonHandlerBuilder(
+  commands.awaken,
+) {}
 
 /**
  * Action to trigger revival.
  */
-export class ReviveHandler extends AbstractButtonHandler {
-  static ACTION = "revive";
-
-  /**
-   * @inheritDoc
-   */
-  static buildButton() {
-    const button = super.buildButton();
-    button.icon = makeIconClass("heart-plus", "button");
-    button.label = "Revive";
-    return button;
-  }
-
-  /** @inheritDoc */
-  async primaryAction() {
-    for (const actor of this.actors) {
-      await actor.system.takeRevive();
-    }
-  }
-}
+export class ReviveHandler extends CommandButtonHandlerBuilder(
+  commands.revive,
+) {}
 
 /**
  * Action to trigger healing.
  */
-export class HealHandler extends AbstractButtonHandler {
-  /** @inheritDoc */
-  static ACTION = "heal";
-
-  /**
-   * @inheritDoc
-   */
-  static buildButton() {
-    const button = super.buildButton();
-    button.icon = makeIconClass("hand-holding-heart", "button");
-    button.label = "Heal";
-    return button;
-  }
-
-  /** @inheritDoc */
-  async primaryAction() {
-    for (const actor of this.actors) {
-      await actor.system.takeNormalHeal();
-    }
-  }
-}
+export class HealHandler extends CommandButtonHandlerBuilder(commands.heal) {}
 
 /**
  * Action to trigger revitalizing.
  */
-export class RevitalizeHandler extends AbstractButtonHandler {
-  /** @inheritDoc */
-  static ACTION = "revitalize";
+export class RevitalizeHandler extends CommandButtonHandlerBuilder(
+  commands.revitalize,
+) {}
 
-  /**
-   * @inheritDoc
-   */
-  static buildButton() {
-    const button = super.buildButton();
-    button.icon = makeIconClass("hand-holding-droplet", "button");
-    button.label = "Revitalize";
-    return button;
-  }
-
-  /** @inheritDoc */
-  async primaryAction() {
-    for (const actor of this.actors) {
-      await actor.system.takeNormalRevitalize();
-    }
-  }
-}
-
-export class DeathBagHandler extends AbstractButtonHandler {
-  /** @inheritDoc */
-  static ACTION = "death-bag";
-
-  /**
-   * @inheritDoc
-   */
-  static buildButton() {
-    const button = super.buildButton();
-    button.icon = makeIconClass("sack", "button");
-    button.label = "Death Bag";
-    return button;
-  }
-
-  /** @inheritDoc */
-  async primaryAction() {
-    for (const actor of this.actors) {
-      await actor.system.deathBagPull();
-    }
-  }
-}
+/**
+ * Action to trigger pulling from the death bag.
+ */
+export class DeathBagHandler extends CommandButtonHandlerBuilder(
+  commands.bag,
+) {}
