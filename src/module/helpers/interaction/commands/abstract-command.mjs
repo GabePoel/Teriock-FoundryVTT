@@ -6,8 +6,11 @@ export const thresholdCommand = {
     dis: "disadvantage",
     dc: "threshold",
   },
+  alt: "advantage",
+  shift: "disadvantage",
 };
 
 export const formulaCommand = {
   args: ["formula"],
+  formula: true,
 };

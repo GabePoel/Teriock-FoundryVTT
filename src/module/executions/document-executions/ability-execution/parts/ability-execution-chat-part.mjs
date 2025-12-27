@@ -7,24 +7,22 @@ import { TeriockFolder } from "../../../../documents/_module.mjs";
 import { addFormula } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
-import { FeatSaveHandler } from "../../../../helpers/interaction/button-handlers/feat-save-handlers.mjs";
-import { TakeHackHandler } from "../../../../helpers/interaction/button-handlers/hack-handlers.mjs";
-import {
-  AwakenHandler,
-  DeathBagHandler,
-  HealHandler,
-  RevitalizeHandler,
-  ReviveHandler,
-} from "../../../../helpers/interaction/button-handlers/one-off-handlers.mjs";
-import { ResistHandler } from "../../../../helpers/interaction/button-handlers/resistance-handlers.mjs";
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
-import { StandardDamageHandler } from "../../../../helpers/interaction/button-handlers/standard-damage.mjs";
 import {
   ApplyStatusHandler,
+  AwakenHandler,
+  DeathBagHandler,
+  FeatHandler,
+  HealHandler,
   RemoveStatusHandler,
-} from "../../../../helpers/interaction/button-handlers/status-handlers.mjs";
-import { TradecraftCheckHandler } from "../../../../helpers/interaction/button-handlers/tradecraft-check-handlers.mjs";
-import { UseAbilityHandler } from "../../../../helpers/interaction/button-handlers/use-ability-handlers.mjs";
+  ResistHandler,
+  RevitalizeHandler,
+  ReviveHandler,
+  StandardDamageHandler,
+  TakeHackHandler,
+  TradecraftCheckHandler,
+  UseAbilityHandler,
+} from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { upgradeTransformation } from "../../../../helpers/utils.mjs";
 
 /**
@@ -43,7 +41,7 @@ export default function AbilityExecutionChatPart(Base) {
         // Feat Save Button
         if (this.source.system.interaction === "feat") {
           this.buttons.push(
-            FeatSaveHandler.buildButton(
+            FeatHandler.buildButton(
               this.source.system.featSaveAttribute,
               this.rolls[0].total,
             ),
@@ -273,9 +271,12 @@ export default function AbilityExecutionChatPart(Base) {
           }
         }
         return {
-          name: `${this.source.name} Effect`,
-          type: "consequence",
+          changes: [],
+          duration: {
+            seconds: seconds,
+          },
           img: this.source.img,
+          name: `${this.source.name} Effect`,
           statuses: Array.from(statuses),
           system: {
             associations: [],
@@ -304,9 +305,7 @@ export default function AbilityExecutionChatPart(Base) {
             source: this.source.uuid,
             transformation: transformation,
           },
-          duration: {
-            seconds: seconds,
-          },
+          type: "consequence",
         };
       }
 

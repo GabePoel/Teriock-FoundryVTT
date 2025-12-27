@@ -62,33 +62,34 @@ export function CommandButtonHandlerBuilder(command) {
     static ACTION = command.id;
 
     /** @inheritDoc */
-    static buildButton() {
+    static buildButton(options = {}) {
       const button = super.buildButton();
+      Object.assign(button.dataset, options);
       button.icon = makeIconClass(
-        getInteractionEntryValue(command, "icon", this.dataset),
+        getInteractionEntryValue(command, "icon", options),
         "button",
       );
-      button.label = getInteractionEntryValue(command, "label", this.dataset);
+      button.label = getInteractionEntryValue(command, "label", options);
       return button;
     }
 
     /** @inheritDoc */
     async primaryAction() {
+      const options = foundry.utils.deepClone(this.commonRollOptions);
+      Object.assign(options, this.critRollOptions);
+      Object.assign(options, this.dataset);
       for (const actor of this.actors) {
-        await command.primary(
-          actor,
-          foundry.utils.mergeObject(this.dataset, this.commonRollOptions),
-        );
+        await command.primary(actor, options);
       }
     }
 
     /** @inheritDoc */
     async secondaryAction() {
+      const options = foundry.utils.deepClone(this.commonRollOptions);
+      Object.assign(options, this.critRollOptions);
+      Object.assign(options, this.dataset);
       for (const actor of this.actors) {
-        await command.secondary(
-          actor,
-          foundry.utils.mergeObject(this.dataset, this.commonRollOptions),
-        );
+        await command.secondary(actor, options);
       }
     }
   };

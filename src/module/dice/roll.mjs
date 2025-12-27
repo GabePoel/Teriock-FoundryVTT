@@ -38,7 +38,9 @@ export default class TeriockRoll extends Roll {
       options,
     );
     this.id = foundry.utils.randomID();
-    this.threshold = userOptions.threshold;
+    if (userOptions.threshold) {
+      this.threshold = Number(userOptions.threshold);
+    }
     this.styles = userOptions.styles;
     this.hideRoll = userOptions.hideRoll;
     this.comparison = userOptions.comparison;

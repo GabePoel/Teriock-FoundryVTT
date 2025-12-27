@@ -1,23 +1,25 @@
 import { ApplyEffectHandler } from "./apply-effect-handlers.mjs";
 import { ExecuteMacroHandler } from "./execute-macro-handlers.mjs";
-import { FeatSaveHandler } from "./feat-save-handlers.mjs";
-import { TakeHackHandler, TakeUnhackHandler } from "./hack-handlers.mjs";
-import {
-  AwakenHandler,
-  DeathBagHandler,
-  HealHandler,
-  RevitalizeHandler,
-  ReviveHandler,
-} from "./one-off-handlers.mjs";
-import { ResistHandler } from "./resistance-handlers.mjs";
 import {
   RollRollableTakeHandler,
   TakeRollableTakeHandler,
 } from "./rollable-takes-handlers.mjs";
-import { StandardDamageHandler } from "./standard-damage.mjs";
-import { ApplyStatusHandler, RemoveStatusHandler } from "./status-handlers.mjs";
-import { TradecraftCheckHandler } from "./tradecraft-check-handlers.mjs";
-import { UseAbilityHandler } from "./use-ability-handlers.mjs";
+import {
+  ApplyStatusHandler,
+  AwakenHandler,
+  DeathBagHandler,
+  FeatHandler,
+  HealHandler,
+  RemoveStatusHandler,
+  ResistHandler,
+  RevitalizeHandler,
+  ReviveHandler,
+  StandardDamageHandler,
+  TakeHackHandler,
+  TakeUnhackHandler,
+  TradecraftCheckHandler,
+  UseAbilityHandler,
+} from "./simple-command-handlers.mjs";
 
 /** @type {typeof AbstractButtonHandler[]} */
 const handlerArray = [
@@ -26,7 +28,7 @@ const handlerArray = [
   AwakenHandler,
   DeathBagHandler,
   ExecuteMacroHandler,
-  FeatSaveHandler,
+  FeatHandler,
   HealHandler,
   RemoveStatusHandler,
   ResistHandler,

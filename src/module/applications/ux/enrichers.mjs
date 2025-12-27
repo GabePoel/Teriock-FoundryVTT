@@ -176,7 +176,7 @@ const lookupEnricher = {
 /**
  * Set up custom text enrichers.
  */
-export function registerInteractionEnrichers() {
+export function registerCommandEnrichers() {
   const stringNames = Object.keys(commands);
   CONFIG.TextEditor.enrichers.push({
     pattern: new RegExp(
@@ -187,11 +187,11 @@ export function registerInteractionEnrichers() {
     id: "executeCommand",
     onRender: (el) => {
       const target = /** @type {HTMLLinkElement} */ el.firstElementChild;
-      el.addEventListener("click", async () => {
-        await executeCommandFromElement(target, "primary");
+      el.addEventListener("click", async (ev) => {
+        await executeCommandFromElement(target, "primary", ev);
       });
-      el.addEventListener("contextmenu", async () => {
-        await executeCommandFromElement(target, "secondary");
+      el.addEventListener("contextmenu", async (ev) => {
+        await executeCommandFromElement(target, "secondary", ev);
       });
     },
   });
@@ -201,12 +201,16 @@ export function registerInteractionEnrichers() {
  * Find an interaction from a command and execute it.
  * @param {HTMLElement} target
  * @param {"primary" | "secondary"} operation
+ * @param {MouseEvent} event
  * @returns {Promise<void>}
  */
-async function executeCommandFromElement(target, operation) {
-  const interaction = commands[target.dataset.command];
-  if (!interaction) return;
+async function executeCommandFromElement(target, operation, event) {
+  const command = commands[target.dataset.command];
+  if (!command) return;
   const options = {};
+  for (const mod of ["alt", "ctrl", "shift"]) {
+    if (command[mod] && event[`${mod}Key`]) options[command[mod]] = true;
+  }
   for (const [key, value] of Object.entries(target.dataset)) {
     if (!["action", "command"].includes(key)) {
       options[key] = value;
@@ -219,7 +223,7 @@ async function executeCommandFromElement(target, operation) {
     actor = doc?.actor;
   }
   if (!actor) actor = game.actors.defaultActor;
-  await interaction[operation](actor, options);
+  await command[operation](actor, options);
 }
 
 /**
@@ -230,20 +234,25 @@ async function executeCommandFromElement(target, operation) {
  */
 function enrichCommand(match, options) {
   let { type, config, label = "" } = match.groups;
-  const interaction = commands[type];
-  const argumentArray = parseArguments(config);
-  const interactionOptions = interpretArguments(argumentArray, interaction);
+  const command = commands[type];
+  let argumentArray;
+  if (command.formula) {
+    argumentArray = [["formula", config]];
+  } else {
+    argumentArray = parseArguments(config);
+  }
+  const interactionOptions = interpretArguments(argumentArray, command);
   const link = document.createElement("a");
-  link.dataset.command = interaction.id;
+  link.dataset.command = command.id;
   link.dataset.action = "executeCommand";
   link.dataset.tooltip = getInteractionEntryValue(
-    interaction,
+    command,
     "tooltip",
     interactionOptions,
   );
   if (!link.dataset.tooltip) {
     link.dataset.tooltip = getInteractionEntryValue(
-      interaction,
+      command,
       "label",
       interactionOptions,
     );
@@ -255,12 +264,12 @@ function enrichCommand(match, options) {
   link.className = "teriock-inline-command";
   link.prepend(
     makeIconElement(
-      getInteractionEntryValue(interaction, "icon", interactionOptions),
+      getInteractionEntryValue(command, "icon", interactionOptions),
       "inline",
     ),
   );
   if (!label) {
-    label = getInteractionEntryValue(interaction, "label", interactionOptions);
+    label = getInteractionEntryValue(command, "label", interactionOptions);
   }
   link.appendChild(document.createTextNode(label));
   return link;
@@ -270,7 +279,7 @@ function enrichCommand(match, options) {
  * Register all enrichers.
  */
 export default function registerEnrichers() {
-  registerInteractionEnrichers();
+  registerCommandEnrichers();
   CONFIG.TextEditor.enrichers.push(wikiLinkEnricher);
   CONFIG.TextEditor.enrichers.push(lookupEnricher);
 }

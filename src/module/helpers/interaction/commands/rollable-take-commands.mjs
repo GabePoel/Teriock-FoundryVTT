@@ -23,8 +23,7 @@ async function abstractTakeOperation(actor, options) {
       formula,
       actor?.getRollData() || {},
     );
-    if (options.reverse)
-      await take.reverse(actor, amount); //import { commandHandlers } from "../../helpers/interaction/commands.mjs";
+    if (options.reverse) await take.reverse(actor, amount);
     else await take.apply(actor, amount);
     return;
   }

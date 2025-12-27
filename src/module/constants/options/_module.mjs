@@ -1,5 +1,6 @@
 export * as change from "./change-options.mjs";
 export { abilityOptions as ability } from "./ability-options.mjs";
+export { attributeOptions as attribute } from "./attribute-options.mjs";
 export { attunementOptions as attunement } from "./attunement-options.mjs";
 export { characterOptions as character } from "./character-options.mjs";
 export { consequenceOptions as consequence } from "./consequence-options.mjs";
@@ -10,10 +11,10 @@ export { displayOptions as display } from "./display-options.mjs";
 export { documentOptions as document } from "./document-options.mjs";
 export { effectOptions as effect } from "./effect-options.mjs";
 export { equipmentOptions as equipment } from "./equipment-options.mjs";
+export { hackOptions as hack } from "./hack-options.mjs";
 export { powerOptions as power } from "./power-options.mjs";
 export { rankOptions as rank } from "./rank-options.mjs";
 export { resourceOptions as resource } from "./resource-options.mjs";
 export { speciesOptions as species } from "./species-options.mjs";
 export { takeOptions as take } from "./take-options.mjs";
 export { tradecraftOptions as tradecraft } from "./tradecraft-options.mjs";
-export { hackOptions as hack } from "./hack-options.mjs";

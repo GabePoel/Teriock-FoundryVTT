@@ -1,4 +1,4 @@
-import { UseAbilityHandler } from "../../../helpers/interaction/button-handlers/use-ability-handlers.mjs";
+import { UseAbilityHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";

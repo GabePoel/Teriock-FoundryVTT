@@ -17,8 +17,10 @@ const command = {
   ...thresholdCommand,
   args: ["attribute"],
   primary,
-  label: "Feat Save",
-  icon: "star",
+  label: (options) =>
+    `${TERIOCK.options.attribute[options?.attribute]?.label || "Feat"} Save`,
+  icon: (options) =>
+    TERIOCK.options.attribute[options?.attribute]?.icon || "star",
   id: "feat",
 };
 

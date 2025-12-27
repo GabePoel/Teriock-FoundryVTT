@@ -1,3 +1,4 @@
+import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { pureUuid } from "../../resolve.mjs";
 
 /**
@@ -24,15 +25,45 @@ async function primary(actor, options = {}) {
 }
 
 /**
+ * @param {TeriockActor} actor
+ * @param {Teriock.Interactions.StandardDamageOptions} options
+ * @returns {Promise<void>}
+ */
+async function secondary(actor, options = {}) {
+  let attacker = actor.system.primaryAttacker;
+  if (options.attacker) {
+    attacker = await fromUuid(pureUuid(options.attacker));
+  }
+  if (!attacker) {
+    ui.notifications.error(
+      `${actor.name} doesn't have a default attack weapon.`,
+    );
+    return;
+  }
+  let formula = attacker.system.damage.base.formula;
+  if (options.twoHanded && attacker.system.hasTwoHandedAttack) {
+    formula = attacker.system.damage.twoHanded.formula;
+  }
+  formula = await boostDialog(formula, { crit: options.crit || false });
+  await attacker.use({
+    secret: true,
+    formula,
+  });
+}
+
+/**
  * Standard damage command
  * @type {Teriock.Interactions.CommandEntry}
  */
 const command = {
   aliases: ["sd", "standard"],
+  alt: "crit",
+  ctrl: "twoHanded",
   icon: "hammer-crash",
   id: "standardDamage",
   label: "Standard Damage",
   primary,
+  secondary,
 };
 
 export default command;

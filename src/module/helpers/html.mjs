@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
-import { ApplyStatusHandler } from "./interaction/button-handlers/status-handlers.mjs";
+import { ApplyStatusHandler } from "./interaction/button-handlers/simple-command-handlers.mjs";
 import { getImage } from "./path.mjs";
 import { toTitleCase } from "./string.mjs";
 

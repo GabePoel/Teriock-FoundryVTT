@@ -18,6 +18,7 @@ declare global {
       aliases?: string[];
       args?: string[];
       flags?: Record<string, string>;
+      formula?: boolean;
     };
 
     export type ThresholdOptions = {

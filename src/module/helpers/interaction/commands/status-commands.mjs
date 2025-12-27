@@ -1,5 +1,3 @@
-import { documentOptions } from "../../../constants/options/document-options.mjs";
-
 /**
  * @param {TeriockActor} actor
  * @param {Teriock.Interactions.StatusOptions} options
@@ -71,7 +69,7 @@ export const removeStatusCommand = {
  */
 export const toggleStatusCommand = {
   args: ["status"],
-  icon: documentOptions.condition.icon,
+  icon: "plus-minus",
   id: "toggle",
   label: (options) =>
     options?.status

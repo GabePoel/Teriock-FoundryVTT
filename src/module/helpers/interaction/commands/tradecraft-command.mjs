@@ -1,5 +1,10 @@
-import { tradecrafts } from "../../../constants/index/_module.mjs";
+import { tradecraftOptions } from "../../../constants/options/tradecraft-options.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
+
+const allOptions = {};
+Object.values(tradecraftOptions).forEach((fieldOption) => {
+  Object.assign(allOptions, fieldOption.tradecrafts);
+});
 
 /**
  * @param {TeriockActor} actor
@@ -18,10 +23,10 @@ const command = {
   ...thresholdCommand,
   aliases: ["tc"],
   args: ["tradecraft"],
-  icon: (options) => `${tradecrafts[options?.tradecraft || "artist"].icon}`,
+  icon: (options) => `${allOptions[options?.tradecraft || "artist"].icon}`,
   id: "tradecraft",
   label: (options) =>
-    `${tradecrafts[options?.tradecraft || "artist"].label} Check`,
+    `${allOptions[options?.tradecraft || "artist"].name} Check`,
   primary,
 };
 
