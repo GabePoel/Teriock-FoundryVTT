@@ -46,7 +46,7 @@ await tm.utils.progressBar(
 
     let creature;
     if (!creatureEntry) {
-      creature = await teriock.Actor.create(species.system.toCreature(), {
+      creature = await game.teriock.Actor.create(species.system.toCreature(), {
         keepEmbeddedIds: true,
         keepId: true,
         pack: "teriock.creatures",

@@ -55,7 +55,7 @@ await tm.utils.progressBar(
               if (rankItem) rankItem = await fromUuid(rankItem.uuid);
 
               if (!rankItem) {
-                rankItem = await teriock.Item.create(
+                rankItem = await game.teriock.Item.create(
                   {
                     name,
                     type: "rank",

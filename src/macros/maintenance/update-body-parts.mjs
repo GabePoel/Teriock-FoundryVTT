@@ -4,7 +4,7 @@ await tm.utils.progressBar(
   async (name) => {
     let item = game.teriock.packs.bodyParts.index.find((i) => i.name === name);
     if (!item) {
-      item = await teriock.Item.create(
+      item = await game.teriock.Item.create(
         { name, type: "body" },
         { pack: "teriock.bodyParts" },
       );

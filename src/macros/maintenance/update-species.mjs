@@ -34,7 +34,7 @@ await tm.utils.progressBar(
       folder = folders["undeadSpeciesFolder"];
     }
     if (!item) {
-      item = /** @type {TeriockSpecies} */ await teriock.Item.create(
+      item = /** @type {TeriockSpecies} */ await game.teriock.Item.create(
         { name: name, type: "species", folder: folder.id },
         { pack: "teriock.species" },
       );

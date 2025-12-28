@@ -206,7 +206,7 @@ export function registerCommandEnrichers() {
  */
 async function executeCommandFromElement(target, operation, event) {
   const command = commands[target.dataset.command];
-  if (!command) return;
+  if (!command || !command[operation]) return;
   const options = {};
   for (const mod of ["alt", "ctrl", "shift"]) {
     if (command[mod] && event[`${mod}Key`]) options[command[mod]] = true;
