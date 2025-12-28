@@ -1,4 +1,5 @@
 import { systemPath } from "../helpers/path.mjs";
+import Booster from "./booster.mjs";
 import { selectWeightedMaxFaceDie } from "./helpers.mjs";
 
 const { Roll } = foundry.dice;
@@ -209,11 +210,12 @@ export default class TeriockRoll extends Roll {
 
   /**
    * Boost this roll in place.
-   * @param {object} options
+   * @param {object} [options]
    * @returns {Promise<TeriockRoll>}
    */
   async boost(options = {}) {
     const clone = this.clone({ evaluated: true });
+    const formula = clone.formula;
     if (!clone._evaluated) {
       await clone.evaluate();
     }
@@ -224,7 +226,14 @@ export default class TeriockRoll extends Roll {
     die.results.push(dieRoll.dice[0].results.at(-1));
     TeriockRoll.resetFormulas(clone);
     return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
-      clone.terms,
+      [
+        new Booster({
+          fn: "b",
+          terms: [formula],
+          rolls: [clone],
+          result: clone.total,
+        }),
+      ],
       options,
     );
   }
@@ -252,6 +261,7 @@ export default class TeriockRoll extends Roll {
    */
   async deboost(options = {}) {
     const clone = this.clone({ evaluated: true });
+    const formula = clone.formula;
     if (!clone._evaluated) {
       await clone.evaluate();
     }
@@ -260,7 +270,14 @@ export default class TeriockRoll extends Roll {
     die.results.pop();
     TeriockRoll.resetFormulas(clone);
     return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
-      clone.terms,
+      [
+        new Booster({
+          fn: "db",
+          terms: [formula],
+          rolls: [clone],
+          result: clone.total,
+        }),
+      ],
       options,
     );
   }

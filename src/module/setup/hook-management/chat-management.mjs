@@ -6,8 +6,10 @@ import {
 
 export default function registerChatManagementHooks() {
   foundry.helpers.Hooks.on("chatMessage", (_chatLog, message) => {
+    let hasCommand = false;
     for (const [id, interaction] of Object.entries(commands)) {
       if (message.startsWith(`/${id} `) || message === `/${id}`) {
+        hasCommand = true;
         const argString = message.slice(id.length + 1).trim();
         const argArr = parseArguments(argString);
         const argObj = interpretArguments(argArr, interaction);
@@ -17,6 +19,8 @@ export default function registerChatManagementHooks() {
         actors.map((actor) => interaction.primary(actor, argObj));
       }
     }
-    return false;
+    if (hasCommand) {
+      return false;
+    }
   });
 }
