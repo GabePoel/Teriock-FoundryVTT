@@ -6,8 +6,10 @@ data.execution.buttons = buttons.filter(
 const button = data.execution.buttons[0];
 const effectObject = JSON.parse(button.dataset.normal);
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
-effectObject.changes[0] = {
-  key: `!equipment__system.equipmentClasses__has__${equipmentClass}__system.damage.base.raw`,
+effectObject.system.impacts.changes[0] = {
+  key: "system.damage.all.raw",
+  qualifier: `@class.${equipmentClass}`,
+  target: "armament",
   value: "1d4[holy]",
   mode: 2,
   priority: 10,

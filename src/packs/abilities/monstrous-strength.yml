@@ -116,7 +116,21 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              target: armament
+              time: normal
+              qualifier: and(@dmg, @range.melee)
+              value: '1'
+            - key: system.piercing.av0
+              mode: 4
+              priority: 10
+              target: armament
+              time: normal
+              qualifier: '@range.melee'
+              value: 'true'
           common: []
           expiration:
             normal:

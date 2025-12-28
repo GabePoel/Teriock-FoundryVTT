@@ -182,12 +182,6 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
     }
     this.parent.changes = [
       {
-        key: "system.attunements",
-        mode: 2,
-        value: this.target,
-        priority: 10,
-      },
-      {
         key: "system.presence.value",
         mode: 2,
         value: this.tier,

@@ -405,7 +405,10 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
               await boostedRoll.toMessage({
                 speaker: TeriockChatMessage.getSpeaker(),
                 system: {
-                  buttons: this.buttons,
+                  buttons: this.buttons.map((b) => {
+                    b.dataset.amount = boostedRoll.total.toString();
+                    return b;
+                  }),
                 },
               });
             },
@@ -419,7 +422,10 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
               await deboostedRoll.toMessage({
                 speaker: TeriockChatMessage.getSpeaker(),
                 system: {
-                  buttons: this.buttons,
+                  buttons: this.buttons.map((b) => {
+                    b.dataset.amount = deboostedRoll.total.toString();
+                    return b;
+                  }),
                 },
               });
             },

@@ -1,4 +1,3 @@
-import { TeriockRoll } from "../../../../../dice/_module.mjs";
 import { getRollIcon, makeIcon } from "../../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../../fields/_module.mjs";
 
@@ -117,31 +116,14 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        for (const damageOption of ["base", "twoHanded"]) {
-          const key = `damage.${damageOption}.raw`;
-          const damageRoll = new TeriockRoll(utils.getProperty(this, key));
-          damageRoll.terms.forEach((term) => {
-            const flavorParts = new Set([
-              ...term.flavor
-                .toLowerCase()
-                .split(" ")
-                .map((p) => p.trim()),
-              ...this.damage.types.map((t) => t.toLowerCase().trim()),
-            ]);
-            flavorParts.delete("");
-            if (this.powerLevel === "magic") {
-              flavorParts.add("magic");
-            }
-            const flavorArray = Array.from(flavorParts);
-            flavorArray.sort((a, b) => a.localeCompare(b));
-            if (!term.isDeterministic || !isNaN(Number(term.expression))) {
-              term.options.flavor = flavorArray.join(" ");
-            }
-          });
-          utils.setProperty(this, key, damageRoll.formula);
+      prepareBaseData() {
+        super.prepareBaseData();
+        if (this.hasTwoHandedAttack) {
+          this.damage.twoHanded.raw = this.addDamageTypesToFormula(
+            this.damage.twoHanded.raw,
+          );
         }
+        this.damage.twoHanded.typed = this.damage.twoHanded.raw;
       }
 
       /** @inheritDoc */

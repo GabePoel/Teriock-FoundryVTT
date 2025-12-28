@@ -37,7 +37,7 @@ class BoosterTerm extends FunctionTerm {
    */
   static _boost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
-    die._number += 1;
+    if (die) die._number += 1;
     roll.resetFormula();
   }
 
@@ -47,7 +47,7 @@ class BoosterTerm extends FunctionTerm {
    */
   static _deboost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
-    die._number = Math.max(0, die._number - 1);
+    if (die) die._number = Math.max(0, die._number - 1);
     roll.resetFormula();
   }
 

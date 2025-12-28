@@ -1,6 +1,6 @@
 export const effectOptions = {
   changeMode: {
-    0: "Custom",
+    0: "Boost",
     1: "Multiply",
     2: "Add",
     3: "Downgrade",

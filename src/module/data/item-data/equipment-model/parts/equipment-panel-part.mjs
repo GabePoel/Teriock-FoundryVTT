@@ -14,9 +14,9 @@ export default (Base) => {
     class EquipmentPanelPart extends Base {
       /** @inheritDoc */
       get panelParts() {
-        const damageString = suffix(this.damage.base.text, "damage");
+        const damageString = suffix(this.damage.base.typed, "damage");
         const twoHandedDamageString = this.hasTwoHandedAttack
-          ? suffix(this.damage.twoHanded.text, "damage")
+          ? suffix(this.damage.twoHanded.typed, "damage")
           : "";
         let rangeString = "";
         if (this.range.long.nonZero) {

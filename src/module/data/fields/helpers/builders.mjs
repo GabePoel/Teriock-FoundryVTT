@@ -244,7 +244,9 @@ export function qualifiedChangeField() {
     ActiveEffect: "Active Effects",
     parent: "Parent",
   };
-  const subTypes = {};
+  const subTypes = {
+    armament: "Armaments",
+  };
   for (const v of Object.values(TERIOCK.system.documentTypes)) {
     Object.assign(subTypes, v);
   }

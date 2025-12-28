@@ -25,19 +25,13 @@ export default (Base) => {
           suppressed = true;
         }
         if (!suppressed && this.parent.parent.type === "equipment") {
-          if (!suppressed && !this.parent.parent.system.equipped) {
-            suppressed = true;
-          }
+          if (!this.parent.parent.system.equipped) suppressed = true;
           if (
-            !suppressed &&
-            this.parent.parent.system.dampened &&
-            this.form !== "intrinsic"
+            this.form !== "intrinsic" &&
+            (this.parent.parent.system.dampened ||
+              !this.parent.parent.system.isAttuned)
           ) {
             suppressed = true;
-          }
-          if (!suppressed && this.form !== "intrinsic") {
-            const isAttuned = this.parent.parent.system.isAttuned;
-            suppressed = !isAttuned;
           }
         }
         if (!suppressed && this.actor && this.parent.sup) {

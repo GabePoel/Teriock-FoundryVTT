@@ -74,7 +74,7 @@ export default class TeriockBodyModel extends mix(
           icon: "fa-crosshairs-simple",
           label: "Attack",
           wrappers: [
-            suffix(this.damage.base.text, "damage"),
+            suffix(this.damage.base.typed, "damage"),
             suffix(prefix(this.hit.text, "+", ""), "hit bonus"),
             suffix(this.attackPenalty.text, "AP"),
             TERIOCK.index.weaponFightingStyles[this.fightingStyle],
@@ -98,6 +98,13 @@ export default class TeriockBodyModel extends mix(
           ],
         },
       ],
+    };
+  }
+
+  getLocalRollData() {
+    return {
+      ...super.getLocalRollData(),
+      "class.bodyParts": 1,
     };
   }
 

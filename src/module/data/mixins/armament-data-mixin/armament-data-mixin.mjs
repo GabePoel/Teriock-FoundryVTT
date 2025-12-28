@@ -1,4 +1,5 @@
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { TeriockRoll } from "../../../dice/_module.mjs";
 import { ArmamentExecution } from "../../../executions/document-executions/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
@@ -166,6 +167,30 @@ export default function ArmamentDataMixin(Base) {
         await execution.execute();
       }
 
+      /**
+       * Add defined damage types to some formula.
+       * @param {string} formula
+       * @returns {string}
+       */
+      addDamageTypesToFormula(formula) {
+        const roll = new TeriockRoll(formula);
+        const terms = roll.terms.filter(
+          (t) => !t.isDeterministic && !isNaN(Number(t.expression)),
+        );
+        terms.push(...roll.dice);
+        terms.forEach((term) => {
+          const types = term.flavor
+            .toLowerCase()
+            .split(" ")
+            .map((type) => type.trim());
+          types.push(Array.from(this.damage.types));
+          const reducedTypes = Array.from(new Set(types)).filter((t) => t);
+          reducedTypes.sort((a, b) => a.localeCompare(b));
+          term.options.flavor = reducedTypes.join(" ");
+        });
+        return roll.formula;
+      }
+
       /** @inheritDoc */
       getLocalRollData() {
         const data = super.getLocalRollData();
@@ -174,8 +199,8 @@ export default function ArmamentDataMixin(Base) {
           dmg: this.damage.base.formula,
           range: this.range.long.formula,
           "range.short": this.range.short.formula,
-          "range.melee": this.range.melee,
-          "range.ranged": this.range.ranged,
+          "range.melee": this.range.melee ? 1 : 0,
+          "range.ranged": this.range.ranged ? 1 : 0,
           av: this.av.value,
           bv: this.bv.value,
           hit: this.hit.value,
@@ -213,11 +238,24 @@ export default function ArmamentDataMixin(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.props = new Set(
-          Array.from(
-            this.parent.effects.filter((e) => e.type === "property"),
-          ).map((p) => toCamelCase(p.name)),
+        const properties = this.parent.effects.filter(
+          (e) => e.type === "property",
         );
+        this.props = new Set(
+          Array.from(properties).map((p) => toCamelCase(p.name)),
+        );
+        for (const p of properties) {
+          if (p.system.damageType) {
+            this.damage.types.add(p.system.damageType);
+          }
+        }
+        if (this.powerLevel === "magic") {
+          this.damage.types.add("magic");
+        }
+        this.damage.base.raw = this.addDamageTypesToFormula(
+          this.damage.base.raw,
+        );
+        this.damage.base.typed = this.damage.base.raw;
         this.piercing = {
           av0: false,
           ub: false,

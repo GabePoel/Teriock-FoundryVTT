@@ -1,6 +1,7 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import {
   addFormula,
+  boostFormula,
   downgradeDeterministicFormula,
   downgradeIndeterministicFormula,
   multiplyFormula,
@@ -32,17 +33,19 @@ export default class FormulaField extends EnhancedStringField {
 
   /** @inheritDoc */
   _applyChangeAdd(value, delta, _model, _change) {
-    if (!value) {
-      return delta;
-    }
+    if (!value) return delta;
     return addFormula(value, delta);
   }
 
   /** @inheritDoc */
+  _applyChangeCustom(value, delta, _model, _change) {
+    if (!delta || this.deterministic) return value;
+    return boostFormula(value, delta);
+  }
+
+  /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
-    if (!value) {
-      return delta;
-    }
+    if (!value) return delta;
     if (this.deterministic) {
       return downgradeDeterministicFormula(value, delta);
     } else {
@@ -52,17 +55,13 @@ export default class FormulaField extends EnhancedStringField {
 
   /** @inheritDoc */
   _applyChangeMultiply(value, delta, _model, _change) {
-    if (!value) {
-      return delta;
-    }
+    if (!value) return delta;
     return multiplyFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeUpgrade(value, delta, _model, _change) {
-    if (!value) {
-      return delta;
-    }
+    if (!value) return delta;
     if (this.deterministic) {
       return upgradeDeterministicFormula(value, delta);
     } else {

@@ -11,6 +11,16 @@ export function addFormula(value, delta) {
 }
 
 /**
+ * Boost a formula.
+ * @param {string} value - Original formula.
+ * @param {string} delta - Modification to formula.
+ * @returns {string}
+ */
+export function boostFormula(value, delta) {
+  return `sb(${value}, ${delta})`;
+}
+
+/**
  * Downgrade a formula deterministically.
  * @param {string} value - Original formula.
  * @param {string} delta - Modification to formula.
@@ -86,6 +96,7 @@ export function upgradeIndeterministicFormula(value, delta) {
     return value;
   }
 }
+
 /**
  * Check if a formula would exist.
  * @param {string|number} formula

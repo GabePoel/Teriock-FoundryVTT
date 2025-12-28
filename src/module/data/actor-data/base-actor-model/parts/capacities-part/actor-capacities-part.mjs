@@ -22,10 +22,6 @@ export default (Base) => {
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
-          attunements: new fields.SetField(new fields.DocumentIdField(), {
-            label: "Attunements",
-            hint: "The documents that the actor is attuned to.",
-          }),
           size: new fields.SchemaField({
             number: new EvaluationField({
               blank: "3",
@@ -158,6 +154,9 @@ export default (Base) => {
       prepareBaseData() {
         super.prepareBaseData();
         this.encumbranceLevel = 0;
+        this.attunements = new Set(
+          this.parent.attunements.map((a) => a.system.target),
+        );
         this.#prepareCarryingCapacity();
       }
 
