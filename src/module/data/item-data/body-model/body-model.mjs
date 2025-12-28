@@ -124,7 +124,7 @@ export default class TeriockBodyModel extends mix(
             .toLowerCase()
             .split(" ")
             .map((p) => p.trim()),
-          ...this.damage.types.map((t) => t.toLowerCase().trim()),
+          ...Array.from(this.damage.types).map((t) => t.toLowerCase().trim()),
         ]);
         flavorParts.delete("");
         const flavorArray = Array.from(flavorParts);

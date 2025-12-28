@@ -4,7 +4,11 @@ import {
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockFolder } from "../../../../documents/_module.mjs";
-import { addFormula } from "../../../../helpers/formula.mjs";
+import {
+  addFormula,
+  boostFormula,
+  formulaExists,
+} from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
 import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
@@ -127,6 +131,10 @@ export default function AbilityExecutionChatPart(Base) {
         // Rollable Take Buttons
         const rolls = this.mergeImpactsRolls("rolls");
         Object.entries(rolls).forEach(([rollType, formula]) => {
+          const boostAmount = this.source.system.impacts.boosts[rollType];
+          if (formulaExists(boostAmount)) {
+            formula = boostFormula(formula, boostAmount);
+          }
           if (formula && TERIOCK.options.take[rollType]) {
             this.buttons.push(
               RollRollableTakeHandler.buildButton(rollType, formula),
@@ -173,6 +181,9 @@ export default function AbilityExecutionChatPart(Base) {
         if (this.warded) {
           this.tags.push("Warded");
         }
+        if (this.vitals) {
+          this.tags.push("Vitals");
+        }
         if (this.heightened > 0) {
           this.tags.push(
             `Heightened ${this.heightened} Time${this.heightened === 1 ? "" : "s"}`,
@@ -195,6 +206,11 @@ export default function AbilityExecutionChatPart(Base) {
         await super._createChatMessage();
       }
 
+      /**
+       * Generate the JSON serializable data for a consequence.
+       * @param {boolean} crit
+       * @returns {Promise<object>}
+       */
       async generateConsequence(crit = false) {
         const statuses = this.mergeImpactsSet("statuses");
         if (crit) {

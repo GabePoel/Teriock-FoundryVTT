@@ -158,10 +158,19 @@ export default function CommonDocumentMixin(Base) {
               /** @type {TeriockMacro} */
               const macro = await fromUuid(macroUuid);
               if (macro) {
-                await macro.execute({
-                  actor: this,
-                  data: data,
-                });
+                try {
+                  await macro.execute({
+                    actor: this,
+                    data: data,
+                  });
+                } catch (e) {
+                  if (game.settings.get("teriock", "developerMode")) {
+                    ui.notifications.error(
+                      `Macro ${macro.name} experienced an error while executing. See console for more information.`,
+                    );
+                  }
+                  console.error(e);
+                }
               }
             }
           }

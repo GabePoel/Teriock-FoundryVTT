@@ -1,7 +1,10 @@
 // noinspection JSUnusedGlobalSymbols
 
 import { TeriockEffect } from "../documents/_module.mjs";
-import { AbilityExecution } from "../executions/document-executions/_module.mjs";
+import {
+  AbilityExecution,
+  ArmamentExecution,
+} from "../executions/document-executions/_module.mjs";
 
 declare global {
   namespace Teriock.HookData {
@@ -42,6 +45,10 @@ declare global {
 
     export type UseAbility = Teriock.HookData.BaseHookData & {
       execution: AbilityExecution;
+    };
+
+    export type UseArmament = Teriock.HookData.BaseHookData & {
+      execution: ArmamentExecution;
     };
 
     export type DocActivity = Teriock.HookData.BaseHookData & {

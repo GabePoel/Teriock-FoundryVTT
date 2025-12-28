@@ -14,8 +14,10 @@ const { TypeDataModel } = foundry.abstract;
 //noinspection JSClosureCompilerSyntax
 /**
  * @implements {Teriock.Models.TeriockBaseMessageModelInterface}
+ * @implements {Teriock.Data.BaseMessageData}
  */
 export default class TeriockBaseMessageModel extends TypeDataModel {
+  //noinspection JSValidateJSDoc
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}

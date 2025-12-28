@@ -50,6 +50,8 @@ declare global {
       specialRules: string;
       /** <schema> Spell Turning */
       spellTurning: boolean;
+      /** <schema> Vitals */
+      vitals: boolean;
       /** <base> Warded */
       warded: boolean;
     }

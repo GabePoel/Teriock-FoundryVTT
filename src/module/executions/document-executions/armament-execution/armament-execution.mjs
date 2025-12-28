@@ -118,6 +118,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
         await ability.use();
       }
     }
+    await this.actor?.hookCall("useArmament", { execution: this });
   }
 
   /** @inheritDoc */

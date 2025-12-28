@@ -14,6 +14,7 @@ declare global {
         ub?: boolean;
         warded?: boolean;
         source?: TeriockAbility;
+        vitals?: boolean;
       };
   }
 }
@@ -41,6 +42,7 @@ declare module "./ability-execution-constructor.mjs" {
       sb: boolean;
     };
     targets: Set<TeriockToken>;
+    vitals: boolean;
     warded: boolean;
 
     get source(): TeriockAbility;

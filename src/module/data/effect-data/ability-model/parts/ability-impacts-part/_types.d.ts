@@ -101,6 +101,8 @@ export type AbilityImpactsData = {
 export type AbilityImpacts = AbilityImpactData & {
   /** <schema> Base impact of using this ability */
   base: AbilityImpact;
+  /** <base> Boosts to apply to resulting rolls. */
+  boosts: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
   /** <schema> How the impacts change if fluent in this ability */
   fluent: AbilityImpact;
   /** <schema> How the impacts change if this ability is heightened */

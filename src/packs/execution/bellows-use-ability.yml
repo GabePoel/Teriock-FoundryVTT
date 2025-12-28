@@ -1,0 +1,31 @@
+name: Bellows - Use Ability
+type: script
+_id: 3ggAKA5UMx4YqKni
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+  const dealsDamage = data.execution.message?.system.buttons.some(
+    (b) =>
+      b.dataset.action === "roll-rollable-take" && b.dataset.type === "damage",
+  );
+  if (data.execution.source.system.spell && dealsDamage) {
+    const bellowsIds = data.execution.actor?.effects
+      .filter((c) => c.name === "Bellows Effect" && c.type === "consequence")
+      .map((c) => c.id);
+    if (bellowsIds && bellowsIds.length > 0) {
+      await data.execution.actor?.deleteEmbeddedDocuments(
+        "ActiveEffect",
+        bellowsIds,
+      );
+    }
+  }
+flags: {}
+_stats:
+  compendiumSource: null
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.1
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!3ggAKA5UMx4YqKni'

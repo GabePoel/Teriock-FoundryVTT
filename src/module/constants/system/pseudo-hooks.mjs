@@ -33,6 +33,7 @@ export const abilityPseudoHooks = {
   turnEnd: "Actor Turn Ending",
   turnStart: "Actor Turn Starting",
   useAbility: "Using an Ability",
+  useArmament: "Using an Armament",
 };
 
 export const propertyPseudoHooks = {

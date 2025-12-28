@@ -6686,7 +6686,14 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - mode: 2
+                  priority: 10
+                  time: normal
+                  key: system.impacts.boosts.damage
+                  target: ability
+                  qualifier: '@spell'
+                  value: '1'
               common: []
               expiration:
                 normal:
@@ -6860,7 +6867,14 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - mode: 2
+                  priority: 10
+                  time: normal
+                  key: system.impacts.boosts.damage
+                  target: ability
+                  qualifier: '@spell'
+                  value: '@h'
               common: []
               expiration:
                 normal:
@@ -6910,7 +6924,8 @@ items:
                 select: false
                 useFolder: false
                 uuid: null
-            macros: {}
+            macros:
+              Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
           qualifiers:
             ephemeral:
               raw: '0'
@@ -7458,22 +7473,8 @@ items:
                 - mode: 2
                   priority: 30
                   time: normal
-                  key: system.damage.base.raw
-                  target: equipment
-                  qualifier: '@dmg'
-                  value: 1d4[fire magic]
-                - mode: 2
-                  priority: 30
-                  time: normal
-                  key: system.damage.twoHanded.raw
-                  target: equipment
-                  qualifier: '@dmg.2h'
-                  value: 1d4[fire magic]
-                - mode: 2
-                  priority: 30
-                  time: normal
-                  key: system.damage.base.raw
-                  target: body
+                  key: system.damage.all.raw
+                  target: armament
                   qualifier: '@dmg'
                   value: 1d4[fire magic]
                 - mode: 2
@@ -13654,6 +13655,7 @@ items:
       warded: false
       hit:
         raw: ''
+      vitals: false
     effects:
       - name: Burning
         type: property

@@ -91,6 +91,13 @@ export default (Base) => {
           },
         );
       }
+
+      /** @inheritDoc */
+      prepareBaseData() {
+        super.prepareBaseData();
+        this.impacts.boosts =
+          /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {};
+      }
     }
   );
 };

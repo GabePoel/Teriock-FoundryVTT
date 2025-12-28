@@ -33,6 +33,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
         this.actor?.system.offense.piercing === "ub",
       sb = this.actor?.system.offense.sb,
       attackPenalty = "0",
+      vitals = this.source.system.targets.has("vitals"),
     } = options;
     this.armament = armament;
     if (this.armament && this.source.system.isContact) {
@@ -56,6 +57,13 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
         this.armament.system.piercing.ub
       ) {
         ub = true;
+      }
+      if (
+        options.vitals === undefined &&
+        this.source.system.interaction === "attack" &&
+        this.armament.system.vitals
+      ) {
+        vitals = true;
       }
     }
     if (ub) {
@@ -90,6 +98,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     };
     this.attackPenaltyFormula = attackPenalty;
     this.attackPenalty = 0;
+    this.vitals = vitals;
     this.targets = new Set();
   }
 

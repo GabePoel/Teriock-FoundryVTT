@@ -34,6 +34,9 @@ export default class BaseExecution {
   /** @type {string} */
   formula;
 
+  /** @type {TeriockChatMessage|undefined} */
+  message;
+
   /** @type {Teriock.MessageData.MessagePanel[]} */
   panels = [];
 
@@ -169,7 +172,7 @@ export default class BaseExecution {
     const { rollMode = game.settings.get("core", "rollMode") } = options;
     const chatData = this.chatData;
     TeriockChatMessage.applyRollMode(chatData, rollMode);
-    await TeriockChatMessage.create(chatData);
+    this.message = await TeriockChatMessage.create(chatData);
   }
 
   /**

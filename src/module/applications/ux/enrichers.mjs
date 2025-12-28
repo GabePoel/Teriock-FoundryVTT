@@ -237,7 +237,7 @@ function enrichCommand(match, options) {
   const command = commands[type];
   let argumentArray;
   if (command.formula) {
-    argumentArray = [["formula", config]];
+    argumentArray = [["formula", config.trim()]];
   } else {
     argumentArray = parseArguments(config);
   }

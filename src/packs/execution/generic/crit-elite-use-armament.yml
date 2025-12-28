@@ -1,0 +1,26 @@
+folder: T1HL9IwE6uoaEeOZ
+name: Crit Elite - Use Armament
+type: script
+_id: 2U8tSQk1fcHRzL6i
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.UseArmament} */ scope.data;
+  const critEliteIds = data.execution.actor?.effects
+    .filter((c) => c.name === "Crit Elite Effect" && c.type === "consequence")
+    .map((c) => c.id);
+  if (critEliteIds && critEliteIds.length > 0) {
+    await data.execution.actor?.deleteEmbeddedDocuments(
+      "ActiveEffect",
+      critEliteIds,
+    );
+  }
+flags: {}
+_stats:
+  compendiumSource: null
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.1
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!2U8tSQk1fcHRzL6i'

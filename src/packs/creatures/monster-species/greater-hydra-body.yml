@@ -1041,7 +1041,21 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - mode: 0
+                  priority: 100
+                  time: normal
+                  key: system.damage.all.raw
+                  target: armament
+                  qualifier: and(@dmg, @range.melee)
+                  value: '1'
+                - mode: 4
+                  priority: 10
+                  time: normal
+                  key: system.piercing.av0
+                  target: armament
+                  qualifier: '@range.melee'
+                  value: 'true'
               common: []
               expiration:
                 normal:
@@ -4666,6 +4680,7 @@ items:
       warded: false
       hit:
         raw: ''
+      vitals: false
     effects:
       - name: Handy
         type: property
@@ -4843,6 +4858,7 @@ items:
       warded: false
       hit:
         raw: ''
+      vitals: false
     effects: []
     flags: {}
     _stats:

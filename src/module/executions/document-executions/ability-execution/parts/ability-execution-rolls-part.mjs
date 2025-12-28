@@ -54,6 +54,9 @@ export default function AbilityExecutionRollsPart(Base) {
           rollOptions.targets = [target];
           if (target.actor) {
             rollOptions.threshold = target.actor.system.defense.cc;
+            if (this.vitals) {
+              rollOptions.threshold += 3;
+            }
             rollOptions.comparison = "gte";
             if (
               this.piercing.ub &&

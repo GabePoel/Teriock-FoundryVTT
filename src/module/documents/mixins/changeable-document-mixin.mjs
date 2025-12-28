@@ -45,15 +45,18 @@ export default function ChangeableDocumentMixin(Base) {
           let changes = [...effect.system.changes];
           for (const change of changes) {
             if (change.key.startsWith("system.damage.all")) {
-              const baseChange = {
-                ...change,
-                key: change.key.replace("all", "base"),
-              };
-              const twoHandedChange = {
-                ...change,
-                key: change.key.replace("all", "twoHanded"),
-              };
-              changes.push(...[baseChange, twoHandedChange]);
+              changes.push(
+                ...[
+                  {
+                    ...change,
+                    key: change.key.replace("all", "base"),
+                  },
+                  {
+                    ...change,
+                    key: change.key.replace("all", "twoHanded"),
+                  },
+                ],
+              );
             }
           }
           for (const change of changes) {
@@ -74,8 +77,12 @@ export default function ChangeableDocumentMixin(Base) {
             } else if (["Actor", "Item", "ActiveEffect"].includes(target)) {
               changeTree[time][target].untyped.push(conditionalChange);
             } else if (target === "armament") {
-              changeTree[time].Item.typed.body.push(conditionalChange);
               changeTree[time].Item.typed.equipment.push(conditionalChange);
+              if (
+                !conditionalChange.key.startsWith("system.damage.twoHanded")
+              ) {
+                changeTree[time].Item.typed.body.push(conditionalChange);
+              }
             } else {
               const documentName = TERIOCK.options.document[target]?.doc;
               if (documentName) {

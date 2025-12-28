@@ -110,6 +110,11 @@ export default function ArmamentDataMixin(Base) {
             label: "Spell Turning",
             nullable: false,
           }),
+          vitals: new fields.BooleanField({
+            initial: false,
+            label: "Vitals",
+            nullable: false,
+          }),
           warded: new fields.BooleanField({
             initial: false,
             label: "Warded",

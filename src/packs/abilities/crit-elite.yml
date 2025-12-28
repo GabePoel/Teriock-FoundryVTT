@@ -23,21 +23,25 @@ effects:
         - self
       elements: []
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
-        description: Instant
+        description: While Stationary
+        stationary: true
       sustained: false
       range: Self.
       overview:
         base: >-
-          <p>You aim your weapon with deadly precision, causing the next
-          @L[Category:Attack abilities]{attack} you make to be
+          <p>You aim with deadly precision, causing the next @L[Category:Attack
+          abilities]{attack} you make with an item to be
           @L[Keyword:Boosted]{boosted}. This @L[Category:Attack
           abilities]{attack} must hit the target's @L[Core:Vitals
-          Target]{vitals} (@L[Core:Armor Class]{AC} + 3).</p>
+          Target]{vitals} (@L[Core:Armor Class]{AC} + 3) or the
+          @L[Category:Attack abilities]{attack} does nothing. Only the
+          @L[Core:Damage]{damage} from the item itself can be
+          @L[Keyword:Boosted]{boosted} in this way.</p>
         proficient: ''
         fluent: ''
       results:
@@ -89,10 +93,8 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: <p>You move or are moved.</p>
-      requirements: >-
-        <p>You must remain stationary until you make the
-        @L[Keyword:Boosted]{boosted} @L[Category:Attack abilities]{attack}.</p>
+      endCondition: ''
+      requirements: <p>You are not already using [[lookup name]].</p>
       effects: []
       expansion: null
       expansionRange: null
@@ -119,7 +121,21 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              target: armament
+              time: normal
+              qualifier: '@dmg'
+              value: '1'
+            - key: system.vitals
+              mode: 5
+              priority: 10
+              target: armament
+              time: normal
+              qualifier: '1'
+              value: 'true'
           common: []
           expiration:
             normal:
@@ -259,7 +275,8 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
-        macros: {}
+        macros:
+          Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
     _id: kicVfFFQVM83uIGK
     changes: []
     disabled: false

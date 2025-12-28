@@ -17,7 +17,8 @@ export function addFormula(value, delta) {
  * @returns {string}
  */
 export function boostFormula(value, delta) {
-  return `sb(${value}, ${delta})`;
+  if (formulaExists(value)) return `sb(${value}, ${delta})`;
+  return value;
 }
 
 /**

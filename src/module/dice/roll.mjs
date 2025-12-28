@@ -137,6 +137,25 @@ export default class TeriockRoll extends Roll {
   }
 
   /**
+   * Reset all rolls recursively.
+   * @param {TeriockRoll} roll
+   */
+  static resetFormulas(roll) {
+    for (const term of roll.terms) {
+      if (term?.rolls) {
+        term.rolls.forEach((r) => {
+          this.resetFormulas(r);
+        });
+      }
+      if (term?.isBooster) {
+        term.result = term.rolls[0].total;
+      }
+    }
+    roll.resetFormula();
+    roll._total = roll._evaluateTotal();
+  }
+
+  /**
    * Whether this threshold has been met.
    * @returns {null|boolean}
    */
@@ -203,6 +222,7 @@ export default class TeriockRoll extends Roll {
     const dieRoll = new TeriockRoll(die.formula);
     await dieRoll.evaluate();
     die.results.push(dieRoll.dice[0].results.at(-1));
+    TeriockRoll.resetFormulas(clone);
     return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
       clone.terms,
       options,
@@ -238,6 +258,7 @@ export default class TeriockRoll extends Roll {
     const die = selectWeightedMaxFaceDie(clone.dice);
     die._number = Math.max(0, die._number - 1);
     die.results.pop();
+    TeriockRoll.resetFormulas(clone);
     return /** @type {TeriockRoll} */ TeriockRoll.fromTerms(
       clone.terms,
       options,
