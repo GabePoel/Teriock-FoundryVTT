@@ -1,6 +1,9 @@
 import { bindCommonActions } from "../../../applications/shared/_module.mjs";
 import { TeriockContextMenu } from "../../../applications/ux/_module.mjs";
-import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import {
+  TeriockChatMessage,
+  TeriockItem,
+} from "../../../documents/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import {
@@ -294,23 +297,8 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
             60 *
             1000;
     }
-    if (autoCollapse) {
-      htmlElement.querySelectorAll(".collapsable").forEach((el) => {
-        el.classList.toggle("collapsed", true);
-      });
-    }
 
-    htmlElement
-      .querySelectorAll("[data-action='toggle-collapse']")
-      .forEach((el) => {
-        el.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const target = /** @type {HTMLElement} */ e.target;
-          const collapsable =
-            /** @type {HTMLElement} */ target.closest(".collapsable");
-          collapsable.classList.toggle("collapsed");
-        });
-      });
+    TeriockItem.bindPanelListeners(htmlElement, { collapseAll: autoCollapse });
 
     // Add an extra content div at the start of message-content if it exists
     if (this.extraContent) {

@@ -20,6 +20,47 @@ export default function PanelDocumentMixin(Base) {
         return metadata;
       }
 
+      /**
+       * Bind listeners to collapse panel elements.
+       * @param {HTMLElement} element
+       * @param {object} [options]
+       * @param {boolean} [options.collapseAll]
+       * @param {boolean} [options.collapsePanel]
+       * @param {boolean} [options.collapseAssociation]
+       */
+      static bindPanelListeners(element, options = {}) {
+        element
+          .querySelectorAll("[data-action='toggle-collapse']")
+          .forEach((el) => {
+            el.addEventListener("click", (e) => {
+              e.stopPropagation();
+              const target = /** @type {HTMLElement} */ e.target;
+              const collapsable =
+                /** @type {HTMLElement} */ target.closest(".collapsable");
+              collapsable.classList.toggle("collapsed");
+            });
+          });
+        if (options.collapsePanel) {
+          element
+            .querySelectorAll(".teriock-panel.collapsable")
+            .forEach((el) => {
+              el.classList.toggle("collapsed", true);
+            });
+        }
+        if (options.collapseAssociation) {
+          element
+            .querySelectorAll(".teriock-panel-association.collapsable")
+            .forEach((el) => {
+              el.classList.toggle("collapsed", true);
+            });
+        }
+        if (options.collapseAll) {
+          element.querySelectorAll(".collapsable").forEach((el) => {
+            el.classList.toggle("collapsed", true);
+          });
+        }
+      }
+
       /** @returns {Teriock.MessageData.MessagePanel} */
       get panelParts() {
         return {
@@ -29,6 +70,27 @@ export default function PanelDocumentMixin(Base) {
           blocks: [],
           bars: [],
         };
+      }
+
+      /** @inheritDoc */
+      async _buildEmbedHTML(config, options = {}) {
+        if (config.values.includes("panel")) {
+          if (!config.label) config.caption = false;
+          return foundry.utils.parseHTML(
+            await TeriockTextEditor.makeTooltip(this.panelParts, {
+              noBlocks: config.values.includes("noBlocks"),
+              noBars: config.values.includes("noBars"),
+              noAssociations: config.values.includes("noAssociations"),
+            }),
+          );
+        }
+        return super._buildEmbedHTML(config, options);
+      }
+
+      /** @inheritDoc */
+      onEmbed(element) {
+        PanelDocument.bindPanelListeners(element);
+        super.onEmbed(element);
       }
 
       /** @inheritDoc */

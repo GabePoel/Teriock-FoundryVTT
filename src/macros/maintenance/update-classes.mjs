@@ -81,8 +81,10 @@ await tm.utils.progressBar(
           .map((n) => classPack.index.find((e) => e.name === n)?.uuid)
           .filter((n) => n);
 
-        const rankText = rankUuids.map((u) => `@Embed[${u}]`).join(`\n`);
-        const archetypeText = `@Embed[${classPack.index.getName(tm.string.toTitleCase(archetype)).uuid}]`;
+        const rankText = rankUuids
+          .map((u) => `<p>@Embed[${u} panel noBlocks]</p>`)
+          .join(``);
+        const archetypeText = `<p>@Embed[${classPack.index.getName(tm.string.toTitleCase(archetype)).uuid} panel]</p>`;
         const flaws = (await fromUuid(rankUuids[0]))?.system.flaws;
 
         const text = tm.string.dedent(`

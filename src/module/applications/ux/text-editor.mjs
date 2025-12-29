@@ -42,9 +42,15 @@ export default class TeriockTextEditor extends TextEditor {
    * Convert the panel to an HTML string.
    * @param {Teriock.MessageData.MessagePanel} parts
    * @param {object} [options]
+   * @param {boolean} [options.noBars]
+   * @param {boolean} [options.noBlocks]
+   * @param {boolean} [options.noAssociations]
    * @returns {Promise<string>}
    */
   static async makeTooltip(parts, options = {}) {
+    if (options.noBars) delete parts.bars;
+    if (options.noBlocks) delete parts.blocks;
+    if (options.noAssociations) delete parts.associations;
     await this.enrichPanel(parts, options);
     return await foundry.applications.handlebars.renderTemplate(
       systemPath("templates/ui-templates/panel.hbs"),

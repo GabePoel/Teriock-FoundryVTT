@@ -47,6 +47,7 @@ export default class TeriockAbilityModel extends mix(
   parts.AbilityImpactsPart,
   parts.AbilityImprovementsPart,
   parts.AbilityPanelPart,
+  parts.AbilityRankPart,
 ) {
   /** @inheritDoc */
   static get metadata() {

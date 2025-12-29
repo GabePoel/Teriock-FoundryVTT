@@ -102,6 +102,17 @@
                           <img src="{{{img}}}" alt="" class="{{#if rescale}}rescale{{/if}}" data-openable="true">
                         </div>
                         <div class="teriock-panel-association-card-name">{{{name}}}</div>
+                        {{#if (exists icon)}}
+                          <div class="teriock-panel-association-row-icon"
+                            {{#if icon.tooltip}}
+                               data-tooltip="{{{icon.tooltip}}}"
+                               data-tooltip-class=""
+                               data-tooltip-direction="DOWN"
+                            {{/if}}
+                          >
+                            <i class="fa-fw fa-light fa-{{{icon.icon}}}"></i>
+                          </div>
+                        {{/if}}
                       </a>
                     {{/each}}
                   </div>

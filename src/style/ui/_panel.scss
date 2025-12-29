@@ -8,16 +8,20 @@
 
 [role="tooltip"] {
   max-height: calc(100% - 200px);
-  --panel-padding: 4px;
 
   .teriock-panel {
     border: none;
+    --panel-padding: 4px;
     padding: 4px;
     width: 300px;
 
     .teriock-panel-header {
       background: none;
       padding: var(--panel-padding) var(--panel-padding) 8px;
+
+      .teriock-panel-image {
+        border-radius: 100%;
+      }
 
       &:hover {
         background: none;
@@ -54,12 +58,6 @@
   .teriock-panel-image {
     border-radius: 2px !important;
   }
-
-  .teriock-panel-association {
-    background: rgba(0 0 0 / 5%) !important;
-    border: 1px solid var(--color-panel-edge) !important;
-    border-radius: 2px !important;
-  }
 }
 
 .teriock-panel-body {
@@ -94,7 +92,32 @@
 .teriock-panel {
   @include mixins.inverse-roll-style;
   overflow: hidden;
+  --panel-padding: 8px;
   width: 100%;
+
+  figure.content-embed:has(figcaption) {
+    .teriock-panel {
+      display: none;
+    }
+  }
+
+  .teriock-panel {
+    .teriock-panel-content {
+      display: none;
+    }
+
+    .teriock-panel-header {
+      .teriock-panel-header-expander {
+        display: none;
+      }
+
+      &:hover {
+        .teriock-panel-header-icon {
+          opacity: 1;
+        }
+      }
+    }
+  }
 
   .teriock-panel-content {
     @include mixins.collapsible;
@@ -122,12 +145,14 @@
     flex-direction: row;
     padding: 8px;
     position: relative;
-    user-select: none;
-
     width: 100%;
 
+    * {
+      user-select: none;
+    }
+
     &:hover {
-      background-color: rgba(255, 255, 255, 0.25);
+      background-color: var(--color-panel-header-hover);
 
       .teriock-panel-header-icon {
         opacity: 0;
@@ -138,31 +163,18 @@
       }
     }
 
-    //&::before {
-    //  background: transparent;
-    //  border-bottom: 1px var(--panel-divider-style) var(--color-panel-divider);
-    //  border-radius: 4px;
-    //  content: "";
-    //  left: var(--panel-padding);
-    //  position: absolute;
-    //  right: var(--panel-padding);
-    //  top: 100%;
-    //}
-
     .teriock-panel-image {
       align-items: center;
       cursor: pointer;
       display: flex;
       height: 2em;
       width: 2em;
-      @include mixins.image-border;
+      @include mixins.image-border(4px, 0.3, 2px);
       @include mixins.warm-image-container-background;
 
       img {
         @include mixins.warm-drop-shadow;
         @include mixins.image-position;
-        height: 100%;
-        width: 100%;
       }
     }
 
@@ -179,7 +191,7 @@
     .teriock-panel-header-icon,
     .teriock-panel-header-expander {
       align-items: center;
-      color: var(--color-panel-edge);
+      color: var(--color-panel-icon);
       display: flex;
       font-size: medium;
       height: 2em;
@@ -199,18 +211,36 @@
     }
   }
 
+  .teriock-panel-association {
+    background: var(--color-panel-associations-background) !important;
+    border: 1px solid var(--color-panel-edge);
+    border-radius: 2px !important;
+  }
+
   .teriock-panel-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    column-gap: 4px;
+    columns: 200px 2;
     user-select: none;
 
+    * {
+      user-select: none;
+    }
+
     .teriock-panel-bar {
-      align-items: center;
+      align-items: start;
       display: flex;
       flex-direction: row;
       gap: 4px;
+      margin-block: 3px;
       width: 100%;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
 
       .teriock-panel-bar-icon {
         align-items: center;
@@ -283,11 +313,11 @@
         display: none;
       }
 
-      *:first-child {
+      > *:first-child {
         margin-top: 0;
       }
 
-      *:last-child {
+      > *:last-child {
         margin-bottom: 0;
       }
     }
@@ -298,6 +328,10 @@
     border-radius: 0.25em;
     overflow: hidden;
     user-select: none;
+
+    * {
+      user-select: none;
+    }
 
     .teriock-panel-association-card-container {
       @include mixins.collapsible;
@@ -347,6 +381,16 @@
         img {
           @include mixins.warm-image-background;
         }
+      }
+
+      .teriock-panel-association-row-icon {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        margin-left: auto;
+        opacity: 0.7;
+        width: 2em;
       }
     }
 

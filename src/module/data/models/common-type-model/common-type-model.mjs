@@ -176,6 +176,14 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * An extra icon tag.
+   * @returns {Teriock.EmbedData.EmbedIcon|undefined}
+   */
+  get tagIcon() {
+    return undefined;
+  }
+
+  /**
    * Types that can be shown on this parent's sheet.
    * @returns {Teriock.Documents.CommonType[]}
    */

@@ -516,13 +516,14 @@ export function quickAddAssociation(
       cards: docs.map((d) => {
         return {
           color: d.system.color,
+          icon: d.system.tagIcon,
           id: d._id,
           img: d.img,
+          makeTooltip: options.makeTooltip,
           name: d.system.nameString || d.name,
           rescale: false,
           type: d.documentName,
           uuid: d.uuid,
-          makeTooltip: options.makeTooltip,
         };
       }),
     };

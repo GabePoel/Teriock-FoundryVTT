@@ -9,7 +9,7 @@ declare global {
       classes?: string;
       clickable?: boolean;
       dataset?: object;
-      icon: string;
+      icon?: Teriock.EmbedData.EmbedIcon;
       tooltip?: string;
       condition?: boolean;
     };

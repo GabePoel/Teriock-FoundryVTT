@@ -124,6 +124,7 @@ export default function EmbedCardDocumentMixin(Base) {
             }
           });
         }
+        super.onEmbed(element);
       }
     }
   );
