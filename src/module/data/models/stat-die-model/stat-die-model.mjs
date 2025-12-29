@@ -4,7 +4,7 @@ import { TeriockRoll } from "../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { dedent } from "../../../helpers/string.mjs";
 import { getRollIcon, makeIconClass } from "../../../helpers/utils.mjs";
-import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
+import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 

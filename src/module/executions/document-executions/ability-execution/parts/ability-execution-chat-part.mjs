@@ -414,6 +414,7 @@ export default function AbilityExecutionChatPart(Base) {
         function baseMethod(a) {
           const b = foundry.utils.deepClone(a);
           if (b.useFolder && b.uuid) {
+            //noinspection JSValidateTypes
             b.uuids = new Set([b.uuid]);
           }
           return b;

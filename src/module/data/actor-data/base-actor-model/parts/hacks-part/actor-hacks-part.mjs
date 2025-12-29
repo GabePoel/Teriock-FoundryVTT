@@ -1,10 +1,9 @@
-//noinspection JSClosureCompilerSyntax
-
 /**
  * Actor data model mixin that handles hacks.
  * @param {typeof TeriockBaseActorModel} Base
  */
 export default (Base) => {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {TeriockBaseActorModel}

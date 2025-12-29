@@ -2,13 +2,14 @@ import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { DocumentSettingsSheet } from "../../utility-sheets/_module.mjs";
 
 /**
- * @param {typeof DocumentSheetV2} Base
+ * @param {typeof TeriockDocumentSheet} Base
  */
 export default function ConfigButtonSheetMixin(Base) {
   /**
-   * @extends {DocumentSheetV2}
+   * @extends {TeriockDocumentSheet}
    * @mixin
    */
+  //noinspection JSValidateTypes
   return class ConfigButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {

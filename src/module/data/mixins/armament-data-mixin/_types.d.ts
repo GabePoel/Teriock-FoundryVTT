@@ -1,4 +1,4 @@
-import { EvaluationModel } from "../../models/_module.mjs";
+import { DamageModel, EvaluationModel } from "../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -12,9 +12,7 @@ declare global {
       /** <schema> Damage Dice */
       damage: {
         /** <schema> Damage this always deals */
-        base: EvaluationModel & {
-          typed: string;
-        };
+        base: DamageModel;
         /** <schema> Additional damage types to be added to all the base damage */
         types: Set<string>;
       };

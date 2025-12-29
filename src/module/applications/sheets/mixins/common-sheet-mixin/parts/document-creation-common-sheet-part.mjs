@@ -12,13 +12,12 @@ import {
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
 /**
- * @param {typeof DocumentSheetV2} Base
+ * @param {typeof TeriockDocumentSheet} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax,JSValidateJSDoc
   return (
     /**
-     * @extends {DocumentSheetV2}
+     * @extends {TeriockDocumentSheet}
      * @mixin
      * @property {TeriockCommon} document
      */

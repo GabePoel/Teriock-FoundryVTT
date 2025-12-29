@@ -1,5 +1,3 @@
-//noinspection JSUnusedGlobalSymbols
-
 import { makeIconClass } from "../../utils.mjs";
 import InteractionHandler from "../interaction-handler.mjs";
 

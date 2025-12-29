@@ -1,11 +1,9 @@
-//noinspection JSUnresolvedReference
-
 /**
  * Equipment migrate data part.
  * @param {typeof TeriockEquipmentModel} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+  //noinspection JSClosureCompilerSyntax,JSUnresolvedReference
   return (
     /**
      * @extends {TeriockEquipmentModel}

@@ -1,5 +1,6 @@
 import { getRollIcon, makeIcon } from "../../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../../fields/_module.mjs";
+import { DamageModel } from "../../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 const { utils } = foundry;
@@ -25,9 +26,11 @@ export default (Base) => {
           damage: new fields.SchemaField({
             base: new EvaluationField({
               deterministic: false,
+              model: DamageModel,
             }),
             twoHanded: new EvaluationField({
               deterministic: false,
+              model: DamageModel,
             }),
             types: new fields.SetField(new fields.StringField()),
           }),
@@ -119,11 +122,8 @@ export default (Base) => {
       prepareBaseData() {
         super.prepareBaseData();
         if (this.hasTwoHandedAttack) {
-          this.damage.twoHanded.raw = this.addDamageTypesToFormula(
-            this.damage.twoHanded.raw,
-          );
+          this.damage.twoHanded.addTypes(this.damage.types);
         }
-        this.damage.twoHanded.typed = this.damage.twoHanded.raw;
       }
 
       /** @inheritDoc */

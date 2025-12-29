@@ -1,15 +1,16 @@
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import { refreshFromCompendiumDialog } from "../../../dialogs/_module.mjs";
+import { refreshFromCompendiumDialog } from "../../../dialogs/_module.mjs"; //noinspection JSValidateJSDoc
 
 /**
- * @param {typeof DocumentSheetV2} Base
+ * @param {typeof TeriockDocumentSheet} Base
  */
 export default function IndexButtonSheetMixin(Base) {
   /**
-   * @extends {DocumentSheetV2}
+   * @extends {TeriockDocumentSheet}
    * @mixin
    */
   return class IndexButtonSheet extends Base {
+    //noinspection JSValidateTypes
     /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {

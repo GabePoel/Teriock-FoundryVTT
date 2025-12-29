@@ -1,11 +1,11 @@
 /**
- * @param {typeof DocumentSheetV2} Base
+ * @param {typeof TeriockDocumentSheet} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+  //noinspection JSAccessibilityCheck
   return (
     /**
-     * @extends {DocumentSheetV2}
+     * @extends {TeriockDocumentSheet}
      * @mixin
      * @property {TeriockCommon} document
      */

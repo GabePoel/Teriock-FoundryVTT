@@ -1,5 +1,3 @@
-//noinspection JSValidateJSDoc,JSClosureCompilerSyntax
-
 import { toTitleCase } from "../../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { bindCommonActions } from "../../../shared/_module.mjs";
@@ -9,13 +7,14 @@ import * as parts from "./parts/_module.mjs";
 
 /**
  * {@link TeriockCommon} sheet mixin.
- * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
+ * @param {typeof TeriockDocumentSheet} Base - The base application class to mix in with.
  */
 export default function CommonSheetMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {CommonSheetMixinInterface}
-     * @extends {DocumentSheetV2}
+     * @extends {TeriockDocumentSheet}
      * @mixes DocumentCreationCommonSheetPart
      * @mixes DragDropCommonSheetPart
      * @mixes FieldsCommonSheetPart

@@ -2,7 +2,7 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Users } = foundry.documents.collections;
 
-//noinspection JSClosureCompilerSyntax
+//noinspection JSClosureCompilerSyntax,JSValidateJSDoc
 /**
  * @implements {Collection<ID<TeriockUser>, TeriockUser>}
  * @implements {DocumentCollection<TeriockUser>}

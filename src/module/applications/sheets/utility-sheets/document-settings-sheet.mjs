@@ -1,15 +1,7 @@
 import { makeIconClass } from "../../../helpers/utils.mjs";
+import TeriockDocumentSheet from "./document-sheet.mjs";
 
-const { DocumentSheetV2, HandlebarsApplicationMixin } =
-  foundry.applications.api;
-
-/**
- * @extends {DocumentSheetV2}
- * @mixes HandlebarsApplicationMixin
- */
-export default class DocumentSettingsSheet extends HandlebarsApplicationMixin(
-  DocumentSheetV2,
-) {
+export default class DocumentSettingsSheet extends TeriockDocumentSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     form: {

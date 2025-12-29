@@ -4,7 +4,7 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { getDocument } from "../../../helpers/fetch.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
-import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
+import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 

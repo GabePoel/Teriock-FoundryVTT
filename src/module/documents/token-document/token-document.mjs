@@ -1,3 +1,5 @@
+//noinspection JSValidateJSDoc
+
 import { TokenSettingsModel } from "../../data/models/settings-models/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { convertUnits } from "../../helpers/unit.mjs";
@@ -14,7 +16,7 @@ const { TokenDocument } = foundry.documents;
  * @mixes EmbedCardDocument
  * @mixes BaseDocument
  * @mixes SettingsDocument
- * @property {DocumentSheetV2} sheet
+ * @property {TeriockDocumentSheet} sheet
  */
 export default class TeriockTokenDocument extends mix(
   TokenDocument,

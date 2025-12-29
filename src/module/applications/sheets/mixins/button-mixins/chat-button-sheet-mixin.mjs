@@ -1,11 +1,11 @@
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
- * @param {typeof DocumentSheetV2} Base
+ * @param {typeof TeriockDocumentSheet} Base
  */
 export default function ChatButtonSheetMixin(Base) {
   /**
-   * @extends {DocumentSheetV2}
+   * @extends {TeriockDocumentSheet}
    * @mixin
    */
   return class ChatButtonSheet extends Base {

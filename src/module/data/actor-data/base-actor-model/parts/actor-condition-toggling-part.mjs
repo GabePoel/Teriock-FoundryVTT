@@ -1,8 +1,12 @@
+/**
+ * Actor data model mixin that handles condition toggling.
+ * @param {typeof TeriockBaseActorModel} Base
+ */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
   return (
     /**
-     * @extends TeriockBaseActorData
+     * @extends TeriockBaseActorModel
      */
     class ActorConditionTogglingPart extends Base {
       /**

@@ -58,39 +58,44 @@ export function getInteractionEntryValue(interaction, property, options) {
  * @returns {typeof AbstractButtonHandler}
  */
 export function CommandButtonHandlerBuilder(command) {
-  return class CommandButtonHandler extends AbstractButtonHandler {
-    static ACTION = command.id;
+  return (
+    /**
+     * @mixin
+     */
+    class CommandButtonHandler extends AbstractButtonHandler {
+      static ACTION = command.id;
 
-    /** @inheritDoc */
-    static buildButton(options = {}) {
-      const button = super.buildButton();
-      Object.assign(button.dataset, options);
-      button.icon = makeIconClass(
-        getInteractionEntryValue(command, "icon", options),
-        "button",
-      );
-      button.label = getInteractionEntryValue(command, "label", options);
-      return button;
-    }
+      /** @inheritDoc */
+      static buildButton(options = {}) {
+        const button = super.buildButton();
+        Object.assign(button.dataset, options);
+        button.icon = makeIconClass(
+          getInteractionEntryValue(command, "icon", options),
+          "button",
+        );
+        button.label = getInteractionEntryValue(command, "label", options);
+        return button;
+      }
 
-    /** @inheritDoc */
-    async primaryAction() {
-      const options = foundry.utils.deepClone(this.commonRollOptions);
-      Object.assign(options, this.critRollOptions);
-      Object.assign(options, this.dataset);
-      for (const actor of this.actors) {
-        await command.primary(actor, options);
+      /** @inheritDoc */
+      async primaryAction() {
+        const options = foundry.utils.deepClone(this.commonRollOptions);
+        Object.assign(options, this.critRollOptions);
+        Object.assign(options, this.dataset);
+        for (const actor of this.actors) {
+          await command.primary(actor, options);
+        }
+      }
+
+      /** @inheritDoc */
+      async secondaryAction() {
+        const options = foundry.utils.deepClone(this.commonRollOptions);
+        Object.assign(options, this.critRollOptions);
+        Object.assign(options, this.dataset);
+        for (const actor of this.actors) {
+          await command.secondary(actor, options);
+        }
       }
     }
-
-    /** @inheritDoc */
-    async secondaryAction() {
-      const options = foundry.utils.deepClone(this.commonRollOptions);
-      Object.assign(options, this.critRollOptions);
-      Object.assign(options, this.dataset);
-      for (const actor of this.actors) {
-        await command.secondary(actor, options);
-      }
-    }
-  };
+  );
 }

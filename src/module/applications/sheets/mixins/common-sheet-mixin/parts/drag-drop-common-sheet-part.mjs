@@ -1,13 +1,12 @@
 import { TeriockDragDrop, TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 /**
- * @param {typeof DocumentSheetV2} Base
+ * @param {typeof TeriockDocumentSheet} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {DocumentSheetV2}
+     * @extends {TeriockDocumentSheet}
      * @property {TeriockCommon} document
      * @mixin
      */
@@ -112,8 +111,7 @@ export default (Base) => {
       async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
-        let doc =
-          /** @type {TeriockDocument} */ await Cls.fromDropData(dropData);
+        let doc = /** @type {TeriockChild} */ await Cls.fromDropData(dropData);
         if (doc.type === "wrapper") doc = doc.system.effect;
         const uuid =
           doc.documentName === "ActiveEffect" ? doc.parent.uuid : doc.uuid;

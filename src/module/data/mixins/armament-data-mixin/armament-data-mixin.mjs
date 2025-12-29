@@ -1,10 +1,9 @@
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-import { TeriockRoll } from "../../../dice/_module.mjs";
 import { ArmamentExecution } from "../../../executions/document-executions/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
-import { DefenseModel } from "../../models/_module.mjs";
+import { DamageModel, DefenseModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -52,6 +51,7 @@ export default function ArmamentDataMixin(Base) {
           damage: new fields.SchemaField({
             base: new EvaluationField({
               deterministic: false,
+              model: DamageModel,
             }),
             types: new fields.SetField(new fields.StringField()),
           }),
@@ -163,37 +163,15 @@ export default function ArmamentDataMixin(Base) {
        * @inheritDoc
        * @param {Teriock.Execution.ArmamentExecutionOptions} options
        */
-      async _use(options = {}) {
+      async _use(
+        options = /** @type {Teriock.Execution.ArmamentExecutionOptions} */ {},
+      ) {
         if (game.settings.get("teriock", "rollAttackOnArmamentUse")) {
           await this.actor?.useAbility("Basic Attack");
         }
         options.source = /** @type {TeriockArmament} */ this.parent;
         const execution = new ArmamentExecution(options);
         await execution.execute();
-      }
-
-      /**
-       * Add defined damage types to some formula.
-       * @param {string} formula
-       * @returns {string}
-       */
-      addDamageTypesToFormula(formula) {
-        const roll = new TeriockRoll(formula);
-        const terms = roll.terms.filter(
-          (t) => !t.isDeterministic && !isNaN(Number(t.expression)),
-        );
-        terms.push(...roll.dice);
-        terms.forEach((term) => {
-          const types = term.flavor
-            .toLowerCase()
-            .split(" ")
-            .map((type) => type.trim());
-          types.push(Array.from(this.damage.types));
-          const reducedTypes = Array.from(new Set(types)).filter((t) => t);
-          reducedTypes.sort((a, b) => a.localeCompare(b));
-          term.options.flavor = reducedTypes.join(" ");
-        });
-        return roll.formula;
       }
 
       /** @inheritDoc */
@@ -249,7 +227,7 @@ export default function ArmamentDataMixin(Base) {
         this.props = new Set(
           Array.from(properties).map((p) => toCamelCase(p.name)),
         );
-        for (const p of properties) {
+        for (const p of properties.filter((p) => p.active)) {
           if (p.system.damageType) {
             this.damage.types.add(p.system.damageType);
           }
@@ -257,10 +235,7 @@ export default function ArmamentDataMixin(Base) {
         if (this.powerLevel === "magic") {
           this.damage.types.add("magic");
         }
-        this.damage.base.raw = this.addDamageTypesToFormula(
-          this.damage.base.raw,
-        );
-        this.damage.base.typed = this.damage.base.raw;
+        this.damage.base.addTypes(this.damage.types);
         this.piercing = {
           av0: false,
           ub: false,

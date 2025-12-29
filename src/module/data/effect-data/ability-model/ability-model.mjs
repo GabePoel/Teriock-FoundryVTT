@@ -18,6 +18,7 @@ import * as parts from "./parts/_module.mjs";
  *
  * @extends {TeriockBaseEffectModel}
  * @implements {Teriock.Models.TeriockAbilityModelInterface}
+ * @MIXES AbilityCostsPart
  * @mixes AbilityDurationPart
  * @mixes AbilityGeneralPart
  * @mixes AbilityHierarchyPart
@@ -343,7 +344,6 @@ export default class TeriockAbilityModel extends mix(
     return this.parent.name + nameAddition;
   }
 
-  //noinspection JSUnusedGlobalSymbols
   /**
    * String that represents all the valid targets.
    * @returns {string}

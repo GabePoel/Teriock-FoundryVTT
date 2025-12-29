@@ -1,4 +1,4 @@
-import EvaluationModel from "../evaluation-model/evaluation-model.mjs";
+import EvaluationModel from "./evaluation-model.mjs";
 
 export default class DefenseModel extends EvaluationModel {
   /** @inheritDoc */

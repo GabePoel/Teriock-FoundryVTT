@@ -1,8 +1,11 @@
+/**
+ * @param {typeof TeriockBaseActorSheet} Base
+ */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {DocumentSheetV2}
+     * @extends {TeriockBaseActorSheet}
      * @property {TeriockCommon} document
      */
     class HidingActorSheetPart extends Base {

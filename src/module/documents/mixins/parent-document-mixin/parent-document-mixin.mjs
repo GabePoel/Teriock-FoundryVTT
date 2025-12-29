@@ -11,7 +11,10 @@ export default function ParentDocumentMixin(Base) {
      * @mixin
      */
     class ParentDocument extends Base {
-      /** @inheritDoc */
+      /**
+       * @inheritDoc
+       * @returns {Teriock.Documents.DocumentMetadata}
+       */
       static get documentMetadata() {
         const metadata = super.documentMetadata;
         metadata.parent = true;

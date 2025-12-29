@@ -1,7 +1,7 @@
-import { TeriockRoll } from "../../../dice/_module.mjs";
-import { roundTo } from "../../../helpers/unit.mjs";
-import { FormulaField } from "../../fields/_module.mjs";
-import EmbeddedDataModel from "../embedded-data-model/embedded-data-model.mjs";
+import { TeriockRoll } from "../../dice/_module.mjs";
+import { roundTo } from "../../helpers/unit.mjs";
+import { FormulaField } from "../fields/_module.mjs";
+import EmbeddedDataModel from "./embedded-data-model.mjs";
 
 /**
  * Model that improves functionality and ergonomics of formula fields.

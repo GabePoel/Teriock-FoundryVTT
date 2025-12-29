@@ -1,13 +1,11 @@
-//noinspection JSValidateJSDoc,JSClosureCompilerSyntax
-
 /**
  * Mixin allowing hacks and spending dice stats.
- * @param {typeof DocumentSheetV2} Base
+ * @param {typeof TeriockDocumentSheet} Base
  */
 export default function HackStatApplicationMixin(Base) {
   return (
     /**
-     * @extends {DocumentSheetV2}
+     * @extends {TeriockDocumentSheet}
      * @mixin
      * @property {TeriockActor} actor
      * @property {boolean} _consumeStatDie

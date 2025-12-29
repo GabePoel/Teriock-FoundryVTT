@@ -15,7 +15,7 @@ export default (Base) => {
   return (
     /**
      * @extends {TeriockAbilityModel}
-     * @implements {AbilityImpactsPartInterface}
+     * @implements {Teriock.Models.AbilityImpactsPartInterface}
      * @mixin
      */
     class AbilityImpactsPart extends Base {

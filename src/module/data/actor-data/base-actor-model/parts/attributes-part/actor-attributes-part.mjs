@@ -73,7 +73,12 @@ export default (Base) => {
        * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
        * @param {Teriock.Execution.FeatSaveExecutionOptions} [options] - Options for the roll.
        */
-      async rollFeatSave(attribute, options = { attribute }) {
+      async rollFeatSave(
+        attribute,
+        options = /** @type {Teriock.Execution.FeatSaveExecutionOptions} */ {
+          attribute,
+        },
+      ) {
         await this.attributes[attribute].use(options);
       }
     }

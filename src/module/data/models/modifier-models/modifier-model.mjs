@@ -1,6 +1,6 @@
 import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
 import { UsableDataMixin } from "../../mixins/_module.mjs";
-import EvaluationModel from "../evaluation-model/evaluation-model.mjs";
+import EvaluationModel from "../evaluation-model.mjs";
 
 const { fields } = foundry.data;
 
