@@ -27,8 +27,7 @@ export default (Base) => {
        * Switches to a specific impacts tab.
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when tab is switched.
-       * @static
+       * @returns {Promise<void>}
        */
       static async _onChangeImpactTab(_event, target) {
         this._impactTab = target.dataset.tab;
@@ -37,8 +36,7 @@ export default (Base) => {
 
       /**
        * Toggles between overview and impacts tabs.
-       * @returns {Promise<void>} Promise that resolves when tab is toggled.
-       * @static
+       * @returns {Promise<void>}
        */
       static async _onToggleImpacts() {
         this._tab = this._tab === "impacts" ? "overview" : "impacts";

@@ -55,7 +55,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
 
   /**
    * Identifies the equipment, revealing all its properties.
-   * @returns {Promise<void>} Promise that resolves when the equipment is identified.
+   * @returns {Promise<void>}
    */
   async identify() {
     const data = { doc: this.parent.parent };
@@ -89,7 +89,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
 
   /**
    * Reads magic on the equipment to reveal its properties.
-   * @returns {Promise<void>} Promise that resolves when magic reading is complete.
+   * @returns {Promise<void>}
    */
   async readMagic() {
     const data = { doc: this.parent.parent };
@@ -140,7 +140,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
 
   /**
    * Removes identification from the equipment.
-   * @returns {Promise<void>} Promise that resolves when the equipment is unidentified.
+   * @returns {Promise<void>}
    */
   async unidentify() {
     const data = { doc: this.parent.parent };

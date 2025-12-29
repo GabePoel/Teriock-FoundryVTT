@@ -25,7 +25,7 @@ export default (Base) => {
 
       /**
        * Toggles the lock state of the current sheet.
-       * @returns {Promise<void>} Promise that resolves when lock is toggled.
+       * @returns {Promise<void>}
        */
       static async _onToggleHideThis() {
         this._hideInactive = !this._hideInactive;

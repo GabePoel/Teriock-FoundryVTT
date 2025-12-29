@@ -45,8 +45,7 @@ export default class TeriockEquipmentSheet extends mix(
 
   /**
    * Toggles the dampened state of the equipment.
-   * @returns {Promise<void>} Promise that resolves when dampened state is toggled.
-   * @static
+   * @returns {Promise<void>}
    */
   static async #onToggleDampened() {
     if (this.document.system.dampened) {
@@ -58,8 +57,7 @@ export default class TeriockEquipmentSheet extends mix(
 
   /**
    * Toggles the equipped state of the equipment.
-   * @returns {Promise<void>} Promise that resolves when equipped state is toggled.
-   * @static
+   * @returns {Promise<void>}
    */
   static async #onToggleEquipped() {
     if (this.document.system.equipped) {
@@ -71,8 +69,7 @@ export default class TeriockEquipmentSheet extends mix(
 
   /**
    * Toggles the shattered state of the equipment.
-   * @returns {Promise<void>} Promise that resolves when shattered state is toggled.
-   * @static
+   * @returns {Promise<void>}
    */
   static async #onToggleShattered() {
     if (this.document.system.shattered) {

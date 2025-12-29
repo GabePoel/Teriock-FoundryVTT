@@ -199,7 +199,7 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Awaken](https://wiki.teriock.com/index.php/Keyword:Awaken)
        *
-       * @returns {Promise<void>} Promise that resolves when the actor is awakened.
+       * @returns {Promise<void>}
        */
       async takeAwaken() {
         const data = await this.parent.hookCall("takeAwaken");
@@ -260,7 +260,7 @@ export default (Base) => {
        * Relevant wiki pages:
        * - [Revival Effects](https://wiki.teriock.com/index.php/Category:Revival_effects)
        *
-       * @returns {Promise<void>} Promise that resolves when the actor is revived.
+       * @returns {Promise<void>}
        */
       async takeRevive() {
         const data = await this.parent.hookCall("takeRevive");

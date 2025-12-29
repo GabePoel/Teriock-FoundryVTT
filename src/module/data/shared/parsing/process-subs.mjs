@@ -13,7 +13,7 @@ import { cleanObject } from "./clean-html-doc.mjs";
  * @param {string} config.nameSelector - CSS selector for the sub effect name element.
  * @param {string} [config.skipNamespace] - Namespace to skip processing for.
  * @param {string} [config.includeNamespace] - Namespace to process.
- * @returns {Promise<void>} Promise that resolves when all sub effects are processed.
+ * @returns {Promise<void>}
  */
 async function processSubEffects(subs, doc, config) {
   const {
@@ -127,7 +127,7 @@ async function processSubEffects(subs, doc, config) {
  * Creates sub-abilities and applies limitations or improvements as needed.
  * @param {Array} subs - Array of subability container elements.
  * @param {TeriockChild} doc - The parent document.
- * @returns {Promise<void>} Promise that resolves when all sub-abilities are processed.
+ * @returns {Promise<void>}
  */
 export async function processSubAbilities(subs, doc) {
   return processSubEffects(subs, doc, {
@@ -144,7 +144,7 @@ export async function processSubAbilities(subs, doc) {
  * Creates sub-properties and applies limitations or improvements as needed.
  * @param {Array} subs - Array of sub-property container elements.
  * @param {TeriockChild} doc - The parent document.
- * @returns {Promise<void>} Promise that resolves when all sub-properties are processed.
+ * @returns {Promise<void>}
  */
 export async function processSubProperties(subs, doc) {
   return processSubEffects(subs, doc, {

@@ -24,11 +24,9 @@ export default (Base) => {
 
       /**
        * Toggles the lock state of the current sheet.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when lock is toggled.
+       * @returns {Promise<void>}
        */
-      static async _onToggleLockThis(_event, _target) {
+      static async _onToggleLockThis() {
         this._locked = !this._locked;
         this.render();
       }

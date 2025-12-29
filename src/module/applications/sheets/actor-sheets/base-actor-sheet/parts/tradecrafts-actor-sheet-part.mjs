@@ -11,8 +11,7 @@ export default (Base) =>
      * Rolls a tradecraft check with optional advantage/disadvantage.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when tradecraft is rolled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async _onRollTradecraft(event, target) {
       const tradecraft = target.dataset.tradecraft;
@@ -30,8 +29,7 @@ export default (Base) =>
      * Cycles through tradecraft extra levels (0, 1, 2).
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when tradecraft extra is updated.
-     * @static
+     * @returns {Promise<void>}
      */
     static async _onTradecraftExtra(_event, target) {
       const tradecraft = target.dataset.tradecraft;

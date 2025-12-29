@@ -35,7 +35,7 @@ export default class TeriockBaseItemSheet extends mix(
    * Marks the {@link TeriockEffect} as being "on use" or not.
    * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when marked.
+   * @returns {Promise<void>}
    */
   static async _onToggleOnUseDoc(_event, target) {
     if (!this.isEditable) {

@@ -20,7 +20,7 @@ export default function WikiButtonSheetMixin(Base) {
 
       /**
        * Opens the wiki page for the current document.
-       * @returns {Promise<void>} Promise that resolves when wiki page is opened.
+       * @returns {Promise<void>}
        */
       static async #onWikiOpenThis() {
         this.document.system.wikiOpen();
@@ -28,7 +28,7 @@ export default function WikiButtonSheetMixin(Base) {
 
       /**
        * Pulls data from wiki for the current document.
-       * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
+       * @returns {Promise<void>}
        */
       static async #onWikiPullThis() {
         if (this.isEditable) {

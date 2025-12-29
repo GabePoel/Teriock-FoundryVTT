@@ -20,8 +20,7 @@ export default (Base) =>
     /**
      * Opens the primary attacker's sheet.
      * @param {MouseEvent} event - The event object.
-     * @returns {Promise<void>} Promise that resolves when the sheet is opened.
-     * @static
+     * @returns {Promise<void>}
      */
     static async #onOpenPrimaryAttacker(event) {
       event.stopPropagation();
@@ -31,8 +30,7 @@ export default (Base) =>
     /**
      * Opens the primary blocker's sheet.
      * @param {MouseEvent} event - The event object.
-     * @returns {Promise<void>} Promise that resolves when the sheet is opened.
-     * @static
+     * @returns {Promise<void>}
      */
     static async #onOpenPrimaryBlocker(event) {
       event.stopPropagation();
@@ -86,8 +84,7 @@ export default (Base) =>
 
     /**
      * Toggles if the character still has a reaction.
-     * @returns {Promise<void>} Promise that resolves when sb is toggled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async #onToggleReaction() {
       await this.document.update({
@@ -97,8 +94,7 @@ export default (Base) =>
 
     /**
      * Toggles the style bonus (sb) state.
-     * @returns {Promise<void>} Promise that resolves when sb is toggled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async #onToggleSb() {
       await this.document.update({

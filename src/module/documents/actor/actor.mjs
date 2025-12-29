@@ -445,7 +445,7 @@ export default class TeriockActor extends mix(
    * Performs post-update operations for the actor.
    * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
-   * @returns {Promise<void>} Promise that resolves when post-update is complete.
+   * @returns {Promise<void>}
    */
   async postUpdate(skipFunctions = {}) {
     const data = { skipFunctions };

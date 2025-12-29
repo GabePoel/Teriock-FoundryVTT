@@ -15,8 +15,7 @@ export default function HackStatApplicationMixin(Base) {
        * Rolls a stat die.
        * @param {MouseEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when hit die is rolled.
-       * @static
+       * @returns {Promise<void>}
        */
       static async _onRollStatDie(_event, target) {
         //noinspection JSUnresolvedReference
@@ -32,8 +31,7 @@ export default function HackStatApplicationMixin(Base) {
        * Hacks a specific body part.
        * @param {MouseEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when hack is applied.
-       * @static
+       * @returns {Promise<void>}
        */
       static async _onTakeHack(event, target) {
         event.stopPropagation();
@@ -47,8 +45,7 @@ export default function HackStatApplicationMixin(Base) {
        * Unhacks a specific body part.
        * @param {MouseEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when hack is applied.
-       * @static
+       * @returns {Promise<void>}
        */
       static async _onTakeUnhack(event, target) {
         event.stopPropagation();
@@ -93,8 +90,7 @@ export default function HackStatApplicationMixin(Base) {
        * Unrolls a stat die.
        * @param {MouseEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when hit die is rolled.
-       * @static
+       * @returns {Promise<void>}
        */
       async _unrollStatDie(_event, target) {
         const id = target.dataset.document;

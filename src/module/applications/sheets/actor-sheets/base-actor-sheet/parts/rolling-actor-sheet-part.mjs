@@ -17,8 +17,7 @@ export default (Base) =>
      * Rolls a feat save with optional advantage/disadvantage.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when feat save is rolled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async _onRollFeatSave(event, target) {
       const attribute = target.dataset.attribute;
@@ -30,8 +29,7 @@ export default (Base) =>
      * Rolls hexproof resistance with optional advantage/disadvantage.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when resistance is rolled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async _onRollHexproof(event, target) {
       const options = protectionOptions(event, target);
@@ -43,8 +41,7 @@ export default (Base) =>
      * Rolls hexseal immunity.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when immunity is rolled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async _onRollHexseal(event, target) {
       const options = protectionOptions(event, target);
@@ -56,8 +53,7 @@ export default (Base) =>
      * Rolls immunity.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when immunity is rolled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async _onRollImmunity(event, target) {
       const options = protectionOptions(event, target);
@@ -68,8 +64,7 @@ export default (Base) =>
      * Rolls resistance with optional advantage/disadvantage.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when resistance is rolled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async _onRollResistance(event, target) {
       const options = protectionOptions(event, target);

@@ -86,7 +86,7 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
 
   /**
    * Checks if the effect should expire and expires it if necessary.
-   * @returns {Promise<void>} Promise that resolves when the expiration check is complete.
+   * @returns {Promise<void>}
    */
   async checkExpiration() {
     if (await this.shouldExpire()) {
@@ -96,7 +96,7 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
 
   /**
    * Expires the effect, removing it from the parent document.
-   * @returns {Promise<void>} Promise that resolves when the effect is expired.
+   * @returns {Promise<void>}
    */
   async expire() {
     if (!this.deleteOnExpire) {

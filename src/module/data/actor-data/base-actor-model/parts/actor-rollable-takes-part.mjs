@@ -17,7 +17,7 @@ export default (Base) => {
        * - [Damage](https://wiki.teriock.com/index.php/Core:Damage)
        *
        * @param {number} amount - The amount of damage to apply.
-       * @returns {Promise<void>} Promise that resolves when damage is applied.
+       * @returns {Promise<void>}
        */
       async takeDamage(amount) {
         const data = { amount };
@@ -42,7 +42,7 @@ export default (Base) => {
        * - [Mana Drain](https://wiki.teriock.com/index.php/Drain:Mana)
        *
        * @param {number} amount - The amount of drain to apply.
-       * @returns {Promise<void>} Promise that resolves when drain is applied.
+       * @returns {Promise<void>}
        */
       async takeDrain(amount) {
         const data = { amount };
@@ -67,7 +67,7 @@ export default (Base) => {
        * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
        *
        * @param {number} amount - The number of temporary hit points to gain.
-       * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
+       * @returns {Promise<void>}
        */
       async takeGainTempHp(amount) {
         const data = { amount };
@@ -88,7 +88,7 @@ export default (Base) => {
        * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
        *
        * @param {number} amount - The number of temporary mana points to gain.
-       * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
+       * @returns {Promise<void>}
        */
       async takeGainTempMp(amount) {
         const data = { amount };
@@ -109,7 +109,7 @@ export default (Base) => {
        * - [Healing](https://wiki.teriock.com/index.php/Core:Healing)
        *
        * @param {number} amount - The amount of healing to apply.
-       * @returns {Promise<void>} Promise that resolves when healing is applied.
+       * @returns {Promise<void>}
        */
       async takeHeal(amount) {
         const data = { amount };
@@ -129,7 +129,7 @@ export default (Base) => {
        * - [Death Ray](https://wiki.teriock.com/index.php/Ability:Death_Ray)
        *
        * @param {number} amount - The amount of kill effect to apply.
-       * @returns {Promise<void>} Promise that resolves when kill effect is applied.
+       * @returns {Promise<void>}
        */
       async takeKill(amount) {
         const data = { amount };
@@ -153,7 +153,7 @@ export default (Base) => {
        * - [Revitalizing](https://wiki.teriock.com/index.php/Core:Revitalizing)
        *
        * @param {number} amount - The amount of revitalization to apply.
-       * @returns {Promise<void>} Promise that resolves when revitalization is applied.
+       * @returns {Promise<void>}
        */
       async takeRevitalize(amount) {
         const data = { amount };
@@ -173,7 +173,7 @@ export default (Base) => {
        * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
        *
        * @param {number} amount - The amount to set temporary hit points to.
-       * @returns {Promise<void>} Promise that resolves when temporary hit points are set.
+       * @returns {Promise<void>}
        */
       async takeSetTempHp(amount) {
         const data = { amount };
@@ -192,7 +192,7 @@ export default (Base) => {
        * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
        *
        * @param {number} amount - The amount to set temporary mana points to.
-       * @returns {Promise<void>} Promise that resolves when temporary mana points are set.
+       * @returns {Promise<void>}
        */
       async takeSetTempMp(amount) {
         const data = { amount };
@@ -211,7 +211,7 @@ export default (Base) => {
        * - [Swift Sleep Aura](https://wiki.teriock.com/index.php/Ability:Swift_Sleep_Aura)
        *
        * @param {number} amount - The amount of sleep to apply.
-       * @returns {Promise<void>} Promise that resolves when sleep is applied.
+       * @returns {Promise<void>}
        */
       async takeSleep(amount) {
         const data = { amount };
@@ -235,7 +235,7 @@ export default (Base) => {
        * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
        *
        * @param {number} amount - The amount of wither to apply.
-       * @returns {Promise<void>} Promise that resolves when wither is applied.
+       * @returns {Promise<void>}
        */
       async takeWither(amount) {
         const data = { amount };

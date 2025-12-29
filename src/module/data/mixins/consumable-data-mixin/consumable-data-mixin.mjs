@@ -87,7 +87,7 @@ export default function ConsumableDataMixin(Base) {
       /**
        * Adds one unit to the consumable item.
        * Increments the quantity by 1, respecting maximum quantity limits.
-       * @returns {Promise<void>} Promise that resolves when the gain is complete.
+       * @returns {Promise<void>}
        */
       async gainOne() {
         if (this.consumable) {
@@ -140,7 +140,7 @@ export default function ConsumableDataMixin(Base) {
       /**
        * Consumes one unit of the consumable item.
        * Decrements the quantity by 1, ensuring it doesn't go below 0.
-       * @returns {Promise<void>} Promise that resolves when consumption is complete.
+       * @returns {Promise<void>}
        */
       async useOne() {
         if (this.consumable) {

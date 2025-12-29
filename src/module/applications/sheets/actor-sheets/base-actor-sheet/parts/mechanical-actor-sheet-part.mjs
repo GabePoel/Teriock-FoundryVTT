@@ -11,7 +11,6 @@ export default (Base) =>
     /**
      * Pull from the Death Bag.
      * @returns {Promise<void>}
-     * @static
      */
     static async #onDeathBagPull() {
       await this.actor.system.deathBagPull();
@@ -21,8 +20,7 @@ export default (Base) =>
      * Quickly uses an item with optional modifiers.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when item is used.
-     * @static
+     * @returns {Promise<void>}
      */
     static async #onQuickUse(event, target) {
       event.stopPropagation();
@@ -49,8 +47,7 @@ export default (Base) =>
      * Toggles a condition.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when condition is toggled.
-     * @static
+     * @returns {Promise<void>}
      */
     static async #onToggleCondition(event, target) {
       event.stopPropagation();

@@ -21,7 +21,7 @@ export default (Base) => {
 
       /**
        * Sends the current document to chat.
-       * @returns {Promise<void>} Promise that resolves when chat is sent.
+       * @returns {Promise<void>}
        */
       static async _onChatThis() {
         await this.document.toMessage({
@@ -32,7 +32,7 @@ export default (Base) => {
       /**
        * Rolls the current document with optional advantage/disadvantage.
        * @param {PointerEvent} event - The event object.
-       * @returns {Promise<void>} Promise that resolves when roll is complete.
+       * @returns {Promise<void>}
        */
       static async _onRollThis(event) {
         const options = event?.altKey

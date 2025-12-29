@@ -14,7 +14,7 @@ export default (Base) => {
        * @param {string} name - The field name.
        * @param {string} key - The key to add.
        * @param {Array} allowedKeys - Array of allowed keys.
-       * @returns {Promise<void>} Promise that resolves when the field is updated.
+       * @returns {Promise<void>}
        */
       async _addToRecordField(name, key, allowedKeys = []) {
         const existing = foundry.utils.getProperty(this.document, name);
@@ -36,7 +36,7 @@ export default (Base) => {
        * Cleans a record field by removing invalid keys.
        * @param {string} name - The field name.
        * @param {Array} allowedKeys - Array of allowed keys to keep.
-       * @returns {Promise<void>} Promise that resolves when the field is cleaned.
+       * @returns {Promise<void>}
        */
       async _cleanRecordField(name, allowedKeys = []) {
         const existing = foundry.utils.getProperty(this.document, name);

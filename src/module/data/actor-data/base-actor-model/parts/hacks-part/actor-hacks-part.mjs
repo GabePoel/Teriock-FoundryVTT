@@ -41,7 +41,7 @@ export default (Base) => {
        * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
        *
        * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to hack.
-       * @returns {Promise<void>} Promise that resolves when hack is applied.
+       * @returns {Promise<void>}
        */
       async takeHack(part) {
         const data = { part };
@@ -71,7 +71,7 @@ export default (Base) => {
        * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
        *
        * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to unhack.
-       * @returns {Promise<void>} Promise that resolves when unhack is applied.
+       * @returns {Promise<void>}
        */
       async takeUnhack(part) {
         const data = { part };

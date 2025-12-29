@@ -18,8 +18,7 @@ export default function ChangesSheetMixin(Base) {
        * Adds a new change at any specified path.
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when change is added.
-       * @static
+       * @returns {Promise<void>}
        */
       static async _onAddChange(_event, target) {
         const path = target.dataset.path;
@@ -43,8 +42,8 @@ export default function ChangesSheetMixin(Base) {
        * Deletes a change at any specified path.
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when change is deleted.
-       * @static
+       * @returns {Promise<void>}
+
        */
       static async _onDeleteChange(_event, target) {
         const index = parseInt(target.dataset.index, 10);

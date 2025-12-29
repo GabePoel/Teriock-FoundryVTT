@@ -21,7 +21,7 @@ export default (Base) => {
        * Toggles a boolean field on the current document.
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when toggle is complete.
+       * @returns {Promise<void>}
        */
       static async _onQuickToggle(_event, target) {
         const { path } = target.dataset;
@@ -33,7 +33,7 @@ export default (Base) => {
        * Toggles a boolean field on the sheet and re-renders.
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when toggle is complete.
+       * @returns {Promise<void>}
        */
       static async _onSheetToggle(_event, target) {
         const { path } = target.dataset;

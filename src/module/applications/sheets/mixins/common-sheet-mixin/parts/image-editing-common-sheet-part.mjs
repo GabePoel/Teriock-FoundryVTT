@@ -20,7 +20,7 @@ export default (Base) => {
        * Opens image picker for editing document images.
        * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when image picker is opened.
+       * @returns {Promise<void>}
        */
       static async _onEditImage(event, target) {
         event.stopPropagation();

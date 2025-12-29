@@ -36,8 +36,7 @@ export default class TeriockBaseEffectSheet extends mix(
 
   /**
    * Toggles the disabled state of the current effect.
-   * @returns {Promise<void>} Promise that resolves when disabled state is toggled.
-   * @static
+   * @returns {Promise<void>}
    */
   static async _onToggledDisabledThis() {
     await this.document.update({ disabled: !this.document.disabled });

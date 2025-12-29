@@ -33,8 +33,7 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
 
   /**
    * Toggles the proficient state of the power.
-   * @returns {Promise<void>} Promise that resolves when proficient state is toggled.
-   * @static
+   * @returns {Promise<void>}
    */
   static async _onToggleProficient() {
     if (this.isEditable) {

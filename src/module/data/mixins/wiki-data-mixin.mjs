@@ -82,7 +82,7 @@ export default function WikiDataMixin(Base) {
        * Pulls data from the wiki and updates the document.
        * Fetches wiki page content, parses it, and applies updates to the document.
        * @param {Teriock.Wiki.PullOptions} [options] - Options for the wiki pull operation.
-       * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
+       * @returns {Promise<void>}
        */
       async wikiPull(options = {}) {
         const notify = options.notify !== false;

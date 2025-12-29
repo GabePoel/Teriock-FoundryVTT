@@ -29,7 +29,6 @@ export default class TeriockPropertySheet extends mix(
   /**
    * Template parts configuration for the property sheet.
    * @type {object}
-   * @static
    */
   static PARTS = {
     all: {

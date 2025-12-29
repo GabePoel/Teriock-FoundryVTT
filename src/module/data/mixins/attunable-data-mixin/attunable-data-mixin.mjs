@@ -170,7 +170,7 @@ export default function AttunableDataMixin(Base) {
 
       /**
        * Removes attunement from the item.
-       * @returns {Promise<void>} Promise that resolves when the item is deattuned.
+       * @returns {Promise<void>}
        */
       async deattune() {
         const data = { doc: this.parent };

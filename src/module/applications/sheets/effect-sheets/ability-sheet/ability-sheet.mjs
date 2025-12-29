@@ -36,7 +36,6 @@ export default class TeriockAbilitySheet extends mix(
   /**
    * Template parts configuration for the ability sheet.
    * @type {object}
-   * @static
    */
   static PARTS = {
     all: {
