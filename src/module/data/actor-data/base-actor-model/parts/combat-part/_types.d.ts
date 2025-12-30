@@ -26,6 +26,8 @@ export default interface ActorCombatPartInterface {
     /** <derived> Combat class (ac + bv) */
     cc: number;
   };
+  /** <schema> Initiative */
+  initiative: string;
   /** <schema> Offense */
   offense: {
     /** <schema> Style bonus */

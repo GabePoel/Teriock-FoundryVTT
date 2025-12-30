@@ -10,199 +10,239 @@ import * as setup from "./setup/_module.mjs";
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 
-/** Global Teriock config */
-globalThis.TERIOCK = constants;
-/** Global Teriock system module. */
-globalThis.teriock = {
-  applications: applications,
-  canvas: canvas,
-  data: data,
-  dice: dice,
-  documents: documents,
-  helpers: helpers,
-};
-/** Useful helpers brought to the top level for easy access by macros. */
-globalThis.tm = {
-  dialogs: applications.dialogs,
-  fetch: helpers.fetch,
-  html: helpers.html,
-  path: helpers.path,
-  resolve: helpers.resolve,
-  sort: helpers.sort,
-  string: helpers.string,
-  unit: helpers.unit,
-  utils: helpers.utils,
-  rolling: helpers.rolling,
-};
+// Register Global References
+// ==========================
+
+Object.assign(globalThis, {
+  TERIOCK: constants,
+  teriock: {
+    applications: applications,
+    canvas: canvas,
+    data: data,
+    dice: dice,
+    documents: documents,
+    helpers: helpers,
+  },
+  tm: {
+    dialogs: applications.dialogs,
+    fetch: helpers.fetch,
+    html: helpers.html,
+    path: helpers.path,
+    resolve: helpers.resolve,
+    sort: helpers.sort,
+    string: helpers.string,
+    unit: helpers.unit,
+    utils: helpers.utils,
+    rolling: helpers.rolling,
+  },
+});
 
 foundry.helpers.Hooks.once("init", function () {
-  CONFIG.TERIOCK = constants;
+  /**
+   * Helper function to assign configs to `CONFIG` on level deep.
+   * @param {object} configs
+   */
+  function assign(configs) {
+    for (const [key, config] of Object.entries(configs)) {
+      Object.assign(CONFIG[key], config);
+    }
+  }
 
-  CONFIG.ui.actors = applications.sidebar.TeriockActorDirectory;
-  CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
-  CONFIG.ui.notifications = applications.ui.TeriockNotifications;
-  CONFIG.ui.items = applications.sidebar.TeriockItemDirectory;
-
-  applications.ux.registerEnrichers();
-
-  CONFIG.Combat.initiative = {
-    decimals: 2,
-    formula: "1d20 + @mov",
-  };
+  // Configure Time Constants
+  // ========================
 
   CONFIG.time.roundTime = 5;
 
+  // Configure Status Effects
+  // ========================
+
+  Object.assign(CONFIG.specialStatusEffects, {
+    BURNED: "burned",
+    CHARMED: "charmed",
+    DEFEATED: "down",
+    ETHEREAL: "ethereal",
+    FRENZIED: "frenzied",
+    FROZEN: "frozen",
+    HIDDEN: "hidden",
+    HOLLIED: "hollied",
+    ILLUSION_TRANSFORMED: "illusionTransformed",
+    LIGHTED: "lighted",
+    MELEE_DODGING: "meleeDodging",
+    MISSILE_DODGING: "missileDodging",
+    POISONED: "poisoned",
+    RUINED: "ruined",
+    SNARED: "snared",
+    TERRORED: "terrored",
+    TRANSFORMED: "transformed",
+    ...Object.fromEntries(
+      Object.values(TERIOCK.data.hacks).map((h) => [h.id.toUpperCase(), h.id]),
+    ),
+  });
   CONFIG.statusEffects.length = 0;
-  for (const condition of Object.values(TERIOCK.data.conditions)) {
-    CONFIG.statusEffects.push(condition);
-  }
-  for (const hack of Object.values(TERIOCK.data.hacks)) {
-    CONFIG.statusEffects.push(hack);
-  }
-  for (const transformation of Object.values(TERIOCK.data.transformations)) {
-    CONFIG.statusEffects.push(transformation);
-  }
+  CONFIG.statusEffects.push(
+    ...Object.values(TERIOCK.data.conditions),
+    ...Object.values(TERIOCK.data.hacks),
+    ...Object.values(TERIOCK.data.transformations),
+  );
   CONFIG.statusEffects.sort((a, b) => {
-    if (a.id === "dead") {
-      return -1;
-    }
-    if (b.id === "dead") {
-      return 1;
-    }
-    if (a.id === "unconscious") {
-      return b.id === "dead" ? 1 : -1;
-    }
-    if (b.id === "unconscious") {
-      return a.id === "dead" ? -1 : 1;
-    }
-    if (a.id === "down") {
-      if (b.id === "dead" || b.id === "unconscious") {
-        return 1;
-      }
-      return -1;
-    }
-    if (b.id === "down") {
-      if (a.id === "dead" || a.id === "unconscious") {
-        return -1;
-      }
-      return 1;
-    }
     return a.id.localeCompare(b.id);
   });
-  CONFIG.specialStatusEffects["BURNED"] = "burned";
-  CONFIG.specialStatusEffects["CHARMED"] = "charmed";
-  CONFIG.specialStatusEffects["DEFEATED"] = "down";
-  CONFIG.specialStatusEffects["ETHEREAL"] = "ethereal";
-  CONFIG.specialStatusEffects["FRENZIED"] = "frenzied";
-  CONFIG.specialStatusEffects["FROZEN"] = "frozen";
-  CONFIG.specialStatusEffects["HIDDEN"] = "hidden";
-  CONFIG.specialStatusEffects["HOLLIED"] = "hollied";
-  CONFIG.specialStatusEffects["ILLUSION_TRANSFORMED"] = "illusionTransformed";
-  CONFIG.specialStatusEffects["LIGHTED"] = "lighted";
-  CONFIG.specialStatusEffects["MELEE_DODGING"] = "meleeDodging";
-  CONFIG.specialStatusEffects["MISSILE_DODGING"] = "missileDodging";
-  CONFIG.specialStatusEffects["POISONED"] = "poisoned";
-  CONFIG.specialStatusEffects["RUINED"] = "ruined";
-  CONFIG.specialStatusEffects["SNARED"] = "snared";
-  CONFIG.specialStatusEffects["TERRORED"] = "terrored";
-  CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
-  for (const hack of Object.values(TERIOCK.data.hacks)) {
-    CONFIG.specialStatusEffects[hack.id.toUpperCase()] = hack.id;
-  }
 
-  // noinspection JSValidateTypes
-  CONFIG.Canvas.visionModes = {
-    ...CONFIG.Canvas.visionModes,
-    ...canvas.perception.visionModes,
-  };
+  // Configure UI Components
+  // =======================
+
+  assign({
+    ui: {
+      actors: applications.sidebar.TeriockActorDirectory,
+      hotbar: applications.ui.TeriockHotbar,
+      notifications: applications.ui.TeriockNotifications,
+      items: applications.sidebar.TeriockItemDirectory,
+      combat: applications.sidebar.TeriockCombatTracker,
+    },
+    ux: {
+      TooltipManager: helpers.interaction.TeriockTooltipManager,
+      TextEditor: applications.ux.TeriockTextEditor,
+      DragDrop: applications.ux.TeriockDragDrop,
+      ContextMenu: applications.ux.TeriockContextMenu,
+    },
+  });
+  applications.ux.registerEnrichers();
+
+  // Configure Canvas
+  // ================
+
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
     const id = CONFIG.Canvas.detectionModes[key].id;
     if (!["basicSight", "lightPerception"].includes(id)) {
       delete CONFIG.Canvas.detectionModes[key];
     }
   }
-  // noinspection JSValidateTypes
-  CONFIG.Canvas.detectionModes = {
-    ...CONFIG.Canvas.detectionModes,
-    ...canvas.perception.detectionModes,
-  };
-
-  // Register custom core placeables
-  CONFIG.Token.objectClass = canvas.placeables.TeriockToken;
-
-  // Register custom core documents
-  CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
-  CONFIG.Actor.documentClass = documents.TeriockActor;
-  CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
-  CONFIG.Combat.documentClass = documents.TeriockCombat;
-  CONFIG.Combatant.documentClass = documents.TeriockCombatant;
-  CONFIG.Folder.documentClass = documents.TeriockFolder;
-  CONFIG.Item.documentClass = documents.TeriockItem;
-  CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
-  CONFIG.JournalEntryCategory.documentClass =
-    documents.TeriockJournalEntryCategory;
-  CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
-  CONFIG.Macro.documentClass = documents.TeriockMacro;
-  CONFIG.Scene.documentClass = documents.TeriockScene;
-  CONFIG.Token.documentClass = documents.TeriockTokenDocument;
-  CONFIG.User.documentClass = documents.TeriockUser;
-  CONFIG.RollTable.documentClass = documents.TeriockRollTable;
-  CONFIG.TableResult.documentClass = documents.TeriockTableResult;
-
-  // Register custom core collections
-  CONFIG.Actor.collection = documents.collections.TeriockActors;
-  CONFIG.ChatMessage.collection = documents.collections.TeriockChatMessages;
-  CONFIG.Folder.collection = documents.collections.TeriockFolders;
-  CONFIG.Item.collection = documents.collections.TeriockItems;
-  CONFIG.JournalEntry.collection = documents.collections.TeriockJournal;
-  CONFIG.Macro.collection = documents.collections.TeriockMacros;
-  CONFIG.RollTable.collection = documents.collections.TeriockRollTables;
-  CONFIG.Scene.collection = documents.collections.TeriockScenes;
-  CONFIG.User.collection = documents.collections.TeriockUsers;
-
-  // Register template classes
-  CONFIG.ChatMessage.template = helpers.path.systemPath(
-    "templates/ui-templates/chat-message.hbs",
-  );
-
-  // Data models
-  Object.assign(CONFIG.Actor.dataModels, {
-    character: data.actor.TeriockCharacterModel,
-    creature: data.actor.TeriockCreatureModel,
-  });
-  Object.assign(CONFIG.Item.dataModels, {
-    body: data.item.TeriockBodyModel,
-    equipment: data.item.TeriockEquipmentModel,
-    mount: data.item.TeriockMountModel,
-    power: data.item.TeriockPowerModel,
-    rank: data.item.TeriockRankModel,
-    species: data.item.TeriockSpeciesModel,
-    wrapper: data.item.TeriockWrapperModel,
-  });
-  Object.assign(CONFIG.ActiveEffect.dataModels, {
-    ability: data.effect.TeriockAbilityModel,
-    attunement: data.effect.TeriockAttunementModel,
-    base: data.effect.TeriockBaseEffectModel,
-    condition: data.effect.TeriockConditionModel,
-    consequence: data.effect.TeriockConsequenceModel,
-    fluency: data.effect.TeriockFluencyModel,
-    property: data.effect.TeriockPropertyModel,
-    resource: data.effect.TeriockResourceModel,
-  });
-  Object.assign(CONFIG.ChatMessage.dataModels, {
-    base: data.message.TeriockBaseMessageModel,
+  Object.assign(CONFIG.Canvas, {
+    detectionModes: {
+      ...CONFIG.Canvas.detectionModes,
+      ...canvas.perception.detectionModes,
+    },
+    visionModes: {
+      ...CONFIG.Canvas.visionModes,
+      ...canvas.perception.visionModes,
+    },
   });
 
-  // UX
-  CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
-  CONFIG.ux.TextEditor = applications.ux.TeriockTextEditor;
-  CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
-  CONFIG.ux.ContextMenu = applications.ux.TeriockContextMenu;
+  // Configure Documents
+  // ===================
 
-  // HUD
-  CONFIG.Token.hudClass = applications.hud.TeriockTokenHUD;
+  // Assign Document and Collection Classes
+  // --------------------------------------
 
-  // Unregister V1 sheets
+  assign({
+    ActiveEffect: {
+      dataModels: {
+        ability: data.effect.TeriockAbilityModel,
+        attunement: data.effect.TeriockAttunementModel,
+        base: data.effect.TeriockBaseEffectModel,
+        condition: data.effect.TeriockConditionModel,
+        consequence: data.effect.TeriockConsequenceModel,
+        fluency: data.effect.TeriockFluencyModel,
+        property: data.effect.TeriockPropertyModel,
+        resource: data.effect.TeriockResourceModel,
+      },
+      documentClass: documents.TeriockEffect,
+    },
+    Actor: {
+      collections: documents.collections.TeriockActors,
+      dataModels: {
+        character: data.actor.TeriockCharacterModel,
+        creature: data.actor.TeriockCreatureModel,
+      },
+      documentClass: documents.TeriockActor,
+    },
+    ChatMessage: {
+      collection: documents.collections.TeriockChatMessages,
+      dataModels: {
+        base: data.message.TeriockBaseMessageModel,
+      },
+      documentClass: documents.TeriockChatMessage,
+      template: helpers.path.systemPath(
+        "templates/ui-templates/chat-message.hbs",
+      ),
+    },
+    Combat: {
+      initiative: {
+        decimals: 2,
+        formula: TERIOCK.options.character.initiative,
+      },
+      documentClass: documents.TeriockCombat,
+    },
+    Combatant: {
+      documentClass: documents.TeriockCombatant,
+    },
+    Folder: {
+      collection: documents.collections.TeriockFolders,
+      documentClass: documents.TeriockFolder,
+    },
+    Item: {
+      collection: documents.collections.TeriockItems,
+      compendiumIndexFields: ["system._sup"],
+      dataModels: {
+        body: data.item.TeriockBodyModel,
+        equipment: data.item.TeriockEquipmentModel,
+        mount: data.item.TeriockMountModel,
+        power: data.item.TeriockPowerModel,
+        rank: data.item.TeriockRankModel,
+        species: data.item.TeriockSpeciesModel,
+        wrapper: data.item.TeriockWrapperModel,
+      },
+      documentClass: documents.TeriockItem,
+    },
+    JournalEntry: {
+      documentClass: documents.TeriockJournalEntry,
+      collection: documents.collections.TeriockJournal,
+    },
+    JournalEntryCategory: {
+      documentClass: documents.TeriockJournalEntryCategory,
+    },
+    JournalEntryPage: {
+      documentClass: documents.TeriockJournalEntryPage,
+    },
+    Macro: {
+      documentClass: documents.TeriockMacro,
+      collection: documents.collections.TeriockMacros,
+    },
+    RollTable: {
+      documentClass: documents.TeriockRollTable,
+      collection: documents.collections.TeriockRollTables,
+    },
+    Scene: {
+      documentClass: documents.TeriockScene,
+      collection: documents.collections.TeriockScenes,
+    },
+    TableResult: {
+      documentClass: documents.TeriockTableResult,
+    },
+    Token: {
+      documentClass: documents.TeriockTokenDocument,
+      hudClass: applications.hud.TeriockTokenHUD,
+      objectClass: canvas.placeables.TeriockToken,
+    },
+    User: {
+      documentClass: documents.TeriockUser,
+      collection: documents.collections.TeriockUsers,
+    },
+  });
+
+  // Configure Type Icons
+  // --------------------
+
+  for (const [k, v] of Object.entries(constants.options.document)) {
+    if (v.doc) {
+      CONFIG[v.doc].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
+    }
+  }
+
+  // Configure Sheets
+  // ----------------
+
+  // Unregister V1 Sheets
   DocumentSheetConfig.unregisterSheet(
     documents.TeriockActor,
     "teriock",
@@ -214,7 +254,7 @@ foundry.helpers.Hooks.once("init", function () {
     ItemSheet,
   );
 
-  // Register custom sheets
+  // Register Custom V2 Sheets
   const sheetMap = [
     // Actors
     {
@@ -326,7 +366,9 @@ foundry.helpers.Hooks.once("init", function () {
     }),
   );
 
-  // Registering custom dice rolls and functions
+  // Configure Dice
+  // ==============
+
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(dice.TeriockRoll);
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
@@ -336,21 +378,14 @@ foundry.helpers.Hooks.once("init", function () {
     }
   }
 
-  // Type icons
-  for (const [k, v] of Object.entries(constants.options.document)) {
-    if (v.doc) {
-      CONFIG[v.doc].typeIcons[k] = `fa-fw fas fa-${v.icon}`;
-    }
-  }
+  // Configure Queries
+  // =================
 
-  // Modifying index fields
-  const hierarchyIndexFields = ["system._sup"];
-  CONFIG.Item.compendiumIndexFields.push(...hierarchyIndexFields);
-
-  // Registering custom queries
   Object.assign(CONFIG.queries, helpers.queries);
 
-  // noinspection JSUndefinedPropertyAssignment
+  // Register Game Shortcuts
+  // =======================
+
   game.teriock = {
     Actor: documents.TeriockActor,
     Combat: documents.TeriockCombat,
@@ -369,24 +404,37 @@ foundry.helpers.Hooks.once("init", function () {
     packs: new documents.collections.TeriockPacks(),
   };
 
-  // Register settings
+  // Register Settings
+  // =================
+
   setup.systemSettings.registerSettings();
 
-  // Register custom handlebars templates
+  // Register Handlebars Templates
+  // =============================
+
   helpers.maintenance.registerTemplates();
 });
 
 foundry.helpers.Hooks.once("setup", function () {
+  // Override Compendium Applications
+  // ================================
+
   for (const pack of game.packs) {
     pack.applicationClass = applications.sidebar.TeriockCompendium;
   }
 });
+
+// Register Hooks
+// ==============
 
 for (const hook of Object.values(setup.hookManagement)) {
   if (typeof hook === "function") {
     hook();
   }
 }
+
+// Register Handlebars Helpers
+// ===========================
 
 for (const helper of Object.values(setup.handlebarHelpers)) {
   if (typeof helper === "function") {

@@ -1,4 +1,5 @@
 export const characterOptions = {
+  initiative: "1d20 + @mov",
   protectionMap: {
     immunities: {
       action: "rollImmunity",

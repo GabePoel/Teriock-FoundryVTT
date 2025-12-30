@@ -1,4 +1,6 @@
+import { characterOptions } from "../../../../../constants/options/character-options.mjs";
 import { prefixObject } from "../../../../../helpers/utils.mjs";
+import { FormulaField } from "../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 const { utils } = foundry;
@@ -31,6 +33,10 @@ export default (Base) => {
               initial: true,
               label: "Has Reaction",
             }),
+          }),
+          initiative: new FormulaField({
+            initial: characterOptions.initiative,
+            deterministic: false,
           }),
           offense: new fields.SchemaField({
             sb: new fields.BooleanField({

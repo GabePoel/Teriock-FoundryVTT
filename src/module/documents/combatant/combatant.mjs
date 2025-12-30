@@ -28,4 +28,24 @@ export default class TeriockCombatant extends EmbedCardDocumentMixin(
     parts.struck = this.isDefeated;
     return parts;
   }
+
+  /**
+   * Modified to allow for custom initiative and advantage/disadvantage on alt and shift clicks.
+   * @see {TeriockCombatTracker._onCombatantControl}
+   * @see {ActorCombatPartInterface.initiative}
+   * @inheritDoc
+   * @returns {string}
+   */
+  _getInitiativeFormula() {
+    let formula =
+      this.actor?.system.initiative || super._getInitiativeFormula();
+    if (this._advantage) {
+      formula = formula.replace("1d20", "2d20kh1");
+    } else if (this._disadvantage) {
+      formula = formula.replace("1d20", "2d20kl1");
+    }
+    delete this._advantage;
+    delete this._disadvantage;
+    return formula;
+  }
 }
