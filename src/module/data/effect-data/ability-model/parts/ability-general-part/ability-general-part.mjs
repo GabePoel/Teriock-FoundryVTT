@@ -319,8 +319,8 @@ export default (Base) => {
           });
         }
         // Add class
-        if (this.parent?.parent?.type === "rank") {
-          const rank = this.parent.parent;
+        if (this.parent.parent?.type === "rank") {
+          const rank = /** @type {TeriockRank} */ this.parent.parent;
           data[`class.${rank.system.className.slice(0, 3).toLowerCase()}`] = 1;
         }
         // Add elements

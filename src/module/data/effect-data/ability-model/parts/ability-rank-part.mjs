@@ -13,15 +13,6 @@ export default (Base) => {
      */
     class AbilityRankPart extends Base {
       /** @inheritDoc */
-      get embedIcons() {
-        const icons = super.embedIcons;
-        if (this.tagIcon) {
-          icons.unshift(this.tagIcon);
-        }
-        return icons;
-      }
-
-      /** @inheritDoc */
       get tagIcon() {
         if (this.parent.parent?.type === "rank") {
           if (this.parent.getFlag("teriock", "category") === "combat") {

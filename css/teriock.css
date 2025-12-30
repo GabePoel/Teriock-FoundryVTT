@@ -68,7 +68,7 @@
     transparent 75%
   );
   --color-panel-associations-shadow-color: transparent;
-  --color-panel-background: transparent;
+  --color-panel-background: rgba(255, 255, 255, 0.03);
   --color-panel-divider: color-mix(
     in srgb,
     var(--color-text-subtle),
@@ -77,7 +77,7 @@
   --color-panel-edge: color-mix(
     in srgb,
     var(--color-text-subtle),
-    transparent 50%
+    transparent 75%
   );
   --color-panel-header-hover: rgba(255, 255, 255, 0.05);
   --color-panel-icon: var(--color-text-subtle);
@@ -162,6 +162,7 @@
   max-height: calc(100% - 200px);
 }
 [role=tooltip] .teriock-panel {
+  background: transparent;
   border: none;
   --panel-padding: 4px;
   padding: 4px;
@@ -340,7 +341,7 @@
 }
 .teriock-panel .teriock-panel-header .teriock-panel-header-name {
   flex: 1 1 auto;
-  font-family: var(--font-h1), serif;
+  font-family: "Modesto Condensed", serif;
   font-size: 1.3em;
   line-height: 1em;
   margin-left: 0.5em;
@@ -4947,11 +4948,11 @@ body > form:only-child section .character-page .character-tabber-background,
   justify-content: start;
   width: 100%;
 }
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .tgrid-item:has(select) {
+  align-items: start;
+}
 .teriock .ab-menu .ab-menu-content .ab-menu-bar select {
   width: 100%;
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-menu-inline .tags {
-  display: none;
 }
 .teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-menu-item {
   align-items: center;
@@ -4973,9 +4974,6 @@ body > form:only-child section .character-page .character-tabber-background,
 }
 .teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label {
   width: 100%;
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label .input-element-tags {
-  display: none;
 }
 .teriock .ab-main {
   background-color: var(--color-block-display-background);
@@ -5109,6 +5107,14 @@ body > form:only-child section .character-page .character-tabber-background,
   place-items: center;
   width: 1.5em;
 }
+.teriock .ab-icon div {
+  align-items: center;
+  display: flex;
+  font-size: smaller;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
 .teriock .ab-icon i {
   font-size: 1em;
   opacity: 0.8;
@@ -5132,6 +5138,9 @@ body > form:only-child section .character-page .character-tabber-background,
 .teriock .ab-check-grid,
 .teriock .ab-select-grid {
   grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.teriock .ab-select-grid {
+  align-items: start;
 }
 .teriock .ab-button-grid {
   grid-template-columns: 1fr 1fr 1fr;

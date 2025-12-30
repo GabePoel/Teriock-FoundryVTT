@@ -1,5 +1,6 @@
-import TeriockBaseActorSheet from "../../applications/sheets/actor-sheets/base-actor-sheet/base-actor-sheet.mjs";
 import { TeriockEffect, TeriockTokenDocument } from "../_module.mjs";
+import { TeriockBaseActorModel } from "../../data/actor-data/_module.mjs";
+import { TeriockBaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
 
 declare module "./actor.mjs" {
   export default interface TeriockActor
@@ -8,6 +9,7 @@ declare module "./actor.mjs" {
     readonly itemTypes: Teriock.Parent.ParentItemTypes;
     sheet: TeriockBaseActorSheet;
     statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+    system: TeriockBaseActorModel;
     readonly token: TeriockTokenDocument;
 
     get documentName(): "Actor";

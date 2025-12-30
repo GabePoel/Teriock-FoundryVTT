@@ -152,6 +152,11 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
     return schema;
   }
 
+  /** @returns {TeriockChatMessage} */
+  get parent() {
+    return super.parent;
+  }
+
   /**
    * Construct the footer element with tags and buttons
    * @returns {HTMLElement} The footer element

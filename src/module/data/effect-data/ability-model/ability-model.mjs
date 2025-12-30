@@ -210,27 +210,6 @@ export default class TeriockAbilityModel extends mix(
     let icons = super.embedIcons.filter(
       (i) => !this.isBasic || !i.action?.toLowerCase().includes("disabled"),
     );
-    if (this.parent.elder?.type === "equipment") {
-      icons.unshift({
-        icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
-        action: "toggleOnUseDoc",
-        tooltip: this.parent.isOnUse
-          ? "Activates Only on Use"
-          : "Always Active",
-        condition: this.parent.isOwner,
-        callback: async () => {
-          const onUseSet = this.parent.parent.system.onUse;
-          if (onUseSet.has(this.parent.id)) {
-            onUseSet.delete(this.parent.id);
-          } else {
-            onUseSet.add(this.parent.id);
-          }
-          await this.parent.parent.update({
-            "system.onUse": Array.from(onUseSet),
-          });
-        },
-      });
-    }
     if (this.isBasic) {
       icons.push({
         icon: "lock",
@@ -241,6 +220,12 @@ export default class TeriockAbilityModel extends mix(
         },
         condition: this.basic,
       });
+    }
+    if (this.parent.elder?.type === "equipment" && !this.parent.isOnUse) {
+      icons.unshift(this.onUseIcon);
+    }
+    if (this.tagIcon) {
+      icons.unshift(this.tagIcon);
     }
     return icons;
   }
@@ -343,6 +328,38 @@ export default class TeriockAbilityModel extends mix(
       nameAddition = ` (${additions.join(", ")})`;
     }
     return this.parent.name + nameAddition;
+  }
+
+  /**
+   * On use icon.
+   * @returns {Teriock.EmbedData.EmbedIcon}
+   */
+  get onUseIcon() {
+    return {
+      icon: this.parent.isOnUse ? "bolt" : "bolt-slash",
+      action: "toggleOnUseDoc",
+      tooltip: this.parent.isOnUse ? "Activates Only on Use" : "Always Active",
+      condition: this.parent.isOwner,
+      callback: async () => {
+        const onUseSet = this.parent.parent.system.onUse;
+        if (onUseSet.has(this.parent.id)) {
+          onUseSet.delete(this.parent.id);
+        } else {
+          onUseSet.add(this.parent.id);
+        }
+        await this.parent.parent.update({
+          "system.onUse": Array.from(onUseSet),
+        });
+      },
+    };
+  }
+
+  /** @inheritDoc */
+  get tagIcon() {
+    if (this.parent.elder?.type === "equipment" && this.parent.isOnUse) {
+      return this.onUseIcon;
+    }
+    return super.tagIcon;
   }
 
   /**
