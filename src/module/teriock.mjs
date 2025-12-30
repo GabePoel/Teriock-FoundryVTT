@@ -415,10 +415,10 @@ foundry.helpers.Hooks.once("init", function () {
   helpers.maintenance.registerTemplates();
 });
 
-foundry.helpers.Hooks.once("setup", function () {
-  // Override Compendium Applications
-  // ================================
+// Override Compendium Applications
+// ================================
 
+foundry.helpers.Hooks.once("setup", function () {
   for (const pack of game.packs) {
     pack.applicationClass = applications.sidebar.TeriockCompendium;
   }

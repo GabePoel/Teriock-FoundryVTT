@@ -20,7 +20,7 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
   static buildButton(primaryData, options = {}) {
     const { secondaryData, sustainingAbility, bonusSubs = new Set() } = options;
     const button = super.buildButton();
-    button.icon = makeIconClass(TERIOCK.options.document.effect.icon, "button");
+    button.icon = makeIconClass("share-all", "button");
     button.label = "Apply Effect";
     const primaryJSON = JSON.stringify(primaryData);
     const secondaryJSON = JSON.stringify(secondaryData);

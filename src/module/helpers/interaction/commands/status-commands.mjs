@@ -37,7 +37,7 @@ async function toggle(actor, options = {}) {
  */
 export const applyStatusCommand = {
   args: ["status"],
-  icon: "plus",
+  icon: "share-all",
   id: "apply",
   label: (options) =>
     options?.status
@@ -53,7 +53,7 @@ export const applyStatusCommand = {
  */
 export const removeStatusCommand = {
   args: ["status"],
-  icon: "xmark",
+  icon: "arrow-rotate-left",
   id: "remove",
   label: (options) =>
     options?.status
@@ -69,7 +69,7 @@ export const removeStatusCommand = {
  */
 export const toggleStatusCommand = {
   args: ["status"],
-  icon: "plus-minus",
+  icon: "arrow-left-arrow-right",
   id: "toggle",
   label: (options) =>
     options?.status

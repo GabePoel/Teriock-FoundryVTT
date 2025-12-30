@@ -40,6 +40,7 @@
   position: relative;
   user-select: none;
   @include mixins.inverse-roll-style;
+  @include mixins.inverse-roll-style-hover;
 
   .teriock-target-img {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -59,6 +60,15 @@
   .teriock-target-name {
     margin: 0;
     margin-block: 2px;
+  }
+}
+
+.dice-result {
+  &:hover {
+    .teriock-dice-formula,
+    .teriock-dice-total {
+      background: var(--color-panel-inverse-hover);
+    }
   }
 }
 

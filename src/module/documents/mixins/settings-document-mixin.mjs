@@ -35,13 +35,13 @@ export default function SettingsDocumentMixin(Base) {
 
       /** @inheritDoc */
       prepareData() {
-        super.prepareData();
         if (this._settingsFlagsDataModel) {
           this.flags.teriockDocumentSettings = new this._settingsFlagsDataModel(
             this._source.flags.teriockDocumentSettings,
             { parent: this },
           );
         }
+        super.prepareData();
       }
     }
   );

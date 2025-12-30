@@ -1,6 +1,7 @@
 export function registerSettings() {
+  //noinspection JSValidateJSDoc
   /** @type {Record<string, Partial<SettingConfig>>} */
-  const settings = {
+  const settings = /** @type {Record<string, Partial<SettingConfig>>} */ {
     confirmStatDiceRerolls: {
       config: true,
       default: true,
