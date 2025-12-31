@@ -4,7 +4,6 @@ declare module "./character-sheet.mjs" {
   export default interface TeriockBaseCharacterSheet
     extends TeriockBaseActorSheet {
     get actor(): TeriockCharacter;
-
     get document(): TeriockCharacter;
   }
 }

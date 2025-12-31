@@ -1,8 +1,5 @@
 import { TeriockActor } from "../../../../documents/_module.mjs";
-import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import "./types/settings";
-
-type SheetMixinType = typeof CommonSheetMixin;
 
 export type ActorTab =
   | "tradecrafts"
@@ -16,11 +13,10 @@ export type ActorTab =
   | "notes";
 
 declare module "./base-actor-sheet.mjs" {
-  export default interface TeriockBaseActorSheet extends SheetMixinType {
+  export default interface TeriockBaseActorSheet {
     _activeTab: ActorTab;
 
     get actor(): TeriockActor;
-
     get document(): TeriockActor;
   }
 }

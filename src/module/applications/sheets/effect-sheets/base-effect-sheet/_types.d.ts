@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
-import { CommonSheetMixin } from "../../mixins/_module.mjs";
-
-type SheetMixinType = typeof CommonSheetMixin;
+import { TeriockEffect } from "../../../../documents/_module.mjs";
 
 declare module "./base-effect-sheet.mjs" {
-  export default interface TeriockBaseEffectSheet extends SheetMixinType {}
+  export default interface TeriockBaseEffectSheet {
+    get document(): TeriockEffect;
+  }
 }
