@@ -112,7 +112,10 @@ export default (Base) => {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
         let doc = /** @type {TeriockChild} */ await Cls.fromDropData(dropData);
-        if (doc.type === "wrapper") doc = doc.system.effect;
+        if (doc.type === "wrapper") {
+          //noinspection JSUnresolvedReference
+          doc = doc.system.effect;
+        }
         const uuid =
           doc.documentName === "ActiveEffect" ? doc.parent.uuid : doc.uuid;
         const obj = doc.toObject();
@@ -151,6 +154,7 @@ export default (Base) => {
        * @returns {Promise<TeriockMacro|void>} Promise that resolves to the created document if successful.
        */
       async _onDropMacro(_event, dropData) {
+        //noinspection JSUnresolvedReference
         if (this.document.system.macros) {
           const macroUuids = Array.from(this.document.system.macros);
           if (dropData.uuid) {

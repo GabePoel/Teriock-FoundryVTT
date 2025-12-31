@@ -5,6 +5,7 @@ import { TeriockBaseEffectSheet } from "../../applications/sheets/effect-sheets/
 declare module "./effect.mjs" {
   export default interface TeriockEffect
     extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
+    disabled: boolean;
     parent: TeriockParent;
     sheet: TeriockBaseEffectSheet;
     system: TeriockBaseEffectModel;

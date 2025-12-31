@@ -39,6 +39,7 @@ export default class TeriockConsequenceSheet extends mix(
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
+    //noinspection JSUnresolvedReference
     Object.assign(context, {
       system: this.document.system,
       systemFields: this.document.system.schema.fields,

@@ -1,5 +1,4 @@
 export default function ChangesSheetMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {CommonSheet}

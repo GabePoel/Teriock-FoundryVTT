@@ -1,4 +1,12 @@
+//noinspection JSClosureCompilerSyntax
+/**
+ * @param {typeof TeriockBaseActorSheet} Base
+ */
 export default (Base) =>
+  /**
+   * @extends {TeriockBaseActorSheet}
+   * @mixin
+   */
   class AvatarImageActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
@@ -31,6 +39,7 @@ export default (Base) =>
       });
     }
 
+    /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.avatarImagePath = this.settings.avatarImagePath;

@@ -2,7 +2,15 @@ import { toCamelCase, toTitleCase } from "../../../../../helpers/string.mjs";
 import { TeriockDialog } from "../../../../api/_module.mjs";
 import { HackStatMixin } from "../../../../shared/mixins/_module.mjs";
 
+//noinspection JSClosureCompilerSyntax
+/**
+ * @param {typeof TeriockBaseActorSheet} Base
+ */
 export default (Base) =>
+  /**
+   * @extends {TeriockBaseActorSheet}
+   * @mixin
+   */
   class TakingActorSheetPart extends HackStatMixin(Base) {
     static DEFAULT_OPTIONS = {
       actions: {

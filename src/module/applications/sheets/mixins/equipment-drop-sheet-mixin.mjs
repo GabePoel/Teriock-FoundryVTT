@@ -4,13 +4,12 @@
  * @param {typeof DragDropCommonSheetPart} Base
  */
 export default function EquipmentDropSheetMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {DragDropCommonSheetPart}
      * @mixes DragDropCommonSheetPart
      * @mixin
-     * @property {TeriockParent} document
+     * @property {TeriockEquipment} document
      */
     class EquipmentDropSheet extends Base {
       /** @inheritDoc */

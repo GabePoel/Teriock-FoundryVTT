@@ -1,6 +1,14 @@
 import { makeCommonRollOptions } from "../../../../../helpers/rolling.mjs";
 
+//noinspection JSClosureCompilerSyntax
+/**
+ * @param {typeof TeriockBaseActorSheet} Base
+ */
 export default (Base) =>
+  /**
+   * @extends {TeriockBaseActorSheet}
+   * @mixin
+   */
   class RollingActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {

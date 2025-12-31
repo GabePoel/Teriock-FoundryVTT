@@ -44,7 +44,5 @@ declare module "./ability-execution-constructor.mjs" {
     targets: Set<TeriockToken>;
     vitals: boolean;
     warded: boolean;
-
-    get source(): TeriockAbility;
   }
 }

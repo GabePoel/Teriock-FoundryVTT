@@ -6,7 +6,6 @@ import { TeriockTextEditor } from "../../ux/_module.mjs";
  * @param {typeof CommonSheet} Base
  */
 export default function ChildSheetMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {CommonSheet}

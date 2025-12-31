@@ -1,99 +1,95 @@
+//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof TeriockBaseActorSheet} Base
  */
-export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
-  return (
-    /**
-     * @extends {TeriockBaseActorSheet}
-     * @mixin
-     * @property {TeriockActor} document
-     */
-    class SortingActorSheetPart extends Base {
-      async _onRender(context, options) {
-        await super._onRender(context, options);
-        this.element
-          .querySelectorAll("[data-action='sheetSelect']")
-          .forEach((el) => {
-            el.addEventListener("change", async () => {
-              foundry.utils.setProperty(this, el.dataset.path, el.value);
-              await this.render();
-            });
+export default (Base) =>
+  /**
+   * @extends {TeriockBaseActorSheet}
+   * @mixin
+   */
+  class SortingActorSheetPart extends Base {
+    async _onRender(context, options) {
+      await super._onRender(context, options);
+      this.element.querySelectorAll("[data-action='sheetSelect']").forEach(
+        /** @param {HTMLInputElement} el */ (el) => {
+          el.addEventListener("change", async () => {
+            foundry.utils.setProperty(this, el.dataset.path, el.value);
+            await this.render();
           });
-      }
+        },
+      );
+    }
 
-      /** @inheritDoc */
-      async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        context.abilities = await this.document.allAbilities();
-        context.equipment = context.equipment.filter(
-          (e) => !e.sup || e.sup.type !== "equipment",
-        );
-        Object.assign(context, {
-          abilities: this._getFilteredAbilities(
-            this._sortAbilities(
-              context.abilities.filter(
-                (a) => a.system.revealed || game.user.isGM,
-              ),
+    /** @inheritDoc */
+    async _prepareContext(options = {}) {
+      const context = await super._prepareContext(options);
+      context.abilities = await this.document.allAbilities();
+      context.equipment = context.equipment.filter(
+        (e) => !e.sup || e.sup.type !== "equipment",
+      );
+      Object.assign(context, {
+        abilities: this._getFilteredAbilities(
+          this._sortAbilities(
+            context.abilities.filter(
+              (a) => a.system.revealed || game.user.isGM,
             ),
           ),
-          equipment: this._sortEquipment(
-            this._getFilteredEquipment(context.equipment),
-          ),
-        });
-        return context;
-      }
-
-      /**
-       * Sorts abilities based on actor sheet settings.
-       * Uses the actor's ability sorting configuration to determine sort criteria.
-       * @param {TeriockAbility[]} abilities
-       * @returns {TeriockAbility[]} A sorted array of abilities.
-       */
-      _sortAbilities(abilities) {
-        const sortKey = this.settings.abilitySortOption;
-        const ascending = this.settings.abilitySortAscending;
-        /** @type {Record<string, Teriock.Sheet.AbilitySorter>} */
-        const sortMap = {
-          name: (a) => a.name,
-          sourceName: (a) => a.parent?.name ?? "",
-          sourceType: (a) => a.parent?.type ?? "",
-          enabled: (a) => Number(a.disabled),
-          type: (a) => a.system.form ?? "",
-        };
-        return sortEmbedded(abilities, sortKey, ascending, sortMap) || [];
-      }
-
-      /**
-       * Sorts equipment based on actor sheet settings.
-       * Uses the actor's equipment sort configuration to determine sort criteria.
-       * @param {TeriockEquipment[]} equipment
-       * @returns {TeriockEquipment[]} Sorted array of equipment.
-       */
-      _sortEquipment(equipment) {
-        const sortKey = this.settings.equipmentSortOption;
-        const ascending = this.settings.equipmentSortAscending;
-        /** @type {Record<string, Teriock.Sheet.EquipmentSorter>} */
-        const sortMap = {
-          name: (e) => e.name,
-          av: (e) => e.system.av.value ?? 0,
-          bv: (e) => e.system.bv.value ?? 0,
-          consumable: (e) => Number(e.system.consumable),
-          damage: (e) => e.system.damage.base.currentValue ?? 0,
-          identified: (e) => Number(e.system.identification.identified),
-          equipmentType: (e) => e.system.equipmentType ?? "",
-          equipped: (e) => Number(e.system.equipped),
-          minStr: (e) => e.system.minStr.value ?? 0,
-          powerLevel: (e) => e.system.powerLevel ?? 0,
-          shattered: (e) => Number(e.system.shattered),
-          tier: (e) => e.system.tier.value ?? 0,
-          weight: (e) => e.system.weight.value ?? 0,
-        };
-        return sortEmbedded(equipment, sortKey, ascending, sortMap);
-      }
+        ),
+        equipment: this._sortEquipment(
+          this._getFilteredEquipment(context.equipment),
+        ),
+      });
+      return context;
     }
-  );
-};
+
+    /**
+     * Sorts abilities based on actor sheet settings.
+     * Uses the actor's ability sorting configuration to determine sort criteria.
+     * @param {TeriockAbility[]} abilities
+     * @returns {TeriockAbility[]} A sorted array of abilities.
+     */
+    _sortAbilities(abilities) {
+      const sortKey = this.settings.abilitySortOption;
+      const ascending = this.settings.abilitySortAscending;
+      /** @type {Record<string, Teriock.Sheet.AbilitySorter>} */
+      const sortMap = {
+        name: (a) => a.name,
+        sourceName: (a) => a.parent?.name ?? "",
+        sourceType: (a) => a.parent?.type ?? "",
+        enabled: (a) => Number(a.disabled),
+        type: (a) => a.system.form ?? "",
+      };
+      return sortEmbedded(abilities, sortKey, ascending, sortMap) || [];
+    }
+
+    /**
+     * Sorts equipment based on actor sheet settings.
+     * Uses the actor's equipment sort configuration to determine sort criteria.
+     * @param {TeriockEquipment[]} equipment
+     * @returns {TeriockEquipment[]} Sorted array of equipment.
+     */
+    _sortEquipment(equipment) {
+      const sortKey = this.settings.equipmentSortOption;
+      const ascending = this.settings.equipmentSortAscending;
+      /** @type {Record<string, Teriock.Sheet.EquipmentSorter>} */
+      const sortMap = {
+        name: (e) => e.name,
+        av: (e) => e.system.av.value ?? 0,
+        bv: (e) => e.system.bv.value ?? 0,
+        consumable: (e) => Number(e.system.consumable),
+        damage: (e) => e.system.damage.base.currentValue ?? 0,
+        identified: (e) => Number(e.system.identification.identified),
+        equipmentType: (e) => e.system.equipmentType ?? "",
+        equipped: (e) => Number(e.system.equipped),
+        minStr: (e) => e.system.minStr.value ?? 0,
+        powerLevel: (e) => e.system.powerLevel ?? 0,
+        shattered: (e) => Number(e.system.shattered),
+        tier: (e) => e.system.tier.value ?? 0,
+        weight: (e) => e.system.weight.value ?? 0,
+      };
+      return sortEmbedded(equipment, sortKey, ascending, sortMap);
+    }
+  };
 
 /**
  * Generic sorting function for embedded items with customizable accessors.

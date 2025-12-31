@@ -1,6 +1,14 @@
 const { SearchFilter } = foundry.applications.ux;
 
+//noinspection JSClosureCompilerSyntax
+/**
+ * @param {typeof TeriockBaseActorSheet} Base
+ */
 export default (Base) =>
+  /**
+   * @extends {TeriockBaseActorSheet}
+   * @mixin
+   */
   class SearchingActorSheetPart extends Base {
     constructor(...args) {
       super(...args);
@@ -8,6 +16,7 @@ export default (Base) =>
       this._searchStrings = {};
     }
 
+    /** @inheritDoc */
     _initSearchFilters() {
       this.element
         .querySelectorAll(".teriock-block-search[data-search-key]")
@@ -45,11 +54,13 @@ export default (Base) =>
         );
     }
 
+    /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
       this._initSearchFilters();
     }
 
+    /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.searchStrings = foundry.utils.deepClone(this._searchStrings);

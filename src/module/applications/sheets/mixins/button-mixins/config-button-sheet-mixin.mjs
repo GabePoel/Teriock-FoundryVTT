@@ -9,10 +9,9 @@ export default function ConfigButtonSheetMixin(Base) {
    * @extends {TeriockDocumentSheet}
    * @mixin
    */
-  //noinspection JSValidateTypes
   return class ConfigButtonSheet extends Base {
     /** @type {Partial<ApplicationConfiguration>} */
-    static DEFAULT_OPTIONS = {
+    static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
       actions: {
         openDocumentSettings: this._onOpenDocumentSettings,
       },

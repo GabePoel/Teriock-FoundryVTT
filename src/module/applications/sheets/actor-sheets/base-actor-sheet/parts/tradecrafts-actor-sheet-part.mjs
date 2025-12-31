@@ -1,4 +1,12 @@
+//noinspection JSClosureCompilerSyntax
+/**
+ * @param {typeof TeriockBaseActorSheet} Base
+ */
 export default (Base) =>
+  /**
+   * @extends {TeriockBaseActorSheet}
+   * @mixin
+   */
   class TradecraftsActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {

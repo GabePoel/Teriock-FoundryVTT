@@ -10,9 +10,8 @@ export default function IndexButtonSheetMixin(Base) {
    * @mixin
    */
   return class IndexButtonSheet extends Base {
-    //noinspection JSValidateTypes
     /** @type {Partial<ApplicationConfiguration>} */
-    static DEFAULT_OPTIONS = {
+    static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
       actions: {
         refreshFromCompendium: this._onRefreshFromCompendium,
       },

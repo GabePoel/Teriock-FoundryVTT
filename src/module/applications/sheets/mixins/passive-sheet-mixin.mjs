@@ -15,12 +15,13 @@ export default function PassiveSheetMixin(Base) {
      */
     class PassiveSheet extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: {
-          unlinkMacro: this._onUnlinkMacro,
-          changeMacroRunHook: this._onChangeMacroRunHook,
-        },
-      };
+      static DEFAULT_OPTIONS =
+        /** @type {Partial<ApplicationConfiguration>} */ {
+          actions: {
+            unlinkMacro: this._onUnlinkMacro,
+            changeMacroRunHook: this._onChangeMacroRunHook,
+          },
+        };
 
       /**
        * Change the run pseudo-hook for a given macro
