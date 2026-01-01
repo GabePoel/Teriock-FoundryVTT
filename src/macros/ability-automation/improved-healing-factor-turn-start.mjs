@@ -3,7 +3,7 @@ if (
   !actor.statuses.has("dead") &&
   !actor.statuses.has("burned")
 ) {
-  await actor.system.takeNormalHeal({
+  await actor.system.takeHeal({
     consumeStatDice: false,
     title: "Improved Healing Factor",
   });

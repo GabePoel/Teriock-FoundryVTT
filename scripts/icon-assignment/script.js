@@ -29,12 +29,13 @@ const app = {
   async loadCategoriesDirectly() {
     const categoryFiles = [
       "consumables",
-      "classes",
       "abilities",
       "archetypes",
       "attributes",
       "body-parts",
+      "classes",
       "conditions",
+      "cover",
       "creatures",
       "currency",
       "damage-types",

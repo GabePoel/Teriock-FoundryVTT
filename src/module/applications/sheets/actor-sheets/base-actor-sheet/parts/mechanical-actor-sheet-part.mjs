@@ -13,6 +13,7 @@ export default (Base) =>
         deathBagPull: this.#onDeathBagPull,
         quickUse: this.#onQuickUse,
         toggleCondition: this.#onToggleCondition,
+        increaseCover: this.#onIncreaseCover,
       },
     };
 
@@ -22,6 +23,14 @@ export default (Base) =>
      */
     static async #onDeathBagPull() {
       await this.actor.system.deathBagPull();
+    }
+
+    /**
+     * Increases cover by a step.
+     * @returns {Promise<void>}
+     */
+    static async #onIncreaseCover() {
+      await this.document.system.increaseCover();
     }
 
     /**
@@ -61,5 +70,18 @@ export default (Base) =>
       event.stopPropagation();
       const conditionKey = target.dataset.condition;
       await this.document.toggleStatusEffect(conditionKey);
+    }
+
+    /** @inheritDoc */
+    async _onRender(context, options) {
+      await super._onRender(context, options);
+      this.element
+        .querySelectorAll("[data-action='increaseCover']")
+        .forEach((el) => {
+          el.addEventListener(
+            "contextmenu",
+            async () => await this.document.system.decreaseCover(),
+          );
+        });
     }
   };

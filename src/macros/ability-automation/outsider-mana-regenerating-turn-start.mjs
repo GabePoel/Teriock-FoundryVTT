@@ -1,5 +1,5 @@
 if (actor.isDrained) {
-  await actor.system.takeNormalRevitalize({
+  await actor.system.takeRevitalize({
     consumeStatDice: false,
     title: "Outsider Mana Regenerating",
   });

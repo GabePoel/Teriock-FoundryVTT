@@ -182,9 +182,34 @@ export default (Base) =>
       );
     }
 
+    /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
       context.sidebarOpen = this._sidebarOpen;
+      context.bars = {
+        hp: this._prepareStatContext(this.actor.system.hp),
+        mp: this._prepareStatContext(this.actor.system.mp),
+      };
       return context;
+    }
+
+    /**
+     * Widths of stats.
+     * @param {object} stat
+     * @returns {{remaining, lost, temp, morganti}}
+     * @private
+     */
+    _prepareStatContext(stat) {
+      const total = stat.max + stat.temp + stat.morganti;
+      const remaining = Math.round((stat.value / total) * 100);
+      const morganti = Math.round((stat.morganti / total) * 100);
+      const temp = Math.round((stat.temp / total) * 100);
+      const lost = 100 - remaining - morganti - temp;
+      return {
+        remaining,
+        lost,
+        temp,
+        morganti,
+      };
     }
   };

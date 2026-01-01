@@ -83,6 +83,7 @@ foundry.helpers.Hooks.once("init", function () {
     ...Object.values(TERIOCK.data.conditions),
     ...Object.values(TERIOCK.data.hacks),
     ...Object.values(TERIOCK.data.transformations),
+    ...Object.values(TERIOCK.data.cover),
   );
   CONFIG.statusEffects.sort((a, b) => {
     return a.id.localeCompare(b.id);

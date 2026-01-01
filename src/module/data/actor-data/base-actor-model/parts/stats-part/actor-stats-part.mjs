@@ -231,9 +231,9 @@ export default (Base) => {
        * @param {Teriock.Dialog.HealDialogOptions} [options]
        * @returns {Promise<void>}
        */
-      async takeNormalHeal(options = {}) {
+      async takeHeal(options = {}) {
         const data = { options };
-        await this.parent.hookCall("takeNormalHeal", data);
+        await this.parent.hookCall("takeHeal", data);
         if (data.cancel) {
           return;
         }
@@ -245,9 +245,9 @@ export default (Base) => {
        * @param {Teriock.Dialog.StatDialogOptions} [options]
        * @returns {Promise<void>}
        */
-      async takeNormalRevitalize(options = {}) {
+      async takeRevitalize(options = {}) {
         const data = { options };
-        await this.parent.hookCall("takeNormalRevitalize", data);
+        await this.parent.hookCall("takeRevitalize", data);
         if (data.cancel) {
           return;
         }
@@ -269,10 +269,10 @@ export default (Base) => {
         }
         if (this.parent.statuses.has("dead")) {
           if (this.hp.value <= 0) {
-            await this.takeHeal(1 - this.hp.value);
+            await this.takeHealing(1 - this.hp.value);
           }
           if (this.mp.value <= 0) {
-            await this.takeRevitalize(1 - this.mp.value);
+            await this.takeRevitalizing(1 - this.mp.value);
           }
           await this.parent.toggleStatusEffect("dead", { active: false });
           const toRemove = this.parent.consequences

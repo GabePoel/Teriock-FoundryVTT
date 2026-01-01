@@ -3,7 +3,7 @@
  * @returns {Promise<void>}
  */
 async function primary(actor) {
-  await actor.system.takeNormalHeal();
+  await actor.system.takeHeal();
 }
 
 const command = {

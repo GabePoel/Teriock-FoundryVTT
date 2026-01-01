@@ -111,9 +111,9 @@ export default (Base) => {
        * @param {number} amount - The amount of healing to apply.
        * @returns {Promise<void>}
        */
-      async takeHeal(amount) {
+      async takeHealing(amount) {
         const data = { amount };
-        await this.parent.hookCall("takeHeal", data);
+        await this.parent.hookCall("takeHealing", data);
         if (data.cancel) {
           return;
         }
@@ -155,9 +155,9 @@ export default (Base) => {
        * @param {number} amount - The amount of revitalization to apply.
        * @returns {Promise<void>}
        */
-      async takeRevitalize(amount) {
+      async takeRevitalizing(amount) {
         const data = { amount };
-        await this.parent.hookCall("takeRevitalize", data);
+        await this.parent.hookCall("takeRevitalizing", data);
         if (data.cancel) {
           return;
         }

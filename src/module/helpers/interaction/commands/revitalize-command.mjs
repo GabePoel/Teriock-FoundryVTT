@@ -3,7 +3,7 @@
  * @returns {Promise<void>}
  */
 async function primary(actor) {
-  await actor.system.takeNormalRevitalize();
+  await actor.system.takeRevitalize();
 }
 
 const command = {

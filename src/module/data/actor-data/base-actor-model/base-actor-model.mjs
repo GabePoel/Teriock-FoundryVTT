@@ -13,6 +13,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ActorCapacitiesPart
  * @mixes ActorCombatPart
  * @mixes ActorConditionTogglingPart
+ * @mixes ActorCoverPart
  * @mixes ActorDeathBagPart
  * @mixes ActorDisplayPart
  * @mixes ActorHacksPart
@@ -34,6 +35,7 @@ export default class TeriockBaseActorModel extends mix(
   parts.ActorScalingPart,
   parts.ActorHacksPart,
   parts.ActorCombatPart,
+  parts.ActorCoverPart,
   parts.ActorRollableTakesPart,
   parts.ActorConditionTogglingPart,
   parts.ActorTradecraftsPart,

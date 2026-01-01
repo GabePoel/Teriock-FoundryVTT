@@ -70,21 +70,43 @@
   </div>
 
   <div
-    class="reaction-box defense-box"
-    style="align-items: center; flex-direction: row;"
-    data-action="toggleReaction"
+    class="defense-box middle-box"
+    style="flex-direction: row; width: 100%; gap: 0.5em;"
   >
-    <div class="title-left tsubtle">Has Reaction</div>
     <div
-      class="right-container"
-      style="display: flex; align-items: center; justify-content: end; flex: 1;"
+      class="reaction-box"
+      style="display: flex; align-items: center; flex-direction: row; width: 57%"
+      data-action="toggleReaction"
     >
-      <div class="character-smallbox-value" data-tooltip="Toggle Reaction">
-        {{#if system.combat.hasReaction}}
-          <i class="fa-solid fa-check thover"></i>
-        {{else}}
-          <i class="fa-solid fa-xmark thover"></i>
-        {{/if}}
+      <div class="title-left tsubtle">Has Reaction</div>
+      <div
+        class="right-container"
+        style="display: flex; align-items: center; justify-content: end; flex: 1;"
+      >
+        <div
+          class="character-smallbox-value"
+          data-tooltip="Toggle Reaction"
+        >
+          {{#if system.combat.hasReaction}}
+            <i class="fa-solid fa-check thover"></i>
+          {{else}}
+            <i class="fa-solid fa-xmark thover"></i>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="cover-box" data-action="increaseCover">
+      <div class="title-left tsubtle">Cover</div>
+      <div
+        class="right-container"
+        style="display: flex; align-items: center; justify-content: end; flex: 1;"
+      >
+        {{#if (eq system.cover 0)}}<i class="fa-fw fa-regular fa-tree thover" data-tooltip="No Cover"></i>{{/if}}
+        {{#if (eq system.cover 1)}}<i class="fa-fw fa-regular fa-duotone fa-tree thover" data-tooltip="Half
+        Cover"></i>{{/if}}
+        {{#if (eq system.cover 2)}}<i class="fa-fw fa-solid fa-tree thover" data-tooltip="Three-Quarters
+      Cover"></i>{{/if}}
+        {{#if (eq system.cover 3)}}<i class="fa-fw fa-solid fa-trees thover" data-tooltip="Full Cover"></i>{{/if}}
       </div>
     </div>
   </div>

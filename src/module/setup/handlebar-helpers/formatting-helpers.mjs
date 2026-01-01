@@ -54,6 +54,8 @@ export default function registerFormattingHelpers() {
     };
   }
 
+  Handlebars.registerHelper("frac", (value, max) => (value / max) * 100);
+
   Handlebars.registerHelper("barLeft", (value, max, temp = 0) => {
     const { value: v, max: m, temp: t } = normalizeBarInputs(value, max, temp);
     return Math.floor((v / (m + t)) * 100);

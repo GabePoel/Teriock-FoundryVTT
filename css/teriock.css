@@ -2,17 +2,17 @@
 .theme-light {
   --color-bar-border: var(--color-block-container-border);
   --color-block-active-inset: color-mix(
-      in srgb,
-      var(--color-warm-3),
-      transparent 50%
+    in srgb,
+    var(--color-warm-3),
+    transparent 50%
   );
   --color-block-container-border: var(--color-block-display-border);
   --color-block-display-background: var(--color-panel-background);
   --color-block-display-border: var(--color-panel-edge);
   --color-block-hover-inset: color-mix(
-      in srgb,
-      var(--color-warm-2),
-      transparent 50%
+    in srgb,
+    var(--color-warm-2),
+    transparent 50%
   );
   --color-block-shadow: rgba(0, 0, 0, 0.15);
   --panel-divider-style: solid;
@@ -29,8 +29,16 @@
   --color-panel-edge: #bbb19f;
   --color-panel-header-hover: rgba(255, 255, 255, 0.25);
   --color-panel-icon: var(--color-panel-edge);
-  --color-panel-inverse-active: color-mix(in srgb, var(--color-panel-background), white 50%);
-  --color-panel-inverse-hover: color-mix(in srgb, var(--color-panel-background), white 25%);
+  --color-panel-inverse-active: color-mix(
+    in srgb,
+    var(--color-panel-background),
+    white 50%
+  );
+  --color-panel-inverse-hover: color-mix(
+    in srgb,
+    var(--color-panel-background),
+    white 25%
+  );
   --color-sheet-header-background: var(--color-panel-background);
   --compendium-sheet-header-background-color: var(--color-warm-3);
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.2);
@@ -40,21 +48,21 @@
 .theme-dark {
   --color-bar-border: var(--color-block-container-border);
   --color-block-active-inset: color-mix(
-      in srgb,
-      var(--color-warm-3),
-      transparent 50%
+    in srgb,
+    var(--color-warm-3),
+    transparent 50%
   );
   --color-block-container-border: color-mix(
-      in srgb,
-      var(--color-text-subtle),
-      transparent 90%
+    in srgb,
+    var(--color-text-subtle),
+    transparent 90%
   );
   --color-block-display-background: rgba(255, 255, 255, 0.1);
   --color-block-display-border: var(--color-border);
   --color-block-hover-inset: color-mix(
-      in srgb,
-      var(--color-warm-2),
-      transparent 50%
+    in srgb,
+    var(--color-warm-2),
+    transparent 50%
   );
   --color-block-shadow: rgba(0, 0, 0, 0.4);
   --panel-divider-style: dotted;
@@ -65,29 +73,29 @@
   --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
   --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
   --color-panel-associations-border: color-mix(
-      in srgb,
-      var(--color-text-subtle),
-      transparent 75%
+    in srgb,
+    var(--color-text-subtle),
+    transparent 75%
   );
   --color-panel-associations-shadow-color: transparent;
   --color-panel-background: rgba(255, 255, 255, 0.03);
   --color-panel-divider: color-mix(
-      in srgb,
-      var(--color-text-subtle),
-      transparent 50%
+    in srgb,
+    var(--color-text-subtle),
+    transparent 50%
   );
   --color-panel-edge: color-mix(
-      in srgb,
-      var(--color-text-subtle),
-      transparent 75%
+    in srgb,
+    var(--color-text-subtle),
+    transparent 75%
   );
   --color-panel-header-hover: rgba(255, 255, 255, 0.05);
   --color-panel-icon: var(--color-text-subtle);
   --color-sheet-header-background: rgba(255, 255, 255, 0.03);
   --compendium-sheet-header-background-color: color-mix(
-      in srgb,
-      var(--color-level-error-bg),
-      black 75%
+    in srgb,
+    var(--color-level-error-bg),
+    black 75%
   );
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.6);
   --color-text-accent: var(--color-warm-1);
@@ -921,7 +929,8 @@ document-embed + document-embed {
   margin-block: 2px;
 }
 
-.dice-result:hover .teriock-dice-formula, .dice-result:hover .teriock-dice-total {
+.dice-result:hover .teriock-dice-formula,
+.dice-result:hover .teriock-dice-total {
   background: var(--color-panel-inverse-hover);
 }
 
@@ -2657,6 +2666,10 @@ table {
   background: linear-gradient(90deg, rgb(40, 0, 0), rgb(50, 0, 0));
 }
 
+.character-status-box .character-status-bars .character-bar-container .character-bar.character-hit-bar .character-bar-morganti {
+  background: linear-gradient(90deg, black, rgb(20, 0, 0));
+}
+
 .character-status-box .character-status-bars .character-bar-container .character-bar.character-mana-bar {
   border: 2px solid #3584e4;
 }
@@ -2672,6 +2685,10 @@ table {
 
 .character-status-box .character-status-bars .character-bar-container .character-bar.character-mana-bar .character-bar-lost {
   background: linear-gradient(90deg, rgb(0, 0, 40), rgb(0, 0, 50));
+}
+
+.character-status-box .character-status-bars .character-bar-container .character-bar.character-mana-bar .character-bar-morganti {
+  background: linear-gradient(90deg, black, rgb(0, 0, 20));
 }
 
 .character-status-box .character-status-bars .character-bar-container .character-bar.character-wither-bar {
@@ -3008,6 +3025,16 @@ body > form:only-child section .character-page .character-tabber-background,
   height: unset;
   line-height: unset;
 }
+.character-window .character-page .character-sidebar .cover-box {
+  align-items: center;
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+  padding-top: 0.5em;
+}
 .character-window .character-page .character-sidebar .defense-box-main,
 .character-window .character-page .character-sidebar .attack-box-main,
 .character-window .character-page .character-sidebar .carrying-box-main {
@@ -3025,6 +3052,10 @@ body > form:only-child section .character-page .character-tabber-background,
 .character-window .character-page .character-sidebar .carrying-box-main input {
   height: unset;
   line-height: unset;
+}
+.character-window .character-page .character-sidebar .middle-box {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
 }
 .character-window .character-page .character-sidebar .ch-battle-box {
   align-items: center;

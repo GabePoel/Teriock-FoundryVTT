@@ -3,6 +3,7 @@ export { default as ActorAutomationPart } from "./automation-part/actor-automati
 export { default as ActorCapacitiesPart } from "./capacities-part/actor-capacities-part.mjs";
 export { default as ActorCombatPart } from "./combat-part/actor-combat-part.mjs";
 export { default as ActorConditionTogglingPart } from "./actor-condition-toggling-part.mjs";
+export { default as ActorCoverPart } from "./cover-part/actor-cover-part.mjs";
 export { default as ActorDeathBagPart } from "./death-bag-part/actor-death-bag-part.mjs";
 export { default as ActorDisplayPart } from "./display-part/actor-display-part.mjs";
 export { default as ActorHacksPart } from "./hacks-part/actor-hacks-part.mjs";
