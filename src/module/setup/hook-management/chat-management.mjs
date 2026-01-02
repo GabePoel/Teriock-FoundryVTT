@@ -7,16 +7,21 @@ import {
 export default function registerChatManagementHooks() {
   foundry.helpers.Hooks.on("chatMessage", (_chatLog, message) => {
     let hasCommand = false;
-    for (const [id, interaction] of Object.entries(commands)) {
+    for (const [id, command] of Object.entries(commands)) {
       if (message.startsWith(`/${id} `) || message === `/${id}`) {
         hasCommand = true;
-        const argString = message.slice(id.length + 1).trim();
-        const argArr = parseArguments(argString);
-        const argObj = interpretArguments(argArr, interaction);
+        const argumentString = message.slice(id.length + 1).trim();
+        let argumentArray;
+        if (command.formula) {
+          argumentArray = [["formula", argumentString]];
+        } else {
+          argumentArray = parseArguments(argumentString);
+        }
+        const argObj = interpretArguments(argumentArray, command);
         const actors = game.canvas.tokens.controlled
           .map((t) => t?.actor)
           .filter((a) => a);
-        actors.map((actor) => interaction.primary(actor, argObj));
+        actors.map((actor) => command.primary(actor, argObj));
       }
     }
     if (hasCommand) {
