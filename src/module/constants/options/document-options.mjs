@@ -131,4 +131,8 @@ export const documentOptions = {
     pack: "species",
     sorter: docSort,
   },
+  wrapper: {
+    doc: "Item",
+    icon: "hand-sparkles",
+  },
 };

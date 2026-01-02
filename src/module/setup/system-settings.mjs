@@ -104,6 +104,14 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    contentLinkTooltips: {
+      config: true,
+      default: true,
+      hint: "If enabled, tooltips will be displayed for content links.",
+      name: "Content Link Tooltips",
+      scope: "user",
+      type: Boolean,
+    },
     placeTemplateOnAbilityUse: {
       config: true,
       default: true,

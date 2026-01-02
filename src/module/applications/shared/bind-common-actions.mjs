@@ -3,7 +3,7 @@ import { TeriockContextMenu } from "../ux/_module.mjs";
 import {
   imageContextMenuOptions,
   previewSheet,
-  wikiContextMenuOptions,
+  wikiContextMenuOptions
 } from "./_module.mjs";
 
 /**
@@ -45,6 +45,14 @@ export default function bindCommonActions(rootElement) {
       await handler.secondaryAction();
     });
   }
+  queryAll(rootElement, ".content-link[data-uuid]").forEach((el) => {
+    if (game.settings.get("teriock", "contentLinkTooltips")) {
+      const cls = /** @type {TeriockDocument} */ foundry.utils.getDocumentClass(
+        el.dataset.type,
+      );
+      if (cls.documentMetadata.tooltip) el.dataset.makeTooltip = "true";
+    }
+  });
   queryAll(rootElement, "[data-teriock-content-link]").forEach(
     /** @param {HTMLLinkElement} el */ (el) => {
       if (game.settings.get("teriock", "systemLinks")) {
