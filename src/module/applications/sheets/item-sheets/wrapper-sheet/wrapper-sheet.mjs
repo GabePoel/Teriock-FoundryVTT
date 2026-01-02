@@ -1,6 +1,6 @@
 import { toTitleCase } from "../../../../helpers/string.mjs";
 import { selectDialog } from "../../../dialogs/select-dialog.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockWrapper}.
@@ -8,7 +8,6 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 export default class TeriockWrapperSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   async _preRender(context, options) {
-    //noinspection JSAccessibilityCheck
     await super._preRender(context, options);
     if (this.document.effects.size === 0) {
       const typeChoices = {};

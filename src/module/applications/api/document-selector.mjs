@@ -17,7 +17,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
-  static DEFAULT_OPTIONS = {
+  static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
     classes: ["teriock", "dynamic-select", "dialog"],
     actions: {
       ok: this._onGetSelected,

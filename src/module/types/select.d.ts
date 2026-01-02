@@ -33,6 +33,8 @@ declare global {
     };
 
     export type SelectDocument = {
+      /** Whether this is checked by default */
+      checked?: boolean;
       /** Image path */
       img: string;
       /** Name to display */

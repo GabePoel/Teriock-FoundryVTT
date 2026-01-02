@@ -1,6 +1,6 @@
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockBody}.

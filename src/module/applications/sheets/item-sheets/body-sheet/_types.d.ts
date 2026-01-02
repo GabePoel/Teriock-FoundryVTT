@@ -1,4 +1,4 @@
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet.mjs";
 
 declare module "./body-sheet.mjs" {
   export default interface TeriockBodySheet extends TeriockBaseItemSheet {

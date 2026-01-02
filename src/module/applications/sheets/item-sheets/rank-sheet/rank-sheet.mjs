@@ -1,7 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet.mjs";
 import {
   archetypeContextMenu,
   classContextMenu,

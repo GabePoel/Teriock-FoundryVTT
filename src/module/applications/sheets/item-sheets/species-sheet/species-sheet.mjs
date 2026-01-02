@@ -2,7 +2,7 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import { setStatDiceDialog } from "../../../dialogs/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockSpecies}.

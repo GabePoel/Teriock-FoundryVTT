@@ -1,4 +1,3 @@
-import "./base-item-sheet/_types";
 import "./body-sheet/_types";
 import "./equipment-sheet/_types";
 import "./mount-sheet/_types";

@@ -1,4 +1,4 @@
-export { default as TeriockBaseItemSheet } from "./base-item-sheet/base-item-sheet.mjs";
+export { default as TeriockBaseItemSheet } from "./base-item-sheet.mjs";
 export { default as TeriockBodySheet } from "./body-sheet/body-sheet.mjs";
 export { default as TeriockEquipmentSheet } from "./equipment-sheet/equipment-sheet.mjs";
 export { default as TeriockMountSheet } from "./mount-sheet/mount-sheet.mjs";

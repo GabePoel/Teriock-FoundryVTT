@@ -153,15 +153,13 @@ declare global {
     get id(): ID<TeriockMount>;
     get uuid(): UUID<TeriockMount>;
   };
-  export type TeriockWrapper<T> = TeriockItem & {
+  export type TeriockWrapper = TeriockItem & {
     sheet: TeriockWrapperSheet;
-    system: TeriockWrapperModel & {
-      get effect(): T;
-    };
+    system: TeriockWrapperModel;
     type: "wrapper";
-    _id: ID<TeriockWrapper<T>>;
-    get id(): ID<TeriockWrapper<T>>;
-    get uuid(): UUID<TeriockWrapper<T>>;
+    _id: ID<TeriockWrapper>;
+    get id(): ID<TeriockWrapper>;
+    get uuid(): UUID<TeriockWrapper>;
   };
 }
 

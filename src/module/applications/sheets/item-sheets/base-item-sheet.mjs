@@ -1,5 +1,5 @@
-import { mix } from "../../../../helpers/utils.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import { mix } from "../../../helpers/utils.mjs";
+import * as mixins from "../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;

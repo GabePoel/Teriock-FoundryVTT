@@ -1,6 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockPower}.
