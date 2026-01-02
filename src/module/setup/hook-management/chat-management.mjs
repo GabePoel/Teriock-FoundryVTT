@@ -17,11 +17,15 @@ export default function registerChatManagementHooks() {
         } else {
           argumentArray = parseArguments(argumentString);
         }
-        const argObj = interpretArguments(argumentArray, command);
+        const argumentObject = interpretArguments(argumentArray, command);
         const actors = game.canvas.tokens.controlled
           .map((t) => t?.actor)
           .filter((a) => a);
-        actors.map((actor) => command.primary(actor, argObj));
+        if (actors.length > 0) {
+          actors.map((actor) => command.primary(actor, argumentObject));
+        } else {
+          command.primary(undefined, argumentObject).then();
+        }
       }
     }
     if (hasCommand) {
