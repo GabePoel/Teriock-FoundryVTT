@@ -5,14 +5,14 @@ export const takeOptions = {
     icon: "heart-crack",
     label: "Damage",
     prefix: "Take",
-    reverse: async (actor, amt) => await actor.system.takeHeal(amt),
+    reverse: async (actor, amt) => await actor.system.takeHealing(amt),
   },
   drain: {
     apply: async (actor, amt) => await actor.system.takeDrain(amt),
     icon: "droplet-slash",
     label: "Drain",
     prefix: "Take",
-    reverse: async (actor, amt) => await actor.system.takeRevitalize(amt),
+    reverse: async (actor, amt) => await actor.system.takeRevitalizing(amt),
   },
   wither: {
     apply: async (actor, amt) => await actor.system.takeWither(amt),
@@ -22,14 +22,14 @@ export const takeOptions = {
     reverse: async (actor, amt) => await actor.system.takeWither(-amt),
   },
   healing: {
-    apply: async (actor, amt) => await actor.system.takeHeal(amt),
+    apply: async (actor, amt) => await actor.system.takeHealing(amt),
     icon: "hand-holding-heart",
     label: "Healing",
     prefix: "Apply",
     reverse: async (actor, amt) => await actor.system.takeDamage(amt),
   },
   revitalizing: {
-    apply: async (actor, amt) => await actor.system.takeRevitalize(amt),
+    apply: async (actor, amt) => await actor.system.takeRevitalizing(amt),
     icon: "hand-holding-droplet",
     label: "Revitalizing",
     prefix: "Apply",

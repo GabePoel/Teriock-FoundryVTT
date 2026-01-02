@@ -3,7 +3,7 @@ import { TeriockContextMenu } from "../ux/_module.mjs";
 import {
   imageContextMenuOptions,
   previewSheet,
-  wikiContextMenuOptions
+  wikiContextMenuOptions,
 } from "./_module.mjs";
 
 /**
