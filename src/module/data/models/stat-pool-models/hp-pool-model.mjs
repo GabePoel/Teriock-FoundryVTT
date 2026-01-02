@@ -7,7 +7,7 @@ export default class HpPoolModel extends StatPoolModel {
     return /** @param {number} amount */ async (amount) => {
       const criticallyWounded =
         this.parent.actor?.statuses.has("criticallyWounded");
-      await this.parent.actor?.system.takeHeal(amount);
+      await this.parent.actor?.system.takeHealing(amount);
       if (!criticallyWounded) {
         await this.parent.actor?.system.takeAwaken();
       }
