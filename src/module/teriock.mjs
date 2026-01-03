@@ -150,7 +150,7 @@ foundry.helpers.Hooks.once("init", function () {
       documentClass: documents.TeriockEffect,
     },
     Actor: {
-      collections: documents.collections.TeriockActors,
+      collection: documents.collections.TeriockActors,
       dataModels: {
         character: data.actor.TeriockCharacterModel,
         creature: data.actor.TeriockCreatureModel,
