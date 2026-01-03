@@ -20,7 +20,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
     if (!actor) {
       const scene = game.scenes.get(speaker.scene);
       const token = scene.tokens.get(speaker.token);
-      actor = token.actor;
+      actor = token?.actor;
     }
     if (!actor) actor = game.user.character;
     if (!actor)
