@@ -11,8 +11,8 @@ effects:
       elderSorceryIncant: ''
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
+      interaction: feat
+      featSaveAttribute: per
       maneuver: active
       executionTime: a1
       delivery:
@@ -32,10 +32,7 @@ effects:
       sustained: false
       range: Self.
       overview:
-        base: >-
-          <p>Roll [[/roll 1d20 + (2 * @per)]]. You see any
-          @L[Condition:Hidden]{hidden} creatures with a "Hidden DC" less than or
-          equal to your roll.</p>
+        base: ''
         proficient: ''
         fluent: ''
       results:
@@ -43,9 +40,13 @@ effects:
         critHit: ''
         miss: ''
         critMiss: ''
-        save: ''
+        save: >-
+          <p>You see any @L[Condition:Hidden]{hidden} creatures with a hidden DC
+          less than or equal to your roll.</p>
         critSave: ''
-        fail: ''
+        fail: >-
+          <p>You do not see any @L[Condition:Hidden]{hidden} creatures with a
+          hidden DC greater than your roll.</p>
         critFail: ''
       piercing: normal
       improvements:

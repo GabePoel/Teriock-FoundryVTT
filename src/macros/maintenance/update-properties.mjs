@@ -5,7 +5,17 @@ await tm.utils.progressBar(
     let item = game.teriock.packs.properties.index.find((i) => i.name === name);
     if (!item) {
       item = await game.teriock.Item.create(
-        { name, type: "wrapper" },
+        {
+          name,
+          type: "wrapper",
+          effects: [
+            {
+              name,
+              type: "property",
+              _id: foundry.utils.randomID(),
+            },
+          ],
+        },
         { pack: "teriock.properties" },
       );
     } else {

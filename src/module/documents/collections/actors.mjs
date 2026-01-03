@@ -1,8 +1,9 @@
+import { TeriockChatMessage } from "../_module.mjs";
 import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Actors } = foundry.documents.collections;
 
-//noinspection JSUnusedGlobalSymbols,JSClosureCompilerSyntax
+//noinspection JSUnusedGlobalSymbols,JSClosureCompilerSyntax,JSValidateJSDoc
 /**
  * @extends {Actors}
  * @implements {Collection<ID<TeriockActor>, TeriockActor>}
@@ -15,7 +16,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
    * @returns {TeriockActor|null}
    */
   get defaultActor() {
-    const speaker = ChatMessage.implementation.getSpeaker();
+    const speaker = TeriockChatMessage.getSpeaker();
     let actor = this.get(speaker.actor);
     if (!actor) {
       const scene = game.scenes.get(speaker.scene);
