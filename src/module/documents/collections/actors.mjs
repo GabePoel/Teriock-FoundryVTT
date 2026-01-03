@@ -16,14 +16,17 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
    */
   get defaultActor() {
     const speaker = ChatMessage.implementation.getSpeaker();
-    const character = game.user.character;
-    const token =
-      (canvas.ready ? canvas.tokens.get(speaker.token) : null) || null;
-    const selected = /** @type {TeriockActor[]} */ this.selectedTokens
-      .map((t) => t.actor)
-      .find((a) => a);
-    return (
-      token?.actor || this.get(speaker.actor) || character || selected || null
-    );
+    let actor = this.get(speaker.actor);
+    if (!actor) {
+      const scene = game.scenes.get(speaker.scene);
+      const token = scene.tokens.get(speaker.token);
+      actor = token.actor;
+    }
+    if (!actor) actor = game.user.character;
+    if (!actor)
+      actor = game.canvas.tokens.controlled.find(
+        /** @param {TeriockToken} t */ (t) => t.actor,
+      )?.actor;
+    return actor ?? null;
   }
 }
