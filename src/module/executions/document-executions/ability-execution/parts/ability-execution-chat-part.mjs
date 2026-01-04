@@ -37,7 +37,6 @@ export default function AbilityExecutionChatPart(Base) {
     /**
      * @extends {AbilityExecutionConstructor}
      * @mixin
-     * @property {TeriockAbility} source
      */
     class AbilityExecutionChat extends Base {
       /** @inheritDoc */

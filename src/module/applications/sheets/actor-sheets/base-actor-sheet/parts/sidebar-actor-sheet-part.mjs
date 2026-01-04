@@ -1,3 +1,5 @@
+import { TeriockContextMenu } from "../../../../ux/_module.mjs";
+
 //noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof TeriockBaseActorSheet} Base
@@ -24,35 +26,17 @@ export default (Base) =>
      * @returns {Teriock.Foundry.ContextMenuEntry[]}
      */
     #piercingContextMenu() {
-      return [
+      return TeriockContextMenu.makeUpdateEntries(
+        this.actor,
+        [
+          { name: "None", icon: "xmark", value: 0 },
+          { name: "AV0", icon: "a", value: 1 },
+          { name: "UB", icon: "u", value: 2 },
+        ],
         {
-          name: "None",
-          icon: '<i class="fa-solid fa-xmark"></i>',
-          callback: async () => {
-            await this.actor.update({
-              "system.offense.piercing": "none",
-            });
-          },
+          path: "system.offense.piercing.raw",
         },
-        {
-          name: "AV0",
-          icon: '<i class="fa-solid fa-a"></i>',
-          callback: async () => {
-            await this.actor.update({
-              "system.offense.piercing": "av0",
-            });
-          },
-        },
-        {
-          name: "UB",
-          icon: '<i class="fa-solid fa-u"></i>',
-          callback: async () => {
-            await this.actor.update({
-              "system.offense.piercing": "ub",
-            });
-          },
-        },
-      ];
+      );
     }
 
     /**
@@ -60,26 +44,24 @@ export default (Base) =>
      * @returns {Teriock.Foundry.ContextMenuEntry[]}
      */
     #scalingContextMenu() {
-      return [
-        {
-          name: "Scale P and F off LVL",
-          icon: '<i class="fa-solid fa-wreath-laurel"></i>',
-          callback: async () => {
-            await this.actor.update({
-              "system.scaling.brScale": false,
-            });
+      return TeriockContextMenu.makeUpdateEntries(
+        this.actor,
+        [
+          {
+            name: "Scale P and F off LVL",
+            icon: "wreath-laurel",
+            value: false,
           },
-        },
-        {
-          name: "Scale P and F off BR",
-          icon: '<i class="fa-solid fa-swords"></i>',
-          callback: async () => {
-            await this.actor.update({
-              "system.scaling.brScale": true,
-            });
+          {
+            name: "Scale P and F off BR",
+            icon: "swords",
+            value: true,
           },
+        ],
+        {
+          path: "system.scaling.brScale",
         },
-      ];
+      );
     }
 
     /** @inheritDoc */

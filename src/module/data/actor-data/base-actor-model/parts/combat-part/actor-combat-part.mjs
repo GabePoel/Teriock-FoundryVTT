@@ -1,6 +1,8 @@
 import { characterOptions } from "../../../../../constants/options/character-options.mjs";
 import { prefixObject } from "../../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../../fields/_module.mjs";
+import { PiercingModel } from "../../../../models/_module.mjs";
+import { migratePiercing } from "../../../../shared/migrations/migrate-piercing.mjs";
 
 const { fields } = foundry.data;
 const { utils } = foundry;
@@ -43,15 +45,7 @@ export default (Base) => {
               initial: false,
               label: "Style Bonus",
             }),
-            piercing: new fields.StringField({
-              initial: "none",
-              label: "Piercing",
-              choices: {
-                none: "None",
-                av0: "AV0",
-                ub: "UB",
-              },
-            }),
+            piercing: new fields.EmbeddedDataField(PiercingModel),
           }),
           wielding: new fields.SchemaField({
             attacker: new fields.DocumentIdField({ nullable: true }),
@@ -96,6 +90,7 @@ export default (Base) => {
         ) {
           utils.setProperty(data, "wielding.blocker", null);
         }
+        data.offense = migratePiercing(data.offense);
         super.migrateData(data);
       }
 

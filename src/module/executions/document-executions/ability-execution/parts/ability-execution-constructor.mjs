@@ -29,11 +29,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       noHeighten = false,
       noTemplate = this.source.system.impacts.base.noTemplate,
       warded = this.source.system.warded,
-      av0 = this.source.system.piercing === "av0" ||
-        this.actor?.system.offense.piercing === "av0",
-      ub = this.source.system.piercing === "ub" ||
-        this.actor?.system.offense.piercing === "ub",
-      sb = this.actor?.system.offense.sb,
+      piercing = /** @type {PiercingModel} */ this.source.system.piercing.clone(),
+      sb = this.actor?.system.offense.sb || 0,
       attackPenalty = "0",
       vitals = this.source.system.targets.has("vitals"),
     } = options;
@@ -46,20 +43,11 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       ) {
         warded = true;
       }
-      if (
-        options.av0 === undefined &&
-        this.source.system.interaction === "attack" &&
-        this.armament.system.piercing.av0
-      ) {
-        av0 = true;
-      }
-      if (
-        options.ub === undefined &&
-        this.source.system.interaction === "attack" &&
-        this.armament.system.piercing.ub
-      ) {
-        ub = true;
-      }
+      piercing.raw = Math.max(
+        piercing.raw,
+        this.armament.system.piercing.raw,
+        this.actor?.system.offense.piercing.raw,
+      );
       if (
         options.vitals === undefined &&
         this.source.system.interaction === "attack" &&
@@ -67,9 +55,6 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       ) {
         vitals = true;
       }
-    }
-    if (ub) {
-      av0 = true;
     }
     if (options.attackPenalty === undefined) {
       if (this.source.system.interaction === "attack") {
@@ -93,11 +78,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       mp: 0,
       gp: 0,
     };
-    this.piercing = {
-      av0: av0,
-      ub: ub,
-      sb: sb,
-    };
+    this.sb = sb;
+    this.piercing = piercing;
     this.attackPenaltyFormula = attackPenalty;
     this.attackPenalty = 0;
     this.vitals = vitals;

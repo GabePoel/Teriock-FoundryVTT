@@ -28,6 +28,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
   );
 
   if (documents.length === 0) {
+    ui.notifications.warn("There are no valid options to select from.");
     return [];
   }
 
@@ -46,6 +47,10 @@ export async function selectDocumentsDialog(documents, options = {}) {
       .getProperty(a, options.nameKey)
       .localeCompare(foundry.utils.getProperty(b, options.nameKey)),
   );
+
+  if (!options.multi && options.checked && options.checked.length > 0) {
+    options.checked.length = 1;
+  }
 
   for (const doc of documents) {
     const id = foundry.utils.getProperty(doc, options.idKey);
@@ -111,6 +116,7 @@ export async function selectDocumentDialog(documents, options = {}) {
   const selected = await selectDocumentsDialog(documents, {
     ...options,
     multi: false,
+    checked: options.checked ? [options.checked] : [],
   });
   return selected?.[0] ?? null;
 }

@@ -4,6 +4,7 @@ import { toCamelCase } from "../../../helpers/string.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../fields/_module.mjs";
 import { DamageModel, DefenseModel } from "../../models/_module.mjs";
+import { PiercingDataMixin } from "../_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -16,9 +17,10 @@ export default function ArmamentDataMixin(Base) {
     /**
      * @extends {TeriockBaseItemModel}
      * @implements {Teriock.Models.ArmamentDataMixinInterface}
+     * @mixes PiercingData
      * @mixin
      */
-    class ArmamentData extends Base {
+    class ArmamentData extends PiercingDataMixin(Base) {
       /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, {
@@ -76,18 +78,6 @@ export default function ArmamentDataMixin(Base) {
           notes: new TextField({
             initial: "",
             label: "Notes",
-          }),
-          piercing: new fields.SchemaField({
-            av0: new fields.BooleanField({
-              initial: false,
-              nullable: false,
-              required: false,
-            }),
-            ub: new fields.BooleanField({
-              initial: false,
-              nullable: false,
-              required: false,
-            }),
           }),
           range: new fields.SchemaField({
             long: new EvaluationField(),
@@ -190,10 +180,8 @@ export default function ArmamentDataMixin(Base) {
           ap: this.attackPenalty.value,
           style: this.fightingStyle,
           [`style.${this.fightingStyle}`]: 1,
-          av0: this.piercing.av0 || this.piercing.ub ? 1 : 0,
-          ub: this.piercing.ub ? 1 : 0,
-          warded: this.warded ? 1 : 0,
-          spellTurning: this.spellTurning ? 1 : 0,
+          warded: Number(this.warded),
+          spellTurning: Number(this.spellTurning),
         });
         for (const type of this.damage.types) {
           data[`dmg.type.${type}`] = 1;
@@ -221,9 +209,10 @@ export default function ArmamentDataMixin(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        const properties = this.parent.effects.filter(
-          (e) => e.type === "property",
-        );
+        const properties =
+          /** @type {TeriockProperty[]} */ this.parent.effects.filter(
+            (e) => e.type === "property",
+          );
         this.props = new Set(
           Array.from(properties).map((p) => toCamelCase(p.name)),
         );
@@ -236,10 +225,6 @@ export default function ArmamentDataMixin(Base) {
           this.damage.types.add("magic");
         }
         this.damage.base.addTypes(this.damage.types);
-        this.piercing = {
-          av0: false,
-          ub: false,
-        };
         this.warded = false;
         this.hookedMacros =
           /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
@@ -263,9 +248,6 @@ export default function ArmamentDataMixin(Base) {
         this.av.evaluate();
         this.bv.evaluate();
         this.hit.evaluate();
-        if (this.piercing.ub) {
-          this.piercing.av0 = true;
-        }
         if (!this.damage.base.nonZero) {
           this.range.melee = false;
         }

@@ -47,7 +47,7 @@ export default (Base) => {
             label: "Execution",
             wrappers: [
               ref.executionTime[this.maneuver][this.executionTime] || "",
-              ref.piercing[this.piercing] || "",
+              this.piercing.value.toUpperCase(),
               ref.delivery[this.delivery.base] || "",
               this.interaction === "feat"
                 ? ref.featSaveAttribute[this.featSaveAttribute]

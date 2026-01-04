@@ -4,10 +4,13 @@ if (ability.isOwner && ability.actor && !ability.inCompendium) {
   const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
   const changes = [
     {
-      key: `!equipment__system.equipmentClasses__has__${equipmentClass}__system.piercing.av0`,
-      value: "true",
-      mode: 5,
+      key: "system.piercing",
+      mode: 4,
       priority: 10,
+      qualifier: `@class.${equipmentClass}`,
+      target: "equipment",
+      time: "normal",
+      value: "1",
     },
   ];
   await ability.update({

@@ -129,10 +129,6 @@ export default (Base) => {
               label: "If Fluent",
             }),
           }),
-          piercing: new fields.StringField({
-            initial: "normal",
-            choices: TERIOCK.options.ability.piercing,
-          }),
           powerSources: new fields.SetField(
             new fields.StringField({
               choices: TERIOCK.index.powerSources,
@@ -279,8 +275,6 @@ export default (Base) => {
           [`interaction.${this.interaction}`]: 1,
           time: this.executionTime,
           [`time.${this.executionTime}`]: 1,
-          av0: ["av0", "ub"].includes(this.piercing) ? 1 : 0,
-          ub: this.piercing === "ub" ? 1 : 0,
           warded: this.warded ? 1 : 0,
           range: this.range,
           basic: this.basic ? 1 : 0,

@@ -27,6 +27,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityPanelPart
  * @mixes ConsumableData
  * @mixes HierarchyData
+ * @mixes PiercingData
  * @mixes ProficiencyData
  * @mixes RevelationData
  * @mixes ThresholdData
@@ -36,6 +37,7 @@ export default class TeriockAbilityModel extends mix(
   TeriockBaseEffectModel,
   mixins.ConsumableDataMixin,
   mixins.HierarchyDataMixin,
+  mixins.PiercingDataMixin,
   mixins.ProficiencyDataMixin,
   mixins.RevelationDataMixin,
   mixins.ThresholdDataMixin,

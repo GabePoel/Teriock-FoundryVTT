@@ -28,6 +28,15 @@ declare global {
       name: string;
     };
 
+    export type ContextMenuOptions = {
+      eventName?: string;
+      fixed?: boolean;
+      jQuery?: boolean;
+      onClose?: ContextMenuCallback;
+      onOpen?: ContextMenuCallback;
+      forceDirection?: "up" | "down";
+    };
+
     export type EffectChangeData = {
       /** <schema> The attribute path in the {@link TeriockParent} data which the change modifies */
       key: string;

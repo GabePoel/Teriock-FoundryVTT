@@ -1,5 +1,6 @@
 import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../../helpers/utils.mjs";
+import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
 /**
  * Creates context menus for ability configuration.
@@ -48,23 +49,17 @@ export default function abilityContextMenus(ability) {
 
   return {
     delivery: quickMenu("delivery", "system.delivery.base"),
-    piercing: [
+    piercing: TeriockContextMenu.makeUpdateEntries(
+      ability,
+      [
+        { name: "None", icon: "xmark", value: 0 },
+        { name: "AV0", icon: "a", value: 1 },
+        { name: "UB", icon: "u", value: 2 },
+      ],
       {
-        name: "Normal",
-        icon: TERIOCK.display.icons.remove,
-        callback: () => ability.update({ "system.piercing": "normal" }),
+        path: "system.piercing.raw",
       },
-      {
-        name: "AV0",
-        icon: TERIOCK.display.icons.av0,
-        callback: () => ability.update({ "system.piercing": "av0" }),
-      },
-      {
-        name: "UB",
-        icon: TERIOCK.display.icons.ub,
-        callback: () => ability.update({ "system.piercing": "ub" }),
-      },
-    ],
+    ),
     maneuver: [
       {
         name: "Active",

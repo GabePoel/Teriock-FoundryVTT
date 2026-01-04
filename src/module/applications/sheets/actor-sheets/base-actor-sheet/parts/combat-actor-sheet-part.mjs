@@ -57,6 +57,7 @@ export default (Base) =>
           label: "Select Primary Attacker",
           openable: true,
           textKey: "system.summarizedAttack",
+          checked: this.document.system.primaryAttacker?.uuid,
         },
       );
       if (attacker) {
@@ -78,6 +79,7 @@ export default (Base) =>
           label: "Select Primary Blocker",
           openable: true,
           textKey: "system.summarizedBlock",
+          checked: this.document.system.primaryBlocker?.uuid,
         },
       );
       if (attacker) {

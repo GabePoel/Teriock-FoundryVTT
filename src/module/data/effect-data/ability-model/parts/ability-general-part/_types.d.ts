@@ -51,8 +51,6 @@ export default interface AbilityGeneralPartInterface {
   maneuver: Teriock.Parameters.Ability.Maneuver;
   /** <schema> Description of what this ability does */
   overview: OverviewText;
-  /** <schema> How well this ability pierces armor and equipment */
-  piercing: Teriock.Parameters.Ability.Piercing;
   /** <schema> Power sources that must be available in order for this ability to work */
   powerSources: Set<Teriock.Parameters.Ability.PowerSource>;
   /** <schema> If this ability needs to be prepared */

@@ -1,3 +1,5 @@
+import { PiercingModel } from "../../../../models/_module.mjs";
+
 export default interface ActorCombatPartInterface {
   /** <schema> Stuff that changes during combat */
   combat: {
@@ -33,7 +35,7 @@ export default interface ActorCombatPartInterface {
     /** <schema> Style bonus */
     sb: boolean;
     /** <schema> Piercing type */
-    piercing: "av0" | "ub" | "none";
+    piercing: PiercingModel;
   };
   /** <schema> Wielding */
   wielding: {

@@ -57,9 +57,6 @@ declare global {
 
     /** Expansion */
     export type Expansion = keyof typeof abilityOptions.expansion;
-
-    /** Piercing */
-    export type Piercing = keyof typeof abilityOptions.piercing;
   }
 }
 

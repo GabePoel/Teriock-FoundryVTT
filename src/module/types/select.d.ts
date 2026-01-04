@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.SelectOptions {
-    export type DocumentSelect = {
+    export type BaseDocumentSelect = {
       /** Text to display on the dialog */
       hint?: string;
       /** Unique key to use that identifies each document */
@@ -25,7 +25,12 @@ declare global {
       tooltipUUID?: string;
     };
 
-    export type DocumentsSelect = Teriock.SelectOptions.DocumentSelect & {
+    export type DocumentSelect = Teriock.SelectOptions.BaseDocumentSelect & {
+      /** Which document is checked? */
+      checked?: string;
+    };
+
+    export type DocumentsSelect = Teriock.SelectOptions.BaseDocumentSelect & {
       /** Whether multiple documents can be selected */
       multi?: boolean;
       /** Which documents are checked? */

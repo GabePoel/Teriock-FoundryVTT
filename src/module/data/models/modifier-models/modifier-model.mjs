@@ -87,12 +87,10 @@ export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
     return value;
   }
 
-  /**
-   * @inheritDoc
-   */
+  /** @inheritDoc */
   getLocalRollData() {
-    const localRollData = super.getLocalRollData();
-    Object.assign(localRollData, { "": this.value });
-    return localRollData;
+    return foundry.utils.mergeObject(super.getLocalRollData(), {
+      "": this.value,
+    });
   }
 }

@@ -28,14 +28,14 @@ export default class AbilityExecution extends AbilityExecutionChatPart(
   get rollData() {
     const rollData = super.rollData;
     const rollAdditions = {
-      av0: this.piercing.av0 ? 2 : 0,
-      "av0.wep": this.armament?.system.piercing.av0 ? 2 : 0,
+      av0: Number(this.piercing.av0) * 2,
+      "av0.wep": Number(this.armament?.system.piercing.av0) * 2,
       h: this.heightened,
-      sb: this.piercing.sb ? 1 : 0,
-      ub: this.piercing.ub ? 1 : 0,
-      "ub.wep": this.armament?.system.piercing.ub ? 1 : 0,
-      warded: this.warded ? 1 : 0,
-      "warded.wep": this.armament?.system.warded ? 1 : 0,
+      sb: Number(this.sb),
+      ub: Number(this.piercing.ub),
+      "ub.wep": Number(this.armament?.system.piercing.ub),
+      warded: Number(this.warded),
+      "warded.wep": Number(this.armament?.system.warded),
     };
     if (this.armament) {
       rollAdditions.bv = this.armament.system.bv.value;

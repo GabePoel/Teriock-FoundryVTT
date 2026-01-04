@@ -56,6 +56,9 @@ export default class TeriockBaseActorSheet extends mix(
     this.settings = defaultSheetSettings();
   }
 
+  /** @type {string} */
+  _activeTab;
+
   /**
    * Cycle the value of a three-way switch either forwards or backwards.
    * @param {HTMLButtonElement} toggleSwitch

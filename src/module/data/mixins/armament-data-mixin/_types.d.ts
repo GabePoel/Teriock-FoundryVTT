@@ -24,13 +24,6 @@ declare global {
       hit: EvaluationModel;
       /** <schema> Notes */
       notes: string;
-      /** <base> Piercing */
-      piercing: {
-        /** <base> <special> If the equipment is AV0 */
-        av0: boolean;
-        /** <base> If the equipment is UB */
-        ub: boolean;
-      };
       /** <base> Local property keys that can be modified by changes */
       props: Set<string>;
       /** <schema> Range (ft) (if ranged) */

@@ -129,19 +129,19 @@
         >
           {{#if
             (or
-              (eq system.offense.piercing "ub")
+              system.offense.piercing.ub
               system.primaryAttacker.system.piercing.ub
             )
           }}
-            UB{{#if (eq system.offense.piercing "ub")}}*{{/if}}
+            UB{{#if system.offense.piercing.ub}}*{{/if}}
           {{else}}
             {{#if
               (or
-                (eq system.offense.piercing "av0")
+                system.offense.piercing.av0
                 system.primaryAttacker.system.piercing.av0
               )
             }}
-              AV0{{#if (eq system.offense.piercing "av0")}}*{{/if}}
+              AV0{{#if system.offense.piercing.av0}}*{{/if}}
             {{else}}
               <i class="fa-solid fa-xmark thover"></i>
             {{/if}}
@@ -225,8 +225,8 @@
           }}
           Fighting Style
         </div>
-        <div>
-          {{editor enrichedSpecialRules button=false editable=false}}
+        <div class="character-fighting-style-summary">
+          {{{enrichedSpecialRules}}}
         </div>
       {{/if}}
     </div>

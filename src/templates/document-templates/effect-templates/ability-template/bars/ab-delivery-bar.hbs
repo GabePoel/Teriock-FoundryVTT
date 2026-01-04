@@ -27,10 +27,9 @@
     classes=(ifThen editable "execution-box" "")
   }}
   {{formBox
-    (concat
-      (lookup TERIOCK.options.ability.piercing system.piercing)
-      " "
+    (prefix
       (lookup TERIOCK.options.ability.delivery system.delivery.base)
+      (uc system.piercing.value)
     )
     icon=(lookup TERIOCK.display.icons "delivery")
     classes=(ifThen editable "delivery-box" "")

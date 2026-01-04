@@ -37,11 +37,6 @@ export const abilityOptions = {
     },
   },
   effectTypes: index.effectTypes,
-  piercing: {
-    normal: "",
-    av0: "AV0",
-    ub: "UB",
-  },
   targets: {
     ability: "Ability",
     area: "Area",

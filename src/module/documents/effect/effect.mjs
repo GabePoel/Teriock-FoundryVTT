@@ -44,7 +44,7 @@ export default class TeriockEffect extends mix(
     if (typeof data?.type === "string" && data.type === "effect") {
       data.type = "consequence";
     }
-    return data;
+    return super.migrateData(data);
   }
 
   /** @inheritDoc */
