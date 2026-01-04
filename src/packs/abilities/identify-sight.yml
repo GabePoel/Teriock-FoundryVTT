@@ -1,10 +1,10 @@
-name: Focused
+name: Identify Sight
 type: wrapper
 effects:
-  - name: Focused
+  - name: Identify Sight
     type: ability
-    _id: t6tPo9gb0eKdSWQH
-    img: systems/teriock/src/icons/abilities/focused.webp
+    _id: yonRrIYiAQHNNtmO
+    img: systems/teriock/src/icons/abilities/identify-sight.webp
     system:
       qualifiers:
         ephemeral:
@@ -48,25 +48,27 @@ effects:
         enabled: false
         amount: 1
       duration:
-        unit: noLimit
+        unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Always Active
+        description: Instant
       basic: false
       delivery:
-        base: self
+        base: sight
         parent: null
-        package: null
+        package: ritual
       effectTypes:
-        - resistance
+        - truthDetecting
+        - sensory
       elderSorcery: false
       elderSorceryIncant: ''
-      elements: []
+      elements:
+        - storm
       endCondition: ''
-      executionTime: passive
+      executionTime: 5 Minutes
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -74,28 +76,32 @@ effects:
       form: special
       grantOnly: false
       grantOnlyText: ''
-      heightened: ''
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the casting time is
+        reduced by 1 minute. If reduced to 0 minutes, then it still takes a
+        @L[Core:Active Maneuvers]{single action}.</p>
       improvement: ''
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: passive
+      maneuver: slow
       overview:
         base: >-
-          <p>If an effect would interfere with your maintenance of a
-          @L[Category:Sustained abilities]{sustained ability}, you
-          @L[Keyword:Resistance]{resist} your having your
-          @L[Core:Sustained]{sustainment} on it end. In addition, you
-          @L[Keyword:Resistance]{resist} having a @L[Category:Slow
-          abilities]{slow ability} @L[Core:Fizzles]{fizzle} if you fail to use
-          @L[Ability:Sustain]{Sustain} it on your turn.</p>
+          <p>If the target is an item, you know if it is
+          @L[Property:Magic]{magical} and what its
+          @L[Category:Properties]{properties} or
+          @L[Category:Abilities]{abilities} are, as well as any ongoing spells
+          that are affecting the item. You also learn the name of the object, if
+          it has one. If the target is a creature, you learn what ongoing or
+          @L[Category:Sustained spells]{sustained spells}, if any, are affecting
+          it.</p>
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - martial
+        - magical
       prepared: true
-      range: Self.
+      range: '60'
       requirements: ''
       results:
         hit: ''
@@ -106,27 +112,21 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      ritual: false
-      rotator: false
+      ritual: true
+      rotator: true
       secret: false
       skill: false
-      spell: false
-      standard: false
+      spell: true
+      standard: true
       sustained: false
       targets:
-        - self
+        - creature
+        - item
       trigger: ''
       warded: false
       impacts:
         base:
-          changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              priority: 10
-              target: Actor
-              time: normal
-              qualifier: '1'
-              value: Abilities Fizzling if not Sustained
+          changes: []
           checks: []
           common: []
           duration: 0
@@ -379,9 +379,9 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nnV6qvQj8SJUlEQJ.t6tPo9gb0eKdSWQH'
-_id: nnV6qvQj8SJUlEQJ
-img: systems/teriock/src/icons/abilities/focused.webp
+    _key: '!items.effects!Tky2cuHXOuliHmdj.yonRrIYiAQHNNtmO'
+_id: Tky2cuHXOuliHmdj
+img: systems/teriock/src/icons/abilities/identify-sight.webp
 flags: {}
 _stats:
   compendiumSource: null
@@ -389,4 +389,4 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!nnV6qvQj8SJUlEQJ'
+_key: '!items!Tky2cuHXOuliHmdj'
