@@ -8,8 +8,8 @@ import { makeIconClass } from "../../helpers/utils.mjs";
  */
 function addWikiOpenToHeader(application, controls) {
   if (
-    application.document.system.metadata.wiki &&
-    application.document.system.isOnWiki
+    application.document.metadata?.wiki &&
+    application.document.system["isOnWiki"]
   ) {
     controls.push({
       action: "wikiOpenThis",
@@ -23,7 +23,7 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "renderJournalEntrySheet",
     /**
-     * @param {ApplicationV2} _application
+     * @param {*} _application
      * @param {HTMLElement} element
      */
     (_application, element) => {
@@ -34,7 +34,7 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "renderRollTableSheet",
     /**
-     * @param {ApplicationV2} _application
+     * @param {*} _application
      * @param {HTMLElement} element
      */
     (_application, element) => {
@@ -49,6 +49,10 @@ export default function registerSheetManagementHooks() {
 
   foundry.helpers.Hooks.on(
     "getHeaderControlsDocumentSheetV2",
+    /**
+     * @param {*} _application
+     * @param {ApplicationHeaderControlsEntry[]} controls
+     */
     (_application, controls) => {
       controls.sort((a, b) =>
         game.i18n.format(a.label).localeCompare(game.i18n.format(b.label)),
