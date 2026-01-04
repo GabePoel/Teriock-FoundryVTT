@@ -304,8 +304,8 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      flu: this.parent.isFluent ? 1 : 0,
-      pro: this.parent.isProficient ? 1 : 0,
+      flu: Number(this.parent.isFluent),
+      pro: Number(this.parent.isProficient),
     };
   }
 

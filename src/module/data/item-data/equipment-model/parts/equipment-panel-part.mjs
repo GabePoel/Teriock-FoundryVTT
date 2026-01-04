@@ -43,6 +43,7 @@ export default (Base) => {
             icon: "fa-crosshairs-simple",
             label: "Attack",
             wrappers: [
+              this.piercing.value,
               damageString,
               twoHandedDamageString,
               this.hit.value ? `+${this.hit.value} Hit Bonus` : "",

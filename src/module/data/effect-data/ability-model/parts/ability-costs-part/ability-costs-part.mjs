@@ -1,4 +1,8 @@
-import { FormulaField, TextField } from "../../../../fields/_module.mjs";
+import { TextField } from "../../../../fields/_module.mjs";
+import {
+  costAdjustment,
+  costField,
+} from "../../../../fields/helpers/builders.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,14 +23,7 @@ export default (Base) => {
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
-          adept: new fields.SchemaField({
-            enabled: new fields.BooleanField({ label: "Adept" }),
-            amount: new fields.NumberField({
-              initial: 1,
-              min: 1,
-              integer: true,
-            }),
-          }),
+          adept: costAdjustment("Adept"),
           costs: new fields.SchemaField({
             verbal: new fields.BooleanField({
               initial: false,
@@ -40,99 +37,19 @@ export default (Base) => {
               initial: false,
               label: "Material",
             }),
-            mp: new fields.SchemaField({
-              type: new fields.StringField({
-                initial: "none",
-                choices: {
-                  none: "None",
-                  static: "Static",
-                  formula: "Formula",
-                  variable: "Variable",
-                },
-              }),
-              value: new fields.SchemaField({
-                static: new fields.NumberField({
-                  initial: 0,
-                  integer: true,
-                  min: 0,
-                }),
-                formula: new FormulaField({
-                  initial: "",
-                  deterministic: false,
-                }),
-                variable: new TextField({
-                  initial: "",
-                  label: "Mana Cost",
-                }),
-              }),
+            mp: costField({ label: "Mana Cost" }),
+            hp: costField({
+              label: "Hit Cost",
+              extraChoices: { hack: "Hack" },
             }),
-            hp: new fields.SchemaField({
-              type: new fields.StringField({
-                initial: "none",
-                choices: {
-                  none: "None",
-                  static: "Static",
-                  formula: "Formula",
-                  variable: "Variable",
-                  hack: "Hack",
-                },
-              }),
-              value: new fields.SchemaField({
-                static: new fields.NumberField({
-                  initial: 0,
-                  integer: true,
-                  min: 0,
-                }),
-                formula: new FormulaField({
-                  initial: "",
-                  deterministic: false,
-                }),
-                variable: new TextField({
-                  initial: "",
-                  label: "Hit Cost",
-                }),
-              }),
-            }),
-            gp: new fields.SchemaField({
-              type: new fields.StringField({
-                initial: "none",
-                choices: {
-                  none: "None",
-                  static: "Static",
-                  formula: "Formula",
-                  variable: "Variable",
-                },
-              }),
-              value: new fields.SchemaField({
-                static: new fields.NumberField({
-                  initial: 0,
-                  integer: true,
-                  min: 0,
-                }),
-                formula: new FormulaField({
-                  initial: "",
-                  deterministic: false,
-                }),
-                variable: new TextField({
-                  initial: "",
-                  label: "Gold Cost",
-                }),
-              }),
-            }),
+            gp: costField({ label: "Gold Cost" }),
             break: new fields.StringField({ initial: "" }),
             materialCost: new TextField({
               initial: "",
               label: "Material Cost",
             }),
           }),
-          gifted: new fields.SchemaField({
-            enabled: new fields.BooleanField({ label: "Gifted" }),
-            amount: new fields.NumberField({
-              initial: 1,
-              min: 1,
-              integer: true,
-            }),
-          }),
+          gifted: costAdjustment("Gifted"),
         });
         return schema;
       }
@@ -205,29 +122,20 @@ export default (Base) => {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          adept: this.adept.enabled ? 1 : 0,
+          adept: Number(this.adept.enabled),
           "adept.amount": this.adept.enabled ? this.adept.amount : 0,
-          gifted: this.gifted.enabled ? 1 : 0,
+          gifted: Number(this.gifted.enabled),
           "gifted.amount": this.gifted.enabled ? this.gifted.amount : 0,
-          "costs.ver": this.costs.verbal ? 1 : 0,
-          "costs.som": this.costs.somatic ? 1 : 0,
-          "costs.mat": this.costs.material ? 1 : 0,
+          "costs.ver": Number(this.costs.verbal),
+          "costs.som": Number(this.costs.somatic),
+          "costs.mat": Number(this.costs.material),
         });
         // Add cost values
-        if (this.costs.mp.type === "static") {
-          data["costs.mp"] = this.costs.mp.value.static;
-        } else if (this.costs.mp.type === "formula") {
-          data["costs.mp"] = this.costs.mp.value.formula;
-        }
-        if (this.costs.hp.type === "static") {
-          data["costs.hp"] = this.costs.hp.value.static;
-        } else if (this.costs.hp.type === "formula") {
-          data["costs.hp"] = this.costs.hp.value.formula;
-        }
-        if (this.costs.gp.type === "static") {
-          data["costs.gp"] = this.costs.gp.value.static;
-        } else if (this.costs.gp.type === "formula") {
-          data["costs.gp"] = this.costs.gp.value.formula;
+        for (const c of ["gp", "hp", "mp"]) {
+          const cost = this.costs[c];
+          if (["static", "formula"].includes(cost.type)) {
+            data[`costs.${c}`] = cost.value[cost.type];
+          }
         }
         return data;
       }
@@ -235,6 +143,18 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
+
+        // Enforce cost values
+        for (const c of ["gp", "hp", "mp"]) {
+          const cost = this.costs[c];
+          const defaultValue = {
+            formula: "",
+            static: 0,
+            variable: "",
+          };
+          delete defaultValue[cost.type];
+          Object.assign(cost.value, defaultValue);
+        }
 
         // Enforce invoked costs
         if (this.invoked) {

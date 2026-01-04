@@ -74,6 +74,7 @@ export default class TeriockBodyModel extends mix(
           icon: "fa-crosshairs-simple",
           label: "Attack",
           wrappers: [
+            this.piercing.value,
             suffix(this.damage.base.typed, "damage"),
             suffix(prefix(this.hit.text, "+", ""), "hit bonus"),
             suffix(this.attackPenalty.text, "AP"),
@@ -101,6 +102,7 @@ export default class TeriockBodyModel extends mix(
     };
   }
 
+  /** @inheritDoc */
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),

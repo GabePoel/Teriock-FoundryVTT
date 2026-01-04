@@ -147,14 +147,7 @@ export default function abilityContextMenus(ability) {
         icon: TERIOCK.display.icons.remove,
         callback: () =>
           ability.update({
-            "system.costs.mp": {
-              type: "none",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
-            },
+            "system.costs.mp.type": "none",
           }),
       },
       {
@@ -164,11 +157,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.mp": {
               type: "static",
-              value: {
-                static: 1,
-                formula: "",
-                variable: "",
-              },
+              "value.static": 1,
             },
           }),
       },
@@ -179,11 +168,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.mp": {
               type: "formula",
-              value: {
-                static: 0,
-                formula: "1d4",
-                variable: "",
-              },
+              "value.formula": "1d4",
             },
           }),
       },
@@ -194,11 +179,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.mp": {
               type: "variable",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "<p>Enter cost here.</p>",
-              },
+              "value.variable": "<p>Enter cost here.</p>",
             },
           }),
       },
@@ -209,14 +190,7 @@ export default function abilityContextMenus(ability) {
         icon: TERIOCK.display.icons.remove,
         callback: () =>
           ability.update({
-            "system.costs.hp": {
-              type: "none",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
-            },
+            "system.costs.hp.type": "none",
           }),
       },
       {
@@ -226,11 +200,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.hp": {
               type: "static",
-              value: {
-                static: 1,
-                formula: "",
-                variable: "",
-              },
+              "value.static": 1,
             },
           }),
       },
@@ -239,14 +209,7 @@ export default function abilityContextMenus(ability) {
         icon: TERIOCK.display.icons.hack,
         callback: () =>
           ability.update({
-            "system.costs.hp": {
-              type: "hack",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
-            },
+            "system.costs.hp.type": "hack",
           }),
       },
       {
@@ -256,11 +219,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.hp": {
               type: "formula",
-              value: {
-                static: 0,
-                formula: "1d4",
-                variable: "",
-              },
+              "value.formula": "1d4",
             },
           }),
       },
@@ -271,11 +230,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.hp": {
               type: "variable",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "<p>Enter cost here.</p>",
-              },
+              "value.variable": "<p>Enter cost here.</p>",
             },
           }),
       },
@@ -286,14 +241,7 @@ export default function abilityContextMenus(ability) {
         icon: TERIOCK.display.icons.remove,
         callback: () =>
           ability.update({
-            "system.costs.gp": {
-              type: "none",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
-            },
+            "system.costs.gp.type": "none",
           }),
       },
       {
@@ -303,11 +251,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.gp": {
               type: "static",
-              value: {
-                static: 50,
-                formula: "",
-                variable: "",
-              },
+              "value.static": 50,
             },
           }),
       },
@@ -318,11 +262,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.gp": {
               type: "formula",
-              value: {
-                static: 0,
-                formula: "1d100",
-                variable: "",
-              },
+              "value.formula": "1d100",
             },
           }),
       },
@@ -333,11 +273,7 @@ export default function abilityContextMenus(ability) {
           ability.update({
             "system.costs.gp": {
               type: "variable",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "<p>Enter cost here.</p>",
-              },
+              "value.variable": "<p>Enter cost here.</p>",
             },
           }),
       },

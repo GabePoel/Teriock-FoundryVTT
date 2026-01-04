@@ -3,6 +3,7 @@ import {
   EnhancedNumberField,
   EnhancedStringField,
   FormulaField,
+  TextField,
 } from "../_module.mjs";
 import { arrayTypeValidator, typeValidator } from "./validators.mjs";
 
@@ -385,5 +386,58 @@ export function blockGaplessField(options = {}) {
     initial,
     label: `${label} Block Gapless`,
     hint: `Whether there shouldn't be gaps between ${label.toLowerCase()} blocks on this document's sheet.`,
+  });
+}
+
+/**
+ * Build a cost adjustment.
+ * @param {string} [label]
+ * @returns {SchemaField}
+ */
+export function costAdjustment(label = "Adjustment") {
+  return new SchemaField({
+    enabled: new BooleanField({ label }),
+    amount: new NumberField({
+      initial: 1,
+      min: 1,
+      integer: true,
+    }),
+  });
+}
+
+/**
+ * Build a cost schema.
+ * @param {object} [options]
+ * @param {Record<string, string>} [options.extraChoices]
+ * @param {string} [options.label]
+ * @returns {SchemaField}
+ */
+export function costField(options = { extraChoices: {}, label: "Cost" }) {
+  return new SchemaField({
+    type: new StringField({
+      initial: "none",
+      choices: {
+        none: "None",
+        static: "Static",
+        formula: "Formula",
+        variable: "Variable",
+        ...options.extraChoices,
+      },
+    }),
+    value: new SchemaField({
+      static: new NumberField({
+        initial: 0,
+        integer: true,
+        min: 0,
+      }),
+      formula: new FormulaField({
+        initial: "",
+        deterministic: false,
+      }),
+      variable: new TextField({
+        initial: "",
+        label: options.label,
+      }),
+    }),
   });
 }
