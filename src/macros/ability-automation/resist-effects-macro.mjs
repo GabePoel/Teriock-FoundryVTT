@@ -25,12 +25,9 @@ const choices = {
   truthDetecting: "Truth detecting",
 };
 
-const documents = Object.keys(choices).map((key) => {
-  return {
-    img: tm.path.getImage("effect-types", choices[key]),
-    name: choices[key],
-    uuid: key,
-  };
+const documents = Object.entries(choices).map(([uuid, name]) => {
+  const img = tm.path.getImage("effect-types", name);
+  return { img, name, uuid };
 });
 
 const choice = await tm.dialogs.selectDocumentDialog(documents, {
