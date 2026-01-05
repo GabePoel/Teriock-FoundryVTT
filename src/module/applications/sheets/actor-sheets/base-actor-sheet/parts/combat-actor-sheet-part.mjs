@@ -49,7 +49,7 @@ export default (Base) =>
     static async #onSelectAttacker() {
       const attacker = await selectDocumentDialog(
         [
-          ...this.document.equipment.filter((e) => e.system.isEquipped),
+          ...this.document.equipment.filter((e) => e.system.equipped),
           ...this.document.bodyParts,
         ],
         {

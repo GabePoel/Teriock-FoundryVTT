@@ -114,23 +114,6 @@ export default (Base) =>
       }
 
       this.element
-        .querySelectorAll("[data-action='quickToggle']")
-        .forEach((el) => {
-          el.addEventListener("contextmenu", async (e) => {
-            e.preventDefault();
-            if (!(el instanceof HTMLElement)) {
-              return;
-            }
-            const path = el.dataset.path.replace("proficient", "fluent");
-            const current = foundry.utils.getProperty(this.document, path);
-            await this.document.update({
-              [path]: !current,
-            });
-            e.stopPropagation();
-          });
-        });
-
-      this.element
         .querySelector(".character-penalty-box")
         ?.addEventListener("contextmenu", async (e) => {
           e.preventDefault();

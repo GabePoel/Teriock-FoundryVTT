@@ -3,6 +3,7 @@ import { toCamelCase } from "../../../helpers/string.mjs";
 import { getRollIcon, makeIcon, mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
+import { CompetenceModel } from "../../models/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 
@@ -23,7 +24,7 @@ const { fields } = foundry.data;
  */
 export default class TeriockRankModel extends mix(
   TeriockBaseItemModel,
-  mixins.ProficiencyDataMixin,
+  mixins.CompetenceDisplayDataMixin,
   mixins.WikiDataMixin,
   mixins.StatGiverDataMixin,
 ) {
@@ -42,15 +43,6 @@ export default class TeriockRankModel extends mix(
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {
-      description: new TextField({
-        initial:
-          "<p>Every adventurer is a journeyman before they join their first class.</p>",
-        label: "Description",
-      }),
-      flaws: new TextField({
-        initial: "",
-        label: "Flaws",
-      }),
       archetype: new fields.StringField({
         initial: "everyman",
         label: "Archetype",
@@ -65,6 +57,18 @@ export default class TeriockRankModel extends mix(
         label: "Class Rank",
         min: 0,
       }),
+      competence: new fields.EmbeddedDataField(CompetenceModel, {
+        initial: { raw: 1 },
+      }),
+      description: new TextField({
+        initial:
+          "<p>Every adventurer is a journeyman before they join their first class.</p>",
+        label: "Description",
+      }),
+      flaws: new TextField({
+        initial: "",
+        label: "Flaws",
+      }),
       innate: new fields.BooleanField({
         initial: false,
         label: "Innate",
@@ -74,10 +78,6 @@ export default class TeriockRankModel extends mix(
         integer: true,
         label: "Maximum AV",
         min: 0,
-      }),
-      proficient: new fields.BooleanField({
-        initial: true,
-        label: "Proficient",
       }),
     });
     return schema;

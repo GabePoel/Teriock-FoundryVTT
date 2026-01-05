@@ -1,10 +1,10 @@
+import { CompetenceModel } from "../../models/_module.mjs";
+
 declare global {
   namespace Teriock.Models {
     export interface UsableMixinInterface {
-      /** <schema> If this is forced to be fluent */
-      fluent: boolean;
-      /** <schema> If this is forced to be proficient */
-      proficient: boolean;
+      /** <schema> Competence */
+      competence: CompetenceModel;
     }
   }
 }

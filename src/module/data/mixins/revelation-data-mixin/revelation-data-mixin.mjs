@@ -69,7 +69,7 @@ export default function RevelationDataMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          revealed: this.revealed ? 1 : 0,
+          revealed: Number(this.revealed),
         };
       }
 

@@ -43,19 +43,12 @@ export default class TeriockBaseEffectSheet extends mix(
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     Object.assign(context, {
       disabled: this.document.disabled,
       transfer: this.document.transfer,
       isSuppressed: this.document.isSuppressed,
-      isProficient: this.document.isProficient,
-      isFluent: this.document.isFluent,
     });
     return context;
   }

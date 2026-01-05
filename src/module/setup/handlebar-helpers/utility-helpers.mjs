@@ -1,4 +1,5 @@
 import { systemPath } from "../../helpers/path.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 
 export default function registerUiHelpers() {
   Handlebars.registerHelper("template", (str) => {
@@ -8,6 +9,10 @@ export default function registerUiHelpers() {
   Handlebars.registerHelper("tabActive", (active, tab) =>
     active === tab ? "active" : "inactive",
   );
+
+  Handlebars.registerHelper("makeIcon", (icon, ...styles) => {
+    return new Handlebars.SafeString(makeIcon(icon, ...styles));
+  });
 
   Handlebars.registerHelper("tswitch", (options) => {
     const { name, disabled } = options.hash;

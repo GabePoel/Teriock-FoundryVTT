@@ -5,7 +5,10 @@ import { mix } from "../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../fields/_module.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import { qualifyChange } from "../../shared/migrations/migrate-changes.mjs";
+import {
+  qualifyChange,
+  scaleChange,
+} from "../../shared/migrations/migrate-changes.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 import * as parsing from "./parsing/_parsing.mjs";
 
@@ -40,11 +43,10 @@ export default class TeriockPropertyModel extends mix(
       namespace: "Property",
       passive: true,
       preservedProperties: [
-        "system.fluent",
         "system.hierarchy",
         "system.improvement",
         "system.limitation",
-        "system.proficient",
+        "system.competence",
       ],
       type: "property",
       visibleTypes: ["property"],
@@ -110,7 +112,9 @@ export default class TeriockPropertyModel extends mix(
 
     // Changes migration
     if (data.impacts?.changes) {
-      data.impacts.changes = data.impacts.changes.map((c) => qualifyChange(c));
+      data.impacts.changes = data.impacts.changes.map((c) =>
+        scaleChange(qualifyChange(c)),
+      );
     }
     return super.migrateData(data);
   }

@@ -1,3 +1,5 @@
+import { CompetenceModel } from "../../models/_module.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -17,16 +19,18 @@ export default function UsableDataMixin(Base) {
       static defineSchema(...args) {
         const schema = super.defineSchema(...args);
         Object.assign(schema, {
-          proficient: new fields.BooleanField({
-            initial: false,
-            label: "Proficient",
-          }),
-          fluent: new fields.BooleanField({
-            initial: false,
-            label: "Fluent",
-          }),
+          competence: new fields.EmbeddedDataField(CompetenceModel),
         });
         return schema;
+      }
+
+      /** @inheritDoc */
+      static migrateData(data) {
+        if (data.proficient) data.competence = { raw: 1 };
+        if (data.fluent) data.competence = { raw: 2 };
+        delete data.proficient;
+        delete data.fluent;
+        return super.migrateData(data);
       }
 
       /**

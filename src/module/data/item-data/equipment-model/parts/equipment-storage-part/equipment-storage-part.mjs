@@ -74,14 +74,14 @@ export default (Base) => {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          storage: this.storage.enabled ? 1 : 0,
+          storage: Number(this.storage.enabled),
           "storage.count": this.storage.carriedCount,
           "storage.count.max": this.storage.maxCount.value,
-          "storage.count.over": this.storage.isOverCountCapacity ? 1 : 0,
+          "storage.count.over": Number(this.storage.isOverCountCapacity),
           "storage.weight": this.storage.carriedWeight,
           "storage.weight.max": this.storage.maxWeight.value,
-          "storage.weight.mult": this.storage.weightMultiplier.value,
-          "storage.weight.over": this.storage.isOverWeightCapacity ? 1 : 0,
+          "storage.weight.mult": this.storage.weightMultiplier,
+          "storage.weight.over": Number(this.storage.isOverWeightCapacity),
           weight: this.weight.total,
         });
         return data;

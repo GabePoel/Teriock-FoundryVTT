@@ -15,35 +15,31 @@
       </div>
     </div>
     {{#each TERIOCK.index.attributesFull as |attribute name|}}
-      <div class="attribute-container tgrid g4 gi4"
-           data-tooltip-direction="LEFT"
-           data-tooltip-left="true"
-           data-make-tooltip="true"
-           data-uuid="{{path @root/TERIOCK.system.uuids.attributes name}}"
+      <div
+        class="attribute-container tgrid g4 gi4"
+        data-tooltip-direction="LEFT"
+        data-tooltip-left="true"
+        data-make-tooltip="true"
+        data-uuid="{{path @root/TERIOCK.system.uuids.attributes name}}"
       >
-        <div class="tcolored tcenter ch-attribute-save-box grid-fill"
-             data-action="quickToggle"
-             data-attribute="{{name}}"
-             data-bool="{{path @root/system.attributes name "proficient"}}"
-             data-path="system.attributes.{{name}}.proficient"
-             data-tooltip-class=""
+        <div
+          class="tcolored tcenter ch-attribute-save-box grid-fill"
+          data-action="increment"
+          data-path="system.attributes.{{name}}.competence.raw"
+          data-tooltip-class=""
         >
-          {{#if (path @root/system.attributes name "fluent")}}
-            <i class="thover fa-solid fa-circle-dot grid-fill" data-tooltip="Fluent"></i>
-          {{else}}
-            {{#if (path @root/system.attributes name "proficient")}}
-              <i class="thover fa-regular fa-circle-dot grid-fill" data-tooltip="Proficient"></i>
-            {{else}}
-              <i class="thover fa-regular fa-circle grid-fill" data-tooltip="Normal"></i>
-            {{/if}}
-          {{/if}}
+          <i
+            class="thover {{path @root/system.attributes name "iconClass"}}"
+            data-tooltip="{{path @root/system.attributes name "competence.description"}}"
+          ></i>
         </div>
-        <div class="tcenter thover draggable"
-             style="text-transform: uppercase;"
-             data-action="rollFeatSave"
-             data-attribute="{{name}}"
-             data-tooltip-direction="LEFT"
-             data-uuid="{{lookup @root/attributeMacros name}}"
+        <div
+          class="tcenter thover draggable"
+          style="text-transform: uppercase;"
+          data-action="rollFeatSave"
+          data-attribute="{{name}}"
+          data-tooltip-direction="LEFT"
+          data-uuid="{{lookup @root/attributeMacros name}}"
         >
           {{name}}
         </div>

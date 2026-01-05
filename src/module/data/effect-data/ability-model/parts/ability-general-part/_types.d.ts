@@ -53,8 +53,6 @@ export default interface AbilityGeneralPartInterface {
   overview: OverviewText;
   /** <schema> Power sources that must be available in order for this ability to work */
   powerSources: Set<Teriock.Parameters.Ability.PowerSource>;
-  /** <schema> If this ability needs to be prepared */
-  prepared: boolean;
   /** <schema> The maximum range at which this ability can be used */
   range: string | null;
   /** <schema> Requirements that must be met for this ability to be used */
@@ -65,8 +63,6 @@ export default interface AbilityGeneralPartInterface {
   ritual: boolean;
   /** <schema> If this ability is a rotator */
   rotator: boolean;
-  /** <schema> If this ability is considered "secret" */
-  secret: boolean;
   /** <schema> If this ability is considered a "skill" */
   skill: boolean;
   /** <schema> If this ability is a spell */

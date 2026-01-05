@@ -5,6 +5,7 @@ import { dotJoin } from "../../../helpers/string.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
+import { CompetenceModel } from "../../models/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
 
 const { fields } = foundry.data;
@@ -30,7 +31,7 @@ export default class TeriockFluencyModel extends mix(
   mixins.WikiDataMixin,
   mixins.RevelationDataMixin,
   mixins.ThresholdDataMixin,
-  mixins.ProficiencyDataMixin,
+  mixins.CompetenceDisplayDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -54,17 +55,12 @@ export default class TeriockFluencyModel extends mix(
         initial: "artist",
         label: "Tradecraft",
       }),
-      proficient: new fields.BooleanField({
-        initial: true,
-        label: "Proficient",
-      }),
-      fluent: new fields.BooleanField({
-        initial: true,
-        label: "Fluent",
-      }),
       tradecraftDescription: new TextField({
         initial: "",
         label: "Tradecraft",
+      }),
+      competence: new fields.EmbeddedDataField(CompetenceModel, {
+        initial: { raw: 2 },
       }),
     });
     return schema;

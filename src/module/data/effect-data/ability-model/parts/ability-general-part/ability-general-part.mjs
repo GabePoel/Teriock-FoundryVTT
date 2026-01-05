@@ -134,10 +134,6 @@ export default (Base) => {
               choices: TERIOCK.index.powerSources,
             }),
           ),
-          prepared: new fields.BooleanField({
-            initial: true,
-            label: "Prepared",
-          }),
           range: new fields.StringField({
             initial: null,
             nullable: true,
@@ -187,10 +183,6 @@ export default (Base) => {
           rotator: new fields.BooleanField({
             initial: false,
             label: "Rotator",
-          }),
-          secret: new fields.BooleanField({
-            initial: false,
-            label: "Secret",
           }),
           skill: new fields.BooleanField({
             initial: false,
@@ -275,21 +267,19 @@ export default (Base) => {
           [`interaction.${this.interaction}`]: 1,
           time: this.executionTime,
           [`time.${this.executionTime}`]: 1,
-          warded: this.warded ? 1 : 0,
+          warded: Number(this.warded),
           range: this.range,
-          basic: this.basic ? 1 : 0,
-          standard: this.standard ? 1 : 0,
-          skill: this.skill ? 1 : 0,
-          spell: this.spell ? 1 : 0,
-          ritual: this.ritual ? 1 : 0,
-          rotator: this.rotator ? 1 : 0,
-          sustained: this.sustained ? 1 : 0,
-          invoked: this.invoked ? 1 : 0,
-          prepared: this.prepared ? 1 : 0,
-          secret: this.secret ? 1 : 0,
-          elderSorcery: this.elderSorcery ? 1 : 0,
-          es: this.elderSorcery ? 1 : 0,
-          grantOnly: this.grantOnly ? 1 : 0,
+          basic: Number(this.basic),
+          standard: Number(this.standard),
+          skill: Number(this.skill),
+          spell: Number(this.spell),
+          ritual: Number(this.ritual),
+          rotator: Number(this.rotator),
+          sustained: Number(this.sustained),
+          invoked: Number(this.invoked),
+          elderSorcery: Number(this.elderSorcery),
+          es: Number(this.elderSorcery),
+          grantOnly: Number(this.grantOnly),
         });
         // Add deliveries
         if (this.delivery.base) {

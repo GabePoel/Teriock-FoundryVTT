@@ -104,7 +104,7 @@ export default function ConsumableDataMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          consumable: this.consumable ? 1 : 0,
+          consumable: Number(this.consumable),
           quantity: this.consumable ? this.quantity : 1,
           "quantity.max": this.consumable ? this.maxQuantity.value : 1,
         };

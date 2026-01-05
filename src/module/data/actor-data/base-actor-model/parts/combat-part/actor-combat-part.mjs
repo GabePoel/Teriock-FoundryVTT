@@ -103,7 +103,7 @@ export default (Base) => {
           const item = /** @type {TeriockEquipment} */ this.parent.items.get(
             this.wielding.attacker,
           );
-          if (item?.type === "body" || item?.system.isEquipped) {
+          if (item?.type === "body" || item?.system.equipped) {
             return item;
           }
         }
@@ -119,7 +119,7 @@ export default (Base) => {
           const item = /** @type {TeriockEquipment} */ this.parent.items.get(
             this.wielding.blocker,
           );
-          if (item?.type === "body" || item?.system.isEquipped) {
+          if (item?.type === "body" || item?.system.equipped) {
             return item;
           }
         }
@@ -182,17 +182,17 @@ export default (Base) => {
           ? this.primaryAttacker.system.warded
           : false;
         return {
-          sb: this.offense.sb ? 1 : 0,
-          av0: hasAv0 ? 2 : 0,
-          "av0.wep": weaponAv0 ? 2 : 0,
+          sb: Number(this.offense.sb),
+          av0: Number(hasAv0) * 2,
+          "av0.wep": Number(weaponAv0) * 2,
           "av0.abi": 0,
-          "av0.nat": naturalAv0 ? 2 : 0,
-          ub: hasUb ? 1 : 0,
-          "ub.wep": weaponUb ? 1 : 0,
+          "av0.nat": Number(naturalAv0) * 2,
+          ub: Number(hasUb),
+          "ub.wep": Number(weaponUb),
           "ub.abi": 0,
-          "ub.nat": naturalUb ? 1 : 0,
-          ward: weaponWarded ? 1 : 0,
-          "ward.wep": weaponWarded ? 1 : 0,
+          "ub.nat": Number(naturalUb),
+          ward: Number(weaponWarded),
+          "ward.wep": Number(weaponWarded),
           "ward.abi": 0,
           ap: this.combat.attackPenalty,
         };
@@ -213,7 +213,7 @@ export default (Base) => {
       prepareBaseData() {
         super.prepareBaseData();
         const armor = this.parent.equipment.filter(
-          (e) => e.system.isEquipped && e.system.equipmentClasses.has("armor"),
+          (e) => e.system.equipped && e.system.equipmentClasses.has("armor"),
         );
         const baseAv = Math.max(armor.map((a) => a.system.av.value));
         this.defense = {
@@ -238,7 +238,7 @@ export default (Base) => {
       prepareSpecialData() {
         super.prepareSpecialData();
         const armor = this.parent.equipment.filter(
-          (e) => e.system.isEquipped && e.system.equipmentClasses.has("armor"),
+          (e) => e.system.equipped && e.system.equipmentClasses.has("armor"),
         );
         const naturalArmor = this.parent.bodyParts.filter(
           (a) => !a.disabled && a.system.av.value > 0,

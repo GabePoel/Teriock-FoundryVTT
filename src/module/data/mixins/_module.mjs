@@ -4,7 +4,7 @@ export { default as ConsumableDataMixin } from "./consumable-data-mixin/consumab
 export { default as ExecutableDataMixin } from "./executable-data-mixin/executable-data-mixin.mjs";
 export { default as HierarchyDataMixin } from "./hierarchy-data-mixin/hierarchy-data-mixin.mjs";
 export { default as PiercingDataMixin } from "./piercing-data-mixin/piercing-data-mixin.mjs";
-export { default as ProficiencyDataMixin } from "./proficiency-data-mixin.mjs";
+export { default as CompetenceDisplayDataMixin } from "./competence-display-data-mixin.mjs";
 export { default as RevelationDataMixin } from "./revelation-data-mixin/revelation-data-mixin.mjs";
 export { default as StatGiverDataMixin } from "./stat-giver-data-mixin/stat-giver-data-mixin.mjs";
 export { default as ThresholdDataMixin } from "./threshold-data-mixin.mjs";

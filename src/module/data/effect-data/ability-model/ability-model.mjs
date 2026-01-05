@@ -38,7 +38,7 @@ export default class TeriockAbilityModel extends mix(
   mixins.ConsumableDataMixin,
   mixins.HierarchyDataMixin,
   mixins.PiercingDataMixin,
-  mixins.ProficiencyDataMixin,
+  mixins.CompetenceDisplayDataMixin,
   mixins.RevelationDataMixin,
   mixins.ThresholdDataMixin,
   mixins.WikiDataMixin,
@@ -63,13 +63,12 @@ export default class TeriockAbilityModel extends mix(
       preservedProperties: [
         "system.adept",
         "system.consumable",
-        "system.fluent",
         "system.gifted",
         "system.grantOnly",
         "system.improvement",
         "system.limitation",
         "system.maxQuantity",
-        "system.proficient",
+        "system.competence",
         "system.quantity",
       ],
       type: "ability",
@@ -112,11 +111,11 @@ export default class TeriockAbilityModel extends mix(
       "system.overview.base",
       {
         path: "system.overview.proficient",
-        classes: this.parent.isProficient ? "" : "faded-display-field",
+        classes: this.competence.proficient ? "" : "faded-display-field",
       },
       {
         path: "system.overview.fluent",
-        classes: this.parent.isFluent ? "" : "faded-display-field",
+        classes: this.competence.fluent ? "" : "faded-display-field",
       },
     ];
     if (this.interaction === "attack") {
@@ -177,16 +176,12 @@ export default class TeriockAbilityModel extends mix(
       "system.invoked",
       "system.costs.verbal",
       "system.costs.somatic",
-      "system.proficient",
-      "system.fluent",
       "system.elderSorcery",
       "system.adept.enabled",
       "system.gifted.enabled",
       "system.consumable",
       "system.grantOnly",
       "system.warded",
-      "system.secret",
-      "system.prepared",
     ];
   }
 

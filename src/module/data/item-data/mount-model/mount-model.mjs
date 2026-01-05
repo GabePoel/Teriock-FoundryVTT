@@ -109,7 +109,7 @@ export default class TeriockMountModel extends mix(
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      mounted: this.mounted ? 1 : 0,
+      mounted: Number(this.mounted),
       [`type.${toCamelCase(this.mountType)}`]: 1,
     };
   }

@@ -31,39 +31,6 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /**
-       * Checks for fluency in the document.
-       * @returns {boolean}
-       */
-      get isFluent() {
-        let fluent = false;
-        if (this.system.fluent) {
-          fluent = true;
-        }
-        if (this.elder?.isFluent) {
-          fluent = true;
-        }
-        return fluent;
-      }
-
-      /**
-       * Checks for proficiency in the document.
-       * @returns {boolean}
-       */
-      get isProficient() {
-        let proficient = false;
-        if (this.system.proficient) {
-          proficient = true;
-        }
-        if (this.elder?.isProficient) {
-          proficient = true;
-        }
-        if (this.isFluent) {
-          proficient = true;
-        }
-        return proficient;
-      }
-
-      /**
        * Get all ActiveEffects that may apply to this document.
        * @yields {TeriockEffect}
        * @returns {Generator<TeriockEffect, void, void>}

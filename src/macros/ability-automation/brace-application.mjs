@@ -13,9 +13,9 @@ const dieSize = actor?.flags?.teriockEffect?.braceDieSize || 6;
 const ability = actor.abilities.find((a) => a.name === "Brace");
 
 let formula = `1d${dieSize}`;
-if (ability?.isProficient) {
+if (ability?.system.competence.proficient) {
   formula = `(1 + @p)d${dieSize}`;
-} else if (ability?.isFluent) {
+} else if (ability?.system.competence.fluent) {
   formula = `(1 + @f)d${dieSize}`;
 }
 

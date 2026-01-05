@@ -209,8 +209,8 @@ export default function TransformationDataMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          transformation: this.isTransformation ? 1 : 0,
-          "transformation.primary": this.isPrimaryTransformation ? 1 : 0,
+          transformation: Number(this.isTransformation),
+          "transformation.primary": Number(this.isPrimaryTransformation),
         };
       }
 

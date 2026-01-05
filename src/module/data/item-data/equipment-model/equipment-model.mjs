@@ -69,7 +69,7 @@ export default class TeriockEquipmentModel extends mix(
         "system.maxQuantity",
         "system.notes",
         "system.powerLevel",
-        "system.proficient",
+        "system.competence",
         "system.quantity",
       ],
       type: "equipment",

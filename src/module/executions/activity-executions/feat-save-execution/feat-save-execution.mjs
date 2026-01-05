@@ -21,10 +21,11 @@ export default class FeatSaveExecution extends ThresholdExecutionMixin(
     if (this.actor) {
       if (options.proficient === undefined) {
         this.proficient =
-          this.actor.system.attributes[options.attribute].isProficient;
+          this.actor.system.attributes[options.attribute].competence.proficient;
       }
       if (options.fluent === undefined) {
-        this.fluent = this.actor.system.attributes[options.attribute].isFluent;
+        this.fluent =
+          this.actor.system.attributes[options.attribute].competence.fluent;
       }
       if (options.bonus === undefined) {
         this.bonus = this.actor.system.attributes[options.attribute].formula;

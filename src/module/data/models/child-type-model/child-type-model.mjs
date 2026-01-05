@@ -68,7 +68,7 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
    * @returns {Teriock.Sheet.DisplayField[]}
    */
   get displayToggles() {
-    return ["system.proficient", "system.fluent"];
+    return [];
   }
 
   /** @inheritDoc */
@@ -304,8 +304,9 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      flu: Number(this.parent.isFluent),
-      pro: Number(this.parent.isProficient),
+      flu: Number(this.competence.fluent),
+      pro: Number(this.competence.proficient),
+      c: this.competence.bonus,
     };
   }
 

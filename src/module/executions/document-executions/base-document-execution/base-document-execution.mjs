@@ -11,10 +11,10 @@ export default class BaseDocumentExecution extends BaseExecution {
       this._actor = options.source.actor || null;
     }
     if (options.proficient === undefined) {
-      this.proficient = options.source.isProficient;
+      this.proficient = options.source.system.competence.proficient;
     }
     if (options.fluent === undefined) {
-      this.fluent = options.source.isFluent;
+      this.fluent = options.source.system.competence.fluent;
     }
   }
 

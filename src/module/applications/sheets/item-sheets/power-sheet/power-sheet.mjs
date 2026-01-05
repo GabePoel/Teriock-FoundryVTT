@@ -14,9 +14,6 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
    */
   static DEFAULT_OPTIONS = {
     classes: ["power"],
-    actions: {
-      toggleProficient: this._onToggleProficient,
-    },
     window: {
       icon: makeIconClass(documentOptions.power.icon, "title"),
     },
@@ -30,18 +27,6 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
-
-  /**
-   * Toggles the proficient state of the power.
-   * @returns {Promise<void>}
-   */
-  static async _onToggleProficient() {
-    if (this.isEditable) {
-      await this.item.update({
-        "system.proficient": !this.item.system.proficient,
-      });
-    }
-  }
 
   /** @inheritDoc */
   async _onRender(context, options) {

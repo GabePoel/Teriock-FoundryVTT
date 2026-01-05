@@ -20,35 +20,33 @@
                   Mod
                 </div>
                 {{#each field.tradecrafts as |tradecraft name|}}
-                  <div class="tradecraft-container tgrid gi6"
+                  <div
+                    class="tradecraft-container tgrid gi6"
                     {{#if (and (not (eq ../name "Artisan")) (not (eq ../name "Scholar")))}}
-                       data-tooltip-direction="RIGHT"
+                    data-tooltip-direction="RIGHT"
                     {{else}}
-                       data-tooltip-direction="LEFT"
-                       data-tooltip-left="true"
+                    data-tooltip-direction="LEFT"
+                    data-tooltip-left="true"
                     {{/if}}
-                       data-make-tooltip="true"
-                       data-uuid="{{lookup @root/TERIOCK.system.uuids.tradecrafts name}}"
+                    data-make-tooltip="true"
+                    data-uuid="{{lookup @root/TERIOCK.system.uuids.tradecrafts name}}"
                   >
-                    <div class="tradecraft-panel-symbol ch-tradecraft-pro-box grid-fill"
-                         data-action="quickToggle"
-                         data-path="system.tradecrafts.{{name}}.proficient"
-                         data-bool="{{path ../../system.tradecrafts name 'proficient'}}"
-                         data-tooltip-direction="LEFT"
-                         data-tooltip-class=""
+                    <div
+                      class="tradecraft-panel-symbol ch-tradecraft-pro-box grid-fill"
+                      data-action="increment"
+                      data-path="system.tradecrafts.{{name}}.competence.raw"
+                      data-tooltip-direction="LEFT"
+                      data-tooltip-class=""
                     >
-                      {{#if (path ../../system.tradecrafts name 'fluent')}}
-                        <i class="thover fa-solid fa-circle-dot grid-fill" data-tooltip="Fluent"></i>
-                      {{else}}
-                        {{#if (path ../../system.tradecrafts name 'proficient')}}
-                          <i class="thover fa-regular fa-circle-dot grid-fill" data-tooltip="Proficient"></i>
-                        {{else}}
-                          <i class="thover fa-regular fa-circle grid-fill" data-tooltip="Normal"></i>
-                        {{/if}}
-                      {{/if}}
+                      <i
+                        class="thover {{path ../../system.tradecrafts name "iconClass"}} grid-fill"
+                        data-tooltip="{{path ../../system.tradecrafts name "competence.description"}}"
+                      ></i>
                     </div>
-                    <div class="tradecraft-panel-symbol thover grid-fill" data-action="tradecraftExtra"
-                         data-tradecraft="{{name}}" data-tooltip-direction="LEFT" data-tooltip-class="">
+                    <div
+                      class="tradecraft-panel-symbol thover grid-fill"
+                      data-action="increment" data-path="system.tradecrafts.{{name}}.score"
+                      data-tradecraft="{{name}}" data-tooltip-direction="LEFT" data-tooltip-class="">
                       {{#if (eq (path ../../system.tradecrafts name 'score') 0)}}
                         <i class="thover fa-fw fa-regular fa-xmark grid-fill" data-tooltip="Normal"></i>
                       {{/if}}
@@ -62,9 +60,10 @@
                         <i class="thover fa-fw fa-regular fa-badge-check grid-fill" data-tooltip="Mastery"></i>
                       {{/if}}
                     </div>
-                    <div class="tradecraft-panel-name thover gi3 draggable" data-action="rollTradecraft"
-                         data-tradecraft="{{name}}"
-                         data-uuid="{{lookup @root/tradecraftMacros name}}"
+                    <div
+                      class="tradecraft-panel-name thover gi3 draggable" data-action="rollTradecraft"
+                      data-tradecraft="{{name}}"
+                      data-uuid="{{lookup @root/tradecraftMacros name}}"
                     >
                       {{tradecraft.name}}
                     </div>

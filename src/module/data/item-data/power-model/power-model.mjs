@@ -2,6 +2,7 @@ import { toCamelCase } from "../../../helpers/string.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
+import { CompetenceModel } from "../../models/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 
 const { fields } = foundry.data;
@@ -15,7 +16,7 @@ const { fields } = foundry.data;
  */
 export default class TeriockPowerModel extends mix(
   TeriockBaseItemModel,
-  mixins.ProficiencyDataMixin,
+  mixins.CompetenceDisplayDataMixin,
 ) {
   /** @inheritDoc */
   static get metadata() {
@@ -26,7 +27,7 @@ export default class TeriockPowerModel extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    return Object.assign(super.defineSchema(), {
       flaws: new TextField({
         initial: "",
         label: "Flaws",
@@ -37,9 +38,8 @@ export default class TeriockPowerModel extends mix(
         label: "Maximum AV",
         min: 0,
       }),
-      proficient: new fields.BooleanField({
-        initial: true,
-        label: "Proficient",
+      competence: new fields.EmbeddedDataField(CompetenceModel, {
+        initial: { raw: 1 },
       }),
       type: new fields.StringField({
         initial: "other",

@@ -45,7 +45,7 @@ export default (Base) => {
       get canEquip() {
         return (
           ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-          !this.isEquipped &&
+          !this.equipped &&
           this.actor?.system.attributes.str.score >= this.minStr
         );
       }
@@ -57,7 +57,7 @@ export default (Base) => {
       get canUnequip() {
         return (
           ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-          this.isEquipped
+          this.equipped
         );
       }
 
@@ -100,22 +100,10 @@ export default (Base) => {
       get embedParts() {
         const parts = super.embedParts;
         Object.assign(parts, {
-          struck: !this.isEquipped,
+          struck: !this.equipped,
           shattered: this.shattered,
         });
         return parts;
-      }
-
-      /**
-       * Checks if the equipment is currently equipped.
-       * @returns {boolean} - True if the equipment is equipped, false otherwise.
-       */
-      get isEquipped() {
-        if (this.consumable) {
-          return this.quantity >= 1 && this.equipped;
-        } else {
-          return this.equipped;
-        }
       }
 
       /** @inheritDoc */
@@ -175,8 +163,8 @@ export default (Base) => {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          equipped: this.isEquipped ? 1 : 0,
-          glued: this.glued ? 1 : 0,
+          equipped: Number(this.equipped),
+          glued: Number(this.glued),
           minStr: this.minStr.value,
           str: this.minStr.value,
         });

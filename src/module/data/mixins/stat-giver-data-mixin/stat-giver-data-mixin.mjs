@@ -51,8 +51,8 @@ export default function StatGiverDataMixin(Base) {
           "mp.faces": this.statDice.mp.faces,
           "hp.number": this.statDice.hp.number.value,
           "mp.number": this.statDice.mp.number.value,
-          "hp.disabled": this.statDice.hp.disabled ? 1 : 0,
-          "mp.disabled": this.statDice.mp.disabled ? 1 : 0,
+          "hp.disabled": Number(this.statDice.hp.disabled),
+          "mp.disabled": Number(this.statDice.mp.disabled),
           hp: this.statDice.hp.formula,
           mp: this.statDice.mp.formula,
         };

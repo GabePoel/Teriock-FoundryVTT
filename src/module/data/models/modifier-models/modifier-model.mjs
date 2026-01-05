@@ -1,10 +1,11 @@
 import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
 import { UsableDataMixin } from "../../mixins/_module.mjs";
 import EvaluationModel from "../evaluation-model.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
+//noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
 /**
  * @mixes UsableData
  * @extends EvaluationModel
@@ -35,19 +36,14 @@ export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
   }
 
   /**
-   * Whether this is fluent.
-   * @returns {boolean}
+   * Class to use in icons for this modifier's competence.
+   * @returns {string}
    */
-  get isFluent() {
-    return this.fluent;
-  }
-
-  /**
-   * Whether this is proficient.
-   * @returns {boolean}
-   */
-  get isProficient() {
-    return this.isFluent || this.proficient;
+  get iconClass() {
+    if (this.competence.fluent) return makeIconClass("circle-dot", "solid");
+    if (this.competence.proficient)
+      return makeIconClass("circle-dot", "regular");
+    return makeIconClass("circle", "regular");
   }
 
   /**
@@ -82,9 +78,7 @@ export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
    * @returns {number}
    */
   #modify(value) {
-    if (this.isFluent) value += this.actor?.system.scaling.f;
-    else if (this.isProficient) value += this.actor?.system.scaling.p;
-    return value;
+    return value + this.competence.bonus;
   }
 
   /** @inheritDoc */

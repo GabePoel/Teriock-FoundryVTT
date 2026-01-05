@@ -101,7 +101,7 @@ export default class TeriockActor extends mix(
    */
   get activeArmaments() {
     return [
-      ...this.equipment.filter((e) => e.system.isEquipped),
+      ...this.equipment.filter((e) => e.system.equipped),
       ...this.bodyParts.filter((b) => !b.disabled),
     ];
   }

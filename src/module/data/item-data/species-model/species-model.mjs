@@ -4,6 +4,7 @@ import { dotJoin, toCamelCase } from "../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
+import { CompetenceModel } from "../../models/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -28,7 +29,7 @@ export default class TeriockSpeciesModel extends mix(
   TeriockBaseItemModel,
   mixins.WikiDataMixin,
   mixins.StatGiverDataMixin,
-  mixins.ProficiencyDataMixin,
+  mixins.CompetenceDisplayDataMixin,
   parts.SpeciesPanelPart,
 ) {
   /** @inheritDoc */
@@ -66,9 +67,8 @@ export default class TeriockSpeciesModel extends mix(
       innateRanks: new TextField({ label: "Innate ranks" }),
       lifespan: new fields.NumberField({ initial: 100 }),
       mpIncrease: new TextField({ label: "Mana increase" }),
-      proficient: new fields.BooleanField({
-        initial: true,
-        label: "Proficient",
+      competence: new fields.EmbeddedDataField(CompetenceModel, {
+        initial: { raw: 1 },
       }),
       size: new fields.SchemaField({
         enabled: new fields.BooleanField({
@@ -126,12 +126,7 @@ export default class TeriockSpeciesModel extends mix(
 
   /** @inheritDoc */
   get displayToggles() {
-    return [
-      "system.size.enabled",
-      "system.proficient",
-      "system.fluent",
-      "system.disabled",
-    ];
+    return ["system.size.enabled", "system.disabled"];
   }
 
   /** @inheritDoc */
@@ -244,12 +239,12 @@ export default class TeriockSpeciesModel extends mix(
     const data = super.getLocalRollData();
     Object.assign(data, {
       [`transformation.level`]: this.transformationLevel,
-      transformation: this.isTransformation ? 1 : 0,
-      "transformation.primary": this.isPrimaryTransformation ? 1 : 0,
+      transformation: Number(this.isTransformation),
+      "transformation.primary": Number(this.isPrimaryTransformation),
       size: this.size.enabled ? this.size.value : 0,
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
-      "size.enabled": this.size.enabled ? 1 : 0,
+      "size.enabled": Number(this.size.enabled),
       adult: this.adult,
       lifespan: this.lifespan,
       br: this.br,

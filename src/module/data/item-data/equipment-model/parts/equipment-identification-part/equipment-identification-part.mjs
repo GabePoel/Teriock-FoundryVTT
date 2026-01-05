@@ -79,8 +79,8 @@ export default (Base) => {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          identified: this.identification.identified ? 1 : 0,
-          read: this.identification.read ? 1 : 0,
+          identified: Number(this.identification.identified),
+          read: Number(this.identification.read),
         };
       }
 

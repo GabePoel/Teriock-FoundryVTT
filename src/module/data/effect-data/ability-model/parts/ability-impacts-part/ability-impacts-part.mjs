@@ -2,7 +2,10 @@ import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
 import { pureUuid } from "../../../../../helpers/resolve.mjs";
 import { FormulaField, RecordField } from "../../../../fields/_module.mjs";
 import { builders } from "../../../../fields/helpers/_module.mjs";
-import { qualifyChange } from "../../../../shared/migrations/migrate-changes.mjs";
+import {
+  qualifyChange,
+  scaleChange,
+} from "../../../../shared/migrations/migrate-changes.mjs";
 
 const { fields } = foundry.data;
 
@@ -59,12 +62,15 @@ export default (Base) => {
             changes.push(...this.impacts.base.changes);
           }
           if (
-            this.parent.isProficient &&
+            this.parent.system.competence.proficient &&
             this.impacts.proficient.changes.length > 0
           ) {
             changes.push(...this.impacts.proficient.changes);
           }
-          if (this.parent.isFluent && this.impacts.fluent.changes.length > 0) {
+          if (
+            this.parent.system.competence.fluent &&
+            this.impacts.fluent.changes.length > 0
+          ) {
             changes.push(...this.impacts.fluent.changes);
           }
           changes.push(...this.pseudoHookChanges);
@@ -343,7 +349,7 @@ function migrateProtections(data) {
  * @returns {AbilityImpact}
  */
 function changeMigration(impact) {
-  impact.changes = impact.changes.map((c) => qualifyChange(c));
+  impact.changes = impact.changes.map((c) => scaleChange(qualifyChange(c)));
   return impact;
 }
 

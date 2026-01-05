@@ -16,11 +16,13 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
     if (this.actor) {
       if (options.proficient === undefined) {
         this.proficient =
-          this.actor.system.tradecrafts[options.tradecraft].isProficient;
+          this.actor.system.tradecrafts[
+            options.tradecraft
+          ].competence.proficient;
       }
       if (options.fluent === undefined) {
         this.fluent =
-          this.actor.system.tradecrafts[options.tradecraft].isFluent;
+          this.actor.system.tradecrafts[options.tradecraft].competence.fluent;
       }
       if (options.bonus === undefined) {
         this.bonus = this.actor.system.tradecrafts[options.tradecraft].formula;

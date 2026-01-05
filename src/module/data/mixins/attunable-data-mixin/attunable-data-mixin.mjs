@@ -213,7 +213,7 @@ export default function AttunableDataMixin(Base) {
         return {
           ...super.getLocalRollData(),
           tier: this.tier.value || 0,
-          attuned: this.isAttuned ? 1 : 0,
+          attuned: Number(this.isAttuned),
         };
       }
 

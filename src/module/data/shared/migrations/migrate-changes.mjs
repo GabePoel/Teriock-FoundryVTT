@@ -125,3 +125,42 @@ const pathTransformations = {
     };
   },
 };
+
+/**
+ * Make piercing and competence changes scale properly.
+ * @param {Teriock.Changes.QualifiedChangeData} change
+ * @returns {Teriock.Changes.QualifiedChangeData}
+ */
+export function scaleChange(change) {
+  if (change.key === "system.piercing.av0") {
+    return {
+      ...change,
+      key: "system.piercing.raw",
+      value: "1",
+      mode: 4,
+    };
+  } else if (change.key === "system.piercing.ub") {
+    return {
+      ...change,
+      key: "system.piercing.raw",
+      value: "2",
+      mode: 4,
+    };
+  } else if (change.key === "system.proficient") {
+    return {
+      ...change,
+      key: "system.competence.raw",
+      value: "1",
+      mode: 4,
+    };
+  } else if (change.key === "system.fluent") {
+    return {
+      ...change,
+      key: "system.competence.raw",
+      value: "2",
+      mode: 4,
+    };
+  } else {
+    return change;
+  }
+}

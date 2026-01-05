@@ -1,11 +1,11 @@
-import EmbeddedDataModel from "../embedded-data-model.mjs";
+import EmbeddedDataModel from "./embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
 //noinspection JSClosureCompilerSyntax
 /**
  * Model for common implementation of piercing settings.
- * @implements {Teriock.Models.PiercingModelInterface}
+ * @implements {Teriock.Models.ScaleModelInterface}
  */
 export default class PiercingModel extends EmbeddedDataModel {
   static defineSchema() {
@@ -19,6 +19,8 @@ export default class PiercingModel extends EmbeddedDataModel {
         hint: "How this interacts with armor and blocking.",
         initial: 0,
         label: "Piercing",
+        max: 2,
+        min: 0,
         nullable: false,
         required: false,
       }),
@@ -56,7 +58,7 @@ export default class PiercingModel extends EmbeddedDataModel {
 
   /**
    * A piercing value.
-   * @returns {"av0"|"ub"|null}
+   * @returns {"av0"|"ub"|""}
    */
   get value() {
     if (this.raw === 1) return "av0";

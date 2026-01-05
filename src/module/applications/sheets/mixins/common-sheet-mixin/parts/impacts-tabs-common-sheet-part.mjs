@@ -44,6 +44,16 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      async _onRender(context, options) {
+        await super._onRender(context, options);
+        this.element.querySelectorAll("[data-action='toggleImpacts']").forEach(
+          /** @param {HTMLButtonElement} el */ (el) => {
+            el.disabled = false;
+          },
+        );
+      }
+
+      /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         context.impactTab = this._impactTab;

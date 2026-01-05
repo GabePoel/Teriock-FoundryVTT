@@ -72,7 +72,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get makeSuppressed() {
-        let suppressed = super.makeSuppressed || !this.isEquipped;
+        let suppressed = super.makeSuppressed || !this.equipped;
         if (this.actor && this.actor.system.isTransformed) {
           if (
             this.parent.elder?.documentName === "Actor" &&
@@ -135,8 +135,8 @@ export default (Base) => {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          dampened: this.dampened ? 1 : 0,
-          shattered: this.shattered ? 1 : 0,
+          dampened: Number(this.dampened),
+          shattered: Number(this.shattered),
         });
         return data;
       }

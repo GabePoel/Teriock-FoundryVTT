@@ -137,13 +137,15 @@ export default (Base) => {
         Object.assign(rollData, {
           "carry.factor": this.carryingCapacity.factor,
           "carry.heavy": this.carryingCapacity.heavy,
-          "carry.heavy.hit":
-            weightCarried >= this.carryingCapacity.heavy ? 1 : 0,
+          "carry.heavy.hit": Number(
+            weightCarried >= this.carryingCapacity.heavy,
+          ),
           "carry.light": this.carryingCapacity.light,
-          "carry.light.hit":
-            weightCarried >= this.carryingCapacity.light ? 1 : 0,
+          "carry.light.hit": Number(
+            weightCarried >= this.carryingCapacity.light,
+          ),
           "carry.max": this.carryingCapacity.max,
-          "carry.max.hit": weightCarried >= this.carryingCapacity.max ? 1 : 0,
+          "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
           size: this.size.number.value,
           weight: this.weight.self.value,
         });
