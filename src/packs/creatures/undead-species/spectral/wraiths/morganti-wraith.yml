@@ -238,10 +238,11 @@ items:
           overview:
             base: >-
               <p>Target is @L[Condition:Alive]{alive} (but still
-              @L[Category:Undead creatures]{undead}) at 1 @L[Core:HP]{HP},
-              although its maximum @L[Core:HP]{HP} is halved (minimum of 1)
-              until it completes a @L[Core:Short Rest]{short rest}. This does
-              not count as a @L[Category:Revival effects]{revival effect}.</p>
+              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
+              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
+              Points]{HP} is halved (minimum of 1) until it completes a
+              @L[Core:Short Rest]{short rest}. This does not count as a
+              @L[Category:Revival effects]{revival effect}.</p>
             proficient: >-
               <p>Target has all @L[Core:HP]{HP} restored, but its maximum
               @L[Core:HP]{HP} is still halved. This does not count as a
@@ -4007,9 +4008,10 @@ items:
               @L[Condition:Unconscious]{unconsciousness},
               @L[Condition:Suffocating]{suffocating}, and being
               @L[Condition:Poisoned]{poisoned}. You do not
-              @L[Condition:Down]{drop} due to being at negative @L[Core:HP]{HP}.
-              You still @L[Condition:Dead]{die} when you reach half your maximum
-              @L[Core:HP]{HP} below zero. You also do not have to
+              @L[Condition:Down]{drop} due to being at negative @L[Core:Hit
+              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
+              when you reach half your maximum @L[Core:Hit Points and Mana
+              Points]{HP} below zero. You also do not have to
               @L[Core:Drowning]{breathe}.</p>
             proficient: ''
             fluent: ''
@@ -5191,15 +5193,8 @@ items:
                   priority: 10
                   time: normal
                   key: system.damage.types
-                  target: equipment
+                  target: armament
                   qualifier: '@class.bodyParts'
-                  value: morganti
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.damage.types
-                  target: body
-                  qualifier: '1'
                   value: morganti
               common: []
               expiration:
@@ -7672,6 +7667,388 @@ items:
           lastModifiedBy: teriockBuilder00
         _key: >-
           !actors.items.effects!Bj4cOMYV2lCvCnqs.fO3TKVsZRGFe5b6s.j1FQE3dweCMt5KZX
+      - name: Morganti Mana Drain Touch
+        type: ability
+        _id: 5di6OkdrroYZjBak
+        img: systems/teriock/src/icons/abilities/morganti-mana-drain-touch.webp
+        system:
+          competence:
+            raw: 0
+          qualifiers:
+            ephemeral:
+              raw: '0'
+            suppressed:
+              raw: '0'
+          consumable: false
+          maxQuantity:
+            raw: ''
+          quantity: 1
+          _ref: >-
+            Compendium.teriock.species.Item.fO3TKVsZRGFe5b6s.ActiveEffect.tQoTF3WFKDnWAlXo
+          piercing:
+            raw: 2
+          revealed: true
+          adept:
+            enabled: false
+            amount: 0
+          costs:
+            verbal: false
+            somatic: false
+            material: false
+            mp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            hp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            gp:
+              type: none
+              value:
+                static: 0
+                formula: ''
+                variable: ''
+            break: ''
+            materialCost: ''
+          gifted:
+            enabled: false
+            amount: 0
+          duration:
+            unit: instant
+            quantity: 0
+            conditions:
+              present: []
+              absent: []
+            stationary: false
+            description: Instant
+          basic: false
+          delivery:
+            base: hand
+            parent: null
+            package: touch
+          effectTypes:
+            - revitalization
+            - draining
+          elderSorcery: false
+          elderSorceryIncant: ''
+          elements: []
+          endCondition: ''
+          executionTime: a1
+          expansion: null
+          expansionRange: null
+          expansionSaveAttribute: mov
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          grantOnlyText: ''
+          heightened: ''
+          improvement: ''
+          interaction: attack
+          invoked: false
+          limitation: ''
+          maneuver: active
+          overview:
+            base: ''
+            proficient: ''
+            fluent: ''
+          powerSources:
+            - magical
+          range: Your Hand's Range
+          requirements: ''
+          results:
+            hit: >-
+              <p>Deal [[/drain 1d8[morganti mana]]] @L[Category:Drain
+              types]{drain} to the target. If this @L[Condition:Dead]{kills} the
+              target, you @L[Core:Revitalizing]{revitalize}.  This
+              @L[Core:Revitalizing]{revitalization} is the only part of this
+              that is a @L[Category:Revitalization effects]{revitalization
+              effect}.</p>
+            critHit: >-
+              <p>Deal [[/drain 2d8[morganti morganti]]] @L[Category:Drain
+              types]{drain} to the target. If this @L[Condition:Dead]{kills} the
+              target, you @L[Core:Revitalizing]{revitalize} twice. This
+              @L[Core:Revitalizing]{revitalization} is the only part of this
+              that is a @L[Category:Revitalization effects]{revitalization
+              effect}.</p>
+            miss: ''
+            critMiss: ''
+            save: ''
+            critSave: ''
+            fail: ''
+            critFail: ''
+          ritual: false
+          rotator: false
+          skill: false
+          spell: false
+          standard: false
+          sustained: false
+          targets:
+            - creature
+          trigger: ''
+          warded: false
+          impacts:
+            base:
+              changes: []
+              checks: []
+              common: []
+              duration: 0
+              endStatuses: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                changeOnCrit: false
+                doesExpire: false
+              hacks: []
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              rolls:
+                drain: 1d8[morganti mana]
+              startStatuses: []
+              statuses: []
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            proficient:
+              changes: []
+              checks: []
+              common: []
+              duration: 0
+              endStatuses: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                changeOnCrit: false
+                doesExpire: false
+              hacks: []
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              rolls: {}
+              startStatuses: []
+              statuses: []
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            fluent:
+              changes: []
+              checks: []
+              common: []
+              duration: 0
+              endStatuses: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                changeOnCrit: false
+                doesExpire: false
+              hacks: []
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              rolls: {}
+              startStatuses: []
+              statuses: []
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            heightened:
+              changes: []
+              checks: []
+              common: []
+              duration: 0
+              endStatuses: []
+              expiration:
+                normal:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                crit:
+                  combat:
+                    who:
+                      type: target
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: none
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                changeOnCrit: false
+                doesExpire: false
+              hacks: []
+              macroButtonUuids: []
+              noTemplate: false
+              abilityButtonNames: []
+              range: ''
+              rolls: {}
+              startStatuses: []
+              statuses: []
+              critStatuses: []
+              transformation:
+                enabled: false
+                image: null
+                level: minor
+                suppression:
+                  bodyParts: true
+                  equipment: true
+                  fluencies: true
+                  ranks: true
+                uuids: []
+                multiple: false
+                resetHp: true
+                resetMp: false
+                select: false
+                useFolder: false
+                uuid: null
+            macros: {}
+          improvements:
+            attributeImprovement:
+              attribute: null
+              minVal: 0
+              text: ''
+            featSaveImprovement:
+              attribute: null
+              amount: proficient
+              text: ''
+        changes: []
+        disabled: false
+        origin: null
+        transfer: true
+        statuses: []
+        flags: {}
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.I92tgU71DMZDzfB5
+          coreVersion: '13'
+          systemId: teriock
+          systemVersion: 0.9.1
+          lastModifiedBy: teriockBuilder00
+        _key: >-
+          !actors.items.effects!Bj4cOMYV2lCvCnqs.fO3TKVsZRGFe5b6s.5di6OkdrroYZjBak
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.fO3TKVsZRGFe5b6s

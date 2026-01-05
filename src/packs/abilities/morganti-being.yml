@@ -121,20 +121,12 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentClasses__has__bodyParts__system.damage.types
-              mode: 2
+            - mode: 2
               priority: 10
-              target: Actor
               time: normal
-              qualifier: '1'
-              value: morganti
-            - key: '!body__type__eq__body__system.damage.types'
-              mode: 2
-              priority: 10
-              target: Actor
-              time: normal
-              qualifier: '1'
+              key: system.damage.types
+              target: armament
+              qualifier: '@class.bodyParts'
               value: morganti
           common: []
           expiration:
