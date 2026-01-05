@@ -1,7 +1,7 @@
 import { makeIconElement } from "../../helpers/utils.mjs";
 
 /**
- *
+ * Mixin to allow icons embedded in data fields.
  * @param {typeof StringField} Base
  * @param {number} optionsIndex
  */
