@@ -122,22 +122,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !ability__parent.system.className__eq__natureMage__system.adept.enabled
-              mode: 5
+            - mode: 5
               priority: 10
-              target: Actor
               time: normal
-              qualifier: '1'
+              key: system.adept.enabled
+              target: ability
+              qualifier: '@class.natureMage'
               value: 'true'
-            - key: >-
-                !ability__parent.system.className__eq__natureMage__system.adept.amount
-              mode: 4
+            - mode: 4
               priority: 10
-              target: Actor
               time: normal
-              qualifier: '1'
-              value: 'true'
+              key: system.adept.amount
+              target: ability
+              qualifier: '@class.natureMage'
+              value: '1'
           common: []
           expiration:
             normal:

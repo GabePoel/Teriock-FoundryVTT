@@ -398,8 +398,8 @@ export function costAdjustment(label = "Adjustment") {
   return new SchemaField({
     enabled: new BooleanField({ label }),
     amount: new NumberField({
-      initial: 1,
-      min: 1,
+      initial: 0,
+      min: 0,
       integer: true,
     }),
   });
