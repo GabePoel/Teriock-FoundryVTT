@@ -8,6 +8,7 @@ const { fields } = foundry.data;
  * @implements {Teriock.Models.ScaleModelInterface}
  */
 export default class PiercingModel extends EmbeddedDataModel {
+  /** @inheritDoc */
   static defineSchema() {
     return {
       raw: new fields.NumberField({

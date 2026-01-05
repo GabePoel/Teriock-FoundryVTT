@@ -13,6 +13,7 @@ export default class TradecraftModel extends ModifierModel {
     };
   }
 
+  /** @inheritDoc */
   async _use(options) {
     options = {
       tradecraft: this.key,

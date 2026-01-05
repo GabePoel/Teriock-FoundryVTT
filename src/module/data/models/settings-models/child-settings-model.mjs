@@ -5,6 +5,7 @@ import {
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 export default class ChildSettingsModel extends EmbeddedDataModel {
+  /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {

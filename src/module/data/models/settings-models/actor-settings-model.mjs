@@ -7,6 +7,7 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 const { fields } = foundry.data;
 
 export default class ActorSettingsModel extends EmbeddedDataModel {
+  /** @inheritDoc */
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {

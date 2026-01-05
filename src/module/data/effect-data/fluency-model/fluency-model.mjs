@@ -66,6 +66,7 @@ export default class TeriockFluencyModel extends mix(
     return schema;
   }
 
+  /** @inheritDoc */
   get displayFields() {
     return [
       "system.description",
@@ -200,6 +201,7 @@ export default class TeriockFluencyModel extends mix(
     };
   }
 
+  /** @inheritDoc */
   prepareDerivedData() {
     this.tradecraftDescription = TERIOCK.content.tradecrafts[this.tradecraft];
   }

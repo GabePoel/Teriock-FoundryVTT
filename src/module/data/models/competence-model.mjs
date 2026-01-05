@@ -9,6 +9,7 @@ const { fields } = foundry.data;
  * @implements {Teriock.Models.ScaleModelInterface}
  */
 export default class CompetenceModel extends EmbeddedDataModel {
+  /** @inheritDoc */
   static defineSchema() {
     return {
       raw: new fields.NumberField({
