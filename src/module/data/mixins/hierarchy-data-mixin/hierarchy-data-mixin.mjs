@@ -42,8 +42,8 @@ export default function HierarchyDataMixin(Base) {
       }
 
       /** @inheritDoc */
-      toObject() {
-        const out = super.toObject();
+      toObject(source = true) {
+        const out = super.toObject(source);
         out._ref = this.parent.uuid;
         return out;
       }

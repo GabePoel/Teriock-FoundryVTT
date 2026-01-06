@@ -427,7 +427,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
           },
         ],
         {
-          fixed: true,
+          fixed: false,
           jQuery: false,
         },
       );

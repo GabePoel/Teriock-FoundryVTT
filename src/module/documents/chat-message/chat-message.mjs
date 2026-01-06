@@ -45,7 +45,6 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
    */
   get speakerToken() {
     if (this.speaker.scene && this.speaker.token) {
-      //noinspection JSUnresolvedReference
       const scene = game.scenes.get(this.speaker.scene);
       return scene?.tokens.get(this.speaker.token) || null;
     }
@@ -60,8 +59,8 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
   }
 
   /** @inheritDoc */
-  toObject() {
-    const obj = super.toObject();
+  toObject(source = true) {
+    const obj = super.toObject(source);
     obj.img = this.speakerImg;
     obj.rescale = this.rescale;
     if (this.author?.name !== this.alias) {

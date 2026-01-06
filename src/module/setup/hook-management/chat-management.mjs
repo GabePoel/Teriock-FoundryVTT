@@ -8,7 +8,7 @@ export default function registerChatManagementHooks() {
   foundry.helpers.Hooks.on(
     "chatMessage",
     /**
-     * @param {*} _chatLog
+     * @param {TeriockChatLog} _chatLog
      * @param {string} message
      * @returns {boolean}
      */

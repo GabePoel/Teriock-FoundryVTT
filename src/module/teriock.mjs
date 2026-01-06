@@ -95,16 +95,17 @@ foundry.helpers.Hooks.once("init", function () {
   assign({
     ui: {
       actors: applications.sidebar.TeriockActorDirectory,
-      hotbar: applications.ui.TeriockHotbar,
-      notifications: applications.ui.TeriockNotifications,
-      items: applications.sidebar.TeriockItemDirectory,
+      chat: applications.sidebar.TeriockChatLog,
       combat: applications.sidebar.TeriockCombatTracker,
+      hotbar: applications.ui.TeriockHotbar,
+      items: applications.sidebar.TeriockItemDirectory,
+      notifications: applications.ui.TeriockNotifications,
     },
     ux: {
-      TooltipManager: helpers.interaction.TeriockTooltipManager,
-      TextEditor: applications.ux.TeriockTextEditor,
-      DragDrop: applications.ux.TeriockDragDrop,
       ContextMenu: applications.ux.TeriockContextMenu,
+      DragDrop: applications.ux.TeriockDragDrop,
+      TextEditor: applications.ux.TeriockTextEditor,
+      TooltipManager: helpers.interaction.TeriockTooltipManager,
     },
   });
   applications.ux.registerEnrichers();
