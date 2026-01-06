@@ -23,7 +23,7 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "renderJournalEntrySheet",
     /**
-     * @param {*} _application
+     * @param {TeriockDocumentSheet} _application
      * @param {HTMLElement} element
      */
     (_application, element) => {
@@ -34,7 +34,7 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "renderRollTableSheet",
     /**
-     * @param {*} _application
+     * @param {TeriockDocumentSheet} _application
      * @param {HTMLElement} element
      */
     (_application, element) => {
@@ -50,7 +50,7 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "getHeaderControlsDocumentSheetV2",
     /**
-     * @param {*} _application
+     * @param {TeriockDocumentSheet} _application
      * @param {ApplicationHeaderControlsEntry[]} controls
      */
     (_application, controls) => {
