@@ -9,10 +9,6 @@ const yaml = true;
 const expandAdventures = true;
 const folders = true;
 const BUILDER_NAME = "teriockBuilder00";
-
-/**
- * Centralized map of properties to delete based on document state or type.
- */
 const DELETION_MAP = {
   root: ["duration", "showIcon", "tint", "sort"],
   stats: [
@@ -79,13 +75,10 @@ const tree = {};
 let packTree = {};
 let buildTree = true;
 
-/**
- * Helper to delete multiple keys from an object safely.
- */
-const clean = (obj, keys) => {
+function clean(obj, keys) {
   if (!obj) return;
   keys.forEach((key) => delete obj[key]);
-};
+}
 
 // Execution Loop
 // ==============
