@@ -125,6 +125,14 @@ export default class StatPoolModel extends EmbeddedDataModel {
   }
 
   /**
+   * The stat this modifies.
+   * @returns {string}
+   */
+  get stat() {
+    return "";
+  }
+
+  /**
    * Total value of all stat dice in this pool.
    * @returns {number}
    */

@@ -36,4 +36,9 @@ export default class MpPoolModel extends StatPoolModel {
       },
     ];
   }
+
+  /** @inheritDoc */
+  get stat() {
+    return "mp";
+  }
 }

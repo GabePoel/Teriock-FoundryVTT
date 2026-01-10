@@ -7,7 +7,6 @@ declare global {
       disabled: boolean;
       faces: number;
       number: EvaluationModel;
-      stat: string;
     }
   }
 }

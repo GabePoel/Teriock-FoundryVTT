@@ -71,4 +71,9 @@ export default class HpPoolModel extends StatPoolModel {
     }
     return panels;
   }
+
+  /** @inheritDoc */
+  get stat() {
+    return "hp";
+  }
 }

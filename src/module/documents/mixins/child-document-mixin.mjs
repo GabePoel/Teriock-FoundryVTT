@@ -125,15 +125,6 @@ export default function ChildDocumentMixin(Base) {
       async wikiOpen() {
         ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
       }
-
-      /**
-       * Pulls data for this document from [the Teriock wiki](https://wiki.teriock.com) and updates the document to
-       * match.
-       * @returns {Promise<void>}
-       */
-      async wikiPull() {
-        ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
-      }
     }
   );
 }

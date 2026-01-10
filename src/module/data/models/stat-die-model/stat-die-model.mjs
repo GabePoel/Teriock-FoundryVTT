@@ -29,11 +29,23 @@ export default class StatDieModel extends EmbeddedDataModel {
         initial: false,
         required: false,
       }),
-      flavor: new fields.StringField({
-        initial: "",
-        required: false,
-      }),
     };
+  }
+
+  /**
+   * Number of faces this die has.
+   * @returns {number}
+   */
+  get faces() {
+    return this.parent.faces || 10;
+  }
+
+  /**
+   * Flavor.
+   * @returns {string}
+   */
+  get flavor() {
+    return this.parent.flavor || "";
   }
 
   /**
@@ -95,6 +107,14 @@ export default class StatDieModel extends EmbeddedDataModel {
    */
   get polyhedral() {
     return /** @type {Teriock.RollOptions.PolyhedralDie} */ `d${this.faces}`;
+  }
+
+  /**
+   * The stat this modifies.
+   * @returns {string}
+   */
+  get stat() {
+    return this.parent.stat || "";
   }
 
   /**
