@@ -3,6 +3,7 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { TeriockAbilityTemplate } from "../../../../canvas/placeables/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { createDialogFieldset } from "../../../../helpers/html.mjs";
+import { dedent } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
@@ -185,22 +186,29 @@ export default function AbilityExecutionGetInputPart(Base) {
         ) {
           let placeTemplate;
           let distance = Number(this.source.system.range);
+          const rangeId = foundry.utils.randomID();
+          const tokenId = foundry.utils.randomID();
           placeTemplate = await TeriockDialog.prompt({
             window: { title: "Template Confirmation" },
             modal: true,
-            content: `
-            <p>Place measured template?</p>
+            content: dedent(`
             <div class="standard-form form-group">
-              <label>Distance <span class="units">(ft)</span></label>
-              <input name='range' type='number' min='0' step='1' value='${this.source.system.range}'>
+              <label for="${rangeId}">Distance <span class="units">(ft)</span></label>
+              <input id="${rangeId}" name='range' type='number' min='0' step='1' value='${this.source.system.range}'>
             </div>
-          `,
+            <div class="standard-form form-group">
+              <label for="${tokenId}">Add Token Radius</label>
+              <input id="${tokenId}" name="token" type="checkbox" checked="checked">
+            </div>
+          `),
             ok: {
-              label: "Yes",
+              label: "Place Template",
               callback: (_event, button) => {
-                distance = Number(
-                  button.form.elements.namedItem("range").value,
-                );
+                distance =
+                  Number(button.form.elements.namedItem("range").value) +
+                  (button.form.elements["token"].checked
+                    ? ((this.actor.system.size.length ?? 0) / 2) * 5
+                    : 0);
               },
             },
           });
