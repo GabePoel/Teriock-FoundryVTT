@@ -29,10 +29,10 @@ for (const asset of ASSETS) {
   const srcPath = path.join(ROOT, asset);
   const destPath = path.join(SYSTEM_DIR, asset);
   if (fs.existsSync(srcPath)) {
-    fs.cpSync(srcPath, destPath, {
-      dereference: false,
+    await fs.promises.cp(srcPath, destPath, {
+      dereference: true,
       recursive: true,
-      verbatimSymlinks: true,
+      force: true,
     });
     console.log(`Copied ${asset}`);
   }
