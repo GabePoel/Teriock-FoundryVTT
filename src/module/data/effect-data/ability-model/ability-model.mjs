@@ -1,7 +1,6 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { AbilityExecution } from "../../../executions/document-executions/_module.mjs";
-import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import { safeUuid } from "../../../helpers/resolve.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -415,13 +414,6 @@ export default class TeriockAbilityModel extends mix(
     }
     const execution = new AbilityExecution(options);
     await execution.execute();
-  }
-
-  /** @inheritDoc */
-  adjustMessage(messageElement) {
-    messageElement = super.adjustMessage(messageElement);
-    messageElement = insertElderSorceryMask(messageElement, this.parent);
-    return messageElement;
   }
 
   /**

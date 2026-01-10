@@ -6,10 +6,11 @@ author: teriockBuilder00
 img: icons/svg/dice-target.svg
 scope: global
 command: |-
+  const actor = data.doc.actor;
   const infernoAura = await tm.fetch.getAbility("Inferno Aura");
   const spiritBury = await tm.fetch.getAbility("Spirit Bury");
-  await infernoAura.system.roll(actor);
-  await spiritBury.system.roll(actor);
+  await infernoAura.system.use({ actor, noMp: true });
+  await spiritBury.system.use({ actor, noMp: true });
 flags: {}
 _stats:
   coreVersion: '13'

@@ -6,7 +6,6 @@ import { toTitleCase } from "./string.mjs";
 
 /**
  * A helper method for constructing an HTML button based on given parameters.
- *
  * @param {Teriock.UI.HTMLButtonConfig} config Options forwarded to the button
  * @returns {HTMLButtonElement}
  */
@@ -37,7 +36,6 @@ export function buildHTMLButton(config) {
 
 /**
  * Make a CSS class for a given array of elements.
- *
  * @param {Set<Teriock.Parameters.Ability.Element>} elements
  * @returns {string}
  */
@@ -58,7 +56,6 @@ export function elementClass(elements) {
 
 /**
  * Creates a dialog fieldset for user input.
- *
  * @param {string} legend - The legend text for the fieldset.
  * @param {string} description - The description text for the field.
  * @param {string} name - The name attribute for the input field.
@@ -71,60 +68,6 @@ export function createDialogFieldset(legend, description, name, max) {
       <div>${description}</div>
       <input type="number" name="${name}" value="0" min="0" max="${max}" step="1">
     </fieldset>`;
-}
-
-/**
- * Add an Elder Sorcery mask to the given element if possible.
- *
- * @param {HTMLDivElement} element
- * @param {TeriockAbility} ability
- * @returns {HTMLDivElement} The modified element.
- */
-export function insertElderSorceryMask(element, ability) {
-  const esMask = elderSorceryMask(ability);
-  if (esMask) {
-    //noinspection SpellCheckingInspection
-    element.insertAdjacentElement("afterbegin", esMask);
-  }
-  return element;
-}
-
-/**
- * Makes an Elder Sorcery mask if possible.
- *
- * @param {TeriockAbility} ability
- * @returns {HTMLDivElement|null}
- */
-export function elderSorceryMask(ability) {
-  if (ability.system.elderSorcery) {
-    const esMaskContainer = document.createElement("div");
-    esMaskContainer.classList.add("es-mask-container");
-    const esMaskRotator = document.createElement("div");
-    esMaskRotator.classList.add("es-mask-rotator");
-    const esMaskOverlay = document.createElement("div");
-    esMaskOverlay.classList.add("es-mask-overlay");
-    esMaskOverlay.classList.add(elementClass(ability.system.elements));
-    esMaskContainer.appendChild(esMaskRotator);
-    esMaskContainer.appendChild(esMaskOverlay);
-    return esMaskContainer;
-  }
-  return null;
-}
-
-//noinspection JSUnusedGlobalSymbols
-/**
- * Add click event listeners to multiple elements.
- *
- * @param {NodeList} elements - Collection of DOM elements to add listeners to
- * @param {Function} handler - Click event handler function
- * @returns {void}
- */
-export function addClickHandler(elements, handler) {
-  elements.forEach((element) => {
-    if (element) {
-      element.addEventListener("click", handler);
-    }
-  });
 }
 
 /**
@@ -221,21 +164,22 @@ export async function makeDamageDrainTypePanels(roll) {
       }
     }
   }
-  if (damageTypes.has("lethal")) {
-    drainTypes.delete("lethal");
-  }
   /** @type {Teriock.MessageData.MessagePanel[]} */
   const panels = [];
-  for (const damageType of damageTypes) {
-    const panel = makeDamageTypePanel(damageType);
-    if (panel) {
-      panels.push(await TeriockTextEditor.enrichPanel(panel));
+  if (roll.options.flavor?.toLowerCase().includes("damage")) {
+    for (const damageType of damageTypes) {
+      const panel = makeDamageTypePanel(damageType);
+      if (panel) {
+        panels.push(await TeriockTextEditor.enrichPanel(panel));
+      }
     }
   }
-  for (const drainType of drainTypes) {
-    const panel = makeDrainTypePanel(drainType);
-    if (panel) {
-      panels.push(await TeriockTextEditor.enrichPanel(panel));
+  if (roll.options.flavor?.toLowerCase().includes("drain")) {
+    for (const drainType of drainTypes) {
+      const panel = makeDrainTypePanel(drainType);
+      if (panel) {
+        panels.push(await TeriockTextEditor.enrichPanel(panel));
+      }
     }
   }
   return panels;

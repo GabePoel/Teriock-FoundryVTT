@@ -40,7 +40,10 @@ export default function AbilityExecutionGetInputPart(Base) {
        */
       async _getCostInput() {
         const dialogs = [];
-        if (this.source.system.costs.mp.type === "variable") {
+        if (
+          this.source.system.costs.mp.type === "variable" &&
+          !this.options.noMp
+        ) {
           let mpDescription = this.source.system.costs.mp.value.variable;
           if (this.source.system.adept.enabled) {
             mpDescription +=
@@ -65,7 +68,10 @@ export default function AbilityExecutionGetInputPart(Base) {
         } else {
           this.costs.mp = await this.#determineCost("mp");
         }
-        if (this.source.system.costs.hp.type === "variable") {
+        if (
+          this.source.system.costs.hp.type === "variable" &&
+          !this.options.noHp
+        ) {
           const hpDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.costs.hp.value.variable,
           );
@@ -81,7 +87,10 @@ export default function AbilityExecutionGetInputPart(Base) {
         } else {
           this.costs.hp = await this.#determineCost("hp");
         }
-        if (this.source.system.costs.gp.type === "variable") {
+        if (
+          this.source.system.costs.gp.type === "variable" &&
+          !this.options.noGp
+        ) {
           const gpDescription = await TeriockTextEditor.enrichHTML(
             this.source.system.costs.gp.value.variable,
           );
@@ -199,7 +208,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             const abilityTemplate = TeriockAbilityTemplate.fromExecution(this, {
               distance: distance,
             });
-            await abilityTemplate.drawPreview();
+            await abilityTemplate?.drawPreview();
           }
         }
       }

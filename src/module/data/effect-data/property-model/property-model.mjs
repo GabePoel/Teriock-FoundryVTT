@@ -120,7 +120,20 @@ export default class TeriockPropertyModel extends mix(
 
   /** @inheritDoc */
   get changes() {
-    return this.impacts.changes;
+    return [
+      ...this.impacts.changes,
+      ...Object.entries(this.impacts.macros).map(([safeUuid, pseudoHook]) => {
+        return {
+          key: `system.hookedMacros.${pseudoHook}`,
+          mode: 2,
+          priority: 5,
+          qualifier: "1",
+          target: "parent",
+          time: "normal",
+          value: pureUuid(safeUuid),
+        };
+      }),
+    ];
   }
 
   /** @inheritDoc */
@@ -245,45 +258,10 @@ export default class TeriockPropertyModel extends mix(
       ...super.getLocalRollData(),
       form: this.form,
       [`form.${this.form}`]: 1,
-      "damage.type": this.damageType,
-      [`damage.type.${this.damageType}`]: 1,
+      "damage.type": this.damageType.toLowerCase(),
+      [`damage.type.${this.damageType.toLowerCase()}`]: 1,
       "damage.extra": this.extraDamage,
     };
-  }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    const changes = [];
-    let macroPrefix = "system.hookedMacros.";
-    if (this.modifies === "Item") {
-      macroPrefix = "item." + macroPrefix;
-    }
-    for (const [safeUuid, pseudoHook] of Object.entries(this.impacts.macros)) {
-      const change = {
-        key: `${macroPrefix}${pseudoHook}`,
-        value: pureUuid(safeUuid),
-        mode: 2,
-        priority: 5,
-      };
-      changes.push(change);
-    }
-    this.parent.changes = foundry.utils.deepClone(changes);
-    if (
-      this.damageType &&
-      this.damageType.length > 0 &&
-      this.parent.allSups.filter(
-        /** @param {TeriockProperty} p */ (p) =>
-          p.system.damageType?.trim().length > 0,
-      ).length === 0
-    ) {
-      this.parent.changes.push({
-        key: "item.system.damage.types",
-        value: this.damageType.toLowerCase(),
-        priority: 10,
-        mode: 2,
-      });
-    }
   }
 
   /**

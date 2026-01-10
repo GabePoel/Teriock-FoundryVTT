@@ -218,7 +218,7 @@ export default function ArmamentDataMixin(Base) {
         );
         for (const p of properties.filter((p) => p.active)) {
           if (p.system.damageType) {
-            this.damage.types.add(p.system.damageType);
+            this.damage.types.add(p.system.damageType.toLowerCase());
           }
         }
         if (this.powerLevel === "magic") {

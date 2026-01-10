@@ -197,15 +197,6 @@ export default class ChildTypeModel extends UsableDataMixin(CommonTypeModel) {
     await this.parent.toMessage(options);
   }
 
-  /**
-   * Adjust the built message after it's created.
-   * @param {HTMLDivElement} messageElement - The raw message HTML.
-   * @returns {HTMLDivElement} The modified raw message HTML.
-   */
-  adjustMessage(messageElement) {
-    return messageElement;
-  }
-
   /** @inheritDoc */
   async deleteThis() {
     if (this.parent.parent) {

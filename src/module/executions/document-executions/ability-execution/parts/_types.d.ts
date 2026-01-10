@@ -8,13 +8,16 @@ declare global {
         armament?: TeriockArmament;
         attackPenalty?: string;
         av0?: boolean;
+        noGp?: boolean;
         noHeighten?: boolean;
+        noHp?: boolean;
+        noMp?: boolean;
         noTemplate?: boolean;
         sb?: boolean;
-        ub?: boolean;
-        warded?: boolean;
         source?: TeriockAbility;
+        ub?: boolean;
         vitals?: boolean;
+        warded?: boolean;
       };
   }
 }
