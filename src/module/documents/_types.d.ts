@@ -92,7 +92,7 @@ declare global {
       indexCategoryKey?: IndexCategoryKey;
       indexCompendiumKey?: IndexCompendiumKey;
       modifies: TeriockParentName;
-      namespace: string;
+      namespace?: string;
       pageNameKey: string;
       passive: boolean;
       preservedProperties: string[];

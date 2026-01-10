@@ -10,7 +10,6 @@ import {
   scaleChange,
 } from "../../shared/migrations/migrate-changes.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import * as parsing from "./parsing/_parsing.mjs";
 
 const { fields } = foundry.data;
 
@@ -250,11 +249,6 @@ export default class TeriockPropertyModel extends mix(
       [`damage.type.${this.damageType}`]: 1,
       "damage.extra": this.extraDamage,
     };
-  }
-
-  /** @inheritDoc */
-  async parse(rawHTML) {
-    return await parsing._parse(this, rawHTML);
   }
 
   /** @inheritDoc */

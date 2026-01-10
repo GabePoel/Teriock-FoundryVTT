@@ -5,7 +5,6 @@ import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _parse } from "./methods/_parsing.mjs";
 
 const { fields } = foundry.data;
 
@@ -285,11 +284,6 @@ export default class TeriockRankModel extends mix(
       archetype: this.archetype,
       [`archetype.${this.archetype.slice(0, 3).toLowerCase()}`]: 1,
     };
-  }
-
-  /** @inheritDoc */
-  async parse(rawHTML) {
-    return await _parse(this, rawHTML);
   }
 
   /** @inheritDoc */

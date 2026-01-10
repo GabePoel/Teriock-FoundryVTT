@@ -3,7 +3,6 @@ import { dotJoin, prefix, suffix } from "../../../helpers/string.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _parse } from "./parsing/_parsing.mjs";
 
 //noinspection JSClosureCompilerSyntax
 /**
@@ -108,11 +107,6 @@ export default class TeriockBodyModel extends mix(
       ...super.getLocalRollData(),
       "class.bodyParts": 1,
     };
-  }
-
-  /** @inheritDoc */
-  async parse(rawHTML) {
-    return await _parse(this, rawHTML);
   }
 
   /** @inheritDoc */

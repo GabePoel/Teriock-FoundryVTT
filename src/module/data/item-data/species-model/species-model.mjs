@@ -6,7 +6,6 @@ import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import { _parse } from "./methods/_parsing.mjs";
 import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
@@ -262,11 +261,6 @@ export default class TeriockSpeciesModel extends mix(
       rollData.size = this.size.enabled ? this.size.value : 0;
     }
     return rollData;
-  }
-
-  /** @inheritDoc */
-  async parse(rawHTML) {
-    return await _parse(this, rawHTML);
   }
 
   /** @inheritDoc */

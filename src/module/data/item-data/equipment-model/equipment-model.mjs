@@ -9,7 +9,6 @@ import { mix } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-model/base-item-model.mjs";
-import * as parsing from "./parsing/_parsing.mjs";
 import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
@@ -196,11 +195,6 @@ export default class TeriockEquipmentModel extends mix(
       data[`class.${equipmentClass}`] = 1;
     }
     return data;
-  }
-
-  /** @inheritDoc */
-  async parse(rawHTML) {
-    return await parsing._parse(this, rawHTML);
   }
 
   /**

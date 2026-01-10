@@ -11,5 +11,5 @@ export * as sort from "./sort.mjs";
 export * as string from "./string.mjs";
 export * as unit from "./unit.mjs";
 export * as utils from "./utils.mjs";
-export * as wiki from "./wiki/_module.mjs";
+export * as wiki from "./wiki.mjs";
 export { default as queries } from "./queries/_module.mjs";

@@ -6,7 +6,6 @@ import { safeUuid } from "../../../helpers/resolve.mjs";
 import { mix } from "../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-model/base-effect-model.mjs";
-import { _parse } from "./parsing/_parsing.mjs";
 import * as parts from "./parts/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax
@@ -500,14 +499,6 @@ export default class TeriockAbilityModel extends mix(
       });
     }
     return rollData;
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {Promise<object>}
-   */
-  async parse(rawHTML) {
-    return await _parse(this, rawHTML);
   }
 
   /**
