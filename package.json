@@ -3,8 +3,10 @@
   "version": "3.0.0",
   "description": "Scripts to manage Teriock Foundry VTT system.",
   "scripts": {
+    "build": "npm run build:style && npm run build:templates && npm run compendium:pack && npm run build:zip",
     "build:style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
     "build:templates": "node scripts/build-templates.mjs",
+    "build:zip": "node scripts/build.mjs",
     "compendium:pack": "node scripts/compendium-pack.mjs",
     "compendium:unpack": "node scripts/compendium-unpack.mjs",
     "format:check": "prettier . --check",
@@ -19,8 +21,9 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@eslint/js": "^9.36.0",
+    "@eslint/js": "^9.39.2",
     "@foundryvtt/foundryvtt-cli": "^1.1.0",
+    "archiver": "^7.0.1",
     "eslint": "^9.36.0",
     "globals": "^16.4.0",
     "handlebars": "^4.7.8",
