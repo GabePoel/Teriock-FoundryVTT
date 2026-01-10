@@ -2,8 +2,16 @@ import archiver from "archiver";
 import fs from "fs";
 import path from "path";
 
-const manifest = JSON.parse(fs.readFileSync("./system.json", "utf-8"));
+const manifestPath = "./system.json";
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 const VERSION = manifest.version;
+
+const downloadUrl = `https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/release-${VERSION}/teriock-release-${VERSION}.zip`;
+manifest.download = downloadUrl;
+
+fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+console.log(`Updated original system.json download URL to version ${VERSION}`);
+
 const ROOT = ".";
 const DIST_DIR = path.join(ROOT, "dist");
 const SYSTEM_DIR = path.join(DIST_DIR, "teriock");
