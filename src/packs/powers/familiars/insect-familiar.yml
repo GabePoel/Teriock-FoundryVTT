@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: insectFamiliar00
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Insect Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.t0KzdE1bBs7CzsIM]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.insectFamiliar00
 type: power
-_id: Q8v9ejeyJjZbxKrg
 effects:
-  - name: Insect Tamer
-    type: fluency
+  - _id: insectTamer00000
+    img: icons/environment/settlement/stables-logo.webp
+    name: Insect Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Insect]{insect}.</p>
-    _id: YgPrgdotpp1IPGgR
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.insectFamiliar00.ActiveEffect.insectTamer00000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,78 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!Q8v9ejeyJjZbxKrg.YgPrgdotpp1IPGgR'
+    _key: '!items.effects!insectFamiliar00.insectTamer00000'
   - name: Bite
     type: ability
+    img: systems/teriock/src/icons/abilities/bite.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>Your @L[Body:Mouth]{mouth} and other @L[Category:Biting
+          equipment]{biting items} count as a @L[Category:Weapons]{weapon} for
+          the purposes of abilities that target or are delivered by it (although
+          it cannot be @L[Property:Shattered]{shattered} or
+          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
+          Interaction]{attack} with it and its damage die is now [[/damage
+          1d4]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -68,83 +142,22 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Your @L[Body:Mouth]{mouth} and other @L[Category:Biting
-          equipment]{biting items} count as a @L[Category:Weapons]{weapon} for
-          the purposes of abilities that target or are delivered by it (although
-          it cannot be @L[Property:Shattered]{shattered} or
-          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
-          Interaction]{attack} with it and its damage die is now [[/damage
-          1d4]].</p>
-        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
-        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -156,10 +169,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__effectKeys.property__has__biting__system.damage.base.raw'
-              mode: 4
-              value: 1d4
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.biting'
+              value: 1d4
           common: []
           expiration:
             normal:
@@ -188,6 +204,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -198,10 +235,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__effectKeys.property__has__biting__system.damage.base.raw'
-              mode: 4
-              value: 1d6
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.biting'
+              value: 1d6
           common: []
           expiration:
             normal:
@@ -230,6 +270,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -240,10 +301,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__effectKeys.property__has__biting__system.damage.base.raw'
-              mode: 4
-              value: 1d8
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.biting'
+              value: 1d8
           common: []
           expiration:
             normal:
@@ -272,6 +336,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -309,9 +394,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: k1E04GOwB0U7sQHr
-    img: systems/teriock/src/icons/abilities/bite.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.insectFamiliar00.ActiveEffect.yIEXza9fMrL64c85
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: A6ztUixgTm6Qrva4
     changes: []
     disabled: false
     origin: null
@@ -319,24 +443,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.laicavn0xwbJ8fNH
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.laicavn0xwbJ8fNH
-    _key: '!items.effects!Q8v9ejeyJjZbxKrg.k1E04GOwB0U7sQHr'
+    _key: '!items.effects!insectFamiliar00.A6ztUixgTm6Qrva4'
   - name: Fear Touch
     type: ability
+    img: systems/teriock/src/icons/abilities/fear-touch.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: hand
+        parent: null
+        package: touch
+      targets:
+        - creature
+      elements:
+        - necromancy
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Minute
+        stationary: false
+      sustained: false
+      range: Your Hand's Range
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      results:
+        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 2
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: necromancer
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -361,81 +534,26 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: hand
-        parent: null
-        package: touch
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      effectTypes:
-        - mental
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - necromancy
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      piercing: ub
-      powerSources:
-        - magical
-      prepared: true
-      range: Your Hand's Range
-      requirements: ''
-      results:
-        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: false
-      targets:
-        - creature
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: necromancer
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - mental
       impacts:
         base:
           statuses:
@@ -476,6 +594,27 @@ effects:
                   skip: 1
             changeOnCrit: true
             doesExpire: true
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -513,6 +652,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -550,6 +710,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -588,10 +769,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-    _id: N4K7SsQ5hIco3qD7
-    img: systems/teriock/src/icons/abilities/fear-touch.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.insectFamiliar00.ActiveEffect.2NgCkgWFK0EmMGzf
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: ZuoO9dAECKpOdTPR
     changes: []
     disabled: false
     origin: null
@@ -599,17 +818,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lOqA4K727mFO9bFU
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lOqA4K727mFO9bFU
-    _key: '!items.effects!Q8v9ejeyJjZbxKrg.N4K7SsQ5hIco3qD7'
+    _key: '!items.effects!insectFamiliar00.ZuoO9dAECKpOdTPR'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!Q8v9ejeyJjZbxKrg'
+_key: '!items!insectFamiliar00'

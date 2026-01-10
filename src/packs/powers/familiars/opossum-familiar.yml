@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: opossumFamiliar0
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Opossum Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.IqUjplsuLecxQmKo]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.opossumFamiliar0
 type: power
-_id: WLC9PqmVNVRPY6zX
 effects:
-  - name: Opossum Tamer
-    type: fluency
+  - _id: opossumTamer0000
+    img: icons/environment/settlement/stables-logo.webp
+    name: Opossum Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Opossum]{opossum}.</p>
-    _id: BowDEJ2jQ1QiKaaO
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.opossumFamiliar0.ActiveEffect.opossumTamer0000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!WLC9PqmVNVRPY6zX.BowDEJ2jQ1QiKaaO'
+    _key: '!items.effects!opossumFamiliar0.opossumTamer0000'
   - name: Night Vision
     type: ability
+    img: systems/teriock/src/icons/abilities/night-vision.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You can see in the dark up to 60 feet as though it is bright light
+          and up to 120 feet as though it is dim light.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -68,79 +137,24 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - sensory
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You can see in the dark up to 60 feet as though it is bright light
-          and up to 120 feet as though it is dim light.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - sensory
       impacts:
         base:
           statuses: []
@@ -151,10 +165,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.senses.dark
-              mode: 4
-              value: '120'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.senses.dark
+              target: Actor
+              qualifier: '1'
+              value: '120'
           common: []
           expiration:
             normal:
@@ -183,6 +200,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -220,6 +258,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -257,6 +316,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -294,9 +374,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: 0j0kQWlwkCZDndSm
-    img: systems/teriock/src/icons/abilities/night-vision.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.opossumFamiliar0.ActiveEffect.mjYynhjJixcvCnFR
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: JaShmZEdTQvQsx4l
     changes: []
     disabled: false
     origin: null
@@ -304,24 +422,83 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
-    _key: '!items.effects!WLC9PqmVNVRPY6zX.0j0kQWlwkCZDndSm'
+    _key: '!items.effects!opossumFamiliar0.JaShmZEdTQvQsx4l'
   - name: Zombify
     type: ability
+    img: systems/teriock/src/icons/abilities/zombify.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: hand
+        parent: null
+        package: touch
+      targets:
+        - creature
+      elements:
+        - necromancy
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Minute
+        stationary: false
+      sustained: false
+      range: Your Hand's Range
+      overview:
+        base: ''
+        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+        fluent: >-
+          <p>The base duration of this effect is 1 hour and the
+          @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
+          command.</p>
+      results:
+        hit: >-
+          <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
+          under your command, but is hostile to everyone other than you that is
+          not @L[Category:Zombies]{another zombie}. The
+          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
+          before, but loses all other traits and abilities. If the target was
+          already @L[Category:Zombies]{some kind of zombie}, then it is
+          reanimated as that type.</p>
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 2
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: necromancer
+      rotator: false
+      invoked: false
       costs:
         verbal: true
         somatic: true
@@ -346,93 +523,28 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: hand
-        parent: null
-        package: touch
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      effectTypes:
-        - control
-        - reanimation
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - necromancy
-      endCondition: ''
-      executionTime: a1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: ''
-        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
-        fluent: >-
-          <p>The base duration of this effect is 1 hour and the
-          @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
-          command.</p>
-      piercing: ub
-      powerSources:
-        - magical
-      prepared: true
-      range: Your Hand's Range
+      endCondition: ''
       requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      results:
-        hit: >-
-          <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
-          under your command, but is hostile to everyone other than you that is
-          not @L[Category:Zombies]{another zombie}. The
-          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
-          before, but loses all other traits and abilities. If the target was
-          already @L[Category:Zombies]{some kind of zombie}, then it is
-          reanimated as that type.</p>
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: false
-      targets:
-        - creature
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: necromancer
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - control
+        - reanimation
       impacts:
         base:
           statuses: []
@@ -476,9 +588,23 @@ effects:
             suppression:
               bodyParts: false
               equipment: false
+              fluencies: true
+              ranks: true
             uuids:
               - Compendium.teriock.species.Item.SRdgO7roRk39yrUB
             level: greater
+            image: null
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
         proficient:
           statuses: []
           startStatuses: []
@@ -516,6 +642,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -553,6 +700,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -590,9 +758,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: X3RF2Y9hTZOuzHQS
-    img: systems/teriock/src/icons/abilities/zombify.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.opossumFamiliar0.ActiveEffect.OR1GARXLuQdI20jl
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: true
+        amount: 1
+      grantOnly: false
+      grantOnlyText: ''
+    _id: 1Eu5rkZFZJUrtkok
     changes: []
     disabled: false
     origin: null
@@ -600,17 +806,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.5v9AknrhiMqCbDvC
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5v9AknrhiMqCbDvC
-    _key: '!items.effects!WLC9PqmVNVRPY6zX.X3RF2Y9hTZOuzHQS'
+    _key: '!items.effects!opossumFamiliar0.1Eu5rkZFZJUrtkok'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!WLC9PqmVNVRPY6zX'
+_key: '!items!opossumFamiliar0'

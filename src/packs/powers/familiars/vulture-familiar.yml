@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: vultureFamiliar0
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Vulture Familiar
 system:
@@ -8,18 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.VVR60Hl4AcDpDuCD]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.vultureFamiliar0
 type: power
-_id: nN0uZn6doz5fQ8qS
 effects:
-  - name: Vulture Tamer
-    type: fluency
+  - _id: vultureTamer0000
     img: icons/environment/settlement/stables-logo.webp
+    name: Vulture Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Vulture]{vulture}.</p>
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
       macros: []
-    _id: Q698xnIyAmwIqJmM
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.vultureFamiliar0.ActiveEffect.vultureTamer0000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -27,94 +46,41 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!nN0uZn6doz5fQ8qS.Q698xnIyAmwIqJmM'
+    _key: '!items.effects!vultureFamiliar0.vultureTamer0000'
   - name: Exorcism
     type: ability
+    img: systems/teriock/src/icons/abilities/exorcism.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: variable
-          value:
-            static: 0
-            formula: ''
-            variable: >-
-              <p>An amount of @L[Core:MP]{MP} equal to the
-              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
-              Paid only on failure.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            formula: ''
-            variable: >-
-              <p>An amount of @L[Core:HP]{HP} equal to the
-              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
-              Paid only on failure.</p>
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - divine
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: slow
+      executionTime: 10 Minutes
       delivery:
         base: sight
         parent: null
         package: ritual
+      targets:
+        - creature
+      elements: []
       duration:
         unit: instant
         quantity: 0
         conditions:
           present: []
           absent: []
-        stationary: false
         description: Instant
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: 10 Minutes
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: slow
+        stationary: false
+      sustained: false
+      range: '5'
       overview:
         base: >-
           <p>If the target of this ritual is @L[Category:Undead
@@ -148,12 +114,6 @@ effects:
           <p>You may add @L[Core:Fluency Bonus]{F} to the
           @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
           of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
-      piercing: normal
-      powerSources:
-        - divine
-      prepared: true
-      range: '5'
-      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -178,18 +138,70 @@ effects:
           the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
           DC.</p>
         critFail: ''
-      ritual: true
-      rotator: false
-      secret: false
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
-      sustained: false
-      targets:
-        - creature
-      trigger: ''
-      warded: false
+      ritual: true
       class: paladin
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: variable
+          value:
+            static: 0
+            formula: ''
+            variable: >-
+              <p>An amount of @L[Core:MP]{MP} equal to the
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.</p>
+        hp:
+          type: variable
+          value:
+            static: 0
+            formula: ''
+            variable: >-
+              <p>An amount of @L[Core:HP]{HP} equal to the
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.</p>
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      warded: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -228,6 +240,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -265,6 +298,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -302,6 +356,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -339,9 +414,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: mUhpkBjmPcjCByCX
-    img: systems/teriock/src/icons/abilities/exorcism.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.vultureFamiliar0.ActiveEffect.W75oyBVDDLpyERNx
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: PTLVit5eN459wu28
     changes: []
     disabled: false
     origin: null
@@ -349,24 +463,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.eabeC5V4g5Wx4EiO
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.eabeC5V4g5Wx4EiO
-    _key: '!items.effects!nN0uZn6doz5fQ8qS.mUhpkBjmPcjCByCX'
+    _key: '!items.effects!vultureFamiliar0.PTLVit5eN459wu28'
   - name: Spirit Bury
     type: ability
+    img: systems/teriock/src/icons/abilities/spirit-bury.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      targets:
+        - creature
+      elements:
+        - necromancy
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Minute
+        stationary: false
+      sustained: false
+      range: null
+      overview:
+        base: ''
+        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+        fluent: ''
+      results:
+        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: necromancer
+      rotator: true
+      invoked: false
       costs:
         verbal: true
         somatic: true
@@ -391,81 +554,25 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: hand
-        parent: null
-        package: null
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - necromancy
-      endCondition: ''
-      executionTime: a1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: ''
-        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: null
+      endCondition: ''
       requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      results:
-        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: true
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: false
-      targets:
-        - creature
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: special
+      limitation: ''
+      improvement: ''
       warded: false
-      class: necromancer
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -504,6 +611,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -541,6 +669,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -578,6 +727,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -615,9 +785,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: F8rB2T50lWqltu6s
-    img: systems/teriock/src/icons/abilities/spirit-bury.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.vultureFamiliar0.ActiveEffect.EsHlywdKRows9dhI
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: FPmhAyc9BXQuR9bb
     changes: []
     disabled: false
     origin: null
@@ -625,17 +834,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.1QWmERgoW3b8TNEd
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.1QWmERgoW3b8TNEd
-    _key: '!items.effects!nN0uZn6doz5fQ8qS.F8rB2T50lWqltu6s'
+    _key: '!items.effects!vultureFamiliar0.FPmhAyc9BXQuR9bb'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!nN0uZn6doz5fQ8qS'
+_key: '!items!vultureFamiliar0'

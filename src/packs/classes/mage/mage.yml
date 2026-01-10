@@ -1,46 +1,29 @@
 name: Mage
 type: power
-_id: iHujMcybjlWsu4AZ
+_id: mage000000000000
 img: systems/teriock/src/icons/archetypes/mage.webp
 system:
-  htmlFields:
-    - description
-    - flaws
+  competence:
+    raw: 1
   description: >-
-    <p>Mages wield powerful magical spells and each class has a different
-    approach, but are generally all quite vulnerable in direct combat. Thus most
-    mages prefer to hang back and cast at their enemies from afar or use their
-    magic to control the flow of a battle while avoiding messy melees.</p>
-  type: learned
+    <p>Mages wield powerful @L[Magically powered spells]{magical spells} and
+    each class has a different approach, but are generally all quite vulnerable
+    in direct @L[Core:Combat]{combat}. Thus most mages prefer to hang back and
+    cast at their enemies from afar or use their magic to control the flow of a
+    battle while avoiding messy melees.</p>
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  _ref: Compendium.teriock.classes.Item.mage000000000000
   maxAv: 0
+  type: learned
 effects:
   - name: Arcane Ray
     type: ability
     img: systems/teriock/src/icons/abilities/arcane-ray.webp
     system:
-      htmlFields:
-        - elderSorceryIncant
-        - overview.base
-        - overview.proficient
-        - overview.fluent
-        - results.hit
-        - results.critHit
-        - results.miss
-        - results.critMiss
-        - results.save
-        - results.critSave
-        - results.fail
-        - results.critFail
-        - costs.mp.value.variable
-        - costs.hp.value.variable
-        - costs.gp.value.variable
-        - costs.materialCost
-        - heightened
-        - endCondition
-        - requirements
-        - trigger
-        - limitation
-        - improvement
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -63,6 +46,7 @@ effects:
           present: []
           absent: []
         description: Instant
+        stationary: false
       sustained: false
       range: '60'
       overview:
@@ -80,19 +64,21 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: av0
+      piercing:
+        raw: 1
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: false
       spell: true
       standard: true
       ritual: false
-      class: ''
       rotator: false
       invoked: false
       costs:
@@ -129,12 +115,16 @@ effects:
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      abilityType: normal
+      form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - damaging
       impacts:
         base:
           statuses: []
@@ -146,9 +136,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -159,6 +152,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -169,6 +164,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -178,9 +194,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -191,6 +210,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -201,6 +222,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -210,9 +252,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -223,6 +268,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -233,6 +280,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -243,9 +311,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -256,6 +327,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -266,10 +339,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
-        macro: null
-      effectTypes:
-        - damaging
-    _id: 4zic6p9YosSdYkev
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
+        macros: {}
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.classes.Item.mage000000000000.ActiveEffect.ISPaaGrt7OtDYqyP
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: NGCuRUaVtXnxAbRe
     changes: []
     disabled: false
     origin: null
@@ -277,39 +387,16 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.AvyB98kEnriHHQcA
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.AvyB98kEnriHHQcA
-    _key: '!items.effects!iHujMcybjlWsu4AZ.4zic6p9YosSdYkev'
+    _key: '!items.effects!mage000000000000.NGCuRUaVtXnxAbRe'
   - name: Staff Touch
     type: ability
     img: systems/teriock/src/icons/abilities/staff-touch.webp
     system:
-      htmlFields:
-        - elderSorceryIncant
-        - overview.base
-        - overview.proficient
-        - overview.fluent
-        - results.hit
-        - results.critHit
-        - results.miss
-        - results.critMiss
-        - results.save
-        - results.critSave
-        - results.fail
-        - results.critFail
-        - costs.mp.value.variable
-        - costs.hp.value.variable
-        - costs.gp.value.variable
-        - costs.materialCost
-        - heightened
-        - endCondition
-        - requirements
-        - trigger
-        - limitation
-        - improvement
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -332,6 +419,7 @@ effects:
           present: []
           absent: []
         description: Always Active
+        stationary: false
       sustained: false
       range: Self.
       overview:
@@ -362,19 +450,21 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
       ritual: false
-      class: ''
       rotator: false
       invoked: false
       costs:
@@ -404,18 +494,19 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      abilityType: normal
+      form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -426,9 +517,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -439,6 +533,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -449,6 +545,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -458,9 +575,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -471,6 +591,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -481,6 +603,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -490,9 +633,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -503,6 +649,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -513,6 +661,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -522,9 +691,12 @@ effects:
           checks: []
           duration: 0
           changes: []
+          common: []
           expiration:
             normal:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -535,6 +707,8 @@ effects:
                   skip: 0
             crit:
               combat:
+                who:
+                  type: target
                 what:
                   type: none
                   roll: 2d4kh1
@@ -545,8 +719,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
-        macro: null
-    _id: F2UMcg2LvpOBK7Rk
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
+        macros: {}
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.classes.Item.mage000000000000.ActiveEffect.JbPrhK3kLkJUNl4g
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: aCWLNsvSFjEuLTyl
     changes: []
     disabled: false
     origin: null
@@ -554,18 +768,18 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.qUzmAETQAywtSMIr
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qUzmAETQAywtSMIr
-    _key: '!items.effects!iHujMcybjlWsu4AZ.F2UMcg2LvpOBK7Rk'
+    _key: '!items.effects!mage000000000000.aCWLNsvSFjEuLTyl'
+folder: mage000000000000
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-folder: EBbCkJ1iR63w8Euf
-_key: '!items!iHujMcybjlWsu4AZ'
+_key: '!items!mage000000000000'

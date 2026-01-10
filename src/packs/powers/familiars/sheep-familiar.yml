@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: sheepFamiliar000
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Sheep Familiar
 system:
@@ -8,18 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.aoi1CqDHb6pWIlQs]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.sheepFamiliar000
 type: power
-_id: AJZWPfWBSPwHGJ11
 effects:
-  - name: Sheep Tamer
-    type: fluency
+  - _id: sheepTamer000000
     img: icons/environment/settlement/stables-logo.webp
+    name: Sheep Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Sheep]{sheep}.</p>
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
       macros: []
-    _id: rh64NMcshJwplw07
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.sheepFamiliar000.ActiveEffect.sheepTamer000000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -27,24 +46,83 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!AJZWPfWBSPwHGJ11.rh64NMcshJwplw07'
+    _key: '!items.effects!sheepFamiliar000.sheepTamer000000'
   - name: Dispel Magic
     type: ability
+    img: systems/teriock/src/icons/abilities/dispel-magic.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: reactive
+      executionTime: r1
+      delivery:
+        base: aura
+        parent: null
+        package: null
+      targets:
+        - spell
+      elements:
+        - storm
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: '30'
+      overview:
+        base: >-
+          <p>Target @L[Category:Conjured spells]{spell}
+          @L[Core:Fizzles]{fizzles}.</p>
+        proficient: >-
+          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
+          additional times as a @L[Category:Free reaction abilities]{free
+          reaction} before the start of your next turn. These additional uses do
+          not in turn allow for additional uses.</p>
+        fluent: >-
+          <p>You may now use [[lookup name]] @L[Core:Fluency Bonus]{F}
+          additional times as a @L[Category:Free reaction abilities]{free
+          reaction} before the start of your next turn. These additional uses do
+          not in turn allow for additional uses.</p>
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: stormMage
+      rotator: true
+      invoked: false
       costs:
         verbal: true
         somatic: true
@@ -69,92 +147,26 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: aura
-        parent: null
-        package: null
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - storm
-      endCondition: <p>The start of your next turn.</p>
-      executionTime: r1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
         name]] increases by 10 feet.</p>
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: <p>@L[Category:Storm element spells]{Storm element spells} only.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}.</p>
-        proficient: >-
-          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
-          additional times as a @L[Category:Free reaction abilities]{free
-          reaction} before the start of your next turn. These additional uses do
-          not in turn allow for additional uses.</p>
-        fluent: >-
-          <p>You may now use [[lookup name]] @L[Core:Fluency Bonus]{F}
-          additional times as a @L[Category:Free reaction abilities]{free
-          reaction} before the start of your next turn. These additional uses do
-          not in turn allow for additional uses.</p>
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: '30'
+      endCondition: <p>The start of your next turn.</p>
       requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: true
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: false
-      targets:
-        - spell
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: >-
         <p>A @L[Category:Conjured spells]{conjured spell} is used within
         range.</p>
+      basic: false
+      form: special
+      limitation: <p>@L[Category:Storm element spells]{Storm element spells} only.</p>
+      improvement: ''
       warded: false
-      class: stormMage
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -193,6 +205,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -230,6 +263,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -267,6 +321,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -304,9 +379,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: vcPbLD9Hi2rbhsOD
-    img: systems/teriock/src/icons/abilities/dispel-magic.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.sheepFamiliar000.ActiveEffect.JzNOIUkkAhFZwbq1
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: o2tcmLVNxf3uZeQ4
     changes: []
     disabled: false
     origin: null
@@ -314,18 +428,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.vhFjKNsAVNFcdCY6
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vhFjKNsAVNFcdCY6
-    _key: '!items.effects!AJZWPfWBSPwHGJ11.vcPbLD9Hi2rbhsOD'
+    _key: '!items.effects!sheepFamiliar000.o2tcmLVNxf3uZeQ4'
   - name: Weather Resilience
     type: ability
     system:
       consumable: false
       maxQuantity:
-        saved: ''
         raw: ''
       quantity: 1
       adept:
@@ -389,9 +502,11 @@ effects:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       interaction: manifest
       invoked: false
       limitation: ''
@@ -402,10 +517,10 @@ effects:
           by weather.</p>
         proficient: ''
         fluent: ''
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      prepared: true
       range: Self.
       requirements: ''
       results:
@@ -419,7 +534,6 @@ effects:
         critFail: ''
       ritual: false
       rotator: false
-      secret: false
       skill: false
       spell: false
       standard: false
@@ -466,6 +580,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -503,6 +638,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -540,6 +696,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -577,8 +754,40 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: 4OIlC0joOc2cUBvk
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.sheepFamiliar000.ActiveEffect.qPeFv64XMOoLJPXf
+      revealed: true
+      grantOnlyText: ''
+    _id: iMbwBZtXcmkWq4hq
     img: systems/teriock/src/icons/abilities/weather-resilience.webp
     changes: []
     disabled: false
@@ -587,17 +796,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ecjxEoGs8cxyMRUW
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ecjxEoGs8cxyMRUW
-    _key: '!items.effects!AJZWPfWBSPwHGJ11.4OIlC0joOc2cUBvk'
+    _key: '!items.effects!sheepFamiliar000.iMbwBZtXcmkWq4hq'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!AJZWPfWBSPwHGJ11'
+_key: '!items!sheepFamiliar000'

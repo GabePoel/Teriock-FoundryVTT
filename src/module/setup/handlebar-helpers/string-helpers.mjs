@@ -1,4 +1,4 @@
-import { toCamelCase, toKebabCase } from "../../helpers/string.mjs";
+import { toCamelCase, toId, toKebabCase } from "../../helpers/string.mjs";
 import { roundTo } from "../../helpers/unit.mjs";
 
 export default function registerStringHelpers() {
@@ -77,6 +77,10 @@ export default function registerStringHelpers() {
       out = String(val).trim();
     }
     return out;
+  });
+
+  Handlebars.registerHelper("ruleUuid", (namespace, pageName) => {
+    return `Compendium.teriock.rules.JournalEntry.${toId(namespace)}.JournalEntryPage.${toId(pageName)}`;
   });
 
   Handlebars.registerHelper("escapeAttr", function (html) {

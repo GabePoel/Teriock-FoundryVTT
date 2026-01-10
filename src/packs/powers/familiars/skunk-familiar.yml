@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: skunkFamiliar000
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Skunk Familiar
 system:
@@ -8,18 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.eOAOvn127pX0WUB5]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.skunkFamiliar000
 type: power
-_id: 2cwMlq7eYyW2GDwz
 effects:
-  - name: Skunk Tamer
-    type: fluency
+  - _id: skunkTamer000000
     img: icons/environment/settlement/stables-logo.webp
+    name: Skunk Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Skunk]{skunk}.</p>
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
       macros: []
-    _id: AEtdgbVc9utsQECl
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.skunkFamiliar000.ActiveEffect.skunkTamer000000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -27,24 +46,76 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!2cwMlq7eYyW2GDwz.AEtdgbVc9utsQECl'
+    _key: '!items.effects!skunkFamiliar000.skunkTamer000000'
   - name: Disable Ray
     type: ability
+    img: systems/teriock/src/icons/abilities/disable-ray.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - spiritual
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: reactive
+      executionTime: r1
+      delivery:
+        base: missile
+        parent: null
+        package: ray
+      targets:
+        - creature
+      elements: []
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Minute
+        stationary: false
+      sustained: false
+      range: '60'
+      overview:
+        base: ''
+        proficient: >-
+          <p>This also makes the effect of that @L[Category:Abilities]{ability}
+          @L[Core:Fizzles]{fizzle}.</p>
+        fluent: ''
+      results:
+        hit: >-
+          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.</p>
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 1
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: thief
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -73,88 +144,29 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: missile
-        parent: null
-        package: ray
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: r1
+      requirements: <p>You may only target the triggering creature.</p>
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: ''
-      maneuver: reactive
-      overview:
-        base: ''
-        proficient: >-
-          <p>This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.</p>
-        fluent: ''
-      piercing: av0
-      powerSources:
-        - spiritual
-      prepared: true
-      range: '60'
-      requirements: <p>You may only target the triggering creature.</p>
-      results:
-        hit: >-
-          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.</p>
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - creature
       trigger: >-
         <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
         @L[Category:Active abilities]{active} or @L[Category:Reactive
         abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
         against a different creature or some @L[Category:Equipment]{equipment}
         that different creature @L[Keyword:Bearing]{bares}.</p>
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: thief
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -194,6 +206,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: true
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -231,6 +264,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -268,6 +322,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -305,9 +380,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: ePwBRUHHWv8ADMCt
-    img: systems/teriock/src/icons/abilities/disable-ray.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.skunkFamiliar000.ActiveEffect.03zYiI47B3Y5hkMO
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: JMtK1yCnqAhbEEZV
     changes: []
     disabled: false
     origin: null
@@ -315,18 +429,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.knrv03v30XSKyWpW
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.knrv03v30XSKyWpW
-    _key: '!items.effects!2cwMlq7eYyW2GDwz.ePwBRUHHWv8ADMCt'
+    _key: '!items.effects!skunkFamiliar000.JMtK1yCnqAhbEEZV'
   - name: Inedible
     type: ability
     system:
       consumable: false
       maxQuantity:
-        saved: ''
         raw: ''
       quantity: 1
       adept:
@@ -391,9 +504,11 @@ effects:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       interaction: manifest
       invoked: false
       limitation: ''
@@ -409,10 +524,10 @@ effects:
           being used.</div>
         proficient: ''
         fluent: ''
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      prepared: true
       range: Self.
       requirements: ''
       results:
@@ -426,7 +541,6 @@ effects:
         critFail: ''
       ritual: false
       rotator: false
-      secret: false
       skill: false
       spell: false
       standard: false
@@ -473,6 +587,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -510,6 +645,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -547,6 +703,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -584,8 +761,40 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: MnY9ZD4ORlkprbWz
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.skunkFamiliar000.ActiveEffect.7RFFLx4SHgpXQR7z
+      revealed: true
+      grantOnlyText: ''
+    _id: WzJUOYpyjt2Hr9w7
     img: systems/teriock/src/icons/abilities/inedible.webp
     changes: []
     disabled: false
@@ -594,17 +803,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.IunQf9eYBnSCttxR
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.IunQf9eYBnSCttxR
-    _key: '!items.effects!2cwMlq7eYyW2GDwz.MnY9ZD4ORlkprbWz'
+    _key: '!items.effects!skunkFamiliar000.WzJUOYpyjt2Hr9w7'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!2cwMlq7eYyW2GDwz'
+_key: '!items!skunkFamiliar000'

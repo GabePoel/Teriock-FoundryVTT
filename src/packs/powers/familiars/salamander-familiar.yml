@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: salamanderFamili
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Salamander Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.3T5a4RSGDav3Qs9r]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.salamanderFamili
 type: power
-_id: 0KqGdNp771I1Aw9A
 effects:
-  - name: Salamander Tamer
-    type: fluency
+  - _id: salamanderTamer0
+    img: icons/environment/settlement/stables-logo.webp
+    name: Salamander Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Salamander]{salamander}.</p>
-    _id: a9oFDVG8RiAHiXNP
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.salamanderFamili.ActiveEffect.salamanderTamer0
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!0KqGdNp771I1Aw9A.a9oFDVG8RiAHiXNP'
+    _key: '!items.effects!salamanderFamili.salamanderTamer0'
   - name: Fire Damage Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire
+          damage}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -68,79 +137,24 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - resistance
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire
-          damage}.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - resistance
       impacts:
         base:
           statuses: []
@@ -151,10 +165,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: fire
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.protections.resistances.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: fire
           common: []
           expiration:
             normal:
@@ -183,6 +200,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -220,6 +258,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -257,6 +316,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -294,9 +374,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: 42qNf17G6XQAJ2hW
-    img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.salamanderFamili.ActiveEffect.qgmY8E8fM9aDH0Gh
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: 0bKHuWvJ4DsL1UAX
     changes: []
     disabled: false
     origin: null
@@ -304,24 +422,77 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.MQ3B15c8wF579ID9
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.MQ3B15c8wF579ID9
-    _key: '!items.effects!0KqGdNp771I1Aw9A.42qNf17G6XQAJ2hW'
+    _key: '!items.effects!salamanderFamili.0bKHuWvJ4DsL1UAX'
   - name: Healing Factor
     type: ability
+    img: systems/teriock/src/icons/abilities/healing-factor.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - primal
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent:
+            - down
+        description: While Up
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
+          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
+          die}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
+          apply on your next @L[Core:Turns]{turn}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -346,84 +517,25 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent:
-            - down
-        stationary: false
-        description: While Up
-      effectTypes:
-        - healing
-        - regeneration
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: <p>Limbs only.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
-          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
-          die}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
-          apply on your next @L[Core:Turns]{turn}.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - primal
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: <p>Limbs only.</p>
+      improvement: ''
       warded: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - healing
+        - regeneration
       impacts:
         base:
           statuses: []
@@ -462,6 +574,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -499,6 +632,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -536,6 +690,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -573,10 +748,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros:
           Compendium_teriock_execution_Macro_ZM9N8Z1sgRIN5HRZ: turnStart
-    _id: Qf4JkOHKo0twnzRu
-    img: systems/teriock/src/icons/abilities/healing-factor.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.salamanderFamili.ActiveEffect.XkgxQPffV0tc0yKI
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: anVeZIN2Fe6wkCRa
     changes: []
     disabled: false
     origin: null
@@ -584,17 +797,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.6Am799dFKw6GrmmL
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.6Am799dFKw6GrmmL
-    _key: '!items.effects!0KqGdNp771I1Aw9A.Qf4JkOHKo0twnzRu'
+    _key: '!items.effects!salamanderFamili.anVeZIN2Fe6wkCRa'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!0KqGdNp771I1Aw9A'
+_key: '!items!salamanderFamili'

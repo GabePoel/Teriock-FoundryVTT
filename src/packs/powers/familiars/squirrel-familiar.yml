@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: squirrelFamiliar
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Squirrel Familiar
 system:
@@ -8,18 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.3cmjfq9y7OdMUyL2]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.squirrelFamiliar
 type: power
-_id: XPrkRkMq9OeNiBtl
 effects:
-  - name: Squirrel Tamer
-    type: fluency
+  - _id: squirrelTamer000
     img: icons/environment/settlement/stables-logo.webp
+    name: Squirrel Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Squirrel]{squirrel}.</p>
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
       macros: []
-    _id: PJcqiMSMTYRDnxMK
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.squirrelFamiliar.ActiveEffect.squirrelTamer000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -27,24 +46,74 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!XPrkRkMq9OeNiBtl.PJcqiMSMTYRDnxMK'
+    _key: '!items.effects!squirrelFamiliar.squirrelTamer000'
   - name: Acrobatics
     type: ability
+    img: systems/teriock/src/icons/abilities/acrobatics.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Climbing]{Climbing} and
+          @L[Ability:Leaping]{Leaping}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: mov
+          amount: proficiency
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: assassin
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -69,80 +138,24 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - movement
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Climbing]{Climbing} and
-          @L[Ability:Leaping]{Leaping}.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: assassin
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - movement
       impacts:
         base:
           statuses: []
@@ -181,6 +194,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -218,6 +252,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -255,6 +310,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -292,9 +368,46 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: cMXttDAozT7vFuOJ
-    img: systems/teriock/src/icons/abilities/acrobatics.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.squirrelFamiliar.ActiveEffect.WnTpVmHxs8K4WyMH
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
     changes: []
     disabled: false
     origin: null
@@ -302,15 +415,15 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.Q2MuAocYolNGAbhb
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Q2MuAocYolNGAbhb
-    _key: '!items.effects!XPrkRkMq9OeNiBtl.cMXttDAozT7vFuOJ'
+    _id: WnTpVmHxs8K4WyMH
+    _key: '!items.effects!squirrelFamiliar.WnTpVmHxs8K4WyMH'
   - name: Climbing
     type: ability
-    img: systems/teriock/src/icons/abilities/climbing.webp
     system:
       elderSorcery: false
       elderSorceryIncant: ''
@@ -333,8 +446,8 @@ effects:
         conditions:
           present: []
           absent: []
-        description: Always Active
         stationary: false
+        description: Always Active
       sustained: false
       range: Self.
       overview:
@@ -350,14 +463,17 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: false
       spell: false
       standard: false
@@ -399,23 +515,16 @@ effects:
       form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       effectTypes:
         - movement
-      adept:
-        enabled: false
-        amount: 1
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       impacts:
         base:
           statuses: []
@@ -426,10 +535,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.speedAdjustments.climb
+              target: Actor
+              qualifier: '1'
+              value: '2'
           common: []
           expiration:
             normal:
@@ -458,6 +570,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -467,10 +600,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              value: '3'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.speedAdjustments.climb
+              target: Actor
+              qualifier: '1'
+              value: '3'
           common: []
           expiration:
             normal:
@@ -499,6 +635,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -536,6 +693,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -573,9 +751,45 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-      _sup: cMXttDAozT7vFuOJ
-    _id: 7lUzBfdfBTjgsgHi
+      _sup: WnTpVmHxs8K4WyMH
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.Q2MuAocYolNGAbhb.ActiveEffect.eoxLjZXWhFrAkTfB
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    img: systems/teriock/src/icons/abilities/climbing.webp
     changes: []
     disabled: false
     origin: null
@@ -583,15 +797,15 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cgveL1wHhWQoZH7b
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cgveL1wHhWQoZH7b
-    _key: '!items.effects!XPrkRkMq9OeNiBtl.7lUzBfdfBTjgsgHi'
+    _id: eoxLjZXWhFrAkTfB
+    _key: '!items.effects!squirrelFamiliar.eoxLjZXWhFrAkTfB'
   - name: Leaping
     type: ability
-    img: systems/teriock/src/icons/abilities/leaping.webp
     system:
       elderSorcery: false
       elderSorceryIncant: ''
@@ -614,8 +828,8 @@ effects:
         conditions:
           present: []
           absent: []
-        description: Always Active
         stationary: false
+        description: Always Active
       sustained: false
       range: Self.
       overview:
@@ -635,14 +849,17 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
@@ -685,23 +902,16 @@ effects:
       form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       effectTypes:
         - movement
-      adept:
-        enabled: false
-        amount: 1
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       impacts:
         base:
           statuses: []
@@ -712,14 +922,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.speedAdjustments.leapVertical
+              target: Actor
+              qualifier: '1'
               value: '1'
+            - mode: 4
               priority: 10
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
+              time: normal
+              key: system.speedAdjustments.leapHorizontal
+              target: Actor
+              qualifier: '1'
               value: '2'
-              priority: 10
           common: []
           expiration:
             normal:
@@ -748,6 +964,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -757,14 +994,20 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.speedAdjustments.leapVertical
+              target: Actor
+              qualifier: '1'
               value: '2'
+            - mode: 4
               priority: 10
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
+              time: normal
+              key: system.speedAdjustments.leapHorizontal
+              target: Actor
+              qualifier: '1'
               value: '3'
-              priority: 10
           common: []
           expiration:
             normal:
@@ -793,6 +1036,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -830,6 +1094,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -867,9 +1152,45 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-      _sup: cMXttDAozT7vFuOJ
-    _id: KzuDznkRc20l7YqB
+      _sup: WnTpVmHxs8K4WyMH
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.Q2MuAocYolNGAbhb.ActiveEffect.klP4mbW67ugdmf11
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    img: systems/teriock/src/icons/abilities/leaping.webp
     changes: []
     disabled: false
     origin: null
@@ -877,24 +1198,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.WJ91XuNoYd43DhFL
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.WJ91XuNoYd43DhFL
-    _key: '!items.effects!XPrkRkMq9OeNiBtl.KzuDznkRc20l7YqB'
+    _id: klP4mbW67ugdmf11
+    _key: '!items.effects!squirrelFamiliar.klP4mbW67ugdmf11'
   - name: Shatter
     type: ability
+    img: systems/teriock/src/icons/abilities/shatter.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: weapon
+        parent: null
+        package: strike
+      targets:
+        - item
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: Your Weapon's Range
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      results:
+        hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 1
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: ranger
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -919,78 +1289,24 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: weapon
-        parent: null
-        package: strike
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes:
-        - destruction
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: a1
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: <p>@L[Category:Knickknacks]{Knickknacks} only.</p>
-      maneuver: active
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      piercing: av0
-      powerSources:
-        - martial
-      prepared: true
-      range: Your Weapon's Range
-      requirements: ''
-      results:
-        hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - item
       trigger: ''
+      basic: false
+      form: normal
+      limitation: <p>@L[Category:Knickknacks]{Knickknacks} only.</p>
+      improvement: ''
       warded: false
-      class: ranger
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - destruction
       impacts:
         base:
           statuses: []
@@ -1029,6 +1345,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -1066,6 +1403,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -1103,6 +1461,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -1140,9 +1519,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: yLqTg6zuw6AmA1xP
-    img: systems/teriock/src/icons/abilities/shatter.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.squirrelFamiliar.ActiveEffect.mmYWq8JhC1w3Ct0c
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: VfUeHhYpMxnBZEOA
     changes: []
     disabled: false
     origin: null
@@ -1150,17 +1567,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.Xmxi22KoJa2UTFzY
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Xmxi22KoJa2UTFzY
-    _key: '!items.effects!XPrkRkMq9OeNiBtl.yLqTg6zuw6AmA1xP'
+    _key: '!items.effects!squirrelFamiliar.VfUeHhYpMxnBZEOA'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!XPrkRkMq9OeNiBtl'
+_key: '!items!squirrelFamiliar'

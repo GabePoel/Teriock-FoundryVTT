@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: mouseFamiliar000
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Mouse Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.t9w9Ddzaod0vmUOa]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.mouseFamiliar000
 type: power
-_id: LwDbgcE4CKwnZvSq
 effects:
-  - name: Mouse Tamer
-    type: fluency
+  - _id: mouseTamer000000
+    img: icons/environment/settlement/stables-logo.webp
+    name: Mouse Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Mouse]{mouse}.</p>
-    _id: h6xLNjd3TbkgEzh0
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.mouseFamiliar000.ActiveEffect.mouseTamer000000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,83 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!LwDbgcE4CKwnZvSq.h6xLNjd3TbkgEzh0'
+    _key: '!items.effects!mouseFamiliar000.mouseTamer000000'
   - name: Hide
     type: ability
+    img: systems/teriock/src/icons/abilities/hide.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
+          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
+          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
+          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+        fluent: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: snk
+          minVal: 2
+          text: ''
+        featSaveImprovement:
+          attribute: snk
+          amount: proficiency
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: thief
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -68,93 +147,27 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: a1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          attribute: snk
-          amount: proficiency
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: >-
-          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
-          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
-          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-        fluent: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
+      endCondition: ''
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: thief
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -195,6 +208,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -233,6 +267,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -271,6 +326,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -308,9 +384,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: GmFMp5kyxBOZO1sD
-    img: systems/teriock/src/icons/abilities/hide.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.mouseFamiliar000.ActiveEffect.lLcC53jxyn5WbiDA
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: KyTWLVdDdGQvpo3E
     changes: []
     disabled: false
     origin: null
@@ -318,24 +433,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.6gOwusIdo9DIGf7L
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.6gOwusIdo9DIGf7L
-    _key: '!items.effects!LwDbgcE4CKwnZvSq.GmFMp5kyxBOZO1sD'
+    _key: '!items.effects!mouseFamiliar000.KyTWLVdDdGQvpo3E'
   - name: Talented Investigator
     type: ability
+    img: icons/skills/trades/academics-investigation-study-blue.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You are a @L[Keyword:Talented]{talented}
+          @L[Tradecraft:Investigator]{investigator}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -360,78 +524,22 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are a @L[Keyword:Talented]{talented}
-          @L[Tradecraft:Investigator]{investigator}.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -442,10 +550,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.tradecrafts.investigator.score
-              mode: 4
-              value: '1'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.tradecrafts.investigator.score
+              target: Actor
+              qualifier: '1'
+              value: '1'
           common: []
           expiration:
             normal:
@@ -474,6 +585,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -511,6 +643,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -548,6 +701,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -585,9 +759,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: gRZ6iLiiJN49RMn4
-    img: icons/skills/trades/academics-investigation-study-blue.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.mouseFamiliar000.ActiveEffect.Q07dp7ScmGOR1Nz6
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: xFfzOacqWWomgvmj
     changes: []
     disabled: false
     origin: null
@@ -595,17 +808,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.CmxaGvb8gtRUOABb
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.CmxaGvb8gtRUOABb
-    _key: '!items.effects!LwDbgcE4CKwnZvSq.gRZ6iLiiJN49RMn4'
+    _key: '!items.effects!mouseFamiliar000.xFfzOacqWWomgvmj'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!LwDbgcE4CKwnZvSq'
+_key: '!items!mouseFamiliar000'

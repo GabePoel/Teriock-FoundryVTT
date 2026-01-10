@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: raccoonFamiliar0
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Raccoon Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.10LYQGZXttzeHGKB]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.raccoonFamiliar0
 type: power
-_id: I2jXw9mYp9fE8Hv9
 effects:
-  - name: Raccoon Tamer
-    type: fluency
+  - _id: raccoonTamer0000
+    img: icons/environment/settlement/stables-logo.webp
+    name: Raccoon Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Raccoon]{raccoon}.</p>
-    _id: n2CM5I1xcz0IhYrL
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.raccoonFamiliar0.ActiveEffect.raccoonTamer0000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,76 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!I2jXw9mYp9fE8Hv9.n2CM5I1xcz0IhYrL'
+    _key: '!items.effects!raccoonFamiliar0.raccoonTamer0000'
   - name: Reflexes
     type: ability
+    img: systems/teriock/src/icons/abilities/reflexes.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
+          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
+          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
+          Reflexes}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: mov
+          amount: proficiency
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: archer
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -68,84 +140,26 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - resistance
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
+      trigger: ''
+      basic: false
       form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      interaction: manifest
-      invoked: false
       limitation: >-
         <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, but
         gain no other benefits from this.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
-          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
-          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
-          Reflexes}.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
-      trigger: ''
+      improvement: ''
       warded: false
-      class: archer
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - resistance
       impacts:
         base:
           statuses: []
@@ -156,10 +170,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.protections.resistances.abilities
-              mode: 2
-              value: Disarm
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.protections.resistances.abilities
+              target: Actor
+              qualifier: '1'
+              value: Disarm
           common: []
           expiration:
             normal:
@@ -188,6 +205,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -225,6 +263,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -262,6 +321,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -299,9 +379,46 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: fFvcEes8PD7cvnS8
-    img: systems/teriock/src/icons/abilities/reflexes.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.raccoonFamiliar0.ActiveEffect.7E2djPMPPxCkmHFj
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
     changes: []
     disabled: false
     origin: null
@@ -309,15 +426,15 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.tZCr6vsAUnW9LqYd
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.tZCr6vsAUnW9LqYd
-    _key: '!items.effects!I2jXw9mYp9fE8Hv9.fFvcEes8PD7cvnS8'
+    _id: 7E2djPMPPxCkmHFj
+    _key: '!items.effects!raccoonFamiliar0.7E2djPMPPxCkmHFj'
   - name: Missile Reflexes
     type: ability
-    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
     system:
       elderSorcery: false
       elderSorceryIncant: ''
@@ -341,8 +458,8 @@ effects:
         conditions:
           present: []
           absent: []
-        description: Instant
         stationary: false
+        description: Instant
       sustained: false
       range: null
       overview:
@@ -360,14 +477,17 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
@@ -413,23 +533,16 @@ effects:
       form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       effectTypes:
         - resistance
-      adept:
-        enabled: false
-        amount: 1
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       impacts:
         base:
           statuses: []
@@ -468,6 +581,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -505,6 +639,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -542,6 +697,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -579,9 +755,45 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-      _sup: fFvcEes8PD7cvnS8
-    _id: JAZtvsENi3KoLh1d
+      _sup: 7E2djPMPPxCkmHFj
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.tZCr6vsAUnW9LqYd.ActiveEffect.ydtuQlpfvDvb9rXd
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
     changes: []
     disabled: false
     origin: null
@@ -589,24 +801,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.3dgI6vWMEP4hTiJs
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.3dgI6vWMEP4hTiJs
-    _key: '!items.effects!I2jXw9mYp9fE8Hv9.JAZtvsENi3KoLh1d'
+    _id: ydtuQlpfvDvb9rXd
+    _key: '!items.effects!raccoonFamiliar0.ydtuQlpfvDvb9rXd'
   - name: Unglue
     type: ability
+    img: systems/teriock/src/icons/abilities/unglue.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - spiritual
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      targets:
+        - item
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: Your Hand's Range
+      overview:
+        base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: thief
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -631,80 +892,26 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: hand
-        parent: null
-        package: null
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes:
-        - stealing
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: a1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - spiritual
-      prepared: true
-      range: Your Hand's Range
+      endCondition: ''
       requirements: >-
         <p>Target's bearer is @L[Condition:Down]{down} or target it
         @L[Property:Searchable]{searchable}.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - item
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: thief
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - stealing
       impacts:
         base:
           statuses: []
@@ -743,6 +950,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -780,6 +1008,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -817,6 +1066,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -854,9 +1124,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: oZ92lFTru21x7UWU
-    img: systems/teriock/src/icons/abilities/unglue.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.raccoonFamiliar0.ActiveEffect.SVJ455NJp8mOB6uO
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: 3JchQOsjdwQORrgE
     changes: []
     disabled: false
     origin: null
@@ -864,17 +1172,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.vNHpm5rUruYXFGHr
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vNHpm5rUruYXFGHr
-    _key: '!items.effects!I2jXw9mYp9fE8Hv9.oZ92lFTru21x7UWU'
+    _key: '!items.effects!raccoonFamiliar0.3JchQOsjdwQORrgE'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!I2jXw9mYp9fE8Hv9'
+_key: '!items!raccoonFamiliar0'

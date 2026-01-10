@@ -3,7 +3,12 @@
   <div class="character-tab-page">
     <div class="tgrid g2" style="gap: 1em;">
       <div class="teriock-block-display">
-        <div class="character-shortbox character-movement-box">
+        <div
+          class="character-shortbox character-movement-box"
+          data-uuid="{{ruleUuid "Core" "Movement Speed"}}"
+          data-make-tooltip
+          data-tooltip-left="true"
+        >
           <div class="tsubtle tcenter">
             Movement Speed
           </div>
@@ -143,8 +148,14 @@
           </div>
         </div>
         <div class="teriock-block-display" style="padding-top: 0.75em;">
-          <div class="carrying-box-main" style="display: flex; flex-direction: row;">
-            <div class="character-shortbox character-size-box">
+          <div
+            data-uuid="{{ruleUuid "Core" "Size"}}"
+            data-make-tooltip
+            class="carrying-box-main" style="display: flex; flex-direction: row;"
+          >
+            <div
+              class="character-shortbox character-size-box"
+            >
               <div class="tsubtle tcenter">
                 Size
               </div>
@@ -156,8 +167,10 @@
                   systemFields.size.fields.number
                   value=system._source.size.number.raw
                   classes="character-size-input character-smallbox-value selected transparent-input"
-                  dataset=(object tooltip=(concat (ucFirst system.size.category) ": " system.size.reach " ft
-                  reach"))
+                  dataset=(object
+                    tooltip=(concat (ucFirst system.size.category) ": " system.size.reach " ft reach")
+                    tooltipClass=""
+                    tooltipDirection="DOWN")
                 }}
               </div>
             </div>
@@ -173,7 +186,11 @@
                   systemFields.weight.fields.self
                   value=system._source.weight.self.raw
                   classes="character-weight-input character-smallbox-value selected transparent-input"
-                  dataset=(object tooltip=(concat "Including Equipment: " system.weight.value " lb"))
+                  dataset=(object
+                    tooltip=(concat "Including Equipment: " system.weight.value " lb")
+                    tooltipClass=""
+                    tooltipDirection=""
+                  )
                 }}
               </div>
             </div>
@@ -181,14 +198,24 @@
               <div class="tsubtle tcenter">
                 Carrying
               </div>
-              <div class="character-smallbox-value tcenter"
-                   data-tooltip="Including Self: {{{system.weight.value}}} lb" style="height: 2rem;">{{{system.weight
+              <div
+                class="character-smallbox-value tcenter"
+                data-tooltip-class=""
+                data-tooltip="Including Self: {{{system.weight.value}}} lb"
+                data-tooltip-direction="DOWN"
+                style="height: 2rem;"
+              >{{{system.weight
               .carried}}} lb
               </div>
             </div>
           </div>
-          <div class="teriock-block-display-divider" style="margin-top: 0.125em; margin-bottom: 0.625em;"></div>
-          <div class="tgrid g3">
+          <div class="teriock-block-display-divider"
+               style="margin-top: 0.125em; margin-bottom: 0.625em;"></div>
+          <div
+            class="tgrid g3"
+            data-uuid="{{ruleUuid "Core" "Carrying Capacity"}}"
+            data-make-tooltip
+          >
             <div class="tsubtle tcenter">
               Light
             </div>
@@ -201,18 +228,24 @@
             <div
               class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.light)}}tred{{/if}}"
               data-tooltip="Light Carrying Capacity"
+              data-tooltip-direction="DOWN"
+              data-tooltip-class=""
             >
               {{{system.carryingCapacity.light}}} lb
             </div>
             <div
               class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}tred{{/if}}"
               data-tooltip="Heavy Carrying Capacity"
+              data-tooltip-direction="DOWN"
+              data-tooltip-class=""
             >
               {{{system.carryingCapacity.heavy}}} lb
             </div>
             <div
               class="tcenter tround {{#if (gte system.weight.carried system.carryingCapacity.max)}}tred{{/if}}"
               data-tooltip="Maximum Carrying Capacity"
+              data-tooltip-direction="DOWN"
+              data-tooltip-class=""
             >
               {{{system.carryingCapacity.max}}} lb
             </div>
@@ -221,7 +254,12 @@
       </div>
       <div class="teriock-block-display" style=" padding-bottom: 0.25em; padding-top: 0.75em;">
         <div class="tgrid g2">
-          <div class="character-shortbox">
+          <div
+            class="character-shortbox"
+            data-uuid="{{ruleUuid "Keyword" "Curse"}}"
+            data-make-tooltip
+            data-tooltip-left="true"
+          >
             <div class="tsubtle tcenter">
               Curses
             </div>

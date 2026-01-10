@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: bearFamiliar0000
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Bear Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.GuPa9fGNIyhdMrAI]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.bearFamiliar0000
 type: power
-_id: wjGT39C9YGy8FJ9U
 effects:
-  - name: Bear Tamer
-    type: fluency
+  - _id: bearTamer0000000
+    img: icons/environment/settlement/stables-logo.webp
+    name: Bear Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Bear]{bear}.</p>
-    _id: 1yzp3vcGc0rJf43H
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.bearFamiliar0000.ActiveEffect.bearTamer0000000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,74 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.1yzp3vcGc0rJf43H'
+    _key: '!items.effects!bearFamiliar0000.bearTamer0000000'
   - name: Battle Cry
     type: ability
+    img: systems/teriock/src/icons/abilities/battle-cry.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
+          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: berserker
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -68,79 +138,22 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
-          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: berserker
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -179,6 +192,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -216,6 +250,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -253,6 +308,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -290,9 +366,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: mptGm4kyhXk1nEki
-    img: systems/teriock/src/icons/abilities/battle-cry.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.bearFamiliar0000.ActiveEffect.uV5wvALPRvXonQRj
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
     changes: []
     disabled: false
     origin: null
@@ -300,15 +414,15 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.mptGm4kyhXk1nEki'
+    _id: uV5wvALPRvXonQRj
+    _key: '!items.effects!bearFamiliar0000.uV5wvALPRvXonQRj'
   - name: Battle Cry Aura
     type: ability
-    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     system:
       elderSorcery: false
       elderSorceryIncant: ''
@@ -331,8 +445,8 @@ effects:
         conditions:
           present: []
           absent: []
-        description: 1 Minute
         stationary: false
+        description: 1 Minute
       sustained: false
       range: '10'
       overview:
@@ -348,14 +462,17 @@ effects:
         critSave: ''
         fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
@@ -400,23 +517,16 @@ effects:
       form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       effectTypes:
         - loud
-      adept:
-        enabled: false
-        amount: 1
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       impacts:
         base:
           statuses:
@@ -457,6 +567,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: true
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -494,6 +625,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -531,6 +683,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -568,10 +741,46 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: mptGm4kyhXk1nEki
-    _id: BpEl79h0qYZ6noiW
+      _sup: uV5wvALPRvXonQRj
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo.ActiveEffect.IqZvefl9CneFIip9
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     changes: []
     disabled: false
     origin: null
@@ -579,15 +788,15 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.qdoHZufxtGs1nUUZ
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qdoHZufxtGs1nUUZ
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.BpEl79h0qYZ6noiW'
+    _id: IqZvefl9CneFIip9
+    _key: '!items.effects!bearFamiliar0000.IqZvefl9CneFIip9'
   - name: Battle Cry Resistance
     type: ability
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     system:
       elderSorcery: false
       elderSorceryIncant: ''
@@ -610,8 +819,8 @@ effects:
         conditions:
           present: []
           absent: []
-        description: 5 Minutes
         stationary: false
+        description: 5 Minutes
       sustained: false
       range: Self.
       overview:
@@ -629,14 +838,17 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
@@ -679,23 +891,16 @@ effects:
       form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       effectTypes:
         - resistance
-      adept:
-        enabled: false
-        amount: 1
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       impacts:
         base:
           statuses: []
@@ -706,10 +911,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              value: frightened
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.protections.resistances.statuses
+              target: Actor
+              qualifier: '1'
+              value: frightened
           common: []
           expiration:
             normal:
@@ -738,6 +946,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -775,6 +1004,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -812,6 +1062,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -849,9 +1120,45 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-      _sup: mptGm4kyhXk1nEki
-    _id: BGWAKvTMu1nxZFQ9
+      _sup: uV5wvALPRvXonQRj
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo.ActiveEffect.RRKOb9lu8cK3akUj
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     changes: []
     disabled: false
     origin: null
@@ -859,24 +1166,85 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.DqXrfWmMV6e0tUmE
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DqXrfWmMV6e0tUmE
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.BGWAKvTMu1nxZFQ9'
+    _id: RRKOb9lu8cK3akUj
+    _key: '!items.effects!bearFamiliar0000.RRKOb9lu8cK3akUj'
   - name: Endure
     type: ability
+    img: systems/teriock/src/icons/abilities/endure.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: reactive
+      executionTime: r1
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>You take the triggering @L[Core:Damage]{damage} as a
+          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
+          types]{damage types} still apply. If the hit was critical, you instead
+          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
+          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
+          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
+          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
+          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
+          @L[Core:Damage]{damage} was dealt by a creature, they choose which
+          limb is affected. If not, it is random. Only an
+          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
+          possible, you take the @L[Core:Damage]{damage} normally.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: ranger
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -901,92 +1269,26 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes:
-        - damaging
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: r1
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
-          types]{damage types} still apply. If the hit was critical, you instead
-          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
-          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
-          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
-          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
-          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
-          @L[Core:Damage]{damage} was dealt by a creature, they choose which
-          limb is affected. If not, it is random. Only an
-          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
-          possible, you take the @L[Core:Damage]{damage} normally.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
       trigger: >-
         <p>You are hit by an @L[Category:Attack abilities]{attack} that would
         @L[Core:Damage]{damage} you.</p>
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: ranger
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - damaging
       impacts:
         base:
           statuses: []
@@ -1027,6 +1329,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -1064,6 +1387,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -1101,6 +1445,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -1138,9 +1503,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: aofCho9DufnyhQnD
-    img: systems/teriock/src/icons/abilities/endure.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.bearFamiliar0000.ActiveEffect.r2w21pFuh00q2GxO
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: tD6ff3hrdA9n9BVf
     changes: []
     disabled: false
     origin: null
@@ -1148,17 +1551,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.5pxoM0JSm5bLRHB1
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5pxoM0JSm5bLRHB1
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.aofCho9DufnyhQnD'
+    _key: '!items.effects!bearFamiliar0000.tD6ff3hrdA9n9BVf'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!wjGT39C9YGy8FJ9U'
+_key: '!items!bearFamiliar0000'

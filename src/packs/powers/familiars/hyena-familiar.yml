@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: hyenaFamiliar000
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Hyena Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.pLuJHpA0V5XgYAsl]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.hyenaFamiliar000
 type: power
-_id: xOmva8z1wXxsRG0E
 effects:
-  - name: Hyena Tamer
-    type: fluency
+  - _id: hyenaTamer000000
+    img: icons/environment/settlement/stables-logo.webp
+    name: Hyena Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Hyena]{hyena}.</p>
-    _id: RZLeYBhvdHZpid1V
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.hyenaFamiliar000.ActiveEffect.hyenaTamer000000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,73 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!xOmva8z1wXxsRG0E.RZLeYBhvdHZpid1V'
+    _key: '!items.effects!hyenaFamiliar000.hyenaTamer000000'
   - name: Spirit Bury
     type: ability
+    img: systems/teriock/src/icons/abilities/spirit-bury.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      targets:
+        - creature
+      elements:
+        - necromancy
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Minute
+        stationary: false
+      sustained: false
+      range: null
+      overview:
+        base: ''
+        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+        fluent: ''
+      results:
+        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: necromancer
+      rotator: true
+      invoked: false
       costs:
         verbal: true
         somatic: true
@@ -68,81 +137,25 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: hand
-        parent: null
-        package: null
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - necromancy
-      endCondition: ''
-      executionTime: a1
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: attack
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: ''
-        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: null
+      endCondition: ''
       requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      results:
-        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: true
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: false
-      targets:
-        - creature
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: special
+      limitation: ''
+      improvement: ''
       warded: false
-      class: necromancer
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -181,6 +194,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -218,6 +252,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -255,6 +310,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -292,9 +368,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: EpziHfizWx9WiL3o
-    img: systems/teriock/src/icons/abilities/spirit-bury.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.hyenaFamiliar000.ActiveEffect.EsHlywdKRows9dhI
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: TBYG84ZNAR1k61DX
     changes: []
     disabled: false
     origin: null
@@ -302,24 +417,83 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.1QWmERgoW3b8TNEd
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.1QWmERgoW3b8TNEd
-    _key: '!items.effects!xOmva8z1wXxsRG0E.EpziHfizWx9WiL3o'
+    _key: '!items.effects!hyenaFamiliar000.TBYG84ZNAR1k61DX'
   - name: Spirit Guide
     type: ability
+    img: systems/teriock/src/icons/abilities/spirit-guide.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: slow
+      executionTime: 10 Minutes
+      delivery:
+        base: sight
+        parent: null
+        package: ritual
+      targets:
+        - creature
+      elements:
+        - necromancy
+      duration:
+        unit: hour
+        quantity: 24
+        conditions:
+          present: []
+          absent: []
+        description: 24 Hours
+        stationary: false
+      sustained: true
+      range: '5'
+      overview:
+        base: >-
+          <p>You can see, hear, and speak to spirits and
+          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+        proficient: >-
+          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Necromancy element abilities]{necromancy}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
+        fluent: >-
+          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Spiritually powered abilities]{spiritual}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: true
+      class: necromancer
+      rotator: false
+      invoked: false
       costs:
         verbal: true
         somatic: true
@@ -344,93 +518,28 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: sight
-        parent: null
-        package: ritual
-      duration:
-        unit: hour
-        quantity: 24
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 24 Hours
-      effectTypes:
-        - sensory
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - necromancy
-      endCondition: ''
-      executionTime: 10 Minutes
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, you may target an
         additional creature.</p>
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You can see, hear, and speak to spirits and
-          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
-        proficient: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
-        fluent: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Spiritually powered abilities]{spiritual}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: '5'
+      endCondition: ''
       requirements: >-
         <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
         yourself.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: true
-      rotator: false
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - creature
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: necromancer
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - sensory
       impacts:
         base:
           statuses: []
@@ -441,10 +550,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.senses.ethereal
-              mode: 4
-              value: '120'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.senses.ethereal
+              target: Actor
+              qualifier: '1'
+              value: '120'
           common: []
           expiration:
             normal:
@@ -473,6 +585,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -510,6 +643,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -547,6 +701,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -584,9 +759,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: bKt5jZossf4M6kna
-    img: systems/teriock/src/icons/abilities/spirit-guide.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.hyenaFamiliar000.ActiveEffect.omVOhleNRsyQKkxo
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: LWApwcIIJDEvc91f
     changes: []
     disabled: false
     origin: null
@@ -594,17 +807,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.4NVBhgZUa8LEiMrr
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.4NVBhgZUa8LEiMrr
-    _key: '!items.effects!xOmva8z1wXxsRG0E.bKt5jZossf4M6kna'
+    _key: '!items.effects!hyenaFamiliar000.LWApwcIIJDEvc91f'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!xOmva8z1wXxsRG0E'
+_key: '!items!hyenaFamiliar000'

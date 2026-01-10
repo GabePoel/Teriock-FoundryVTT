@@ -1,15 +1,21 @@
 name: Warrior
 type: power
-_id: rA3egf1EqyxnQklj
+_id: warrior000000000
 img: systems/teriock/src/icons/archetypes/warrior.webp
 system:
-  htmlFields:
-    - description
-    - flaws
+  competence:
+    raw: 1
   description: >-
     <p>Warriors are primarily fighters and can handle themselves well in heavy
-    melee combat. Though they all have similar combat strength, they achieve
-    different goals in battle in order to win their objective.</p>
+    melee @L[Core:Combat]{combat}. Though they all have similar combat strength,
+    they achieve different goals in battle in order to win their objective.</p>
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  _ref: Compendium.teriock.classes.Item.warrior000000000
+  maxAv: 4
   type: learned
 effects:
   - name: Warrior Techniques
@@ -59,7 +65,8 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
@@ -110,14 +117,11 @@ effects:
       form: normal
       limitation: ''
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       impacts:
         base:
           statuses: []
@@ -352,16 +356,25 @@ effects:
             useFolder: false
             uuid: null
         macros: {}
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.classes.Item.warrior000000000.ActiveEffect.8e9roKoeCSmTjbbo
       revealed: true
       adept:
         enabled: false
-        amount: 1
-      effectTypes: []
+        amount: 0
       gifted:
         enabled: false
-        amount: 1
+        amount: 0
       grantOnly: false
-    _id: HUdO8UHAVpkHTiW7
+      grantOnlyText: ''
     changes: []
     disabled: false
     origin: null
@@ -369,12 +382,13 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.DmnWKk7WUS5Hlkn3
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DmnWKk7WUS5Hlkn3
-    _key: '!items.effects!rA3egf1EqyxnQklj.HUdO8UHAVpkHTiW7'
+    _id: 8e9roKoeCSmTjbbo
+    _key: '!items.effects!warrior000000000.8e9roKoeCSmTjbbo'
   - name: Defensive Martial Arts
     type: ability
     system:
@@ -425,7 +439,8 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
@@ -474,11 +489,9 @@ effects:
       trigger: ''
       basic: false
       form: normal
-      limitation: While wearing armor only.
+      limitation: <p>While wearing @L[Category:Armor]{armor} only.</p>
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
@@ -486,7 +499,6 @@ effects:
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       impacts:
         base:
           statuses: []
@@ -497,10 +509,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-              mode: 4
-              value: '1'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.bv.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: '1'
           common: []
           expiration:
             normal:
@@ -559,10 +574,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.bv.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: '2'
           common: []
           expiration:
             normal:
@@ -621,10 +639,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-              mode: 4
-              value: '3'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.bv.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: '3'
           common: []
           expiration:
             normal:
@@ -733,13 +754,23 @@ effects:
             useFolder: false
             uuid: null
         macros: {}
+      _sup: 8e9roKoeCSmTjbbo
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.DmnWKk7WUS5Hlkn3.ActiveEffect.4tKZWhHPGEJoR7dR
       revealed: true
       adept:
         enabled: false
-        amount: 1
-      effectTypes: []
+        amount: 0
       grantOnly: false
-      _sup: HUdO8UHAVpkHTiW7
+      grantOnlyText: ''
     img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
     changes: []
     disabled: false
@@ -748,19 +779,19 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.FPhoEpWwyy8yBLvC
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.FPhoEpWwyy8yBLvC
-    _id: 7GPkhmroiLxRlqUX
-    _key: '!items.effects!rA3egf1EqyxnQklj.7GPkhmroiLxRlqUX'
+    _id: 4tKZWhHPGEJoR7dR
+    _key: '!items.effects!warrior000000000.4tKZWhHPGEJoR7dR'
+folder: warrior000000000
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-folder: EYkIxmsvhN14xIo5
-_key: '!items!rA3egf1EqyxnQklj'
+_key: '!items!warrior000000000'

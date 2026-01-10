@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: sharkFamiliar000
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Shark Familiar
 system:
@@ -8,18 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.AEOnvJzo7IXM9JWe]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.sharkFamiliar000
 type: power
-_id: PgWqf2M8K4FI2m1W
 effects:
-  - name: Shark Tamer
-    type: fluency
+  - _id: sharkTamer000000
     img: icons/environment/settlement/stables-logo.webp
+    name: Shark Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Shark]{shark}.</p>
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
       macros: []
-    _id: WE5dV4tulocgQpCg
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.sharkFamiliar000.ActiveEffect.sharkTamer000000
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -27,24 +46,85 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!PgWqf2M8K4FI2m1W.WE5dV4tulocgQpCg'
+    _key: '!items.effects!sharkFamiliar000.sharkTamer000000'
   - name: Resurrect
     type: ability
+    img: systems/teriock/src/icons/abilities/resurrect.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: slow
+      executionTime: 10 Minutes
+      delivery:
+        base: sight
+        parent: null
+        package: ritual
+      targets:
+        - creature
+      elements:
+        - life
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: '5'
+      overview:
+        base: >-
+          <p>If target is @L[Condition:Dead]{dead}, they are brought back to
+          life with 1 @L[Core:Hit Points and Mana Points]{HP}. If target is
+          @L[Category:Undead creatures]{undead}, you can choose to have them be
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
+          does not count as a @L[Category:Healing effects]{healing effect}
+          unless you choose to @L[Core:Healing]{heal} with it.</p>
+        proficient: >-
+          <p>If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
+          @L[Core:Proficiency Bonus]{P} times.</p>
+        fluent: >-
+          <p>If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
+          Bonus]{F} times.</p>
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: true
+      class: lifeMage
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -69,98 +149,31 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: sight
-        parent: null
-        package: ritual
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes:
-        - revival
-        - healing
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - life
-      endCondition: ''
-      executionTime: 10 Minutes
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 24 hours. If target is
         @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
         an additional time.</p>
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: slow
-      overview:
-        base: >-
-          <p>If target is @L[Condition:Dead]{dead}, they are brought back to
-          life with 1 @L[Core:Hit Points and Mana Points]{HP}. If target is
-          @L[Category:Undead creatures]{undead}, you can choose to have them be
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
-          does not count as a @L[Category:Healing effects]{healing effect}
-          unless you choose to @L[Core:Healing]{heal} with it.</p>
-        proficient: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
-          @L[Core:Proficiency Bonus]{P} times.</p>
-        fluent: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
-          Bonus]{F} times.</p>
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: '5'
+      endCondition: ''
       requirements: >-
         <p>Target is @L[Category:Undead creatures]{undead} or has
         @L[Condition:Dead]{died} within the last 24 hours.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: true
-      rotator: false
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: false
-      targets:
-        - creature
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: lifeMage
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - revival
+        - healing
       impacts:
         base:
           statuses: []
@@ -199,6 +212,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -236,6 +270,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -273,6 +328,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -310,9 +386,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: jMP0laAR513nnsKo
-    img: systems/teriock/src/icons/abilities/resurrect.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.sharkFamiliar000.ActiveEffect.DuPrz66O8MibMz5a
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: dJM53bvDeVxfIV49
     changes: []
     disabled: false
     origin: null
@@ -320,24 +434,85 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bfp5m5K3bUnLwhob
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.bfp5m5K3bUnLwhob
-    _key: '!items.effects!PgWqf2M8K4FI2m1W.jMP0laAR513nnsKo'
+    _key: '!items.effects!sharkFamiliar000.dJM53bvDeVxfIV49'
   - name: Summon the Dead
     type: ability
+    img: systems/teriock/src/icons/abilities/summon-the-dead.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+        - spiritual
+        - primal
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: slow
+      executionTime: 10 Minutes
+      delivery:
+        base: sight
+        parent: null
+        package: ritual
+      targets:
+        - creature
+      elements:
+        - necromancy
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: '5'
+      overview:
+        base: >-
+          <p>If you have the body of the target in your possession, you can put
+          the spirit back into its body such that it is no longer
+          @L[Condition:Wisping]{wisping}. The body maintains all damage it had
+          when it died.</p>
+        proficient: >-
+          <p>If the body is thoroughly damaged (such as if it's
+          @L[Condition:Ruined]{ruined}) or missing entirely, you can expend some
+          of your own life force to recreate the body from the spirit for
+          additional @L[Core:Hit Points and Mana Points]{MP} and @L[Core:Hit
+          Points and Mana Points]{HP}. The creature is still dead, but the body
+          is now intact.</p>
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: false
+      spell: true
+      standard: true
+      ritual: true
+      class: necromancer
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -370,91 +545,24 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: sight
-        parent: null
-        package: ritual
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes:
-        - summoning
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements:
-        - necromancy
+      heightened: ''
       endCondition: ''
-      executionTime: 10 Minutes
+      requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: slow
-      overview:
-        base: >-
-          <p>If you have the body of the target in your possession, you can put
-          the spirit back into its body such that it is no longer
-          @L[Condition:Wisping]{wisping}. The body maintains all damage it had
-          when it died.</p>
-        proficient: >-
-          <p>If the body is thoroughly damaged (such as if it's
-          @L[Condition:Ruined]{ruined}) or missing entirely, you can expend some
-          of your own life force to recreate the body from the spirit for
-          additional @L[Core:Hit Points and Mana Points]{MP} and @L[Core:Hit
-          Points and Mana Points]{HP}. The creature is still dead, but the body
-          is now intact.</p>
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      prepared: true
-      range: '5'
-      requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: true
-      rotator: false
-      secret: false
-      skill: false
-      spell: true
-      standard: true
-      sustained: false
-      targets:
-        - creature
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: necromancer
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - summoning
       impacts:
         base:
           statuses: []
@@ -493,6 +601,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -530,6 +659,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -567,6 +717,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -604,9 +775,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: 8AHkfNgx9kJ4qKBX
-    img: systems/teriock/src/icons/abilities/summon-the-dead.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.sharkFamiliar000.ActiveEffect.VWvUHBh4tstpfvXc
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: XjojStGt56g9QFCj
     changes: []
     disabled: false
     origin: null
@@ -614,17 +823,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.QfYZVoHhxd8vLSiz
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.QfYZVoHhxd8vLSiz
-    _key: '!items.effects!PgWqf2M8K4FI2m1W.8AHkfNgx9kJ4qKBX'
+    _key: '!items.effects!sharkFamiliar000.XjojStGt56g9QFCj'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!PgWqf2M8K4FI2m1W'
+_key: '!items!sharkFamiliar000'

@@ -73,6 +73,17 @@ export function dotJoin(strings) {
 }
 
 /**
+ * Converts a string to an ID.
+ * @param {string} str
+ * @param {string} background
+ * @returns {string}
+ */
+export function toId(str, background = "0000000000000000") {
+  const camel = toCamelCase(str);
+  return camel.slice(0, 16) + background.slice(camel.length);
+}
+
+/**
  * Add a suffix to a string if it exists.
  * @param {string|number} base
  * @param {string} suffix

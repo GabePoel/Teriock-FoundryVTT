@@ -1,17 +1,17 @@
 name: Drain
-_id: BQHXYKIc5Lm27Tf3
+_id: drain00000000000
 pages:
-  - name: Mana
+  - _id: mana000000000000
+    name: Mana
     type: text
     text:
       content: >-
-        <p><span class="drain-box"></span>Mana Drain is similar to
+        <p><span class="drain-box"></span>Mana drain is similar to
         @L[Core:Damage]{damage}, but it reduces @L[Core:MP]{MP} instead of
         @L[Core:HP]{HP}.
 
         </p>
       format: 1
-    _id: LZ3lfJjj0S5TDJEu
     system: {}
     title:
       show: true
@@ -24,16 +24,84 @@ pages:
     category: null
     flags:
       teriock:
-        journalImage: systems/teriock/src/icons/drain-types/mana.webp
         journalIcon: droplet-slash
+        journalImage: systems/teriock/src/icons/drain-types/mana.webp
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
+    _key: '!journal.pages!drain00000000000.mana000000000000'
+  - _id: morganti00000000
+    name: Morganti
+    type: text
+    text:
+      content: >-
+        <p><span class="drain-box"><b>Morganti</b> drain cannot be
+        @L[Core:Healing]{healed}. This includes  @L[Condition:Dead]{death} and
+        @L[Condition:Unconscious]{unconsciousness} imposed by it. If a creature
+        is @L[Condition:Dead]{killed} with morganti damage then they cannot be
+        @L[Category:Revival effects]{revived}.</span>
+
+        </p>
+      format: 1
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    flags:
+      teriock:
+        journalIcon: droplet-slash
+        journalImage: systems/teriock/src/icons/drain-types/morganti.webp
+    _stats:
       compendiumSource: null
-    _key: '!journal.pages!BQHXYKIc5Lm27Tf3.LZ3lfJjj0S5TDJEu'
-  - name: Memory
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!journal.pages!drain00000000000.morganti00000000'
+  - _id: wither0000000000
+    name: Wither
+    type: text
+    text:
+      content: >-
+        <p><span class="drain-box"></span>If a creature takes Wither, then they
+        age a number of years equal to the amount of Wither that they took. This
+        aging is relative to a 100 year lifespan, regardless of how long the
+        creature's lifespan would naturally be.
+
+        </p>
+      format: 1
+    system: {}
+    title:
+      show: true
+      level: 1
+    image: {}
+    video:
+      controls: true
+      volume: 0.5
+    src: null
+    category: null
+    flags:
+      teriock:
+        journalIcon: droplet-slash
+        journalImage: systems/teriock/src/icons/drain-types/wither.webp
+    _stats:
+      compendiumSource: null
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!journal.pages!drain00000000000.wither0000000000'
+  - _id: memory0000000000
+    name: Memory
     type: text
     text:
       content: >-
@@ -52,7 +120,6 @@ pages:
 
         </p>
       format: 1
-    _id: sr4fSiZdDrs408fW
     system: {}
     title:
       show: true
@@ -65,62 +132,30 @@ pages:
     category: null
     flags:
       teriock:
+        journalIcon: droplet-slash
         journalImage: systems/teriock/src/icons/drain-types/memory.webp
-        journalIcon: droplet-slash
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!journal.pages!BQHXYKIc5Lm27Tf3.sr4fSiZdDrs408fW'
-  - name: Wither
+    _key: '!journal.pages!drain00000000000.memory0000000000'
+  - _id: lethal0000000000
+    name: Lethal
     type: text
     text:
       content: >-
-        <p><span class="drain-box"></span>If a creature takes Wither, then they
-        age a number of years equal to the amount of Wither that they took. This
-        aging is relative to a 100 year lifespan, regardless of how long the
-        creature's lifespan would naturally be.
-
-        </p>
-      format: 1
-    _id: 2tDpWMQBYsnCEJAv
-    system: {}
-    title:
-      show: true
-      level: 1
-    image: {}
-    video:
-      controls: true
-      volume: 0.5
-    src: null
-    category: null
-    flags:
-      teriock:
-        journalImage: systems/teriock/src/icons/drain-types/wither.webp
-        journalIcon: droplet-slash
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!journal.pages!BQHXYKIc5Lm27Tf3.2tDpWMQBYsnCEJAv'
-  - name: Lethal
-    type: text
-    text:
-      content: >-
-        <p><span class="drain-box">When a creature is reduced to 0
-        @L[Core:MP]{MP} or below due to <b>lethal</b> drain, it is instead
-        reduced to half their maximum @L[Core:MP]{MP} below zero
-        @L[Core:MP]{MP}. If this is not possible, their @L[Core:MP]{MP} reduces
+        <p><span class="drain-box">When a creature is reduced to 0 @L[Core:Hit
+        Points and Mana Points]{MP} or below due to <b>lethal</b> drain, it is
+        instead reduced to half their maximum @L[Core:Hit Points and Mana
+        Points]{MP} below zero @L[Core:Hit Points and Mana Points]{MP}. If this
+        is not possible, their @L[Core:Hit Points and Mana Points]{MP} reduces
         to the lowest value it can go to. This counts as a @L[Category:Killing
         effects]{killing effect}.</span>
 
         </p>
       format: 1
-    _id: gzD2LEZjvtNKySp4
     system: {}
     title:
       show: true
@@ -133,21 +168,21 @@ pages:
     category: null
     flags:
       teriock:
-        journalImage: systems/teriock/src/icons/drain-types/lethal.webp
         journalIcon: droplet-slash
+        journalImage: systems/teriock/src/icons/drain-types/lethal.webp
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!journal.pages!BQHXYKIc5Lm27Tf3.gzD2LEZjvtNKySp4'
+    _key: '!journal.pages!drain00000000000.lethal0000000000'
 categories: []
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!journal!BQHXYKIc5Lm27Tf3'
+_key: '!journal!drain00000000000'

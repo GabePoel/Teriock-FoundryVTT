@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: rhinocerosFamili
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Rhinoceros Familiar
 system:
@@ -8,17 +9,36 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.wkzUod2zPkdISKjx]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.rhinocerosFamili
 type: power
-_id: bUs0ygx5F34nGljz
 effects:
-  - name: Rhinoceros Tamer
-    type: fluency
+  - _id: rhinocerosTamer0
+    img: icons/environment/settlement/stables-logo.webp
+    name: Rhinoceros Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: <p>You know the way of the @L[Creature:Rhinoceros]{rhinoceros}.</p>
-    _id: WlpKPtdJB1PEjfGj
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.rhinocerosFamili.ActiveEffect.rhinocerosTamer0
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -26,24 +46,87 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!bUs0ygx5F34nGljz.WlpKPtdJB1PEjfGj'
+    _key: '!items.effects!rhinocerosFamili.rhinocerosTamer0'
   - name: Might Strike
     type: ability
+    img: systems/teriock/src/icons/abilities/might-strike.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - divine
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: slow
+      executionTime: 10 Minutes
+      delivery:
+        base: self
+        parent: null
+        package: ritual
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: untilDawn
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Until Dawn
+        stationary: false
+      sustained: true
+      range: Self.
+      overview:
+        base: >-
+          <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
+          @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
+          classes]{class} deal either an additional [[/damage 1d4[holy]]]
+          @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of
+          a type corresponding to the @L[Core:Domains]{domain} of your deity.
+          You may decide which of these benefits a @L[Category:Weapons]{weapon}
+          gets every time you attempt an @L[Category:Attack abilities]{attack}
+          with it. In addition, all @L[Core:Damage]{damage} dealt by a single
+          chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
+          classes]{class} is @L[Damage:Magic]{magic} as long as you are
+          @L[Core:Presence]{attuned} to it.</p><table class="wikitable
+          sortable"><caption>Benefits by
+          Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
+          selflink">Might Strike</a> Damage
+          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: true
+      class: paladin
+      rotator: false
+      invoked: false
       costs:
         verbal: true
         somatic: true
@@ -68,94 +151,24 @@ effects:
             variable: ''
         break: ''
         materialCost: <p>Something symbolic of your deity.</p>
-      delivery:
-        base: self
-        parent: null
-        package: ritual
-      duration:
-        unit: untilDawn
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Until Dawn
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: 10 Minutes
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
-          @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
-          classes]{class} deal either an additional [[/damage 1d4[holy]]]
-          @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of
-          a type corresponding to the @L[Core:Domains]{domain} of your deity.
-          You may decide which of these benefits a @L[Category:Weapons]{weapon}
-          gets every time you attempt an @L[Category:Attack abilities]{attack}
-          with it. In addition, all @L[Core:Damage]{damage} dealt by a single
-          chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
-          classes]{class} is @L[Damage:Magic]{magic} as long as you are
-          @L[Core:Presence]{attuned} to it.</p><table class="wikitable
-          sortable"><caption>Benefits by
-          Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
-          selflink">Might Strike</a> Damage
-          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - divine
-      prepared: true
-      range: Self.
+      endCondition: ''
       requirements: >-
         <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
         name]].</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: true
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: true
-      targets:
-        - self
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: paladin
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -167,10 +180,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.standard
-              mode: 2
-              value: +1d4[holy]
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.damage.standard
+              target: Actor
+              qualifier: '1'
+              value: +1d4[holy]
           common: []
           expiration:
             normal:
@@ -199,6 +215,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -236,6 +273,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -273,6 +331,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -310,10 +389,49 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros:
           Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
-    _id: J9zo3XAA2jGyBAOF
-    img: systems/teriock/src/icons/abilities/might-strike.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.rhinocerosFamili.ActiveEffect.bwu5lrAUqf0ae7WW
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: riGYdtYQjiCU4jSG
     changes: []
     disabled: false
     origin: null
@@ -321,24 +439,74 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.rmesJmgi1edqtkG1
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.rmesJmgi1edqtkG1
-    _key: '!items.effects!bUs0ygx5F34nGljz.J9zo3XAA2jGyBAOF'
+    _key: '!items.effects!rhinocerosFamili.riGYdtYQjiCU4jSG'
   - name: Spell Turning Shields
     type: ability
+    img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - divine
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          <p>@L[Category:Shields]{Shields} you use are @L[Property:Spell
+          Turning]{spell turning}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: paladin
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -363,80 +531,24 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - resistance
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          <p>@L[Category:Shields]{Shields} you use are @L[Property:Spell
-          Turning]{spell turning}.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - divine
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: paladin
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - resistance
       impacts:
         base:
           statuses: []
@@ -489,6 +601,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -526,6 +659,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -563,6 +717,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -600,9 +775,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: DpI3viKX3NZSMKwr
-    img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.rhinocerosFamili.ActiveEffect.DihxD33vU88JHEx8
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: LJTFYxAqMchkbwFR
     changes: []
     disabled: false
     origin: null
@@ -610,17 +823,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mfqeACqXIIcgOC90
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.mfqeACqXIIcgOC90
-    _key: '!items.effects!bUs0ygx5F34nGljz.DpI3viKX3NZSMKwr'
+    _key: '!items.effects!rhinocerosFamili.LJTFYxAqMchkbwFR'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!bUs0ygx5F34nGljz'
+_key: '!items!rhinocerosFamili'

@@ -20,7 +20,11 @@
         data-tooltip-direction="LEFT"
         data-tooltip-left="true"
         data-make-tooltip="true"
-        data-uuid="{{path @root/TERIOCK.system.uuids.attributes name}}"
+        {{#if (eq name "unp")}}
+        data-uuid="{{ruleUuid "Core" "Presence"}}"
+        {{else}}
+        data-uuid="{{ruleUuid "Core" (path @root/TERIOCK.index.attributesFull name)}}"
+        {{/if}}
       >
         <div
           class="tcolored tcenter ch-attribute-save-box grid-fill"

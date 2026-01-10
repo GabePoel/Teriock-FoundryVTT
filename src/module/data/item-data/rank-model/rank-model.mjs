@@ -16,6 +16,7 @@ const { fields } = foundry.data;
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
  * @extends {TeriockBaseItemModel}
+ * @extends {CommonTypeModel}
  * @implements {Teriock.Models.TeriockRankModelInterface}
  * @mixes ProficiencyData
  * @mixes StatGiverData
@@ -61,7 +62,7 @@ export default class TeriockRankModel extends mix(
       }),
       description: new TextField({
         initial:
-          "<p>Every adventurer is a journeyman before they join their first class.</p>",
+          "<p>Every adventurer is a journeyman before they join their first @L[Category:Classes]{class}.</p>",
         label: "Description",
       }),
       flaws: new TextField({
@@ -109,6 +110,11 @@ export default class TeriockRankModel extends mix(
    */
   get hpDie() {
     return this.statDice.hp.dice[0];
+  }
+
+  /** @inheritDoc */
+  get isOnWiki() {
+    return this.classRank > 0 && this.classRank <= 5;
   }
 
   /** @inheritDoc */

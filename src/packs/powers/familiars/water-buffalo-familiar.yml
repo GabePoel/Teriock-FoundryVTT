@@ -1,4 +1,5 @@
-folder: mcACcCmiOZEgcWjP
+_id: waterBuffaloFami
+folder: 3OD1Sj2noLROIrdg
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Water Buffalo Familiar
 system:
@@ -8,19 +9,38 @@ system:
     and delete the other
     one.</p><p>@Embed[Compendium.teriock.creatures.Actor.hl01HWqHLocXRuQ4]</p>
   maxAv: 0
+  qualifiers:
+    ephemeral:
+      raw: '0'
+    suppressed:
+      raw: '0'
+  competence:
+    raw: 1
+  _ref: Compendium.teriock.powers.Item.waterBuffaloFami
 type: power
-_id: DY1Y90G6MuVi9mOU
 effects:
-  - name: Water Buffalo Tamer
-    type: fluency
+  - _id: waterBuffaloTame
+    img: icons/environment/settlement/stables-logo.webp
+    name: Water Buffalo Tamer
     system:
       field: survivalist
       tradecraft: tamer
       description: >-
         <p>You know the way of the @L[Creature:Water Buffalo]{water
         buffalo}.</p>
-    _id: Fjx0VoiZYRMmzLkm
-    img: icons/environment/settlement/stables-logo.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 2
+      macros: []
+      revealed: true
+      tradecraftDescription: ''
+      _ref: >-
+        Compendium.teriock.powers.Item.waterBuffaloFami.ActiveEffect.waterBuffaloTame
+    type: fluency
     changes: []
     disabled: false
     origin: null
@@ -28,24 +48,77 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: null
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: null
-    _key: '!items.effects!DY1Y90G6MuVi9mOU.Fjx0VoiZYRMmzLkm'
+    _key: '!items.effects!waterBuffaloFami.waterBuffaloTame'
   - name: Partner Awaken
     type: ability
+    img: systems/teriock/src/icons/abilities/partner-awaken.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: sight
+        parent: null
+        package: null
+      targets:
+        - creature
+      elements: []
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Hour
+        stationary: false
+      sustained: false
+      range: '30'
+      overview:
+        base: >-
+          <p>You and the target gain @L[Keyword:Limited]{Limited}
+          @L[Ability:Instant Awaken]{Instant Awaken} and
+          @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
+          Awaken} (only usable on each other). You may only have this active on
+          one creature at a time.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: veteran
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -70,82 +143,22 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: sight
-        parent: null
-        package: null
-      duration:
-        unit: hour
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Hour
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: <p>You use [[lookup name]] again.</p>
-      executionTime: a1
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: >-
-          <p>You and the target gain @L[Keyword:Limited]{Limited}
-          @L[Ability:Instant Awaken]{Instant Awaken} and
-          @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
-          Awaken} (only usable on each other). You may only have this active on
-          one creature at a time.</p>
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: '30'
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - creature
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: veteran
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
       impacts:
         base:
           statuses: []
@@ -184,6 +197,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -221,6 +255,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -258,6 +313,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -295,9 +371,47 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-    _id: L72WVlq9DHuvS1SH
-    img: systems/teriock/src/icons/abilities/partner-awaken.webp
+      effectTypes: []
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.waterBuffaloFami.ActiveEffect.hR43aimffaOKR5s6
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
     changes: []
     disabled: false
     origin: null
@@ -305,15 +419,15 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.RAMOKodB3uUx8V7q
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.RAMOKodB3uUx8V7q
-    _key: '!items.effects!DY1Y90G6MuVi9mOU.L72WVlq9DHuvS1SH'
+    _id: hR43aimffaOKR5s6
+    _key: '!items.effects!waterBuffaloFami.hR43aimffaOKR5s6'
   - name: Instant Awaken
     type: ability
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
     system:
       elderSorcery: false
       elderSorceryIncant: ''
@@ -336,8 +450,8 @@ effects:
         conditions:
           present: []
           absent: []
-        description: Instant
         stationary: false
+        description: Instant
       sustained: false
       range: Your Hand's Range
       overview:
@@ -353,14 +467,17 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
@@ -400,25 +517,18 @@ effects:
       trigger: ''
       basic: false
       form: normal
-      limitation: Only usable on the other participant in the Partner Awaken.
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       effectTypes:
         - awakening
-      adept:
-        enabled: false
-        amount: 1
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       impacts:
         base:
           statuses: []
@@ -457,6 +567,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -494,6 +625,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -531,6 +683,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -568,9 +741,45 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-      _sup: L72WVlq9DHuvS1SH
-    _id: ZGGz0Qsdbbzstz55
+      _sup: hR43aimffaOKR5s6
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.RAMOKodB3uUx8V7q.ActiveEffect.GXZ1IhsDMGPOCNZC
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
     changes: []
     disabled: false
     origin: null
@@ -578,15 +787,15 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.9xIw5i0wbavIBIj4
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.9xIw5i0wbavIBIj4
-    _key: '!items.effects!DY1Y90G6MuVi9mOU.ZGGz0Qsdbbzstz55'
+    _id: GXZ1IhsDMGPOCNZC
+    _key: '!items.effects!waterBuffaloFami.GXZ1IhsDMGPOCNZC'
   - name: Reactive Awaken
     type: ability
-    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
     system:
       elderSorcery: false
       elderSorceryIncant: ''
@@ -609,8 +818,8 @@ effects:
         conditions:
           present: []
           absent: []
-        description: Instant
         stationary: false
+        description: Instant
       sustained: false
       range: Your Hand's Range
       overview:
@@ -626,14 +835,17 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing:
+        raw: 0
       improvements:
         attributeImprovement:
           attribute: null
           minVal: 0
+          text: ''
         featSaveImprovement:
           attribute: null
           amount: proficient
+          text: ''
       skill: true
       spell: false
       standard: true
@@ -673,25 +885,18 @@ effects:
       trigger: ''
       basic: false
       form: normal
-      limitation: Only usable on the other participant in the Partner Awaken.
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
       improvement: ''
-      prepared: true
       warded: false
-      secret: false
+      gifted:
+        enabled: false
+        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        saved: ''
       effectTypes:
         - awakening
-      adept:
-        enabled: false
-        amount: 1
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
       impacts:
         base:
           statuses: []
@@ -730,6 +935,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -767,6 +993,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -804,6 +1051,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -841,9 +1109,45 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros: {}
-      _sup: L72WVlq9DHuvS1SH
-    _id: OQm6Iv8Sxp60yd8b
+      _sup: hR43aimffaOKR5s6
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.abilities.Item.RAMOKodB3uUx8V7q.ActiveEffect.fCKsO5AaAVdFZ8md
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
     changes: []
     disabled: false
     origin: null
@@ -851,24 +1155,89 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.NGUfWP2pC23PmT2G
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.NGUfWP2pC23PmT2G
-    _key: '!items.effects!DY1Y90G6MuVi9mOU.OQm6Iv8Sxp60yd8b'
+    _id: fCKsO5AaAVdFZ8md
+    _key: '!items.effects!waterBuffaloFami.fCKsO5AaAVdFZ8md'
   - name: Skill Share
     type: ability
+    img: systems/teriock/src/icons/abilities/skill-share.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: sight
+        parent: null
+        package: null
+      targets:
+        - creature
+      elements: []
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Hour
+        stationary: false
+      sustained: true
+      range: '30'
+      overview:
+        base: >-
+          <p>Target gains one @L[Category:Abilities]{ability} of your choice
+          that you have from your first rank in a @L[Category:Classes]{class}.
+          The @L[Category:Abilities]{ability} must not be @L[Category:Elder
+          Sorcery abilities]{Elder Sorcery}, must not be a @L[Category:Contract
+          effects]{contract effect}, must be one you are @L[Core:Proficiency
+          Bonus]{proficient} in, and must be one you aren't
+          @L[Keyword:Incapable]{incapable} of. The target also becomes
+          @L[Keyword:Incapable]{incapable} of <a class="mw-selflink
+          selflink">Skill Share</a>. You may only have this active on one
+          creature at a time.</p>
+        proficient: >-
+          <p>You can now share @L[Category:Abilities]{abilities} you have from
+          any of your first @L[Core:Proficiency Bonus]{P} ranks in a
+          @L[Category:Classes]{class}.</p>
+        fluent: >-
+          <p>You can now share @L[Category:Abilities]{abilities} you have from
+          any of your first @L[Core:Fluency Bonus]{F} ranks in a
+          @L[Category:Classes]{class}.</p>
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing:
+        raw: 0
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+          text: ''
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+          text: ''
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: corsair
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -893,94 +1262,24 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: sight
-        parent: null
-        package: null
-      duration:
-        unit: hour
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Hour
-      effectTypes:
-        - contract
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: <p>You use <a class="mw-selflink selflink">Skill Share</a> again.</p>
-      executionTime: a1
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target gains one @L[Category:Abilities]{ability} of your choice
-          that you have from your first rank in a @L[Category:Classes]{class}.
-          The @L[Category:Abilities]{ability} must not be @L[Category:Elder
-          Sorcery abilities]{Elder Sorcery}, must not be a @L[Category:Contract
-          effects]{contract effect}, must be one you are @L[Core:Proficiency
-          Bonus]{proficient} in, and must be one you aren't
-          @L[Keyword:Incapable]{incapable} of. The target also becomes
-          @L[Keyword:Incapable]{incapable} of <a class="mw-selflink
-          selflink">Skill Share</a>. You may only have this active on one
-          creature at a time.</p>
-        proficient: >-
-          <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first @L[Core:Proficiency Bonus]{P} ranks in a
-          @L[Category:Classes]{class}.</p>
-        fluent: >-
-          <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first @L[Core:Fluency Bonus]{F} ranks in a
-          @L[Category:Classes]{class}.</p>
-      piercing: normal
-      powerSources:
-        - magical
-      prepared: true
-      range: '30'
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: true
-      targets:
-        - creature
       trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
       warded: false
-      class: corsair
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+      effectTypes:
+        - contract
       impacts:
         base:
           statuses: []
@@ -1019,6 +1318,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         proficient:
           statuses: []
           startStatuses: []
@@ -1056,6 +1376,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         fluent:
           statuses: []
           startStatuses: []
@@ -1093,6 +1434,27 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         heightened:
           statuses: []
           startStatuses: []
@@ -1130,10 +1492,48 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          macroButtonUuids: []
+          noTemplate: false
+          abilityButtonNames: []
+          range: ''
+          critStatuses: []
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            multiple: false
+            resetHp: true
+            resetMp: false
+            select: false
+            useFolder: false
+            uuid: null
         macros:
           Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
-    _id: R05QL4n6XyupjxHV
-    img: systems/teriock/src/icons/abilities/skill-share.webp
+      qualifiers:
+        ephemeral:
+          raw: '0'
+        suppressed:
+          raw: '0'
+      competence:
+        raw: 0
+      _ref: >-
+        Compendium.teriock.powers.Item.waterBuffaloFami.ActiveEffect.gJZZDW2NTcaM17jD
+      revealed: true
+      adept:
+        enabled: false
+        amount: 0
+      gifted:
+        enabled: false
+        amount: 0
+      grantOnly: false
+      grantOnlyText: ''
+    _id: Zv4meO1wICSQ9iH5
     changes: []
     disabled: false
     origin: null
@@ -1141,17 +1541,17 @@ effects:
     statuses: []
     flags: {}
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.OcZLMxaexSkIeyRW
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.OcZLMxaexSkIeyRW
-    _key: '!items.effects!DY1Y90G6MuVi9mOU.R05QL4n6XyupjxHV'
+    _key: '!items.effects!waterBuffaloFami.Zv4meO1wICSQ9iH5'
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!items!DY1Y90G6MuVi9mOU'
+_key: '!items!waterBuffaloFami'
