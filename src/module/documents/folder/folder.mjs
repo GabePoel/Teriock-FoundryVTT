@@ -2,7 +2,6 @@ import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Folder } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Folder} implementation.
  * @extends {ClientDocument}
@@ -10,6 +9,7 @@ const { Folder } = foundry.documents;
  * @mixes BaseDocument
  */
 export default class TeriockFolder extends BaseDocumentMixin(Folder) {
+  //noinspection JSValidateJSDoc
   /**
    * Get all the entries recursively from a child node.
    * @param {FolderChildNode} node
@@ -61,5 +61,10 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
       contents.push(...this.constructor.getAllEntries(child));
     }
     return contents;
+  }
+
+  /** @inheritDoc */
+  get contents() {
+    return super.contents.filter((d) => !d.system?._sup);
   }
 }

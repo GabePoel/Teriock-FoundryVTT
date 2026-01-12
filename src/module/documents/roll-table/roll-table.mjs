@@ -16,17 +16,6 @@ export default class TeriockRollTable extends mix(
   RollTable,
   mixins.BaseDocumentMixin,
 ) {
-  /** @inheritDoc */
-  static async fromFolder(folder, options = {}) {
-    const table = await super.fromFolder(folder, options);
-    if (game.settings.get("teriock", "developerMode") && game.user.isGM) {
-      await table.update({
-        description: "",
-      });
-    }
-    return table;
-  }
-
   /**
    * @inheritDoc
    * @param {TeriockTableResult[]} results
