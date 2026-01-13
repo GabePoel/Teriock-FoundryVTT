@@ -1,7 +1,7 @@
-import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
+import BaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 declare module "./ability-sheet.mjs" {
-  export default interface TeriockAbilitySheet extends TeriockBaseEffectSheet {
+  export default interface TeriockAbilitySheet extends BaseEffectSheet {
     get document(): TeriockAbility;
   }
 }

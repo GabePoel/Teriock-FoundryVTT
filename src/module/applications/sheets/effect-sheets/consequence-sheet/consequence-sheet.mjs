@@ -9,7 +9,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
  */
-export default class TeriockConsequenceSheet extends mix(
+export default class ConsequenceSheet extends mix(
   ActiveEffectConfig,
   mixins.ChangesSheetMixin,
 ) {

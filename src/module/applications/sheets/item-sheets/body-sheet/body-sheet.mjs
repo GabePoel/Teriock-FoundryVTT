@@ -1,15 +1,15 @@
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet.mjs";
+import BaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockBody}.
- * @extends {TeriockBaseItemSheet}
+ * @extends {BaseItemSheet}
  * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
-export default class TeriockBodySheet extends mix(
-  TeriockBaseItemSheet,
+export default class BodySheet extends mix(
+  BaseItemSheet,
   mixins.UseButtonSheetMixin,
   mixins.WikiButtonSheetMixin,
 ) {

@@ -13,7 +13,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @mixes CommonSheet
  * @property {TeriockEffect} document
  */
-export default class TeriockBaseEffectSheet extends mix(
+export default class BaseEffectSheet extends mix(
   ActiveEffectConfig,
   mixins.CommonSheetMixin,
   mixins.ChildSheetMixin,

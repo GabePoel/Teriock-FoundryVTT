@@ -48,9 +48,9 @@ export default class IdentificationModel extends EmbeddedDataModel {
     };
   }
 
-  /** @returns {TeriockEquipmentModel} */
+  /** @returns {EquipmentSystem} */
   get parent() {
-    return /** @type {TeriockEquipmentModel} */ super.parent;
+    return /** @type {EquipmentSystem} */ super.parent;
   }
 
   /**

@@ -2,19 +2,19 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { mix } from "../../../../helpers/utils.mjs";
 import { durationDialog } from "../../../dialogs/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
+import BaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import abilityContextMenus from "./helpers/ability-context-menus.mjs";
 
 /**
  * {@link TeriockAbility} sheet.
  * @property {TeriockAbility} document
- * @extends {TeriockBaseEffectSheet}
+ * @extends {BaseEffectSheet}
  * @mixes PassiveSheet
  * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
-export default class TeriockAbilitySheet extends mix(
-  TeriockBaseEffectSheet,
+export default class AbilitySheet extends mix(
+  BaseEffectSheet,
   mixins.PassiveSheetMixin,
   mixins.UseButtonSheetMixin,
   mixins.WikiButtonSheetMixin,

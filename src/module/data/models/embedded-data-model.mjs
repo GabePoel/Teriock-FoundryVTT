@@ -18,7 +18,7 @@ export default class EmbeddedDataModel extends DataModel {
   }
 
   /**
-   * @returns {EmbeddedDataModel|CommonTypeModel}
+   * @returns {EmbeddedDataModel|CommonSystem}
    */
   get parent() {
     return super.parent;

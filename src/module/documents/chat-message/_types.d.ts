@@ -1,6 +1,6 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockActor } from "../_module.mjs";
-import { TeriockBaseMessageModel } from "../../data/message-data/_module.mjs";
+import { BaseMessageSystem } from "../../data/systems/messages/_module.mjs";
 
 declare global {
   namespace Teriock.Data {
@@ -19,14 +19,10 @@ declare module "./chat-message.mjs" {
     _id: ID<TeriockChatMessage>;
     rolls: TeriockRoll[];
     readonly speakerActor: TeriockActor | null;
-    system: TeriockBaseMessageModel;
+    system: BaseMessageSystem;
 
     get documentName(): "ChatMessage";
-
     get id(): ID<TeriockChatMessage>;
-
     get uuid(): UUID<TeriockChatMessage>;
   }
 }
-
-export {};

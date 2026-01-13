@@ -1,11 +1,11 @@
 import { toTitleCase } from "../../../../helpers/string.mjs";
 import { selectDialog } from "../../../dialogs/select-dialog.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet.mjs";
+import BaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockWrapper}.
  */
-export default class TeriockWrapperSheet extends TeriockBaseItemSheet {
+export default class WrapperSheet extends BaseItemSheet {
   /** @inheritDoc */
   async _preRender(context, options) {
     await super._preRender(context, options);

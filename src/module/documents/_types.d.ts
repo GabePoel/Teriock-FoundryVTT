@@ -16,10 +16,7 @@ import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
 import { documentTypes } from "../constants/system/document-types.mjs";
-import * as models from "../data/_module.mjs";
-import TeriockBaseEffectModel from "../data/effect-data/base-effect-model/base-effect-model.mjs";
-import TeriockBaseItemModel from "../data/item-data/base-item-model/base-item-model.mjs";
-import TeriockBaseActorModel from "../data/actor-data/base-actor-model/base-actor-model.mjs";
+import * as systems from "../data/systems/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
@@ -115,12 +112,12 @@ declare global {
       types: Teriock.Documents.CommonType[];
     };
 
-    export type ActorModel = TeriockBaseActorModel &
-      InstanceType<(typeof models.actor)[keyof typeof models.actor]>;
-    export type ItemModel = TeriockBaseItemModel &
-      InstanceType<(typeof models.item)[keyof typeof models.item]>;
-    export type EffectModel = TeriockBaseEffectModel &
-      InstanceType<(typeof models.effect)[keyof typeof models.effect]>;
+    export type ActorModel = systems.actors.BaseActorSystem &
+      InstanceType<(typeof systems.actors)[keyof typeof systems.actors]>;
+    export type ItemModel = systems.items.BaseItemSystem &
+      InstanceType<(typeof systems.items)[keyof typeof systems.items]>;
+    export type EffectModel = systems.effects.BaseEffectSystem &
+      InstanceType<(typeof systems.effects)[keyof typeof systems.effects]>;
   }
 }
 

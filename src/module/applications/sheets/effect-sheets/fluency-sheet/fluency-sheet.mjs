@@ -1,16 +1,16 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { makeIcon, makeIconClass, mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
+import BaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 /**
  * {@link TeriockFluency} sheet.
- * @extends {TeriockBaseEffectSheet}
+ * @extends {BaseEffectSheet}
  * @mixes UseButtonSheet
  * @property {TeriockFluency} document
  */
-export default class TeriockFluencySheet extends mix(
-  TeriockBaseEffectSheet,
+export default class FluencySheet extends mix(
+  BaseEffectSheet,
   mixins.UseButtonSheetMixin,
 ) {
   /**

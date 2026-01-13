@@ -1,8 +1,6 @@
 export * from "./modifier-models/_module.mjs";
 export * from "./settings-models/_module.mjs";
 export * from "./stat-pool-models/_module.mjs";
-export { default as ChildTypeModel } from "./child-type-model/child-type-model.mjs";
-export { default as CommonTypeModel } from "./common-type-model/common-type-model.mjs";
 export { default as CompetenceModel } from "./competence-model.mjs";
 export { default as DamageModel } from "./damage-model.mjs";
 export { default as DefenseModel } from "./defense-model.mjs";

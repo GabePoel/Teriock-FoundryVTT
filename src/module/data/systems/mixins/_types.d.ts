@@ -1,0 +1,10 @@
+import "./armament-system-mixin/_types";
+import "./attunable-system-mixin/_types";
+import "./consumable-system-mixin/_types";
+import "./executable-system-mixin/_types";
+import "./hierarchy-system-mixin/_types";
+import "./revelation-system-mixin/_types";
+import "./stat-giver-system-mixin/_types";
+import "./transformation-system-mixin/_types";
+import "../../shared/mixins/usable-data-mixin/_types";
+import "./wielded-data-mixin/_types";

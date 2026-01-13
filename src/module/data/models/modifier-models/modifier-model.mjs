@@ -1,6 +1,6 @@
 import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
-import { UsableDataMixin } from "../../mixins/_module.mjs";
+import { UsableDataMixin } from "../../shared/mixins/_module.mjs";
 import EvaluationModel from "../evaluation-model.mjs";
 
 const { fields } = foundry.data;

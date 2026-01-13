@@ -1,8 +1,8 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { systemPath } from "../../../../helpers/path.mjs";
-import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
+import BaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
-export default class TeriockInventorySheet extends TeriockBaseActorSheet {
+export default class InventorySheet extends BaseActorSheet {
   static DEFAULT_OPTIONS = {
     classes: ["inventory"],
     form: {

@@ -1,22 +1,22 @@
 // noinspection JSUnusedGlobalSymbols
 
 import {
-  TeriockAbilityModel,
-  TeriockAttunementModel,
-  TeriockConditionModel,
-  TeriockConsequenceModel,
-  TeriockFluencyModel,
-  TeriockPropertyModel,
-  TeriockResourceModel,
-} from "../data/effect-data/_module.mjs";
+  AbilitySystem,
+  AttunementSystem,
+  ConditionSystem,
+  ConsequenceSystem,
+  FluencySystem,
+  PropertySystem,
+  ResourceSystem,
+} from "../data/systems/effects/_module.mjs";
 import {
-  TeriockAbilitySheet,
-  TeriockAttunementSheet,
-  TeriockConditionSheet,
-  TeriockConsequenceSheet,
-  TeriockFluencySheet,
-  TeriockPropertySheet,
-  TeriockResourceSheet,
+  AbilitySheet,
+  AttunementSheet,
+  ConditionSheet,
+  ConsequenceSheet,
+  FluencySheet,
+  PropertySheet,
+  ResourceSheet,
 } from "../applications/sheets/effect-sheets/_module.mjs";
 import {
   TeriockActor,
@@ -34,31 +34,31 @@ import {
   TeriockUser,
 } from "../documents/_module.mjs";
 import {
-  TeriockBodySheet,
-  TeriockEquipmentSheet,
-  TeriockMountSheet,
-  TeriockPowerSheet,
-  TeriockRankSheet,
-  TeriockSpeciesSheet,
-  TeriockWrapperSheet,
+  BodySheet,
+  EquipmentSheet,
+  MountSheet,
+  PowerSheet,
+  RankSheet,
+  SpeciesSheet,
+  WrapperSheet,
 } from "../applications/sheets/item-sheets/_module.mjs";
 import {
-  TeriockBodyModel,
-  TeriockEquipmentModel,
-  TeriockMountModel,
-  TeriockPowerModel,
-  TeriockRankModel,
-  TeriockSpeciesModel,
-  TeriockWrapperModel,
-} from "../data/item-data/_module.mjs";
+  BodySystem,
+  EquipmentSystem,
+  MountSystem,
+  PowerSystem,
+  RankSystem,
+  SpeciesSystem,
+  WrapperSystem,
+} from "../data/systems/items/_module.mjs";
 import {
-  TeriockCharacterSheet,
-  TeriockCreatureSheet,
+  CharacterSheet,
+  CreatureSheet,
 } from "../applications/sheets/actor-sheets/_module.mjs";
 import {
-  TeriockCharacterModel,
-  TeriockCreatureModel,
-} from "../data/actor-data/_module.mjs";
+  CharacterSystem,
+  CreatureSystem,
+} from "../data/systems/actors/_module.mjs";
 
 // Base Document Classes
 // =====================
@@ -84,16 +84,16 @@ declare global {
 
 declare global {
   export type TeriockCharacter = TeriockActor & {
-    sheet: TeriockCharacterSheet;
-    system: TeriockCharacterModel;
+    sheet: CharacterSheet;
+    system: CharacterSystem;
     type: "character";
     _id: ID<TeriockCharacter>;
     get id(): ID<TeriockCharacter>;
     get uuid(): UUID<TeriockCharacter>;
   };
   export type TeriockCreature = TeriockActor & {
-    sheet: TeriockCreatureSheet;
-    system: TeriockCreatureModel;
+    sheet: CreatureSheet;
+    system: CreatureSystem;
     type: "creature";
     _id: ID<TeriockCreature>;
     get id(): ID<TeriockCreature>;
@@ -106,56 +106,56 @@ declare global {
 
 declare global {
   export type TeriockBody = TeriockItem & {
-    sheet: TeriockBodySheet;
-    system: TeriockBodyModel;
+    sheet: BodySheet;
+    system: BodySystem;
     type: "body";
     _id: ID<TeriockBody>;
     get id(): ID<TeriockBody>;
     get uuid(): UUID<TeriockBody>;
   };
   export type TeriockEquipment = TeriockItem & {
-    sheet: TeriockEquipmentSheet;
-    system: TeriockEquipmentModel;
+    sheet: EquipmentSheet;
+    system: EquipmentSystem;
     type: "equipment";
     _id: ID<TeriockEquipment>;
     get id(): ID<TeriockEquipment>;
     get uuid(): UUID<TeriockEquipment>;
   };
   export type TeriockPower = TeriockItem & {
-    sheet: TeriockPowerSheet;
-    system: TeriockPowerModel;
+    sheet: PowerSheet;
+    system: PowerSystem;
     type: "power";
     _id: ID<TeriockPower>;
     get id(): ID<TeriockPower>;
     get uuid(): UUID<TeriockPower>;
   };
   export type TeriockRank = TeriockItem & {
-    sheet: TeriockRankSheet;
-    system: TeriockRankModel;
+    sheet: RankSheet;
+    system: RankSystem;
     type: "rank";
     _id: ID<TeriockRank>;
     get id(): ID<TeriockRank>;
     get uuid(): UUID<TeriockRank>;
   };
   export type TeriockSpecies = TeriockItem & {
-    sheet: TeriockSpeciesSheet;
-    system: TeriockSpeciesModel;
+    sheet: SpeciesSheet;
+    system: SpeciesSystem;
     type: "species";
     _id: ID<TeriockSpecies>;
     get id(): ID<TeriockSpecies>;
     get uuid(): UUID<TeriockSpecies>;
   };
   export type TeriockMount = TeriockItem & {
-    sheet: TeriockMountSheet;
-    system: TeriockMountModel;
+    sheet: MountSheet;
+    system: MountSystem;
     type: "mount";
     _id: ID<TeriockMount>;
     get id(): ID<TeriockMount>;
     get uuid(): UUID<TeriockMount>;
   };
   export type TeriockWrapper = TeriockItem & {
-    sheet: TeriockWrapperSheet;
-    system: TeriockWrapperModel;
+    sheet: WrapperSheet;
+    system: WrapperSystem;
     type: "wrapper";
     _id: ID<TeriockWrapper>;
     get id(): ID<TeriockWrapper>;
@@ -168,48 +168,48 @@ declare global {
 
 declare global {
   export type TeriockAbility = TeriockEffect & {
-    sheet: TeriockAbilitySheet;
-    system: TeriockAbilityModel;
+    sheet: AbilitySheet;
+    system: AbilitySystem;
     type: "ability";
     _id: ID<TeriockAbility>;
     get id(): ID<TeriockAbility>;
     get uuid(): UUID<TeriockAbility>;
   };
   export type TeriockAttunement = TeriockEffect & {
-    sheet: TeriockAttunementSheet;
-    system: TeriockAttunementModel;
+    sheet: AttunementSheet;
+    system: AttunementSystem;
     type: "attunement";
     _id: ID<TeriockAttunement>;
     get id(): ID<TeriockAttunement>;
     get uuid(): UUID<TeriockAttunement>;
   };
   export type TeriockCondition = TeriockEffect & {
-    sheet: TeriockConditionSheet;
-    system: TeriockConditionModel;
+    sheet: ConditionSheet;
+    system: ConditionSystem;
     type: "condition";
     _id: ID<TeriockCondition>;
     get id(): ID<TeriockCondition>;
     get uuid(): UUID<TeriockCondition>;
   };
   export type TeriockConsequence = TeriockEffect & {
-    sheet: TeriockConsequenceSheet;
-    system: TeriockConsequenceModel;
+    sheet: ConsequenceSheet;
+    system: ConsequenceSystem;
     type: "consequence";
     _id: ID<TeriockConsequence>;
     get id(): ID<TeriockConsequence>;
     get uuid(): UUID<TeriockConsequence>;
   };
   export type TeriockFluency = TeriockEffect & {
-    sheet: TeriockFluencySheet;
-    system: TeriockFluencyModel;
+    sheet: FluencySheet;
+    system: FluencySystem;
     type: "fluency";
     _id: ID<TeriockFluency>;
     get id(): ID<TeriockFluency>;
     get uuid(): UUID<TeriockFluency>;
   };
   export type TeriockProperty = TeriockEffect & {
-    sheet: TeriockPropertySheet;
-    system: TeriockPropertyModel;
+    sheet: PropertySheet;
+    system: PropertySystem;
     type: "property";
     _id: ID<TeriockProperty>;
     get id(): ID<TeriockProperty>;
@@ -217,8 +217,8 @@ declare global {
     get parent(): TeriockEquipment;
   };
   export type TeriockResource = TeriockEffect & {
-    sheet: TeriockResourceSheet;
-    system: TeriockResourceModel;
+    sheet: ResourceSheet;
+    system: ResourceSystem;
     type: "resource";
     _id: ID<TeriockResource>;
     get id(): ID<TeriockResource>;

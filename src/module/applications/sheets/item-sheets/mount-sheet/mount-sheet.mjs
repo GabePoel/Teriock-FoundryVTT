@@ -1,13 +1,13 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet.mjs";
+import BaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockMount}.
  * @property {TeriockMount} document
  * @property {TeriockMount} item
  */
-export default class TeriockMountSheet extends TeriockBaseItemSheet {
+export default class MountSheet extends BaseItemSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["mount"],

@@ -23,7 +23,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends mix(
+export default class BaseActorSheet extends mix(
   ActorSheetV2,
   HackStatApplicationMixin,
   HandlebarsApplicationMixin,

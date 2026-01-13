@@ -4,7 +4,7 @@ import TeriockPlayableActorSheet from "../base-actor-sheet/playable-actor-sheet.
 /**
  * Sheet for a {@link TeriockCharacter}.
  */
-export default class TeriockCreatureSheet extends TeriockPlayableActorSheet {
+export default class CreatureSheet extends TeriockPlayableActorSheet {
   //noinspection JSValidateTypes
   /**
    * @inheritDoc

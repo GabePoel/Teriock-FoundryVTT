@@ -1,19 +1,19 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet.mjs";
+import BaseItemSheet from "../base-item-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockEquipment}.
- * @extends {TeriockBaseItemSheet}
+ * @extends {BaseItemSheet}
  * @property {TeriockEquipment} document
  * @property {TeriockEquipment} item
  * @mixes EquipmentDropSheet
  * @mixes UseButtonSheet
  * @mixes WikiButtonSheet
  */
-export default class TeriockEquipmentSheet extends mix(
-  TeriockBaseItemSheet,
+export default class EquipmentSheet extends mix(
+  BaseItemSheet,
   mixins.EquipmentDropSheetMixin,
   mixins.UseButtonSheetMixin,
   mixins.WikiButtonSheetMixin,

@@ -6,7 +6,8 @@ const manifestPath = "./system.json";
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 const VERSION = manifest.version;
 
-const downloadUrl = `https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/release-${VERSION}/teriock-release-${VERSION}.zip`;
+const file = `teriock-release-${VERSION}.zip`;
+const downloadUrl = `https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/release-${VERSION}/${file}`;
 manifest.download = downloadUrl;
 
 fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
@@ -33,10 +34,37 @@ for (const asset of ASSETS) {
       dereference: true,
       recursive: true,
       force: true,
+      filter: (src) => {
+        const fileName = path.basename(src);
+        if (fileName === "macros") return false;
+        if (fileName.endsWith(".d.ts")) return false;
+        if (fileName.endsWith(".scss")) return false;
+        if (fileName.endsWith(".yml")) return false;
+        if (fileName.startsWith("_")) {
+          return fileName === "_module.mjs";
+        }
+        return true;
+      },
     });
-    console.log(`Copied ${asset}`);
   }
 }
+
+async function removeEmptyDirs(dir) {
+  const isDir = (await fs.promises.lstat(dir)).isDirectory();
+  if (!isDir) return;
+  let files = await fs.promises.readdir(dir);
+  if (files.length > 0) {
+    await Promise.all(
+      files.map((file) => removeEmptyDirs(path.join(dir, file))),
+    );
+    files = await fs.promises.readdir(dir);
+  }
+  if (files.length === 0) {
+    await fs.promises.rmdir(dir);
+  }
+}
+
+await removeEmptyDirs(SYSTEM_DIR);
 
 async function createZip() {
   const output = fs.createWriteStream(ZIP_PATH);

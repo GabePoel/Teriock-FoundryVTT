@@ -13,7 +13,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @property {TeriockItem} document
  * @property {TeriockItem} item
  */
-export default class TeriockBaseItemSheet extends mix(
+export default class BaseItemSheet extends mix(
   ItemSheetV2,
   HandlebarsApplicationMixin,
   mixins.CommonSheetMixin,

@@ -50,7 +50,7 @@ export default function bindCommonActions(rootElement) {
       const cls = /** @type {TeriockDocument} */ foundry.utils.getDocumentClass(
         el.dataset.type,
       );
-      if (cls.documentMetadata.tooltip) el.dataset.makeTooltip = "true";
+      if (cls?.documentMetadata?.tooltip) el.dataset.makeTooltip = "true";
     }
   });
   queryAll(rootElement, "[data-teriock-content-link]").forEach(

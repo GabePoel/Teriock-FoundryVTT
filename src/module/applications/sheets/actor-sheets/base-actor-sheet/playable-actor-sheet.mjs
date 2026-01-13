@@ -1,11 +1,11 @@
 import { mix } from "../../../../helpers/utils.mjs";
-import TeriockBaseActorSheet from "./base-actor-sheet.mjs";
+import BaseActorSheet from "./base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 
 //noinspection JSUnresolvedReference,JSClosureCompilerSyntax
 /**
  * Playable actor sheet.
- * @extends {TeriockBaseActorSheet}
+ * @extends {BaseActorSheet}
  * @mixes AvatarImageActorSheetPart
  * @mixes CombatActorSheetPart
  * @mixes ConditionsActorSheetPart
@@ -17,7 +17,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes TradecraftsActorSheetPart
  */
 export default class TeriockPlayableActorSheet extends mix(
-  TeriockBaseActorSheet,
+  BaseActorSheet,
   parts.AvatarImageActorSheetPart,
   parts.CombatActorSheetPart,
   parts.ConditionsActorSheetPart,
