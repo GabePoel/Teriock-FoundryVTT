@@ -116,12 +116,20 @@ dl:not(:first-child) {
   }
 }
 
-.cards-config,
+.cards-config.deck,
 .macro-config,
 .active-effect-config {
   header {
     input {
       @include mixins.title-text-spacing(calc(64px + 1rem));
+    }
+  }
+}
+
+.cards-config:not(.deck) {
+  header {
+    input {
+      @include mixins.title-text-spacing(0);
     }
   }
 }
