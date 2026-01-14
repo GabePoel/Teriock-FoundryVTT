@@ -15,6 +15,7 @@ import "./scene/_types";
 import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
+import "./card/_types";
 import { documentTypes } from "../constants/system/document-types.mjs";
 import * as systems from "../data/systems/_module.mjs";
 

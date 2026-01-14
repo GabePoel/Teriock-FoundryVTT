@@ -22,7 +22,7 @@ const { Item } = foundry.documents;
  * @property {ID<TeriockItem>} _id
  * @property {ID<TeriockItem>} id
  * @property {UUID<TeriockItem>} uuid
- * @property {TeriockBaseItemSheet} sheet
+ * @property {BaseItemSheet} sheet
  */
 export default class TeriockItem extends mix(
   Item,

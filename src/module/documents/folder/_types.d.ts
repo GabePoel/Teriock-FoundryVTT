@@ -4,9 +4,7 @@ declare module "./folder.mjs" {
     _id: ID<TeriockFolder>;
 
     get documentName(): "Folder";
-
     get id(): ID<TeriockFolder>;
-
     get uuid(): UUID<TeriockFolder>;
   }
 }

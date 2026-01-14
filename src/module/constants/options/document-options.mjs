@@ -135,4 +135,8 @@ export const documentOptions = {
     doc: "Item",
     icon: "hand-sparkles",
   },
+  stone: {
+    doc: "Card",
+    icon: "circle",
+  },
 };
