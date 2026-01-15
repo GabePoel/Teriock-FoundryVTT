@@ -19,10 +19,10 @@ import {
   ResourceSheet,
 } from "../applications/sheets/effect-sheets/_module.mjs";
 import {
+  TeriockActiveEffect,
   TeriockActor,
   TeriockChatMessage,
   TeriockCombat,
-  TeriockEffect,
   TeriockFolder,
   TeriockItem,
   TeriockJournalEntry,
@@ -67,7 +67,7 @@ declare global {
   const TeriockActor: TeriockActor;
   const TeriockChatMessage: TeriockChatMessage;
   const TeriockCombat: TeriockCombat;
-  const TeriockEffect: TeriockEffect;
+  const TeriockActiveEffect: TeriockActiveEffect;
   const TeriockFolder: TeriockFolder;
   const TeriockItem: TeriockItem;
   const TeriockJournalEntry: TeriockJournalEntry;
@@ -167,7 +167,7 @@ declare global {
 // =======
 
 declare global {
-  export type TeriockAbility = TeriockEffect & {
+  export type TeriockAbility = TeriockActiveEffect & {
     sheet: AbilitySheet;
     system: AbilitySystem;
     type: "ability";
@@ -175,7 +175,7 @@ declare global {
     get id(): ID<TeriockAbility>;
     get uuid(): UUID<TeriockAbility>;
   };
-  export type TeriockAttunement = TeriockEffect & {
+  export type TeriockAttunement = TeriockActiveEffect & {
     sheet: AttunementSheet;
     system: AttunementSystem;
     type: "attunement";
@@ -183,7 +183,7 @@ declare global {
     get id(): ID<TeriockAttunement>;
     get uuid(): UUID<TeriockAttunement>;
   };
-  export type TeriockCondition = TeriockEffect & {
+  export type TeriockCondition = TeriockActiveEffect & {
     sheet: ConditionSheet;
     system: ConditionSystem;
     type: "condition";
@@ -191,7 +191,7 @@ declare global {
     get id(): ID<TeriockCondition>;
     get uuid(): UUID<TeriockCondition>;
   };
-  export type TeriockConsequence = TeriockEffect & {
+  export type TeriockConsequence = TeriockActiveEffect & {
     sheet: ConsequenceSheet;
     system: ConsequenceSystem;
     type: "consequence";
@@ -199,7 +199,7 @@ declare global {
     get id(): ID<TeriockConsequence>;
     get uuid(): UUID<TeriockConsequence>;
   };
-  export type TeriockFluency = TeriockEffect & {
+  export type TeriockFluency = TeriockActiveEffect & {
     sheet: FluencySheet;
     system: FluencySystem;
     type: "fluency";
@@ -207,7 +207,7 @@ declare global {
     get id(): ID<TeriockFluency>;
     get uuid(): UUID<TeriockFluency>;
   };
-  export type TeriockProperty = TeriockEffect & {
+  export type TeriockProperty = TeriockActiveEffect & {
     sheet: PropertySheet;
     system: PropertySystem;
     type: "property";
@@ -216,7 +216,7 @@ declare global {
     get uuid(): UUID<TeriockProperty>;
     get parent(): TeriockEquipment;
   };
-  export type TeriockResource = TeriockEffect & {
+  export type TeriockResource = TeriockActiveEffect & {
     sheet: ResourceSheet;
     system: ResourceSystem;
     type: "resource";
@@ -240,15 +240,15 @@ declare global {
 declare global {
   export type TeriockParent = TeriockActor | TeriockItem;
   export type TeriockParentName = "Actor" | "Item";
-  export type TeriockChild = TeriockItem | TeriockEffect;
+  export type TeriockChild = TeriockItem | TeriockActiveEffect;
   export type TeriockChildName = "Item" | "ActiveEffect";
-  export type TeriockCommon = TeriockActor | TeriockItem | TeriockEffect;
+  export type TeriockCommon = TeriockActor | TeriockItem | TeriockActiveEffect;
   export type TeriockCommonName = "Actor" | "Item" | "ActiveEffect";
   export type TeriockDocument =
     | TeriockActor
     | TeriockChatMessage
     | TeriockCombat
-    | TeriockEffect
+    | TeriockActiveEffect
     | TeriockFolder
     | TeriockItem
     | TeriockJournalEntry

@@ -1,6 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
-import { TeriockEffect } from "../documents/_module.mjs";
+import { TeriockActiveEffect } from "../documents/_module.mjs";
 import {
   AbilityExecution,
   ArmamentExecution,
@@ -61,7 +61,7 @@ declare global {
     };
 
     export type EffectActivity = Teriock.HookData.BaseHookData & {
-      doc: TeriockEffect;
+      doc: TeriockActiveEffect;
     };
 
     export type EquipmentActivity = Teriock.HookData.BaseHookData & {

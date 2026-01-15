@@ -32,8 +32,8 @@ export default function ChildDocumentMixin(Base) {
 
       /**
        * Get all ActiveEffects that may apply to this document.
-       * @yields {TeriockEffect}
-       * @returns {Generator<TeriockEffect, void, void>}
+       * @yields {TeriockActiveEffect}
+       * @returns {Generator<TeriockActiveEffect, void, void>}
        */
       *allApplicableEffects() {
         if (this.actor) {

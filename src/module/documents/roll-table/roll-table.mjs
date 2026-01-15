@@ -10,7 +10,7 @@ const { RollTable } = foundry.documents;
  * @extends {RollTable}
  * @extends {ClientDocument}
  * @mixes BaseDocument
- * @property {Collection<ID<TeriockTableResult>, TeriockTableResult>} results
+ * @property {TypeCollection<TeriockTableResult, TeriockTableResult>} results
  */
 export default class TeriockRollTable extends mix(
   RollTable,

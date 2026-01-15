@@ -6,7 +6,7 @@ const { Actors } = foundry.documents.collections;
 //noinspection JSUnusedGlobalSymbols,JSClosureCompilerSyntax,JSValidateJSDoc
 /**
  * @extends {Actors}
- * @implements {Collection<ID<TeriockActor>, TeriockActor>}
+ * @implements {TypeCollection<TeriockActor, TeriockActor>}
  * @implements {WorldCollection<TeriockActor>}
  * @property {Record<ID<TeriockActor>, TeriockActor>} tokens
  */

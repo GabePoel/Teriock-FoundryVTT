@@ -1,7 +1,7 @@
-import { TeriockEffect } from "../../../../documents/_module.mjs";
+import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 
 declare module "./base-effect-sheet.mjs" {
   export default interface TeriockBaseEffectSheet {
-    get document(): TeriockEffect;
+    get document(): TeriockActiveEffect;
   }
 }

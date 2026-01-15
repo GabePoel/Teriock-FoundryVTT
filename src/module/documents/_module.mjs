@@ -1,11 +1,11 @@
 export * as collections from "./collections/_module.mjs";
 export * as mixins from "./mixins/_module.mjs";
+export { default as TeriockActiveEffect } from "./active-effect/effect.mjs";
 export { default as TeriockActor } from "./actor/actor.mjs";
 export { default as TeriockCard } from "./card/card.mjs";
 export { default as TeriockChatMessage } from "./chat-message/chat-message.mjs";
 export { default as TeriockCombat } from "./combat/combat.mjs";
 export { default as TeriockCombatant } from "./combatant/combatant.mjs";
-export { default as TeriockEffect } from "./effect/effect.mjs";
 export { default as TeriockFolder } from "./folder/folder.mjs";
 export { default as TeriockItem } from "./item/item.mjs";
 export { default as TeriockJournalEntry } from "./journal-entry/journal-entry.mjs";

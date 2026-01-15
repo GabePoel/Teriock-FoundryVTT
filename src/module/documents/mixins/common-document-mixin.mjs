@@ -129,7 +129,7 @@ export default function CommonDocumentMixin(Base) {
        * Executes all macros for a given pseudo-hook and calls a regular hook with the same name.
        * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook - What pseudo-hook to call.
        * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in each connected {@link TeriockMacro}.
-       * @param {TeriockEffect} [effect] - Only call {@link TeriockMacro}s provided by this {@link TeriockEffect}.
+       * @param {TeriockActiveEffect} [effect] - Only call {@link TeriockMacro}s provided by this {@link TeriockActiveEffect}.
        * @param {boolean} [skipCall] - Whether to skip calling normal hooks.
        * @returns {Promise<Teriock.HookData.BaseHookData>} The mutated data.
        */
@@ -193,7 +193,7 @@ export default function CommonDocumentMixin(Base) {
 
       /**
        * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
-       * {@link TeriockEffect}s, but that we want to be able to add synchronously during the update cycle. Any of these
+       * {@link TeriockActiveEffect}s, but that we want to be able to add synchronously during the update cycle. Any of these
        * effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects}.
        */
       prepareVirtualEffects() {

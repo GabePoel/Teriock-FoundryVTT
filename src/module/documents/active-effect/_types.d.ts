@@ -3,7 +3,7 @@ import { TeriockActor } from "../_module.mjs";
 import { BaseEffectSheet } from "../../applications/sheets/effect-sheets/_module.mjs";
 
 declare module "./effect.mjs" {
-  export default interface TeriockEffect
+  export default interface TeriockActiveEffect
     extends Teriock.Documents.Interface<Teriock.Documents.NullDocument> {
     disabled: boolean;
     parent: TeriockParent;

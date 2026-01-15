@@ -1,11 +1,11 @@
-import { TeriockEffect, TeriockTokenDocument } from "../_module.mjs";
+import { TeriockActiveEffect, TeriockTokenDocument } from "../_module.mjs";
 import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
 import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
 
 declare module "./actor.mjs" {
   export default interface TeriockActor
     extends Teriock.Documents.Interface<TeriockChild> {
-    appliedEffects: TeriockEffect[];
+    appliedEffects: TeriockActiveEffect[];
     readonly itemTypes: Teriock.Parent.ParentItemTypes;
     sheet: BaseActorSheet;
     statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
@@ -14,6 +14,6 @@ declare module "./actor.mjs" {
 
     get documentName(): "Actor";
     getDependentTokens(): TeriockTokenDocument[];
-    get temporaryEffects(): TeriockEffect[];
+    get temporaryEffects(): TeriockActiveEffect[];
   }
 }

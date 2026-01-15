@@ -5,13 +5,13 @@ import * as mixins from "../../mixins/_module.mjs";
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
- * Base {@link TeriockEffect} sheet.
+ * Base {@link TeriockActiveEffect} sheet.
  * @extends {ActiveEffectConfig}
  * @mixes ChangesSheet
  * @mixes ChatButtonSheet
  * @mixes ChildSheet
  * @mixes CommonSheet
- * @property {TeriockEffect} document
+ * @property {TeriockActiveEffect} document
  */
 export default class BaseEffectSheet extends mix(
   ActiveEffectConfig,

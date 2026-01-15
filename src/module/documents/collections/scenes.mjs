@@ -4,8 +4,9 @@ const { Scenes } = foundry.documents.collections;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @implements {Collection<ID<TeriockScene>, TeriockScene>}
+ * @implements {TypeCollection<TeriockScene, TeriockScene>}
  * @implements {DocumentCollection<TeriockScene>}
  * @property {TeriockScene|null} viewed
+ * @extends {Scenes}
  */
 export default class TeriockScenes extends BaseWorldCollectionMixin(Scenes) {}

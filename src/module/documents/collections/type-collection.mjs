@@ -1,9 +1,10 @@
 const { Collection } = foundry.utils;
 
-//noinspection JSClosureCompilerSyntax
+//noinspection JSClosureCompilerSyntax,JSUnresolvedReference
 /**
  * @inheritDoc
- * @extends {Collection<ID<TeriockCommon>, TeriockCommon|Index<TeriockCommon>>}
+ * @template K, V
+ * @extends {Collection<ID<K>, V>}
  */
 export default class TypeCollection extends Collection {
   /**
@@ -21,3 +22,8 @@ export default class TypeCollection extends Collection {
     return documentTypeMap;
   }
 }
+
+/**
+ * @template T
+ * @typedef {TypeCollection<TeriockCommon, TeriockCommon | Index<TeriockCommon>>} IndexCollection
+ */

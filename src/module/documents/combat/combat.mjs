@@ -8,7 +8,7 @@ const { Combat } = foundry.documents;
  * @extends {ClientDocument}
  * @extends {Combat}
  * @mixes BaseDocument
- * @property {Collection<UUID<TeriockCombatant>, TeriockCombatant>} combatants
+ * @property {TypeCollection<TeriockCombatant, TeriockCombatant>} combatants
  */
 export default class TeriockCombat extends BaseDocumentMixin(Combat) {
   /**
@@ -46,7 +46,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
           actorUuid === expirations.who.source) ||
         (expirations.who.type === "target" && actorUuid === effect.actor.uuid))
     ) {
-      const user = effect.actor?.defaultUser;
+      const user = effect.actor ? effect.actor.defaultUser : null;
       if (expirations.when.skip <= 0 && user) {
         try {
           await user.query("teriock.inCombatExpiration", {

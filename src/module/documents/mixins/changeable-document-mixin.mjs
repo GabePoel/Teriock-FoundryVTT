@@ -1,7 +1,7 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 
 /**
- * Mixin for a document that can be changed by a {@link TeriockEffect}.
+ * Mixin for a document that can be changed by a {@link TeriockActiveEffect}.
  * @param {typeof TeriockDocument} Base
  * @mixin
  */
@@ -14,7 +14,7 @@ export default function ChangeableDocumentMixin(Base) {
     class ChangeableDocument extends Base {
       /**
        * Build a change tree from an array of expanded changes.
-       * @param {TeriockEffect[]} effects
+       * @param {TeriockActiveEffect[]} effects
        * @returns {Teriock.Changes.ChangeTree}
        */
       static buildChangeTree(effects) {

@@ -48,7 +48,7 @@ export async function resolveDocuments(syncDocs) {
 
 /**
  * Ensure all documents in a collection are not indexes.
- * @param {TypeCollection} typeCollection
+ * @param {IndexCollection} typeCollection
  * @returns {Promise<TypeCollection>}
  */
 export async function resolveCollection(typeCollection) {

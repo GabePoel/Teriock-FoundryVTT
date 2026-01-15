@@ -16,7 +16,7 @@ const { Item } = foundry.documents;
  * @mixes ParentDocument
  * @mixes RetrievalDocument
  * @mixes SettingsDocument
- * @property {Collection<ID<TeriockEffect>, TeriockEffect>} effects
+ * @property {TypeCollection<ID<TeriockActiveEffect>, TeriockActiveEffect>} effects
  * @property {Teriock.Documents.ItemModel} system
  * @property {Teriock.Documents.ItemType} type
  * @property {ID<TeriockItem>} _id
@@ -82,7 +82,7 @@ export default class TeriockItem extends mix(
 
   /**
    * @inheritDoc
-   * @returns {TeriockEffect[]}
+   * @returns {TeriockActiveEffect[]}
    */
   get validEffects() {
     return this.effects.contents;
@@ -111,8 +111,8 @@ export default class TeriockItem extends mix(
 
   /**
    * @inheritDoc
-   * @yields {TeriockEffect}
-   * @returns {Generator<TeriockEffect, void, void>}
+   * @yields {TeriockActiveEffect}
+   * @returns {Generator<TeriockActiveEffect, void, void>}
    */
   *allApplicableEffects() {
     for (const effect of this.effects) {

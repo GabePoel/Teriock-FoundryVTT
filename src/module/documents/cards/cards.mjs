@@ -8,6 +8,6 @@ const { Card } = foundry.documents;
  * @extends {ClientDocument}
  * @extends {Cards}
  * @mixes BaseDocument
- * @property {Collection<ID<TeriockCard>, TeriockCard>} cards
+ * @property {TypeCollection<TeriockCard, TeriockCard>} cards
  */
 export default class TeriockCards extends BaseDocumentMixin(Card) {}

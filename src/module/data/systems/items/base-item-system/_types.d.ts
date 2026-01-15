@@ -1,4 +1,7 @@
-import { TeriockEffect, TeriockItem } from "../../../../documents/_module.mjs";
+import {
+  TeriockActiveEffect,
+  TeriockItem,
+} from "../../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -6,8 +9,8 @@ declare global {
       extends Teriock.Models.ChildSystemInterface {
       /** <schema> Whether this is disabled */
       disabled: boolean;
-      /** <schema> IDs for each {@link TeriockEffect} that only activates on use of this {@link TeriockItem}. */
-      onUse: Set<ID<TeriockEffect>>;
+      /** <schema> IDs for each {@link TeriockActiveEffect} that only activates on use of this {@link TeriockItem}. */
+      onUse: Set<ID<TeriockActiveEffect>>;
 
       get parent(): TeriockItem;
     }

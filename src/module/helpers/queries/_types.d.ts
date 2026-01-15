@@ -1,6 +1,6 @@
 import {
+  TeriockActiveEffect,
   TeriockActor,
-  TeriockEffect,
   TeriockItem,
   TeriockUser,
 } from "../../documents/_module.mjs";
@@ -62,7 +62,7 @@ declare global {
     };
 
     export type Update = {
-      uuid: UUID<TeriockActor> | UUID<TeriockItem> | UUID<TeriockEffect>;
+      uuid: UUID<TeriockActor> | UUID<TeriockItem> | UUID<TeriockActiveEffect>;
       data: object;
       operation?: object;
     };

@@ -245,7 +245,6 @@ export default class ConsequenceSystem extends mix(
       }
     }
     if (this.sustainedExpiration) {
-      /** @type {TeriockEffect} */
       const source = await fromUuid(this.source);
       should = should || !source || !source.active;
     }

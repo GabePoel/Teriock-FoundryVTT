@@ -148,7 +148,7 @@ foundry.helpers.Hooks.once("init", function () {
         property: data.systems.effects.PropertySystem,
         resource: data.systems.effects.ResourceSystem,
       },
-      documentClass: documents.TeriockEffect,
+      documentClass: documents.TeriockActiveEffect,
     },
     Actor: {
       collection: documents.collections.TeriockActors,
@@ -331,31 +331,31 @@ foundry.helpers.Hooks.once("init", function () {
     // Effects
     {
       cls: applications.sheets.effect.AbilitySheet,
-      doc: documents.TeriockEffect,
+      doc: documents.TeriockActiveEffect,
       label: "Ability",
       types: ["ability"],
     },
     {
       cls: applications.sheets.effect.FluencySheet,
-      doc: documents.TeriockEffect,
+      doc: documents.TeriockActiveEffect,
       label: "Fluency",
       types: ["fluency"],
     },
     {
       cls: applications.sheets.effect.ResourceSheet,
-      doc: documents.TeriockEffect,
+      doc: documents.TeriockActiveEffect,
       label: "Resource",
       types: ["resource"],
     },
     {
       cls: applications.sheets.effect.PropertySheet,
-      doc: documents.TeriockEffect,
+      doc: documents.TeriockActiveEffect,
       label: "Property",
       types: ["property"],
     },
     {
       cls: applications.sheets.effect.ConsequenceSheet,
-      doc: documents.TeriockEffect,
+      doc: documents.TeriockActiveEffect,
       label: "Consequence",
       types: ["consequence"],
     },
@@ -405,7 +405,7 @@ foundry.helpers.Hooks.once("init", function () {
   game.teriock = {
     Actor: documents.TeriockActor,
     Combat: documents.TeriockCombat,
-    Effect: documents.TeriockEffect,
+    Effect: documents.TeriockActiveEffect,
     Item: documents.TeriockItem,
     Macro: documents.TeriockMacro,
     ChatMessage: documents.TeriockChatMessage,

@@ -1,4 +1,4 @@
-import { TeriockEffect } from "../../../../documents/_module.mjs";
+import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -17,7 +17,7 @@ declare global {
         };
       };
 
-      get parent(): TeriockEffect;
+      get parent(): TeriockActiveEffect;
     }
   }
 }

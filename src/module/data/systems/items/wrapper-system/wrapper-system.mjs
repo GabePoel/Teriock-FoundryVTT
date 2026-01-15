@@ -16,7 +16,7 @@ export default class WrapperSystem extends BaseItemSystem {
 
   /**
    * The wrapped effect.
-   * @returns {TeriockEffect}
+   * @returns {TeriockActiveEffect}
    */
   get effect() {
     return this.parent.validEffects[0];

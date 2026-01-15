@@ -1,4 +1,4 @@
-import { TeriockEffect } from "../documents/_module.mjs";
+import { TeriockActiveEffect } from "../documents/_module.mjs";
 import { change } from "../constants/options/_module.mjs";
 
 declare global {
@@ -14,7 +14,7 @@ declare global {
 
     export type PreparedChangeData = Teriock.Foundry.EffectChangeData & {
       qualifier: string;
-      effect: TeriockEffect;
+      effect: TeriockActiveEffect;
     };
 
     export type QualifiedChangeData = Teriock.Foundry.EffectChangeData & {

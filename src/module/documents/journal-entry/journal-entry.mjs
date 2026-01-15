@@ -10,8 +10,8 @@ const { JournalEntry } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
- * @property {Collection<ID<TeriockJournalEntryCategory>, TeriockJournalEntryCategory>} categories
- * @property {Collection<ID<TeriockJournalEntryPage>, TeriockJournalEntryPage>} pages
+ * @property {TypeCollection<TeriockJournalEntryCategory, TeriockJournalEntryCategory>} categories
+ * @property {TypeCollection<TeriockJournalEntryPage, TeriockJournalEntryPage>} pages
  */
 export default class TeriockJournalEntry extends mix(
   JournalEntry,

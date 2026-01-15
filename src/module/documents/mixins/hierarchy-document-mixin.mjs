@@ -258,7 +258,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The collection that contains this and its siblings or their indexes.
-       * @returns {Collection<ID<HierarchyDocument>, HierarchyDocument>}
+       * @returns {TypeCollection<HierarchyDocument, HierarchyDocument>}
        */
       get siblingCollection() {
         let collection = this.collection;

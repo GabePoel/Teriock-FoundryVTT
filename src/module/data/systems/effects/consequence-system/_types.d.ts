@@ -4,7 +4,10 @@ import {
   CombatExpirationSourceType,
   CombatExpirationTiming,
 } from "../../../fields/helpers/_types";
-import { TeriockActor, TeriockEffect } from "../../../../documents/_module.mjs";
+import {
+  TeriockActiveEffect,
+  TeriockActor,
+} from "../../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -56,8 +59,8 @@ declare global {
         changes: Teriock.Changes.QualifiedChangeData[];
       };
       movementExpiration: boolean;
-      /** <schema> {@link TeriockEffect} that's the source of this consequence */
-      source: UUID<TeriockEffect>;
+      /** <schema> {@link TeriockActiveEffect} that's the source of this consequence */
+      source: UUID<TeriockActiveEffect>;
       /** <schema> Source description */
       sourceDescription: string;
       /** <schema> If this expires when its source is inactive */

@@ -39,10 +39,9 @@ export default class StoneSystem extends BaseCardSystem {
     super.prepareDerivedData();
     if (this.parent.parent) {
       let count = 1;
-      const cards =
-        /** @type {TeriockCard[]} */ this.parent.parent.cards.contents.filter(
-          (c) => c.type === this.parent.type && c.suit === this.parent.suit,
-        );
+      const cards = this.parent.parent.cards.contents.filter(
+        (c) => c.type === this.parent.type && c.suit === this.parent.suit,
+      );
       cards.sort((a, b) => a.sort - b.sort);
       for (const card of cards) {
         if (card.id === this.parent.id) break;

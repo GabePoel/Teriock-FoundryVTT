@@ -32,7 +32,7 @@ export default class BaseItemSheet extends mix(
   };
 
   /**
-   * Marks the {@link TeriockEffect} as being "on use" or not.
+   * Marks the {@link TeriockActiveEffect} as being "on use" or not.
    * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>}

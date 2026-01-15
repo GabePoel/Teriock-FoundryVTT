@@ -1,13 +1,14 @@
+import "./active-effect/_types";
 import "./actor/_types";
+import "./card/_types";
 import "./chat-message/_types";
 import "./combat/_types";
 import "./combatant/_types";
-import "./effect/_types";
 import "./folder/_types";
 import "./item/_types";
-import "./journal-entry/_types";
 import "./journal-entry-category/_types";
 import "./journal-entry-page/_types";
+import "./journal-entry/_types";
 import "./macro/_types";
 import "./mixins/_types";
 import "./roll-table/_types";
@@ -15,7 +16,6 @@ import "./scene/_types";
 import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
-import "./card/_types";
 import { documentTypes } from "../constants/system/document-types.mjs";
 import * as systems from "../data/systems/_module.mjs";
 

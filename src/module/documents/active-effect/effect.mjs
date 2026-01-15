@@ -19,12 +19,12 @@ const { ActiveEffect } = foundry.documents;
  * @mixes SettingsDocument
  * @property {Teriock.Documents.EffectModel} system
  * @property {Teriock.Documents.EffectType} type
- * @property {ID<TeriockEffect>} _id
- * @property {ID<TeriockEffect>} id
- * @property {UUID<TeriockEffect>} uuid
+ * @property {ID<TeriockActiveEffect>} _id
+ * @property {ID<TeriockActiveEffect>} id
+ * @property {UUID<TeriockActiveEffect>} uuid
  * @property {TeriockBaseEffectSheet} sheet
  */
-export default class TeriockEffect extends mix(
+export default class TeriockActiveEffect extends mix(
   ActiveEffect,
   mixins.BaseDocumentMixin,
   mixins.CommonDocumentMixin,
@@ -53,7 +53,7 @@ export default class TeriockEffect extends mix(
   }
 
   /**
-   * Alternative to {@link TeriockEffect.isTemporary} that only references duration.
+   * Alternative to {@link TeriockActiveEffect.isTemporary} that only references duration.
    * @returns {boolean}
    */
   get hasDuration() {

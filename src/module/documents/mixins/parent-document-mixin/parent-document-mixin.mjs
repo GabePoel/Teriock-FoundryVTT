@@ -53,9 +53,9 @@ export default function ParentDocumentMixin(Base) {
       }
 
       /**
-       * Gets the list of TeriockEffect documents associated with this document.
+       * Gets the list of {@link TeriockActiveEffect} documents associated with this document.
        * Helper method for prepareDerivedData() that can be called explicitly.
-       * @returns {TeriockEffect[]}
+       * @returns {TeriockActiveEffect[]}
        */
       get validEffects() {
         return [];
