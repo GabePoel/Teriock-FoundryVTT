@@ -1,36 +1,17 @@
 name: Swamp Beast
-img: systems/teriock/src/icons/creatures/swamp-beast.webp
 type: creature
-folder: RDGQptRQuOQJYYPl
-_id: Thh9xrk8obbZX5P1
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 4
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: y6OSxWeK5LdjFJB4
-    blocker: y6OSxWeK5LdjFJB4
-  hp:
-    value: 12
-  mp:
-    value: 4
+img: systems/teriock/src/icons/creatures/swamp-beast.webp
 prototypeToken:
   name: Swamp Beast
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/swamp-beast.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -153,7 +129,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.Thh9xrk8obbZX5P1.Item.Vg2SKSyjpcFhURqN
+        Compendium.teriock.creatures.Actor.swampBeast000000.Item.Vg2SKSyjpcFhURqN
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -197,22 +173,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -246,7 +228,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -524,10 +508,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.KQyT2OjipN5IAeNl
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.KQyT2OjipN5IAeNl
       - name: Dense Intelligence
         type: ability
         system:
@@ -568,22 +552,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -613,7 +603,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -890,10 +882,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.PT3Et55oTXl9p9jK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.xt3xvlRrZE1B83hJ
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.xt3xvlRrZE1B83hJ
       - name: Devour
         type: ability
         system:
@@ -935,21 +927,27 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: a2
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -979,7 +977,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Your Bite's Range
+          range:
+            unit: ft
+            raw: Your Bite's Range
           requirements: <p>Target is @L[Condition:Down]{down}.</p>
           results:
             hit: >-
@@ -1260,10 +1260,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.QnqaSDkU2kHD1P5L
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.VkPqvFbcuUvp12tX
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.VkPqvFbcuUvp12tX
       - name: Night Vision
         type: ability
         system:
@@ -1304,13 +1304,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -1318,9 +1319,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1352,7 +1358,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1636,10 +1644,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.Vonf2uQAxE1kQC7L
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.Vonf2uQAxE1kQC7L
       - name: Normal Movement
         type: ability
         system:
@@ -1680,22 +1688,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1725,7 +1739,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2002,10 +2018,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.ILt8ZZq01IC9ESAN
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.ILt8ZZq01IC9ESAN
       - name: Normal Perception
         type: ability
         system:
@@ -2046,22 +2062,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2091,7 +2113,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2368,10 +2392,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.06Vg2EEkGBgRSVdz
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.06Vg2EEkGBgRSVdz
       - name: Normal Sneak
         type: ability
         system:
@@ -2412,22 +2436,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2457,7 +2487,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2734,10 +2766,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.MOvgsQhpwAAVctJE
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.MOvgsQhpwAAVctJE
       - name: Poison Strike
         type: ability
         system:
@@ -2779,12 +2811,13 @@ items:
             package: strike
           duration:
             unit: hour
-            quantity: 24
             conditions:
               present: []
               absent: []
             stationary: false
             description: 24 Hours
+            raw: '24'
+            dawn: false
           effectTypes:
             - poison
           elderSorcery: false
@@ -2792,9 +2825,14 @@ items:
           elements: []
           endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2828,7 +2866,9 @@ items:
             raw: 0
           powerSources:
             - alchemical
-          range: Your Weapon's Range
+          range:
+            unit: ft
+            raw: Your Weapon's Range
           requirements: ''
           results:
             hit: >-
@@ -3113,10 +3153,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DBrO7NQw5K6ks2MN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.yl2CONmua5YE9krF
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.yl2CONmua5YE9krF
       - name: Swamp Native
         type: ability
         system:
@@ -3157,22 +3197,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3204,7 +3250,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3481,10 +3529,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9CAiuzSvzl73fshA
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.pzmYwzJxptmj3i1s
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.pzmYwzJxptmj3i1s
       - name: Agile
         type: ability
         system:
@@ -3525,13 +3573,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -3539,9 +3588,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3573,7 +3627,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3858,18 +3914,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.WrvQ3vZFTItud9sc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN.BWc2XXza1sdtb1T2
+          !actors.items.effects!swampBeast000000.Vg2SKSyjpcFhURqN.BWc2XXza1sdtb1T2
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.Vg2SKSyjpcFhURqN
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!Thh9xrk8obbZX5P1.Vg2SKSyjpcFhURqN'
+    _key: '!actors.items!swampBeast000000.Vg2SKSyjpcFhURqN'
   - name: Thick Hide
     type: body
     _id: 7zqeYw46dsUaQRqr
@@ -3905,10 +3961,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3921,9 +3979,9 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.RfgszLJah8iEzsOw
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!Thh9xrk8obbZX5P1.7zqeYw46dsUaQRqr'
+    _key: '!actors.items!swampBeast000000.7zqeYw46dsUaQRqr'
   - name: Foot
     type: body
     _id: CpFtcsbu1SFYOeRJ
@@ -3959,10 +4017,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4009,10 +4069,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.CpFtcsbu1SFYOeRJ.LwntE76DWV8LsMYk
+          !actors.items.effects!swampBeast000000.CpFtcsbu1SFYOeRJ.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -4051,18 +4111,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.CpFtcsbu1SFYOeRJ.70oASdJA4Iza7rlK
+          !actors.items.effects!swampBeast000000.CpFtcsbu1SFYOeRJ.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!Thh9xrk8obbZX5P1.CpFtcsbu1SFYOeRJ'
+    _key: '!actors.items!swampBeast000000.CpFtcsbu1SFYOeRJ'
   - name: Ferocious Jaw
     type: body
     _id: y6OSxWeK5LdjFJB4
@@ -4098,10 +4158,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4147,10 +4209,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.y6OSxWeK5LdjFJB4.eQUrKLYfdm3d2pbp
+          !actors.items.effects!swampBeast000000.y6OSxWeK5LdjFJB4.eQUrKLYfdm3d2pbp
       - name: Weapon
         type: property
         system:
@@ -4189,10 +4251,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.y6OSxWeK5LdjFJB4.3UeX8RwGGyFvjqWm
+          !actors.items.effects!swampBeast000000.y6OSxWeK5LdjFJB4.3UeX8RwGGyFvjqWm
       - name: AV0
         type: property
         system:
@@ -4236,24 +4298,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.RtpPLATV2DKzDwg1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!Thh9xrk8obbZX5P1.y6OSxWeK5LdjFJB4.1If9EoCtkcFEPVeN
+          !actors.items.effects!swampBeast000000.y6OSxWeK5LdjFJB4.1If9EoCtkcFEPVeN
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.srx0p7BJJ6aF1aur
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!Thh9xrk8obbZX5P1.y6OSxWeK5LdjFJB4'
+    _key: '!actors.items!swampBeast000000.y6OSxWeK5LdjFJB4'
+system:
+  hp:
+    value: 12
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 4
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '4'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: y6OSxWeK5LdjFJB4
+    blocker: y6OSxWeK5LdjFJB4
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.swampBeast000000
+_id: swampBeast000000
 effects: []
+folder: RDGQptRQuOQJYYPl
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!Thh9xrk8obbZX5P1'
+_key: '!actors!swampBeast000000'

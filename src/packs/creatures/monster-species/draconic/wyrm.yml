@@ -1,36 +1,17 @@
 name: Wyrm
-img: systems/teriock/src/icons/creatures/wyrm.webp
 type: creature
-folder: DMMYcBwfdMECyHp3
-_id: YheRjIEP9Ohq06ND
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 10
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: WEv7kYPIsNOLdq60
-    blocker: J4DA1MBoT4tSznJu
-  hp:
-    value: 48
-  mp:
-    value: 6
+img: systems/teriock/src/icons/creatures/wyrm.webp
 prototypeToken:
   name: Wyrm
-  displayName: 0
-  actorLink: false
-  width: 3
-  height: 3
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/wyrm.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 3
+  height: 3
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -156,7 +132,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.YheRjIEP9Ohq06ND.Item.cbiR3rlr3dkZC0bI
+        Compendium.teriock.creatures.Actor.wyrm000000000000.Item.cbiR3rlr3dkZC0bI
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -179,15 +155,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Battle Roar Aura]{Battle Roar Aura} and
@@ -248,9 +227,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -525,10 +509,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.rL2xFqIjBu9krTdA
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.1KCUGzU4ITs8Ylqs
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.1KCUGzU4ITs8Ylqs
       - name: Battle Roar Aura
         type: ability
         system:
@@ -549,14 +533,17 @@ items:
           elements: []
           duration:
             unit: minute
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Minute
+            raw: '1'
+            dawn: false
           sustained: false
-          range: '150'
+          range:
+            unit: ft
+            raw: '150'
           overview:
             base: >-
               <p>This ability cannot affect @L[Condition:Deaf]{deaf}
@@ -619,9 +606,14 @@ items:
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -901,10 +893,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.1RycYmNR8QKlosOY
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.bGzV87Fui06AYyqW
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.bGzV87Fui06AYyqW
       - name: Battle Cry
         type: ability
         system:
@@ -924,15 +916,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
@@ -993,9 +988,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1271,10 +1271,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.qnpINT6L9er8P9lZ
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.qnpINT6L9er8P9lZ
       - name: Battle Cry Aura
         type: ability
         system:
@@ -1295,14 +1295,17 @@ items:
           elements: []
           duration:
             unit: minute
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Minute
+            raw: '1'
+            dawn: false
           sustained: false
-          range: '10'
+          range:
+            unit: ft
+            raw: '10'
           overview:
             base: >-
               <p>This ability cannot affect @L[Condition:Deaf]{deaf}
@@ -1366,9 +1369,14 @@ items:
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1648,10 +1656,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.qdoHZufxtGs1nUUZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.Hjq51TWxh1ECY461
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.Hjq51TWxh1ECY461
       - name: Battle Cry Resistance
         type: ability
         system:
@@ -1672,14 +1680,17 @@ items:
           elements: []
           duration:
             unit: minute
-            quantity: 5
             conditions:
               present: []
               absent: []
             stationary: false
             description: 5 Minutes
+            raw: '5'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You @L[Keyword:Resistance]{resist} being
@@ -1740,9 +1751,14 @@ items:
           heightened: ''
           endCondition: <p>You die or 1 minute passes without combat.</p>
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2026,10 +2042,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DqXrfWmMV6e0tUmE
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.KRxZkycyzyi1pI0i
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.KRxZkycyzyi1pI0i
       - name: Dragon Scales
         type: ability
         system:
@@ -2049,15 +2065,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>Your @L[Category:AV granting abilities]{natural armor} is
@@ -2117,9 +2136,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2408,10 +2432,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.xwdhYUU7D5GUUk1X
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.hnWuSjdcFby5eLNq
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.hnWuSjdcFby5eLNq
       - name: Improved Devour
         type: ability
         system:
@@ -2432,14 +2456,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Your Bite's Range
+          range:
+            unit: ft
+            raw: Your Bite's Range
           overview:
             base: ''
             proficient: ''
@@ -2501,9 +2528,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: <p>Target is @L[Condition:Down]{down}.</p>
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2778,10 +2810,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.6F1sOU7Or4QGnPeF
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.sVlXDvXNNicDfEXc
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.sVlXDvXNNicDfEXc
       - name: Lumbering
         type: ability
         system:
@@ -2801,15 +2833,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -2867,9 +2902,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -3144,10 +3184,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.sTg8EklB3nnM8fc9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.5HnpaLQN2wFUO4DG
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.5HnpaLQN2wFUO4DG
       - name: Monstrous Strength
         type: ability
         system:
@@ -3167,15 +3207,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Supernatural Strength]{Supernatural
@@ -3237,9 +3280,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: special
@@ -3528,10 +3576,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.J51oJRVLBRrkvMpm
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.N4UwyLd67imkcZsC
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.N4UwyLd67imkcZsC
       - name: Supernatural Strength
         type: ability
         system:
@@ -3551,15 +3599,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
@@ -3622,9 +3673,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: special
@@ -3900,10 +3956,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.uPQ4GiiSTAHr5k0N
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.gf4tNWkk29gT2q9L
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.gf4tNWkk29gT2q9L
       - name: Giant Strength
         type: ability
         system:
@@ -3923,15 +3979,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
@@ -3994,9 +4053,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -4272,10 +4336,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.MYmdciuBLqHTJZBD
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.XiehbkbJFglkgn1B
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.XiehbkbJFglkgn1B
       - name: Improved Strength
         type: ability
         system:
@@ -4295,15 +4359,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
@@ -4364,9 +4431,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -4642,10 +4714,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.SYy6lxPn4EOOJ0bC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.TzuCOAJAkBiWqGpt
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.TzuCOAJAkBiWqGpt
       - name: Beastly Strength
         type: ability
         system:
@@ -4665,15 +4737,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -4736,9 +4811,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5014,10 +5094,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.QOGcLwCJ70pLfcvQ
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.QOGcLwCJ70pLfcvQ
       - name: Improved Armor Piercing
         type: ability
         system:
@@ -5037,15 +5117,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
@@ -5106,9 +5189,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5384,10 +5472,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.H0TY6iliodv97qAv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.3QqBe2ExdE9Ptfl0
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.3QqBe2ExdE9Ptfl0
       - name: Melee Damage Boost
         type: ability
         system:
@@ -5408,14 +5496,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: null
+          range:
+            unit: melee
+            raw: ''
           overview:
             base: >-
               <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -5480,9 +5571,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: >-
             <p>You have hit a creature with a @L[Category:Damaging
             effects]{damaging} melee @L[Category:Weapon delivery
@@ -5762,10 +5858,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.GkyxqkzxVAfMxXxR
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.DHBCsajmXs8MTItn
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.DHBCsajmXs8MTItn
       - name: Shattering Grip
         type: ability
         system:
@@ -5786,14 +5882,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: null
+          range:
+            unit: melee
+            raw: ''
           overview:
             base: <p>Target is @L[Property:Shattered]{shattered}.</p>
             proficient: ''
@@ -5851,9 +5950,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: <p>You are holding the target.</p>
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6130,10 +6234,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nWx098kLqK76zH6X
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.f1IcJ2UivS76O4lw
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.f1IcJ2UivS76O4lw
       - name: Normal Movement
         type: ability
         system:
@@ -6153,15 +6257,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -6219,9 +6326,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6496,10 +6608,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.VOdaPpRmOdwWaJDe
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.VOdaPpRmOdwWaJDe
       - name: Normal Perception
         type: ability
         system:
@@ -6519,15 +6631,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -6585,9 +6700,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6862,10 +6982,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.FjHlBXlU8mzgVRlU
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.FjHlBXlU8mzgVRlU
       - name: Improved Healing Factor
         type: ability
         system:
@@ -6906,14 +7026,15 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent:
                 - dead
             stationary: false
             description: While Alive
+            raw: '0'
+            dawn: false
           effectTypes:
             - healing
             - regeneration
@@ -6922,9 +7043,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -6959,7 +7085,9 @@ items:
             raw: 0
           powerSources:
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -7237,10 +7365,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.8WDZ2ZtiENd1DdrD
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.SrYxsSO238Hf4XEM
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.SrYxsSO238Hf4XEM
       - name: Improved Revitalizing Factor
         type: ability
         system:
@@ -7281,14 +7409,15 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent:
                 - dead
             stationary: false
             description: While Alive
+            raw: '0'
+            dawn: false
           effectTypes:
             - regeneration
             - revitalization
@@ -7297,9 +7426,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -7333,7 +7467,9 @@ items:
             raw: 0
           powerSources:
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -7610,18 +7746,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.j8SRlCDEpdwE8R34
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI.qPwaKvYF72TXZ8GS
+          !actors.items.effects!wyrm000000000000.cbiR3rlr3dkZC0bI.qPwaKvYF72TXZ8GS
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.cbiR3rlr3dkZC0bI
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!YheRjIEP9Ohq06ND.cbiR3rlr3dkZC0bI'
+    _key: '!actors.items!wyrm000000000000.cbiR3rlr3dkZC0bI'
   - name: Sharp Claw
     type: body
     _id: 8v79W7Eyofv0h5kE
@@ -7657,10 +7793,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -7706,10 +7844,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.8v79W7Eyofv0h5kE.Wez1JXmo9LjBU1oA
+          !actors.items.effects!wyrm000000000000.8v79W7Eyofv0h5kE.Wez1JXmo9LjBU1oA
       - name: Weapon
         type: property
         system:
@@ -7748,18 +7886,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.8v79W7Eyofv0h5kE.6CVqlpk3uf4VDbFY
+          !actors.items.effects!wyrm000000000000.8v79W7Eyofv0h5kE.6CVqlpk3uf4VDbFY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!YheRjIEP9Ohq06ND.8v79W7Eyofv0h5kE'
+    _key: '!actors.items!wyrm000000000000.8v79W7Eyofv0h5kE'
   - name: Reinforced Scales
     type: body
     _id: FvgIE6HkmBr78onX
@@ -7795,10 +7933,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -7811,9 +7951,9 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.M2VG06ICB51fNn4a
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!YheRjIEP9Ohq06ND.FvgIE6HkmBr78onX'
+    _key: '!actors.items!wyrm000000000000.FvgIE6HkmBr78onX'
   - name: Crushing Jaw
     type: body
     _id: J4DA1MBoT4tSznJu
@@ -7849,10 +7989,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -7898,10 +8040,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.J4DA1MBoT4tSznJu.F2wD1hO6khCdOqI4
+          !actors.items.effects!wyrm000000000000.J4DA1MBoT4tSznJu.F2wD1hO6khCdOqI4
       - name: Weapon
         type: property
         system:
@@ -7940,10 +8082,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.J4DA1MBoT4tSznJu.SOKBBE9Eu2PiI2xI
+          !actors.items.effects!wyrm000000000000.J4DA1MBoT4tSznJu.SOKBBE9Eu2PiI2xI
       - name: AV0
         type: property
         system:
@@ -7987,18 +8129,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.RtpPLATV2DKzDwg1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.J4DA1MBoT4tSznJu.dvmwlaIZ5VOQUZru
+          !actors.items.effects!wyrm000000000000.J4DA1MBoT4tSznJu.dvmwlaIZ5VOQUZru
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.f3lwEFJ1y8zfO8Rk
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!YheRjIEP9Ohq06ND.J4DA1MBoT4tSznJu'
+    _key: '!actors.items!wyrm000000000000.J4DA1MBoT4tSznJu'
   - name: Foot
     type: body
     _id: WEv7kYPIsNOLdq60
@@ -8034,10 +8176,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -8084,10 +8228,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.WEv7kYPIsNOLdq60.LwntE76DWV8LsMYk
+          !actors.items.effects!wyrm000000000000.WEv7kYPIsNOLdq60.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -8126,24 +8270,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!YheRjIEP9Ohq06ND.WEv7kYPIsNOLdq60.70oASdJA4Iza7rlK
+          !actors.items.effects!wyrm000000000000.WEv7kYPIsNOLdq60.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!YheRjIEP9Ohq06ND.WEv7kYPIsNOLdq60'
+    _key: '!actors.items!wyrm000000000000.WEv7kYPIsNOLdq60'
+system:
+  hp:
+    value: 48
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '10'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: WEv7kYPIsNOLdq60
+    blocker: J4DA1MBoT4tSznJu
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.wyrm000000000000
+_id: wyrm000000000000
 effects: []
+folder: DMMYcBwfdMECyHp3
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!YheRjIEP9Ohq06ND'
+_key: '!actors!wyrm000000000000'

@@ -1,36 +1,17 @@
 name: Cave Troll
-img: systems/teriock/src/icons/creatures/cave-troll.webp
 type: creature
-folder: TVKnfbZRchjiAhoD
-_id: CbnORvkDrhqndkKU
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 8
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: rSPeuFr8iDQPv2nt
-    blocker: JmR1wHYZYXRw82Yg
-  hp:
-    value: 48
-  mp:
-    value: 6
+img: systems/teriock/src/icons/creatures/cave-troll.webp
 prototypeToken:
   name: Cave Troll
-  displayName: 0
-  actorLink: false
-  width: 2
-  height: 2
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/cave-troll.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 2
+  height: 2
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -154,7 +130,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.CbnORvkDrhqndkKU.Item.IavzrDnY6tEeqPY8
+        Compendium.teriock.creatures.Actor.caveTroll0000000.Item.IavzrDnY6tEeqPY8
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -198,13 +174,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - resistance
           elderSorcery: false
@@ -212,9 +189,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -250,7 +232,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -541,10 +525,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.QssNuNkciHTxajIJ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.DNbc4BOEOQEJHGJx
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.DNbc4BOEOQEJHGJx
       - name: Dark Vision
         type: ability
         system:
@@ -585,13 +569,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -599,9 +584,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -633,7 +623,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -917,10 +909,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.NXOLmuklxD24q9kC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.mVrsO2Ap8ifdDuD6
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.mVrsO2Ap8ifdDuD6
       - name: Dense Intelligence
         type: ability
         system:
@@ -961,22 +953,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -1006,7 +1004,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1283,10 +1283,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.PT3Et55oTXl9p9jK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.oYd5R67rDfydED4h
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.oYd5R67rDfydED4h
       - name: Monstrous Strength
         type: ability
         system:
@@ -1327,22 +1327,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -1376,7 +1382,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1667,10 +1675,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.J51oJRVLBRrkvMpm
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.mt1GgiTpsF9DOxnP
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.mt1GgiTpsF9DOxnP
       - name: Supernatural Strength
         type: ability
         system:
@@ -1711,22 +1719,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -1761,7 +1775,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2039,10 +2055,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.uPQ4GiiSTAHr5k0N
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.dy1Vg3MGj4XjWXw2
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.dy1Vg3MGj4XjWXw2
       - name: Giant Strength
         type: ability
         system:
@@ -2083,22 +2099,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2132,7 +2154,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2411,10 +2435,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.MYmdciuBLqHTJZBD
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.YV4iJbZnJFPu7shE
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.YV4iJbZnJFPu7shE
       - name: Improved Strength
         type: ability
         system:
@@ -2455,22 +2479,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2502,7 +2532,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2781,10 +2813,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.SYy6lxPn4EOOJ0bC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.u46T11BcoQsowvVJ
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.u46T11BcoQsowvVJ
       - name: Beastly Strength
         type: ability
         system:
@@ -2825,22 +2857,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2874,7 +2912,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3153,10 +3193,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.5jHC46Wb1GLHAD4U
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.5jHC46Wb1GLHAD4U
       - name: Improved Armor Piercing
         type: ability
         system:
@@ -3197,22 +3237,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3244,7 +3290,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3523,10 +3571,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.H0TY6iliodv97qAv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.ysGJCJd3YZlMr7ky
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.ysGJCJd3YZlMr7ky
       - name: Melee Damage Boost
         type: ability
         system:
@@ -3568,12 +3616,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - damaging
           elderSorcery: false
@@ -3581,9 +3630,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: r0
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3619,7 +3673,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: null
+          range:
+            unit: melee
+            raw: ''
           requirements: ''
           results:
             hit: ''
@@ -3901,10 +3957,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.GkyxqkzxVAfMxXxR
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.QpJkCVZf5uOWlK2l
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.QpJkCVZf5uOWlK2l
       - name: Shattering Grip
         type: ability
         system:
@@ -3946,12 +4002,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - destruction
           elderSorcery: false
@@ -3959,9 +4016,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: a2
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3991,7 +4053,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: null
+          range:
+            unit: melee
+            raw: ''
           requirements: <p>You are holding the target.</p>
           results:
             hit: ''
@@ -4269,10 +4333,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nWx098kLqK76zH6X
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.YtMtbxPBuW7LvrMe
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.YtMtbxPBuW7LvrMe
       - name: Normal Movement
         type: ability
         system:
@@ -4313,22 +4377,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4358,7 +4428,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4635,10 +4707,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.ySEQzkgQ6chZNoEC
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.ySEQzkgQ6chZNoEC
       - name: Normal Perception
         type: ability
         system:
@@ -4679,22 +4751,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4724,7 +4802,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5001,10 +5081,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.bUHtdH21oXomCKel
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.bUHtdH21oXomCKel
       - name: Normal Sneak
         type: ability
         system:
@@ -5045,22 +5125,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5090,7 +5176,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5367,10 +5455,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.xgO5UjB40iRy3c19
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.xgO5UjB40iRy3c19
       - name: Regenerating
         type: ability
         system:
@@ -5411,13 +5499,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - revival
             - healing
@@ -5427,9 +5516,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -5470,7 +5564,9 @@ items:
             raw: 0
           powerSources:
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5748,18 +5844,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.KMru5nPLLX8PwZw4
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8.Zkl5KUoxCHQGO9h2
+          !actors.items.effects!caveTroll0000000.IavzrDnY6tEeqPY8.Zkl5KUoxCHQGO9h2
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.IavzrDnY6tEeqPY8
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!CbnORvkDrhqndkKU.IavzrDnY6tEeqPY8'
+    _key: '!actors.items!caveTroll0000000.IavzrDnY6tEeqPY8'
   - name: Mouth
     type: body
     _id: Comr90MSjmzOqurM
@@ -5795,10 +5891,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -5845,10 +5943,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.Comr90MSjmzOqurM.1keJAxX1vkfTL8Wl
+          !actors.items.effects!caveTroll0000000.Comr90MSjmzOqurM.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -5887,10 +5985,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.Comr90MSjmzOqurM.cj70nNvBKfT3EQ8P
+          !actors.items.effects!caveTroll0000000.Comr90MSjmzOqurM.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -5929,18 +6027,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.Comr90MSjmzOqurM.43UnM2Fnf4EpPLFE
+          !actors.items.effects!caveTroll0000000.Comr90MSjmzOqurM.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!CbnORvkDrhqndkKU.Comr90MSjmzOqurM'
+    _key: '!actors.items!caveTroll0000000.Comr90MSjmzOqurM'
   - name: Prehensile Sharp Claw
     type: body
     _id: JmR1wHYZYXRw82Yg
@@ -5976,10 +6074,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6025,10 +6125,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.JmR1wHYZYXRw82Yg.LwQ7bQ0NWiZc8z7r
+          !actors.items.effects!caveTroll0000000.JmR1wHYZYXRw82Yg.LwQ7bQ0NWiZc8z7r
       - name: Prehensile
         type: property
         system:
@@ -6067,10 +6167,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.JmR1wHYZYXRw82Yg.3FLrmVmIEROO5wr3
+          !actors.items.effects!caveTroll0000000.JmR1wHYZYXRw82Yg.3FLrmVmIEROO5wr3
       - name: Weapon
         type: property
         system:
@@ -6109,18 +6209,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.JmR1wHYZYXRw82Yg.ALZxM7mT6KTtgo5v
+          !actors.items.effects!caveTroll0000000.JmR1wHYZYXRw82Yg.ALZxM7mT6KTtgo5v
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.7iDhwsYXcb2HAZ3f
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!CbnORvkDrhqndkKU.JmR1wHYZYXRw82Yg'
+    _key: '!actors.items!caveTroll0000000.JmR1wHYZYXRw82Yg'
   - name: Thick Hide
     type: body
     _id: l1nOAoc9ivStCGn8
@@ -6156,10 +6256,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6172,9 +6274,9 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.RfgszLJah8iEzsOw
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!CbnORvkDrhqndkKU.l1nOAoc9ivStCGn8'
+    _key: '!actors.items!caveTroll0000000.l1nOAoc9ivStCGn8'
   - name: Foot
     type: body
     _id: rSPeuFr8iDQPv2nt
@@ -6210,10 +6312,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6260,10 +6364,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.rSPeuFr8iDQPv2nt.LwntE76DWV8LsMYk
+          !actors.items.effects!caveTroll0000000.rSPeuFr8iDQPv2nt.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -6302,24 +6406,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!CbnORvkDrhqndkKU.rSPeuFr8iDQPv2nt.70oASdJA4Iza7rlK
+          !actors.items.effects!caveTroll0000000.rSPeuFr8iDQPv2nt.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!CbnORvkDrhqndkKU.rSPeuFr8iDQPv2nt'
+    _key: '!actors.items!caveTroll0000000.rSPeuFr8iDQPv2nt'
+system:
+  hp:
+    value: 48
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '8'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: rSPeuFr8iDQPv2nt
+    blocker: JmR1wHYZYXRw82Yg
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.caveTroll0000000
+_id: caveTroll0000000
 effects: []
+folder: TVKnfbZRchjiAhoD
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!CbnORvkDrhqndkKU'
+_key: '!actors!caveTroll0000000'

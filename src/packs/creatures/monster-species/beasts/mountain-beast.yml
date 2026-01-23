@@ -1,36 +1,17 @@
 name: Mountain Beast
-img: systems/teriock/src/icons/creatures/mountain-beast.webp
 type: creature
-folder: RDGQptRQuOQJYYPl
-_id: 0TQlOL8lnlfaSNAT
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 4
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: bYHgd5Otr36cjfeI
-    blocker: bYHgd5Otr36cjfeI
-  hp:
-    value: 10
-  mp:
-    value: 4
+img: systems/teriock/src/icons/creatures/mountain-beast.webp
 prototypeToken:
   name: Mountain Beast
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/mountain-beast.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -150,7 +126,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.0TQlOL8lnlfaSNAT.Item.3T8HjM4Q1LfbCUIK
+        Compendium.teriock.creatures.Actor.mountainBeast000.Item.3T8HjM4Q1LfbCUIK
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -174,14 +150,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Your Weapon's Range
+          range:
+            unit: ft
+            raw: Your Weapon's Range
           overview:
             base: >-
               <div class="note"><b>Note:</b> A target moving due to [[lookup
@@ -248,9 +227,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the target and
             becoming adjacent to them.</p>
@@ -527,10 +511,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.P01DzaAQHrD8w9TG
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.kqxRXBan5sGFvED6
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.kqxRXBan5sGFvED6
       - name: Devour
         type: ability
         system:
@@ -551,14 +535,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Your Bite's Range
+          range:
+            unit: ft
+            raw: Your Bite's Range
           overview:
             base: ''
             proficient: ''
@@ -620,9 +607,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: <p>Target is @L[Condition:Down]{down}.</p>
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -897,10 +889,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.QnqaSDkU2kHD1P5L
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.vNob2imN5K0Drr14
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.vNob2imN5K0Drr14
       - name: Night Vision
         type: ability
         system:
@@ -920,15 +912,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is bright
@@ -988,9 +983,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1273,10 +1273,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.6dQfW9fj3cWUdzwV
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.6dQfW9fj3cWUdzwV
       - name: Normal Movement
         type: ability
         system:
@@ -1296,15 +1296,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -1362,9 +1365,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1639,10 +1647,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.gz9Nw65aiBH6lNx0
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.gz9Nw65aiBH6lNx0
       - name: Normal Perception
         type: ability
         system:
@@ -1662,15 +1670,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -1728,9 +1739,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2005,10 +2021,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.27J3aMYAF7PcKDNV
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.27J3aMYAF7PcKDNV
       - name: Normal Sneak
         type: ability
         system:
@@ -2028,15 +2044,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -2094,9 +2113,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2371,10 +2395,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.LN5F2bH8wnd5TyXq
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.LN5F2bH8wnd5TyXq
       - name: Normal Strength
         type: ability
         system:
@@ -2394,15 +2418,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -2460,9 +2487,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2737,10 +2769,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.OmnYGWvgtAYR8L5L
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.OmnYGWvgtAYR8L5L
       - name: Trample
         type: ability
         system:
@@ -2761,14 +2793,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Your Weapon's Range
+          range:
+            unit: ft
+            raw: Your Weapon's Range
           overview:
             base: >-
               <p>If you use [[lookup name]] on a
@@ -2831,9 +2866,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the target and
             becoming adjacent to them.</p>
@@ -3112,18 +3152,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.Y9K7pgX7rnZMaQ4y
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK.3zpgmhYMcFK2mdZq
+          !actors.items.effects!mountainBeast000.3T8HjM4Q1LfbCUIK.3zpgmhYMcFK2mdZq
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.3T8HjM4Q1LfbCUIK
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0TQlOL8lnlfaSNAT.3T8HjM4Q1LfbCUIK'
+    _key: '!actors.items!mountainBeast000.3T8HjM4Q1LfbCUIK'
   - name: Fanged Jaw
     type: body
     _id: 59efhsLNBenHjCXm
@@ -3159,10 +3199,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3208,10 +3250,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.59efhsLNBenHjCXm.ozGDVg02SHRX2hCr
+          !actors.items.effects!mountainBeast000.59efhsLNBenHjCXm.ozGDVg02SHRX2hCr
       - name: Weapon
         type: property
         system:
@@ -3250,18 +3292,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.59efhsLNBenHjCXm.u9pZ8QANF4C7gKB9
+          !actors.items.effects!mountainBeast000.59efhsLNBenHjCXm.u9pZ8QANF4C7gKB9
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.U7AaYHX3z8kjCnSq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0TQlOL8lnlfaSNAT.59efhsLNBenHjCXm'
+    _key: '!actors.items!mountainBeast000.59efhsLNBenHjCXm'
   - name: Hardened Hide
     type: body
     _id: OOPVOZqw2w1hEPtt
@@ -3297,10 +3339,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3313,9 +3357,9 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.0nZ4mArbVh0zR169
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0TQlOL8lnlfaSNAT.OOPVOZqw2w1hEPtt'
+    _key: '!actors.items!mountainBeast000.OOPVOZqw2w1hEPtt'
   - name: Sharp Claw
     type: body
     _id: bYHgd5Otr36cjfeI
@@ -3351,10 +3395,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3400,10 +3446,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.bYHgd5Otr36cjfeI.Wez1JXmo9LjBU1oA
+          !actors.items.effects!mountainBeast000.bYHgd5Otr36cjfeI.Wez1JXmo9LjBU1oA
       - name: Weapon
         type: property
         system:
@@ -3442,24 +3488,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0TQlOL8lnlfaSNAT.bYHgd5Otr36cjfeI.6CVqlpk3uf4VDbFY
+          !actors.items.effects!mountainBeast000.bYHgd5Otr36cjfeI.6CVqlpk3uf4VDbFY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0TQlOL8lnlfaSNAT.bYHgd5Otr36cjfeI'
+    _key: '!actors.items!mountainBeast000.bYHgd5Otr36cjfeI'
+system:
+  hp:
+    value: 10
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 4
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '4'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: bYHgd5Otr36cjfeI
+    blocker: bYHgd5Otr36cjfeI
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.mountainBeast000
+_id: mountainBeast000
 effects: []
+folder: RDGQptRQuOQJYYPl
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!0TQlOL8lnlfaSNAT'
+_key: '!actors!mountainBeast000'

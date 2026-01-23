@@ -1,36 +1,17 @@
 name: Plague Ghoul
-img: systems/teriock/src/icons/creatures/plague-ghoul.webp
 type: creature
-folder: MHpV0Grb2NHJPNQV
-_id: oiibKdBuE8kIo9RG
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 3
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: rPja6h4Vo0zuqe9I
-    blocker: rPja6h4Vo0zuqe9I
-  hp:
-    value: 10
-  mp:
-    value: 6
+img: systems/teriock/src/icons/creatures/plague-ghoul.webp
 prototypeToken:
   name: Plague Ghoul
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/plague-ghoul.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -156,7 +132,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.oiibKdBuE8kIo9RG.Item.oa8D5LBlxcXPD96Z
+        Compendium.teriock.creatures.Actor.plagueGhoul00000.Item.oa8D5LBlxcXPD96Z
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -200,22 +176,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -249,7 +231,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -527,10 +511,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.Y7xfWamFXNeMid6F
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.Y7xfWamFXNeMid6F
       - name: Feeding
         type: ability
         system:
@@ -571,13 +555,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -585,9 +570,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -629,7 +619,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -906,10 +898,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.BCCNwL2fmogSuQM6
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.eBEjWfijRRcyfaXm
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.eBEjWfijRRcyfaXm
       - name: Full Undead
         type: ability
         system:
@@ -950,13 +942,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -964,9 +957,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -996,7 +994,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1273,10 +1273,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.jyUqeCTZXYLqeIcW
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.jyUqeCTZXYLqeIcW
       - name: Ethereal Senses
         type: ability
         system:
@@ -1317,13 +1317,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -1332,9 +1333,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1368,7 +1374,9 @@ items:
             - magical
             - spiritual
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1653,10 +1661,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.yzVehDWfRnIdLcPN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.8SNPtYygXwsJqyZY
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.8SNPtYygXwsJqyZY
       - name: Healing Sensitivity
         type: ability
         system:
@@ -1697,13 +1705,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -1711,9 +1720,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -1750,7 +1764,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2028,10 +2044,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.SZtEayMd6TPP34p8
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.JDojbDSVtme6yu2t
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.JDojbDSVtme6yu2t
       - name: Impure Durability
         type: ability
         system:
@@ -2072,13 +2088,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -2086,9 +2103,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -2121,7 +2143,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2406,10 +2430,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.LUx6kx2A8yt15dWA
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.XmFBeumZMXAKZQH0
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.XmFBeumZMXAKZQH0
       - name: Mana Drain Grasp
         type: ability
         system:
@@ -2451,12 +2475,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - revitalization
             - draining
@@ -2465,9 +2490,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: a2
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -2497,7 +2527,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Your Hand's Range
+          range:
+            unit: ft
+            raw: Your Hand's Range
           requirements: ''
           results:
             hit: >-
@@ -2788,10 +2820,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.m4zyaVYprgShHj2C
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.ziYFscX3hoLc0Of1
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.ziYFscX3hoLc0Of1
       - name: Undead Mind
         type: ability
         system:
@@ -2832,13 +2864,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -2847,9 +2880,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -2883,7 +2921,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3175,10 +3215,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.RI93Ezzmys7poKXG
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.YREKgJVbgR9qsr3k
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.YREKgJVbgR9qsr3k
       - name: Undying Durability
         type: ability
         system:
@@ -3219,13 +3259,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -3234,9 +3275,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -3275,7 +3321,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3574,10 +3622,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.I8PF7dSu1phiM8Vc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.QWcR9M5hsjgVWpAl
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.QWcR9M5hsjgVWpAl
       - name: Improved Devour
         type: ability
         system:
@@ -3619,21 +3667,27 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3663,7 +3717,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Your Bite's Range
+          range:
+            unit: ft
+            raw: Your Bite's Range
           requirements: <p>Target is @L[Condition:Down]{down}.</p>
           results:
             hit: >-
@@ -3944,10 +4000,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.6F1sOU7Or4QGnPeF
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.23HMx7W1MbzTHM7Z
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.23HMx7W1MbzTHM7Z
       - name: Low Intelligence
         type: ability
         system:
@@ -3988,22 +4044,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -4033,7 +4095,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4310,10 +4374,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nqpe5LzoIB6hJY7g
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.7RTGOred3w4eClzu
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.7RTGOred3w4eClzu
       - name: Normal Movement
         type: ability
         system:
@@ -4354,22 +4418,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4399,7 +4469,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4676,10 +4748,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.r3PhOtVB73aI48IR
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.r3PhOtVB73aI48IR
       - name: Normal Perception
         type: ability
         system:
@@ -4720,22 +4792,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4765,7 +4843,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5042,10 +5122,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.D551OOE3JRNJtsLs
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.D551OOE3JRNJtsLs
       - name: Normal Sneak
         type: ability
         system:
@@ -5086,22 +5166,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5131,7 +5217,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5408,10 +5496,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.JN1i6ZnSAvjsRGYG
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.JN1i6ZnSAvjsRGYG
       - name: Poison Strike
         type: ability
         system:
@@ -5453,12 +5541,13 @@ items:
             package: strike
           duration:
             unit: hour
-            quantity: 24
             conditions:
               present: []
               absent: []
             stationary: false
             description: 24 Hours
+            raw: '24'
+            dawn: false
           effectTypes:
             - poison
           elderSorcery: false
@@ -5466,9 +5555,14 @@ items:
           elements: []
           endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5502,7 +5596,9 @@ items:
             raw: 0
           powerSources:
             - alchemical
-          range: Your Weapon's Range
+          range:
+            unit: ft
+            raw: Your Weapon's Range
           requirements: ''
           results:
             hit: >-
@@ -5787,10 +5883,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DBrO7NQw5K6ks2MN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.VPy1zRiSlbO9KvEZ
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.VPy1zRiSlbO9KvEZ
       - name: Insatiable
         type: ability
         system:
@@ -5831,13 +5927,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -5845,9 +5942,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5882,7 +5984,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -6159,18 +6263,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.MO5VfWsbghtrAsm8
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z.xVNEE0Oz6pAmKVvC
+          !actors.items.effects!plagueGhoul00000.oa8D5LBlxcXPD96Z.xVNEE0Oz6pAmKVvC
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.oa8D5LBlxcXPD96Z
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!oiibKdBuE8kIo9RG.oa8D5LBlxcXPD96Z'
+    _key: '!actors.items!plagueGhoul00000.oa8D5LBlxcXPD96Z'
   - name: Ferocious Jaw
     type: body
     _id: 0XjtHUdx8tOrBd6h
@@ -6206,10 +6310,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6255,10 +6361,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.0XjtHUdx8tOrBd6h.eQUrKLYfdm3d2pbp
+          !actors.items.effects!plagueGhoul00000.0XjtHUdx8tOrBd6h.eQUrKLYfdm3d2pbp
       - name: Weapon
         type: property
         system:
@@ -6297,10 +6403,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.0XjtHUdx8tOrBd6h.3UeX8RwGGyFvjqWm
+          !actors.items.effects!plagueGhoul00000.0XjtHUdx8tOrBd6h.3UeX8RwGGyFvjqWm
       - name: AV0
         type: property
         system:
@@ -6344,18 +6450,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.RtpPLATV2DKzDwg1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.0XjtHUdx8tOrBd6h.1If9EoCtkcFEPVeN
+          !actors.items.effects!plagueGhoul00000.0XjtHUdx8tOrBd6h.1If9EoCtkcFEPVeN
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.srx0p7BJJ6aF1aur
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!oiibKdBuE8kIo9RG.0XjtHUdx8tOrBd6h'
+    _key: '!actors.items!plagueGhoul00000.0XjtHUdx8tOrBd6h'
   - name: Foot
     type: body
     _id: emKLFrZGFj8Gh0fQ
@@ -6391,10 +6497,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6441,10 +6549,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.emKLFrZGFj8Gh0fQ.LwntE76DWV8LsMYk
+          !actors.items.effects!plagueGhoul00000.emKLFrZGFj8Gh0fQ.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -6483,18 +6591,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.emKLFrZGFj8Gh0fQ.70oASdJA4Iza7rlK
+          !actors.items.effects!plagueGhoul00000.emKLFrZGFj8Gh0fQ.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!oiibKdBuE8kIo9RG.emKLFrZGFj8Gh0fQ'
+    _key: '!actors.items!plagueGhoul00000.emKLFrZGFj8Gh0fQ'
   - name: Sharp Claw
     type: body
     _id: rPja6h4Vo0zuqe9I
@@ -6530,10 +6638,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6579,10 +6689,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.rPja6h4Vo0zuqe9I.Wez1JXmo9LjBU1oA
+          !actors.items.effects!plagueGhoul00000.rPja6h4Vo0zuqe9I.Wez1JXmo9LjBU1oA
       - name: Weapon
         type: property
         system:
@@ -6621,24 +6731,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!oiibKdBuE8kIo9RG.rPja6h4Vo0zuqe9I.6CVqlpk3uf4VDbFY
+          !actors.items.effects!plagueGhoul00000.rPja6h4Vo0zuqe9I.6CVqlpk3uf4VDbFY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!oiibKdBuE8kIo9RG.rPja6h4Vo0zuqe9I'
+    _key: '!actors.items!plagueGhoul00000.rPja6h4Vo0zuqe9I'
+system:
+  hp:
+    value: 10
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '3'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: rPja6h4Vo0zuqe9I
+    blocker: rPja6h4Vo0zuqe9I
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.plagueGhoul00000
+_id: plagueGhoul00000
 effects: []
+folder: MHpV0Grb2NHJPNQV
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!oiibKdBuE8kIo9RG'
+_key: '!actors!plagueGhoul00000'

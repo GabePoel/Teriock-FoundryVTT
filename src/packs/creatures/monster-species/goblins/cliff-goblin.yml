@@ -1,36 +1,17 @@
 name: Cliff Goblin
-img: systems/teriock/src/icons/creatures/cliff-goblin.webp
 type: creature
-folder: Gzp2U18nFDHybaDL
-_id: 9zYg5zttOC3oAQuF
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 1
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: w7dY9xFm4xIgm5lp
-    blocker: w7dY9xFm4xIgm5lp
-  hp:
-    value: 5
-  mp:
-    value: 4
+img: systems/teriock/src/icons/creatures/cliff-goblin.webp
 prototypeToken:
   name: Cliff Goblin
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/cliff-goblin.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -154,7 +130,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.9zYg5zttOC3oAQuF.Item.3hcbGn9nV9c9XTjY
+        Compendium.teriock.creatures.Actor.cliffGoblin00000.Item.3hcbGn9nV9c9XTjY
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -198,13 +174,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -212,9 +189,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -244,7 +226,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -528,10 +512,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.pI6q0ijnDpGSPRfL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.8nJlXxcEd2a9reBC
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.8nJlXxcEd2a9reBC
       - name: Knockback
         type: ability
         system:
@@ -573,21 +557,27 @@ items:
             package: strike
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -620,7 +610,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Your Weapon's Range
+          range:
+            unit: ft
+            raw: Your Weapon's Range
           requirements: ''
           results:
             hit: <p>Target moves 10 feet away from you.</p>
@@ -898,10 +890,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.peSzO0a2gIJ9GpIz
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.WmWVCjjnCfrHSFvM
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.WmWVCjjnCfrHSFvM
       - name: Leaping
         type: ability
         system:
@@ -942,13 +934,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -956,9 +949,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -993,7 +991,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1299,10 +1299,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.WJ91XuNoYd43DhFL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.soawZpFgddQcFJdA
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.soawZpFgddQcFJdA
       - name: Low Strength
         type: ability
         system:
@@ -1343,22 +1343,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -1388,7 +1394,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1665,10 +1673,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.pBd2wvjPcZslAqR4
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.PmDobUF88NQwedA9
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.PmDobUF88NQwedA9
       - name: Normal Movement
         type: ability
         system:
@@ -1709,22 +1717,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1754,7 +1768,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2031,10 +2047,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.WKNqlAso2LJGHgBK
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.WKNqlAso2LJGHgBK
       - name: Normal Perception
         type: ability
         system:
@@ -2075,22 +2091,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2120,7 +2142,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2397,10 +2421,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.sjyWzziiZclJHAFI
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.sjyWzziiZclJHAFI
       - name: Normal Sneak
         type: ability
         system:
@@ -2441,22 +2465,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2486,7 +2516,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2763,10 +2795,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.Yrg6HWcEcRZ4gEcx
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.Yrg6HWcEcRZ4gEcx
       - name: Stupid Intelligence
         type: ability
         system:
@@ -2807,22 +2839,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2852,7 +2890,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3129,18 +3169,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.BoXAkrfVSt354MD9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY.9g3nFlxT7hv9HwKa
+          !actors.items.effects!cliffGoblin00000.3hcbGn9nV9c9XTjY.9g3nFlxT7hv9HwKa
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.3hcbGn9nV9c9XTjY
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!9zYg5zttOC3oAQuF.3hcbGn9nV9c9XTjY'
+    _key: '!actors.items!cliffGoblin00000.3hcbGn9nV9c9XTjY'
   - name: Foot
     type: body
     _id: dRRZJOElEqd5fnUm
@@ -3176,10 +3216,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3226,10 +3268,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.dRRZJOElEqd5fnUm.LwntE76DWV8LsMYk
+          !actors.items.effects!cliffGoblin00000.dRRZJOElEqd5fnUm.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -3268,18 +3310,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.dRRZJOElEqd5fnUm.70oASdJA4Iza7rlK
+          !actors.items.effects!cliffGoblin00000.dRRZJOElEqd5fnUm.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!9zYg5zttOC3oAQuF.dRRZJOElEqd5fnUm'
+    _key: '!actors.items!cliffGoblin00000.dRRZJOElEqd5fnUm'
   - name: Mouth
     type: body
     _id: nXHNHBAYfEbm2VLF
@@ -3315,10 +3357,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3365,10 +3409,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.nXHNHBAYfEbm2VLF.1keJAxX1vkfTL8Wl
+          !actors.items.effects!cliffGoblin00000.nXHNHBAYfEbm2VLF.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -3407,10 +3451,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.nXHNHBAYfEbm2VLF.cj70nNvBKfT3EQ8P
+          !actors.items.effects!cliffGoblin00000.nXHNHBAYfEbm2VLF.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -3449,18 +3493,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.nXHNHBAYfEbm2VLF.43UnM2Fnf4EpPLFE
+          !actors.items.effects!cliffGoblin00000.nXHNHBAYfEbm2VLF.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!9zYg5zttOC3oAQuF.nXHNHBAYfEbm2VLF'
+    _key: '!actors.items!cliffGoblin00000.nXHNHBAYfEbm2VLF'
   - name: Hand
     type: body
     _id: w7dY9xFm4xIgm5lp
@@ -3496,10 +3540,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3546,10 +3592,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.w7dY9xFm4xIgm5lp.FAUPXdLk1A1fD0k8
+          !actors.items.effects!cliffGoblin00000.w7dY9xFm4xIgm5lp.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -3588,10 +3634,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.w7dY9xFm4xIgm5lp.wGdRsURrcXoNZsur
+          !actors.items.effects!cliffGoblin00000.w7dY9xFm4xIgm5lp.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -3630,10 +3676,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.w7dY9xFm4xIgm5lp.1eIcI58ulvhlFYKA
+          !actors.items.effects!cliffGoblin00000.w7dY9xFm4xIgm5lp.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -3672,24 +3718,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!9zYg5zttOC3oAQuF.w7dY9xFm4xIgm5lp.r6jJPWhMBH4YpEKr
+          !actors.items.effects!cliffGoblin00000.w7dY9xFm4xIgm5lp.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!9zYg5zttOC3oAQuF.w7dY9xFm4xIgm5lp'
+    _key: '!actors.items!cliffGoblin00000.w7dY9xFm4xIgm5lp'
+system:
+  hp:
+    value: 5
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 4
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '1'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: w7dY9xFm4xIgm5lp
+    blocker: w7dY9xFm4xIgm5lp
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.cliffGoblin00000
+_id: cliffGoblin00000
 effects: []
+folder: Gzp2U18nFDHybaDL
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!9zYg5zttOC3oAQuF'
+_key: '!actors!cliffGoblin00000'

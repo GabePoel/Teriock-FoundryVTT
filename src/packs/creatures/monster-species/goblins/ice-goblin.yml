@@ -1,36 +1,17 @@
 name: Ice Goblin
-img: systems/teriock/src/icons/creatures/ice-goblin.webp
 type: creature
-folder: Gzp2U18nFDHybaDL
-_id: OiKVJRgUXlzzZ7Wd
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 1
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: tUVWJWqWRSVseHj4
-    blocker: tUVWJWqWRSVseHj4
-  hp:
-    value: 5
-  mp:
-    value: 4
+img: systems/teriock/src/icons/creatures/ice-goblin.webp
 prototypeToken:
   name: Ice Goblin
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/ice-goblin.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -154,7 +130,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.OiKVJRgUXlzzZ7Wd.Item.uHR6U9CZztuUxMy2
+        Compendium.teriock.creatures.Actor.iceGoblin0000000.Item.uHR6U9CZztuUxMy2
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -199,12 +175,13 @@ items:
             package: null
           duration:
             unit: hour
-            quantity: 8
             conditions:
               present: []
               absent: []
             stationary: false
             description: 8 Hours
+            raw: '8'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -212,9 +189,14 @@ items:
             - storm
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -247,7 +229,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -546,10 +530,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.1XElAYLlzdYg8Ao1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.UTst9RaCcx81zjWg
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.UTst9RaCcx81zjWg
       - name: Shock Touch
         type: ability
         system:
@@ -591,12 +575,13 @@ items:
             package: touch
           duration:
             unit: minute
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Minute
+            raw: '1'
+            dawn: false
           effectTypes:
             - temporal
           elderSorcery: false
@@ -607,9 +592,14 @@ items:
             <p>At the end of each of the target's actions, they roll [[/roll
             2d4]]. If either of these dice roll a 4, this effect ends.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -639,7 +629,9 @@ items:
             raw: 2
           powerSources:
             - magical
-          range: Your Hand's Range
+          range:
+            unit: ft
+            raw: Your Hand's Range
           requirements: ''
           results:
             hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
@@ -923,10 +915,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.HZ6PxeAka3A6UO03
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.jiZlW9OcouPJs6vr
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.jiZlW9OcouPJs6vr
       - name: Blizzard Aura
         type: ability
         system:
@@ -968,12 +960,13 @@ items:
             package: null
           duration:
             unit: minute
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Minute
+            raw: '1'
+            dawn: false
           effectTypes:
             - temporal
           elderSorcery: false
@@ -984,9 +977,14 @@ items:
             <p>At the start of each of the target's actions, they roll [[/roll
             2d4]]. If either of these dice roll a 4, this effect ends.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1016,7 +1014,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: '10'
+          range:
+            unit: ft
+            raw: '10'
           requirements: ''
           results:
             hit: ''
@@ -1298,10 +1298,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.62IJw3eo6zzPySrX
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.JAbUnJ3J5W9ZCRRM
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.JAbUnJ3J5W9ZCRRM
       - name: Digging
         type: ability
         system:
@@ -1342,13 +1342,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -1356,9 +1357,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1388,7 +1394,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1672,10 +1680,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.pI6q0ijnDpGSPRfL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.sD7UVVx5MYXp58kU
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.sD7UVVx5MYXp58kU
       - name: Low Strength
         type: ability
         system:
@@ -1716,22 +1724,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -1761,7 +1775,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2038,10 +2054,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.pBd2wvjPcZslAqR4
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.nO0C0Fo2sHT94CD4
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.nO0C0Fo2sHT94CD4
       - name: Normal Movement
         type: ability
         system:
@@ -2082,22 +2098,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2127,7 +2149,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2404,10 +2428,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.QBUABQdnhSGbk909
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.QBUABQdnhSGbk909
       - name: Normal Perception
         type: ability
         system:
@@ -2448,22 +2472,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2493,7 +2523,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2770,10 +2802,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.KDzzjbWU1xU0squZ
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.KDzzjbWU1xU0squZ
       - name: Normal Sneak
         type: ability
         system:
@@ -2814,22 +2846,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2859,7 +2897,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3136,10 +3176,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.LmkIW8FLf3e6605Z
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.LmkIW8FLf3e6605Z
       - name: Spell Trigger
         type: ability
         system:
@@ -3181,12 +3221,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -3194,9 +3235,14 @@ items:
             - storm
           endCondition: ''
           executionTime: r1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -3229,7 +3275,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3507,10 +3555,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ph94yBHaW8ob8gQp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.Vcjvo5JbCJ5RIE6a
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.Vcjvo5JbCJ5RIE6a
       - name: Stupid Intelligence
         type: ability
         system:
@@ -3551,22 +3599,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -3596,7 +3650,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3873,18 +3929,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.BoXAkrfVSt354MD9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2.CMWuAuEiaMsbRLD4
+          !actors.items.effects!iceGoblin0000000.uHR6U9CZztuUxMy2.CMWuAuEiaMsbRLD4
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.uHR6U9CZztuUxMy2
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!OiKVJRgUXlzzZ7Wd.uHR6U9CZztuUxMy2'
+    _key: '!actors.items!iceGoblin0000000.uHR6U9CZztuUxMy2'
   - name: Foot
     type: body
     _id: ETkhIVIkH2cbLePP
@@ -3920,10 +3976,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3970,10 +4028,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.ETkhIVIkH2cbLePP.LwntE76DWV8LsMYk
+          !actors.items.effects!iceGoblin0000000.ETkhIVIkH2cbLePP.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -4012,18 +4070,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.ETkhIVIkH2cbLePP.70oASdJA4Iza7rlK
+          !actors.items.effects!iceGoblin0000000.ETkhIVIkH2cbLePP.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!OiKVJRgUXlzzZ7Wd.ETkhIVIkH2cbLePP'
+    _key: '!actors.items!iceGoblin0000000.ETkhIVIkH2cbLePP'
   - name: Hand
     type: body
     _id: iDpfFyFby1FZOJwJ
@@ -4059,10 +4117,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4109,10 +4169,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.iDpfFyFby1FZOJwJ.FAUPXdLk1A1fD0k8
+          !actors.items.effects!iceGoblin0000000.iDpfFyFby1FZOJwJ.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -4151,10 +4211,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.iDpfFyFby1FZOJwJ.wGdRsURrcXoNZsur
+          !actors.items.effects!iceGoblin0000000.iDpfFyFby1FZOJwJ.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -4193,10 +4253,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.iDpfFyFby1FZOJwJ.1eIcI58ulvhlFYKA
+          !actors.items.effects!iceGoblin0000000.iDpfFyFby1FZOJwJ.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -4235,18 +4295,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.iDpfFyFby1FZOJwJ.r6jJPWhMBH4YpEKr
+          !actors.items.effects!iceGoblin0000000.iDpfFyFby1FZOJwJ.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!OiKVJRgUXlzzZ7Wd.iDpfFyFby1FZOJwJ'
+    _key: '!actors.items!iceGoblin0000000.iDpfFyFby1FZOJwJ'
   - name: Mouth
     type: body
     _id: tUVWJWqWRSVseHj4
@@ -4282,10 +4342,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4332,10 +4394,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.tUVWJWqWRSVseHj4.1keJAxX1vkfTL8Wl
+          !actors.items.effects!iceGoblin0000000.tUVWJWqWRSVseHj4.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -4374,10 +4436,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.tUVWJWqWRSVseHj4.cj70nNvBKfT3EQ8P
+          !actors.items.effects!iceGoblin0000000.tUVWJWqWRSVseHj4.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -4416,24 +4478,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OiKVJRgUXlzzZ7Wd.tUVWJWqWRSVseHj4.43UnM2Fnf4EpPLFE
+          !actors.items.effects!iceGoblin0000000.tUVWJWqWRSVseHj4.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!OiKVJRgUXlzzZ7Wd.tUVWJWqWRSVseHj4'
+    _key: '!actors.items!iceGoblin0000000.tUVWJWqWRSVseHj4'
+system:
+  hp:
+    value: 5
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 4
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '1'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: tUVWJWqWRSVseHj4
+    blocker: tUVWJWqWRSVseHj4
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.iceGoblin0000000
+_id: iceGoblin0000000
 effects: []
+folder: Gzp2U18nFDHybaDL
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!OiKVJRgUXlzzZ7Wd'
+_key: '!actors!iceGoblin0000000'

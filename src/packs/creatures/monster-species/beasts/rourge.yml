@@ -1,36 +1,17 @@
 name: Rourge
-img: systems/teriock/src/icons/creatures/rourge.webp
 type: creature
-folder: RDGQptRQuOQJYYPl
-_id: 0waO5o1qn9DxpUTx
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 5
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: mSDM0me2NQcPjAMf
-    blocker: UOxdmTWAj0J2RZrT
-  hp:
-    value: 12
-  mp:
-    value: 5
+img: systems/teriock/src/icons/creatures/rourge.webp
 prototypeToken:
   name: Rourge
-  displayName: 0
-  actorLink: false
-  width: 2
-  height: 2
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/rourge.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 2
+  height: 2
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -150,7 +126,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.0waO5o1qn9DxpUTx.Item.OwEjjzsXP9MD5NWx
+        Compendium.teriock.creatures.Actor.rourge0000000000.Item.OwEjjzsXP9MD5NWx
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -194,22 +170,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -243,7 +225,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -521,10 +505,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.zt5TuBR29F3RXAu1
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.zt5TuBR29F3RXAu1
       - name: Dense Intelligence
         type: ability
         system:
@@ -565,22 +549,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -610,7 +600,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -887,10 +879,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.PT3Et55oTXl9p9jK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.dA62nUL2fn5IAhpJ
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.dA62nUL2fn5IAhpJ
       - name: Devour
         type: ability
         system:
@@ -932,21 +924,27 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: a2
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -976,7 +974,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Your Bite's Range
+          range:
+            unit: ft
+            raw: Your Bite's Range
           requirements: <p>Target is @L[Condition:Down]{down}.</p>
           results:
             hit: >-
@@ -1257,10 +1257,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.QnqaSDkU2kHD1P5L
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.1bNNbDM3pME3zbEt
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.1bNNbDM3pME3zbEt
       - name: Leaping
         type: ability
         system:
@@ -1301,13 +1301,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -1315,9 +1316,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1352,7 +1358,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1658,10 +1666,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.WJ91XuNoYd43DhFL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.2gKdLbjUtGhtN34q
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.2gKdLbjUtGhtN34q
       - name: Magical Recovery
         type: ability
         system:
@@ -1702,22 +1710,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -1754,7 +1768,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2031,10 +2047,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.gFmJsjgGvuD1Pust
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.j1mDcOZGJbBdTCd9
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.j1mDcOZGJbBdTCd9
       - name: Night Vision
         type: ability
         system:
@@ -2075,13 +2091,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -2089,9 +2106,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2123,7 +2145,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2407,10 +2431,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.4qYyYh0TaT9o4GYb
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.4qYyYh0TaT9o4GYb
       - name: Normal Movement
         type: ability
         system:
@@ -2451,22 +2475,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2496,7 +2526,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2773,10 +2805,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.CJoonVucvZHaJSc9
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.CJoonVucvZHaJSc9
       - name: Normal Perception
         type: ability
         system:
@@ -2817,22 +2849,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2862,7 +2900,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3139,10 +3179,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.MYZLEMCn1ntO0MgB
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.MYZLEMCn1ntO0MgB
       - name: Normal Sneak
         type: ability
         system:
@@ -3183,22 +3223,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3228,7 +3274,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3505,10 +3553,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.sLJUPvchrJwkMZIV
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.sLJUPvchrJwkMZIV
       - name: Partial Hands
         type: ability
         system:
@@ -3549,22 +3597,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -3596,7 +3650,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3873,18 +3929,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.EABkpB3eetExvW6e
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx.lh2IIae2lHYDgykx
+          !actors.items.effects!rourge0000000000.OwEjjzsXP9MD5NWx.lh2IIae2lHYDgykx
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.OwEjjzsXP9MD5NWx
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0waO5o1qn9DxpUTx.OwEjjzsXP9MD5NWx'
+    _key: '!actors.items!rourge0000000000.OwEjjzsXP9MD5NWx'
   - name: Prehensile Rending Claw
     type: body
     _id: CWjtpK7R42rOslP4
@@ -3920,10 +3976,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3969,10 +4027,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.CWjtpK7R42rOslP4.sOhFvc8GVOKryoDz
+          !actors.items.effects!rourge0000000000.CWjtpK7R42rOslP4.sOhFvc8GVOKryoDz
       - name: Prehensile
         type: property
         system:
@@ -4011,10 +4069,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.CWjtpK7R42rOslP4.WvMAuLt3N8RlGo44
+          !actors.items.effects!rourge0000000000.CWjtpK7R42rOslP4.WvMAuLt3N8RlGo44
       - name: Weapon
         type: property
         system:
@@ -4053,10 +4111,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.CWjtpK7R42rOslP4.DBAMgCzXFj7nPQiB
+          !actors.items.effects!rourge0000000000.CWjtpK7R42rOslP4.DBAMgCzXFj7nPQiB
       - name: AV0
         type: property
         system:
@@ -4100,18 +4158,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.RtpPLATV2DKzDwg1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.CWjtpK7R42rOslP4.4C1VHwDVtLAXK9er
+          !actors.items.effects!rourge0000000000.CWjtpK7R42rOslP4.4C1VHwDVtLAXK9er
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.RSRikErgjOz4t2GY
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0waO5o1qn9DxpUTx.CWjtpK7R42rOslP4'
+    _key: '!actors.items!rourge0000000000.CWjtpK7R42rOslP4'
   - name: Fanged Jaw
     type: body
     _id: HuqjN9CGONbf2uHe
@@ -4147,10 +4205,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4196,10 +4256,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.HuqjN9CGONbf2uHe.ozGDVg02SHRX2hCr
+          !actors.items.effects!rourge0000000000.HuqjN9CGONbf2uHe.ozGDVg02SHRX2hCr
       - name: Weapon
         type: property
         system:
@@ -4238,18 +4298,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.HuqjN9CGONbf2uHe.u9pZ8QANF4C7gKB9
+          !actors.items.effects!rourge0000000000.HuqjN9CGONbf2uHe.u9pZ8QANF4C7gKB9
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.U7AaYHX3z8kjCnSq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0waO5o1qn9DxpUTx.HuqjN9CGONbf2uHe'
+    _key: '!actors.items!rourge0000000000.HuqjN9CGONbf2uHe'
   - name: Stabbing Horn
     type: body
     _id: UOxdmTWAj0J2RZrT
@@ -4285,10 +4345,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4334,18 +4396,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.UOxdmTWAj0J2RZrT.prdfApFTZiNLYYsy
+          !actors.items.effects!rourge0000000000.UOxdmTWAj0J2RZrT.prdfApFTZiNLYYsy
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.rUhUjsmidgZdIQIM
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0waO5o1qn9DxpUTx.UOxdmTWAj0J2RZrT'
+    _key: '!actors.items!rourge0000000000.UOxdmTWAj0J2RZrT'
   - name: Foot
     type: body
     _id: mSDM0me2NQcPjAMf
@@ -4381,10 +4443,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4431,10 +4495,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.mSDM0me2NQcPjAMf.LwntE76DWV8LsMYk
+          !actors.items.effects!rourge0000000000.mSDM0me2NQcPjAMf.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -4473,24 +4537,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!0waO5o1qn9DxpUTx.mSDM0me2NQcPjAMf.70oASdJA4Iza7rlK
+          !actors.items.effects!rourge0000000000.mSDM0me2NQcPjAMf.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!0waO5o1qn9DxpUTx.mSDM0me2NQcPjAMf'
+    _key: '!actors.items!rourge0000000000.mSDM0me2NQcPjAMf'
+system:
+  hp:
+    value: 12
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 5
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '5'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: mSDM0me2NQcPjAMf
+    blocker: UOxdmTWAj0J2RZrT
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.rourge0000000000
+_id: rourge0000000000
 effects: []
+folder: RDGQptRQuOQJYYPl
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!0waO5o1qn9DxpUTx'
+_key: '!actors!rourge0000000000'

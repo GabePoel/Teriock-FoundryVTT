@@ -1,36 +1,17 @@
 name: Needle Drake
-img: systems/teriock/src/icons/creatures/needle-drake.webp
 type: creature
-folder: YtsUPuJKaPVTYau2
-_id: VNVCiWHxN0YYCBXf
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 5
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: VlstZbpZd8erEH8F
-    blocker: VlstZbpZd8erEH8F
-  hp:
-    value: 30
-  mp:
-    value: 6
+img: systems/teriock/src/icons/creatures/needle-drake.webp
 prototypeToken:
   name: Needle Drake
-  displayName: 0
-  actorLink: false
-  width: 2
-  height: 2
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/needle-drake.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 2
+  height: 2
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -157,7 +133,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.VNVCiWHxN0YYCBXf.Item.PivlMjpenCjrsRiP
+        Compendium.teriock.creatures.Actor.needleDrake00000.Item.PivlMjpenCjrsRiP
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -201,22 +177,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -248,7 +230,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -526,10 +510,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.dSAoXvyRlT0Yp5dl
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.dSAoXvyRlT0Yp5dl
       - name: Battle Cry Aura
         type: ability
         system:
@@ -571,12 +555,13 @@ items:
             package: null
           duration:
             unit: minute
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Minute
+            raw: '1'
+            dawn: false
           effectTypes:
             - loud
           elderSorcery: false
@@ -587,9 +572,14 @@ items:
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: int
           form: normal
           gifted:
@@ -621,7 +611,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: '10'
+          range:
+            unit: ft
+            raw: '10'
           requirements: ''
           results:
             hit: ''
@@ -903,10 +895,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.qdoHZufxtGs1nUUZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.S88heqkgwXaO8cI5
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.S88heqkgwXaO8cI5
       - name: Battle Cry Resistance
         type: ability
         system:
@@ -948,12 +940,13 @@ items:
             package: null
           duration:
             unit: minute
-            quantity: 5
             conditions:
               present: []
               absent: []
             stationary: false
             description: 5 Minutes
+            raw: '5'
+            dawn: false
           effectTypes:
             - resistance
           elderSorcery: false
@@ -961,9 +954,14 @@ items:
           elements: []
           endCondition: <p>You die or 1 minute passes without combat.</p>
           executionTime: a0
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -995,7 +993,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1281,10 +1281,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DqXrfWmMV6e0tUmE
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.G8sXfZKsyEb93QP3
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.G8sXfZKsyEb93QP3
       - name: Fast
         type: ability
         system:
@@ -1325,22 +1325,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1370,7 +1376,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1647,10 +1655,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.PKI39bYvUsRV7J04
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.eHyMlxm2nTMYH8KU
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.eHyMlxm2nTMYH8KU
       - name: Flying
         type: ability
         system:
@@ -1691,13 +1699,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -1705,9 +1714,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1737,7 +1751,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2029,10 +2045,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DebtP4uyZnZ4u8nL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.VAM4zyPz9iT73x5m
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.VAM4zyPz9iT73x5m
       - name: Improved Strength
         type: ability
         system:
@@ -2073,22 +2089,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2120,7 +2142,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2398,10 +2422,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.SYy6lxPn4EOOJ0bC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.p88EBQz6fWpGTwRw
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.p88EBQz6fWpGTwRw
       - name: Beastly Strength
         type: ability
         system:
@@ -2442,22 +2466,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2491,7 +2521,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2770,10 +2802,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.ZfOzEYJL1W0aSCwU
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.ZfOzEYJL1W0aSCwU
       - name: Improved Armor Piercing
         type: ability
         system:
@@ -2814,22 +2846,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2861,7 +2899,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3140,10 +3180,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.H0TY6iliodv97qAv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.Py7kf15PA29IJLSo
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.Py7kf15PA29IJLSo
       - name: Needle Drake Breath
         type: ability
         system:
@@ -3185,12 +3225,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - damaging
           elderSorcery: false
@@ -3198,9 +3239,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -3230,7 +3276,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: '15'
+          range:
+            unit: ft
+            raw: '15'
           requirements: ''
           results:
             hit: ''
@@ -3510,10 +3558,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.NvJ4m0yWoiYHYT7h
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.ATmFOBvePkOrfN9S
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.ATmFOBvePkOrfN9S
       - name: Night Vision
         type: ability
         system:
@@ -3554,13 +3602,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -3568,9 +3617,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3602,7 +3656,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3886,10 +3942,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.yts1eOye2p40tlQq
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.yts1eOye2p40tlQq
       - name: No Hands
         type: ability
         system:
@@ -3930,22 +3986,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -3975,7 +4037,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4252,10 +4316,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.0Pri1funErarei9r
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.YlPXW5TcU2zFg40I
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.YlPXW5TcU2zFg40I
       - name: Normal Perception
         type: ability
         system:
@@ -4296,22 +4360,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4341,7 +4411,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4618,10 +4690,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.qLfGph8UpRMIBcR2
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.qLfGph8UpRMIBcR2
       - name: Normal Sneak
         type: ability
         system:
@@ -4662,22 +4734,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4707,7 +4785,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4984,10 +5064,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.BJkHM3b8Quy7UjTy
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.BJkHM3b8Quy7UjTy
       - name: Stupid Intelligence
         type: ability
         system:
@@ -5028,22 +5108,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -5073,7 +5159,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5350,18 +5438,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.BoXAkrfVSt354MD9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP.pajID1fsd9TrX5uV
+          !actors.items.effects!needleDrake00000.PivlMjpenCjrsRiP.pajID1fsd9TrX5uV
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.PivlMjpenCjrsRiP
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!VNVCiWHxN0YYCBXf.PivlMjpenCjrsRiP'
+    _key: '!actors.items!needleDrake00000.PivlMjpenCjrsRiP'
   - name: Foot
     type: body
     _id: 2Wi6AbyFTzxV4Vfg
@@ -5397,10 +5485,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -5447,10 +5537,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.2Wi6AbyFTzxV4Vfg.LwntE76DWV8LsMYk
+          !actors.items.effects!needleDrake00000.2Wi6AbyFTzxV4Vfg.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -5489,18 +5579,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.2Wi6AbyFTzxV4Vfg.70oASdJA4Iza7rlK
+          !actors.items.effects!needleDrake00000.2Wi6AbyFTzxV4Vfg.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!VNVCiWHxN0YYCBXf.2Wi6AbyFTzxV4Vfg'
+    _key: '!actors.items!needleDrake00000.2Wi6AbyFTzxV4Vfg'
   - name: Rank 1 Archer
     type: rank
     system:
@@ -5564,15 +5654,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: true
             description: While Stationary
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You aim with deadly precision, causing the next
@@ -5639,9 +5732,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: <p>You are not already using [[lookup name]].</p>
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5931,10 +6029,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.G0j8z76WzkVDuqam
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.4PPDSXlKyJWHMMxo.AFaTfZw9j6QJi83h
+          !actors.items.effects!needleDrake00000.4PPDSXlKyJWHMMxo.AFaTfZw9j6QJi83h
       - name: Multi-Shot
         type: ability
         system:
@@ -5954,15 +6052,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>When you @L[Category:Attack abilities]{attack} with a
@@ -6030,9 +6131,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6307,10 +6413,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.Tdh3zK2zICyW6FbK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.4PPDSXlKyJWHMMxo.Vf6cQaUzw80mThUF
+          !actors.items.effects!needleDrake00000.4PPDSXlKyJWHMMxo.Vf6cQaUzw80mThUF
       - name: Archery Training
         type: ability
         system:
@@ -6330,15 +6436,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Bow Blocking]{Bow Blocking} and
@@ -6399,9 +6508,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6676,10 +6790,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.8MzcnpKvNmEtf2f2
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.4PPDSXlKyJWHMMxo.PGd3A9MQ9kjLO1BJ
+          !actors.items.effects!needleDrake00000.4PPDSXlKyJWHMMxo.PGd3A9MQ9kjLO1BJ
       - name: Improvised Items
         type: ability
         system:
@@ -6700,14 +6814,17 @@ items:
           elements: []
           duration:
             unit: hour
-            quantity: 8
             conditions:
               present: []
               absent: []
             stationary: false
             description: 8 Hours
+            raw: '8'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
@@ -6778,9 +6895,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -7055,10 +7177,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.dWwE6pyMZILegLeR
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.4PPDSXlKyJWHMMxo.7cSNmEGIh65UPxYI
+          !actors.items.effects!needleDrake00000.4PPDSXlKyJWHMMxo.7cSNmEGIh65UPxYI
       - name: Bow Blocking
         type: ability
         system:
@@ -7078,15 +7200,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>@L[Category:Bows]{Bows} you use have their @L[Core:BV]{BV}
@@ -7147,9 +7272,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -7432,10 +7562,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.lytO74rQgfpZp0tC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.4PPDSXlKyJWHMMxo.T53N4eNcE2FPJr7q
+          !actors.items.effects!needleDrake00000.4PPDSXlKyJWHMMxo.T53N4eNcE2FPJr7q
       - name: Free Reload
         type: ability
         system:
@@ -7456,14 +7586,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: <p>Target is reloaded.</p>
             proficient: ''
@@ -7522,9 +7655,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -7800,18 +7938,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.0ukgudvlDO19kRam
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.4PPDSXlKyJWHMMxo.F6iUfYxaqoEw9BcO
+          !actors.items.effects!needleDrake00000.4PPDSXlKyJWHMMxo.F6iUfYxaqoEw9BcO
     flags: {}
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.wx9cUuxZxsR6sCGa
+      compendiumSource: Compendium.teriock.classes.Item.rank1Archer00000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!VNVCiWHxN0YYCBXf.4PPDSXlKyJWHMMxo'
+    _key: '!actors.items!needleDrake00000.4PPDSXlKyJWHMMxo'
   - name: Ferocious Jaw
     type: body
     _id: GK6P1r1oAZVEg0qL
@@ -7847,10 +7985,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -7896,10 +8036,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.GK6P1r1oAZVEg0qL.eQUrKLYfdm3d2pbp
+          !actors.items.effects!needleDrake00000.GK6P1r1oAZVEg0qL.eQUrKLYfdm3d2pbp
       - name: Weapon
         type: property
         system:
@@ -7938,10 +8078,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.GK6P1r1oAZVEg0qL.3UeX8RwGGyFvjqWm
+          !actors.items.effects!needleDrake00000.GK6P1r1oAZVEg0qL.3UeX8RwGGyFvjqWm
       - name: AV0
         type: property
         system:
@@ -7985,18 +8125,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.RtpPLATV2DKzDwg1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.GK6P1r1oAZVEg0qL.1If9EoCtkcFEPVeN
+          !actors.items.effects!needleDrake00000.GK6P1r1oAZVEg0qL.1If9EoCtkcFEPVeN
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.srx0p7BJJ6aF1aur
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!VNVCiWHxN0YYCBXf.GK6P1r1oAZVEg0qL'
+    _key: '!actors.items!needleDrake00000.GK6P1r1oAZVEg0qL'
   - name: Sharp Claw
     type: body
     _id: VlstZbpZd8erEH8F
@@ -8032,10 +8172,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -8081,10 +8223,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.VlstZbpZd8erEH8F.Wez1JXmo9LjBU1oA
+          !actors.items.effects!needleDrake00000.VlstZbpZd8erEH8F.Wez1JXmo9LjBU1oA
       - name: Weapon
         type: property
         system:
@@ -8123,18 +8265,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.VlstZbpZd8erEH8F.6CVqlpk3uf4VDbFY
+          !actors.items.effects!needleDrake00000.VlstZbpZd8erEH8F.6CVqlpk3uf4VDbFY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!VNVCiWHxN0YYCBXf.VlstZbpZd8erEH8F'
+    _key: '!actors.items!needleDrake00000.VlstZbpZd8erEH8F'
   - name: Semi
     type: power
     _id: semi000000000000
@@ -8156,7 +8298,7 @@ items:
         suppressed:
           raw: '0'
       _ref: >-
-        Compendium.teriock.creatures.Actor.VNVCiWHxN0YYCBXf.Item.semi000000000000
+        Compendium.teriock.creatures.Actor.needleDrake00000.Item.semi000000000000
       maxAv: 4
       type: learned
     effects:
@@ -8435,22 +8577,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -8483,7 +8631,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -8526,25 +8676,72 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.Kf5T5DmBbgSHoMy2
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!VNVCiWHxN0YYCBXf.semi000000000000.4XNvcPLM4s2CAFYb
+          !actors.items.effects!needleDrake00000.semi000000000000.4XNvcPLM4s2CAFYb
     folder: semi000000000000
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.semi000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!VNVCiWHxN0YYCBXf.semi000000000000'
+    _key: '!actors.items!needleDrake00000.semi000000000000'
+system:
+  hp:
+    value: 30
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '5'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: VlstZbpZd8erEH8F
+    blocker: VlstZbpZd8erEH8F
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.needleDrake00000
+_id: needleDrake00000
 effects: []
+folder: YtsUPuJKaPVTYau2
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!VNVCiWHxN0YYCBXf'
+_key: '!actors!needleDrake00000'

@@ -7,7 +7,7 @@ img: icons/svg/padlock.svg
 scope: global
 command: |-
   await tm.utils.progressBar(
-    game.packs.contents.filter((p) => p.collection !== "teriock.creatures"),
+    await tm.dialogs.selectCompendiumsDialog(),
     "Refreshing Compendium Sources",
     /** @param {TeriockCompendiumCollection<TeriockDocument>} p */ async (p) => {
       if (!p.locked) {
@@ -20,7 +20,7 @@ command: |-
           `Refreshing ${p.title} Sources`,
           async (i) => {
             const doc = await tm.resolve.resolveDocument(i);
-            if (["Actor", "ActiveEffect", "Item"].includes(doc.documentName)) {
+            if (doc.documentMetadata.common) {
               await tm.resolve.inferChildCompendiumSources(doc);
             }
           },

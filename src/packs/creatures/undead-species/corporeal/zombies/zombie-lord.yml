@@ -1,36 +1,17 @@
 name: Zombie Lord
-img: systems/teriock/src/icons/creatures/zombie-lord.webp
 type: creature
-folder: Iq0IEcm6dJBfZVa1
-_id: x0MrNKzKa5knhZEM
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 3
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: pPUbzsSJyIcHYIdA
-    blocker: pPUbzsSJyIcHYIdA
-  hp:
-    value: 10
-  mp:
-    value: 5
+img: systems/teriock/src/icons/creatures/zombie-lord.webp
 prototypeToken:
   name: Zombie Lord
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/zombie-lord.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -151,7 +127,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.x0MrNKzKa5knhZEM.Item.6jeC7bkyqamZScIU
+        Compendium.teriock.creatures.Actor.zombieLord000000.Item.6jeC7bkyqamZScIU
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -174,15 +150,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -240,9 +219,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -517,10 +501,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.cbHq0bBBqP7RiBE1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.QcIr5SLAlhC4paPo
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.QcIr5SLAlhC4paPo
       - name: Low Intelligence
         type: ability
         system:
@@ -540,15 +524,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -606,9 +593,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -883,10 +875,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nqpe5LzoIB6hJY7g
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.Ov0Cl57eDG1S0Vck
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.Ov0Cl57eDG1S0Vck
       - name: Minor Undead
         type: ability
         system:
@@ -907,15 +899,18 @@ items:
           elements:
             - necromancy
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Slow Mana Drain]{Slow Mana Drain},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
             proficient: ''
@@ -973,9 +968,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1250,10 +1250,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.esISmQvMAX2OQBIJ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.uoWhykwwr82Nr4IH
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.uoWhykwwr82Nr4IH
       - name: Ethereal Senses
         type: ability
         system:
@@ -1276,15 +1276,18 @@ items:
           elements:
             - necromancy
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You can see and hear spirits and
@@ -1344,9 +1347,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1630,10 +1638,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.yzVehDWfRnIdLcPN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.pRJ0aKV8OEp3fxtk
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.pRJ0aKV8OEp3fxtk
       - name: Healing Sensitivity
         type: ability
         system:
@@ -1654,15 +1662,18 @@ items:
           elements:
             - necromancy
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>@L[Core:Healing]{Healing} can be used to
@@ -1727,9 +1738,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -2005,10 +2021,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.SZtEayMd6TPP34p8
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.3RrAlaNZ55JrN7de
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.3RrAlaNZ55JrN7de
       - name: Slow Mana Drain
         type: ability
         system:
@@ -2029,14 +2045,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Your Hand's Range
+          range:
+            unit: ft
+            raw: Your Hand's Range
           overview:
             base: >-
               <p>Deal enough @L[Drain:Mana]{mana drain} to
@@ -2098,9 +2117,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2378,10 +2402,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.c49KClLCIFwGJqgo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.2gzYlD0nQFbROcz1
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.2gzYlD0nQFbROcz1
       - name: Undead Mind
         type: ability
         system:
@@ -2402,15 +2426,18 @@ items:
           elements:
             - necromancy
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to being
@@ -2472,9 +2499,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: special
@@ -2765,10 +2797,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.RI93Ezzmys7poKXG
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.HlU8NneKucv7CYwq
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.HlU8NneKucv7CYwq
       - name: Undying Durability
         type: ability
         system:
@@ -2789,15 +2821,18 @@ items:
           elements:
             - necromancy
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to
@@ -2864,9 +2899,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: special
@@ -3164,10 +3204,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.I8PF7dSu1phiM8Vc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.NPAgRr8eOclWnVqG
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.NPAgRr8eOclWnVqG
       - name: Normal Perception
         type: ability
         system:
@@ -3187,15 +3227,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -3253,9 +3296,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -3530,10 +3578,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.D423rsWxzwSizCZJ
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.D423rsWxzwSizCZJ
       - name: Normal Strength
         type: ability
         system:
@@ -3553,15 +3601,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -3619,9 +3670,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -3896,10 +3952,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.OBJsaQVWaZu3FzN8
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.OBJsaQVWaZu3FzN8
       - name: Slow
         type: ability
         system:
@@ -3919,15 +3975,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -3985,9 +4044,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -4262,10 +4326,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.LRa9jYQZfPUJ52Xc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.lotFry265Z6LL3bW
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.lotFry265Z6LL3bW
       - name: Zombie Empowerment
         type: ability
         system:
@@ -4286,16 +4350,19 @@ items:
           elements:
             - necromancy
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent:
                 - down
             stationary: false
             description: While Up
+            raw: '0'
+            dawn: false
           sustained: false
-          range: '60'
+          range:
+            unit: ft
+            raw: '60'
           overview:
             base: <p>Target gains @L[Ability:Zombify]{Zombify}.</p>
             proficient: ''
@@ -4353,9 +4420,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: <p>Only targets @L[Category:Zombies]{zombies}.</p>
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: special
@@ -4630,10 +4702,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.5s2kDv5TBkG2hysX
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.nVyqgvEjiAK0W29t
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.nVyqgvEjiAK0W29t
       - name: Zombify
         type: ability
         system:
@@ -4675,12 +4747,13 @@ items:
             package: touch
           duration:
             unit: minute
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Minute
+            raw: '1'
+            dawn: false
           effectTypes:
             - control
             - reanimation
@@ -4690,9 +4763,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4728,7 +4806,9 @@ items:
             raw: 2
           powerSources:
             - magical
-          range: Your Hand's Range
+          range:
+            unit: ft
+            raw: Your Hand's Range
           requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
           results:
             hit: >-
@@ -5015,18 +5095,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.5v9AknrhiMqCbDvC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU.fnAKuTL2hKfInzTI
+          !actors.items.effects!zombieLord000000.6jeC7bkyqamZScIU.fnAKuTL2hKfInzTI
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.6jeC7bkyqamZScIU
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!x0MrNKzKa5knhZEM.6jeC7bkyqamZScIU'
+    _key: '!actors.items!zombieLord000000.6jeC7bkyqamZScIU'
   - name: Mouth
     type: body
     _id: NSvhrS5XvZQ756PS
@@ -5062,10 +5142,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -5112,10 +5194,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.NSvhrS5XvZQ756PS.1keJAxX1vkfTL8Wl
+          !actors.items.effects!zombieLord000000.NSvhrS5XvZQ756PS.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -5154,10 +5236,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.NSvhrS5XvZQ756PS.cj70nNvBKfT3EQ8P
+          !actors.items.effects!zombieLord000000.NSvhrS5XvZQ756PS.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -5196,18 +5278,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.NSvhrS5XvZQ756PS.43UnM2Fnf4EpPLFE
+          !actors.items.effects!zombieLord000000.NSvhrS5XvZQ756PS.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!x0MrNKzKa5knhZEM.NSvhrS5XvZQ756PS'
+    _key: '!actors.items!zombieLord000000.NSvhrS5XvZQ756PS'
   - name: Hand
     type: body
     _id: Y6QWXgZasue9XLkl
@@ -5243,10 +5325,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -5293,10 +5377,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.Y6QWXgZasue9XLkl.FAUPXdLk1A1fD0k8
+          !actors.items.effects!zombieLord000000.Y6QWXgZasue9XLkl.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -5335,10 +5419,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.Y6QWXgZasue9XLkl.wGdRsURrcXoNZsur
+          !actors.items.effects!zombieLord000000.Y6QWXgZasue9XLkl.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -5377,10 +5461,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.Y6QWXgZasue9XLkl.1eIcI58ulvhlFYKA
+          !actors.items.effects!zombieLord000000.Y6QWXgZasue9XLkl.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -5419,18 +5503,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.Y6QWXgZasue9XLkl.r6jJPWhMBH4YpEKr
+          !actors.items.effects!zombieLord000000.Y6QWXgZasue9XLkl.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!x0MrNKzKa5knhZEM.Y6QWXgZasue9XLkl'
+    _key: '!actors.items!zombieLord000000.Y6QWXgZasue9XLkl'
   - name: Foot
     type: body
     _id: pPUbzsSJyIcHYIdA
@@ -5466,10 +5550,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -5516,10 +5602,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.pPUbzsSJyIcHYIdA.LwntE76DWV8LsMYk
+          !actors.items.effects!zombieLord000000.pPUbzsSJyIcHYIdA.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -5558,24 +5644,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!x0MrNKzKa5knhZEM.pPUbzsSJyIcHYIdA.70oASdJA4Iza7rlK
+          !actors.items.effects!zombieLord000000.pPUbzsSJyIcHYIdA.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!x0MrNKzKa5knhZEM.pPUbzsSJyIcHYIdA'
+    _key: '!actors.items!zombieLord000000.pPUbzsSJyIcHYIdA'
+system:
+  hp:
+    value: 10
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 5
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '3'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: pPUbzsSJyIcHYIdA
+    blocker: pPUbzsSJyIcHYIdA
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.zombieLord000000
+_id: zombieLord000000
 effects: []
+folder: Iq0IEcm6dJBfZVa1
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!x0MrNKzKa5knhZEM'
+_key: '!actors!zombieLord000000'

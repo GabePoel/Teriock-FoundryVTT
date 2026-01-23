@@ -1,36 +1,17 @@
 name: Sea Goblin
-img: systems/teriock/src/icons/creatures/sea-goblin.webp
 type: creature
-folder: Gzp2U18nFDHybaDL
-_id: 3E56hjzf8OYegamn
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 1
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: xanyc5qVuS1isls6
-    blocker: xanyc5qVuS1isls6
-  hp:
-    value: 5
-  mp:
-    value: 4
+img: systems/teriock/src/icons/creatures/sea-goblin.webp
 prototypeToken:
   name: Sea Goblin
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/sea-goblin.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -154,7 +130,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.3E56hjzf8OYegamn.Item.m87Nk08WWB342rjx
+        Compendium.teriock.creatures.Actor.seaGoblin0000000.Item.m87Nk08WWB342rjx
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -198,13 +174,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -212,9 +189,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -244,7 +226,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -528,10 +512,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.pI6q0ijnDpGSPRfL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.OhXIymnb1MOixQOb
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.OhXIymnb1MOixQOb
       - name: Disruption Aura
         type: ability
         system:
@@ -573,21 +557,27 @@ items:
             package: null
           duration:
             unit: hour
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Hour
+            raw: '1'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -619,7 +609,9 @@ items:
             raw: 0
           powerSources:
             - divine
-          range: '10'
+          range:
+            unit: ft
+            raw: '10'
           requirements: ''
           results:
             hit: ''
@@ -905,10 +897,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.uUYVerN7SzA6XH4m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.Z9fXPDmMOz5iVES0
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.Z9fXPDmMOz5iVES0
       - name: Low Strength
         type: ability
         system:
@@ -949,22 +941,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -994,7 +992,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1271,10 +1271,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.pBd2wvjPcZslAqR4
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.r0AQRO4mH4WVy0ZX
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.r0AQRO4mH4WVy0ZX
       - name: Normal Movement
         type: ability
         system:
@@ -1315,22 +1315,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1360,7 +1366,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1637,10 +1645,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.NguSKPLEQni05YEl
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.NguSKPLEQni05YEl
       - name: Normal Perception
         type: ability
         system:
@@ -1681,22 +1689,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1726,7 +1740,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2003,10 +2019,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.tZPQD1J4PUi8RXEe
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.tZPQD1J4PUi8RXEe
       - name: Normal Sneak
         type: ability
         system:
@@ -2047,22 +2063,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2092,7 +2114,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2369,10 +2393,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.15gKZR1CzSXs903F
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.15gKZR1CzSXs903F
       - name: Stupid Intelligence
         type: ability
         system:
@@ -2413,22 +2437,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2458,7 +2488,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2735,10 +2767,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.BoXAkrfVSt354MD9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.A9HjcUxIENwOjQ6G
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.A9HjcUxIENwOjQ6G
       - name: Water Native
         type: ability
         system:
@@ -2779,22 +2811,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2827,7 +2865,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3104,10 +3144,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.n4adr7ikFptIlbPN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.luuku0JUGFOiKz8F
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.luuku0JUGFOiKz8F
       - name: Swimming
         type: ability
         system:
@@ -3148,22 +3188,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3193,7 +3239,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3479,10 +3527,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.40Mn5BA3AoNAwZW0
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.8ZyE2PwPHBXLuNex
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.8ZyE2PwPHBXLuNex
       - name: Diving
         type: ability
         system:
@@ -3523,22 +3571,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3570,7 +3624,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3849,18 +3905,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nnMJAQUH3eu31K8R
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.m87Nk08WWB342rjx.nkDczJ3j2VhBKGDY
+          !actors.items.effects!seaGoblin0000000.m87Nk08WWB342rjx.nkDczJ3j2VhBKGDY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.m87Nk08WWB342rjx
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!3E56hjzf8OYegamn.m87Nk08WWB342rjx'
+    _key: '!actors.items!seaGoblin0000000.m87Nk08WWB342rjx'
   - name: Foot
     type: body
     _id: JYBJRl37LQXAU0AI
@@ -3896,10 +3952,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3946,10 +4004,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.JYBJRl37LQXAU0AI.LwntE76DWV8LsMYk
+          !actors.items.effects!seaGoblin0000000.JYBJRl37LQXAU0AI.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -3988,18 +4046,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.JYBJRl37LQXAU0AI.70oASdJA4Iza7rlK
+          !actors.items.effects!seaGoblin0000000.JYBJRl37LQXAU0AI.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!3E56hjzf8OYegamn.JYBJRl37LQXAU0AI'
+    _key: '!actors.items!seaGoblin0000000.JYBJRl37LQXAU0AI'
   - name: Mouth
     type: body
     _id: bUoJ1iV71s7Jt2VH
@@ -4035,10 +4093,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4085,10 +4145,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.bUoJ1iV71s7Jt2VH.1keJAxX1vkfTL8Wl
+          !actors.items.effects!seaGoblin0000000.bUoJ1iV71s7Jt2VH.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -4127,10 +4187,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.bUoJ1iV71s7Jt2VH.cj70nNvBKfT3EQ8P
+          !actors.items.effects!seaGoblin0000000.bUoJ1iV71s7Jt2VH.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -4169,18 +4229,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.bUoJ1iV71s7Jt2VH.43UnM2Fnf4EpPLFE
+          !actors.items.effects!seaGoblin0000000.bUoJ1iV71s7Jt2VH.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!3E56hjzf8OYegamn.bUoJ1iV71s7Jt2VH'
+    _key: '!actors.items!seaGoblin0000000.bUoJ1iV71s7Jt2VH'
   - name: Hand
     type: body
     _id: xanyc5qVuS1isls6
@@ -4216,10 +4276,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4266,10 +4328,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.xanyc5qVuS1isls6.FAUPXdLk1A1fD0k8
+          !actors.items.effects!seaGoblin0000000.xanyc5qVuS1isls6.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -4308,10 +4370,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.xanyc5qVuS1isls6.wGdRsURrcXoNZsur
+          !actors.items.effects!seaGoblin0000000.xanyc5qVuS1isls6.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -4350,10 +4412,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.xanyc5qVuS1isls6.1eIcI58ulvhlFYKA
+          !actors.items.effects!seaGoblin0000000.xanyc5qVuS1isls6.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -4392,24 +4454,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!3E56hjzf8OYegamn.xanyc5qVuS1isls6.r6jJPWhMBH4YpEKr
+          !actors.items.effects!seaGoblin0000000.xanyc5qVuS1isls6.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!3E56hjzf8OYegamn.xanyc5qVuS1isls6'
+    _key: '!actors.items!seaGoblin0000000.xanyc5qVuS1isls6'
+system:
+  hp:
+    value: 5
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 4
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '1'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: xanyc5qVuS1isls6
+    blocker: xanyc5qVuS1isls6
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.seaGoblin0000000
+_id: seaGoblin0000000
 effects: []
+folder: Gzp2U18nFDHybaDL
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!3E56hjzf8OYegamn'
+_key: '!actors!seaGoblin0000000'

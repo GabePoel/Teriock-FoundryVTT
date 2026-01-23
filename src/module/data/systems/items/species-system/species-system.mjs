@@ -299,43 +299,49 @@ export default class SpeciesSystem extends mix(
 
   /**
    * Data that represents this species as a creature.
+   * @param {object} [data] Optional data to mutate the created creature.
    * @returns {object}
    */
-  toCreature() {
+  toCreature(data = {}) {
     const hasTokenImg =
       !!TERIOCK.index.creatures[toCamelCase(this.parent.name)];
     const tokenImg = hasTokenImg
       ? this.parent.img.replace("icons/creatures", "icons/tokens")
       : this.parent.img;
-    return {
-      name: this.parent.name,
-      type: "creature",
-      img: this.parent.img,
-      prototypeToken: {
+    data = foundry.utils.mergeObject(
+      {
         name: this.parent.name,
-        ring: {
-          enabled: hasTokenImg,
+        type: "creature",
+        img: this.parent.img,
+        prototypeToken: {
+          name: this.parent.name,
+          ring: {
+            enabled: hasTokenImg,
+          },
+          texture: {
+            src: tokenImg,
+          },
+          width: TeriockActor.sizeDefinition(this.size.value).length / 5,
+          height: TeriockActor.sizeDefinition(this.size.value).length / 5,
         },
-        texture: {
-          src: tokenImg,
-        },
-        width: TeriockActor.sizeDefinition(this.size.value).length / 5,
-        height: TeriockActor.sizeDefinition(this.size.value).length / 5,
-      },
-      items: [game.items.fromCompendium(this.parent)],
-      system: {
-        hp: {
-          value: 999999,
-        },
-        mp: {
-          value: 999999,
-        },
-        size: {
-          number: {
-            saved: this.size.value,
+        items: [game.items.fromCompendium(this.parent)],
+        system: {
+          hp: {
+            value: 999999,
+          },
+          mp: {
+            value: 999999,
+          },
+          size: {
+            number: {
+              saved: this.size.value,
+            },
           },
         },
       },
-    };
+      data,
+    );
+    data.items = [game.items.fromCompendium(this.parent)];
+    return data;
   }
 }

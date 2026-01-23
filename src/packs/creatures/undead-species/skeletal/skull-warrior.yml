@@ -1,36 +1,17 @@
 name: Skull Warrior
-img: systems/teriock/src/icons/creatures/skull-warrior.webp
 type: creature
-folder: yv3tNS1RFRPE1Ngi
-_id: EvMs5BUauxGp794q
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 4
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: XZ21J8jHWskqJAWu
-    blocker: XZ21J8jHWskqJAWu
-  hp:
-    value: 12
-  mp:
-    value: 12
+img: systems/teriock/src/icons/creatures/skull-warrior.webp
 prototypeToken:
   name: Skull Warrior
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/skull-warrior.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -152,7 +128,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.EvMs5BUauxGp794q.Item.BNJwYNow7ieRdo7T
+        Compendium.teriock.creatures.Actor.skullWarrior0000.Item.BNJwYNow7ieRdo7T
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -196,22 +172,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -250,7 +232,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -528,10 +512,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.wgg4bmcrQS8QgKft
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.uMOeyYgRIvvjFA6m
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.uMOeyYgRIvvjFA6m
       - name: Fire Ball
         type: ability
         system:
@@ -573,12 +557,13 @@ items:
             package: ball
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - damaging
           elderSorcery: false
@@ -587,9 +572,14 @@ items:
             - flame
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -621,7 +611,9 @@ items:
             raw: 2
           powerSources:
             - magical
-          range: '30'
+          range:
+            unit: ft
+            raw: '30'
           requirements: ''
           results:
             hit: >-
@@ -905,10 +897,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.t9SXjnFK5t9hyhjK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.KaxvpmFYbpSK86RR
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.KaxvpmFYbpSK86RR
       - name: Flame Ray
         type: ability
         system:
@@ -950,12 +942,13 @@ items:
             package: ray
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - damaging
           elderSorcery: false
@@ -964,9 +957,14 @@ items:
             - flame
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -998,7 +996,9 @@ items:
             raw: 1
           powerSources:
             - magical
-          range: '60'
+          range:
+            unit: ft
+            raw: '60'
           requirements: ''
           results:
             hit: >-
@@ -1282,10 +1282,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.F44tDztbxNEauAie
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.pPAgvkYCtrgNW10Y
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.pPAgvkYCtrgNW10Y
       - name: Full Undead
         type: ability
         system:
@@ -1326,13 +1326,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -1340,9 +1341,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -1372,7 +1378,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1649,10 +1657,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.bjxE6abWNndIpUYC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.hLP13pqlQNuo9wpe
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.hLP13pqlQNuo9wpe
       - name: Ethereal Senses
         type: ability
         system:
@@ -1693,13 +1701,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -1708,9 +1717,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1744,7 +1758,9 @@ items:
             - magical
             - spiritual
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2029,10 +2045,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.yzVehDWfRnIdLcPN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.JSecuNbV5J84f7WI
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.JSecuNbV5J84f7WI
       - name: Healing Sensitivity
         type: ability
         system:
@@ -2073,13 +2089,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -2087,9 +2104,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2126,7 +2148,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2404,10 +2428,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.SZtEayMd6TPP34p8
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.09PpidMHWojskufR
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.09PpidMHWojskufR
       - name: Impure Durability
         type: ability
         system:
@@ -2448,13 +2472,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -2462,9 +2487,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -2497,7 +2527,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2782,10 +2814,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.LUx6kx2A8yt15dWA
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.mOImZqLjlzyYB17j
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.mOImZqLjlzyYB17j
       - name: Mana Drain Grasp
         type: ability
         system:
@@ -2827,12 +2859,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - revitalization
             - draining
@@ -2841,9 +2874,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: a2
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -2873,7 +2911,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Your Hand's Range
+          range:
+            unit: ft
+            raw: Your Hand's Range
           requirements: ''
           results:
             hit: >-
@@ -3164,10 +3204,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.m4zyaVYprgShHj2C
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.PN4CFUwUxW0EcN3B
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.PN4CFUwUxW0EcN3B
       - name: Undead Mind
         type: ability
         system:
@@ -3208,13 +3248,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -3223,9 +3264,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -3259,7 +3305,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3551,10 +3599,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.RI93Ezzmys7poKXG
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.hCMioCr5niJFQwiE
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.hCMioCr5niJFQwiE
       - name: Undying Durability
         type: ability
         system:
@@ -3595,13 +3643,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -3610,9 +3659,14 @@ items:
             - necromancy
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -3651,7 +3705,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3950,10 +4006,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.I8PF7dSu1phiM8Vc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.6nSKtgxEZVjXx4i1
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.6nSKtgxEZVjXx4i1
       - name: Improved Healing Factor
         type: ability
         system:
@@ -3994,14 +4050,15 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent:
                 - dead
             stationary: false
             description: While Alive
+            raw: '0'
+            dawn: false
           effectTypes:
             - healing
             - regeneration
@@ -4010,9 +4067,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -4047,7 +4109,9 @@ items:
             raw: 0
           powerSources:
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4325,10 +4389,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.8WDZ2ZtiENd1DdrD
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.xVuPCj3no4u95Eqe
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.xVuPCj3no4u95Eqe
       - name: Missile Durability
         type: ability
         system:
@@ -4369,13 +4433,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -4383,9 +4448,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4420,7 +4490,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4697,10 +4769,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vpOulnmvKGkPaZKg
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.0SpEuLNa83UVAoqf
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.0SpEuLNa83UVAoqf
       - name: Normal Movement
         type: ability
         system:
@@ -4741,22 +4813,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4786,7 +4864,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5063,10 +5143,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.IuuuKYaWeCVWTyxL
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.IuuuKYaWeCVWTyxL
       - name: Normal Perception
         type: ability
         system:
@@ -5107,22 +5187,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5152,7 +5238,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5429,10 +5517,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.0AKn2Iuf3zX5uKfj
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.0AKn2Iuf3zX5uKfj
       - name: Normal Sneak
         type: ability
         system:
@@ -5473,22 +5561,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5518,7 +5612,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5795,10 +5891,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.l3Ro1nXRBoRtl9is
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.l3Ro1nXRBoRtl9is
       - name: Normal Strength
         type: ability
         system:
@@ -5839,22 +5935,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5884,7 +5986,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -6161,10 +6265,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.1YdF8d8xU9yqf6og
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.1YdF8d8xU9yqf6og
       - name: Very High Intelligence
         type: ability
         system:
@@ -6205,22 +6309,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -6250,7 +6360,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -6527,10 +6639,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.rB85qdO9qnAoBE3Y
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.x4NlE9KJiz2PkOZF
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.x4NlE9KJiz2PkOZF
       - name: Vitals Durability
         type: ability
         system:
@@ -6571,13 +6683,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -6585,9 +6698,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -6620,7 +6738,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -6897,18 +7017,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.931JlGiH7Pk4tw2f
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T.oJgQ1fvGVRWOC0Q0
+          !actors.items.effects!skullWarrior0000.BNJwYNow7ieRdo7T.oJgQ1fvGVRWOC0Q0
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.BNJwYNow7ieRdo7T
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EvMs5BUauxGp794q.BNJwYNow7ieRdo7T'
+    _key: '!actors.items!skullWarrior0000.BNJwYNow7ieRdo7T'
   - name: Mouth
     type: body
     _id: 6qkcHPHYV3qH5hwg
@@ -6944,10 +7064,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6994,10 +7116,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.6qkcHPHYV3qH5hwg.1keJAxX1vkfTL8Wl
+          !actors.items.effects!skullWarrior0000.6qkcHPHYV3qH5hwg.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -7036,10 +7158,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.6qkcHPHYV3qH5hwg.cj70nNvBKfT3EQ8P
+          !actors.items.effects!skullWarrior0000.6qkcHPHYV3qH5hwg.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -7078,18 +7200,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.6qkcHPHYV3qH5hwg.43UnM2Fnf4EpPLFE
+          !actors.items.effects!skullWarrior0000.6qkcHPHYV3qH5hwg.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EvMs5BUauxGp794q.6qkcHPHYV3qH5hwg'
+    _key: '!actors.items!skullWarrior0000.6qkcHPHYV3qH5hwg'
   - name: Foot
     type: body
     _id: X6RzZqYr8thQXXzx
@@ -7125,10 +7247,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -7175,10 +7299,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.X6RzZqYr8thQXXzx.LwntE76DWV8LsMYk
+          !actors.items.effects!skullWarrior0000.X6RzZqYr8thQXXzx.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -7217,18 +7341,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.X6RzZqYr8thQXXzx.70oASdJA4Iza7rlK
+          !actors.items.effects!skullWarrior0000.X6RzZqYr8thQXXzx.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EvMs5BUauxGp794q.X6RzZqYr8thQXXzx'
+    _key: '!actors.items!skullWarrior0000.X6RzZqYr8thQXXzx'
   - name: Hand
     type: body
     _id: XZ21J8jHWskqJAWu
@@ -7264,10 +7388,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -7314,10 +7440,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.XZ21J8jHWskqJAWu.FAUPXdLk1A1fD0k8
+          !actors.items.effects!skullWarrior0000.XZ21J8jHWskqJAWu.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -7356,10 +7482,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.XZ21J8jHWskqJAWu.wGdRsURrcXoNZsur
+          !actors.items.effects!skullWarrior0000.XZ21J8jHWskqJAWu.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -7398,10 +7524,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.XZ21J8jHWskqJAWu.1eIcI58ulvhlFYKA
+          !actors.items.effects!skullWarrior0000.XZ21J8jHWskqJAWu.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -7440,24 +7566,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EvMs5BUauxGp794q.XZ21J8jHWskqJAWu.r6jJPWhMBH4YpEKr
+          !actors.items.effects!skullWarrior0000.XZ21J8jHWskqJAWu.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EvMs5BUauxGp794q.XZ21J8jHWskqJAWu'
+    _key: '!actors.items!skullWarrior0000.XZ21J8jHWskqJAWu'
+system:
+  hp:
+    value: 12
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 12
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '4'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: XZ21J8jHWskqJAWu
+    blocker: XZ21J8jHWskqJAWu
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.skullWarrior0000
+_id: skullWarrior0000
 effects: []
+folder: yv3tNS1RFRPE1Ngi
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!EvMs5BUauxGp794q'
+_key: '!actors!skullWarrior0000'

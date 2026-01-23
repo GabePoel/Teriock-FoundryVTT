@@ -514,8 +514,8 @@ export default class CommonSystem extends TypeDataModel {
       if (updateDocument) {
         const indexObject = await this.getCompendiumSourceRefreshObject();
         delete indexObject.flags;
-        delete indexObject.system._ref;
-        delete indexObject.system._sup;
+        delete indexObject.system?._ref;
+        delete indexObject.system?._sup;
         await this.parent.update(indexObject);
       }
       const reference = await this.getCompendiumSource();

@@ -1,46 +1,17 @@
 name: Merfolk
-img: systems/teriock/src/icons/creatures/merfolk.webp
 type: creature
-folder: CSg33tJaMdQxbzeO
-_id: vUmA0aGJuMKmLac4
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: '3'
-      raw: '3'
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: null
-    blocker: null
-  hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 1
-  mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 1
-  transformation:
-    primary: null
+img: systems/teriock/src/icons/creatures/merfolk.webp
 prototypeToken:
   name: Merfolk
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/merfolk.webp
     anchorX: 0.5
@@ -53,6 +24,10 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -96,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -166,7 +132,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.vUmA0aGJuMKmLac4.Item.FK8zBsEdd4y5tJ4u
+        Compendium.teriock.creatures.Actor.merfolk000000000.Item.FK8zBsEdd4y5tJ4u
     effects:
       - name: Water Native
         type: ability
@@ -208,22 +174,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -256,7 +228,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -533,10 +507,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.n4adr7ikFptIlbPN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!vUmA0aGJuMKmLac4.FK8zBsEdd4y5tJ4u.ZOo7C4EGyDbmbgag
+          !actors.items.effects!merfolk000000000.FK8zBsEdd4y5tJ4u.ZOo7C4EGyDbmbgag
       - name: Swimming
         type: ability
         img: systems/teriock/src/icons/abilities/swimming.webp
@@ -557,15 +531,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
             proficient: ''
@@ -624,9 +601,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -908,10 +890,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.40Mn5BA3AoNAwZW0
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!vUmA0aGJuMKmLac4.FK8zBsEdd4y5tJ4u.iUPRwDVQAHDd18Go
+          !actors.items.effects!merfolk000000000.FK8zBsEdd4y5tJ4u.iUPRwDVQAHDd18Go
       - name: Diving
         type: ability
         img: systems/teriock/src/icons/abilities/diving.webp
@@ -932,15 +914,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You no longer have to stay on the surface of water while
@@ -1001,9 +986,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1278,24 +1268,71 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nnMJAQUH3eu31K8R
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!vUmA0aGJuMKmLac4.FK8zBsEdd4y5tJ4u.mPoTN0gNqthZaj5v
+          !actors.items.effects!merfolk000000000.FK8zBsEdd4y5tJ4u.mPoTN0gNqthZaj5v
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.FK8zBsEdd4y5tJ4u
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!vUmA0aGJuMKmLac4.FK8zBsEdd4y5tJ4u'
+    _key: '!actors.items!merfolk000000000.FK8zBsEdd4y5tJ4u'
+system:
+  hp:
+    value: 1
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 1
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '3'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: null
+    blocker: null
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.merfolk000000000
+_id: merfolk000000000
 effects: []
+folder: CSg33tJaMdQxbzeO
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!vUmA0aGJuMKmLac4'
+_key: '!actors!merfolk000000000'

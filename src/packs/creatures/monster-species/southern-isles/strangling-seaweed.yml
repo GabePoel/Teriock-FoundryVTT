@@ -1,46 +1,17 @@
 name: Strangling Seaweed
-img: systems/teriock/src/icons/creatures/strangling-seaweed.webp
 type: creature
-folder: 87J1Cv81XIW9AuHz
-_id: OWtvROjT5STTaOWn
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: '6'
-      raw: '3'
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: ohEoWEszd71leArq
-    blocker: ohEoWEszd71leArq
-  hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 18
-  mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 2
-  transformation:
-    primary: null
+img: systems/teriock/src/icons/creatures/strangling-seaweed.webp
 prototypeToken:
   name: Strangling Seaweed
-  displayName: 0
-  actorLink: false
-  width: 2
-  height: 2
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/strangling-seaweed.webp
     anchorX: 0.5
@@ -53,6 +24,10 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 2
+  height: 2
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -96,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -161,7 +127,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.OWtvROjT5STTaOWn.Item.CIdp7Jr1iKRROnr6
+        Compendium.teriock.creatures.Actor.stranglingSeawee.Item.CIdp7Jr1iKRROnr6
     effects:
       - name: Constrict
         type: ability
@@ -203,22 +169,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: true
             description: While Stationary
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: str
           form: normal
           gifted:
@@ -248,7 +220,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Your Hand's Range
+          range:
+            unit: ft
+            raw: Your Hand's Range
           requirements: <p>Target is your @L[Core:Size]{SIZE} or smaller.</p>
           results:
             hit: ''
@@ -527,10 +501,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nYuZekkgl570Bn0O
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.84D5ElhrWpTrFi9u
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.84D5ElhrWpTrFi9u
       - name: Giant Strength
         type: ability
         system:
@@ -571,22 +545,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -620,7 +600,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -898,10 +880,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.MYmdciuBLqHTJZBD
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.ADXXSNLOkTFuNSFM
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.ADXXSNLOkTFuNSFM
       - name: Improved Strength
         type: ability
         img: systems/teriock/src/icons/abilities/improved-strength.webp
@@ -922,15 +904,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
@@ -991,9 +976,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1268,10 +1258,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.SYy6lxPn4EOOJ0bC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.UAF0HqiBqYSNQc0M
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.UAF0HqiBqYSNQc0M
       - name: Melee Damage Boost
         type: ability
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
@@ -1293,14 +1283,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             description: Instant
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: null
+          range:
+            unit: melee
+            raw: ''
           overview:
             base: >-
               <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -1365,9 +1358,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: >-
             <p>You have hit a creature with a @L[Category:Damaging
             effects]{damaging} melee @L[Category:Weapon delivery
@@ -1646,10 +1644,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.GkyxqkzxVAfMxXxR
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.q5sAdn8w2HKIJ8qv
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.q5sAdn8w2HKIJ8qv
       - name: Normal Movement
         type: ability
         system:
@@ -1690,22 +1688,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1735,7 +1739,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2012,10 +2018,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.PXOwNIOlfScGl2RF
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.PXOwNIOlfScGl2RF
       - name: Regenerating
         type: ability
         system:
@@ -2056,13 +2062,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - revival
             - healing
@@ -2072,9 +2079,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -2115,7 +2127,9 @@ items:
             raw: 0
           powerSources:
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2393,10 +2407,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.KMru5nPLLX8PwZw4
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.XFfBpHDaCDFKx4jW
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.XFfBpHDaCDFKx4jW
       - name: Snare
         type: ability
         system:
@@ -2437,13 +2451,14 @@ items:
             parent: null
             package: strike
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: No Limit
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
@@ -2453,9 +2468,14 @@ items:
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2485,7 +2505,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Your Weapon's Range
+          range:
+            unit: ft
+            raw: Your Weapon's Range
           requirements: ''
           results:
             hit: <p>Target is @L[Condition:Snared]{snared}.</p>
@@ -2767,10 +2789,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.VUMkpdKNuJQ5AYtw
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.zmvFBn2o3B99kmzU
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.zmvFBn2o3B99kmzU
       - name: Sneaky
         type: ability
         system:
@@ -2811,22 +2833,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2856,7 +2884,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3133,10 +3163,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.zBbpwOU0Bg3JniSe
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.ldPlIHhbVQUEQrqv
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.ldPlIHhbVQUEQrqv
       - name: Stupid Intelligence
         type: ability
         system:
@@ -3177,22 +3207,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -3222,7 +3258,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3499,10 +3537,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.BoXAkrfVSt354MD9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.eVH4DHwdAyadE4PD
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.eVH4DHwdAyadE4PD
       - name: Swimming
         type: ability
         system:
@@ -3543,22 +3581,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3588,7 +3632,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3873,10 +3919,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.40Mn5BA3AoNAwZW0
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.53qwdhL5FCGHX6lV
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.53qwdhL5FCGHX6lV
       - name: Unconsciousness Immunity
         type: ability
         system:
@@ -3917,13 +3963,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - immunity
           elderSorcery: false
@@ -3931,9 +3978,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3965,7 +4017,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4249,10 +4303,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.xvTiz8TKtPOXv0us
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.3A4FCqWnhf2yvZQt
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.3A4FCqWnhf2yvZQt
       - name: Unobservant
         type: ability
         system:
@@ -4293,22 +4347,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -4338,7 +4398,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4615,10 +4677,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.72JhNdCjRT4rBPps
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.NAFA40ZIZr2u3ZH1
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.NAFA40ZIZr2u3ZH1
       - name: Water Native
         type: ability
         system:
@@ -4659,22 +4721,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4707,7 +4775,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4984,10 +5054,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.n4adr7ikFptIlbPN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.7DZoBNCo7g4Xi0or
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.7DZoBNCo7g4Xi0or
       - name: Swimming
         type: ability
         img: systems/teriock/src/icons/abilities/swimming.webp
@@ -5008,15 +5078,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
             proficient: ''
@@ -5075,9 +5148,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5359,10 +5437,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.40Mn5BA3AoNAwZW0
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.Im4q0yrxSfX5H3dS
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.Im4q0yrxSfX5H3dS
       - name: Diving
         type: ability
         img: systems/teriock/src/icons/abilities/diving.webp
@@ -5383,15 +5461,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You no longer have to stay on the surface of water while
@@ -5452,9 +5533,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5729,10 +5815,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nnMJAQUH3eu31K8R
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.fcxrnXooyoDZmO79
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.fcxrnXooyoDZmO79
       - name: Beastly Strength
         type: ability
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
@@ -5753,15 +5839,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -5824,9 +5913,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6101,10 +6195,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.XD96Xt3kvkRCMFKb
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.XD96Xt3kvkRCMFKb
       - name: Improved Armor Piercing
         type: ability
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
@@ -6125,15 +6219,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
@@ -6194,9 +6291,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6471,18 +6573,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.H0TY6iliodv97qAv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6.w4WJgBmHUmB0BtdY
+          !actors.items.effects!stranglingSeawee.CIdp7Jr1iKRROnr6.w4WJgBmHUmB0BtdY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.CIdp7Jr1iKRROnr6
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!OWtvROjT5STTaOWn.CIdp7Jr1iKRROnr6'
+    _key: '!actors.items!stranglingSeawee.CIdp7Jr1iKRROnr6'
   - name: Hardened Bark
     type: body
     _id: CkecVB8JMfClpIPf
@@ -6518,10 +6620,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6534,9 +6638,9 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.KaVXSgZfhC4Yij8C
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!OWtvROjT5STTaOWn.CkecVB8JMfClpIPf'
+    _key: '!actors.items!stranglingSeawee.CkecVB8JMfClpIPf'
   - name: Grasping Vine
     type: body
     _id: ohEoWEszd71leArq
@@ -6573,10 +6677,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6622,10 +6728,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.ohEoWEszd71leArq.jH5UXYvbYDYIzGTB
+          !actors.items.effects!stranglingSeawee.ohEoWEszd71leArq.jH5UXYvbYDYIzGTB
       - name: Weapon
         type: property
         system:
@@ -6664,10 +6770,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.ohEoWEszd71leArq.QWPPh151143jLSLE
+          !actors.items.effects!stranglingSeawee.ohEoWEszd71leArq.QWPPh151143jLSLE
       - name: Entangling
         type: property
         system:
@@ -6706,24 +6812,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.sa7rRPjCZ5c6cHcn
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!OWtvROjT5STTaOWn.ohEoWEszd71leArq.GsY8AmwnOhKUdt6w
+          !actors.items.effects!stranglingSeawee.ohEoWEszd71leArq.GsY8AmwnOhKUdt6w
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.OrCvr9S4DvEEvC4P
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!OWtvROjT5STTaOWn.ohEoWEszd71leArq'
+    _key: '!actors.items!stranglingSeawee.ohEoWEszd71leArq'
+system:
+  hp:
+    value: 18
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 2
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '6'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: ohEoWEszd71leArq
+    blocker: ohEoWEszd71leArq
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.stranglingSeawee
+_id: stranglingSeawee
 effects: []
+folder: 87J1Cv81XIW9AuHz
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!OWtvROjT5STTaOWn'
+_key: '!actors!stranglingSeawee'

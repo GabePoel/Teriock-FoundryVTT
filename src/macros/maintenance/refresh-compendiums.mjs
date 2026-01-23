@@ -1,5 +1,5 @@
 await tm.utils.progressBar(
-  game.packs.contents.filter((p) => p.collection !== "teriock.creatures"),
+  await tm.dialogs.selectCompendiumsDialog(),
   "Refreshing Compendiums",
   /** @param {TeriockCompendiumCollection<TeriockDocument>} p */ async (p) => {
     if (!p.locked) {

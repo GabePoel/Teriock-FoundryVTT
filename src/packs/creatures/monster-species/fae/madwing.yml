@@ -1,46 +1,17 @@
 name: Madwing
-img: systems/teriock/src/icons/creatures/madwing.webp
 type: creature
-folder: MdNQ5toPQQeIwJ2d
-_id: ULSzNFr0rpBxw8hu
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: '2'
-      raw: '3'
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: zHbvywQc7MDLb4SC
-    blocker: zHbvywQc7MDLb4SC
-  hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 10
-  mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 10
-  transformation:
-    primary: null
+img: systems/teriock/src/icons/creatures/madwing.webp
 prototypeToken:
   name: Madwing
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/madwing.webp
     anchorX: 0.5
@@ -53,6 +24,10 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -96,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -169,7 +135,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.ULSzNFr0rpBxw8hu.Item.HFY6RyGzAoV2ZSp4
+        Compendium.teriock.creatures.Actor.madwing000000000.Item.HFY6RyGzAoV2ZSp4
     effects:
       - name: Fae Elder Sorcery
         type: ability
@@ -211,22 +177,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -269,7 +241,9 @@ items:
           powerSources:
             - magical
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -553,10 +527,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.5T7AGREWd84zVLmZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.yzX2Aj1bGwBMytGK
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.yzX2Aj1bGwBMytGK
       - name: Innate Elder Sorcery
         type: ability
         system:
@@ -597,22 +571,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -663,7 +643,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -941,10 +923,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.hBFvs5rlAgeXcR9h
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.PWQRAlUdAwSpBneK
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.PWQRAlUdAwSpBneK
       - name: Flying
         type: ability
         system:
@@ -985,13 +967,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -999,9 +982,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1031,7 +1019,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1323,10 +1313,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DebtP4uyZnZ4u8nL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.UWkDn6kiCrmRcop9
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.UWkDn6kiCrmRcop9
       - name: Infinite Lifespan
         type: ability
         system:
@@ -1367,22 +1357,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -1415,7 +1411,9 @@ items:
             raw: 0
           powerSources:
             - unknown
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1692,10 +1690,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.bIZppERxKo3nPdD5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.71hauew4Jb2e7gYG
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.71hauew4Jb2e7gYG
       - name: Mana Regenerating
         type: ability
         system:
@@ -1736,13 +1734,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - revival
             - regeneration
@@ -1752,9 +1751,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -1794,7 +1798,9 @@ items:
             raw: 0
           powerSources:
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2072,10 +2078,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.q9H4zdZWzUwj1f14
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.t4cl6kwqGmi53QSm
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.t4cl6kwqGmi53QSm
       - name: Night Vision
         type: ability
         system:
@@ -2116,13 +2122,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -2130,9 +2137,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2164,7 +2176,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2448,10 +2462,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.PvbmoqyqXnLy380F
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.PvbmoqyqXnLy380F
       - name: Normal Intelligence
         type: ability
         system:
@@ -2492,22 +2506,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2537,7 +2557,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2814,10 +2836,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.lKPHfbtn0kt9Acf9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.3SEoZNHA7d2gS843
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.3SEoZNHA7d2gS843
       - name: Normal Movement
         type: ability
         system:
@@ -2858,22 +2880,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2903,7 +2931,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3180,10 +3210,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.llhce3reITydinqa
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.llhce3reITydinqa
       - name: Normal Perception
         type: ability
         system:
@@ -3224,22 +3254,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3269,7 +3305,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3546,10 +3584,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.fiZ1w6mu27GIPqp1
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.fiZ1w6mu27GIPqp1
       - name: Normal Sneak
         type: ability
         system:
@@ -3590,22 +3628,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3635,7 +3679,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3912,10 +3958,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.mg6l4XozZjFEmC1X
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.mg6l4XozZjFEmC1X
       - name: Normal Strength
         type: ability
         system:
@@ -3956,22 +4002,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4001,7 +4053,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4278,10 +4332,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.OnYIBkQDKQyFRBTH
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.OnYIBkQDKQyFRBTH
       - name: Regenerating
         type: ability
         system:
@@ -4322,13 +4376,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - revival
             - healing
@@ -4338,9 +4393,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -4381,7 +4441,9 @@ items:
             raw: 0
           powerSources:
             - primal
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4659,10 +4721,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.KMru5nPLLX8PwZw4
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.2NEk6L1n5nnHBlfA
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.2NEk6L1n5nnHBlfA
       - name: Thin Soul
         type: ability
         system:
@@ -4703,22 +4765,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -4750,7 +4818,9 @@ items:
             raw: 0
           powerSources:
             - unknown
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5034,10 +5104,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.wXPujA9x0zsOwPkh
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.Eb8hHL8RPpLsQq5Y
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.Eb8hHL8RPpLsQq5Y
       - name: Elder Sorcery Creation
         type: ability
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
@@ -5059,14 +5129,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             description: Instant
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: null
+          range:
+            unit: melee
+            raw: ''
           overview:
             base: >-
               <p>You may create 1 custom "rotator" @L[Category:Spells]{spells}
@@ -5150,9 +5223,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: special
@@ -5429,10 +5507,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.Mdcuh7skNnu6UxjN
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.53RawxzfdwyZD91Q
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.53RawxzfdwyZD91Q
       - name: All Elder Sorcery Words
         type: ability
         system:
@@ -5473,13 +5551,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: true
           elderSorceryIncant: ''
@@ -5491,9 +5570,14 @@ items:
             - nature
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -5738,7 +5822,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -6016,18 +6102,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.xKGhRmlXkVOSKuWl
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4.AF8AETUrz3ffwwtx
+          !actors.items.effects!madwing000000000.HFY6RyGzAoV2ZSp4.AF8AETUrz3ffwwtx
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.HFY6RyGzAoV2ZSp4
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!ULSzNFr0rpBxw8hu.HFY6RyGzAoV2ZSp4'
+    _key: '!actors.items!madwing000000000.HFY6RyGzAoV2ZSp4'
   - name: Hand
     type: body
     _id: UpZ6ina0rf4AcDTy
@@ -6063,10 +6149,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6113,10 +6201,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.UpZ6ina0rf4AcDTy.FAUPXdLk1A1fD0k8
+          !actors.items.effects!madwing000000000.UpZ6ina0rf4AcDTy.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -6155,10 +6243,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.UpZ6ina0rf4AcDTy.wGdRsURrcXoNZsur
+          !actors.items.effects!madwing000000000.UpZ6ina0rf4AcDTy.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -6197,10 +6285,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.UpZ6ina0rf4AcDTy.1eIcI58ulvhlFYKA
+          !actors.items.effects!madwing000000000.UpZ6ina0rf4AcDTy.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -6239,18 +6327,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.UpZ6ina0rf4AcDTy.r6jJPWhMBH4YpEKr
+          !actors.items.effects!madwing000000000.UpZ6ina0rf4AcDTy.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!ULSzNFr0rpBxw8hu.UpZ6ina0rf4AcDTy'
+    _key: '!actors.items!madwing000000000.UpZ6ina0rf4AcDTy'
   - name: Mouth
     type: body
     _id: cCx1DjaRXkjL3dHG
@@ -6286,10 +6374,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6336,10 +6426,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.cCx1DjaRXkjL3dHG.1keJAxX1vkfTL8Wl
+          !actors.items.effects!madwing000000000.cCx1DjaRXkjL3dHG.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -6378,10 +6468,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.cCx1DjaRXkjL3dHG.cj70nNvBKfT3EQ8P
+          !actors.items.effects!madwing000000000.cCx1DjaRXkjL3dHG.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -6420,18 +6510,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.cCx1DjaRXkjL3dHG.43UnM2Fnf4EpPLFE
+          !actors.items.effects!madwing000000000.cCx1DjaRXkjL3dHG.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!ULSzNFr0rpBxw8hu.cCx1DjaRXkjL3dHG'
+    _key: '!actors.items!madwing000000000.cCx1DjaRXkjL3dHG'
   - name: Foot
     type: body
     _id: zHbvywQc7MDLb4SC
@@ -6467,10 +6557,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6517,10 +6609,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.zHbvywQc7MDLb4SC.LwntE76DWV8LsMYk
+          !actors.items.effects!madwing000000000.zHbvywQc7MDLb4SC.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -6559,24 +6651,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!ULSzNFr0rpBxw8hu.zHbvywQc7MDLb4SC.70oASdJA4Iza7rlK
+          !actors.items.effects!madwing000000000.zHbvywQc7MDLb4SC.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!ULSzNFr0rpBxw8hu.zHbvywQc7MDLb4SC'
+    _key: '!actors.items!madwing000000000.zHbvywQc7MDLb4SC'
+system:
+  hp:
+    value: 10
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 10
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '2'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: zHbvywQc7MDLb4SC
+    blocker: zHbvywQc7MDLb4SC
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.madwing000000000
+_id: madwing000000000
 effects: []
+folder: MdNQ5toPQQeIwJ2d
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!ULSzNFr0rpBxw8hu'
+_key: '!actors!madwing000000000'

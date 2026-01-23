@@ -1,36 +1,17 @@
 name: Leather Speed Drake
-img: systems/teriock/src/icons/creatures/leather-speed-drake.webp
 type: creature
-folder: YtsUPuJKaPVTYau2
-_id: 06Fi9u0MeCgYhJ0b
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 3
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: kyTodfTUtT4b0l5N
-    blocker: XLNbhwqgs0iTI36I
-  hp:
-    value: 12
-  mp:
-    value: 6
+img: systems/teriock/src/icons/creatures/leather-speed-drake.webp
 prototypeToken:
   name: Leather Speed Drake
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/leather-speed-drake.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -154,7 +130,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.06Fi9u0MeCgYhJ0b.Item.O5Zy93poVohKoBfl
+        Compendium.teriock.creatures.Actor.leatherSpeedDrak.Item.O5Zy93poVohKoBfl
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -198,22 +174,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -245,7 +227,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -523,10 +507,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.GbM9VuxOJdE9E8Lr
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.GbM9VuxOJdE9E8Lr
       - name: Battle Cry Aura
         type: ability
         system:
@@ -568,12 +552,13 @@ items:
             package: null
           duration:
             unit: minute
-            quantity: 1
             conditions:
               present: []
               absent: []
             stationary: false
             description: 1 Minute
+            raw: '1'
+            dawn: false
           effectTypes:
             - loud
           elderSorcery: false
@@ -584,9 +569,14 @@ items:
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: int
           form: normal
           gifted:
@@ -618,7 +608,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: '10'
+          range:
+            unit: ft
+            raw: '10'
           requirements: ''
           results:
             hit: ''
@@ -900,10 +892,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.qdoHZufxtGs1nUUZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.4gskRvRE1DgdF7bl
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.4gskRvRE1DgdF7bl
       - name: Battle Cry Resistance
         type: ability
         system:
@@ -945,12 +937,13 @@ items:
             package: null
           duration:
             unit: minute
-            quantity: 5
             conditions:
               present: []
               absent: []
             stationary: false
             description: 5 Minutes
+            raw: '5'
+            dawn: false
           effectTypes:
             - resistance
           elderSorcery: false
@@ -958,9 +951,14 @@ items:
           elements: []
           endCondition: <p>You die or 1 minute passes without combat.</p>
           executionTime: a0
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -992,7 +990,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1278,10 +1278,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DqXrfWmMV6e0tUmE
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.JfXfznJU43FUkn1T
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.JfXfznJU43FUkn1T
       - name: Beastly Strength
         type: ability
         system:
@@ -1322,22 +1322,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1371,7 +1377,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1649,10 +1657,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.WXkOcJfg0YDXaBAO
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.WXkOcJfg0YDXaBAO
       - name: Flying
         type: ability
         system:
@@ -1693,13 +1701,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -1707,9 +1716,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1739,7 +1753,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2031,10 +2047,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DebtP4uyZnZ4u8nL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.clF9EmWBxRqdqIXa
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.clF9EmWBxRqdqIXa
       - name: Leather Drake Breath
         type: ability
         system:
@@ -2076,21 +2092,27 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -2120,7 +2142,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: '15'
+          range:
+            unit: ft
+            raw: '15'
           requirements: ''
           results:
             hit: ''
@@ -2401,10 +2425,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.YJJKyY0BQ6vDbVUq
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.f6R7o75PaX2x802F
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.f6R7o75PaX2x802F
       - name: Night Vision
         type: ability
         system:
@@ -2445,13 +2469,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -2459,9 +2484,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2493,7 +2523,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2777,10 +2809,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.HVL1Si5cRR86SBGZ
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.fgTJ49fvmnmcenIl
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.fgTJ49fvmnmcenIl
       - name: No Hands
         type: ability
         system:
@@ -2821,22 +2853,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2866,7 +2904,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3143,10 +3183,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.0Pri1funErarei9r
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.CjLrWmKWevCQcgZd
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.CjLrWmKWevCQcgZd
       - name: Normal Perception
         type: ability
         system:
@@ -3187,22 +3227,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3232,7 +3278,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3509,10 +3557,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.tBij2LZvTdGoeAjt
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.tBij2LZvTdGoeAjt
       - name: Normal Sneak
         type: ability
         system:
@@ -3553,22 +3601,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3598,7 +3652,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3875,10 +3931,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.Cc6s6T4b0Ru7f57W
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.Cc6s6T4b0Ru7f57W
       - name: Stupid Intelligence
         type: ability
         system:
@@ -3919,22 +3975,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -3964,7 +4026,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4241,10 +4305,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.BoXAkrfVSt354MD9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.h1gqM4fdxji5g2Tn
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.h1gqM4fdxji5g2Tn
       - name: Super Speed
         type: ability
         system:
@@ -4285,22 +4349,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -4330,7 +4400,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4607,18 +4679,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.N97e7VeCuCHYxBhf
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl.JjmRXVot5jroKQyS
+          !actors.items.effects!leatherSpeedDrak.O5Zy93poVohKoBfl.JjmRXVot5jroKQyS
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.O5Zy93poVohKoBfl
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!06Fi9u0MeCgYhJ0b.O5Zy93poVohKoBfl'
+    _key: '!actors.items!leatherSpeedDrak.O5Zy93poVohKoBfl'
   - name: Rank 1 Ranger
     type: rank
     system:
@@ -4681,14 +4753,17 @@ items:
           elements: []
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You take the triggering @L[Core:Damage]{damage} as a
@@ -4760,9 +4835,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: >-
             <p>You are hit by an @L[Category:Attack abilities]{attack} that
             would @L[Core:Damage]{damage} you.</p>
@@ -5042,10 +5122,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.5pxoM0JSm5bLRHB1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.FHCCNykESme52LE7.HTh9eKY8tjEyFZiW
+          !actors.items.effects!leatherSpeedDrak.FHCCNykESme52LE7.HTh9eKY8tjEyFZiW
       - name: Snare
         type: ability
         system:
@@ -5065,15 +5145,18 @@ items:
             - leg
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: No Limit
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Your Weapon's Range
+          range:
+            unit: ft
+            raw: Your Weapon's Range
           overview:
             base: ''
             proficient: ''
@@ -5137,9 +5220,14 @@ items:
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5416,10 +5504,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.VUMkpdKNuJQ5AYtw
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.FHCCNykESme52LE7.nzFq8r1iYJ84sDUE
+          !actors.items.effects!leatherSpeedDrak.FHCCNykESme52LE7.nzFq8r1iYJ84sDUE
       - name: Track
         type: ability
         system:
@@ -5439,15 +5527,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You are an @L[Keyword:Expertise]{expert}
@@ -5509,9 +5600,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5794,10 +5890,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.GwIfXb6FtuhMX4Qn
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.FHCCNykESme52LE7.nH5Lp5XDU4r41853
+          !actors.items.effects!leatherSpeedDrak.FHCCNykESme52LE7.nH5Lp5XDU4r41853
       - name: Scouting
         type: ability
         system:
@@ -5817,15 +5913,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You have @L[Core:Advantage]{advantage} on checks made with
@@ -5886,9 +5985,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6164,10 +6268,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ip4KhBbxhUQNuVWC
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.FHCCNykESme52LE7.IOEdI6sRGZJf9aOR
+          !actors.items.effects!leatherSpeedDrak.FHCCNykESme52LE7.IOEdI6sRGZJf9aOR
       - name: Agile
         type: ability
         system:
@@ -6187,15 +6291,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You walk through difficult terrain at @L[Core:Movement
@@ -6255,9 +6362,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6541,18 +6653,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.WrvQ3vZFTItud9sc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.FHCCNykESme52LE7.8kGhtp5AprVX9ihX
+          !actors.items.effects!leatherSpeedDrak.FHCCNykESme52LE7.8kGhtp5AprVX9ihX
     flags: {}
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.zfZyZUHIWShGBI4t
+      compendiumSource: Compendium.teriock.classes.Item.rank1Ranger00000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!06Fi9u0MeCgYhJ0b.FHCCNykESme52LE7'
+    _key: '!actors.items!leatherSpeedDrak.FHCCNykESme52LE7'
   - name: Ferocious Jaw
     type: body
     _id: NsR1l6H9DXXwALKQ
@@ -6588,10 +6700,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6637,10 +6751,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.NsR1l6H9DXXwALKQ.eQUrKLYfdm3d2pbp
+          !actors.items.effects!leatherSpeedDrak.NsR1l6H9DXXwALKQ.eQUrKLYfdm3d2pbp
       - name: Weapon
         type: property
         system:
@@ -6679,10 +6793,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.NsR1l6H9DXXwALKQ.3UeX8RwGGyFvjqWm
+          !actors.items.effects!leatherSpeedDrak.NsR1l6H9DXXwALKQ.3UeX8RwGGyFvjqWm
       - name: AV0
         type: property
         system:
@@ -6726,18 +6840,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.RtpPLATV2DKzDwg1
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.NsR1l6H9DXXwALKQ.1If9EoCtkcFEPVeN
+          !actors.items.effects!leatherSpeedDrak.NsR1l6H9DXXwALKQ.1If9EoCtkcFEPVeN
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.srx0p7BJJ6aF1aur
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!06Fi9u0MeCgYhJ0b.NsR1l6H9DXXwALKQ'
+    _key: '!actors.items!leatherSpeedDrak.NsR1l6H9DXXwALKQ'
   - name: Sharp Claw
     type: body
     _id: XLNbhwqgs0iTI36I
@@ -6773,10 +6887,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6822,10 +6938,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.XLNbhwqgs0iTI36I.Wez1JXmo9LjBU1oA
+          !actors.items.effects!leatherSpeedDrak.XLNbhwqgs0iTI36I.Wez1JXmo9LjBU1oA
       - name: Weapon
         type: property
         system:
@@ -6864,18 +6980,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.XLNbhwqgs0iTI36I.6CVqlpk3uf4VDbFY
+          !actors.items.effects!leatherSpeedDrak.XLNbhwqgs0iTI36I.6CVqlpk3uf4VDbFY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!06Fi9u0MeCgYhJ0b.XLNbhwqgs0iTI36I'
+    _key: '!actors.items!leatherSpeedDrak.XLNbhwqgs0iTI36I'
   - name: Foot
     type: body
     _id: kyTodfTUtT4b0l5N
@@ -6911,10 +7027,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -6961,10 +7079,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.kyTodfTUtT4b0l5N.LwntE76DWV8LsMYk
+          !actors.items.effects!leatherSpeedDrak.kyTodfTUtT4b0l5N.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -7003,18 +7121,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.kyTodfTUtT4b0l5N.70oASdJA4Iza7rlK
+          !actors.items.effects!leatherSpeedDrak.kyTodfTUtT4b0l5N.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!06Fi9u0MeCgYhJ0b.kyTodfTUtT4b0l5N'
+    _key: '!actors.items!leatherSpeedDrak.kyTodfTUtT4b0l5N'
   - name: Semi
     type: power
     _id: semi000000000000
@@ -7036,7 +7154,7 @@ items:
         suppressed:
           raw: '0'
       _ref: >-
-        Compendium.teriock.creatures.Actor.06Fi9u0MeCgYhJ0b.Item.semi000000000000
+        Compendium.teriock.creatures.Actor.leatherSpeedDrak.Item.semi000000000000
       maxAv: 4
       type: learned
     effects:
@@ -7315,22 +7433,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -7363,7 +7487,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -7406,25 +7532,72 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.Kf5T5DmBbgSHoMy2
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!06Fi9u0MeCgYhJ0b.semi000000000000.4XNvcPLM4s2CAFYb
+          !actors.items.effects!leatherSpeedDrak.semi000000000000.4XNvcPLM4s2CAFYb
     folder: semi000000000000
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.semi000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!06Fi9u0MeCgYhJ0b.semi000000000000'
+    _key: '!actors.items!leatherSpeedDrak.semi000000000000'
+system:
+  hp:
+    value: 12
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '3'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: kyTodfTUtT4b0l5N
+    blocker: XLNbhwqgs0iTI36I
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.leatherSpeedDrak
+_id: leatherSpeedDrak
 effects: []
+folder: YtsUPuJKaPVTYau2
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!06Fi9u0MeCgYhJ0b'
+_key: '!actors!leatherSpeedDrak'

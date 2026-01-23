@@ -1,46 +1,17 @@
 name: Bombardier Larva
-img: systems/teriock/src/icons/creatures/bombardier-larva.webp
 type: creature
-folder: 2AAdwm22W0jaCc52
-_id: btG5vHGt2Eulupcq
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: '1'
-      raw: '3'
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: 1JN8TYd6XtvkSoiW
-    blocker: b0teljC1voDux9oP
-  hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 4
-  mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 3
-  transformation:
-    primary: null
+img: systems/teriock/src/icons/creatures/bombardier-larva.webp
 prototypeToken:
   name: Bombardier Larva
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/bombardier-larva.webp
     anchorX: 0.5
@@ -53,6 +24,10 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -96,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -166,7 +132,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.btG5vHGt2Eulupcq.Item.O1avuTCf3MEtidZz
+        Compendium.teriock.creatures.Actor.bombardierLarva0.Item.O1avuTCf3MEtidZz
     effects:
       - name: Acidic Blood
         type: ability
@@ -208,13 +174,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - automatic
           elderSorcery: false
@@ -222,9 +189,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -258,7 +230,9 @@ items:
             raw: 0
           powerSources:
             - alchemical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -537,10 +511,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.UR2FQvNc3yHTKUUe
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz.AlSdCjpwTweDTMc0
+          !actors.items.effects!bombardierLarva0.O1avuTCf3MEtidZz.AlSdCjpwTweDTMc0
       - name: Combusting
         type: ability
         system:
@@ -582,12 +556,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - damaging
             - automatic
@@ -596,9 +571,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: r0
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -630,7 +610,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: '10'
+          range:
+            unit: ft
+            raw: '10'
           requirements: ''
           results:
             hit: ''
@@ -918,10 +900,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkRhYbuWX78pXrM3
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz.4B6Scn10ZousWRUa
+          !actors.items.effects!bombardierLarva0.O1avuTCf3MEtidZz.4B6Scn10ZousWRUa
       - name: Dense Intelligence
         type: ability
         system:
@@ -962,22 +944,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -1007,7 +995,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1284,10 +1274,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.PT3Et55oTXl9p9jK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz.DgrpSlu1CI9UkOUq
+          !actors.items.effects!bombardierLarva0.O1avuTCf3MEtidZz.DgrpSlu1CI9UkOUq
       - name: Normal Perception
         type: ability
         system:
@@ -1328,22 +1318,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1373,7 +1369,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1650,10 +1648,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz.YZc3n6KUCwY3ZeQb
+          !actors.items.effects!bombardierLarva0.O1avuTCf3MEtidZz.YZc3n6KUCwY3ZeQb
       - name: Normal Sneak
         type: ability
         system:
@@ -1694,22 +1692,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1739,7 +1743,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2016,10 +2022,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz.1MjTR0ZiraWQZdqV
+          !actors.items.effects!bombardierLarva0.O1avuTCf3MEtidZz.1MjTR0ZiraWQZdqV
       - name: Normal Strength
         type: ability
         system:
@@ -2060,22 +2066,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2105,7 +2117,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2382,10 +2396,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz.zw7OurRQyuYfVPaA
+          !actors.items.effects!bombardierLarva0.O1avuTCf3MEtidZz.zw7OurRQyuYfVPaA
       - name: Slow
         type: ability
         system:
@@ -2426,22 +2440,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2471,7 +2491,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2748,18 +2770,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.LRa9jYQZfPUJ52Xc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz.UB5A4tqoR3OCPXdi
+          !actors.items.effects!bombardierLarva0.O1avuTCf3MEtidZz.UB5A4tqoR3OCPXdi
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.O1avuTCf3MEtidZz
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!btG5vHGt2Eulupcq.O1avuTCf3MEtidZz'
+    _key: '!actors.items!bombardierLarva0.O1avuTCf3MEtidZz'
   - name: Jaw
     type: body
     _id: 1JN8TYd6XtvkSoiW
@@ -2795,10 +2817,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -2844,10 +2868,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.1JN8TYd6XtvkSoiW.G0tdQXSp86EwqkNT
+          !actors.items.effects!bombardierLarva0.1JN8TYd6XtvkSoiW.G0tdQXSp86EwqkNT
       - name: Weapon
         type: property
         system:
@@ -2886,18 +2910,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!btG5vHGt2Eulupcq.1JN8TYd6XtvkSoiW.37rxckf9CC1HPsQd
+          !actors.items.effects!bombardierLarva0.1JN8TYd6XtvkSoiW.37rxckf9CC1HPsQd
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.IrYMgwHyfm2xq4oa
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!btG5vHGt2Eulupcq.1JN8TYd6XtvkSoiW'
+    _key: '!actors.items!bombardierLarva0.1JN8TYd6XtvkSoiW'
   - name: Light Carapace
     type: body
     _id: b0teljC1voDux9oP
@@ -2933,10 +2957,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -2949,15 +2975,62 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.Vn3DePw3E7hMs71f
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!btG5vHGt2Eulupcq.b0teljC1voDux9oP'
+    _key: '!actors.items!bombardierLarva0.b0teljC1voDux9oP'
+system:
+  hp:
+    value: 4
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 3
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '1'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: 1JN8TYd6XtvkSoiW
+    blocker: b0teljC1voDux9oP
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.bombardierLarva0
+_id: bombardierLarva0
 effects: []
+folder: 2AAdwm22W0jaCc52
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!btG5vHGt2Eulupcq'
+_key: '!actors!bombardierLarva0'

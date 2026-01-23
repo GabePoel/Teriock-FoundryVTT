@@ -232,6 +232,31 @@ export async function selectAbilityDialog() {
 }
 
 /**
+ * Dialog to select compendiums.
+ * @returns {Promise<TeriockCompendiumCollection<TeriockDocument>[]>}
+ */
+export async function selectCompendiumsDialog() {
+  const packDocs = game.packs.contents
+    .filter((p) => !p.locked)
+    .map((p) => {
+      return {
+        name: p.title,
+        uuid: p.collection,
+        img: "icons/svg/book.svg",
+      };
+    });
+  packDocs.sort((a, b) => a.name.localeCompare(b.name));
+  const chosen = await tm.dialogs.selectDocumentsDialog(packDocs, {
+    tooltip: false,
+    tooltipAsync: false,
+    hint: "Please select compendiums.",
+    title: "Select Compendiums",
+    checked: packDocs.map((p) => p.uuid),
+  });
+  return chosen.map((c) => game.packs.get(c.uuid));
+}
+
+/**
  * Dialog to select a equipment.
  * @returns {Promise<TeriockEquipment|void>}
  */

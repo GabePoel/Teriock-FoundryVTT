@@ -1,46 +1,17 @@
 name: Haunt
-img: systems/teriock/src/icons/creatures/haunt.webp
 type: creature
-folder: 1pVtkm4sqW6x4Hmi
-_id: UVXtNihhwDeqK5fS
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: '3'
-      raw: '3'
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: null
-    blocker: null
-  hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 1
-  mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 1
-  transformation:
-    primary: null
+img: systems/teriock/src/icons/creatures/haunt.webp
 prototypeToken:
   name: Haunt
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/haunt.webp
     anchorX: 0.5
@@ -53,6 +24,10 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -96,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -172,7 +138,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.UVXtNihhwDeqK5fS.Item.wUclMxsD45ULa7nv
+        Compendium.teriock.creatures.Actor.haunt00000000000.Item.wUclMxsD45ULa7nv
     effects:
       - name: Haunting
         type: ability
@@ -214,22 +180,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -279,7 +251,9 @@ items:
             raw: 0
           powerSources:
             - unknown
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: <p>You are a @L[Creature:Haunt]{haunt}.</p>
           results:
             hit: ''
@@ -556,10 +530,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.ep8DBYQY6kNkcH26
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!UVXtNihhwDeqK5fS.wUclMxsD45ULa7nv.BYSAxgA0IM4ZvTei
+          !actors.items.effects!haunt00000000000.wUclMxsD45ULa7nv.BYSAxgA0IM4ZvTei
       - name: Haunt Escalation
         type: ability
         system:
@@ -601,12 +575,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - automatic
           elderSorcery: false
@@ -614,9 +589,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: r0
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -666,7 +646,9 @@ items:
             raw: 0
           powerSources:
             - unknown
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: <p>You are a @L[Creature:Haunt]{haunt}.</p>
           results:
             hit: ''
@@ -946,10 +928,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.8TEz1r6I2LaNqlgW
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!UVXtNihhwDeqK5fS.wUclMxsD45ULa7nv.HwDHR2Tdcu6WsyBM
+          !actors.items.effects!haunt00000000000.wUclMxsD45ULa7nv.HwDHR2Tdcu6WsyBM
       - name: Haunt Deescalation
         type: ability
         system:
@@ -991,12 +973,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - automatic
           elderSorcery: false
@@ -1004,9 +987,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: r0
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: special
           gifted:
@@ -1042,7 +1030,9 @@ items:
             raw: 0
           powerSources:
             - unknown
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1325,24 +1315,71 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.r0dB9EgGi7bSz63z
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!UVXtNihhwDeqK5fS.wUclMxsD45ULa7nv.aYi0qlfsAPOrFSHo
+          !actors.items.effects!haunt00000000000.wUclMxsD45ULa7nv.aYi0qlfsAPOrFSHo
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.wUclMxsD45ULa7nv
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!UVXtNihhwDeqK5fS.wUclMxsD45ULa7nv'
+    _key: '!actors.items!haunt00000000000.wUclMxsD45ULa7nv'
+system:
+  hp:
+    value: 1
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 1
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '3'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: null
+    blocker: null
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.haunt00000000000
+_id: haunt00000000000
 effects: []
+folder: 1pVtkm4sqW6x4Hmi
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!UVXtNihhwDeqK5fS'
+_key: '!actors!haunt00000000000'

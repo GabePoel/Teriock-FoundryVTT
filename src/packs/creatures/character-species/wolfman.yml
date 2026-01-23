@@ -1,46 +1,17 @@
 name: Wolfman
-img: systems/teriock/src/icons/creatures/wolfman.webp
 type: creature
-folder: CSg33tJaMdQxbzeO
-_id: t3NjSYvnSroGerRV
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: '2'
-      raw: '3'
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: qtt13HQt4uFqNOQw
-    blocker: qtt13HQt4uFqNOQw
-  hp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 6
-  mp:
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-    value: 5
-  transformation:
-    primary: null
+img: systems/teriock/src/icons/creatures/wolfman.webp
 prototypeToken:
   name: Wolfman
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/wolfman.webp
     anchorX: 0.5
@@ -53,6 +24,10 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -96,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -166,7 +132,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.t3NjSYvnSroGerRV.Item.B5yHNORxbUkKJtWZ
+        Compendium.teriock.creatures.Actor.wolfman000000000.Item.B5yHNORxbUkKJtWZ
     effects:
       - name: Acrobatics
         type: ability
@@ -208,13 +174,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -222,9 +189,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -256,7 +228,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -534,10 +508,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.Q2MuAocYolNGAbhb
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.KAevv21lzX87VIlq
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.KAevv21lzX87VIlq
       - name: Climbing
         type: ability
         img: systems/teriock/src/icons/abilities/climbing.webp
@@ -558,15 +532,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
             proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
@@ -624,9 +601,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -916,10 +898,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.cgveL1wHhWQoZH7b
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.oYWzPHvFwmYbcHjh
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.oYWzPHvFwmYbcHjh
       - name: Leaping
         type: ability
         img: systems/teriock/src/icons/abilities/leaping.webp
@@ -940,15 +922,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You vertically leap at @L[Core:Movement Speed]{quarter speed}
@@ -1012,9 +997,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -1318,10 +1308,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.WJ91XuNoYd43DhFL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.n7uYChrR1Wy6RIOr
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.n7uYChrR1Wy6RIOr
       - name: Advanced Smell
         type: ability
         system:
@@ -1362,14 +1352,15 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent:
                 - down
             stationary: false
             description: While Up
+            raw: '0'
+            dawn: false
           effectTypes:
             - sensory
           elderSorcery: false
@@ -1377,9 +1368,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1415,7 +1411,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
           results:
             hit: ''
@@ -1693,10 +1691,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.R65QBgIc0qUqyn4S
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.KeenGACJfT1SFtOM
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.KeenGACJfT1SFtOM
       - name: Scent Seeing
         type: ability
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
@@ -1717,15 +1715,19 @@ items:
             - creature
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
-              absent: []
-            description: While Target Remains In Range
+              absent:
+                - down
+            description: While Up
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: '10'
+          range:
+            unit: ft
+            raw: '10'
           overview:
             base: >-
               <p>You know the exact location of all target creatures. You
@@ -1790,9 +1792,14 @@ items:
           requirements: >-
             <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
             not @L[Condition:Odorless]{odorless}.</p>
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2075,10 +2082,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.iLjxTmEv789fF560
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.6Dkw5BmF8EOv5r09
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.6Dkw5BmF8EOv5r09
       - name: Aggressive
         type: ability
         system:
@@ -2119,22 +2126,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2167,7 +2180,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2444,10 +2459,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.CRDqaqlbHb9wqnGA
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.T9NrQn7kwwMVRjEV
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.T9NrQn7kwwMVRjEV
       - name: Fire Frailty
         type: ability
         system:
@@ -2488,22 +2503,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2541,7 +2562,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2819,10 +2842,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.B1aKVlGvMTXPX40e
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.OPqG1Oy640aSjvzO
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.OPqG1Oy640aSjvzO
       - name: Low Intelligence
         type: ability
         system:
@@ -2863,22 +2886,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -2908,7 +2937,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3185,10 +3216,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nqpe5LzoIB6hJY7g
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.2TgWsGcy6PezXAtD
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.2TgWsGcy6PezXAtD
       - name: Normal Movement
         type: ability
         system:
@@ -3229,22 +3260,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3274,7 +3311,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3551,10 +3590,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.gp8xOeSx2v1KCWfv
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.gp8xOeSx2v1KCWfv
       - name: Normal Perception
         type: ability
         system:
@@ -3595,22 +3634,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3640,7 +3685,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -3917,10 +3964,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.FZr7U78FZfUbTbJi
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.FZr7U78FZfUbTbJi
       - name: Normal Sneak
         type: ability
         system:
@@ -3961,22 +4008,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4006,7 +4059,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4283,10 +4338,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.qwsTbMORKdve2RXA
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.qwsTbMORKdve2RXA
       - name: Normal Strength
         type: ability
         system:
@@ -4327,22 +4382,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4372,7 +4433,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4649,10 +4712,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.4jurSSwAjnpj1JD2
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.4jurSSwAjnpj1JD2
       - name: Pack Duel
         type: ability
         system:
@@ -4694,21 +4757,27 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: a1
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -4740,7 +4809,9 @@ items:
             raw: 0
           powerSources:
             - spiritual
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5017,10 +5088,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.pgkOpLMySUl9KkUj
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.7BEkXkJ9TyDTzKmX
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.7BEkXkJ9TyDTzKmX
       - name: Snow Native
         type: ability
         system:
@@ -5061,22 +5132,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -5106,7 +5183,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -5383,10 +5462,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.1ISmRjMrOmL2zdaq
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.4ephSIU5ADDJZNXz
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.4ephSIU5ADDJZNXz
       - name: Arctic Resilience
         type: ability
         img: systems/teriock/src/icons/abilities/arctic-resilience.webp
@@ -5407,15 +5486,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by arctic\_weather.</p>"
             proficient: ''
@@ -5473,9 +5555,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -5750,10 +5837,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.adtoVQ0QXkkFubnX
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.0tHo4yHcpWOeFmHw
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.0tHo4yHcpWOeFmHw
       - name: Agile
         type: ability
         img: systems/teriock/src/icons/abilities/agile.webp
@@ -5774,15 +5861,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             description: Always Active
             stationary: false
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You walk through difficult terrain at @L[Core:Movement
@@ -5842,9 +5932,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -6127,18 +6222,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.WrvQ3vZFTItud9sc
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ.HZ8OfNaGAf0OJ7Sm
+          !actors.items.effects!wolfman000000000.B5yHNORxbUkKJtWZ.HZ8OfNaGAf0OJ7Sm
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.B5yHNORxbUkKJtWZ
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!t3NjSYvnSroGerRV.B5yHNORxbUkKJtWZ'
+    _key: '!actors.items!wolfman000000000.B5yHNORxbUkKJtWZ'
   - name: Foot
     type: body
     _id: 1be7X2Tl1MIGt3sF
@@ -6175,10 +6270,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       specialRules: ''
       warded: false
       competence:
@@ -6224,10 +6321,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.1be7X2Tl1MIGt3sF.LwntE76DWV8LsMYk
+          !actors.items.effects!wolfman000000000.1be7X2Tl1MIGt3sF.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -6266,18 +6363,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.1be7X2Tl1MIGt3sF.70oASdJA4Iza7rlK
+          !actors.items.effects!wolfman000000000.1be7X2Tl1MIGt3sF.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!t3NjSYvnSroGerRV.1be7X2Tl1MIGt3sF'
+    _key: '!actors.items!wolfman000000000.1be7X2Tl1MIGt3sF'
   - name: Hand
     type: body
     _id: CPddq0fdMZRyL9Ym
@@ -6314,10 +6411,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       specialRules: ''
       warded: false
       competence:
@@ -6363,10 +6462,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.CPddq0fdMZRyL9Ym.FAUPXdLk1A1fD0k8
+          !actors.items.effects!wolfman000000000.CPddq0fdMZRyL9Ym.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -6405,10 +6504,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.CPddq0fdMZRyL9Ym.wGdRsURrcXoNZsur
+          !actors.items.effects!wolfman000000000.CPddq0fdMZRyL9Ym.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -6447,10 +6546,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.CPddq0fdMZRyL9Ym.1eIcI58ulvhlFYKA
+          !actors.items.effects!wolfman000000000.CPddq0fdMZRyL9Ym.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -6489,18 +6588,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.CPddq0fdMZRyL9Ym.r6jJPWhMBH4YpEKr
+          !actors.items.effects!wolfman000000000.CPddq0fdMZRyL9Ym.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!t3NjSYvnSroGerRV.CPddq0fdMZRyL9Ym'
+    _key: '!actors.items!wolfman000000000.CPddq0fdMZRyL9Ym'
   - name: Mouth
     type: body
     _id: qtt13HQt4uFqNOQw
@@ -6537,10 +6636,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       specialRules: ''
       warded: false
       competence:
@@ -6586,10 +6687,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.qtt13HQt4uFqNOQw.1keJAxX1vkfTL8Wl
+          !actors.items.effects!wolfman000000000.qtt13HQt4uFqNOQw.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -6628,10 +6729,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.qtt13HQt4uFqNOQw.cj70nNvBKfT3EQ8P
+          !actors.items.effects!wolfman000000000.qtt13HQt4uFqNOQw.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -6670,24 +6771,71 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!t3NjSYvnSroGerRV.qtt13HQt4uFqNOQw.43UnM2Fnf4EpPLFE
+          !actors.items.effects!wolfman000000000.qtt13HQt4uFqNOQw.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!t3NjSYvnSroGerRV.qtt13HQt4uFqNOQw'
+    _key: '!actors.items!wolfman000000000.qtt13HQt4uFqNOQw'
+system:
+  hp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 5
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '2'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: qtt13HQt4uFqNOQw
+    blocker: qtt13HQt4uFqNOQw
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.wolfman000000000
+_id: wolfman000000000
 effects: []
+folder: CSg33tJaMdQxbzeO
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!t3NjSYvnSroGerRV'
+_key: '!actors!wolfman000000000'

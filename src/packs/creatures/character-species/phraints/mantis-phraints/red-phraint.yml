@@ -1,36 +1,17 @@
 name: Red Phraint
-img: systems/teriock/src/icons/creatures/red-phraint.webp
 type: creature
-folder: aMM5G4yAFsh9TFl7
-_id: l9fZ0HU45HkkAGyk
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 3
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: bl32qENRVPJ7EN5y
-    blocker: ucPTPlE8a78Jfnb2
-  hp:
-    value: 6
-  mp:
-    value: 6
+img: systems/teriock/src/icons/creatures/red-phraint.webp
 prototypeToken:
   name: Red Phraint
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/red-phraint.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -158,7 +134,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.l9fZ0HU45HkkAGyk.Item.dd652R1lf0P3YCQ0
+        Compendium.teriock.creatures.Actor.redPhraint000000.Item.dd652R1lf0P3YCQ0
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -181,15 +157,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You are @L[Keyword:Incapable]{incapable} of @L[Core:Leveling
@@ -250,9 +229,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -527,10 +511,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.PW0UGhrvDVcLnRm7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.lL8fkaG9WipND9eW
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.lL8fkaG9WipND9eW
       - name: Cannot Become Warrior
         type: ability
         system:
@@ -550,15 +534,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You are @L[Keyword:Incapable]{incapable} of @L[Core:Leveling
@@ -620,9 +607,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -897,10 +889,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.Gk1oydx1AX3tvQGO
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.KiGokCuuzG7R8CnH
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.KiGokCuuzG7R8CnH
       - name: Cannot Swim
         type: ability
         system:
@@ -920,15 +912,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You have no @L[Core:Movement Speed]{swim speed}. This overrides
@@ -988,9 +983,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -1272,10 +1272,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.oh1pZbUbSjBtYXZ4
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.ba7AvjZHfJLdW54R
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.ba7AvjZHfJLdW54R
       - name: Irregularly Shaped
         type: ability
         system:
@@ -1295,15 +1295,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>@L[Category:Armor]{Armor} you wear must be custom-made to fit
@@ -1363,9 +1366,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: flaw
@@ -1640,10 +1648,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.2X2GTpjgMwRM4dXt
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.GnycBhgMjkb3MWhb
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.GnycBhgMjkb3MWhb
       - name: Leaping
         type: ability
         system:
@@ -1663,15 +1671,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: >-
               <p>You vertically leap at @L[Core:Movement Speed]{quarter speed}
@@ -1735,9 +1746,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2041,10 +2057,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.WJ91XuNoYd43DhFL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.55apKFI7s2W5FRX1
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.55apKFI7s2W5FRX1
       - name: Normal Intelligence
         type: ability
         system:
@@ -2064,15 +2080,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -2130,9 +2149,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2407,10 +2431,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.lKPHfbtn0kt9Acf9
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.EzUu7kZ6mBps0i5o
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.EzUu7kZ6mBps0i5o
       - name: Normal Movement
         type: ability
         system:
@@ -2430,15 +2454,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -2496,9 +2523,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -2773,10 +2805,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.fdDIsxKcCSXcJFZ5
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.5a4OE0H1z7hWXjyc
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.5a4OE0H1z7hWXjyc
       - name: Normal Perception
         type: ability
         system:
@@ -2796,15 +2828,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -2862,9 +2897,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -3139,10 +3179,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.KJufkT7i3CvUoUBM
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.KJufkT7i3CvUoUBM
       - name: Normal Sneak
         type: ability
         system:
@@ -3162,15 +3202,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -3228,9 +3271,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -3505,10 +3553,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.8do3Ktf8fzSYdqvO
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.8do3Ktf8fzSYdqvO
       - name: Normal Strength
         type: ability
         system:
@@ -3528,15 +3576,18 @@ items:
             - self
           elements: []
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           sustained: false
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           overview:
             base: ''
             proficient: ''
@@ -3594,9 +3645,14 @@ items:
           heightened: ''
           endCondition: ''
           requirements: ''
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           trigger: ''
           basic: false
           form: normal
@@ -3871,10 +3927,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.NiWh6C8yBUM6AEC8
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.NiWh6C8yBUM6AEC8
       - name: Brave
         type: ability
         system:
@@ -3915,22 +3971,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -3962,7 +4024,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -4246,18 +4310,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.h0WeUm6JdQoKUo3t
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0.EqE14IhAy9rdjHD3
+          !actors.items.effects!redPhraint000000.dd652R1lf0P3YCQ0.EqE14IhAy9rdjHD3
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.dd652R1lf0P3YCQ0
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!l9fZ0HU45HkkAGyk.dd652R1lf0P3YCQ0'
+    _key: '!actors.items!redPhraint000000.dd652R1lf0P3YCQ0'
   - name: Foot
     type: body
     _id: Gi38dBRuQv4lW85K
@@ -4293,10 +4357,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4343,10 +4409,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.Gi38dBRuQv4lW85K.LwntE76DWV8LsMYk
+          !actors.items.effects!redPhraint000000.Gi38dBRuQv4lW85K.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -4385,18 +4451,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.Gi38dBRuQv4lW85K.70oASdJA4Iza7rlK
+          !actors.items.effects!redPhraint000000.Gi38dBRuQv4lW85K.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!l9fZ0HU45HkkAGyk.Gi38dBRuQv4lW85K'
+    _key: '!actors.items!redPhraint000000.Gi38dBRuQv4lW85K'
   - name: Mouth
     type: body
     _id: OtX8ojVnoTNiKiWF
@@ -4432,10 +4498,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4482,10 +4550,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.OtX8ojVnoTNiKiWF.1keJAxX1vkfTL8Wl
+          !actors.items.effects!redPhraint000000.OtX8ojVnoTNiKiWF.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -4524,10 +4592,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.OtX8ojVnoTNiKiWF.cj70nNvBKfT3EQ8P
+          !actors.items.effects!redPhraint000000.OtX8ojVnoTNiKiWF.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -4566,18 +4634,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.OtX8ojVnoTNiKiWF.43UnM2Fnf4EpPLFE
+          !actors.items.effects!redPhraint000000.OtX8ojVnoTNiKiWF.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!l9fZ0HU45HkkAGyk.OtX8ojVnoTNiKiWF'
+    _key: '!actors.items!redPhraint000000.OtX8ojVnoTNiKiWF'
   - name: Hand
     type: body
     _id: bl32qENRVPJ7EN5y
@@ -4613,10 +4681,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4663,10 +4733,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.bl32qENRVPJ7EN5y.FAUPXdLk1A1fD0k8
+          !actors.items.effects!redPhraint000000.bl32qENRVPJ7EN5y.FAUPXdLk1A1fD0k8
       - name: Handy
         type: property
         system:
@@ -4705,10 +4775,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.bl32qENRVPJ7EN5y.wGdRsURrcXoNZsur
+          !actors.items.effects!redPhraint000000.bl32qENRVPJ7EN5y.wGdRsURrcXoNZsur
       - name: Prehensile
         type: property
         system:
@@ -4747,10 +4817,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.McOW5492KecCSUDo
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.bl32qENRVPJ7EN5y.1eIcI58ulvhlFYKA
+          !actors.items.effects!redPhraint000000.bl32qENRVPJ7EN5y.1eIcI58ulvhlFYKA
       - name: Small
         type: property
         system:
@@ -4789,18 +4859,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!l9fZ0HU45HkkAGyk.bl32qENRVPJ7EN5y.r6jJPWhMBH4YpEKr
+          !actors.items.effects!redPhraint000000.bl32qENRVPJ7EN5y.r6jJPWhMBH4YpEKr
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!l9fZ0HU45HkkAGyk.bl32qENRVPJ7EN5y'
+    _key: '!actors.items!redPhraint000000.bl32qENRVPJ7EN5y'
   - name: Carapace
     type: body
     _id: ucPTPlE8a78Jfnb2
@@ -4836,10 +4906,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -4852,15 +4924,62 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.w3dbwE3zxTf8IoIu
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!l9fZ0HU45HkkAGyk.ucPTPlE8a78Jfnb2'
+    _key: '!actors.items!redPhraint000000.ucPTPlE8a78Jfnb2'
+system:
+  hp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '3'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: bl32qENRVPJ7EN5y
+    blocker: ucPTPlE8a78Jfnb2
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.redPhraint000000
+_id: redPhraint000000
 effects: []
+folder: aMM5G4yAFsh9TFl7
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!l9fZ0HU45HkkAGyk'
+_key: '!actors!redPhraint000000'

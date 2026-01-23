@@ -1,36 +1,17 @@
 name: Windrunner
-img: systems/teriock/src/icons/creatures/windrunner.webp
 type: creature
-folder: sF6kdkkaGPcMD9uV
-_id: EJZ49UhpArJqnT6s
-system:
-  scaling:
-    lvl: 1
-    brScale: true
-  size:
-    number:
-      saved: 3
-      raw: 3
-  weight:
-    self:
-      saved: pow(3 + @size, 3)
-      raw: pow(3 + @size, 3)
-  combat:
-    attackPenalty: 0
-    hasReaction: true
-  wielding:
-    attacker: ORqGNQEdzC2mEae1
-    blocker: EaPrLAVsxHyNObET
-  hp:
-    value: 6
-  mp:
-    value: 5
+img: systems/teriock/src/icons/creatures/windrunner.webp
 prototypeToken:
   name: Windrunner
-  displayName: 0
-  actorLink: false
-  width: 1
-  height: 1
+  ring:
+    enabled: true
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/windrunner.webp
     anchorX: 0.5
@@ -43,10 +24,14 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
+  width: 1
+  height: 1
+  displayName: 30
+  actorLink: false
   lockRotation: false
   rotation: 0
   alpha: 1
-  displayBars: 0
+  displayBars: 20
   bar1:
     attribute: hp
   bar2:
@@ -86,15 +71,6 @@ prototypeToken:
   detectionModes: []
   occludable:
     radius: 0
-  ring:
-    enabled: true
-    colors:
-      ring: null
-      background: null
-    effects: 1
-    subject:
-      scale: 1
-      texture: null
   turnMarker:
     mode: 1
     animation: null
@@ -156,7 +132,7 @@ items:
       competence:
         raw: 1
       _ref: >-
-        Compendium.teriock.creatures.Actor.EJZ49UhpArJqnT6s.Item.zNPb4BvaKQ5gXHTQ
+        Compendium.teriock.creatures.Actor.windrunner000000.Item.zNPb4BvaKQ5gXHTQ
       mpIncrease: ''
       transformationLevel: null
     effects:
@@ -200,13 +176,14 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes:
             - movement
           elderSorcery: false
@@ -214,9 +191,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -246,7 +228,9 @@ items:
             raw: 0
           powerSources:
             - magical
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -538,10 +522,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.DebtP4uyZnZ4u8nL
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ.0mQFs0Agsd3LlZGm
+          !actors.items.effects!windrunner000000.zNPb4BvaKQ5gXHTQ.0mQFs0Agsd3LlZGm
       - name: Low Intelligence
         type: ability
         system:
@@ -582,22 +566,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: flaw
           gifted:
@@ -627,7 +617,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -904,10 +896,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.nqpe5LzoIB6hJY7g
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ.fzjCrX99Lnvu33nH
+          !actors.items.effects!windrunner000000.zNPb4BvaKQ5gXHTQ.fzjCrX99Lnvu33nH
       - name: Normal Perception
         type: ability
         system:
@@ -948,22 +940,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -993,7 +991,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1270,10 +1270,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.AkQhXvIDe7w1ku5m
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ.iYpAokJrIuszQJiS
+          !actors.items.effects!windrunner000000.zNPb4BvaKQ5gXHTQ.iYpAokJrIuszQJiS
       - name: Normal Sneak
         type: ability
         system:
@@ -1314,22 +1314,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1359,7 +1365,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -1636,10 +1644,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ.0Fy2OuZyIQCj3CRs
+          !actors.items.effects!windrunner000000.zNPb4BvaKQ5gXHTQ.0Fy2OuZyIQCj3CRs
       - name: Normal Strength
         type: ability
         system:
@@ -1680,22 +1688,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -1725,7 +1739,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2002,10 +2018,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.9V78GDePVuQQYTDd
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ.LawZrNLau4U48lNx
+          !actors.items.effects!windrunner000000.zNPb4BvaKQ5gXHTQ.LawZrNLau4U48lNx
       - name: Speed
         type: ability
         system:
@@ -2046,22 +2062,28 @@ items:
             parent: null
             package: null
           duration:
-            unit: noLimit
-            quantity: 0
+            unit: unlimited
             conditions:
               present: []
               absent: []
             stationary: false
             description: Always Active
+            raw: '0'
+            dawn: false
           effectTypes: []
           elderSorcery: false
           elderSorceryIncant: ''
           elements: []
           endCondition: ''
           executionTime: passive
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2091,7 +2113,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: ''
@@ -2368,10 +2392,10 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.mRO09tGwZ4fL665M
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ.2ghUkPm1oCxTf7Hs
+          !actors.items.effects!windrunner000000.zNPb4BvaKQ5gXHTQ.2ghUkPm1oCxTf7Hs
       - name: Triumphant Awaken
         type: ability
         system:
@@ -2413,12 +2437,13 @@ items:
             package: null
           duration:
             unit: instant
-            quantity: 0
             conditions:
               present: []
               absent: []
             stationary: false
             description: Instant
+            raw: '0'
+            dawn: false
           effectTypes:
             - awakening
           elderSorcery: false
@@ -2426,9 +2451,14 @@ items:
           elements: []
           endCondition: ''
           executionTime: r0
-          expansion: null
-          expansionRange: null
-          expansionSaveAttribute: mov
+          expansion:
+            type: null
+            range:
+              raw: ''
+              unit: self
+            featSaveAttribute: mov
+            cap:
+              raw: ''
           featSaveAttribute: mov
           form: normal
           gifted:
@@ -2458,7 +2488,9 @@ items:
             raw: 0
           powerSources:
             - martial
-          range: Self.
+          range:
+            raw: ''
+            unit: self
           requirements: ''
           results:
             hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
@@ -2736,18 +2768,18 @@ items:
           compendiumSource: Compendium.teriock.abilities.Item.0Gk7RcHv1wbRg9JF
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ.fsEpf2AC287sc3Mz
+          !actors.items.effects!windrunner000000.zNPb4BvaKQ5gXHTQ.fsEpf2AC287sc3Mz
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.species.Item.zNPb4BvaKQ5gXHTQ
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EJZ49UhpArJqnT6s.zNPb4BvaKQ5gXHTQ'
+    _key: '!actors.items!windrunner000000.zNPb4BvaKQ5gXHTQ'
   - name: Mouth
     type: body
     _id: AXKnjs1JVfucHqxq
@@ -2783,10 +2815,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -2833,10 +2867,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.AXKnjs1JVfucHqxq.1keJAxX1vkfTL8Wl
+          !actors.items.effects!windrunner000000.AXKnjs1JVfucHqxq.1keJAxX1vkfTL8Wl
       - name: Biting
         type: property
         system:
@@ -2875,10 +2909,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.bl3MCaFDuXRMiF9w
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.AXKnjs1JVfucHqxq.cj70nNvBKfT3EQ8P
+          !actors.items.effects!windrunner000000.AXKnjs1JVfucHqxq.cj70nNvBKfT3EQ8P
       - name: Small
         type: property
         system:
@@ -2917,18 +2951,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.AXKnjs1JVfucHqxq.43UnM2Fnf4EpPLFE
+          !actors.items.effects!windrunner000000.AXKnjs1JVfucHqxq.43UnM2Fnf4EpPLFE
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EJZ49UhpArJqnT6s.AXKnjs1JVfucHqxq'
+    _key: '!actors.items!windrunner000000.AXKnjs1JVfucHqxq'
   - name: Sharp Claw
     type: body
     _id: EaPrLAVsxHyNObET
@@ -2964,10 +2998,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3013,10 +3049,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.B7bnogygj6AgmAq7
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.EaPrLAVsxHyNObET.Wez1JXmo9LjBU1oA
+          !actors.items.effects!windrunner000000.EaPrLAVsxHyNObET.Wez1JXmo9LjBU1oA
       - name: Weapon
         type: property
         system:
@@ -3055,18 +3091,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.EaPrLAVsxHyNObET.6CVqlpk3uf4VDbFY
+          !actors.items.effects!windrunner000000.EaPrLAVsxHyNObET.6CVqlpk3uf4VDbFY
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.Je9FxlIBfdWLluWN
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EJZ49UhpArJqnT6s.EaPrLAVsxHyNObET'
+    _key: '!actors.items!windrunner000000.EaPrLAVsxHyNObET'
   - name: Foot
     type: body
     _id: ORqGNQEdzC2mEae1
@@ -3102,10 +3138,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3152,10 +3190,10 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.ORqGNQEdzC2mEae1.LwntE76DWV8LsMYk
+          !actors.items.effects!windrunner000000.ORqGNQEdzC2mEae1.LwntE76DWV8LsMYk
       - name: Small
         type: property
         system:
@@ -3194,18 +3232,18 @@ items:
           compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.1
+          systemVersion: 0.9.8
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!EJZ49UhpArJqnT6s.ORqGNQEdzC2mEae1.70oASdJA4Iza7rlK
+          !actors.items.effects!windrunner000000.ORqGNQEdzC2mEae1.70oASdJA4Iza7rlK
     flags: {}
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EJZ49UhpArJqnT6s.ORqGNQEdzC2mEae1'
+    _key: '!actors.items!windrunner000000.ORqGNQEdzC2mEae1'
   - name: Hide
     type: body
     _id: muC2A5GcAWhQ052w
@@ -3241,10 +3279,12 @@ items:
       range:
         long:
           raw: ''
+          unit: self
         melee: true
         ranged: false
         short:
           raw: ''
+          unit: self
       warded: false
       competence:
         raw: 0
@@ -3257,15 +3297,62 @@ items:
       compendiumSource: Compendium.teriock.bodyParts.Item.m9OGOvsxZeh87im1
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!EJZ49UhpArJqnT6s.muC2A5GcAWhQ052w'
+    _key: '!actors.items!windrunner000000.muC2A5GcAWhQ052w'
+system:
+  hp:
+    value: 6
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  mp:
+    value: 5
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+  size:
+    number:
+      raw: '3'
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    lvl: 1
+    brScale: true
+  combat:
+    attackPenalty: 0
+    hasReaction: true
+  initiative: 1d20 + @mov
+  wielding:
+    attacker: ORqGNQEdzC2mEae1
+    blocker: EaPrLAVsxHyNObET
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  transformation:
+    primary: null
+  notes: ''
+  magic:
+    maxRotators:
+      raw: ''
+  detection:
+    hiding:
+      raw: '@snk.pas'
+    perceiving:
+      raw: '@per.pas'
+  _ref: Compendium.teriock.creatures.Actor.windrunner000000
+_id: windrunner000000
 effects: []
+folder: sF6kdkkaGPcMD9uV
 flags: {}
 _stats:
+  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.8
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
-_key: '!actors!EJZ49UhpArJqnT6s'
+_key: '!actors!windrunner000000'
