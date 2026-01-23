@@ -1,8 +1,14 @@
 <div class="ab-bar">
   {{formBox
-    (formInput systemFields.range value=system.range disabled=(not editable))
+    (concat
+      "<span style='flex: auto;' data-tooltip='Range' data-path='system.range' data-action='updateUnit'>"
+      (ifThen (eq system.range.unitType "finite") system.range.formula system.range.text)
+      "</span>"
+    )
+    action="updateUnit"
+    dataset=(object path="system.range")
     icon=(lookup TERIOCK.display.icons "range")
-    label="ft"
+    label=(ifThen (eq system.range.unitType "finite") system.range.symbol "")
     include=(or
       (eq system.delivery.base "area")
       (eq system.delivery.base "missile")
@@ -18,9 +24,10 @@
     classes=(ifThen editable "target-box" "")
   }}
   {{formBox
-    system.duration.description
+    system.duration.text
     icon=(lookup TERIOCK.display.icons "duration")
-    action=(ifThen editable "setDuration" "")
+    action=(ifThen editable "updateUnit" "")
     tooltip="Duration"
+    dataset=(object path="system.duration")
   }}
 </div>

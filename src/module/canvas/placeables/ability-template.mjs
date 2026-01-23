@@ -23,7 +23,7 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
       return null;
     }
     let distance = TeriockRoll.meanValue(
-      execution.source.system.range,
+      execution.source.system.range.formula,
       execution.rollData,
     );
     if (source && execution.source.system.isAoe) {
@@ -193,7 +193,7 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
         reject,
         rotate: this._onRotatePlacement.bind(this),
       };
-      if (this.execution.source.system.expansion === "detonate") {
+      if (this.execution.source.system.expansion.type === "detonate") {
         this.#events.move = this._onMovePlacement.bind(this);
         canvas.stage.on("mousemove", this.#events.move);
       }

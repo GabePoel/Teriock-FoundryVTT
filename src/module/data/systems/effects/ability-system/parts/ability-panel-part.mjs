@@ -1,3 +1,4 @@
+import { formulaExists } from "../../../../../helpers/formula.mjs";
 import { elementClass } from "../../../../../helpers/html.mjs";
 
 /**
@@ -60,7 +61,7 @@ export default (Base) => {
             label: "Targeting",
             wrappers: [
               ["missile", "cone", "sight", "aura"].includes(this.delivery.base)
-                ? this.range + " ft"
+                ? this.range.abbreviation
                 : "",
               Array.from(
                 this.targets.map((target) => ref.targets[target]),
@@ -71,18 +72,18 @@ export default (Base) => {
           {
             icon: "fa-expand",
             label: "Expansion",
-            wrappers: [
-              ["detonate", "ripple"].includes(this.expansion)
-                ? ref.attribute[this.expansionSaveAttribute]
-                : "",
-              ref.expansion[this.expansion] || "",
-              this.expansionRange?.includes(",")
-                ? this.expansionRange.split(",")[0]
-                : this.expansionRange || "",
-              this.expansionRange?.includes(",")
-                ? this.expansionRange.split(",")[1]
-                : this.expansionRange || "",
-            ],
+            wrappers: this.expansion.type
+              ? [
+                  ["detonate", "ripple"].includes(this.expansion.type)
+                    ? ref.attribute[this.expansion.featSaveAttribute]
+                    : "",
+                  ref.expansion[this.expansion.type] || "",
+                  this.expansion.range.abbreviation,
+                  formulaExists(this.expansion.cap.raw)
+                    ? this.expansion.cap.raw + " extra executions"
+                    : "",
+                ]
+              : [],
           },
           {
             icon: "fa-coins",

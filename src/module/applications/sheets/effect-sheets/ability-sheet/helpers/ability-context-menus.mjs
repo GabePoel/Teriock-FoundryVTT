@@ -304,10 +304,10 @@ export default function abilityContextMenus(ability) {
           }),
       },
     ],
-    expansion: quickMenu("expansion", "system.expansion", true),
+    expansion: quickMenu("expansion", "system.expansion.type", true),
     expansionSaveAttribute: quickMenu(
       "featSaveAttribute",
-      "system.expansionSaveAttribute",
+      "system.expansion.featSaveAttribute",
     ),
 
     attributeImprovement: Object.keys(TERIOCK.index.statAttributes).map(

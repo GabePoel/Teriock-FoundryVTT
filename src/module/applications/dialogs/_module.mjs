@@ -6,7 +6,6 @@ export * from "./select-token-dialog.mjs";
 export { default as boostDialog } from "./boost-dialog.mjs";
 export { default as changeSizeDialog } from "./change-size-dialog.mjs";
 export { default as deathBagDialog } from "./death-bag-dialog.mjs";
-export { default as durationDialog } from "./duration-dialog.mjs";
 export { default as healDialog } from "./heal-dialog.mjs";
 export { default as revitalizeDialog } from "./revitalize-dialog.mjs";
 export { default as hotbarDropDialog } from "./hotbar-drop-dialog.mjs";

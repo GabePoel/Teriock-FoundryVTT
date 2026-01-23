@@ -30,7 +30,7 @@ export default class EvaluationField extends EmbeddedDataField {
       if (typeof value !== "object") {
         value = { raw: value };
       }
-      if (typeof value.saved !== "undefined") {
+      if (typeof value?.saved !== "undefined" && value?.saved !== null) {
         value.raw = value.saved;
         delete value.saved;
       }

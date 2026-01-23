@@ -309,7 +309,7 @@ export default function AbilityExecutionChatPart(Base) {
                 ),
               },
               movement: this.source.system.duration.stationary,
-              dawn: this.source.system.duration.unit === "untilDawn",
+              dawn: this.source.system.duration.dawn,
               sustained: this.source.system.sustained,
               description: this.source.system.endCondition,
             },

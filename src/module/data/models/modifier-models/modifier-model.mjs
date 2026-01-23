@@ -10,7 +10,6 @@ const { fields } = foundry.data;
  * @mixes UsableData
  * @extends EvaluationModel
  * @implements {Teriock.Models.ModifierModelInterface}
- * @property {number} score - The modifier score.
  */
 export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
   /** @inheritDoc */

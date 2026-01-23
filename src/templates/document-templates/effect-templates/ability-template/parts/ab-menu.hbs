@@ -41,7 +41,7 @@
     </div>
     <div class="ab-menu-bar">
       <div class="tgrid ab-button-grid">
-        {{#if (not (exists system.expansion))}}
+        {{#if (not (exists system.expansion.type))}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-expansion-button"
               {{#if (not editable)}}
@@ -50,6 +50,18 @@
             >
               {{{TERIOCK.display.icons.add}}}
               Expansion
+            </button>
+          </div>
+        {{/if}}
+        {{#if (and (exists system.expansion.type) (not (exists system.expansionCap.raw)))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-expansion-cap-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Expansion Cap
             </button>
           </div>
         {{/if}}

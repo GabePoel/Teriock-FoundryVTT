@@ -403,7 +403,7 @@ export async function addTrackersToExecution(execution, key, uuids) {
           cards: [],
         };
         for (const uuid of uuids) {
-          effectObject.changes.push({
+          effectObject.system.impacts.changes.push({
             key: `system.conditionInformation.${key}.trackers`,
             value: uuid,
             mode: 2,

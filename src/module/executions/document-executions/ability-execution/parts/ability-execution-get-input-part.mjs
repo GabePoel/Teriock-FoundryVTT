@@ -182,7 +182,8 @@ export default function AbilityExecutionGetInputPart(Base) {
         if (
           this.source.system.isAoe &&
           !this.flags.noTemplate &&
-          game.settings.get("teriock", "placeTemplateOnAbilityUse")
+          game.settings.get("teriock", "placeTemplateOnAbilityUse") &&
+          this.actor
         ) {
           let placeTemplate;
           let distance = Number(this.source.system.range);
@@ -194,7 +195,14 @@ export default function AbilityExecutionGetInputPart(Base) {
             content: dedent(`
             <div class="standard-form form-group">
               <label for="${rangeId}">Distance <span class="units">(ft)</span></label>
-              <input id="${rangeId}" name='range' type='number' min='0' step='1' value='${this.source.system.range}'>
+              <input 
+                id="${rangeId}" 
+                name='range' 
+                type='number'
+                min='0' 
+                step='1' 
+                value='${this.source.system.range.currentValue}'
+              >
             </div>
             <div class="standard-form form-group">
               <label for="${tokenId}">Add Token Radius</label>

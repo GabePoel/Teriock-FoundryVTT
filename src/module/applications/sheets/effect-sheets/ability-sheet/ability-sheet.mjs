@@ -1,6 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
-import { durationDialog } from "../../../dialogs/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import abilityContextMenus from "./helpers/ability-context-menus.mjs";
@@ -25,9 +24,6 @@ export default class AbilitySheet extends mix(
    */
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
-    actions: {
-      setDuration: this._onSetDuration,
-    },
     window: {
       icon: `fa-solid fa-${documentOptions.ability.icon}`,
     },
@@ -48,17 +44,6 @@ export default class AbilitySheet extends mix(
       ],
     },
   };
-
-  /**
-   * Set the duration for this ability.
-   * @returns {Promise<void>}
-   */
-  static async _onSetDuration() {
-    if (!this.isEditable) {
-      return;
-    }
-    await durationDialog(this.document);
-  }
 
   /**
    * Activates context menus for various ability components.
@@ -152,6 +137,12 @@ export default class AbilitySheet extends mix(
     }
 
     const staticUpdates = {
+      ".ab-attribute-improvement-button": {
+        "system.improvements.attributeImprovement.attribute": "int",
+      },
+      ".ab-break-cost-button": {
+        "system.costs.break": "shatter",
+      },
       ".ab-es-incant-button": {
         "system.elderSorceryIncant": "Incant.",
         "system.elderSorcery": true,
@@ -159,12 +150,18 @@ export default class AbilitySheet extends mix(
       ".ab-expansion-button": {
         "system.expansion": "detonate",
       },
-      ".ab-mana-cost-button": {
-        "system.costs.mp": {
-          type: "static",
+      ".ab-expansion-cap-button": {
+        "system.expansionCap.raw": "1",
+      },
+      ".ab-feat-save-improvement-button": {
+        "system.improvements.featSaveImprovement.attribute": "int",
+      },
+      ".ab-gold-cost-button": {
+        "system.costs.gp": {
+          type: "formula",
           value: {
-            static: 1,
-            formula: "",
+            static: 0,
+            formula: "1d100",
             variable: "",
           },
         },
@@ -179,24 +176,15 @@ export default class AbilitySheet extends mix(
           },
         },
       },
-      ".ab-gold-cost-button": {
-        "system.costs.gp": {
-          type: "formula",
+      ".ab-mana-cost-button": {
+        "system.costs.mp": {
+          type: "static",
           value: {
-            static: 0,
-            formula: "1d100",
+            static: 1,
+            formula: "",
             variable: "",
           },
         },
-      },
-      ".ab-break-cost-button": {
-        "system.costs.break": "shatter",
-      },
-      ".ab-attribute-improvement-button": {
-        "system.improvements.attributeImprovement.attribute": "int",
-      },
-      ".ab-feat-save-improvement-button": {
-        "system.improvements.featSaveImprovement.attribute": "int",
       },
     };
 
@@ -210,43 +198,9 @@ export default class AbilitySheet extends mix(
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) {
-      return;
-    }
-
+    if (!this.isEditable) return;
     this._activateContextMenus();
     this._activateTags();
-
-    /** @type {NodeListOf<HTMLInputElement|HTMLSelectElement>} */
-    const elements = this.element.querySelectorAll(".change-box-entry");
-
-    elements.forEach((entry) => {
-      entry.addEventListener("change", async () => {
-        const index = parseInt(entry.dataset.index, 10);
-        const key = entry.dataset.key;
-        const application = entry.dataset.application;
-        const updateString = `system.impacts.${application}.changes`;
-        let value = entry.value;
-        if (!isNaN(Number(value)) && value !== "") {
-          const intValue = parseInt(value, 10);
-          if (!isNaN(intValue) && intValue.toString() === value.trim()) {
-            value = intValue;
-          }
-        }
-        if (
-          typeof value === "string" &&
-          value.trim() !== "" &&
-          !isNaN(Number(value))
-        ) {
-          value = Number(value);
-        }
-        const changes = this.document.system.impacts[application].changes;
-        if (index >= 0 && index < changes.length) {
-          changes[index][key] = value;
-          await this.document.update({ [updateString]: changes });
-        }
-      });
-    });
   }
 
   /** @inheritDoc */

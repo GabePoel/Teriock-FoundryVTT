@@ -1,0 +1,286 @@
+import { makeIconClass } from "../../../helpers/utils.mjs";
+import EvaluationModel from "../evaluation-model.mjs";
+
+const { fields } = foundry.data;
+const { DialogV2 } = foundry.applications.api;
+
+class UnitDialog extends DialogV2 {
+  /** @type {UnitModel} */
+  unitModel;
+
+  /**
+   * @param {HTMLInputElement} rawInput
+   * @param {string} value
+   * @private
+   */
+  #updateInputs(rawInput, value) {
+    rawInput.disabled = !this.unitModel.constructor.finiteChoiceEntries
+      .map((e) => e.id)
+      .includes(value);
+  }
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if (this.unitModel) {
+      const unitInput =
+        /** @type {HTMLInputElement} */ this.element.querySelector(
+          `[name="${this.unitModel.schema.fieldPath}.unit"]`,
+        );
+      const rawInput =
+        /** @type {HTMLInputElement} */ this.element.querySelector(
+          `[name="${this.unitModel.schema.fieldPath}.raw"]`,
+        );
+      this.#updateInputs(rawInput, unitInput.value);
+      unitInput.addEventListener("change", (e) => {
+        this.#updateInputs(rawInput, e.target.value);
+      });
+    }
+  }
+}
+
+//noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
+/**
+ * @implements {Teriock.Models.UnitModelInterface}
+ */
+export default class UnitModel extends EvaluationModel {
+  /** @returns {Teriock.Units.UnitEntry[]} */
+  static get choiceEntries() {
+    return [
+      ...this.zeroChoiceEntries,
+      ...this.finiteChoiceEntries,
+      ...this.infiniteChoiceEntries,
+    ];
+  }
+
+  /**
+   * Valid unit choices.
+   * @returns {Record<string, string>}
+   */
+  static get choices() {
+    return Object.fromEntries(this.choiceEntries.map((e) => [e.id, e.label]));
+  }
+
+  /** @returns {Teriock.Units.UnitEntry[]} */
+  static get finiteChoiceEntries() {
+    return [];
+  }
+
+  /**
+   * @inheritDoc
+   * @returns {Teriock.Units.UnitEntry[]}
+   */
+  static get infiniteChoiceEntries() {
+    return [
+      {
+        id: "unlimited",
+        label: "No Limit",
+      },
+    ];
+  }
+
+  /** @returns {Teriock.Units.UnitEntry[]} */
+  static get zeroChoiceEntries() {
+    return [];
+  }
+
+  /** @inheritDoc */
+  static defineSchema() {
+    const schema = super.defineSchema();
+    Object.assign(schema, {
+      unit: new fields.StringField({
+        label: "Unit",
+        required: false,
+        initial: this.choiceEntries[0].id,
+        choices: this.choices,
+        hint: "The unit of the this value.",
+      }),
+    });
+    return schema;
+  }
+
+  /**
+   * A text abbreviation of this.
+   * @returns {string}
+   */
+  get abbreviation() {
+    if (this.unitType === "finite") {
+      return `${this.formula} ${this.symbol}`;
+    }
+    return this.text;
+  }
+
+  /** @inheritDoc */
+  get currentValue() {
+    return this.#convert(super.currentValue);
+  }
+
+  /**
+   * Form group representing this unit.
+   * @returns {HTMLDivElement}
+   */
+  get formGroup() {
+    const group = document.createElement("div");
+    group.classList.add("teriock-form-container");
+    group.append(
+      ...[
+        ...this._formGroups(["unit"]),
+        this.schema.fields.raw.toFormGroup(
+          {
+            rootId: foundry.utils.randomID(),
+            label: "Quantity",
+            hint: "How many of the specified unit.",
+          },
+          { name: `${this.schema.fieldPath}.raw`, value: this.raw },
+        ),
+      ],
+    );
+    return group;
+  }
+
+  /**
+   * An icon for this unit model.
+   * @returns {string}
+   */
+  get icon() {
+    return "pen-to-square";
+  }
+
+  /**
+   * An abbreviation for the unit.
+   * @returns {string}
+   */
+  get symbol() {
+    return (
+      this.constructor.choiceEntries.find((e) => e.id === this.unit).symbol ||
+      this.unit
+    );
+  }
+
+  /** @inheritDoc */
+  get text() {
+    if (this.unitType === "finite") {
+      const entry = this.constructor.finiteChoiceEntries.find(
+        (e) => e.id === this.unit,
+      );
+      return `${this.raw} ${this.raw === "1" ? entry.label : entry.plural}`;
+    } else {
+      return this.constructor.choices[this.unit];
+    }
+  }
+
+  /**
+   * What type of unit this is.
+   * @returns {"zero" | "finite" | "infinite"}
+   */
+  get unitType() {
+    if (
+      this.constructor.zeroChoiceEntries.map((e) => e.id).includes(this.unit)
+    ) {
+      return "zero";
+    } else if (
+      this.constructor.finiteChoiceEntries.map((e) => e.id).includes(this.unit)
+    ) {
+      return "finite";
+    } else {
+      return "infinite";
+    }
+  }
+
+  /** @inheritDoc */
+  get value() {
+    return this.#convert(super.value);
+  }
+
+  /**
+   * Convert to the base numerical unit.
+   * @param {number} value
+   * @returns {number}
+   */
+  #convert(value) {
+    const unitType = this.unitType;
+    if (unitType === "zero") return 0;
+    if (unitType === "infinite") return Infinity;
+    else {
+      const conversion =
+        this.constructor.finiteChoiceEntries.find((e) => e.id === this.unit)
+          .conversion || 1;
+      return value * conversion;
+    }
+  }
+
+  /**
+   * Make form groups from specified field paths.
+   * @param {string[]} paths
+   */
+  _formGroups(paths) {
+    return paths.map((p) =>
+      this.schema.getField(p).toFormGroup(
+        { rootId: foundry.utils.randomID() },
+        {
+          name: `${this.schema.fieldPath}.${p}`,
+          value: foundry.utils.getProperty(this, p),
+        },
+      ),
+    );
+  }
+
+  /**
+   * Convert the current to a given unit.
+   * @param {string} unit
+   * @returns {number}
+   */
+  convertTo(unit) {
+    const unitType = this.unitType;
+    if (unitType !== "finite") return this.currentValue;
+    return (
+      (this.constructor.finiteChoiceEntries.find((e) => e.id === unit)
+        .conversion || 1) * this.currentValue
+    );
+  }
+
+  /**
+   * Dialog to update this unit.
+   * @returns {Promise<void>}
+   */
+  async updateDialog() {
+    const group = this.formGroup;
+    const document = this.document;
+    const dialog = new UnitDialog({
+      buttons: [
+        {
+          action: "update",
+          label: "Update",
+          default: true,
+          icon: makeIconClass("check", "button"),
+          /**
+           * @param {PointerEvent} _event
+           * @param {HTMLButtonElement} button
+           */
+          callback: async function (_event, button) {
+            const namedElements = /** @type {HTMLInputElement[]} */ Array.from(
+              button.form.elements,
+            ).filter((el) => el.hasAttribute("name"));
+            const updateData = Object.fromEntries(
+              namedElements.map((el) => [
+                el.getAttribute("name"),
+                el.type === "checkbox" ? el.checked : el.value,
+              ]),
+            );
+            await document.update(updateData);
+          },
+        },
+      ],
+      content: group.outerHTML,
+      position: {
+        width: 500,
+      },
+      window: {
+        title: `Update ${this.schema.label || "Unit"}`,
+        icon: makeIconClass(this.icon, "title"),
+      },
+    });
+    dialog.unitModel = this;
+    await dialog.render(true);
+  }
+}

@@ -18,14 +18,6 @@ export default (Base) => {
         const twoHandedDamageString = this.hasTwoHandedAttack
           ? suffix(this.damage.twoHanded.typed, "damage")
           : "";
-        let rangeString = "";
-        if (this.range.long.nonZero) {
-          rangeString += this.range.long.formula;
-          if (this.range.short.nonZero) {
-            rangeString = this.range.short.formula + " / " + rangeString;
-          }
-          rangeString += " ft";
-        }
         const bars = [
           {
             icon:
@@ -36,7 +28,7 @@ export default (Base) => {
               TERIOCK.options.equipment.powerLevel[this.powerLevel].name,
               this.shattered ? "Shattered" : "",
               this.equipmentType,
-              rangeString,
+              this.range.description,
             ],
           },
           {

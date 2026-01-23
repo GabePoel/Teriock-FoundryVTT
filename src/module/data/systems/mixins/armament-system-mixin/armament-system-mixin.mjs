@@ -3,7 +3,11 @@ import { ArmamentExecution } from "../../../../executions/document-executions/_m
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getRollIcon } from "../../../../helpers/utils.mjs";
 import { EvaluationField, TextField } from "../../../fields/_module.mjs";
-import { DamageModel, DefenseModel } from "../../../models/_module.mjs";
+import {
+  DamageModel,
+  DefenseModel,
+  RangeModel,
+} from "../../../models/_module.mjs";
 import { PiercingSystemMixin } from "../_module.mjs";
 
 const { fields } = foundry.data;
@@ -80,7 +84,7 @@ export default function ArmamentSystemMixin(Base) {
             label: "Notes",
           }),
           range: new fields.SchemaField({
-            long: new EvaluationField(),
+            long: new EvaluationField({ model: RangeModel, label: "Range" }),
             melee: new fields.BooleanField({
               initial: true,
               label: "Melee",
@@ -89,7 +93,10 @@ export default function ArmamentSystemMixin(Base) {
               initial: false,
               label: "Ranged",
             }),
-            short: new EvaluationField(),
+            short: new EvaluationField({
+              model: RangeModel,
+              label: "Short Range",
+            }),
           }),
           specialRules: new TextField({
             initial: "",
@@ -209,6 +216,8 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
+
+        // Properties
         const properties =
           /** @type {TeriockProperty[]} */ this.parent.effects.filter(
             (e) => e.type === "property",
@@ -216,6 +225,8 @@ export default function ArmamentSystemMixin(Base) {
         this.props = new Set(
           Array.from(properties).map((p) => toCamelCase(p.name)),
         );
+
+        // Damage
         for (const p of properties.filter((p) => p.active)) {
           if (p.system.damageType) {
             this.damage.types.add(p.system.damageType.toLowerCase());
@@ -225,7 +236,17 @@ export default function ArmamentSystemMixin(Base) {
           this.damage.types.add("magic");
         }
         this.damage.base.addTypes(this.damage.types);
+
+        // Tags
         this.warded = false;
+
+        // Range
+        this.range.description = "";
+        this.range.melee =
+          this.range.long.unit === "melee" || this.range.short.unit === "melee";
+        this.range.ranged = this.range.long.unitType !== "zero";
+
+        // Macros
         this.hookedMacros =
           /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
         for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
@@ -236,6 +257,26 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
+
+        // Range
+        if (
+          this.range.long.unitType === "zero" ||
+          (this.range.long.unitType === "finite" &&
+            this.range.short.unitType === "finite")
+        ) {
+          this.range.short.unit = this.range.long.unit;
+        }
+        this.range.description = this.range.long.abbreviation;
+        if (this.range.long.unitType !== "zero") {
+          const shortDescription =
+            this.range.short.unitType === "finite"
+              ? this.range.short.formula
+              : this.range.short.text;
+          this.range.description =
+            shortDescription + " / " + this.range.description;
+        }
+
+        // Fighting Style
         if (this.fightingStyle && this.fightingStyle.length > 0) {
           this.specialRules =
             TERIOCK.content.weaponFightingStyles[this.fightingStyle];

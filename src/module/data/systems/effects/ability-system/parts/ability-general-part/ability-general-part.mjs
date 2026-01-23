@@ -1,4 +1,5 @@
-import { TextField } from "../../../../../fields/_module.mjs";
+import { EvaluationField, TextField } from "../../../../../fields/_module.mjs";
+import { RangeModel } from "../../../../../models/unit-models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -69,15 +70,20 @@ export default (Base) => {
             label: "End Condition",
           }),
           executionTime: new fields.StringField({ initial: "a1" }),
-          expansion: new fields.StringField({
-            initial: null,
-            nullable: true,
+          expansion: new fields.SchemaField({
+            type: new fields.StringField({
+              initial: null,
+              nullable: true,
+            }),
+            range: new EvaluationField({
+              model: RangeModel,
+              label: "Expansion Range",
+            }),
+            featSaveAttribute: new fields.StringField({ initial: "mov" }),
+            cap: new EvaluationField({
+              deterministic: false,
+            }),
           }),
-          expansionRange: new fields.StringField({
-            initial: null,
-            nullable: true,
-          }),
-          expansionSaveAttribute: new fields.StringField({ initial: "mov" }),
           featSaveAttribute: new fields.StringField({
             initial: "mov",
             choices: TERIOCK.index.attributes,
@@ -134,10 +140,7 @@ export default (Base) => {
               choices: TERIOCK.index.powerSources,
             }),
           ),
-          range: new fields.StringField({
-            initial: null,
-            nullable: true,
-          }),
+          range: new EvaluationField({ model: RangeModel, label: "Range" }),
           requirements: new TextField({
             initial: "",
             label: "Requirements",
@@ -252,6 +255,22 @@ export default (Base) => {
           delete data.effects;
         }
 
+        // Range migration
+        if (typeof data.range === "string") {
+          data.range = { raw: data.range };
+        }
+
+        // Expansion migration
+        if (typeof data.expansion === "string") {
+          data.expansion = { type: data.expansion };
+        }
+        if (typeof data.expansion !== "object") {
+          data.expansion = {};
+        }
+        if (typeof data.expansionRange === "string") {
+          data.expansion.range = { raw: data.expansionRange };
+        }
+
         super.migrateData(data);
       }
 
@@ -268,7 +287,7 @@ export default (Base) => {
           time: this.executionTime,
           [`time.${this.executionTime}`]: 1,
           warded: Number(this.warded),
-          range: this.range,
+          range: this.range.value,
           basic: Number(this.basic),
           standard: Number(this.standard),
           skill: Number(this.skill),
@@ -294,12 +313,12 @@ export default (Base) => {
         if (this.interaction === "feat") {
           data[`attr.${this.featSaveAttribute}`] = 1;
         }
-        if (this.expansion) {
+        if (this.expansion.type) {
           Object.assign(data, {
             expansion: this.expansion,
-            [`expansion.${this.expansion}`]: 1,
-            [`expansion.attr.${this.expansionSaveAttribute}`]: 1,
-            [`expansion.range`]: this.expansionRange,
+            [`expansion.${this.expansion.type}`]: 1,
+            [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
+            [`expansion.range`]: this.expansion.range.value,
           });
         }
         // Add class

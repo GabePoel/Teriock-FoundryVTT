@@ -18,6 +18,14 @@ export default class EmbeddedDataModel extends DataModel {
   }
 
   /**
+   * The document associated with this data model if there is one.
+   * @returns {TeriockCommon}
+   */
+  get document() {
+    return this.parent.document;
+  }
+
+  /**
    * @returns {EmbeddedDataModel|CommonSystem}
    */
   get parent() {

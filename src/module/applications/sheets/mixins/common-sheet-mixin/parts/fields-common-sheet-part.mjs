@@ -14,6 +14,7 @@ export default (Base) => {
       static DEFAULT_OPTIONS = {
         actions: {
           increment: this.#onIncrement,
+          updateUnit: this.#onUpdateUnit,
         },
       };
 
@@ -25,6 +26,18 @@ export default (Base) => {
        */
       static async #onIncrement(_event, target) {
         await this._onIncrement(_event, target);
+      }
+
+      /**
+       * Update a unit.
+       * @param {PointerEvent} _event
+       * @param {HTMLElement} target
+       * @returns {Promise<void>}
+       */
+      static async #onUpdateUnit(_event, target) {
+        await foundry.utils
+          .getProperty(this.document, target.dataset.path)
+          .updateDialog();
       }
 
       /**

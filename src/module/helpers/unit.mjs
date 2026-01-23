@@ -1,11 +1,34 @@
 /**
+ * Convert unit name to a consistent standard.
+ * @param {string} unit
+ * @returns {string}
+ */
+export function standardizeLengthUnitName(unit) {
+  const UNIT_ALIASES = {
+    in: ["inch", "inches"],
+    ft: ["foot", "feet"],
+    yd: ["yard", "yards"],
+    mi: ["mile", "miles"],
+    mm: ["millimeter", "millimeters"],
+    cm: ["centimeter", "centimeters"],
+    dm: ["decimeter", "decimeters"],
+    m: ["meter", "meters"],
+    km: ["kilometer", "kilometers"],
+  };
+  for (const [key, value] of Object.entries(UNIT_ALIASES)) {
+    if (value.includes(unit)) return key;
+  }
+  return unit;
+}
+
+/**
  * Convert the given unit to feet.
  * @param {number} range
  * @param {string} units
  * @returns {number}
  */
 export function fromFeet(range, units) {
-  switch (units) {
+  switch (standardizeLengthUnitName(units)) {
     case "in":
       return range / 12;
     case "ft":
@@ -13,7 +36,7 @@ export function fromFeet(range, units) {
     case "yd":
       return range * 3;
     case "mi":
-      return range * 1760;
+      return range * 5280;
     case "mm":
       return (range * 10) / 3000;
     case "cm":
@@ -36,7 +59,7 @@ export function fromFeet(range, units) {
  * @returns {number}
  */
 export function toFeet(range, units) {
-  switch (units) {
+  switch (standardizeLengthUnitName(units)) {
     case "in":
       return range * 12;
     case "ft":
@@ -44,7 +67,7 @@ export function toFeet(range, units) {
     case "yd":
       return range / 3;
     case "mi":
-      return range / 1760;
+      return range / 5280;
     case "mm":
       return (range * 3000) / 10;
     case "cm":
@@ -74,7 +97,7 @@ export function convertUnits(range, fromUnits, toUnits) {
 /**
  * Parses a duration string and returns a duration.
  * @param durationString
- * @returns {Duration}
+ * @returns {object}
  */
 export function parseDurationString(durationString) {
   let parsingString = durationString.trim().toLowerCase().replace(/\.$/, "");

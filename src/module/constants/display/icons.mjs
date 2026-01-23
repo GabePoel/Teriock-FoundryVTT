@@ -28,6 +28,7 @@ export const icons = {
   edit: '<i class="fa-fw fa-solid fa-edit"></i>',
   execution: '<i class="fa-fw fa-light fa-arrows-turn-right"></i>',
   expansion: '<i class="fa-fw fa-light fa-expand"></i>',
+  expansionCap: '<i class="fa-fw fa-light fa-arrow-up-to-bracket"></i>',
   expansionRange: '<i class="fa-fw fa-light fa-ruler-combined"></i>',
   feat: '<i class="fa-fw fa-solid fa-star"></i>',
   fluency: '<i class="fa-fw fa-solid fa-f"></i>',

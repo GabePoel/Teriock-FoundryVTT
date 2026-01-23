@@ -1,3 +1,6 @@
+import { RangeModel } from "../../../../../models/unit-models/_module.mjs";
+import { EvaluationModel } from "../../../../../models/_module.mjs";
+
 declare global {
   namespace Teriock.Models {
     export interface AbilityGeneralPartInterface {
@@ -23,11 +26,17 @@ declare global {
       /** <schema> This ability's execution time */
       executionTime: Teriock.Parameters.Ability.ExecutionTime;
       /** <schema> This ability's expansion */
-      expansion: Teriock.Parameters.Ability.Expansion | null;
-      /** <schema> What is the maximum range of this ability's expansion */
-      expansionRange: string | null;
-      /** <schema> What attribute is used for feat saves against this ability's expansion */
-      expansionSaveAttribute: Teriock.Parameters.Actor.Attribute;
+      expansion: {
+        /** <schema> Maximum number of extra executions */
+        cap: EvaluationModel;
+        /** <schema> Type of ability's expansion */
+        type: Teriock.Parameters.Ability.Expansion | null;
+        /** <schema> Range of expansion */
+        range: RangeModel;
+        /** <schema> What attribute is used for feat saves against this ability's expansion */
+        featSaveAttribute: Teriock.Parameters.Actor.Attribute;
+      };
+
       /** <schema> What attribute is used for feat saves against this ability */
       featSaveAttribute: Teriock.Parameters.Actor.Attribute;
       /** <schema> The "form" of this ability (what color it would be printed on a card) */
@@ -56,7 +65,7 @@ declare global {
       /** <schema> Power sources that must be available in order for this ability to work */
       powerSources: Set<Teriock.Parameters.Ability.PowerSource>;
       /** <schema> The maximum range at which this ability can be used */
-      range: string | null;
+      range: RangeModel;
       /** <schema> Requirements that must be met for this ability to be used */
       requirements: string;
       /** <schema> What this ability does to a target */

@@ -1,19 +1,19 @@
-{{#if system.expansion}}
+{{#if system.expansion.type}}
   <div class="ab-bar">
     {{formBox
       (concat
         (ifThen
-          (or (eq system.expansion "detonate") (eq system.expansion "ripple"))
+          (or (eq system.expansion.type "detonate") (eq system.expansion.type "ripple"))
           (concat
             (lookup
               TERIOCK.options.ability.featSaveAttribute
-              system.expansionSaveAttribute
+              system.expansion.featSaveAttribute
             )
             " "
           )
           ""
         )
-        (lookup TERIOCK.options.ability.expansion system.expansion)
+        (lookup TERIOCK.options.ability.expansion system.expansion.type)
       )
       classes=(ifThen
         editable (concat "expansion-box expansion-box-" system.expansion) ""
@@ -22,14 +22,29 @@
       icon=(lookup TERIOCK.display.icons "expansion")
     }}
     {{formBox
-      (formInput
-        systemFields.expansionRange
-        value=system.expansionRange
-        disabled=(not editable)
+      (concat
+        "<span style='flex: auto;' data-path='system.expansion.range' data-action='updateUnit'>"
+        (ifThen
+          (eq system.expansion.range.unitType "finite")
+          system.expansion.range.formula system.expansion.range.text
+        )
+        "</span>"
       )
+      action="updateUnit"
       icon=(lookup TERIOCK.display.icons "expansionRange")
       tooltip="Expansion Range"
-      label="ft"
+      label=(ifThen (eq system.expansion.range.unitType "finite") system.expansion.range.symbol "")
+    }}
+    {{formBox
+      (formInput
+        systemFields.expansion.fields.cap
+        value=system._source.expansion.cap.raw
+        disabled=(not editable)
+        dataset=(object tooltip="Expansion Cap")
+      )
+      icon=(lookup TERIOCK.display.icons "expansionCap")
+      unselected=system.expansion.cap.value
+      include=(exists system.expansion.cap.raw)
     }}
   </div>
 {{/if}}

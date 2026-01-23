@@ -1,4 +1,8 @@
-import { DamageModel, EvaluationModel } from "../../../models/_module.mjs";
+import {
+  DamageModel,
+  EvaluationModel,
+  RangeModel,
+} from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -29,13 +33,15 @@ declare global {
       /** <schema> Range (ft) (if ranged) */
       range: {
         /** <schema> Long range (this is the default range) */
-        long: EvaluationModel;
+        long: RangeModel;
         /** <schema> Is the equipment melee? */
         melee: boolean;
         /** <schema> Is the equipment ranged? */
         ranged: boolean;
         /** <schema> Short range */
-        short: EvaluationModel;
+        short: RangeModel;
+        /** <base> Text that summarizes the range */
+        description: string;
       };
       /** <derived> Special Rules (Weapon Fighting Style) */
       specialRules: string;

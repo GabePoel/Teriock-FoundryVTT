@@ -103,7 +103,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     const macroEntries = Object.entries(this.source.system.impacts.macros);
     for (const [safeUuid, macroPseudoHook] of macroEntries) {
       if (macroPseudoHook === pseudoHook) {
-        const macro = await fromUuid(pureUuid(safeUuid));
+        const macro = /** @type {TeriockMacro} */ await fromUuid(
+          pureUuid(safeUuid),
+        );
         if (macro) {
           try {
             await macro.execute({
@@ -114,6 +116,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
               args: [this],
               execution: this,
               useData: this,
+              ability: this.source,
               abilityData: this.source.system,
               chatData: this.chatData,
               data: { execution: this },

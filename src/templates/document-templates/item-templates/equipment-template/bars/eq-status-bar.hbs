@@ -30,24 +30,21 @@
     icon="staff"
   }}
   {{formBox
-    (formInput
-      systemFields.range.fields.long
-      dataset=(object tooltip="Range")
-      disabled=(not editable)
-      value=system._source.range.long.raw
+    (concat
+      "<span style='flex: auto;' data-tooltip='"
+      (ifThen (not (eq system.range.long.unitType "zero")) "Long Range" "Range")
+      "' data-path='system.range.long' data-action='updateUnit'>"
+      (ifThen (eq system.range.long.unitType "finite") system.range.long.formula system.range.long.text)
+      "</span>"
     )
-    secondary=(formInput
-      systemFields.range.fields.short
-      dataset=(object tooltip="Short Range")
-      disabled=(not editable)
-      value=system._source.range.short.raw
+    secondary=(concat
+      "<span style='flex: auto;' data-tooltip='Short Range' data-path='system.range.short' data-action='updateUnit'>"
+      (ifThen (eq system.range.short.unitType "finite") system.range.short.formula system.range.short.text)
+      "</span>"
     )
     after=false
     icon=(path TERIOCK.display.icons "range")
-    include=(exists system.range.long.raw)
-    includeSecondary=(exists system.range.short.raw)
-    label="ft"
-    unselected=system.range.long.raw
-    unselectedSecondary=system.range.short.raw
+    includeSecondary=(not (eq system.range.long.unitType "zero"))
+    label=(ifThen (eq system.range.long.unitType "finite") system.range.long.symbol "")
   }}
 </div>
