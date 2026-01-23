@@ -6,6 +6,11 @@ export default class AttributeModel extends ModifierModel {
   passive;
 
   /** @inheritDoc */
+  get quickValue() {
+    return 2 * this.score + this.competence.bonus;
+  }
+
+  /** @inheritDoc */
   async _use(options) {
     options = {
       attribute: this.key,

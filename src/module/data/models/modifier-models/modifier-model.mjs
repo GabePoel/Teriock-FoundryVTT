@@ -63,7 +63,7 @@ export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
 
   /** @inheritDoc */
   get quickValue() {
-    return this.score;
+    return this.score + this.competence.bonus;
   }
 
   /** @inheritDoc */
@@ -84,6 +84,7 @@ export default class ModifierModel extends UsableDataMixin(EvaluationModel) {
   getLocalRollData() {
     return foundry.utils.mergeObject(super.getLocalRollData(), {
       "": this.value,
+      score: this.score,
     });
   }
 }

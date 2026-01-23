@@ -172,7 +172,7 @@ export async function progressBar(arr, message, callback, options = {}) {
 export function prefixObject(obj, prefix) {
   return Object.fromEntries(
     Object.entries(foundry.utils.flattenObject(obj)).map(([k, v]) => [
-      `${prefix}.${k}`,
+      k.length > 0 ? `${prefix}.${k}` : prefix,
       v,
     ]),
   );
