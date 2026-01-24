@@ -28,7 +28,7 @@ export default function CommonSheetMixin(Base) {
      * @mixes StatDiceCommonSheetPart
      * @mixes ToggleCommonSheetPart
      * @mixin
-     * @property {TeriockCommon} document
+     * @property {GenericCommon} document
      */
     class CommonSheet extends mix(
       Base,
@@ -47,24 +47,24 @@ export default function CommonSheetMixin(Base) {
       parts.ToggleCommonSheetPart,
       IndexButtonSheetMixin,
     ) {
-      //noinspection JSValidateTypes
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: {
-          openDoc: this._onOpenDoc,
-        },
-        form: {
-          closeOnSubmit: false,
-          submitOnChange: true,
-        },
-        position: {
-          height: 600,
-          width: 560,
-        },
-        window: {
-          resizable: true,
-        },
-      };
+      static DEFAULT_OPTIONS =
+        /** @type {Partial<ApplicationConfiguration>} */ {
+          actions: {
+            openDoc: this._onOpenDoc,
+          },
+          form: {
+            closeOnSubmit: false,
+            submitOnChange: true,
+          },
+          position: {
+            height: 600,
+            width: 560,
+          },
+          window: {
+            resizable: true,
+          },
+        };
 
       /**
        * Creates a new Teriock sheet instance.

@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Models {
-    export interface WrapperSystem
+    export interface WrapperSystemInterface
       extends Teriock.Models.BaseItemSystemInterface {
       get parent(): TeriockWrapper;
     }

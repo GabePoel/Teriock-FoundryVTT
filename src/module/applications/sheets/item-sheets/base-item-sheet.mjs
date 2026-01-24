@@ -10,8 +10,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes ChatButtonSheet
  * @mixes CommonSheet
  * @mixes ChildSheet
- * @property {TeriockItem} document
- * @property {TeriockItem} item
+ * @property {GenericItem} document
+ * @property {GenericItem} item
  */
 export default class BaseItemSheet extends mix(
   ItemSheetV2,
@@ -33,7 +33,7 @@ export default class BaseItemSheet extends mix(
 
   /**
    * Marks the {@link TeriockActiveEffect} as being "on use" or not.
-   * @param {MouseEvent} _event - The event object.
+   * @param {PointerEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>}
    */

@@ -7,7 +7,7 @@ export default (Base) => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
-     * @property {TeriockCommon} document
+     * @property {GenericCommon} document
      * @mixin
      */
     class DragDropCommonSheetPart extends Base {
@@ -154,7 +154,6 @@ export default (Base) => {
        * @returns {Promise<TeriockMacro|void>} Promise that resolves to the created document if successful.
        */
       async _onDropMacro(_event, dropData) {
-        //noinspection JSUnresolvedReference
         if (this.document.system.macros) {
           const macroUuids = Array.from(this.document.system.macros);
           if (dropData.uuid) {

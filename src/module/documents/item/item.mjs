@@ -5,6 +5,7 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
 
+//noinspection JSUnresolvedReference
 /**
  * The Teriock {@link Item} implementation.
  * @extends {ClientDocument}
@@ -16,8 +17,8 @@ const { Item } = foundry.documents;
  * @mixes ParentDocument
  * @mixes RetrievalDocument
  * @mixes SettingsDocument
- * @property {TypeCollection<ID<TeriockActiveEffect>, TeriockActiveEffect>} effects
- * @property {Teriock.Documents.ItemModel} system
+ * @property {TypeCollection<ID<GenericActiveEffect>, GenericActiveEffect>} effects
+ * @property {Teriock.Documents.ItemModel | WrapperSystem} system
  * @property {Teriock.Documents.ItemType} type
  * @property {ID<TeriockItem>} _id
  * @property {ID<TeriockItem>} id
@@ -82,7 +83,7 @@ export default class TeriockItem extends mix(
 
   /**
    * @inheritDoc
-   * @returns {TeriockActiveEffect[]}
+   * @returns {GenericActiveEffect[]}
    */
   get validEffects() {
     return this.effects.contents;

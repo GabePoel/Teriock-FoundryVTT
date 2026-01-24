@@ -13,7 +13,7 @@ export default function HackStatApplicationMixin(Base) {
     class HackStatApplication extends Base {
       /**
        * Rolls a stat die.
-       * @param {MouseEvent} _event - The event object.
+       * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        */
@@ -29,7 +29,7 @@ export default function HackStatApplicationMixin(Base) {
 
       /**
        * Hacks a specific body part.
-       * @param {MouseEvent} event - The event object.
+       * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        */
@@ -43,7 +43,7 @@ export default function HackStatApplicationMixin(Base) {
 
       /**
        * Unhacks a specific body part.
-       * @param {MouseEvent} event - The event object.
+       * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        */
@@ -66,7 +66,7 @@ export default function HackStatApplicationMixin(Base) {
         const stat = target.dataset.stat;
         const index = target.dataset.index;
         const item =
-          /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
+          /** @type {TeriockChild & {system: Teriock.Models.StatGiverSystemInterface}} */
           this.actor[collection].get(id);
         return item.system.statDice[stat].dice[Number(index)];
       }
@@ -88,7 +88,7 @@ export default function HackStatApplicationMixin(Base) {
 
       /**
        * Unrolls a stat die.
-       * @param {MouseEvent} _event - The event object.
+       * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        */
@@ -98,7 +98,7 @@ export default function HackStatApplicationMixin(Base) {
         const stat = target.dataset.stat;
         const index = target.dataset.index;
         const item =
-          /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
+          /** @type {TeriockChild & {system: Teriock.Models.StatGiverSystemInterface}} */
           this.actor[collection].get(id);
         const statDie =
           /** @type {StatDieModel} */ item.system.statDice[stat].dice[

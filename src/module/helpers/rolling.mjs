@@ -1,6 +1,6 @@
 /**
  * Make common roll options.
- * @param {MouseEvent} event
+ * @param {PointerEvent} event
  * @returns {Teriock.RollOptions.CommonRoll | Teriock.RollOptions.EquipmentRoll}
  */
 export function makeCommonRollOptions(event) {

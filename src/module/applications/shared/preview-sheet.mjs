@@ -1,6 +1,6 @@
 /**
  * Preview a document's sheet even if you aren't the owner of it.
- * @param {TeriockChild} doc
+ * @param {GenericChild} doc
  */
 export default async function previewSheet(doc) {
   if (doc.isOwner) {

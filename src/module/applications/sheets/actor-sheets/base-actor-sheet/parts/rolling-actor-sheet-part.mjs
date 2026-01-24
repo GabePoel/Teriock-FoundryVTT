@@ -23,7 +23,7 @@ export default (Base) =>
 
     /**
      * Rolls a feat save with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
@@ -35,7 +35,7 @@ export default (Base) =>
 
     /**
      * Rolls hexproof resistance with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
@@ -47,7 +47,7 @@ export default (Base) =>
 
     /**
      * Rolls hexseal immunity.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
@@ -59,7 +59,7 @@ export default (Base) =>
 
     /**
      * Rolls immunity.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
@@ -70,7 +70,7 @@ export default (Base) =>
 
     /**
      * Rolls resistance with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
@@ -95,7 +95,7 @@ export default (Base) =>
 
 /**
  * Get the protection options for a target.
- * @param {MouseEvent} event - The event object.
+ * @param {PointerEvent} event - The event object.
  * @param {HTMLElement} target
  * @returns {Partial<Teriock.Execution.ImmunityExecutionOptions>}
  */

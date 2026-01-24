@@ -11,7 +11,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @mixes ChatButtonSheet
  * @mixes ChildSheet
  * @mixes CommonSheet
- * @property {TeriockActiveEffect} document
+ * @property {GenericActiveEffect} documentf
  */
 export default class BaseEffectSheet extends mix(
   ActiveEffectConfig,

@@ -13,7 +13,7 @@ export default class AbstractButtonHandler extends InteractionHandler {
   static ACTION = "";
 
   /**
-   * @param {MouseEvent} event
+   * @param {PointerEvent} event
    * @param {HTMLElement} element
    */
   constructor(event, element) {

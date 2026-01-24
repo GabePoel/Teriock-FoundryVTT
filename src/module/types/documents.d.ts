@@ -230,6 +230,26 @@ declare global {
 // ===============
 
 declare global {
+  export type GenericActiveEffect =
+    | TeriockAbility
+    | TeriockAttunement
+    | TeriockCondition
+    | TeriockConsequence
+    | TeriockFluency
+    | TeriockProperty
+    | TeriockResource;
+  export type GenericItem =
+    | TeriockBody
+    | TeriockEquipment
+    | TeriockPower
+    | TeriockRank
+    | TeriockSpecies
+    | TeriockMount
+    | TeriockWrapper;
+  export type GenericActor = TeriockCharacter | TeriockCreature;
+  export type GenericParent = GenericActor | GenericItem;
+  export type GenericCommon = GenericActor | GenericItem | GenericActiveEffect;
+  export type GenericChild = GenericItem | GenericActiveEffect;
   export type TeriockArmament = TeriockBody | TeriockEquipment;
   export type TeriockLingering = TeriockCondition | TeriockConsequence;
 }

@@ -35,7 +35,7 @@ export default (Base) =>
 
     /**
      * Quickly uses an item with optional modifiers.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */
@@ -62,7 +62,7 @@ export default (Base) =>
 
     /**
      * Toggles a condition.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */

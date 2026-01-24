@@ -3,7 +3,7 @@ import { makeIconClass } from "../../helpers/utils.mjs";
 
 /**
  * Add wiki open button to sheet header.
- * @param {TeriockBaseItemSheet|TeriockBaseEffectSheet} application
+ * @param {BaseItemSheet|BaseEffectSheet} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  */
 function addWikiOpenToHeader(application, controls) {
@@ -50,7 +50,7 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "getHeaderControlsDocumentSheetV2",
     /**
-     * @param {TeriockDocumentSheet} _application
+     * @param {DocumentSheetV2} _application
      * @param {ApplicationHeaderControlsEntry[]} controls
      */
     (_application, controls) => {

@@ -201,7 +201,7 @@ export function registerCommandEnrichers() {
  * Find an interaction from a command and execute it.
  * @param {HTMLElement} target
  * @param {"primary" | "secondary"} operation
- * @param {MouseEvent} event
+ * @param {PointerEvent} event
  * @returns {Promise<void>}
  */
 async function executeCommandFromElement(target, operation, event) {

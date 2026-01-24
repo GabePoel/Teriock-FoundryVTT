@@ -17,7 +17,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
-  static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
+  static DEFAULT_OPTIONS = {
     classes: ["teriock", "dynamic-select", "dialog"],
     actions: {
       ok: this._onGetSelected,
@@ -66,7 +66,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   }
 
   /**
-   * @param {MouseEvent} event
+   * @param {PointerEvent} event
    * @returns {Promise<void>}
    */
   static async _onCancel(event) {
@@ -76,7 +76,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   }
 
   /**
-   * @param {MouseEvent} event
+   * @param {PointerEvent} event
    * @returns {Promise<void>}
    */
   static async _onGetSelected(event) {

@@ -3,7 +3,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 //noinspection JSClosureCompilerSyntax
 /**
  * Wrapper-specific item data model.
- * @implements {Teriock.Models.WrapperSystem}
+ * @implements {Teriock.Models.WrapperSystemInterface}
  */
 export default class WrapperSystem extends BaseItemSystem {
   /** @inheritDoc */
@@ -16,7 +16,7 @@ export default class WrapperSystem extends BaseItemSystem {
 
   /**
    * The wrapped effect.
-   * @returns {TeriockActiveEffect}
+   * @returns {GenericActiveEffect}
    */
   get effect() {
     return this.parent.validEffects[0];

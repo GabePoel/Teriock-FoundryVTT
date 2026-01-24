@@ -24,7 +24,7 @@ export default (Base) =>
 
     /**
      * Opens the primary attacker's sheet.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @returns {Promise<void>}
      */
     static async #onOpenPrimaryAttacker(event) {
@@ -34,7 +34,7 @@ export default (Base) =>
 
     /**
      * Opens the primary blocker's sheet.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @returns {Promise<void>}
      */
     static async #onOpenPrimaryBlocker(event) {

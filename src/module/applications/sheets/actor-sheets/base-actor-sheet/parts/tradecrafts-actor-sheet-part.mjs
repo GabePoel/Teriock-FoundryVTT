@@ -16,7 +16,7 @@ export default (Base) =>
 
     /**
      * Rolls a tradecraft check with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>}
      */

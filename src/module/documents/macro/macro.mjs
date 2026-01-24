@@ -177,7 +177,7 @@ export default class TeriockMacro extends mix(
    * @param {object} [options]
    * @param {TeriockActor} [options.actor]
    * @param {Teriock.Documents.ChildType} [options.type]
-   * @param {MouseEvent} [options.event]
+   * @param {PointerEvent} [options.event]
    * @returns {Promise<void>}
    */
   static async useDocumentGeneral(name, options) {
@@ -212,7 +212,7 @@ export default class TeriockMacro extends mix(
    * Get a document from its UUID and use it.
    * @param {UUID<TeriockChild>} uuid
    * @param {object} [options]
-   * @param {MouseEvent} [options.event]
+   * @param {PointerEvent} [options.event]
    * @returns {Promise<void>}
    */
   static async useDocumentLinked(uuid, options) {

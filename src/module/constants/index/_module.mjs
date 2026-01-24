@@ -1,3 +1,5 @@
+//noinspection JSUnusedGlobalSymbols
+
 import { default as allConditions } from "../../../index/names/conditions.json" with { type: "json" };
 import { default as allProperties } from "../../../index/names/properties.json" with { type: "json" };
 
