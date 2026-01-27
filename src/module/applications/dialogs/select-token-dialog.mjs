@@ -15,7 +15,7 @@ export async function selectTokensDialog(options = {}) {
     },
     options,
   );
-  const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
+  const tokenLayer = game.canvas.tokens;
   const visibleTokenIds = tokenLayer.placeables
     .filter((t) => t.visible)
     .map((t) => t.id);
@@ -33,34 +33,14 @@ export async function selectTokensDialog(options = {}) {
 }
 
 /**
- * Select some number of visible tokens for target to be lighted to.
+ * Select some number of visible tokens for a target to have a condition associated with.
+ * @param {Teriock.Parameters.Condition.ConditionKey} condition
  * @returns {Promise<UUID<TeriockTokenDocument>[]>}
  */
-export async function lightedToDialog() {
+export async function conditionDialog(condition) {
+  const conditionName = TERIOCK.index.conditions[condition];
   return await selectTokensDialog({
     title: "Select Creatures",
-    hint: "Select what creatures this effect makes its targets lighted to.",
-  });
-}
-
-/**
- * Select some number of visible tokens for target to be goaded to.
- * @returns {Promise<UUID<TeriockTokenDocument>[]>}
- */
-export async function goadedToDialog() {
-  return await selectTokensDialog({
-    title: "Select Creatures",
-    hint: "Select what creatures this effect makes its targets goaded to.",
-  });
-}
-
-/**
- * Select some number of visible tokens for target to be frightened of.
- * @returns {Promise<UUID<TeriockTokenDocument>[]>}
- */
-export async function frightenedOfDialog() {
-  return await selectTokensDialog({
-    title: "Select Creatures",
-    hint: "Select what creatures this effect makes its targets frightened of.",
+    hint: `The targets will be ${conditionName} with respect to the selected creatures.`,
   });
 }

@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { makeIconClass } from "../../../../helpers/utils.mjs";
 import TeriockPlayableActorSheet from "../base-actor-sheet/playable-actor-sheet.mjs";
 
 /**
@@ -20,7 +21,7 @@ export default class CharacterSheet extends TeriockPlayableActorSheet {
       height: 600,
     },
     window: {
-      icon: `fa-solid fa-${documentOptions.character.icon}`,
+      icon: makeIconClass(documentOptions.character.icon, "title"),
     },
   };
 

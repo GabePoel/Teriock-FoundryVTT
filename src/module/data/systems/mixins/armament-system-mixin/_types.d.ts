@@ -6,6 +6,13 @@ import {
 
 declare global {
   namespace Teriock.Models {
+    export type ArmamentDamage = {
+      /** <schema> Damage this always deals */
+      base: DamageModel;
+      /** <schema> Additional damage types to be added to all the base damage */
+      types: Set<string>;
+    };
+
     export interface ArmamentSystemInterface {
       /** <schema> How much this increases an actor's attack penalty by per use */
       attackPenalty: EvaluationModel;
@@ -14,12 +21,7 @@ declare global {
       /** <schema> Block Value */
       bv: EvaluationModel;
       /** <schema> Damage Dice */
-      damage: {
-        /** <schema> Damage this always deals */
-        base: DamageModel;
-        /** <schema> Additional damage types to be added to all the base damage */
-        types: Set<string>;
-      };
+      damage: Teriock.Models.ArmamentDamage;
       /** <schema> Style Bonus (Weapon Fighting Style) */
       fightingStyle: Teriock.Parameters.Equipment.WeaponFightingStyle;
       /** <schema> Flaws */

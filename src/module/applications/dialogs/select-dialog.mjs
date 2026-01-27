@@ -183,7 +183,7 @@ export async function selectPropertyDialog() {
         openable: true,
       }),
     )
-  ).system.effect;
+  )?.system.effect;
 }
 
 /**
@@ -228,7 +228,7 @@ export async function selectAbilityDialog() {
         openable: true,
       }),
     )
-  ).system.effect;
+  )?.system.effect;
 }
 
 /**

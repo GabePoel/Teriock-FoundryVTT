@@ -68,14 +68,7 @@ export function getRollIcon(rollFormula) {
  * @returns {Teriock.Parameters.Shared.TransformationLevel}
  */
 export function upgradeTransformation(l1, l2) {
-  if (l1 === "minor") {
-    return l2;
-  } else if (l1 === "full") {
-    if (l2 === "greater") {
-      return l2;
-    }
-  }
-  return l1;
+  return l1 === "minor" || (l1 === "full" && l2 === "greater") ? l2 : l1;
 }
 
 /**
@@ -112,6 +105,7 @@ export function fancifyFields(displayFields) {
     .filter((f) => f.visible);
 }
 
+//noinspection JSUnusedGlobalSymbols
 /**
  * Merge two objects and their arrays.
  * @param {object} original

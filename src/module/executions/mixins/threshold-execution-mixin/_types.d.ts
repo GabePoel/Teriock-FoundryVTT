@@ -6,6 +6,7 @@ declare global {
         disadvantage?: boolean;
         threshold?: number;
         bonus?: number | string;
+        comparison?: string;
       };
   }
 }

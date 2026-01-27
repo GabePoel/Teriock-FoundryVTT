@@ -111,9 +111,8 @@ export default (Base) => {
       async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
-        let doc = /** @type {TeriockChild} */ await Cls.fromDropData(dropData);
+        let doc = /** @type {GenericChild} */ await Cls.fromDropData(dropData);
         if (doc.type === "wrapper") {
-          //noinspection JSUnresolvedReference
           doc = doc.system.effect;
         }
         const uuid =

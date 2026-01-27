@@ -21,7 +21,7 @@ export default class EvaluationField extends EmbeddedDataField {
     this._derivationOptions = options;
   }
 
-  /** @type {Teriock.Fields.FormulaDerivationOptions} */
+  /** @type {StringFieldOptions & Teriock.Fields._EvaluationFieldOptions} */
   _derivationOptions;
 
   /** @inheritDoc */

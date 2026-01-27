@@ -18,12 +18,12 @@ export default class BaseDocumentExecution extends BaseExecution {
     }
   }
 
-  /** @type {TeriockChild} */
+  /** @type {GenericChild} */
   _source;
 
   /**
    * Source document.
-   * @returns {TeriockChild}
+   * @returns {GenericChild}
    */
   get source() {
     return this._source;

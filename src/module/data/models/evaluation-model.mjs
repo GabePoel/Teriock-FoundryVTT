@@ -116,7 +116,9 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @param {Teriock.Fields.FormulaDerivationOptions} [options]
    * @returns {number}
    */
-  #evaluate(options = {}) {
+  #evaluate(
+    options = /** @type {Teriock.Fields.FormulaDerivationOptions} */ {},
+  ) {
     options = {
       ...this._derivationOptions,
       ...options,

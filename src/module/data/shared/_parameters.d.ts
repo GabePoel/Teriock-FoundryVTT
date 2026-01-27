@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import { effectOptions } from "../../constants/options/effect-options.mjs";
 import { fonts } from "../../constants/display/fonts.mjs";
 import { abilityOptions } from "../../constants/options/ability-options.mjs";

@@ -2,6 +2,10 @@ import { tradecraftPanel } from "../../../helpers/html.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 import { TradecraftExecutionMixin } from "../../mixins/_module.mjs";
 
+/**
+ * @extends {BaseExecution}
+ * @mixes TradecraftExecution
+ */
 export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   BaseExecution,
 ) {
