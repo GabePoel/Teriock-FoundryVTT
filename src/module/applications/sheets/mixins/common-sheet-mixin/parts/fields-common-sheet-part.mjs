@@ -1,3 +1,5 @@
+import { updateDialog } from "../../../../dialogs/_module.mjs";
+
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
@@ -14,6 +16,7 @@ export default (Base) => {
       static DEFAULT_OPTIONS = {
         actions: {
           increment: this.#onIncrement,
+          updatePaths: this.#onUpdatePaths,
           updateUnit: this.#onUpdateUnit,
         },
       };
@@ -26,6 +29,23 @@ export default (Base) => {
        */
       static async #onIncrement(_event, target) {
         await this._onIncrement(_event, target);
+      }
+
+      /**
+       * Update several paths.
+       * @param {PointerEvent} _event
+       * @param {HTMLElement} target
+       * @returns {Promise<void>}
+       */
+      static async #onUpdatePaths(_event, target) {
+        if (this.isEditable) {
+          await updateDialog(
+            this.document,
+            target.dataset.paths.split(" ").map((p) => p.trim()),
+            target.dataset.title,
+            target.dataset.icon,
+          );
+        }
       }
 
       /**

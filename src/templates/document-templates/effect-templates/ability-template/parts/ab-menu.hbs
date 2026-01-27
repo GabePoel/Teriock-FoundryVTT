@@ -130,7 +130,7 @@
         {{> (template "document-templates/shared/display-field-buttons.hbs")}}
         {{! Improvements }}
         {{#if
-          (not (exists system.improvements.attributeImprovement.attribute))
+          (not (exists system.upgrades.score.attribute))
         }}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-attribute-improvement-button"
@@ -139,11 +139,11 @@
               {{/if}}
             >
               {{{TERIOCK.display.icons.add}}}
-              Attribute Improvement
+              Attribute Score
             </button>
           </div>
         {{/if}}
-        {{#if (not (exists system.improvements.featSaveImprovement.attribute))}}
+        {{#if (not (exists system.upgrades.competence.attribute))}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-feat-save-improvement-button"
               {{#if (not editable)}}
@@ -151,7 +151,7 @@
               {{/if}}
             >
               {{{TERIOCK.display.icons.add}}}
-              Feat Save Improvement
+              Attribute Competence
             </button>
           </div>
         {{/if}}

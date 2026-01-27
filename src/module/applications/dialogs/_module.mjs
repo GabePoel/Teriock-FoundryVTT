@@ -13,3 +13,4 @@ export { default as inCombatExpirationDialog } from "./in-combat-expiration-dial
 export { default as setStatDiceDialog } from "./set-stat-dice-dialog.mjs";
 export { default as refreshFromCompendiumDialog } from "./refresh-from-compendium-dialog.mjs";
 export { default as newDocumentDialog } from "./new-document-dialog.mjs";
+export { default as updateDialog } from "./update-dialog.mjs";

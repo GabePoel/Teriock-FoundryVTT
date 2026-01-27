@@ -211,7 +211,9 @@ export default (Base) => {
               choices: TERIOCK.options.ability.targets,
             }),
             {
+              hint: "Valid targets for this ability.",
               initial: ["creature"],
+              label: "Targets",
             },
           ),
           trigger: new TextField({

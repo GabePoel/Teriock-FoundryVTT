@@ -1,7 +1,6 @@
 import { makeIconClass } from "../../helpers/utils.mjs";
+import { competenceField } from "../fields/helpers/builders.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
-
-const { fields } = foundry.data;
 
 //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
 /**
@@ -12,20 +11,7 @@ export default class CompetenceModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      raw: new fields.NumberField({
-        choices: {
-          0: "None",
-          1: "Proficient",
-          2: "Fluent",
-        },
-        hint: "If this is proficient or fluent.",
-        initial: 0,
-        label: "Competence",
-        max: 2,
-        min: 0,
-        nullable: false,
-        required: false,
-      }),
+      raw: competenceField(),
     };
   }
 

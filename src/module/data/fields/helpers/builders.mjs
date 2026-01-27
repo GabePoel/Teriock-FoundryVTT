@@ -441,3 +441,44 @@ export function costField(options = { extraChoices: {}, label: "Cost" }) {
     }),
   });
 }
+
+/**
+ * Competence field.
+ * @returns {NumberField}
+ */
+export function competenceField() {
+  return new NumberField({
+    choices: {
+      0: "None",
+      1: "Proficient",
+      2: "Fluent",
+    },
+    hint: "If this is proficient or fluent.",
+    initial: 0,
+    label: "Competence",
+    max: 2,
+    min: 0,
+    nullable: false,
+    required: false,
+  });
+}
+
+/**
+ * Attribute field.
+ * @param {object} [options]
+ * @param {boolean} [options.unp]
+ * @param {boolean} [options.nullable]
+ * @returns {StringField}
+ */
+export function attributeField(options = { unp: false, nullable: true }) {
+  return new StringField({
+    choices: options.unp
+      ? TERIOCK.index.statAttributes
+      : TERIOCK.index.attributes,
+    hint: "What attribute this applies to.",
+    initial: options.nullable ? null : "int",
+    label: "Attribute",
+    nullable: options.nullable,
+    required: false,
+  });
+}

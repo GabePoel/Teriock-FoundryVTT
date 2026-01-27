@@ -1,4 +1,8 @@
 import { TextField } from "../../../../../fields/_module.mjs";
+import {
+  attributeField,
+  competenceField,
+} from "../../../../../fields/helpers/builders.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,29 +23,30 @@ export default (Base) => {
       static defineSchema() {
         const schema = super.defineSchema();
         Object.assign(schema, {
-          improvements: new fields.SchemaField({
-            attributeImprovement: new fields.SchemaField({
-              attribute: new fields.StringField({
-                initial: null,
-                nullable: true,
-                choices: TERIOCK.index.statAttributes,
-              }),
-              minVal: new fields.NumberField({ initial: 0 }),
+          upgrades: new fields.SchemaField({
+            competence: new fields.SchemaField({
+              attribute: attributeField(),
               text: new TextField({
                 initial: "",
-                label: "Attribute Improvement",
+                label: "Attribute Competence Improvement",
+                required: false,
               }),
+              value: competenceField(),
             }),
-            featSaveImprovement: new fields.SchemaField({
-              attribute: new fields.StringField({
-                initial: null,
-                nullable: true,
-                choices: TERIOCK.index.attributes,
-              }),
-              amount: new fields.StringField({ initial: "proficient" }),
+            score: new fields.SchemaField({
+              attribute: attributeField(),
               text: new TextField({
                 initial: "",
-                label: "Feat Save Improvement",
+                label: "Attribute Score Improvement",
+                required: false,
+              }),
+              value: new fields.NumberField({
+                hint: "The value of this attribute score.",
+                initial: 0,
+                label: "Score",
+                max: 5,
+                min: -3,
+                required: false,
               }),
             }),
           }),
@@ -50,30 +55,59 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      static migrateData(data) {
+        //noinspection JSUnresolvedReference
+        if (data.improvements) {
+          //noinspection JSUnresolvedReference
+          data.upgrades = {
+            competence: {
+              attribute: data.improvements.featSaveImprovement.attribute,
+              value: 1,
+            },
+            score: {
+              attribute: data.improvements.attributeImprovement.attribute,
+              value: data.improvements.attributeImprovement.minVal,
+            },
+          };
+          switch (data.improvements.featSaveImprovement.amount) {
+            case "fluency":
+              data.upgrades.competence.value = 2;
+              break;
+            case "proficiency":
+              data.upgrades.competence.value = 1;
+              break;
+            default:
+              data.upgrades.competence.value = 0;
+              break;
+          }
+          delete data.improvements;
+        }
+        super.migrateData(data);
+      }
+
+      /** @inheritDoc */
       get changes() {
         const changes = super.changes;
-        if (this.improvements.attributeImprovement.attribute) {
+        if (this.upgrades.score.attribute) {
           changes.push({
-            key: `system.attributes.${this.improvements.attributeImprovement.attribute}.score`,
+            key: `system.attributes.${this.upgrades.score.attribute}.score`,
             mode: 4,
             priority: 20,
             qualifier: "1",
             target: "Actor",
             time: "normal",
-            value: `${this.improvements.attributeImprovement.minVal}`,
+            value: `${this.upgrades.score.value}`,
           });
         }
-        if (this.improvements.featSaveImprovement.attribute) {
-          const amount = this.improvements.featSaveImprovement.amount;
-          const saveKey = amount === "fluency" ? "fluent" : "proficient";
+        if (this.upgrades.competence.attribute) {
           changes.push({
-            key: `system.attributes.${this.improvements.featSaveImprovement.attribute}.${saveKey}`,
+            key: `system.attributes.${this.upgrades.competence.attribute}.competence.raw`,
             mode: 4,
             priority: 20,
             qualifier: "1",
             target: "Actor",
             time: "normal",
-            value: "true",
+            value: `${this.upgrades.competence.value}`,
           });
         }
         return changes;
@@ -82,25 +116,33 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.improvements.attributeImprovement.attribute) {
-          const att = this.improvements.attributeImprovement.attribute;
-          const minVal = this.improvements.attributeImprovement.minVal;
-          this.improvements.attributeImprovement.text =
+        if (this.upgrades.score.attribute) {
+          const att = this.upgrades.score.attribute;
+          const minVal = this.upgrades.score.value;
+          this.upgrades.score.text =
             `This ability sets your @L[Core:${att.toUpperCase()}] score ` +
             `to a minimum of ${minVal}.`;
         } else {
-          this.improvements.attributeImprovement.text = "";
+          this.upgrades.score.text = "";
         }
-        if (this.improvements.featSaveImprovement.attribute) {
-          const att = this.improvements.featSaveImprovement.attribute;
-          const amount = this.improvements.featSaveImprovement.amount;
-          const amountVal =
-            TERIOCK.options.ability.featSaveImprovementAmount[amount];
-          this.improvements.featSaveImprovement.text =
-            `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in ` +
+        if (this.upgrades.competence.value === 0) {
+          this.upgrades.competence.attribute = null;
+        }
+        if (this.upgrades.competence.attribute) {
+          const att = this.upgrades.competence.attribute;
+          const amount = this.upgrades.competence.value;
+          let amountPage = "Competence";
+          if (amount === 1) {
+            amountPage = "Proficiency";
+          }
+          if (amount === 2) {
+            amountPage = "Fluency";
+          }
+          this.upgrades.competence.text =
+            `This ability gives you @L[Core:${amountPage} Bonus]{${amountPage.toLowerCase()}} in ` +
             `@L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
         } else {
-          this.improvements.featSaveImprovement.text = "";
+          this.upgrades.competence.text = "";
         }
       }
     }

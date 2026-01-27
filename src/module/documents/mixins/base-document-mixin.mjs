@@ -98,7 +98,7 @@ export default function BaseDocumentMixin(Base) {
       /**
        * Get a specific schema field.
        * @param {string} path
-       * @returns {DataSchema}
+       * @returns {DataField}
        */
       getSchema(path) {
         let schema;

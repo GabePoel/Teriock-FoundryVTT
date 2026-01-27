@@ -59,7 +59,6 @@ export default class AbilitySheet extends mix(
       ['.execution-box[data-maneuver="Reactive"]', cm.reactive, "click"],
       [".interaction-box", cm.interaction, "click"],
       [".interaction-box-feat", cm.featSaveAttribute, "contextmenu"],
-      [".target-box", cm.targets, "click"],
       [".mana-cost-box", cm.manaCost, "contextmenu"],
       [".hit-cost-box", cm.hitCost, "contextmenu"],
       [".gold-cost-box", cm.goldCost, "contextmenu"],
@@ -67,18 +66,6 @@ export default class AbilitySheet extends mix(
       [".expansion-box", cm.expansion, "click"],
       [".expansion-box-detonate", cm.expansionSaveAttribute, "contextmenu"],
       [".expansion-box-ripple", cm.expansionSaveAttribute, "contextmenu"],
-      [".ab-improvement-attribute", cm.attributeImprovement, "click"],
-      [
-        ".ab-improvement-attribute",
-        cm.attributeImprovementMinVal,
-        "contextmenu",
-      ],
-      [".ab-improvement-feat-save", cm.featSaveImprovement, "click"],
-      [
-        ".ab-improvement-feat-save",
-        cm.featSaveImprovementAmount,
-        "contextmenu",
-      ],
       [".ability-type-box", cm.form, "click"],
     ];
 
@@ -138,7 +125,7 @@ export default class AbilitySheet extends mix(
 
     const staticUpdates = {
       ".ab-attribute-improvement-button": {
-        "system.improvements.attributeImprovement.attribute": "int",
+        "system.upgrades.score.attribute": "int",
       },
       ".ab-break-cost-button": {
         "system.costs.break": "shatter",
@@ -154,7 +141,8 @@ export default class AbilitySheet extends mix(
         "system.expansionCap.raw": "1",
       },
       ".ab-feat-save-improvement-button": {
-        "system.improvements.featSaveImprovement.attribute": "int",
+        "system.upgrades.competence.attribute": "int",
+        "system.upgrades.competence.value": 1,
       },
       ".ab-gold-cost-button": {
         "system.costs.gp": {

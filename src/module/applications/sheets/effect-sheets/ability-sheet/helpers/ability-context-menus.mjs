@@ -1,4 +1,3 @@
-import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../../helpers/utils.mjs";
 import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
@@ -110,36 +109,6 @@ export default function abilityContextMenus(ability) {
     featSaveAttribute: quickMenu(
       "featSaveAttribute",
       "system.featSaveAttribute",
-    ),
-    targets: Object.entries(TERIOCK.options.ability.targets).flatMap(
-      ([key, value]) => [
-        {
-          name: value,
-          icon: TERIOCK.display.icons.unchecked,
-          callback: async () => {
-            const currentTargets = ability.system.targets;
-            const newTargets = [...currentTargets, key];
-            await ability.update({ "system.targets": newTargets });
-          },
-          condition: () => {
-            const currentTargets = ability.system.targets;
-            return !currentTargets.has(key);
-          },
-        },
-        {
-          name: value,
-          icon: TERIOCK.display.icons.checked,
-          callback: async () => {
-            const currentTargets = ability.system.targets;
-            const newTargets = currentTargets.filter((t) => t !== key);
-            await ability.update({ "system.targets": newTargets });
-          },
-          condition: () => {
-            const currentTargets = ability.system.targets;
-            return currentTargets.has(key);
-          },
-        },
-      ],
     ),
     manaCost: [
       {
@@ -309,49 +278,6 @@ export default function abilityContextMenus(ability) {
       "featSaveAttribute",
       "system.expansion.featSaveAttribute",
     ),
-
-    attributeImprovement: Object.keys(TERIOCK.index.statAttributes).map(
-      (attr) => ({
-        name: attr.toUpperCase(),
-        icon: TERIOCK.display.icons[attr],
-        callback: async () => {
-          await ability.update({
-            "system.improvements.attributeImprovement.attribute": attr,
-          });
-        },
-      }),
-    ),
-    attributeImprovementMinVal: Array.from({ length: 9 }, (_, i) => i - 3).map(
-      (i) => ({
-        name: i.toString(),
-        icon: TERIOCK.display.icons.numerical,
-        callback: async () => {
-          await ability.update({
-            "system.improvements.attributeImprovement.minVal": i,
-          });
-        },
-      }),
-    ),
-    featSaveImprovement: Object.keys(TERIOCK.index.attributes).map((attr) => ({
-      name: attr.toUpperCase(),
-      icon: TERIOCK.display.icons[attr],
-      callback: async () => {
-        await ability.update({
-          "system.improvements.featSaveImprovement.attribute": attr,
-        });
-      },
-    })),
-    featSaveImprovementAmount: Object.keys(
-      TERIOCK.options.ability.featSaveImprovementAmount,
-    ).map((level) => ({
-      name: toTitleCase(level),
-      icon: TERIOCK.display.icons[level],
-      callback: async () => {
-        await ability.update({
-          "system.improvements.featSaveImprovement.amount": level,
-        });
-      },
-    })),
     form: Object.entries(TERIOCK.options.ability.form).map(([key, value]) => ({
       name: value.name,
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),

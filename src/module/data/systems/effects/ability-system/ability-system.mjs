@@ -147,14 +147,28 @@ export default class AbilitySystem extends mix(
           editable: false,
         },
         {
-          path: "system.improvements.attributeImprovement.text",
-          classes: "italic-display-field ab-improvement-attribute",
+          path: "system.upgrades.score.text",
+          classes: "italic-display-field editable-display-field",
           editable: false,
+          dataset: {
+            action: "updatePaths",
+            paths:
+              "system.upgrades.score.attribute system.upgrades.score.value",
+            title: "Update Attribute Score Upgrade",
+            icon: "hashtag",
+          },
         },
         {
-          path: "system.improvements.featSaveImprovement.text",
-          classes: "italic-display-field ab-improvement-feat-save",
+          path: "system.upgrades.competence.text",
+          classes: "italic-display-field editable-display-field",
           editable: false,
+          dataset: {
+            action: "updatePaths",
+            paths:
+              "system.upgrades.competence.attribute system.upgrades.competence.value",
+            title: "Update Attribute Competence Upgrade",
+            icon: "award",
+          },
         },
       ],
     );

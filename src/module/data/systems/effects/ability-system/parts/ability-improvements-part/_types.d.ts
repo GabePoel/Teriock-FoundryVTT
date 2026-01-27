@@ -1,9 +1,6 @@
 export default interface AbilityImprovementsPartInterface {
-  /**
-   * <schema> Attributes that this ability improves
-   * (not to be confused with {@link Teriock.Models.AbilityGeneralPartInterface.improvement})
-   */
-  improvements: ImprovementsConfig;
+  /** <schema> Attributes that this ability upgrades */
+  upgrades: UpgradesConfig;
 }
 
 /**
@@ -12,27 +9,15 @@ export default interface AbilityImprovementsPartInterface {
 export type FeatSaveImprovementAmount = "proficiency" | "fluency";
 
 /**
- * Attribute improvement configuration
+ * Upgrades configuration
  */
-export interface AttributeImprovement {
-  attribute: Teriock.Parameters.Actor.StatAttribute | null;
-  minVal: number;
-  text: string;
-}
-
-/**
- * Feat save improvement configuration
- */
-export interface FeatSaveImprovement {
-  amount: FeatSaveImprovementAmount;
-  attribute: Teriock.Parameters.Actor.Attribute | null;
-  text: string;
-}
-
-/**
- * Improvements configuration
- */
-export interface ImprovementsConfig {
-  attributeImprovement: AttributeImprovement;
-  featSaveImprovement: FeatSaveImprovement;
+export interface UpgradesConfig {
+  competence: {
+    attribute: Teriock.Parameters.Actor.Attribute | null;
+    value: number;
+  };
+  score: {
+    attribute: Teriock.Parameters.Actor.StatAttribute | null;
+    value: number;
+  };
 }

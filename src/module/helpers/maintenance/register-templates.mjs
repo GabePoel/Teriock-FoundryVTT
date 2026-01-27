@@ -34,7 +34,6 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-expansion-bar.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-status-bar.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-targeting-bar.hbs",
-    "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-improvements-entries.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/ab-impacts.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/ab-menu.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/impact-expiration.hbs",

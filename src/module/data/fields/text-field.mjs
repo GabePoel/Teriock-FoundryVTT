@@ -24,6 +24,7 @@ export default class TextField extends HTMLField {
     const out = super.toFormGroup(groupConfig, inputConfig);
     out.classList.add("ab-section-container");
     out.classList.remove("form-group");
+    if (inputConfig.dataset) Object.assign(out.dataset, inputConfig.dataset);
     /** @type {HTMLLabelElement|null} */
     const label =
       out.querySelector("label") || /** @type {any} */ (out.firstElementChild);
