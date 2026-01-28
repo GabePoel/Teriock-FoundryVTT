@@ -19,6 +19,21 @@ function addWikiOpenToHeader(application, controls) {
   }
 }
 
+/**
+ * Add GM notes button to sheet header.
+ * @param {BaseItemSheet|BaseEffectSheet} _application
+ * @param {ApplicationHeaderControlsEntry[]} controls
+ */
+function addGmNotesToHeader(_application, controls) {
+  if (game.user.isGM) {
+    controls.push({
+      action: "gmNotesOpen",
+      icon: makeIconClass("notes", "contextMenu"),
+      label: "Open GM Notes",
+    });
+  }
+}
+
 export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "renderJournalEntrySheet",
@@ -45,6 +60,11 @@ export default function registerSheetManagementHooks() {
   foundry.helpers.Hooks.on(
     "getHeaderControlsWikiButtonSheet",
     addWikiOpenToHeader,
+  );
+
+  foundry.helpers.Hooks.on(
+    "getHeaderControlsGmNotesCommonSheetPart",
+    addGmNotesToHeader,
   );
 
   foundry.helpers.Hooks.on(

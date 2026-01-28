@@ -104,6 +104,22 @@ export default (Base) => {
         this.impacts.boosts =
           /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {};
       }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        const keys = Object.keys(TERIOCK.options.consequence.rolls);
+        for (const impact of [
+          this.impacts.base,
+          this.impacts.proficient,
+          this.impacts.fluent,
+        ]) {
+          for (const key of Object.keys(impact.rolls)) {
+            if (!keys.includes(key)) {
+              delete impact.rolls[key];
+            }
+          }
+        }
+      }
     }
   );
 };

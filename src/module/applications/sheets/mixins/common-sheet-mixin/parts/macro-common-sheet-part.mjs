@@ -9,7 +9,7 @@ export default (Base) => {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {TeriockCommon} document
+     * @property {GenericCommon} document
      */
     class MacroCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */

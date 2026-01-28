@@ -1,3 +1,5 @@
+import { makeIconClass } from "../../../../../helpers/utils.mjs";
+
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
@@ -14,8 +16,19 @@ export default (Base) => {
       static DEFAULT_OPTIONS = {
         actions: {
           chatThis: this._onChatThis,
-          rollThis: this._onRollThis,
+          deleteThis: this._onDeleteThis,
           openDoc: this._onOpenDoc,
+          rollThis: this._onRollThis,
+        },
+        window: {
+          controls: [
+            {
+              action: "deleteThis",
+              icon: makeIconClass("trash", "contextMenu"),
+              label: "Delete This",
+              ownership: "OWNER",
+            },
+          ],
         },
       };
 
@@ -27,6 +40,14 @@ export default (Base) => {
         await this.document.toMessage({
           actor: this.actor,
         });
+      }
+
+      /**
+       * Deletes the current document.
+       * @returns {Promise<void>}
+       */
+      static async _onDeleteThis() {
+        await this.document.safeDelete();
       }
 
       /**

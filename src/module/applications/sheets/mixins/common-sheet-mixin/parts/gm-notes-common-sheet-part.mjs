@@ -2,7 +2,6 @@
  * @param {typeof TeriockDocumentSheet} Base
  */
 export default (Base) => {
-  //noinspection JSAccessibilityCheck
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -23,21 +22,6 @@ export default (Base) => {
        */
       static async _onGmNotesOpen() {
         await this.document.system.gmNotesOpen();
-      }
-
-      /** @inheritDoc */
-      async _renderFrame(options = {}) {
-        const frame = await super._renderFrame(options);
-        if (game.user.isGM) {
-          const notesButton = document.createElement("button");
-          notesButton.classList.add(
-            ...["header-control", "icon", "fa-solid", "fa-notes"],
-          );
-          notesButton.setAttribute("data-action", "gmNotesOpen");
-          notesButton.setAttribute("data-tooltip", "Open GM Notes");
-          this.window.controls.before(notesButton);
-        }
-        return frame;
       }
     }
   );

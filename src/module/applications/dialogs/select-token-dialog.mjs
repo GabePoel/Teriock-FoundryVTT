@@ -41,6 +41,6 @@ export async function conditionDialog(condition) {
   const conditionName = TERIOCK.index.conditions[condition];
   return await selectTokensDialog({
     title: "Select Creatures",
-    hint: `The targets will be ${conditionName} with respect to the selected creatures.`,
+    hint: `The targets will be ${conditionName.toLowerCase()} with respect to the selected creatures.`,
   });
 }
