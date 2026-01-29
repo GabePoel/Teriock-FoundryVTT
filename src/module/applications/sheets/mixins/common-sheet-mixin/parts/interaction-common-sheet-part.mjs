@@ -25,7 +25,7 @@ export default (Base) => {
             {
               action: "deleteThis",
               icon: makeIconClass("trash", "contextMenu"),
-              label: "Delete This",
+              label: "Delete Document",
               ownership: "OWNER",
             },
           ],
