@@ -1,6 +1,7 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../../helpers/html.mjs";
 import { toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
+import { WebsiteURLField } from "../../../fields/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -44,6 +45,10 @@ export default class CommonSystem extends TypeDataModel {
    */
   static defineSchema() {
     return {
+      url: new WebsiteURLField({
+        label: "Web Address",
+        hint: "URL to a reference web address.",
+      }),
       gmNotes: new fields.DocumentUUIDField({
         required: false,
         nullable: true,

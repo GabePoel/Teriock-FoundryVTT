@@ -13,6 +13,8 @@ declare global {
     export interface CommonSystemInterface {
       /** <schema> Journal entry page only accessible to GM */
       gmNotes: UUID<TeriockJournalEntryPage>;
+      /** <schema> A URL for a reference to this. */
+      url: string;
     }
   }
 }
