@@ -6,328 +6,59 @@ effects:
   - name: White Dragonfly Breath
     type: ability
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
       costs:
-        verbal: false
-        somatic: false
-        material: false
         mp:
           type: static
           value:
             static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
       delivery:
         base: cone
-        parent: null
-        package: null
       duration:
         unit: minute
         quantity: 10
-        conditions:
-          present: []
-          absent: []
         stationary: false
         description: 10 Minutes
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
       elements:
         - life
-      endCondition: ''
       executionTime: a1
-      expansion: null
-      expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
       form: special
-      gifted:
-        enabled: false
-        amount: 1
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic holy]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      improvement: ''
       improvements:
         attributeImprovement:
-          attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
           amount: proficient
       interaction: feat
-      invoked: false
-      limitation: ''
       maneuver: active
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
       piercing: normal
       powerSources:
         - magical
-      prepared: true
       range:
         unit: ft
         raw: '15'
-      requirements: ''
       results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
         save: >-
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
           choice and takes half as much @L[Core:Damage]{damage} from this as
           they would otherwise. This is calculated after any
           @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
-        critSave: ''
         fail: >-
           <p>Target cannot deal @L[Core:Damage]{damage} and is
           @L[Condition:Lighted]{lighted} to a creature of your choice.</p>
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
       targets:
         - creature
-      trigger: ''
-      warded: false
       impacts:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
         heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
           rolls:
             damage: 2d10[magic holy]
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
-        macros: {}
     _id: xo8afBJElOYMIuOh
     img: systems/teriock/src/icons/abilities/white-dragonfly-breath.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -335,11 +66,9 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.abilities.Item.yX504vd6T13fCHG9
     _key: '!items.effects!yX504vd6T13fCHG9.xo8afBJElOYMIuOh'
-flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
 _key: '!items!yX504vd6T13fCHG9'

@@ -5,13 +5,10 @@ prototypeToken:
   name: Terrobuton Toadstool
   ring:
     enabled: true
-    colors:
-      ring: null
-      background: null
+    colors: {}
     effects: 1
     subject:
       scale: 1
-      texture: null
   texture:
     src: systems/teriock/src/icons/tokens/terrobuton-toadstool.webp
     anchorX: 0.5
@@ -42,7 +39,6 @@ prototypeToken:
     alpha: 0.5
     angle: 360
     bright: 0
-    color: null
     coloration: 1
     dim: 0
     attenuation: 0.5
@@ -51,7 +47,6 @@ prototypeToken:
     contrast: 0
     shadows: 0
     animation:
-      type: null
       speed: 5
       intensity: 5
       reverse: false
@@ -63,570 +58,131 @@ prototypeToken:
     range: 0
     angle: 360
     visionMode: basic
-    color: null
     attenuation: 0.1
     brightness: 0
     saturation: 0
     contrast: 0
-  detectionModes: []
   occludable:
     radius: 0
   turnMarker:
     mode: 1
-    animation: null
-    src: null
     disposition: false
-  movementAction: null
-  flags: {}
   randomImg: false
   appendNumber: false
   prependAdjective: false
 items:
-  - name: Terrobuton Toadstool
-    type: species
+  - _id: terrobutonToadst
     folder: JWyDfjLkE2E9S902
-    _id: c8vwxtm3RT6OToSn
+    name: Terrobuton Toadstool
+    type: species
     img: systems/teriock/src/icons/creatures/terrobuton-toadstool.webp
     system:
+      competence:
+        raw: 1
       description: >-
         <p>Immature @L[Creature:Deathcap Toadstool]{deathcap toadstools}. They
         are very dangerous but have many uses when properly harvested by
         herbalists. Terrobuton toadstools cannot yet hop and are rooted to old
         logs and decaying matter.</p>
-      onUse: []
       statDice:
         hp:
           disabled: false
           faces: 6
           number:
             raw: '1'
-          dice: []
         mp:
           disabled: false
           faces: 4
           number:
             raw: '1'
-          dice: []
-      adult: null
       appearance: >-
         <p>Large hybrid mushroom-@L[Creature:Toad]{toads}. Terrobuton toadstools
         are red with black spots.</p>
-      attributeIncrease: ''
       br: 4
-      hpIncrease: ''
-      innateRanks: ''
-      lifespan: null
-      mpIncrease: ''
       size:
         enabled: true
         value: 0.5
-        min: null
-        max: null
       traits:
         - animal
         - fungus
-      transformationLevel: null
-      qualifiers:
-        ephemeral:
-          raw: '0'
-        suppressed:
-          raw: '0'
-      competence:
-        raw: 1
-      _ref: >-
-        Compendium.teriock.creatures.Actor.terrobutonToadst.Item.c8vwxtm3RT6OToSn
     effects:
       - name: Dense Intelligence
         type: ability
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
+          powerSources:
+            - martial
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: passive
+          executionTime: passive
           delivery:
             base: self
-            parent: null
-            package: null
+          targets:
+            - self
           duration:
             unit: unlimited
-            conditions:
-              present: []
-              absent: []
-            stationary: false
             description: Always Active
             raw: '0'
             dawn: false
-          effectTypes: []
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
-          executionTime: passive
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
-          featSaveAttribute: mov
-          form: flaw
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          interaction: manifest
-          invoked: false
-          limitation: ''
-          maneuver: passive
-          overview:
-            base: ''
-            proficient: ''
-            fluent: ''
+            stationary: false
           piercing:
             raw: 0
-          powerSources:
-            - martial
-          range:
-            raw: ''
-            unit: self
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
-          targets:
-            - self
-          trigger: ''
-          warded: false
-          impacts:
-            base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
+          form: flaw
           upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
             score:
               attribute: int
               value: -2
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: ZBc807wNs84jCBHy
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
+          grantOnly: false
+          range:
+            unit: self
+        _id: GqzNBLB8FWJ492GX
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.PT3Et55oTXl9p9jK
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.ZBc807wNs84jCBHy
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.GqzNBLB8FWJ492GX
       - name: Fire Damage Immunity
         type: ability
+        img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
+          powerSources:
+            - magical
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: passive
+          executionTime: passive
           delivery:
             base: self
-            parent: null
-            package: null
+          targets:
+            - self
           duration:
             unit: unlimited
-            conditions:
-              present: []
-              absent: []
-            stationary: false
             description: Always Active
             raw: '0'
             dawn: false
-          effectTypes:
-            - immunity
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
-          executionTime: passive
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
-          featSaveAttribute: mov
-          form: normal
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          interaction: manifest
-          invoked: false
-          limitation: ''
-          maneuver: passive
+            stationary: false
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Fire]{fire
               damage}.</p>
-            proficient: ''
-            fluent: ''
           piercing:
             raw: 0
-          powerSources:
-            - magical
-          range:
-            raw: ''
-            unit: self
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
-          targets:
-            - self
-          trigger: ''
-          warded: false
+          form: normal
+          effectTypes:
+            - immunity
           impacts:
             base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
               changes:
                 - mode: 2
                   priority: 10
@@ -635,1853 +191,234 @@ items:
                   target: Actor
                   qualifier: '1'
                   value: fire
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
-          upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
-            score:
-              attribute: null
-              value: 0
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: 8ItGbLFj5h0PTJsi
-        img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
+          grantOnly: false
+          range:
+            unit: self
+        _id: SBJGZdS52sylaZOn
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.Y2enQ6mYV3fwCgXV
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.8ItGbLFj5h0PTJsi
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.SBJGZdS52sylaZOn
       - name: Lightning Immunity
         type: ability
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
           delivery:
             base: self
-            parent: null
-            package: null
           duration:
             unit: unlimited
-            conditions:
-              present: []
-              absent: []
             stationary: false
             description: Always Active
             raw: '0'
             dawn: false
-          effectTypes: []
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
           executionTime: passive
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
           featSaveAttribute: mov
           form: normal
-          gifted:
-            enabled: false
-            amount: 1
           grantOnly: false
-          heightened: ''
-          improvement: ''
           interaction: manifest
-          invoked: false
-          limitation: ''
           maneuver: passive
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Lightning
               effects]{lightning effects}.</p>
-            proficient: ''
-            fluent: ''
           piercing:
             raw: 0
           powerSources:
             - primal
-          range:
-            raw: ''
-            unit: self
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
           targets:
             - self
-          trigger: ''
-          warded: false
-          impacts:
-            base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
-          upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
-            score:
-              attribute: null
-              value: 0
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: cP7JuCvyvfqsyAAC
+          range:
+            unit: self
+        _id: lvvy9Ev6o7oXakKY
         img: systems/teriock/src/icons/abilities/lightning-immunity.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.C56Er6Ep0tSWUkc6
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.cP7JuCvyvfqsyAAC
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.lvvy9Ev6o7oXakKY
       - name: Normal Sneak
         type: ability
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
+          powerSources:
+            - martial
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: passive
+          executionTime: passive
           delivery:
             base: self
-            parent: null
-            package: null
+          targets:
+            - self
           duration:
             unit: unlimited
-            conditions:
-              present: []
-              absent: []
-            stationary: false
             description: Always Active
             raw: '0'
             dawn: false
-          effectTypes: []
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
-          executionTime: passive
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
-          featSaveAttribute: mov
-          form: normal
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          interaction: manifest
-          invoked: false
-          limitation: ''
-          maneuver: passive
-          overview:
-            base: ''
-            proficient: ''
-            fluent: ''
+            stationary: false
           piercing:
             raw: 0
-          powerSources:
-            - martial
-          range:
-            raw: ''
-            unit: self
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
-          targets:
-            - self
-          trigger: ''
-          warded: false
-          impacts:
-            base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
+          form: normal
           upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
             score:
               attribute: snk
               value: 0
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: GRWjyPlYDvYLNidu
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
+          grantOnly: false
+          range:
+            unit: self
+        _id: rxU5RBcTqxWXZygl
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.vnJIeoWVUXPdQDnv
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.GRWjyPlYDvYLNidu
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.rxU5RBcTqxWXZygl
       - name: Poor Perception
         type: ability
+        img: systems/teriock/src/icons/abilities/poor-perception.webp
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
+          powerSources:
+            - martial
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: passive
+          executionTime: passive
           delivery:
             base: self
-            parent: null
-            package: null
+          targets:
+            - self
           duration:
             unit: unlimited
-            conditions:
-              present: []
-              absent: []
-            stationary: false
             description: Always Active
             raw: '0'
             dawn: false
-          effectTypes: []
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
-          executionTime: passive
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
-          featSaveAttribute: mov
-          form: flaw
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          interaction: manifest
-          invoked: false
-          limitation: ''
-          maneuver: passive
-          overview:
-            base: ''
-            proficient: ''
-            fluent: ''
+            stationary: false
           piercing:
             raw: 0
-          powerSources:
-            - martial
-          range:
-            raw: ''
-            unit: self
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
-          targets:
-            - self
-          trigger: ''
-          warded: false
-          impacts:
-            base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
+          form: flaw
           upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
             score:
               attribute: per
               value: -1
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: HI4u52S31Kipwuj9
-        img: systems/teriock/src/icons/abilities/poor-perception.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
+          grantOnly: false
+          range:
+            unit: self
+        _id: vTkPg64fOC1IXc0T
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.l3FXUg29HR3C6H8b
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.HI4u52S31Kipwuj9
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.vTkPg64fOC1IXc0T
       - name: Stationary
         type: ability
+        img: systems/teriock/src/icons/abilities/stationary.webp
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
+          powerSources:
+            - martial
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: passive
+          executionTime: passive
           delivery:
             base: self
-            parent: null
-            package: null
+          targets:
+            - self
           duration:
             unit: unlimited
-            conditions:
-              present: []
-              absent: []
-            stationary: false
             description: Always Active
             raw: '0'
             dawn: false
-          effectTypes: []
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
-          executionTime: passive
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
-          featSaveAttribute: mov
-          form: flaw
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          interaction: manifest
-          invoked: false
-          limitation: ''
-          maneuver: passive
-          overview:
-            base: ''
-            proficient: ''
-            fluent: ''
+            stationary: false
           piercing:
             raw: 0
-          powerSources:
-            - martial
-          range:
-            raw: ''
-            unit: self
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
-          targets:
-            - self
-          trigger: ''
-          warded: false
-          impacts:
-            base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
+          form: flaw
           upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
             score:
               attribute: mov
               value: -3
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: QIeLJWh1tWlDz0Uq
-        img: systems/teriock/src/icons/abilities/stationary.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
+          grantOnly: false
+          range:
+            unit: self
+        _id: zrXFTcNPLb875uQM
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.GKjsqrEESZA7cjvf
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.QIeLJWh1tWlDz0Uq
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.zrXFTcNPLb875uQM
       - name: Terror Ball
         type: ability
+        img: systems/teriock/src/icons/abilities/terror-ball.webp
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
-          delivery:
-            base: missile
-            parent: null
-            package: ball
-          duration:
-            unit: instant
-            conditions:
-              present: []
-              absent: []
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          effectTypes:
-            - damaging
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements:
-            - necromancy
-          endCondition: ''
-          executionTime: a1
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
-          featSaveAttribute: mov
-          form: normal
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
-          improvement: ''
-          interaction: attack
-          invoked: false
-          limitation: ''
-          maneuver: active
-          overview:
-            base: ''
-            proficient: ''
-            fluent: ''
-          piercing:
-            raw: 2
           powerSources:
             - magical
+          interaction: attack
+          featSaveAttribute: mov
+          maneuver: active
+          executionTime: a1
+          delivery:
+            base: missile
+            package: ball
+          targets:
+            - creature
+          elements:
+            - necromancy
+          duration:
+            unit: instant
+            description: Instant
+            dawn: false
+            stationary: false
           range:
             unit: ft
             raw: '30'
-          requirements: ''
           results:
             hit: >-
               <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
@@ -2489,676 +426,94 @@ items:
             critHit: >-
               <p>Double the @L[Core:Damage]{damage dice} dealt by this
               @L[Category:Abilities]{ability}.</p>
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
+          piercing:
+            raw: 0
           spell: true
           standard: true
-          sustained: false
-          targets:
-            - creature
-          trigger: ''
-          warded: false
           class: necromancer
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
+          form: normal
+          effectTypes:
+            - damaging
           impacts:
             base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
               rolls:
                 damage: 1d4[terror magic]
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
             heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
               rolls:
                 damage: 1d4[magic terror]
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
-          upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
-            score:
-              attribute: null
-              value: 0
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: WAPt6E5VrYKXym3b
-        img: systems/teriock/src/icons/abilities/terror-ball.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
+          grantOnly: false
+        _id: H2gAyRJZUS3ll8YJ
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.0pMuBeTl2zLI4Fmz
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.WAPt6E5VrYKXym3b
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.H2gAyRJZUS3ll8YJ
       - name: Tiny Strength
         type: ability
+        img: systems/teriock/src/icons/abilities/tiny-strength.webp
         system:
-          consumable: false
-          maxQuantity:
-            raw: ''
-          quantity: 1
-          adept:
-            enabled: false
-            amount: 1
-          basic: false
-          costs:
-            verbal: false
-            somatic: false
-            material: false
-            mp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            hp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            gp:
-              type: none
-              value:
-                static: 0
-                formula: ''
-                variable: ''
-            break: ''
-            materialCost: ''
+          powerSources:
+            - martial
+          interaction: manifest
+          featSaveAttribute: mov
+          maneuver: passive
+          executionTime: passive
           delivery:
             base: self
-            parent: null
-            package: null
+          targets:
+            - self
           duration:
             unit: unlimited
-            conditions:
-              present: []
-              absent: []
-            stationary: false
             description: Always Active
             raw: '0'
             dawn: false
-          effectTypes: []
-          elderSorcery: false
-          elderSorceryIncant: ''
-          elements: []
-          endCondition: ''
-          executionTime: passive
-          expansion:
-            type: null
-            range:
-              raw: ''
-              unit: self
-            featSaveAttribute: mov
-            cap:
-              raw: ''
-          featSaveAttribute: mov
-          form: flaw
-          gifted:
-            enabled: false
-            amount: 1
-          grantOnly: false
-          heightened: ''
-          improvement: ''
-          interaction: manifest
-          invoked: false
-          limitation: ''
-          maneuver: passive
-          overview:
-            base: ''
-            proficient: ''
-            fluent: ''
+            stationary: false
           piercing:
             raw: 0
-          powerSources:
-            - martial
-          range:
-            raw: ''
-            unit: self
-          requirements: ''
-          results:
-            hit: ''
-            critHit: ''
-            miss: ''
-            critMiss: ''
-            save: ''
-            critSave: ''
-            fail: ''
-            critFail: ''
-          ritual: false
-          rotator: false
-          skill: false
-          spell: false
-          standard: false
-          sustained: false
-          targets:
-            - self
-          trigger: ''
-          warded: false
-          impacts:
-            base:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            proficient:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            fluent:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            heightened:
-              statuses: []
-              startStatuses: []
-              endStatuses: []
-              rolls: {}
-              hacks: []
-              checks: []
-              duration: 0
-              changes: []
-              common: []
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: none
-                    when:
-                      skip: 0
-                      time: start
-                      trigger: turn
-                changeOnCrit: false
-                doesExpire: false
-              transformation:
-                enabled: false
-                image: null
-                level: minor
-                suppression:
-                  bodyParts: true
-                  equipment: true
-                  fluencies: true
-                  ranks: true
-                uuids: []
-                resetHp: true
-                resetMp: false
-                multiple: false
-                select: false
-                useFolder: false
-                uuid: null
-              macroButtonUuids: []
-              noTemplate: false
-              abilityButtonNames: []
-              range: ''
-              critStatuses: []
-            macros: {}
+          form: flaw
           upgrades:
-            competence:
-              attribute: null
-              value: 0
-              text: ''
             score:
               attribute: str
               value: -2
-              text: ''
-          qualifiers:
-            ephemeral:
-              raw: '0'
-            suppressed:
-              raw: '0'
+          expansion:
+            range:
+              unit: self
+            featSaveAttribute: mov
           competence:
             raw: 0
-          _ref: null
           revealed: true
-          grantOnlyText: ''
-        _id: fungzOYo7t8g8Kbo
-        img: systems/teriock/src/icons/abilities/tiny-strength.webp
-        changes: []
-        disabled: false
-        origin: null
-        transfer: true
-        statuses: []
-        flags: {}
+          grantOnly: false
+          range:
+            unit: self
+        _id: rtk9OtqblPncfmmo
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.q7iEXe3XPf3USaeS
           coreVersion: '13'
           systemId: teriock
-          systemVersion: 0.9.11
+          systemVersion: 0.9.14
           lastModifiedBy: teriockBuilder00
         _key: >-
-          !actors.items.effects!terrobutonToadst.c8vwxtm3RT6OToSn.fungzOYo7t8g8Kbo
-    flags: {}
+          !actors.items.effects!terrobutonToadst.terrobutonToadst.rtk9OtqblPncfmmo
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.c8vwxtm3RT6OToSn
+      compendiumSource: Compendium.teriock.species.Item.terrobutonToadst
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
+      systemVersion: 0.9.14
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!terrobutonToadst.c8vwxtm3RT6OToSn'
+    _key: '!actors.items!terrobutonToadst.terrobutonToadst'
 system:
   hp:
     value: 4
@@ -3186,30 +541,17 @@ system:
     attackPenalty: 0
     hasReaction: true
   initiative: 1d20 + @mov
-  wielding:
-    attacker: null
-    blocker: null
   weight:
     self:
       raw: pow(3 + @size, 3)
-  transformation:
-    primary: null
-  notes: ''
-  magic:
-    maxRotators:
-      raw: ''
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-  _ref: Compendium.teriock.creatures.Actor.terrobutonToadst
 _id: terrobutonToadst
-effects: []
 folder: 87J1Cv81XIW9AuHz
-flags: {}
 _stats:
-  compendiumSource: null
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.8

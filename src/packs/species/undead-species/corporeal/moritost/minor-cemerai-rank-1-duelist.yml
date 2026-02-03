@@ -1,10 +1,12 @@
-name: Rank 1 Duelist
-type: rank
+_id: wzup1rJM8lMKiMYj
 folder: IiMVvNrihSEP66aT
+name: Rank 1 Duelist
 system:
   archetype: warrior
   className: duelist
   classRank: 1
+  competence:
+    raw: 1
   description: >-
     <p>Honor-bound and honest to the core, Duelists are often judges and
     referees for duels as well as devoted warriors. Duelists prize the honor of
@@ -12,42 +14,28 @@ system:
     in everything that they do. A true Duelist wins the battle before it has
     begun. Strategy and personal perfection are the Duelist's way. If you are a
     Duelist, be calm, focused, well spoken and confident in yourself.</p>
-  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
-  maxAv: 4
   statDice:
     hp:
+      disabled: false
       faces: 12
-      disabled: false
       number:
-        saved: '1'
         raw: '1'
-      dice: []
     mp:
-      faces: 8
       disabled: false
+      faces: 8
       number:
-        saved: '1'
         raw: '1'
-      dice: []
-  qualifiers:
-    ephemeral:
-      saved: '0'
-      raw: '0'
-    suppressed:
-      saved: '0'
-      raw: '0'
-  _sup: Cu3DPBvcbcXyjlBX
-  _ref: Compendium.teriock.species.Item.3SVjDI8BOaxa4lr2
-  onUse: []
+  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
   innate: false
-_id: ctTAC3jyMDxPqgIK
+  maxAv: 4
+  _sup: minorCemerai0000
+type: rank
 img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
 effects:
   - name: Duel
     type: ability
+    img: systems/teriock/src/icons/abilities/duel.webp
     system:
-      elderSorcery: false
-      elderSorceryIncant: ''
       powerSources:
         - spiritual
       interaction: manifest
@@ -56,20 +44,13 @@ effects:
       executionTime: a1
       delivery:
         base: sight
-        parent: null
-        package: null
       targets:
         - creature
-      elements: []
       duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
+        unit: instant
         description: No Limit
-      sustained: false
+        stationary: false
+        dawn: false
       range:
         unit: ft
         raw: '30'
@@ -88,94 +69,21 @@ effects:
           action abilities]{single action} @L[Category:Duelist class
           abilities]{Duelist ability} as a @L[Core:Reactive Maneuvers]{free
           reaction} to the target's decision and subsequent movement.</p>
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-          text: ''
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-          text: ''
+      piercing:
+        raw: 0
       skill: true
-      spell: false
       standard: true
-      ritual: false
       class: duelist
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
       requirements: >-
         <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
         an opponent.</p>
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        saved: ''
       impacts:
         base:
           statuses:
             - lighted
           startStatuses:
             - dueling
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
           expiration:
             normal:
               combat:
@@ -189,253 +97,33 @@ effects:
                   time: end
                   trigger: turn
                   skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
         proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
           abilityButtonNames:
             - Move
-          macroButtonUuids: []
-          noTemplate: false
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
         macros:
           Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
-      qualifiers:
-        ephemeral:
-          saved: '0'
-          raw: '0'
-        suppressed:
-          saved: '0'
-          raw: '0'
-      _ref: null
+      competence:
+        raw: 0
       revealed: true
-      adept:
-        enabled: false
-        amount: 1
-      effectTypes: []
       grantOnly: false
-      grantOnlyText: ''
-    _id: fOLtc6H3b1sdjhsK
-    img: systems/teriock/src/icons/abilities/duel.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+    _id: A4WZCzLVp8Jq9ykR
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.y0vCZhuJEduO943v
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.14
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ctTAC3jyMDxPqgIK.fOLtc6H3b1sdjhsK'
+    _key: '!items.effects!wzup1rJM8lMKiMYj.A4WZCzLVp8Jq9ykR'
   - name: Defy Death
     type: ability
+    img: systems/teriock/src/icons/abilities/defy-death.webp
     system:
-      elderSorcery: false
-      elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
@@ -444,370 +132,53 @@ effects:
       executionTime: r1
       delivery:
         base: self
-        parent: null
-        package: null
       targets:
         - self
-      elements: []
       duration:
         unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
         description: 1 Minute
+        stationary: false
+        dawn: false
       sustained: true
-      range:
-        raw: ''
       overview:
         base: <p>You begin @L[Condition:Defying Death]{defying death}.</p>
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-          text: ''
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-          text: ''
+      piercing:
+        raw: 0
       skill: true
-      spell: false
       standard: true
-      ritual: false
       class: duelist
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
       trigger: <p>You would @L[Condition:Down]{drop}.</p>
-      basic: false
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        saved: ''
       effectTypes:
         - resistance
       impacts:
         base:
           statuses:
             - defyingDeath
-          startStatuses: []
-          endStatuses: []
           rolls:
             endCon: 2d4
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        macros: {}
-      qualifiers:
-        ephemeral:
-          saved: '0'
-          raw: '0'
-        suppressed:
-          saved: '0'
-          raw: '0'
-      _ref: null
+      competence:
+        raw: 0
       revealed: true
-      adept:
-        enabled: false
-        amount: 1
       grantOnly: false
-      grantOnlyText: ''
-    _id: s4jlaiLOKHcZ0CUI
-    img: systems/teriock/src/icons/abilities/defy-death.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      range:
+        unit: self
+    _id: Uz1hvRPju7UkGtEK
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.mJ1yUwH12EFrZrCu
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.14
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ctTAC3jyMDxPqgIK.s4jlaiLOKHcZ0CUI'
+    _key: '!items.effects!wzup1rJM8lMKiMYj.Uz1hvRPju7UkGtEK'
   - name: Resolve Conflict
     type: ability
+    img: systems/teriock/src/icons/abilities/resolve-conflict.webp
     system:
-      elderSorcery: false
-      elderSorceryIncant: ''
       powerSources:
         - martial
       interaction: manifest
@@ -816,374 +187,56 @@ effects:
       executionTime: passive
       delivery:
         base: self
-        parent: null
-        package: null
       targets:
         - self
-      elements: []
       duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
+        unit: unlimited
         description: Always Active
-      sustained: false
-      range:
-        raw: ''
+        stationary: false
+        raw: '0'
+        dawn: false
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
           @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
           @L[Ability:Detect Lie]{Detect Lie}.</p>
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-          text: ''
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-          text: ''
+      piercing:
+        raw: 0
       skill: true
-      spell: false
       standard: true
-      ritual: false
       class: duelist
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        saved: ''
       impacts:
         base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes:
-            - key: system.tradecrafts.peacekeeper.score
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        macros: {}
-      qualifiers:
-        ephemeral:
-          saved: '0'
-          raw: '0'
-        suppressed:
-          saved: '0'
-          raw: '0'
-      _ref: null
+              time: normal
+              key: system.tradecrafts.peacekeeper.score
+              target: Actor
+              qualifier: '1'
+              value: '2'
+      competence:
+        raw: 0
       revealed: true
-      adept:
-        enabled: false
-        amount: 1
-      effectTypes: []
       grantOnly: false
-      grantOnlyText: ''
-    _id: LxMNCqFqk83L8a8b
-    img: systems/teriock/src/icons/abilities/resolve-conflict.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      range:
+        unit: self
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.E72AFglumdOwjfU6
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.14
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ctTAC3jyMDxPqgIK.LxMNCqFqk83L8a8b'
+    _id: ez42WB6ZV9yzul09
+    _key: '!items.effects!wzup1rJM8lMKiMYj.ez42WB6ZV9yzul09'
   - name: Detect Lie
     type: ability
     system:
-      elderSorcery: false
-      elderSorceryIncant: ''
       powerSources:
         - spiritual
       interaction: feat
@@ -1192,378 +245,64 @@ effects:
       executionTime: r0
       delivery:
         base: sight
-        parent: null
-        package: null
       targets:
         - creature
-      elements: []
       duration:
         unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
         stationary: false
         description: Instant
-      sustained: false
+        raw: '0'
+        dawn: false
       range:
         unit: ft
         raw: '15'
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
       results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
         save: >-
           <p>You detect that the statement is true, regardless of what the
           target actually believes. This also applies if [[lookup name]] is
           @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for some
           other reason.</p>
-        critSave: ''
         fail: >-
           <p>You detect whether the target believes the statement is true or
           false.</p>
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-          text: ''
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-          text: ''
+      piercing:
+        raw: 0
       skill: true
-      spell: false
       standard: true
-      ritual: false
       class: duelist
-      rotator: false
-      invoked: false
       costs:
-        verbal: false
-        somatic: false
-        material: false
         mp:
           type: static
           value:
             static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
       trigger: >-
         <p>Someone makes a statement which could, in principle, be true or
         false.</p>
-      basic: false
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        saved: ''
       effectTypes:
         - truthDetecting
-      impacts:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-          macroButtonUuids: []
-          noTemplate: false
-          abilityButtonNames: []
-          range: ''
-          critStatuses: []
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            multiple: false
-            resetHp: true
-            resetMp: false
-            select: false
-            useFolder: false
-            uuid: null
-        macros: {}
-      qualifiers:
-        ephemeral:
-          saved: '0'
-          raw: '0'
-        suppressed:
-          saved: '0'
-          raw: '0'
-      _sup: LxMNCqFqk83L8a8b
-      _ref: null
+      _sup: ez42WB6ZV9yzul09
+      competence:
+        raw: 0
       revealed: true
-      adept:
-        enabled: false
-        amount: 1
       grantOnly: false
-      grantOnlyText: ''
-    _id: 3hN6DxA1nRtyGOQy
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
     img: systems/teriock/src/icons/abilities/detect-lie.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.PuXtIJ90SSRQkbDq
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.14
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ctTAC3jyMDxPqgIK.3hN6DxA1nRtyGOQy'
-flags: {}
+    _id: WCJUDTZBY0DrItAn
+    _key: '!items.effects!wzup1rJM8lMKiMYj.WCJUDTZBY0DrItAn'
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.rank1Duelist0000
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.14
   lastModifiedBy: teriockBuilder00
-_key: '!items!ctTAC3jyMDxPqgIK'
+_key: '!items!wzup1rJM8lMKiMYj'

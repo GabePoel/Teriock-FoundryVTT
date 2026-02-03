@@ -7,8 +7,6 @@ effects:
     type: ability
     img: systems/teriock/src/icons/abilities/zombify.webp
     system:
-      elderSorcery: false
-      elderSorceryIncant: ''
       powerSources:
         - magical
       interaction: attack
@@ -17,7 +15,6 @@ effects:
       executionTime: a1
       delivery:
         base: hand
-        parent: null
         package: touch
       targets:
         - creature
@@ -26,16 +23,11 @@ effects:
       duration:
         unit: minute
         quantity: 1
-        conditions:
-          present: []
-          absent: []
         description: 1 Minute
-      sustained: false
       range:
         unit: ft
         raw: Your Hand's Range
       overview:
-        base: ''
         proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
         fluent: >-
           <p>The base duration of this effect is 1 hour and the
@@ -50,115 +42,30 @@ effects:
           before, but loses all other traits and abilities. If the target was
           already @L[Category:Zombies]{some kind of zombie}, then it is
           reanimated as that type.</p>
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
       piercing: ub
       improvements:
         attributeImprovement:
-          attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
           amount: proficient
-      skill: false
       spell: true
       standard: true
-      ritual: false
       class: necromancer
-      rotator: false
-      invoked: false
       costs:
         verbal: true
         somatic: true
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      endCondition: ''
       requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      expansion: null
-      expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
       effectTypes:
         - control
         - reanimation
       impacts:
         base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
           transformation:
             enabled: true
             suppression:
@@ -167,125 +74,11 @@ effects:
             uuids:
               - Compendium.teriock.species.Item.SRdgO7roRk39yrUB
             level: greater
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
         fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
           duration: 3600
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
         heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
           duration: 3600
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
     _id: OR1GARXLuQdI20jl
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -293,11 +86,9 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.abilities.Item.5v9AknrhiMqCbDvC
     _key: '!items.effects!5v9AknrhiMqCbDvC.OR1GARXLuQdI20jl'
-flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.1.0
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
 _key: '!items!5v9AknrhiMqCbDvC'

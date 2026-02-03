@@ -6,46 +6,20 @@ system:
   equipped: true
   consumable: true
   quantity: 1
-  maxQuantity:
-    raw: ''
-    saved: ''
   damage:
     base:
       saved: '0'
-      raw: ''
-    twoHanded:
-      saved: ''
-      raw: ''
-    types: []
   weight:
     saved: 1
     raw: 0
   range:
-    long:
-      saved: ''
-      raw: ''
-    short:
-      saved: ''
-      raw: ''
     ranged: false
   equipmentClasses:
     - knickknacks
   minStr:
     saved: -3
     raw: -3
-  av:
-    saved: 0
-    raw: 0
-  bv:
-    saved: 0
-    raw: 0
-  price: 0
   powerLevel: enchanted
-  fightingStyle: null
-  macros: []
-  onUse:
-    - z3qVOrP2JL1VWf1z
-    - CihFRAqovlVzihgb
 img: systems/teriock/src/icons/consumables/gooseege-vial.webp
 effects:
   - name: Searchable
@@ -56,24 +30,8 @@ effects:
         steal through @L[Category:Abilities]{abilities} like
         @L[Ability:Search]{Search}.</p>
       form: flaw
-      damageType: ''
-      extraDamage: ''
-      applyIfShattered: false
-      applyIfDampened: false
-      modifiesActor: false
-      limitation: ''
-      improvement: ''
-      impacts:
-        changes: []
-        macros: {}
     _id: x6sjcsIVaOkVZOFD
     img: systems/teriock/src/icons/properties/searchable.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -88,24 +46,8 @@ effects:
         <p>An item with this property is easily concealed and can often be used
         in the same hand as a @L[Category:Shields]{shield}.</p>
       form: intrinsic
-      damageType: ''
-      extraDamage: ''
-      applyIfShattered: false
-      applyIfDampened: false
-      modifiesActor: false
-      limitation: ''
-      improvement: ''
-      impacts:
-        changes: []
-        macros: {}
     _id: VQDFXr0oJQZ7Waxe
     img: systems/teriock/src/icons/properties/small.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -116,91 +58,37 @@ effects:
   - name: Drink Gooseege Vial
     type: ability
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
       costs:
-        verbal: false
-        somatic: false
         material: true
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
       delivery:
         base: item
-        parent: null
-        package: null
       duration:
         unit: minute
         quantity: 10
-        conditions:
-          present: []
-          absent: []
         stationary: false
         description: 10 Minutes
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
       executionTime: a1
-      expansion: null
-      expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
-      gifted:
-        enabled: false
-        amount: 1
       grantOnly: false
-      heightened: ''
-      improvement: ''
       improvements:
         attributeImprovement:
-          attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
           amount: proficient
       interaction: manifest
-      invoked: false
-      limitation: ''
       maneuver: active
       overview:
         base: >-
           <p>Your @L[Core:Size]{SIZE} is increased by 1, but you are
           @L[Condition:Slowed]{slowed}.</p>
-        proficient: ''
-        fluent: ''
       piercing: normal
       powerSources:
         - alchemical
-      prepared: true
       range:
         unit: melee
       requirements: >-
@@ -208,189 +96,19 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
       targets:
         - self
-      trigger: ''
-      warded: false
       impacts:
         base:
           statuses:
             - slowed
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes:
             - key: system.size.number.raw
               mode: 2
               value: '1'
               priority: 10
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
     _id: CihFRAqovlVzihgb
     img: systems/teriock/src/icons/abilities/drink-gooseege-vial.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -401,91 +119,37 @@ effects:
   - name: Pour Gooseege Vial
     type: ability
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
       costs:
-        verbal: false
-        somatic: false
         material: true
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
       delivery:
         base: item
-        parent: null
-        package: null
       duration:
         unit: minute
         quantity: 1
-        conditions:
-          present: []
-          absent: []
         stationary: false
         description: 1 Minute
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
       executionTime: a1
-      expansion: null
-      expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
-      gifted:
-        enabled: false
-        amount: 1
       grantOnly: false
-      heightened: ''
-      improvement: ''
       improvements:
         attributeImprovement:
-          attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
           amount: proficient
       interaction: attack
-      invoked: false
-      limitation: ''
       maneuver: active
       overview:
         base: >-
           <p>Target's @L[Core:Size]{SIZE} is increased by 1, but they are
           @L[Condition:Slowed]{slowed}.</p>
-        proficient: ''
-        fluent: ''
       piercing: normal
       powerSources:
         - alchemical
-      prepared: true
       range:
         unit: melee
       requirements: >-
@@ -493,189 +157,19 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
       targets:
         - creature
-      trigger: ''
-      warded: false
       impacts:
         base:
           statuses:
             - slowed
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
           changes:
             - key: system.size.number.raw
               mode: 2
               value: '1'
               priority: 10
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
     _id: z3qVOrP2JL1VWf1z
     img: systems/teriock/src/icons/abilities/pour-gooseege-vial.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -695,24 +189,8 @@ effects:
         through some other means, it is instead
         @L[Property:Destroyed]{destroyed}.</p>
       form: flaw
-      damageType: ''
-      extraDamage: ''
-      applyIfShattered: false
-      applyIfDampened: false
-      modifiesActor: false
-      limitation: ''
-      improvement: ''
-      impacts:
-        changes: []
-        macros: {}
     _id: qSvziissv3FCq5J2
     img: systems/teriock/src/icons/properties/fragile.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -720,12 +198,10 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.properties.Item.7TVFsjp80zEMQ26u
     _key: '!items.effects!aQkYVmPB6ynizffQ.qSvziissv3FCq5J2'
-flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
 _id: aQkYVmPB6ynizffQ
 _key: '!items!aQkYVmPB6ynizffQ'

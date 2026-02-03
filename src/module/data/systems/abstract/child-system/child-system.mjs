@@ -44,17 +44,6 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     return schema;
   }
 
-  /** @inheritDoc */
-  static migrateData(data) {
-    if (typeof data?.qualifiers?.ephemeral !== "object") {
-      foundry.utils.setProperty(data, "qualifiers.ephemeral", { raw: "0" });
-    }
-    if (typeof data?.qualifiers?.suppressed !== "object") {
-      foundry.utils.setProperty(data, "qualifiers.suppressed", { raw: "0" });
-    }
-    return super.migrateData(data);
-  }
-
   /**
    * Fields to display in panels and sheets.
    * @returns {Teriock.Sheet.DisplayField[]}

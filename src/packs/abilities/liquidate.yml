@@ -6,24 +6,11 @@ effects:
   - name: Liquidate
     type: ability
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
       costs:
-        verbal: false
-        somatic: false
-        material: false
         mp:
           type: variable
           value:
             static: 0
-            formula: ''
             variable: >-
               <p>An amount of @L[Core:Hit Points and Mana Points]{MP} equal to
               the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
@@ -32,59 +19,31 @@ effects:
           type: variable
           value:
             static: 0
-            formula: ''
             variable: >-
               <p>An amount of @L[Core:Hit Points and Mana Points]{HP} equal to
               the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
               DC. Paid only on failure.</p>
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
       delivery:
         base: sight
-        parent: null
         package: ritual
       duration:
         unit: instant
         quantity: 0
-        conditions:
-          present: []
-          absent: []
         stationary: false
         description: Instant
       effectTypes:
         - destruction
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
       executionTime: 10 Minutes
-      expansion: null
-      expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
-      gifted:
-        enabled: false
-        amount: 1
       grantOnly: false
-      heightened: ''
-      improvement: ''
       improvements:
         attributeImprovement:
-          attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
           amount: proficient
       interaction: manifest
-      invoked: false
-      limitation: ''
       maneuver: slow
       overview:
         base: >-
@@ -113,247 +72,32 @@ effects:
       powerSources:
         - divine
         - financial
-      prepared: true
       range:
         unit: ft
         raw: '5'
-      requirements: ''
       results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
         save: >-
           <p>The item is @L[Property:Destroyed]{destroyed} and the economic
           value of its raw materials and @L[Category:Magical properties]{magical
           properties} are extracted. This is very inefficient. Only 20% of the
           value of the item's materials and @L[Category:Properties]{properties}
           are extracted.</p>
-        critSave: ''
         fail: >-
           <p>You pay an amount of @L[Core:Hit Points and Mana Points]{MP} and
           @L[Core:Hit Points and Mana Points]{HP} equal to the
           @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.</p>
-        critFail: ''
       ritual: true
-      rotator: false
-      secret: false
       skill: true
-      spell: false
       standard: true
-      sustained: false
       targets:
         - item
-      trigger: ''
-      warded: false
       class: paladin
       impacts:
         base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
           checks:
             - priest
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: none
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
-          transformation:
-            enabled: false
-            image: null
-            level: minor
-            suppression:
-              bodyParts: true
-              equipment: true
-              fluencies: true
-              ranks: true
-            uuids: []
-            resetHp: true
-            resetMp: false
-        macros: {}
     _id: lTI1iacFVyYXmQsk
     img: systems/teriock/src/icons/abilities/liquidate.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -361,11 +105,9 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.abilities.Item.TCO33RU056hcu9oI
     _key: '!items.effects!TCO33RU056hcu9oI.lTI1iacFVyYXmQsk'
-flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
 _key: '!items!TCO33RU056hcu9oI'

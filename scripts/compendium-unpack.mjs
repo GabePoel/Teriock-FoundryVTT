@@ -4,81 +4,16 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 import { toKebabCase, toKebabCaseFull } from "../src/module/helpers/string.mjs";
+import { cleanDocument } from "./compendium/clean-fields.mjs";
 
-const yaml = true;
-const expandAdventures = true;
-const folders = true;
 const BUILDER_NAME = "teriockBuilder00";
-const DELETION_MAP = {
-  root: ["duration", "showIcon", "tint", "sort"],
-  stats: [
-    "createdTime",
-    "duplicateSource",
-    "exportSource",
-    "modifiedTime",
-    "ownership",
-  ],
-  systemShared: [
-    "applyHp",
-    "applyMp",
-    "deleteOnExpire",
-    "disabled",
-    "fluent",
-    "font",
-    "gmNotes",
-    "hierarchy",
-    "hpDice",
-    "hpDiceBase",
-    "mpDice",
-    "mpDiceBase",
-    "proficient",
-    "suppression",
-    "virtualProperties",
-    "wikiNamespace",
-  ],
-  types: {
-    creature: [
-      "abilityFlags",
-      "attributes",
-      "attunements",
-      "carryingCapacity",
-      "deathBag",
-      "interestRate",
-      "money",
-      "movementSpeed",
-      "offense",
-      "protections",
-      "senses",
-      "sheet",
-      "speedAdjustments",
-      "tradecrafts",
-      "wither",
-    ],
-    power: ["size", "lifespan", "adult", "onUse", "flaws"],
-    ability: ["description", "deleteOnExpire", "suppression", "sustaining"],
-    equipment: [
-      "damageTypes",
-      "dampened",
-      "glued",
-      "identified",
-      "ranged",
-      "reference",
-      "shattered",
-      "shortRange",
-      "twoHandedDamage",
-    ],
-    descriptionOnly: ["property", "fluency", "resource"],
-  },
-};
+const EXPAND_ADVENTURES = true;
+const FOLDERS = true;
+const YAML = true;
 
 const tree = {};
 let packTree = {};
 let buildTree = true;
-
-function clean(obj, keys) {
-  if (!obj) return;
-  keys.forEach((key) => delete obj[key]);
-}
 
 // Execution Loop
 // ==============
@@ -90,7 +25,7 @@ for (const pack of packs) {
   try {
     for (const file of await fs.readdir(directory)) {
       const filePath = path.join(directory, file);
-      if (file.endsWith(yaml ? ".yml" : ".json")) {
+      if (file.endsWith(YAML ? ".yml" : ".json")) {
         await fs.unlink(filePath);
       } else {
         await fs.rm(filePath, { recursive: true });
@@ -105,12 +40,12 @@ for (const pack of packs) {
   tree[pack] = packTree;
 
   const extractOptions = {
-    yaml,
+    yaml: YAML,
     transformName,
     transformFolderName,
     transformEntry,
-    expandAdventures,
-    folders,
+    expandAdventures: EXPAND_ADVENTURES,
+    folders: FOLDERS,
   };
 
   await extractPack(
@@ -135,7 +70,7 @@ function transformName(doc, context) {
     safeFileName = `${packTree[doc.system._sup]}-${toKebabCase(doc.name)}`;
   }
   let name =
-    `${doc.name ? safeFileName : doc._id}.${yaml ? "yml" : "json"}`.replace(
+    `${doc.name ? safeFileName : doc._id}.${YAML ? "yml" : "json"}`.replace(
       "---",
       "-",
     );
@@ -152,12 +87,9 @@ function transformFolderName(doc) {
 function cleanEntry(doc) {
   if (buildTree) packTree[doc._id] = toKebabCase(doc.name);
 
-  clean(doc, DELETION_MAP.root);
-  if (!doc.folder) delete doc.folder;
+  cleanDocument(doc);
   if (doc.author) doc.author = BUILDER_NAME;
   if (doc._stats) {
-    clean(doc._stats, DELETION_MAP.stats);
-    delete doc.ownership;
     if (doc._stats.coreVersion) doc._stats.coreVersion = "13";
     doc._stats.lastModifiedBy = BUILDER_NAME;
   }
@@ -170,21 +102,6 @@ function cleanEntry(doc) {
       doc.system.combat.attackPenalty = 0;
     if (typeof doc.system.combat?.hasReaction === "boolean")
       doc.system.combat.hasReaction = true;
-
-    // Bulk deletes
-    clean(doc.system, DELETION_MAP.systemShared);
-
-    // Type-specific deletes
-    if (DELETION_MAP.types[doc.type]) {
-      clean(doc.system, DELETION_MAP.types[doc.type]);
-      if (doc.type === "ability") {
-        delete doc.description;
-        if (doc.system.effectTypes) delete doc.system.effects;
-      }
-    }
-    if (DELETION_MAP.types.descriptionOnly.includes(doc.type)) {
-      delete doc.description;
-    }
   }
 }
 

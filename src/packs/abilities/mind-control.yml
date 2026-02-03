@@ -6,136 +6,66 @@ effects:
   - name: Mind Control
     type: ability
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
       costs:
         verbal: true
-        somatic: false
-        material: false
         mp:
           type: static
           value:
             static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
       delivery:
         base: sight
-        parent: null
-        package: null
       duration:
         unit: minute
         quantity: 1
-        conditions:
-          present: []
-          absent: []
         stationary: false
         description: 1 Minute
       effectTypes:
         - mental
         - control
-      elderSorcery: false
-      elderSorceryIncant: ''
       elements:
         - storm
       endCondition: >-
         <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansion: null
-      expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: int
       form: special
-      gifted:
-        enabled: false
-        amount: 1
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the maximum length of the
         command can be increased by 1 word.</p>
-      improvement: ''
       improvements:
         attributeImprovement:
-          attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
           amount: proficient
       interaction: feat
-      invoked: false
-      limitation: ''
       maneuver: active
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
       piercing: normal
       powerSources:
         - magical
-      prepared: true
       range:
         unit: ft
         raw: '60'
-      requirements: ''
       results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
         fail: >-
           <p>Target is @L[Condition:Charmed]{charmed}. In addition, you may
           provide a 1 word command that the target must follow for the duration
           of this spell. If the command is directly harmful to the target, this
           spell @L[Core:Fizzles]{fizzles} and they do not need to follow it. The
           target must understand the language that the command was given in.</p>
-        critFail: ''
-      ritual: false
       rotator: true
-      secret: false
-      skill: false
       spell: true
       standard: true
-      sustained: false
       targets:
         - creature
-      trigger: ''
-      warded: false
       impacts:
         base:
           statuses:
             - charmed
-          startStatuses: []
-          endStatuses: []
           rolls:
             endCon: 2d4
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
           expiration:
             normal:
               combat:
@@ -149,140 +79,10 @@ effects:
                   time: start
                   trigger: turn
                   skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
     _id: uaSChWYrlMWGCZQP
     img: systems/teriock/src/icons/abilities/mind-control.webp
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -290,11 +90,9 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.abilities.Item.h55SxIJjESCKiCp8
     _key: '!items.effects!h55SxIJjESCKiCp8.uaSChWYrlMWGCZQP'
-flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
 _key: '!items!h55SxIJjESCKiCp8'

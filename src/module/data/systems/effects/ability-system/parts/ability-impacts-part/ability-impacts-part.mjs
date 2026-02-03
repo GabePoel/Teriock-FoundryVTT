@@ -365,7 +365,9 @@ function migrateProtections(data) {
  * @returns {AbilityImpact}
  */
 function changeMigration(impact) {
-  impact.changes = impact.changes.map((c) => scaleChange(qualifyChange(c)));
+  if (impact.changes) {
+    impact.changes = impact.changes.map((c) => scaleChange(qualifyChange(c)));
+  }
   return impact;
 }
 

@@ -7,8 +7,6 @@ effects:
     type: ability
     img: systems/teriock/src/icons/abilities/exorcism.webp
     system:
-      elderSorcery: false
-      elderSorceryIncant: ''
       powerSources:
         - divine
       interaction: manifest
@@ -17,19 +15,13 @@ effects:
       executionTime: 10 Minutes
       delivery:
         base: sight
-        parent: null
         package: ritual
       targets:
         - creature
-      elements: []
       duration:
         unit: instant
         quantity: 0
-        conditions:
-          present: []
-          absent: []
         description: Instant
-      sustained: false
       range:
         unit: ft
         raw: '5'
@@ -67,10 +59,6 @@ effects:
           @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
           of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
       results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
         save: >-
           <p>The target is "destroyed". They @L[Condition:Dead]{die}, they are
           @L[Condition:Ruined]{ruined}, and they pull additional stones from the
@@ -84,36 +72,25 @@ effects:
           survive, their body must be @L[Ability:Summon the Dead]{reconstructed}
           and then they can be @L[Category:Revival effects]{revived} in a
           non-undead state.</p>
-        critSave: ''
         fail: >-
           <p>You pay an amount of @L[Core:MP]{MP} and @L[Core:HP]{HP} equal to
           the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
           DC.</p>
-        critFail: ''
       piercing: normal
       improvements:
         attributeImprovement:
-          attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
           amount: proficient
       skill: true
-      spell: false
       standard: true
       ritual: true
       class: paladin
-      rotator: false
-      invoked: false
       costs:
-        verbal: false
-        somatic: false
-        material: false
         mp:
           type: variable
           value:
             static: 0
-            formula: ''
             variable: >-
               <p>An amount of @L[Core:MP]{MP} equal to the
               @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
@@ -122,196 +99,13 @@ effects:
           type: variable
           value:
             static: 0
-            formula: ''
             variable: >-
               <p>An amount of @L[Core:HP]{HP} equal to the
               @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
               Paid only on failure.</p>
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      effects: []
-      expansion: null
-      expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      impacts:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
     _id: W75oyBVDDLpyERNx
-    changes: []
-    disabled: false
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
@@ -319,11 +113,9 @@ effects:
       lastModifiedBy: teriockBuilder00
       compendiumSource: Compendium.teriock.abilities.Item.eabeC5V4g5Wx4EiO
     _key: '!items.effects!eabeC5V4g5Wx4EiO.W75oyBVDDLpyERNx'
-flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.1.0
   lastModifiedBy: teriockBuilder00
-  compendiumSource: null
 _key: '!items!eabeC5V4g5Wx4EiO'
