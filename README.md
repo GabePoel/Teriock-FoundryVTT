@@ -33,6 +33,10 @@ https://raw.githubusercontent.com/GabePoel/Teriock-FoundryVTT/refs/heads/main/sy
 
 ![chat.webp](src/assets/screenshots/chat.webp)
 
+### Module Integration
+
+![condition-effect-demo.gif](src/assets/screenshots/condition-effect-demo.gif)
+
 ### Excessive Options and Dialogs
 
 ![menus.webp](src/assets/screenshots/menus.webp)
