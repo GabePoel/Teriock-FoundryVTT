@@ -3,7 +3,7 @@
  */
 export default class InteractionHandler {
   constructor() {
-    //noinspection JSUnresolvedReference
+    //noinspection JSUnresolvedReference,JSValidateJSDoc
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
     const user = game.user;
     this.selectedTokens =

@@ -7,7 +7,7 @@ export default function HackStatApplicationMixin(Base) {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {TeriockActor} actor
+     * @property {TeriockActor} document
      * @property {boolean} _consumeStatDie
      */
     class HackStatApplication extends Base {
@@ -16,14 +16,14 @@ export default function HackStatApplicationMixin(Base) {
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
+       * @this {HackStatApplication}
        */
       static async _onRollStatDie(_event, target) {
-        //noinspection JSUnresolvedReference
         const statDie = this._getStatDie(target);
-        let criticallyWounded = this.actor.statuses.has("criticallyWounded");
+        let criticallyWounded = this.document.statuses.has("criticallyWounded");
         await statDie.use(this._consumeStatDie ?? true);
         if (!criticallyWounded) {
-          await this.actor.system.takeAwaken();
+          await this.document.system.takeAwaken();
         }
       }
 
@@ -32,13 +32,11 @@ export default function HackStatApplicationMixin(Base) {
        * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
+       * @this {HackStatApplication}
        */
       static async _onTakeHack(event, target) {
         event.stopPropagation();
-        const part =
-          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target
-            .dataset.part;
-        await this.actor.system.takeHack(part);
+        await this.document.system.takeHack(target.dataset.part);
       }
 
       /**
@@ -46,13 +44,11 @@ export default function HackStatApplicationMixin(Base) {
        * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
+       * @this {HackStatApplication}
        */
       static async _onTakeUnhack(event, target) {
         event.stopPropagation();
-        const part =
-          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target
-            .dataset.part;
-        await this.actor.system.takeUnhack(part);
+        await this.document.system.takeUnhack(target.dataset.part);
       }
 
       /**
@@ -67,7 +63,7 @@ export default function HackStatApplicationMixin(Base) {
         const index = target.dataset.index;
         const item =
           /** @type {TeriockChild & {system: Teriock.Models.StatGiverSystemInterface}} */
-          this.actor[collection].get(id);
+          this.document[collection].get(id);
         return item.system.statDice[stat].dice[Number(index)];
       }
 
@@ -99,7 +95,7 @@ export default function HackStatApplicationMixin(Base) {
         const index = target.dataset.index;
         const item =
           /** @type {TeriockChild & {system: Teriock.Models.StatGiverSystemInterface}} */
-          this.actor[collection].get(id);
+          this.document[collection].get(id);
         const statDie =
           /** @type {StatDieModel} */ item.system.statDice[stat].dice[
             Number(index)

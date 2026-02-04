@@ -45,11 +45,8 @@ export function interpretArguments(argArr, command) {
  */
 export function getInteractionEntryValue(interaction, property, options) {
   if (!interaction[property]) return "";
-  if (typeof interaction[property] === "string") {
-    return interaction[property];
-  } else {
-    return interaction[property](options);
-  }
+  if (typeof interaction[property] === "string") return interaction[property];
+  else return interaction[property](options);
 }
 
 /**

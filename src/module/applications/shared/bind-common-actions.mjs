@@ -36,11 +36,14 @@ export default function bindCommonActions(rootElement) {
       continue;
     }
     element.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
       const handler = new HandlerClass(event, element);
       await handler.primaryAction();
     });
     element.addEventListener("contextmenu", async (event) => {
       event.preventDefault();
+      event.stopPropagation();
       const handler = new HandlerClass(event, element);
       await handler.secondaryAction();
     });

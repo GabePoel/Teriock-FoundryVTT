@@ -1,3 +1,5 @@
+//noinspection RegExpRedundantEscape
+
 import { documentOptions } from "../../constants/options/document-options.mjs";
 import {
   commands,
@@ -186,6 +188,8 @@ export function registerCommandEnrichers() {
     enricher: enrichCommand,
     id: "executeCommand",
     onRender: (el) => {
+      if (el.dataset.enriched) return;
+      el.dataset.enriched = "true";
       const target = /** @type {HTMLLinkElement} */ el.firstElementChild;
       el.addEventListener("click", async (ev) => {
         await executeCommandFromElement(target, "primary", ev);
@@ -205,6 +209,8 @@ export function registerCommandEnrichers() {
  * @returns {Promise<void>}
  */
 async function executeCommandFromElement(target, operation, event) {
+  event.preventDefault();
+  event.stopPropagation();
   const command = commands[target.dataset.command];
   if (!command || !command[operation]) return;
   const options = {};

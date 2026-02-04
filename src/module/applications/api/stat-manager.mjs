@@ -1,26 +1,22 @@
 import { HackStatMixin } from "../shared/mixins/_module.mjs";
-
-const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
+import { TeriockDocumentSheet } from "../sheets/utility-sheets/_module.mjs";
 
 // noinspection JSClosureCompilerSyntax
 /**
- * @extends {ApplicationV2}
- * @mixes HandlebarsApplicationMixin
+ * @extends {TeriockDocumentSheet}
  * @mixes HackStatApplication
- * @property {TeriockActor} actor
- * @property {TeriockActor} document
  * @property {boolean} _consumeStatDice
  * @property {boolean} _forHarm
  */
 export default class TeriockStatManager extends HackStatMixin(
-  HandlebarsApplicationMixin(ApplicationV2),
+  TeriockDocumentSheet,
 ) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["teriock", "dialog"],
+    classes: ["dialog"],
     actions: {
       ok: this._onDone,
     },
@@ -40,10 +36,13 @@ export default class TeriockStatManager extends HackStatMixin(
     if (title.length > 0) {
       applicationOptions.title = title;
     }
+    Object.assign(applicationOptions, {
+      document: actor,
+      sheetConfig: false,
+    });
     super(applicationOptions);
     this._forHarm = forHarm;
     this._consumeStatDice = consumeStatDice;
-    this.actor = actor;
   }
 
   /**
@@ -63,34 +62,6 @@ export default class TeriockStatManager extends HackStatMixin(
       applicationOptions.window.title = options.title;
     }
     return applicationOptions;
-  }
-
-  /** @inheritDoc */
-  _onClose(options = {}) {
-    super._onClose(options);
-    foundry.helpers.Hooks.off("updateActor", this._actorHook);
-    foundry.helpers.Hooks.off("updateItem", this._itemHook);
-  }
-
-  /** @inheritDoc */
-  async _onFirstRender(context, options) {
-    await super._onFirstRender(context, options);
-    this._actorHook = foundry.helpers.Hooks.on(
-      "updateActor",
-      async (document) => {
-        if (document.uuid === this.actor.uuid) {
-          await this.render();
-        }
-      },
-    );
-    this._itemHook = foundry.helpers.Hooks.on(
-      "updateItem",
-      async (document) => {
-        if (document.actor && document.actor.uuid === this.actor.uuid) {
-          await this.render();
-        }
-      },
-    );
   }
 
   /** @inheritDoc */
@@ -121,8 +92,8 @@ export default class TeriockStatManager extends HackStatMixin(
     context.forHarmField = this._forHarmField;
     context.consumeStatDice = this._consumeStatDice;
     context.consumeStatDiceField = this._consumeStatDiceField;
-    context.system = this.actor.system;
-    context.uuid = this.actor.uuid;
+    context.system = this.document.system;
+    context.uuid = this.document.uuid;
     return context;
   }
 }

@@ -51,9 +51,11 @@ export default class TeriockHealManager extends TeriockStatManager {
     });
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @this {TeriockHealManager}
+   */
   static async _onRollStatDie(event, target) {
-    //noinspection JSUnresolvedReference
     const statDie = this._getStatDie(target);
     if (this._forHarm) {
       const takeHandler = new buttonHandlers["roll-rollable-takes"](
@@ -83,7 +85,7 @@ export default class TeriockHealManager extends TeriockStatManager {
         const part =
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */
           el.dataset.part;
-        await this.actor.system.takeHack(part);
+        await this.document.system.takeHack(part);
         e.stopPropagation();
       });
     });
