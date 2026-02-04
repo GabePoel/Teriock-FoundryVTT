@@ -8,6 +8,7 @@ export default (Base) =>
   /**
    * @extends {TeriockBaseActorSheet}
    * @mixin
+   * @property {TeriockActor} document
    */
   class CombatActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
@@ -116,8 +117,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async _onUseAbility(event, target) {
-      const abilityName = target.dataset.ability;
-      await this.actor.useAbility(abilityName, {
+      await this.document.useAbility(target.dataset.ability, {
         advantage: event.altKey,
         disadvantage: event.shiftKey,
       });

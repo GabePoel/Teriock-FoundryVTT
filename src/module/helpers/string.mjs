@@ -7,9 +7,13 @@ import { formulaExists } from "./formula.mjs";
  */
 export function toCamelCase(str) {
   return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/'/g, "")
     .toLowerCase()
-    .replace(/[-\s]+(.)/g, (_, c) => c.toUpperCase())
-    .replace(/^[a-z]/, (c) => c.toLowerCase());
+    .replace(/[^a-z0-9]+(.)/gi, (_, c) => c.toUpperCase())
+    .replace(/[^a-z0-9]/gi, "")
+    .replace(/^[A-Z]/, (c) => c.toLowerCase());
 }
 
 /**
@@ -30,10 +34,13 @@ export function toTitleCase(str) {
  */
 export function toKebabCase(str) {
   return str
-    .replaceAll(",", "")
-    .replace(/\s+/g, "-")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/'/g, "")
     .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .toLowerCase();
+    .replace(/[^a-z0-9]+/gi, "-")
+    .toLowerCase()
+    .replace(/^-+|-+$/g, "");
 }
 
 /**
@@ -93,7 +100,6 @@ export function toId(str, options = {}) {
       str = str.replace(k, v);
     }
   }
-  str = str.replace("ō", "o").replace("Ō", "O");
   const camel = toCamelCase(str);
   return camel.slice(0, length) + background.slice(camel.length);
 }

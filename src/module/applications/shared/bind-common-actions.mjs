@@ -1,4 +1,3 @@
-import { buttonHandlers } from "../../helpers/interaction/_module.mjs";
 import { TeriockContextMenu } from "../ux/_module.mjs";
 import {
   imageContextMenuOptions,
@@ -26,28 +25,6 @@ export default function bindCommonActions(rootElement) {
       fixed: true,
     },
   );
-  const actionElements = rootElement.querySelectorAll("[data-action]");
-  for (const /** @type {HTMLElement} */ element of actionElements) {
-    const action = element.dataset.action;
-    const HandlerClass = Object.values(buttonHandlers).find(
-      (Handler) => Handler.ACTION === action,
-    );
-    if (!HandlerClass) {
-      continue;
-    }
-    element.addEventListener("click", async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      const handler = new HandlerClass(event, element);
-      await handler.primaryAction();
-    });
-    element.addEventListener("contextmenu", async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      const handler = new HandlerClass(event, element);
-      await handler.secondaryAction();
-    });
-  }
   queryAll(rootElement, ".content-link[data-uuid]").forEach((el) => {
     if (game.settings.get("teriock", "contentLinkTooltips")) {
       const cls = /** @type {TeriockDocument} */ foundry.utils.getDocumentClass(

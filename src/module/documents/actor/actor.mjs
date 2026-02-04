@@ -605,6 +605,7 @@ export default class TeriockActor extends mix(
   async useAbility(abilityName, options = {}) {
     const abilities = await this.allAbilities();
     const ability = abilities.find((i) => i.name === abilityName);
+    options.actor = this;
     if (ability) {
       await ability.use(options);
     } else {

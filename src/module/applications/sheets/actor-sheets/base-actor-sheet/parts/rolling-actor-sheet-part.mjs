@@ -8,15 +8,16 @@ export default (Base) =>
   /**
    * @extends {TeriockBaseActorSheet}
    * @mixin
+   * @property {TeriockActor} actor
    */
   class RollingActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
       actions: {
         rollFeatSave: this._onRollFeatSave,
-        rollImmunity: this._onRollImmunity,
         rollHexproof: this._onRollHexproof,
-        rollResistance: this._onRollResistance,
         rollHexseal: this._onRollHexseal,
+        rollImmunity: this._onRollImmunity,
+        rollResistance: this._onRollResistance,
         rollStatDie: this._onRollStatDie,
       },
     };

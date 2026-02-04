@@ -21,6 +21,12 @@ import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
 import TeriockCanvas from "../_canvas.mjs";
 import { TeriockNotifications } from "../applications/ui/_module.mjs";
 import type { TeriockCompendiumCollection } from "../documents/collections/packs";
+import { TeriockDocumentSheet } from "../applications/sheets/utility-sheets/_module.mjs";
+import {
+  TeriockActorDirectory,
+  TeriockItemDirectory,
+} from "../applications/sidebar/_module.mjs";
+import type TeriockHotbar from "../applications/ui/hotbar.mjs";
 
 declare global {
   // Definition for writing macros.
@@ -43,6 +49,10 @@ declare global {
     users: TeriockUsers;
   };
   const ui: {
+    activeWindow: TeriockDocumentSheet;
+    actors: TeriockActorDirectory;
+    hotbar: TeriockHotbar;
+    items: TeriockItemDirectory;
     notifications: TeriockNotifications;
   };
 
