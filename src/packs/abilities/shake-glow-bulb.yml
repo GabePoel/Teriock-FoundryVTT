@@ -1,33 +1,37 @@
-name: Shake Glow Bulb
-type: wrapper
-_id: kImRJY2L1ibB39Cz
-img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+_id: shakeGlowBulb000
 effects:
   - name: Shake Glow Bulb
     type: ability
+    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+    _id: shakeGlowBulb000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      delivery:
-        base: item
       duration:
+        raw: '10'
         unit: minute
-        quantity: 10
+        dawn: false
         stationary: false
         description: 10 Minutes
+      delivery:
+        base: item
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
@@ -35,7 +39,6 @@ effects:
           <p>The source of this ability starts @L[Property:Glowing]{glowing} (30
           feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
           renders it inert.</p>
-      piercing: normal
       powerSources:
         - alchemical
       range:
@@ -50,22 +53,25 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.light.dim
-              mode: 4
-              value: '30'
+            - mode: 4
               priority: 5
-    _id: ISrHaIW4Qxv8aw7Y
-    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
+              value: '30'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.kImRJY2L1ibB39Cz
-    _key: '!items.effects!kImRJY2L1ibB39Cz.ISrHaIW4Qxv8aw7Y'
+    _key: '!items.effects!shakeGlowBulb000.shakeGlowBulb000'
+img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+name: Shake Glow Bulb
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!kImRJY2L1ibB39Cz'
+_key: '!items!shakeGlowBulb000'

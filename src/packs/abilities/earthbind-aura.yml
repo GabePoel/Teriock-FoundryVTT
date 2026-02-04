@@ -1,91 +1,96 @@
-name: Earthbind Aura
-type: wrapper
-_id: vcSeTiCRsDaiDLLq
-img: systems/teriock/src/icons/abilities/earthbind-aura.webp
+_id: earthbindAura000
 effects:
   - name: Earthbind Aura
     type: ability
     img: systems/teriock/src/icons/abilities/earthbind-aura.webp
+    _id: earthbindAura000
     system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - nature
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        fail: >-
-          <p>Target is @L[Condition:Grounded]{grounded} and
-          @L[Condition:Immobile]{immobilized}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: natureMage
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well.</p>"
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: aura
+      elements:
+        - nature
       endCondition: >-
         <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target is @L[Condition:Grounded]{grounded} and
+          @L[Condition:Immobile]{immobilized}.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - grounded
-            - immobilized
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - grounded
+            - immobilized
         heightened:
           rolls:
             damage: 1d4[magic vine]
-    _id: 5epq0bKLIaLNyXC8
+      class: natureMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vcSeTiCRsDaiDLLq
-    _key: '!items.effects!vcSeTiCRsDaiDLLq.5epq0bKLIaLNyXC8'
+    _key: '!items.effects!earthbindAura000.earthbindAura000'
+img: systems/teriock/src/icons/abilities/earthbind-aura.webp
+name: Earthbind Aura
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!vcSeTiCRsDaiDLLq'
+_key: '!items!earthbindAura000'

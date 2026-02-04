@@ -1,27 +1,36 @@
-name: Combat Shimmering
-type: wrapper
-_id: 77Ib1dBrE6rt19ny
-img: systems/teriock/src/icons/abilities/combat-shimmering.webp
+_id: combatShimmering
 effects:
   - name: Combat Shimmering
     type: ability
     img: systems/teriock/src/icons/abilities/combat-shimmering.webp
+    _id: combatShimmering
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      sustained: true
+      effectTypes:
+        - resistance
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Keyword:Resistance]{resistant} to effects that would
@@ -29,45 +38,52 @@ effects:
           @L[Condition:Immobile]{immobile}, and to @L[Damage:Hack]{hack damage}
           dealt by other creatures.</p><div class="note"><b>Note:</b> This does
           not clear any existing effects.</div>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      sustained: true
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
+            - mode: 2
+              priority: 10
+              time: normal
+              key: system.protections.resistances.statuses
+              target: Actor
+              qualifier: '1'
               value: snared
+            - mode: 2
               priority: 10
-            - key: system.protections.resistances.statuses
-              mode: 2
+              time: normal
+              key: system.protections.resistances.statuses
+              target: Actor
+              qualifier: '1'
               value: immobilized
+            - mode: 2
               priority: 10
-            - key: system.protections.resistances.damageTypes
-              mode: 2
+              time: normal
+              key: system.protections.resistances.damageTypes
+              target: Actor
+              qualifier: '1'
               value: hack
-              priority: 10
-    _id: 6EtpcjahNQlYqsT6
+      class: corsair
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.77Ib1dBrE6rt19ny
-    _key: '!items.effects!77Ib1dBrE6rt19ny.6EtpcjahNQlYqsT6'
+    _key: '!items.effects!combatShimmering.combatShimmering'
+img: systems/teriock/src/icons/abilities/combat-shimmering.webp
+name: Combat Shimmering
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!77Ib1dBrE6rt19ny'
+_key: '!items!combatShimmering'

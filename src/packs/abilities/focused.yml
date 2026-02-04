@@ -1,15 +1,20 @@
-name: Focused
-type: wrapper
+_id: focused000000000
 effects:
   - name: Focused
     type: ability
-    _id: t6tPo9gb0eKdSWQH
     img: systems/teriock/src/icons/abilities/focused.webp
+    _id: focused000000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
       revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
       delivery:
@@ -17,7 +22,10 @@ effects:
       effectTypes:
         - resistance
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -32,38 +40,34 @@ effects:
           @L[Keyword:Resistance]{resist} having a @L[Category:Slow
           abilities]{slow ability} @L[Core:Fizzles]{fizzle} if you fail to use
           @L[Ability:Sustain]{Sustain} it on your turn.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
+            - mode: 2
               priority: 10
-              target: Actor
               time: normal
+              key: system.protections.resistances.other
+              target: Actor
               qualifier: '1'
               value: Abilities Fizzling if not Sustained
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.nnV6qvQj8SJUlEQJ
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nnV6qvQj8SJUlEQJ.t6tPo9gb0eKdSWQH'
-_id: nnV6qvQj8SJUlEQJ
+    _key: '!items.effects!focused000000000.focused000000000'
 img: systems/teriock/src/icons/abilities/focused.webp
+name: Focused
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!nnV6qvQj8SJUlEQJ'
+_key: '!items!focused000000000'

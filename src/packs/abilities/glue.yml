@@ -1,67 +1,75 @@
-name: Glue
-type: wrapper
-_id: 34zZozyjC0wOm2tF
-img: systems/teriock/src/icons/abilities/glue.webp
+_id: glue000000000000
 effects:
   - name: Glue
     type: ability
     img: systems/teriock/src/icons/abilities/glue.webp
+    _id: glue000000000000
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: sight
         package: ritual
-      targets:
-        - item
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: '5'
+      effectTypes:
+        - immunity
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Target is @L[Property:Glued]{glued} to the creature
           @L[Keyword:Bearing]{bearing} it.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - spiritual
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target item must be @L[Keyword:Bearing]{beared} by a creature.</p>
+      ritual: true
       skill: true
       standard: true
-      ritual: true
-      class: thief
-      requirements: <p>Target item must be @L[Keyword:Bearing]{beared} by a creature.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
+      targets:
+        - item
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.other
-              mode: 2
-              value: Stealing (Glued Items)
+            - mode: 2
               priority: 10
-    _id: QrZbguiKAee2qZWP
+              time: normal
+              key: system.protections.immunities.other
+              target: Actor
+              qualifier: '1'
+              value: Stealing (Glued Items)
+      class: thief
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.34zZozyjC0wOm2tF
-    _key: '!items.effects!34zZozyjC0wOm2tF.QrZbguiKAee2qZWP'
+    _key: '!items.effects!glue000000000000.glue000000000000'
+img: systems/teriock/src/icons/abilities/glue.webp
+name: Glue
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!34zZozyjC0wOm2tF'
+_key: '!items!glue000000000000'

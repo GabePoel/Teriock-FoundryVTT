@@ -1,32 +1,47 @@
-name: Fire Ball
-type: wrapper
-_id: t9SXjnFK5t9hyhjK
-img: systems/teriock/src/icons/abilities/fire-ball.webp
+_id: fireBall00000000
 effects:
   - name: Fire Ball
     type: ability
     img: systems/teriock/src/icons/abilities/fire-ball.webp
+    _id: fireBall00000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: missile
         package: ball
-      targets:
-        - creature
+      effectTypes:
+        - damaging
       elements:
         - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: '30'
+        unit: ft
       results:
         hit: >-
           <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
@@ -34,22 +49,10 @@ effects:
         critHit: >-
           <p>Double the @L[Core:Damage]{damage dice} dealt by this
           @L[Category:Abilities]{ability}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -57,17 +60,19 @@ effects:
         heightened:
           rolls:
             damage: 1d4[magic fire]
-    _id: wKxfL6pzdYHJceL0
+      class: flameMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.t9SXjnFK5t9hyhjK
-    _key: '!items.effects!t9SXjnFK5t9hyhjK.wKxfL6pzdYHJceL0'
+    _key: '!items.effects!fireBall00000000.fireBall00000000'
+img: systems/teriock/src/icons/abilities/fire-ball.webp
+name: Fire Ball
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!t9SXjnFK5t9hyhjK'
+_key: '!items!fireBall00000000'

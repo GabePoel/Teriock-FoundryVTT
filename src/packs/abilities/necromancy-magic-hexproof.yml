@@ -1,33 +1,37 @@
-name: Necromancy Magic Hexproof
-type: wrapper
-_id: rBoS9ilxZu26DW3k
-img: systems/teriock/src/icons/abilities/necromancy-magic-hexproof.webp
+_id: necroMagHxp00000
 effects:
   - name: Necromancy Magic Hexproof
     type: ability
+    img: systems/teriock/src/icons/abilities/necromancy-magic-hexproof.webp
+    _id: necroMagHxp00000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
       effectTypes:
         - hexproof
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -35,30 +39,34 @@ effects:
           <p>You are @L[Keyword:Hexproof]{hexproof} to @L[Category:Magically
           powered abilities]{magical} @L[Category:Necromancy element
           abilities]{necromancy abilities}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.hexproofs.elements
-              mode: 2
-              value: necromancy
+            - mode: 2
               priority: 10
-    _id: gbwkgGnJeRpP9nzC
-    img: systems/teriock/src/icons/abilities/necromancy-magic-hexproof.webp
+              time: normal
+              key: system.protections.hexproofs.elements
+              target: Actor
+              qualifier: '1'
+              value: necromancy
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.rBoS9ilxZu26DW3k
-    _key: '!items.effects!rBoS9ilxZu26DW3k.gbwkgGnJeRpP9nzC'
+    _key: '!items.effects!necroMagHxp00000.necroMagHxp00000'
+img: systems/teriock/src/icons/abilities/necromancy-magic-hexproof.webp
+name: Necromancy Magic Hexproof
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!rBoS9ilxZu26DW3k'
+_key: '!items!necroMagHxp00000'

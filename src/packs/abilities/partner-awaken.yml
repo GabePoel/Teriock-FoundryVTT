@@ -1,29 +1,35 @@
-name: Partner Awaken
-type: wrapper
-_id: RAMOKodB3uUx8V7q
-img: systems/teriock/src/icons/abilities/partner-awaken.webp
+_id: partnerAwaken000
 effects:
   - name: Partner Awaken
     type: ability
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
+    _id: partnerAwaken000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: sight
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
-      range:
-        unit: ft
-        raw: '30'
+      endCondition: <p>You use [[lookup name]] again.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You and the target gain @L[Keyword:Limited]{Limited}
@@ -31,121 +37,133 @@ effects:
           @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
           Awaken} (only usable on each other). You may only have this active on
           one creature at a time.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: '30'
+        unit: ft
       skill: true
       standard: true
+      targets:
+        - creature
+      impacts: {}
       class: veteran
-      endCondition: <p>You use [[lookup name]] again.</p>
-      expansionSaveAttribute: mov
-      form: normal
-    _id: KPRg9AvCvctKNXK1
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.RAMOKodB3uUx8V7q
-    _key: '!items.effects!RAMOKodB3uUx8V7q.KPRg9AvCvctKNXK1'
+    _key: '!items.effects!partnerAwaken000.partnerAwaken000'
   - name: Instant Awaken
     type: ability
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+    _id: gyeWlaPqJoMNLIDR
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: hand
+      effectTypes:
+        - awakening
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: active
+      powerSources:
+        - martial
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       skill: true
       standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      effectTypes:
-        - awakening
-      _sup: KPRg9AvCvctKNXK1
-    _id: TyWAaSc9yZ7hrGLW
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.9xIw5i0wbavIBIj4
-    _key: '!items.effects!RAMOKodB3uUx8V7q.TyWAaSc9yZ7hrGLW'
-  - name: Reactive Awaken
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: hand
       targets:
         - creature
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      overview:
-        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      effectTypes:
-        - awakening
-      _sup: KPRg9AvCvctKNXK1
-    _id: OLg7YGgs3uXJcnye
-    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
+      impacts: {}
+      _sup: partnerAwaken000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.instAwaken000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.NGUfWP2pC23PmT2G
-    _key: '!items.effects!RAMOKodB3uUx8V7q.OLg7YGgs3uXJcnye'
+    _key: '!items.effects!partnerAwaken000.gyeWlaPqJoMNLIDR'
+  - name: Reactive Awaken
+    type: ability
+    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
+    _id: CoWQLMRClDUbNVOq
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: hand
+      effectTypes:
+        - awakening
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: reactive
+      overview:
+        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      skill: true
+      standard: true
+      targets:
+        - creature
+      impacts: {}
+      _sup: partnerAwaken000
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reAwaken00000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!partnerAwaken000.CoWQLMRClDUbNVOq'
+img: systems/teriock/src/icons/abilities/partner-awaken.webp
+name: Partner Awaken
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!RAMOKodB3uUx8V7q'
+_key: '!items!partnerAwaken000'

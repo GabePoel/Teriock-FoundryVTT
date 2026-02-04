@@ -1,33 +1,37 @@
-name: Necromancy Magic Resistance
-type: wrapper
-_id: AgmyrwgzYbjB1M3r
-img: systems/teriock/src/icons/abilities/necromancy-magic-resistance.webp
+_id: necroMagRsc00000
 effects:
   - name: Necromancy Magic Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/necromancy-magic-resistance.webp
+    _id: necroMagRsc00000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
       effectTypes:
         - resistance
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -35,30 +39,34 @@ effects:
           <p>You are @L[Keyword:Resistance]{resistant} to @L[Category:Magically
           powered abilities]{magical} @L[Category:Necromancy element
           abilities]{necromancy abilities}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.elements
-              mode: 2
-              value: necromancy
+            - mode: 2
               priority: 10
-    _id: SDnUXw8XVoCPM3rY
-    img: systems/teriock/src/icons/abilities/necromancy-magic-resistance.webp
+              time: normal
+              key: system.protections.resistances.elements
+              target: Actor
+              qualifier: '1'
+              value: necromancy
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.AgmyrwgzYbjB1M3r
-    _key: '!items.effects!AgmyrwgzYbjB1M3r.SDnUXw8XVoCPM3rY'
+    _key: '!items.effects!necroMagRsc00000.necroMagRsc00000'
+img: systems/teriock/src/icons/abilities/necromancy-magic-resistance.webp
+name: Necromancy Magic Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!AgmyrwgzYbjB1M3r'
+_key: '!items!necroMagRsc00000'

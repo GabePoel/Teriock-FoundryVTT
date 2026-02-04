@@ -1,103 +1,126 @@
-name: Regeneration Touch
-type: wrapper
-_id: w87IESYuddwQAfAE
-img: systems/teriock/src/icons/abilities/regeneration-touch.webp
+_id: regenerationTouc
 effects:
   - name: Regeneration Touch
     type: ability
     img: systems/teriock/src/icons/abilities/regeneration-touch.webp
+    _id: regenerationTouc
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        package: touch
-      targets:
-        - creature
-      elements:
-        - nature
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: >-
-          <p>Target gains @L[Keyword:Limited]{Limited}
-          @L[Ability:Regenerating]{Regenerating}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: natureMage
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
       costs:
         verbal: true
         somatic: true
-      endCondition: >-
-        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
-      form: special
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: hand
+        package: touch
       effectTypes:
         - revival
         - healing
         - regeneration
+      elements:
+        - nature
+      endCondition: >-
+        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: >-
+          <p>Target gains @L[Keyword:Limited]{Limited}
+          @L[Ability:Regenerating]{Regenerating}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: executor
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: VqZH7zytPx3paVJJ
+          rolls:
+            endCon: 2d4
+      class: natureMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.w87IESYuddwQAfAE
-    _key: '!items.effects!w87IESYuddwQAfAE.VqZH7zytPx3paVJJ'
+    _key: '!items.effects!regenerationTouc.regenerationTouc'
   - name: Regenerating
     type: ability
+    img: systems/teriock/src/icons/abilities/regenerating.webp
+    _id: qFWPqx40rHPdN0Pu
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>You must spend 1 @L[Core:Hit Points and Mana Points]{MP} or
+        @L[Core:Healing]{healing} in this way consumes a @L[Core:Hit Die]{hit
+        die} as normal (except that it can @L[Category:Revival effects]{revive}
+        you). This can only @L[Category:Revival effects]{revive} creatures that
+        have been @L[Condition:Dead]{dead} for 1 minute or less.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -110,40 +133,29 @@ effects:
           @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana Points]{HP}
           loss if you start your @L[Core:Turns]{turn} without successfully
           [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      limitation: >-
-        <p>You must spend 1 @L[Core:Hit Points and Mana Points]{MP} or
-        @L[Core:Healing]{healing} in this way consumes a @L[Core:Hit Die]{hit
-        die} as normal (except that it can @L[Category:Revival effects]{revive}
-        you). This can only @L[Category:Revival effects]{revive} creatures that
-        have been @L[Condition:Dead]{dead} for 1 minute or less.</p>
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         macros:
           Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
-      _sup: VqZH7zytPx3paVJJ
-    _id: olwK0J1BIT4Q7oyC
-    img: systems/teriock/src/icons/abilities/regenerating.webp
+      _sup: regenerationTouc
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.regenerating0000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KMru5nPLLX8PwZw4
-    _key: '!items.effects!w87IESYuddwQAfAE.olwK0J1BIT4Q7oyC'
+    _key: '!items.effects!regenerationTouc.qFWPqx40rHPdN0Pu'
+img: systems/teriock/src/icons/abilities/regeneration-touch.webp
+name: Regeneration Touch
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!w87IESYuddwQAfAE'
+_key: '!items!regenerationTouc'

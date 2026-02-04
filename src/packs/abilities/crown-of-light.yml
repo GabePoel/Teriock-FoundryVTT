@@ -1,253 +1,278 @@
-name: Crown of Light
-type: wrapper
-_id: qzeb2OOcLI2CcUIz
-img: systems/teriock/src/icons/abilities/crown-of-light.webp
+_id: cOLight000000000
 effects:
   - name: Crown of Light
     type: ability
     img: systems/teriock/src/icons/abilities/crown-of-light.webp
+    _id: cOLight000000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '8'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 8 Hours
       delivery:
         base: self
-      targets:
-        - self
       elements:
         - life
-      duration:
-        unit: hour
-        quantity: 8
-        description: 8 Hours
-      sustained: true
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>A small circle of golden light circles above your head. You gain
           @L[Ability:Light Touch]{Light Touch} and @L[Ability:Light Aura]{Light
           Aura}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
       spell: true
       standard: true
-      class: lifeMage
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: special
+      sustained: true
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.light.dim
-              mode: 4
+            - mode: 4
+              priority: 3
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
               value: '0.01'
+            - mode: 5
               priority: 3
-            - key: system.light.color
-              mode: 5
+              time: normal
+              key: system.light.color
+              target: Actor
+              qualifier: '1'
               value: '#DEDDDA'
+            - mode: 5
               priority: 3
-            - key: system.light.animation.type
-              mode: 5
+              time: normal
+              key: system.light.animation.type
+              target: Actor
+              qualifier: '1'
               value: sunburst
-              priority: 3
-    _id: IhiRgwXkTtc1I95J
+      class: lifeMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qzeb2OOcLI2CcUIz
-    _key: '!items.effects!qzeb2OOcLI2CcUIz.IhiRgwXkTtc1I95J'
+    _key: '!items.effects!cOLight000000000.cOLight000000000'
   - name: Light Touch
     type: ability
+    img: systems/teriock/src/icons/abilities/light-touch.webp
+    _id: oHvIDuIYKzKtCaVG
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
       elements:
         - life
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
           choice.</p>
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
-      class: lifeMage
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - lighted
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: end
                   trigger: turn
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - lighted
         heightened:
           rolls:
             damage: 1d4[magic holy]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      _sup: IhiRgwXkTtc1I95J
-    _id: pbTwRikkgfpjPjCH
-    img: systems/teriock/src/icons/abilities/light-touch.webp
+      _sup: cOLight000000000
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lightTouch000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.iqBetQHgvgdnfxli
-    _key: '!items.effects!qzeb2OOcLI2CcUIz.pbTwRikkgfpjPjCH'
+    _key: '!items.effects!cOLight000000000.oHvIDuIYKzKtCaVG'
   - name: Light Aura
     type: ability
+    img: systems/teriock/src/icons/abilities/light-aura.webp
+    _id: vos4yNHPwQic98GT
     system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        fail: >-
-          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
-          choice.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: lifeMage
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: aura
+      elements:
+        - life
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
+          choice.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - lighted
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-        heightened:
           rolls:
             endCon: 2d4
+          statuses:
+            - lighted
+        heightened:
+          rolls:
             damage: 1d4[magic holy]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      _sup: IhiRgwXkTtc1I95J
-    _id: zsEoZeeh1QQKjSM7
-    img: systems/teriock/src/icons/abilities/light-aura.webp
+      _sup: cOLight000000000
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lightAura0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.a8ebNup8BJ3b8Lc2
-    _key: '!items.effects!qzeb2OOcLI2CcUIz.zsEoZeeh1QQKjSM7'
+    _key: '!items.effects!cOLight000000000.vos4yNHPwQic98GT'
+img: systems/teriock/src/icons/abilities/crown-of-light.webp
+name: Crown of Light
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!qzeb2OOcLI2CcUIz'
+_key: '!items!cOLight000000000'

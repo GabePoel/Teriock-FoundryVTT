@@ -1,78 +1,83 @@
-name: Vitals Silence
-type: wrapper
-_id: 6I58EJbXdBNCXxCA
-img: systems/teriock/src/icons/abilities/vitals-silence.webp
+_id: vitSilence000000
 effects:
   - name: Vitals Silence
     type: ability
     img: systems/teriock/src/icons/abilities/vitals-silence.webp
+    _id: vitSilence000000
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: weapon
         package: strike
-      targets:
-        - vitals
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target is @L[Condition:Silenced]{silenced}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Silenced]{silenced}.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
       impacts:
         base:
-          statuses:
-            - silenced
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: V33jSSpXn12Zy2HS
+          rolls:
+            endCon: 2d4
+          statuses:
+            - silenced
+      class: assassin
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.6I58EJbXdBNCXxCA
-    _key: '!items.effects!6I58EJbXdBNCXxCA.V33jSSpXn12Zy2HS'
+    _key: '!items.effects!vitSilence000000.vitSilence000000'
+img: systems/teriock/src/icons/abilities/vitals-silence.webp
+name: Vitals Silence
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!6I58EJbXdBNCXxCA'
+_key: '!items!vitSilence000000'

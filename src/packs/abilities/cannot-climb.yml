@@ -1,58 +1,66 @@
-name: Cannot Climb
-type: wrapper
-_id: LfLpgb8z0WFOz3qU
-img: systems/teriock/src/icons/abilities/cannot-climb.webp
+_id: cantClimb0000000
 effects:
   - name: Cannot Climb
     type: ability
-    _id: KXYEQIbBiKRbah95
     img: systems/teriock/src/icons/abilities/cannot-climb.webp
+    _id: cantClimb0000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You have no @L[Core:Movement Speed]{climb speed}. This overrides
           abilities such as @L[Ability:Climbing]{Climbing}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.speedAdjustments.climb
-              mode: 5
-              value: '0'
+            - mode: 5
               priority: 20
+              time: normal
+              key: system.speedAdjustments.climb
+              target: Actor
+              qualifier: '1'
+              value: '0'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.LfLpgb8z0WFOz3qU
-    _key: '!items.effects!LfLpgb8z0WFOz3qU.KXYEQIbBiKRbah95'
+    _key: '!items.effects!cantClimb0000000.cantClimb0000000'
+img: systems/teriock/src/icons/abilities/cannot-climb.webp
+name: Cannot Climb
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!LfLpgb8z0WFOz3qU'
+_key: '!items!cantClimb0000000'

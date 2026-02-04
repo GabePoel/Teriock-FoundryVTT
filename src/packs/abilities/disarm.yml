@@ -1,74 +1,86 @@
-name: Disarm
-type: wrapper
-_id: zkchimO4lWtXMTww
-img: systems/teriock/src/icons/abilities/disarm.webp
+_id: disarm0000000000
 effects:
   - name: Disarm
     type: ability
     img: systems/teriock/src/icons/abilities/disarm.webp
+    _id: disarm0000000000
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: weapon
         package: strike
-      targets:
-        - arm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         base: >-
           <p>Anything held in the targeted arm is knocked out of their hand.
           This triggers @L[Ability:Catch Item]{Catch Item}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
       skill: true
       standard: true
+      targets:
+        - arm
+      impacts: {}
       class: thief
-      expansionSaveAttribute: mov
-      form: normal
-    _id: TYmaiiVvcb8wOEXd
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.zkchimO4lWtXMTww
-    _key: '!items.effects!zkchimO4lWtXMTww.TYmaiiVvcb8wOEXd'
+    _key: '!items.effects!disarm0000000000.disarm0000000000'
   - name: Catch Item
     type: ability
+    img: systems/teriock/src/icons/abilities/catch-item.webp
+    _id: WE3nDgUsT5vDRxxf
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: hand
-      targets:
-        - item
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      basic: true
+      delivery:
+        base: hand
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You catch the item. If multiple creatures are all trying to catch
@@ -76,29 +88,29 @@ effects:
           highest roll catches the item.</p>
         proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
         fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      targets:
+        - item
       trigger: <p>An item within range is falling or flying by.</p>
-      basic: true
-      form: intrinsic
-      _sup: TYmaiiVvcb8wOEXd
-    _id: xVtbkmzNCRfZtxuK
-    img: systems/teriock/src/icons/abilities/catch-item.webp
+      impacts: {}
+      _sup: disarm0000000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.uHCqoTmeCnveY98Y
-    _key: '!items.effects!zkchimO4lWtXMTww.xVtbkmzNCRfZtxuK'
+    _key: '!items.effects!disarm0000000000.WE3nDgUsT5vDRxxf'
+img: systems/teriock/src/icons/abilities/disarm.webp
+name: Disarm
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!zkchimO4lWtXMTww'
+_key: '!items!disarm0000000000'

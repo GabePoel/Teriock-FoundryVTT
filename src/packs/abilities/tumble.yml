@@ -1,26 +1,39 @@
-name: Tumble
-type: wrapper
-_id: ioZKaQdUckEyQrsf
-img: systems/teriock/src/icons/abilities/tumble.webp
+_id: tumble0000000000
 effects:
   - name: Tumble
     type: ability
     img: systems/teriock/src/icons/abilities/tumble.webp
+    _id: tumble0000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      effectTypes:
+        - movement
+      endCondition: >-
+        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You take only half the triggering @L[Core:Damage]{damage}.</p><div
@@ -33,53 +46,47 @@ effects:
           were originally dealt 15 @L[Damage:Fire]{fire damage} and 3
           @L[Damage:Holy]{holy damage} then you would only take 7
           @L[Damage:Fire]{fire damage} and 1 @L[Damage:Holy]{holy damage}.</div>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: veteran
-      endCondition: >-
-        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - self
       trigger: <p>You would take @L[Core:Damage]{damage}.</p>
-      form: normal
-      effectTypes:
-        - movement
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: executor
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: A4im5MWvCxmM8xzm
+          rolls:
+            endCon: 2d4
+      class: veteran
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ioZKaQdUckEyQrsf
-    _key: '!items.effects!ioZKaQdUckEyQrsf.A4im5MWvCxmM8xzm'
+    _key: '!items.effects!tumble0000000000.tumble0000000000'
+img: systems/teriock/src/icons/abilities/tumble.webp
+name: Tumble
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ioZKaQdUckEyQrsf'
+_key: '!items!tumble0000000000'

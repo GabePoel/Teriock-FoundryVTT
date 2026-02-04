@@ -1,65 +1,77 @@
-name: Drink Freezing Liquid
-type: wrapper
-_id: FoiDNzMlG8nJvEL7
-img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
+_id: dkFreezingLiquid
 effects:
   - name: Drink Freezing Liquid
     type: ability
+    img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
+    _id: dkFreezingLiquid
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
+      delivery:
+        base: self
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
         base: >-
           <p>You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Shock Touch]{Shock
           Touch}.</p>
-      piercing: normal
       powerSources:
         - alchemical
+      range:
+        unit: self
       targets:
         - self
-    _id: IwikyLAdaigPNuPF
-    img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.FoiDNzMlG8nJvEL7
-    _key: '!items.effects!FoiDNzMlG8nJvEL7.IwikyLAdaigPNuPF'
+    _key: '!items.effects!dkFreezingLiquid.dkFreezingLiquid'
   - name: Shock Touch
     type: ability
+    img: systems/teriock/src/icons/abilities/shock-touch.webp
+    _id: yy1We9GXPlL5cEVZ
     system:
-      adept:
-        enabled: true
-        amount: 1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
       costs:
         verbal: true
         somatic: true
+      gifted:
+        enabled: true
+        amount: 1
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
       effectTypes:
         - temporal
       elements:
@@ -68,27 +80,21 @@ effects:
         <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
         If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
-      gifted:
-        enabled: true
-        amount: 1
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
-      piercing: ub
       powerSources:
         - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
@@ -96,56 +102,57 @@ effects:
       standard: true
       targets:
         - creature
-      class: stormMage
       impacts:
         base:
-          statuses:
-            - frozen
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: action
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: end
                   trigger: action
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
         heightened:
           rolls:
             damage: 1d4[magic ice]
-      _sup: IwikyLAdaigPNuPF
-    _id: AleCcDWVi0nhKeF3
-    img: systems/teriock/src/icons/abilities/shock-touch.webp
+      _sup: dkFreezingLiquid
+      class: stormMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shockTouch000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.HZ6PxeAka3A6UO03
-    _key: '!items.effects!FoiDNzMlG8nJvEL7.AleCcDWVi0nhKeF3'
+    _key: '!items.effects!dkFreezingLiquid.yy1We9GXPlL5cEVZ'
+img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
+name: Drink Freezing Liquid
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!FoiDNzMlG8nJvEL7'
+_key: '!items!dkFreezingLiquid'

@@ -1,68 +1,90 @@
+_id: torch00000000000
+folder: a18imnpbyMt5Ft6E
 name: Torch
-type: equipment
 system:
   equipmentType: Torch
-  equipped: true
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-3'
   damage:
     base:
-      saved: '1'
-  weight:
-    saved: 1
+      raw: '1'
+    twoHanded: {}
+  hit: {}
   range:
     long:
       unit: melee
+    melee: true
+    ranged: false
     short:
       unit: melee
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '1'
+  minStr:
+    raw: '-3'
   equipmentClasses:
     - supplies
-  minStr:
-    saved: -3
-  av: 0
-  bv: 0
   powerLevel: mundane
-  attackPenalty:
-    raw: '-3'
-_id: 90zcbcIyx3oyZkxf
+type: equipment
 img: systems/teriock/src/icons/equipment/torch.webp
 effects:
   - name: Bashing
     type: property
+    img: systems/teriock/src/icons/properties/bashing.webp
+    _id: bashing000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
         weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
         Attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: mnbn05ViHLG7ClwX
-    img: systems/teriock/src/icons/properties/bashing.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
-    _key: '!items.effects!90zcbcIyx3oyZkxf.mnbn05ViHLG7ClwX'
+    _key: '!items.effects!torch00000000000.bashing000000000'
   - name: Flaming
     type: property
+    img: systems/teriock/src/icons/properties/flaming.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>If an item is <b>[[lookup name style=lc]]</b> (on fire), it is
         @L[Property:Glowing]{glowing} (10 feet) and
         @L[Property:Burning]{burning}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: lhXzKiZejIojzfqZ
-    img: systems/teriock/src/icons/properties/flaming.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.flaming000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Oeg2HTRKAXQsmm8m
-    _key: '!items.effects!90zcbcIyx3oyZkxf.lhXzKiZejIojzfqZ'
+    _id: W7zBwBVrBOlOAAnp
+    _key: '!items.effects!torch00000000000.W7zBwBVrBOlOAAnp'
   - name: Glowing
     type: property
+    img: systems/teriock/src/icons/properties/glowing.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the
         dark and produces light that makes other things visible. When an item
@@ -71,68 +93,68 @@ effects:
         specified, then the item is visible, but glows faintly enough that it
         doesn't illuminate other objects unless they are held <i>right</i> next
         to it.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-      modifiesActor: true
-      changes:
-        - key: system.light.dim
-          mode: 4
-          value: '10'
-          priority: 5
-        - key: system.light.color
-          mode: 5
-          value: '#C64600'
-          priority: 5
-        - key: system.light.animation.type
-          mode: 5
-          value: torch
-          priority: 5
       impacts:
         changes:
-          - key: system.light.dim
-            mode: 4
+          - mode: 4
+            priority: 5
+            time: normal
+            key: system.light.dim
+            target: Actor
+            qualifier: '1'
             value: '10'
+          - mode: 5
             priority: 5
-          - key: system.light.color
-            mode: 5
+            time: normal
+            key: system.light.color
+            target: Actor
+            qualifier: '1'
             value: '#C64600'
+          - mode: 5
             priority: 5
-          - key: system.light.animation.type
-            mode: 5
+            time: normal
+            key: system.light.animation.type
+            target: Actor
+            qualifier: '1'
             value: torch
-            priority: 5
-      _sup: lhXzKiZejIojzfqZ
-    _id: j0jK42K8SffOxP7d
-    img: systems/teriock/src/icons/properties/glowing.webp
+      modifiesActor: true
+      _sup: W7zBwBVrBOlOAAnp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.glowing000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.5KFoOw5ojdhHdvMx
-    _key: '!items.effects!90zcbcIyx3oyZkxf.j0jK42K8SffOxP7d'
+    _id: WkmvIShmSbN9O6yz
+    _key: '!items.effects!torch00000000000.WkmvIShmSbN9O6yz'
   - name: Burning
     type: property
+    img: systems/teriock/src/icons/properties/burning.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b>, deals
         @L[Damage:Fire]{fire damage} and can be used to deliver
         @L[Ability:Burn]{Burn}.</p>
-      form: intrinsic
+      suppression: {}
+      revealed: true
       damageType: Fire
-      _sup: lhXzKiZejIojzfqZ
-    _id: PujXzhpDcE8OyMiF
-    img: systems/teriock/src/icons/properties/burning.webp
+      form: intrinsic
+      _sup: W7zBwBVrBOlOAAnp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.burning000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.C5eRDMyRxBDMkYAE
-    _key: '!items.effects!90zcbcIyx3oyZkxf.PujXzhpDcE8OyMiF'
+    _id: dIVwDeC6OjdthY4a
+    _key: '!items.effects!torch00000000000.dIVwDeC6OjdthY4a'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: a18imnpbyMt5Ft6E
-_key: '!items!90zcbcIyx3oyZkxf'
+_key: '!items!torch00000000000'

@@ -1,15 +1,20 @@
-name: Space Hold
-type: wrapper
+_id: spaceHold0000000
 effects:
   - name: Space Hold
     type: ability
-    _id: sxXjMSIhucFa0Y9M
     img: systems/teriock/src/icons/abilities/space-hold.webp
+    _id: spaceHold0000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
       revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
       delivery:
@@ -17,7 +22,10 @@ effects:
       effectTypes:
         - immunity
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -27,38 +35,34 @@ effects:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Displacement
           effects]{displacement effects}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.effects
-              mode: 2
+            - mode: 2
               priority: 10
-              target: Actor
               time: normal
+              key: system.protections.immunities.effects
+              target: Actor
               qualifier: '1'
               value: displacement
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.JBayEILVKmeMomoK
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JBayEILVKmeMomoK.sxXjMSIhucFa0Y9M'
-_id: JBayEILVKmeMomoK
+    _key: '!items.effects!spaceHold0000000.spaceHold0000000'
 img: systems/teriock/src/icons/abilities/space-hold.webp
+name: Space Hold
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!JBayEILVKmeMomoK'
+_key: '!items!spaceHold0000000'

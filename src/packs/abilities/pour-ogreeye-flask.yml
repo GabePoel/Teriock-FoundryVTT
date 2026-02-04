@@ -1,33 +1,37 @@
-name: Pour Ogreeye Flask
-type: wrapper
-_id: nrM8GpOvpfl8KDo8
-img: systems/teriock/src/icons/abilities/pour-ogreeye-flask.webp
+_id: prOgreeyeFlask00
 effects:
   - name: Pour Ogreeye Flask
     type: ability
+    img: systems/teriock/src/icons/abilities/pour-ogreeye-flask.webp
+    _id: prOgreeyeFlask00
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      delivery:
-        base: item
       duration:
+        raw: '1'
         unit: hour
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Hour
+      delivery:
+        base: item
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
       overview:
@@ -35,7 +39,6 @@ effects:
           <p>Target gains @L[Ability:Improved Strength]{Improved Strength}, has
           their @L[Core:Strength]{STR} set to 2, and has their
           @L[Core:Intelligence]{INT} decreased by 1.</p>
-      piercing: normal
       powerSources:
         - alchemical
       range:
@@ -50,89 +53,107 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.attributes.str.value
-              mode: 5
+            - mode: 5
+              priority: 30
+              time: normal
+              key: system.attributes.str.value
+              target: Actor
+              qualifier: '1'
               value: '2'
+            - mode: 2
               priority: 30
-            - key: system.attributes.int.value
-              mode: 2
+              time: normal
+              key: system.attributes.int.value
+              target: Actor
+              qualifier: '1'
               value: '-1'
-              priority: 30
-    _id: sTTnA5GdoHaMjtWp
-    img: systems/teriock/src/icons/abilities/pour-ogreeye-flask.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.nrM8GpOvpfl8KDo8
-    _key: '!items.effects!nrM8GpOvpfl8KDo8.sTTnA5GdoHaMjtWp'
+    _key: '!items.effects!prOgreeyeFlask00.prOgreeyeFlask00'
   - name: Improved Strength
     type: ability
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 2
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
           @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       skill: true
       standard: true
       targets:
         - self
+      impacts: {}
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+      _sup: prOgreeyeFlask00
       class: knight
-      _sup: sTTnA5GdoHaMjtWp
-    _id: jvhtg5ruHNDUj4h6
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.SYy6lxPn4EOOJ0bC
-    _key: '!items.effects!nrM8GpOvpfl8KDo8.jvhtg5ruHNDUj4h6'
+    _id: bUbiia7i9MsgCWN9
+    _key: '!items.effects!prOgreeyeFlask00.bUbiia7i9MsgCWN9'
   - name: Beastly Strength
     type: ability
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 1
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -141,71 +162,86 @@ effects:
           hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
           Piercing]{Armor piercing} weapons must still be wielded in two hands
           to be @L[Property:AV0]{AV0}.</div>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       skill: true
       standard: true
       targets:
         - self
+      impacts: {}
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+      _sup: bUbiia7i9MsgCWN9
       class: knight
-      _sup: jvhtg5ruHNDUj4h6
-    _id: PyvbCsEEaihG3l9G
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ktAIOGZwdd6hJkDT
-    _key: '!items.effects!nrM8GpOvpfl8KDo8.PyvbCsEEaihG3l9G'
+    _id: sdcHrOBQcCcSUoSH
+    _key: '!items.effects!prOgreeyeFlask00.sdcHrOBQcCcSUoSH'
   - name: Improved Armor Piercing
     type: ability
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       skill: true
       standard: true
       targets:
         - self
+      impacts: {}
+      _sup: bUbiia7i9MsgCWN9
       class: knight
-      _sup: jvhtg5ruHNDUj4h6
-    _id: RqXxaKdrsB9GVybq
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.H0TY6iliodv97qAv
-    _key: '!items.effects!nrM8GpOvpfl8KDo8.RqXxaKdrsB9GVybq'
+    _id: 5VXPtaa6Q1XbziX4
+    _key: '!items.effects!prOgreeyeFlask00.5VXPtaa6Q1XbziX4'
+img: systems/teriock/src/icons/abilities/pour-ogreeye-flask.webp
+name: Pour Ogreeye Flask
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!nrM8GpOvpfl8KDo8'
+_key: '!items!prOgreeyeFlask00'

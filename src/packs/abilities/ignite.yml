@@ -1,81 +1,95 @@
-name: Ignite
-type: wrapper
-_id: jnJmcj39Cgf1sW4b
-img: systems/teriock/src/icons/abilities/ignite.webp
+_id: ignite0000000000
 effects:
   - name: Ignite
     type: ability
     img: systems/teriock/src/icons/abilities/ignite.webp
+    _id: ignite0000000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: hand
-      targets:
-        - item
       elements:
         - flame
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
-      sustained: true
-      range:
-        unit: melee
+      executionTime: a0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
           counts as a torch for the purpose of this @L[Category:Spells]{spell}.
           When @L[Property:On Fire]{on fire}, your hand produces no smoke and
           being set @L[Property:On Fire]{on fire} does not harm it.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: <p>Target must be a torch.</p>
       spell: true
       standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target must be a torch.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      sustained: true
+      targets:
+        - item
       impacts:
         base:
           changes:
-            - key: system.light.dim
-              mode: 4
+            - mode: 4
+              priority: 5
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
               value: '10'
+            - mode: 5
               priority: 5
-            - key: system.light.color
-              mode: 5
+              time: normal
+              key: system.light.color
+              target: Actor
+              qualifier: '1'
               value: '#C64600'
+            - mode: 5
               priority: 5
-            - key: system.light.animation.type
-              mode: 5
+              time: normal
+              key: system.light.animation.type
+              target: Actor
+              qualifier: '1'
               value: torch
-              priority: 5
         heightened:
           duration: 3600
-    _id: Rd6d5tGdnHRAuhWW
+      class: flameMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.jnJmcj39Cgf1sW4b
-    _key: '!items.effects!jnJmcj39Cgf1sW4b.Rd6d5tGdnHRAuhWW'
+    _key: '!items.effects!ignite0000000000.ignite0000000000'
+img: systems/teriock/src/icons/abilities/ignite.webp
+name: Ignite
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!jnJmcj39Cgf1sW4b'
+_key: '!items!ignite0000000000'

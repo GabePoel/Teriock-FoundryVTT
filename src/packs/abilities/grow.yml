@@ -1,28 +1,37 @@
-name: Grow
-type: wrapper
-_id: E8Yhuy9Qhgxs9LfJ
-img: icons/magic/control/sihouette-hold-beam-green.webp
+_id: grow000000000000
 effects:
   - name: Grow
     type: ability
+    img: icons/magic/control/sihouette-hold-beam-green.webp
+    _id: grow000000000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
       elements:
         - nature
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -30,19 +39,13 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
-      piercing: ub
       powerSources:
         - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: <p>Target's @L[Core:Size]{SIZE} increases by 1. </p>
       rotator: true
@@ -53,24 +56,27 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.size.number.raw
-              mode: 2
-              value: '1'
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.size.number.raw
+              target: Actor
+              qualifier: '1'
+              value: '1'
         heightened:
           duration: 3600
-    _id: B7KzcDaekJy6r80X
-    img: icons/magic/control/sihouette-hold-beam-green.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.E8Yhuy9Qhgxs9LfJ
-    _key: '!items.effects!E8Yhuy9Qhgxs9LfJ.B7KzcDaekJy6r80X'
+    _key: '!items.effects!grow000000000000.grow000000000000'
+img: icons/magic/control/sihouette-hold-beam-green.webp
+name: Grow
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!E8Yhuy9Qhgxs9LfJ'
+_key: '!items!grow000000000000'

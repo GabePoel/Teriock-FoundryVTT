@@ -1,91 +1,136 @@
+_id: throwingAxe00000
+folder: s1CVfW55iRMBO1gN
 name: Throwing Axe
-type: equipment
 system:
   equipmentType: Throwing Axe
-  equipped: true
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-2'
+  bv:
+    raw: '1'
   damage:
     base:
-      saved: 1d4
+      raw: 1d4
     twoHanded:
-      saved: 1d6
-  weight:
-    saved: 2
+      raw: 1d6
+  fightingStyle: gladiator
+  hit: {}
   range:
     long:
-      saved: '60'
+      raw: '60'
       unit: ft
+    melee: true
+    ranged: false
     short:
-      saved: '20'
+      raw: '20'
       unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '2'
+  minStr:
+    raw: '-3'
   equipmentClasses:
     - impactWeapons
-  minStr:
-    saved: -3
-  sb: gladiator
-  av: 0
-  bv:
-    saved: 1
   powerLevel: mundane
-  attackPenalty:
-    saved: '-2'
-_id: cKT1574f8uaYSXI4
+type: equipment
 img: systems/teriock/src/icons/equipment/throwing-axe.webp
 effects:
   - name: Versatile
     type: property
+    img: systems/teriock/src/icons/properties/versatile.webp
+    _id: versatile0000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be
         used in one or two hands. The two-handed damage value appears in
         parentheses next to the one-handed value.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: iE5xEiNv2wn5ifn0
-    img: systems/teriock/src/icons/properties/versatile.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.versatile0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.qUOXkRVCStUiudKx
-    _key: '!items.effects!cKT1574f8uaYSXI4.iE5xEiNv2wn5ifn0'
+    _key: '!items.effects!throwingAxe00000.versatile0000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: h6dW3TyiJfNjWeOl
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!cKT1574f8uaYSXI4.h6dW3TyiJfNjWeOl'
+    _key: '!items.effects!throwingAxe00000.wep0000000000000'
+  - name: Armor Piercing
+    type: property
+    img: systems/teriock/src/icons/properties/armor-piercing.webp
+    _id: armorPiercing000
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is @L[Property:AV0]{AV0} when wielded in
+        two hands.</p>
+      suppression: {}
+      revealed: true
+      form: intrinsic
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.armorPiercing000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!throwingAxe00000.armorPiercing000'
   - name: Thrown
     type: property
+    img: systems/teriock/src/icons/properties/thrown.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
         @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
         be used to make melee attacks.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: yvxOMW2XwgvjML9Y
-    img: systems/teriock/src/icons/properties/thrown.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.GxpMTePEVU970bWo
-    _key: '!items.effects!cKT1574f8uaYSXI4.yvxOMW2XwgvjML9Y'
+    _id: uthjYeaibPNS7Uj5
+    _key: '!items.effects!throwingAxe00000.uthjYeaibPNS7Uj5'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -97,43 +142,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      _sup: yvxOMW2XwgvjML9Y
-    _id: CLB5OO6IWushdTYi
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: uthjYeaibPNS7Uj5
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!cKT1574f8uaYSXI4.CLB5OO6IWushdTYi'
-  - name: Armor Piercing
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is @L[Property:AV0]{AV0} when wielded in
-        two hands.</p>
-      revealed: true
-      form: intrinsic
-    _id: X4HUX1VFeikno7yL
-    img: systems/teriock/src/icons/properties/armor-piercing.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.dQ4dHCWEvbEaRqfz
-    _key: '!items.effects!cKT1574f8uaYSXI4.X4HUX1VFeikno7yL'
+    _id: UnvSiLdQolTHRdeo
+    _key: '!items.effects!throwingAxe00000.UnvSiLdQolTHRdeo'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: s1CVfW55iRMBO1gN
-_key: '!items!cKT1574f8uaYSXI4'
+_key: '!items!throwingAxe00000'

@@ -1,56 +1,66 @@
-name: Ice Damage Resistance
-type: wrapper
-_id: HqxE3OTv1OCvSEPB
-img: systems/teriock/src/icons/abilities/ice-damage-resistance.webp
+_id: iceDmgRsc0000000
 effects:
   - name: Ice Damage Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/ice-damage-resistance.webp
+    _id: iceDmgRsc0000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-      overview:
-        base: <p>You @L[Keyword:Resistance]{resist} @L[Damage:Ice]{ice damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
       effectTypes:
         - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @L[Keyword:Resistance]{resist} @L[Damage:Ice]{ice damage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: ice
+            - mode: 2
               priority: 10
-    _id: bevCVhOnjt1ed7PE
+              time: normal
+              key: system.protections.resistances.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: ice
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.HqxE3OTv1OCvSEPB
-    _key: '!items.effects!HqxE3OTv1OCvSEPB.bevCVhOnjt1ed7PE'
+    _key: '!items.effects!iceDmgRsc0000000.iceDmgRsc0000000'
+img: systems/teriock/src/icons/abilities/ice-damage-resistance.webp
+name: Ice Damage Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!HqxE3OTv1OCvSEPB'
+_key: '!items!iceDmgRsc0000000'

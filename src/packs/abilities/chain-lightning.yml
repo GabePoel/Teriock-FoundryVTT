@@ -1,69 +1,69 @@
-name: Chain Lightning
-type: wrapper
-_id: ijWUR9sw0M06s6tp
-img: systems/teriock/src/icons/abilities/chain-lightning.webp
+_id: chainLightning00
 effects:
   - name: Chain Lightning
     type: ability
     img: systems/teriock/src/icons/abilities/chain-lightning.webp
+    _id: chainLightning00
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: <p>Deal [[/damage 1d8[magic]]] @L[Core:Damage]{damage} to target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 2
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d8[magic]]] @L[Core:Damage]{damage}. The cascade also
-        executes an additional time.</p>
-      expansion:
-        range:
-          raw: '60'
-          unit: ft
-        cap:
-          raw: '2'
-        type: cascade
-      expansionRange: 60 , 2 Extra Executions
-      expansionSaveAttribute: mov
-      form: special
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: missile
+        package: ray
       effectTypes:
         - damaging
         - loud
         - lightning
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        type: cascade
+        range:
+          raw: '60'
+          unit: ft
+        featSaveAttribute: mov
+        cap:
+          raw: '2'
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d8[magic]]] @L[Core:Damage]{damage}. The cascade also
+        executes an additional time.</p>
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        hit: <p>Deal [[/damage 1d8[magic]]] @L[Core:Damage]{damage} to target.</p>
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -71,17 +71,18 @@ effects:
         heightened:
           rolls:
             damage: 1d8[magic]
-    _id: xrm7mFsC1EsSp9IP
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ijWUR9sw0M06s6tp
-    _key: '!items.effects!ijWUR9sw0M06s6tp.xrm7mFsC1EsSp9IP'
+    _key: '!items.effects!chainLightning00.chainLightning00'
+img: systems/teriock/src/icons/abilities/chain-lightning.webp
+name: Chain Lightning
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ijWUR9sw0M06s6tp'
+_key: '!items!chainLightning00'

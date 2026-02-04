@@ -6,9 +6,7 @@ declare module "./roll-table.mjs" {
     _id: ID<TeriockRollTable>;
 
     get documentName(): "RollTable";
-
     get id(): ID<TeriockRollTable>;
-
     get uuid(): UUID<TeriockRollTable>;
   }
 }

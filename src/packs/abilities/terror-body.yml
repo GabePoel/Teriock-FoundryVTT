@@ -1,64 +1,68 @@
-name: Terror Body
-type: wrapper
-_id: aKaLtjT4X7WU1ZaT
-img: systems/teriock/src/icons/abilities/terror-body.webp
+_id: terrorBody000000
 effects:
   - name: Terror Body
     type: ability
+    img: systems/teriock/src/icons/abilities/terror-body.webp
+    _id: terrorBody000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>Your @L[Category:Body parts]{body parts} are deal an additional
           [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
+          changes:
+            - mode: 2
+              priority: 30
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@dmg'
+              value: 1d4[terror magic]
           rolls:
             damage: 1d4[terror magic]
-          changes:
-            - key: >-
-                !body__system.damage.base.raw__exists__null__system.damage.base.raw
-              mode: 2
-              priority: 30
-              target: Actor
-              time: normal
-              qualifier: '1'
-              value: 1d4[terror magic]
-    _id: eK2RIo7X8IwNwqox
-    img: systems/teriock/src/icons/abilities/terror-body.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.aKaLtjT4X7WU1ZaT
-    _key: '!items.effects!aKaLtjT4X7WU1ZaT.eK2RIo7X8IwNwqox'
+    _key: '!items.effects!terrorBody000000.terrorBody000000'
+img: systems/teriock/src/icons/abilities/terror-body.webp
+name: Terror Body
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!aKaLtjT4X7WU1ZaT'
+_key: '!items!terrorBody000000'

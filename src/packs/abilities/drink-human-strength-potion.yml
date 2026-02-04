@@ -1,42 +1,45 @@
-name: Drink Human Strength Potion
-type: wrapper
-_id: UpuHfPtAfqBFsEV3
-img: systems/teriock/src/icons/abilities/drink-human-strength-potion.webp
+_id: dkHumanStrengthP
 effects:
   - name: Drink Human Strength Potion
     type: ability
+    img: systems/teriock/src/icons/abilities/drink-human-strength-potion.webp
+    _id: dkHumanStrengthP
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      delivery:
-        base: item
       duration:
+        raw: '10'
         unit: minute
-        quantity: 10
+        dawn: false
         stationary: false
         description: 10 Minutes
+      delivery:
+        base: item
       effectTypes:
         - transformation
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
         base: >-
           <p>Your @L[Core:Strength]{STR} is set to 0. This applies regardless of
           what it was prior.</p>
-      piercing: normal
       powerSources:
         - alchemical
       range:
@@ -51,22 +54,25 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.attributes.str.value
-              mode: 5
-              value: '0'
+            - mode: 5
               priority: 50
-    _id: oIC3lAi0gbGcJim3
-    img: systems/teriock/src/icons/abilities/drink-human-strength-potion.webp
+              time: normal
+              key: system.attributes.str.value
+              target: Actor
+              qualifier: '1'
+              value: '0'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.UpuHfPtAfqBFsEV3
-    _key: '!items.effects!UpuHfPtAfqBFsEV3.oIC3lAi0gbGcJim3'
+    _key: '!items.effects!dkHumanStrengthP.dkHumanStrengthP'
+img: systems/teriock/src/icons/abilities/drink-human-strength-potion.webp
+name: Drink Human Strength Potion
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!UpuHfPtAfqBFsEV3'
+_key: '!items!dkHumanStrengthP'

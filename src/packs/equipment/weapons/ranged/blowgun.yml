@@ -1,99 +1,122 @@
+_id: blowgun000000000
+folder: GjqehiaK2urxvWVm
 name: Blowgun
-type: equipment
 system:
   equipmentType: Blowgun
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
   attackPenalty:
-    saved: '-1'
-    raw: '-3'
+    raw: '-1'
   damage:
     base:
-      saved: 1d4
+      raw: 1d4
+    twoHanded: {}
   fightingStyle: quickshot
+  hit: {}
   range:
     long:
-      saved: '320'
+      raw: '320'
       unit: ft
     melee: true
     ranged: false
     short:
-      saved: '80'
+      raw: '80'
       unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '1'
+  minStr:
+    raw: '-2'
   equipmentClasses:
     - specialtyWeapons
-  minStr:
-    saved: -2
-    raw: -3
   powerLevel: mundane
-  weight:
-    saved: 1
-    raw: 0
-_id: lRP3sHDrQ1ThkMtS
+type: equipment
 img: systems/teriock/src/icons/equipment/blowgun.webp
 effects:
   - name: Loading
     type: property
+    img: systems/teriock/src/icons/properties/loading.webp
+    _id: loading000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property must be
         reloaded after making an @L[Category:Attack abilities]{attack} with it.
         Anyone can do this using @L[Ability:Reload]{Reload}.</p>
+      suppression: {}
       revealed: true
       form: flaw
-    _id: PQtDoSOKYNxUYdUg
-    img: systems/teriock/src/icons/properties/loading.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.loading000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.IqKNnbXPdsjuyi4Y
-    _key: '!items.effects!lRP3sHDrQ1ThkMtS.PQtDoSOKYNxUYdUg'
+    _key: '!items.effects!blowgun000000000.loading000000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
-    _id: rArqbdzne3KdWwCN
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!lRP3sHDrQ1ThkMtS.rArqbdzne3KdWwCN'
+    _key: '!items.effects!blowgun000000000.wep0000000000000'
   - name: Ammunition
     type: property
+    img: systems/teriock/src/icons/properties/ammunition.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property is @L[Property:Ranged]{ranged} and
         requires some sort of [[lookup name style=lc]] (arrows, rocks, darts,
         etc.) to @L[Category:Attack abilities]{attack} with.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.melee
-            mode: 5
-            value: 'false'
+          - mode: 5
             priority: 10
-    _id: LSbsL4buLfoFiRpD
-    img: systems/teriock/src/icons/properties/ammunition.webp
+            time: normal
+            key: system.range.melee
+            target: parent
+            qualifier: '1'
+            value: 'false'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.JJ1CEFynCrUbDAPO
-    _key: '!items.effects!lRP3sHDrQ1ThkMtS.LSbsL4buLfoFiRpD'
+    _id: bx7jrk8upXfasWFw
+    _key: '!items.effects!blowgun000000000.bx7jrk8upXfasWFw'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -105,27 +128,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      revealed: true
-      _sup: LSbsL4buLfoFiRpD
-    _id: 7Wp7ISute9ohwSzA
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: bx7jrk8upXfasWFw
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!lRP3sHDrQ1ThkMtS.7Wp7ISute9ohwSzA'
-folder: GjqehiaK2urxvWVm
+    _id: UlgDrEYwaO9fFTAa
+    _key: '!items.effects!blowgun000000000.UlgDrEYwaO9fFTAa'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!lRP3sHDrQ1ThkMtS'
+_key: '!items!blowgun000000000'

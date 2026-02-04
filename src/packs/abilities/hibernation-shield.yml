@@ -1,109 +1,123 @@
-name: Hibernation Shield
-type: wrapper
-_id: 8qpH0WmO4Zn1QvdW
-img: systems/teriock/src/icons/abilities/hibernation-shield.webp
+_id: hibernationShiel
 effects:
   - name: Hibernation Shield
     type: ability
     img: systems/teriock/src/icons/abilities/hibernation-shield.webp
+    _id: hibernationShiel
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      elements:
-        - life
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: untilDawn
-        quantity: 0
+        raw: '0'
+        unit: instant
         conditions:
           present:
             - down
+        dawn: true
+        stationary: false
         description: Until Dawn While Down
-      range:
-        unit: ft
-        raw: '10'
+      delivery:
+        base: sight
+      elements:
+        - life
+      endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
           yourself with this as you go @L[Condition:Down]{down}.</p>
         proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
         fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      requirements: <p>Target must be @L[Condition:Down]{down}.</p>
       spell: true
       standard: true
-      class: lifeMage
-      endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
-      requirements: <p>Target must be @L[Condition:Down]{down}.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: <p>You go @L[Condition:Down]{down}.</p>
-      form: normal
-    _id: i9RdeGy7eeoOgNU4
+      impacts: {}
+      class: lifeMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.8qpH0WmO4Zn1QvdW
-    _key: '!items.effects!8qpH0WmO4Zn1QvdW.i9RdeGy7eeoOgNU4'
+    _key: '!items.effects!hibernationShiel.hibernationShiel'
   - name: Hibernation
     type: ability
+    img: systems/teriock/src/icons/abilities/hibernation.webp
+    _id: hrcHFlwcoYQkDvL6
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           present:
             - down
+        dawn: false
         stationary: false
         description: While Down
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - primal
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
+      _sup: hibernationShiel
       class: ranger
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: i9RdeGy7eeoOgNU4
-    _id: lU4auD4tomGadoGb
-    img: systems/teriock/src/icons/abilities/hibernation.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hibernation00000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.EJLeZEObry91nM4m
-    _key: '!items.effects!8qpH0WmO4Zn1QvdW.lU4auD4tomGadoGb'
+    _key: '!items.effects!hibernationShiel.hrcHFlwcoYQkDvL6'
+img: systems/teriock/src/icons/abilities/hibernation-shield.webp
+name: Hibernation Shield
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!8qpH0WmO4Zn1QvdW'
+_key: '!items!hibernationShiel'

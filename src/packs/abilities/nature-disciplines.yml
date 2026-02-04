@@ -1,26 +1,34 @@
-name: Nature Disciplines
-type: wrapper
-_id: nqSYHRyoKBZgeEjL
-img: systems/teriock/src/icons/abilities/nature-disciplines.webp
+_id: natureDiscipline
 effects:
   - name: Nature Disciplines
     type: ability
     img: systems/teriock/src/icons/abilities/nature-disciplines.webp
+    _id: natureDiscipline
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -38,44 +46,60 @@ effects:
         fluent: >-
           <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
           Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: int
-          amount: proficiency
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
+      upgrades:
+        competence:
+          attribute: int
+          value: 0
       class: natureMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: aHwQrgo8XUochmTu
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.nqSYHRyoKBZgeEjL
-    _key: '!items.effects!nqSYHRyoKBZgeEjL.aHwQrgo8XUochmTu'
+    _key: '!items.effects!natureDiscipline.natureDiscipline'
   - name: Branching Casting
     type: ability
+    img: systems/teriock/src/icons/abilities/branching-casting.webp
+    _id: rC7iLmg0FnTroe4v
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - spell
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You may select an additional target within 30 feet of the
@@ -83,87 +107,90 @@ effects:
           @L[Category:Spells]{spell} targets them as well. Any @L[Core:Attack
           Interaction]{attack rolls}, @L[Core:Feat Interaction]{feat saves}, or
           other necessary rolls must be made for the new target as well.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>A @L[Category:Spells]{spell} you cast affects at least one target
+        other than @L[Category:Self target spells]{yourself}.</p>
+      impacts: {}
+      _sup: natureDiscipline
       class: natureMage
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.branchingCasting
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!natureDiscipline.rC7iLmg0FnTroe4v'
+  - name: Territorial Casting
+    type: ability
+    img: systems/teriock/src/icons/abilities/territorial-casting.webp
+    _id: HqQg3PrC4NyyI45n
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>A @L[Category:Spells]{spell} you cast affects at least one target
-        other than @L[Category:Self target spells]{yourself}.</p>
-      form: normal
-      _sup: aHwQrgo8XUochmTu
-    _id: eSB8DtbPPgOo3xDI
-    img: systems/teriock/src/icons/abilities/branching-casting.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.0p23WVm2zYM0dLn2
-    _key: '!items.effects!nqSYHRyoKBZgeEjL.eSB8DtbPPgOo3xDI'
-  - name: Territorial Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-      targets:
-        - spell
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You cast a @L[Category:Single action spells]{single action spell}
           at the triggering creature.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
-      class: natureMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - spell
       trigger: <p>Another creature moves within 5 feet of you.</p>
-      form: normal
-      _sup: aHwQrgo8XUochmTu
-    _id: kveVKnjhQ0QXe1Ge
-    img: systems/teriock/src/icons/abilities/territorial-casting.webp
+      impacts: {}
+      _sup: natureDiscipline
+      class: natureMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.territorialCasti
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.OLehzLzbleIlHAmV
-    _key: '!items.effects!nqSYHRyoKBZgeEjL.kveVKnjhQ0QXe1Ge'
+    _key: '!items.effects!natureDiscipline.HqQg3PrC4NyyI45n'
+img: systems/teriock/src/icons/abilities/nature-disciplines.webp
+name: Nature Disciplines
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!nqSYHRyoKBZgeEjL'
+_key: '!items!natureDiscipline'

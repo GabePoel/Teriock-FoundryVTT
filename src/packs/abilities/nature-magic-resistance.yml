@@ -1,33 +1,37 @@
-name: Nature Magic Resistance
-type: wrapper
-_id: 1gqir2R5t5acZiBQ
-img: systems/teriock/src/icons/abilities/nature-magic-resistance.webp
+_id: natureMagRsc0000
 effects:
   - name: Nature Magic Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/nature-magic-resistance.webp
+    _id: natureMagRsc0000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
       effectTypes:
         - resistance
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -35,30 +39,34 @@ effects:
           <p>You are @L[Keyword:Resistance]{resistant} to @L[Category:Magically
           powered abilities]{magical} @L[Category:Nature element
           abilities]{nature abilities}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.elements
-              mode: 2
-              value: nature
+            - mode: 2
               priority: 10
-    _id: W6kwUfq2V8qNPICq
-    img: systems/teriock/src/icons/abilities/nature-magic-resistance.webp
+              time: normal
+              key: system.protections.resistances.elements
+              target: Actor
+              qualifier: '1'
+              value: nature
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.1gqir2R5t5acZiBQ
-    _key: '!items.effects!1gqir2R5t5acZiBQ.W6kwUfq2V8qNPICq'
+    _key: '!items.effects!natureMagRsc0000.natureMagRsc0000'
+img: systems/teriock/src/icons/abilities/nature-magic-resistance.webp
+name: Nature Magic Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!1gqir2R5t5acZiBQ'
+_key: '!items!natureMagRsc0000'

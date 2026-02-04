@@ -1,68 +1,73 @@
-name: Elder Sorcery Adept
-type: wrapper
-_id: kgi1Or5Ew7V9zRdo
-img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
+_id: eSAdept000000000
 effects:
   - name: Elder Sorcery Adept
     type: ability
+    img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
+    _id: eSAdept000000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Adept]{adept} at creating, casting, and learning
           @L[Core:Elder Sorcery]{Elder Sorcery}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: '!ability__system.elderSorcery__is__true__system.adept.enabled'
-              mode: 4
+            - mode: 4
               priority: 10
-              target: Actor
               time: normal
-              qualifier: '1'
+              key: system.adept.enabled
+              target: ability
+              qualifier: '@es'
               value: 'true'
-            - key: '!ability__system.elderSorcery__is__true__system.adept.amount'
-              mode: 4
+            - mode: 4
               priority: 10
-              target: Actor
               time: normal
-              qualifier: '1'
+              key: system.adept.amount
+              target: ability
+              qualifier: '@es'
               value: '1'
-    _id: ZH2z2Plwm6OGwJCn
-    img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.kgi1Or5Ew7V9zRdo
-    _key: '!items.effects!kgi1Or5Ew7V9zRdo.ZH2z2Plwm6OGwJCn'
+    _key: '!items.effects!eSAdept000000000.eSAdept000000000'
+img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
+name: Elder Sorcery Adept
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!kgi1Or5Ew7V9zRdo'
+_key: '!items!eSAdept000000000'

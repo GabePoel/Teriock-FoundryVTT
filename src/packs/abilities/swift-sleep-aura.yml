@@ -1,52 +1,16 @@
-name: Swift Sleep Aura
-type: wrapper
-_id: a0Vuv7r2TTj8KgQJ
-img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+_id: swiftSleepAura00
 effects:
   - name: Swift Sleep Aura
     type: ability
     img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+    _id: swiftSleepAura00
     system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: per
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: untilDawn
-        quantity: 0
-        description: Until Dawn
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: >-
-          <p>A hypnotizing shimmer spreads through the air around you. Roll
-          [[/sleep 1d8]] to determine the strength of this effect.</p>
-        proficient: <p>Instead roll [[/sleep (@p)d8]].</p>
-        fluent: <p>Instead roll [[/sleep (@f)d8]].</p>
-      results:
-        fail: >-
-          <p>Any creatures who have fewer @L[Core:HP]{HP} than the result of the
-          die roll are rendered @L[Condition:Asleep]{asleep} until this effect
-          ends.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: lifeMage
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -54,13 +18,52 @@ effects:
           type: static
           value:
             static: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: true
+        stationary: false
+        description: Until Dawn
+      delivery:
+        base: aura
+      elements:
+        - life
+      endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: per
+      form: special
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, roll an additional
         [[/sleep 1d8]]. Target is also @L[Keyword:Resistance]{resistant} to
         being @L[Keyword:Awaken]{awakened}.</p>
-      endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
-      expansionSaveAttribute: mov
-      form: special
+      interaction: feat
+      maneuver: active
+      overview:
+        base: >-
+          <p>A hypnotizing shimmer spreads through the air around you. Roll
+          [[/sleep 1d8]] to determine the strength of this effect.</p>
+        proficient: <p>Instead roll [[/sleep (@p)d8]].</p>
+        fluent: <p>Instead roll [[/sleep (@f)d8]].</p>
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Any creatures who have fewer @L[Core:HP]{HP} than the result of the
+          die roll are rendered @L[Condition:Asleep]{asleep} until this effect
+          ends.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -74,17 +77,19 @@ effects:
         heightened:
           rolls:
             sleep: 1d8
-    _id: OYcNEszQikaBX4ax
+      class: lifeMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.a0Vuv7r2TTj8KgQJ
-    _key: '!items.effects!a0Vuv7r2TTj8KgQJ.OYcNEszQikaBX4ax'
+    _key: '!items.effects!swiftSleepAura00.swiftSleepAura00'
+img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+name: Swift Sleep Aura
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!a0Vuv7r2TTj8KgQJ'
+_key: '!items!swiftSleepAura00'

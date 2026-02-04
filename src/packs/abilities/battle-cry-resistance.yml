@@ -1,62 +1,72 @@
-name: Battle Cry Resistance
-type: wrapper
-_id: DqXrfWmMV6e0tUmE
-img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+_id: battleCryRsc0000
 effects:
   - name: Battle Cry Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    _id: battleCryRsc0000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '5'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 5 Minutes
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: minute
-        quantity: 5
-        description: 5 Minutes
+      effectTypes:
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime: a0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} being
           @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: berserker
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              value: frightened
+            - mode: 2
               priority: 10
-    _id: ucGvdDkpWbtybUSj
+              time: normal
+              key: system.protections.resistances.statuses
+              target: Actor
+              qualifier: '1'
+              value: frightened
+      class: berserker
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DqXrfWmMV6e0tUmE
-    _key: '!items.effects!DqXrfWmMV6e0tUmE.ucGvdDkpWbtybUSj'
+    _key: '!items.effects!battleCryRsc0000.battleCryRsc0000'
+img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+name: Battle Cry Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!DqXrfWmMV6e0tUmE'
+_key: '!items!battleCryRsc0000'

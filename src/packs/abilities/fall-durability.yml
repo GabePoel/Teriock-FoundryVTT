@@ -1,58 +1,68 @@
-name: Fall Durability
-type: wrapper
-_id: xoVB2jQ0zYkB82iN
-img: systems/teriock/src/icons/abilities/fall-durability.webp
+_id: fallDur000000000
 effects:
   - name: Fall Durability
     type: ability
     img: systems/teriock/src/icons/abilities/fall-durability.webp
+    _id: fallDur000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to fall
           @L[Core:Damage]{damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              value: fall
+            - mode: 2
               priority: 10
-    _id: G493ItCQLeUxmwjO
+              time: normal
+              key: system.protections.immunities.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: fall
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.xoVB2jQ0zYkB82iN
-    _key: '!items.effects!xoVB2jQ0zYkB82iN.G493ItCQLeUxmwjO'
+    _key: '!items.effects!fallDur000000000.fallDur000000000'
+img: systems/teriock/src/icons/abilities/fall-durability.webp
+name: Fall Durability
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!xoVB2jQ0zYkB82iN'
+_key: '!items!fallDur000000000'

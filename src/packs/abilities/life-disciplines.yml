@@ -1,26 +1,34 @@
-name: Life Disciplines
-type: wrapper
-_id: VHYgmgCU05DH3rjp
-img: systems/teriock/src/icons/abilities/life-disciplines.webp
+_id: lifeDisciplines0
 effects:
   - name: Life Disciplines
     type: ability
     img: systems/teriock/src/icons/abilities/life-disciplines.webp
+    _id: lifeDisciplines0
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -38,130 +46,149 @@ effects:
         fluent: >-
           <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
           Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: int
-          amount: proficiency
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
+      upgrades:
+        competence:
+          attribute: int
+          value: 0
       class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: dupcuVVojo46q7gq
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.VHYgmgCU05DH3rjp
-    _key: '!items.effects!VHYgmgCU05DH3rjp.dupcuVVojo46q7gq'
+    _key: '!items.effects!lifeDisciplines0.lifeDisciplines0'
   - name: Emergency Casting
     type: ability
+    img: systems/teriock/src/icons/abilities/emergency-casting.webp
+    _id: JjPHZ5YzZCIHRU3j
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-      targets:
-        - spell
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      overview:
-        base: >-
-          <p>You cast a @L[Category:Single action spells]{single action spell}
-          at the triggering creature.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: lifeMage
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: self
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You cast a @L[Category:Single action spells]{single action spell}
+          at the triggering creature.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
       trigger: >-
         <p>You are being @L[Category:Attack abilities]{attacked} by another
         creature.</p>
-      form: normal
-      _sup: dupcuVVojo46q7gq
-    _id: sxrtkx7Ui7ZCcUmU
-    img: systems/teriock/src/icons/abilities/emergency-casting.webp
+      impacts: {}
+      _sup: lifeDisciplines0
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.emergencyCasting
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Cuol6ppIdgbUzoa0
-    _key: '!items.effects!VHYgmgCU05DH3rjp.sxrtkx7Ui7ZCcUmU'
+    _key: '!items.effects!lifeDisciplines0.JjPHZ5YzZCIHRU3j'
   - name: Sheltered Casting
     type: ability
+    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
+    _id: OilBPAyXZHnaASjn
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - spell
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You may keep the triggering @L[Category:Spells]{spell} from
           targeting up to @L[Core:Proficiency Bonus]{P} targets of your choice
           that it would otherwise target.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
-      class: lifeMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - spell
       trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-      form: normal
-      _sup: dupcuVVojo46q7gq
-    _id: kezrvk6koVGeeldn
-    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
+      impacts: {}
+      _sup: lifeDisciplines0
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shelteredCasting
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vEQmqLQHPES8Jd75
-    _key: '!items.effects!VHYgmgCU05DH3rjp.kezrvk6koVGeeldn'
+    _key: '!items.effects!lifeDisciplines0.OilBPAyXZHnaASjn'
+img: systems/teriock/src/icons/abilities/life-disciplines.webp
+name: Life Disciplines
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!VHYgmgCU05DH3rjp'
+_key: '!items!lifeDisciplines0'

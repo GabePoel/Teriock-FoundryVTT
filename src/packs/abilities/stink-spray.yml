@@ -1,41 +1,44 @@
-name: Stink Spray
-type: wrapper
-_id: YMMF80TCfXQ7v4PO
-img: systems/teriock/src/icons/abilities/stink-spray.webp
+_id: stinkSpray000000
 effects:
   - name: Stink Spray
     type: ability
+    img: systems/teriock/src/icons/abilities/stink-spray.webp
+    _id: stinkSpray000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: cone
       duration:
+        raw: '1'
         unit: week
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Week
+      delivery:
+        base: cone
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: feat
       maneuver: active
-      piercing: normal
       powerSources:
         - alchemical
       range:
-        unit: ft
         raw: '15'
+        unit: ft
       results:
         fail: >-
           <p>Target is covered with a terrible stench that is extremely hard to
@@ -49,30 +52,39 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.attributes.snk.score.raw
-              mode: 3
-              value: '-3'
+            - mode: 3
               priority: 50
-            - key: system.protections.immunities.hidden
-              mode: 2
-              value: statuses
+              time: normal
+              key: system.attributes.snk.score.raw
+              target: Actor
+              qualifier: '1'
+              value: '-3'
+            - mode: 2
               priority: 10
-            - key: system.protections.immunities.odorless
-              mode: 2
+              time: normal
+              key: system.protections.immunities.hidden
+              target: Actor
+              qualifier: '1'
               value: statuses
+            - mode: 2
               priority: 10
-    _id: zfLSUtyFxLxVuQNH
-    img: systems/teriock/src/icons/abilities/stink-spray.webp
+              time: normal
+              key: system.protections.immunities.odorless
+              target: Actor
+              qualifier: '1'
+              value: statuses
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.YMMF80TCfXQ7v4PO
-    _key: '!items.effects!YMMF80TCfXQ7v4PO.zfLSUtyFxLxVuQNH'
+    _key: '!items.effects!stinkSpray000000.stinkSpray000000'
+img: systems/teriock/src/icons/abilities/stink-spray.webp
+name: Stink Spray
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!YMMF80TCfXQ7v4PO'
+_key: '!items!stinkSpray000000'

@@ -1,23 +1,29 @@
-name: Blue Dragonfly Breath
-type: wrapper
-_id: xPCbTsAG7lPFGxlJ
-img: systems/teriock/src/icons/abilities/blue-dragonfly-breath.webp
+_id: blueDrgflyBreath
 effects:
   - name: Blue Dragonfly Breath
     type: ability
+    img: systems/teriock/src/icons/abilities/blue-dragonfly-breath.webp
+    _id: blueDrgflyBreath
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: cone
       duration:
+        raw: '10'
         unit: minute
-        quantity: 10
+        dawn: false
         stationary: false
         description: 10 Minutes
+      delivery:
+        base: cone
       effectTypes:
         - temporal
       elements:
@@ -26,7 +32,10 @@ effects:
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -34,19 +43,13 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic ice]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: feat
       maneuver: active
-      piercing: normal
       powerSources:
         - magical
       range:
-        unit: ft
         raw: '15'
+        unit: ft
       results:
         save: >-
           <p>Target is @L[Condition:Frozen]{frozen}. At the end of each of the
@@ -60,8 +63,6 @@ effects:
         - creature
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
@@ -77,21 +78,23 @@ effects:
                   trigger: action
             changeOnCrit: false
             doesExpire: true
+          rolls:
+            endCon: 2d4
         heightened:
           rolls:
             damage: 2d10[magic ice]
-    _id: xUxI8nevJDWqKv22
-    img: systems/teriock/src/icons/abilities/blue-dragonfly-breath.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.xPCbTsAG7lPFGxlJ
-    _key: '!items.effects!xPCbTsAG7lPFGxlJ.xUxI8nevJDWqKv22'
+    _key: '!items.effects!blueDrgflyBreath.blueDrgflyBreath'
+img: systems/teriock/src/icons/abilities/blue-dragonfly-breath.webp
+name: Blue Dragonfly Breath
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!xPCbTsAG7lPFGxlJ'
+_key: '!items!blueDrgflyBreath'

@@ -1,80 +1,85 @@
-name: Misdirect
-type: wrapper
-_id: WHk7lQPSzOOkryWN
-img: systems/teriock/src/icons/abilities/misdirect.webp
+_id: misdirect0000000
 effects:
   - name: Misdirect
     type: ability
     img: systems/teriock/src/icons/abilities/misdirect.webp
+    _id: misdirect0000000
     system:
-      powerSources:
-        - martial
-      interaction: block
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: item
-      targets:
-        - attack
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: block
+      maneuver: reactive
+      powerSources:
+        - martial
       range:
         unit: melee
+      requirements: <p>You block with a @L[Category:Bows]{bow} or your hand.</p>
       results:
         save: >-
           <p>The @L[Core:Interactions]{attack's} effect
           @L[Core:Fizzles]{fizzles} and the @L[Core:Attack
           Interaction]{attacker} is @L[Condition:Snared]{snared}.</p>
         fail: <p>The @L[Core:Interactions]{attack's} effect Applies.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       skill: true
       standard: true
-      class: archer
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      requirements: <p>You block with a @L[Category:Bows]{bow} or your hand.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - attack
       trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
-      form: normal
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: W9ekYaonCEkM8hNy
+          rolls:
+            endCon: 2d4
+      class: archer
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.WHk7lQPSzOOkryWN
-    _key: '!items.effects!WHk7lQPSzOOkryWN.W9ekYaonCEkM8hNy'
+    _key: '!items.effects!misdirect0000000.misdirect0000000'
+img: systems/teriock/src/icons/abilities/misdirect.webp
+name: Misdirect
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!WHk7lQPSzOOkryWN'
+_key: '!items!misdirect0000000'

@@ -1,14 +1,18 @@
+_id: plank00000000000
+folder: 6Em4FnE9jUuw4rVD
 name: Plank
-type: equipment
 system:
   equipmentType: Plank
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
   attackPenalty:
-    saved: '-3'
     raw: '-3'
   damage:
     base:
-      saved: '1'
+      raw: '1'
+    twoHanded: {}
+  hit: {}
   range:
     long:
       unit: melee
@@ -16,61 +20,74 @@ system:
     ranged: false
     short:
       unit: melee
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '7'
+  minStr:
+    raw: '-1'
   equipmentClasses:
     - objects
-  minStr:
-    saved: -1
-    raw: -3
   powerLevel: mundane
-  weight:
-    saved: 7
-    raw: 0
-_id: 6Vm098GO8jykT1Pt
+type: equipment
 img: systems/teriock/src/icons/equipment/plank.webp
 effects:
-  - name: Bashing
-    type: property
-    system:
-      description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
-        weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
-        Attack}.</p>
-      revealed: true
-      form: intrinsic
-    _id: y0ion3CdglaqDeIx
-    img: systems/teriock/src/icons/properties/bashing.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
-    _key: '!items.effects!6Vm098GO8jykT1Pt.y0ion3CdglaqDeIx'
   - name: Reach
     type: property
+    img: systems/teriock/src/icons/properties/reach.webp
+    _id: d6iX3vEtg1pdsfGd
     system:
+      competence:
+        raw: 0
       description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.long.raw
-            mode: 4
-            value: '10'
+          - mode: 4
             priority: 10
-    _id: Jf3qgxu98pwtZAjf
-    img: systems/teriock/src/icons/properties/reach.webp
+            time: normal
+            key: system.range.long.raw
+            target: parent
+            qualifier: '1'
+            value: '10'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.reach00000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.v9dwKuaTl1plMIHT
-    _key: '!items.effects!6Vm098GO8jykT1Pt.Jf3qgxu98pwtZAjf'
-folder: 6Em4FnE9jUuw4rVD
+    _key: '!items.effects!plank00000000000.d6iX3vEtg1pdsfGd'
+  - name: Bashing
+    type: property
+    img: systems/teriock/src/icons/properties/bashing.webp
+    _id: YrBUxpN9UHBPEYji
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
+        weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
+        Attack}.</p>
+      suppression: {}
+      revealed: true
+      form: intrinsic
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!plank00000000000.YrBUxpN9UHBPEYji'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!6Vm098GO8jykT1Pt'
+_key: '!items!plank00000000000'

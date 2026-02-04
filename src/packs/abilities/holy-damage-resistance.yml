@@ -1,58 +1,68 @@
-name: Holy Damage Resistance
-type: wrapper
-_id: FS3K1k6BSdRwJxl6
-img: systems/teriock/src/icons/abilities/holy-damage-resistance.webp
+_id: holyDmgRsc000000
 effects:
   - name: Holy Damage Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/holy-damage-resistance.webp
+    _id: holyDmgRsc000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Damage:Holy]{holy
           damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: holy
+            - mode: 2
               priority: 10
-    _id: dGsLazjo5nfSUlQ3
+              time: normal
+              key: system.protections.resistances.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: holy
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.FS3K1k6BSdRwJxl6
-    _key: '!items.effects!FS3K1k6BSdRwJxl6.dGsLazjo5nfSUlQ3'
+    _key: '!items.effects!holyDmgRsc000000.holyDmgRsc000000'
+img: systems/teriock/src/icons/abilities/holy-damage-resistance.webp
+name: Holy Damage Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!FS3K1k6BSdRwJxl6'
+_key: '!items!holyDmgRsc000000'

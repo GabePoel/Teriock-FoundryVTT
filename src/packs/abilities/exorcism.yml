@@ -1,30 +1,52 @@
-name: Exorcism
-type: wrapper
-_id: eabeC5V4g5Wx4EiO
-img: systems/teriock/src/icons/abilities/exorcism.webp
+_id: exorcism00000000
 effects:
   - name: Exorcism
     type: ability
     img: systems/teriock/src/icons/abilities/exorcism.webp
+    _id: exorcism00000000
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>An amount of @L[Core:MP]{MP} equal to the
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.</p>
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>An amount of @L[Core:HP]{HP} equal to the
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.</p>
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>If the target of this ritual is @L[Category:Undead
@@ -58,6 +80,11 @@ effects:
           <p>You may add @L[Core:Fluency Bonus]{F} to the
           @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
           of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
+      powerSources:
+        - divine
+      range:
+        raw: '5'
+        unit: ft
       results:
         save: >-
           <p>The target is "destroyed". They @L[Condition:Dead]{die}, they are
@@ -76,46 +103,25 @@ effects:
           <p>You pay an amount of @L[Core:MP]{MP} and @L[Core:HP]{HP} equal to
           the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
           DC.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      ritual: true
       skill: true
       standard: true
-      ritual: true
+      targets:
+        - creature
+      impacts: {}
       class: paladin
-      costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>An amount of @L[Core:MP]{MP} equal to the
-              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
-              Paid only on failure.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>An amount of @L[Core:HP]{HP} equal to the
-              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
-              Paid only on failure.</p>
-      expansionSaveAttribute: mov
-      form: normal
-    _id: W75oyBVDDLpyERNx
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.eabeC5V4g5Wx4EiO
-    _key: '!items.effects!eabeC5V4g5Wx4EiO.W75oyBVDDLpyERNx'
+    _key: '!items.effects!exorcism00000000.exorcism00000000'
+img: systems/teriock/src/icons/abilities/exorcism.webp
+name: Exorcism
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!eabeC5V4g5Wx4EiO'
+_key: '!items!exorcism00000000'

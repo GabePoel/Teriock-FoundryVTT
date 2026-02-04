@@ -1,58 +1,79 @@
+_id: net0000000000000
+folder: GjqehiaK2urxvWVm
 name: Net
-type: equipment
 system:
   equipmentType: Net
-  equipped: true
-  consumable: true
-  quantity: 1
-  maxQuantity:
-    derived: 0
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-2'
+  bv:
+    raw: '1'
   damage:
     base:
-      saved: '0'
-  weight:
-    saved: 3
+      raw: '0'
+    twoHanded: {}
+  fightingStyle: wraparound
+  hit: {}
   range:
     long:
-      saved: '60'
+      raw: '60'
       unit: ft
+    melee: true
+    ranged: false
     short:
-      saved: '20'
+      raw: '20'
       unit: ft
+  vitals: false
+  consumable: true
+  maxQuantity: {}
+  quantity: 1
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '3'
+  minStr:
+    raw: '-3'
   equipmentClasses:
     - supplies
-  minStr:
-    saved: -3
-  sb: wraparound
-  av: 0
-  bv:
-    saved: 1
   powerLevel: mundane
-  attackPenalty:
-    saved: '-2'
-_id: ouLCNSJCkgSf7l9F
+type: equipment
 img: systems/teriock/src/icons/equipment/net.webp
 effects:
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: 6cc4qFG0QDG4tmO7
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!ouLCNSJCkgSf7l9F.6cc4qFG0QDG4tmO7'
+    _key: '!items.effects!net0000000000000.wep0000000000000'
   - name: AV0
     type: property
+    img: systems/teriock/src/icons/properties/av0.webp
+    _id: av00000000000000
     system:
+      competence:
+        raw: 0
       description: <p>An item with this property is always @L[Keyword:AV0]{AV0}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
@@ -63,36 +84,40 @@ effects:
             target: parent
             qualifier: '1'
             value: '1'
-    _id: MOz67DoLrr83cyKV
-    img: systems/teriock/src/icons/properties/av0.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.av00000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.RtpPLATV2DKzDwg1
-    _key: '!items.effects!ouLCNSJCkgSf7l9F.MOz67DoLrr83cyKV'
+    _key: '!items.effects!net0000000000000.av00000000000000'
   - name: Thrown
     type: property
+    img: systems/teriock/src/icons/properties/thrown.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
         @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
         be used to make melee attacks.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: QOe0WrHOr5Gh2Nqn
-    img: systems/teriock/src/icons/properties/thrown.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.GxpMTePEVU970bWo
-    _key: '!items.effects!ouLCNSJCkgSf7l9F.QOe0WrHOr5Gh2Nqn'
+    _id: NFe70l3rQdXI2qP2
+    _key: '!items.effects!net0000000000000.NFe70l3rQdXI2qP2'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -104,91 +129,98 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      _sup: QOe0WrHOr5Gh2Nqn
-    _id: 4I0s5wjO72DSCs9F
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: NFe70l3rQdXI2qP2
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!ouLCNSJCkgSf7l9F.4I0s5wjO72DSCs9F'
+    _id: LgFMuv7xbMFDF4Sa
+    _key: '!items.effects!net0000000000000.LgFMuv7xbMFDF4Sa'
   - name: Immobilize
     type: ability
     img: systems/teriock/src/icons/abilities/immobilize.webp
+    _id: 2z1b2XhcCsmYGFlR
     system:
-      powerSources:
-        - spiritual
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target is @L[Condition:Immobilized]{immobilized}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: intrinsic
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - spiritual
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Immobilized]{immobilized}.</p>
+      targets:
+        - creature
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-      revealed: true
-      grantOnly: true
-    _id: WQTap6RPwyoIsiaN
+          rolls:
+            endCon: 2d4
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.immobilize000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ZwX0Le405pUPTpL8
-    _key: '!items.effects!ouLCNSJCkgSf7l9F.WQTap6RPwyoIsiaN'
+    _key: '!items.effects!net0000000000000.2z1b2XhcCsmYGFlR'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: GjqehiaK2urxvWVm
-_key: '!items!ouLCNSJCkgSf7l9F'
+_key: '!items!net0000000000000'

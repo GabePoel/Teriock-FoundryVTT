@@ -1,29 +1,48 @@
-name: Undead Hunter
-type: wrapper
-_id: jheoteb8oWnIfcGH
-img: systems/teriock/src/icons/abilities/undead-hunter.webp
+_id: undeadHunter0000
 effects:
   - name: Undead Hunter
     type: ability
     img: systems/teriock/src/icons/abilities/undead-hunter.webp
+    _id: undeadHunter0000
     system:
-      powerSources:
-        - divine
-      interaction: feat
-      featSaveAttribute: unp
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        material: true
+        mp:
+          type: static
+          value:
+            static: 1
+        materialCost: >-
+          <p>Something symbolic of your deity. A piece of the type of undead
+          being summoned.</p>
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: self
         package: ritual
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        raw: 10 Miles
+      effectTypes:
+        - duelModifying
+        - displacement
+        - longRange
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: unp
+      form: normal
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>The target adds their @L[Core:Fluency Bonus]{fluency bonus} to
@@ -47,6 +66,12 @@ effects:
         fluent: >-
           <p>The range of this ritual becomes 10 × @L[Core:Fluency Bonus]{F}
           miles.</p>
+      powerSources:
+        - divine
+      range:
+        raw: 10 Miles
+        unit: self
+      requirements: <p>Target must be @L[Category:Undead creatures]{undead}.</p>
       results:
         save: >-
           <p>Target is aware that you are hunting them, becomes
@@ -63,43 +88,25 @@ effects:
           to where it came from. If you win, the @L[Category:Undead
           creatures]{undead} is forced to the Material Plane and to the site of
           this ritual.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      ritual: true
       skill: true
       standard: true
-      ritual: true
+      targets:
+        - creature
+      impacts: {}
       class: paladin
-      costs:
-        material: true
-        mp:
-          type: static
-          value:
-            static: 1
-        materialCost: >-
-          <p>Something symbolic of your deity. A piece of the type of undead
-          being summoned.</p>
-      requirements: <p>Target must be @L[Category:Undead creatures]{undead}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - duelModifying
-        - displacement
-        - longRange
-    _id: Siub0fhgheZ0C3lF
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.jheoteb8oWnIfcGH
-    _key: '!items.effects!jheoteb8oWnIfcGH.Siub0fhgheZ0C3lF'
+    _key: '!items.effects!undeadHunter0000.undeadHunter0000'
+img: systems/teriock/src/icons/abilities/undead-hunter.webp
+name: Undead Hunter
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!jheoteb8oWnIfcGH'
+_key: '!items!undeadHunter0000'

@@ -1,44 +1,16 @@
-name: Inferno Aura
-type: wrapper
-_id: kdSPNve6L110oSa1
-img: systems/teriock/src/icons/abilities/inferno-aura.webp
+_id: infernoAura00000
 effects:
   - name: Inferno Aura
     type: ability
     img: systems/teriock/src/icons/abilities/inferno-aura.webp
+    _id: infernoAura00000
     system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        fail: >-
-          <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -46,13 +18,44 @@ effects:
           type: static
           value:
             static: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: aura
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
+          target.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -60,17 +63,19 @@ effects:
         heightened:
           rolls:
             damage: 1d6[magic fire]
-    _id: BvDzQ5XWGee3B3d3
+      class: flameMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.kdSPNve6L110oSa1
-    _key: '!items.effects!kdSPNve6L110oSa1.BvDzQ5XWGee3B3d3'
+    _key: '!items.effects!infernoAura00000.infernoAura00000'
+img: systems/teriock/src/icons/abilities/inferno-aura.webp
+name: Inferno Aura
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!kdSPNve6L110oSa1'
+_key: '!items!infernoAura00000'

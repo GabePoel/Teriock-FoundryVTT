@@ -1,82 +1,87 @@
-name: Battle Roar Aura
-type: wrapper
-_id: 1RycYmNR8QKlosOY
-img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
+_id: battleRoarAura00
 effects:
   - name: Battle Roar Aura
     type: ability
     img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
+    _id: battleRoarAura00
     system:
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '150'
-      overview:
-        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
-      results:
-        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: aura
+      effectTypes:
+        - loud
       endCondition: >-
         <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: int
       form: normal
-      effectTypes:
-        - loud
+      grantOnly: false
+      interaction: feat
+      maneuver: active
+      overview:
+        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '150'
+        unit: ft
+      results:
+        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-    _id: OdVv1JoO607nrCym
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.1RycYmNR8QKlosOY
-    _key: '!items.effects!1RycYmNR8QKlosOY.OdVv1JoO607nrCym'
+    _key: '!items.effects!battleRoarAura00.battleRoarAura00'
+img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
+name: Battle Roar Aura
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!1RycYmNR8QKlosOY'
+_key: '!items!battleRoarAura00'

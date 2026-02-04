@@ -1,28 +1,32 @@
-name: Cannot Leap
-type: wrapper
-_id: DCWOigwzTGr7zCzv
-img: systems/teriock/src/icons/abilities/cannot-leap.webp
+_id: cantLeap00000000
 effects:
   - name: Cannot Leap
     type: ability
+    img: systems/teriock/src/icons/abilities/cannot-leap.webp
+    _id: cantLeap00000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -30,34 +34,41 @@ effects:
           <p>You have no horizontal nor vertical @L[Core:Movement Speed]{leap
           speed}. This overrides abilities such as
           @L[Ability:Leaping]{Leaping}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 5
-              value: '0'
+            - mode: 5
               priority: 20
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 5
+              time: normal
+              key: system.speedAdjustments.leapVertical
+              target: Actor
+              qualifier: '1'
               value: '0'
+            - mode: 5
               priority: 20
-    _id: zXLlEXL9W1F8lESz
-    img: systems/teriock/src/icons/abilities/cannot-leap.webp
+              time: normal
+              key: system.speedAdjustments.leapHorizontal
+              target: Actor
+              qualifier: '1'
+              value: '0'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DCWOigwzTGr7zCzv
-    _key: '!items.effects!DCWOigwzTGr7zCzv.zXLlEXL9W1F8lESz'
+    _key: '!items.effects!cantLeap00000000.cantLeap00000000'
+img: systems/teriock/src/icons/abilities/cannot-leap.webp
+name: Cannot Leap
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!DCWOigwzTGr7zCzv'
+_key: '!items!cantLeap00000000'

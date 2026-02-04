@@ -1,58 +1,68 @@
-name: Vine Damage Immunity
-type: wrapper
-_id: KUT0qC4kPR16fJHq
-img: systems/teriock/src/icons/abilities/vine-damage-immunity.webp
+_id: vineDmgImy000000
 effects:
   - name: Vine Damage Immunity
     type: ability
     img: systems/teriock/src/icons/abilities/vine-damage-immunity.webp
+    _id: vineDmgImy000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Vine]{vine
           damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              value: vine
+            - mode: 2
               priority: 10
-    _id: YEe5SFewAadyjX8T
+              time: normal
+              key: system.protections.immunities.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: vine
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KUT0qC4kPR16fJHq
-    _key: '!items.effects!KUT0qC4kPR16fJHq.YEe5SFewAadyjX8T'
+    _key: '!items.effects!vineDmgImy000000.vineDmgImy000000'
+img: systems/teriock/src/icons/abilities/vine-damage-immunity.webp
+name: Vine Damage Immunity
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!KUT0qC4kPR16fJHq'
+_key: '!items!vineDmgImy000000'

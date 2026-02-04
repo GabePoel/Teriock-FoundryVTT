@@ -1,252 +1,278 @@
-name: Crown of Fear
-type: wrapper
-_id: ELxIEGXD7TIAdVgp
-img: systems/teriock/src/icons/abilities/crown-of-fear.webp
+_id: cOFear0000000000
 effects:
   - name: Crown of Fear
     type: ability
     img: systems/teriock/src/icons/abilities/crown-of-fear.webp
+    _id: cOFear0000000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '8'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 8 Hours
       delivery:
         base: self
-      targets:
-        - self
       elements:
         - necromancy
-      duration:
-        unit: hour
-        quantity: 8
-        description: 8 Hours
-      sustained: true
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>A small circle of glowing purple mist circles above your head. You
           gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear Aura]{Fear
           Aura}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
       spell: true
       standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: special
+      sustained: true
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.light.dim
-              mode: 4
+            - mode: 4
+              priority: 3
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
               value: '0.01'
+            - mode: 5
               priority: 3
-            - key: system.light.color
-              mode: 5
+              time: normal
+              key: system.light.color
+              target: Actor
+              qualifier: '1'
               value: '#9141AC'
+            - mode: 5
               priority: 3
-            - key: system.light.animation.type
-              mode: 5
+              time: normal
+              key: system.light.animation.type
+              target: Actor
+              qualifier: '1'
               value: sunburst
-              priority: 3
-    _id: YhGOUDZAclkaL1lL
+      class: necromancer
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ELxIEGXD7TIAdVgp
-    _key: '!items.effects!ELxIEGXD7TIAdVgp.YhGOUDZAclkaL1lL'
+    _key: '!items.effects!cOFear0000000000.cOFear0000000000'
   - name: Fear Touch
     type: ability
+    img: systems/teriock/src/icons/abilities/fear-touch.webp
+    _id: Ja3lag1wHjObbBV4
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
+      effectTypes:
+        - mental
       elements:
         - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: necromancer
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
-      effectTypes:
-        - mental
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: end
                   trigger: turn
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
         heightened:
           rolls:
             damage: 1d4[magic terror]
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: YhGOUDZAclkaL1lL
-    _id: VIMM9SnV9ZEPJLkz
-    img: systems/teriock/src/icons/abilities/fear-touch.webp
+      _sup: cOFear0000000000
+      class: necromancer
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fearTouch0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lOqA4K727mFO9bFU
-    _key: '!items.effects!ELxIEGXD7TIAdVgp.VIMM9SnV9ZEPJLkz'
+    _key: '!items.effects!cOFear0000000000.Ja3lag1wHjObbBV4'
   - name: Fear Aura
     type: ability
+    img: systems/teriock/src/icons/abilities/fear-aura.webp
+    _id: sjyGZ3Y3DtqldpdH
     system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: necromancer
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: aura
+      effectTypes:
+        - mental
+      elements:
+        - necromancy
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
-      effectTypes:
-        - mental
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
         heightened:
           rolls:
             damage: 1d4[magic terror]
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: YhGOUDZAclkaL1lL
-    _id: yCWt2LBkQWByiX5E
-    img: systems/teriock/src/icons/abilities/fear-aura.webp
+      _sup: cOFear0000000000
+      class: necromancer
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fearAura00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.NGcbcFsPPFDbxQKi
-    _key: '!items.effects!ELxIEGXD7TIAdVgp.yCWt2LBkQWByiX5E'
+    _key: '!items.effects!cOFear0000000000.sjyGZ3Y3DtqldpdH'
+img: systems/teriock/src/icons/abilities/crown-of-fear.webp
+name: Crown of Fear
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ELxIEGXD7TIAdVgp'
+_key: '!items!cOFear0000000000'

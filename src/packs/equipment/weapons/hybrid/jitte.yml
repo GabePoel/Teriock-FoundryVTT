@@ -1,89 +1,115 @@
+_id: jitte00000000000
+folder: s1CVfW55iRMBO1gN
 name: Jitte
-type: equipment
 system:
   equipmentType: Jitte
-  equipped: true
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-1'
+  bv:
+    raw: '1'
   damage:
     base:
-      saved: 1d4
-  weight:
-    saved: 1
+      raw: 1d4
+    twoHanded: {}
+  fightingStyle: juttejutsu
+  hit: {}
   range:
     long:
-      saved: '60'
+      raw: '60'
       unit: ft
+    melee: true
+    ranged: false
     short:
-      saved: '20'
+      raw: '20'
       unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '1'
+  minStr:
+    raw: '-3'
   equipmentClasses:
     - daggers
     - specialtySwords
-  minStr:
-    saved: -3
-  sb: juttejutsu
-  av: 0
-  bv:
-    saved: 1
   powerLevel: mundane
-  attackPenalty:
-    saved: '-1'
-_id: JqFTqLD9uEcJUK1T
+type: equipment
 img: systems/teriock/src/icons/equipment/jitte.webp
 effects:
   - name: Small
     type: property
+    img: systems/teriock/src/icons/properties/small.webp
+    _id: small00000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
         in the same hand as a @L[Category:Shields]{shield}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: k2ZkxhgHbw7D7dY2
-    img: systems/teriock/src/icons/properties/small.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
-    _key: '!items.effects!JqFTqLD9uEcJUK1T.k2ZkxhgHbw7D7dY2'
+    _key: '!items.effects!jitte00000000000.small00000000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: SyNhHHzSVJtrzuO5
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!JqFTqLD9uEcJUK1T.SyNhHHzSVJtrzuO5'
+    _key: '!items.effects!jitte00000000000.wep0000000000000'
   - name: Thrown
     type: property
+    img: systems/teriock/src/icons/properties/thrown.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
         @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
         be used to make melee attacks.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: xmC1mcW7ESN5vYUv
-    img: systems/teriock/src/icons/properties/thrown.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.GxpMTePEVU970bWo
-    _key: '!items.effects!JqFTqLD9uEcJUK1T.xmC1mcW7ESN5vYUv'
+    _id: 8n4YwqqZdo7Bry0X
+    _key: '!items.effects!jitte00000000000.8n4YwqqZdo7Bry0X'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -95,26 +121,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      _sup: xmC1mcW7ESN5vYUv
-    _id: o0xp9TmLzbZlg7Of
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: 8n4YwqqZdo7Bry0X
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!JqFTqLD9uEcJUK1T.o0xp9TmLzbZlg7Of'
+    _id: 77AkTAbzkyyAFvG9
+    _key: '!items.effects!jitte00000000000.77AkTAbzkyyAFvG9'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: s1CVfW55iRMBO1gN
-_key: '!items!JqFTqLD9uEcJUK1T'
+_key: '!items!jitte00000000000'

@@ -1,64 +1,68 @@
-name: Ice Body
-type: wrapper
-_id: J2MsP7n3PtxVoFqu
-img: systems/teriock/src/icons/abilities/ice-body.webp
+_id: iceBody000000000
 effects:
   - name: Ice Body
     type: ability
+    img: systems/teriock/src/icons/abilities/ice-body.webp
+    _id: iceBody000000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>Your @L[Category:Body parts]{body parts} are deal an additional
           [[/damage 1d4[ice magic]]] @L[Core:Damage]{damage}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
+          changes:
+            - mode: 2
+              priority: 30
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@dmg'
+              value: 1d4[ice magic]
           rolls:
             damage: 1d4[ice magic]
-          changes:
-            - key: >-
-                !body__system.damage.base.raw__exists__null__system.damage.base.raw
-              mode: 2
-              priority: 30
-              target: Actor
-              time: normal
-              qualifier: '1'
-              value: 1d4[ice magic]
-    _id: VaD9yLTnKs3QmYHi
-    img: systems/teriock/src/icons/abilities/ice-body.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.J2MsP7n3PtxVoFqu
-    _key: '!items.effects!J2MsP7n3PtxVoFqu.VaD9yLTnKs3QmYHi'
+    _key: '!items.effects!iceBody000000000.iceBody000000000'
+img: systems/teriock/src/icons/abilities/ice-body.webp
+name: Ice Body
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!J2MsP7n3PtxVoFqu'
+_key: '!items!iceBody000000000'

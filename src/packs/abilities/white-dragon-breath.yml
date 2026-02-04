@@ -1,27 +1,36 @@
-name: White Dragon Breath
-type: wrapper
-_id: SmrXpNVdCDZT8hHQ
-img: systems/teriock/src/icons/abilities/white-dragon-breath.webp
+_id: whiteDrgBreath00
 effects:
   - name: White Dragon Breath
     type: ability
+    img: systems/teriock/src/icons/abilities/white-dragon-breath.webp
+    _id: whiteDrgBreath00
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: cone
       duration:
+        raw: '10'
         unit: minute
-        quantity: 10
+        dawn: false
         stationary: false
         description: 10 Minutes
+      delivery:
+        base: cone
       elements:
         - life
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -29,19 +38,13 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic holy]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: feat
       maneuver: active
-      piercing: normal
       powerSources:
         - magical
       range:
-        unit: ft
         raw: '30'
+        unit: ft
       results:
         save: >-
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
@@ -57,18 +60,18 @@ effects:
         heightened:
           rolls:
             damage: 2d10[magic holy]
-    _id: cAZODgYWhqE6AysY
-    img: systems/teriock/src/icons/abilities/white-dragon-breath.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.SmrXpNVdCDZT8hHQ
-    _key: '!items.effects!SmrXpNVdCDZT8hHQ.cAZODgYWhqE6AysY'
+    _key: '!items.effects!whiteDrgBreath00.whiteDrgBreath00'
+img: systems/teriock/src/icons/abilities/white-dragon-breath.webp
+name: White Dragon Breath
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!SmrXpNVdCDZT8hHQ'
+_key: '!items!whiteDrgBreath00'

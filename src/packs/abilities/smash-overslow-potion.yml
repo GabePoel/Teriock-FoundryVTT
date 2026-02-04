@@ -1,45 +1,48 @@
-name: Smash Overslow Potion
-type: wrapper
-_id: lCIvb2XehJDgtnls
-img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
+_id: smOverslowPtn000
 effects:
   - name: Smash Overslow Potion
     type: ability
+    img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
+    _id: smOverslowPtn000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         material: true
         break: shatter
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      delivery:
-        base: aura
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
+      delivery:
+        base: aura
       endCondition: >-
         <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: unp
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: feat
       maneuver: active
-      piercing: normal
       powerSources:
         - alchemical
       range:
-        unit: ft
         raw: '50'
+        unit: ft
       requirements: >-
         <p>Use this ability by interacting with the
         @L[Category:Equipment]{equipment} that provides it. That counts as the
@@ -51,37 +54,37 @@ effects:
         - creature
       impacts:
         base:
-          statuses:
-            - slowed
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: tljjvbReLUDJ1EP3
-    img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
+          rolls:
+            endCon: 2d4
+          statuses:
+            - slowed
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lCIvb2XehJDgtnls
-    _key: '!items.effects!lCIvb2XehJDgtnls.tljjvbReLUDJ1EP3'
+    _key: '!items.effects!smOverslowPtn000.smOverslowPtn000'
+img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
+name: Smash Overslow Potion
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!lCIvb2XehJDgtnls'
+_key: '!items!smOverslowPtn000'

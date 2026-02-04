@@ -1,29 +1,42 @@
-name: Mana Drain Grasp
-type: wrapper
-_id: m4zyaVYprgShHj2C
-img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+_id: manaDrainGrasp00
 effects:
   - name: Mana Drain Grasp
     type: ability
     img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+    _id: manaDrainGrasp00
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: hand
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      effectTypes:
+        - revitalization
+        - draining
+      executionTime: a2
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
@@ -37,32 +50,24 @@ effects:
           @L[Core:Revitalizing]{revitalize} twice. This
           @L[Core:Revitalizing]{revitalization} is the only part of this that is
           a @L[Category:Revitalization effects]{revitalization effect}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - revitalization
-        - draining
+      targets:
+        - creature
       impacts:
         base:
           rolls:
             drain: 1d8[mana]
-    _id: Dx8sB7izknBWhpqr
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.m4zyaVYprgShHj2C
-    _key: '!items.effects!m4zyaVYprgShHj2C.Dx8sB7izknBWhpqr'
+    _key: '!items.effects!manaDrainGrasp00.manaDrainGrasp00'
+img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+name: Mana Drain Grasp
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!m4zyaVYprgShHj2C'
+_key: '!items!manaDrainGrasp00'

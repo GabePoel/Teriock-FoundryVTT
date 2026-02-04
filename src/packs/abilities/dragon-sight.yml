@@ -1,80 +1,100 @@
-name: Dragon Sight
-type: wrapper
-_id: UIbBIKRQeUsx1fQv
-img: systems/teriock/src/icons/abilities/dragon-sight.webp
+_id: drgSight00000000
 effects:
   - name: Dragon Sight
     type: ability
     img: systems/teriock/src/icons/abilities/dragon-sight.webp
+    _id: drgSight00000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Instant Identify Sight]{Instant Identify Sight}
           and @L[Ability:True Sight]{True Sight}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: per
-          minVal: 5
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - sensory
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.senses.truth
-              mode: 4
-              value: Infinity
+            - mode: 4
               priority: 10
-    _id: XFIolzUgJuyxHiG5
+              time: normal
+              key: system.senses.truth
+              target: Actor
+              qualifier: '1'
+              value: Infinity
+      upgrades:
+        score:
+          attribute: per
+          value: 5
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.UIbBIKRQeUsx1fQv
-    _key: '!items.effects!UIbBIKRQeUsx1fQv.XFIolzUgJuyxHiG5'
+    _key: '!items.effects!drgSight00000000.drgSight00000000'
   - name: Instant Identify Sight
     type: ability
+    img: systems/teriock/src/icons/abilities/instant-identify-sight.webp
+    _id: PF11bSnM6cYD5NoS
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-      targets:
-        - creature
-        - item
-      elements:
-        - storm
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
-      range:
-        unit: ft
-        raw: '60'
+      delivery:
+        base: sight
+      effectTypes:
+        - truthDetecting
+        - sensory
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>If the target is an item, you know if it is
@@ -85,45 +105,54 @@ effects:
           it has one. If the target is a creature, you learn what ongoing or
           @L[Category:Sustained spells]{sustained spells}, if any, are affecting
           it.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - truthDetecting
-        - sensory
-      _sup: XFIolzUgJuyxHiG5
-    _id: WBs1QA9LMjrrGuqF
-    img: systems/teriock/src/icons/abilities/instant-identify-sight.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.p6ePDH7E4LtDQtxi
-    _key: '!items.effects!UIbBIKRQeUsx1fQv.WBs1QA9LMjrrGuqF'
-  - name: True Sight
-    type: ability
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        raw: '60'
+        unit: ft
       targets:
-        - self
+        - creature
+        - item
+      impacts: {}
+      _sup: drgSight00000000
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.instIdentifySigh
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!drgSight00000000.PF11bSnM6cYD5NoS'
+  - name: True Sight
+    type: ability
+    img: systems/teriock/src/icons/abilities/true-sight.webp
+    _id: zOQvnLoS7Ro9XAF2
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Scouting]{Scouting} and @L[Ability:Ethereal
@@ -132,137 +161,163 @@ effects:
           @L[Keyword:Illusionary]{illusions} and
           @L[Condition:Transformed]{transformations}. You may be able to through
           other effects as well at @L[Core:Game Master]{GM} discretion.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: per
-          minVal: 4
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - sensory
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.senses.truth
-              mode: 4
-              value: Infinity
+            - mode: 4
               priority: 10
-      _sup: XFIolzUgJuyxHiG5
-    _id: 8TG4P3fM0rjVXyHy
-    img: systems/teriock/src/icons/abilities/true-sight.webp
+              time: normal
+              key: system.senses.truth
+              target: Actor
+              qualifier: '1'
+              value: Infinity
+      upgrades:
+        score:
+          attribute: per
+          value: 4
+      _sup: drgSight00000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.trueSight0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5NQk47KFSZn0tkOY
-    _key: '!items.effects!UIbBIKRQeUsx1fQv.8TG4P3fM0rjVXyHy'
+    _key: '!items.effects!drgSight00000000.zOQvnLoS7Ro9XAF2'
   - name: Scouting
     type: ability
+    img: systems/teriock/src/icons/abilities/scouting.webp
+    _id: 5toF16bdZ5s7ie0c
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You have @L[Core:Advantage]{advantage} on checks made with
           @L[Ability:Perceive]{Perceive}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: per
-          minVal: 2
-        featSaveImprovement:
-          attribute: per
-          amount: proficiency
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: ranger
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
-      _sup: 8TG4P3fM0rjVXyHy
-    _id: XmnTyTlTWStqXMEf
-    img: systems/teriock/src/icons/abilities/scouting.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ip4KhBbxhUQNuVWC
-    _key: '!items.effects!UIbBIKRQeUsx1fQv.XmnTyTlTWStqXMEf'
-  - name: Ethereal Senses
-    type: ability
-    system:
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
-      elements:
-        - necromancy
+      impacts: {}
+      upgrades:
+        competence:
+          attribute: per
+          value: 0
+        score:
+          attribute: per
+          value: 2
+      _sup: zOQvnLoS7Ro9XAF2
+      class: ranger
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.scouting00000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!drgSight00000000.5toF16bdZ5s7ie0c'
+  - name: Ethereal Senses
+    type: ability
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    _id: TQKd5UNOej9Vk1YI
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
           creatures.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
+      powerSources:
+        - magical
+        - spiritual
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.senses.ethereal
-              mode: 4
-              value: '120'
+            - mode: 4
               priority: 10
-      _sup: 8TG4P3fM0rjVXyHy
-    _id: ZLK2hI5oFHjkqZqZ
-    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+              time: normal
+              key: system.senses.ethereal
+              target: Actor
+              qualifier: '1'
+              value: '120'
+      _sup: zOQvnLoS7Ro9XAF2
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.etherealSenses00
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.yzVehDWfRnIdLcPN
-    _key: '!items.effects!UIbBIKRQeUsx1fQv.ZLK2hI5oFHjkqZqZ'
+    _key: '!items.effects!drgSight00000000.TQKd5UNOej9Vk1YI'
+img: systems/teriock/src/icons/abilities/dragon-sight.webp
+name: Dragon Sight
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!UIbBIKRQeUsx1fQv'
+_key: '!items!drgSight00000000'

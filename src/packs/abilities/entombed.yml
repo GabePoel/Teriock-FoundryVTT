@@ -1,32 +1,36 @@
-name: Entombed
-type: wrapper
-_id: c4H7ptNo6X3RQ4ZQ
-img: systems/teriock/src/icons/abilities/entombed.webp
+_id: entombed00000000
 effects:
   - name: Entombed
     type: ability
+    img: systems/teriock/src/icons/abilities/entombed.webp
+    _id: entombed00000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       effectTypes:
         - immunity
       elements:
         - necromancy
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,35 +38,42 @@ effects:
           <p>You are @L[Keyword:Immunity]{immune} to being @L[Category:Revival
           effects]{revived} or @L[Category:Regeneration
           effects]{regenerated}.</p>
-      piercing: normal
       powerSources:
         - magical
         - divine
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.effects
-              mode: 2
+            - mode: 2
+              priority: 10
+              time: normal
+              key: system.protections.immunities.effects
+              target: Actor
+              qualifier: '1'
               value: revival
+            - mode: 2
               priority: 10
-            - key: system.protections.immunities.effects
-              mode: 2
+              time: normal
+              key: system.protections.immunities.effects
+              target: Actor
+              qualifier: '1'
               value: regeneration
-              priority: 10
-    _id: zqeQ9FtbW6BTLxxv
-    img: systems/teriock/src/icons/abilities/entombed.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.c4H7ptNo6X3RQ4ZQ
-    _key: '!items.effects!c4H7ptNo6X3RQ4ZQ.zqeQ9FtbW6BTLxxv'
+    _key: '!items.effects!entombed00000000.entombed00000000'
+img: systems/teriock/src/icons/abilities/entombed.webp
+name: Entombed
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!c4H7ptNo6X3RQ4ZQ'
+_key: '!items!entombed00000000'

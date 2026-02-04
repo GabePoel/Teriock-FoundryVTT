@@ -1,47 +1,51 @@
-name: Power Through
-type: wrapper
-_id: 9HztgwaZ5UstnwAY
-img: systems/teriock/src/icons/abilities/power-through.webp
+_id: powerThrough0000
 effects:
   - name: Power Through
     type: ability
     img: systems/teriock/src/icons/abilities/power-through.webp
+    _id: powerThrough0000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: second
-        quantity: 5
-        description: 5 Seconds
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>You can treat a type of @L[Damage:Hack]{hack damage} you've taken
-          as though it is one step lower.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         hp:
           type: static
           value:
             static: 5
-      endCondition: <p>The turn ends.</p>
-      expansionSaveAttribute: mov
+      duration:
+        raw: '5'
+        unit: second
+        dawn: false
+        stationary: false
+        description: 5 Seconds
       basic: true
+      delivery:
+        base: weapon
+      endCondition: <p>The turn ends.</p>
+      executionTime: a0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You can treat a type of @L[Damage:Hack]{hack damage} you've taken
+          as though it is one step lower.</p>
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      targets:
+        - creature
       impacts:
         base:
           expiration:
@@ -50,26 +54,27 @@ effects:
                 who:
                   type: everyone
                 what:
-                  type: forced
                   roll: 2d4kh1
                   threshold: 4
+                  type: forced
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: wTZkVAVi4GxLs6cG
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.9HztgwaZ5UstnwAY
-    _key: '!items.effects!9HztgwaZ5UstnwAY.wTZkVAVi4GxLs6cG'
+    _key: '!items.effects!powerThrough0000.powerThrough0000'
+img: systems/teriock/src/icons/abilities/power-through.webp
+name: Power Through
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!9HztgwaZ5UstnwAY'
+_key: '!items!powerThrough0000'

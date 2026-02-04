@@ -1,12 +1,15 @@
 name: Glowing
 type: wrapper
-_id: 5KFoOw5ojdhHdvMx
 img: systems/teriock/src/icons/properties/glowing.webp
+_id: glowing000000000
 effects:
   - name: Glowing
     type: property
     img: systems/teriock/src/icons/properties/glowing.webp
+    _id: glowing000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the
         dark and produces light that makes other things visible. When an item
@@ -15,46 +18,42 @@ effects:
         specified, then the item is visible, but glows faintly enough that it
         doesn't illuminate other objects unless they are held <i>right</i> next
         to it.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-      modifiesActor: true
-      changes:
-        - key: system.light.dim
-          mode: 4
-          value: '10'
-          priority: 5
-        - key: system.light.color
-          mode: 5
-          value: '#C64600'
-          priority: 5
-        - key: system.light.animation.type
-          mode: 5
-          value: torch
-          priority: 5
       impacts:
         changes:
-          - key: system.light.dim
-            mode: 4
+          - mode: 4
+            priority: 5
+            time: normal
+            key: system.light.dim
+            target: Actor
+            qualifier: '1'
             value: '10'
+          - mode: 5
             priority: 5
-          - key: system.light.color
-            mode: 5
+            time: normal
+            key: system.light.color
+            target: Actor
+            qualifier: '1'
             value: '#C64600'
+          - mode: 5
             priority: 5
-          - key: system.light.animation.type
-            mode: 5
+            time: normal
+            key: system.light.animation.type
+            target: Actor
+            qualifier: '1'
             value: torch
-            priority: 5
-    _id: l1sk39DxaVxZcVCe
+      modifiesActor: true
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.5KFoOw5ojdhHdvMx
-    _key: '!items.effects!5KFoOw5ojdhHdvMx.l1sk39DxaVxZcVCe'
+    _key: '!items.effects!glowing000000000.glowing000000000'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!5KFoOw5ojdhHdvMx'
+_key: '!items!glowing000000000'

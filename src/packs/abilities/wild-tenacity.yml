@@ -1,114 +1,140 @@
-name: Wild Tenacity
-type: wrapper
-_id: 0P6h5Wr1Ngtxgo34
-img: systems/teriock/src/icons/abilities/wild-tenacity.webp
+_id: wildTenacity0000
 effects:
   - name: Wild Tenacity
     type: ability
     img: systems/teriock/src/icons/abilities/wild-tenacity.webp
+    _id: wildTenacity0000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Hibernation]{Hibernation} and
           @L[Ability:Stamina]{Stamina}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: ranger
-      expansionSaveAttribute: mov
-      form: normal
-    _id: CZZACDnRTd18JHcq
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.0P6h5Wr1Ngtxgo34
-    _key: '!items.effects!0P6h5Wr1Ngtxgo34.CZZACDnRTd18JHcq'
+    _key: '!items.effects!wildTenacity0000.wildTenacity0000'
   - name: Hibernation
     type: ability
+    img: systems/teriock/src/icons/abilities/hibernation.webp
+    _id: CB36uhrlcrfYbq58
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           present:
             - down
+        dawn: false
         stationary: false
         description: While Down
-      overview:
-        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: ranger
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: CZZACDnRTd18JHcq
-    _id: bekj1DXwqw2s4JNS
-    img: systems/teriock/src/icons/abilities/hibernation.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.EJLeZEObry91nM4m
-    _key: '!items.effects!0P6h5Wr1Ngtxgo34.bekj1DXwqw2s4JNS'
-  - name: Stamina
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
+      powerSources:
+        - primal
+      range:
+        unit: self
+      skill: true
+      standard: true
       targets:
         - self
+      impacts: {}
+      _sup: wildTenacity0000
+      class: ranger
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hibernation00000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!wildTenacity0000.CB36uhrlcrfYbq58'
+  - name: Stamina
+    type: ability
+    img: systems/teriock/src/icons/abilities/stamina.webp
+    _id: If3vnHCrOdVcNjGD
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Condition:Down]{dropping} due
@@ -117,39 +143,39 @@ effects:
           @L[Core:Hit Points and Mana Points]{MP} below zero and suffer other
           consequences from negative @L[Core:Hit Points and Mana
           Points]{MP}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: ranger
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Dropping From Negative MP
+            - mode: 2
               priority: 10
-      _sup: CZZACDnRTd18JHcq
-    _id: GtkPd5i0GlzjiDp5
-    img: systems/teriock/src/icons/abilities/stamina.webp
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
+              value: Dropping From Negative MP
+      _sup: wildTenacity0000
+      class: ranger
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stamina000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qYCmQ55NQnkBL8z8
-    _key: '!items.effects!0P6h5Wr1Ngtxgo34.GtkPd5i0GlzjiDp5'
+    _key: '!items.effects!wildTenacity0000.If3vnHCrOdVcNjGD'
+img: systems/teriock/src/icons/abilities/wild-tenacity.webp
+name: Wild Tenacity
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!0P6h5Wr1Ngtxgo34'
+_key: '!items!wildTenacity0000'

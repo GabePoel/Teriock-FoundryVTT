@@ -1,137 +1,127 @@
-name: Armor Master
-type: wrapper
-_id: K8ezGDJyDIWpKwS2
-img: systems/teriock/src/icons/abilities/armor-master.webp
+_id: armorMas00000000
 effects:
   - name: Armor Master
     type: ability
     img: systems/teriock/src/icons/abilities/armor-master.webp
+    _id: armorMas00000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Master Armor Smith]{Master Armor Smith} and
           @L[Ability:Runic Armor]{Runic Armor}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: veteran
-      expansionSaveAttribute: mov
-      form: normal
-    _id: GjvfHWrW59PD6NrW
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.K8ezGDJyDIWpKwS2
-    _key: '!items.effects!K8ezGDJyDIWpKwS2.GjvfHWrW59PD6NrW'
+    _key: '!items.effects!armorMas00000000.armorMas00000000'
   - name: Master Armor Smith
     type: ability
+    img: systems/teriock/src/icons/abilities/master-armor-smith.webp
+    _id: bUAuaaEtGidUQgmH
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
           @L[Tradecraft:Blacksmith]{blacksmith}. In addition, you gain the
           ability to create @L[Property:Master Crafted]{master crafted}
           armor.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: veteran
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.tradecrafts.blacksmith.score
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
-      _sup: GjvfHWrW59PD6NrW
-    _id: 8IOC7rHJMcFYWPwO
-    img: systems/teriock/src/icons/abilities/master-armor-smith.webp
+              time: normal
+              key: system.tradecrafts.blacksmith.score
+              target: Actor
+              qualifier: '1'
+              value: '2'
+      _sup: armorMas00000000
+      class: veteran
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.masArmorSmith000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ZEV8YKi3fLsnxsjc
-    _key: '!items.effects!K8ezGDJyDIWpKwS2.8IOC7rHJMcFYWPwO'
+    _key: '!items.effects!armorMas00000000.bUAuaaEtGidUQgmH'
   - name: Runic Armor
     type: ability
+    img: systems/teriock/src/icons/abilities/runic-armor.webp
+    _id: ySrNedMHa0kIv329
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - armor
-      duration:
-        unit: hour
-        quantity: 24
-        stationary: false
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>The targeted @L[Category:Armor]{armor} becomes
-          @L[Property:Runic]{runic}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      ritual: true
-      class: veteran
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: variable
@@ -140,21 +130,55 @@ effects:
             variable: >-
               <p>[[lookup name]] costs an amount of @L[Core:MP]{MP} equal to the
               armor's @L[Core:AV]{AV}.</p>
-      expansionSaveAttribute: mov
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
+      delivery:
+        base: sight
+        package: ritual
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
-      _sup: GjvfHWrW59PD6NrW
-    _id: W32cwoUlMtL7efaV
-    img: systems/teriock/src/icons/abilities/runic-armor.webp
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The targeted @L[Category:Armor]{armor} becomes
+          @L[Property:Runic]{runic}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - armor
+      impacts: {}
+      _sup: armorMas00000000
+      class: veteran
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.runicArmor000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.yyHpWdwsPvaRCLkK
-    _key: '!items.effects!K8ezGDJyDIWpKwS2.W32cwoUlMtL7efaV'
+    _key: '!items.effects!armorMas00000000.ySrNedMHa0kIv329'
+img: systems/teriock/src/icons/abilities/armor-master.webp
+name: Armor Master
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!K8ezGDJyDIWpKwS2'
+_key: '!items!armorMas00000000'

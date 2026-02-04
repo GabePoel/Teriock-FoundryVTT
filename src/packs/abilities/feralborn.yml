@@ -1,30 +1,45 @@
-name: Feralborn
-type: wrapper
-_id: k97lxpqk2KCQ7MEV
-img: systems/teriock/src/icons/abilities/feralborn.webp
+_id: feralborn0000000
 effects:
   - name: Feralborn
     type: ability
     img: systems/teriock/src/icons/abilities/feralborn.webp
+    _id: feralborn0000000
     system:
-      powerSources:
-        - magical
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '10'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 10 Minutes
       delivery:
         base: self
-      targets:
-        - self
+      effectTypes:
+        - transformation
       elements:
         - nature
-      duration:
-        unit: minute
-        quantity: 10
-        description: 10 Minutes
-      sustained: true
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Gain one @L[Core:Common Animal Abilities]{common animal ability} of
@@ -53,52 +68,60 @@ effects:
           Native]{Earth
           Native}</td></tr><tr><td>10</td><td>Volcanic</td><td>@L[Ability:Volcano
           Native]{Volcano Native}</td></tr></tbody></table>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      rotator: true
       spell: true
       standard: true
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - transformation
-    _id: vWGbXAuCiymqlPSu
+      sustained: true
+      targets:
+        - self
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.k97lxpqk2KCQ7MEV
-    _key: '!items.effects!k97lxpqk2KCQ7MEV.vWGbXAuCiymqlPSu'
+    _key: '!items.effects!feralborn0000000.feralborn0000000'
   - name: Regenerating
     type: ability
+    img: systems/teriock/src/icons/abilities/regenerating.webp
+    _id: 8BBP65gs8nGPyvy0
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>One terrain type only, as specified when casting <a
+        class="mw-selflink selflink">Feralborn</a>.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -111,37 +134,29 @@ effects:
           @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana Points]{HP}
           loss if you start your @L[Core:Turns]{turn} without successfully
           [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      limitation: >-
-        <p>One terrain type only, as specified when casting <a
-        class="mw-selflink selflink">Feralborn</a>.</p>
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         macros:
           Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
-      _sup: vWGbXAuCiymqlPSu
-    _id: 8Zoc4jHdwD9BlL33
-    img: systems/teriock/src/icons/abilities/regenerating.webp
+      _sup: feralborn0000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.regenerating0000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KMru5nPLLX8PwZw4
-    _key: '!items.effects!k97lxpqk2KCQ7MEV.8Zoc4jHdwD9BlL33'
+    _key: '!items.effects!feralborn0000000.8BBP65gs8nGPyvy0'
+img: systems/teriock/src/icons/abilities/feralborn.webp
+name: Feralborn
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!k97lxpqk2KCQ7MEV'
+_key: '!items!feralborn0000000'

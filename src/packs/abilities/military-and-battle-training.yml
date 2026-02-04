@@ -1,26 +1,34 @@
-name: Military and Battle Training
-type: wrapper
-_id: ncYtWDQQSE9iAJAI
-img: systems/teriock/src/icons/abilities/military-and-battle-training.webp
+_id: militaryAndBattl
 effects:
   - name: Military and Battle Training
     type: ability
     img: systems/teriock/src/icons/abilities/military-and-battle-training.webp
+    _id: militaryAndBattl
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: self
-      targets:
-        - area
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
+      executionTime: Short Rest
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You may spend a @L[Core:Short Rest]{short rest} developing a battle
@@ -30,74 +38,85 @@ effects:
           Awaken]{Triumphant Awaken}. In addition, the first @L[Category:Attack
           abilities]{attack} you and each of your allies makes in this combat is
           @L[Keyword:Boosted]{boosted}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: str
-          amount: proficiency
-      skill: true
-      standard: true
-      class: knight
-      requirements: <p>You remain in the targeted area.</p>
-      expansionSaveAttribute: mov
-      form: normal
-    _id: Ak1VHmPhz3Og9RGq
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ncYtWDQQSE9iAJAI
-    _key: '!items.effects!ncYtWDQQSE9iAJAI.Ak1VHmPhz3Og9RGq'
-  - name: Triumphant Awaken
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      range:
+        unit: self
+      requirements: <p>You remain in the targeted area.</p>
       skill: true
       standard: true
+      targets:
+        - area
+      impacts: {}
+      upgrades:
+        competence:
+          attribute: str
+          value: 0
       class: knight
-      expansionSaveAttribute: mov
-      trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
-      form: normal
-      effectTypes:
-        - awakening
-      _sup: Ak1VHmPhz3Og9RGq
-    _id: oCs4fxrfBGgvIlyT
-    img: systems/teriock/src/icons/abilities/triumphant-awaken.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.0Gk7RcHv1wbRg9JF
-    _key: '!items.effects!ncYtWDQQSE9iAJAI.oCs4fxrfBGgvIlyT'
+    _key: '!items.effects!militaryAndBattl.militaryAndBattl'
+  - name: Triumphant Awaken
+    type: ability
+    img: systems/teriock/src/icons/abilities/triumphant-awaken.webp
+    _id: m0pDVrp0UtN5Dn58
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: self
+      effectTypes:
+        - awakening
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: reactive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      results:
+        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
+      impacts: {}
+      _sup: militaryAndBattl
+      class: knight
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.trtAwaken0000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!militaryAndBattl.m0pDVrp0UtN5Dn58'
+img: systems/teriock/src/icons/abilities/military-and-battle-training.webp
+name: Military and Battle Training
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ncYtWDQQSE9iAJAI'
+_key: '!items!militaryAndBattl'

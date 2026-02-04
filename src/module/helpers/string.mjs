@@ -75,12 +75,27 @@ export function dotJoin(strings) {
 /**
  * Converts a string to an ID.
  * @param {string} str
- * @param {string} background
+ * @param {object} [options]
+ * @param {boolean} [options.abbreviate]
+ * @param {string} [options.background]
+ * @param {number} [options.length]
  * @returns {string}
  */
-export function toId(str, background = "0000000000000000") {
+export function toId(str, options = {}) {
+  const {
+    abbreviate = false,
+    background = "0000000000000000",
+    length = 16,
+  } = options;
+  if (abbreviate) {
+    str = toTitleCase(str);
+    for (const [k, v] of Object.entries(TERIOCK.aliases.abbreviations)) {
+      str = str.replace(k, v);
+    }
+  }
+  str = str.replace("ō", "o").replace("Ō", "O");
   const camel = toCamelCase(str);
-  return camel.slice(0, 16) + background.slice(camel.length);
+  return camel.slice(0, length) + background.slice(camel.length);
 }
 
 /**

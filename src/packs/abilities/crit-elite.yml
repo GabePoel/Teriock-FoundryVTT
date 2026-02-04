@@ -1,27 +1,34 @@
-name: Crit Elite
-type: wrapper
-_id: G0j8z76WzkVDuqam
-img: systems/teriock/src/icons/abilities/crit-elite.webp
+_id: critElite0000000
 effects:
   - name: Crit Elite
     type: ability
     img: systems/teriock/src/icons/abilities/crit-elite.webp
+    _id: critElite0000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: true
+        description: While Stationary
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: While Stationary
-        stationary: true
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next @L[Category:Attack
@@ -32,48 +39,47 @@ effects:
           @L[Category:Attack abilities]{attack} does nothing. Only the
           @L[Core:Damage]{damage} from the item itself can be
           @L[Keyword:Boosted]{boosted} in this way.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are not already using [[lookup name]].</p>
       skill: true
       standard: true
-      class: archer
-      requirements: <p>You are not already using [[lookup name]].</p>
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.damage.all.raw
-              mode: 0
+            - mode: 0
               priority: 100
-              target: armament
               time: normal
+              key: system.damage.all.raw
+              target: armament
               qualifier: '@dmg'
               value: '1'
-            - key: system.vitals
-              mode: 5
+            - mode: 5
               priority: 10
-              target: armament
               time: normal
+              key: system.vitals
+              target: armament
               qualifier: '1'
               value: 'true'
         macros:
           Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
-    _id: kicVfFFQVM83uIGK
+      class: archer
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.G0j8z76WzkVDuqam
-    _key: '!items.effects!G0j8z76WzkVDuqam.kicVfFFQVM83uIGK'
+    _key: '!items.effects!critElite0000000.critElite0000000'
+img: systems/teriock/src/icons/abilities/crit-elite.webp
+name: Crit Elite
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!G0j8z76WzkVDuqam'
+_key: '!items!critElite0000000'

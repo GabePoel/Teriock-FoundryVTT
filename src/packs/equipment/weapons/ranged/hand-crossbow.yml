@@ -1,98 +1,121 @@
+_id: handCrossbow0000
+folder: GjqehiaK2urxvWVm
 name: Hand Crossbow
-type: equipment
 system:
   equipmentType: Hand Crossbow
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
   attackPenalty:
-    saved: '-2'
-    raw: '-3'
+    raw: '-2'
   damage:
     base:
-      saved: 1d6
+      raw: 1d6
+    twoHanded: {}
+  hit: {}
   range:
     long:
-      saved: '120'
+      raw: '120'
       unit: ft
     melee: true
     ranged: false
     short:
-      saved: '30'
+      raw: '30'
       unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '3'
+  minStr:
+    raw: '-3'
   equipmentClasses:
     - bows
-  minStr:
-    saved: -3
-    raw: -3
   powerLevel: mundane
-  weight:
-    saved: 3
-    raw: 0
-_id: 3MMJ2NUZpIjcFuEn
+type: equipment
 img: systems/teriock/src/icons/equipment/hand-crossbow.webp
 effects:
   - name: Loading
     type: property
+    img: systems/teriock/src/icons/properties/loading.webp
+    _id: loading000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property must be
         reloaded after making an @L[Category:Attack abilities]{attack} with it.
         Anyone can do this using @L[Ability:Reload]{Reload}.</p>
+      suppression: {}
       revealed: true
       form: flaw
-    _id: nH8LqdMQcfv4HIzJ
-    img: systems/teriock/src/icons/properties/loading.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.loading000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.IqKNnbXPdsjuyi4Y
-    _key: '!items.effects!3MMJ2NUZpIjcFuEn.nH8LqdMQcfv4HIzJ'
+    _key: '!items.effects!handCrossbow0000.loading000000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
-    _id: 0kjtAYKl8Ee5LyhK
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!3MMJ2NUZpIjcFuEn.0kjtAYKl8Ee5LyhK'
+    _key: '!items.effects!handCrossbow0000.wep0000000000000'
   - name: Ammunition
     type: property
+    img: systems/teriock/src/icons/properties/ammunition.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property is @L[Property:Ranged]{ranged} and
         requires some sort of [[lookup name style=lc]] (arrows, rocks, darts,
         etc.) to @L[Category:Attack abilities]{attack} with.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.melee
-            mode: 5
-            value: 'false'
+          - mode: 5
             priority: 10
-    _id: kWrV8HNov0eSIr8b
-    img: systems/teriock/src/icons/properties/ammunition.webp
+            time: normal
+            key: system.range.melee
+            target: parent
+            qualifier: '1'
+            value: 'false'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.JJ1CEFynCrUbDAPO
-    _key: '!items.effects!3MMJ2NUZpIjcFuEn.kWrV8HNov0eSIr8b'
+    _id: tUSt1LeNZtvJkAGx
+    _key: '!items.effects!handCrossbow0000.tUSt1LeNZtvJkAGx'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -104,27 +127,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      revealed: true
-      _sup: kWrV8HNov0eSIr8b
-    _id: JGYcdAyHH1stKaqx
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: tUSt1LeNZtvJkAGx
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!3MMJ2NUZpIjcFuEn.JGYcdAyHH1stKaqx'
-folder: GjqehiaK2urxvWVm
+    _id: vzvJ5SmRiU6OZUFu
+    _key: '!items.effects!handCrossbow0000.vzvJ5SmRiU6OZUFu'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!3MMJ2NUZpIjcFuEn'
+_key: '!items!handCrossbow0000'

@@ -1,181 +1,204 @@
-name: Battle Cry
-type: wrapper
-_id: KMd3cAqbjnmIVwUo
-img: systems/teriock/src/icons/abilities/battle-cry.webp
+_id: battleCry0000000
 effects:
   - name: Battle Cry
     type: ability
     img: systems/teriock/src/icons/abilities/battle-cry.webp
+    _id: battleCry0000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
           @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-    _id: 7CF70DNuey1Zqc68
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KMd3cAqbjnmIVwUo
-    _key: '!items.effects!KMd3cAqbjnmIVwUo.7CF70DNuey1Zqc68'
+    _key: '!items.effects!battleCry0000000.battleCry0000000'
   - name: Battle Cry Aura
     type: ability
+    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+    _id: L63r0AnsW7h9X2XA
     system:
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
-      results:
-        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: aura
+      effectTypes:
+        - loud
       endCondition: >-
         <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: int
       form: normal
-      effectTypes:
-        - loud
+      grantOnly: false
+      interaction: feat
+      maneuver: active
+      overview:
+        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: 7CF70DNuey1Zqc68
-    _id: jN2QvmXyM3EjmQGa
-    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+      _sup: battleCry0000000
+      class: berserker
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.battleCryAura000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qdoHZufxtGs1nUUZ
-    _key: '!items.effects!KMd3cAqbjnmIVwUo.jN2QvmXyM3EjmQGa'
+    _key: '!items.effects!battleCry0000000.L63r0AnsW7h9X2XA'
   - name: Battle Cry Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    _id: ei3vfYJoWfZdzgWy
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '5'
         unit: minute
-        quantity: 5
+        dawn: false
         stationary: false
         description: 5 Minutes
+      delivery:
+        base: self
+      effectTypes:
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime: a0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} being
           @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: berserker
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              value: frightened
+            - mode: 2
               priority: 10
-      _sup: 7CF70DNuey1Zqc68
-    _id: NECi3AFU8CqK19mT
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+              time: normal
+              key: system.protections.resistances.statuses
+              target: Actor
+              qualifier: '1'
+              value: frightened
+      _sup: battleCry0000000
+      class: berserker
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.battleCryRsc0000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DqXrfWmMV6e0tUmE
-    _key: '!items.effects!KMd3cAqbjnmIVwUo.NECi3AFU8CqK19mT'
+    _key: '!items.effects!battleCry0000000.ei3vfYJoWfZdzgWy'
+img: systems/teriock/src/icons/abilities/battle-cry.webp
+name: Battle Cry
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!KMd3cAqbjnmIVwUo'
+_key: '!items!battleCry0000000'

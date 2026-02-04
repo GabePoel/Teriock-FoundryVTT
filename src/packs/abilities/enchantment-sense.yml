@@ -1,33 +1,37 @@
-name: Enchantment Sense
-type: wrapper
-_id: XbfLw7kYygzLqoHU
-img: systems/teriock/src/icons/abilities/enchantment-sense.webp
+_id: enchantmentSense
 effects:
   - name: Enchantment Sense
     type: ability
+    img: systems/teriock/src/icons/abilities/enchantment-sense.webp
+    _id: enchantmentSense
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - blind
+        dawn: false
         stationary: false
         description: While Not Blind
+      delivery:
+        base: self
       effectTypes:
         - sensory
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -38,26 +42,27 @@ effects:
           otherwise @L[Property:Granting]{enchanted}. If you pick a creature,
           you can tell whether each of the visible items you can see it
           @L[Keyword:Bearing]{bearing} meet this criteria.</p>
-      piercing: normal
       powerSources:
         - magical
       range:
         raw: '60'
+        unit: self
       targets:
         - creature
         - item
-    _id: k2ChO9g7YtYJ3qkg
-    img: systems/teriock/src/icons/abilities/enchantment-sense.webp
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.XbfLw7kYygzLqoHU
-    _key: '!items.effects!XbfLw7kYygzLqoHU.k2ChO9g7YtYJ3qkg'
+    _key: '!items.effects!enchantmentSense.enchantmentSense'
+img: systems/teriock/src/icons/abilities/enchantment-sense.webp
+name: Enchantment Sense
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!XbfLw7kYygzLqoHU'
+_key: '!items!enchantmentSense'

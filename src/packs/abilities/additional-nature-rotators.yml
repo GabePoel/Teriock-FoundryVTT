@@ -1,84 +1,65 @@
-name: Additional Nature Rotators
-type: wrapper
-_id: NvBiIrpOXLq9wUin
-img: systems/teriock/src/icons/abilities/additional-nature-rotators.webp
+_id: adlNatureRots000
 effects:
   - name: Additional Nature Rotators
     type: ability
     img: systems/teriock/src/icons/abilities/additional-nature-rotators.webp
+    _id: adlNatureRots000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Advanced Hack Healing]{Advanced Hack Healing} and
           @L[Ability:Transmute]{Transmute} to your list of possible
           @L[Category:Rotator spells]{rotator spells}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
+      targets:
+        - self
+      impacts: {}
       class: natureMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: L1HMMEpfFZ10CF8z
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.NvBiIrpOXLq9wUin
-    _key: '!items.effects!NvBiIrpOXLq9wUin.L1HMMEpfFZ10CF8z'
+    _key: '!items.effects!adlNatureRots000.adlNatureRots000'
   - name: Advanced Hack Healing
     type: ability
+    img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
+    _id: 7kgdZyAnAFqU2N0N
     system:
-      powerSources:
-        - magical
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - nature
-      duration:
-        unit: hour
-        quantity: 8
-        stationary: false
-        description: 8 Hours
-      overview:
-        base: >-
-          <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal}
-          a @L[Damage:Hack]{hack} as well.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: natureMage
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -86,42 +67,95 @@ effects:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      form: special
+      duration:
+        raw: '8'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 8 Hours
+      delivery:
+        base: self
       effectTypes:
         - healing
         - regeneration
-      _sup: L1HMMEpfFZ10CF8z
-    _id: kDvkGejwzhGfIUm5
-    img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.RX60K5QVsmwlhg32
-    _key: '!items.effects!NvBiIrpOXLq9wUin.kDvkGejwzhGfIUm5'
-  - name: Transmute
-    type: ability
-    system:
+      elements:
+        - nature
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal}
+          a @L[Damage:Hack]{hack} as well.</p>
       powerSources:
         - magical
         - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
       targets:
         - self
-      elements:
-        - nature
+      impacts: {}
+      _sup: adlNatureRots000
+      class: natureMage
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.advancedHackHng0
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!adlNatureRots000.7kgdZyAnAFqU2N0N'
+  - name: Transmute
+    type: ability
+    img: systems/teriock/src/icons/abilities/transmute.webp
+    _id: DCeVg5Ilt7VwUIGP
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        hp:
+          type: hack
+          value:
+            static: 0
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      effectTypes:
+        - transformation
+      elements:
+        - nature
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>The triggering @L[Category:Standard abilities]{ability} is
@@ -142,32 +176,19 @@ effects:
           abilities]{ability} was @L[Keyword:UB]{UB}, but you otherwise would
           have been able to @L[Ability:Basic Block]{Block} it, you may treat it
           as though it targeted your arm. </p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      rotator: true
       spell: true
       standard: true
-      class: natureMage
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        hp:
-          type: hack
-          value:
-            static: 0
-      expansionSaveAttribute: mov
+      targets:
+        - self
       trigger: >-
         <p>You would take a @L[Category:Standard abilities]{standard
         ability}.</p>
-      form: special
-      effectTypes:
-        - transformation
       impacts:
         base:
           hacks:
@@ -178,19 +199,21 @@ effects:
             - ear
             - mouth
             - nose
-      _sup: L1HMMEpfFZ10CF8z
-    _id: u3psH5YPw4AbX2fF
-    img: systems/teriock/src/icons/abilities/transmute.webp
+      _sup: adlNatureRots000
+      class: natureMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.transmute0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Y5ciVQQxNGybydyh
-    _key: '!items.effects!NvBiIrpOXLq9wUin.u3psH5YPw4AbX2fF'
+    _key: '!items.effects!adlNatureRots000.DCeVg5Ilt7VwUIGP'
+img: systems/teriock/src/icons/abilities/additional-nature-rotators.webp
+name: Additional Nature Rotators
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!NvBiIrpOXLq9wUin'
+_key: '!items!adlNatureRots000'

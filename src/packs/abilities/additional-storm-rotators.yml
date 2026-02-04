@@ -1,87 +1,65 @@
-name: Additional Storm Rotators
-type: wrapper
-_id: 5qr7jIGQIp8avuqi
-img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
+_id: adlStormRots0000
 effects:
   - name: Additional Storm Rotators
     type: ability
     img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
+    _id: adlStormRots0000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Reflect Magic]{Reflect Magic} and
           @L[Ability:Teleport]{Teleport} to your list of possible
           @L[Category:Rotator spells]{rotator spells}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
+      targets:
+        - self
+      impacts: {}
       class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: y2rRjcOihCryf0eh
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5qr7jIGQIp8avuqi
-    _key: '!items.effects!5qr7jIGQIp8avuqi.y2rRjcOihCryf0eh'
+    _key: '!items.effects!adlStormRots0000.adlStormRots0000'
   - name: Reflect Magic
     type: ability
+    img: systems/teriock/src/icons/abilities/reflect-magic.webp
+    _id: zQv17kb267N9Gz3k
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: aura
-      targets:
-        - spell
-      elements:
-        - storm
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
-          range. Their casters take the spells' effects instead.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: stormMage
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -89,53 +67,103 @@ effects:
           type: static
           value:
             static: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: aura
+      elements:
+        - storm
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
         name]] increases by 15 feet.</p>
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target @L[Category:Conjured spells]{spell}
+          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
+          range. Their casters take the spells' effects instead.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
       requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      expansionSaveAttribute: mov
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - spell
       trigger: >-
         <p>A @L[Category:Conjured spells]{conjured spell} is used within
         range.</p>
-      form: special
-      _sup: y2rRjcOihCryf0eh
-    _id: jNmY4OXJpUb2bXxd
-    img: systems/teriock/src/icons/abilities/reflect-magic.webp
-    flags:
-      teriock:
-        dontConsume: false
+      impacts: {}
+      _sup: adlStormRots0000
+      class: stormMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reflectMag000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.d4jRtC1rZtlNA25O
-    _key: '!items.effects!5qr7jIGQIp8avuqi.jNmY4OXJpUb2bXxd'
+    _key: '!items.effects!adlStormRots0000.zQv17kb267N9Gz3k'
   - name: Teleport
     type: ability
+    img: systems/teriock/src/icons/abilities/teleport.webp
+    _id: 1H4342ENqLtsvIsb
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: sight
         package: ritual
-      targets:
-        - area
-        - creature
+      effectTypes:
+        - displacement
+        - longRange
       elements:
         - storm
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, your maximum [[lookup name
+        style=lc]] distance increases by your level in miles.</p>
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Target creature is moved to a location you have studied within your
@@ -153,45 +181,34 @@ effects:
           <p>You may now have 2 × @L[Core:Fluency Bonus]{F} locations studied
           and can [[lookup name style=lc]] a distance of up to @L[Core:Fluency
           Bonus]{F} × your level in miles.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      rotator: true
       spell: true
       standard: true
-      ritual: true
+      targets:
+        - area
+        - creature
+      impacts: {}
+      _sup: adlStormRots0000
       class: stormMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, your maximum [[lookup name
-        style=lc]] distance increases by your level in miles.</p>
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - displacement
-        - longRange
-      _sup: y2rRjcOihCryf0eh
-    _id: I5A075gSzzqXymZV
-    img: systems/teriock/src/icons/abilities/teleport.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.teleport00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Ppi3jt8GNVacFKoN
-    _key: '!items.effects!5qr7jIGQIp8avuqi.I5A075gSzzqXymZV'
+    _key: '!items.effects!adlStormRots0000.1H4342ENqLtsvIsb'
+img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
+name: Additional Storm Rotators
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!5qr7jIGQIp8avuqi'
+_key: '!items!adlStormRots0000'

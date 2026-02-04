@@ -1,93 +1,98 @@
-name: Threat
-type: wrapper
-_id: M6WwRmOH6PPk3CS1
-img: systems/teriock/src/icons/abilities/threat.webp
+_id: threat0000000000
 effects:
   - name: Threat
     type: ability
     img: systems/teriock/src/icons/abilities/threat.webp
+    _id: threat0000000000
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: weapon
         package: strike
-      targets:
-        - vitals
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Targeted creature is @L[Condition:Frightened]{frightened}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
       endCondition: >-
         <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        hit: <p>Targeted creature is @L[Condition:Frightened]{frightened}.</p>
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
       impacts:
         base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: start
                   trigger: turn
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-    _id: htF5Djlio0oH4UJE
+      class: berserker
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.M6WwRmOH6PPk3CS1
-    _key: '!items.effects!M6WwRmOH6PPk3CS1.htF5Djlio0oH4UJE'
+    _key: '!items.effects!threat0000000000.threat0000000000'
+img: systems/teriock/src/icons/abilities/threat.webp
+name: Threat
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!M6WwRmOH6PPk3CS1'
+_key: '!items!threat0000000000'

@@ -1,29 +1,35 @@
-name: Poison Item
-type: wrapper
-_id: 2VTopTkaSAg3r1GJ
-img: systems/teriock/src/icons/abilities/poison-item.webp
+_id: poisonItm0000000
 effects:
   - name: Poison Item
     type: ability
     img: systems/teriock/src/icons/abilities/poison-item.webp
+    _id: poisonItm0000000
     system:
-      powerSources:
-        - alchemical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: hand
-      targets:
-        - item
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}.
@@ -39,42 +45,41 @@ effects:
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
           1d10[toxic]]] @L[Core:Damage]{damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - alchemical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: <p>Target is not a weapon.</p>
       skill: true
       standard: true
-      class: assassin
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-      requirements: <p>Target is not a weapon.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - item
       impacts:
         base:
-          statuses:
-            - poisoned
           rolls:
             damage: 1d6[toxic]
+          statuses:
+            - poisoned
         proficient:
           rolls:
             damage: 1d8[toxic]
         fluent:
           rolls:
             damage: 1d10[toxic]
-    _id: 04nZm47BBt0Yd2C3
+      class: assassin
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.2VTopTkaSAg3r1GJ
-    _key: '!items.effects!2VTopTkaSAg3r1GJ.04nZm47BBt0Yd2C3'
+    _key: '!items.effects!poisonItm0000000.poisonItm0000000'
+img: systems/teriock/src/icons/abilities/poison-item.webp
+name: Poison Item
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!2VTopTkaSAg3r1GJ'
+_key: '!items!poisonItm0000000'

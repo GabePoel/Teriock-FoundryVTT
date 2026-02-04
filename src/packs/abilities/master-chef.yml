@@ -1,59 +1,66 @@
-name: Master Chef
-type: wrapper
-_id: Cp2URCkfRQMfpsLq
-img: icons/consumables/food/cheese-wedge-swiss-white.webp
+_id: masChef000000000
 effects:
   - name: Master Chef
     type: ability
+    img: icons/consumables/food/cheese-wedge-swiss-white.webp
+    _id: masChef000000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
       revealed: true
-      impacts:
-        base:
-          changes:
-            - key: system.tradecrafts.chef.score
-              mode: 4
-              value: '3'
-              priority: 10
-      delivery:
-        base: self
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are a @L[Keyword:Mastery]{master}
           @L[Tradecraft:Chef]{chef}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
-    _id: f0ClkWhGuWrsSLzk
-    img: icons/consumables/food/cheese-wedge-swiss-white.webp
+      impacts:
+        base:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.tradecrafts.chef.score
+              target: Actor
+              qualifier: '1'
+              value: '3'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Cp2URCkfRQMfpsLq
-    _key: '!items.effects!Cp2URCkfRQMfpsLq.f0ClkWhGuWrsSLzk'
+    _key: '!items.effects!masChef000000000.masChef000000000'
+img: icons/consumables/food/cheese-wedge-swiss-white.webp
+name: Master Chef
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Cp2URCkfRQMfpsLq'
+_key: '!items!masChef000000000'

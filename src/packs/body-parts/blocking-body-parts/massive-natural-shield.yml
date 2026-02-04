@@ -1,49 +1,77 @@
+_id: massiveNaturalSh
 name: Massive Natural Shield
 type: body
-_id: fPxgDXWgWj7Eb9hQ
+folder: DagtgOUki27S4SOj
 img: systems/teriock/src/icons/body-parts/massive-natural-shield.webp
 system:
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-3'
+  bv:
+    raw: '4'
   damage:
     base:
-      saved: '1'
+      raw: '1'
+  hit: {}
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
 effects:
   - name: Bashing
     type: property
+    img: systems/teriock/src/icons/properties/bashing.webp
+    _id: 25gt4VTC5eulsM0s
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
         weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
         Attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: eRqe6VlXBTieLMOY
-    img: systems/teriock/src/icons/properties/bashing.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
-    _key: '!items.effects!fPxgDXWgWj7Eb9hQ.eRqe6VlXBTieLMOY'
+    _key: '!items.effects!massiveNaturalSh.25gt4VTC5eulsM0s'
   - name: Blocking
     type: property
+    img: systems/teriock/src/icons/properties/blocking.webp
+    _id: tyCxd7OUwZIbQPed
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property can be used
         for @L[Ability:Block Cone]{Block Cone}. It also does not have any
         @L[Core:Block Interaction]{block penalty}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: IFghBPAw9nOD67bD
-    img: systems/teriock/src/icons/properties/blocking.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.blking0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.YQm2Q8xUa1C3WcFR
-    _key: '!items.effects!fPxgDXWgWj7Eb9hQ.IFghBPAw9nOD67bD'
+    _key: '!items.effects!massiveNaturalSh.tyCxd7OUwZIbQPed'
   - name: Cumbersome
     type: property
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    _id: ml4Oj0ysRBK9EX16
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
         <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
@@ -54,47 +82,52 @@ effects:
         otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-      modifiesActor: true
       impacts:
         changes:
-          - key: system.encumbranceLevel
-            mode: 2
-            value: '1'
+          - mode: 2
             priority: 10
-    _id: N9ZCfdpbZlbdcrnO
-    img: systems/teriock/src/icons/properties/cumbersome.webp
+            time: normal
+            key: system.encumbranceLevel
+            target: Actor
+            qualifier: '1'
+            value: '1'
+      modifiesActor: true
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Qnxdsbou7Lfai8FN
-    _key: '!items.effects!fPxgDXWgWj7Eb9hQ.N9ZCfdpbZlbdcrnO'
+    _key: '!items.effects!massiveNaturalSh.ml4Oj0ysRBK9EX16'
   - name: Tower Shielding
     type: property
+    img: systems/teriock/src/icons/properties/tower-shielding.webp
+    _id: zL3oTjIQLWLuwHCv
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Only @L[Category:Small equipment]{small equipment} can be held in an
         arm that's @L[Keyword:Using]{using} @L[Category:Tower Shielding
         equipment]{tower shielding equipment}. But but no
         @L[Category:Equipment]{equipment} can be used to @L[Core:Attack
         Interaction]{attack} or @L[Core:Block Interaction]{block}.</p>
+      suppression: {}
       revealed: true
       form: flaw
-    _id: osVuSg5I4jj2CPm1
-    img: systems/teriock/src/icons/properties/tower-shielding.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.towerShielding00
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fnGa9NRLdDr7Cy7N
-    _key: '!items.effects!fPxgDXWgWj7Eb9hQ.osVuSg5I4jj2CPm1'
-folder: DagtgOUki27S4SOj
+    _key: '!items.effects!massiveNaturalSh.zL3oTjIQLWLuwHCv'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!fPxgDXWgWj7Eb9hQ'
+_key: '!items!massiveNaturalSh'

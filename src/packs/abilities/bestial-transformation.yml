@@ -1,28 +1,41 @@
-name: Bestial Transformation
-type: wrapper
-_id: fKR3TT6GXJNLctgz
-img: systems/teriock/src/icons/abilities/bestial-transformation.webp
+_id: bestialTransform
 effects:
   - name: Bestial Transformation
     type: ability
     img: systems/teriock/src/icons/abilities/bestial-transformation.webp
+    _id: bestialTransform
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: self
-      targets:
-        - self
+      effectTypes:
+        - transformation
       elements:
         - nature
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the maximum
+        @L[Core:BR]{BR} available to you increases by 1.</p>
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You are @L[Condition:Transformed]{fully transformed} into a
@@ -35,43 +48,31 @@ effects:
         fluent: >-
           <p>The maximum @L[Core:BR]{BR} available to you is now @L[Core:Fluency
           Bonus]{F}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
       spell: true
       standard: true
-      rotator: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the maximum
-        @L[Core:BR]{BR} available to you increases by 1.</p>
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - transformation
+      targets:
+        - self
       impacts:
         base:
           statuses:
             - transformed
-          transformation:
-            enabled: true
-            useFolder: true
-            uuid: Compendium.teriock.species.Folder.Jg0dWUzFS1WNDl2g
-            select: true
-            level: full
-    _id: 9qSCdxQhajiyqnrn
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.fKR3TT6GXJNLctgz
-    _key: '!items.effects!fKR3TT6GXJNLctgz.9qSCdxQhajiyqnrn'
+    _key: '!items.effects!bestialTransform.bestialTransform'
+img: systems/teriock/src/icons/abilities/bestial-transformation.webp
+name: Bestial Transformation
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!fKR3TT6GXJNLctgz'
+_key: '!items!bestialTransform'

@@ -1,26 +1,35 @@
-name: Attempt Hide
-type: wrapper
-_id: Wec1GW9rU94Y6JYZ
-img: systems/teriock/src/icons/abilities/attempt-hide.webp
+_id: attemptHide00000
 effects:
   - name: Attempt Hide
     type: ability
     img: systems/teriock/src/icons/abilities/attempt-hide.webp
+    _id: attemptHide00000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      basic: true
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You attempt to become @L[Condition:Hidden]{hidden}. As you do this,
@@ -35,45 +44,42 @@ effects:
         fluent: >-
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
           DC.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      expansionSaveAttribute: mov
-      basic: true
-      form: intrinsic
+      targets:
+        - self
       impacts:
         base:
-          startStatuses:
-            - hidden
           rolls:
             hide: 1d20 + (2 * @snk)
-            perceive: 10 + @per
+          startStatuses:
+            - hidden
         proficient:
           rolls:
             hide: 1d20 + (2 * @snk) + @p
         fluent:
           rolls:
             hide: 1d20 + (2 * @snk) + @f
-    _id: FZOXRAn9rdgVM34Q
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Wec1GW9rU94Y6JYZ
-    _key: '!items.effects!Wec1GW9rU94Y6JYZ.FZOXRAn9rdgVM34Q'
+    _key: '!items.effects!attemptHide00000.attemptHide00000'
+img: systems/teriock/src/icons/abilities/attempt-hide.webp
+name: Attempt Hide
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Wec1GW9rU94Y6JYZ'
+_key: '!items!attemptHide00000'

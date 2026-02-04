@@ -1,26 +1,36 @@
-name: Leaping
-type: wrapper
-_id: WJ91XuNoYd43DhFL
-img: systems/teriock/src/icons/abilities/leaping.webp
+_id: leaping000000000
 effects:
   - name: Leaping
     type: ability
     img: systems/teriock/src/icons/abilities/leaping.webp
+    _id: leaping000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
@@ -28,51 +38,60 @@ effects:
         proficient: >-
           <p>You instead vertically leap at @L[Core:Movement Speed]{half speed}
           and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.speedAdjustments.leapVertical
+              target: Actor
+              qualifier: '1'
               value: '1'
+            - mode: 4
               priority: 10
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
+              time: normal
+              key: system.speedAdjustments.leapHorizontal
+              target: Actor
+              qualifier: '1'
               value: '2'
-              priority: 10
         proficient:
           changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.speedAdjustments.leapVertical
+              target: Actor
+              qualifier: '1'
               value: '2'
+            - mode: 4
               priority: 10
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
+              time: normal
+              key: system.speedAdjustments.leapHorizontal
+              target: Actor
+              qualifier: '1'
               value: '3'
-              priority: 10
-    _id: dtRRBGwI2IylmV3h
+      class: assassin
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.WJ91XuNoYd43DhFL
-    _key: '!items.effects!WJ91XuNoYd43DhFL.dtRRBGwI2IylmV3h'
+    _key: '!items.effects!leaping000000000.leaping000000000'
+img: systems/teriock/src/icons/abilities/leaping.webp
+name: Leaping
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!WJ91XuNoYd43DhFL'
+_key: '!items!leaping000000000'

@@ -1,54 +1,60 @@
-name: Instant Devour
-type: wrapper
-_id: e4QZBYKPMtZszK1G
-img: systems/teriock/src/icons/abilities/instant-devour.webp
+_id: instDevour000000
 effects:
   - name: Instant Devour
     type: ability
     img: systems/teriock/src/icons/abilities/instant-devour.webp
+    _id: instDevour000000
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: bite
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - martial
       range:
-        unit: ft
         raw: Your Bite's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
           and their @L[Core:Size]{SIZE} is reduced by 2. If their
           @L[Core:Size]{SIZE} was already 2 or less, their body is completely
           consumed.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-    _id: NtlyCanDmgLWx8dm
+      targets:
+        - creature
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.e4QZBYKPMtZszK1G
-    _key: '!items.effects!e4QZBYKPMtZszK1G.NtlyCanDmgLWx8dm'
+    _key: '!items.effects!instDevour000000.instDevour000000'
+img: systems/teriock/src/icons/abilities/instant-devour.webp
+name: Instant Devour
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!e4QZBYKPMtZszK1G'
+_key: '!items!instDevour000000'

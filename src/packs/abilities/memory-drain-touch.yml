@@ -1,60 +1,65 @@
-name: Memory Drain Touch
-type: wrapper
-_id: DjlDPT6AniOsOKF4
-img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
+_id: memoryDrainTouch
 effects:
   - name: Memory Drain Touch
     type: ability
     img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
+    _id: memoryDrainTouch
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: <p>Deal [[/drain 1d8[memory]]] @L[Category:Drain types]{drain}.</p>
-        critHit: <p>Deal [[/drain 2d8[memory]]] @L[Category:Drain types]{drain}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
       effectTypes:
         - mental
         - displacement
         - draining
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: <p>Deal [[/drain 1d8[memory]]] @L[Category:Drain types]{drain}.</p>
+        critHit: <p>Deal [[/drain 2d8[memory]]] @L[Category:Drain types]{drain}.</p>
+      targets:
+        - creature
       impacts:
         base:
           rolls:
             drain: 1d8[memory]
-    _id: IkIBzFvWyHwBCWFv
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DjlDPT6AniOsOKF4
-    _key: '!items.effects!DjlDPT6AniOsOKF4.IkIBzFvWyHwBCWFv'
+    _key: '!items.effects!memoryDrainTouch.memoryDrainTouch'
+img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
+name: Memory Drain Touch
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!DjlDPT6AniOsOKF4'
+_key: '!items!memoryDrainTouch'

@@ -1,63 +1,76 @@
-name: Super Digging
-type: wrapper
-_id: ktVFaBfthnXmgxp4
-img: systems/teriock/src/icons/abilities/super-digging.webp
+_id: superDigging0000
 effects:
   - name: Super Digging
     type: ability
     img: systems/teriock/src/icons/abilities/super-digging.webp
+    _id: superDigging0000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You dig at @L[Core:Movement Speed]{half speed}.</p>
         proficient: <p>You instead dig at @L[Core:Movement Speed]{normal speed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.speedAdjustments.dig
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.speedAdjustments.dig
+              target: Actor
+              qualifier: '1'
+              value: '2'
         proficient:
           changes:
-            - key: system.speedAdjustments.dig
-              mode: 4
-              value: '3'
+            - mode: 4
               priority: 10
-    _id: gI4q7FALLXcgtVf4
+              time: normal
+              key: system.speedAdjustments.dig
+              target: Actor
+              qualifier: '1'
+              value: '3'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ktVFaBfthnXmgxp4
-    _key: '!items.effects!ktVFaBfthnXmgxp4.gI4q7FALLXcgtVf4'
+    _key: '!items.effects!superDigging0000.superDigging0000'
+img: systems/teriock/src/icons/abilities/super-digging.webp
+name: Super Digging
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ktVFaBfthnXmgxp4'
+_key: '!items!superDigging0000'

@@ -1,110 +1,140 @@
+_id: battleStaff00000
+folder: pG7DMl7V9VLyOvBg
 name: Battle Staff
-type: equipment
 system:
   equipmentType: Battle Staff
-  equipped: true
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-3'
+  bv:
+    raw: '2'
   damage:
     base:
-      saved: 1d6
+      raw: 1d6
     twoHanded:
-      saved: 1d8
-  weight:
-    saved: 4
+      raw: 1d8
+  fightingStyle: bluntForce
+  hit: {}
   range:
     long:
       unit: melee
+    melee: true
+    ranged: false
     short:
       unit: melee
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '4'
+  minStr:
+    raw: '0'
   equipmentClasses:
     - mageloreEquipment
     - poleArms
-  minStr: 0
-  sb: bluntForce
-  av: 0
-  bv:
-    saved: 2
   powerLevel: mundane
-  attackPenalty:
-    raw: '-3'
-_id: ZCN67N9y427tztgF
+type: equipment
 img: systems/teriock/src/icons/equipment/battle-staff.webp
 effects:
+  - name: Weapon
+    type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: JIsV2htLb3fYomAM
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
+      form: intrinsic
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!battleStaff00000.JIsV2htLb3fYomAM'
+  - name: Reach
+    type: property
+    img: systems/teriock/src/icons/properties/reach.webp
+    _id: Qi5dizokXOJOSPm1
+    system:
+      competence:
+        raw: 0
+      description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
+      suppression: {}
+      revealed: true
+      form: intrinsic
+      impacts:
+        changes:
+          - mode: 4
+            priority: 10
+            time: normal
+            key: system.range.long.raw
+            target: parent
+            qualifier: '1'
+            value: '10'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.reach00000000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!battleStaff00000.Qi5dizokXOJOSPm1'
+  - name: Versatile
+    type: property
+    img: systems/teriock/src/icons/properties/versatile.webp
+    _id: 43kXzqQF7irSTHbm
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be
+        used in one or two hands. The two-handed damage value appears in
+        parentheses next to the one-handed value.</p>
+      suppression: {}
+      revealed: true
+      form: intrinsic
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.versatile0000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!battleStaff00000.43kXzqQF7irSTHbm'
   - name: Magelore
     type: property
+    img: systems/teriock/src/icons/properties/magelore.webp
+    _id: EB5RCu9bbrLCvJWD
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with this property can be used to cast @L[Category:Invoked
         component spells]{invoked spells}. It can also be used as its user's
         @L[Category:Hand delivery abilities]{hand} if they have @L[Ability:Staff
         Touch]{Staff Touch}.</p>
+      suppression: {}
+      revealed: true
       form: normal
-    _id: Eb5yndLzx89q22vw
-    img: systems/teriock/src/icons/properties/magelore.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.magelore00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.kge6nWD5GPizouXm
-    _key: '!items.effects!ZCN67N9y427tztgF.Eb5yndLzx89q22vw'
-  - name: Versatile
-    type: property
-    system:
-      description: >-
-        <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be
-        used in one or two hands. The two-handed damage value appears in
-        parentheses next to the one-handed value.</p>
-      form: intrinsic
-    _id: Wgd71ME5I4EifkS5
-    img: systems/teriock/src/icons/properties/versatile.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.qUOXkRVCStUiudKx
-    _key: '!items.effects!ZCN67N9y427tztgF.Wgd71ME5I4EifkS5'
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: 9lg1j2ly6ezSL27w
-    img: systems/teriock/src/icons/properties/weapon.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!ZCN67N9y427tztgF.9lg1j2ly6ezSL27w'
-  - name: Reach
-    type: property
-    system:
-      description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
-      form: intrinsic
-      impacts:
-        changes:
-          - key: item.system.range.long.raw
-            mode: 4
-            value: '10'
-            priority: 10
-    _id: 94vb2JJPFGwChgQf
-    img: systems/teriock/src/icons/properties/reach.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.v9dwKuaTl1plMIHT
-    _key: '!items.effects!ZCN67N9y427tztgF.94vb2JJPFGwChgQf'
+    _key: '!items.effects!battleStaff00000.EB5RCu9bbrLCvJWD'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: pG7DMl7V9VLyOvBg
-_key: '!items!ZCN67N9y427tztgF'
+_key: '!items!battleStaff00000'

@@ -1,76 +1,83 @@
-name: Melee Dodge
-type: wrapper
-_id: GF3VOabOdmTiEI4h
-img: systems/teriock/src/icons/abilities/melee-dodge.webp
+_id: meleeDodge000000
 effects:
   - name: Melee Dodge
     type: ability
     img: systems/teriock/src/icons/abilities/melee-dodge.webp
+    _id: meleeDodge000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '5'
+        unit: second
+        dawn: false
+        stationary: false
+        description: 5 Seconds
+      basic: true
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: second
-        quantity: 5
-        description: 5 Seconds
-      sustained: true
+      effectTypes:
+        - movement
+      endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You are @L[Condition:Melee Dodging]{melee dodging} until the start
           of your next @L[Core:Turns]{turn}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are not @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared},
         or @L[Condition:Immobile]{immobile}.</p>
-      expansionSaveAttribute: mov
-      basic: true
-      form: intrinsic
-      effectTypes:
-        - movement
+      sustained: true
+      targets:
+        - self
       impacts:
         base:
-          statuses:
-            - meleeDodging
           expiration:
             normal:
               combat:
                 who:
                   type: executor
                 what:
-                  type: forced
                   roll: 2d4kh1
                   threshold: 4
+                  type: forced
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: 0qJ7iZJVepKylpaE
+          statuses:
+            - meleeDodging
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.GF3VOabOdmTiEI4h
-    _key: '!items.effects!GF3VOabOdmTiEI4h.0qJ7iZJVepKylpaE'
+    _key: '!items.effects!meleeDodge000000.meleeDodge000000'
+img: systems/teriock/src/icons/abilities/melee-dodge.webp
+name: Melee Dodge
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!GF3VOabOdmTiEI4h'
+_key: '!items!meleeDodge000000'

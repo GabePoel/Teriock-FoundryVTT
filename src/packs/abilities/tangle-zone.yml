@@ -1,33 +1,46 @@
-name: Tangle Zone
-type: wrapper
-_id: cxq0iaGXQjqBKaf0
-img: systems/teriock/src/icons/abilities/tangle-zone.webp
+_id: tangleZone000000
 effects:
   - name: Tangle Zone
     type: ability
     img: systems/teriock/src/icons/abilities/tangle-zone.webp
+    _id: tangleZone000000
     system:
-      powerSources:
-        - magical
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '8'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 8 Hours
       delivery:
         base: hand
         package: ritual
-      targets:
-        - area
       elements:
         - nature
-      duration:
-        unit: hour
-        quantity: 8
-        description: 8 Hours
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 24 hours. The overall duration is rounded to the
+        nearest 24 hours.</p>
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You enchant an area no larger than 30 feet in any direction. Any
@@ -39,63 +52,55 @@ effects:
           @L[Core:Movement]{moving} through this area takes [[/damage
           1d4[vine]]] @L[Core:Damage]{damage} for every 5 feet they move through
           it.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+        - primal
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      ritual: true
+      rotator: true
       spell: true
       standard: true
-      ritual: true
-      class: paladin
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours. The overall duration is rounded to the
-        nearest 24 hours.</p>
-      expansionSaveAttribute: mov
-      form: special
+      targets:
+        - area
       impacts:
         base:
-          startStatuses:
-            - snared
-          rolls:
-            endCon: 2d4
-            damage: 1d4[vine]
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          rolls:
+            endCon: 2d4
+            damage: 1d4[vine]
+          startStatuses:
+            - snared
         heightened:
           duration: 86400
-    _id: 7Sull54oynSYQi1m
+      class: paladin
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cxq0iaGXQjqBKaf0
-    _key: '!items.effects!cxq0iaGXQjqBKaf0.7Sull54oynSYQi1m'
+    _key: '!items.effects!tangleZone000000.tangleZone000000'
+img: systems/teriock/src/icons/abilities/tangle-zone.webp
+name: Tangle Zone
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!cxq0iaGXQjqBKaf0'
+_key: '!items!tangleZone000000'

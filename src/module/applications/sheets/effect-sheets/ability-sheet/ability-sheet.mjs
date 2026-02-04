@@ -94,6 +94,7 @@ export default class AbilitySheet extends mix(
       ".flag-tag-verbal": "system.costs.verbal",
       ".flag-tag-somatic": "system.costs.somatic",
       ".flag-elder-sorcery": "system.elderSorcery",
+      ".flag-warded": "system.warded",
     };
 
     for (const [selector, param] of Object.entries(tags)) {

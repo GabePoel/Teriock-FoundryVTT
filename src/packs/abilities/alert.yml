@@ -1,60 +1,73 @@
-name: Alert
-type: wrapper
-_id: GF29MoVCGkR6MwWM
-img: systems/teriock/src/icons/abilities/alert.webp
+_id: alert00000000000
 effects:
   - name: Alert
     type: ability
     img: systems/teriock/src/icons/abilities/alert.webp
+    _id: alert00000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - resistance
+        - sensory
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} being @L[Core:Surprise
           Rounds]{surprised}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: per
-          amount: proficiency
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-        - sensory
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Being Surprised
+            - mode: 2
               priority: 10
-    _id: qKN0MKOJtgwDpjbO
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
+              value: Being Surprised
+      upgrades:
+        competence:
+          attribute: per
+          value: 0
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.GF29MoVCGkR6MwWM
-    _key: '!items.effects!GF29MoVCGkR6MwWM.qKN0MKOJtgwDpjbO'
+    _key: '!items.effects!alert00000000000.alert00000000000'
+img: systems/teriock/src/icons/abilities/alert.webp
+name: Alert
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!GF29MoVCGkR6MwWM'
+_key: '!items!alert00000000000'

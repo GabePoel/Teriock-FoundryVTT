@@ -1,27 +1,36 @@
-name: Shadowcreep Acrobatics
-type: wrapper
-_id: ck0eR1mYHa23OpRY
-img: systems/teriock/src/icons/abilities/shadowcreep-acrobatics.webp
+_id: shadowcreepAcrob
 effects:
   - name: Shadowcreep Acrobatics
     type: ability
     img: systems/teriock/src/icons/abilities/shadowcreep-acrobatics.webp
+    _id: shadowcreepAcrob
     system:
-      powerSources:
-        - unknown
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your difficult terrain, crawl, climb, hidden, and leap (both
@@ -29,54 +38,70 @@ effects:
           step.</p><div class="note"><b>Note:</b> This explicitly stacks with
           other @L[Category:Movement effects]{movement abilities} such as
           @L[Ability:Agile]{Agile} and @L[Ability:Acrobatics]{Acrobatics}.</div>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - movement
+      powerSources:
+        - unknown
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.speedAdjustments.difficultTerrain
-              mode: 2
-              value: '1'
+            - mode: 2
               priority: 30
-            - key: system.speedAdjustments.crawl
-              mode: 2
+              time: normal
+              key: system.speedAdjustments.difficultTerrain
+              target: Actor
+              qualifier: '1'
               value: '1'
+            - mode: 2
               priority: 30
-            - key: system.speedAdjustments.climb
-              mode: 2
+              time: normal
+              key: system.speedAdjustments.crawl
+              target: Actor
+              qualifier: '1'
               value: '1'
+            - mode: 2
               priority: 30
-            - key: system.speedAdjustments.hidden
-              mode: 2
+              time: normal
+              key: system.speedAdjustments.climb
+              target: Actor
+              qualifier: '1'
               value: '1'
+            - mode: 2
               priority: 30
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 2
+              time: normal
+              key: system.speedAdjustments.hidden
+              target: Actor
+              qualifier: '1'
               value: '1'
+            - mode: 2
               priority: 30
-            - key: system.speedAdjustments.leapVertical
-              mode: 2
+              time: normal
+              key: system.speedAdjustments.leapHorizontal
+              target: Actor
+              qualifier: '1'
               value: '1'
+            - mode: 2
               priority: 30
-    _id: kRZF1iaMfkzouIaB
+              time: normal
+              key: system.speedAdjustments.leapVertical
+              target: Actor
+              qualifier: '1'
+              value: '1'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ck0eR1mYHa23OpRY
-    _key: '!items.effects!ck0eR1mYHa23OpRY.kRZF1iaMfkzouIaB'
+    _key: '!items.effects!shadowcreepAcrob.shadowcreepAcrob'
+img: systems/teriock/src/icons/abilities/shadowcreep-acrobatics.webp
+name: Shadowcreep Acrobatics
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ck0eR1mYHa23OpRY'
+_key: '!items!shadowcreepAcrob'

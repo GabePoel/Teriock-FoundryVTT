@@ -1,101 +1,106 @@
-name: Fear Touch
-type: wrapper
-_id: lOqA4K727mFO9bFU
-img: systems/teriock/src/icons/abilities/fear-touch.webp
+_id: fearTouch0000000
 effects:
   - name: Fear Touch
     type: ability
     img: systems/teriock/src/icons/abilities/fear-touch.webp
+    _id: fearTouch0000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
+      effectTypes:
+        - mental
       elements:
         - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: necromancer
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
-      effectTypes:
-        - mental
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: end
                   trigger: turn
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
         heightened:
           rolls:
             damage: 1d4[magic terror]
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-    _id: 2NgCkgWFK0EmMGzf
+      class: necromancer
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lOqA4K727mFO9bFU
-    _key: '!items.effects!lOqA4K727mFO9bFU.2NgCkgWFK0EmMGzf'
+    _key: '!items.effects!fearTouch0000000.fearTouch0000000'
+img: systems/teriock/src/icons/abilities/fear-touch.webp
+name: Fear Touch
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!lOqA4K727mFO9bFU'
+_key: '!items!fearTouch0000000'

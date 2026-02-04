@@ -1,28 +1,32 @@
-name: Rotators
-type: wrapper
-_id: vccPVWcx7H5TT64k
-img: systems/teriock/src/icons/abilities/rotators.webp
+_id: rots000000000000
 effects:
   - name: Rotators
     type: ability
+    img: systems/teriock/src/icons/abilities/rotators.webp
+    _id: rots000000000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -47,43 +51,53 @@ effects:
         fluent: >-
           <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
           Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       skill: true
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              value: '@rank.mag - 1'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.magic.maxRotators.raw
+              target: Actor
+              qualifier: '1'
+              value: '@rank.mag - 1'
         proficient:
           changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              value: 2 * (@rank.mag - 1)
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.magic.maxRotators.raw
+              target: Actor
+              qualifier: '1'
+              value: 2 * (@rank.mag - 1)
         fluent:
           changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              value: 2 * (@rank.mag - 1) + @p
+            - mode: 4
               priority: 10
-    _id: geZN0Q8NGh4ak1PR
-    img: systems/teriock/src/icons/abilities/rotators.webp
+              time: normal
+              key: system.magic.maxRotators.raw
+              target: Actor
+              qualifier: '1'
+              value: 2 * (@rank.mag - 1) + @p
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.13
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vccPVWcx7H5TT64k
-    _key: '!items.effects!vccPVWcx7H5TT64k.geZN0Q8NGh4ak1PR'
+    _key: '!items.effects!rots000000000000.rots000000000000'
+img: systems/teriock/src/icons/abilities/rotators.webp
+name: Rotators
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!vccPVWcx7H5TT64k'
+_key: '!items!rots000000000000'

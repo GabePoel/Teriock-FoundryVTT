@@ -233,9 +233,10 @@ export async function selectAbilityDialog() {
 
 /**
  * Dialog to select compendiums.
+ * @property {boolean} selected
  * @returns {Promise<TeriockCompendiumCollection<TeriockDocument>[]>}
  */
-export async function selectCompendiumsDialog() {
+export async function selectCompendiumsDialog(selected = true) {
   const packDocs = game.packs.contents
     .filter((p) => !p.locked)
     .map((p) => {
@@ -251,7 +252,7 @@ export async function selectCompendiumsDialog() {
     tooltipAsync: false,
     hint: "Please select compendiums.",
     title: "Select Compendiums",
-    checked: packDocs.map((p) => p.uuid),
+    checked: packDocs.map((p) => p.uuid && selected),
   });
   return chosen.map((c) => game.packs.get(c.uuid));
 }

@@ -1,61 +1,71 @@
-name: Spell Immunity
-type: wrapper
-_id: 4unzGqpsVv9oPrzf
-img: systems/teriock/src/icons/abilities/spell-immunity.webp
+_id: spellImy00000000
 effects:
   - name: Spell Immunity
     type: ability
     img: systems/teriock/src/icons/abilities/spell-immunity.webp
+    _id: spellImy00000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
+        stationary: false
         description: While Up
+      delivery:
+        base: self
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to
           @L[Category:Spells]{spells}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.other
-              mode: 2
-              value: Spells
+            - mode: 2
               priority: 10
-    _id: 82AgsMMzeStNSffz
+              time: normal
+              key: system.protections.immunities.other
+              target: Actor
+              qualifier: '1'
+              value: Spells
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.4unzGqpsVv9oPrzf
-    _key: '!items.effects!4unzGqpsVv9oPrzf.82AgsMMzeStNSffz'
+    _key: '!items.effects!spellImy00000000.spellImy00000000'
+img: systems/teriock/src/icons/abilities/spell-immunity.webp
+name: Spell Immunity
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!4unzGqpsVv9oPrzf'
+_key: '!items!spellImy00000000'

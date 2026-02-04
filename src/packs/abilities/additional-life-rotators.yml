@@ -1,73 +1,97 @@
-name: Additional Life Rotators
-type: wrapper
-_id: GaXsYre8dXSa4aay
-img: systems/teriock/src/icons/abilities/additional-life-rotators.webp
+_id: adlLifeRots00000
 effects:
   - name: Additional Life Rotators
     type: ability
     img: systems/teriock/src/icons/abilities/additional-life-rotators.webp
+    _id: adlLifeRots00000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Minor Item Enchantment]{Minor Item Enchantment} and
           @L[Ability:Swift Sleep Aura]{Swift Sleep Aura} to your list of
           possible @L[Category:Rotator spells]{rotator spells}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
+      targets:
+        - self
+      impacts: {}
       class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: 38Wo7OWomFkgzJCK
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.GaXsYre8dXSa4aay
-    _key: '!items.effects!GaXsYre8dXSa4aay.38Wo7OWomFkgzJCK'
+    _key: '!items.effects!adlLifeRots00000.adlLifeRots00000'
   - name: Minor Item Enchantment
     type: ability
+    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
+    _id: ZIsqp7F0FuwoKNtx
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: sight
         package: ritual
-      targets:
-        - weapon
       elements:
         - life
-      duration:
-        unit: hour
-        quantity: 1
-        stationary: false
-        description: 1 Hour
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
@@ -77,17 +101,41 @@ effects:
           component abilities]{invoked} for. The enchanted item is
           @L[Core:Presence]{tier 1}. If the item is
           @L[Property:Shattered]{shattered}, this enchantment fades.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
+      ritual: true
+      rotator: true
       spell: true
       standard: true
-      ritual: true
+      targets:
+        - weapon
+      impacts:
+        heightened:
+          duration: 3600
+      _sup: adlLifeRots00000
       class: lifeMage
-      rotator: true
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.minorItmEnchantm
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!adlLifeRots00000.ZIsqp7F0FuwoKNtx'
+  - name: Swift Sleep Aura
+    type: ability
+    img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+    _id: 56oWlAsGIYQt9UHF
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -95,84 +143,52 @@ effects:
           type: static
           value:
             static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
-      expansionSaveAttribute: mov
-      form: special
-      impacts:
-        heightened:
-          duration: 3600
-      _sup: 38Wo7OWomFkgzJCK
-    _id: zwLTqZJEMg8Pa45P
-    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hqC1pDqin4UpmKvg
-    _key: '!items.effects!GaXsYre8dXSa4aay.zwLTqZJEMg8Pa45P'
-  - name: Swift Sleep Aura
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: per
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - life
       duration:
-        unit: untilDawn
-        quantity: 0
+        raw: '0'
+        unit: instant
+        dawn: true
         stationary: false
         description: Until Dawn
-      range:
-        unit: ft
-        raw: '10'
+      delivery:
+        base: aura
+      elements:
+        - life
+      endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: per
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, roll an additional
+        [[/sleep 1d8]]. Target is also @L[Keyword:Resistance]{resistant} to
+        being @L[Keyword:Awaken]{awakened}.</p>
+      interaction: feat
+      maneuver: active
       overview:
         base: >-
           <p>A hypnotizing shimmer spreads through the air around you. Roll
           [[/sleep 1d8]] to determine the strength of this effect.</p>
         proficient: <p>Instead roll [[/sleep (@p)d8]].</p>
         fluent: <p>Instead roll [[/sleep (@f)d8]].</p>
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
       results:
         fail: >-
           <p>Any creatures who have fewer @L[Core:HP]{HP} than the result of the
           die roll are rendered @L[Condition:Asleep]{asleep} until this effect
           ends.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      rotator: true
       spell: true
       standard: true
-      class: lifeMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, roll an additional
-        [[/sleep 1d8]]. Target is also @L[Keyword:Resistance]{resistant} to
-        being @L[Keyword:Awaken]{awakened}.</p>
-      endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
-      expansionSaveAttribute: mov
-      form: special
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -186,19 +202,21 @@ effects:
         heightened:
           rolls:
             sleep: 1d8
-      _sup: 38Wo7OWomFkgzJCK
-    _id: 2wUWVk4YXezm4VLW
-    img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+      _sup: adlLifeRots00000
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swiftSleepAura00
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.a0Vuv7r2TTj8KgQJ
-    _key: '!items.effects!GaXsYre8dXSa4aay.2wUWVk4YXezm4VLW'
+    _key: '!items.effects!adlLifeRots00000.56oWlAsGIYQt9UHF'
+img: systems/teriock/src/icons/abilities/additional-life-rotators.webp
+name: Additional Life Rotators
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!GaXsYre8dXSa4aay'
+_key: '!items!adlLifeRots00000'

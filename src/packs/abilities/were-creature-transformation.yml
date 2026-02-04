@@ -1,34 +1,36 @@
-name: Were-Creature Transformation
-type: wrapper
-_id: cYcj9zK4GMl0NYty
-img: systems/teriock/src/icons/abilities/were-creature-transformation.webp
+_id: wereCreatureTran
 effects:
   - name: Were-Creature Transformation
     type: ability
-    _id: xqB1lZo5Ks9xMkli
     img: systems/teriock/src/icons/abilities/were-creature-transformation.webp
+    _id: wereCreatureTran
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '24'
         unit: hour
-        quantity: 24
+        dawn: false
         stationary: false
         description: 24 Hours
+      delivery:
+        base: self
       effectTypes:
         - transformation
         - disease
         - automatic
       executionTime: 10 Minutes
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: slow
       overview:
@@ -46,9 +48,10 @@ effects:
           also have @L[Ability:Impure Durability]{Impure Durability}, and become
           @L[Ability:Aggressive]{Aggressive} while
           @L[Condition:Transformed]{transformed}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       trigger: >-
@@ -56,107 +59,126 @@ effects:
         which you were first bitten by a
         @L[Creature:Were-Creature]{were-creature}. This triggers automatically.
         You cannot choose to not use it if you are able to.</p>
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cYcj9zK4GMl0NYty
-    _key: '!items.effects!cYcj9zK4GMl0NYty.xqB1lZo5Ks9xMkli'
+    _key: '!items.effects!wereCreatureTran.wereCreatureTran'
   - name: Impure Durability
     type: ability
+    img: systems/teriock/src/icons/abilities/impure-durability.webp
+    _id: fMlLwbB0yPweqIPm
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       effectTypes:
         - immunity
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to non-@L[Damage:Magic]{magic}
           non-@L[Damage:Silver]{silver} @L[Core:Damage]{damage}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              value: Non-magical Non-silver
+            - mode: 2
               priority: 10
-      _sup: xqB1lZo5Ks9xMkli
-    _id: Rq6MOc7Mnb9bHNeR
-    img: systems/teriock/src/icons/abilities/impure-durability.webp
+              time: normal
+              key: system.protections.immunities.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: Non-magical Non-silver
+      _sup: wereCreatureTran
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.impureDur0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.LUx6kx2A8yt15dWA
-    _key: '!items.effects!cYcj9zK4GMl0NYty.Rq6MOc7Mnb9bHNeR'
+    _key: '!items.effects!wereCreatureTran.fMlLwbB0yPweqIPm'
   - name: Aggressive
     type: ability
+    img: systems/teriock/src/icons/abilities/aggressive.webp
+    _id: mVIour7WyuAQAuhN
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You will not leave combat willingly and are
           @L[Keyword:Inept]{inept} at not killing anyone who opposes you.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
-      _sup: xqB1lZo5Ks9xMkli
-    _id: GQ8RtFsKbLAt6ofX
-    img: systems/teriock/src/icons/abilities/aggressive.webp
+      impacts: {}
+      _sup: wereCreatureTran
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.aggressive000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.CRDqaqlbHb9wqnGA
-    _key: '!items.effects!cYcj9zK4GMl0NYty.GQ8RtFsKbLAt6ofX'
+    _key: '!items.effects!wereCreatureTran.mVIour7WyuAQAuhN'
+img: systems/teriock/src/icons/abilities/were-creature-transformation.webp
+name: Were-Creature Transformation
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!cYcj9zK4GMl0NYty'
+_key: '!items!wereCreatureTran'

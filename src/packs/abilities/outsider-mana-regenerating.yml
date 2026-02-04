@@ -1,26 +1,38 @@
-name: Outsider Mana Regenerating
-type: wrapper
-_id: dP0CPaG9CfWRZkYH
-img: systems/teriock/src/icons/abilities/outsider-mana-regenerating.webp
+_id: outsiderManaRege
 effects:
   - name: Outsider Mana Regenerating
     type: ability
     img: systems/teriock/src/icons/abilities/outsider-mana-regenerating.webp
+    _id: outsiderManaRege
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - revival
+        - regeneration
+        - revitalization
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you
@@ -32,32 +44,27 @@ effects:
           You only @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana
           Points]{MP} loss if you start your @L[Core:Turns]{turn} without
           successfully regenerating @L[Core:Hit Points and Mana Points]{MP}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - revival
-        - regeneration
-        - revitalization
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         macros:
           Compendium_teriock_execution_Macro_vaxmVYJBt9cB84QO: turnStart
-    _id: 0INizUcLSBXQmnuP
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.dP0CPaG9CfWRZkYH
-    _key: '!items.effects!dP0CPaG9CfWRZkYH.0INizUcLSBXQmnuP'
+    _key: '!items.effects!outsiderManaRege.outsiderManaRege'
+img: systems/teriock/src/icons/abilities/outsider-mana-regenerating.webp
+name: Outsider Mana Regenerating
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!dP0CPaG9CfWRZkYH'
+_key: '!items!outsiderManaRege'

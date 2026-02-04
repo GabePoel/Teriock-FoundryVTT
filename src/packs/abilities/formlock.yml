@@ -1,28 +1,37 @@
-name: Formlock
-type: wrapper
-_id: 3Y49qi8DbCMwQWbm
-img: systems/teriock/src/icons/abilities/formlock.webp
+_id: formlock00000000
 effects:
   - name: Formlock
     type: ability
+    img: systems/teriock/src/icons/abilities/formlock.webp
+    _id: formlock00000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
       elements:
         - nature
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -30,19 +39,13 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
-      piercing: ub
       powerSources:
         - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: <p>Target is @L[Ability:Formbound]{Formbound}.</p>
       rotator: true
@@ -53,37 +56,41 @@ effects:
       impacts:
         heightened:
           duration: 3600
-    _id: zsfvJBSiqvwf3AmS
-    img: systems/teriock/src/icons/abilities/formlock.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.3Y49qi8DbCMwQWbm
-    _key: '!items.effects!3Y49qi8DbCMwQWbm.zsfvJBSiqvwf3AmS'
+    _key: '!items.effects!formlock00000000.formlock00000000'
   - name: Formbound
     type: ability
+    img: systems/teriock/src/icons/abilities/formbound.webp
+    _id: 9qBNExltROL43IOi
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       effectTypes:
         - immunity
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -91,31 +98,36 @@ effects:
           <p>You are @L[Keyword:Immunity]{immune} to and
           @L[Keyword:Incapable]{incapable} of @L[Category:Transformation
           effects]{transformation effects}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.transformation
-              mode: 2
-              value: effects
+            - mode: 2
               priority: 10
-      _sup: zsfvJBSiqvwf3AmS
-    _id: 102IziwsVv5k1E3B
-    img: systems/teriock/src/icons/abilities/formbound.webp
+              time: normal
+              key: system.protections.immunities.transformation
+              target: Actor
+              qualifier: '1'
+              value: effects
+      _sup: formlock00000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.formbound0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.H5azDdyueETFSV0n
-    _key: '!items.effects!3Y49qi8DbCMwQWbm.102IziwsVv5k1E3B'
+    _key: '!items.effects!formlock00000000.9qBNExltROL43IOi'
+img: systems/teriock/src/icons/abilities/formlock.webp
+name: Formlock
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!3Y49qi8DbCMwQWbm'
+_key: '!items!formlock00000000'

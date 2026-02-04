@@ -1,58 +1,68 @@
-name: Fire Damage Resistance
-type: wrapper
-_id: MQ3B15c8wF579ID9
-img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
+_id: fireDmgRsc000000
 effects:
   - name: Fire Damage Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
+    _id: fireDmgRsc000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire
           damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: fire
+            - mode: 2
               priority: 10
-    _id: qgmY8E8fM9aDH0Gh
+              time: normal
+              key: system.protections.resistances.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: fire
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.MQ3B15c8wF579ID9
-    _key: '!items.effects!MQ3B15c8wF579ID9.qgmY8E8fM9aDH0Gh'
+    _key: '!items.effects!fireDmgRsc000000.fireDmgRsc000000'
+img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
+name: Fire Damage Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!MQ3B15c8wF579ID9'
+_key: '!items!fireDmgRsc000000'

@@ -1,26 +1,36 @@
-name: Gliding
-type: wrapper
-_id: OTgi1om1VLGFyAI9
-img: systems/teriock/src/icons/abilities/gliding.webp
+_id: gliding000000000
 effects:
   - name: Gliding
     type: ability
     img: systems/teriock/src/icons/abilities/gliding.webp
+    _id: gliding000000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Core:MOV]{fly} at @L[Core:Movement Speed]{quarter speed} and
@@ -28,34 +38,34 @@ effects:
           Speed]{normal speed}. However, you cannot move more than a couple feet
           above the ground. You fall at the rate of 30 feet per round (30 feet
           per 5 seconds).</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.speedAdjustments.fly
-              mode: 4
-              value: '1'
+            - mode: 4
               priority: 10
-    _id: ggJjju1IGVx5txLt
+              time: normal
+              key: system.speedAdjustments.fly
+              target: Actor
+              qualifier: '1'
+              value: '1'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.OTgi1om1VLGFyAI9
-    _key: '!items.effects!OTgi1om1VLGFyAI9.ggJjju1IGVx5txLt'
+    _key: '!items.effects!gliding000000000.gliding000000000'
+img: systems/teriock/src/icons/abilities/gliding.webp
+name: Gliding
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!OTgi1om1VLGFyAI9'
+_key: '!items!gliding000000000'

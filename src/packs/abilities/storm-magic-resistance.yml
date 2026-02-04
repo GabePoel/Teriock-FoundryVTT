@@ -1,33 +1,37 @@
-name: Storm Magic Resistance
-type: wrapper
-_id: 3v6Tgpd24BwwxMK3
-img: systems/teriock/src/icons/abilities/storm-magic-resistance.webp
+_id: stormMagRsc00000
 effects:
   - name: Storm Magic Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/storm-magic-resistance.webp
+    _id: stormMagRsc00000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
       effectTypes:
         - resistance
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -35,30 +39,34 @@ effects:
           <p>You are @L[Keyword:Resistance]{resistant} to @L[Category:Magically
           powered abilities]{magical} @L[Category:Storm element abilities]{storm
           abilities}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.elements
-              mode: 2
-              value: storm
+            - mode: 2
               priority: 10
-    _id: ProdfQXaJ6X3UnLo
-    img: systems/teriock/src/icons/abilities/storm-magic-resistance.webp
+              time: normal
+              key: system.protections.resistances.elements
+              target: Actor
+              qualifier: '1'
+              value: storm
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.3v6Tgpd24BwwxMK3
-    _key: '!items.effects!3v6Tgpd24BwwxMK3.ProdfQXaJ6X3UnLo'
+    _key: '!items.effects!stormMagRsc00000.stormMagRsc00000'
+img: systems/teriock/src/icons/abilities/storm-magic-resistance.webp
+name: Storm Magic Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!3v6Tgpd24BwwxMK3'
+_key: '!items!stormMagRsc00000'

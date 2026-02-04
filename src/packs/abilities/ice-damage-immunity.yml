@@ -1,58 +1,68 @@
-name: Ice Damage Immunity
-type: wrapper
-_id: 9UiRwVIWENTkVM7y
-img: systems/teriock/src/icons/abilities/ice-damage-immunity.webp
+_id: iceDmgImy0000000
 effects:
   - name: Ice Damage Immunity
     type: ability
     img: systems/teriock/src/icons/abilities/ice-damage-immunity.webp
+    _id: iceDmgImy0000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Ice]{ice
           damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              value: ice
+            - mode: 2
               priority: 10
-    _id: 3vIDNCpG9ns6oct0
+              time: normal
+              key: system.protections.immunities.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: ice
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.9UiRwVIWENTkVM7y
-    _key: '!items.effects!9UiRwVIWENTkVM7y.3vIDNCpG9ns6oct0'
+    _key: '!items.effects!iceDmgImy0000000.iceDmgImy0000000'
+img: systems/teriock/src/icons/abilities/ice-damage-immunity.webp
+name: Ice Damage Immunity
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!9UiRwVIWENTkVM7y'
+_key: '!items!iceDmgImy0000000'

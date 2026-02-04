@@ -1,28 +1,36 @@
-name: Melee Damage Boost
-type: wrapper
-_id: GkyxqkzxVAfMxXxR
-img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+_id: meleeDmgBoost000
 effects:
   - name: Melee Damage Boost
     type: ability
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    _id: meleeDmgBoost000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: melee
+      effectTypes:
+        - damaging
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -31,34 +39,32 @@ effects:
           <p>You may spend an additional unused @L[Core:Active
           Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
           @L[Core:Damage]{damage} again.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: melee
       skill: true
       standard: true
-      class: knight
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have hit a creature with a @L[Category:Damaging
         effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
         @L[Category:Attack abilities]{attack}.</p>
-      form: normal
-      effectTypes:
-        - damaging
-    _id: GLLojtwZ8GCUbGpa
+      impacts: {}
+      class: knight
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.GkyxqkzxVAfMxXxR
-    _key: '!items.effects!GkyxqkzxVAfMxXxR.GLLojtwZ8GCUbGpa'
+    _key: '!items.effects!meleeDmgBoost000.meleeDmgBoost000'
+img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+name: Melee Damage Boost
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!GkyxqkzxVAfMxXxR'
+_key: '!items!meleeDmgBoost000'

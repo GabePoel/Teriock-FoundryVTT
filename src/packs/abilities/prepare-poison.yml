@@ -1,26 +1,37 @@
-name: Prepare Poison
-type: wrapper
-_id: Bo4HkRcy8IniTY5a
-img: systems/teriock/src/icons/abilities/prepare-poison.webp
+_id: prepPoison000000
 effects:
   - name: Prepare Poison
     type: ability
     img: systems/teriock/src/icons/abilities/prepare-poison.webp
+    _id: prepPoison000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        material: true
+        materialCost: <p>A vial of poison or constituent ingredients.</p>
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
+      executionTime: Short Rest
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You spend a @L[Core:Short Rest]{short rest} preparing a vial of
@@ -30,50 +41,55 @@ effects:
           put on some other item, which can in turn be applied with
           @L[Ability:Poison Item]{Poison Item}. Once prepared, the poison only
           lasts 24 hours before it expires.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: assassin
-      costs:
-        material: true
-        materialCost: <p>A vial of poison or constituent ingredients.</p>
-      expansionSaveAttribute: mov
-      form: normal
-    _id: pzlpfUg7knR5SoJh
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Bo4HkRcy8IniTY5a
-    _key: '!items.effects!Bo4HkRcy8IniTY5a.pzlpfUg7knR5SoJh'
+    _key: '!items.effects!prepPoison000000.prepPoison000000'
   - name: Poison Strike
     type: ability
+    img: systems/teriock/src/icons/abilities/poison-strike.webp
+    _id: kB0DmYPxYZdUKVdK
     system:
-      powerSources:
-        - alchemical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        stationary: false
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+      effectTypes:
+        - poison
+      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         proficient: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
@@ -81,67 +97,70 @@ effects:
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
           1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+      powerSources:
+        - alchemical
+      range:
+        raw: Your Weapon's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
           @L[Core:Damage]{damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       skill: true
-      class: assassin
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - poison
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - poisoned
           rolls:
             damage: 1d6[toxic]
+          statuses:
+            - poisoned
         proficient:
           rolls:
             damage: 1d8[toxic]
         fluent:
           rolls:
             damage: 1d10[toxic]
-      _sup: pzlpfUg7knR5SoJh
-    _id: okcQurzHlO5iuDAx
-    img: systems/teriock/src/icons/abilities/poison-strike.webp
+      _sup: prepPoison000000
+      class: assassin
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.poisonStrike0000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DBrO7NQw5K6ks2MN
-    _key: '!items.effects!Bo4HkRcy8IniTY5a.okcQurzHlO5iuDAx'
+    _key: '!items.effects!prepPoison000000.kB0DmYPxYZdUKVdK'
   - name: Poison Item
     type: ability
+    img: systems/teriock/src/icons/abilities/poison-item.webp
+    _id: Bv9lMSII2dR8hK6T
     system:
-      powerSources:
-        - alchemical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - item
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '24'
         unit: hour
-        quantity: 24
+        dawn: false
         stationary: false
         description: 24 Hours
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      delivery:
+        base: hand
+      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}.
@@ -157,44 +176,43 @@ effects:
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
           1d10[toxic]]] @L[Core:Damage]{damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - alchemical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: <p>Target is not a weapon.</p>
       skill: true
       standard: true
-      class: assassin
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-      requirements: <p>Target is not a weapon.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - item
       impacts:
         base:
-          statuses:
-            - poisoned
           rolls:
             damage: 1d6[toxic]
+          statuses:
+            - poisoned
         proficient:
           rolls:
             damage: 1d8[toxic]
         fluent:
           rolls:
             damage: 1d10[toxic]
-      _sup: pzlpfUg7knR5SoJh
-    _id: IsGAFVZNY6FXlz8r
-    img: systems/teriock/src/icons/abilities/poison-item.webp
+      _sup: prepPoison000000
+      class: assassin
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.poisonItm0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.2VTopTkaSAg3r1GJ
-    _key: '!items.effects!Bo4HkRcy8IniTY5a.IsGAFVZNY6FXlz8r'
+    _key: '!items.effects!prepPoison000000.Bv9lMSII2dR8hK6T'
+img: systems/teriock/src/icons/abilities/prepare-poison.webp
+name: Prepare Poison
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Bo4HkRcy8IniTY5a'
+_key: '!items!prepPoison000000'

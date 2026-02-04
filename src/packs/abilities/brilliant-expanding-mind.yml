@@ -1,63 +1,74 @@
-name: Brilliant Expanding Mind
-type: wrapper
-_id: vsVcYWf35ck7pK1O
-img: systems/teriock/src/icons/abilities/brilliant-expanding-mind.webp
+_id: brilliantExpandi
 effects:
   - name: Brilliant Expanding Mind
     type: ability
+    img: systems/teriock/src/icons/abilities/brilliant-expanding-mind.webp
+    _id: brilliantExpandi
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>Your @L[Core:Intelligence]{INT} increases by @L[Core:Fluency
           Bonus]{F} up to a maximum of 2.</p>
-      piercing: normal
       powerSources:
         - spiritual
         - primal
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.attributes.int.score.raw
-              mode: 2
-              value: '@f'
+            - mode: 2
               priority: 10
-            - key: system.attributes.int.score.raw
-              mode: 3
-              value: '1'
+              time: normal
+              key: system.attributes.int.score.raw
+              target: Actor
+              qualifier: '1'
+              value: '@f'
+            - mode: 3
               priority: 15
-    _id: NixeFkwYMYUePrfZ
-    img: systems/teriock/src/icons/abilities/brilliant-expanding-mind.webp
+              time: normal
+              key: system.attributes.int.score.raw
+              target: Actor
+              qualifier: '1'
+              value: '1'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vsVcYWf35ck7pK1O
-    _key: '!items.effects!vsVcYWf35ck7pK1O.NixeFkwYMYUePrfZ'
+    _key: '!items.effects!brilliantExpandi.brilliantExpandi'
+img: systems/teriock/src/icons/abilities/brilliant-expanding-mind.webp
+name: Brilliant Expanding Mind
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!vsVcYWf35ck7pK1O'
+_key: '!items!brilliantExpandi'

@@ -1,75 +1,80 @@
-name: Blinding Spit
-type: wrapper
-_id: KG7DFgKSxtd5uJ69
-img: systems/teriock/src/icons/abilities/blinding-spit.webp
+_id: blindingSpit0000
 effects:
   - name: Blinding Spit
     type: ability
     img: systems/teriock/src/icons/abilities/blinding-spit.webp
+    _id: blindingSpit0000
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: No Limit
       delivery:
         base: missile
         package: ray
-      targets:
-        - vitals
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: No Limit
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: <p>Target is @L[Condition:Blind]{blind}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: <p>Target is @L[Condition:Blind]{blind}.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      targets:
+        - vitals
       impacts:
         base:
-          statuses:
-            - blind
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: XO965H6E09d5TCqZ
+          rolls:
+            endCon: 2d4
+          statuses:
+            - blind
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KG7DFgKSxtd5uJ69
-    _key: '!items.effects!KG7DFgKSxtd5uJ69.XO965H6E09d5TCqZ'
+    _key: '!items.effects!blindingSpit0000.blindingSpit0000'
+img: systems/teriock/src/icons/abilities/blinding-spit.webp
+name: Blinding Spit
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!KG7DFgKSxtd5uJ69'
+_key: '!items!blindingSpit0000'

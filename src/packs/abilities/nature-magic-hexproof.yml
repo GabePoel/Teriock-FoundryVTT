@@ -1,33 +1,37 @@
-name: Nature Magic Hexproof
-type: wrapper
-_id: ZPS30y3wiL6NRc9E
-img: systems/teriock/src/icons/abilities/nature-magic-hexproof.webp
+_id: natureMagHxp0000
 effects:
   - name: Nature Magic Hexproof
     type: ability
+    img: systems/teriock/src/icons/abilities/nature-magic-hexproof.webp
+    _id: natureMagHxp0000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
       effectTypes:
         - hexproof
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -35,30 +39,34 @@ effects:
           <p>You are @L[Keyword:Hexproof]{hexproof} to @L[Category:Magically
           powered abilities]{magical} @L[Category:Nature element
           abilities]{nature abilities}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.hexproofs.elements
-              mode: 2
-              value: nature
+            - mode: 2
               priority: 10
-    _id: pSCkDYjaFXWLOgsm
-    img: systems/teriock/src/icons/abilities/nature-magic-hexproof.webp
+              time: normal
+              key: system.protections.hexproofs.elements
+              target: Actor
+              qualifier: '1'
+              value: nature
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ZPS30y3wiL6NRc9E
-    _key: '!items.effects!ZPS30y3wiL6NRc9E.pSCkDYjaFXWLOgsm'
+    _key: '!items.effects!natureMagHxp0000.natureMagHxp0000'
+img: systems/teriock/src/icons/abilities/nature-magic-hexproof.webp
+name: Nature Magic Hexproof
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ZPS30y3wiL6NRc9E'
+_key: '!items!natureMagHxp0000'

@@ -1,28 +1,44 @@
-name: Might Strike
-type: wrapper
-_id: rmesJmgi1edqtkG1
-img: systems/teriock/src/icons/abilities/might-strike.webp
+_id: mightStrike00000
 effects:
   - name: Might Strike
     type: ability
     img: systems/teriock/src/icons/abilities/might-strike.webp
+    _id: mightStrike00000
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+        material: true
+        mp:
+          type: static
+          value:
+            static: 1
+        materialCost: <p>Something symbolic of your deity.</p>
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: true
+        stationary: false
+        description: Until Dawn
       delivery:
         base: self
         package: ritual
-      targets:
-        - self
-      duration:
-        unit: untilDawn
-        quantity: 0
-        description: Until Dawn
-      sustained: true
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
@@ -40,52 +56,46 @@ effects:
           Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
           selflink">Might Strike</a> Damage
           Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      ritual: true
-      class: paladin
-      costs:
-        verbal: true
-        somatic: true
-        material: true
-        mp:
-          type: static
-          value:
-            static: 1
-        materialCost: <p>Something symbolic of your deity.</p>
+      powerSources:
+        - divine
+      range:
+        unit: self
       requirements: >-
         <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
         name]].</p>
-      expansionSaveAttribute: mov
-      form: normal
+      ritual: true
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - self
       impacts:
         base:
+          changes:
+            - mode: 2
+              priority: 10
+              time: normal
+              key: system.damage.standard
+              target: Actor
+              qualifier: '1'
+              value: +1d4[holy]
           rolls:
             damage: 1d4
-          changes:
-            - key: system.damage.standard
-              mode: 2
-              value: +1d4[holy]
-              priority: 10
         macros:
           Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
-    _id: bwu5lrAUqf0ae7WW
+      class: paladin
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.rmesJmgi1edqtkG1
-    _key: '!items.effects!rmesJmgi1edqtkG1.bwu5lrAUqf0ae7WW'
+    _key: '!items.effects!mightStrike00000.mightStrike00000'
+img: systems/teriock/src/icons/abilities/might-strike.webp
+name: Might Strike
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!rmesJmgi1edqtkG1'
+_key: '!items!mightStrike00000'

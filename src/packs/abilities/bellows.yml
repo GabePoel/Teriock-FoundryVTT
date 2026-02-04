@@ -1,43 +1,16 @@
-name: Bellows
-type: wrapper
-_id: fGMrJLzquYwW0TnV
-img: systems/teriock/src/icons/abilities/bellows.webp
+_id: bellows000000000
 effects:
   - name: Bellows
     type: ability
     img: systems/teriock/src/icons/abilities/bellows.webp
+    _id: bellows000000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - flame
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      sustained: true
-      overview:
-        base: >-
-          <p>The next @L[Category:Spells]{spell} you cast that would deal
-          @L[Core:Damage]{damage} is @L[Keyword:Boosted]{boosted}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -45,44 +18,78 @@ effects:
           type: static
           value:
             static: 1
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: self
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the next
         @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
         again.</p>
-      expansionSaveAttribute: mov
-      form: special
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>The next @L[Category:Spells]{spell} you cast that would deal
+          @L[Core:Damage]{damage} is @L[Keyword:Boosted]{boosted}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.impacts.boosts.damage
-              mode: 2
+            - mode: 2
               priority: 10
-              target: ability
               time: normal
+              key: system.impacts.boosts.damage
+              target: ability
               qualifier: '@spell'
               value: '1'
         heightened:
           changes:
-            - key: system.impacts.boosts.damage
-              mode: 2
+            - mode: 2
               priority: 10
-              target: ability
               time: normal
+              key: system.impacts.boosts.damage
+              target: ability
               qualifier: '@spell'
               value: '@h'
         macros:
           Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
-    _id: BcRIWy6nNq41qe32
+      class: flameMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.fGMrJLzquYwW0TnV
-    _key: '!items.effects!fGMrJLzquYwW0TnV.BcRIWy6nNq41qe32'
+    _key: '!items.effects!bellows000000000.bellows000000000'
+img: systems/teriock/src/icons/abilities/bellows.webp
+name: Bellows
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!fGMrJLzquYwW0TnV'
+_key: '!items!bellows000000000'

@@ -1,29 +1,46 @@
-name: Detect Lie
-type: wrapper
-_id: PuXtIJ90SSRQkbDq
-img: systems/teriock/src/icons/abilities/detect-lie.webp
+_id: detLie0000000000
 effects:
   - name: Detect Lie
     type: ability
     img: systems/teriock/src/icons/abilities/detect-lie.webp
+    _id: detLie0000000000
     system:
-      powerSources:
-        - spiritual
-      interaction: feat
-      featSaveAttribute: snk
-      maneuver: reactive
-      executionTime: r0
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: sight
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      effectTypes:
+        - truthDetecting
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: snk
+      form: normal
+      grantOnly: false
+      interaction: feat
+      maneuver: reactive
+      powerSources:
+        - spiritual
       range:
-        unit: ft
         raw: '15'
+        unit: ft
       results:
         save: >-
           <p>You detect that the statement is true, regardless of what the
@@ -33,38 +50,27 @@ effects:
         fail: >-
           <p>You detect whether the target believes the statement is true or
           false.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       skill: true
       standard: true
-      class: duelist
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>Someone makes a statement which could, in principle, be true or
         false.</p>
-      form: normal
-      effectTypes:
-        - truthDetecting
-    _id: 8stD3sdArKjic3ex
+      impacts: {}
+      class: duelist
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.PuXtIJ90SSRQkbDq
-    _key: '!items.effects!PuXtIJ90SSRQkbDq.8stD3sdArKjic3ex'
+    _key: '!items.effects!detLie0000000000.detLie0000000000'
+img: systems/teriock/src/icons/abilities/detect-lie.webp
+name: Detect Lie
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!PuXtIJ90SSRQkbDq'
+_key: '!items!detLie0000000000'

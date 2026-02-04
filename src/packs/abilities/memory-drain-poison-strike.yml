@@ -1,30 +1,40 @@
-name: Memory Drain Poison Strike
-type: wrapper
-_id: KBbTuNsexqeXLHoy
-img: systems/teriock/src/icons/abilities/memory-drain-poison-strike.webp
+_id: memoryDrainPoiso
 effects:
   - name: Memory Drain Poison Strike
     type: ability
     img: systems/teriock/src/icons/abilities/memory-drain-poison-strike.webp
+    _id: memoryDrainPoiso
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+      effectTypes:
+        - mental
+        - poison
+        - displacement
+        - draining
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         proficient: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
@@ -32,47 +42,42 @@ effects:
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
           1d10[memory]]] @L[Category:Drain types]{drain}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: Your Weapon's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} deals [[/drain 1d6[memory]]]
           @L[Category:Drain types]{drain}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - mental
-        - poison
-        - displacement
-        - draining
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - poisoned
           rolls:
             drain: 1d6[memory]
+          statuses:
+            - poisoned
         proficient:
           rolls:
             drain: 1d8[memory]
         fluent:
           rolls:
             drain: 1d10[memory]
-    _id: fTRvIJEgraF5IRm2
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KBbTuNsexqeXLHoy
-    _key: '!items.effects!KBbTuNsexqeXLHoy.fTRvIJEgraF5IRm2'
+    _key: '!items.effects!memoryDrainPoiso.memoryDrainPoiso'
+img: systems/teriock/src/icons/abilities/memory-drain-poison-strike.webp
+name: Memory Drain Poison Strike
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!KBbTuNsexqeXLHoy'
+_key: '!items!memoryDrainPoiso'

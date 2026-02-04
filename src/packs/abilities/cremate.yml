@@ -1,46 +1,16 @@
-name: Cremate
-type: wrapper
-_id: qe7gHkF0hjEpxDU1
-img: systems/teriock/src/icons/abilities/cremate.webp
+_id: cremate000000000
 effects:
   - name: Cremate
     type: ability
     img: systems/teriock/src/icons/abilities/cremate.webp
+    _id: cremate000000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - vitals
-      elements:
-        - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Burned]{burned}, and
-          @L[Condition:Ruined]{ruined}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -48,28 +18,63 @@ effects:
           type: static
           value:
             static: 1
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      expansionSaveAttribute: mov
-      form: special
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: weapon
+        package: strike
       effectTypes:
         - killing
         - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      results:
+        hit: >-
+          <p>Target is @L[Condition:Burned]{burned}, and
+          @L[Condition:Ruined]{ruined}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - vitals
       impacts:
         base:
           startStatuses:
             - burned
             - ruined
-    _id: f9Tq0E6dVIJgaD0j
+      class: flameMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qe7gHkF0hjEpxDU1
-    _key: '!items.effects!qe7gHkF0hjEpxDU1.f9Tq0E6dVIJgaD0j'
+    _key: '!items.effects!cremate000000000.cremate000000000'
+img: systems/teriock/src/icons/abilities/cremate.webp
+name: Cremate
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!qe7gHkF0hjEpxDU1'
+_key: '!items!cremate000000000'

@@ -1,62 +1,67 @@
-name: Warded Attacks
-type: wrapper
-_id: nh3XtLZz2CRyxY5D
-img: systems/teriock/src/icons/abilities/warded-attacks.webp
+_id: wardedAtks000000
 effects:
   - name: Warded Attacks
     type: ability
+    img: systems/teriock/src/icons/abilities/warded-attacks.webp
+    _id: wardedAtks000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>All your @L[Category:Attack abilities]{attacks} are
           @L[Keyword:Warded]{warded}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       warded: true
       impacts:
         base:
           changes:
-            - key: '!ability__system.interaction__eq__attack__system.warded'
-              mode: 4
+            - mode: 4
               priority: 10
-              target: Actor
               time: normal
-              qualifier: '1'
+              key: system.warded
+              target: ability
+              qualifier: '@interaction.attack'
               value: 'true'
-    _id: 0HsAIhn4oxrIlVml
-    img: systems/teriock/src/icons/abilities/warded-attacks.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.nh3XtLZz2CRyxY5D
-    _key: '!items.effects!nh3XtLZz2CRyxY5D.0HsAIhn4oxrIlVml'
+    _key: '!items.effects!wardedAtks000000.wardedAtks000000'
+img: systems/teriock/src/icons/abilities/warded-attacks.webp
+name: Warded Attacks
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!nh3XtLZz2CRyxY5D'
+_key: '!items!wardedAtks000000'

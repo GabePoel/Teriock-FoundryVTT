@@ -1,68 +1,94 @@
-name: Hitman
-type: wrapper
-_id: aeUNJJ3naMPH4h5R
-img: systems/teriock/src/icons/abilities/hitman.webp
+_id: hitman0000000000
 effects:
   - name: Hitman
     type: ability
     img: systems/teriock/src/icons/abilities/hitman.webp
+    _id: hitman0000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: self
-      targets:
-        - area
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
+      executionTime: a2
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You prepare a 5 foot by 5 foot area. While in this area, you may
           make a limited improved @L[Ability:Hide]{Hide} action.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 1
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - area
+      impacts: {}
+      upgrades:
+        score:
+          attribute: snk
+          value: 1
       class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-    _id: NhuBlMa7kbphjRsy
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.aeUNJJ3naMPH4h5R
-    _key: '!items.effects!aeUNJJ3naMPH4h5R.NhuBlMa7kbphjRsy'
+    _key: '!items.effects!hitman0000000000.hitman0000000000'
   - name: Hide
     type: ability
+    img: systems/teriock/src/icons/abilities/hide.webp
+    _id: pmwSbwJsCpS20YNi
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvement: >-
+        <p>You may [[lookup name]] regardless of the environment (cover,
+        lighting, etc.) that you prepare.</p>
+      interaction: manifest
+      limitation: >-
+        <p>You may only [[lookup name]] in the location you have prepared and
+        you do not get the attribute improvement from this ability. You also do
+        not remain @L[Condition:Hidden]{hidden} if you leave this location.</p>
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
@@ -78,57 +104,54 @@ effects:
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
           (if it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          attribute: snk
-          amount: proficiency
-      skill: true
-      standard: true
-      class: thief
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: >-
-        <p>You may only [[lookup name]] in the location you have prepared and
-        you do not get the attribute improvement from this ability. You also do
-        not remain @L[Condition:Hidden]{hidden} if you leave this location.</p>
-      improvement: >-
-        <p>You may [[lookup name]] regardless of the environment (cover,
-        lighting, etc.) that you prepare.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
       impacts:
         base:
-          startStatuses:
-            - hidden
           rolls:
             hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
         proficient:
           rolls:
             hide: 1d20 + (2 * @snk) + @p
         fluent:
           rolls:
             hide: 1d20 + (2 * @snk) + @f
-      _sup: NhuBlMa7kbphjRsy
-    _id: 5Jxyd7V2FYCQcIZs
-    img: systems/teriock/src/icons/abilities/hide.webp
+      upgrades:
+        competence:
+          attribute: snk
+          value: 0
+        score:
+          attribute: snk
+          value: 2
+      _sup: hitman0000000000
+      class: thief
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.6gOwusIdo9DIGf7L
-    _key: '!items.effects!aeUNJJ3naMPH4h5R.5Jxyd7V2FYCQcIZs'
+    _key: '!items.effects!hitman0000000000.pmwSbwJsCpS20YNi'
+img: systems/teriock/src/icons/abilities/hitman.webp
+name: Hitman
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!aeUNJJ3naMPH4h5R'
+_key: '!items!hitman0000000000'

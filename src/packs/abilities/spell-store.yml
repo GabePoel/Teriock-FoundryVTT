@@ -1,34 +1,38 @@
-name: Spell Store
-type: wrapper
-_id: XjBu6GNSGd38o1NM
-img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+_id: spellStore000000
 effects:
   - name: Spell Store
     type: ability
+    img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+    _id: spellStore000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: sight
         package: ritual
-      duration:
-        unit: hour
-        quantity: 1
-        stationary: false
-        description: 1 Hour
       executionTime: 10 Minutes
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: slow
       overview:
@@ -40,52 +44,56 @@ effects:
           @L[Keyword:Improved]{Improved} @L[Ability:Spell Strike]{Spell Strike}.
           Only one @L[Category:Missile delivery spells]{spell} can be stored in
           the target @L[Category:Weapons]{weapon} at a time.</p>
-      piercing: normal
       powerSources:
         - magical
       range:
-        unit: ft
         raw: '5'
+        unit: ft
       ritual: true
       targets:
         - weapon
-    _id: 7Ikdmn1uPyDFJiNk
-    img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.XjBu6GNSGd38o1NM
-    _key: '!items.effects!XjBu6GNSGd38o1NM.7Ikdmn1uPyDFJiNk'
+    _key: '!items.effects!spellStore000000.spellStore000000'
   - name: Spell Strike
     type: ability
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    _id: TWmROmtpQJx0P4TH
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: weapon
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: weapon
       executionTime: r0
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       improvement: >-
         <p>You are considered to have and be @L[Core:Proficiency
         Bonus]{proficient} in the stored spell for this purpose.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       limitation: >-
         <p>Can only be used with the stored spell and the item it is stored
@@ -98,7 +106,6 @@ effects:
           that you are @L[Core:Proficiency Bonus]{proficient} in. If the
           triggering hit was a critical hit, then the target takes the "on
           critical hit" effect instead.</p>
-      piercing: normal
       powerSources:
         - magical
       range:
@@ -112,19 +119,21 @@ effects:
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
-      _sup: 7Ikdmn1uPyDFJiNk
-    _id: 77x5RZUwGbcX8Ulf
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
+      impacts: {}
+      _sup: spellStore000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.E0kDW8VNZFbrTmwx
-    _key: '!items.effects!XjBu6GNSGd38o1NM.77x5RZUwGbcX8Ulf'
+    _key: '!items.effects!spellStore000000.TWmROmtpQJx0P4TH'
+img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+name: Spell Store
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!XjBu6GNSGd38o1NM'
+_key: '!items!spellStore000000'

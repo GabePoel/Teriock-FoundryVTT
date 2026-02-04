@@ -1,36 +1,52 @@
+_id: odachi0000000000
+folder: be4NJt6nKR4hPMF4
 name: Ōdachi
-type: equipment
 system:
   equipmentType: Ōdachi
-  equipped: true
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-4'
+  bv:
+    raw: '2'
   damage:
     base:
-      saved: 1d10
-  weight:
-    saved: 6
+      raw: 1d10
+    twoHanded: {}
+  fightingStyle: greatKenjutsu
+  hit: {}
   range:
     long:
       unit: melee
+    melee: true
+    ranged: false
     short:
       unit: melee
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '6'
+  minStr:
+    raw: '1'
   equipmentClasses:
     - specialtySwords
-  minStr:
-    saved: 1
-  sb: greatKenjutsu
-  av: 0
-  bv:
-    saved: 2
   powerLevel: mundane
-  attackPenalty:
-    saved: '-4'
-_id: rLGCLveXlS7AzaVr
+type: equipment
 img: systems/teriock/src/icons/equipment/odachi.webp
 effects:
   - name: Cumbersome
     type: property
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    _id: jGhjnvO8AJOVdUT0
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
         <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
@@ -41,97 +57,117 @@ effects:
         otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-      modifiesActor: true
       impacts:
         changes:
-          - key: system.encumbranceLevel
-            mode: 2
-            value: '1'
+          - mode: 2
             priority: 10
-    _id: DGJ2JqO4EcfvYZwB
-    img: systems/teriock/src/icons/properties/cumbersome.webp
+            time: normal
+            key: system.encumbranceLevel
+            target: Actor
+            qualifier: '1'
+            value: '1'
+      modifiesActor: true
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Qnxdsbou7Lfai8FN
-    _key: '!items.effects!rLGCLveXlS7AzaVr.DGJ2JqO4EcfvYZwB'
+    _key: '!items.effects!odachi0000000000.jGhjnvO8AJOVdUT0'
+  - name: Weapon
+    type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: x9hrPJ8DpFndo8YD
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
+      form: intrinsic
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!odachi0000000000.x9hrPJ8DpFndo8YD'
   - name: Two-Handed
     type: property
+    img: systems/teriock/src/icons/properties/two-handed.webp
+    _id: UfBVc2mSZ3VRVdmB
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
         @L[Category:Attack abilities]{attacked} with unless it is wielded in two
         hands.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-    _id: ajShJhomOfVfhD5a
-    img: systems/teriock/src/icons/properties/two-handed.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.twoHanded0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.f9yfWeyhhdZ1G9F3
-    _key: '!items.effects!rLGCLveXlS7AzaVr.ajShJhomOfVfhD5a'
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: QAMpX90Lr1UwcI61
-    img: systems/teriock/src/icons/properties/weapon.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!rLGCLveXlS7AzaVr.QAMpX90Lr1UwcI61'
-  - name: Reach
-    type: property
-    system:
-      description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
-      form: intrinsic
-      impacts:
-        changes:
-          - key: item.system.range.long.raw
-            mode: 4
-            value: '10'
-            priority: 10
-    _id: sT8fD5eVcrCbpX82
-    img: systems/teriock/src/icons/properties/reach.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.v9dwKuaTl1plMIHT
-    _key: '!items.effects!rLGCLveXlS7AzaVr.sT8fD5eVcrCbpX82'
+    _key: '!items.effects!odachi0000000000.UfBVc2mSZ3VRVdmB'
   - name: Armor Piercing
     type: property
+    img: systems/teriock/src/icons/properties/armor-piercing.webp
+    _id: 5zq8RN3frSW8KVqv
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with this property is @L[Property:AV0]{AV0} when wielded in
         two hands.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
-    _id: tVHtbYYiJGv4lSwL
-    img: systems/teriock/src/icons/properties/armor-piercing.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.armorPiercing000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.dQ4dHCWEvbEaRqfz
-    _key: '!items.effects!rLGCLveXlS7AzaVr.tVHtbYYiJGv4lSwL'
+    _key: '!items.effects!odachi0000000000.5zq8RN3frSW8KVqv'
+  - name: Reach
+    type: property
+    img: systems/teriock/src/icons/properties/reach.webp
+    _id: BFWYM3QPcHvGgked
+    system:
+      competence:
+        raw: 0
+      description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
+      suppression: {}
+      revealed: true
+      form: intrinsic
+      impacts:
+        changes:
+          - mode: 4
+            priority: 10
+            time: normal
+            key: system.range.long.raw
+            target: parent
+            qualifier: '1'
+            value: '10'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.reach00000000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!odachi0000000000.BFWYM3QPcHvGgked'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: be4NJt6nKR4hPMF4
-_key: '!items!rLGCLveXlS7AzaVr'
+_key: '!items!odachi0000000000'

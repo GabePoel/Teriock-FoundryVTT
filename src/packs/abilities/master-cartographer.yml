@@ -1,59 +1,66 @@
-name: Master Cartographer
-type: wrapper
-_id: AJACMiy12teWB3aB
-img: icons/tools/navigation/map-marked-blue.webp
+_id: masCartographer0
 effects:
   - name: Master Cartographer
     type: ability
+    img: icons/tools/navigation/map-marked-blue.webp
+    _id: masCartographer0
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
       revealed: true
-      impacts:
-        base:
-          changes:
-            - key: system.tradecrafts.cartographer.score
-              mode: 4
-              value: '3'
-              priority: 10
-      delivery:
-        base: self
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are a @L[Keyword:Mastery]{master}
           @L[Tradecraft:Cartographer]{cartographer}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
-    _id: ioRy2RSRuXeMeiWU
-    img: icons/tools/navigation/map-marked-blue.webp
+      impacts:
+        base:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.tradecrafts.cartographer.score
+              target: Actor
+              qualifier: '1'
+              value: '3'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.AJACMiy12teWB3aB
-    _key: '!items.effects!AJACMiy12teWB3aB.ioRy2RSRuXeMeiWU'
+    _key: '!items.effects!masCartographer0.masCartographer0'
+img: icons/tools/navigation/map-marked-blue.webp
+name: Master Cartographer
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!AJACMiy12teWB3aB'
+_key: '!items!masCartographer0'

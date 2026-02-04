@@ -1,30 +1,34 @@
-name: Changing Demeanor
-type: wrapper
-_id: hwuo1Hb27Pz8ZUwI
-img: systems/teriock/src/icons/abilities/changing-demeanor.webp
+_id: changingDemeanor
 effects:
   - name: Changing Demeanor
     type: ability
+    img: systems/teriock/src/icons/abilities/changing-demeanor.webp
+    _id: changingDemeanor
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       elements:
         - nature
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -32,93 +36,107 @@ effects:
           <p>You are either @L[Ability:Aggressive]{Aggressive} or
           @L[Ability:Cowardly]{Cowardly} (your choice). You can change which of
           these you are during a @L[Core:Short Rest]{short rest}.</p>
-      piercing: normal
       powerSources:
         - divine
+      range:
+        unit: self
       targets:
         - self
-    _id: hkI9PU4joRgtqT7p
-    img: systems/teriock/src/icons/abilities/changing-demeanor.webp
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hwuo1Hb27Pz8ZUwI
-    _key: '!items.effects!hwuo1Hb27Pz8ZUwI.hkI9PU4joRgtqT7p'
+    _key: '!items.effects!changingDemeanor.changingDemeanor'
   - name: Aggressive
     type: ability
+    img: systems/teriock/src/icons/abilities/aggressive.webp
+    _id: Zm7nVMduR4dF4A8C
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You will not leave combat willingly and are
           @L[Keyword:Inept]{inept} at not killing anyone who opposes you.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
-      _sup: hkI9PU4joRgtqT7p
-    _id: Z3Me7zXxactm7YkS
-    img: systems/teriock/src/icons/abilities/aggressive.webp
+      impacts: {}
+      _sup: changingDemeanor
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.aggressive000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.CRDqaqlbHb9wqnGA
-    _key: '!items.effects!hwuo1Hb27Pz8ZUwI.Z3Me7zXxactm7YkS'
+    _key: '!items.effects!changingDemeanor.Zm7nVMduR4dF4A8C'
   - name: Cowardly
     type: ability
+    img: systems/teriock/src/icons/abilities/cowardly.webp
+    _id: OA8IdLXLm7kRcg0a
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: No Limit
+      delivery:
+        base: self
       effectTypes:
         - automatic
       endCondition: >-
         <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r0
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
       overview:
         base: <p>You become @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       trigger: >-
@@ -127,8 +145,6 @@ effects:
         to.</p>
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
@@ -144,19 +160,22 @@ effects:
                   trigger: turn
             changeOnCrit: false
             doesExpire: true
-      _sup: hkI9PU4joRgtqT7p
-    _id: GtRcK7tppu7mVqXz
-    img: systems/teriock/src/icons/abilities/cowardly.webp
+          rolls:
+            endCon: 2d4
+      _sup: changingDemeanor
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cowardly00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.S9Bd3GAKqqmyE6a0
-    _key: '!items.effects!hwuo1Hb27Pz8ZUwI.GtRcK7tppu7mVqXz'
+    _key: '!items.effects!changingDemeanor.OA8IdLXLm7kRcg0a'
+img: systems/teriock/src/icons/abilities/changing-demeanor.webp
+name: Changing Demeanor
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!hwuo1Hb27Pz8ZUwI'
+_key: '!items!changingDemeanor'

@@ -1,83 +1,88 @@
-name: Bodyguard Taunt
-type: wrapper
-_id: bteh1qaYInYYM6O4
-img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+_id: bodyguardTaunt00
 effects:
   - name: Bodyguard Taunt
     type: ability
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+    _id: bodyguardTaunt00
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '5'
+        unit: second
+        dawn: false
+        stationary: false
+        description: 5 Seconds
       delivery:
         base: weapon
-      targets:
-        - creature
-      duration:
-        unit: second
-        quantity: 5
-        description: 5 Seconds
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>Pick another creature within range. They are
           @L[Condition:Goaded]{goaded} until the start of your next
           @L[Core:Turns]{turn}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: veteran
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
       requirements: >-
         <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
         Backup}.</p>
-      expansionSaveAttribute: mov
+      skill: true
+      standard: true
+      targets:
+        - creature
       trigger: >-
         <p>You attempt an @L[Core:Attack Interaction]{attack} against another
         creature.</p>
-      form: normal
       impacts:
         base:
-          statuses:
-            - goaded
           expiration:
             normal:
               combat:
                 who:
                   type: executor
                 what:
-                  type: forced
                   roll: 2d4kh1
                   threshold: 4
+                  type: forced
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          statuses:
+            - goaded
         macros:
           Compendium_teriock_execution_Macro_R54099tFLeLMmBAw: preExecution
-    _id: n2Ovng5HqrerVTN7
+      class: veteran
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.bteh1qaYInYYM6O4
-    _key: '!items.effects!bteh1qaYInYYM6O4.n2Ovng5HqrerVTN7'
+    _key: '!items.effects!bodyguardTaunt00.bodyguardTaunt00'
+img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+name: Bodyguard Taunt
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!bteh1qaYInYYM6O4'
+_key: '!items!bodyguardTaunt00'

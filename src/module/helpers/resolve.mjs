@@ -97,7 +97,9 @@ export async function inferCompendiumSource(document) {
   if (pack) {
     const ref = pack.index.getName(document.name);
     if (ref) {
-      await document.update({ "_stats.compendiumSource": ref.uuid });
+      let uuid = ref.uuid;
+      if (document.uuid.includes(uuid)) uuid = null;
+      await document.update({ "_stats.compendiumSource": uuid });
     } else {
       console.log(document.name);
     }
@@ -117,7 +119,9 @@ export async function inferChildCompendiumSources(document) {
     if (pack) {
       const ref = pack.index.getName(d.name);
       if (ref) {
-        await d.update({ "_stats.compendiumSource": ref.uuid });
+        let uuid = ref.uuid;
+        if (d.uuid.includes(uuid)) uuid = null;
+        await d.update({ "_stats.compendiumSource": uuid });
         await inferChildCompendiumSources(d);
       }
     }

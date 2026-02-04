@@ -1,14 +1,20 @@
+_id: anchor0000000000
+folder: rIw1nYFbCFsXwhHY
 name: Anchor
-type: equipment
 system:
   equipmentType: Anchor
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
   attackPenalty:
-    saved: '6'
-    raw: '-3'
+    raw: '6'
+  bv:
+    raw: '1'
   damage:
     base:
-      saved: 1d20
+      raw: 1d20
+    twoHanded: {}
+  hit: {}
   range:
     long:
       unit: melee
@@ -16,21 +22,30 @@ system:
     ranged: false
     short:
       unit: melee
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '1500'
+  minStr:
+    raw: '4'
   equipmentClasses:
     - objects
-  minStr:
-    saved: 4
-    raw: -3
   powerLevel: mundane
-  weight:
-    saved: 1500
-    raw: 0
-_id: 6fxVXiBHJ4jHjIVN
+type: equipment
 img: systems/teriock/src/icons/equipment/anchor.webp
 effects:
   - name: Cumbersome
     type: property
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    _id: w2yj5GUx8hRBvfQq
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
         <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
@@ -41,28 +56,35 @@ effects:
         otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
+      suppression: {}
       revealed: true
       form: flaw
       impacts:
         changes:
-          - key: system.encumbranceLevel
-            mode: 2
-            value: '1'
+          - mode: 2
             priority: 10
+            time: normal
+            key: system.encumbranceLevel
+            target: Actor
+            qualifier: '1'
+            value: '1'
       modifiesActor: true
-    _id: 5h617rR4brMVsMUD
-    img: systems/teriock/src/icons/properties/cumbersome.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Qnxdsbou7Lfai8FN
-    _key: '!items.effects!6fxVXiBHJ4jHjIVN.5h617rR4brMVsMUD'
+    _key: '!items.effects!anchor0000000000.w2yj5GUx8hRBvfQq'
   - name: Unblockable
     type: property
+    img: systems/teriock/src/icons/properties/unblockable.webp
+    _id: Cut0da3jtuQD9ppG
     system:
+      competence:
+        raw: 0
       description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
       impacts:
@@ -74,19 +96,16 @@ effects:
             target: parent
             qualifier: '1'
             value: '2'
-    _id: IN1Wx3yAEWeazsHD
-    img: systems/teriock/src/icons/properties/unblockable.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.unblockable00000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.iRiARZgivsHKtckV
-    _key: '!items.effects!6fxVXiBHJ4jHjIVN.IN1Wx3yAEWeazsHD'
-folder: rIw1nYFbCFsXwhHY
+    _key: '!items.effects!anchor0000000000.Cut0da3jtuQD9ppG'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!6fxVXiBHJ4jHjIVN'
+_key: '!items!anchor0000000000'

@@ -1,93 +1,99 @@
-name: Drink Burning Liquid
-type: wrapper
-_id: bWGyKY6M5TvX60Rs
-img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+_id: dkBurningLiquid0
 effects:
   - name: Drink Burning Liquid
     type: ability
+    img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+    _id: dkBurningLiquid0
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
+      delivery:
+        base: self
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
         base: >-
           <p>You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Burning
           Touch]{Burning Touch}.</p>
-      piercing: normal
       powerSources:
         - alchemical
+      range:
+        unit: self
       targets:
         - self
-    _id: i50CChvism4ZzNwi
-    img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.bWGyKY6M5TvX60Rs
-    _key: '!items.effects!bWGyKY6M5TvX60Rs.i50CChvism4ZzNwi'
+    _key: '!items.effects!dkBurningLiquid0.dkBurningLiquid0'
   - name: Burning Touch
     type: ability
+    img: systems/teriock/src/icons/abilities/burning-touch.webp
+    _id: VOMF43kpVMSEsBrG
     system:
-      adept:
-        enabled: true
-        amount: 1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
       costs:
         verbal: true
         somatic: true
+      gifted:
+        enabled: true
+        amount: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: hand
         package: touch
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
       effectTypes:
         - damaging
       elements:
         - flame
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
-      gifted:
-        enabled: true
-        amount: 1
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
-      piercing: ub
       powerSources:
         - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
@@ -99,7 +105,6 @@ effects:
       standard: true
       targets:
         - creature
-      class: flameMage
       impacts:
         base:
           rolls:
@@ -107,19 +112,21 @@ effects:
         heightened:
           rolls:
             damage: 1d6[magic fire]
-      _sup: i50CChvism4ZzNwi
-    _id: XNReH5csuZkOH7d1
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
+      _sup: dkBurningLiquid0
+      class: flameMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.4kKjFS7bUNRdxbN2
-    _key: '!items.effects!bWGyKY6M5TvX60Rs.XNReH5csuZkOH7d1'
+    _key: '!items.effects!dkBurningLiquid0.VOMF43kpVMSEsBrG'
+img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+name: Drink Burning Liquid
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!bWGyKY6M5TvX60Rs'
+_key: '!items!dkBurningLiquid0'

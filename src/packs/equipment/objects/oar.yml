@@ -1,14 +1,18 @@
+_id: oar0000000000000
+folder: rIw1nYFbCFsXwhHY
 name: Oar
-type: equipment
 system:
   equipmentType: Oar
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
   attackPenalty:
-    saved: '-3'
     raw: '-3'
   damage:
     base:
-      saved: '1'
+      raw: '1'
+    twoHanded: {}
+  hit: {}
   range:
     long:
       unit: melee
@@ -16,61 +20,74 @@ system:
     ranged: false
     short:
       unit: melee
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '10'
+  minStr:
+    raw: '-1'
   equipmentClasses:
     - objects
-  minStr:
-    saved: -1
-    raw: -3
   powerLevel: mundane
-  weight:
-    saved: 10
-    raw: 0
-_id: dzsu4H7OKQH8hJGW
+type: equipment
 img: systems/teriock/src/icons/equipment/oar.webp
 effects:
   - name: Bashing
     type: property
+    img: systems/teriock/src/icons/properties/bashing.webp
+    _id: SlHzBoqx8OyMR2pS
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
         weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
         Attack}.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
-    _id: JFrOighB0htWsX2v
-    img: systems/teriock/src/icons/properties/bashing.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
-    _key: '!items.effects!dzsu4H7OKQH8hJGW.JFrOighB0htWsX2v'
+    _key: '!items.effects!oar0000000000000.SlHzBoqx8OyMR2pS'
   - name: Reach
     type: property
+    img: systems/teriock/src/icons/properties/reach.webp
+    _id: fjtAeKW3l0Ht5XsQ
     system:
+      competence:
+        raw: 0
       description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.long.raw
-            mode: 4
-            value: '10'
+          - mode: 4
             priority: 10
-    _id: c0Q4zmwn2xMWkxyk
-    img: systems/teriock/src/icons/properties/reach.webp
+            time: normal
+            key: system.range.long.raw
+            target: parent
+            qualifier: '1'
+            value: '10'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.reach00000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.v9dwKuaTl1plMIHT
-    _key: '!items.effects!dzsu4H7OKQH8hJGW.c0Q4zmwn2xMWkxyk'
-folder: rIw1nYFbCFsXwhHY
+    _key: '!items.effects!oar0000000000000.fjtAeKW3l0Ht5XsQ'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!dzsu4H7OKQH8hJGW'
+_key: '!items!oar0000000000000'

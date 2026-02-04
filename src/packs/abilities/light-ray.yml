@@ -1,32 +1,43 @@
-name: Light Ray
-type: wrapper
-_id: EQljawEo4v2EZwdk
-img: systems/teriock/src/icons/abilities/light-ray.webp
+_id: lightRay00000000
 effects:
   - name: Light Ray
     type: ability
     img: systems/teriock/src/icons/abilities/light-ray.webp
+    _id: lightRay00000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: missile
         package: ray
-      targets:
-        - creature
       elements:
         - life
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: '60'
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
@@ -34,68 +45,59 @@ effects:
         critHit: >-
           <p>If you want, target is @L[Condition:Lighted]{lighted} until the end
           of your next @L[Core:Turns]{turn}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
-      class: lifeMage
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - lighted
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: forced
                   roll: 2d4kh1
                   threshold: 4
+                  type: forced
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: executor
                 what:
-                  type: forced
                   roll: 2d4kh1
                   threshold: 4
+                  type: forced
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: true
             doesExpire: true
+          statuses:
+            - lighted
         heightened:
           rolls:
             damage: 1d4[magic holy]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-    _id: JhNbjfOBP4vq6fDO
-    flags:
-      teriock:
-        dontConsume: false
+      class: lifeMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.EQljawEo4v2EZwdk
-    _key: '!items.effects!EQljawEo4v2EZwdk.JhNbjfOBP4vq6fDO'
+    _key: '!items.effects!lightRay00000000.lightRay00000000'
+img: systems/teriock/src/icons/abilities/light-ray.webp
+name: Light Ray
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!EQljawEo4v2EZwdk'
+_key: '!items!lightRay00000000'

@@ -1,69 +1,91 @@
-name: Illusionary Arts
-type: wrapper
-_id: kIesEnlLKnLK4oS5
-img: systems/teriock/src/icons/abilities/illusionary-arts.webp
+_id: illusionaryArts0
 effects:
   - name: Illusionary Arts
     type: ability
     img: systems/teriock/src/icons/abilities/illusionary-arts.webp
+    _id: illusionaryArts0
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Simple Illusion Creation]{Simple Illusion
           Creation} and @L[Ability:Detect Illusion]{Detect Illusion}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: WvPjROa3Fk7RHT6b
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.kIesEnlLKnLK4oS5
-    _key: '!items.effects!kIesEnlLKnLK4oS5.WvPjROa3Fk7RHT6b'
+    _key: '!items.effects!illusionaryArts0.illusionaryArts0'
   - name: Simple Illusion Creation
     type: ability
+    img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
+    _id: 1rXf2YNFersyQIIO
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - storm
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
+      delivery:
+        base: self
+      effectTypes:
+        - mental
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You create a @L[Keyword:Illusionary]{minor illusion} of a simple
@@ -73,96 +95,95 @@ effects:
           even if you @L[Keyword:Resistance]{resist} or are
           @L[Keyword:Immunity]{immune} to @L[Category:Mental effects]{mental
           effects}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       spell: true
       standard: true
-      class: stormMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - mental
+      targets:
+        - self
       impacts:
         heightened:
           duration: 3600
-      _sup: WvPjROa3Fk7RHT6b
-    _id: wFvL9vhiojUbiQfz
-    img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
+      _sup: illusionaryArts0
+      class: stormMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.simpleIllusionCr
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.SfEODmOZ2BXrewGl
-    _key: '!items.effects!kIesEnlLKnLK4oS5.wFvL9vhiojUbiQfz'
+    _key: '!items.effects!illusionaryArts0.1rXf2YNFersyQIIO'
   - name: Detect Illusion
     type: ability
+    img: systems/teriock/src/icons/abilities/detect-illusion.webp
+    _id: zDKGizPEkiqHuDDm
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: hand
         package: touch
-      targets:
-        - area
-        - creature
-        - item
+      effectTypes:
+        - mental
       elements:
         - storm
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         proficient: >-
           <p>You also know what <i>type</i> of @L[Keyword:Illusionary]{illusion}
           it is (Minor, Full, or Greater) as well as the DC needed to
           @L[Ability:Disbelieve]{Disbelieve} it. This does not count as
           "disbelieving" the illusion.</p>
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
       results:
         hit: <p>You know if the target is @L[Keyword:Illusionary]{illusionary}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
+      targets:
+        - area
+        - creature
+        - item
+      impacts: {}
+      _sup: illusionaryArts0
       class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - mental
-      _sup: WvPjROa3Fk7RHT6b
-    _id: YosGyhax4qWPEDi2
-    img: systems/teriock/src/icons/abilities/detect-illusion.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.detIllusion00000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.gHfWORU2Sn6IAFat
-    _key: '!items.effects!kIesEnlLKnLK4oS5.YosGyhax4qWPEDi2'
+    _key: '!items.effects!illusionaryArts0.zDKGizPEkiqHuDDm'
+img: systems/teriock/src/icons/abilities/illusionary-arts.webp
+name: Illusionary Arts
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!kIesEnlLKnLK4oS5'
+_key: '!items!illusionaryArts0'

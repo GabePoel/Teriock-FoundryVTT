@@ -1,26 +1,38 @@
-name: Mana Regenerating
-type: wrapper
-_id: q9H4zdZWzUwj1f14
-img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+_id: manaRegenerating
 effects:
   - name: Mana Regenerating
     type: ability
     img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+    _id: manaRegenerating
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - revival
+        - regeneration
+        - revitalization
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -32,32 +44,27 @@ effects:
           due to @L[Core:Hit Points and Mana Points]{MP} loss if you start your
           @L[Core:Turns]{turn} without successfully regenerating @L[Core:Hit
           Points and Mana Points]{MP}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - revival
-        - regeneration
-        - revitalization
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         macros:
           Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
-    _id: eFl0wq36GPb9AucR
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.q9H4zdZWzUwj1f14
-    _key: '!items.effects!q9H4zdZWzUwj1f14.eFl0wq36GPb9AucR'
+    _key: '!items.effects!manaRegenerating.manaRegenerating'
+img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+name: Mana Regenerating
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!q9H4zdZWzUwj1f14'
+_key: '!items!manaRegenerating'

@@ -1,63 +1,76 @@
-name: Advanced Hearing
-type: wrapper
-_id: 6BuU4YIrCixBOdyU
-img: systems/teriock/src/icons/abilities/advanced-hearing.webp
+_id: advancedHearing0
 effects:
   - name: Advanced Hearing
     type: ability
     img: systems/teriock/src/icons/abilities/advanced-hearing.webp
+    _id: advancedHearing0
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
+        stationary: false
         description: While Up
+      delivery:
+        base: self
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can hear all moving creatures within 30 feet. If the creature
           is breathing, you can hear it even if it is not moving. You can not
           detect @L[Condition:Silent]{silent} creatures in this way.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: per
-          minVal: 2
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.senses.hearing
-              mode: 4
-              value: '30'
+            - mode: 4
               priority: 10
-    _id: wGGTAfOpVxVtOatL
+              time: normal
+              key: system.senses.hearing
+              target: Actor
+              qualifier: '1'
+              value: '30'
+      upgrades:
+        score:
+          attribute: per
+          value: 2
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.6BuU4YIrCixBOdyU
-    _key: '!items.effects!6BuU4YIrCixBOdyU.wGGTAfOpVxVtOatL'
+    _key: '!items.effects!advancedHearing0.advancedHearing0'
+img: systems/teriock/src/icons/abilities/advanced-hearing.webp
+name: Advanced Hearing
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!6BuU4YIrCixBOdyU'
+_key: '!items!advancedHearing0'

@@ -1,75 +1,80 @@
-name: Sand Blind Packet
-type: wrapper
-_id: tqIv4Hlfh5vAePof
-img: systems/teriock/src/icons/abilities/sand-blind-packet.webp
+_id: sandBlindPacket0
 effects:
   - name: Sand Blind Packet
     type: ability
     img: systems/teriock/src/icons/abilities/sand-blind-packet.webp
+    _id: sandBlindPacket0
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: No Limit
       delivery:
         base: missile
         package: ray
-      targets:
-        - creature
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: No Limit
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: <p>Target is @L[Condition:Blind]{blind}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: <p>Target is @L[Condition:Blind]{blind}.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - blind
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: jfzhWLfoSDH0riCe
+          rolls:
+            endCon: 2d4
+          statuses:
+            - blind
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.tqIv4Hlfh5vAePof
-    _key: '!items.effects!tqIv4Hlfh5vAePof.jfzhWLfoSDH0riCe'
+    _key: '!items.effects!sandBlindPacket0.sandBlindPacket0'
+img: systems/teriock/src/icons/abilities/sand-blind-packet.webp
+name: Sand Blind Packet
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!tqIv4Hlfh5vAePof'
+_key: '!items!sandBlindPacket0'

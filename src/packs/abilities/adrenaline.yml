@@ -1,26 +1,36 @@
-name: Adrenaline
-type: wrapper
-_id: QssNuNkciHTxajIJ
-img: systems/teriock/src/icons/abilities/adrenaline.webp
+_id: adrenaline000000
 effects:
   - name: Adrenaline
     type: ability
     img: systems/teriock/src/icons/abilities/adrenaline.webp
+    _id: adrenaline000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist}
@@ -29,38 +39,41 @@ effects:
           Points and Mana Points]{HP}. You still @L[Condition:Dead]{die} when
           you reach half your maximum @L[Core:Hit Points and Mana Points]{HP}
           below zero.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
+            - mode: 2
+              priority: 10
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
               value: Dropping From Negative HP
+            - mode: 2
               priority: 10
-            - key: system.protections.resistances.statuses
-              mode: 2
+              time: normal
+              key: system.protections.resistances.statuses
+              target: Actor
+              qualifier: '1'
               value: unconscious
-              priority: 10
-    _id: HqSu04PRuiNmNlcy
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.QssNuNkciHTxajIJ
-    _key: '!items.effects!QssNuNkciHTxajIJ.HqSu04PRuiNmNlcy'
+    _key: '!items.effects!adrenaline000000.adrenaline000000'
+img: systems/teriock/src/icons/abilities/adrenaline.webp
+name: Adrenaline
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!QssNuNkciHTxajIJ'
+_key: '!items!adrenaline000000'

@@ -1,56 +1,72 @@
+_id: barrel0000000000
+folder: JPirKLE2TYwpIAz5
 name: Barrel
-type: equipment
 system:
   equipmentType: Barrel
-  equipped: true
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-3'
+  bv:
+    raw: '1'
   damage:
     base:
-      saved: '1'
-  weight:
-    saved: 70
+      raw: '1'
+    twoHanded: {}
+  hit: {}
   range:
     long:
       unit: melee
+    melee: true
+    ranged: false
     short:
       unit: melee
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '70'
+  minStr:
+    raw: '1'
   equipmentClasses:
     - containers
-  minStr:
-    saved: 1
-  av: 0
-  bv:
-    saved: 1
   powerLevel: mundane
-  attackPenalty:
-    raw: '-3'
-  storage:
-    enabled: true
-    maxWeight:
-      raw: '250'
-_id: m0oaqjRrACpLm1d1
+type: equipment
 img: systems/teriock/src/icons/equipment/barrel.webp
 effects:
   - name: Bashing
     type: property
+    img: systems/teriock/src/icons/properties/bashing.webp
+    _id: yrg9CE60H78KXU1W
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
         weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
         Attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: beMcZJEsUCxXG0Dl
-    img: systems/teriock/src/icons/properties/bashing.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.1w0TAx5uCCAe03VK
-    _key: '!items.effects!m0oaqjRrACpLm1d1.beMcZJEsUCxXG0Dl'
+    _key: '!items.effects!barrel0000000000.yrg9CE60H78KXU1W'
   - name: Cumbersome
     type: property
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    _id: MSY8H4MQ2GO4IJxA
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
         <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
@@ -61,27 +77,29 @@ effects:
         otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-      modifiesActor: true
       impacts:
         changes:
-          - key: system.encumbranceLevel
-            mode: 2
-            value: '1'
+          - mode: 2
             priority: 10
-    _id: WcGvA8Bv9JgBdflL
-    img: systems/teriock/src/icons/properties/cumbersome.webp
+            time: normal
+            key: system.encumbranceLevel
+            target: Actor
+            qualifier: '1'
+            value: '1'
+      modifiesActor: true
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Qnxdsbou7Lfai8FN
-    _key: '!items.effects!m0oaqjRrACpLm1d1.WcGvA8Bv9JgBdflL'
+    _key: '!items.effects!barrel0000000000.MSY8H4MQ2GO4IJxA'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: JPirKLE2TYwpIAz5
-_key: '!items!m0oaqjRrACpLm1d1'
+_key: '!items!barrel0000000000'

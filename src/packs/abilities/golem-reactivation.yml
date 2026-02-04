@@ -1,36 +1,40 @@
-name: Golem Reactivation
-type: wrapper
-_id: o9oHGRkQOP6NE7s0
-img: systems/teriock/src/icons/abilities/golem-reactivation.webp
+_id: golemReactivatio
 effects:
   - name: Golem Reactivation
     type: ability
+    img: systems/teriock/src/icons/abilities/golem-reactivation.webp
+    _id: golemReactivatio
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           present:
             - down
+        dawn: false
         stationary: false
         description: While Down
+      delivery:
+        base: self
       effectTypes:
         - revival
         - healing
         - revitalization
         - automatic
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -43,27 +47,29 @@ effects:
           Points and Mana Points]{mana dice}. This does not consume any
           @L[Core:Hit Points and Mana Points]{hit dice} or @L[Core:Hit Points
           and Mana Points]{mana dice}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       trigger: >-
         <p>Another creatures @L[Ability:Pay Mana]{spends} 1 or more @L[Core:Hit
         Points and Mana Points]{MP} into you. This triggers automatically. You
         cannot choose to not use it if you are able to.</p>
-    _id: vLXnnwIKok9XtPcM
-    img: systems/teriock/src/icons/abilities/golem-reactivation.webp
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.o9oHGRkQOP6NE7s0
-    _key: '!items.effects!o9oHGRkQOP6NE7s0.vLXnnwIKok9XtPcM'
+    _key: '!items.effects!golemReactivatio.golemReactivatio'
+img: systems/teriock/src/icons/abilities/golem-reactivation.webp
+name: Golem Reactivation
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!o9oHGRkQOP6NE7s0'
+_key: '!items!golemReactivatio'

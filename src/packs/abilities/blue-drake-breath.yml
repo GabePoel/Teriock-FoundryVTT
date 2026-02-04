@@ -1,23 +1,29 @@
-name: Blue Drake Breath
-type: wrapper
-_id: eLXP09JaARxnxoBp
-img: systems/teriock/src/icons/abilities/blue-drake-breath.webp
+_id: blueDrkBreath000
 effects:
   - name: Blue Drake Breath
     type: ability
+    img: systems/teriock/src/icons/abilities/blue-drake-breath.webp
+    _id: blueDrkBreath000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 2
-      delivery:
-        base: cone
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
+      delivery:
+        base: cone
       effectTypes:
         - temporal
       elements:
@@ -26,58 +32,55 @@ effects:
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: feat
       maneuver: active
-      piercing: normal
       powerSources:
         - magical
       range:
-        unit: ft
         raw: '15'
+        unit: ft
       results:
         fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
       targets:
         - creature
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: wEmw8hZsnZ49Rkqk
-    img: systems/teriock/src/icons/abilities/blue-drake-breath.webp
+          rolls:
+            endCon: 2d4
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.eLXP09JaARxnxoBp
-    _key: '!items.effects!eLXP09JaARxnxoBp.wEmw8hZsnZ49Rkqk'
+    _key: '!items.effects!blueDrkBreath000.blueDrkBreath000'
+img: systems/teriock/src/icons/abilities/blue-drake-breath.webp
+name: Blue Drake Breath
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!eLXP09JaARxnxoBp'
+_key: '!items!blueDrkBreath000'

@@ -1,30 +1,38 @@
-name: Displacement Poison Strike
-type: wrapper
-_id: 0B8QuyLmkF9iJEn6
-img: systems/teriock/src/icons/abilities/displacement-poison-strike.webp
+_id: displacementPois
 effects:
   - name: Displacement Poison Strike
     type: ability
     img: systems/teriock/src/icons/abilities/displacement-poison-strike.webp
+    _id: displacementPois
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+      effectTypes:
+        - poison
+        - displacement
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         proficient: >-
           <p>The @L[Condition:Poisoned]{poison} instead transports the target 10
@@ -32,33 +40,31 @@ effects:
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead transports the target 10
           × @L[Core:Fluency Bonus]{F} feet.</p>
+      powerSources:
+        - magical
+      range:
+        raw: Your Weapon's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} causes the target to be instantly
           transported 10 feet in a random direction.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - poison
-        - displacement
-    _id: mTgJ0GeI8Eds1ECf
+      targets:
+        - creature
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.0B8QuyLmkF9iJEn6
-    _key: '!items.effects!0B8QuyLmkF9iJEn6.mTgJ0GeI8Eds1ECf'
+    _key: '!items.effects!displacementPois.displacementPois'
+img: systems/teriock/src/icons/abilities/displacement-poison-strike.webp
+name: Displacement Poison Strike
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!0B8QuyLmkF9iJEn6'
+_key: '!items!displacementPois'

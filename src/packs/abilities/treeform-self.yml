@@ -1,37 +1,42 @@
-name: Treeform Self
-type: wrapper
-_id: vUvYTwowSVT88dU2
-img: systems/teriock/src/icons/abilities/treeform-self.webp
+_id: treeformSelf0000
 effects:
   - name: Treeform Self
     type: ability
+    img: systems/teriock/src/icons/abilities/treeform-self.webp
+    _id: treeformSelf0000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: untilDawn
-        quantity: 0
+        raw: '0'
+        unit: instant
+        dawn: true
         stationary: false
         description: Until Dawn
+      delivery:
+        base: self
       effectTypes:
         - transformation
       elements:
         - nature
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       results:
         hit: >-
           <p>You are @L[Condition:Transformed]{minorly transformed} into a
@@ -42,29 +47,32 @@ effects:
         - self
       impacts:
         base:
+          changes:
+            - mode: 5
+              priority: 40
+              time: normal
+              key: system.transformation.img
+              target: Actor
+              qualifier: '1'
+              value: icons/environment/wilderness/tree-ash.webp
           statuses:
             - transformed
-          changes:
-            - key: system.transformation.img
-              mode: 5
-              value: icons/environment/wilderness/tree-ash.webp
-              priority: 40
         macros:
           Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
           Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
           Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-    _id: xmqTcIHfNIjB5kJc
-    img: systems/teriock/src/icons/abilities/treeform-self.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vUvYTwowSVT88dU2
-    _key: '!items.effects!vUvYTwowSVT88dU2.xmqTcIHfNIjB5kJc'
+    _key: '!items.effects!treeformSelf0000.treeformSelf0000'
+img: systems/teriock/src/icons/abilities/treeform-self.webp
+name: Treeform Self
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!vUvYTwowSVT88dU2'
+_key: '!items!treeformSelf0000'

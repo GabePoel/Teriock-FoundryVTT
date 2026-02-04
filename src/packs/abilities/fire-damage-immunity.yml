@@ -1,58 +1,68 @@
-name: Fire Damage Immunity
-type: wrapper
-_id: Y2enQ6mYV3fwCgXV
-img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
+_id: fireDmgImy000000
 effects:
   - name: Fire Damage Immunity
     type: ability
     img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
+    _id: fireDmgImy000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Fire]{fire
           damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              value: fire
+            - mode: 2
               priority: 10
-    _id: MHzFhAQN3z764LzV
+              time: normal
+              key: system.protections.immunities.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: fire
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Y2enQ6mYV3fwCgXV
-    _key: '!items.effects!Y2enQ6mYV3fwCgXV.MHzFhAQN3z764LzV'
+    _key: '!items.effects!fireDmgImy000000.fireDmgImy000000'
+img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
+name: Fire Damage Immunity
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Y2enQ6mYV3fwCgXV'
+_key: '!items!fireDmgImy000000'

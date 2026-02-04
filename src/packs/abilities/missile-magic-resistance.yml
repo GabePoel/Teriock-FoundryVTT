@@ -1,65 +1,75 @@
-name: Missile Magic Resistance
-type: wrapper
-_id: vVcrEfDLCLaKrpGY
-img: systems/teriock/src/icons/abilities/missile-magic-resistance.webp
+_id: missileMagRsc000
 effects:
   - name: Missile Magic Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/missile-magic-resistance.webp
+    _id: missileMagRsc000
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - dead
+        dawn: false
+        stationary: false
         description: While Alive
+      delivery:
+        base: self
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Resistance]{resistant} to all
           @L[Category:Conjured spells]{conjured} @L[Category:Missile delivery
           spells]{Missile Spells}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - primal
+      range:
+        unit: self
       skill: true
       standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Conjured Missile Spells
+            - mode: 2
               priority: 10
-    _id: kQoCjSw82AzBGlsU
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
+              value: Conjured Missile Spells
+      class: berserker
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vVcrEfDLCLaKrpGY
-    _key: '!items.effects!vVcrEfDLCLaKrpGY.kQoCjSw82AzBGlsU'
+    _key: '!items.effects!missileMagRsc000.missileMagRsc000'
+img: systems/teriock/src/icons/abilities/missile-magic-resistance.webp
+name: Missile Magic Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!vVcrEfDLCLaKrpGY'
+_key: '!items!missileMagRsc000'

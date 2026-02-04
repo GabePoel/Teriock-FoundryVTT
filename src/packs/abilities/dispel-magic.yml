@@ -1,31 +1,43 @@
-name: Dispel Magic
-type: wrapper
-_id: vhFjKNsAVNFcdCY6
-img: systems/teriock/src/icons/abilities/dispel-magic.webp
+_id: dispelMag0000000
 effects:
   - name: Dispel Magic
     type: ability
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
+    _id: dispelMag0000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: aura
-      targets:
-        - spell
       elements:
         - storm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: '30'
+      endCondition: <p>The start of your next turn.</p>
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
+        name]] increases by 10 feet.</p>
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>Target @L[Category:Conjured spells]{spell}
@@ -40,40 +52,34 @@ effects:
           additional times as a @L[Category:Free reaction abilities]{free
           reaction} before the start of your next turn. These additional uses do
           not in turn allow for additional uses.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      rotator: true
       spell: true
       standard: true
-      class: stormMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 10 feet.</p>
-      endCondition: <p>The start of your next turn.</p>
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - spell
       trigger: >-
         <p>A @L[Category:Conjured spells]{conjured spell} is used within
         range.</p>
-      form: special
-    _id: JzNOIUkkAhFZwbq1
+      impacts: {}
+      class: stormMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.vhFjKNsAVNFcdCY6
-    _key: '!items.effects!vhFjKNsAVNFcdCY6.JzNOIUkkAhFZwbq1'
+    _key: '!items.effects!dispelMag0000000.dispelMag0000000'
+img: systems/teriock/src/icons/abilities/dispel-magic.webp
+name: Dispel Magic
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!vhFjKNsAVNFcdCY6'
+_key: '!items!dispelMag0000000'

@@ -1,32 +1,55 @@
-name: Explosion
-type: wrapper
-_id: w9ge2IEary3nB4dQ
-img: systems/teriock/src/icons/abilities/explosion.webp
+_id: explosion0000000
 effects:
   - name: Explosion
     type: ability
     img: systems/teriock/src/icons/abilities/explosion.webp
+    _id: explosion0000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 2
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: missile
         package: ball
-      targets:
-        - creature
+      effectTypes:
+        - damaging
+        - loud
       elements:
         - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      executionTime: a1
+      expansion:
+        type: detonate
+        range:
+          raw: '30'
+          unit: ft
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: '30'
+        unit: ft
       results:
         hit: >-
           <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
@@ -34,33 +57,11 @@ effects:
         critHit: >-
           <p>Double the @L[Core:Damage]{damage dice} dealt by this
           @L[Category:Abilities]{ability}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      rotator: true
       spell: true
       standard: true
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 2
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      expansion:
-        range:
-          unit: ft
-        type: detonate
-      expansionRange: '30'
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - damaging
-        - loud
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -68,17 +69,18 @@ effects:
         heightened:
           rolls:
             damage: 1d6[magic fire]
-    _id: d1vGQH2MCyu40ca0
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.w9ge2IEary3nB4dQ
-    _key: '!items.effects!w9ge2IEary3nB4dQ.d1vGQH2MCyu40ca0'
+    _key: '!items.effects!explosion0000000.explosion0000000'
+img: systems/teriock/src/icons/abilities/explosion.webp
+name: Explosion
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!w9ge2IEary3nB4dQ'
+_key: '!items!explosion0000000'

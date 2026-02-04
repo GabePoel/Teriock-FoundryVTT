@@ -1,36 +1,51 @@
+_id: musket0000000000
+folder: GjqehiaK2urxvWVm
 name: Musket
-type: equipment
 system:
   equipmentType: Musket
-  consumable: false
-  damage:
-    base:
-      saved: 1d10
-  equipmentClasses:
-    - guns
-  minStr:
-    saved: -1
-    raw: -3
-  powerLevel: mundane
-  range:
-    short:
-      saved: '40'
-      unit: ft
-    long:
-      saved: '120'
-      unit: ft
-    ranged: false
-  weight:
-    saved: 10
+  tier: {}
+  competence:
     raw: 0
   attackPenalty:
-    saved: '-4'
-_id: Elrf0F5hKdvMHwNo
+    raw: '-4'
+  damage:
+    base:
+      raw: 1d10
+    twoHanded: {}
+  hit: {}
+  range:
+    long:
+      raw: '120'
+      unit: ft
+    melee: true
+    ranged: false
+    short:
+      raw: '40'
+      unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '10'
+  minStr:
+    raw: '-1'
+  equipmentClasses:
+    - guns
+  powerLevel: mundane
+type: equipment
 img: systems/teriock/src/icons/equipment/musket.webp
 effects:
   - name: Cumbersome
     type: property
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    _id: cumbersome000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
         <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
@@ -41,26 +56,33 @@ effects:
         otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-      modifiesActor: true
       impacts:
         changes:
-          - key: system.encumbranceLevel
-            mode: 2
-            value: '1'
+          - mode: 2
             priority: 10
-    _id: kDvUSEDBWq9OD3CF
-    img: systems/teriock/src/icons/properties/cumbersome.webp
+            time: normal
+            key: system.encumbranceLevel
+            target: Actor
+            qualifier: '1'
+            value: '1'
+      modifiesActor: true
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Qnxdsbou7Lfai8FN
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.kDvUSEDBWq9OD3CF'
+    _key: '!items.effects!musket0000000000.cumbersome000000'
   - name: Fragile
     type: property
+    img: systems/teriock/src/icons/properties/fragile.webp
+    _id: fragile000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
         becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
@@ -69,112 +91,137 @@ effects:
         effects]{damage}. If it would become @L[Property:Shattered]{shattered}
         through some other means, it is instead
         @L[Property:Destroyed]{destroyed}.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-    _id: suDydSzsWksunoGd
-    img: systems/teriock/src/icons/properties/fragile.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.7TVFsjp80zEMQ26u
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.suDydSzsWksunoGd'
+    _key: '!items.effects!musket0000000000.fragile000000000'
   - name: Involved
     type: property
+    img: systems/teriock/src/icons/properties/involved.webp
+    _id: involved00000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Using an <b>[[lookup name style=lc]]</b> @L[Category:Involved
         equipment]{item} is more complicated than a regular one and gives other
         creatures a chance to interfere. Doing any of the following with an
         @L[Category:Involved equipment]{involved item} counts as a valid trigger
         for @L[Ability:Opportunity Attack]{opportunity attacks}.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-    _id: Ivh9uBKJDfifc3Il
-    img: systems/teriock/src/icons/properties/involved.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.involved00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.QG9liblYY7FGyMFC
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.Ivh9uBKJDfifc3Il'
+    _key: '!items.effects!musket0000000000.involved00000000'
   - name: Loading
     type: property
+    img: systems/teriock/src/icons/properties/loading.webp
+    _id: loading000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property must be
         reloaded after making an @L[Category:Attack abilities]{attack} with it.
         Anyone can do this using @L[Ability:Reload]{Reload}.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-    _id: 7MxRhENBUUmxZhWY
-    img: systems/teriock/src/icons/properties/loading.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.loading000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.IqKNnbXPdsjuyi4Y
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.7MxRhENBUUmxZhWY'
+    _key: '!items.effects!musket0000000000.loading000000000'
   - name: Two-Handed
     type: property
+    img: systems/teriock/src/icons/properties/two-handed.webp
+    _id: twoHanded0000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
         @L[Category:Attack abilities]{attacked} with unless it is wielded in two
         hands.</p>
+      suppression: {}
+      revealed: true
       form: flaw
-    _id: O93tJMrolqjLW5ho
-    img: systems/teriock/src/icons/properties/two-handed.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.twoHanded0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.f9yfWeyhhdZ1G9F3
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.O93tJMrolqjLW5ho'
+    _key: '!items.effects!musket0000000000.twoHanded0000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: yDupUr6rkd43KG5h
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.yDupUr6rkd43KG5h'
+    _key: '!items.effects!musket0000000000.wep0000000000000'
   - name: Ammunition
     type: property
+    img: systems/teriock/src/icons/properties/ammunition.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property is @L[Property:Ranged]{ranged} and
         requires some sort of [[lookup name style=lc]] (arrows, rocks, darts,
         etc.) to @L[Category:Attack abilities]{attack} with.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.melee
-            mode: 5
-            value: 'false'
+          - mode: 5
             priority: 10
-    _id: v0ElyRk6H0TjbO0S
-    img: systems/teriock/src/icons/properties/ammunition.webp
+            time: normal
+            key: system.range.melee
+            target: parent
+            qualifier: '1'
+            value: 'false'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.JJ1CEFynCrUbDAPO
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.v0ElyRk6H0TjbO0S'
+    _id: 3qoQMnlYSPfYspa4
+    _key: '!items.effects!musket0000000000.3qoQMnlYSPfYspa4'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -186,26 +233,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      _sup: v0ElyRk6H0TjbO0S
-    _id: P3YndKekAVnsOtAv
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: 3qoQMnlYSPfYspa4
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!Elrf0F5hKdvMHwNo.P3YndKekAVnsOtAv'
-folder: GjqehiaK2urxvWVm
+    _id: XBjErBW8qrtZD5QO
+    _key: '!items.effects!musket0000000000.XBjErBW8qrtZD5QO'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Elrf0F5hKdvMHwNo'
+_key: '!items!musket0000000000'

@@ -1,120 +1,150 @@
-name: Intimidate
-type: wrapper
-_id: unqjy3zAKV4tWiQy
-img: systems/teriock/src/icons/abilities/intimidate.webp
+_id: intimidate000000
 effects:
   - name: Intimidate
     type: ability
     img: systems/teriock/src/icons/abilities/intimidate.webp
+    _id: intimidate000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Intimidating Presence]{Intimidating Presence}
           and @L[Ability:Terrify]{Terrify}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-    _id: iK58Wo29aS3XigQ6
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.unqjy3zAKV4tWiQy
-    _key: '!items.effects!unqjy3zAKV4tWiQy.iK58Wo29aS3XigQ6'
+    _key: '!items.effects!intimidate000000.intimidate000000'
   - name: Intimidating Presence
     type: ability
+    img: systems/teriock/src/icons/abilities/intimidating-presence.webp
+    _id: eyEDugnWHSd8O0LV
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
           @L[Tradecraft:Enforcer]{enforcer}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.tradecrafts.enforcer.score
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
-      _sup: iK58Wo29aS3XigQ6
-    _id: d8Epu0VZ3HdtYB5T
-    img: systems/teriock/src/icons/abilities/intimidating-presence.webp
+              time: normal
+              key: system.tradecrafts.enforcer.score
+              target: Actor
+              qualifier: '1'
+              value: '2'
+      _sup: intimidate000000
+      class: berserker
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.intimidatingPres
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.GZz8Trg9YmDlarpm
-    _key: '!items.effects!unqjy3zAKV4tWiQy.d8Epu0VZ3HdtYB5T'
+    _key: '!items.effects!intimidate000000.eyEDugnWHSd8O0LV'
   - name: Terrify
     type: ability
+    img: systems/teriock/src/icons/abilities/terrify.webp
+    _id: wF4R1CYnUTBMR03w
     system:
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-      targets:
-        - creature
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '5'
         unit: minute
-        quantity: 5
+        dawn: false
         stationary: false
         description: 5 Minutes
+      delivery:
+        base: sight
+      effectTypes:
+        - mental
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: int
+      form: normal
+      grantOnly: false
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - martial
       range:
-        unit: ft
         raw: '30'
+        unit: ft
       results:
         fail: >-
           <p>If the target is @L[Condition:Frightened]{frightened}, they
@@ -122,38 +152,31 @@ effects:
           Additionally, if some effect would cause them to become
           @L[Condition:Frightened]{frightened}, they take [[/damage
           1d4[psychic]]] @L[Core:Damage]{damage} as well.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       skill: true
       standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - mental
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - frightened
           rolls:
             damage: 1d4[psychic]
-      _sup: iK58Wo29aS3XigQ6
-    _id: FAuUcqkyX71y8sLc
-    img: systems/teriock/src/icons/abilities/terrify.webp
+          statuses:
+            - frightened
+      _sup: intimidate000000
+      class: berserker
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.terrify000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Hvn9loxtLu1lxvKP
-    _key: '!items.effects!unqjy3zAKV4tWiQy.FAuUcqkyX71y8sLc'
+    _key: '!items.effects!intimidate000000.wF4R1CYnUTBMR03w'
+img: systems/teriock/src/icons/abilities/intimidate.webp
+name: Intimidate
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!unqjy3zAKV4tWiQy'
+_key: '!items!intimidate000000'

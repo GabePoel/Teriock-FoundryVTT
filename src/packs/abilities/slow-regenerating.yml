@@ -1,26 +1,38 @@
-name: Slow Regenerating
-type: wrapper
-_id: 82mH9es5Yjd7qmWv
-img: systems/teriock/src/icons/abilities/slow-regenerating.webp
+_id: slowRegenerating
 effects:
   - name: Slow Regenerating
     type: ability
     img: systems/teriock/src/icons/abilities/slow-regenerating.webp
+    _id: slowRegenerating
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once every 10 minutes, you @L[Core:Healing]{heal} and regain that
@@ -28,29 +40,25 @@ effects:
           consume the @L[Core:Hit Die]{hit die}. If you were
           @L[Condition:Dead]{dead}, this brings you back to live with the number
           of @L[Core:Hit Points and Mana Points]{HP} you rolled.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
-    _id: bHQB9lLQjSzXdlhw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.82mH9es5Yjd7qmWv
-    _key: '!items.effects!82mH9es5Yjd7qmWv.bHQB9lLQjSzXdlhw'
+    _key: '!items.effects!slowRegenerating.slowRegenerating'
+img: systems/teriock/src/icons/abilities/slow-regenerating.webp
+name: Slow Regenerating
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!82mH9es5Yjd7qmWv'
+_key: '!items!slowRegenerating'

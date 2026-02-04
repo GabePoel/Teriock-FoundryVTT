@@ -1,40 +1,45 @@
-name: Cowardly
-type: wrapper
-_id: S9Bd3GAKqqmyE6a0
-img: systems/teriock/src/icons/abilities/cowardly.webp
+_id: cowardly00000000
 effects:
   - name: Cowardly
     type: ability
+    img: systems/teriock/src/icons/abilities/cowardly.webp
+    _id: cowardly00000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: No Limit
+      delivery:
+        base: self
       effectTypes:
         - automatic
       endCondition: >-
         <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r0
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
       overview:
         base: <p>You become @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       trigger: >-
@@ -43,35 +48,35 @@ effects:
         to.</p>
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: executor
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: YUMbFoYCy3yvhHRt
-    img: systems/teriock/src/icons/abilities/cowardly.webp
+          rolls:
+            endCon: 2d4
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.S9Bd3GAKqqmyE6a0
-    _key: '!items.effects!S9Bd3GAKqqmyE6a0.YUMbFoYCy3yvhHRt'
+    _key: '!items.effects!cowardly00000000.cowardly00000000'
+img: systems/teriock/src/icons/abilities/cowardly.webp
+name: Cowardly
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!S9Bd3GAKqqmyE6a0'
+_key: '!items!cowardly00000000'

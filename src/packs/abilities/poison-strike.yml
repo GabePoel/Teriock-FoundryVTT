@@ -1,30 +1,38 @@
-name: Poison Strike
-type: wrapper
-_id: DBrO7NQw5K6ks2MN
-img: systems/teriock/src/icons/abilities/poison-strike.webp
+_id: poisonStrike0000
 effects:
   - name: Poison Strike
     type: ability
     img: systems/teriock/src/icons/abilities/poison-strike.webp
+    _id: poisonStrike0000
     system:
-      powerSources:
-        - alchemical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+      effectTypes:
+        - poison
+      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         proficient: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
@@ -32,47 +40,44 @@ effects:
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
           1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+      powerSources:
+        - alchemical
+      range:
+        raw: Your Weapon's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
           @L[Core:Damage]{damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       skill: true
-      class: assassin
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - poison
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - poisoned
           rolls:
             damage: 1d6[toxic]
+          statuses:
+            - poisoned
         proficient:
           rolls:
             damage: 1d8[toxic]
         fluent:
           rolls:
             damage: 1d10[toxic]
-    _id: 4FRh8BVzKWfc7JoJ
+      class: assassin
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DBrO7NQw5K6ks2MN
-    _key: '!items.effects!DBrO7NQw5K6ks2MN.4FRh8BVzKWfc7JoJ'
+    _key: '!items.effects!poisonStrike0000.poisonStrike0000'
+img: systems/teriock/src/icons/abilities/poison-strike.webp
+name: Poison Strike
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!DBrO7NQw5K6ks2MN'
+_key: '!items!poisonStrike0000'

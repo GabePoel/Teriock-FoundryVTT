@@ -1,75 +1,80 @@
-name: Web Packet
-type: wrapper
-_id: hT5zLDdSPAvq0KH7
-img: systems/teriock/src/icons/abilities/web-packet.webp
+_id: webPacket0000000
 effects:
   - name: Web Packet
     type: ability
     img: systems/teriock/src/icons/abilities/web-packet.webp
+    _id: webPacket0000000
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: missile
         package: ray
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - martial
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - snared
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: W60cxslkIivW7R6r
+          rolls:
+            endCon: 2d4
+          statuses:
+            - snared
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hT5zLDdSPAvq0KH7
-    _key: '!items.effects!hT5zLDdSPAvq0KH7.W60cxslkIivW7R6r'
+    _key: '!items.effects!webPacket0000000.webPacket0000000'
+img: systems/teriock/src/icons/abilities/web-packet.webp
+name: Web Packet
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!hT5zLDdSPAvq0KH7'
+_key: '!items!webPacket0000000'

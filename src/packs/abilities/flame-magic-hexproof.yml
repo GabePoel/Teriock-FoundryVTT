@@ -1,33 +1,37 @@
-name: Flame Magic Hexproof
-type: wrapper
-_id: j7Y9p7WCARscyGNY
-img: systems/teriock/src/icons/abilities/flame-magic-hexproof.webp
+_id: flameMagHxp00000
 effects:
   - name: Flame Magic Hexproof
     type: ability
+    img: systems/teriock/src/icons/abilities/flame-magic-hexproof.webp
+    _id: flameMagHxp00000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
       effectTypes:
         - hexproof
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -35,30 +39,34 @@ effects:
           <p>You are @L[Keyword:Hexproof]{hexproof} to @L[Category:Magically
           powered abilities]{magical} @L[Category:Flame element abilities]{flame
           abilities}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.hexproofs.elements
-              mode: 2
-              value: flame
+            - mode: 2
               priority: 10
-    _id: B6PFaoAbsnvSUQ32
-    img: systems/teriock/src/icons/abilities/flame-magic-hexproof.webp
+              time: normal
+              key: system.protections.hexproofs.elements
+              target: Actor
+              qualifier: '1'
+              value: flame
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.j7Y9p7WCARscyGNY
-    _key: '!items.effects!j7Y9p7WCARscyGNY.B6PFaoAbsnvSUQ32'
+    _key: '!items.effects!flameMagHxp00000.flameMagHxp00000'
+img: systems/teriock/src/icons/abilities/flame-magic-hexproof.webp
+name: Flame Magic Hexproof
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!j7Y9p7WCARscyGNY'
+_key: '!items!flameMagHxp00000'

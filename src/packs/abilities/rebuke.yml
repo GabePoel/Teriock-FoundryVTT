@@ -1,79 +1,84 @@
-name: Rebuke
-type: wrapper
-_id: TK7YRK1IkvlKbUW6
-img: systems/teriock/src/icons/abilities/rebuke.webp
+_id: rebuke0000000000
 effects:
   - name: Rebuke
     type: ability
     img: systems/teriock/src/icons/abilities/rebuke.webp
+    _id: rebuke0000000000
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '5'
+        unit: second
+        dawn: false
+        stationary: false
+        description: 5 Seconds
       delivery:
         base: sight
-      targets:
-        - creature
-      duration:
-        unit: second
-        quantity: 5
-        description: 5 Seconds
-      range:
-        unit: ft
-        raw: '90'
+      endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>The triggering creature takes [[/damage 1d6[spiritual]]]
           @L[Core:Damage]{damage} and is @L[Condition:Lighted]{lighted} towards
           a creature of your choice.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - spiritual
+      range:
+        raw: '90'
+        unit: ft
       skill: true
       standard: true
-      class: duelist
-      endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
-      form: normal
       impacts:
         base:
-          rolls:
-            damage: 1d6[spiritual]
           expiration:
             normal:
               combat:
                 who:
                   type: executor
                 what:
-                  type: forced
                   roll: 2d4kh1
                   threshold: 4
+                  type: forced
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          rolls:
+            damage: 1d6[spiritual]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-    _id: n3lQ7z6myhos68Ue
+      class: duelist
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.TK7YRK1IkvlKbUW6
-    _key: '!items.effects!TK7YRK1IkvlKbUW6.n3lQ7z6myhos68Ue'
+    _key: '!items.effects!rebuke0000000000.rebuke0000000000'
+img: systems/teriock/src/icons/abilities/rebuke.webp
+name: Rebuke
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!TK7YRK1IkvlKbUW6'
+_key: '!items!rebuke0000000000'

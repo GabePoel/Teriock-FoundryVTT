@@ -1,41 +1,44 @@
-name: Smash Glow Bulb
-type: wrapper
-_id: EaRUsKldNnyZD3sX
-img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
+_id: smGlowBulb000000
 effects:
   - name: Smash Glow Bulb
     type: ability
+    img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
+    _id: smGlowBulb000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         material: true
         break: shatter
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      delivery:
-        base: item
       duration:
+        raw: '10'
         unit: minute
-        quantity: 10
+        dawn: false
         stationary: false
         description: 10 Minutes
+      delivery:
+        base: item
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
         base: >-
           <p>The spot on the ground where the source of this ability was smashed
           starts @L[Property:Glowing]{glowing} (100 feet).</p>
-      piercing: normal
       powerSources:
         - alchemical
       range:
@@ -50,22 +53,25 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.light.dim
-              mode: 4
-              value: '100'
+            - mode: 4
               priority: 5
-    _id: hTeg1HrdjrL80Bzf
-    img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
+              value: '100'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.EaRUsKldNnyZD3sX
-    _key: '!items.effects!EaRUsKldNnyZD3sX.hTeg1HrdjrL80Bzf'
+    _key: '!items.effects!smGlowBulb000000.smGlowBulb000000'
+img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
+name: Smash Glow Bulb
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!EaRUsKldNnyZD3sX'
+_key: '!items!smGlowBulb000000'

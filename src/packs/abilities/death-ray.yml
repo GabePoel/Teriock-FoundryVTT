@@ -1,57 +1,60 @@
-name: Death Ray
-type: wrapper
-_id: XQOq1ZLYjWqbvHpz
-img: systems/teriock/src/icons/abilities/death-ray.webp
+_id: deathRay00000000
 effects:
   - name: Death Ray
     type: ability
     img: systems/teriock/src/icons/abilities/death-ray.webp
+    _id: deathRay00000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: missile
         package: ray
-      targets:
-        - creature
+      effectTypes:
+        - killing
       elements:
         - necromancy
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
+        1d6]].</p>
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: '60'
+        unit: ft
+      requirements: >-
+        <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
+        creatures]{undead}.</p>
       results:
         hit: >-
           <p>Roll [[/kill 2d6]] if this is greater than or equal the number of
           @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}. This
           does not deal @L[Core:Damage]{damage}.</p>
         critHit: <p>Double the number of dice rolled.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
-      class: necromancer
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
-        1d6]].</p>
-      requirements: >-
-        <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
-        creatures]{undead}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - killing
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -59,17 +62,19 @@ effects:
         heightened:
           rolls:
             kill: 1d6
-    _id: xjdBpwES77180gsl
+      class: necromancer
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.XQOq1ZLYjWqbvHpz
-    _key: '!items.effects!XQOq1ZLYjWqbvHpz.xjdBpwES77180gsl'
+    _key: '!items.effects!deathRay00000000.deathRay00000000'
+img: systems/teriock/src/icons/abilities/death-ray.webp
+name: Death Ray
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!XQOq1ZLYjWqbvHpz'
+_key: '!items!deathRay00000000'

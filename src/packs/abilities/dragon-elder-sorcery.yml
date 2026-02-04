@@ -1,28 +1,32 @@
-name: Dragon Elder Sorcery
-type: wrapper
-_id: GYomVN0zYhSYeSRt
-img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
+_id: drgES00000000000
 effects:
   - name: Dragon Elder Sorcery
     type: ability
+    img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
+    _id: drgES00000000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -50,9 +54,10 @@ effects:
           Sorcery]{Elder Sorcery}. However, it <i>must</i> be true. Otherwise,
           you fumble as though you had cast @L[Core:Elder Sorcery]{Elder
           Sorcery}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
@@ -67,35 +72,39 @@ effects:
                 or(@key.innateElderSorcery, @key.elderSorceryAdept,
                 @key.dragonSnapcast)
               value: '2'
-    _id: Va3e9XqQ2xLAvrRZ
-    img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.GYomVN0zYhSYeSRt
-    _key: '!items.effects!GYomVN0zYhSYeSRt.Va3e9XqQ2xLAvrRZ'
+    _key: '!items.effects!drgES00000000000.drgES00000000000'
   - name: Innate Elder Sorcery
     type: ability
+    img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
+    _id: yfKyofKOJ3ay8QEd
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -121,96 +130,136 @@ effects:
           Sorcery Words]{All Elder Sorcery Words} and also always gain a +(10 *
           @L[Core:Fluency Bonus]{F}) experience bonus during @L[Core:Elder
           Sorcery]{Elder Sorcery} spell creation.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
-      _sup: Va3e9XqQ2xLAvrRZ
-    _id: 7howCwy7OkIyqoDh
-    img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
+      impacts: {}
+      _sup: drgES00000000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.innateES00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hBFvs5rlAgeXcR9h
-    _key: '!items.effects!GYomVN0zYhSYeSRt.7howCwy7OkIyqoDh'
+    _key: '!items.effects!drgES00000000000.yfKyofKOJ3ay8QEd'
   - name: Elder Sorcery Adept
     type: ability
+    img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
+    _id: YGuDR6hlVYas02So
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Adept]{adept} at creating, casting, and learning
           @L[Core:Elder Sorcery]{Elder Sorcery}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: '!ability__system.elderSorcery__is__true__system.adept.enabled'
-              mode: 4
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.adept.enabled
+              target: ability
+              qualifier: '@es'
               value: 'true'
+            - mode: 4
               priority: 10
-            - key: '!ability__system.elderSorcery__is__true__system.adept.amount'
-              mode: 4
+              time: normal
+              key: system.adept.amount
+              target: ability
+              qualifier: '@es'
               value: '1'
-              priority: 10
-      _sup: Va3e9XqQ2xLAvrRZ
-    _id: nTa9TNICQmZFk3a0
-    img: systems/teriock/src/icons/abilities/elder-sorcery-adept.webp
+      _sup: drgES00000000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.eSAdept000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.kgi1Or5Ew7V9zRdo
-    _key: '!items.effects!GYomVN0zYhSYeSRt.nTa9TNICQmZFk3a0'
+    _key: '!items.effects!drgES00000000000.YGuDR6hlVYas02So'
   - name: Elder Sorcery Creation
     type: ability
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    _id: 2LJcXBgom5dt90w7
     system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Long Rest
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        material: true
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
+              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
+              @L[Core:MP]{MP} of the spell itself.</p>
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+        materialCost: >-
+          <p>Creation cost is at least 3 × the material components of the spell
+          itself.</p>
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: sight
         package: ritual
-      targets:
-        - self
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: melee
+      elderSorcery: true
+      executionTime: Long Rest
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
@@ -232,59 +281,42 @@ effects:
           @L[Core:Proficiency Bonus]{P} additional spells from other
           @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
           Sorcery]{Elder Sorcery} for more information.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
+      powerSources:
+        - magical
+      range:
+        unit: melee
       ritual: true
-      costs:
-        material: true
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        materialCost: >-
-          <p>Creation cost is at least 3 × the material components of the spell
-          itself.</p>
-      expansionSaveAttribute: mov
-      form: special
-      grantOnly: false
-      _sup: 7howCwy7OkIyqoDh
-    _id: mnqpzwo5SzB6GBj2
-    flags:
-      teriock:
-        dontConsume: false
+      skill: true
+      targets:
+        - self
+      impacts: {}
+      _sup: yfKyofKOJ3ay8QEd
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.eSCreation000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Mdcuh7skNnu6UxjN
-    _key: '!items.effects!GYomVN0zYhSYeSRt.mnqpzwo5SzB6GBj2'
+    _key: '!items.effects!drgES00000000000.2LJcXBgom5dt90w7'
   - name: All Elder Sorcery Words
     type: ability
+    img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
+    _id: iG7iDqIkQfyM5EAV
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       elderSorcery: true
       elements:
         - life
@@ -293,15 +325,13 @@ effects:
         - flame
         - nature
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -522,24 +552,27 @@ effects:
         fluent: >-
           <p>The OP of words you know is 1 + (3 × @L[Core:Fluency
           Bonus]{F}).</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
-      _sup: 7howCwy7OkIyqoDh
-    _id: h1AFtOHsQmkor0D0
-    img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
+      impacts: {}
+      _sup: yfKyofKOJ3ay8QEd
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.allESWords000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.xKGhRmlXkVOSKuWl
-    _key: '!items.effects!GYomVN0zYhSYeSRt.h1AFtOHsQmkor0D0'
+    _key: '!items.effects!drgES00000000000.iG7iDqIkQfyM5EAV'
+img: systems/teriock/src/icons/abilities/dragon-elder-sorcery.webp
+name: Dragon Elder Sorcery
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!GYomVN0zYhSYeSRt'
+_key: '!items!drgES00000000000'

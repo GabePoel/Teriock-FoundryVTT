@@ -1,29 +1,39 @@
-name: Stamina
-type: wrapper
-_id: qYCmQ55NQnkBL8z8
-img: systems/teriock/src/icons/abilities/stamina.webp
+_id: stamina000000000
 effects:
   - name: Stamina
     type: ability
     img: systems/teriock/src/icons/abilities/stamina.webp
+    _id: stamina000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
+        stationary: false
         description: While Up
+      delivery:
+        base: self
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Condition:Down]{dropping} due
@@ -32,37 +42,37 @@ effects:
           @L[Core:Hit Points and Mana Points]{MP} below zero and suffer other
           consequences from negative @L[Core:Hit Points and Mana
           Points]{MP}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: ranger
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Dropping From Negative MP
+            - mode: 2
               priority: 10
-    _id: tbZx4WQeYK2hdrjx
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
+              value: Dropping From Negative MP
+      class: ranger
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qYCmQ55NQnkBL8z8
-    _key: '!items.effects!qYCmQ55NQnkBL8z8.tbZx4WQeYK2hdrjx'
+    _key: '!items.effects!stamina000000000.stamina000000000'
+img: systems/teriock/src/icons/abilities/stamina.webp
+name: Stamina
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!qYCmQ55NQnkBL8z8'
+_key: '!items!stamina000000000'

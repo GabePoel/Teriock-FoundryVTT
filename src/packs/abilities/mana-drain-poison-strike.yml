@@ -1,30 +1,38 @@
-name: Mana Drain Poison Strike
-type: wrapper
-_id: BAIAQUiM0XEUcv6B
-img: systems/teriock/src/icons/abilities/mana-drain-poison-strike.webp
+_id: manaDrainPoisonS
 effects:
   - name: Mana Drain Poison Strike
     type: ability
     img: systems/teriock/src/icons/abilities/mana-drain-poison-strike.webp
+    _id: manaDrainPoisonS
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+      effectTypes:
+        - poison
+        - draining
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         proficient: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
@@ -32,22 +40,18 @@ effects:
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
           1d10[mana]]] @L[Category:Drain types]{drain}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: Your Weapon's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} deals [[/drain 1d6[mana]]]
           @L[Category:Drain types]{drain}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - poison
-        - draining
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -58,17 +62,18 @@ effects:
         fluent:
           rolls:
             drain: 1d10[mana]
-    _id: E617pr1ekCm7vKxq
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.BAIAQUiM0XEUcv6B
-    _key: '!items.effects!BAIAQUiM0XEUcv6B.E617pr1ekCm7vKxq'
+    _key: '!items.effects!manaDrainPoisonS.manaDrainPoisonS'
+img: systems/teriock/src/icons/abilities/mana-drain-poison-strike.webp
+name: Mana Drain Poison Strike
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!BAIAQUiM0XEUcv6B'
+_key: '!items!manaDrainPoisonS'

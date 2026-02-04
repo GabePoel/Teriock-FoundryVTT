@@ -1,65 +1,75 @@
-name: Called Magic Resistance
-type: wrapper
-_id: y5OPBAnuRx86n2jo
-img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
+_id: calledMagRsc0000
 effects:
   - name: Called Magic Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
+    _id: calledMagRsc0000
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - dead
+        dawn: false
+        stationary: false
         description: While Alive
+      delivery:
+        base: self
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} all @L[Category:Conjured
           spells]{Conjured spells} that aren't @L[Category:Self target
           spells]{self targeted}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - primal
+      range:
+        unit: self
       skill: true
       standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Conjured Spells
+            - mode: 2
               priority: 10
-    _id: 5KZgbY0Lkn3zj6Jz
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
+              value: Conjured Spells
+      class: berserker
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.y5OPBAnuRx86n2jo
-    _key: '!items.effects!y5OPBAnuRx86n2jo.5KZgbY0Lkn3zj6Jz'
+    _key: '!items.effects!calledMagRsc0000.calledMagRsc0000'
+img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
+name: Called Magic Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!y5OPBAnuRx86n2jo'
+_key: '!items!calledMagRsc0000'

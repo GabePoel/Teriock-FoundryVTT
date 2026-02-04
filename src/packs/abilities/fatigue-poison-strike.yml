@@ -1,30 +1,42 @@
-name: Fatigue Poison Strike
-type: wrapper
-_id: O8PccrRKcvu4WLtt
-img: systems/teriock/src/icons/abilities/fatigue-poison-strike.webp
+_id: fatiguePoisonStr
 effects:
   - name: Fatigue Poison Strike
     type: ability
     img: systems/teriock/src/icons/abilities/fatigue-poison-strike.webp
+    _id: fatiguePoisonStr
     system:
-      powerSources:
-        - alchemical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
+      effectTypes:
+        - poison
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - alchemical
       range:
-        unit: ft
         raw: Your Weapon's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
@@ -32,31 +44,24 @@ effects:
           @L[Condition:Slowed]{slowed}. If the target is already
           @L[Condition:Slowed]{slowed} by this @L[Condition:Poisoned]{poison},
           then they become @L[Condition:Immobilized]{immobilized}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - poison
+      targets:
+        - creature
       impacts:
         base:
           statuses:
             - poisoned
-    _id: AO4OtnS9Qhco3vO8
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.O8PccrRKcvu4WLtt
-    _key: '!items.effects!O8PccrRKcvu4WLtt.AO4OtnS9Qhco3vO8'
+    _key: '!items.effects!fatiguePoisonStr.fatiguePoisonStr'
+img: systems/teriock/src/icons/abilities/fatigue-poison-strike.webp
+name: Fatigue Poison Strike
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!O8PccrRKcvu4WLtt'
+_key: '!items!fatiguePoisonStr'

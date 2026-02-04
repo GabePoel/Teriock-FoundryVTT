@@ -1,91 +1,96 @@
-name: Snare
-type: wrapper
-_id: VUMkpdKNuJQ5AYtw
-img: systems/teriock/src/icons/abilities/snare.webp
+_id: snare00000000000
 effects:
   - name: Snare
     type: ability
     img: systems/teriock/src/icons/abilities/snare.webp
+    _id: snare00000000000
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: No Limit
       delivery:
         base: weapon
         package: strike
-      targets:
-        - leg
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: No Limit
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: ranger
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+      skill: true
+      standard: true
+      targets:
+        - leg
       impacts:
         base:
-          statuses:
-            - snared
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: end
                   trigger: turn
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
-    _id: z25LqcqD6c28mo5v
+          rolls:
+            endCon: 2d4
+          statuses:
+            - snared
+      class: ranger
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.VUMkpdKNuJQ5AYtw
-    _key: '!items.effects!VUMkpdKNuJQ5AYtw.z25LqcqD6c28mo5v'
+    _key: '!items.effects!snare00000000000.snare00000000000'
+img: systems/teriock/src/icons/abilities/snare.webp
+name: Snare
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!VUMkpdKNuJQ5AYtw'
+_key: '!items!snare00000000000'

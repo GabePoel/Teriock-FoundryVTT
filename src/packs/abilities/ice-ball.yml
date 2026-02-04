@@ -1,99 +1,104 @@
-name: Ice Ball
-type: wrapper
-_id: bwbAXS34s92L4R4p
-img: systems/teriock/src/icons/abilities/ice-ball.webp
+_id: iceBall000000000
 effects:
   - name: Ice Ball
     type: ability
     img: systems/teriock/src/icons/abilities/ice-ball.webp
+    _id: iceBall000000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: missile
         package: ball
-      targets:
-        - creature
+      effectTypes:
+        - temporal
       elements:
         - storm
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: stormMage
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
       endCondition: >-
         <p>At the start of each of the target's actions, they roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
-      effectTypes:
-        - temporal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - frozen
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: start
                   trigger: action
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: start
                   trigger: action
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
         heightened:
           rolls:
             damage: 1d4[magic ice]
-    _id: UTE4vX4qQBQ5SaJA
+      class: stormMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.bwbAXS34s92L4R4p
-    _key: '!items.effects!bwbAXS34s92L4R4p.UTE4vX4qQBQ5SaJA'
+    _key: '!items.effects!iceBall000000000.iceBall000000000'
+img: systems/teriock/src/icons/abilities/ice-ball.webp
+name: Ice Ball
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!bwbAXS34s92L4R4p'
+_key: '!items!iceBall000000000'

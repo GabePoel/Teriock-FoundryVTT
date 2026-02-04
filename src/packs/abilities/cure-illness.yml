@@ -1,32 +1,49 @@
-name: Cure Illness
-type: wrapper
-_id: m1sC6csetlLjfJ9o
-img: systems/teriock/src/icons/abilities/cure-illness.webp
+_id: cureIllness00000
 effects:
   - name: Cure Illness
     type: ability
     img: systems/teriock/src/icons/abilities/cure-illness.webp
+    _id: cureIllness00000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      effectTypes:
+        - healing
       elements:
         - life
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
+        reduced by 1.</p>
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Make an @L[Tradecraft:Herbalist]{herbalist} check to remove a
@@ -43,6 +60,11 @@ effects:
           @L[Core:Proficiency Bonus]{proficiency bonus} to the
           @L[Tradecraft:Herbalist]{herbalist} check regardless of whether or not
           you are proficient in @L[Tradecraft:Herbalist]{herbalist}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
       results:
         save: <p>The target is cured of the illness.</p>
         fail: >-
@@ -50,41 +72,25 @@ effects:
           duration of Healing Touch. You may cast [[lookup name]] again to keep
           the disease from progressing, but you may not attempt the check
           again.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      ritual: true
       spell: true
       standard: true
-      ritual: true
+      targets:
+        - creature
+      impacts: {}
       class: lifeMage
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
-        reduced by 1.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - healing
-    _id: vlq6QZQEkkG7vGwL
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.m1sC6csetlLjfJ9o
-    _key: '!items.effects!m1sC6csetlLjfJ9o.vlq6QZQEkkG7vGwL'
+    _key: '!items.effects!cureIllness00000.cureIllness00000'
+img: systems/teriock/src/icons/abilities/cure-illness.webp
+name: Cure Illness
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!m1sC6csetlLjfJ9o'
+_key: '!items!cureIllness00000'

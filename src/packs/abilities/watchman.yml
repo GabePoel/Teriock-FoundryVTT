@@ -1,26 +1,34 @@
-name: Watchman
-type: wrapper
-_id: etaIQZOQVp2UhyYy
-img: systems/teriock/src/icons/abilities/watchman.webp
+_id: watchman00000000
 effects:
   - name: Watchman
     type: ability
     img: systems/teriock/src/icons/abilities/watchman.webp
+    _id: watchman00000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: self
-      targets:
-        - area
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
+      executionTime: Short Rest
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You may spend a @L[Core:Short Rest]{short rest} setting up a watch
@@ -28,80 +36,93 @@ effects:
           @L[Core:Short Rest]{short rest} or when @L[Core:Combat]{combat} begins
           may each spend 1 @L[Core:MP]{MP} to gain @L[Ability:Cat Sense]{Cat
           Sense}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You remain in the targeted area.</p>
       skill: true
       standard: true
+      targets:
+        - area
+      impacts: {}
       class: archer
-      requirements: <p>You remain in the targeted area.</p>
-      expansionSaveAttribute: mov
-      form: normal
-    _id: DxqOXbieqS8tOT8S
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.etaIQZOQVp2UhyYy
-    _key: '!items.effects!etaIQZOQVp2UhyYy.DxqOXbieqS8tOT8S'
+    _key: '!items.effects!watchman00000000.watchman00000000'
   - name: Cat Sense
     type: ability
+    img: systems/teriock/src/icons/abilities/cat-sense.webp
+    _id: j3eumWqYhHgZBHA8
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see @L[Condition:Ethereal]{Ethereal} creatures and have
           @L[Core:Advantage]{advantage} on checks made with
           @L[Ability:Perceive]{Perceive}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: per
-          minVal: 2
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.senses.ethereal
-              mode: 4
-              value: Infinity
+            - mode: 4
               priority: 10
-      _sup: DxqOXbieqS8tOT8S
-    _id: V39tdzSQhfvX4ajN
-    img: systems/teriock/src/icons/abilities/cat-sense.webp
+              time: normal
+              key: system.senses.ethereal
+              target: Actor
+              qualifier: '1'
+              value: Infinity
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+      _sup: watchman00000000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.catSense00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hKUGteYAjpiR0sd9
-    _key: '!items.effects!etaIQZOQVp2UhyYy.V39tdzSQhfvX4ajN'
+    _key: '!items.effects!watchman00000000.j3eumWqYhHgZBHA8'
+img: systems/teriock/src/icons/abilities/watchman.webp
+name: Watchman
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!etaIQZOQVp2UhyYy'
+_key: '!items!watchman00000000'

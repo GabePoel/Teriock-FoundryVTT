@@ -1,11 +1,16 @@
-name: Capital Punishment
-type: wrapper
-_id: 2qAF2lXMWpeuhOOe
-img: systems/teriock/src/icons/abilities/capital-punishment.webp
+_id: capitalPunishmen
 effects:
   - name: Capital Punishment
     type: ability
+    img: systems/teriock/src/icons/abilities/capital-punishment.webp
+    _id: capitalPunishmen
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -15,24 +20,23 @@ effects:
           value:
             static: 1
         materialCost: <p>Something symbolic of your deity.</p>
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: true
+        stationary: false
+        description: Until Dawn
       delivery:
         base: self
         package: ritual
-      duration:
-        unit: untilDawn
-        quantity: 0
-        stationary: false
-        description: Until Dawn
       executionTime: 10 Minutes
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: slow
       overview:
@@ -44,10 +48,11 @@ effects:
           single chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
           classes]{class} is @L[Damage:Magic]{magic} as long as you are
           @L[Core:Presence]{attuned} to it.</p>
-      piercing: normal
       powerSources:
         - divine
         - financial
+      range:
+        unit: self
       requirements: >-
         <p>You not already @L[Category:Sustained abilities]{sustaining} Might
         Strike.</p>
@@ -57,44 +62,49 @@ effects:
       sustained: true
       targets:
         - self
+      impacts: {}
       class: paladin
-    _id: aR3Qb068jP2I77ZI
-    img: systems/teriock/src/icons/abilities/capital-punishment.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.2qAF2lXMWpeuhOOe
-    _key: '!items.effects!2qAF2lXMWpeuhOOe.aR3Qb068jP2I77ZI'
+    _key: '!items.effects!capitalPunishmen.capitalPunishmen'
   - name: Slay
     type: ability
+    img: systems/teriock/src/icons/abilities/slay.webp
+    _id: fP1fOz0CdJ3DNp99
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: weapon
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: weapon
       effectTypes:
         - killing
         - damaging
       executionTime: r0
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       limitation: >-
         <p>With @L[Category:Weapons]{weapons} of the chosen
@@ -112,12 +122,11 @@ effects:
           abilities]{attack}. If the triggering @L[Category:Attack
           abilities]{attack} was a critical hit, this deals 10
           @L[Core:Damage]{damage} instead.</p>
-      piercing: normal
       powerSources:
         - martial
       range:
-        unit: ft
         raw: Your Weapon's Range
+        unit: ft
       skill: true
       standard: true
       targets:
@@ -125,24 +134,25 @@ effects:
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      class: assassin
       impacts:
         base:
           rolls:
             damage: 5[lethal]
-      _sup: aR3Qb068jP2I77ZI
-    _id: lbfR5Icd1FITZgBb
-    img: systems/teriock/src/icons/abilities/slay.webp
+      _sup: capitalPunishmen
+      class: assassin
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.RGGT3fiMwTbMwQWu
-    _key: '!items.effects!2qAF2lXMWpeuhOOe.lbfR5Icd1FITZgBb'
+    _key: '!items.effects!capitalPunishmen.fP1fOz0CdJ3DNp99'
+img: systems/teriock/src/icons/abilities/capital-punishment.webp
+name: Capital Punishment
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!2qAF2lXMWpeuhOOe'
+_key: '!items!capitalPunishmen'

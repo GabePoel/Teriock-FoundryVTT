@@ -1,40 +1,45 @@
-name: Lingering Cowardice
-type: wrapper
-_id: SQ6qv4gtYkg3YcHa
-img: systems/teriock/src/icons/abilities/lingering-cowardice.webp
+_id: lingeringCowardi
 effects:
   - name: Lingering Cowardice
     type: ability
+    img: systems/teriock/src/icons/abilities/lingering-cowardice.webp
+    _id: lingeringCowardi
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: No Limit
+      delivery:
+        base: self
       effectTypes:
         - automatic
       endCondition: >-
         <p>At the end of each of your @L[Core:Turn]{turns}, you roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r0
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
       overview:
         base: <p>You becomg @L[Condition:Frightened]{frightened}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       trigger: >-
@@ -43,8 +48,6 @@ effects:
         automatically. You cannot choose to not use it if you are able to.</p>
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
@@ -60,18 +63,20 @@ effects:
                   trigger: turn
             changeOnCrit: false
             doesExpire: true
-    _id: TGwsV5xJcDdCOO55
-    img: systems/teriock/src/icons/abilities/lingering-cowardice.webp
+          rolls:
+            endCon: 2d4
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.SQ6qv4gtYkg3YcHa
-    _key: '!items.effects!SQ6qv4gtYkg3YcHa.TGwsV5xJcDdCOO55'
+    _key: '!items.effects!lingeringCowardi.lingeringCowardi'
+img: systems/teriock/src/icons/abilities/lingering-cowardice.webp
+name: Lingering Cowardice
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!SQ6qv4gtYkg3YcHa'
+_key: '!items!lingeringCowardi'

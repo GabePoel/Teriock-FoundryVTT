@@ -1,72 +1,80 @@
-name: Scent Seeing
-type: wrapper
-_id: iLjxTmEv789fF560
-img: systems/teriock/src/icons/abilities/scent-seeing.webp
+_id: scentSeeing00000
 effects:
   - name: Scent Seeing
     type: ability
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
+    _id: scentSeeing00000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: aura
-      targets:
-        - creature
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
+        stationary: false
         description: While Up
-      range:
-        unit: ft
-        raw: '10'
+      delivery:
+        base: aura
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You know the exact location of all target creatures. You continue
           to know the location of all targets within 10 feet, whether they are
           or you are moving or not, so long as they are still within 10 feet of
           you.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
       requirements: >-
         <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
         @L[Condition:Odorless]{odorless}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
+      skill: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
           changes:
-            - key: system.senses.smell
-              mode: 4
-              value: '10'
+            - mode: 4
               priority: 10
-    _id: vKSUKukFTOoee5Pa
+              time: normal
+              key: system.senses.smell
+              target: Actor
+              qualifier: '1'
+              value: '10'
+      class: berserker
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.iLjxTmEv789fF560
-    _key: '!items.effects!iLjxTmEv789fF560.vKSUKukFTOoee5Pa'
+    _key: '!items.effects!scentSeeing00000.scentSeeing00000'
+img: systems/teriock/src/icons/abilities/scent-seeing.webp
+name: Scent Seeing
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!iLjxTmEv789fF560'
+_key: '!items!scentSeeing00000'

@@ -1,26 +1,38 @@
-name: Outsider Regenerating
-type: wrapper
-_id: d7hc6R4OiC5A44bB
-img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
+_id: outsiderRegenera
 effects:
   - name: Outsider Regenerating
     type: ability
     img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
+    _id: outsiderRegenera
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you
@@ -33,32 +45,27 @@ effects:
           @L[Core:Turns]{turn} without successfully regenerating @L[Core:Hit
           Points and Mana Points]{HP}. You may do this <i>even if you are
           @L[Condition:Burned]{burned}</i>.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         macros:
           Compendium_teriock_execution_Macro_5ObHOfAGjqqdVKPH: turnStart
-    _id: gGKqVQHUcs6whoqc
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.d7hc6R4OiC5A44bB
-    _key: '!items.effects!d7hc6R4OiC5A44bB.gGKqVQHUcs6whoqc'
+    _key: '!items.effects!outsiderRegenera.outsiderRegenera'
+img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
+name: Outsider Regenerating
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!d7hc6R4OiC5A44bB'
+_key: '!items!outsiderRegenera'

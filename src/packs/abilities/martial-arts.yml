@@ -1,67 +1,83 @@
-name: Martial Arts
-type: wrapper
-_id: uoFwzaoGXghad972
-img: systems/teriock/src/icons/abilities/martial-arts.webp
+_id: martialArts00000
 effects:
   - name: Martial Arts
     type: ability
     img: systems/teriock/src/icons/abilities/martial-arts.webp
+    _id: martialArts00000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
           and @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-    _id: 8WlO5gHBJjFv8eBM
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.uoFwzaoGXghad972
-    _key: '!items.effects!uoFwzaoGXghad972.8WlO5gHBJjFv8eBM'
+    _key: '!items.effects!martialArts00000.martialArts00000'
   - name: Offensive Martial Arts
     type: ability
+    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+    _id: CE07TQehFconUfZB
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
@@ -74,69 +90,85 @@ effects:
           1d4]].</p>
         proficient: <p>The damage die is instead [[/damage 1d6]].</p>
         fluent: <p>The damage die is instead [[/damage 1d8]].</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d4
-          changes:
-            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
-              mode: 4
-              value: 1d4
-              priority: 10
-        proficient:
-          rolls:
-            damage: 1d6
-          changes:
-            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
-              mode: 4
-              value: 1d6
-              priority: 10
-        fluent:
-          rolls:
-            damage: 1d8
-          changes:
-            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
-              mode: 4
-              value: 1d8
-              priority: 10
-      _sup: 8WlO5gHBJjFv8eBM
-    _id: NpAQIzPpzNNquElA
-    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Gk1fwl6bXoPF2N7U
-    _key: '!items.effects!uoFwzaoGXghad972.NpAQIzPpzNNquElA'
-  - name: Defensive Martial Arts
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      skill: true
+      standard: true
       targets:
         - self
+      impacts:
+        base:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: 1d4
+          rolls:
+            damage: 1d4
+        proficient:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: 1d6
+          rolls:
+            damage: 1d6
+        fluent:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: 1d8
+          rolls:
+            damage: 1d8
+      _sup: martialArts00000
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!martialArts00000.CE07TQehFconUfZB'
+  - name: Defensive Martial Arts
+    type: ability
+    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+    _id: BilfZNzdc0cXCbca
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
@@ -150,48 +182,56 @@ effects:
           @L[Property:Blocking]{blocking}.</div>
         proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
         fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-              mode: 4
-              value: '1'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.bv.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: '1'
         proficient:
           changes:
-            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.bv.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: '2'
         fluent:
           changes:
-            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
-              mode: 4
-              value: '3'
+            - mode: 4
               priority: 10
-      _sup: 8WlO5gHBJjFv8eBM
-    _id: mi98N3OrrCPZ3PDQ
-    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+              time: normal
+              key: system.bv.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: '3'
+      _sup: martialArts00000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.FPhoEpWwyy8yBLvC
-    _key: '!items.effects!uoFwzaoGXghad972.mi98N3OrrCPZ3PDQ'
+    _key: '!items.effects!martialArts00000.BilfZNzdc0cXCbca'
+img: systems/teriock/src/icons/abilities/martial-arts.webp
+name: Martial Arts
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!uoFwzaoGXghad972'
+_key: '!items!martialArts00000'

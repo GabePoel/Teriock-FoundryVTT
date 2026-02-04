@@ -1,66 +1,74 @@
-name: Death Resistance
-type: wrapper
-_id: k6z2tAhV2vr6dCzS
-img: systems/teriock/src/icons/abilities/death-resistance.webp
+_id: deathRsc00000000
 effects:
   - name: Death Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/death-resistance.webp
+    _id: deathRsc00000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         stationary: false
         description: While Up
+      delivery:
+        base: self
       effectTypes:
         - resistance
       elements:
         - necromancy
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Category:Killing
           effects]{killing effects}. </p>
-      piercing: normal
       powerSources:
         - magical
         - spiritual
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.effects
-              mode: 2
-              value: killing
+            - mode: 2
               priority: 10
-    _id: hSqjOgHgPUyKriIh
-    img: systems/teriock/src/icons/abilities/death-resistance.webp
+              time: normal
+              key: system.protections.resistances.effects
+              target: Actor
+              qualifier: '1'
+              value: killing
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.k6z2tAhV2vr6dCzS
-    _key: '!items.effects!k6z2tAhV2vr6dCzS.hSqjOgHgPUyKriIh'
+    _key: '!items.effects!deathRsc00000000.deathRsc00000000'
+img: systems/teriock/src/icons/abilities/death-resistance.webp
+name: Death Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!k6z2tAhV2vr6dCzS'
+_key: '!items!deathRsc00000000'

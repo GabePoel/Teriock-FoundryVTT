@@ -1,31 +1,43 @@
-name: Jumpstart Animate Dead
-type: wrapper
-_id: XryH8dRpLlYSfQdb
-img: systems/teriock/src/icons/abilities/jumpstart-animate-dead.webp
+_id: jSAnimateDead000
 effects:
   - name: Jumpstart Animate Dead
     type: ability
     img: systems/teriock/src/icons/abilities/jumpstart-animate-dead.webp
+    _id: jSAnimateDead000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: hand
-      targets:
-        - creature
+      effectTypes:
+        - reanimation
       elements:
         - necromancy
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         base: >-
           <p>Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
@@ -39,35 +51,29 @@ effects:
           @L[Core:HP]{HP} is still halved. This does not count as a
           @L[Category:Healing effects]{healing effect}.</p>
         fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
       requirements: >-
         <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
         creatures]{undead}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - reanimation
-    _id: T0cXVlU8DBOaXDrW
+      targets:
+        - creature
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.XryH8dRpLlYSfQdb
-    _key: '!items.effects!XryH8dRpLlYSfQdb.T0cXVlU8DBOaXDrW'
+    _key: '!items.effects!jSAnimateDead000.jSAnimateDead000'
+img: systems/teriock/src/icons/abilities/jumpstart-animate-dead.webp
+name: Jumpstart Animate Dead
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!XryH8dRpLlYSfQdb'
+_key: '!items!jSAnimateDead000'

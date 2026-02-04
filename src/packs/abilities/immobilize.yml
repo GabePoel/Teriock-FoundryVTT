@@ -1,73 +1,78 @@
-name: Immobilize
-type: wrapper
-_id: ZwX0Le405pUPTpL8
-img: systems/teriock/src/icons/abilities/immobilize.webp
+_id: immobilize000000
 effects:
   - name: Immobilize
     type: ability
     img: systems/teriock/src/icons/abilities/immobilize.webp
+    _id: immobilize000000
     system:
-      powerSources:
-        - spiritual
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target is @L[Condition:Immobilized]{immobilized}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - spiritual
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Immobilized]{immobilized}.</p>
+      targets:
+        - creature
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: P6mUxOcZJHd9eUmh
+          rolls:
+            endCon: 2d4
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ZwX0Le405pUPTpL8
-    _key: '!items.effects!ZwX0Le405pUPTpL8.P6mUxOcZJHd9eUmh'
+    _key: '!items.effects!immobilize000000.immobilize000000'
+img: systems/teriock/src/icons/abilities/immobilize.webp
+name: Immobilize
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ZwX0Le405pUPTpL8'
+_key: '!items!immobilize000000'

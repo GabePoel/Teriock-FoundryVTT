@@ -1,38 +1,41 @@
-name: Pour Potion of Hunger
-type: wrapper
-_id: KM3AFreIU0QDNw72
-img: systems/teriock/src/icons/abilities/pour-potion-of-hunger.webp
+_id: prPtnOfHunger000
 effects:
   - name: Pour Potion of Hunger
     type: ability
+    img: systems/teriock/src/icons/abilities/pour-potion-of-hunger.webp
+    _id: prPtnOfHunger000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      delivery:
-        base: item
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
+      delivery:
+        base: item
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
       overview:
         base: <p>Target gains @L[Ability:Devour]{Devour}.</p>
-      piercing: normal
       powerSources:
         - alchemical
       range:
@@ -44,43 +47,47 @@ effects:
         the ability.</p>
       targets:
         - creature
-    _id: wzkeU0uONqpySVFx
-    img: systems/teriock/src/icons/abilities/pour-potion-of-hunger.webp
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KM3AFreIU0QDNw72
-    _key: '!items.effects!KM3AFreIU0QDNw72.wzkeU0uONqpySVFx'
+    _key: '!items.effects!prPtnOfHunger000.prPtnOfHunger000'
   - name: Devour
     type: ability
+    img: systems/teriock/src/icons/abilities/devour.webp
+    _id: qp32pdCIE6hjmdBj
     system:
-      delivery:
-        base: bite
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: bite
       executionTime: a2
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
-      piercing: normal
       powerSources:
         - martial
       range:
-        unit: ft
         raw: Your Bite's Range
+        unit: ft
       requirements: <p>Target is @L[Condition:Down]{down}.</p>
       results:
         hit: >-
@@ -89,19 +96,21 @@ effects:
           @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
       targets:
         - creature
-      _sup: wzkeU0uONqpySVFx
-    _id: 0IAEknLGdTk7hY87
-    img: systems/teriock/src/icons/abilities/devour.webp
+      impacts: {}
+      _sup: prPtnOfHunger000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.QnqaSDkU2kHD1P5L
-    _key: '!items.effects!KM3AFreIU0QDNw72.0IAEknLGdTk7hY87'
+    _key: '!items.effects!prPtnOfHunger000.qp32pdCIE6hjmdBj'
+img: systems/teriock/src/icons/abilities/pour-potion-of-hunger.webp
+name: Pour Potion of Hunger
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!KM3AFreIU0QDNw72'
+_key: '!items!prPtnOfHunger000'

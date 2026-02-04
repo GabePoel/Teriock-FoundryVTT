@@ -1,29 +1,37 @@
-name: Improved Brace
-type: wrapper
-_id: 2SONNvpvhN0HQW0e
-img: systems/teriock/src/icons/abilities/improved-brace.webp
+_id: imBrace000000000
 effects:
   - name: Improved Brace
     type: ability
     img: systems/teriock/src/icons/abilities/improved-brace.webp
+    _id: imBrace000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
+        stationary: false
         description: While Up
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you use @L[Ability:Brace]{Brace}, you gain @L[Core:Temporary
@@ -36,40 +44,39 @@ effects:
           extra damage dice rolled due to a @L[Keyword:Boosted]{boost} or
           critical hit are added before the @L[Keyword:Deboosted]{deboost} from
           [[lookup name]] takes them away.</div>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: veteran
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
-          rolls:
-            tempHp: 1d6
           changes:
-            - key: flags.teriockEffect.braceDieSize
-              mode: 5
+            - mode: 5
               priority: 10
-              target: Actor
               time: normal
+              key: flags.teriockEffect.braceDieSize
+              target: Actor
               qualifier: '1'
               value: '10'
-    _id: v0Xb1GopbJqrtB0N
+          rolls:
+            tempHp: 1d6
+      class: veteran
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.2SONNvpvhN0HQW0e
-    _key: '!items.effects!2SONNvpvhN0HQW0e.v0Xb1GopbJqrtB0N'
+    _key: '!items.effects!imBrace000000000.imBrace000000000'
+img: systems/teriock/src/icons/abilities/improved-brace.webp
+name: Improved Brace
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!2SONNvpvhN0HQW0e'
+_key: '!items!imBrace000000000'

@@ -1,117 +1,143 @@
+_id: crossbow00000000
+folder: GjqehiaK2urxvWVm
 name: Crossbow
-type: equipment
 system:
   equipmentType: Crossbow
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
   attackPenalty:
-    saved: '-3'
     raw: '-3'
   damage:
     base:
-      saved: 1d8
+      raw: 1d8
+    twoHanded: {}
   fightingStyle: sniper
+  hit: {}
   range:
     long:
-      saved: '320'
+      raw: '320'
       unit: ft
     melee: true
     ranged: false
     short:
-      saved: '80'
+      raw: '80'
       unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '5'
+  minStr:
+    raw: '-2'
   equipmentClasses:
     - bows
-  minStr:
-    saved: -2
-    raw: -3
   powerLevel: mundane
-  weight:
-    saved: 5
-    raw: 0
-_id: Gj4MR15ChyAsjxf7
+type: equipment
 img: systems/teriock/src/icons/equipment/crossbow.webp
 effects:
   - name: Loading
     type: property
+    img: systems/teriock/src/icons/properties/loading.webp
+    _id: loading000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property must be
         reloaded after making an @L[Category:Attack abilities]{attack} with it.
         Anyone can do this using @L[Ability:Reload]{Reload}.</p>
+      suppression: {}
       revealed: true
       form: flaw
-    _id: 6chKMqt5pe75hhEo
-    img: systems/teriock/src/icons/properties/loading.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.loading000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.IqKNnbXPdsjuyi4Y
-    _key: '!items.effects!Gj4MR15ChyAsjxf7.6chKMqt5pe75hhEo'
+    _key: '!items.effects!crossbow00000000.loading000000000'
   - name: Two-Handed
     type: property
+    img: systems/teriock/src/icons/properties/two-handed.webp
+    _id: twoHanded0000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
         @L[Category:Attack abilities]{attacked} with unless it is wielded in two
         hands.</p>
+      suppression: {}
       revealed: true
       form: flaw
-    _id: i3Ip8vaO8j6S6l0l
-    img: systems/teriock/src/icons/properties/two-handed.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.twoHanded0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.f9yfWeyhhdZ1G9F3
-    _key: '!items.effects!Gj4MR15ChyAsjxf7.i3Ip8vaO8j6S6l0l'
+    _key: '!items.effects!crossbow00000000.twoHanded0000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
-    _id: lpcGU9XslcJygjlJ
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!Gj4MR15ChyAsjxf7.lpcGU9XslcJygjlJ'
+    _key: '!items.effects!crossbow00000000.wep0000000000000'
   - name: Ammunition
     type: property
+    img: systems/teriock/src/icons/properties/ammunition.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property is @L[Property:Ranged]{ranged} and
         requires some sort of [[lookup name style=lc]] (arrows, rocks, darts,
         etc.) to @L[Category:Attack abilities]{attack} with.</p>
+      suppression: {}
       revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.melee
-            mode: 5
-            value: 'false'
+          - mode: 5
             priority: 10
-    _id: KbP5AChwY8pK9a66
-    img: systems/teriock/src/icons/properties/ammunition.webp
+            time: normal
+            key: system.range.melee
+            target: parent
+            qualifier: '1'
+            value: 'false'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.JJ1CEFynCrUbDAPO
-    _key: '!items.effects!Gj4MR15ChyAsjxf7.KbP5AChwY8pK9a66'
+    _id: C0LQz402qhZ8UvCq
+    _key: '!items.effects!crossbow00000000.C0LQz402qhZ8UvCq'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -123,27 +149,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      revealed: true
-      _sup: KbP5AChwY8pK9a66
-    _id: UggbZ54rTDEoMM0p
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: C0LQz402qhZ8UvCq
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!Gj4MR15ChyAsjxf7.UggbZ54rTDEoMM0p'
-folder: GjqehiaK2urxvWVm
+    _id: fEHsuA46LVQBCK3O
+    _key: '!items.effects!crossbow00000000.fEHsuA46LVQBCK3O'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Gj4MR15ChyAsjxf7'
+_key: '!items!crossbow00000000'

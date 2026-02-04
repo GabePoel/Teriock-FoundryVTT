@@ -1,72 +1,106 @@
-name: Life Elder Sorcery
-type: wrapper
-_id: KqdXp8HOJezJ1kXJ
-img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
+_id: lifeES0000000000
 effects:
   - name: Life Elder Sorcery
     type: ability
     img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
+    _id: lifeES0000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
           Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial Elder
           Sorcery Words}, and @L[Ability:Life Elder Sorcery Words]{Life Elder
           Sorcery Words}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
+      targets:
+        - self
+      impacts: {}
       class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: mKvTYwozAeybiT2l
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.KqdXp8HOJezJ1kXJ
-    _key: '!items.effects!KqdXp8HOJezJ1kXJ.mKvTYwozAeybiT2l'
+    _key: '!items.effects!lifeES0000000000.lifeES0000000000'
   - name: Elder Sorcery Creation
     type: ability
+    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    _id: lqQJe6EdMMVl6kNS
     system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Long Rest
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        material: true
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
+              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
+              @L[Core:MP]{MP} of the spell itself.</p>
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+        materialCost: >-
+          <p>Creation cost is at least 3 × the material components of the spell
+          itself.</p>
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: sight
         package: ritual
-      targets:
-        - self
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: melee
+      elderSorcery: true
+      executionTime: Long Rest
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
@@ -88,68 +122,53 @@ effects:
           @L[Core:Proficiency Bonus]{P} additional spells from other
           @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
           Sorcery]{Elder Sorcery} for more information.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      ritual: true
-      costs:
-        material: true
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        materialCost: >-
-          <p>Creation cost is at least 3 × the material components of the spell
-          itself.</p>
-      expansionSaveAttribute: mov
-      form: special
-      _sup: mKvTYwozAeybiT2l
-    _id: HxxJt3UPXrdtvbr3
-    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
-    flags:
-      teriock:
-        dontConsume: false
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Mdcuh7skNnu6UxjN
-    _key: '!items.effects!KqdXp8HOJezJ1kXJ.HxxJt3UPXrdtvbr3'
-  - name: Celestial Elder Sorcery Words
-    type: ability
-    system:
-      elderSorcery: true
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: melee
+      ritual: true
+      skill: true
       targets:
         - self
+      impacts: {}
+      _sup: lifeES0000000000
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.eSCreation000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!lifeES0000000000.lqQJe6EdMMVl6kNS'
+  - name: Celestial Elder Sorcery Words
+    type: ability
+    img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
+    _id: ncbx17L7UitKBw1U
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      elderSorcery: true
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
@@ -245,49 +264,54 @@ effects:
         fluent: >-
           <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
           @L[Core:Fluency Bonus]{F}).</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      expansionSaveAttribute: mov
-      form: special
-      _sup: mKvTYwozAeybiT2l
-    _id: 22YyYv9rB3odxGmB
-    img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
-    flags:
-      teriock:
-        dontConsume: false
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.IKQwfFDFUlTIUnz9
-    _key: '!items.effects!KqdXp8HOJezJ1kXJ.22YyYv9rB3odxGmB'
-  - name: Life Elder Sorcery Words
-    type: ability
-    system:
-      elderSorcery: true
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      skill: true
       targets:
         - self
-      elements:
-        - life
+      impacts: {}
+      _sup: lifeES0000000000
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.celestialESWords
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!lifeES0000000000.ncbx17L7UitKBw1U'
+  - name: Life Elder Sorcery Words
+    type: ability
+    img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
+    _id: jYUzZ8kyscb3KOZp
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      elderSorcery: true
+      elements:
+        - life
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Life Elder Sorcery
@@ -323,29 +347,29 @@ effects:
         fluent: >-
           <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
           @L[Core:Fluency Bonus]{F}).</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
+      targets:
+        - self
+      impacts: {}
+      _sup: lifeES0000000000
       class: lifeMage
-      expansionSaveAttribute: mov
-      form: special
-      _sup: mKvTYwozAeybiT2l
-    _id: uomrMp3o8Z3Y2mNg
-    img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lifeESWords00000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Gbvh6lTDqw7matVm
-    _key: '!items.effects!KqdXp8HOJezJ1kXJ.uomrMp3o8Z3Y2mNg'
+    _key: '!items.effects!lifeES0000000000.jYUzZ8kyscb3KOZp'
+img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
+name: Life Elder Sorcery
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!KqdXp8HOJezJ1kXJ'
+_key: '!items!lifeES0000000000'

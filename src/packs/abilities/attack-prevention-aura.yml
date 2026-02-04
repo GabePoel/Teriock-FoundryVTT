@@ -1,43 +1,46 @@
-name: Attack Prevention Aura
-type: wrapper
-_id: ShwooTJTZpBtU7jp
-img: systems/teriock/src/icons/abilities/attack-prevention-aura.webp
+_id: atkPreventionAur
 effects:
   - name: Attack Prevention Aura
     type: ability
+    img: systems/teriock/src/icons/abilities/attack-prevention-aura.webp
+    _id: atkPreventionAur
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: aura
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: aura
       elements:
         - life
       executionTime: r1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: unp
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
-      piercing: normal
       powerSources:
         - divine
       range:
-        unit: ft
         raw: '10'
+        unit: ft
       results:
         fail: >-
           <p>The @L[Core:Damage]{damage} is
@@ -49,19 +52,20 @@ effects:
       trigger: >-
         <p>One or more creature within range would take or deal
         @L[Core:Damage]{damage}.</p>
+      impacts: {}
       class: paladin
-    _id: uSVcat7L4UedtZyc
-    img: systems/teriock/src/icons/abilities/attack-prevention-aura.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ShwooTJTZpBtU7jp
-    _key: '!items.effects!ShwooTJTZpBtU7jp.uSVcat7L4UedtZyc'
+    _key: '!items.effects!atkPreventionAur.atkPreventionAur'
+img: systems/teriock/src/icons/abilities/attack-prevention-aura.webp
+name: Attack Prevention Aura
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!ShwooTJTZpBtU7jp'
+_key: '!items!atkPreventionAur'

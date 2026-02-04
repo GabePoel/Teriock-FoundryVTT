@@ -1,58 +1,68 @@
-name: Holy Damage Immunity
-type: wrapper
-_id: yryDCigf2m2rlr1J
-img: systems/teriock/src/icons/abilities/holy-damage-immunity.webp
+_id: holyDmgImy000000
 effects:
   - name: Holy Damage Immunity
     type: ability
     img: systems/teriock/src/icons/abilities/holy-damage-immunity.webp
+    _id: holyDmgImy000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Holy]{holy
           damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.damageTypes
-              mode: 2
-              value: holy
+            - mode: 2
               priority: 10
-    _id: rSdw7RrXMiFX2HeM
+              time: normal
+              key: system.protections.immunities.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: holy
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.yryDCigf2m2rlr1J
-    _key: '!items.effects!yryDCigf2m2rlr1J.rSdw7RrXMiFX2HeM'
+    _key: '!items.effects!holyDmgImy000000.holyDmgImy000000'
+img: systems/teriock/src/icons/abilities/holy-damage-immunity.webp
+name: Holy Damage Immunity
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!yryDCigf2m2rlr1J'
+_key: '!items!holyDmgImy000000'

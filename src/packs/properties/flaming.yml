@@ -1,28 +1,35 @@
 name: Flaming
 type: wrapper
-_id: Oeg2HTRKAXQsmm8m
 img: systems/teriock/src/icons/properties/flaming.webp
+_id: flaming000000000
 effects:
   - name: Flaming
     type: property
     img: systems/teriock/src/icons/properties/flaming.webp
+    _id: flaming000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>If an item is <b>[[lookup name style=lc]]</b> (on fire), it is
         @L[Property:Glowing]{glowing} (10 feet) and
         @L[Property:Burning]{burning}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: mRi1EwSt2lrfXvXf
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Oeg2HTRKAXQsmm8m
-    _key: '!items.effects!Oeg2HTRKAXQsmm8m.mRi1EwSt2lrfXvXf'
+    _key: '!items.effects!flaming000000000.flaming000000000'
   - name: Glowing
     type: property
+    img: systems/teriock/src/icons/properties/glowing.webp
+    _id: HcWJ3papak2gSI2j
     system:
+      competence:
+        raw: 0
       description: >-
         <p>If an item is <b>[[lookup name style=lc]]</b>, it is visible in the
         dark and produces light that makes other things visible. When an item
@@ -31,67 +38,67 @@ effects:
         specified, then the item is visible, but glows faintly enough that it
         doesn't illuminate other objects unless they are held <i>right</i> next
         to it.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-      modifiesActor: true
-      changes:
-        - key: system.light.dim
-          mode: 4
-          value: '10'
-          priority: 5
-        - key: system.light.color
-          mode: 5
-          value: '#C64600'
-          priority: 5
-        - key: system.light.animation.type
-          mode: 5
-          value: torch
-          priority: 5
       impacts:
         changes:
-          - key: system.light.dim
-            mode: 4
+          - mode: 4
+            priority: 5
+            time: normal
+            key: system.light.dim
+            target: Actor
+            qualifier: '1'
             value: '10'
+          - mode: 5
             priority: 5
-          - key: system.light.color
-            mode: 5
+            time: normal
+            key: system.light.color
+            target: Actor
+            qualifier: '1'
             value: '#C64600'
+          - mode: 5
             priority: 5
-          - key: system.light.animation.type
-            mode: 5
+            time: normal
+            key: system.light.animation.type
+            target: Actor
+            qualifier: '1'
             value: torch
-            priority: 5
-      _sup: mRi1EwSt2lrfXvXf
-    _id: rL5KAfDMawzoFNbj
-    img: systems/teriock/src/icons/properties/glowing.webp
+      modifiesActor: true
+      _sup: flaming000000000
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.glowing000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.5KFoOw5ojdhHdvMx
-    _key: '!items.effects!Oeg2HTRKAXQsmm8m.rL5KAfDMawzoFNbj'
+    _key: '!items.effects!flaming000000000.HcWJ3papak2gSI2j'
   - name: Burning
     type: property
+    img: systems/teriock/src/icons/properties/burning.webp
+    _id: DAcyMWa1RbFgmHwN
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b>, deals
         @L[Damage:Fire]{fire damage} and can be used to deliver
         @L[Ability:Burn]{Burn}.</p>
-      form: intrinsic
+      suppression: {}
+      revealed: true
       damageType: Fire
-      _sup: mRi1EwSt2lrfXvXf
-    _id: 0bcmKptl0mb8U0KO
-    img: systems/teriock/src/icons/properties/burning.webp
+      form: intrinsic
+      _sup: flaming000000000
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.burning000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.C5eRDMyRxBDMkYAE
-    _key: '!items.effects!Oeg2HTRKAXQsmm8m.0bcmKptl0mb8U0KO'
+    _key: '!items.effects!flaming000000000.DAcyMWa1RbFgmHwN'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Oeg2HTRKAXQsmm8m'
+_key: '!items!flaming000000000'

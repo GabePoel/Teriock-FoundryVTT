@@ -1,28 +1,48 @@
-name: Auto-Rebirth
-type: wrapper
-_id: cFGYHY4D2ruJUDC9
-img: systems/teriock/src/icons/abilities/auto-rebirth.webp
+_id: autoRebirth00000
 effects:
   - name: Auto-Rebirth
     type: ability
     img: systems/teriock/src/icons/abilities/auto-rebirth.webp
+    _id: autoRebirth00000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: self
-      targets:
-        - self
+      effectTypes:
+        - revival
+        - automatic
       elements:
         - life
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>If you @L[Condition:Dead]{die}, you are brought back to
@@ -33,46 +53,33 @@ effects:
           brought back with 1 @L[Core:Hit Points and Mana Points]{MP}.
           Otherwise, your @L[Core:Hit Points and Mana Points]{HP} and
           @L[Core:Hit Points and Mana Points]{MP} do not change.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
       spell: true
       standard: true
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - self
       trigger: >-
         <p> This triggers automatically. You cannot choose to not use it if you
         are able to.</p>
-      form: special
-      effectTypes:
-        - revival
-        - automatic
       impacts:
         heightened:
           duration: 3600
-    _id: 5QWPqHarxyzSOOtn
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cFGYHY4D2ruJUDC9
-    _key: '!items.effects!cFGYHY4D2ruJUDC9.5QWPqHarxyzSOOtn'
+    _key: '!items.effects!autoRebirth00000.autoRebirth00000'
+img: systems/teriock/src/icons/abilities/auto-rebirth.webp
+name: Auto-Rebirth
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!cFGYHY4D2ruJUDC9'
+_key: '!items!autoRebirth00000'

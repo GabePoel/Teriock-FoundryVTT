@@ -1,74 +1,89 @@
-name: Zombie Empowerment
-type: wrapper
-_id: 5s2kDv5TBkG2hysX
-img: systems/teriock/src/icons/abilities/zombie-empowerment.webp
+_id: zomEmpowerment00
 effects:
   - name: Zombie Empowerment
     type: ability
     img: systems/teriock/src/icons/abilities/zombie-empowerment.webp
+    _id: zomEmpowerment00
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - necromancy
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
+        stationary: false
         description: While Up
-      range:
-        unit: ft
-        raw: '60'
+      delivery:
+        base: aura
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>Target gains @L[Ability:Zombify]{Zombify}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
       requirements: <p>Only targets @L[Category:Zombies]{zombies}.</p>
-      expansionSaveAttribute: mov
-      form: special
-    _id: C9niaxBwo4G1Zf7a
+      targets:
+        - creature
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5s2kDv5TBkG2hysX
-    _key: '!items.effects!5s2kDv5TBkG2hysX.C9niaxBwo4G1Zf7a'
+    _key: '!items.effects!zomEmpowerment00.zomEmpowerment00'
   - name: Zombify
     type: ability
+    img: systems/teriock/src/icons/abilities/zombify.webp
+    _id: 2Ogz7XmOJ7oBu9NY
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
       costs:
         verbal: true
         somatic: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
       effectTypes:
         - control
         - reanimation
       elements:
         - necromancy
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -76,11 +91,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: active
       overview:
@@ -89,12 +99,11 @@ effects:
           <p>The base duration of this effect is 1 hour and the
           @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
           command.</p>
-      piercing: ub
       powerSources:
         - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
       results:
         hit: >-
@@ -109,38 +118,26 @@ effects:
       standard: true
       targets:
         - creature
-      class: necromancer
       impacts:
-        base:
-          transformation:
-            enabled: true
-            level: greater
-            suppression:
-              bodyParts: false
-              equipment: false
-              fluencies: true
-              ranks: true
-            uuids:
-              - Compendium.teriock.species.Item.SRdgO7roRk39yrUB
-            resetHp: true
-            resetMp: false
         fluent:
           duration: 3600
         heightened:
           duration: 3600
-      _sup: C9niaxBwo4G1Zf7a
-    _id: Q2D7Lc7HTdFxItOf
-    img: systems/teriock/src/icons/abilities/zombify.webp
+      _sup: zomEmpowerment00
+      class: necromancer
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.zombify000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5v9AknrhiMqCbDvC
-    _key: '!items.effects!5s2kDv5TBkG2hysX.Q2D7Lc7HTdFxItOf'
+    _key: '!items.effects!zomEmpowerment00.2Ogz7XmOJ7oBu9NY'
+img: systems/teriock/src/icons/abilities/zombie-empowerment.webp
+name: Zombie Empowerment
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!5s2kDv5TBkG2hysX'
+_key: '!items!zomEmpowerment00'

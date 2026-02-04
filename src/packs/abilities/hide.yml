@@ -1,26 +1,34 @@
-name: Hide
-type: wrapper
-_id: 6gOwusIdo9DIGf7L
-img: systems/teriock/src/icons/abilities/hide.webp
+_id: hide000000000000
 effects:
   - name: Hide
     type: ability
     img: systems/teriock/src/icons/abilities/hide.webp
+    _id: hide000000000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
@@ -36,48 +44,52 @@ effects:
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
           (if it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          attribute: snk
-          amount: proficiency
-      skill: true
-      standard: true
-      class: thief
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      skill: true
+      standard: true
+      targets:
+        - self
       impacts:
         base:
-          startStatuses:
-            - hidden
           rolls:
             hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
         proficient:
           rolls:
             hide: 1d20 + (2 * @snk) + @p
         fluent:
           rolls:
             hide: 1d20 + (2 * @snk) + @f
-    _id: lLcC53jxyn5WbiDA
+      upgrades:
+        competence:
+          attribute: snk
+          value: 0
+        score:
+          attribute: snk
+          value: 2
+      class: thief
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.6gOwusIdo9DIGf7L
-    _key: '!items.effects!6gOwusIdo9DIGf7L.lLcC53jxyn5WbiDA'
+    _key: '!items.effects!hide000000000000.hide000000000000'
+img: systems/teriock/src/icons/abilities/hide.webp
+name: Hide
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!6gOwusIdo9DIGf7L'
+_key: '!items!hide000000000000'

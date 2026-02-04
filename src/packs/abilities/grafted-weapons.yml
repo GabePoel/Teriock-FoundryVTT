@@ -1,30 +1,34 @@
-name: Grafted Weapons
-type: wrapper
-_id: iTjmYUHxkx8MPSzu
-img: systems/teriock/src/icons/abilities/grafted-weapons.webp
+_id: graftedWeps00000
 effects:
   - name: Grafted Weapons
     type: ability
+    img: systems/teriock/src/icons/abilities/grafted-weapons.webp
+    _id: graftedWeps00000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       effectTypes:
         - immunity
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -38,34 +42,41 @@ effects:
           still be @L[Property:Shattered]{shattered}, but they can be repaired
           when you are @L[Core:Healing]{healed} as a @L[Damage:Hack]{hack} could
           be.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.Losing Grafted Items
-              mode: 2
+            - mode: 2
+              priority: 10
+              time: normal
+              key: system.protections.immunities.Losing Grafted Items
+              target: Actor
+              qualifier: '1'
               value: other
+            - mode: 2
               priority: 10
-            - key: system.protections.immunities.Disarm
-              mode: 2
+              time: normal
+              key: system.protections.immunities.Disarm
+              target: Actor
+              qualifier: '1'
               value: abilities
-              priority: 10
-    _id: uBZWuBm5BBVTt35a
-    img: systems/teriock/src/icons/abilities/grafted-weapons.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.iTjmYUHxkx8MPSzu
-    _key: '!items.effects!iTjmYUHxkx8MPSzu.uBZWuBm5BBVTt35a'
+    _key: '!items.effects!graftedWeps00000.graftedWeps00000'
+img: systems/teriock/src/icons/abilities/grafted-weapons.webp
+name: Grafted Weapons
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!iTjmYUHxkx8MPSzu'
+_key: '!items!graftedWeps00000'

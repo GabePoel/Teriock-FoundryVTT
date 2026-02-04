@@ -120,6 +120,7 @@ export default (Base) => {
             label: "Ability Type",
             wrappers: [
               ref.form[this.form].name || "",
+              this.warded ? "Warded" : "",
               this.elderSorcery ? "Elder Sorcery" : "",
               ...this.effectTypes
                 .filter((e) => !this.powerSources.has(e))

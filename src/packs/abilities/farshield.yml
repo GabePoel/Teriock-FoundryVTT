@@ -1,51 +1,52 @@
-name: Farshield
-type: wrapper
-_id: pwJHfrhZa4uR4uh3
-img: systems/teriock/src/icons/abilities/farshield.webp
+_id: farshield0000000
 effects:
   - name: Farshield
     type: ability
-    _id: aiaujlLPrzbReFUT
     img: systems/teriock/src/icons/abilities/farshield.webp
+    _id: farshield0000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: sight
       duration:
+        raw: '5'
         unit: second
-        quantity: 5
+        dawn: false
         stationary: false
         description: 5 Seconds
+      delivery:
+        base: sight
       elements:
         - life
       endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, add 1 to the amount the
         target's @L[Core:Armor Class]{AC} increases by.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
         base: <p>Target's @L[Core:Armor Class]{AC} is increased by 1.</p>
-      piercing: normal
       powerSources:
         - magical
       range:
-        unit: ft
         raw: '60'
+        unit: ft
       rotator: true
       spell: true
       standard: true
@@ -55,10 +56,13 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.defense.ac
-              mode: 2
-              value: '1'
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.defense.ac
+              target: Actor
+              qualifier: '1'
+              value: '1'
           expiration:
             normal:
               combat:
@@ -76,20 +80,25 @@ effects:
             doesExpire: true
         heightened:
           changes:
-            - key: system.defense.ac
-              mode: 2
-              value: '@h'
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.defense.ac
+              target: Actor
+              qualifier: '1'
+              value: '@h'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.pwJHfrhZa4uR4uh3
-    _key: '!items.effects!pwJHfrhZa4uR4uh3.aiaujlLPrzbReFUT'
+    _key: '!items.effects!farshield0000000.farshield0000000'
+img: systems/teriock/src/icons/abilities/farshield.webp
+name: Farshield
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!pwJHfrhZa4uR4uh3'
+_key: '!items!farshield0000000'

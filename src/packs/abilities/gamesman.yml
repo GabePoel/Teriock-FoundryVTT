@@ -1,26 +1,34 @@
-name: Gamesman
-type: wrapper
-_id: cgetZplFKBGFd1kt
-img: systems/teriock/src/icons/abilities/gamesman.webp
+_id: gamesman00000000
 effects:
   - name: Gamesman
     type: ability
     img: systems/teriock/src/icons/abilities/gamesman.webp
+    _id: gamesman00000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
@@ -28,54 +36,71 @@ effects:
           @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for one species of
           your choice. You can change the species once per a @L[Core:Short
           Rest]{short rest}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: archer
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.tradecrafts.hunter.score
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
-    _id: ueYla8bhEj1usHVo
+              time: normal
+              key: system.tradecrafts.hunter.score
+              target: Actor
+              qualifier: '1'
+              value: '2'
+      class: archer
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cgetZplFKBGFd1kt
-    _key: '!items.effects!cgetZplFKBGFd1kt.ueYla8bhEj1usHVo'
+    _key: '!items.effects!gamesman00000000.gamesman00000000'
   - name: Slay
     type: ability
     img: systems/teriock/src/icons/abilities/slay.webp
+    _id: 0rbMXAyjAbpNK17n
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>Only usable against one species, as specified when you use <a
+        class="mw-selflink selflink">Gamesman</a>.</p>
+      maneuver: reactive
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -84,52 +109,37 @@ effects:
           abilities]{attack}. If the triggering @L[Category:Attack
           abilities]{attack} was a critical hit, this deals 10
           @L[Core:Damage]{damage} instead.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
       skill: true
       standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable against one species, as specified when you use <a
-        class="mw-selflink selflink">Gamesman</a>.</p>
-      effectTypes:
-        - killing
-        - damaging
       impacts:
         base:
           rolls:
             damage: 5[lethal]
-      revealed: true
-      adept:
-        enabled: true
-        amount: 1
-      grantOnly: false
-      _sup: ueYla8bhEj1usHVo
-    _id: yUhJb8kWFQHllPc4
+      _sup: gamesman00000000
+      class: assassin
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.RGGT3fiMwTbMwQWu
-    _key: '!items.effects!cgetZplFKBGFd1kt.yUhJb8kWFQHllPc4'
+    _key: '!items.effects!gamesman00000000.0rbMXAyjAbpNK17n'
+img: systems/teriock/src/icons/abilities/gamesman.webp
+name: Gamesman
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!cgetZplFKBGFd1kt'
+_key: '!items!gamesman00000000'

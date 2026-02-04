@@ -1,60 +1,68 @@
-name: Attack Resistance
-type: wrapper
-_id: i8h0DsNs7XCzNRfp
-img: systems/teriock/src/icons/abilities/attack-resistance.webp
+_id: atkRsc0000000000
 effects:
   - name: Attack Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/attack-resistance.webp
+    _id: atkRsc0000000000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       effectTypes:
         - resistance
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Resistance]{resistant} to being hit by
           non-critical @L[Category:Attack abilities]{attacks}.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Non-critical Attacks
+            - mode: 2
               priority: 10
-    _id: qFMoBtl1Ov0FCWRk
-    img: systems/teriock/src/icons/abilities/attack-resistance.webp
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
+              value: Non-critical Attacks
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.i8h0DsNs7XCzNRfp
-    _key: '!items.effects!i8h0DsNs7XCzNRfp.qFMoBtl1Ov0FCWRk'
+    _key: '!items.effects!atkRsc0000000000.atkRsc0000000000'
+img: systems/teriock/src/icons/abilities/attack-resistance.webp
+name: Attack Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!i8h0DsNs7XCzNRfp'
+_key: '!items!atkRsc0000000000'

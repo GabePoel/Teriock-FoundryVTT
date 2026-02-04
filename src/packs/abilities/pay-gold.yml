@@ -1,38 +1,16 @@
-name: Pay Gold
-type: wrapper
-_id: bgf7Hqo6CWtFui6o
-img: systems/teriock/src/icons/abilities/pay-gold.webp
+_id: payGold000000000
 effects:
   - name: Pay Gold
     type: ability
     img: systems/teriock/src/icons/abilities/pay-gold.webp
+    _id: payGold000000000
     system:
-      powerSources:
-        - divine
-        - financial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      overview:
-        base: >-
-          <p>If the target is "@L[Damage:Financial]{indebted}", this pays off an
-          amount of their debt equal to the amount paid upon using [[lookup
-          name]].</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         material: true
         gp:
@@ -40,25 +18,54 @@ effects:
           value:
             static: 0
             variable: <p>An amount of @L[Equipment:Coin]{gold} of your choosing.</p>
-      expansionSaveAttribute: mov
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       basic: true
+      delivery:
+        base: self
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>If the target is "@L[Damage:Financial]{indebted}", this pays off an
+          amount of their debt equal to the amount paid upon using [[lookup
+          name]].</p>
+      powerSources:
+        - divine
+        - financial
+      range:
+        unit: self
+      targets:
+        - creature
       impacts:
         base:
           endStatuses:
             - hollied
             - terrored
-    _id: x8w8yrad5wgYHmr3
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.bgf7Hqo6CWtFui6o
-    _key: '!items.effects!bgf7Hqo6CWtFui6o.x8w8yrad5wgYHmr3'
+    _key: '!items.effects!payGold000000000.payGold000000000'
+img: systems/teriock/src/icons/abilities/pay-gold.webp
+name: Pay Gold
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!bgf7Hqo6CWtFui6o'
+_key: '!items!payGold000000000'

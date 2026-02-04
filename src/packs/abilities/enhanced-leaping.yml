@@ -1,64 +1,75 @@
-name: Enhanced Leaping
-type: wrapper
-_id: 1abjz7lzEeGnlT1Y
-img: systems/teriock/src/icons/abilities/enhanced-leaping.webp
+_id: enhancedLeaping0
 effects:
   - name: Enhanced Leaping
     type: ability
+    img: systems/teriock/src/icons/abilities/enhanced-leaping.webp
+    _id: enhancedLeaping0
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       effectTypes:
         - movement
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You vertically leap at @L[Core:Movement Speed]{full speed} and
           horizontally leap at @L[Core:Movement Speed]{double speed}.</p>
-      piercing: normal
       powerSources:
         - martial
+      range:
+        unit: self
       targets:
         - self
       impacts:
         base:
           changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.speedAdjustments.leapVertical
+              target: Actor
+              qualifier: '1'
               value: '3'
+            - mode: 4
               priority: 10
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
+              time: normal
+              key: system.speedAdjustments.leapHorizontal
+              target: Actor
+              qualifier: '1'
               value: '4'
-              priority: 10
-    _id: Hx3Hki4Eoa3LvZZW
-    img: systems/teriock/src/icons/abilities/enhanced-leaping.webp
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.1abjz7lzEeGnlT1Y
-    _key: '!items.effects!1abjz7lzEeGnlT1Y.Hx3Hki4Eoa3LvZZW'
+    _key: '!items.effects!enhancedLeaping0.enhancedLeaping0'
+img: systems/teriock/src/icons/abilities/enhanced-leaping.webp
+name: Enhanced Leaping
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!1abjz7lzEeGnlT1Y'
+_key: '!items!enhancedLeaping0'

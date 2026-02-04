@@ -1,39 +1,43 @@
-name: Forcefield
-type: wrapper
-_id: RcpZWEYWGr7H49AU
-img: systems/teriock/src/icons/abilities/forcefield.webp
+_id: forcefield000000
 effects:
   - name: Forcefield
     type: ability
+    img: systems/teriock/src/icons/abilities/forcefield.webp
+    _id: forcefield000000
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      delivery:
-        base: self
       duration:
+        raw: '5'
         unit: second
-        quantity: 5
+        dawn: false
         stationary: false
         description: 5 Seconds
+      delivery:
+        base: self
       elements:
         - life
       endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
       executionTime: r1
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, add 1 to the amount your
         @L[Core:Armor Class]{AC} increases by.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
       overview:
@@ -41,9 +45,10 @@ effects:
           <p>Your @L[Core:Armor Class]{AC} is increased by 1. Use the new value
           in determining whether the triggering @L[Category:Attack
           abilities]{attack} hits you.</p>
-      piercing: normal
       powerSources:
         - magical
+      range:
+        unit: self
       rotator: true
       spell: true
       standard: true
@@ -54,10 +59,13 @@ effects:
       impacts:
         base:
           changes:
-            - key: system.defense.ac
-              mode: 2
-              value: '1'
+            - mode: 2
               priority: 10
+              time: normal
+              key: system.defense.ac
+              target: Actor
+              qualifier: '1'
+              value: '1'
           expiration:
             normal:
               combat:
@@ -75,22 +83,25 @@ effects:
             doesExpire: true
         heightened:
           changes:
-            - key: system.defense.ac
-              mode: 2
-              value: '@h'
+            - mode: 2
               priority: 10
-    _id: AfDPfPFfmfNCITAs
-    img: systems/teriock/src/icons/abilities/forcefield.webp
+              time: normal
+              key: system.defense.ac
+              target: Actor
+              qualifier: '1'
+              value: '@h'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.RcpZWEYWGr7H49AU
-    _key: '!items.effects!RcpZWEYWGr7H49AU.AfDPfPFfmfNCITAs'
+    _key: '!items.effects!forcefield000000.forcefield000000'
+img: systems/teriock/src/icons/abilities/forcefield.webp
+name: Forcefield
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!RcpZWEYWGr7H49AU'
+_key: '!items!forcefield000000'

@@ -1,70 +1,90 @@
-name: Shipwright
-type: wrapper
-_id: XV0QqlrtRFDd6m3D
-img: systems/teriock/src/icons/abilities/shipwright.webp
+_id: shipwright000000
 effects:
   - name: Shipwright
     type: ability
     img: systems/teriock/src/icons/abilities/shipwright.webp
+    _id: shipwright000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Ship Lore]{Ship Lore} and @L[Ability:Improvised
           Ship Repairs]{Improvised Ship Repairs}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-    _id: zOcIOiAKedtwe4pB
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.XV0QqlrtRFDd6m3D
-    _key: '!items.effects!XV0QqlrtRFDd6m3D.zOcIOiAKedtwe4pB'
+    _key: '!items.effects!shipwright000000.shipwright000000'
   - name: Ship Lore
     type: ability
+    img: systems/teriock/src/icons/abilities/ship-lore.webp
+    _id: dtID6wWV1YieLi4A
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-      targets:
-        - ship
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
-      range:
-        unit: ft
-        raw: '120'
+      delivery:
+        base: sight
+      effectTypes:
+        - truthDetecting
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You recognize details about ships by sight. For a given ship, you
@@ -78,56 +98,57 @@ effects:
           allows.</p><p>At @L[Core:Game Master]{GM} discretion, you can also
           spend 10 minutes studying a ship up close to get additional
           information.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: '120'
+        unit: ft
       skill: true
       standard: true
-      class: corsair
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - truthDetecting
+      targets:
+        - ship
       impacts:
         base:
           checks:
             - mariner
-      _sup: zOcIOiAKedtwe4pB
-    _id: igiconBOtrYCZk3i
-    img: systems/teriock/src/icons/abilities/ship-lore.webp
+      _sup: shipwright000000
+      class: corsair
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shipLore00000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.HSkgH0IeJRTqKgAE
-    _key: '!items.effects!XV0QqlrtRFDd6m3D.igiconBOtrYCZk3i'
+    _key: '!items.effects!shipwright000000.dtID6wWV1YieLi4A'
   - name: Improvised Ship Repairs
     type: ability
+    img: systems/teriock/src/icons/abilities/improvised-ship-repairs.webp
+    _id: lc1a0N59NkQJyvI3
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: self
-      targets:
-        - ship
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '8'
         unit: hour
-        quantity: 8
+        dawn: false
         stationary: false
         description: 8 Hours
+      delivery:
+        base: self
+      executionTime: Short Rest
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
@@ -143,30 +164,30 @@ effects:
           <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
           repairs.</p>
         fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} repairs.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - ship
+      impacts: {}
+      _sup: shipwright000000
       class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: zOcIOiAKedtwe4pB
-    _id: FlqL2urcmx8VmoIF
-    img: systems/teriock/src/icons/abilities/improvised-ship-repairs.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.impShipRepairs00
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.n1LJPaTcJSAuxCFB
-    _key: '!items.effects!XV0QqlrtRFDd6m3D.FlqL2urcmx8VmoIF'
+    _key: '!items.effects!shipwright000000.lc1a0N59NkQJyvI3'
+img: systems/teriock/src/icons/abilities/shipwright.webp
+name: Shipwright
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!XV0QqlrtRFDd6m3D'
+_key: '!items!shipwright000000'

@@ -1,31 +1,38 @@
 name: Silveel
 type: wrapper
-_id: a8G65xvDf4zB1TOn
 img: systems/teriock/src/icons/properties/silveel.webp
+_id: silveel000000000
 effects:
   - name: Silveel
     type: property
     img: systems/teriock/src/icons/properties/silveel.webp
+    _id: silveel000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b> has all the same
         traits as one that is @L[Property:Silver]{silver} and
         @L[Property:Mithril]{mithril}, except that it deals
         @L[Damage:Silveel]{silveel damage} instead of @L[Damage:Silver]{silver
         damage}.</p>
-      form: intrinsic
+      suppression: {}
+      revealed: true
       damageType: Silveel
-    _id: T43OGNfLVh6qkK1I
+      form: intrinsic
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.a8G65xvDf4zB1TOn
-    _key: '!items.effects!a8G65xvDf4zB1TOn.T43OGNfLVh6qkK1I'
+    _key: '!items.effects!silveel000000000.silveel000000000'
   - name: Silver
     type: property
+    img: systems/teriock/src/icons/properties/silver.webp
+    _id: d2cvDwkSn1GCHIkT
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Items that are <b>[[lookup name style=lc]]</b> can @L[Core:Block
         Interaction]{block} @L[Drain:Mana]{mana draining} @L[Category:Attack
@@ -34,79 +41,93 @@ effects:
         @L[Drain:Mana]{mana draining} @L[Category:Attack abilities]{attacks}
         made against you are not @L[Keyword:AV0]{AV0}. [[lookup name]] items
         also deal @L[Damage:Silver]{silver damage}.</p>
-      form: intrinsic
+      suppression: {}
+      revealed: true
       damageType: Silver
-      _sup: T43OGNfLVh6qkK1I
-    _id: l5MlUkqXHyRYWmtp
-    img: systems/teriock/src/icons/properties/silver.webp
+      form: intrinsic
+      _sup: silveel000000000
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.silver0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.Tlvn2aznCnTnPdkO
-    _key: '!items.effects!a8G65xvDf4zB1TOn.l5MlUkqXHyRYWmtp'
+    _key: '!items.effects!silveel000000000.d2cvDwkSn1GCHIkT'
   - name: Mithril
     type: property
+    img: systems/teriock/src/icons/properties/mithril.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p><b>[[lookup name]]</b> items are @L[Property:Durable]{durable}, weigh
         half as much, have their minimum @L[Core:Strength]{STR} decreased by 1,
         and are @L[Property:Unbreachable]{unbreachable} if they are
         @L[Category:Armor]{armor}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.weight.raw
-            mode: 1
+          - mode: 1
+            priority: 10
+            time: normal
+            key: system.weight.raw
+            target: parent
+            qualifier: '1'
             value: '0.5'
+          - mode: 2
             priority: 10
-          - key: item.system.minStr.raw
-            mode: 2
+            time: normal
+            key: system.minStr.raw
+            target: parent
+            qualifier: '1'
             value: '-1'
-            priority: 10
-      _sup: T43OGNfLVh6qkK1I
-    _id: hvixUYjDLO7RfDoT
-    img: systems/teriock/src/icons/properties/mithril.webp
+      _sup: silveel000000000
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.mithril000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.eHK3QJmvuLVBrDO4
-    _key: '!items.effects!a8G65xvDf4zB1TOn.hvixUYjDLO7RfDoT'
+    _id: XS4Y4IFszp1ncmgQ
+    _key: '!items.effects!silveel000000000.XS4Y4IFszp1ncmgQ'
   - name: Durable
     type: property
+    img: systems/teriock/src/icons/properties/durable.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b> is
         @L[Keyword:Resistance]{resistant} to becoming
         @L[Property:Shattered]{shattered} and effects that would render it
         @L[Property:Destroyed]{destroyed} cause it to be
         @L[Property:Shattered]{shattered} instead.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-      _sup: hvixUYjDLO7RfDoT
-    _id: LV0OTSOdp0rxvBOv
-    img: systems/teriock/src/icons/properties/durable.webp
+      _sup: XS4Y4IFszp1ncmgQ
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.durable000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.yz8hsMaFYEGXNQpb
-    _key: '!items.effects!a8G65xvDf4zB1TOn.LV0OTSOdp0rxvBOv'
+    _id: 9e5yz5oYS5ME3eCR
+    _key: '!items.effects!silveel000000000.9e5yz5oYS5ME3eCR'
   - name: Unbreachable
     type: property
+    img: systems/teriock/src/icons/properties/unbreachable.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b> has
         its @L[Core:Armor Class]{AV} increased by 1.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-      changes:
-        - key: system.baseAv
-          mode: 2
-          value: '1'
-          priority: 10
       impacts:
         changes:
           - mode: 4
@@ -116,19 +137,18 @@ effects:
             target: parent
             qualifier: '@av'
             value: '1'
-      _sup: hvixUYjDLO7RfDoT
-    _id: fkU2Qwrx1AcqYRLa
-    img: systems/teriock/src/icons/properties/unbreachable.webp
+      _sup: XS4Y4IFszp1ncmgQ
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.unbreachable0000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.yKh9TdhyxfR56Ag3
-    _key: '!items.effects!a8G65xvDf4zB1TOn.fkU2Qwrx1AcqYRLa'
+    _id: Siu2s9nwu0nuPM85
+    _key: '!items.effects!silveel000000000.Siu2s9nwu0nuPM85'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!a8G65xvDf4zB1TOn'
+_key: '!items!silveel000000000'

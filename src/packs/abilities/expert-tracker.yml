@@ -1,56 +1,66 @@
-name: Expert Tracker
-type: wrapper
-_id: pP8vOBOhrlv2VUSL
-img: icons/creatures/abilities/paw-print-tan.webp
+_id: expTracker000000
 effects:
   - name: Expert Tracker
     type: ability
     img: icons/creatures/abilities/paw-print-tan.webp
+    _id: expTracker000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
           @L[Tradecraft:Tracker]{tracker}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.tradecrafts.tracker.score
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
-    _id: pA1EcWvNF8WA0GIU
+              time: normal
+              key: system.tradecrafts.tracker.score
+              target: Actor
+              qualifier: '1'
+              value: '2'
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.pP8vOBOhrlv2VUSL
-    _key: '!items.effects!pP8vOBOhrlv2VUSL.pA1EcWvNF8WA0GIU'
+    _key: '!items.effects!expTracker000000.expTracker000000'
+img: icons/creatures/abilities/paw-print-tan.webp
+name: Expert Tracker
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!pP8vOBOhrlv2VUSL'
+_key: '!items!expTracker000000'

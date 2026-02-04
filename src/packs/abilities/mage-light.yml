@@ -1,198 +1,239 @@
-name: Mage Light
-type: wrapper
-_id: VVYV5Wcjiy9OBKdM
-img: systems/teriock/src/icons/abilities/mage-light.webp
+_id: mageLight0000000
 effects:
   - name: Mage Light
     type: ability
     img: systems/teriock/src/icons/abilities/mage-light.webp
+    _id: mageLight0000000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Light]{Light} and
           @L[Ability:Ignite]{Ignite}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: flameMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: A6vM94eGHHtyIiPF
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.VVYV5Wcjiy9OBKdM
-    _key: '!items.effects!VVYV5Wcjiy9OBKdM.A6vM94eGHHtyIiPF'
+    _key: '!items.effects!mageLight0000000.mageLight0000000'
   - name: Light
     type: ability
+    img: systems/teriock/src/icons/abilities/light.webp
+    _id: CmpplzSFy20FkipJ
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: cone
-      targets:
-        - area
-      elements:
-        - flame
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
-      sustained: true
-      range:
-        unit: ft
-        raw: '100'
+      delivery:
+        base: cone
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>The area is illuminated. This [[lookup name style=lc]] emanates
           from your hand and moves with you. You may change its direction at
           will.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '100'
+        unit: ft
       spell: true
       standard: true
-      class: flameMage
-      expansionSaveAttribute: mov
-      form: normal
+      sustained: true
+      targets:
+        - area
       impacts:
         base:
           changes:
-            - key: system.light.bright
-              mode: 4
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.light.bright
+              target: Actor
+              qualifier: '1'
               value: '50'
+            - mode: 4
               priority: 10
-            - key: system.light.dim
-              mode: 4
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
               value: '100'
-              priority: 10
-            - key: system.light.color
-              mode: 5
-              value: '#C64600'
+            - mode: 5
               priority: 5
-            - key: system.light.animation.type
-              mode: 5
+              time: normal
+              key: system.light.color
+              target: Actor
+              qualifier: '1'
+              value: '#C64600'
+            - mode: 5
+              priority: 10
+              time: normal
+              key: system.light.animation.type
+              target: Actor
+              qualifier: '1'
               value: pulse
+            - mode: 5
               priority: 10
-            - key: system.light.angle
-              mode: 5
+              time: normal
+              key: system.light.angle
+              target: Actor
+              qualifier: '1'
               value: '60'
-              priority: 10
-          noTemplate: true
-      _sup: A6vM94eGHHtyIiPF
-    _id: g1u0nYtTtE9VTdto
-    img: systems/teriock/src/icons/abilities/light.webp
+      _sup: mageLight0000000
+      class: flameMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.light00000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lDaVkAhfzd5JjjEU
-    _key: '!items.effects!VVYV5Wcjiy9OBKdM.g1u0nYtTtE9VTdto'
+    _key: '!items.effects!mageLight0000000.CmpplzSFy20FkipJ'
   - name: Ignite
     type: ability
+    img: systems/teriock/src/icons/abilities/ignite.webp
+    _id: h37vXvuqTiTdXprM
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
-      delivery:
-        base: hand
-      targets:
-        - item
-      elements:
-        - flame
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '1'
         unit: hour
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Hour
-      sustained: true
-      range:
-        unit: melee
+      delivery:
+        base: hand
+      elements:
+        - flame
+      executionTime: a0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
           counts as a torch for the purpose of this @L[Category:Spells]{spell}.
           When @L[Property:On Fire]{on fire}, your hand produces no smoke and
           being set @L[Property:On Fire]{on fire} does not harm it.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: <p>Target must be a torch.</p>
       spell: true
       standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target must be a torch.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      sustained: true
+      targets:
+        - item
       impacts:
         base:
           changes:
-            - key: system.light.dim
-              mode: 4
+            - mode: 4
+              priority: 5
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
               value: '10'
+            - mode: 5
               priority: 5
-            - key: system.light.color
-              mode: 5
+              time: normal
+              key: system.light.color
+              target: Actor
+              qualifier: '1'
               value: '#C64600'
+            - mode: 5
               priority: 5
-            - key: system.light.animation.type
-              mode: 5
+              time: normal
+              key: system.light.animation.type
+              target: Actor
+              qualifier: '1'
               value: torch
-              priority: 5
         heightened:
           duration: 3600
-      _sup: A6vM94eGHHtyIiPF
-    _id: WpKez11JDtADWoFJ
-    img: systems/teriock/src/icons/abilities/ignite.webp
+      _sup: mageLight0000000
+      class: flameMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ignite0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.jnJmcj39Cgf1sW4b
-    _key: '!items.effects!VVYV5Wcjiy9OBKdM.WpKez11JDtADWoFJ'
+    _key: '!items.effects!mageLight0000000.h37vXvuqTiTdXprM'
+img: systems/teriock/src/icons/abilities/mage-light.webp
+name: Mage Light
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!VVYV5Wcjiy9OBKdM'
+_key: '!items!mageLight0000000'

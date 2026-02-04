@@ -1,78 +1,105 @@
-name: Resolve Conflict
-type: wrapper
-_id: E72AFglumdOwjfU6
-img: systems/teriock/src/icons/abilities/resolve-conflict.webp
+_id: resolveConflict0
 effects:
   - name: Resolve Conflict
     type: ability
     img: systems/teriock/src/icons/abilities/resolve-conflict.webp
+    _id: resolveConflict0
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
           @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
           @L[Ability:Detect Lie]{Detect Lie}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: duelist
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.tradecrafts.peacekeeper.score
-              mode: 4
-              value: '2'
+            - mode: 4
               priority: 10
-    _id: Pam0KiIGSB7dDovT
+              time: normal
+              key: system.tradecrafts.peacekeeper.score
+              target: Actor
+              qualifier: '1'
+              value: '2'
+      class: duelist
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.E72AFglumdOwjfU6
-    _key: '!items.effects!E72AFglumdOwjfU6.Pam0KiIGSB7dDovT'
+    _key: '!items.effects!resolveConflict0.resolveConflict0'
   - name: Detect Lie
     type: ability
+    img: systems/teriock/src/icons/abilities/detect-lie.webp
+    _id: mzoR9WSwlgFls2PK
     system:
-      powerSources:
-        - spiritual
-      interaction: feat
-      featSaveAttribute: snk
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: sight
-      targets:
-        - creature
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: sight
+      effectTypes:
+        - truthDetecting
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: snk
+      form: normal
+      grantOnly: false
+      interaction: feat
+      maneuver: reactive
+      powerSources:
+        - spiritual
       range:
-        unit: ft
         raw: '15'
+        unit: ft
       results:
         save: >-
           <p>You detect that the statement is true, regardless of what the
@@ -82,40 +109,29 @@ effects:
         fail: >-
           <p>You detect whether the target believes the statement is true or
           false.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       skill: true
       standard: true
-      class: duelist
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>Someone makes a statement which could, in principle, be true or
         false.</p>
-      form: normal
-      effectTypes:
-        - truthDetecting
-      _sup: Pam0KiIGSB7dDovT
-    _id: USLxP9nLbao34Xb9
-    img: systems/teriock/src/icons/abilities/detect-lie.webp
+      impacts: {}
+      _sup: resolveConflict0
+      class: duelist
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.detLie0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.PuXtIJ90SSRQkbDq
-    _key: '!items.effects!E72AFglumdOwjfU6.USLxP9nLbao34Xb9'
+    _key: '!items.effects!resolveConflict0.mzoR9WSwlgFls2PK'
+img: systems/teriock/src/icons/abilities/resolve-conflict.webp
+name: Resolve Conflict
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!E72AFglumdOwjfU6'
+_key: '!items!resolveConflict0'

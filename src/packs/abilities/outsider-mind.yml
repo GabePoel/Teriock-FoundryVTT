@@ -1,26 +1,36 @@
-name: Outsider Mind
-type: wrapper
-_id: 9JuSadDah17hGgPU
-img: systems/teriock/src/icons/abilities/outsider-mind.webp
+_id: outsiderMind0000
 effects:
   - name: Outsider Mind
     type: ability
     img: systems/teriock/src/icons/abilities/outsider-mind.webp
+    _id: outsiderMind0000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Control
@@ -28,42 +38,48 @@ effects:
           @L[Condition:Frightened]{frightened} or
           @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
           maintained even if @L[Condition:Transformed]{transformed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - immunity
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.immunities.statuses
-              mode: 2
+            - mode: 2
+              priority: 10
+              time: normal
+              key: system.protections.immunities.statuses
+              target: Actor
+              qualifier: '1'
               value: frightened
+            - mode: 2
               priority: 10
-            - key: system.protections.immunities.statuses
-              mode: 2
+              time: normal
+              key: system.protections.immunities.statuses
+              target: Actor
+              qualifier: '1'
               value: charmed
+            - mode: 2
               priority: 10
-            - key: system.protections.immunities.effects
-              mode: 2
+              time: normal
+              key: system.protections.immunities.effects
+              target: Actor
+              qualifier: '1'
               value: control
-              priority: 10
-    _id: wM77bJRLySgp4DIq
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.9JuSadDah17hGgPU
-    _key: '!items.effects!9JuSadDah17hGgPU.wM77bJRLySgp4DIq'
+    _key: '!items.effects!outsiderMind0000.outsiderMind0000'
+img: systems/teriock/src/icons/abilities/outsider-mind.webp
+name: Outsider Mind
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!9JuSadDah17hGgPU'
+_key: '!items!outsiderMind0000'

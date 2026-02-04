@@ -1,144 +1,170 @@
-name: Archery Training
-type: wrapper
-_id: 8MzcnpKvNmEtf2f2
-img: systems/teriock/src/icons/abilities/archery-training.webp
+_id: arcyTraining0000
 effects:
   - name: Archery Training
     type: ability
     img: systems/teriock/src/icons/abilities/archery-training.webp
+    _id: arcyTraining0000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Bow Blocking]{Bow Blocking} and @L[Ability:Free
           Reload]{Free Reload}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: archer
-      expansionSaveAttribute: mov
-      form: normal
-    _id: SpCQVEUkQQaQyFEI
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.8MzcnpKvNmEtf2f2
-    _key: '!items.effects!8MzcnpKvNmEtf2f2.SpCQVEUkQQaQyFEI'
+    _key: '!items.effects!arcyTraining0000.arcyTraining0000'
   - name: Bow Blocking
     type: ability
+    img: systems/teriock/src/icons/abilities/bow-blocking.webp
+    _id: pHiXWbPkvTnztYT7
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>@L[Category:Bows]{Bows} you use have their @L[Core:BV]{BV}
           increased by 2.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      class: archer
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.equipmentChanges.upgrades.classes.bows.bv
-              mode: 2
-              value: '2'
+            - mode: 2
               priority: 10
-      _sup: SpCQVEUkQQaQyFEI
-    _id: v0vJuF81LXIlElkG
-    img: systems/teriock/src/icons/abilities/bow-blocking.webp
+              time: normal
+              key: system.equipmentChanges.upgrades.classes.bows.bv
+              target: Actor
+              qualifier: '1'
+              value: '2'
+      _sup: arcyTraining0000
+      class: archer
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bowBlking0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lytO74rQgfpZp0tC
-    _key: '!items.effects!8MzcnpKvNmEtf2f2.v0vJuF81LXIlElkG'
+    _key: '!items.effects!arcyTraining0000.pHiXWbPkvTnztYT7'
   - name: Free Reload
     type: ability
+    img: systems/teriock/src/icons/abilities/free-reload.webp
+    _id: Q8PkMb6MicXAYk7m
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
-      delivery:
-        base: self
-      targets:
-        - item
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      executionTime: a0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: <p>Target is reloaded.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
       skill: true
       standard: true
+      targets:
+        - item
+      impacts: {}
+      _sup: arcyTraining0000
       class: archer
-      requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: SpCQVEUkQQaQyFEI
-    _id: NzrUMg2QwqKb4JPa
-    img: systems/teriock/src/icons/abilities/free-reload.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.freeReload000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.0ukgudvlDO19kRam
-    _key: '!items.effects!8MzcnpKvNmEtf2f2.NzrUMg2QwqKb4JPa'
+    _key: '!items.effects!arcyTraining0000.Q8PkMb6MicXAYk7m'
+img: systems/teriock/src/icons/abilities/archery-training.webp
+name: Archery Training
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!8MzcnpKvNmEtf2f2'
+_key: '!items!arcyTraining0000'

@@ -1,64 +1,81 @@
-name: Serrated Claws
-type: wrapper
-_id: Qql3KjnNdAlk2ccu
-img: systems/teriock/src/icons/abilities/serrated-claws.webp
+_id: serratedClaws000
 effects:
   - name: Serrated Claws
     type: ability
     img: systems/teriock/src/icons/abilities/serrated-claws.webp
+    _id: serratedClaws000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Keyword:Improved]{improved} @L[Ability:Offensive
           Martial Arts]{Offensive Martial Arts}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-    _id: d7eYtWHuiIsdDM7S
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      impacts: {}
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Qql3KjnNdAlk2ccu
-    _key: '!items.effects!Qql3KjnNdAlk2ccu.d7eYtWHuiIsdDM7S'
+    _key: '!items.effects!serratedClaws000.serratedClaws000'
   - name: Offensive Martial Arts
     type: ability
+    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+    _id: 9DA335PqNppMr5EP
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvement: <p>Your hands are @L[Property:AV0]{AV0}.</p>
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
@@ -71,55 +88,62 @@ effects:
           1d4]].</p>
         proficient: <p>The damage die is instead [[/damage 1d6]].</p>
         fluent: <p>The damage die is instead [[/damage 1d8]].</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      improvement: <p>Your hands are @L[Property:AV0]{AV0}.</p>
+      targets:
+        - self
       impacts:
         base:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: 1d4
           rolls:
             damage: 1d4
-          changes:
-            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
-              mode: 4
-              value: 1d4
-              priority: 10
         proficient:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: 1d6
           rolls:
             damage: 1d6
-          changes:
-            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
-              mode: 4
-              value: 1d6
-              priority: 10
         fluent:
+          changes:
+            - mode: 4
+              priority: 10
+              time: normal
+              key: system.damage.base.raw
+              target: body
+              qualifier: '@prop.handy'
+              value: 1d8
           rolls:
             damage: 1d8
-          changes:
-            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
-              mode: 4
-              value: 1d8
-              priority: 10
-      _sup: d7eYtWHuiIsdDM7S
-    _id: rQjDyJxXGHZI2wCk
-    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+      _sup: serratedClaws000
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Gk1fwl6bXoPF2N7U
-    _key: '!items.effects!Qql3KjnNdAlk2ccu.rQjDyJxXGHZI2wCk'
+    _key: '!items.effects!serratedClaws000.9DA335PqNppMr5EP'
+img: systems/teriock/src/icons/abilities/serrated-claws.webp
+name: Serrated Claws
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Qql3KjnNdAlk2ccu'
+_key: '!items!serratedClaws000'

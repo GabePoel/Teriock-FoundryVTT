@@ -1,47 +1,16 @@
-name: Disable Ray
-type: wrapper
-_id: knrv03v30XSKyWpW
-img: systems/teriock/src/icons/abilities/disable-ray.webp
+_id: disableRay000000
 effects:
   - name: Disable Ray
     type: ability
     img: systems/teriock/src/icons/abilities/disable-ray.webp
+    _id: disableRay000000
     system:
-      powerSources:
-        - spiritual
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '60'
-      overview:
-        proficient: >-
-          <p>This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.</p>
-      results:
-        hit: >-
-          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: thief
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
       costs:
         mp:
           type: variable
@@ -52,48 +21,84 @@ effects:
               triggering @L[Category:Abilities]{ability} was used on you or some
               @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
               It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: missile
+        package: ray
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: reactive
+      overview:
+        proficient: >-
+          <p>This also makes the effect of that @L[Category:Abilities]{ability}
+          @L[Core:Fizzles]{fizzle}.</p>
+      powerSources:
+        - spiritual
+      range:
+        raw: '60'
+        unit: ft
       requirements: <p>You may only target the triggering creature.</p>
-      expansionSaveAttribute: mov
+      results:
+        hit: >-
+          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
       trigger: >-
         <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
         @L[Category:Active abilities]{active} or @L[Category:Reactive
         abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
         against a different creature or some @L[Category:Equipment]{equipment}
         that different creature @L[Keyword:Bearing]{bares}.</p>
-      form: normal
       impacts:
         base:
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-    _id: 03zYiI47B3Y5hkMO
+          rolls:
+            endCon: 2d4
+      class: thief
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.knrv03v30XSKyWpW
-    _key: '!items.effects!knrv03v30XSKyWpW.03zYiI47B3Y5hkMO'
+    _key: '!items.effects!disableRay000000.disableRay000000'
+img: systems/teriock/src/icons/abilities/disable-ray.webp
+name: Disable Ray
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!knrv03v30XSKyWpW'
+_key: '!items!disableRay000000'

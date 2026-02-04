@@ -1,32 +1,51 @@
-name: Empathic Ray
-type: wrapper
-_id: SDDHkUYTrL4MePxx
-img: systems/teriock/src/icons/abilities/empathic-ray.webp
+_id: empathicRay00000
 effects:
   - name: Empathic Ray
     type: ability
     img: systems/teriock/src/icons/abilities/empathic-ray.webp
+    _id: empathicRay00000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 1
+      revealed: true
+      costs:
+        hp:
+          type: formula
+          value:
+            static: 0
+            formula: 1d4
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: missile
         package: ray
-      targets:
-        - creature
+      effectTypes:
+        - healing
+        - regeneration
+        - damaging
       elements:
         - nature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-      range:
-        unit: ft
-        raw: '60'
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic]]] or @L[Core:Healing]{heal} the target again
+        (depending on what you chose).</p>
+      interaction: attack
+      maneuver: active
       overview:
         base: >-
           <p>As you cast [[lookup name]], choose either "damage" or "healing".
@@ -40,6 +59,11 @@ effects:
           effect} and a @L[Category:Healing effects]{healing effect}. This is
           the only part of [[lookup name]] that counts as a
           @L[Category:Regeneration effects]{regeneration effect}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
       results:
         hit: >-
           <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target or
@@ -48,31 +72,10 @@ effects:
           <p>Double the @L[Core:Damage]{damage dice} dealt by this
           @L[Category:Abilities]{ability}. Or, if you chose "healing", double
           the number of times that target @L[Core:Healing]{heals}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
-      class: natureMage
-      costs:
-        hp:
-          type: formula
-          value:
-            static: 0
-            formula: 1d4
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] or @L[Core:Healing]{heal} the target again
-        (depending on what you chose).</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - healing
-        - regeneration
-        - damaging
+      targets:
+        - creature
       impacts:
         base:
           rolls:
@@ -80,17 +83,19 @@ effects:
         heightened:
           rolls:
             damage: 1d6[magic]
-    _id: cmsncHhS67XVXPkF
+      class: natureMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.SDDHkUYTrL4MePxx
-    _key: '!items.effects!SDDHkUYTrL4MePxx.cmsncHhS67XVXPkF'
+    _key: '!items.effects!empathicRay00000.empathicRay00000'
+img: systems/teriock/src/icons/abilities/empathic-ray.webp
+name: Empathic Ray
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!SDDHkUYTrL4MePxx'
+_key: '!items!empathicRay00000'

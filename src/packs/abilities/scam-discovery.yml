@@ -1,83 +1,92 @@
-name: Scam Discovery
-type: wrapper
-_id: 0F0aZ96YX8moQqXi
-img: systems/teriock/src/icons/abilities/scam-discovery.webp
+_id: scamDiscovery000
 effects:
   - name: Scam Discovery
     type: ability
+    img: systems/teriock/src/icons/abilities/scam-discovery.webp
+    _id: scamDiscovery000
     system:
-      delivery:
-        base: self
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
-        unit: noLimit
-        quantity: 0
+        raw: '0'
+        unit: unlimited
+        dawn: false
         stationary: false
         description: Always Active
+      delivery:
+        base: self
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Sense Scam]{Sense Scam} and
           @L[Ability:Audit]{Audit}.</p>
-      piercing: normal
-      powerSources:
-        - divine
-        - financial
-      skill: true
-      standard: true
-      targets:
-        - self
-      class: paladin
-    _id: CqphHVrmLv31BNrM
-    img: systems/teriock/src/icons/abilities/scam-discovery.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.0F0aZ96YX8moQqXi
-    _key: '!items.effects!0F0aZ96YX8moQqXi.CqphHVrmLv31BNrM'
-  - name: Sense Scam
-    type: ability
-    system:
-      delivery:
-        base: aura
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      effectTypes:
-        - truthDetecting
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: unp
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: feat
-      maneuver: active
-      piercing: normal
       powerSources:
         - divine
         - financial
       range:
-        unit: ft
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      impacts: {}
+      class: paladin
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!scamDiscovery000.scamDiscovery000'
+  - name: Sense Scam
+    type: ability
+    img: systems/teriock/src/icons/abilities/sense-scam.webp
+    _id: WpuuTa8b6qcveYYc
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
+      delivery:
+        base: aura
+      effectTypes:
+        - truthDetecting
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: unp
+      form: normal
+      grantOnly: false
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - divine
+        - financial
+      range:
         raw: '10'
+        unit: ft
       results:
         save: >-
           <p>You do not learn the target's disposition towards you and your
@@ -89,20 +98,27 @@ effects:
       standard: true
       targets:
         - creature
+      impacts: {}
+      _sup: scamDiscovery000
       class: paladin
-      _sup: CqphHVrmLv31BNrM
-    _id: 7gDwpCKM8IcekMuO
-    img: systems/teriock/src/icons/abilities/sense-scam.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.senseScam0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.xkgDdd6ESzBHybhD
-    _key: '!items.effects!0F0aZ96YX8moQqXi.7gDwpCKM8IcekMuO'
+    _key: '!items.effects!scamDiscovery000.WpuuTa8b6qcveYYc'
   - name: Audit
     type: ability
+    img: systems/teriock/src/icons/abilities/audit.webp
+    _id: Kt3n3VRgmyy56t1p
     system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -112,26 +128,25 @@ effects:
           value:
             static: 1
         materialCost: <p>Something symbolic of your deity.</p>
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: sight
         package: ritual
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
       effectTypes:
         - truthDetecting
       executionTime: 10 Minutes
-      expansionSaveAttribute: mov
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: slow
       overview:
@@ -142,33 +157,34 @@ effects:
           values at their discretion. This ritual also determines where the
           target lies on a political compass (economic right/left,
           authoritarian/libertarian).</p>
-      piercing: normal
       powerSources:
         - divine
         - financial
       range:
-        unit: ft
         raw: '5'
+        unit: ft
       ritual: true
       skill: true
       standard: true
       targets:
         - creature
         - item
+      impacts: {}
+      _sup: scamDiscovery000
       class: paladin
-      _sup: CqphHVrmLv31BNrM
-    _id: bLevgq1ZtOvsJRuv
-    img: systems/teriock/src/icons/abilities/audit.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.audit00000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.yxCwVOpLFVmejw8g
-    _key: '!items.effects!0F0aZ96YX8moQqXi.bLevgq1ZtOvsJRuv'
+    _key: '!items.effects!scamDiscovery000.Kt3n3VRgmyy56t1p'
+img: systems/teriock/src/icons/abilities/scam-discovery.webp
+name: Scam Discovery
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.1
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!0F0aZ96YX8moQqXi'
+_key: '!items!scamDiscovery000'

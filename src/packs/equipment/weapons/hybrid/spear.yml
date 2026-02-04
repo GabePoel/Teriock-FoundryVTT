@@ -1,110 +1,143 @@
+_id: spear00000000000
+folder: s1CVfW55iRMBO1gN
 name: Spear
-type: equipment
 system:
   equipmentType: Spear
-  equipped: true
-  consumable: false
-  damage:
-    base:
-      saved: 1d6
-    twoHanded:
-      saved: 1d8
-  weight:
-    saved: 3
-  range:
-    long:
-      saved: '60'
-      unit: ft
-    short:
-      saved: '20'
-      unit: ft
-  equipmentClasses:
-    - poleArms
-  minStr: 0
-  sb: phalanx
-  av: 0
-  bv:
-    saved: 2
-  powerLevel: mundane
+  tier: {}
+  competence:
+    raw: 0
   attackPenalty:
     raw: '-3'
-_id: Zr8lCITWy1dz0Qc8
+  bv:
+    raw: '2'
+  damage:
+    base:
+      raw: 1d6
+    twoHanded:
+      raw: 1d8
+  fightingStyle: phalanx
+  hit: {}
+  range:
+    long:
+      raw: '60'
+      unit: ft
+    melee: true
+    ranged: false
+    short:
+      raw: '20'
+      unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '3'
+  minStr:
+    raw: '0'
+  equipmentClasses:
+    - poleArms
+  powerLevel: mundane
+type: equipment
 img: systems/teriock/src/icons/equipment/spear.webp
 effects:
   - name: Versatile
     type: property
+    img: systems/teriock/src/icons/properties/versatile.webp
+    _id: versatile0000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be
         used in one or two hands. The two-handed damage value appears in
         parentheses next to the one-handed value.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: TnfKhR8RYKSnzUVe
-    img: systems/teriock/src/icons/properties/versatile.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.versatile0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.qUOXkRVCStUiudKx
-    _key: '!items.effects!Zr8lCITWy1dz0Qc8.TnfKhR8RYKSnzUVe'
+    _key: '!items.effects!spear00000000000.versatile0000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: 2REksPy88a8mOMen
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!Zr8lCITWy1dz0Qc8.2REksPy88a8mOMen'
+    _key: '!items.effects!spear00000000000.wep0000000000000'
   - name: Reach
     type: property
+    img: systems/teriock/src/icons/properties/reach.webp
+    _id: reach00000000000
     system:
+      competence:
+        raw: 0
       description: <p>A weapon with this property has a range of 10 feet instead of 5.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.long.raw
-            mode: 4
-            value: '10'
+          - mode: 4
             priority: 10
-    _id: FqOiSyGIDt9FhT0n
-    img: systems/teriock/src/icons/properties/reach.webp
+            time: normal
+            key: system.range.long.raw
+            target: parent
+            qualifier: '1'
+            value: '10'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.reach00000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.v9dwKuaTl1plMIHT
-    _key: '!items.effects!Zr8lCITWy1dz0Qc8.FqOiSyGIDt9FhT0n'
+    _key: '!items.effects!spear00000000000.reach00000000000'
   - name: Thrown
     type: property
+    img: systems/teriock/src/icons/properties/thrown.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
         @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
         be used to make melee attacks.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: 5PPPU9PYXSXGfZLq
-    img: systems/teriock/src/icons/properties/thrown.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.GxpMTePEVU970bWo
-    _key: '!items.effects!Zr8lCITWy1dz0Qc8.5PPPU9PYXSXGfZLq'
+    _id: uEKasZdIpD2YIkxN
+    _key: '!items.effects!spear00000000000.uEKasZdIpD2YIkxN'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -116,27 +149,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      ranged: false
-      _sup: 5PPPU9PYXSXGfZLq
-    _id: cQIoRoN7t7mxNAWX
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: uEKasZdIpD2YIkxN
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!Zr8lCITWy1dz0Qc8.cQIoRoN7t7mxNAWX'
+    _id: LdAb8Cj57BtBGOVr
+    _key: '!items.effects!spear00000000000.LdAb8Cj57BtBGOVr'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: s1CVfW55iRMBO1gN
-_key: '!items!Zr8lCITWy1dz0Qc8'
+_key: '!items!spear00000000000'

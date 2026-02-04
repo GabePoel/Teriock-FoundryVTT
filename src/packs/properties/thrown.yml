@@ -1,29 +1,35 @@
 name: Thrown
 type: wrapper
-_id: GxpMTePEVU970bWo
 img: systems/teriock/src/icons/properties/thrown.webp
+_id: thrown0000000000
 effects:
   - name: Thrown
     type: property
     img: systems/teriock/src/icons/properties/thrown.webp
+    _id: thrown0000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
         @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
         be used to make melee attacks.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: VcNE1wFDIMGDmNIF
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.GxpMTePEVU970bWo
-    _key: '!items.effects!GxpMTePEVU970bWo.VcNE1wFDIMGDmNIF'
+    _key: '!items.effects!thrown0000000000.thrown0000000000'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
+    _id: 5klezcnz5Fts8jBd
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -35,25 +41,29 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      _sup: VcNE1wFDIMGDmNIF
-    _id: 7keop6HKBK0WSuzL
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: thrown0000000000
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!GxpMTePEVU970bWo.7keop6HKBK0WSuzL'
+    _key: '!items.effects!thrown0000000000.5klezcnz5Fts8jBd'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!GxpMTePEVU970bWo'
+_key: '!items!thrown0000000000'

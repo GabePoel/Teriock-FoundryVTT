@@ -1,38 +1,59 @@
-name: Zombify
-type: wrapper
-_id: 5v9AknrhiMqCbDvC
-img: systems/teriock/src/icons/abilities/zombify.webp
+_id: zombify000000000
 effects:
   - name: Zombify
     type: ability
     img: systems/teriock/src/icons/abilities/zombify.webp
+    _id: zombify000000000
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
+      effectTypes:
+        - control
+        - reanimation
       elements:
         - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      interaction: attack
+      maneuver: active
       overview:
         proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
         fluent: >-
           <p>The base duration of this effect is 1 hour and the
           @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
           command.</p>
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
       results:
         hit: >-
           <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
@@ -42,53 +63,28 @@ effects:
           before, but loses all other traits and abilities. If the target was
           already @L[Category:Zombies]{some kind of zombie}, then it is
           reanimated as that type.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
-      class: necromancer
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - control
-        - reanimation
+      targets:
+        - creature
       impacts:
-        base:
-          transformation:
-            enabled: true
-            suppression:
-              bodyParts: false
-              equipment: false
-            uuids:
-              - Compendium.teriock.species.Item.SRdgO7roRk39yrUB
-            level: greater
         fluent:
           duration: 3600
         heightened:
           duration: 3600
-    _id: OR1GARXLuQdI20jl
+      class: necromancer
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5v9AknrhiMqCbDvC
-    _key: '!items.effects!5v9AknrhiMqCbDvC.OR1GARXLuQdI20jl'
+    _key: '!items.effects!zombify000000000.zombify000000000'
+img: systems/teriock/src/icons/abilities/zombify.webp
+name: Zombify
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!5v9AknrhiMqCbDvC'
+_key: '!items!zombify000000000'

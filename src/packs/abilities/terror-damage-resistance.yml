@@ -1,58 +1,68 @@
-name: Terror Damage Resistance
-type: wrapper
-_id: Pu2eraX0wC1evekD
-img: systems/teriock/src/icons/abilities/terror-damage-resistance.webp
+_id: terrorDmgRsc0000
 effects:
   - name: Terror Damage Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/terror-damage-resistance.webp
+    _id: terrorDmgRsc0000
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Damage:Terror]{terror
           damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: terror
+            - mode: 2
               priority: 10
-    _id: 1g1KEvDJx1eT6L4W
+              time: normal
+              key: system.protections.resistances.damageTypes
+              target: Actor
+              qualifier: '1'
+              value: terror
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Pu2eraX0wC1evekD
-    _key: '!items.effects!Pu2eraX0wC1evekD.1g1KEvDJx1eT6L4W'
+    _key: '!items.effects!terrorDmgRsc0000.terrorDmgRsc0000'
+img: systems/teriock/src/icons/abilities/terror-damage-resistance.webp
+name: Terror Damage Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!Pu2eraX0wC1evekD'
+_key: '!items!terrorDmgRsc0000'

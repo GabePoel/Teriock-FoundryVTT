@@ -1,183 +1,201 @@
-name: Bodyguard Training
-type: wrapper
-_id: EI6qvU7SUIw0RADw
-img: systems/teriock/src/icons/abilities/bodyguard-training.webp
+_id: bodyguardTrainin
 effects:
   - name: Bodyguard Training
     type: ability
     img: systems/teriock/src/icons/abilities/bodyguard-training.webp
+    _id: bodyguardTrainin
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
           @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
       class: veteran
-      expansionSaveAttribute: mov
-      form: normal
-    _id: 7brepIvcVkL5Hm9n
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.EI6qvU7SUIw0RADw
-    _key: '!items.effects!EI6qvU7SUIw0RADw.7brepIvcVkL5Hm9n'
+    _key: '!items.effects!bodyguardTrainin.bodyguardTrainin'
   - name: Bodyguard Backup
     type: ability
+    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
+    _id: acVqnrHv8cDkci92
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
-      range:
-        unit: ft
-        raw: '5'
+      delivery:
+        base: weapon
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>Pick another creature within range. They gain
           @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
           @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they
           make.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: veteran
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
       requirements: >-
         <p>You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard
         Taunt}.</p>
-      expansionSaveAttribute: mov
+      skill: true
+      standard: true
+      targets:
+        - creature
       trigger: >-
         <p>You attempt an @L[Core:Attack Interaction]{attack} against another
         creature.</p>
-      form: normal
       impacts:
         macros:
           Compendium_teriock_execution_Macro_U3eabIvCln4vwrrO: rollFeatSave
-      _sup: 7brepIvcVkL5Hm9n
-    _id: 5EiczQ5pM1ELbpbM
-    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
+      _sup: bodyguardTrainin
+      class: veteran
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bodyguardBackup0
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.Jr4T55CBaaf8aeif
-    _key: '!items.effects!EI6qvU7SUIw0RADw.5EiczQ5pM1ELbpbM'
+    _key: '!items.effects!bodyguardTrainin.acVqnrHv8cDkci92'
   - name: Bodyguard Taunt
     type: ability
+    img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+    _id: 0LT5Cu1iRi4yP5mw
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       duration:
+        raw: '5'
         unit: second
-        quantity: 5
+        dawn: false
         stationary: false
         description: 5 Seconds
-      range:
-        unit: ft
-        raw: '5'
+      delivery:
+        base: weapon
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>Pick another creature within range. They are
           @L[Condition:Goaded]{goaded} until the start of your next
           @L[Core:Turns]{turn}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: veteran
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
       requirements: >-
         <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
         Backup}.</p>
-      expansionSaveAttribute: mov
+      skill: true
+      standard: true
+      targets:
+        - creature
       trigger: >-
         <p>You attempt an @L[Core:Attack Interaction]{attack} against another
         creature.</p>
-      form: normal
       impacts:
         base:
-          statuses:
-            - goaded
           expiration:
             normal:
               combat:
                 who:
                   type: executor
                 what:
-                  type: forced
                   roll: 2d4kh1
                   threshold: 4
+                  type: forced
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
+          statuses:
+            - goaded
         macros:
           Compendium_teriock_execution_Macro_R54099tFLeLMmBAw: preExecution
-      _sup: 7brepIvcVkL5Hm9n
-    _id: qC6zYjlbB65kUXMe
-    img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+      _sup: bodyguardTrainin
+      class: veteran
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bodyguardTaunt00
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.bteh1qaYInYYM6O4
-    _key: '!items.effects!EI6qvU7SUIw0RADw.qC6zYjlbB65kUXMe'
+    _key: '!items.effects!bodyguardTrainin.0LT5Cu1iRi4yP5mw'
+img: systems/teriock/src/icons/abilities/bodyguard-training.webp
+name: Bodyguard Training
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!EI6qvU7SUIw0RADw'
+_key: '!items!bodyguardTrainin'

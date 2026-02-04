@@ -1,60 +1,65 @@
-name: Paralysis Poison Strike
-type: wrapper
-_id: viNgRYC5rqeF2MTM
-img: systems/teriock/src/icons/abilities/paralysis-poison-strike.webp
+_id: paralysisPoisonS
 effects:
   - name: Paralysis Poison Strike
     type: ability
     img: systems/teriock/src/icons/abilities/paralysis-poison-strike.webp
+    _id: paralysisPoisonS
     system:
-      powerSources:
-        - alchemical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '24'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 24 Hours
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
+      effectTypes:
+        - poison
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - alchemical
       range:
-        unit: ft
         raw: Your Weapon's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} causes the target to become
           @L[Condition:Paralyzed]{paralyzed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - poison
+      targets:
+        - creature
       impacts:
         base:
           statuses:
             - poisoned
-    _id: AbKg37zwzEpuRbsW
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.viNgRYC5rqeF2MTM
-    _key: '!items.effects!viNgRYC5rqeF2MTM.AbKg37zwzEpuRbsW'
+    _key: '!items.effects!paralysisPoisonS.paralysisPoisonS'
+img: systems/teriock/src/icons/abilities/paralysis-poison-strike.webp
+name: Paralysis Poison Strike
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!viNgRYC5rqeF2MTM'
+_key: '!items!paralysisPoisonS'

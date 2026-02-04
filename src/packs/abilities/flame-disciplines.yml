@@ -1,26 +1,34 @@
-name: Flame Disciplines
-type: wrapper
-_id: DNPR7R09aZRWqSTK
-img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+_id: flameDisciplines
 effects:
   - name: Flame Disciplines
     type: ability
     img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+    _id: flameDisciplines
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -38,97 +46,123 @@ effects:
         fluent: >-
           <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
           Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: int
-          amount: proficiency
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - self
+      impacts: {}
+      upgrades:
+        competence:
+          attribute: int
+          value: 0
       class: flameMage
-      expansionSaveAttribute: mov
-      form: normal
-    _id: Iwvlnl3k7kE5WCYA
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.14
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.DNPR7R09aZRWqSTK
-    _key: '!items.effects!DNPR7R09aZRWqSTK.Iwvlnl3k7kE5WCYA'
+    _key: '!items.effects!flameDisciplines.flameDisciplines'
   - name: Bombastic Casting
     type: ability
+    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
+    _id: dBNBbq4w6CmHnSxL
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - spell
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      effectTypes:
+        - loud
+      executionTime: r0
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>The triggering @L[Category:Spells]{spell} becomes extremely visible
           and loud. Visually the @L[Category:Spells]{spell} extends 10 feet in
           all directions from a line between the caster and each of its targets.
           The spell can be heard up to 600 feet away.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+      impacts: {}
+      _sup: flameDisciplines
       class: flameMage
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bombasticCasting
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!flameDisciplines.dBNBbq4w6CmHnSxL'
+  - name: Sudden Casting
+    type: ability
+    img: systems/teriock/src/icons/abilities/sudden-casting.webp
+    _id: xY0DE61Dfq54aBd9
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-      form: normal
-      effectTypes:
-        - loud
-      _sup: Iwvlnl3k7kE5WCYA
-    _id: Sa6vQofCcS2lYob0
-    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hs5nvpNhOEyd98ah
-    _key: '!items.effects!DNPR7R09aZRWqSTK.Sa6vQofCcS2lYob0'
-  - name: Sudden Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-      targets:
-        - spell
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
+      delivery:
+        base: self
+      effectTypes:
+        - sensory
+      executionTime: r1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You cast a @L[Category:Single action spells]{single action spell}
@@ -136,41 +170,34 @@ effects:
           of. The triggering creature must be within range of the spell when it
           triggers and at least one of the targets of the @L[Category:Single
           action spells]{spell} you cast.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
       skill: true
       standard: true
-      class: flameMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - spell
       trigger: >-
         <p>Another creatures would move out of sight or out of range of a
         @L[Category:Single action spells]{single action spell} you could
         cast.</p>
-      form: normal
-      effectTypes:
-        - sensory
-      _sup: Iwvlnl3k7kE5WCYA
-    _id: zqLRKFbcnQBTody3
-    img: systems/teriock/src/icons/abilities/sudden-casting.webp
+      impacts: {}
+      _sup: flameDisciplines
+      class: flameMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.suddenCasting000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.f7jClQNz9OFZqWCZ
-    _key: '!items.effects!DNPR7R09aZRWqSTK.zqLRKFbcnQBTody3'
+    _key: '!items.effects!flameDisciplines.xY0DE61Dfq54aBd9'
+img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+name: Flame Disciplines
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!DNPR7R09aZRWqSTK'
+_key: '!items!flameDisciplines'

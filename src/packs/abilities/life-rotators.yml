@@ -1,26 +1,34 @@
-name: Life Rotators
-type: wrapper
-_id: bgMaof3aaGZpArNr
-img: systems/teriock/src/icons/abilities/life-rotators.webp
+_id: lifeRots00000000
 effects:
   - name: Life Rotators
     type: ability
     img: systems/teriock/src/icons/abilities/life-rotators.webp
+    _id: lifeRots00000000
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Having mastered the basic techniques in this field of magic, you
@@ -47,68 +55,92 @@ effects:
         fluent: >-
           <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
           Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
       skill: true
-      class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              value: '@rank.mag - 1'
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.magic.maxRotators.raw
+              target: Actor
+              qualifier: '1'
+              value: '@rank.mag - 1'
         proficient:
           changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              value: 2 * (@rank.mag - 1)
+            - mode: 4
               priority: 10
+              time: normal
+              key: system.magic.maxRotators.raw
+              target: Actor
+              qualifier: '1'
+              value: 2 * (@rank.mag - 1)
         fluent:
           changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              value: 2 * (@rank.mag - 1) + @p
+            - mode: 4
               priority: 10
-    _id: XKzs0ZoSuWhH4ED7
+              time: normal
+              key: system.magic.maxRotators.raw
+              target: Actor
+              qualifier: '1'
+              value: 2 * (@rank.mag - 1) + @p
+      class: lifeMage
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.13
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.bgMaof3aaGZpArNr
-    _key: '!items.effects!bgMaof3aaGZpArNr.XKzs0ZoSuWhH4ED7'
+    _key: '!items.effects!lifeRots00000000.lifeRots00000000'
   - name: Blessing
     type: ability
+    img: systems/teriock/src/icons/abilities/blessing.webp
+    _id: kWazRc9aPkcnfTyD
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      effectTypes:
+        - contract
       elements:
         - life
-      duration:
-        unit: hour
-        quantity: 1
-        stationary: false
-        description: 1 Hour
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, you may target 1
+        additional creature.</p>
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Choose 1 ability from your deity's @L[Core:Domains]{domains chart}.
@@ -123,326 +155,310 @@ effects:
           <p>You may choose 2 × @L[Core:Fluency Bonus]{F} abilities from your
           deity's @L[Core:Domains]{domains chart} and bless 2 × @L[Core:Fluency
           Bonus]{F} targets with 2 of them.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You are not @L[Category:Sustained abilities]{sustaining} [[lookup
+        name]].</p>
+      ritual: true
+      rotator: true
       spell: true
       standard: true
-      ritual: true
+      sustained: true
+      targets:
+        - creature
+      impacts: {}
+      _sup: lifeRots00000000
       class: lifeMage
-      rotator: true
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.blessing00000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!lifeRots00000000.kWazRc9aPkcnfTyD'
+  - name: Crown of Light
+    type: ability
+    img: systems/teriock/src/icons/abilities/crown-of-light.webp
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target 1
-        additional creature.</p>
-      requirements: >-
-        <p>You are not @L[Category:Sustained abilities]{sustaining} [[lookup
-        name]].</p>
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - contract
-      _sup: XKzs0ZoSuWhH4ED7
-    _id: 2l32V3VXGxJalRgk
-    img: systems/teriock/src/icons/abilities/blessing.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.xZhEjDm5UlTInUyO
-    _key: '!items.effects!bgMaof3aaGZpArNr.2l32V3VXGxJalRgk'
-  - name: Crown of Light
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - life
       duration:
+        raw: '8'
         unit: hour
-        quantity: 8
+        dawn: false
         stationary: false
         description: 8 Hours
-      sustained: true
+      delivery:
+        base: self
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>A small circle of golden light circles above your head. You gain
           @L[Ability:Light Touch]{Light Touch} and @L[Ability:Light Aura]{Light
           Aura}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
       spell: true
       standard: true
-      class: lifeMage
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: special
+      sustained: true
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.light.dim
-              mode: 4
+            - mode: 4
+              priority: 3
+              time: normal
+              key: system.light.dim
+              target: Actor
+              qualifier: '1'
               value: '0.01'
+            - mode: 5
               priority: 3
-            - key: system.light.color
-              mode: 5
+              time: normal
+              key: system.light.color
+              target: Actor
+              qualifier: '1'
               value: '#DEDDDA'
+            - mode: 5
               priority: 3
-            - key: system.light.animation.type
-              mode: 5
+              time: normal
+              key: system.light.animation.type
+              target: Actor
+              qualifier: '1'
               value: sunburst
-              priority: 3
-      _sup: XKzs0ZoSuWhH4ED7
-    _id: sPCBc9Zn0gQxQzqm
-    img: systems/teriock/src/icons/abilities/crown-of-light.webp
+      _sup: lifeRots00000000
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cOLight000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.qzeb2OOcLI2CcUIz
-    _key: '!items.effects!bgMaof3aaGZpArNr.sPCBc9Zn0gQxQzqm'
+    _id: gxc9KUcy4JUX19Aa
+    _key: '!items.effects!lifeRots00000000.gxc9KUcy4JUX19Aa'
   - name: Light Touch
     type: ability
+    img: systems/teriock/src/icons/abilities/light-touch.webp
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
       elements:
         - life
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
           choice.</p>
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
-      class: lifeMage
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - lighted
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 1
                   time: end
                   trigger: turn
-                  skip: 1
             changeOnCrit: true
             doesExpire: true
+          rolls:
+            endCon: 2d4
+          statuses:
+            - lighted
         heightened:
           rolls:
             damage: 1d4[magic holy]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      _sup: sPCBc9Zn0gQxQzqm
-    _id: ZMvUnSqs1h2OOuL1
-    img: systems/teriock/src/icons/abilities/light-touch.webp
+      _sup: gxc9KUcy4JUX19Aa
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lightTouch000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.iqBetQHgvgdnfxli
-    _key: '!items.effects!bgMaof3aaGZpArNr.ZMvUnSqs1h2OOuL1'
+    _id: O6YnsrLkgo2aW43Z
+    _key: '!items.effects!lifeRots00000000.O6YnsrLkgo2aW43Z'
   - name: Light Aura
     type: ability
+    img: systems/teriock/src/icons/abilities/light-aura.webp
     system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        fail: >-
-          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
-          choice.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: lifeMage
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      duration:
+        raw: '1'
+        unit: minute
+        dawn: false
+        stationary: false
+        description: 1 Minute
+      delivery:
+        base: aura
+      elements:
+        - life
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
+          choice.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
       impacts:
         base:
-          statuses:
-            - lighted
-          rolls:
-            endCon: 2d4
           expiration:
             normal:
               combat:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: rolled
                 when:
+                  skip: 0
                   time: end
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: true
-        heightened:
           rolls:
             endCon: 2d4
+          statuses:
+            - lighted
+        heightened:
+          rolls:
             damage: 1d4[magic holy]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      _sup: sPCBc9Zn0gQxQzqm
-    _id: kAhwfXjGj3ivcZHU
-    img: systems/teriock/src/icons/abilities/light-aura.webp
+      _sup: gxc9KUcy4JUX19Aa
+      class: lifeMage
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lightAura0000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.a8ebNup8BJ3b8Lc2
-    _key: '!items.effects!bgMaof3aaGZpArNr.kAhwfXjGj3ivcZHU'
+    _id: wTP29oU2yQboHhia
+    _key: '!items.effects!lifeRots00000000.wTP29oU2yQboHhia'
   - name: Glow of Healing
     type: ability
+    img: systems/teriock/src/icons/abilities/glow-of-healing.webp
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - self
-      elements:
-        - life
-      duration:
-        unit: hour
-        quantity: 8
-        stationary: false
-        description: 8 Hours
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Healing Touch]{Healing Touch} and
-          @L[Ability:Cure Illness]{Cure Illness}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: lifeMage
-      rotator: true
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -450,99 +466,158 @@ effects:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
+      duration:
+        raw: '8'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 8 Hours
+      delivery:
+        base: sight
+        package: ritual
+      elements:
+        - life
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
       form: special
-      _sup: XKzs0ZoSuWhH4ED7
-    _id: w6GUnsvpkfCsICKf
-    img: systems/teriock/src/icons/abilities/glow-of-healing.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.QkHc4u4HjnkNTHK6
-    _key: '!items.effects!bgMaof3aaGZpArNr.w6GUnsvpkfCsICKf'
-  - name: Healing Touch
-    type: ability
-    system:
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Healing Touch]{Healing Touch} and
+          @L[Ability:Cure Illness]{Cure Illness}.</p>
       powerSources:
         - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      range:
+        unit: melee
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+      impacts: {}
+      _sup: lifeRots00000000
+      class: lifeMage
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.glowOfHng0000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _id: sFBXZGhXtObx54pk
+    _key: '!items.effects!lifeRots00000000.sFBXZGhXtObx54pk'
+  - name: Healing Touch
+    type: ability
+    img: systems/teriock/src/icons/abilities/healing-touch.webp
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 2
+      revealed: true
+      costs:
+        verbal: true
+        somatic: true
+      duration:
+        raw: '0'
+        unit: instant
+        dawn: false
+        stationary: false
+        description: Instant
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
       elements:
         - life
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target is
+        @L[Core:Healing]{healed} again at the start of your next
+        @L[Core:Turns]{turn}.</p>
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
           @L[Core:Healing]{healed} at the start of your next
           @L[Core:Turns]{turn}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       spell: true
       standard: true
+      targets:
+        - creature
+      impacts: {}
+      _sup: sFBXZGhXtObx54pk
       class: lifeMage
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hngTouch00000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _id: 8zQrbuyqQvsI2cij
+    _key: '!items.effects!lifeRots00000000.8zQrbuyqQvsI2cij'
+  - name: Cure Illness
+    type: ability
+    img: systems/teriock/src/icons/abilities/cure-illness.webp
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target is
-        @L[Core:Healing]{healed} again at the start of your next
-        @L[Core:Turns]{turn}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: w6GUnsvpkfCsICKf
-    _id: 4aLSQRJEdbloghH7
-    img: systems/teriock/src/icons/abilities/healing-touch.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.5Ivayud71HICAvmC
-    _key: '!items.effects!bgMaof3aaGZpArNr.4aLSQRJEdbloghH7'
-  - name: Cure Illness
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+        mp:
+          type: static
+          value:
+            static: 1
+      duration:
+        raw: '1'
+        unit: hour
+        dawn: false
+        stationary: false
+        description: 1 Hour
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      effectTypes:
+        - healing
       elements:
         - life
-      duration:
-        unit: hour
-        quantity: 1
-        stationary: false
-        description: 1 Hour
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
+        reduced by 1.</p>
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Make an @L[Tradecraft:Herbalist]{herbalist} check to remove a
@@ -559,6 +634,11 @@ effects:
           @L[Core:Proficiency Bonus]{proficiency bonus} to the
           @L[Tradecraft:Herbalist]{herbalist} check regardless of whether or not
           you are proficient in @L[Tradecraft:Herbalist]{herbalist}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
       results:
         save: <p>The target is cured of the illness.</p>
         fail: >-
@@ -566,16 +646,33 @@ effects:
           duration of Healing Touch. You may cast [[lookup name]] again to keep
           the disease from progressing, but you may not attempt the check
           again.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      ritual: true
       spell: true
       standard: true
-      ritual: true
+      targets:
+        - creature
+      impacts: {}
+      _sup: sFBXZGhXtObx54pk
       class: lifeMage
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cureIllness00000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _id: N3pwnfFeyo3YQtoT
+    _key: '!items.effects!lifeRots00000000.N3pwnfFeyo3YQtoT'
+  - name: Rebirth
+    type: ability
+    img: systems/teriock/src/icons/abilities/rebirth.webp
+    _id: iOzUPPRcTt83hlGS
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
@@ -583,45 +680,34 @@ effects:
           type: static
           value:
             static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
-        reduced by 1.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - healing
-      _sup: w6GUnsvpkfCsICKf
-    _id: cagJJJwSnoxf6gfN
-    img: systems/teriock/src/icons/abilities/cure-illness.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.m1sC6csetlLjfJ9o
-    _key: '!items.effects!bgMaof3aaGZpArNr.cagJJJwSnoxf6gfN'
-  - name: Rebirth
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
-      elements:
-        - life
       duration:
+        raw: '0'
         unit: instant
-        quantity: 0
+        dawn: false
         stationary: false
         description: Instant
-      range:
-        unit: melee
+      delivery:
+        base: hand
+      effectTypes:
+        - revival
+        - healing
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target can have been
+        @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.</p>
+      interaction: attack
+      maneuver: active
       overview:
         proficient: >-
           <p>If target is @L[Category:Undead creatures]{undead}, they are
@@ -631,6 +717,13 @@ effects:
           <p>If target is @L[Category:Undead creatures]{undead}, they are
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
           Bonus]{F} times.</p>
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 10 minutes.</p>
       results:
         hit: >-
           <p>If target is @L[Condition:Dead]{dead}, they are brought back to
@@ -644,66 +737,57 @@ effects:
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
           does not count as a @L[Category:Healing effects]{healing effect}
           unless you choose to @L[Core:Healing]{heal} with it.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      rotator: true
       spell: true
       standard: true
+      targets:
+        - creature
+      impacts: {}
+      _sup: lifeRots00000000
       class: lifeMage
-      rotator: true
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.rebirth000000000
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.16
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!lifeRots00000000.iOzUPPRcTt83hlGS'
+  - name: Ward
+    type: ability
+    img: systems/teriock/src/icons/abilities/ward.webp
+    _id: amguHzpw47jExGWy
+    system:
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
       costs:
         verbal: true
         somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target can have been
-        @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
-        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
-        an additional time.</p>
-      requirements: >-
-        <p>Target is @L[Category:Undead creatures]{undead} or has
-        @L[Condition:Dead]{died} within the last 10 minutes.</p>
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - revival
-        - healing
-      _sup: XKzs0ZoSuWhH4ED7
-    _id: 3TmvPWv7lquU8k4J
-    img: systems/teriock/src/icons/abilities/rebirth.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hrjXtR5hPr0uKO7E
-    _key: '!items.effects!bgMaof3aaGZpArNr.3TmvPWv7lquU8k4J'
-  - name: Ward
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - item
-      elements:
-        - life
       duration:
+        raw: '1'
         unit: minute
-        quantity: 1
+        dawn: false
         stationary: false
         description: 1 Minute
+      delivery:
+        base: hand
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      powerSources:
+        - magical
       range:
         unit: melee
       results:
@@ -713,34 +797,27 @@ effects:
           you do, the creature's next @L[Category:Hand delivery spells]{hand} or
           @L[Category:Missile delivery spells]{missile spell} is
           @L[Keyword:Warded]{warded}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      rotator: true
       spell: true
       standard: true
+      targets:
+        - item
+      impacts: {}
+      _sup: lifeRots00000000
       class: lifeMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      expansionSaveAttribute: mov
-      form: special
-      _sup: XKzs0ZoSuWhH4ED7
-    _id: WavhbyCNLGw7x0d8
-    img: systems/teriock/src/icons/abilities/ward.webp
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ward000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.0ViwAZLyxJkNe55A
-    _key: '!items.effects!bgMaof3aaGZpArNr.WavhbyCNLGw7x0d8'
+    _key: '!items.effects!lifeRots00000000.amguHzpw47jExGWy'
+img: systems/teriock/src/icons/abilities/life-rotators.webp
+name: Life Rotators
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!bgMaof3aaGZpArNr'
+_key: '!items!lifeRots00000000'

@@ -1,88 +1,113 @@
+_id: kunai00000000000
+folder: s1CVfW55iRMBO1gN
 name: Kunai
-type: equipment
 system:
   equipmentType: Kunai
-  equipped: true
-  consumable: false
+  tier: {}
+  competence:
+    raw: 0
+  attackPenalty:
+    raw: '-1'
   damage:
     base:
-      saved: 1d4
-  weight:
-    saved: 0.5
+      raw: 1d4
+    twoHanded: {}
+  fightingStyle: kunai
+  hit: {}
   range:
     long:
-      saved: '30'
+      raw: '30'
       unit: ft
+    melee: true
+    ranged: false
     short:
-      saved: '5'
+      raw: '5'
       unit: ft
+  vitals: false
+  consumable: false
+  storage:
+    enabled: false
+    maxCount: {}
+    maxWeight: {}
+    weightMultiplier: '1'
+  weight:
+    raw: '0.5'
+  minStr:
+    raw: '-3'
   equipmentClasses:
     - daggers
     - specialtySwords
-  minStr:
-    saved: -3
-  sb: kunai
-  av: 0
-  bv: 0
   powerLevel: mundane
-  attackPenalty:
-    saved: '-1'
-_id: xqNAkz86gaJfoXsM
+type: equipment
 img: systems/teriock/src/icons/equipment/kunai.webp
 effects:
   - name: Small
     type: property
+    img: systems/teriock/src/icons/properties/small.webp
+    _id: small00000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
         in the same hand as a @L[Category:Shields]{shield}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: HBFO68DXbxLgXwLm
-    img: systems/teriock/src/icons/properties/small.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.8SJqtgxoQxC1lTYI
-    _key: '!items.effects!xqNAkz86gaJfoXsM.HBFO68DXbxLgXwLm'
+    _key: '!items.effects!kunai00000000000.small00000000000'
   - name: Weapon
     type: property
+    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: wep0000000000000
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: yoOjbZ8WMeTc6gGw
-    img: systems/teriock/src/icons/properties/weapon.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.FmegEpK7hSq6IGZp
-    _key: '!items.effects!xqNAkz86gaJfoXsM.yoOjbZ8WMeTc6gGw'
+    _key: '!items.effects!kunai00000000000.wep0000000000000'
   - name: Thrown
     type: property
+    img: systems/teriock/src/icons/properties/thrown.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
         @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
         be used to make melee attacks.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
-    _id: xMWumuy47fBFj0gu
-    img: systems/teriock/src/icons/properties/thrown.webp
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.GxpMTePEVU970bWo
-    _key: '!items.effects!xqNAkz86gaJfoXsM.xMWumuy47fBFj0gu'
+    _id: 0rolXP3aEmYcrbnU
+    _key: '!items.effects!kunai00000000000.0rolXP3aEmYcrbnU'
   - name: Ranged
     type: property
     img: systems/teriock/src/icons/properties/ranged.webp
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -94,26 +119,30 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
+      suppression: {}
+      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
-            mode: 5
-            value: 'true'
+          - mode: 5
             priority: 10
-      _sup: xMWumuy47fBFj0gu
-    _id: rpHXIwP61fZXuM1h
+            time: normal
+            key: system.range.ranged
+            target: parent
+            qualifier: '1'
+            value: 'true'
+      _sup: 0rolXP3aEmYcrbnU
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.t9mU7VLbJycS6atE
-    _key: '!items.effects!xqNAkz86gaJfoXsM.rpHXIwP61fZXuM1h'
+    _id: 8DyKX9itq5hgMBq0
+    _key: '!items.effects!kunai00000000000.8DyKX9itq5hgMBq0'
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.8
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-folder: s1CVfW55iRMBO1gN
-_key: '!items!xqNAkz86gaJfoXsM'
+_key: '!items!kunai00000000000'

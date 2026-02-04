@@ -1,56 +1,66 @@
-name: Skill Resistance
-type: wrapper
-_id: UgwYaCsMseDvOMqL
-img: systems/teriock/src/icons/abilities/skill-resistance.webp
+_id: skillRsc00000000
 effects:
   - name: Skill Resistance
     type: ability
     img: systems/teriock/src/icons/abilities/skill-resistance.webp
+    _id: skillRsc00000000
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      suppression: {}
+      piercing:
+        raw: 0
+      revealed: true
+      duration:
+        raw: '0'
+        unit: unlimited
+        dawn: false
+        stationary: false
+        description: Always Active
       delivery:
         base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-      overview:
-        base: <p>You @L[Keyword:Resistance]{resist} @L[Category:Skills]{skills}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
       effectTypes:
         - resistance
+      executionTime: passive
+      expansion:
+        range:
+          unit: self
+        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You @L[Keyword:Resistance]{resist} @L[Category:Skills]{skills}.</p>
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
       impacts:
         base:
           changes:
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Skills
+            - mode: 2
               priority: 10
-    _id: ws9PjkIOl6hjMWxN
+              time: normal
+              key: system.protections.resistances.other
+              target: Actor
+              qualifier: '1'
+              value: Skills
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.UgwYaCsMseDvOMqL
-    _key: '!items.effects!UgwYaCsMseDvOMqL.ws9PjkIOl6hjMWxN'
+    _key: '!items.effects!skillRsc00000000.skillRsc00000000'
+img: systems/teriock/src/icons/abilities/skill-resistance.webp
+name: Skill Resistance
+type: wrapper
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.16
   lastModifiedBy: teriockBuilder00
-_key: '!items!UgwYaCsMseDvOMqL'
+_key: '!items!skillRsc00000000'
