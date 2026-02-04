@@ -7,11 +7,11 @@ const { fields } = foundry.data;
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @param {typeof TeriockBaseActorSheet} Base
+ * @param {typeof BaseActorSheet} Base
  */
 export default (Base) =>
   /**
-   * @extends {TeriockBaseActorSheet}
+   * @extends {BaseActorSheet}
    * @mixin
    */
   class TakingActorSheetPart extends HackStatMixin(Base) {

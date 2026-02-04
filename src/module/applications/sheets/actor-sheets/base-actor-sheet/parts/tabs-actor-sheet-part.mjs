@@ -4,11 +4,11 @@ import TeriockTextEditor from "../../../../ux/text-editor.mjs";
 
 //noinspection JSClosureCompilerSyntax,JSUnresolvedReference,JSUnusedGlobalSymbols
 /**
- * @param {typeof TeriockBaseActorSheet} Base
+ * @param {typeof BaseActorSheet} Base
  */
 export default (Base) =>
   /**
-   * @extends {TeriockBaseActorSheet}
+   * @extends {BaseActorSheet}
    * @mixin
    */
   class TabsActorSheetPart extends Base {

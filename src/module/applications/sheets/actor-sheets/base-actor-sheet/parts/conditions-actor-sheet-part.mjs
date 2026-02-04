@@ -4,11 +4,11 @@ import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @param {typeof TeriockBaseActorSheet} Base
+ * @param {typeof BaseActorSheet} Base
  */
 export default (Base) =>
   /**
-   * @extends {TeriockBaseActorSheet}
+   * @extends {BaseActorSheet}
    * @mixin
    */
   class ConditionsActorSheetPart extends Base {

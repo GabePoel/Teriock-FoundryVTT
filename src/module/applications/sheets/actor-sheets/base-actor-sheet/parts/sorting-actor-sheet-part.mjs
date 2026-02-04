@@ -1,13 +1,14 @@
 //noinspection JSClosureCompilerSyntax
 /**
- * @param {typeof TeriockBaseActorSheet} Base
+ * @param {typeof BaseActorSheet} Base
  */
 export default (Base) =>
   /**
-   * @extends {TeriockBaseActorSheet}
+   * @extends {BaseActorSheet}
    * @mixin
    */
   class SortingActorSheetPart extends Base {
+    /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
       this.element.querySelectorAll("[data-action='sheetSelect']").forEach(

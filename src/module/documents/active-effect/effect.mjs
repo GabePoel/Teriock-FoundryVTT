@@ -22,7 +22,7 @@ const { ActiveEffect } = foundry.documents;
  * @property {ID<TeriockActiveEffect>} _id
  * @property {ID<TeriockActiveEffect>} id
  * @property {UUID<TeriockActiveEffect>} uuid
- * @property {TeriockBaseEffectSheet} sheet
+ * @property {BaseEffectSheet} sheet
  */
 export default class TeriockActiveEffect extends mix(
   ActiveEffect,

@@ -2,11 +2,11 @@ import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @param {typeof TeriockBaseActorSheet} Base
+ * @param {typeof BaseActorSheet} Base
  */
 export default (Base) =>
   /**
-   * @extends {TeriockBaseActorSheet}
+   * @extends {BaseActorSheet}
    * @mixin
    */
   class SidebarActorSheetPart extends Base {

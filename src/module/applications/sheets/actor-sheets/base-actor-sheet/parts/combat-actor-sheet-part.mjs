@@ -2,13 +2,12 @@ import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog
 
 //noinspection JSClosureCompilerSyntax
 /**
- * @param {typeof TeriockBaseActorSheet} Base
+ * @param {typeof BaseActorSheet} Base
  */
 export default (Base) =>
   /**
-   * @extends {TeriockBaseActorSheet}
+   * @extends {BaseActorSheet}
    * @mixin
-   * @property {TeriockActor} document
    */
   class CombatActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
