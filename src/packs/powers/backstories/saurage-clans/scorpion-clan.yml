@@ -1,35 +1,69 @@
-folder: MwRSCixW3oPgC6LW
-name: Scorpion Clan
-type: power
-_id: qsnTEvzKsoaj94EJ
-img: icons/creatures/invertebrates/scorpion-yellow.webp
-system:
-  description: >-
-    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
-    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
-    color.</p>
-  type: backstory
+_id: scorpionClan0000
+_key: '!items!scorpionClan0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Combat Shimmering
-    type: ability
+  - _id: 7nqtWFQHZURbc5jQ
+    _key: '!items.effects!scorpionClan0000.7nqtWFQHZURbc5jQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.combatShimmering
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/combat-shimmering.webp
+    name: Combat Shimmering
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: corsair
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: minute
-        quantity: 1
+        dawn: false
         description: 1 Minute
+        raw: '1'
         stationary: false
-      sustained: true
+        unit: minute
+      effectTypes:
+        - resistance
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: snared
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: immobilized
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: hack
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Keyword:Resistance]{resistant} to effects that would
@@ -37,46 +71,29 @@ effects:
           @L[Condition:Immobile]{immobile}, and to @L[Damage:Hack]{hack damage}
           dealt by other creatures.</p><div class="note"><b>Note:</b> This does
           not clear any existing effects.</div>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              value: snared
-              priority: 10
-            - key: system.protections.resistances.statuses
-              mode: 2
-              value: immobilized
-              priority: 10
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: hack
-              priority: 10
-    _id: 7nqtWFQHZURbc5jQ
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.combatShimmering
-    _key: '!items.effects!qsnTEvzKsoaj94EJ.7nqtWFQHZURbc5jQ'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!qsnTEvzKsoaj94EJ'
+      sustained: true
+      targets:
+        - self
+    type: ability
+folder: saurageClans0000
+img: icons/creatures/invertebrates/scorpion-yellow.webp
+name: Scorpion Clan
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
+    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
+    color.</p>
+  maxAv: 4
+  type: backstory
+type: power

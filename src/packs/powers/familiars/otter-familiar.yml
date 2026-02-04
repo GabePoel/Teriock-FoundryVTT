@@ -1,57 +1,69 @@
 _id: otterFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Otter Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.otter00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!otterFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: otterTamer000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Otter Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Otter]{otter}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: po7V1oQ5sQU1B8PV
+    _key: '!items.effects!otterFamiliar000.po7V1oQ5sQU1B8PV'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.evasiveShimmerin
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!otterFamiliar000.otterTamer000000'
-  - name: Evasive Shimmering
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
+    name: Evasive Shimmering
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: instant
-        quantity: 0
         description: Instant
+        quantity: 0
         stationary: false
+        unit: instant
+      effectTypes:
+        - resistance
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: snared
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: immobilized
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: hack
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Keyword:Resistance]{resistant} to effects that would
@@ -61,71 +73,136 @@ effects:
           not clear any existing effects.</div>
       piercing:
         raw: 0
+      powerSources:
+        - primal
+      requirements: <p>You are not within 10 feet of any enemy creature.</p>
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: 20s6fx6LHZEftPvZ
+    _key: '!items.effects!otterFamiliar000.20s6fx6LHZEftPvZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+    name: Missile Reflexes
+    system:
+      _sup: ptNE4vEZKLTJW6u2
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - resistance
+      executionTime: r1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      requirements: <p>You are not within 10 feet of any enemy creature.</p>
-      expansionSaveAttribute: mov
-      form: normal
+      interaction: block
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
+          Interaction]{attack}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - attack
+        - item
+      trigger: >-
+        <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
+        @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
+        Interaction]{attack}.</p>
+    type: ability
+  - _id: otterTamer000000
+    _key: '!items.effects!otterFamiliar000.otterTamer000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Otter Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Otter]{otter}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: ptNE4vEZKLTJW6u2
+    _key: '!items.effects!otterFamiliar000.ptNE4vEZKLTJW6u2'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/reflexes.webp
+    name: Reflexes
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
       effectTypes:
         - resistance
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 2
+            - key: system.protections.resistances.abilities
+              mode: 2
               priority: 10
-              time: normal
-              key: system.protections.resistances.statuses
-              target: Actor
               qualifier: '1'
-              value: snared
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.statuses
               target: Actor
-              qualifier: '1'
-              value: immobilized
-            - mode: 2
-              priority: 10
               time: normal
-              key: system.protections.resistances.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: hack
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: po7V1oQ5sQU1B8PV
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.evasiveShimmerin
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otterFamiliar000.po7V1oQ5sQU1B8PV'
-  - name: Reflexes
-    type: ability
-    img: systems/teriock/src/icons/abilities/reflexes.webp
-    system:
-      powerSources:
-        - martial
+              value: Disarm
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficiency
+          attribute: mov
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
@@ -134,101 +211,24 @@ effects:
           Reflexes}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      skill: true
-      standard: true
-      class: archer
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.abilities
-              target: Actor
-              qualifier: '1'
-              value: Disarm
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: ptNE4vEZKLTJW6u2
-    _key: '!items.effects!otterFamiliar000.ptNE4vEZKLTJW6u2'
-  - name: Missile Reflexes
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: block
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: hand
-      targets:
-        - attack
-        - item
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
-          Interaction]{attack}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
       skill: true
       standard: true
-      class: archer
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
-        @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
-        Interaction]{attack}.</p>
-      form: normal
-      effectTypes:
-        - resistance
-      _sup: ptNE4vEZKLTJW6u2
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 20s6fx6LHZEftPvZ
-    _key: '!items.effects!otterFamiliar000.20s6fx6LHZEftPvZ'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!otterFamiliar000'
+      targets:
+        - self
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Otter Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.otter00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

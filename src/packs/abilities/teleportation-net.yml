@@ -1,45 +1,55 @@
 _id: teleportationNet
+_key: '!items!teleportationNet'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Teleportation Net
-    type: ability
+  - _id: teleportationNet
+    _key: '!items.effects!teleportationNet.teleportationNet'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/teleportation-net.webp
-    _id: teleportationNet
+    name: Teleportation Net
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 3
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
       delivery:
         base: aura
         package: ritual
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - displacement
       elements:
         - storm
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. </p>
+      impacts:
+        heightened:
+          duration: 3600
       interaction: manifest
       maneuver: slow
       overview:
@@ -48,11 +58,14 @@ effects:
           @L[Category:Displacement effects]{displacement effects} that would
           pass through the targeted area are intercepted. They end with whatever
           was being displaced manifests within the targeted area.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '30'
         unit: ft
+      revealed: true
       ritual: true
       rotator: true
       spell: true
@@ -60,21 +73,7 @@ effects:
       sustained: true
       targets:
         - area
-      impacts:
-        heightened:
-          duration: 3600
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!teleportationNet.teleportationNet'
+    type: ability
 img: systems/teriock/src/icons/abilities/teleportation-net.webp
 name: Teleportation Net
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!teleportationNet'

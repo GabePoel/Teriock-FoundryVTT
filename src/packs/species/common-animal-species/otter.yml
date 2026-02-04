@@ -1,11 +1,790 @@
 _id: otter00000000000
-folder: Jg0dWUzFS1WNDl2g
-name: Otter
-type: species
+_key: '!items!otter00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: pBMlTQnaBCIQW5qi
+    _key: '!items.effects!otter00000000000.pBMlTQnaBCIQW5qi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -2
+    type: ability
+  - _id: pZxXWZN88RrvwsPL
+    _key: '!items.effects!otter00000000000.pZxXWZN88RrvwsPL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.digging000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/digging.webp
+    name: Digging
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.dig
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: O4KSjWBNHCqSMJpw
+    _key: '!items.effects!otter00000000000.O4KSjWBNHCqSMJpw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hack.webp
+    name: Hack
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          hacks:
+            - arm
+            - leg
+      interaction: attack
+      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+      maneuver: active
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
+          gets dealt accordingly.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
+          legs, depending on what you chose.</p>
+        hit: >-
+          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    type: ability
+  - _id: mGyDEc5XfkTMKjBV
+    _key: '!items.effects!otter00000000000.mGyDEc5XfkTMKjBV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
+          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
+          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
+          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
+        fluent: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light,
+        @L[Core:Cover]{three-quarters cover}, or some other feature which the
+        @L[Core:Game Master]{GM} determines is appropriate for being
+        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 0
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: BD2HZUmYY60rj1CP
+    _key: '!items.effects!otter00000000000.BD2HZUmYY60rj1CP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/impale.webp
+    name: Impale
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
+          hacks:
+            - body
+      interaction: attack
+      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
+          as well.</p>
+        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+  - _id: 3ztd1DJcY6lOAvi2
+    _key: '!items.effects!otter00000000000.3ztd1DJcY6lOAvi2'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+    name: Missile Reflexes
+    system:
+      _sup: uRY0IrZRLD0np50U
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - resistance
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: block
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
+          Interaction]{attack}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - attack
+        - item
+      trigger: >-
+        <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
+        @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
+        Interaction]{attack}.</p>
+    type: ability
+  - _id: TSGZr9J8voDhnuav
+    _key: '!items.effects!otter00000000000.TSGZr9J8voDhnuav'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/no-hands.webp
+    name: No Hands
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: xW6GhxWweiAb1VUF
+    _key: '!items.effects!otter00000000000.xW6GhxWweiAb1VUF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    type: ability
+  - _id: z4FGZNE3LyaKd8q6
+    _key: '!items.effects!otter00000000000.z4FGZNE3LyaKd8q6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    type: ability
+  - _id: XLr3OlOju5px2xzN
+    _key: '!items.effects!otter00000000000.XLr3OlOju5px2xzN'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 0
+    type: ability
+  - _id: uRY0IrZRLD0np50U
+    _key: '!items.effects!otter00000000000.uRY0IrZRLD0np50U'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/reflexes.webp
+    name: Reflexes
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.abilities
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Disarm
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
+          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
+          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
+          Reflexes}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: mov
+          value: 0
+    type: ability
+  - _id: FYocGm6AkpgDhMqQ
+    _key: '!items.effects!otter00000000000.FYocGm6AkpgDhMqQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: nGurFmS7jPNQymEV
+    _key: '!items.effects!otter00000000000.nGurFmS7jPNQymEV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/tiny-strength.webp
+    name: Tiny Strength
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: -2
+    type: ability
+  - _id: KVLxiJAPhUgiZMeo
+    _key: '!items.effects!otter00000000000.KVLxiJAPhUgiZMeo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.vitHack000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/vitals-hack.webp
+    name: Vitals Hack
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
+          hacks:
+            - ear
+            - mouth
+            - nose
+      interaction: attack
+      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
+          as well.</p>
+        hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+folder: commonAnimalSpec
 img: systems/teriock/src/icons/creatures/otter.webp
+name: Otter
 system:
+  br: 2
   competence:
     raw: 1
+  size:
+    enabled: true
+    value: 0.5
   statDice:
     hp:
       disabled: false
@@ -17,785 +796,6 @@ system:
       faces: 6
       number:
         raw: '1'
-  br: 2
-  size:
-    enabled: true
-    value: 0.5
   traits:
     - animal
-effects:
-  - name: Dense Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: flaw
-      upgrades:
-        score:
-          attribute: int
-          value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: pBMlTQnaBCIQW5qi
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.pBMlTQnaBCIQW5qi'
-  - name: Digging
-    type: ability
-    img: systems/teriock/src/icons/abilities/digging.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
-      piercing:
-        raw: 0
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.dig
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: pZxXWZN88RrvwsPL
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.digging000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.pZxXWZN88RrvwsPL'
-  - name: Hack
-    type: ability
-    img: systems/teriock/src/icons/abilities/hack.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - arm
-        - leg
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
-          gets dealt accordingly.</p>
-      results:
-        hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
-        critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: berserker
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-    _id: O4KSjWBNHCqSMJpw
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.O4KSjWBNHCqSMJpw'
-  - name: Hide
-    type: ability
-    img: systems/teriock/src/icons/abilities/hide.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      overview:
-        base: >-
-          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
-          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
-          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-        fluent: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: thief
-      requirements: >-
-        <p>You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:Game Master]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-          rolls:
-            hide: 1d20 + (2 * @snk)
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
-      upgrades:
-        competence:
-          attribute: snk
-          value: 0
-        score:
-          attribute: snk
-          value: 2
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      range:
-        unit: self
-    _id: mGyDEc5XfkTMKjBV
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.mGyDEc5XfkTMKjBV'
-  - name: Impale
-    type: ability
-    img: systems/teriock/src/icons/abilities/impale.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - vitals
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
-        critHit: >-
-          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
-          as well.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - body
-          common:
-            - standardDamage
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-    _id: BD2HZUmYY60rj1CP
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.BD2HZUmYY60rj1CP'
-  - name: No Hands
-    type: ability
-    img: systems/teriock/src/icons/abilities/no-hands.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
-      piercing:
-        raw: 0
-      form: flaw
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: TSGZr9J8voDhnuav
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.TSGZr9J8voDhnuav'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: mov
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: xW6GhxWweiAb1VUF
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.xW6GhxWweiAb1VUF'
-  - name: Normal Perception
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: per
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: z4FGZNE3LyaKd8q6
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.z4FGZNE3LyaKd8q6'
-  - name: Normal Sneak
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-sneak.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: snk
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: XLr3OlOju5px2xzN
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.XLr3OlOju5px2xzN'
-  - name: Reflexes
-    type: ability
-    img: systems/teriock/src/icons/abilities/reflexes.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
-          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
-          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
-          Reflexes}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.abilities
-              target: Actor
-              qualifier: '1'
-              value: Disarm
-      upgrades:
-        competence:
-          attribute: mov
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: uRY0IrZRLD0np50U
-    _key: '!items.effects!otter00000000000.uRY0IrZRLD0np50U'
-  - name: Missile Reflexes
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: block
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: hand
-      targets:
-        - attack
-        - item
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
-          Interaction]{attack}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      trigger: >-
-        <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
-        @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
-        Interaction]{attack}.</p>
-      form: normal
-      effectTypes:
-        - resistance
-      _sup: uRY0IrZRLD0np50U
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 3ztd1DJcY6lOAvi2
-    _key: '!items.effects!otter00000000000.3ztd1DJcY6lOAvi2'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: FYocGm6AkpgDhMqQ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.FYocGm6AkpgDhMqQ'
-  - name: Tiny Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/tiny-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: flaw
-      upgrades:
-        score:
-          attribute: str
-          value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: nGurFmS7jPNQymEV
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.nGurFmS7jPNQymEV'
-  - name: Vitals Hack
-    type: ability
-    img: systems/teriock/src/icons/abilities/vitals-hack.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - vitals
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
-        critHit: >-
-          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
-          as well.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      form: normal
-      effectTypes:
-        - damaging
-      impacts:
-        base:
-          hacks:
-            - ear
-            - mouth
-            - nose
-          common:
-            - standardDamage
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-    _id: KVLxiJAPhUgiZMeo
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.vitHack000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!otter00000000000.KVLxiJAPhUgiZMeo'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!otter00000000000'
+type: species

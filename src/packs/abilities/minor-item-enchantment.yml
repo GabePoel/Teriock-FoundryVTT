@@ -1,39 +1,47 @@
 _id: minorItmEnchantm
+_key: '!items!minorItmEnchantm'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Minor Item Enchantment
-    type: ability
+  - _id: minorItmEnchantm
+    _key: '!items.effects!minorItmEnchantm.minorItmEnchantm'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
-    _id: minorItmEnchantm
+    name: Minor Item Enchantment
     system:
+      class: lifeMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       elements:
         - life
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -41,6 +49,9 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
       interaction: manifest
       maneuver: slow
       overview:
@@ -52,34 +63,22 @@ effects:
           component abilities]{invoked} for. The enchanted item is
           @L[Core:Presence]{tier 1}. If the item is
           @L[Property:Shattered]{shattered}, this enchantment fades.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '5'
         unit: ft
       requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
+      revealed: true
       ritual: true
       rotator: true
       spell: true
       standard: true
       targets:
         - weapon
-      impacts:
-        heightened:
-          duration: 3600
-      class: lifeMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!minorItmEnchantm.minorItmEnchantm'
+    type: ability
 img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
 name: Minor Item Enchantment
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!minorItmEnchantm'

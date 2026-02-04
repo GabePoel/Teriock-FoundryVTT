@@ -1,40 +1,54 @@
 _id: removeCharm00000
+_key: '!items!removeCharm00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Remove Charm
-    type: ability
+  - _id: removeCharm00000
+    _key: '!items.effects!removeCharm00000.removeCharm00000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/remove-charm.webp
-    _id: removeCharm00000
+    name: Remove Charm
     system:
+      class: paladin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        verbal: true
       delivery:
         base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          endStatuses:
+            - charmed
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - divine
       range:
@@ -45,27 +59,12 @@ effects:
           <p>Target is no longer @L[Condition:Charmed]{charmed} and any other
           @L[Category:Mental effects]{mental effects} on them
           @L[Core:Fizzles]{fizzles}.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          endStatuses:
-            - charmed
-      class: paladin
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!removeCharm00000.removeCharm00000'
+    type: ability
 img: systems/teriock/src/icons/abilities/remove-charm.webp
 name: Remove Charm
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!removeCharm00000'

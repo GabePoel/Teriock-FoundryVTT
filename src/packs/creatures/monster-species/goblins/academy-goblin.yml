@@ -1,88 +1,395 @@
-name: Academy Goblin
-type: creature
+_id: academyGoblin000
+_key: '!actors!academyGoblin000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+folder: goblins000000000
 img: systems/teriock/src/icons/creatures/academy-goblin.webp
-prototypeToken:
-  name: Academy Goblin
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/academy-goblin.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: academyGoblin000
-    folder: h6qMUnBl9QLrvZEN
-    name: Academy Goblin
-    type: species
+    _key: '!actors.items!academyGoblin000.academyGoblin000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.academyGoblin000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: 9UJhZHG58VK3MhjP
+        _key: >-
+          !actors.items.effects!academyGoblin000.academyGoblin000.9UJhZHG58VK3MhjP
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.calledMagRsc0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
+        name: Called Magic Resistance
+        system:
+          class: berserker
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            conditions:
+              absent:
+                - dead
+            dawn: false
+            description: While Alive
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - resistance
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.resistances.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Conjured Spells
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You @L[Keyword:Resistance]{resist} all @L[Category:Conjured
+              spells]{Conjured spells} that aren't @L[Category:Self target
+              spells]{self targeted}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - primal
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: avmmLINzsGBdtZDB
+        _key: >-
+          !actors.items.effects!academyGoblin000.academyGoblin000.avmmLINzsGBdtZDB
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/digging.webp
+        name: Digging
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.dig
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '1'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: b0LzXVb2KGK438fI
+        _key: >-
+          !actors.items.effects!academyGoblin000.academyGoblin000.b0LzXVb2KGK438fI
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/low-strength.webp
+        name: Low Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -1
+        type: ability
+      - _id: GNmp1yqvPdvXYG8A
+        _key: >-
+          !actors.items.effects!academyGoblin000.academyGoblin000.GNmp1yqvPdvXYG8A
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: KyZlHtPiVygW8Fge
+        _key: >-
+          !actors.items.effects!academyGoblin000.academyGoblin000.KyZlHtPiVygW8Fge
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: twsqKoVptks9rzcy
+        _key: >-
+          !actors.items.effects!academyGoblin000.academyGoblin000.twsqKoVptks9rzcy
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        type: ability
+      - _id: fIyzJTYhgpwOJqbq
+        _key: >-
+          !actors.items.effects!academyGoblin000.academyGoblin000.fIyzJTYhgpwOJqbq
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
+        name: Stupid Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -3
+        type: ability
+    folder: goblins000000000
     img: systems/teriock/src/icons/creatures/academy-goblin.webp
+    name: Academy Goblin
     system:
+      appearance: >-
+        <p>Green skinned, with a slight build, wide eyes, and sharp
+        features.</p>
+      br: 2
       competence:
         raw: 1
       description: >-
         <p>@L[Category:Goblins]{Goblins} have only a loose grasp on reality and
         are easily fooled. In combat, they prefer to attack in large
         numbers.</p>
+      size:
+        enabled: true
+        value: 1
       statDice:
         hp:
           disabled: false
@@ -94,392 +401,71 @@ items:
           faces: 6
           number:
             raw: '1'
-      appearance: >-
-        <p>Green skinned, with a slight build, wide eyes, and sharp
-        features.</p>
-      br: 2
-      size:
-        enabled: true
-        value: 1
       traits:
         - humanoid
-    effects:
-      - name: Called Magic Resistance
-        type: ability
-        img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
-        system:
-          powerSources:
-            - primal
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            conditions:
-              absent:
-                - dead
-            description: While Alive
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You @L[Keyword:Resistance]{resist} all @L[Category:Conjured
-              spells]{Conjured spells} that aren't @L[Category:Self target
-              spells]{self targeted}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: berserker
-          form: normal
-          effectTypes:
-            - resistance
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.other
-                  target: Actor
-                  qualifier: '1'
-                  value: Conjured Spells
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: 9UJhZHG58VK3MhjP
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.calledMagRsc0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.academyGoblin000.9UJhZHG58VK3MhjP
-      - name: Digging
-        type: ability
-        img: systems/teriock/src/icons/abilities/digging.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.dig
-                  target: Actor
-                  qualifier: '1'
-                  value: '1'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: avmmLINzsGBdtZDB
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.academyGoblin000.avmmLINzsGBdtZDB
-      - name: Low Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/low-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: str
-              value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: b0LzXVb2KGK438fI
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.academyGoblin000.b0LzXVb2KGK438fI
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: GNmp1yqvPdvXYG8A
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.academyGoblin000.GNmp1yqvPdvXYG8A
-      - name: Normal Perception
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: KyZlHtPiVygW8Fge
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.academyGoblin000.KyZlHtPiVygW8Fge
-      - name: Normal Sneak
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: twsqKoVptks9rzcy
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.academyGoblin000.twsqKoVptks9rzcy
-      - name: Stupid Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: int
-              value: -3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: fIyzJTYhgpwOJqbq
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.academyGoblin000.fIyzJTYhgpwOJqbq
+    type: species
+  - _id: E3DrIKdnnAlJs2xr
+    _key: '!actors.items!academyGoblin000.E3DrIKdnnAlJs2xr'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.academyGoblin000
+      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!academyGoblin000.academyGoblin000'
-  - name: Hand
-    type: body
-    _id: 4pyISmXKwUZ80SEh
-    img: systems/teriock/src/icons/body-parts/hand.webp
+    effects:
+      - _id: LwntE76DWV8LsMYk
+        _key: >-
+          !actors.items.effects!academyGoblin000.E3DrIKdnnAlJs2xr.LwntE76DWV8LsMYk
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 70oASdJA4Iza7rlK
+        _key: >-
+          !actors.items.effects!academyGoblin000.E3DrIKdnnAlJs2xr.70oASdJA4Iza7rlK
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: goblins000000000
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
     system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
       _sup: academyGoblin000
       attackPenalty:
         raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
       range:
         long:
           unit: self
@@ -488,109 +474,109 @@ items:
         short:
           unit: self
       vitals: false
+    type: body
+  - _id: 4pyISmXKwUZ80SEh
+    _key: '!actors.items!academyGoblin000.4pyISmXKwUZ80SEh'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.hand000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Bashing
-        type: property
+      - _id: FAUPXdLk1A1fD0k8
+        _key: >-
+          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.FAUPXdLk1A1fD0k8
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
             a weapon, but can still be used to make a @L[Ability:Basic
             Attack]{Basic Attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: FAUPXdLk1A1fD0k8
-        img: systems/teriock/src/icons/properties/bashing.webp
+        type: property
+      - _id: wGdRsURrcXoNZsur
+        _key: >-
+          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.wGdRsURrcXoNZsur
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.FAUPXdLk1A1fD0k8
-      - name: Handy
-        type: property
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: wGdRsURrcXoNZsur
-        img: systems/teriock/src/icons/properties/handy.webp
+        type: property
+      - _id: 1eIcI58ulvhlFYKA
+        _key: >-
+          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.1eIcI58ulvhlFYKA
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.wGdRsURrcXoNZsur
-      - name: Prehensile
-        type: property
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such
             as while using @L[Ability:Interact]{Interact}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 1eIcI58ulvhlFYKA
-        img: systems/teriock/src/icons/properties/prehensile.webp
+        type: property
+      - _id: r6jJPWhMBH4YpEKr
+        _key: >-
+          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.r6jJPWhMBH4YpEKr
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.1eIcI58ulvhlFYKA
-      - name: Small
-        type: property
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: r6jJPWhMBH4YpEKr
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.4pyISmXKwUZ80SEh.r6jJPWhMBH4YpEKr
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.hand000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!academyGoblin000.4pyISmXKwUZ80SEh'
-  - name: Mouth
-    type: body
-    _id: 8w2Psw67cKp2PbDV
-    img: icons/creatures/abilities/mouth-teeth-human.webp
+        type: property
+    folder: goblins000000000
+    img: systems/teriock/src/icons/body-parts/hand.webp
+    name: Hand
     system:
-      damage:
-        base:
-          raw: '1'
-      fightingStyle: savage
-      competence:
-        raw: 0
       _sup: academyGoblin000
       attackPenalty:
         raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
       range:
         long:
           unit: self
@@ -599,88 +585,90 @@ items:
         short:
           unit: self
       vitals: false
+    type: body
+  - _id: 8w2Psw67cKp2PbDV
+    _key: '!actors.items!academyGoblin000.8w2Psw67cKp2PbDV'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Bashing
-        type: property
+      - _id: 1keJAxX1vkfTL8Wl
+        _key: >-
+          !actors.items.effects!academyGoblin000.8w2Psw67cKp2PbDV.1keJAxX1vkfTL8Wl
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
             a weapon, but can still be used to make a @L[Ability:Basic
             Attack]{Basic Attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 1keJAxX1vkfTL8Wl
-        img: systems/teriock/src/icons/properties/bashing.webp
+        type: property
+      - _id: cj70nNvBKfT3EQ8P
+        _key: >-
+          !actors.items.effects!academyGoblin000.8w2Psw67cKp2PbDV.cj70nNvBKfT3EQ8P
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.8w2Psw67cKp2PbDV.1keJAxX1vkfTL8Wl
-      - name: Biting
-        type: property
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: cj70nNvBKfT3EQ8P
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        type: property
+      - _id: 43UnM2Fnf4EpPLFE
+        _key: >-
+          !actors.items.effects!academyGoblin000.8w2Psw67cKp2PbDV.43UnM2Fnf4EpPLFE
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.8w2Psw67cKp2PbDV.cj70nNvBKfT3EQ8P
-      - name: Small
-        type: property
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 43UnM2Fnf4EpPLFE
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.8w2Psw67cKp2PbDV.43UnM2Fnf4EpPLFE
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!academyGoblin000.8w2Psw67cKp2PbDV'
-  - name: Foot
-    type: body
-    _id: E3DrIKdnnAlJs2xr
-    img: systems/teriock/src/icons/body-parts/foot.webp
+        type: property
+    folder: goblins000000000
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
     system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
       _sup: academyGoblin000
       attackPenalty:
         raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      fightingStyle: savage
       range:
         long:
           unit: self
@@ -689,98 +677,113 @@ items:
         short:
           unit: self
       vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: LwntE76DWV8LsMYk
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.E3DrIKdnnAlJs2xr.LwntE76DWV8LsMYk
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 70oASdJA4Iza7rlK
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!academyGoblin000.E3DrIKdnnAlJs2xr.70oASdJA4Iza7rlK
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!academyGoblin000.E3DrIKdnnAlJs2xr'
+    type: body
+name: Academy Goblin
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Academy Goblin
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/academy-goblin.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 5
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '1'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: E3DrIKdnnAlJs2xr
-    blocker: E3DrIKdnnAlJs2xr
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: academyGoblin000
-folder: Gzp2U18nFDHybaDL
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!academyGoblin000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 5
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '1'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: E3DrIKdnnAlJs2xr
+    blocker: E3DrIKdnnAlJs2xr
+type: creature

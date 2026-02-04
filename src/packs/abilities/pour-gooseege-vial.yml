@@ -1,43 +1,64 @@
 _id: prGooseegeVial00
+_key: '!items!prGooseegeVial00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Pour Gooseege Vial
-    type: ability
+  - _id: prGooseegeVial00
+    _key: '!items.effects!prGooseegeVial00.prGooseegeVial00'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/pour-gooseege-vial.webp
-    _id: prGooseegeVial00
+    name: Pour Gooseege Vial
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.size.number.raw
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+          statuses:
+            - slowed
       interaction: attack
       maneuver: active
       overview:
         base: >-
           <p>Target's @L[Core:Size]{SIZE} is increased by 1, but they are
           @L[Condition:Slowed]{slowed}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -47,32 +68,10 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.size.number.raw
-              target: Actor
-              qualifier: '1'
-              value: '1'
-          statuses:
-            - slowed
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!prGooseegeVial00.prGooseegeVial00'
+    type: ability
 img: systems/teriock/src/icons/abilities/pour-gooseege-vial.webp
 name: Pour Gooseege Vial
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!prGooseegeVial00'

@@ -1,56 +1,50 @@
-_id: rank4Thief000000
-folder: thief00000000000
-name: Rank 4 Thief
-system:
-  archetype: semi
-  className: thief
-  classRank: 4
-  competence:
-    raw: 1
-  description: >-
-    <p>Almost as shady as the @L[Class:Assassin]{Assassin}, a Thief is a bit
-    more socially oriented and has a much greater care for her own life. Thieves
-    are the flip side of the @L[Class:Duelist]{Duelist} and tend to follow laws
-    and tell the truth only if it serves their purpose. Always trying to make a
-    profit, thieves are the businessmen of the world and will cheat you without
-    blinking an eyelash, that is their job. If you are playing a thief, lie and
-    make up stories, be ever watchful for a chance to search or loot and look
-    for the profit angle, never doing anything for free.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 2
-type: rank
-img: systems/teriock/src/icons/ranks/rank-4-thief.webp
+_id: r4Thi00000000000
+_key: '!items!r4Thi00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Combo
-    type: ability
+  - _id: y2p3FTTFsRee6Xiu
+    _key: '!items.effects!r4Thi00000000000.y2p3FTTFsRee6Xiu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.combo00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
     img: systems/teriock/src/icons/abilities/combo.webp
+    name: Combo
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      class: thief
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: minute
-        quantity: 1
+        dawn: false
         description: 1 Minute
+        raw: '1'
         stationary: false
+        unit: minute
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        proficient:
+          rolls:
+            endCon: 3d4
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You gain a benefit that you can expend in one of following ways of
@@ -77,59 +71,181 @@ effects:
           @L[Core:Advantage]{advantage}.</dd></dl>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: thief
-      expansionSaveAttribute: mov
+      targets:
+        - self
       trigger: >-
         <p>You use an @L[Category:Active abilities]{active ability} that takes
         at least @L[Category:Single action abilities]{one action}.</p>
-      form: normal
-      impacts:
-        proficient:
-          rolls:
-            endCon: 3d4
+    type: ability
+  - _id: IviuFSlTJybvcwoI
+    _key: '!items.effects!r4Thi00000000000.IviuFSlTJybvcwoI'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.deathGrip0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/death-grip.webp
+    name: Death Grip
+    system:
+      class: thief
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    _id: y2p3FTTFsRee6Xiu
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: stealing
+            - key: system.protections.resistances.abilities
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Unglue
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You and items you're @L[Keyword:Bearing]{bearing}
+          @L[Keyword:Resistance]{resist} being @L[Category:Stealing
+          effects]{stolen} or @L[Ability:Unglue]{unglued}. All items that you
+          @L[Keyword:Bearing]{bear} that are @L[Property:Glued]{glued} to you,
+          travel with you when you're @L[Condition:Wisping]{wisping}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: GiCDSyWgjn3UHUgp
+    _key: '!items.effects!r4Thi00000000000.GiCDSyWgjn3UHUgp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.disarmKnockback0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/disarm-knockback.webp
+    name: Disarm Knockback
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Whenever you hit another creature with @L[Ability:Disarm]{Disarm},
+          they are also moved 10 feet away from you. If it was a critical hit,
+          they are instead moved 20 feet away from you.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: Hj6pHa544ganuBR3
+    _key: '!items.effects!r4Thi00000000000.Hj6pHa544ganuBR3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.discard000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.combo00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Thief000000.y2p3FTTFsRee6Xiu'
-  - name: Discard
-    type: ability
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/discard.webp
+    name: Discard
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      class: thief
+      competence:
+        raw: 0
       delivery:
         base: hand
-      targets:
-        - ability
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
-      range:
-        unit: melee
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>The @L[Category:Abilities]{ability} @L[Core:Fizzles]{fizzles}
@@ -137,77 +253,37 @@ effects:
           your hand.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - spiritual
+      range:
+        unit: melee
+      requirements: <p>You must be holding at least one item in your hand.</p>
+      revealed: true
       skill: true
       standard: true
-      class: thief
-      requirements: <p>You must be holding at least one item in your hand.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - ability
       trigger: >-
         <p>You would take @L[Core:Damage]{damage} from an
         @L[Category:Abilities]{ability}.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: Hj6pHa544ganuBR3
+    type: ability
+  - _id: gI9c2H4FJ2PgJ4SV
+    _key: '!items.effects!r4Thi00000000000.gI9c2H4FJ2PgJ4SV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.disruptionBall00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.discard000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Thief000000.Hj6pHa544ganuBR3'
-  - name: Disruption Ball
-    type: ability
     img: systems/teriock/src/icons/abilities/disruption-ball.webp
+    name: Disruption Ball
     system:
-      powerSources:
-        - spiritual
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: missile
-        package: ball
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
-        stationary: false
-      range:
-        unit: ft
-        raw: '30'
-      overview:
-        proficient: >-
-          <p>This may be triggered by @L[Category:Basic abilities]{basic
-          abilities} as well.</p>
-      results:
-        hit: >-
-          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.</p>
-      piercing:
-        raw: 2
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
       class: thief
+      competence:
+        raw: 0
       costs:
         mp:
           type: variable
@@ -219,254 +295,178 @@ effects:
               or some @L[Category:Equipment]{equipment} you
               @L[Keyword:Bearing]{bear}. It costs 1 @L[Core:Hit Points and Mana
               Points]{MP} otherwise.</p>
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+      interaction: attack
+      maneuver: reactive
+      overview:
+        proficient: >-
+          <p>This may be triggered by @L[Category:Basic abilities]{basic
+          abilities} as well.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - spiritual
+      range:
+        raw: '30'
+        unit: ft
       requirements: <p>You may only target the triggering creature.</p>
-      expansionSaveAttribute: mov
+      results:
+        hit: >-
+          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
       trigger: >-
         <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
         @L[Category:Active abilities]{active} or @L[Category:Reactive
         abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
         against a different creature or some @L[Category:Equipment]{equipment}
         that different creature @L[Keyword:Bearing]{bares}.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: gI9c2H4FJ2PgJ4SV
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.disruptionBall00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Thief000000.gI9c2H4FJ2PgJ4SV'
-  - name: Death Grip
     type: ability
-    img: systems/teriock/src/icons/abilities/death-grip.webp
-    system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You and items you're @L[Keyword:Bearing]{bearing}
-          @L[Keyword:Resistance]{resist} being @L[Category:Stealing
-          effects]{stolen} or @L[Ability:Unglue]{unglued}. All items that you
-          @L[Keyword:Bearing]{bear} that are @L[Property:Glued]{glued} to you,
-          travel with you when you're @L[Condition:Wisping]{wisping}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: thief
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.effects
-              target: Actor
-              qualifier: '1'
-              value: stealing
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.abilities
-              target: Actor
-              qualifier: '1'
-              value: Unglue
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: IviuFSlTJybvcwoI
+  - _id: ZcU4d2SIEOQ02cUO
+    _key: '!items.effects!r4Thi00000000000.ZcU4d2SIEOQ02cUO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hideOther0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.deathGrip0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Thief000000.IviuFSlTJybvcwoI'
-  - name: Disarm Knockback
-    type: ability
-    img: systems/teriock/src/icons/abilities/disarm-knockback.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>Whenever you hit another creature with @L[Ability:Disarm]{Disarm},
-          they are also moved 10 feet away from you. If it was a critical hit,
-          they are instead moved 20 feet away from you.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: thief
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: GiCDSyWgjn3UHUgp
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.disarmKnockback0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Thief000000.GiCDSyWgjn3UHUgp'
-  - name: Hide Other
-    type: ability
     img: systems/teriock/src/icons/abilities/hide-other.webp
+    name: Hide Other
     system:
-      powerSources:
-        - spiritual
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: thief
+      competence:
+        raw: 0
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        unit: instant
+      endCondition: >-
+        <p>Target moves or is no longer in a location with shadows, dim light,
+        or @L[Core:Cover]{three-quarters cover}.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + @snk
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + @snk + @f
+        proficient:
+          rolls:
+            hide: 1d20 + @snk + @p
+      interaction: attack
+      maneuver: active
       overview:
         base: >-
           <p>Target becomes @L[Condition:Hidden]{hidden}. As you hide them, you
           may roll [[/roll 1d20 + @snk]]. You may choose to use this as their
           hidden DC.</p>
-        proficient: <p>Instead roll [[/roll 1d20 + @snk + @p]] for their hidden DC.</p>
         fluent: <p>Instead roll [[/roll 1d20 + @snk + @f]] for their hidden DC.</p>
+        proficient: <p>Instead roll [[/roll 1d20 + @snk + @p]] for their hidden DC.</p>
       piercing:
         raw: 2
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: thief
-      endCondition: >-
-        <p>Target moves or is no longer in a location with shadows, dim light,
-        or @L[Core:Cover]{three-quarters cover}.</p>
+      powerSources:
+        - spiritual
+      range:
+        raw: Your Hand's Range
+        unit: ft
       requirements: >-
         <p>Target is in a location with shadows, dim light, or
         @L[Core:Cover]{three-quarters cover}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-          rolls:
-            hide: 1d20 + @snk
-        proficient:
-          rolls:
-            hide: 1d20 + @snk + @p
-        fluent:
-          rolls:
-            hide: 1d20 + @snk + @f
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-    _id: ZcU4d2SIEOQ02cUO
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hideOther0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Thief000000.ZcU4d2SIEOQ02cUO'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank4Thief000000'
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+folder: thief00000000000
+img: systems/teriock/src/icons/ranks/rank-4-thief.webp
+name: Rank 4 Thief
+system:
+  archetype: semi
+  className: thief
+  classRank: 4
+  competence:
+    raw: 1
+  description: >-
+    <p>Almost as shady as the @L[Class:Assassin]{Assassin}, a Thief is a bit
+    more socially oriented and has a much greater care for her own life. Thieves
+    are the flip side of the @L[Class:Duelist]{Duelist} and tend to follow laws
+    and tell the truth only if it serves their purpose. Always trying to make a
+    profit, thieves are the businessmen of the world and will cheat you without
+    blinking an eyelash, that is their job. If you are playing a thief, lie and
+    make up stories, be ever watchful for a chance to search or loot and look
+    for the profit angle, never doing anything for free.</p>
+  innate: false
+  maxAv: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+type: rank

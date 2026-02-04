@@ -1,335 +1,57 @@
-name: Centibeast
-type: creature
+_id: centibeast000000
+_key: '!actors!centibeast000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+folder: desert0000000000
 img: systems/teriock/src/icons/creatures/centibeast.webp
-prototypeToken:
-  name: Centibeast
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/centibeast.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 2
-  height: 2
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: centibeast000000
-    folder: s05Q2tRPUQEiiYA3
-    name: Centibeast
-    type: species
-    img: systems/teriock/src/icons/creatures/centibeast.webp
-    system:
-      competence:
-        raw: 1
-      description: <p>[[lookup name]]s are found lumbering deep in the Teriock deserts.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 10
-          number:
-            raw: 2 * @size - 8
-        mp:
-          disabled: false
-          faces: 6
-          number:
-            raw: '1'
-      appearance: <p>Enormous centipedes.</p>
-      br: 18
-      hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
-      size:
-        enabled: true
-        value: 6
-        min: 6
-        max: 10
-      traits:
-        - animal
+    _key: '!actors.items!centibeast000000.centibeast000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.centibeast000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: int
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: bPQqpLt23bJHj7kg
+      - _id: FGCEoe4hZsfyFNht
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.FGCEoe4hZsfyFNht
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.bPQqpLt23bJHj7kg
-      - name: Devour
-        type: ability
-        img: systems/teriock/src/icons/abilities/devour.webp
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
         system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a2
-          delivery:
-            base: bite
-          targets:
-            - creature
-          duration:
-            unit: instant
-            description: Instant
-            raw: '0'
-            dawn: false
-            stationary: false
-          range:
-            unit: ft
-            raw: Your Bite's Range
-          results:
-            hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
-              1, it is reduced to 0.</p>
-          piercing:
-            raw: 0
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
-          form: normal
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          impacts: {}
-        _id: leyaWwgc0jwQLrrt
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.leyaWwgc0jwQLrrt
-      - name: Giant Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/giant-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
+          _sup: ejUL15D8SzbjaLFe
           class: knight
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
           competence:
             raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: ETSPOZ6lNqfAUDAp
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.ETSPOZ6lNqfAUDAp
-      - name: Improved Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
             dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          grantOnly: false
-          _sup: ETSPOZ6lNqfAUDAp
-          upgrades:
-            score:
-              attribute: str
-              value: 2
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
           expansion:
+            featSaveAttribute: mov
             range:
               unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: ejUL15D8SzbjaLFe
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.ejUL15D8SzbjaLFe
-      - name: Beastly Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
           featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
           maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
           overview:
             base: >-
               <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -338,109 +60,364 @@ items:
               hands to be @L[Property:AV0]{AV0}.</div>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
-          class: knight
-          form: normal
-          grantOnly: false
-          _sup: ejUL15D8SzbjaLFe
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        type: ability
+      - _id: bPQqpLt23bJHj7kg
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.bPQqpLt23bJHj7kg
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: FGCEoe4hZsfyFNht
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.FGCEoe4hZsfyFNht
-      - name: Improved Armor Piercing
-        type: ability
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        type: ability
+      - _id: leyaWwgc0jwQLrrt
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.leyaWwgc0jwQLrrt
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/devour.webp
+        name: Devour
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: bite
+          duration:
             dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a2
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Bite's Range
+            unit: ft
+          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          results:
+            hit: >-
+              <p>Target is @L[Condition:Dead]{dead},
+              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
+              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
+              1, it is reduced to 0.</p>
+          revealed: true
+          targets:
+            - creature
+        type: ability
+      - _id: ETSPOZ6lNqfAUDAp
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.ETSPOZ6lNqfAUDAp
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/giant-strength.webp
+        name: Giant Strength
+        system:
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
+              you are no longer suffer the consequences of
+              @L[Property:Cumbersome]{cumbersome} items.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 3
+        type: ability
+      - _id: sATKanXDqxlVfUl7
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.sATKanXDqxlVfUl7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: ejUL15D8SzbjaLFe
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
               piercing}.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          grantOnly: false
-          _sup: ejUL15D8SzbjaLFe
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: sATKanXDqxlVfUl7
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.sATKanXDqxlVfUl7
-      - name: Melee Damage Boost
-        type: ability
-        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-        system:
           powerSources:
             - martial
-          interaction: manifest
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: ejUL15D8SzbjaLFe
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.ejUL15D8SzbjaLFe
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          _sup: ETSPOZ6lNqfAUDAp
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: 4P3BXView2UAq5Qj
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.4P3BXView2UAq5Qj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.lumbering0000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/lumbering.webp
+        name: Lumbering
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: -3
+        type: ability
+      - _id: xX0ML47n16a0vWlB
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.xX0ML47n16a0vWlB
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        name: Melee Damage Boost
+        system:
+          _sup: ETSPOZ6lNqfAUDAp
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: weapon
-          targets:
-            - creature
           duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
             dawn: false
-          range:
-            unit: melee
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: reactive
           overview:
             base: >-
               <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -452,199 +429,152 @@ items:
               @L[Core:Damage]{damage} again.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: melee
+          revealed: true
           skill: true
           standard: true
-          class: knight
+          targets:
+            - creature
           trigger: >-
             <p>You have hit a creature with a @L[Category:Damaging
             effects]{damaging} melee @L[Category:Weapon delivery
             abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          grantOnly: false
-          _sup: ETSPOZ6lNqfAUDAp
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          impacts: {}
+        type: ability
+      - _id: MSecM4msxb1eHUIV
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.MSecM4msxb1eHUIV
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: xX0ML47n16a0vWlB
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.xX0ML47n16a0vWlB
-      - name: Lumbering
-        type: ability
-        img: systems/teriock/src/icons/abilities/lumbering.webp
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: snk
-              value: -3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
           competence:
             raw: 0
-          revealed: true
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
           grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
           range:
             unit: self
-          impacts: {}
-        _id: 4P3BXView2UAq5Qj
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.lumbering0000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.4P3BXView2UAq5Qj
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
           upgrades:
             score:
               attribute: mov
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: MSecM4msxb1eHUIV
+        type: ability
+      - _id: k1D9b3LuWrGLkKJX
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.k1D9b3LuWrGLkKJX
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          compendiumSource: Compendium.teriock.abilities.Item.poorPerception00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.MSecM4msxb1eHUIV
-      - name: Poor Perception
-        type: ability
         img: systems/teriock/src/icons/abilities/poor-perception.webp
+        name: Poor Perception
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: k1D9b3LuWrGLkKJX
+        type: ability
+      - _id: O2ZCamWps9OhRBu2
+        _key: >-
+          !actors.items.effects!centibeast000000.centibeast000000.O2ZCamWps9OhRBu2
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.poorPerception00
+          compendiumSource: Compendium.teriock.abilities.Item.trample000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.k1D9b3LuWrGLkKJX
-      - name: Trample
-        type: ability
         img: systems/teriock/src/icons/abilities/trample.webp
+        name: Trample
         system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
+          competence:
+            raw: 0
           delivery:
             base: weapon
-          targets:
-            - creature
           duration:
-            unit: instant
-            description: Instant
             dawn: false
-            stationary: false
+            description: Instant
             raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
+            stationary: false
+            unit: instant
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              common:
+                - standardDamage
+              rolls:
+                damage: 1d6
+          interaction: attack
+          maneuver: reactive
           overview:
             base: >-
               <p>If you use [[lookup name]] on a
@@ -652,243 +582,361 @@ items:
               category} smaller than you, add [[/damage 1d6]]
               @L[Core:Damage]{damage} to its @L[Core:Standard Damage]{standard
               damage}.</p>
-          results:
-            hit: <p>Deal @L[Core:Standard Damage]{standard damage}.</p>
-            critHit: <p>Deal @L[Core:Critical Damage]{critical damage}.</p>
           piercing:
             raw: 2
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: <p>Deal @L[Core:Critical Damage]{critical damage}.</p>
+            hit: <p>Deal @L[Core:Standard Damage]{standard damage}.</p>
+          revealed: true
+          targets:
+            - creature
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the target and
             becoming adjacent to them.</p>
-          form: normal
-          impacts:
-            base:
-              rolls:
-                damage: 1d6
-              common:
-                - standardDamage
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-        _id: O2ZCamWps9OhRBu2
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.trample000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.centibeast000000.O2ZCamWps9OhRBu2
+        type: ability
+    folder: desert0000000000
+    img: systems/teriock/src/icons/creatures/centibeast.webp
+    name: Centibeast
+    system:
+      appearance: <p>Enormous centipedes.</p>
+      br: 18
+      competence:
+        raw: 1
+      description: <p>[[lookup name]]s are found lumbering deep in the Teriock deserts.</p>
+      hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
+      size:
+        enabled: true
+        max: 10
+        min: 6
+        value: 6
+      statDice:
+        hp:
+          disabled: false
+          faces: 10
+          number:
+            raw: 2 * @size - 8
+        mp:
+          disabled: false
+          faces: 6
+          number:
+            raw: '1'
+      traits:
+        - animal
+    type: species
+  - _id: FJ8Sm04toRcHL4XR
+    _key: '!actors.items!centibeast000000.FJ8Sm04toRcHL4XR'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.centibeast000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.colossalTail0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!centibeast000000.centibeast000000'
-  - name: Colossal Tail
-    type: body
-    _id: FJ8Sm04toRcHL4XR
-    img: systems/teriock/src/icons/body-parts/colossal-tail.webp
-    system:
-      damage:
-        base:
-          raw: 1d12
-      fightingStyle: wraparound
-      competence:
-        raw: 0
-      _sup: centibeast000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      bv:
-        raw: '2'
     effects:
-      - name: Handy
-        type: property
+      - _id: f2RuZ6qiE73AsT4u
+        _key: >-
+          !actors.items.effects!centibeast000000.FJ8Sm04toRcHL4XR.f2RuZ6qiE73AsT4u
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: f2RuZ6qiE73AsT4u
-        img: systems/teriock/src/icons/properties/handy.webp
+        type: property
+      - _id: f5sWvAYpYSHDtUJZ
+        _key: >-
+          !actors.items.effects!centibeast000000.FJ8Sm04toRcHL4XR.f5sWvAYpYSHDtUJZ
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          compendiumSource: Compendium.teriock.properties.Item.unblockable00000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.FJ8Sm04toRcHL4XR.f2RuZ6qiE73AsT4u
-      - name: Weapon
-        type: property
-        system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: kkQBrntahsZWi7st
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.FJ8Sm04toRcHL4XR.kkQBrntahsZWi7st
-      - name: Unblockable
-        type: property
         img: systems/teriock/src/icons/properties/unblockable.webp
+        name: Unblockable
         system:
+          competence:
+            raw: 0
           description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
           form: intrinsic
           impacts:
             changes:
-              - mode: 4
+              - key: system.piercing.raw
+                mode: 4
                 priority: 10
-                time: normal
-                key: system.piercing.raw
-                target: parent
                 qualifier: '1'
+                target: parent
+                time: normal
                 value: '2'
           revealed: true
-          competence:
-            raw: 0
-        _id: f5sWvAYpYSHDtUJZ
+        type: property
+      - _id: kkQBrntahsZWi7st
+        _key: >-
+          !actors.items.effects!centibeast000000.FJ8Sm04toRcHL4XR.kkQBrntahsZWi7st
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.unblockable00000
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.FJ8Sm04toRcHL4XR.f5sWvAYpYSHDtUJZ
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.colossalTail0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!centibeast000000.FJ8Sm04toRcHL4XR'
-  - name: Reinforced Carapace
-    type: body
-    _id: LVBCeCgISPfoL1xV
-    img: systems/teriock/src/icons/body-parts/reinforced-carapace.webp
-    system:
-      damage:
-        base:
-          raw: '0'
-      competence:
-        raw: 0
-      _sup: centibeast000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      av:
-        raw: '4'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.reinforcedCarapa
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!centibeast000000.LVBCeCgISPfoL1xV'
-  - name: Massive Natural Shield
-    type: body
-    _id: NW1vOWgtptG2DZbP
-    img: systems/teriock/src/icons/body-parts/massive-natural-shield.webp
-    system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
-      _sup: centibeast000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      bv:
-        raw: '4'
-    effects:
-      - name: Bashing
-        type: property
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
         system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: desert0000000000
+    img: systems/teriock/src/icons/body-parts/colossal-tail.webp
+    name: Colossal Tail
+    system:
+      _sup: centibeast000000
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '2'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d12
+      fightingStyle: wraparound
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: gInyJESgUKbF6q1O
+    _key: '!actors.items!centibeast000000.gInyJESgUKbF6q1O'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: ozGDVg02SHRX2hCr
+        _key: >-
+          !actors.items.effects!centibeast000000.gInyJESgUKbF6q1O.ozGDVg02SHRX2hCr
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: u9pZ8QANF4C7gKB9
+        _key: >-
+          !actors.items.effects!centibeast000000.gInyJESgUKbF6q1O.u9pZ8QANF4C7gKB9
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: desert0000000000
+    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
+    name: Fanged Jaw
+    system:
+      _sup: centibeast000000
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '1'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d6
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: Xa6GfqF301ykHMx1
+    _key: '!actors.items!centibeast000000.Xa6GfqF301ykHMx1'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: LwntE76DWV8LsMYk
+        _key: >-
+          !actors.items.effects!centibeast000000.Xa6GfqF301ykHMx1.LwntE76DWV8LsMYk
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
             a weapon, but can still be used to make a @L[Ability:Basic
             Attack]{Basic Attack}.</p>
           form: intrinsic
+          revealed: true
+        type: property
+      - _id: 70oASdJA4Iza7rlK
+        _key: >-
+          !actors.items.effects!centibeast000000.Xa6GfqF301ykHMx1.70oASdJA4Iza7rlK
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
           competence:
             raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
           revealed: true
-        _id: eRqe6VlXBTieLMOY
-        img: systems/teriock/src/icons/properties/bashing.webp
+        type: property
+    folder: desert0000000000
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: centibeast000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: NW1vOWgtptG2DZbP
+    _key: '!actors.items!centibeast000000.NW1vOWgtptG2DZbP'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.massiveNaturalSh
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: eRqe6VlXBTieLMOY
+        _key: >-
+          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.eRqe6VlXBTieLMOY
         _stats:
           compendiumSource: Compendium.teriock.properties.Item.bashing000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.eRqe6VlXBTieLMOY
-      - name: Blocking
-        type: property
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: IFghBPAw9nOD67bD
+        _key: >-
+          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.IFghBPAw9nOD67bD
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.blking0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/blocking.webp
+        name: Blocking
+        system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property can be
             used for @L[Ability:Block Cone]{Block Cone}. It also does not have
             any @L[Core:Block Interaction]{block penalty}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: IFghBPAw9nOD67bD
-        img: systems/teriock/src/icons/properties/blocking.webp
+        type: property
+      - _id: N9ZCfdpbZlbdcrnO
+        _key: >-
+          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.N9ZCfdpbZlbdcrnO
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.blking0000000000
+          compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.IFghBPAw9nOD67bD
-      - name: Cumbersome
-        type: property
+        img: systems/teriock/src/icons/properties/cumbersome.webp
+        name: Cumbersome
         system:
+          competence:
+            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
             <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
@@ -901,72 +949,55 @@ items:
             have been @L[Condition:Encumbered]{heavily encumbered} otherwise,
             they are rendered @L[Condition:Immobile]{immobile}.</p>
           form: flaw
-          modifiesActor: true
           impacts:
             changes:
-              - mode: 2
+              - key: system.encumbranceLevel
+                mode: 2
                 priority: 10
-                time: normal
-                key: system.encumbranceLevel
-                target: Actor
                 qualifier: '1'
+                target: Actor
+                time: normal
                 value: '1'
-          competence:
-            raw: 0
+          modifiesActor: true
           revealed: true
-        _id: N9ZCfdpbZlbdcrnO
-        img: systems/teriock/src/icons/properties/cumbersome.webp
+        type: property
+      - _id: osVuSg5I4jj2CPm1
+        _key: >-
+          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.osVuSg5I4jj2CPm1
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
+          compendiumSource: Compendium.teriock.properties.Item.towerShielding00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.N9ZCfdpbZlbdcrnO
-      - name: Tower Shielding
-        type: property
+        img: systems/teriock/src/icons/properties/tower-shielding.webp
+        name: Tower Shielding
         system:
+          competence:
+            raw: 0
           description: >-
             <p>Only @L[Category:Small equipment]{small equipment} can be held in
             an arm that's @L[Keyword:Using]{using} @L[Category:Tower Shielding
             equipment]{tower shielding equipment}. But but no
             @L[Category:Equipment]{equipment} can be used to @L[Core:Attack
             Interaction]{attack} or @L[Core:Block Interaction]{block}.</p>
-          revealed: true
           form: flaw
-          competence:
-            raw: 0
-        _id: osVuSg5I4jj2CPm1
-        img: systems/teriock/src/icons/properties/tower-shielding.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.towerShielding00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.NW1vOWgtptG2DZbP.osVuSg5I4jj2CPm1
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.massiveNaturalSh
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!centibeast000000.NW1vOWgtptG2DZbP'
-  - name: Foot
-    type: body
-    _id: Xa6GfqF301ykHMx1
-    img: systems/teriock/src/icons/body-parts/foot.webp
+          revealed: true
+        type: property
+    folder: desert0000000000
+    img: systems/teriock/src/icons/body-parts/massive-natural-shield.webp
+    name: Massive Natural Shield
     system:
+      _sup: centibeast000000
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '4'
+      competence:
+        raw: 0
       damage:
         base:
           raw: '1'
-      competence:
-        raw: 0
-      _sup: centibeast000000
-      attackPenalty:
-        raw: '-3'
       range:
         long:
           unit: self
@@ -975,69 +1006,29 @@ items:
         short:
           unit: self
       vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: LwntE76DWV8LsMYk
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.Xa6GfqF301ykHMx1.LwntE76DWV8LsMYk
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 70oASdJA4Iza7rlK
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.Xa6GfqF301ykHMx1.70oASdJA4Iza7rlK
+    type: body
+  - _id: LVBCeCgISPfoL1xV
+    _key: '!actors.items!centibeast000000.LVBCeCgISPfoL1xV'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.reinforcedCarapa
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!centibeast000000.Xa6GfqF301ykHMx1'
-  - name: Fanged Jaw
-    type: body
-    _id: gInyJESgUKbF6q1O
-    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
+    folder: desert0000000000
+    img: systems/teriock/src/icons/body-parts/reinforced-carapace.webp
+    name: Reinforced Carapace
     system:
+      _sup: centibeast000000
+      attackPenalty:
+        raw: '-3'
+      av:
+        raw: '4'
+      competence:
+        raw: 0
       damage:
         base:
-          raw: 1d6
-      fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: centibeast000000
-      attackPenalty:
-        raw: '-3'
+          raw: '0'
       range:
         long:
           unit: self
@@ -1046,99 +1037,113 @@ items:
         short:
           unit: self
       vitals: false
-      bv:
-        raw: '1'
-    effects:
-      - name: Biting
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: ozGDVg02SHRX2hCr
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.gInyJESgUKbF6q1O.ozGDVg02SHRX2hCr
-      - name: Weapon
-        type: property
-        system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: u9pZ8QANF4C7gKB9
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!centibeast000000.gInyJESgUKbF6q1O.u9pZ8QANF4C7gKB9
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!centibeast000000.gInyJESgUKbF6q1O'
+    type: body
+name: Centibeast
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 2
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Centibeast
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/centibeast.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 2
 system:
-  hp:
-    value: 24
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '6'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: gInyJESgUKbF6q1O
-    blocker: NW1vOWgtptG2DZbP
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: centibeast000000
-folder: aQWUbCV9QIzsnZgo
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!centibeast000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 24
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '6'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: gInyJESgUKbF6q1O
+    blocker: NW1vOWgtptG2DZbP
+type: creature

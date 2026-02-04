@@ -1,110 +1,21 @@
 _id: longbow000000000
-folder: GjqehiaK2urxvWVm
-name: Longbow
-system:
-  equipmentType: Longbow
-  tier: {}
-  competence:
-    raw: 0
-  attackPenalty:
-    raw: '-3'
-  damage:
-    base:
-      raw: 1d8
-    twoHanded: {}
-  fightingStyle: sniper
-  hit: {}
-  range:
-    long:
-      raw: '600'
-      unit: ft
-    melee: true
-    ranged: false
-    short:
-      raw: '150'
-      unit: ft
-  vitals: false
-  consumable: false
-  storage:
-    enabled: false
-    maxCount: {}
-    maxWeight: {}
-    weightMultiplier: '1'
-  weight:
-    raw: '2'
-  minStr:
-    raw: '-1'
-  equipmentClasses:
-    - bows
-  powerLevel: mundane
-type: equipment
-img: systems/teriock/src/icons/equipment/longbow.webp
+_key: '!items!longbow000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Loading
-    type: property
-    img: systems/teriock/src/icons/properties/loading.webp
-    _id: loading000000000
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property must be
-        reloaded after making an @L[Category:Attack abilities]{attack} with it.
-        Anyone can do this using @L[Ability:Reload]{Reload}.</p>
-      suppression: {}
-      revealed: true
-      form: flaw
+  - _id: pShfiqKm2A4970DJ
+    _key: '!items.effects!longbow000000000.pShfiqKm2A4970DJ'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.loading000000000
+      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!longbow000000000.loading000000000'
-  - name: Two-Handed
-    type: property
-    img: systems/teriock/src/icons/properties/two-handed.webp
-    _id: twoHanded0000000
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
-        @L[Category:Attack abilities]{attacked} with unless it is wielded in two
-        hands.</p>
-      suppression: {}
-      revealed: true
-      form: flaw
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.twoHanded0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!longbow000000000.twoHanded0000000'
-  - name: Weapon
-    type: property
-    img: systems/teriock/src/icons/properties/weapon.webp
-    _id: wep0000000000000
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      suppression: {}
-      revealed: true
-      form: intrinsic
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!longbow000000000.wep0000000000000'
-  - name: Ammunition
-    type: property
     img: systems/teriock/src/icons/properties/ammunition.webp
+    name: Ammunition
     system:
       competence:
         raw: 0
@@ -112,30 +23,50 @@ effects:
         <p>A weapon with this property is @L[Property:Ranged]{ranged} and
         requires some sort of [[lookup name style=lc]] (arrows, rocks, darts,
         etc.) to @L[Category:Attack abilities]{attack} with.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - mode: 5
+          - key: system.range.melee
+            mode: 5
             priority: 10
-            time: normal
-            key: system.range.melee
-            target: parent
             qualifier: '1'
+            target: parent
+            time: normal
             value: 'false'
+      revealed: true
+    type: property
+  - _id: loading000000000
+    _key: '!items.effects!longbow000000000.loading000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
+      compendiumSource: Compendium.teriock.properties.Item.loading000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: pShfiqKm2A4970DJ
-    _key: '!items.effects!longbow000000000.pShfiqKm2A4970DJ'
-  - name: Ranged
-    type: property
-    img: systems/teriock/src/icons/properties/ranged.webp
+    img: systems/teriock/src/icons/properties/loading.webp
+    name: Loading
     system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property must be
+        reloaded after making an @L[Category:Attack abilities]{attack} with it.
+        Anyone can do this using @L[Ability:Reload]{Reload}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: h6SFggRFMj27gbVy
+    _key: '!items.effects!longbow000000000.h6SFggRFMj27gbVy'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/ranged.webp
+    name: Ranged
+    system:
+      _sup: pShfiqKm2A4970DJ
       competence:
         raw: 0
       description: >-
@@ -149,30 +80,86 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - mode: 5
+          - key: system.range.ranged
+            mode: 5
             priority: 10
-            time: normal
-            key: system.range.ranged
-            target: parent
             qualifier: '1'
+            target: parent
+            time: normal
             value: 'true'
-      _sup: pShfiqKm2A4970DJ
+      revealed: true
+    type: property
+  - _id: twoHanded0000000
+    _key: '!items.effects!longbow000000000.twoHanded0000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      compendiumSource: Compendium.teriock.properties.Item.twoHanded0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/two-handed.webp
+    name: Two-Handed
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
+        @L[Category:Attack abilities]{attacked} with unless it is wielded in two
+        hands.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: wep0000000000000
+    _key: '!items.effects!longbow000000000.wep0000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _id: h6SFggRFMj27gbVy
-    _key: '!items.effects!longbow000000000.h6SFggRFMj27gbVy'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!longbow000000000'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: ranged0000000000
+img: systems/teriock/src/icons/equipment/longbow.webp
+name: Longbow
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d8
+  equipmentClasses:
+    - bows
+  equipmentType: Longbow
+  fightingStyle: sniper
+  minStr:
+    raw: '-1'
+  powerLevel: mundane
+  range:
+    long:
+      raw: '600'
+      unit: ft
+    melee: true
+    ranged: false
+    short:
+      raw: '150'
+      unit: ft
+  vitals: false
+  weight:
+    raw: '2'
+type: equipment

@@ -1,5 +1,451 @@
-_id: rank1FlameMage00
+_id: r1Fla00000000000
+_key: '!items!r1Fla00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: wKxfL6pzdYHJceL0
+    _key: '!items.effects!r1Fla00000000000.wKxfL6pzdYHJceL0'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/fire-ball.webp
+    name: Fire Ball
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d4[magic fire]
+        heightened:
+          rolls:
+            damage: 1d4[magic fire]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: jNVwWGftQrYicpwi
+    _key: '!items.effects!r1Fla00000000000.jNVwWGftQrYicpwi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.flameRay00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/flame-ray.webp
+    name: Flame Ray
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d8[fire magic]
+        heightened:
+          rolls:
+            damage: 1d8[fire magic]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: ltZA2RRIcCYTzW0J
+    _key: '!items.effects!r1Fla00000000000.ltZA2RRIcCYTzW0J'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ignite0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/ignite.webp
+    name: Ignite
+    system:
+      _sup: LbLjjWiopqGfltmW
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      elements:
+        - flame
+      executionTime: a0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+            - key: system.light.color
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#C64600'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: torch
+        heightened:
+          duration: 3600
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
+          counts as a torch for the purpose of this @L[Category:Spells]{spell}.
+          When @L[Property:On Fire]{on fire}, your hand produces no smoke and
+          being set @L[Property:On Fire]{on fire} does not harm it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: <p>Target must be a torch.</p>
+      revealed: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - item
+    type: ability
+  - _id: DEJ3d4VyZch9MA2u
+    _key: '!items.effects!r1Fla00000000000.DEJ3d4VyZch9MA2u'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.light00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/light.webp
+    name: Light
+    system:
+      _sup: LbLjjWiopqGfltmW
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: cone
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.bright
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '50'
+            - key: system.light.dim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '100'
+            - key: system.light.color
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#C64600'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: pulse
+            - key: system.light.angle
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>The area is illuminated. This [[lookup name style=lc]] emanates
+          from your hand and moves with you. You may change its direction at
+          will.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '100'
+        unit: ft
+      revealed: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - area
+    type: ability
+  - _id: LbLjjWiopqGfltmW
+    _key: '!items.effects!r1Fla00000000000.LbLjjWiopqGfltmW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mageLight0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mage-light.webp
+    name: Mage Light
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Light]{Light} and
+          @L[Ability:Ignite]{Ignite}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: yHA67BqutokLx7uo
+    _key: '!items.effects!r1Fla00000000000.yHA67BqutokLx7uo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.selfDetonate0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/self-detonate.webp
+    name: Self Detonate
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - flame
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, you may target an
+        additional person.</p>
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The next @L[Category:Conjured spells]{conjured} @L[Category:Missile
+          delivery spells]{missile spell} cast on the target @L[Core:Detonate
+          Expansion]{detonates} (emanates in a 10 foot radius @L[Core:Aura
+          Delivery]{aura} from the target). This is a @L[Core:MOV]{MOV}
+          @L[Core:Feat Interaction]{feat save} using <i>your</i> DC. Do not add
+          your @L[Core:Proficiency Bonus]{proficiency bonus} to the DC. This
+          detonating @L[Core:Aura Delivery]{aura} is @L[Category:Loud
+          effects]{loud}.</p>
+        fluent: >-
+          <p>Your @L[Core:Fluency Bonus]{fluency bonus} is now included in the
+          @L[Core:Feat Interaction]{feat save DC}.</p>
+        proficient: >-
+          <p>Your @L[Core:Proficiency Bonus]{proficiency bonus} is now included
+          in the @L[Core:Feat Interaction]{feat save DC}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
+        yourself.</p>
+      revealed: true
+      ritual: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
 folder: flameMage0000000
+img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
 name: Rank 1 Flame Mage
 system:
   archetype: mage
@@ -14,6 +460,8 @@ system:
     bit chaotic, these mages like the mountains and underground spaces. If you
     are playing a Flame Mage be hot tempered, war-like, ready for battle, and
     consuming everything.</p>
+  innate: false
+  maxAv: 0
   statDice:
     hp:
       disabled: false
@@ -25,456 +473,4 @@ system:
       faces: 12
       number:
         raw: '1'
-  innate: false
-  maxAv: 0
 type: rank
-img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
-effects:
-  - name: Flame Ray
-    type: ability
-    img: systems/teriock/src/icons/abilities/flame-ray.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing:
-        raw: 1
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 1d8[fire magic]
-        heightened:
-          rolls:
-            damage: 1d8[fire magic]
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: jNVwWGftQrYicpwi
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flameRay00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank1FlameMage00.jNVwWGftQrYicpwi'
-  - name: Fire Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/fire-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ball
-      targets:
-        - creature
-      elements:
-        - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing:
-        raw: 2
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 1d4[magic fire]
-        heightened:
-          rolls:
-            damage: 1d4[magic fire]
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: wKxfL6pzdYHJceL0
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank1FlameMage00.wKxfL6pzdYHJceL0'
-  - name: Mage Light
-    type: ability
-    img: systems/teriock/src/icons/abilities/mage-light.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Light]{Light} and
-          @L[Ability:Ignite]{Ignite}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: flameMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mageLight0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: LbLjjWiopqGfltmW
-    _key: '!items.effects!rank1FlameMage00.LbLjjWiopqGfltmW'
-  - name: Light
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: cone
-      targets:
-        - area
-      elements:
-        - flame
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      sustained: true
-      range:
-        unit: ft
-        raw: '100'
-      overview:
-        base: >-
-          <p>The area is illuminated. This [[lookup name style=lc]] emanates
-          from your hand and moves with you. You may change its direction at
-          will.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.light.bright
-              target: Actor
-              qualifier: '1'
-              value: '50'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.light.dim
-              target: Actor
-              qualifier: '1'
-              value: '100'
-            - mode: 5
-              priority: 5
-              time: normal
-              key: system.light.color
-              target: Actor
-              qualifier: '1'
-              value: '#C64600'
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.light.animation.type
-              target: Actor
-              qualifier: '1'
-              value: pulse
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.light.angle
-              target: Actor
-              qualifier: '1'
-              value: '60'
-      _sup: LbLjjWiopqGfltmW
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/light.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.light00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: DEJ3d4VyZch9MA2u
-    _key: '!items.effects!rank1FlameMage00.DEJ3d4VyZch9MA2u'
-  - name: Ignite
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
-      delivery:
-        base: hand
-      targets:
-        - item
-      elements:
-        - flame
-      duration:
-        unit: hour
-        quantity: 1
-        stationary: false
-        description: 1 Hour
-      sustained: true
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
-          counts as a torch for the purpose of this @L[Category:Spells]{spell}.
-          When @L[Property:On Fire]{on fire}, your hand produces no smoke and
-          being set @L[Property:On Fire]{on fire} does not harm it.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target must be a torch.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 5
-              time: normal
-              key: system.light.dim
-              target: Actor
-              qualifier: '1'
-              value: '10'
-            - mode: 5
-              priority: 5
-              time: normal
-              key: system.light.color
-              target: Actor
-              qualifier: '1'
-              value: '#C64600'
-            - mode: 5
-              priority: 5
-              time: normal
-              key: system.light.animation.type
-              target: Actor
-              qualifier: '1'
-              value: torch
-        heightened:
-          duration: 3600
-      _sup: LbLjjWiopqGfltmW
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/ignite.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ignite0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: ltZA2RRIcCYTzW0J
-    _key: '!items.effects!rank1FlameMage00.ltZA2RRIcCYTzW0J'
-  - name: Self Detonate
-    type: ability
-    img: systems/teriock/src/icons/abilities/self-detonate.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - flame
-      duration:
-        unit: hour
-        quantity: 8
-        description: 8 Hours
-        stationary: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>The next @L[Category:Conjured spells]{conjured} @L[Category:Missile
-          delivery spells]{missile spell} cast on the target @L[Core:Detonate
-          Expansion]{detonates} (emanates in a 10 foot radius @L[Core:Aura
-          Delivery]{aura} from the target). This is a @L[Core:MOV]{MOV}
-          @L[Core:Feat Interaction]{feat save} using <i>your</i> DC. Do not add
-          your @L[Core:Proficiency Bonus]{proficiency bonus} to the DC. This
-          detonating @L[Core:Aura Delivery]{aura} is @L[Category:Loud
-          effects]{loud}.</p>
-        proficient: >-
-          <p>Your @L[Core:Proficiency Bonus]{proficiency bonus} is now included
-          in the @L[Core:Feat Interaction]{feat save DC}.</p>
-        fluent: >-
-          <p>Your @L[Core:Fluency Bonus]{fluency bonus} is now included in the
-          @L[Core:Feat Interaction]{feat save DC}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: flameMage
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional person.</p>
-      requirements: >-
-        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
-        yourself.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: yHA67BqutokLx7uo
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.selfDetonate0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank1FlameMage00.yHA67BqutokLx7uo'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank1FlameMage00'

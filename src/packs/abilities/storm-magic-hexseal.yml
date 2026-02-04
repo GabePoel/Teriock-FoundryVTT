@@ -1,37 +1,54 @@
 _id: stormMagHxs00000
+_key: '!items!stormMagHxs00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Storm Magic Hexseal
-    type: ability
+  - _id: stormMagHxs00000
+    _key: '!items.effects!stormMagHxs00000.stormMagHxs00000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
-    _id: stormMagHxs00000
+    name: Storm Magic Hexseal
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
+      delivery:
+        base: self
       duration:
-        raw: '0'
-        unit: unlimited
         conditions:
           absent:
             - down
         dawn: false
-        stationary: false
         description: While Up
-      delivery:
-        base: self
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - hexseal
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.hexseals.elements
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: storm
       interaction: manifest
       maneuver: passive
       overview:
@@ -39,34 +56,16 @@ effects:
           <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
           powered abilities]{magical} @L[Category:Storm element abilities]{storm
           abilities}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.hexseals.elements
-              target: Actor
-              qualifier: '1'
-              value: storm
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormMagHxs00000.stormMagHxs00000'
+    type: ability
 img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
 name: Storm Magic Hexseal
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!stormMagHxs00000'

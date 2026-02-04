@@ -1,222 +1,206 @@
 _id: Y0cFyONL4L6LMhL9
-folder: Tk6pbr9vvAktVhpb
-name: Rank 1 Storm Mage
-system:
-  archetype: mage
-  className: stormMage
-  classRank: 1
-  competence:
-    raw: 1
-  description: >-
-    <p>The true wonder seeker, these mages are the philosophers of the world,
-    always seeking out more knowledge and more wisdom. The Storm Mage is a
-    logician, a tactical intellectual who prefers to neutralize opponents rather
-    than destroy them. Often cold, the Storm Mage is also tumultuous and crafty.
-    If you are playing a Storm Mage, be curious, hungry for information, always
-    in the clouds, tricky and clever, eluding rather than confronting.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: mediumBlueSlime0
-type: rank
-img: systems/teriock/src/icons/ranks/rank-1-storm-mage.webp
+_key: '!items!Y0cFyONL4L6LMhL9'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Sto00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Lightning Ray
-    type: ability
-    img: systems/teriock/src/icons/abilities/lightning-ray.webp
+  - _id: BhiYk6miYGlSd4I0
+    _key: '!items.effects!Y0cFyONL4L6LMhL9.BhiYk6miYGlSd4I0'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.detIllusion00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/detect-illusion.webp
+    name: Detect Illusion
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing:
-        raw: 1
-      spell: true
-      standard: true
+      _sup: XGWcDOE95PgdyWli
       class: stormMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
-      form: normal
-      effectTypes:
-        - damaging
-        - lightning
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic]
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: tJclZapWI7l0kdLc
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!Y0cFyONL4L6LMhL9.tJclZapWI7l0kdLc'
-  - name: Ice Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/ice-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
       delivery:
-        base: missile
-        package: ball
-      targets:
-        - creature
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - mental
       elements:
         - storm
-      duration:
-        unit: minute
-        description: 1 Minute
-        stationary: false
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        proficient: >-
+          <p>You also know what <i>type</i> of @L[Keyword:Illusionary]{illusion}
+          it is (Minor, Full, or Greater) as well as the DC needed to
+          @L[Ability:Disbelieve]{Disbelieve} it. This does not count as
+          "disbelieving" the illusion.</p>
       piercing:
         raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: <p>You know if the target is @L[Keyword:Illusionary]{illusionary}.</p>
+      revealed: true
       spell: true
       standard: true
-      class: stormMage
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      endCondition: >-
-        <p>At the start of each of the target's actions, they roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      effectTypes:
-        - temporal
-      impacts:
-        base:
-          statuses:
-            - frozen
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: action
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: action
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-        heightened:
-          rolls:
-            damage: 1d4[magic ice]
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: UTE4vX4qQBQ5SaJA
+      targets:
+        - area
+        - creature
+        - item
+    type: ability
+  - _id: UTE4vX4qQBQ5SaJA
+    _key: '!items.effects!Y0cFyONL4L6LMhL9.UTE4vX4qQBQ5SaJA'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.iceBall000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!Y0cFyONL4L6LMhL9.UTE4vX4qQBQ5SaJA'
-  - name: Identify
-    type: ability
-    img: systems/teriock/src/icons/abilities/identify.webp
+    img: systems/teriock/src/icons/abilities/ice-ball.webp
+    name: Ice Ball
     system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - temporal
+      elements:
+        - storm
+      endCondition: >-
+        <p>At the start of each of the target's actions, they roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic ice]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: mF8W0tXnFIwY7ClK
+    _key: '!items.effects!Y0cFyONL4L6LMhL9.mF8W0tXnFIwY7ClK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.identify00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/identify.webp
+    name: Identify
+    system:
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
-        - item
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - truthDetecting
       elements:
         - storm
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, you may target an
+        additional item.</p>
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>If the target is an item, you know if it is
@@ -229,101 +213,177 @@ effects:
           it.</p>
       piercing:
         raw: 0
-      spell: true
-      standard: true
-      ritual: true
-      class: stormMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional item.</p>
-      form: normal
-      effectTypes:
-        - truthDetecting
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: mF8W0tXnFIwY7ClK
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.identify00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!Y0cFyONL4L6LMhL9.mF8W0tXnFIwY7ClK'
-  - name: Illusionary Arts
-    type: ability
-    img: systems/teriock/src/icons/abilities/illusionary-arts.webp
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+        - item
+    type: ability
+  - _id: XGWcDOE95PgdyWli
+    _key: '!items.effects!Y0cFyONL4L6LMhL9.XGWcDOE95PgdyWli'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.illusionaryArts0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/illusionary-arts.webp
+    name: Illusionary Arts
+    system:
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Simple Illusion Creation]{Simple Illusion
           Creation} and @L[Ability:Detect Illusion]{Detect Illusion}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: stormMage
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.illusionaryArts0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: XGWcDOE95PgdyWli
-    _key: '!items.effects!Y0cFyONL4L6LMhL9.XGWcDOE95PgdyWli'
-  - name: Simple Illusion Creation
-    type: ability
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: tJclZapWI7l0kdLc
+    _key: '!items.effects!Y0cFyONL4L6LMhL9.tJclZapWI7l0kdLc'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/lightning-ray.webp
+    name: Lightning Ray
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+        - lightning
       elements:
         - storm
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: utNRAt3kaSlVSzee
+    _key: '!items.effects!Y0cFyONL4L6LMhL9.utNRAt3kaSlVSzee'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.simpleIllusionCr
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
+    name: Simple Illusion Creation
+    system:
+      _sup: XGWcDOE95PgdyWli
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
         dawn: false
+        description: 1 Minute
         raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - mental
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You create a @L[Keyword:Illusionary]{minor illusion} of a simple
@@ -335,104 +395,44 @@ effects:
           effects}.</p>
       piercing:
         raw: 0
-      spell: true
-      standard: true
-      class: stormMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      form: normal
-      effectTypes:
-        - mental
-      impacts:
-        heightened:
-          duration: 3600
-      _sup: XGWcDOE95PgdyWli
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.simpleIllusionCr
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: utNRAt3kaSlVSzee
-    _key: '!items.effects!Y0cFyONL4L6LMhL9.utNRAt3kaSlVSzee'
-  - name: Detect Illusion
-    type: ability
-    system:
       powerSources:
         - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        package: touch
-      targets:
-        - area
-        - creature
-        - item
-      elements:
-        - storm
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
       range:
-        unit: ft
-        raw: Your Hand's Range
-      overview:
-        proficient: >-
-          <p>You also know what <i>type</i> of @L[Keyword:Illusionary]{illusion}
-          it is (Minor, Full, or Greater) as well as the DC needed to
-          @L[Ability:Disbelieve]{Disbelieve} it. This does not count as
-          "disbelieving" the illusion.</p>
-      results:
-        hit: <p>You know if the target is @L[Keyword:Illusionary]{illusionary}.</p>
-      piercing:
-        raw: 2
+        unit: self
+      revealed: true
       spell: true
       standard: true
-      class: stormMage
-      form: normal
-      effectTypes:
-        - mental
-      _sup: XGWcDOE95PgdyWli
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/detect-illusion.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.detIllusion00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: BhiYk6miYGlSd4I0
-    _key: '!items.effects!Y0cFyONL4L6LMhL9.BhiYk6miYGlSd4I0'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1StormMage00
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!Y0cFyONL4L6LMhL9'
+      targets:
+        - self
+    type: ability
+folder: blueSlimes000000
+img: systems/teriock/src/icons/ranks/rank-1-storm-mage.webp
+name: Rank 1 Storm Mage
+system:
+  _sup: mediumBlueSlime0
+  archetype: mage
+  className: stormMage
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>The true wonder seeker, these mages are the philosophers of the world,
+    always seeking out more knowledge and more wisdom. The Storm Mage is a
+    logician, a tactical intellectual who prefers to neutralize opponents rather
+    than destroy them. Often cold, the Storm Mage is also tumultuous and crafty.
+    If you are playing a Storm Mage, be curious, hungry for information, always
+    in the clouds, tricky and clever, eluding rather than confronting.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

@@ -1,65 +1,64 @@
 _id: memoryDrainTouch
+_key: '!items!memoryDrainTouch'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Memory Drain Touch
-    type: ability
+  - _id: memoryDrainTouch
+    _key: '!items.effects!memoryDrainTouch.memoryDrainTouch'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
-    _id: memoryDrainTouch
+    name: Memory Drain Touch
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - mental
         - displacement
         - draining
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            drain: 1d8[memory]
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
         raw: Your Hand's Range
         unit: ft
       results:
-        hit: <p>Deal [[/drain 1d8[memory]]] @L[Category:Drain types]{drain}.</p>
         critHit: <p>Deal [[/drain 2d8[memory]]] @L[Category:Drain types]{drain}.</p>
+        hit: <p>Deal [[/drain 1d8[memory]]] @L[Category:Drain types]{drain}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          rolls:
-            drain: 1d8[memory]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!memoryDrainTouch.memoryDrainTouch'
+    type: ability
 img: systems/teriock/src/icons/abilities/memory-drain-touch.webp
 name: Memory Drain Touch
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!memoryDrainTouch'

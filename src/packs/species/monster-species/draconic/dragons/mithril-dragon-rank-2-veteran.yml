@@ -1,58 +1,324 @@
 _id: IJAnVz6WWakg2NZN
-folder: qTlk5KD9WGOfDG5I
-name: Rank 2 Veteran
-system:
-  archetype: warrior
-  className: veteran
-  classRank: 2
-  competence:
-    raw: 1
-  description: >-
-    <p>Jaded and tough, these warriors act as if they have seen it all.
-    Obviously they are not all seasoned warriors, but the training of a Veteran
-    involves a great deal of time in battle, so even a first rank Veteran has
-    seen more action than other first rank warriors. The strategy of the Veteran
-    is to be an immovable wall, and hold the line. Veterans rely on defense in
-    battle, always working to better ensure their protection, which is why they
-    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
-    and pessimistic.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 4
-  _sup: mithrilDragon000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-2-veteran.webp
+_key: '!items!IJAnVz6WWakg2NZN'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r2Vet00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Tumble
-    type: ability
-    img: systems/teriock/src/icons/abilities/tumble.webp
+  - _id: JjurmQdVGDd2qISi
+    _key: '!items.effects!IJAnVz6WWakg2NZN.JjurmQdVGDd2qISi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bodyguardBackup0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
+    name: Bodyguard Backup
     system:
+      _sup: WPnSLdXPauH6iDwJ
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_U3eabIvCln4vwrrO: rollFeatSave
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Pick another creature within range. They gain
+          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
+          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they
+          make.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard
+        Taunt}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
+        creature.</p>
+    type: ability
+  - _id: 7im3RhCNz2Vcd70Y
+    _key: '!items.effects!IJAnVz6WWakg2NZN.7im3RhCNz2Vcd70Y'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bodyguardTaunt00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+    name: Bodyguard Taunt
+    system:
+      _sup: WPnSLdXPauH6iDwJ
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+          statuses:
+            - goaded
+        macros:
+          Compendium_teriock_execution_Macro_R54099tFLeLMmBAw: preExecution
+      interaction: manifest
       maneuver: reactive
-      executionTime: r1
+      overview:
+        base: >-
+          <p>Pick another creature within range. They are
+          @L[Condition:Goaded]{goaded} until the start of your next
+          @L[Core:Turns]{turn}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
+        Backup}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
+        creature.</p>
+    type: ability
+  - _id: WPnSLdXPauH6iDwJ
+    _key: '!items.effects!IJAnVz6WWakg2NZN.WPnSLdXPauH6iDwJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bodyguardTrainin
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/bodyguard-training.webp
+    name: Bodyguard Training
+    system:
+      class: veteran
+      competence:
+        raw: 0
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
+          @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: 0PHdhRQSojTzyJig
+    _key: '!items.effects!IJAnVz6WWakg2NZN.0PHdhRQSojTzyJig'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fortifyArea00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/fortify-area.webp
+    name: Fortify Area
+    system:
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: instant
-        description: Instant
-        stationary: false
         dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            gainTempHp: 1d10
+        fluent:
+          rolls:
+            gainTempHp: 1d10 + (@f)d10
+        proficient:
+          rolls:
+            gainTempHp: 1d10 + (@p)d10
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You may spend a @L[Core:Short Rest]{short rest} building defensive
+          fortifications around the area you are resting in. You and your allies
+          that are in this are when @L[Core:Combat]{combat} begins gain
+          [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for
+          the duration of that @L[Core:Combat]{combat}. This area counts as
+          having been "fortified".</p>
+        fluent: >-
+          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
+          @L[Core:Temporary Hit Points]{temporary HP}.</p>
+        proficient: >-
+          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
+          @L[Core:Temporary Hit Points]{temporary HP}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You remain in the targeted area.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - area
+    type: ability
+  - _id: A4im5MWvCxmM8xzm
+    _key: '!items.effects!IJAnVz6WWakg2NZN.A4im5MWvCxmM8xzm'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.tumble0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/tumble.webp
+    name: Tumble
+    system:
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
         raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - movement
+      endCondition: >-
+        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+          rolls:
+            endCon: 2d4
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You take only half the triggering @L[Core:Damage]{damage}.</p><div
@@ -67,376 +333,110 @@ effects:
           @L[Damage:Fire]{fire damage} and 1 @L[Damage:Holy]{holy damage}.</div>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      endCondition: >-
-        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      trigger: <p>You would take @L[Core:Damage]{damage}.</p>
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: A4im5MWvCxmM8xzm
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.tumble0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!IJAnVz6WWakg2NZN.A4im5MWvCxmM8xzm'
-  - name: Unbreachability
-    type: ability
-    img: systems/teriock/src/icons/abilities/unbreachability.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+      trigger: <p>You would take @L[Core:Damage]{damage}.</p>
+    type: ability
+  - _id: QTwygiNnoFgmLtLQ
+    _key: '!items.effects!IJAnVz6WWakg2NZN.QTwygiNnoFgmLtLQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.unbreachability0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/unbreachability.webp
+    name: Unbreachability
+    system:
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.av.bonus
+              mode: 4
+              priority: 10
+              qualifier: '@av'
+              target: equipment
+              time: normal
+              value: '1'
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: unbreachable
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>Armor you wear is @L[Property:Unbreachable]{unbreachable}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.av.bonus
-              target: equipment
-              qualifier: '@av'
-              value: '1'
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.props
-              target: body
-              qualifier: '@av'
-              value: unbreachable
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: QTwygiNnoFgmLtLQ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.unbreachability0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!IJAnVz6WWakg2NZN.QTwygiNnoFgmLtLQ'
-  - name: Fortify Area
-    type: ability
-    img: systems/teriock/src/icons/abilities/fortify-area.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: self
-      targets:
-        - area
-      duration:
-        unit: hour
-        description: 24 Hours
-        stationary: false
-        dawn: false
-        raw: '24'
-      overview:
-        base: >-
-          <p>You may spend a @L[Core:Short Rest]{short rest} building defensive
-          fortifications around the area you are resting in. You and your allies
-          that are in this are when @L[Core:Combat]{combat} begins gain
-          [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for
-          the duration of that @L[Core:Combat]{combat}. This area counts as
-          having been "fortified".</p>
-        proficient: >-
-          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.</p>
-        fluent: >-
-          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      requirements: <p>You remain in the targeted area.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            gainTempHp: 1d10
-        proficient:
-          rolls:
-            gainTempHp: 1d10 + (@p)d10
-        fluent:
-          rolls:
-            gainTempHp: 1d10 + (@f)d10
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       range:
         unit: self
-    _id: 0PHdhRQSojTzyJig
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fortifyArea00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!IJAnVz6WWakg2NZN.0PHdhRQSojTzyJig'
-  - name: Bodyguard Training
-    type: ability
-    img: systems/teriock/src/icons/abilities/bodyguard-training.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
-      duration:
-        unit: minute
-        description: 1 Minute
-        stationary: false
-        raw: '1'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
-          @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bodyguardTrainin
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: WPnSLdXPauH6iDwJ
-    _key: '!items.effects!IJAnVz6WWakg2NZN.WPnSLdXPauH6iDwJ'
-  - name: Bodyguard Backup
     type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-2-veteran.webp
+name: Rank 2 Veteran
+system:
+  _sup: mithrilDragon000
+  archetype: warrior
+  className: veteran
+  classRank: 2
+  competence:
+    raw: 1
+  description: >-
+    <p>Jaded and tough, these warriors act as if they have seen it all.
+    Obviously they are not all seasoned warriors, but the training of a Veteran
+    involves a great deal of time in battle, so even a first rank Veteran has
+    seen more action than other first rank warriors. The strategy of the Veteran
+    is to be an immovable wall, and hold the line. Veterans rely on defense in
+    battle, always working to better ensure their protection, which is why they
+    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
+    and pessimistic.</p>
+  innate: false
+  maxAv: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
         raw: '1'
-        dawn: false
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Pick another creature within range. They gain
-          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
-          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they
-          make.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      requirements: >-
-        <p>You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard
-        Taunt}.</p>
-      trigger: >-
-        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
-        creature.</p>
-      form: normal
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_U3eabIvCln4vwrrO: rollFeatSave
-      _sup: WPnSLdXPauH6iDwJ
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bodyguardBackup0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: JjurmQdVGDd2qISi
-    _key: '!items.effects!IJAnVz6WWakg2NZN.JjurmQdVGDd2qISi'
-  - name: Bodyguard Taunt
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: second
-        stationary: false
-        description: 5 Seconds
-        dawn: false
-        raw: '5'
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Pick another creature within range. They are
-          @L[Condition:Goaded]{goaded} until the start of your next
-          @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      requirements: >-
-        <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
-        Backup}.</p>
-      trigger: >-
-        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
-        creature.</p>
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - goaded
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  type: forced
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-        macros:
-          Compendium_teriock_execution_Macro_R54099tFLeLMmBAw: preExecution
-      _sup: WPnSLdXPauH6iDwJ
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bodyguardTaunt00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: 7im3RhCNz2Vcd70Y
-    _key: '!items.effects!IJAnVz6WWakg2NZN.7im3RhCNz2Vcd70Y'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank2Veteran0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!IJAnVz6WWakg2NZN'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

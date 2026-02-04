@@ -1,7 +1,262 @@
 _id: b5apoaeQbETAh738
-folder: qTlk5KD9WGOfDG5I
+_key: '!items!b5apoaeQbETAh738'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r5Kni00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+effects:
+  - _id: 0tKYWDmHft5FThLV
+    _key: '!items.effects!b5apoaeQbETAh738.0tKYWDmHft5FThLV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.masWepSmith00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
+    name: Master Weapon Smith
+    system:
+      _sup: 3g1a1LvEjlpO8mii
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.blacksmith.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Blacksmith]{blacksmith}. In addition, you gain the
+          ability to create @L[Property:Master Crafted]{Master Crafted}
+          weapons.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: gSVBUkOjAWiqXfuq
+    _key: '!items.effects!b5apoaeQbETAh738.gSVBUkOjAWiqXfuq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.runicWeps0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/runic-weapons.webp
+    name: Runic Weapons
+    system:
+      _sup: 3g1a1LvEjlpO8mii
+      class: knight
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The targeted @L[Category:Weapons]{weapon} becomes
+          @L[Property:Runic]{runic}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - weapon
+    type: ability
+  - _id: p6uxscnoyCy8JtwB
+    _key: '!items.effects!b5apoaeQbETAh738.p6uxscnoyCy8JtwB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.taunt00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/taunt.webp
+    name: Taunt
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      endCondition: >-
+        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        fail: >-
+          <p>You and the target are @L[Keyword:Vulnerable]{vulnerable} to each
+          other.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 3g1a1LvEjlpO8mii
+    _key: '!items.effects!b5apoaeQbETAh738.3g1a1LvEjlpO8mii'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.wepMas0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/weapon-master.webp
+    name: Weapon Master
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Master Weapon Smith]{Master Weapon Smith} and
+          @L[Ability:Runic Weapons]{Runic Weapons}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-5-knight.webp
 name: Rank 5 Knight
 system:
+  _sup: steelDragon00000
   archetype: warrior
   className: knight
   classRank: 5
@@ -15,6 +270,8 @@ system:
     Knights are the real behemoths of the battlefield, leading troops into the
     fray and slaughtering all they can. If you are a Knight be looking for
     glory, looking for the next powerful weapon.</p>
+  innate: false
+  maxAv: 4
   statDice:
     hp:
       disabled: false
@@ -26,261 +283,4 @@ system:
       faces: 8
       number:
         raw: '1'
-  innate: false
-  maxAv: 4
-  _sup: steelDragon00000
 type: rank
-img: systems/teriock/src/icons/ranks/rank-5-knight.webp
-effects:
-  - name: Taunt
-    type: ability
-    img: systems/teriock/src/icons/abilities/taunt.webp
-    system:
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      duration:
-        unit: minute
-        description: 1 Minute
-        stationary: false
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        fail: >-
-          <p>You and the target are @L[Keyword:Vulnerable]{vulnerable} to each
-          other.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: p6uxscnoyCy8JtwB
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.taunt00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!b5apoaeQbETAh738.p6uxscnoyCy8JtwB'
-  - name: Weapon Master
-    type: ability
-    img: systems/teriock/src/icons/abilities/weapon-master.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Master Weapon Smith]{Master Weapon Smith} and
-          @L[Ability:Runic Weapons]{Runic Weapons}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.wepMas0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 3g1a1LvEjlpO8mii
-    _key: '!items.effects!b5apoaeQbETAh738.3g1a1LvEjlpO8mii'
-  - name: Master Weapon Smith
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Blacksmith]{blacksmith}. In addition, you gain the
-          ability to create @L[Property:Master Crafted]{Master Crafted}
-          weapons.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.blacksmith.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      _sup: 3g1a1LvEjlpO8mii
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.masWepSmith00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 0tKYWDmHft5FThLV
-    _key: '!items.effects!b5apoaeQbETAh738.0tKYWDmHft5FThLV'
-  - name: Runic Weapons
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - weapon
-      duration:
-        unit: hour
-        stationary: false
-        description: 24 Hours
-        raw: '24'
-        dawn: false
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>The targeted @L[Category:Weapons]{weapon} becomes
-          @L[Property:Runic]{runic}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      ritual: true
-      class: knight
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      form: normal
-      _sup: 3g1a1LvEjlpO8mii
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/runic-weapons.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.runicWeps0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: gSVBUkOjAWiqXfuq
-    _key: '!items.effects!b5apoaeQbETAh738.gSVBUkOjAWiqXfuq'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank5Knight00000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!b5apoaeQbETAh738'

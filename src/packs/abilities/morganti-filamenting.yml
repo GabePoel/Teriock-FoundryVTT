@@ -1,32 +1,43 @@
 _id: morgantiFilament
+_key: '!items!morgantiFilament'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Morganti Filamenting
-    type: ability
+  - _id: morgantiFilament
+    _key: '!items.effects!morgantiFilament.morgantiFilament'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/morganti-filamenting.webp
-    _id: morgantiFilament
+    name: Morganti Filamenting
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 1d20[lethal morganti]
       interaction: manifest
       maneuver: passive
       overview:
@@ -42,28 +53,16 @@ effects:
           @L[Property:Silver]{Silver} doesn't get cut by the filament. Instead,
           it "reactivates" and immediately @L[Core:Healing]{fully heals} you
           upon hitting the filament.</p>
+      piercing:
+        raw: 0
       powerSources:
         - unknown
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          rolls:
-            damage: 1d20[lethal morganti]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!morgantiFilament.morgantiFilament'
+    type: ability
 img: systems/teriock/src/icons/abilities/morganti-filamenting.webp
 name: Morganti Filamenting
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!morgantiFilament'

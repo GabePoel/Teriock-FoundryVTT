@@ -1,106 +1,218 @@
-name: Telepelec Blade
-type: equipment
-folder: X3rVK7Ngg1mHq1vl
-system:
-  equipmentType: Dagger
-  equipped: true
-  consumable: false
-  damage:
-    base:
-      saved: 1d4
-  weight:
-    saved: 2
-    raw: 0
-  range:
-    long:
-      saved: '60'
-      unit: ft
-    short:
-      saved: '20'
-      unit: ft
-    ranged: false
-  equipmentClasses:
-    - daggers
-    - swords
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: magic
-  fightingStyle: knife
-  notes: >-
-    <p>Made only in the Far East by a band of nomadic halflings, these [[lookup
-    system.equipmentType style=lc]]s are quite popular throughout Teriock due to
-    their lack of flaws! How the halflings made these is a lost art and thus
-    these [[lookup system.equipmentType style=lc]]s are sought after pieces.</p>
-  attackPenalty:
-    raw: '-1'
-  bv:
-    raw: '1'
-img: systems/teriock/src/assets/items/telepelec-blade.webp
+_id: telepelecBlade00
+_key: '!items!telepelecBlade00'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.1dprGoEGgk6Xeqrk
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: u6giZ9kPSethkRN3
-    img: systems/teriock/src/icons/properties/small.webp
+  - _id: poJmCsUjdz33lcOb
+    _key: '!items.effects!telepelecBlade00.poJmCsUjdz33lcOb'
     _stats:
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.u6giZ9kPSethkRN3'
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: E5woJ8dYZcNwEQsD
-    img: systems/teriock/src/icons/properties/weapon.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.E5woJ8dYZcNwEQsD'
-  - name: Conditional Glowing
-    type: property
-    _id: poJmCsUjdz33lcOb
+      systemVersion: 0.9.16
     img: icons/magic/light/explosion-star-large-teal.webp
+    name: Conditional Glowing
     system:
+      competence:
+        raw: 0
       description: <p>This item glows green in the presence of evil.</p>
       form: normal
       impacts:
         changes:
           - key: system.light.dim
             mode: 4
-            value: '1'
             priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: '1'
           - key: system.light.color
             mode: 5
-            value: '#33D17A'
             priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: '#33D17A'
           - key: system.light.animation.type
             mode: 5
-            value: starlight
             priority: 4
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.poJmCsUjdz33lcOb'
-  - name: Mana Storing
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: starlight
+      revealed: true
     type: property
-    img: systems/teriock/src/icons/properties/mana-storing.webp
+  - _id: Yfqlnn6ZeKGguw7f
+    _key: '!items.effects!telepelecBlade00.Yfqlnn6ZeKGguw7f'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.flameRay00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/flame-ray.webp
+    name: Flame Ray
     system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d8[fire magic]
+        heightened:
+          rolls:
+            damage: 1d8[fire magic]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: xPco0RB42TOdwVwP
+    _key: '!items.effects!telepelecBlade00.xPco0RB42TOdwVwP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/lightning-ray.webp
+    name: Lightning Ray
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+        - lightning
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: RBnj7uPNL0zlOttE
+    _key: '!items.effects!telepelecBlade00.RBnj7uPNL0zlOttE'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.magelore00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/magelore.webp
+    name: Magelore
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property can be used to cast @L[Category:Invoked
+        component spells]{invoked spells}. It can also be used as its user's
+        @L[Category:Hand delivery abilities]{hand} if they have @L[Ability:Staff
+        Touch]{Staff Touch}.</p>
+      form: normal
+      revealed: true
+    type: property
+  - _id: 59j6fhzohlwaNmTi
+    _key: '!items.effects!telepelecBlade00.59j6fhzohlwaNmTi'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.manaStoring00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/mana-storing.webp
+    name: Mana Storing
+    system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
         within it that creatures can use to power their own
@@ -114,210 +226,22 @@ effects:
         dawn comes and nobody is @L[Ability:Attune]{attuned} to a [[lookup
         name]] item, it releases all @L[Core:MP]{MP} it had stored.</p>
       form: normal
-    _id: 59j6fhzohlwaNmTi
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.manaStoring00000
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.59j6fhzohlwaNmTi'
-  - name: Stored Mana (2)
-    type: resource
-    _id: 7BchbaFnAQu4kqcr
-    img: systems/teriock/src/icons/general/celestial-mana-storing.webp
-    system:
-      description: >-
-        A <b>mana storing</b> item has some latent energy held within it that
-        creatures can use to power their own @L[Category:Abilities]{abilities}.
-        Mana storing items will always have a number N associated with them (1,
-        by default, if no number is listed). This number refers to a "mana die"
-        analogous to those that creatures have. It is always [[/roll 1d4]] (3
-        MP), which means the item stores a maximum of N × 3 @L[Core:MP]{MP}. At
-        dawn, if @L[Ability:Attune]{attuned} to the mana storing item, roll
-        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
-        dawn comes and nobody is @L[Ability:Attune]{attuned} to a Mana Storing
-        item, it releases all @L[Core:MP]{MP} it had stored.
-      consumable: true
-      quantity: 0
-      maxQuantity:
-        saved: '6'
-      macros:
-        - Compendium.teriock.player.Macro.20AgUNM6tioUSxHq
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.7BchbaFnAQu4kqcr'
-  - name: Magelore
-    type: property
-    img: systems/teriock/src/icons/properties/magelore.webp
-    system:
-      description: >-
-        <p>An item with this property can be used to cast @L[Category:Invoked
-        component spells]{invoked spells}. It can also be used as its user's
-        @L[Category:Hand delivery abilities]{hand} if they have @L[Ability:Staff
-        Touch]{Staff Touch}.</p>
-      form: normal
-    _id: RBnj7uPNL0zlOttE
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.magelore00000000
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.RBnj7uPNL0zlOttE'
-  - name: Flame Ray
-    type: ability
-    img: systems/teriock/src/icons/abilities/flame-ray.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 1d8[fire magic]
-        heightened:
-          rolls:
-            damage: 1d8[fire magic]
-    _id: Yfqlnn6ZeKGguw7f
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.flameRay00000000
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.Yfqlnn6ZeKGguw7f'
-  - name: Lightning Ray
-    type: ability
-    img: systems/teriock/src/icons/abilities/lightning-ray.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: stormMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-        - lightning
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic]
-    _id: xPco0RB42TOdwVwP
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.xPco0RB42TOdwVwP'
-  - name: Thrown
-    type: property
-    img: systems/teriock/src/icons/properties/thrown.webp
-    system:
-      description: >-
-        <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
-        be used to make melee attacks.</p>
-      form: intrinsic
       revealed: true
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-    _id: gWYrox9o6GFVxS0W
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.gWYrox9o6GFVxS0W'
-  - name: Ranged
     type: property
+  - _id: KSVNJXlWFMMdouaR
+    _key: '!items.effects!telepelecBlade00.KSVNJXlWFMMdouaR'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/properties/ranged.webp
+    name: Ranged
     system:
+      _sup: gWYrox9o6GFVxS0W
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -332,25 +256,145 @@ effects:
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
+          - key: system.range.ranged
             mode: 5
-            value: 'true'
             priority: 10
-      _sup: gWYrox9o6GFVxS0W
+            qualifier: '1'
+            target: parent
+            time: normal
+            value: 'true'
       revealed: true
+    type: property
+  - _id: u6giZ9kPSethkRN3
+    _key: '!items.effects!telepelecBlade00.u6giZ9kPSethkRN3'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _id: KSVNJXlWFMMdouaR
-    _key: '!items.effects!X5ykXLSJPtmTOMmf.KSVNJXlWFMMdouaR'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.1dprGoEGgk6Xeqrk
-_id: X5ykXLSJPtmTOMmf
-_key: '!items!X5ykXLSJPtmTOMmf'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: 7BchbaFnAQu4kqcr
+    _key: '!items.effects!telepelecBlade00.7BchbaFnAQu4kqcr'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    disabled: false
+    img: systems/teriock/src/icons/general/celestial-mana-storing.webp
+    name: Stored Mana (2)
+    system:
+      competence:
+        raw: 0
+      consumable: true
+      description: >-
+        A <b>mana storing</b> item has some latent energy held within it that
+        creatures can use to power their own @L[Category:Abilities]{abilities}.
+        Mana storing items will always have a number N associated with them (1,
+        by default, if no number is listed). This number refers to a "mana die"
+        analogous to those that creatures have. It is always [[/roll 1d4]] (3
+        MP), which means the item stores a maximum of N × 3 @L[Core:MP]{MP}. At
+        dawn, if @L[Ability:Attune]{attuned} to the mana storing item, roll
+        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
+        dawn comes and nobody is @L[Ability:Attune]{attuned} to a Mana Storing
+        item, it releases all @L[Core:MP]{MP} it had stored.
+      macros:
+        - Compendium.teriock.player.Macro.20AgUNM6tioUSxHq
+      maxQuantity:
+        raw: '6'
+      quantity: 0
+      revealed: true
+    tint: '#ffffff'
+    transfer: true
+    type: resource
+  - _id: gWYrox9o6GFVxS0W
+    _key: '!items.effects!telepelecBlade00.gWYrox9o6GFVxS0W'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/thrown.webp
+    name: Thrown
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A weapon with this property can be tossed to make a
+        @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
+        be used to make melee attacks.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: E5woJ8dYZcNwEQsD
+    _key: '!items.effects!telepelecBlade00.E5woJ8dYZcNwEQsD'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/telepelec-blade.webp
+name: Telepelec Blade
+system:
+  attackPenalty:
+    raw: '-1'
+  bv:
+    raw: '1'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d4
+  equipmentClasses:
+    - daggers
+    - swords
+  equipmentType: Dagger
+  equipped: true
+  fightingStyle: knife
+  minStr:
+    raw: '-3'
+  notes: >-
+    <p>Made only in the Far East by a band of nomadic halflings, these [[lookup
+    system.equipmentType style=lc]]s are quite popular throughout Teriock due to
+    their lack of flaws! How the halflings made these is a lost art and thus
+    these [[lookup system.equipmentType style=lc]]s are sought after pieces.</p>
+  powerLevel: magic
+  range:
+    long:
+      raw: '60'
+      unit: ft
+    melee: true
+    ranged: false
+    short:
+      raw: '20'
+      unit: ft
+  vitals: false
+  weight:
+    raw: '2'
+type: equipment

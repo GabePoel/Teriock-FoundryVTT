@@ -1,63 +1,93 @@
-name: Freezing Liquid
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/freezing-liquid.webp
+_id: freezingLiquid00
+_key: '!items!freezingLiquid00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: iYl1sblFlotOhUBe
+    _key: '!items.effects!freezingLiquid00.iYl1sblFlotOhUBe'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.dkFreezingLiquid
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!WZUtc1rqpk0RGhdI.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
+    name: Drink Freezing Liquid
     system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!WZUtc1rqpk0RGhdI.VQDFXr0oJQZ7Waxe'
-  - name: Pour Freezing Liquid
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Shock Touch]{Shock
+          Touch}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
     type: ability
+  - _id: oRXAa1HQGWzcVYLt
+    _key: '!items.effects!freezingLiquid00.oRXAa1HQGWzcVYLt'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: VpMWvn5pbQRYM67N
+    _key: '!items.effects!freezingLiquid00.VpMWvn5pbQRYM67N'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prFreezingLiquid
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/pour-freezing-liquid.webp
+    name: Pour Freezing Liquid
+    system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -66,26 +96,47 @@ effects:
       delivery:
         base: item
       duration:
-        unit: minute
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       endCondition: >-
         <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
         If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          startStatuses:
+            - frozen
       interaction: attack
       maneuver: active
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -97,113 +148,57 @@ effects:
         the ability. Target must be @L[Condition:Down]{down}.</p>
       results:
         hit: <p>Target becomes @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          startStatuses:
-            - frozen
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: action
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-    _id: VpMWvn5pbQRYM67N
-    img: systems/teriock/src/icons/abilities/pour-freezing-liquid.webp
+    type: ability
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!freezingLiquid00.x6sjcsIVaOkVZOFD'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.prFreezingLiquid
-    _key: '!items.effects!WZUtc1rqpk0RGhdI.VpMWvn5pbQRYM67N'
-  - name: Fragile
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
     system:
+      competence:
+        raw: 0
       description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
       form: flaw
-    _id: oRXAa1HQGWzcVYLt
-    img: systems/teriock/src/icons/properties/fragile.webp
+      revealed: true
+    type: property
+  - _id: QFd01KsFD5APsHtE
+    _key: '!items.effects!freezingLiquid00.QFd01KsFD5APsHtE'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shockTouch000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!WZUtc1rqpk0RGhdI.oRXAa1HQGWzcVYLt'
-  - name: Drink Freezing Liquid
-    type: ability
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Shock Touch]{Shock
-          Touch}.</p>
-      piercing: normal
-      powerSources:
-        - alchemical
-      targets:
-        - self
-    _id: iYl1sblFlotOhUBe
-    img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.dkFreezingLiquid
-    _key: '!items.effects!WZUtc1rqpk0RGhdI.iYl1sblFlotOhUBe'
-  - name: Shock Touch
-    type: ability
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/shock-touch.webp
+    name: Shock Touch
     system:
+      _sup: iYl1sblFlotOhUBe
+      class: stormMage
+      competence:
+        raw: 0
       costs:
-        verbal: true
         somatic: true
+        verbal: true
       delivery:
         base: hand
         package: touch
       duration:
-        unit: minute
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - temporal
       elements:
@@ -212,85 +207,118 @@ effects:
         <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
         If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       gifted:
-        enabled: true
         amount: 1
+        enabled: true
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: action
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic ice]
       interaction: attack
       maneuver: active
-      piercing: ub
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
       spell: true
       standard: true
       targets:
         - creature
-      class: stormMage
-      impacts:
-        base:
-          statuses:
-            - frozen
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: action
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: action
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-        heightened:
-          rolls:
-            damage: 1d4[magic ice]
-      _sup: iYl1sblFlotOhUBe
-    img: systems/teriock/src/icons/abilities/shock-touch.webp
+    type: ability
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!freezingLiquid00.VQDFXr0oJQZ7Waxe'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.shockTouch000000
-    _id: QFd01KsFD5APsHtE
-    _key: '!items.effects!WZUtc1rqpk0RGhdI.QFd01KsFD5APsHtE'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: WZUtc1rqpk0RGhdI
-_key: '!items!WZUtc1rqpk0RGhdI'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/freezing-liquid.webp
+name: Freezing Liquid
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

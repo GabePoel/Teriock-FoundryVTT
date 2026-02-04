@@ -1,61 +1,62 @@
 _id: vultureFamiliar0
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Vulture Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.vulture000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!vultureFamiliar0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: vultureTamer0000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Vulture Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Vulture]{vulture}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: PTLVit5eN459wu28
+    _key: '!items.effects!vultureFamiliar0.PTLVit5eN459wu28'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.exorcism00000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!vultureFamiliar0.vultureTamer0000'
-  - name: Exorcism
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/exorcism.webp
+    name: Exorcism
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>An amount of @L[Core:HP]{HP} equal to the
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.</p>
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>An amount of @L[Core:MP]{MP} equal to the
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.</p>
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
         description: Instant
+        quantity: 0
         stationary: false
-      range:
-        unit: ft
-        raw: '5'
+        unit: instant
+      executionTime: 10 Minutes
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>If the target of this ritual is @L[Category:Undead
@@ -80,16 +81,27 @@ effects:
           an @L[Category:Undead creatures]{undead} target. The target pulls
           stones from the @L[Condition:Dead]{death bag} based on the severity of
           the effect being cleansed (see @L[Core:Game Master]{GM}).
+        fluent: >-
+          <p>You may add @L[Core:Fluency Bonus]{F} to the
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
+          of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
         proficient: >-
           <p>You may add @L[Core:Proficiency Bonus]{P} to the
           @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
           of whether or not you are proficient in
           @L[Tradecraft:Priest]{priest}.</p>
-        fluent: >-
-          <p>You may add @L[Core:Fluency Bonus]{F} to the
-          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
-          of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        raw: '5'
+        unit: ft
       results:
+        fail: >-
+          <p>You pay an amount of @L[Core:MP]{MP} and @L[Core:HP]{HP} equal to
+          the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
+          DC.</p>
         save: >-
           <p>The target is "destroyed". They @L[Condition:Dead]{die}, they are
           @L[Condition:Ruined]{ruined}, and they pull additional stones from the
@@ -103,120 +115,108 @@ effects:
           survive, their body must be @L[Ability:Summon the Dead]{reconstructed}
           and then they can be @L[Category:Revival effects]{revived} in a
           non-undead state.</p>
-        fail: >-
-          <p>You pay an amount of @L[Core:MP]{MP} and @L[Core:HP]{HP} equal to
-          the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
-          DC.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
+      ritual: true
       skill: true
       standard: true
-      ritual: true
-      class: paladin
-      costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>An amount of @L[Core:MP]{MP} equal to the
-              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
-              Paid only on failure.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>An amount of @L[Core:HP]{HP} equal to the
-              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
-              Paid only on failure.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: PTLVit5eN459wu28
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.exorcism00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!vultureFamiliar0.PTLVit5eN459wu28'
-  - name: Spirit Bury
-    type: ability
-    img: systems/teriock/src/icons/abilities/spirit-bury.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
       targets:
         - creature
+    type: ability
+  - _id: FPmhAyc9BXQuR9bb
+    _key: '!items.effects!vultureFamiliar0.FPmhAyc9BXQuR9bb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/spirit-bury.webp
+    name: Spirit Bury
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+      duration:
+        description: 1 Minute
+        quantity: 1
+        stationary: false
+        unit: minute
       elements:
         - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-        stationary: false
-      range:
-        unit: melee
-      overview:
-        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
-      results:
-        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      expansionSaveAttribute: mov
-      form: special
       impacts:
-        proficient:
-          duration: 600
         heightened:
           duration: 3600
-      competence:
+        proficient:
+          duration: 600
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: attack
+      maneuver: active
+      overview:
+        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+      piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+      results:
+        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
       revealed: true
-      grantOnly: false
-    _id: FPmhAyc9BXQuR9bb
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: vultureTamer0000
+    _key: '!items.effects!vultureFamiliar0.vultureTamer0000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!vultureFamiliar0.FPmhAyc9BXQuR9bb'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!vultureFamiliar0'
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Vulture Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Vulture]{vulture}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Vulture Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.vulture000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

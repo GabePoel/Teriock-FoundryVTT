@@ -1,52 +1,95 @@
 _id: goldJoro00000000
-folder: QDEp5mPTCt1InWJ5
-name: Gold Joro
-type: species
-img: systems/teriock/src/icons/creatures/gold-joro.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Joro com from Amon and speak an odd language that seems reminiscent of
-    @L[Category:Elves]{elven} and @L[Category:Orks]{orkish} languages, but with
-    other odd features as well. Joro typically become connected to some totem
-    animal during their childhood and, upon reaching adulthood, are able to tap
-    into the powers of this animal.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  adult: 12
-  appearance: >-
-    <p>Like @L[Creature:Common Ork]{common orks} with more
-    @L[Creature:Human]{human} features, Gold skin, and Gold eyes.</p>
-  br: 1
-  lifespan: 60
-  size:
-    enabled: true
-    value: 3
-  traits:
-    - humanoid
+_key: '!items!goldJoro00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Classtoids
-    type: ability
+  - _id: DV7vz1ZAd5PqLSJo
+    _key: '!items.effects!goldJoro00000000.DV7vz1ZAd5PqLSJo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/agile.webp
+    name: Agile
     system:
+      _sup: l0pq74rZOWlT9Yyf
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You walk through difficult terrain at @L[Core:Movement
+          Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: LstYtdqsFKnXYxcS
+    _key: '!items.effects!goldJoro00000000.LstYtdqsFKnXYxcS'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.classtoids000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/classtoids.webp
+    name: Classtoids
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -74,35 +117,81 @@ effects:
           @L[Category:Classes]{ranks}.</p><p>Every two
           @L[Category:Classes]{ranks}, you gain an additional @L[Category:Flaw
           abilities]{flaw} as well from the following
-          list.</p><p>@Embed[Compendium.teriock.tables.RollTable.Brnxz85nV5zWdqaQ
+          list.</p><p>@Embed[Compendium.teriock.tables.RollTable.elementalFrailty
           rollable]</p>
       piercing:
         raw: 0
       powerSources:
         - primal
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: LstYtdqsFKnXYxcS
-    img: systems/teriock/src/icons/abilities/classtoids.webp
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: YpD38ifOVwigsxV2
+    _key: '!items.effects!goldJoro00000000.YpD38ifOVwigsxV2'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.classtoids000000
+      compendiumSource: Compendium.teriock.abilities.Item.flanking00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.LstYtdqsFKnXYxcS'
-  - name: Gold Joro Channeling
-    type: ability
+    img: systems/teriock/src/icons/abilities/flanking.webp
+    name: Flanking
     system:
+      _sup: ISd6x3hCwLpsZO6z
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>You only get the benefits of [[lookup name]] against creatures of the
+        species you chose.</p>
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @L[Core:Advantage]{advantage} on @L[Core:Attack
+          Interaction]{attack rolls} against creatures that are within 5 feet of
+          an ally of yours that isn't incapacitated and that you can see.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: WlPMIaOUDMy9n2Y1
+    _key: '!items.effects!goldJoro00000000.WlPMIaOUDMy9n2Y1'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.goldJoroChanneli
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/gold-joro-channeling.webp
+    name: Gold Joro Channeling
+    system:
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
@@ -111,12 +200,16 @@ effects:
       delivery:
         base: self
       duration:
-        unit: minute
-        stationary: false
+        dawn: false
         description: 10 Minutes
         raw: '10'
-        dawn: false
+        stationary: false
+        unit: minute
       executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -128,164 +221,114 @@ effects:
           @L[Ability:Joro Totem]{Joro Totem} @L[Category:Common animal
           creatures]{species} has. You are not @L[Core:Proficiency
           Bonus]{proficient} nor @L[Core:Fluency Bonus]{fluent} in it.</p>
-        proficient: >-
-          <p>While executing Gold Joro Chanelling, you may spend 1 additional
-          @L[Core:Hit Points and Mana Points]{MP} to be @L[Core:Proficiency
-          Bonus]{proficient} in the @L[Category:Abilities]{ability}.</p>
         fluent: >-
           <p>While executing Gold Joro Chanelling, you may spend 1 additional
           @L[Core:Hit Points and Mana Points]{MP} to be @L[Core:Fluency
           Bonus]{fluent} in the @L[Category:Abilities]{ability}.</p>
+        proficient: >-
+          <p>While executing Gold Joro Chanelling, you may spend 1 additional
+          @L[Core:Hit Points and Mana Points]{MP} to be @L[Core:Proficiency
+          Bonus]{proficient} in the @L[Category:Abilities]{ability}.</p>
       piercing:
         raw: 0
       powerSources:
         - primal
+      range:
+        unit: self
       requirements: <p>You have a @L[Ability:Joro Totem]{Joro Totem}.</p>
+      revealed: true
       sustained: true
       targets:
         - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: WlPMIaOUDMy9n2Y1
-    img: systems/teriock/src/icons/abilities/gold-joro-channeling.webp
+    type: ability
+  - _id: ISd6x3hCwLpsZO6z
+    _key: '!items.effects!goldJoro00000000.ISd6x3hCwLpsZO6z'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.goldJoroChanneli
+      compendiumSource: Compendium.teriock.abilities.Item.huntingParty0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.WlPMIaOUDMy9n2Y1'
-  - name: Hunting Party
-    type: ability
     img: systems/teriock/src/icons/abilities/hunting-party.webp
+    name: Hunting Party
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      class: ranger
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - other
       duration:
-        unit: hour
+        dawn: false
         description: 8 Hours
         raw: '8'
-        dawn: false
         stationary: false
-      sustained: true
+        unit: hour
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>While in a group of three or more Joro and on horsepack on in the
+        presence of your @L[Ability:Joro Totem]{Joro Totem} @L[Category:Common
+        animal creatures]{species}.</p>
+      maneuver: slow
       overview:
         base: >-
           <p>Pick 1 species you're familiar with. Your allies have
           @L[Keyword:Gifted]{Gifted} @L[Ability:Snare]{Snare} against creatures
           of that species. You also have @L[Keyword:Limited]{Limited}
           @L[Ability:Flanking]{Flanking} against creatures of that species.</p>
-        proficient: >-
-          <p>You may instead pick up to @L[Core:Proficiency Bonus]{P} species
-          you're familiar with.</p>
         fluent: >-
           <p>You may instead pick up to @L[Core:Fluency Bonus]{F} species you're
           familiar with.</p>
+        proficient: >-
+          <p>You may instead pick up to @L[Core:Proficiency Bonus]{P} species
+          you're familiar with.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: ranger
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: >-
-        <p>While in a group of three or more Joro and on horsepack on in the
-        presence of your @L[Ability:Joro Totem]{Joro Totem} @L[Category:Common
-        animal creatures]{species}.</p>
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.huntingParty0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: ISd6x3hCwLpsZO6z
-    _key: '!items.effects!goldJoro00000000.ISd6x3hCwLpsZO6z'
-  - name: Flanking
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You have @L[Core:Advantage]{advantage} on @L[Core:Attack
-          Interaction]{attack rolls} against creatures that are within 5 feet of
-          an ally of yours that isn't incapacitated and that you can see.</p>
-      piercing:
-        raw: 0
-      form: normal
-      limitation: >-
-        <p>You only get the benefits of [[lookup name]] against creatures of the
-        species you chose.</p>
-      _sup: ISd6x3hCwLpsZO6z
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
       range:
         unit: self
-    img: systems/teriock/src/icons/abilities/flanking.webp
+      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+      revealed: true
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - other
+    type: ability
+  - _id: 7Co6H7pJLzWGAIsO
+    _key: '!items.effects!goldJoro00000000.7Co6H7pJLzWGAIsO'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flanking00000000
+      compendiumSource: Compendium.teriock.abilities.Item.joroArmorAversio
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: YpD38ifOVwigsxV2
-    _key: '!items.effects!goldJoro00000000.YpD38ifOVwigsxV2'
-  - name: Joro Armor Aversion
-    type: ability
+    img: systems/teriock/src/icons/abilities/joro-armor-aversion.webp
+    name: Joro Armor Aversion
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
@@ -306,38 +349,38 @@ effects:
         raw: 0
       powerSources:
         - primal
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: 7Co6H7pJLzWGAIsO
-    img: systems/teriock/src/icons/abilities/joro-armor-aversion.webp
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: kqvuYQm35C2PGFya
+    _key: '!items.effects!goldJoro00000000.kqvuYQm35C2PGFya'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.joroArmorAversio
+      compendiumSource: Compendium.teriock.abilities.Item.joroTotem0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.7Co6H7pJLzWGAIsO'
-  - name: Joro Totem
-    type: ability
+    img: systems/teriock/src/icons/abilities/joro-totem.webp
+    name: Joro Totem
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -356,271 +399,285 @@ effects:
       powerSources:
         - spiritual
         - primal
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: kqvuYQm35C2PGFya
-    img: systems/teriock/src/icons/abilities/joro-totem.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.joroTotem0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.kqvuYQm35C2PGFya'
-  - name: Normal Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: MjBCmkueOJSN02Jv
+    _key: '!items.effects!goldJoro00000000.MjBCmkueOJSN02Jv'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+    name: Normal Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: MjBCmkueOJSN02Jv
+    type: ability
+  - _id: D2QENOjbVJ3B1ErU
+    _key: '!items.effects!goldJoro00000000.D2QENOjbVJ3B1ErU'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.MjBCmkueOJSN02Jv'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: D2QENOjbVJ3B1ErU
+    type: ability
+  - _id: UDUaN7DivhjjuLtW
+    _key: '!items.effects!goldJoro00000000.UDUaN7DivhjjuLtW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.D2QENOjbVJ3B1ErU'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: UDUaN7DivhjjuLtW
+    type: ability
+  - _id: tDmaIeWse3N88EYp
+    _key: '!items.effects!goldJoro00000000.tDmaIeWse3N88EYp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.UDUaN7DivhjjuLtW'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: tDmaIeWse3N88EYp
+    type: ability
+  - _id: H5wNu2kKKPJKxDs1
+    _key: '!items.effects!goldJoro00000000.H5wNu2kKKPJKxDs1'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.tDmaIeWse3N88EYp'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: H5wNu2kKKPJKxDs1
+    type: ability
+  - _id: l0pq74rZOWlT9Yyf
+    _key: '!items.effects!goldJoro00000000.l0pq74rZOWlT9Yyf'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+      compendiumSource: Compendium.teriock.abilities.Item.track00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldJoro00000000.H5wNu2kKKPJKxDs1'
-  - name: Track
-    type: ability
     img: systems/teriock/src/icons/abilities/track.webp
+    name: Track
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: ranger
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.tracker.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+      interaction: manifest
+      limitation: >-
+        <p>While in a group of three or more Joro and on horsepack on in the
+        presence of your @L[Ability:Joro Totem]{Joro Totem} @L[Category:Common
+        animal creatures]{species}.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
@@ -628,109 +685,52 @@ effects:
           @L[Ability:Agile]{Agile} outside towns and other urban areas.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: ranger
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.tracker.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: >-
-        <p>While in a group of three or more Joro and on horsepack on in the
-        presence of your @L[Ability:Joro Totem]{Joro Totem} @L[Category:Common
-        animal creatures]{species}.</p>
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.track00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: l0pq74rZOWlT9Yyf
-    _key: '!items.effects!goldJoro00000000.l0pq74rZOWlT9Yyf'
-  - name: Agile
     type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You walk through difficult terrain at @L[Core:Movement
-          Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.difficultTerrain
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      _sup: l0pq74rZOWlT9Yyf
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/agile.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: DV7vz1ZAd5PqLSJo
-    _key: '!items.effects!goldJoro00000000.DV7vz1ZAd5PqLSJo'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!goldJoro00000000'
+folder: orks000000000000
+img: systems/teriock/src/icons/creatures/gold-joro.webp
+name: Gold Joro
+system:
+  adult: 12
+  appearance: >-
+    <p>Like @L[Creature:Common Ork]{common orks} with more
+    @L[Creature:Human]{human} features, Gold skin, and Gold eyes.</p>
+  br: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>Joro com from Amon and speak an odd language that seems reminiscent of
+    @L[Category:Elves]{elven} and @L[Category:Orks]{orkish} languages, but with
+    other odd features as well. Joro typically become connected to some totem
+    animal during their childhood and, upon reaching adulthood, are able to tap
+    into the powers of this animal.</p>
+  lifespan: 60
+  size:
+    enabled: true
+    value: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - humanoid
+type: species

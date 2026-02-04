@@ -1,89 +1,42 @@
 _id: wildernessHng000
+_key: '!items!wildernessHng000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Wilderness Healing
-    type: ability
-    img: systems/teriock/src/icons/abilities/wilderness-healing.webp
-    _id: wildernessHng000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        conditions:
-          present:
-            - down
-        dawn: false
-        stationary: false
-        description: While Down
-      delivery:
-        base: self
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>While @L[Condition:Down]{down}, you have @L[Ability:Slow
-          Regenerating]{Slow Regenerating}.</p>
-      powerSources:
-        - primal
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      impacts: {}
-      class: ranger
+  - _id: eIQUerGQeQrEEvEI
+    _key: '!items.effects!wildernessHng000.eIQUerGQeQrEEvEI'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slowRgn000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wildernessHng000.wildernessHng000'
-  - name: Slow Regenerating
-    type: ability
     img: systems/teriock/src/icons/abilities/slow-regenerating.webp
-    _id: eIQUerGQeQrEEvEI
+    name: Slow Regenerating
     system:
+      _sup: wildernessHng000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - revival
         - healing
         - regeneration
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -96,27 +49,70 @@ effects:
           consume the @L[Core:Hit Die]{hit die}. If you were
           @L[Condition:Dead]{dead}, this brings you back to live with the number
           of @L[Core:Hit Points and Mana Points]{HP} you rolled.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts: {}
-      _sup: wildernessHng000
+    type: ability
+  - _id: wildernessHng000
+    _key: '!items.effects!wildernessHng000.wildernessHng000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slowRegenerating
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wildernessHng000.eIQUerGQeQrEEvEI'
+    img: systems/teriock/src/icons/abilities/wilderness-healing.webp
+    name: Wilderness Healing
+    system:
+      class: ranger
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        conditions:
+          present:
+            - down
+        dawn: false
+        description: While Down
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>While @L[Condition:Down]{down}, you have @L[Ability:Slow
+          Regenerating]{Slow Regenerating}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/wilderness-healing.webp
 name: Wilderness Healing
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!wildernessHng000'

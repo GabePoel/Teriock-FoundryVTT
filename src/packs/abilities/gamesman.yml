@@ -1,32 +1,50 @@
 _id: gamesman00000000
+_key: '!items!gamesman00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Gamesman
-    type: ability
+  - _id: gamesman00000000
+    _key: '!items.effects!gamesman00000000.gamesman00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/gamesman.webp
-    _id: gamesman00000000
+    name: Gamesman
     system:
+      class: archer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.hunter.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -36,66 +54,61 @@ effects:
           @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for one species of
           your choice. You can change the species once per a @L[Core:Short
           Rest]{short rest}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.hunter.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      class: archer
+    type: ability
+  - _id: 0rbMXAyjAbpNK17n
+    _key: '!items.effects!gamesman00000000.0rbMXAyjAbpNK17n'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!gamesman00000000.gamesman00000000'
-  - name: Slay
-    type: ability
     img: systems/teriock/src/icons/abilities/slay.webp
-    _id: 0rbMXAyjAbpNK17n
+    name: Slay
     system:
+      _sup: gamesman00000000
+      class: assassin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - killing
         - damaging
       executionTime: r0
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
       interaction: manifest
       limitation: >-
         <p>Only usable against one species, as specified when you use <a
@@ -109,11 +122,14 @@ effects:
           abilities]{attack}. If the triggering @L[Category:Attack
           abilities]{attack} was a critical hit, this deals 10
           @L[Core:Damage]{damage} instead.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         raw: Your Weapon's Range
         unit: ft
+      revealed: true
       skill: true
       standard: true
       targets:
@@ -121,25 +137,7 @@ effects:
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-      _sup: gamesman00000000
-      class: assassin
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!gamesman00000000.0rbMXAyjAbpNK17n'
+    type: ability
 img: systems/teriock/src/icons/abilities/gamesman.webp
 name: Gamesman
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!gamesman00000000'

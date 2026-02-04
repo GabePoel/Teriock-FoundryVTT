@@ -1,34 +1,51 @@
 _id: blindFighting000
+_key: '!items!blindFighting000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Blind Fighting
-    type: ability
+  - _id: blindFighting000
+    _key: '!items.effects!blindFighting000.blindFighting000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: icons/creatures/slimes/slime-giant-face-eyes.webp
-    _id: blindFighting000
+    name: Blind Fighting
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - sensory
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.blind
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
       interaction: manifest
       maneuver: passive
       overview:
@@ -39,39 +56,21 @@ effects:
           movements like breathing are sufficient for this purpose. This does
           not detect any color nor depth, such as pictures or words on a
           page.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
         - primal
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.blind
-              target: Actor
-              qualifier: '1'
-              value: '60'
       upgrades:
         score:
           attribute: per
           value: 1
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blindFighting000.blindFighting000'
+    type: ability
 img: icons/creatures/slimes/slime-giant-face-eyes.webp
 name: Blind Fighting
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!blindFighting000'

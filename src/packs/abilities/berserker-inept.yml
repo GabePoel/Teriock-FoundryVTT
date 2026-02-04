@@ -1,32 +1,56 @@
 _id: berInept00000000
+_key: '!items!berInept00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Berserker Inept
-    type: ability
+  - _id: berInept00000000
+    _key: '!items.effects!berInept00000000.berInept00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/berserker-inept.webp
-    _id: berInept00000000
+    name: Berserker Inept
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.gifted.enabled
+              mode: 5
+              priority: 10
+              qualifier: '@class.berserker'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.gifted.amount
+              mode: 2
+              priority: 10
+              qualifier: '@class.berserker'
+              target: ability
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,41 +58,16 @@ effects:
           <p>You are @L[Keyword:Inept]{inept} at @L[Category:Berserker class
           abilities]{abilities} you get from ranks in
           @L[Class:Berserker]{Berserker}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.gifted.enabled
-              target: ability
-              qualifier: '@class.berserker'
-              value: 'true'
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.gifted.amount
-              target: ability
-              qualifier: '@class.berserker'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!berInept00000000.berInept00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/berserker-inept.webp
 name: Berserker Inept
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!berInept00000000'

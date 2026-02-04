@@ -1,298 +1,285 @@
 _id: terrobutonSuccul
-folder: s05Q2tRPUQEiiYA3
-name: Terrobuton Succulent
-type: species
-img: systems/teriock/src/icons/creatures/terrobuton-succulent.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Immature @L[Creature:Deathcap Succulent]{deathcap succulents}. They are
-    very dangerous but have many uses when properly harvested by herbalists.
-    Terrobuton toadstools cannot yet hop and are rooted to old logs and decaying
-    matter.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 4
-      number:
-        raw: '1'
-  appearance: >-
-    <p>Large hybrid cactus-@L[Creature:Toad]{toads}. Terrobuton succulents are
-    red with black spots.</p>
-  br: 4
-  size:
-    enabled: true
-    value: 0.5
-  traits:
-    - animal
-    - plant
+_key: '!items!terrobutonSuccul'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Dense Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: flaw
-      upgrades:
-        score:
-          attribute: int
-          value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: On0XlM1oZngXx4yP
+  - _id: IUdxxiQlevtbq3SU
+    _key: '!items.effects!terrobutonSuccul.IUdxxiQlevtbq3SU'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.On0XlM1oZngXx4yP'
-  - name: Desert Native
-    type: ability
-    img: systems/teriock/src/icons/abilities/desert-native.webp
+    img: systems/teriock/src/icons/abilities/agile.webp
+    name: Agile
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: "<p>You gain @L[Ability:Desert Resilience]{Desert Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
-      piercing:
-        raw: 0
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.desertNative0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: mg5XV6iQjGAsrKrA
-    _key: '!items.effects!terrobutonSuccul.mg5XV6iQjGAsrKrA'
-  - name: Desert Resilience
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by desert\_weather.</p>"
-      piercing:
-        raw: 0
-      form: normal
       _sup: mg5XV6iQjGAsrKrA
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/desert-resilience.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.desertResilience
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: pt6zhrYRMIRXepFv
-    _key: '!items.effects!terrobutonSuccul.pt6zhrYRMIRXepFv'
-  - name: Agile
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      limitation: <p>Desert terrain only.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>You walk through difficult terrain at @L[Core:Movement
           Speed]{normal speed}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: On0XlM1oZngXx4yP
+    _key: '!items.effects!terrobutonSuccul.On0XlM1oZngXx4yP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -2
+    type: ability
+  - _id: mg5XV6iQjGAsrKrA
+    _key: '!items.effects!terrobutonSuccul.mg5XV6iQjGAsrKrA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.desertNative0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/desert-native.webp
+    name: Desert Native
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
-      limitation: <p>Desert terrain only.</p>
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You gain @L[Ability:Desert Resilience]{Desert Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: pt6zhrYRMIRXepFv
+    _key: '!items.effects!terrobutonSuccul.pt6zhrYRMIRXepFv'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.desertResilience
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/desert-resilience.webp
+    name: Desert Resilience
+    system:
+      _sup: mg5XV6iQjGAsrKrA
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by desert\_weather.</p>"
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: KCifRPlpVKjcL0wv
+    _key: '!items.effects!terrobutonSuccul.KCifRPlpVKjcL0wv'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fireDmgImy000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
+    name: Fire Damage Immunity
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
-        - movement
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.protections.immunities.damageTypes
+              mode: 2
               priority: 10
-              time: normal
-              key: system.speedAdjustments.difficultTerrain
-              target: Actor
               qualifier: '1'
-              value: '3'
-      _sup: mg5XV6iQjGAsrKrA
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/agile.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: IUdxxiQlevtbq3SU
-    _key: '!items.effects!terrobutonSuccul.IUdxxiQlevtbq3SU'
-  - name: Fire Damage Immunity
-    type: ability
-    img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
-    system:
-      powerSources:
-        - magical
+              target: Actor
+              time: normal
+              value: fire
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Fire]{fire
           damage}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: fire
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: KCifRPlpVKjcL0wv
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: U1wXEnqmreBpjoKi
+    _key: '!items.effects!terrobutonSuccul.U1wXEnqmreBpjoKi'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fireDmgImy000000
+      compendiumSource: Compendium.teriock.abilities.Item.lightningImy0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.KCifRPlpVKjcL0wv'
-  - name: Lightning Immunity
-    type: ability
+    img: systems/teriock/src/icons/abilities/lightning-immunity.webp
+    name: Lightning Immunity
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -306,205 +293,185 @@ effects:
         raw: 0
       powerSources:
         - primal
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: U1wXEnqmreBpjoKi
-    img: systems/teriock/src/icons/abilities/lightning-immunity.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lightningImy0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.U1wXEnqmreBpjoKi'
-  - name: Normal Sneak
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-sneak.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: erJRP0RpsLFBmms3
+    _key: '!items.effects!terrobutonSuccul.erJRP0RpsLFBmms3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: erJRP0RpsLFBmms3
+    type: ability
+  - _id: F3A0tVRzuj5uE7Oc
+    _key: '!items.effects!terrobutonSuccul.F3A0tVRzuj5uE7Oc'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.poorPerception00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.erJRP0RpsLFBmms3'
-  - name: Poor Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/poor-perception.webp
+    name: Poor Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: F3A0tVRzuj5uE7Oc
+    type: ability
+  - _id: oFlf5O5HxwstH5le
+    _key: '!items.effects!terrobutonSuccul.oFlf5O5HxwstH5le'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.poorPerception00
+      compendiumSource: Compendium.teriock.abilities.Item.stationary000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.F3A0tVRzuj5uE7Oc'
-  - name: Stationary
-    type: ability
     img: systems/teriock/src/icons/abilities/stationary.webp
+    name: Stationary
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: -3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: diuIKvkDHPn9GW1N
+    _key: '!items.effects!terrobutonSuccul.diuIKvkDHPn9GW1N'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.terrorBall000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/terror-ball.webp
+    name: Terror Ball
+    system:
+      class: necromancer
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: oFlf5O5HxwstH5le
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stationary000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.oFlf5O5HxwstH5le'
-  - name: Terror Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/terror-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
       delivery:
         base: missile
         package: ball
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
       elements:
         - necromancy
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing:
-        raw: 2
-      spell: true
-      standard: true
-      class: necromancer
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
-      form: normal
-      effectTypes:
-        - damaging
       impacts:
         base:
           rolls:
@@ -512,70 +479,103 @@ effects:
         heightened:
           rolls:
             damage: 1d4[magic terror]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: es0WplPGifN35jMa
+    _key: '!items.effects!terrobutonSuccul.es0WplPGifN35jMa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/tiny-strength.webp
+    name: Tiny Strength
+    system:
       competence:
         raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    _id: diuIKvkDHPn9GW1N
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.terrorBall000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.diuIKvkDHPn9GW1N'
-  - name: Tiny Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/tiny-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: es0WplPGifN35jMa
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrobutonSuccul.es0WplPGifN35jMa'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!terrobutonSuccul'
+    type: ability
+folder: desert0000000000
+img: systems/teriock/src/icons/creatures/terrobuton-succulent.webp
+name: Terrobuton Succulent
+system:
+  appearance: >-
+    <p>Large hybrid cactus-@L[Creature:Toad]{toads}. Terrobuton succulents are
+    red with black spots.</p>
+  br: 4
+  competence:
+    raw: 1
+  description: >-
+    <p>Immature @L[Creature:Deathcap Succulent]{deathcap succulents}. They are
+    very dangerous but have many uses when properly harvested by herbalists.
+    Terrobuton toadstools cannot yet hop and are rooted to old logs and decaying
+    matter.</p>
+  size:
+    enabled: true
+    value: 0.5
+  statDice:
+    hp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 4
+      number:
+        raw: '1'
+  traits:
+    - animal
+    - plant
+type: species

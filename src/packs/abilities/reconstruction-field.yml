@@ -1,37 +1,45 @@
 _id: reconstructionFi
+_key: '!items!reconstructionFi'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Reconstruction Field
-    type: ability
+  - _id: reconstructionFi
+    _key: '!items.effects!reconstructionFi.reconstructionFi'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/reconstruction-field.webp
-    _id: reconstructionFi
+    name: Reconstruction Field
     system:
+      class: paladin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
       delivery:
         base: hand
         package: ritual
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
       elements:
         - flame
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -39,6 +47,9 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 24 hours. The overall duration is rounded to the
         nearest 24 hours.</p>
+      impacts:
+        heightened:
+          duration: 86400
       interaction: manifest
       maneuver: slow
       overview:
@@ -47,41 +58,29 @@ effects:
           @L[Property:Runic]{runic}. However, they only repair themselves if
           they were @L[Property:Shattered]{shattered} within the past 10
           minutes.</p>
-        proficient: >-
-          <p>Items are instead repaired if they were
-          @L[Property:Shattered]{shattered} within the past 10 ×
-          @L[Core:Proficiency Bonus]{P} minutes.</p>
         fluent: >-
           <p>Items are instead repaired if they were
           @L[Property:Shattered]{shattered} within the past 10 × @L[Core:Fluency
           Bonus]{F} minutes.</p>
+        proficient: >-
+          <p>Items are instead repaired if they were
+          @L[Property:Shattered]{shattered} within the past 10 ×
+          @L[Core:Proficiency Bonus]{P} minutes.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: Your Hand's Range
         unit: ft
+      revealed: true
       ritual: true
       rotator: true
       spell: true
       standard: true
       targets:
         - area
-      impacts:
-        heightened:
-          duration: 86400
-      class: paladin
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!reconstructionFi.reconstructionFi'
+    type: ability
 img: systems/teriock/src/icons/abilities/reconstruction-field.webp
 name: Reconstruction Field
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!reconstructionFi'

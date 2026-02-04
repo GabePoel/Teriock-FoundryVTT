@@ -1,209 +1,152 @@
 _id: zombie0000000000
-folder: DpeAXrkaAoVt93xG
-name: Zombie
-type: species
-img: systems/teriock/src/icons/creatures/zombie.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Common creatures found in use by @L[Class:Necromancer]{Necromancers}
-    everywhere, [[lookup name style=lc]]s are one of the easiest
-    @L[Category:Undead creatures]{undead} to create and are a staple of
-    @L[Category:Undead creatures]{undead} armies.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '2'
-    mp:
-      disabled: false
-      faces: 2
-      number:
-        raw: '1'
-  appearance: <p>Humanoid corpses, often rotting or falling apart.</p>
-  br: 3
-  size:
-    enabled: true
-    value: 3
-  traits:
-    - undead
+_key: '!items!zombie0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Clumsy
-    type: ability
+  - _id: vgTxD0TkKrocp2vv
+    _key: '!items.effects!zombie0000000000.vgTxD0TkKrocp2vv'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.clumsy0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/clumsy.webp
+    name: Clumsy
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: vgTxD0TkKrocp2vv
+    type: ability
+  - _id: T8KcPH3xLnFBeu3z
+    _key: '!items.effects!zombie0000000000.T8KcPH3xLnFBeu3z'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.clumsy0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.etherealSenses00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!zombie0000000000.vgTxD0TkKrocp2vv'
-  - name: Minor Undead
-    type: ability
-    img: systems/teriock/src/icons/abilities/minor-undead.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Slow Mana Drain]{Slow Mana Drain},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
-      piercing:
-        raw: 0
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.minorUndead00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: WKFVHkGWlGbTXLcg
-    _key: '!items.effects!zombie0000000000.WKFVHkGWlGbTXLcg'
-  - name: Ethereal Senses
-    type: ability
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
     system:
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      _sup: WKFVHkGWlGbTXLcg
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
       elements:
         - necromancy
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.ethereal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
           creatures.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - sensory
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.ethereal
-              target: Actor
-              qualifier: '1'
-              value: '120'
-      _sup: WKFVHkGWlGbTXLcg
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.etherealSenses00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: T8KcPH3xLnFBeu3z
-    _key: '!items.effects!zombie0000000000.T8KcPH3xLnFBeu3z'
-  - name: Healing Sensitivity
-    type: ability
-    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+        - spiritual
+        - primal
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: ffjWKNlGXzlMcblC
+    _key: '!items.effects!zombie0000000000.ffjWKNlGXzlMcblC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    name: Healing Sensitivity
+    system:
+      _sup: WKFVHkGWlGbTXLcg
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       elements:
         - necromancy
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>@L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage}
@@ -215,49 +158,229 @@ effects:
           @L[Core:HP]{hit dice}.</p>
       piercing:
         raw: 0
-      form: flaw
-      grantOnly: false
-      _sup: WKFVHkGWlGbTXLcg
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: ffjWKNlGXzlMcblC
-    _key: '!items.effects!zombie0000000000.ffjWKNlGXzlMcblC'
-  - name: Slow Mana Drain
-    type: ability
-    img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
-    system:
       powerSources:
         - magical
-      interaction: manifest
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: WKFVHkGWlGbTXLcg
+    _key: '!items.effects!zombie0000000000.WKFVHkGWlGbTXLcg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.minorUndead00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/minor-undead.webp
+    name: Minor Undead
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Slow Mana Drain]{Slow Mana Drain},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: FFZXuIPxugRim29J
+    _key: '!items.effects!zombie0000000000.FFZXuIPxugRim29J'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    type: ability
+  - _id: Q77E9kMhNBVUhAoA
+    _key: '!items.effects!zombie0000000000.Q77E9kMhNBVUhAoA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 0
+    type: ability
+  - _id: Jz7rDUgrehBRWorG
+    _key: '!items.effects!zombie0000000000.Jz7rDUgrehBRWorG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/slow.webp
+    name: Slow
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: -1
+    type: ability
+  - _id: fhQA4BXIabBBYoR6
+    _key: '!items.effects!zombie0000000000.fhQA4BXIabBBYoR6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slowManaDrain000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
+    name: Slow Mana Drain
+    system:
+      _sup: WKFVHkGWlGbTXLcg
+      competence:
+        raw: 0
       delivery:
         base: hand
-      targets:
-        - creature
       duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
         dawn: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - revitalization
+        - draining
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Deal enough @L[Drain:Mana]{mana drain} to @L[Condition:Dead]{kill}
@@ -265,49 +388,113 @@ effects:
           you @L[Core:Revitalizing]{revitalize}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - revitalization
-        - draining
-      grantOnly: false
-      _sup: WKFVHkGWlGbTXLcg
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slowManaDrain000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: fhQA4BXIabBBYoR6
-    _key: '!items.effects!zombie0000000000.fhQA4BXIabBBYoR6'
-  - name: Undead Mind
-    type: ability
-    img: systems/teriock/src/icons/abilities/undead-mind.webp
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      revealed: true
+      targets:
+        - creature
+    type: ability
+  - _id: 00IZtTsEvaL5Grhf
+    _key: '!items.effects!zombie0000000000.00IZtTsEvaL5Grhf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
+    name: Stupid Intelligence
+    system:
+      competence:
+        raw: 0
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+      upgrades:
+        score:
+          attribute: int
+          value: -3
+    type: ability
+  - _id: wgOTunf1hxa8Jl93
+    _key: '!items.effects!zombie0000000000.wgOTunf1hxa8Jl93'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.undeadMind000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/undead-mind.webp
+    name: Undead Mind
+    system:
+      _sup: WKFVHkGWlGbTXLcg
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
       elements:
         - necromancy
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: frightened
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: charmed
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to being
@@ -316,67 +503,74 @@ effects:
           maintained even if @L[Condition:Transformed]{transformed}.</p>
       piercing:
         raw: 0
-      form: special
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: fpETqdgoxCLGADTz
+    _key: '!items.effects!zombie0000000000.fpETqdgoxCLGADTz'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.undyingDur000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/undying-durability.webp
+    name: Undying Durability
+    system:
+      _sup: WKFVHkGWlGbTXLcg
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
       grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 2
+            - key: system.protections.immunities.statuses
+              mode: 2
               priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
               qualifier: '1'
-              value: frightened
-            - mode: 2
+              target: Actor
+              time: normal
+              value: unconscious
+            - key: system.protections.immunities.statuses
+              mode: 2
               priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
               qualifier: '1'
-              value: charmed
-      _sup: WKFVHkGWlGbTXLcg
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.undeadMind000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: wgOTunf1hxa8Jl93
-    _key: '!items.effects!zombie0000000000.wgOTunf1hxa8Jl93'
-  - name: Undying Durability
-    type: ability
-    img: systems/teriock/src/icons/abilities/undying-durability.webp
-    system:
-      powerSources:
-        - magical
+              target: Actor
+              time: normal
+              value: suffocating
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: poisoned
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to
@@ -389,235 +583,41 @@ effects:
           have to @L[Core:Drowning]{breathe}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - immunity
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: unconscious
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: suffocating
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: poisoned
-      _sup: WKFVHkGWlGbTXLcg
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
+      powerSources:
+        - magical
       range:
         unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.undyingDur000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: fpETqdgoxCLGADTz
-    _key: '!items.effects!zombie0000000000.fpETqdgoxCLGADTz'
-  - name: Normal Perception
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: per
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: FFZXuIPxugRim29J
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!zombie0000000000.FFZXuIPxugRim29J'
-  - name: Normal Strength
     type: ability
-    img: systems/teriock/src/icons/abilities/normal-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: str
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Q77E9kMhNBVUhAoA
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!zombie0000000000.Q77E9kMhNBVUhAoA'
-  - name: Slow
-    type: ability
-    img: systems/teriock/src/icons/abilities/slow.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: flaw
-      upgrades:
-        score:
-          attribute: mov
-          value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Jz7rDUgrehBRWorG
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!zombie0000000000.Jz7rDUgrehBRWorG'
-  - name: Stupid Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: flaw
-      upgrades:
-        score:
-          attribute: int
-          value: -3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 00IZtTsEvaL5Grhf
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!zombie0000000000.00IZtTsEvaL5Grhf'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!zombie0000000000'
+folder: zombies000000000
+img: systems/teriock/src/icons/creatures/zombie.webp
+name: Zombie
+system:
+  appearance: <p>Humanoid corpses, often rotting or falling apart.</p>
+  br: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>Common creatures found in use by @L[Class:Necromancer]{Necromancers}
+    everywhere, [[lookup name style=lc]]s are one of the easiest
+    @L[Category:Undead creatures]{undead} to create and are a staple of
+    @L[Category:Undead creatures]{undead} armies.</p>
+  size:
+    enabled: true
+    value: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '2'
+    mp:
+      disabled: false
+      faces: 2
+      number:
+        raw: '1'
+  traits:
+    - undead
+type: species

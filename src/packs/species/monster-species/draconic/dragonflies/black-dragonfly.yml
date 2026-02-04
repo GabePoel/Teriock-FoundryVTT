@@ -1,42 +1,24 @@
 _id: blackDragonfly00
-folder: 7bHAPATOmOohGhCU
-name: Black Dragonfly
-type: species
-img: systems/teriock/src/icons/creatures/black-dragonfly.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Dragonflies are usually found in the Oni Isles, although some have left
-    their native grounds. These creatures are highly intelligent and are often
-    @L[Category:Mage classes]{mages} of one or more types. Every dragonfly has
-    their own pond, swamp, or small body of water that it treats as its
-    lair.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '4'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '2'
-  appearance: >-
-    <p>Large hybrids of @L[Category:Dragons]{dragons} and mundane dragonflies.
-    They appear as small @L[Category:Dragons]{dragons} with dragonfly wings.</p>
-  br: 21
-  size:
-    enabled: true
-    value: 1
-  traits:
-    - animal
-    - draconic
+_key: '!items!blackDragonfly00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Black Dragonfly Breath
-    type: ability
+  - _id: I4Xad6PS4l3X44yu
+    _key: '!items.effects!blackDragonfly00.I4Xad6PS4l3X44yu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.blackDrgflyBreat
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/black-dragonfly-breath.webp
+    name: Black Dragonfly Breath
     system:
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
@@ -45,16 +27,20 @@ effects:
       delivery:
         base: cone
       duration:
-        unit: instant
-        stationary: false
-        description: Instant
         dawn: false
+        description: Instant
         raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - damaging
       elements:
         - necromancy
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -62,25 +48,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic terror]]] @L[Core:Damage]{damage}. Additionally,
         the @L[Core:Range]{range} of this increases by 5 feet.</p>
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: ft
-        raw: '15'
-      results:
-        save: >-
-          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
-          would otherwise. This is calculated after any
-          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
-        fail: >-
-          <p>Target takes [[/damage 4d10[magic terror]]]
-          @L[Core:Damage]{damage}.</p>
-      targets:
-        - creature
       impacts:
         base:
           rolls:
@@ -88,528 +55,148 @@ effects:
         heightened:
           rolls:
             damage: 2d10[magic terror]
-      competence:
+      interaction: feat
+      maneuver: active
+      piercing:
         raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: I4Xad6PS4l3X44yu
-    img: systems/teriock/src/icons/abilities/black-dragonfly-breath.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.blackDrgflyBreat
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.I4Xad6PS4l3X44yu'
-  - name: Charm
-    type: ability
-    img: systems/teriock/src/icons/abilities/charm.webp
-    system:
       powerSources:
         - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        package: touch
+      range:
+        raw: '15'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target takes [[/damage 4d10[magic terror]]]
+          @L[Core:Damage]{damage}.</p>
+        save: >-
+          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
+          would otherwise. This is calculated after any
+          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
+      revealed: true
       targets:
         - creature
-      duration:
-        unit: hour
-        description: 1 Hour
-        dawn: false
-        stationary: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
-      piercing:
-        raw: 2
+    type: ability
+  - _id: wY7IcmWALFn19UlE
+    _key: '!items.effects!blackDragonfly00.wY7IcmWALFn19UlE'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.charm00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/charm.webp
+    name: Charm
+    system:
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      requirements: >-
-        <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
-        @L[Condition:Charmed]{charmed} at a time.</p>
-      form: normal
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - mental
         - control
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           statuses:
             - charmed
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
+      interaction: attack
       limitation: <p>Below 0 @L[Core:Intelligence]{INT} only and only in lair.</p>
-    _id: wY7IcmWALFn19UlE
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.charm00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.wY7IcmWALFn19UlE'
-  - name: Fast
-    type: ability
-    img: systems/teriock/src/icons/abilities/fast.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
+      maneuver: active
       piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: mov
-          value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: RVGKnRSBwZUQz6c6
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fast000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.RVGKnRSBwZUQz6c6'
-  - name: Flying
-    type: ability
-    img: systems/teriock/src/icons/abilities/flying.webp
-    system:
+        raw: 2
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
       range:
-        unit: self
-    _id: DVjyiqyAUfcTpsy7
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.DVjyiqyAUfcTpsy7'
-  - name: Hide
-    type: ability
-    img: systems/teriock/src/icons/abilities/hide.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      overview:
-        base: >-
-          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
-          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
-          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-        fluent: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: thief
+        raw: Your Hand's Range
+        unit: ft
       requirements: >-
-        <p>You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:Game Master]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-          rolls:
-            hide: 1d20 + (2 * @snk)
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
-      upgrades:
-        competence:
-          attribute: snk
-          value: 0
-        score:
-          attribute: snk
-          value: 2
-      competence:
-        raw: 0
+        <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
+        @L[Condition:Charmed]{charmed} at a time.</p>
+      results:
+        hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
       revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>In or above water.</p>
-      range:
-        unit: self
-    _id: aNtG4c8PjWDMnMTW
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.aNtG4c8PjWDMnMTW'
-  - name: High Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/high-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: int
-          value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: KJTeqlDoRlppq7WR
+        - creature
+    type: ability
+  - _id: hf5YM4kl4rlXWjQI
+    _key: '!items.effects!blackDragonfly00.hf5YM4kl4rlXWjQI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.highIntelligence
+      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.KJTeqlDoRlppq7WR'
-  - name: Keen Eye
-    type: ability
-    img: systems/teriock/src/icons/abilities/keen-eye.webp
+    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+    name: Defensive Martial Arts
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: per
-          value: 2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: zAH6rs8rylo5Icjp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.keenEye000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.zAH6rs8rylo5Icjp'
-  - name: Martial Arts
-    type: ability
-    img: systems/teriock/src/icons/abilities/martial-arts.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
-          and @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: assassin
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.martialArts00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: mVRBMJB74dMd59NW
-    _key: '!items.effects!blackDragonfly00.mVRBMJB74dMd59NW'
-  - name: Offensive Martial Arts
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
-          equipment]{handy items} count as @L[Category:Weapons]{weapons} for the
-          purposes of @L[Category:Weapon target abilities]{abilities that
-          target} or are @L[Category:Weapon delivery abilities]{delivered by}
-          them (although they cannot be @L[Property:Shattered]{shattered} or
-          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
-          Interaction]{attack} with them and their damage die is now [[/damage
-          1d4]].</p>
-        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
-        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d4
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d4
-        proficient:
-          rolls:
-            damage: 1d6
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d6
-        fluent:
-          rolls:
-            damage: 1d8
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d8
       _sup: mVRBMJB74dMd59NW
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 075ueJpSOG2tX4t5
-    _key: '!items.effects!blackDragonfly00.075ueJpSOG2tX4t5'
-  - name: Defensive Martial Arts
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '1'
+        fluent:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '3'
+        proficient:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
@@ -621,246 +208,651 @@ effects:
           Interaction]{block} with them and their @L[Core:Block Value]{BV} is
           +1.</p><div class="note"><b>Note:</b> This does not make your hands
           @L[Property:Blocking]{blocking}.</div>
-        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
         fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
+        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: RVGKnRSBwZUQz6c6
+    _key: '!items.effects!blackDragonfly00.RVGKnRSBwZUQz6c6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fast000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/fast.webp
+    name: Fast
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 1
+    type: ability
+  - _id: DVjyiqyAUfcTpsy7
+    _key: '!items.effects!blackDragonfly00.DVjyiqyAUfcTpsy7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/flying.webp
+    name: Flying
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.fly
+              mode: 4
               priority: 10
+              qualifier: '1'
+              target: Actor
               time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '1'
+              value: '2'
         proficient:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.fly
+              mode: 4
               priority: 10
+              qualifier: '1'
+              target: Actor
               time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '2'
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
               value: '3'
-      _sup: mVRBMJB74dMd59NW
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: hf5YM4kl4rlXWjQI
-    _key: '!items.effects!blackDragonfly00.hf5YM4kl4rlXWjQI'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
+      overview:
+        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: aNtG4c8PjWDMnMTW
+    _key: '!items.effects!blackDragonfly00.aNtG4c8PjWDMnMTW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
+      interaction: manifest
+      limitation: <p>In or above water.</p>
+      maneuver: active
+      overview:
+        base: >-
+          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
+          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
+          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
+          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
+        fluent: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light,
+        @L[Core:Cover]{three-quarters cover}, or some other feature which the
+        @L[Core:Game Master]{GM} determines is appropriate for being
+        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 0
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: KJTeqlDoRlppq7WR
+    _key: '!items.effects!blackDragonfly00.KJTeqlDoRlppq7WR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.highIntelligence
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/high-intelligence.webp
+    name: High Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: 3
+    type: ability
+  - _id: zAH6rs8rylo5Icjp
+    _key: '!items.effects!blackDragonfly00.zAH6rs8rylo5Icjp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.keenEye000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/keen-eye.webp
+    name: Keen Eye
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+    type: ability
+  - _id: mVRBMJB74dMd59NW
+    _key: '!items.effects!blackDragonfly00.mVRBMJB74dMd59NW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.martialArts00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/martial-arts.webp
+    name: Martial Arts
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
+          and @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: u6UkflAqjdlgx5Sa
+    _key: '!items.effects!blackDragonfly00.u6UkflAqjdlgx5Sa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: u6UkflAqjdlgx5Sa
+    type: ability
+  - _id: WyR1zF8S7ZqCUJKt
+    _key: '!items.effects!blackDragonfly00.WyR1zF8S7ZqCUJKt'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.u6UkflAqjdlgx5Sa'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: WyR1zF8S7ZqCUJKt
+    type: ability
+  - _id: 075ueJpSOG2tX4t5
+    _key: '!items.effects!blackDragonfly00.075ueJpSOG2tX4t5'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.WyR1zF8S7ZqCUJKt'
-  - name: Polymorph
-    type: ability
-    img: systems/teriock/src/icons/abilities/polymorph.webp
+    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+    name: Offensive Martial Arts
     system:
-      powerSources:
-        - magical
-      interaction: manifest
+      _sup: mVRBMJB74dMd59NW
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d4
+          rolls:
+            damage: 1d4
+        fluent:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d8
+          rolls:
+            damage: 1d8
+        proficient:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d6
+          rolls:
+            damage: 1d6
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
+          equipment]{handy items} count as @L[Category:Weapons]{weapons} for the
+          purposes of @L[Category:Weapon target abilities]{abilities that
+          target} or are @L[Category:Weapon delivery abilities]{delivered by}
+          them (although they cannot be @L[Property:Shattered]{shattered} or
+          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
+          Interaction]{attack} with them and their damage die is now [[/damage
+          1d4]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: SdMNyPt0cwOhmYY9
+    _key: '!items.effects!blackDragonfly00.SdMNyPt0cwOhmYY9'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.polymorph0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/polymorph.webp
+    name: Polymorph
+    system:
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - transformation
       elements:
         - nature
-      duration:
-        unit: hour
-        description: 1 Hour
-        dawn: false
-        stationary: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the maximum @L[Core:Battle
+        Rating]{BR} available to you increases by 3.</p>
+      impacts:
+        base:
+          statuses:
+            - transformed
+      interaction: manifest
+      limitation: <p>Dragonfly @L[Creature:Insect]{insect} only.</p>
+      maneuver: slow
       overview:
         base: >-
           <p>Target is @L[Condition:Transformed]{fully transformed} into a
           @L[Category:Common animal creatures]{common animals}. The maximum
           @L[Core:Battle Rating]{BR} of @L[Category:Common animal
           creatures]{animals} you can choose is 3.</p>
-        proficient: >-
-          <p>The maximum @L[Core:Battle Rating]{BR} available to you is now 3 ×
-          @L[Core:Proficiency Bonus]{P}.</p>
         fluent: >-
           <p>The maximum @L[Core:Battle Rating]{BR} available to you is now 3 ×
           @L[Core:Fluency Bonus]{F}.</p>
+        proficient: >-
+          <p>The maximum @L[Core:Battle Rating]{BR} available to you is now 3 ×
+          @L[Core:Proficiency Bonus]{P}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      rotator: true
       spell: true
       standard: true
-      ritual: true
-      class: natureMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the maximum @L[Core:Battle
-        Rating]{BR} available to you increases by 3.</p>
-      form: special
-      effectTypes:
-        - transformation
-      impacts:
-        base:
-          statuses:
-            - transformed
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>Dragonfly @L[Creature:Insect]{insect} only.</p>
-    _id: SdMNyPt0cwOhmYY9
+      targets:
+        - creature
+    type: ability
+  - _id: 70gzdJ7NmGA92tpr
+    _key: '!items.effects!blackDragonfly00.70gzdJ7NmGA92tpr'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.polymorph0000000
+      compendiumSource: Compendium.teriock.abilities.Item.rgn0000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.SdMNyPt0cwOhmYY9'
-  - name: Regenerating
-    type: ability
     img: systems/teriock/src/icons/abilities/regenerating.webp
+    name: Regenerating
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
+          Compendium_teriock_execution_Macro_rgnTurnStart0000: turnStart
+      interaction: manifest
+      limitation: <p>In lair only.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -875,81 +867,90 @@ effects:
           [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: <p>In lair only.</p>
+      powerSources:
+        - primal
       range:
         unit: self
-    _id: 70gzdJ7NmGA92tpr
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.regenerating0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.70gzdJ7NmGA92tpr'
-  - name: Sneaky
-    type: ability
-    img: systems/teriock/src/icons/abilities/sneaky.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: 88Wl9rpiPenLluN8
+    _key: '!items.effects!blackDragonfly00.88Wl9rpiPenLluN8'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/sneaky.webp
+    name: Sneaky
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 88Wl9rpiPenLluN8
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blackDragonfly00.88Wl9rpiPenLluN8'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!blackDragonfly00'
+    type: ability
+folder: dragonflies00000
+img: systems/teriock/src/icons/creatures/black-dragonfly.webp
+name: Black Dragonfly
+system:
+  appearance: >-
+    <p>Large hybrids of @L[Category:Dragons]{dragons} and mundane dragonflies.
+    They appear as small @L[Category:Dragons]{dragons} with dragonfly wings.</p>
+  br: 21
+  competence:
+    raw: 1
+  description: >-
+    <p>Dragonflies are usually found in the Oni Isles, although some have left
+    their native grounds. These creatures are highly intelligent and are often
+    @L[Category:Mage classes]{mages} of one or more types. Every dragonfly has
+    their own pond, swamp, or small body of water that it treats as its
+    lair.</p>
+  size:
+    enabled: true
+    value: 1
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '4'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '2'
+  traits:
+    - animal
+    - draconic
+type: species

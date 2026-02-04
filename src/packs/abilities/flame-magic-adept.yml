@@ -1,34 +1,58 @@
 _id: flameMagAdept000
+_key: '!items!flameMagAdept000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Flame Magic Adept
-    type: ability
+  - _id: flameMagAdept000
+    _key: '!items.effects!flameMagAdept000.flameMagAdept000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/flame-magic-adept.webp
-    _id: flameMagAdept000
+    name: Flame Magic Adept
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       elements:
         - flame
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.system.adept.enabled
+              mode: 4
+              priority: 10
+              qualifier: '@element.flame'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.system.adept.amount
+              mode: 4
+              priority: 10
+              qualifier: '@element.flame'
+              target: ability
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -36,41 +60,16 @@ effects:
           <p>You are @L[Keyword:Adept]{adept} at @L[Category:Magically powered
           abilities]{magical} @L[Category:Flame element abilities]{flame
           abilities}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.system.adept.enabled
-              target: ability
-              qualifier: '@element.flame'
-              value: 'true'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.system.adept.amount
-              target: ability
-              qualifier: '@element.flame'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!flameMagAdept000.flameMagAdept000'
+    type: ability
 img: systems/teriock/src/icons/abilities/flame-magic-adept.webp
 name: Flame Magic Adept
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!flameMagAdept000'

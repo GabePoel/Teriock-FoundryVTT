@@ -1,35 +1,93 @@
 _id: hibernationShiel
+_key: '!items!hibernationShiel'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Hibernation Shield
-    type: ability
-    img: systems/teriock/src/icons/abilities/hibernation-shield.webp
-    _id: hibernationShiel
+  - _id: hrcHFlwcoYQkDvL6
+    _key: '!items.effects!hibernationShiel.hrcHFlwcoYQkDvL6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hibernation00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hibernation.webp
+    name: Hibernation
     system:
+      _sup: hibernationShiel
+      class: ranger
       competence:
         raw: 0
-      suppression: {}
+      delivery:
+        base: self
+      duration:
+        conditions:
+          present:
+            - down
+        dawn: false
+        description: While Down
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
       piercing:
         raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
       revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: hibernationShiel
+    _key: '!items.effects!hibernationShiel.hibernationShiel'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hibernation-shield.webp
+    name: Hibernation Shield
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: sight
       duration:
-        raw: '0'
-        unit: instant
         conditions:
           present:
             - down
         dawn: true
-        stationary: false
         description: Until Dawn While Down
-      delivery:
-        base: sight
+        raw: '0'
+        stationary: false
+        unit: instant
       elements:
         - life
       endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -39,85 +97,23 @@ effects:
         base: >-
           <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
           yourself with this as you go @L[Condition:Down]{down}.</p>
-        proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
         fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
+        proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '10'
         unit: ft
       requirements: <p>Target must be @L[Condition:Down]{down}.</p>
+      revealed: true
       spell: true
       standard: true
       targets:
         - creature
       trigger: <p>You go @L[Condition:Down]{down}.</p>
-      impacts: {}
-      class: lifeMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hibernationShiel.hibernationShiel'
-  - name: Hibernation
     type: ability
-    img: systems/teriock/src/icons/abilities/hibernation.webp
-    _id: hrcHFlwcoYQkDvL6
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        conditions:
-          present:
-            - down
-        dawn: false
-        stationary: false
-        description: While Down
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
-      powerSources:
-        - primal
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      impacts: {}
-      _sup: hibernationShiel
-      class: ranger
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hibernation00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hibernationShiel.hrcHFlwcoYQkDvL6'
 img: systems/teriock/src/icons/abilities/hibernation-shield.webp
 name: Hibernation Shield
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!hibernationShiel'

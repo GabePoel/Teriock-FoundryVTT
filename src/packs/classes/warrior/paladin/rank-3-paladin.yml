@@ -1,56 +1,204 @@
-_id: rank3Paladin0000
-folder: paladin000000000
-name: Rank 3 Paladin
-system:
-  archetype: warrior
-  className: paladin
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>The least martial of the warriors, their outlook on life is that of the
-    combat medic, focusing on keeping others alive on the front lines. Paladins
-    are often leaders, as their charismatic charm draws followers to them and
-    everyone likes to have a healer on their side. Paladins see themselves as
-    somewhat better than most others as they have magical powers that other
-    warriors lack. Paladins usually have a strong guiding force in their life to
-    help those in need and do what is right. If you are a Paladin be righteous,
-    concerned for others, and take charge.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 3
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-paladin.webp
+_id: r3Pal00000000000
+_key: '!items!r3Pal00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Improved Might Strike
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-might-strike.webp
+  - _id: 7Wk3s8Y54plF4wzb
+    _key: '!items.effects!r3Pal00000000000.7Wk3s8Y54plF4wzb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bless00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/bless.webp
+    name: Bless
     system:
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>You may sacrifice any amount of health as a part of this
+              ritual.</p>
+        material: true
+        materialCost: >-
+          <p>You may sacrifice any material components as a part of this ritual,
+          but you must have a symbol of your deity present.</p>
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>You may sacrifice any amount of mana as a part of this
+              ritual.</p>
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - contract
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>[[lookup name]] Self in a ritual that improves your
+          @L[Ability:Divine Gift]{Divine Gift}. It follows the same rules as
+          that ritual, but allows you to revise and strengthen that ritual's
+          effects. Remind the @L[Core:Game Master]{GM} of the effects of your
+          Divine Gift, as they determine the effects of this ritual. The
+          improved @L[Ability:Divine Gift]{Divine Gift} still counts as a
+          @L[Keyword:Blessing]{blessing}.</p><div class="note"><b>Note:</b> Keep
+          track of your original @L[Ability:Divine Gift]{Divine Gift's} effects.
+          If you loose or become @L[Keyword:Incapable]{incapable} of [[lookup
+          name]] Self, your @L[Ability:Divine Gift]{Divine Gift} returns to the
+          state it was in before. If you loose or become
+          @L[Keyword:Incapable]{incapable} of @L[Ability:Divine Gift]{Divine
+          Gift}, then you loose the effects of [[lookup name]] Self.</div>
+      piercing:
+        raw: 0
       powerSources:
         - divine
-      interaction: manifest
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You already have a @L[Ability:Divine Gift]{Divine Gift}. This ritual
+        can typically be used only once.</p>
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
+  - _id: 1kLqnITXkrLScZX1
+    _key: '!items.effects!r3Pal00000000000.1kLqnITXkrLScZX1'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.detAlignment0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/detect-alignment.webp
+    name: Detect Alignment
+    system:
+      _sup: bOWSk8n8vCiTWks9
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: <p>Something symbolic of your deity.</p>
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - truthDetecting
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You learn whether your deity considers the alignment of the target.
+          (Good/neutral/evil, chaotic/neutral/lawful, etc.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+        - item
+    type: ability
+  - _id: q2jjzulkWyMGcIFJ
+    _key: '!items.effects!r3Pal00000000000.q2jjzulkWyMGcIFJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imMightStrike000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/improved-might-strike.webp
+    name: Improved Might Strike
+    system:
+      class: paladin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Ability:Might Strike]{Might Strike} also makes attacks with
@@ -58,116 +206,166 @@ effects:
           @L[Property:AV0]{AV0} and @L[Keyword:Boosted]{boosted}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - divine
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: paladin
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: q2jjzulkWyMGcIFJ
+      targets:
+        - self
+    type: ability
+  - _id: vtIHdhj50rKsMcXQ
+    _key: '!items.effects!r3Pal00000000000.vtIHdhj50rKsMcXQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.miraculousRecove
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imMightStrike000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Paladin0000.q2jjzulkWyMGcIFJ'
-  - name: Miraculous Recovery
-    type: ability
     img: systems/teriock/src/icons/abilities/miraculous-recovery.webp
+    name: Miraculous Recovery
     system:
-      powerSources:
-        - divine
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: melee
-      results:
-        hit: <p>Target @L[Core:Healing]{heals}.</p>
-        critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
       class: paladin
+      competence:
+        raw: 0
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - healing
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
         target again. This does not consume their @L[Core:Hit Dice]{hit dice}
         (including the @L[Core:Hit Dice]{hit dice} for the initial
         @L[Core:Healing]{healing}).</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - healing
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        unit: melee
+      results:
+        critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
+        hit: <p>Target @L[Core:Healing]{heals}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: bOWSk8n8vCiTWks9
+    _key: '!items.effects!r3Pal00000000000.bOWSk8n8vCiTWks9'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.motiveDiscovery0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/motive-discovery.webp
+    name: Motive Discovery
+    system:
+      class: paladin
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    _id: vtIHdhj50rKsMcXQ
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Sense Motive]{Sense Motive} and
+          @L[Ability:Detect Alignment]{Detect Alignment}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: kTUf7jsbcKixG6dO
+    _key: '!items.effects!r3Pal00000000000.kTUf7jsbcKixG6dO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.righteousAura000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.miraculousRecove
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Paladin0000.vtIHdhj50rKsMcXQ'
-  - name: Righteous Aura
-    type: ability
     img: systems/teriock/src/icons/abilities/righteous-aura.webp
+    name: Righteous Aura
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: paladin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain an @L[Category:Aura delivery abilities]{aura} depending on
@@ -200,318 +398,120 @@ effects:
           Blast Aura]{Ice Blast Aura}</td></tr></tbody></table><p></p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: paladin
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: kTUf7jsbcKixG6dO
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.righteousAura000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Paladin0000.kTUf7jsbcKixG6dO'
-  - name: Bless
-    type: ability
-    img: systems/teriock/src/icons/abilities/bless.webp
-    system:
       powerSources:
         - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      sustained: true
       range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>[[lookup name]] Self in a ritual that improves your
-          @L[Ability:Divine Gift]{Divine Gift}. It follows the same rules as
-          that ritual, but allows you to revise and strengthen that ritual's
-          effects. Remind the @L[Core:Game Master]{GM} of the effects of your
-          Divine Gift, as they determine the effects of this ritual. The
-          improved @L[Ability:Divine Gift]{Divine Gift} still counts as a
-          @L[Keyword:Blessing]{blessing}.</p><div class="note"><b>Note:</b> Keep
-          track of your original @L[Ability:Divine Gift]{Divine Gift's} effects.
-          If you loose or become @L[Keyword:Incapable]{incapable} of [[lookup
-          name]] Self, your @L[Ability:Divine Gift]{Divine Gift} returns to the
-          state it was in before. If you loose or become
-          @L[Keyword:Incapable]{incapable} of @L[Ability:Divine Gift]{Divine
-          Gift}, then you loose the effects of [[lookup name]] Self.</div>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      ritual: true
-      class: paladin
-      costs:
-        verbal: true
-        somatic: true
-        material: true
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of mana as a part of this
-              ritual.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of health as a part of this
-              ritual.</p>
-        materialCost: >-
-          <p>You may sacrifice any material components as a part of this ritual,
-          but you must have a symbol of your deity present.</p>
-      requirements: >-
-        <p>You already have a @L[Ability:Divine Gift]{Divine Gift}. This ritual
-        can typically be used only once.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - contract
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 7Wk3s8Y54plF4wzb
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bless00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Paladin0000.7Wk3s8Y54plF4wzb'
-  - name: Motive Discovery
-    type: ability
-    img: systems/teriock/src/icons/abilities/motive-discovery.webp
-    system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Sense Motive]{Sense Motive} and
-          @L[Ability:Detect Alignment]{Detect Alignment}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: paladin
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.motiveDiscovery0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: bOWSk8n8vCiTWks9
-    _key: '!items.effects!rank3Paladin0000.bOWSk8n8vCiTWks9'
-  - name: Sense Motive
     type: ability
-    system:
-      powerSources:
-        - divine
-      interaction: feat
-      featSaveAttribute: unp
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        save: >-
-          <p>You do not learn the target's disposition towards you and your
-          party.</p>
-        fail: >-
-          <p>You know whether the target is hostile, neutral, or friendly
-          towards you and your party.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: paladin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - truthDetecting
-      _sup: bOWSk8n8vCiTWks9
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/sense-motive.webp
+  - _id: xpxCUEGuuPmJHXLi
+    _key: '!items.effects!r3Pal00000000000.xpxCUEGuuPmJHXLi'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.senseMotive00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _id: xpxCUEGuuPmJHXLi
-    _key: '!items.effects!rank3Paladin0000.xpxCUEGuuPmJHXLi'
-  - name: Detect Alignment
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/sense-motive.webp
+    name: Sense Motive
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      _sup: bOWSk8n8vCiTWks9
+      class: paladin
+      competence:
+        raw: 0
       delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-        - item
+        base: aura
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>You learn whether your deity considers the alignment of the target.
-          (Good/neutral/evil, chaotic/neutral/lawful, etc.)</p>
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - truthDetecting
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: unp
+      form: normal
+      grantOnly: false
+      interaction: feat
+      maneuver: active
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - divine
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>You know whether the target is hostile, neutral, or friendly
+          towards you and your party.</p>
+        save: >-
+          <p>You do not learn the target's disposition towards you and your
+          party.</p>
+      revealed: true
       skill: true
       standard: true
-      ritual: true
+      targets:
+        - creature
+    type: ability
+  - _id: Siub0fhgheZ0C3lF
+    _key: '!items.effects!r3Pal00000000000.Siub0fhgheZ0C3lF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.undeadHunter0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/undead-hunter.webp
+    name: Undead Hunter
+    system:
       class: paladin
+      competence:
+        raw: 0
       costs:
-        verbal: true
-        somatic: true
         material: true
+        materialCost: >-
+          <p>Something symbolic of your deity. A piece of the type of undead
+          being summoned.</p>
         mp:
           type: static
           value:
             static: 1
-        materialCost: <p>Something symbolic of your deity.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - truthDetecting
-      _sup: bOWSk8n8vCiTWks9
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/detect-alignment.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.detAlignment0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 1kLqnITXkrLScZX1
-    _key: '!items.effects!rank3Paladin0000.1kLqnITXkrLScZX1'
-  - name: Undead Hunter
-    type: ability
-    img: systems/teriock/src/icons/abilities/undead-hunter.webp
-    system:
-      powerSources:
-        - divine
-      interaction: feat
-      featSaveAttribute: unp
-      maneuver: slow
-      executionTime: 10 Minutes
       delivery:
         base: self
         package: ritual
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
-      range:
-        raw: 10 Miles
+        unit: instant
+      effectTypes:
+        - duelModifying
+        - displacement
+        - longRange
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: unp
+      form: normal
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>The target adds their @L[Core:Fluency Bonus]{fluency bonus} to
@@ -529,19 +529,21 @@ effects:
           If @L[Ability:Active Bow Out]{Active Bow Out} is used on [[lookup
           name]], this merely becomes a normal
           @L[Condition:Dueling]{duel}.</div>
-        proficient: >-
-          <p>The range of this ritual becomes 10 × @L[Core:Proficiency Bonus]{P}
-          miles.</p>
         fluent: >-
           <p>The range of this ritual becomes 10 × @L[Core:Fluency Bonus]{F}
           miles.</p>
+        proficient: >-
+          <p>The range of this ritual becomes 10 × @L[Core:Proficiency Bonus]{P}
+          miles.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        raw: 10 Miles
+        unit: self
+      requirements: <p>Target must be @L[Category:Undead creatures]{undead}.</p>
       results:
-        save: >-
-          <p>Target is aware that you are hunting them, becomes
-          @L[Keyword:Resistance]{resistant} to your @L[Category:Divinely powered
-          abilities]{divine abilities}, and you become
-          @L[Keyword:Incapable]{incapable} of targeting them with [[lookup
-          name]] for 1 week.</p>
         fail: >-
           <p>Target is summoned to your location and is forced into a
           @L[Condition:Dueling]{duel} with you. This @L[Condition:Dueling]{duel}
@@ -551,51 +553,48 @@ effects:
           to where it came from. If you win, the @L[Category:Undead
           creatures]{undead} is forced to the Material Plane and to the site of
           this ritual.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        save: >-
+          <p>Target is aware that you are hunting them, becomes
+          @L[Keyword:Resistance]{resistant} to your @L[Category:Divinely powered
+          abilities]{divine abilities}, and you become
+          @L[Keyword:Incapable]{incapable} of targeting them with [[lookup
+          name]] for 1 week.</p>
+      revealed: true
+      ritual: true
       skill: true
       standard: true
-      ritual: true
-      class: paladin
-      costs:
-        material: true
-        mp:
-          type: static
-          value:
-            static: 1
-        materialCost: >-
-          <p>Something symbolic of your deity. A piece of the type of undead
-          being summoned.</p>
-      requirements: <p>Target must be @L[Category:Undead creatures]{undead}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - duelModifying
-        - displacement
-        - longRange
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: Siub0fhgheZ0C3lF
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.undeadHunter0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Paladin0000.Siub0fhgheZ0C3lF'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank3Paladin0000'
+      targets:
+        - creature
+    type: ability
+folder: paladin000000000
+img: systems/teriock/src/icons/ranks/rank-3-paladin.webp
+name: Rank 3 Paladin
+system:
+  archetype: warrior
+  className: paladin
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>The least martial of the warriors, their outlook on life is that of the
+    combat medic, focusing on keeping others alive on the front lines. Paladins
+    are often leaders, as their charismatic charm draws followers to them and
+    everyone likes to have a healer on their side. Paladins see themselves as
+    somewhat better than most others as they have magical powers that other
+    warriors lack. Paladins usually have a strong guiding force in their life to
+    help those in need and do what is right. If you are a Paladin be righteous,
+    concerned for others, and take charge.</p>
+  innate: false
+  maxAv: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

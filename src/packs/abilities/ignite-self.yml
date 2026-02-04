@@ -1,34 +1,55 @@
 _id: igniteSelf000000
+_key: '!items!igniteSelf000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Ignite Self
-    type: ability
+  - _id: igniteSelf000000
+    _key: '!items.effects!igniteSelf000000.igniteSelf000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/ignite-self.webp
-    _id: igniteSelf000000
+    name: Ignite Self
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '10'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 10 Minutes
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
       effectTypes:
         - automatic
       executionTime: r0
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.base.raw
+              mode: 2
+              priority: 30
+              qualifier: '@dmg'
+              target: equipment
+              time: normal
+              value: 1d4[fire]
+          rolls:
+            damage: 1d4[fire]
+          statuses:
+            - burned
       interaction: manifest
       maneuver: reactive
       overview:
@@ -40,41 +61,19 @@ effects:
           @L[Core:Turns]{turns}. You also count as @L[Condition:Burned]{burned}
           regardless of whether you're @L[Condition:Up]{up} or
           @L[Condition:Down]{down}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
         unit: self
+      revealed: true
       targets:
         - self
       trigger: >-
         <p>You take @L[Damage:Fire]{fire damage}. This triggers automatically.
         You cannot choose to not use it if you are able to.</p>
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.damage.base.raw
-              target: equipment
-              qualifier: '@dmg'
-              value: 1d4[fire]
-          rolls:
-            damage: 1d4[fire]
-          statuses:
-            - burned
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!igniteSelf000000.igniteSelf000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/ignite-self.webp
 name: Ignite Self
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!igniteSelf000000'

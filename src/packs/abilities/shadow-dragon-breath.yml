@@ -1,37 +1,44 @@
 _id: shadowDrgBreath0
+_key: '!items!shadowDrgBreath0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Shadow Dragon Breath
-    type: ability
+  - _id: shadowDrgBreath0
+    _key: '!items.effects!shadowDrgBreath0.shadowDrgBreath0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/shadow-dragon-breath.webp
-    _id: shadowDrgBreath0
+    name: Shadow Dragon Breath
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: cone
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - killing
         - damaging
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -39,23 +46,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 5[lethal magic]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      interaction: feat
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        save: >-
-          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
-          would otherwise. This is calculated after any
-          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
-        fail: >-
-          <p>Target takes [[/damage 20[lethal magic]]]
-          @L[Core:Damage]{damage}.</p>
-      targets:
-        - creature
       impacts:
         base:
           rolls:
@@ -63,18 +53,27 @@ effects:
         heightened:
           rolls:
             damage: 5[lethal magic]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowDrgBreath0.shadowDrgBreath0'
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target takes [[/damage 20[lethal magic]]]
+          @L[Core:Damage]{damage}.</p>
+        save: >-
+          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
+          would otherwise. This is calculated after any
+          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/shadow-dragon-breath.webp
 name: Shadow Dragon Breath
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!shadowDrgBreath0'

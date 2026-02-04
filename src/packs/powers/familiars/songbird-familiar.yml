@@ -1,153 +1,153 @@
 _id: songbirdFamiliar
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Songbird Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.songbird00000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!songbirdFamiliar'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: songbirdTamer000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Songbird Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Songbird]{songbird}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: AAgd2avDxsy254cQ
+    _key: '!items.effects!songbirdFamiliar.AAgd2avDxsy254cQ'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.alert00000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!songbirdFamiliar.songbirdTamer000'
-  - name: Alert
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/alert.webp
+    name: Alert
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - resistance
+        - sensory
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Surprised
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficiency
+          attribute: per
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} being @L[Core:Surprise
           Rounds]{surprised}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: songbirdTamer000
+    _key: '!items.effects!songbirdFamiliar.songbirdTamer000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Songbird Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Songbird]{songbird}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: bumy1wCmw063PhEn
+    _key: '!items.effects!songbirdFamiliar.bumy1wCmw063PhEn'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.talCourtier00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: icons/skills/social/diplomacy-handshake-blue.webp
+    name: Talented Courtier
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.courtier.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
-          attribute: per
-          amount: proficiency
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Being Surprised
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: AAgd2avDxsy254cQ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.alert00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!songbirdFamiliar.AAgd2avDxsy254cQ'
-  - name: Talented Courtier
-    type: ability
-    img: icons/skills/social/diplomacy-handshake-blue.webp
-    system:
-      powerSources:
-        - martial
+          amount: proficient
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
       overview:
         base: >-
           <p>You are a @L[Keyword:Talented]{talented}
           @L[Tradecraft:Courtier]{courtier}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.courtier.score
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      competence:
-        raw: 0
+      powerSources:
+        - martial
       revealed: true
-      grantOnly: false
-    _id: bumy1wCmw063PhEn
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talCourtier00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!songbirdFamiliar.bumy1wCmw063PhEn'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!songbirdFamiliar'
+      targets:
+        - self
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Songbird Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.songbird00000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

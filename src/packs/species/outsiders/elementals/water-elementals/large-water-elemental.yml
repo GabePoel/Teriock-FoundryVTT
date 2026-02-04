@@ -1,221 +1,44 @@
 _id: largeWaterElemen
-folder: c5zE9iTmMkA7iSD0
-name: Large Water Elemental
-type: species
-img: systems/teriock/src/icons/creatures/large-water-elemental.webp
-system:
-  competence:
-    raw: 1
-  statDice:
-    hp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '@size'
-    mp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '5'
-  appearance: >-
-    <p>Appear as a mass of water. This amorphous state is their default form,
-    but elementals can also take a humanoid form which resembles a human with an
-    odd skin color.</p>
-  br: 22
-  hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Storm Mage]{Storm Mage}.</p>"
-  size:
-    enabled: true
-    value: 7
-    min: 7
-    max: 8
-  traits:
-    - outsider
-    - elemental
+_key: '!items!largeWaterElemen'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Dark Vision
-    type: ability
-    img: systems/teriock/src/icons/abilities/dark-vision.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You can see in the dark up to 60 feet as though it is dim
-          light.</p>
-      piercing:
-        raw: 0
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.dark
-              target: Actor
-              qualifier: '1'
-              value: '60'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: kQIB1b6WhQe5wFEP
+  - _id: Br33hrB8zgK1ensT
+    _key: '!items.effects!largeWaterElemen.Br33hrB8zgK1ensT'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.kQIB1b6WhQe5wFEP'
-  - name: Giant Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
+      _sup: 9TGdkwwFPQKWkqgY
       class: knight
-      form: normal
-      upgrades:
-        score:
-          attribute: str
-          value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: WVk8QffoLdXOdfNy
-    _key: '!items.effects!largeWaterElemen.WVk8QffoLdXOdfNy'
-  - name: Improved Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      grantOnly: false
-      _sup: WVk8QffoLdXOdfNy
-      upgrades:
-        score:
-          attribute: str
-          value: 2
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 9TGdkwwFPQKWkqgY
-    _key: '!items.effects!largeWaterElemen.9TGdkwwFPQKWkqgY'
-  - name: Beastly Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
       featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
       overview:
         base: >-
           <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -224,219 +47,333 @@ effects:
           to be @L[Property:AV0]{AV0}.</div>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
-      grantOnly: false
-      _sup: 9TGdkwwFPQKWkqgY
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    type: ability
+  - _id: kQIB1b6WhQe5wFEP
+    _key: '!items.effects!largeWaterElemen.kQIB1b6WhQe5wFEP'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: Br33hrB8zgK1ensT
-    _key: '!items.effects!largeWaterElemen.Br33hrB8zgK1ensT'
-  - name: Improved Armor Piercing
-    type: ability
+    img: systems/teriock/src/icons/abilities/dark-vision.webp
+    name: Dark Vision
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can see in the dark up to 60 feet as though it is dim
+          light.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: WVk8QffoLdXOdfNy
+    _key: '!items.effects!largeWaterElemen.WVk8QffoLdXOdfNy'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    name: Giant Strength
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
+          are no longer suffer the consequences of
+          @L[Property:Cumbersome]{cumbersome} items.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 3
+    type: ability
+  - _id: bDlWt5nPt3awcs5L
+    _key: '!items.effects!largeWaterElemen.bDlWt5nPt3awcs5L'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: 9TGdkwwFPQKWkqgY
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      grantOnly: false
-      _sup: 9TGdkwwFPQKWkqgY
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: bDlWt5nPt3awcs5L
-    _key: '!items.effects!largeWaterElemen.bDlWt5nPt3awcs5L'
-  - name: Melee Damage Boost
-    type: ability
-    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
       range:
-        unit: melee
-      overview:
-        base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
-        proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
-      piercing:
-        raw: 0
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
-      form: normal
-      effectTypes:
-        - damaging
-      grantOnly: false
-      _sup: WVk8QffoLdXOdfNy
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: Ap1ZEGMxuvOK2jWK
-    _key: '!items.effects!largeWaterElemen.Ap1ZEGMxuvOK2jWK'
-  - name: Magical Durability
-    type: ability
-    img: systems/teriock/src/icons/abilities/magical-durability.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
+    type: ability
+  - _id: 9TGdkwwFPQKWkqgY
+    _key: '!items.effects!largeWaterElemen.9TGdkwwFPQKWkqgY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: WVk8QffoLdXOdfNy
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
+  - _id: Qo1UAl2B5ssZrdqo
+    _key: '!items.effects!largeWaterElemen.Qo1UAl2B5ssZrdqo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/magical-durability.webp
+    name: Magical Durability
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mundane
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
           @L[Core:Damage]{damage}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: mundane
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: Qo1UAl2B5ssZrdqo
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.Qo1UAl2B5ssZrdqo'
-  - name: Mana Regenerating
-    type: ability
-    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
-    system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: h1ky8JdZdIKGOT9K
+    _key: '!items.effects!largeWaterElemen.h1ky8JdZdIKGOT9K'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.manaRgn000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+    name: Mana Regenerating
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - revival
+        - regeneration
+        - revitalization
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
+          Compendium_teriock_execution_Macro_manaRgnTurnStart: turnStart
+      interaction: manifest
+      limitation: >-
+        <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
+        Mana Points]{MP} spent on @L[Category:Storm element abilities]{storm
+        element abilities}.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -450,194 +387,254 @@ effects:
           Points and Mana Points]{MP}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - revival
-        - regeneration
-        - revitalization
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: >-
-        <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
-        Mana Points]{MP} spent on @L[Category:Storm element abilities]{storm
-        element abilities}.</p>
+      powerSources:
+        - primal
       range:
         unit: self
-    _id: h1ky8JdZdIKGOT9K
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.manaRegenerating
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.h1ky8JdZdIKGOT9K'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: Ap1ZEGMxuvOK2jWK
+    _key: '!items.effects!largeWaterElemen.Ap1ZEGMxuvOK2jWK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
+    system:
+      _sup: WVk8QffoLdXOdfNy
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
       duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
         dawn: false
+        description: Instant
+        raw: '0'
         stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
+          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+        proficient: >-
+          <p>You may spend an additional unused @L[Core:Active
+          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
+          @L[Core:Damage]{damage} again.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have hit a creature with a @L[Category:Damaging
+        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
+        @L[Category:Attack abilities]{attack}.</p>
+    type: ability
+  - _id: ufwddRbU4NCMImtq
+    _key: '!items.effects!largeWaterElemen.ufwddRbU4NCMImtq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: ufwddRbU4NCMImtq
+    type: ability
+  - _id: kyFXk4kX1fE12vKD
+    _key: '!items.effects!largeWaterElemen.kyFXk4kX1fE12vKD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.ufwddRbU4NCMImtq'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: kyFXk4kX1fE12vKD
+    type: ability
+  - _id: Ib7YGF4TWJrGSr7z
+    _key: '!items.effects!largeWaterElemen.Ib7YGF4TWJrGSr7z'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.kyFXk4kX1fE12vKD'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Ib7YGF4TWJrGSr7z
+    type: ability
+  - _id: vUtAs9JEmQU25gTz
+    _key: '!items.effects!largeWaterElemen.vUtAs9JEmQU25gTz'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.stormMagHxs00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.Ib7YGF4TWJrGSr7z'
-  - name: Storm Magic Hexseal
-    type: ability
     img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
+    name: Storm Magic Hexseal
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         description: While Up
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - hexseal
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.hexseals.elements
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: storm
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
@@ -645,51 +642,42 @@ effects:
           abilities}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - hexseal
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.hexseals.elements
-              target: Actor
-              qualifier: '1'
-              value: storm
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: vUtAs9JEmQU25gTz
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: 6kZWxSNL42UM8YnU
+    _key: '!items.effects!largeWaterElemen.6kZWxSNL42UM8YnU'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stormMagHxs00000
+      compendiumSource: Compendium.teriock.abilities.Item.takeAmorphousEle
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.vUtAs9JEmQU25gTz'
-  - name: Take Amorphous Elemental Form
-    type: ability
+    img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+    name: Take Amorphous Elemental Form
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: instant
       effectTypes:
         - transformation
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -709,43 +697,43 @@ effects:
         raw: 0
       powerSources:
         - magical
+      range:
+        unit: self
       requirements: >-
         <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
         elemental form}.</p>
+      revealed: true
       targets:
         - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: 6kZWxSNL42UM8YnU
-    img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+    type: ability
+  - _id: D0qQoldiQw53Uy22
+    _key: '!items.effects!largeWaterElemen.D0qQoldiQw53Uy22'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.takeAmorphousEle
+      compendiumSource: Compendium.teriock.abilities.Item.takeHumanoidElea
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.6kZWxSNL42UM8YnU'
-  - name: Take Humanoid Elemental Form
-    type: ability
+    img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+    name: Take Humanoid Elemental Form
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: instant
       effectTypes:
         - transformation
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -763,89 +751,102 @@ effects:
         raw: 0
       powerSources:
         - magical
+      range:
+        unit: self
       requirements: >-
         <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
         elemental form}.</p>
+      revealed: true
       targets:
         - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: D0qQoldiQw53Uy22
-    img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+    type: ability
+  - _id: FdW2y8Nl7YDBSMmc
+    _key: '!items.effects!largeWaterElemen.FdW2y8Nl7YDBSMmc'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.takeHumanoidElea
+      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.D0qQoldiQw53Uy22'
-  - name: Unconsciousness Immunity
-    type: ability
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+    name: Unconsciousness Immunity
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: unconscious
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to falling
           @L[Condition:Unconscious]{unconscious}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: unconscious
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: FdW2y8Nl7YDBSMmc
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeWaterElemen.FdW2y8Nl7YDBSMmc'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!largeWaterElemen'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: waterElementals0
+img: systems/teriock/src/icons/creatures/large-water-elemental.webp
+name: Large Water Elemental
+system:
+  appearance: >-
+    <p>Appear as a mass of water. This amorphous state is their default form,
+    but elementals can also take a humanoid form which resembles a human with an
+    odd skin color.</p>
+  br: 22
+  competence:
+    raw: 1
+  hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
+  innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Storm Mage]{Storm Mage}.</p>"
+  size:
+    enabled: true
+    max: 8
+    min: 7
+    value: 7
+  statDice:
+    hp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '@size'
+    mp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '5'
+  traits:
+    - outsider
+    - elemental
+type: species

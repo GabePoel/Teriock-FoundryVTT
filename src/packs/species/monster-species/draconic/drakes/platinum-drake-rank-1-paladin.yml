@@ -1,261 +1,68 @@
 _id: JAUBw5TaWPu5Chay
-folder: RzPs61J6b8X8OR9T
-name: Rank 1 Paladin
-system:
-  archetype: warrior
-  className: paladin
-  classRank: 1
-  competence:
-    raw: 1
-  description: >-
-    <p>The least martial of the warriors, their outlook on life is that of the
-    combat medic, focusing on keeping others alive on the front lines. Paladins
-    are often leaders, as their charismatic charm draws followers to them and
-    everyone likes to have a healer on their side. Paladins see themselves as
-    somewhat better than most others as they have magical powers that other
-    warriors lack. Paladins usually have a strong guiding force in their life to
-    help those in need and do what is right. If you are a Paladin be righteous,
-    concerned for others, and take charge.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 3
-  _sup: platinumDrake000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-1-paladin.webp
+_key: '!items!JAUBw5TaWPu5Chay'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Pal00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Jumpstart Heal
-    type: ability
-    img: systems/teriock/src/icons/abilities/jumpstart-heal.webp
-    system:
-      powerSources:
-        - divine
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
-      range:
-        unit: melee
-      results:
-        hit: <p>Target @L[Core:Healing]{heals} at the start of their next turn.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: paladin
-      form: normal
-      effectTypes:
-        - healing
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: J2R06ccW6xHWjrck
+  - _id: 7EokvV5AVB46gi4P
+    _key: '!items.effects!JAUBw5TaWPu5Chay.7EokvV5AVB46gi4P'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.jSHeal0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.divineGift000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JAUBw5TaWPu5Chay.J2R06ccW6xHWjrck'
-  - name: Might Strike
-    type: ability
-    img: systems/teriock/src/icons/abilities/might-strike.webp
-    system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: self
-        package: ritual
-      targets:
-        - self
-      duration:
-        description: Until Dawn
-        stationary: false
-        raw: '0'
-        dawn: true
-        unit: instant
-      sustained: true
-      overview:
-        base: >-
-          <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
-          @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
-          classes]{class} deal either an additional [[/damage 1d4[holy]]]
-          @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of
-          a type corresponding to the @L[Core:Domains]{domain} of your deity.
-          You may decide which of these benefits a @L[Category:Weapons]{weapon}
-          gets every time you attempt an @L[Category:Attack abilities]{attack}
-          with it. In addition, all @L[Core:Damage]{damage} dealt by a single
-          chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
-          classes]{class} is @L[Damage:Magic]{magic} as long as you are
-          @L[Core:Presence]{attuned} to it.</p><table class="wikitable
-          sortable"><caption>Benefits by
-          Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
-          selflink">Might Strike</a> Damage
-          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      ritual: true
-      class: paladin
-      costs:
-        verbal: true
-        somatic: true
-        material: true
-        mp:
-          type: static
-          value:
-            static: 1
-        materialCost: <p>Something symbolic of your deity.</p>
-      requirements: >-
-        <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
-        name]].</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d4
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.damage.standard
-              target: Actor
-              qualifier: '1'
-              value: +1d4[holy]
-        macros:
-          Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: cFYEs5rH6gdmqV1x
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mightStrike00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JAUBw5TaWPu5Chay.cFYEs5rH6gdmqV1x'
-  - name: Resist Mental Effects
-    type: ability
-    img: systems/teriock/src/icons/abilities/resist-mental-effects.webp
-    system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} @L[Category:Mental
-          effects]{mental effects}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: paladin
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.effects
-              target: Actor
-              qualifier: '1'
-              value: mental
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: B5I6y61wTKim4h9J
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.resistMentalEffe
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JAUBw5TaWPu5Chay.B5I6y61wTKim4h9J'
-  - name: Divine Gift
-    type: ability
     img: systems/teriock/src/icons/abilities/divine-gift.webp
+    name: Divine Gift
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>You may sacrifice any amount of health as a part of this
+              ritual.</p>
+        material: true
+        materialCost: >-
+          <p>You may sacrifice any material components as a part of this ritual,
+          but you must have a symbol of your deity present.</p>
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>You may sacrifice any amount of mana as a part of this
+              ritual.</p>
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - other
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - contract
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>[[lookup name]] is a ritual that allows you to call upon their
@@ -284,55 +91,248 @@ effects:
           you temporarily become @L[Keyword:Incapable]{incapable} of it.</div>
       piercing:
         raw: 0
+      powerSources:
+        - divine
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>This ritual can typically be used only once.</p>
+      revealed: true
+      ritual: true
       skill: true
       standard: true
-      ritual: true
-      class: paladin
-      costs:
-        verbal: true
-        somatic: true
-        material: true
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of mana as a part of this
-              ritual.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of health as a part of this
-              ritual.</p>
-        materialCost: >-
-          <p>You may sacrifice any material components as a part of this ritual,
-          but you must have a symbol of your deity present.</p>
-      requirements: <p>This ritual can typically be used only once.</p>
-      form: normal
-      effectTypes:
-        - contract
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: 7EokvV5AVB46gi4P
+      sustained: true
+      targets:
+        - other
+    type: ability
+  - _id: J2R06ccW6xHWjrck
+    _key: '!items.effects!JAUBw5TaWPu5Chay.J2R06ccW6xHWjrck'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.divineGift000000
+      compendiumSource: Compendium.teriock.abilities.Item.jSHeal0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/jumpstart-heal.webp
+    name: Jumpstart Heal
+    system:
+      class: paladin
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - healing
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        unit: melee
+      results:
+        hit: <p>Target @L[Core:Healing]{heals} at the start of their next turn.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: cFYEs5rH6gdmqV1x
+    _key: '!items.effects!JAUBw5TaWPu5Chay.cFYEs5rH6gdmqV1x'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mightStrike00000
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JAUBw5TaWPu5Chay.7EokvV5AVB46gi4P'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1Paladin0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!JAUBw5TaWPu5Chay'
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/might-strike.webp
+    name: Might Strike
+    system:
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: <p>Something symbolic of your deity.</p>
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+        package: ritual
+      duration:
+        dawn: true
+        description: Until Dawn
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.standard
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: +1d4[holy]
+          rolls:
+            damage: 1d4
+        macros:
+          Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
+          @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
+          classes]{class} deal either an additional [[/damage 1d4[holy]]]
+          @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of
+          a type corresponding to the @L[Core:Domains]{domain} of your deity.
+          You may decide which of these benefits a @L[Category:Weapons]{weapon}
+          gets every time you attempt an @L[Category:Attack abilities]{attack}
+          with it. In addition, all @L[Core:Damage]{damage} dealt by a single
+          chosen @L[Category:Weapons]{weapon} of that @L[Category:Weapon
+          classes]{class} is @L[Damage:Magic]{magic} as long as you are
+          @L[Core:Presence]{attuned} to it.</p><table class="wikitable
+          sortable"><caption>Benefits by
+          Domain</caption><tbody><tr><th>Domain</th><th><a class="mw-selflink
+          selflink">Might Strike</a> Damage
+          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        unit: self
+      requirements: >-
+        <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
+        name]].</p>
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: B5I6y61wTKim4h9J
+    _key: '!items.effects!JAUBw5TaWPu5Chay.B5I6y61wTKim4h9J'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.resistMentalEffe
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/resist-mental-effects.webp
+    name: Resist Mental Effects
+    system:
+      class: paladin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mental
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} @L[Category:Mental
+          effects]{mental effects}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: drakes0000000000
+img: systems/teriock/src/icons/ranks/rank-1-paladin.webp
+name: Rank 1 Paladin
+system:
+  _sup: platinumDrake000
+  archetype: warrior
+  className: paladin
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>The least martial of the warriors, their outlook on life is that of the
+    combat medic, focusing on keeping others alive on the front lines. Paladins
+    are often leaders, as their charismatic charm draws followers to them and
+    everyone likes to have a healer on their side. Paladins see themselves as
+    somewhat better than most others as they have magical powers that other
+    warriors lack. Paladins usually have a strong guiding force in their life to
+    help those in need and do what is right. If you are a Paladin be righteous,
+    concerned for others, and take charge.</p>
+  innate: false
+  maxAv: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

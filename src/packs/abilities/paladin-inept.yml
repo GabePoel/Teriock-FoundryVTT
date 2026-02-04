@@ -1,32 +1,56 @@
 _id: palInept00000000
+_key: '!items!palInept00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Paladin Inept
-    type: ability
+  - _id: palInept00000000
+    _key: '!items.effects!palInept00000000.palInept00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/paladin-inept.webp
-    _id: palInept00000000
+    name: Paladin Inept
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.gifted.enabled
+              mode: 5
+              priority: 10
+              qualifier: '@class.paladin'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.gifted.amount
+              mode: 2
+              priority: 10
+              qualifier: '@class.paladin'
+              target: ability
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,41 +58,16 @@ effects:
           <p>You are @L[Keyword:Inept]{inept} at @L[Category:Paladin class
           abilities]{abilities} you get from ranks in
           @L[Class:Paladin]{Paladin}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.gifted.enabled
-              target: ability
-              qualifier: '@class.paladin'
-              value: 'true'
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.gifted.amount
-              target: ability
-              qualifier: '@class.paladin'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!palInept00000000.palInept00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/paladin-inept.webp
 name: Paladin Inept
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!palInept00000000'

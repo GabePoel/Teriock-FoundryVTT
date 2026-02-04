@@ -1,156 +1,21 @@
 _id: bowshield0000000
-folder: GjqehiaK2urxvWVm
-name: Bowshield
-system:
-  equipmentType: Bowshield
-  tier: {}
-  competence:
-    raw: 0
-  attackPenalty:
-    raw: '-3'
-  bv:
-    raw: '3'
-  damage:
-    base:
-      raw: 1d8
-    twoHanded: {}
-  hit: {}
-  range:
-    long:
-      raw: '400'
-      unit: ft
-    melee: true
-    ranged: false
-    short:
-      raw: '100'
-      unit: ft
-  vitals: false
-  consumable: false
-  storage:
-    enabled: false
-    maxCount: {}
-    maxWeight: {}
-    weightMultiplier: '1'
-  weight:
-    raw: '14'
-  minStr:
-    raw: '-1'
-  equipmentClasses:
-    - bows
-    - shields
-  powerLevel: mundane
-type: equipment
-img: systems/teriock/src/icons/equipment/bowshield.webp
+_key: '!items!bowshield0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Blocking
-    type: property
-    img: systems/teriock/src/icons/properties/blocking.webp
-    _id: blking0000000000
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property can be used
-        for @L[Ability:Block Cone]{Block Cone}. It also does not have any
-        @L[Core:Block Interaction]{block penalty}.</p>
-      suppression: {}
-      revealed: true
-      form: intrinsic
+  - _id: M2AkhrgOW5mJ1f7j
+    _key: '!items.effects!bowshield0000000.M2AkhrgOW5mJ1f7j'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.blking0000000000
+      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bowshield0000000.blking0000000000'
-  - name: Loading
-    type: property
-    img: systems/teriock/src/icons/properties/loading.webp
-    _id: loading000000000
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property must be
-        reloaded after making an @L[Category:Attack abilities]{attack} with it.
-        Anyone can do this using @L[Ability:Reload]{Reload}.</p>
-      suppression: {}
-      revealed: true
-      form: flaw
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.loading000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bowshield0000000.loading000000000'
-  - name: Tower Shielding
-    type: property
-    img: systems/teriock/src/icons/properties/tower-shielding.webp
-    _id: towerShielding00
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>Only @L[Category:Small equipment]{small equipment} can be held in an
-        arm that's @L[Keyword:Using]{using} @L[Category:Tower Shielding
-        equipment]{tower shielding equipment}. But but no
-        @L[Category:Equipment]{equipment} can be used to @L[Core:Attack
-        Interaction]{attack} or @L[Core:Block Interaction]{block}.</p>
-      suppression: {}
-      revealed: true
-      form: flaw
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.towerShielding00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bowshield0000000.towerShielding00'
-  - name: Two-Handed
-    type: property
-    img: systems/teriock/src/icons/properties/two-handed.webp
-    _id: twoHanded0000000
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
-        @L[Category:Attack abilities]{attacked} with unless it is wielded in two
-        hands.</p>
-      suppression: {}
-      revealed: true
-      form: flaw
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.twoHanded0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bowshield0000000.twoHanded0000000'
-  - name: Weapon
-    type: property
-    img: systems/teriock/src/icons/properties/weapon.webp
-    _id: wep0000000000000
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      suppression: {}
-      revealed: true
-      form: intrinsic
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bowshield0000000.wep0000000000000'
-  - name: Ammunition
-    type: property
     img: systems/teriock/src/icons/properties/ammunition.webp
+    name: Ammunition
     system:
       competence:
         raw: 0
@@ -158,30 +23,70 @@ effects:
         <p>A weapon with this property is @L[Property:Ranged]{ranged} and
         requires some sort of [[lookup name style=lc]] (arrows, rocks, darts,
         etc.) to @L[Category:Attack abilities]{attack} with.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - mode: 5
+          - key: system.range.melee
+            mode: 5
             priority: 10
-            time: normal
-            key: system.range.melee
-            target: parent
             qualifier: '1'
+            target: parent
+            time: normal
             value: 'false'
+      revealed: true
+    type: property
+  - _id: blking0000000000
+    _key: '!items.effects!bowshield0000000.blking0000000000'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.ammunition000000
+      compendiumSource: Compendium.teriock.properties.Item.blking0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: M2AkhrgOW5mJ1f7j
-    _key: '!items.effects!bowshield0000000.M2AkhrgOW5mJ1f7j'
-  - name: Ranged
-    type: property
-    img: systems/teriock/src/icons/properties/ranged.webp
+    img: systems/teriock/src/icons/properties/blocking.webp
+    name: Blocking
     system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property can be used
+        for @L[Ability:Block Cone]{Block Cone}. It also does not have any
+        @L[Core:Block Interaction]{block penalty}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: loading000000000
+    _key: '!items.effects!bowshield0000000.loading000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.loading000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/loading.webp
+    name: Loading
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property must be
+        reloaded after making an @L[Category:Attack abilities]{attack} with it.
+        Anyone can do this using @L[Ability:Reload]{Reload}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: WheTWsIhitFwAk9Z
+    _key: '!items.effects!bowshield0000000.WheTWsIhitFwAk9Z'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/ranged.webp
+    name: Ranged
+    system:
+      _sup: M2AkhrgOW5mJ1f7j
       competence:
         raw: 0
       description: >-
@@ -195,30 +100,110 @@ effects:
         @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
         Interaction]{attack roll}. You can't attack a target beyond the weapon's
         long range.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - mode: 5
+          - key: system.range.ranged
+            mode: 5
             priority: 10
-            time: normal
-            key: system.range.ranged
-            target: parent
             qualifier: '1'
+            target: parent
+            time: normal
             value: 'true'
-      _sup: M2AkhrgOW5mJ1f7j
+      revealed: true
+    type: property
+  - _id: towerShielding00
+    _key: '!items.effects!bowshield0000000.towerShielding00'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      compendiumSource: Compendium.teriock.properties.Item.towerShielding00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/tower-shielding.webp
+    name: Tower Shielding
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>Only @L[Category:Small equipment]{small equipment} can be held in an
+        arm that's @L[Keyword:Using]{using} @L[Category:Tower Shielding
+        equipment]{tower shielding equipment}. But but no
+        @L[Category:Equipment]{equipment} can be used to @L[Core:Attack
+        Interaction]{attack} or @L[Core:Block Interaction]{block}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: twoHanded0000000
+    _key: '!items.effects!bowshield0000000.twoHanded0000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.twoHanded0000000
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _id: WheTWsIhitFwAk9Z
-    _key: '!items.effects!bowshield0000000.WheTWsIhitFwAk9Z'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!bowshield0000000'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/two-handed.webp
+    name: Two-Handed
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
+        @L[Category:Attack abilities]{attacked} with unless it is wielded in two
+        hands.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: wep0000000000000
+    _key: '!items.effects!bowshield0000000.wep0000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: ranged0000000000
+img: systems/teriock/src/icons/equipment/bowshield.webp
+name: Bowshield
+system:
+  attackPenalty:
+    raw: '-3'
+  bv:
+    raw: '3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d8
+  equipmentClasses:
+    - bows
+    - shields
+  equipmentType: Bowshield
+  minStr:
+    raw: '-1'
+  powerLevel: mundane
+  range:
+    long:
+      raw: '400'
+      unit: ft
+    melee: true
+    ranged: false
+    short:
+      raw: '100'
+      unit: ft
+  vitals: false
+  weight:
+    raw: '14'
+type: equipment

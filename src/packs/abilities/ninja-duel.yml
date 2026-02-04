@@ -1,90 +1,48 @@
 _id: ninjaDuel0000000
+_key: '!items!ninjaDuel0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Ninja Duel
-    type: ability
-    img: systems/teriock/src/icons/abilities/ninja-duel.webp
-    _id: ninjaDuel0000000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
-      delivery:
-        base: sight
-      effectTypes:
-        - duelModifying
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You and the target begin @L[Condition:Dueling]{dueling} each other.
-          You gain @L[Ability:Active Bow Out]{Active Bow Out} while in this
-          @L[Condition:Dueling]{duel}.</p>
-      powerSources:
-        - spiritual
-      range:
-        raw: '30'
-        unit: ft
-      requirements: >-
-        <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
-        an opponent.</p>
-      skill: true
-      standard: true
-      targets:
-        - creature
-      impacts: {}
-      class: assassin
+  - _id: HZBRXyvlgFiNBXks
+    _key: '!items.effects!ninjaDuel0000000.HZBRXyvlgFiNBXks'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.activeBowOut0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ninjaDuel0000000.ninjaDuel0000000'
-  - name: Active Bow Out
-    type: ability
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
-    _id: HZBRXyvlgFiNBXks
+    name: Active Bow Out
     system:
+      _sup: ninjaDuel0000000
+      class: duelist
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - duelModifying
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          endStatuses:
+            - dueling
       interaction: manifest
       maneuver: active
       overview:
@@ -96,33 +54,72 @@ effects:
           <p>If you want, everyone in the @L[Condition:Dueling]{duel} returns to
           the number of @L[Core:Hit Points and Mana Points]{HP} they had prior
           to @L[Condition:Dueling]{dueling}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - spiritual
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          endStatuses:
-            - dueling
-      _sup: ninjaDuel0000000
-      class: duelist
+    type: ability
+  - _id: ninjaDuel0000000
+    _key: '!items.effects!ninjaDuel0000000.ninjaDuel0000000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.activeBowOut0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ninjaDuel0000000.HZBRXyvlgFiNBXks'
+    img: systems/teriock/src/icons/abilities/ninja-duel.webp
+    name: Ninja Duel
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - duelModifying
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You and the target begin @L[Condition:Dueling]{dueling} each other.
+          You gain @L[Ability:Active Bow Out]{Active Bow Out} while in this
+          @L[Condition:Dueling]{duel}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '30'
+        unit: ft
+      requirements: >-
+        <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
+        an opponent.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/ninja-duel.webp
 name: Ninja Duel
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!ninjaDuel0000000'

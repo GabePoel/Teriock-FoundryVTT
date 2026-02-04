@@ -1,51 +1,52 @@
 _id: shadowcreepElf00
-folder: dTP7uBtXYgVDtwBE
-name: Shadowcreep Elf
-type: species
-img: systems/teriock/src/icons/creatures/shadowcreep-elf.webp
-system:
-  competence:
-    raw: 1
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  adult: 100
-  appearance: <p>Lithe or willowy build with pointed ears and four fingers and toes.</p>
-  br: 8
-  size:
-    enabled: true
-    value: 3
-  traits:
-    - humanoid
+_key: '!items!shadowcreepElf00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Detection Immunity
-    type: ability
+  - _id: e4VbJUQ95HWtdjlV
+    _key: '!items.effects!shadowcreepElf00.e4VbJUQ95HWtdjlV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.detionImy0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/detection-immunity.webp
+    name: Detection Immunity
     system:
-      powerSources:
-        - unknown
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: truthDetecting
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune to} @L[Category:Truth detecting
@@ -53,55 +54,58 @@ effects:
           like to them.</p>
       piercing:
         raw: 0
-      form: special
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.effects
-              target: Actor
-              qualifier: '1'
-              value: truthDetecting
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
       range:
         unit: self
-    _id: e4VbJUQ95HWtdjlV
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.detionImy0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.e4VbJUQ95HWtdjlV'
-  - name: Hide
-    type: ability
-    img: systems/teriock/src/icons/abilities/hide.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: 46dv6NH5hZFxvr6g
+    _key: '!items.effects!shadowcreepElf00.46dv6NH5hZFxvr6g'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: instant
-        description: Instant
         dawn: false
-        stationary: false
+        description: Instant
         raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
@@ -109,38 +113,31 @@ effects:
           @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
           @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
           your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
         fluent: >-
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
           (if it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: thief
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-          rolls:
-            hide: 1d20 + (2 * @snk)
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
       upgrades:
         competence:
           attribute: snk
@@ -148,44 +145,38 @@ effects:
         score:
           attribute: snk
           value: 2
+    type: ability
+  - _id: L5ZdrkKgZ1Q4ZrCT
+    _key: '!items.effects!shadowcreepElf00.L5ZdrkKgZ1Q4ZrCT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.infLifespan00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
+    name: Infinite Lifespan
+    system:
       competence:
         raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      range:
-        unit: self
-    _id: 46dv6NH5hZFxvr6g
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.46dv6NH5hZFxvr6g'
-  - name: Infinite Lifespan
-    type: ability
-    img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
-    system:
-      powerSources:
-        - unknown
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You have no maximum lifespan. Your aging slows down with time and
@@ -193,45 +184,57 @@ effects:
           your mid 30s.</p>
       piercing:
         raw: 0
-      form: special
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: L5ZdrkKgZ1Q4ZrCT
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.infLifespan00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.L5ZdrkKgZ1Q4ZrCT'
-  - name: Mental Effect Immunity
-    type: ability
-    img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
-    system:
       powerSources:
         - unknown
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: sFbN9YaeUKVuJlMb
+    _key: '!items.effects!shadowcreepElf00.sFbN9YaeUKVuJlMb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mentalEffectImy0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
+    name: Mental Effect Immunity
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mental
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
@@ -239,238 +242,272 @@ effects:
           maintained even if @L[Condition:Transformed]{transformed}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.effects
-              target: Actor
-              qualifier: '1'
-              value: mental
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
       range:
         unit: self
-    _id: sFbN9YaeUKVuJlMb
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mentalEffectImy0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.sFbN9YaeUKVuJlMb'
-  - name: Normal Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: RxVRTu1XIPyTDmmI
+    _key: '!items.effects!shadowcreepElf00.RxVRTu1XIPyTDmmI'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+    name: Normal Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: RxVRTu1XIPyTDmmI
+    type: ability
+  - _id: jKGOmPL16luDDHxP
+    _key: '!items.effects!shadowcreepElf00.jKGOmPL16luDDHxP'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.RxVRTu1XIPyTDmmI'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: jKGOmPL16luDDHxP
+    type: ability
+  - _id: 7398V0bjfrmnyXxu
+    _key: '!items.effects!shadowcreepElf00.7398V0bjfrmnyXxu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.jKGOmPL16luDDHxP'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 7398V0bjfrmnyXxu
+    type: ability
+  - _id: SNw9K3Kq8qktJKcf
+    _key: '!items.effects!shadowcreepElf00.SNw9K3Kq8qktJKcf'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.7398V0bjfrmnyXxu'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: SNw9K3Kq8qktJKcf
+    type: ability
+  - _id: ARqg40HBAkCDsqcX
+    _key: '!items.effects!shadowcreepElf00.ARqg40HBAkCDsqcX'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+      compendiumSource: Compendium.teriock.abilities.Item.shadowcreepAcrob
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.SNw9K3Kq8qktJKcf'
-  - name: Shadowcreep Acrobatics
-    type: ability
     img: systems/teriock/src/icons/abilities/shadowcreep-acrobatics.webp
+    name: Shadowcreep Acrobatics
     system:
-      powerSources:
-        - unknown
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              mode: 2
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.crawl
+              mode: 2
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.climb
+              mode: 2
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.hidden
+              mode: 2
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 2
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.leapVertical
+              mode: 2
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your difficult terrain, crawl, climb, hidden, and leap (both
@@ -480,92 +517,47 @@ effects:
           @L[Ability:Agile]{Agile} and @L[Ability:Acrobatics]{Acrobatics}.</div>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.speedAdjustments.difficultTerrain
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.speedAdjustments.crawl
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.speedAdjustments.hidden
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
+        - martial
       range:
         unit: self
-    _id: ARqg40HBAkCDsqcX
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.shadowcreepAcrob
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.ARqg40HBAkCDsqcX'
-  - name: Stealth
-    type: ability
-    img: systems/teriock/src/icons/abilities/stealth.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: RQJrz8IjA8wXBP1P
+    _key: '!items.effects!shadowcreepElf00.RQJrz8IjA8wXBP1P'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stealth000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/stealth.webp
+    name: Stealth
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You crawl at @L[Core:Movement Speed]{half speed} and can
@@ -580,10 +572,15 @@ effects:
           @L[Condition:Hidden]{hidden}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: thief
-      form: normal
+      targets:
+        - self
       upgrades:
         competence:
           attribute: snk
@@ -591,137 +588,140 @@ effects:
         score:
           attribute: snk
           value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: LJ3KfqXIgdWjip17
+    _key: '!items.effects!shadowcreepElf00.LJ3KfqXIgdWjip17'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.talTracker000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: icons/creatures/abilities/paw-print-tan.webp
+    name: Talented Tracker
+    system:
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: RQJrz8IjA8wXBP1P
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stealth000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.RQJrz8IjA8wXBP1P'
-  - name: Talented Tracker
-    type: ability
-    img: icons/creatures/abilities/paw-print-tan.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.tracker.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are a @L[Keyword:Talented]{talented}
           @L[Tradecraft:Tracker]{tracker}.</p>
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: ybC1dmd4IzcE8Mi0
+    _key: '!items.effects!shadowcreepElf00.ybC1dmd4IzcE8Mi0'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/thin-soul.webp
+    name: Thin Soul
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.tracker.score
-              target: Actor
+            - key: system.deathBag.pull
+              mode: 4
+              priority: 5
               qualifier: '1'
-              value: '1'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: LJ3KfqXIgdWjip17
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talTracker000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.LJ3KfqXIgdWjip17'
-  - name: Thin Soul
-    type: ability
-    img: systems/teriock/src/icons/abilities/thin-soul.webp
-    system:
-      powerSources:
-        - unknown
+              target: Actor
+              time: normal
+              value: '15'
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You pull an additional 5 stones from the @L[Core:Death Bag]{death
           bag}.</p>
       piercing:
         raw: 0
-      form: flaw
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 5
-              time: normal
-              key: system.deathBag.pull
-              target: Actor
-              qualifier: '1'
-              value: '15'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
       range:
         unit: self
-    _id: ybC1dmd4IzcE8Mi0
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shadowcreepElf00.ybC1dmd4IzcE8Mi0'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!shadowcreepElf00'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: elves00000000000
+img: systems/teriock/src/icons/creatures/shadowcreep-elf.webp
+name: Shadowcreep Elf
+system:
+  adult: 100
+  appearance: <p>Lithe or willowy build with pointed ears and four fingers and toes.</p>
+  br: 8
+  competence:
+    raw: 1
+  size:
+    enabled: true
+    value: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - humanoid
+type: species

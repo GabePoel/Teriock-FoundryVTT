@@ -1,63 +1,78 @@
-name: Reflector Salve
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/reflector-salve.webp
+_id: reflectorSalve00
+_key: '!items!reflectorSalve00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: rA3XGrMyKciIpJwF
+    _key: '!items.effects!reflectorSalve00.rA3XGrMyKciIpJwF'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.applyReflectorSa
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!t2gVDJyoMObCvSTA.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/apply-reflector-salve.webp
+    name: Apply Reflector Salve
     system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: >-
+          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
+          that provides it.</p>
+      delivery:
+        base: item
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Cover a surface no greater than 25 square feet with the source of
+          this ability to make it @L[Property:Spell Turning]{spell turning}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it.</p>
+      revealed: true
+      targets:
+        - area
+        - item
+    type: ability
+  - _id: Z8Q21X7QboeySzUT
+    _key: '!items.effects!reflectorSalve00.Z8Q21X7QboeySzUT'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!t2gVDJyoMObCvSTA.VQDFXr0oJQZ7Waxe'
-  - name: Fragile
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
         becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
@@ -67,41 +82,82 @@ effects:
         through some other means, it is instead
         @L[Property:Destroyed]{destroyed}.</p>
       form: flaw
-    _id: Z8Q21X7QboeySzUT
-    img: systems/teriock/src/icons/properties/fragile.webp
+      revealed: true
+    type: property
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!reflectorSalve00.x6sjcsIVaOkVZOFD'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!t2gVDJyoMObCvSTA.Z8Q21X7QboeySzUT'
-  - name: Smash Reflector Salve
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
     system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!reflectorSalve00.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: yo5CaDtLEUjGgaVg
+    _key: '!items.effects!reflectorSalve00.yo5CaDtLEUjGgaVg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.smReflectorSalve
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/smash-reflector-salve.webp
+    name: Smash Reflector Salve
+    system:
+      competence:
+        raw: 0
       costs:
-        material: true
         break: shatter
+        material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
       delivery:
         base: item
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: r1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
       overview:
@@ -110,7 +166,8 @@ effects:
           @L[Category:Spells]{spell} within range @L[Core:Fizzles]{fizzle} as
           well as any others cast simultaneously within range. Their casters
           take the spells' effects instead.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -121,72 +178,38 @@ effects:
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability. Target is a @L[Category:Conjured spells]{conjured
         spell}.</p>
+      revealed: true
       targets:
         - spell
-    _id: yo5CaDtLEUjGgaVg
-    img: systems/teriock/src/icons/abilities/smash-reflector-salve.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.smReflectorSalve
-    _key: '!items.effects!t2gVDJyoMObCvSTA.yo5CaDtLEUjGgaVg'
-  - name: Apply Reflector Salve
     type: ability
-    system:
-      costs:
-        material: true
-        materialCost: >-
-          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
-          that provides it.</p>
-      delivery:
-        base: item
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      executionTime: 10 Minutes
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Cover a surface no greater than 25 square feet with the source of
-          this ability to make it @L[Property:Spell Turning]{spell turning}.</p>
-      piercing: normal
-      powerSources:
-        - alchemical
-      range:
-        unit: melee
-      requirements: >-
-        <p>Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it.</p>
-      targets:
-        - area
-        - item
-    _id: rA3XGrMyKciIpJwF
-    img: systems/teriock/src/icons/abilities/apply-reflector-salve.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.applyReflectorSa
-    _key: '!items.effects!t2gVDJyoMObCvSTA.rA3XGrMyKciIpJwF'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: t2gVDJyoMObCvSTA
-_key: '!items!t2gVDJyoMObCvSTA'
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/reflector-salve.webp
+name: Reflector Salve
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

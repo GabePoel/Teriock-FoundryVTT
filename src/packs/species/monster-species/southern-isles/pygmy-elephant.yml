@@ -1,208 +1,44 @@
 _id: pygmyElephant000
-folder: JWyDfjLkE2E9S902
-name: Pygmy Elephant
-type: species
-img: systems/teriock/src/icons/creatures/pygmy-elephant.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Pygmy elephants are common mounts in the Oni Isles. They are half the
-    size of traditional @L[Creature:Elephant]{elephants}, but are just as
-    dangerous!</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '2'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  appearance: <p>Miniature @L[Creature:Elephant]{elephants}.</p>
-  br: 9
-  size:
-    enabled: true
-    value: 4
-  traits:
-    - animal
+_key: '!items!pygmyElephant000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Disarm
-    type: ability
-    img: systems/teriock/src/icons/abilities/disarm.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - arm
-      duration:
-        unit: instant
-        description: Instant
-        raw: '0'
-        dawn: false
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>Anything held in the targeted arm is knocked out of their hand.
-          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: thief
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+  - _id: 7PF5BmN89lr6v25D
+    _key: '!items.effects!pygmyElephant000.7PF5BmN89lr6v25D'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: vT1F8qjc3x0y89nw
-    _key: '!items.effects!pygmyElephant000.vT1F8qjc3x0y89nw'
-  - name: Catch Item
-    type: ability
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: hand
-      targets:
-        - item
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      overview:
-        base: >-
-          <p>You catch the item. If multiple creatures are all trying to catch
-          the same item, they all roll [[/roll 1d20]]. The creature with the
-          highest roll catches the item.</p>
-        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-      piercing:
-        raw: 0
-      trigger: <p>An item within range is falling or flying by.</p>
-      basic: true
-      form: intrinsic
-      _sup: vT1F8qjc3x0y89nw
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/catch-item.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: AKeFRROLDUTTsGGE
-    _key: '!items.effects!pygmyElephant000.AKeFRROLDUTTsGGE'
-  - name: Improved Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
+      _sup: wHoU7ozioP7O7c7y
       class: knight
-      form: normal
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: wHoU7ozioP7O7c7y
-    _key: '!items.effects!pygmyElephant000.wHoU7ozioP7O7c7y'
-  - name: Beastly Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -211,429 +47,587 @@ effects:
           to be @L[Property:AV0]{AV0}.</div>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
-      _sup: wHoU7ozioP7O7c7y
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    type: ability
+  - _id: AKeFRROLDUTTsGGE
+    _key: '!items.effects!pygmyElephant000.AKeFRROLDUTTsGGE'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 7PF5BmN89lr6v25D
-    _key: '!items.effects!pygmyElephant000.7PF5BmN89lr6v25D'
-  - name: Improved Armor Piercing
-    type: ability
+    img: systems/teriock/src/icons/abilities/catch-item.webp
+    name: Catch Item
     system:
+      _sup: vT1F8qjc3x0y89nw
+      basic: true
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You catch the item. If multiple creatures are all trying to catch
+          the same item, they all roll [[/roll 1d20]]. The creature with the
+          highest roll catches the item.</p>
+        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
+        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      revealed: true
+      targets:
+        - item
+      trigger: <p>An item within range is falling or flying by.</p>
+    type: ability
+  - _id: vT1F8qjc3x0y89nw
+    _key: '!items.effects!pygmyElephant000.vT1F8qjc3x0y89nw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/disarm.webp
+    name: Disarm
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      form: normal
+      grantOnly: false
+      interaction: attack
+      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+      maneuver: active
+      overview:
+        base: >-
+          <p>Anything held in the targeted arm is knocked out of their hand.
+          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - arm
+    type: ability
+  - _id: 9JhudgoEoZRZTItr
+    _key: '!items.effects!pygmyElephant000.9JhudgoEoZRZTItr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: wHoU7ozioP7O7c7y
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      _sup: wHoU7ozioP7O7c7y
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 9JhudgoEoZRZTItr
-    _key: '!items.effects!pygmyElephant000.9JhudgoEoZRZTItr'
-  - name: Low Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/low-strength.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: wHoU7ozioP7O7c7y
+    _key: '!items.effects!pygmyElephant000.wHoU7ozioP7O7c7y'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
+  - _id: QNgs45g17A5aDnI2
+    _key: '!items.effects!pygmyElephant000.QNgs45g17A5aDnI2'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/low-strength.webp
+    name: Low Strength
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: QNgs45g17A5aDnI2
+    type: ability
+  - _id: T1e2PrQ3Jy0DBJnc
+    _key: '!items.effects!pygmyElephant000.T1e2PrQ3Jy0DBJnc'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pygmyElephant000.QNgs45g17A5aDnI2'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: T1e2PrQ3Jy0DBJnc
+    type: ability
+  - _id: 8zs6OmPgD7RfpE4u
+    _key: '!items.effects!pygmyElephant000.8zs6OmPgD7RfpE4u'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pygmyElephant000.T1e2PrQ3Jy0DBJnc'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 8zs6OmPgD7RfpE4u
+    type: ability
+  - _id: b0nJnBkBxy0AIvua
+    _key: '!items.effects!pygmyElephant000.b0nJnBkBxy0AIvua'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pygmyElephant000.8zs6OmPgD7RfpE4u'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: b0nJnBkBxy0AIvua
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pygmyElephant000.b0nJnBkBxy0AIvua'
-  - name: Snare
     type: ability
-    img: systems/teriock/src/icons/abilities/snare.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - leg
-      duration:
-        unit: unlimited
-        description: No Limit
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: ranger
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - snared
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
-    _id: 2KqoQGnriBkNmGlI
+  - _id: 2KqoQGnriBkNmGlI
+    _key: '!items.effects!pygmyElephant000.2KqoQGnriBkNmGlI'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.snare00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pygmyElephant000.2KqoQGnriBkNmGlI'
-  - name: Trample
-    type: ability
-    img: systems/teriock/src/icons/abilities/trample.webp
+    img: systems/teriock/src/icons/abilities/snare.webp
+    name: Snare
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      class: ranger
+      competence:
+        raw: 0
       delivery:
         base: weapon
-      targets:
-        - creature
+        package: strike
       duration:
-        unit: instant
-        description: Instant
         dawn: false
-        stationary: false
+        description: No Limit
         raw: '0'
+        stationary: false
+        unit: unlimited
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - snared
+      interaction: attack
+      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
       range:
-        unit: ft
         raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - leg
+    type: ability
+  - _id: q10UfF8d6JAjGhba
+    _key: '!items.effects!pygmyElephant000.q10UfF8d6JAjGhba'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.trample000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/trample.webp
+    name: Trample
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
+          rolls:
+            damage: 1d6
+      interaction: attack
+      maneuver: reactive
       overview:
         base: >-
           <p>If you use [[lookup name]] on a @L[Category:Creatures]{creature} at
           least one @L[Core:Size]{size category} smaller than you, add [[/damage
           1d6]] @L[Core:Damage]{damage} to its @L[Core:Standard Damage]{standard
           damage}.</p>
-      results:
-        hit: <p>Deal @L[Core:Standard Damage]{standard damage}.</p>
-        critHit: <p>Deal @L[Core:Critical Damage]{critical damage}.</p>
       piercing:
         raw: 2
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>Deal @L[Core:Critical Damage]{critical damage}.</p>
+        hit: <p>Deal @L[Core:Standard Damage]{standard damage}.</p>
+      revealed: true
+      targets:
+        - creature
       trigger: >-
         <p>Moving at least 10 feet in a straight line towards the target and
         becoming adjacent to them.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d6
-          common:
-            - standardDamage
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    _id: q10UfF8d6JAjGhba
+    type: ability
+  - _id: 93BqZT2T0OjK1doN
+    _key: '!items.effects!pygmyElephant000.93BqZT2T0OjK1doN'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.trample000000000
+      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pygmyElephant000.q10UfF8d6JAjGhba'
-  - name: Weapons Mastery
-    type: ability
     img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+    name: Weapons Mastery
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: assassin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
+          Compendium_teriock_execution_Macro_wepsMasyExecutio: execution
+      interaction: manifest
+      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
@@ -653,35 +647,42 @@ effects:
           way.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: assassin
-      form: normal
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: 93BqZT2T0OjK1doN
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!pygmyElephant000.93BqZT2T0OjK1doN'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!pygmyElephant000'
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: southernIsles000
+img: systems/teriock/src/icons/creatures/pygmy-elephant.webp
+name: Pygmy Elephant
+system:
+  appearance: <p>Miniature @L[Creature:Elephant]{elephants}.</p>
+  br: 9
+  competence:
+    raw: 1
+  description: >-
+    <p>Pygmy elephants are common mounts in the Oni Isles. They are half the
+    size of traditional @L[Creature:Elephant]{elephants}, but are just as
+    dangerous!</p>
+  size:
+    enabled: true
+    value: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '2'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - animal
+type: species

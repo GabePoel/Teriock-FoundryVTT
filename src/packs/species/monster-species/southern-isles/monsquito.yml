@@ -1,9 +1,372 @@
 _id: monsquito0000000
-folder: JWyDfjLkE2E9S902
-name: Monsquito
-type: species
+_key: '!items!monsquito0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: YoC1UII4kS3T96mL
+    _key: '!items.effects!monsquito0000000.YoC1UII4kS3T96mL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -2
+    type: ability
+  - _id: 9Zo1ds9Oa4aRSpVr
+    _key: '!items.effects!monsquito0000000.9Zo1ds9Oa4aRSpVr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/flying.webp
+    name: Flying
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: CQXeBkA5I0Ewjkmc
+    _key: '!items.effects!monsquito0000000.CQXeBkA5I0Ewjkmc'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/low-strength.webp
+    name: Low Strength
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: -1
+    type: ability
+  - _id: HKRiyYod1Bf1EBaA
+    _key: '!items.effects!monsquito0000000.HKRiyYod1Bf1EBaA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.manaDrainSuck000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mana-drain-suck.webp
+    name: Mana Drain Suck
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: bite
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - revitalization
+        - draining
+      executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            drain: 1d8[mana]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: Your Bite's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to the
+          target. If this @L[Condition:Dead]{kills} the target, you
+          @L[Core:Revitalizing]{revitalize} twice. This
+          @L[Core:Revitalizing]{revitalization} is the only part of this that is
+          a @L[Category:Revitalization effects]{revitalization effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
+          target. If this @L[Condition:Dead]{kills} the target, you
+          @L[Core:Revitalizing]{revitalize}.  This
+          @L[Core:Revitalizing]{revitalization} is the only part of this that is
+          a @L[Category:Revitalization effects]{revitalization effect}.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
+  - _id: XeJRdeQv7CBRuwpK
+    _key: '!items.effects!monsquito0000000.XeJRdeQv7CBRuwpK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    type: ability
+  - _id: HOrEudsAaUDUaR28
+    _key: '!items.effects!monsquito0000000.HOrEudsAaUDUaR28'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    type: ability
+  - _id: EXsYoYWxMOUMkDlm
+    _key: '!items.effects!monsquito0000000.EXsYoYWxMOUMkDlm'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/sneaky.webp
+    name: Sneaky
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 1
+    type: ability
+folder: southernIsles000
 img: systems/teriock/src/icons/creatures/monsquito.webp
+name: Monsquito
 system:
+  appearance: <p>Large black mosquitos the size of pelicans.</p>
+  br: 9
   competence:
     raw: 1
   description: >-
@@ -13,6 +376,9 @@ system:
     prey after wounding them. And, for reasons still unknown, this appears to
     drain their victims of their @L[Core:Hit Points and Mana Points]{MP} as
     well.</p>
+  size:
+    enabled: true
+    value: 1
   statDice:
     hp:
       disabled: false
@@ -24,372 +390,6 @@ system:
       faces: 8
       number:
         raw: '1'
-  appearance: <p>Large black mosquitos the size of pelicans.</p>
-  br: 9
-  size:
-    enabled: true
-    value: 1
   traits:
     - animal
-effects:
-  - name: Dense Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: flaw
-      upgrades:
-        score:
-          attribute: int
-          value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: YoC1UII4kS3T96mL
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!monsquito0000000.YoC1UII4kS3T96mL'
-  - name: Flying
-    type: ability
-    img: systems/teriock/src/icons/abilities/flying.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 9Zo1ds9Oa4aRSpVr
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!monsquito0000000.9Zo1ds9Oa4aRSpVr'
-  - name: Low Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/low-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: flaw
-      upgrades:
-        score:
-          attribute: str
-          value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: CQXeBkA5I0Ewjkmc
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!monsquito0000000.CQXeBkA5I0Ewjkmc'
-  - name: Mana Drain Suck
-    type: ability
-    system:
-      delivery:
-        base: bite
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        dawn: false
-        raw: '0'
-      effectTypes:
-        - revitalization
-        - draining
-      executionTime: a2
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: ft
-        raw: Your Bite's Range
-      results:
-        hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize}.  This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
-        critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize} twice. This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
-      targets:
-        - creature
-      impacts:
-        base:
-          rolls:
-            drain: 1d8[mana]
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: HKRiyYod1Bf1EBaA
-    img: systems/teriock/src/icons/abilities/mana-drain-suck.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.manaDrainSuck000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!monsquito0000000.HKRiyYod1Bf1EBaA'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: mov
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: XeJRdeQv7CBRuwpK
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!monsquito0000000.XeJRdeQv7CBRuwpK'
-  - name: Normal Perception
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: per
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: HOrEudsAaUDUaR28
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!monsquito0000000.HOrEudsAaUDUaR28'
-  - name: Sneaky
-    type: ability
-    img: systems/teriock/src/icons/abilities/sneaky.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: snk
-          value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: EXsYoYWxMOUMkDlm
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!monsquito0000000.EXsYoYWxMOUMkDlm'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!monsquito0000000'
+type: species

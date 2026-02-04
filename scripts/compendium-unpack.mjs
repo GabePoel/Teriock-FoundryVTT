@@ -86,7 +86,6 @@ function transformFolderName(doc) {
  */
 function cleanEntry(doc) {
   if (buildTree) packTree[doc._id] = toKebabCase(doc.name);
-
   cleanDocument(doc);
   if (doc.author) doc.author = BUILDER_NAME;
   if (doc._stats) {
@@ -103,12 +102,57 @@ function cleanEntry(doc) {
     if (typeof doc.system.combat?.hasReaction === "boolean")
       doc.system.combat.hasReaction = true;
   }
+  sortKeys(doc);
 }
 
 function transformEntry(doc) {
   if (buildTree && doc.system?._sup) return false;
   cleanEntry(doc);
-  ["pages", "results", "effects", "items"].forEach((key) => {
-    doc[key]?.forEach((d) => transformEntry(d));
+  [
+    "cards",
+    "categories",
+    "effects",
+    "items",
+    "notes",
+    "pages",
+    "results",
+  ].forEach((key) => {
+    sortEmbedded(doc[key]);
+    doc[key]?.forEach((d) => {
+      transformEntry(d);
+    });
   });
+}
+
+/**
+ * Sort keys in an object in place.
+ * @param {object} obj
+ */
+function sortKeys(obj) {
+  if (typeof obj !== "object") return;
+  const keys = Object.keys(obj).sort();
+  const cache = { ...obj };
+  for (const key in obj) {
+    delete obj[key];
+  }
+  for (const key of keys) {
+    obj[key] = cache[key];
+    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+      sortKeys(obj[key]);
+    }
+    if (typeof obj[key] === "object" && Array.isArray(obj[key])) {
+      for (const i of obj[key]) {
+        sortKeys(i);
+      }
+    }
+  }
+}
+
+/**
+ * Sort an embedded collection.
+ * @param {object[] || undefined} collection
+ */
+function sortEmbedded(collection) {
+  if (!collection) return;
+  collection.sort((a, b) => a.name.localeCompare(b.name));
 }

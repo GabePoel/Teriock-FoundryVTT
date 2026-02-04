@@ -1,53 +1,52 @@
 _id: firefly000000000
-folder: JWyDfjLkE2E9S902
-name: Firefly
-type: species
-img: systems/teriock/src/icons/creatures/firefly.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>These creatures are found in the jungles and swamps of the Oni Islands.
-    They seem to be attracted to dry wood in which they eat, feed, and breed.
-    They tend to attack and burn any dry wood they can see (including weapons).
-    However, they tend to stay clear of mushrooms like the @L[Creature:Deathcap
-    Toadstool]{deathcap toadstools} that prey on them.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 2
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 4
-      number:
-        raw: '1'
-  appearance: <p>Bright red and glowing bugs.</p>
-  br: 7
-  size:
-    enabled: true
-    value: 0.25
-  traits:
-    - animal
+_key: '!items!firefly000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Attack Resistance
-    type: ability
+  - _id: A9S6l0U6q8UheUxC
+    _key: '!items.effects!firefly000000000.A9S6l0U6q8UheUxC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.atkRsc0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/attack-resistance.webp
+    name: Attack Resistance
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       effectTypes:
         - resistance
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Non-critical Attacks
       interaction: manifest
       maneuver: passive
       overview:
@@ -58,170 +57,140 @@ effects:
         raw: 0
       powerSources:
         - magical
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Non-critical Attacks
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: A9S6l0U6q8UheUxC
-    img: systems/teriock/src/icons/abilities/attack-resistance.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.atkRsc0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.A9S6l0U6q8UheUxC'
-  - name: Dense Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: MuMlpVNnsGYysRFu
+    _key: '!items.effects!firefly000000000.MuMlpVNnsGYysRFu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: MuMlpVNnsGYysRFu
+    type: ability
+  - _id: XFEsmVtKvP8WrvIu
+    _key: '!items.effects!firefly000000000.XFEsmVtKvP8WrvIu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      compendiumSource: Compendium.teriock.abilities.Item.elusive000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.MuMlpVNnsGYysRFu'
-  - name: Elusive
-    type: ability
     img: systems/teriock/src/icons/abilities/elusive.webp
+    name: Elusive
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: special
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 4
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: IUux1t2DJZXqcGXD
+    _key: '!items.effects!firefly000000000.IUux1t2DJZXqcGXD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/fire-ball.webp
+    name: Fire Ball
+    system:
+      class: flameMage
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: XFEsmVtKvP8WrvIu
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.elusive000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.XFEsmVtKvP8WrvIu'
-  - name: Fire Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/fire-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
       delivery:
         base: missile
         package: ball
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
       elements:
         - flame
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing:
-        raw: 2
-      spell: true
-      standard: true
-      class: flameMage
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-      form: normal
-      effectTypes:
-        - damaging
       impacts:
         base:
           rolls:
@@ -229,39 +198,59 @@ effects:
         heightened:
           rolls:
             damage: 1d4[magic fire]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: HuHbmnV1H3Q5VpKk
+    _key: '!items.effects!firefly000000000.HuHbmnV1H3Q5VpKk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.flameMagImy00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/flame-magic-immunity.webp
+    name: Flame Magic Immunity
+    system:
       competence:
         raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    _id: IUux1t2DJZXqcGXD
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.IUux1t2DJZXqcGXD'
-  - name: Flame Magic Immunity
-    type: ability
-    system:
       delivery:
         base: self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - down
-        stationary: false
+        dawn: false
         description: While Up
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -276,232 +265,243 @@ effects:
         raw: 0
       powerSources:
         - magical
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: HuHbmnV1H3Q5VpKk
-    img: systems/teriock/src/icons/abilities/flame-magic-immunity.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flameMagImy00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.HuHbmnV1H3Q5VpKk'
-  - name: Flying
-    type: ability
-    img: systems/teriock/src/icons/abilities/flying.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: 2cliojKHSqnzrLL0
+    _key: '!items.effects!firefly000000000.2cliojKHSqnzrLL0'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/flying.webp
+    name: Flying
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
         proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: 2cliojKHSqnzrLL0
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.2cliojKHSqnzrLL0'
-  - name: No Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/no-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: vrqUYbHYKzYlSSfj
+    _key: '!items.effects!firefly000000000.vrqUYbHYKzYlSSfj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.noStrength000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/no-strength.webp
+    name: No Strength
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: -3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: vrqUYbHYKzYlSSfj
+    type: ability
+  - _id: BwjzxjksGEN5uVtO
+    _key: '!items.effects!firefly000000000.BwjzxjksGEN5uVtO'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.noStrength000000
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.vrqUYbHYKzYlSSfj'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: BwjzxjksGEN5uVtO
+    type: ability
+  - _id: chCK3o3EqWVOO2Iv
+    _key: '!items.effects!firefly000000000.chCK3o3EqWVOO2Iv'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.BwjzxjksGEN5uVtO'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: chCK3o3EqWVOO2Iv
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!firefly000000000.chCK3o3EqWVOO2Iv'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!firefly000000000'
+    type: ability
+folder: southernIsles000
+img: systems/teriock/src/icons/creatures/firefly.webp
+name: Firefly
+system:
+  appearance: <p>Bright red and glowing bugs.</p>
+  br: 7
+  competence:
+    raw: 1
+  description: >-
+    <p>These creatures are found in the jungles and swamps of the Oni Islands.
+    They seem to be attracted to dry wood in which they eat, feed, and breed.
+    They tend to attack and burn any dry wood they can see (including weapons).
+    However, they tend to stay clear of mushrooms like the @L[Creature:Deathcap
+    Toadstool]{deathcap toadstools} that prey on them.</p>
+  size:
+    enabled: true
+    value: 0.25
+  statDice:
+    hp:
+      disabled: false
+      faces: 2
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 4
+      number:
+        raw: '1'
+  traits:
+    - animal
+type: species

@@ -1,116 +1,135 @@
 _id: scorpionFamiliar
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Scorpion Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.scorpion00000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!scorpionFamiliar'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: scorpionTamer000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Scorpion Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Scorpion]{scorpion}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: jWKiBcN0s7OV8omr
+    _key: '!items.effects!scorpionFamiliar.jWKiBcN0s7OV8omr'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!scorpionFamiliar.scorpionTamer000'
-  - name: Night Vision
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/night-vision.webp
+    name: Night Vision
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is bright light
           and up to 120 feet as though it is dim light.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: scorpionTamer000
+    _key: '!items.effects!scorpionFamiliar.scorpionTamer000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Scorpion Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Scorpion]{scorpion}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: rw0UPlGQu9w3saCd
+    _key: '!items.effects!scorpionFamiliar.rw0UPlGQu9w3saCd'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.dark
-              target: Actor
-              qualifier: '1'
-              value: '120'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: jWKiBcN0s7OV8omr
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!scorpionFamiliar.jWKiBcN0s7OV8omr'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -121,49 +140,30 @@ effects:
           @L[Core:Damage]{damage} instead.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
       skill: true
       standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      effectTypes:
-        - killing
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-      competence:
-        raw: 0
-      revealed: true
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
-    _id: rw0UPlGQu9w3saCd
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!scorpionFamiliar.rw0UPlGQu9w3saCd'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!scorpionFamiliar'
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Scorpion Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.scorpion00000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

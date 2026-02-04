@@ -1,49 +1,44 @@
 _id: sandSpider000000
-folder: s05Q2tRPUQEiiYA3
-name: Sand Spider
-type: species
-img: systems/teriock/src/icons/creatures/sand-spider.webp
-system:
-  competence:
-    raw: 1
-  description: <p>Sand spiders are usually found in large colonies.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '2'
-    mp:
-      disabled: false
-      faces: 4
-      number:
-        raw: '1'
-  appearance: <p>Large yellow sand-colored @L[Category:Spiders]{spiders}.</p>
-  br: 6
-  size:
-    enabled: true
-    value: 2
+_key: '!items!sandSpider000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Acidic Blood
-    type: ability
+  - _id: jYh6D0tkfgPzPw4w
+    _key: '!items.effects!sandSpider000000.jYh6D0tkfgPzPw4w'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/acidic-blood.webp
+    name: Acidic Blood
     system:
-      powerSources:
-        - alchemical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - automatic
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Any @L[Category:Weapons]{weapon} that deals @L[Core:Damage]{damage}
@@ -51,105 +46,117 @@ effects:
           next @L[Core:Turns]{turn}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       trigger: >-
         <p> This triggers automatically. You cannot choose to not use it if you
         are able to.</p>
-      form: normal
-      effectTypes:
-        - automatic
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: jYh6D0tkfgPzPw4w
+    type: ability
+  - _id: dftIP8Q7uYT4PbBE
+    _key: '!items.effects!sandSpider000000.dftIP8Q7uYT4PbBE'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+      compendiumSource: Compendium.teriock.abilities.Item.digging000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.jYh6D0tkfgPzPw4w'
-  - name: Digging
-    type: ability
     img: systems/teriock/src/icons/abilities/digging.webp
+    name: Digging
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.dig
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.dig
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: dftIP8Q7uYT4PbBE
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.digging000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.dftIP8Q7uYT4PbBE'
-  - name: Hide
-    type: ability
-    img: systems/teriock/src/icons/abilities/hide.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: N5ivcfVwy31UCkum
+    _key: '!items.effects!sandSpider000000.N5ivcfVwy31UCkum'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: instant
-        description: Instant
         dawn: false
-        stationary: false
+        description: Instant
         raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
+      interaction: manifest
+      limitation: <p>In sand only.</p>
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
@@ -157,38 +164,31 @@ effects:
           @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
           @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
           your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
         fluent: >-
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
           (if it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: thief
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-          rolls:
-            hide: 1d20 + (2 * @snk)
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
       upgrades:
         competence:
           attribute: snk
@@ -196,357 +196,353 @@ effects:
         score:
           attribute: snk
           value: 2
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>In sand only.</p>
-      range:
-        unit: self
-    _id: N5ivcfVwy31UCkum
+    type: ability
+  - _id: uP9qIX0gpeS6KhNH
+    _key: '!items.effects!sandSpider000000.uP9qIX0gpeS6KhNH'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      compendiumSource: Compendium.teriock.abilities.Item.maul000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.N5ivcfVwy31UCkum'
-  - name: Maul
-    type: ability
     img: systems/teriock/src/icons/abilities/maul.webp
+    name: Maul
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
       delivery:
         base: hand
-      targets:
-        - creature
       duration:
-        unit: unlimited
         conditions:
           present:
             - down
-        description: While Down
         dawn: false
-        stationary: false
+        description: While Down
         raw: '0'
-      range:
-        unit: melee
-      overview:
-        base: <p>Target is @L[Condition:Terrored]{terrored}.</p>
-      piercing:
-        raw: 0
+        stationary: false
+        unit: unlimited
       endCondition: <p>Target is @L[Condition:Up]{up}.</p>
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
       impacts:
         base:
           statuses:
             - terrored
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    _id: uP9qIX0gpeS6KhNH
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.maul000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.uP9qIX0gpeS6KhNH'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: <p>Target is @L[Condition:Terrored]{terrored}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
+  - _id: CtegGo0fiNaEZdr3
+    _key: '!items.effects!sandSpider000000.CtegGo0fiNaEZdr3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: CtegGo0fiNaEZdr3
+    type: ability
+  - _id: 9NN9SvDkB3AYkRrv
+    _key: '!items.effects!sandSpider000000.9NN9SvDkB3AYkRrv'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.CtegGo0fiNaEZdr3'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 9NN9SvDkB3AYkRrv
+    type: ability
+  - _id: o52uVJkJOb67tKxU
+    _key: '!items.effects!sandSpider000000.o52uVJkJOb67tKxU'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.9NN9SvDkB3AYkRrv'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: o52uVJkJOb67tKxU
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.o52uVJkJOb67tKxU'
-  - name: Snare
     type: ability
-    img: systems/teriock/src/icons/abilities/snare.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - leg
-      duration:
-        unit: unlimited
-        description: No Limit
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: ranger
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - snared
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    _id: 1h3eSlj8WcBT4xlx
+  - _id: 1h3eSlj8WcBT4xlx
+    _key: '!items.effects!sandSpider000000.1h3eSlj8WcBT4xlx'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.snare00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.1h3eSlj8WcBT4xlx'
-  - name: Sneaky
-    type: ability
-    img: systems/teriock/src/icons/abilities/sneaky.webp
+    img: systems/teriock/src/icons/abilities/snare.webp
+    name: Snare
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: ranger
+      competence:
+        raw: 0
       delivery:
-        base: self
-      targets:
-        - self
+        base: weapon
+        package: strike
       duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
         dawn: false
+        description: No Limit
+        raw: '0'
         stationary: false
+        unit: unlimited
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - snared
+      interaction: attack
+      maneuver: active
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - leg
+    type: ability
+  - _id: 5Io09kXLDxCYYo2g
+    _key: '!items.effects!sandSpider000000.5Io09kXLDxCYYo2g'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/sneaky.webp
+    name: Sneaky
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 5Io09kXLDxCYYo2g
+    type: ability
+  - _id: 6AJI8pZXPhKvECUq
+    _key: '!items.effects!sandSpider000000.6AJI8pZXPhKvECUq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.webCapture000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.5Io09kXLDxCYYo2g'
-  - name: Web Capture
-    type: ability
+    img: systems/teriock/src/icons/abilities/web-capture.webp
+    name: Web Capture
     system:
+      competence:
+        raw: 0
       delivery:
         base: hand
       duration:
-        unit: unlimited
         conditions:
           present:
             - down
-        stationary: false
+        dawn: false
         description: While Down
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -562,96 +558,100 @@ effects:
         hit: >-
           <p>Target is @L[Condition:Snared]{snared} and
           @L[Condition:Terrored]{terrored}.</p>
+      revealed: true
       targets:
         - creature
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-    _id: 6AJI8pZXPhKvECUq
-    img: systems/teriock/src/icons/abilities/web-capture.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.webCapture000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.6AJI8pZXPhKvECUq'
-  - name: Web Packet
     type: ability
-    img: systems/teriock/src/icons/abilities/web-packet.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      duration:
-        unit: instant
-        description: Instant
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-      piercing:
-        raw: 1
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - snared
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    _id: fdbgUMVOM86gI1WQ
+  - _id: fdbgUMVOM86gI1WQ
+    _key: '!items.effects!sandSpider000000.fdbgUMVOM86gI1WQ'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.webPacket0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sandSpider000000.fdbgUMVOM86gI1WQ'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!sandSpider000000'
+    img: systems/teriock/src/icons/abilities/web-packet.webp
+    name: Web Packet
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - snared
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - martial
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
+folder: desert0000000000
+img: systems/teriock/src/icons/creatures/sand-spider.webp
+name: Sand Spider
+system:
+  appearance: <p>Large yellow sand-colored @L[Category:Spiders]{spiders}.</p>
+  br: 6
+  competence:
+    raw: 1
+  description: <p>Sand spiders are usually found in large colonies.</p>
+  size:
+    enabled: true
+    value: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '2'
+    mp:
+      disabled: false
+      faces: 4
+      number:
+        raw: '1'
+type: species

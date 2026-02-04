@@ -1,32 +1,392 @@
 _id: flameRots0000000
+_key: '!items!flameRots0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Flame Rotators
-    type: ability
-    img: systems/teriock/src/icons/abilities/flame-rotators.webp
-    _id: flameRots0000000
+  - _id: QMUaoHGq6ScQtJ1T
+    _key: '!items.effects!flameRots0000000.QMUaoHGq6ScQtJ1T'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bellows000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/bellows.webp
+    name: Bellows
     system:
+      _sup: flameRots0000000
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
       delivery:
         base: self
-      executionTime: passive
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - flame
+      executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the next
+        @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
+        again.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.impacts.boosts.damage
+              mode: 2
+              priority: 10
+              qualifier: '@spell'
+              target: ability
+              time: normal
+              value: '1'
+        heightened:
+          changes:
+            - key: system.impacts.boosts.damage
+              mode: 2
+              priority: 10
+              qualifier: '@spell'
+              target: ability
+              time: normal
+              value: '@h'
+        macros:
+          Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
+          Compendium_teriock_execution_Macro_bellowsUseAbilit: useAbility
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>The next @L[Category:Spells]{spell} you cast that would deal
+          @L[Core:Damage]{damage} is @L[Keyword:Boosted]{boosted}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: NO7flSE4Ka88puZZ
+    _key: '!items.effects!flameRots0000000.NO7flSE4Ka88puZZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/burning-touch.webp
+    name: Burning Touch
+    system:
+      _sup: Y3xunMsGcsxLaTd7
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
         featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[fire magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic fire]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: aSTa2kNyEX6y6i4L
+    _key: '!items.effects!flameRots0000000.aSTa2kNyEX6y6i4L'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ctrlAndResistFir
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
+    name: Control and Resist Fire
+    system:
+      _sup: flameRots0000000
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - resistance
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 2
+              priority: 30
+              qualifier: '@dmg'
+              target: armament
+              time: normal
+              value: 1d4[fire magic]
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: fire
+          rolls:
+            damage: 1d4[fire magic]
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Your @L[Core:Standard Damage]{standard damage} increases by
+          [[/damage 1d4[fire magic]]] @L[Core:Damage]{damage}. You also
+          @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: Y3xunMsGcsxLaTd7
+    _key: '!items.effects!flameRots0000000.Y3xunMsGcsxLaTd7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cOFlame000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/crown-of-flame.webp
+    name: Crown of Flame
+    system:
+      _sup: flameRots0000000
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#E01B24'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A small circle of smokeless fire circles above your head. You gain
+          @L[Ability:Burning Touch]{Burning Touch} and @L[Ability:Inferno
+          Aura]{Inferno Aura}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: flameRots0000000
+    _key: '!items.effects!flameRots0000000.flameRots0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/flame-rotators.webp
+    name: Flame Rotators
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
       interaction: manifest
       maneuver: passive
       overview:
@@ -50,423 +410,79 @@ effects:
           Fire]{Control and Resist Fire}, @L[Ability:Crown of Flame]{Crown of
           Flame}, @L[Ability:Melting Grasp]{Melting Grasp}, and
           @L[Ability:Rupture Mark]{Rupture Mark}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
         fluent: >-
           <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
           Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: '@rank.mag - 1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1)
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1) + @p
-      class: flameMage
+    type: ability
+  - _id: I3msVYHk6BuQrTWo
+    _key: '!items.effects!flameRots0000000.I3msVYHk6BuQrTWo'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.infernoAura00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!flameRots0000000.flameRots0000000'
-  - name: Bellows
-    type: ability
-    img: systems/teriock/src/icons/abilities/bellows.webp
-    _id: QMUaoHGq6ScQtJ1T
+    img: systems/teriock/src/icons/abilities/inferno-aura.webp
+    name: Inferno Aura
     system:
+      _sup: Y3xunMsGcsxLaTd7
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
-      delivery:
-        base: self
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the next
-        @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
-        again.</p>
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The next @L[Category:Spells]{spell} you cast that would deal
-          @L[Core:Damage]{damage} is @L[Keyword:Boosted]{boosted}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.impacts.boosts.damage
-              target: ability
-              qualifier: '@spell'
-              value: '1'
-        heightened:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.impacts.boosts.damage
-              target: ability
-              qualifier: '@spell'
-              value: '@h'
-        macros:
-          Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
-      _sup: flameRots0000000
-      class: flameMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bellows000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!flameRots0000000.QMUaoHGq6ScQtJ1T'
-  - name: Control and Resist Fire
-    type: ability
-    img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
-    _id: aSTa2kNyEX6y6i4L
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
-        verbal: true
         somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
-      delivery:
-        base: self
-      effectTypes:
-        - resistance
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Your @L[Core:Standard Damage]{standard damage} increases by
-          [[/damage 1d4[fire magic]]] @L[Core:Damage]{damage}. You also
-          @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.damage.all.raw
-              target: armament
-              qualifier: '@dmg'
-              value: 1d4[fire magic]
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: fire
-          rolls:
-            damage: 1d4[fire magic]
-      _sup: flameRots0000000
-      class: flameMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ctrlAndResistFir
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!flameRots0000000.aSTa2kNyEX6y6i4L'
-  - name: Crown of Flame
-    type: ability
-    img: systems/teriock/src/icons/abilities/crown-of-flame.webp
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
         verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
       delivery:
-        base: self
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>A small circle of smokeless fire circles above your head. You gain
-          @L[Ability:Burning Touch]{Burning Touch} and @L[Ability:Inferno
-          Aura]{Inferno Aura}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 3
-              time: normal
-              key: system.light.dim
-              target: Actor
-              qualifier: '1'
-              value: '0.01'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.color
-              target: Actor
-              qualifier: '1'
-              value: '#E01B24'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.animation.type
-              target: Actor
-              qualifier: '1'
-              value: sunburst
-      _sup: flameRots0000000
-      class: flameMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cOFlame000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: Y3xunMsGcsxLaTd7
-    _key: '!items.effects!flameRots0000000.Y3xunMsGcsxLaTd7'
-  - name: Burning Touch
-    type: ability
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      costs:
-        verbal: true
-        somatic: true
+        base: aura
       duration:
-        raw: '0'
-        unit: instant
         dawn: false
-        stationary: false
         description: Instant
-      delivery:
-        base: hand
-        package: touch
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
       impacts:
         base:
           rolls:
-            damage: 1d6[fire magic]
+            damage: 1d6[magic fire]
         heightened:
           rolls:
             damage: 1d6[magic fire]
-      _sup: Y3xunMsGcsxLaTd7
-      class: flameMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: NO7flSE4Ka88puZZ
-    _key: '!items.effects!flameRots0000000.NO7flSE4Ka88puZZ'
-  - name: Inferno Aura
-    type: ability
-    img: systems/teriock/src/icons/abilities/inferno-aura.webp
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
-      delivery:
-        base: aura
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -476,65 +492,56 @@ effects:
         fail: >-
           <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
           target.</p>
+      revealed: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic fire]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
-      _sup: Y3xunMsGcsxLaTd7
-      class: flameMage
+    type: ability
+  - _id: dun9FquDlNzUQcrS
+    _key: '!items.effects!flameRots0000000.dun9FquDlNzUQcrS'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.infernoAura00000
+      compendiumSource: Compendium.teriock.abilities.Item.meltingGrasp0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: I3msVYHk6BuQrTWo
-    _key: '!items.effects!flameRots0000000.I3msVYHk6BuQrTWo'
-  - name: Melting Grasp
-    type: ability
     img: systems/teriock/src/icons/abilities/melting-grasp.webp
-    _id: dun9FquDlNzUQcrS
+    name: Melting Grasp
     system:
+      _sup: flameRots0000000
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 1
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        somatic: true
+        verbal: true
       delivery:
         base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       elements:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 1
       powerSources:
         - magical
       range:
@@ -542,59 +549,57 @@ effects:
         unit: ft
       results:
         hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - item
-      impacts: {}
-      _sup: flameRots0000000
-      class: flameMage
+    type: ability
+  - _id: 32sLd3whlDkUuVe1
+    _key: '!items.effects!flameRots0000000.32sLd3whlDkUuVe1'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.meltingGrasp0000
+      compendiumSource: Compendium.teriock.abilities.Item.ruptureMark00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!flameRots0000000.dun9FquDlNzUQcrS'
-  - name: Rupture Mark
-    type: ability
     img: systems/teriock/src/icons/abilities/rupture-mark.webp
-    _id: 32sLd3whlDkUuVe1
+    name: Rupture Mark
     system:
+      _sup: flameRots0000000
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
+        somatic: true
+        verbal: true
       delivery:
         base: hand
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       elements:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -603,27 +608,13 @@ effects:
         hit: >-
           <p>Target's next @L[Category:Conjured spells]{conjured spell} does not
           trigger @L[Category:Reaction abilities]{reactions}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts: {}
-      _sup: flameRots0000000
-      class: flameMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ruptureMark00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!flameRots0000000.32sLd3whlDkUuVe1'
+    type: ability
 img: systems/teriock/src/icons/abilities/flame-rotators.webp
 name: Flame Rotators
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!flameRots0000000'

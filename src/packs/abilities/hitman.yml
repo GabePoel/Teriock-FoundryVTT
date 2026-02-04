@@ -1,85 +1,54 @@
 _id: hitman0000000000
+_key: '!items!hitman0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Hitman
-    type: ability
-    img: systems/teriock/src/icons/abilities/hitman.webp
-    _id: hitman0000000000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
-      delivery:
-        base: self
-      executionTime: a2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You prepare a 5 foot by 5 foot area. While in this area, you may
-          make a limited improved @L[Ability:Hide]{Hide} action.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - area
-      impacts: {}
-      upgrades:
-        score:
-          attribute: snk
-          value: 1
-      class: assassin
+  - _id: pmwSbwJsCpS20YNi
+    _key: '!items.effects!hitman0000000000.pmwSbwJsCpS20YNi'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hitman0000000000.hitman0000000000'
-  - name: Hide
-    type: ability
     img: systems/teriock/src/icons/abilities/hide.webp
-    _id: pmwSbwJsCpS20YNi
+    name: Hide
     system:
+      _sup: hitman0000000000
+      class: thief
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
       improvement: >-
         <p>You may [[lookup name]] regardless of the environment (cover,
         lighting, etc.) that you prepare.</p>
@@ -96,14 +65,16 @@ effects:
           @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
           @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
           your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
         fluent: >-
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
           (if it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
@@ -114,22 +85,11 @@ effects:
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          rolls:
-            hide: 1d20 + (2 * @snk)
-          startStatuses:
-            - hidden
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
       upgrades:
         competence:
           attribute: snk
@@ -137,21 +97,58 @@ effects:
         score:
           attribute: snk
           value: 2
-      _sup: hitman0000000000
-      class: thief
+    type: ability
+  - _id: hitman0000000000
+    _key: '!items.effects!hitman0000000000.hitman0000000000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hitman0000000000.pmwSbwJsCpS20YNi'
+    img: systems/teriock/src/icons/abilities/hitman.webp
+    name: Hitman
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You prepare a 5 foot by 5 foot area. While in this area, you may
+          make a limited improved @L[Ability:Hide]{Hide} action.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - area
+      upgrades:
+        score:
+          attribute: snk
+          value: 1
+    type: ability
 img: systems/teriock/src/icons/abilities/hitman.webp
 name: Hitman
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!hitman0000000000'

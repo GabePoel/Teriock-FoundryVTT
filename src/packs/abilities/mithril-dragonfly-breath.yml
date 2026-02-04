@@ -1,34 +1,41 @@
 _id: mithrilDrgflyBre
+_key: '!items!mithrilDrgflyBre'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Mithril Dragonfly Breath
-    type: ability
+  - _id: mithrilDrgflyBre
+    _key: '!items.effects!mithrilDrgflyBre.mithrilDrgflyBre'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/mithril-dragonfly-breath.webp
-    _id: mithrilDrgflyBre
+    name: Mithril Dragonfly Breath
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '10'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 10 Minutes
       delivery:
         base: cone
+      duration:
+        dawn: false
+        description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -36,38 +43,30 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
+      impacts:
+        heightened:
+          rolls:
+            damage: 2d10[magic]
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '15'
         unit: ft
       results:
+        fail: <p>Target is @L[Condition:Immobilized]{immobilized}.</p>
         save: >-
           <p>Target is @L[Condition:Slowed]{slowed} and takes half as much
           @L[Core:Damage]{damage} from this as they would otherwise. This is
           calculated after any @L[Keyword:Boosted]{boosts} or
           @L[Keyword:Deboosted]{deboosts}.</p>
-        fail: <p>Target is @L[Condition:Immobilized]{immobilized}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        heightened:
-          rolls:
-            damage: 2d10[magic]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mithrilDrgflyBre.mithrilDrgflyBre'
+    type: ability
 img: systems/teriock/src/icons/abilities/mithril-dragonfly-breath.webp
 name: Mithril Dragonfly Breath
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!mithrilDrgflyBre'

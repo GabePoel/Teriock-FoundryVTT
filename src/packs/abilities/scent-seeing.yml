@@ -1,37 +1,55 @@
 _id: scentSeeing00000
+_key: '!items!scentSeeing00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Scent Seeing
-    type: ability
+  - _id: scentSeeing00000
+    _key: '!items.effects!scentSeeing00000.scentSeeing00000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
-    _id: scentSeeing00000
+    name: Scent Seeing
     system:
+      class: berserker
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
+      delivery:
+        base: aura
       duration:
-        raw: '0'
-        unit: unlimited
         conditions:
           absent:
             - down
         dawn: false
-        stationary: false
         description: While Up
-      delivery:
-        base: aura
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - sensory
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.smell
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
       interaction: manifest
       maneuver: passive
       overview:
@@ -40,6 +58,8 @@ effects:
           to know the location of all targets within 10 feet, whether they are
           or you are moving or not, so long as they are still within 10 feet of
           you.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
@@ -48,33 +68,12 @@ effects:
       requirements: >-
         <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
         @L[Condition:Odorless]{odorless}.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.smell
-              target: Actor
-              qualifier: '1'
-              value: '10'
-      class: berserker
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!scentSeeing00000.scentSeeing00000'
+    type: ability
 img: systems/teriock/src/icons/abilities/scent-seeing.webp
 name: Scent Seeing
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!scentSeeing00000'

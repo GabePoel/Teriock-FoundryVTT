@@ -1,133 +1,68 @@
 _id: 1nxCOsboQLGutqDM
-folder: uFj0EHeAAtwb9g3I
-name: Rank 1 Nature Mage
-system:
-  archetype: mage
-  className: natureMage
-  classRank: 1
-  competence:
-    raw: 1
-  description: >-
-    <p>The enchanter of the woods, these wandering spell casters resemble
-    Rangers in their wanderlust. More comfortable with animals than people,
-    Nature Mages are always heading to the woods and keeping to themselves. Ever
-    in defense of the land, Nature Mages are like environmentalists. Nature
-    Mages are in tune with the world at all times. If you are playing a Nature
-    Mage be reclusive, avoiding people if you can, happy in nature and eager to
-    leave any civilization.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: clayMummy0000000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-1-nature-mage.webp
+_key: '!items!1nxCOsboQLGutqDM'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Nat00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Treeform Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/treeform-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ball
-      targets:
-        - creature
-      elements:
-        - nature
-      duration:
-        unit: instant
-        description: Until Dawn
-        stationary: false
-        dawn: true
-        raw: '0'
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Transformed]{minorly transformed} into a
-          @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
-          transformation}. The @L[Core:Size]{size} of the tree is equal to the
-          target's @L[Core:Size]{SIZE} prior to being
-          @L[Condition:Transformed]{transformed}. If a treeformed creature is
-          reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
-          and any remaining @L[Core:Damage]{damage} carries over to their
-          reverted state.</p>
-        critHit: >-
-          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
-          @L[Ability:Self Revert]{Self Revert}.</p>
-      piercing:
-        raw: 2
-      spell: true
-      standard: true
-      class: natureMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
-        addition turn without the target being able to @L[Ability:Self
-        Revert]{Self Revert}.</p>
-      form: normal
-      effectTypes:
-        - transformation
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: synfq4mv5z7bw03a
+  - _id: oy1A5zdakXd9Rhxu
+    _key: '!items.effects!1nxCOsboQLGutqDM.oy1A5zdakXd9Rhxu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.treeformBall0000
+      compendiumSource: Compendium.teriock.abilities.Item.empathicRay00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!1nxCOsboQLGutqDM.synfq4mv5z7bw03a'
-  - name: Empathic Ray
-    type: ability
     img: systems/teriock/src/icons/abilities/empathic-ray.webp
+    name: Empathic Ray
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: formula
+          value:
+            formula: 1d4
+            static: 0
       delivery:
         base: missile
         package: ray
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - healing
+        - regeneration
+        - damaging
       elements:
         - nature
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: '60'
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic]]] or @L[Core:Healing]{heal} the target again
+        (depending on what you chose).</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic]
+      interaction: attack
+      maneuver: active
       overview:
         base: >-
           <p>As you cast [[lookup name]], choose either "damage" or "healing".
@@ -141,86 +76,74 @@ effects:
           effect} and a @L[Category:Healing effects]{healing effect}. This is
           the only part of [[lookup name]] that counts as a
           @L[Category:Regeneration effects]{regeneration effect}.</p>
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
       results:
-        hit: >-
-          <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target or
-          @L[Core:Healing]{heal} them (depending on what you chose).</p>
         critHit: >-
           <p>Double the @L[Core:Damage]{damage dice} dealt by this
           @L[Category:Abilities]{ability}. Or, if you chose "healing", double
           the number of times that target @L[Core:Healing]{heals}.</p>
-      piercing:
-        raw: 1
+        hit: >-
+          <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target or
+          @L[Core:Healing]{heal} them (depending on what you chose).</p>
+      revealed: true
       spell: true
       standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 3B8CCaqeJdPsJBDU
+    _key: '!items.effects!1nxCOsboQLGutqDM.3B8CCaqeJdPsJBDU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.familiarBond0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/familiar-bond.webp
+    name: Familiar Bond
+    system:
       class: natureMage
-      costs:
-        hp:
-          type: formula
-          value:
-            static: 0
-            formula: 1d4
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] or @L[Core:Healing]{heal} the target again
-        (depending on what you chose).</p>
-      form: normal
-      effectTypes:
-        - healing
-        - regeneration
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic]
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: oy1A5zdakXd9Rhxu
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.empathicRay00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!1nxCOsboQLGutqDM.oy1A5zdakXd9Rhxu'
-  - name: Familiar Bond
-    type: ability
-    img: systems/teriock/src/icons/abilities/familiar-bond.webp
-    system:
-      powerSources:
-        - magical
-        - spiritual
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      costs:
+        material: true
+        materialCost: >-
+          <p>Something symbolic of the animal you wish to bond with and the
+          relationship you wish to have with it.</p>
+        mp:
+          type: static
+          value:
+            static: 3
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - longRange
+        - contract
       elements:
         - nature
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>[[lookup name]] is a ritual that allows you to bond with an animal
@@ -243,67 +166,62 @@ effects:
           with it.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+        - spiritual
+        - primal
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>This ritual can typically be used only once.</p>
+      revealed: true
+      ritual: true
       spell: true
       standard: true
-      ritual: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
+  - _id: xK4OnVF5jnqLxb3g
+    _key: '!items.effects!1nxCOsboQLGutqDM.xK4OnVF5jnqLxb3g'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.oracle0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/oracle.webp
+    name: Oracle
+    system:
       class: natureMage
+      competence:
+        raw: 0
       costs:
-        material: true
         mp:
           type: static
           value:
-            static: 3
-        materialCost: >-
-          <p>Something symbolic of the animal you wish to bond with and the
-          relationship you wish to have with it.</p>
-      requirements: <p>This ritual can typically be used only once.</p>
-      form: normal
-      effectTypes:
-        - longRange
-        - contract
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: 3B8CCaqeJdPsJBDU
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.familiarBond0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!1nxCOsboQLGutqDM.3B8CCaqeJdPsJBDU'
-  - name: Oracle
-    type: ability
-    img: systems/teriock/src/icons/abilities/oracle.webp
-    system:
-      powerSources:
-        - magical
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+            static: 1
       delivery:
         base: self
         package: ritual
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       elements:
         - nature
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
-      range:
-        raw: '5'
-        unit: self
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You may ask a question to a deity or other supernatural being with
@@ -314,12 +232,6 @@ effects:
           @L[Keyword:Visions]{minor vision} in response. If you are at a place
           of great power or significance to the deity or entity you are asking,
           you will receive a @L[Keyword:Visions]{full vision} instead.</p>
-        proficient: >-
-          <p>Once per @L[Core:Long Rest]{long rest}, you may ask a question and
-          get a @L[Keyword:Visions]{full vision} in response. If you are at a
-          place of great power or significance to the deity or entity you are
-          asking, you will receive a @L[Keyword:Visions]{greater vision}
-          instead.</p>
         fluent: >-
           <p>Your @L[Core:Short Rest]{short rest} questions receive a
           @L[Keyword:Visions]{full vision} and your @L[Core:Long Rest]{long
@@ -327,38 +239,126 @@ effects:
           are at a place of great power or significance to the deity or entity
           you are asking, your visions are made even more powerful at
           @L[Core:Game Master]{GM} discretion.</p>
+        proficient: >-
+          <p>Once per @L[Core:Long Rest]{long rest}, you may ask a question and
+          get a @L[Keyword:Visions]{full vision} in response. If you are at a
+          place of great power or significance to the deity or entity you are
+          asking, you will receive a @L[Keyword:Visions]{greater vision}
+          instead.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+        - divine
+      range:
+        raw: '5'
+        unit: self
+      revealed: true
+      ritual: true
       spell: true
       standard: true
-      ritual: true
+      targets:
+        - creature
+    type: ability
+  - _id: synfq4mv5z7bw03a
+    _key: '!items.effects!1nxCOsboQLGutqDM.synfq4mv5z7bw03a'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.treeformBall0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/treeform-ball.webp
+    name: Treeform Ball
+    system:
       class: natureMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      form: normal
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: true
+        description: Until Dawn
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - transformation
+      elements:
+        - nature
+      executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
-    _id: xK4OnVF5jnqLxb3g
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.oracle0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!1nxCOsboQLGutqDM.xK4OnVF5jnqLxb3g'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1NatureMage0
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!1nxCOsboQLGutqDM'
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
+        addition turn without the target being able to @L[Ability:Self
+        Revert]{Self Revert}.</p>
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
+          @L[Ability:Self Revert]{Self Revert}.</p>
+        hit: >-
+          <p>Target is @L[Condition:Transformed]{minorly transformed} into a
+          @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
+          transformation}. The @L[Core:Size]{size} of the tree is equal to the
+          target's @L[Core:Size]{SIZE} prior to being
+          @L[Condition:Transformed]{transformed}. If a treeformed creature is
+          reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
+          and any remaining @L[Core:Damage]{damage} carries over to their
+          reverted state.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+folder: mummies000000000
+img: systems/teriock/src/icons/ranks/rank-1-nature-mage.webp
+name: Rank 1 Nature Mage
+system:
+  _sup: clayMummy0000000
+  archetype: mage
+  className: natureMage
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>The enchanter of the woods, these wandering spell casters resemble
+    Rangers in their wanderlust. More comfortable with animals than people,
+    Nature Mages are always heading to the woods and keeping to themselves. Ever
+    in defense of the land, Nature Mages are like environmentalists. Nature
+    Mages are in tune with the world at all times. If you are playing a Nature
+    Mage be reclusive, avoiding people if you can, happy in nature and eager to
+    leave any civilization.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

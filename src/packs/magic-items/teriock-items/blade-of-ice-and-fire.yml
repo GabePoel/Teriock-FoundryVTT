@@ -1,346 +1,373 @@
-name: Blade of Ice and Fire
-type: equipment
-system:
-  equipmentType: Scimitar
-  consumable: false
-  equipped: true
-  damage:
-    base:
-      saved: 1d8
-  weight:
-    saved: 3
-    raw: 0
-  range:
-    short:
-      unit: melee
-    long:
-      unit: melee
-    ranged: false
-  equipmentClasses:
-    - swords
-  minStr:
-    saved: -2
-    raw: -3
-  fightingStyle: swordsman
-  powerLevel: magic
-  tier:
-    saved: '2'
-  notes: >-
-    <p>Only found in the Far East, these are a favorite of nomads, bandits,
-    pirates, and military alike. A rare find, these always fetch a high
-    price.</p>
-  attackPenalty:
-    raw: '-3'
-img: systems/teriock/src/assets/items/blade-of-ice-and-fire.webp
+_id: bladeOfIceAndFir
+_key: '!items!bladeOfIceAndFir'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.Cc9Tz3mYOEBCmfwU
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: r0F6Mrn2OAvrpOGd
-    img: systems/teriock/src/icons/properties/weapon.webp
+  - _id: ohAGT8be0rjcl9um
+    _key: '!items.effects!bladeOfIceAndFir.ohAGT8be0rjcl9um'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.burning000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-    _key: '!items.effects!izzWMHef8IUPUKZI.r0F6Mrn2OAvrpOGd'
-  - name: Burning
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/properties/burning.webp
+    name: Burning
     system:
+      competence:
+        raw: 0
+      damageType: Fire
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b>, deals
         @L[Damage:Fire]{fire damage} and can be used to deliver
         @L[Ability:Burn]{Burn}.</p>
       form: intrinsic
-      damageType: Fire
-    _id: ohAGT8be0rjcl9um
+      revealed: true
+    type: property
+  - _id: qiHq9J5Sr1DhQRfv
+    _key: '!items.effects!bladeOfIceAndFir.qiHq9J5Sr1DhQRfv'
     _stats:
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.burning000000000
-    _key: '!items.effects!izzWMHef8IUPUKZI.ohAGT8be0rjcl9um'
-  - name: Ice Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/ice-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ball
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-        stationary: false
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: stormMage
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      endCondition: >-
-        <p>At the start of each of the target's actions, they roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - temporal
-      gifted:
-        enabled: true
-        amount: 1
-      impacts:
-        base:
-          statuses:
-            - frozen
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: action
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: action
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-        heightened:
-          rolls:
-            damage: 1d4[magic ice]
-    _id: affM4Lt512RmbNEC
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.iceBall000000000
-    _key: '!items.effects!izzWMHef8IUPUKZI.affM4Lt512RmbNEC'
-  - name: Fire Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/fire-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ball
-      targets:
-        - creature
-      elements:
-        - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-      gifted:
-        enabled: true
-        amount: 1
-      impacts:
-        base:
-          rolls:
-            damage: 1d4[magic fire]
-        heightened:
-          rolls:
-            damage: 1d4[magic fire]
-    _id: IoTrrCnoDENu0KbJ
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
-    _key: '!items.effects!izzWMHef8IUPUKZI.IoTrrCnoDENu0KbJ'
-  - name: Spell Turning Weapons
-    type: ability
-    img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
-    system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>@L[Category:Weapons]{Weapons} you use are @L[Property:Spell
-          Turning]{spell turning}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: ranger
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: >-
-        <p>Can only be used on @L[Category:Storm element abilities]{storm} and
-        @L[Category:Flame element abilities]{flame} abilities.</p>
-      effectTypes:
-        - resistance
-      grantOnly: true
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.props
-              target: equipment
-              qualifier: '@prop.weapon'
-              value: spellTurning
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.spellTurning
-              target: equipment
-              qualifier: '@prop.weapon'
-              value: 'true'
-    _id: B9VhH9YdxK5DYCMx
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.sTWeps0000000000
-    _key: '!items.effects!izzWMHef8IUPUKZI.B9VhH9YdxK5DYCMx'
-  - name: Damaged by Nature and Life Spells
-    type: ability
-    _id: qiHq9J5Sr1DhQRfv
+      systemVersion: 0.9.16
     img: icons/skills/wounds/blood-spurt-spray-red.webp
+    name: Damaged by Nature and Life Spells
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 1
-        stationary: false
+        dawn: false
         description: Always Active
+        raw: '1'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - magical
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>@L[Category:Nature element spells]{Nature spells} deal you an
           additional [[/damage 1d10[vine]]] @L[Core:Damage]{damage} and
           @L[Category:Life element spells]{life spells} deal you an additional
           [[/damage 1d10[holy]]] @L[Core:Damage]{damage}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      effectTypes:
+      piercing:
+        raw: 0
+      powerSources:
         - magical
-      expansionSaveAttribute: mov
-      form: flaw
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: IoTrrCnoDENu0KbJ
+    _key: '!items.effects!bladeOfIceAndFir.IoTrrCnoDENu0KbJ'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!izzWMHef8IUPUKZI.qiHq9J5Sr1DhQRfv'
-folder: X3rVK7Ngg1mHq1vl
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/fire-ball.webp
+    name: Fire Ball
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d4[magic fire]
+        heightened:
+          rolls:
+            damage: 1d4[magic fire]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: affM4Lt512RmbNEC
+    _key: '!items.effects!bladeOfIceAndFir.affM4Lt512RmbNEC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.iceBall000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/ice-ball.webp
+    name: Ice Ball
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - temporal
+      elements:
+        - storm
+      endCondition: >-
+        <p>At the start of each of the target's actions, they roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic ice]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: B9VhH9YdxK5DYCMx
+    _key: '!items.effects!bladeOfIceAndFir.B9VhH9YdxK5DYCMx'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.sTWeps0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
+    name: Spell Turning Weapons
+    system:
+      class: ranger
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: true
+      impacts:
+        base:
+          changes:
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@prop.weapon'
+              target: equipment
+              time: normal
+              value: spellTurning
+            - key: system.spellTurning
+              mode: 5
+              priority: 10
+              qualifier: '@prop.weapon'
+              target: equipment
+              time: normal
+              value: 'true'
+      interaction: manifest
+      limitation: >-
+        <p>Can only be used on @L[Category:Storm element abilities]{storm} and
+        @L[Category:Flame element abilities]{flame} abilities.</p>
+      maneuver: passive
+      overview:
+        base: >-
+          <p>@L[Category:Weapons]{Weapons} you use are @L[Property:Spell
+          Turning]{spell turning}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: r0F6Mrn2OAvrpOGd
+    _key: '!items.effects!bladeOfIceAndFir.r0F6Mrn2OAvrpOGd'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
 flags:
   teriock:
     dontConsume: false
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.Cc9Tz3mYOEBCmfwU
-_id: izzWMHef8IUPUKZI
-_key: '!items!izzWMHef8IUPUKZI'
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/blade-of-ice-and-fire.webp
+name: Blade of Ice and Fire
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d8
+  equipmentClasses:
+    - swords
+  equipmentType: Scimitar
+  equipped: true
+  fightingStyle: swordsman
+  minStr:
+    raw: '-2'
+  notes: >-
+    <p>Only found in the Far East, these are a favorite of nomads, bandits,
+    pirates, and military alike. A rare find, these always fetch a high
+    price.</p>
+  powerLevel: magic
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  tier:
+    raw: '2'
+  vitals: false
+  weight:
+    raw: '3'
+type: equipment

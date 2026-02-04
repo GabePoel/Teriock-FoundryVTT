@@ -1,84 +1,646 @@
-name: Insect
-type: creature
+_id: insect0000000000
+_key: '!actors!insect0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: commonAnimalSpec
 img: systems/teriock/src/icons/creatures/insect.webp
-prototypeToken:
-  name: Insect
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/insect.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 0.5
-  height: 0.5
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: insect0000000000
-    folder: Jg0dWUzFS1WNDl2g
-    name: Insect
-    type: species
+    _key: '!actors.items!insect0000000000.insect0000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.insect0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: SPOg2dvYV46pkoKg
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.SPOg2dvYV46pkoKg
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/climbing.webp
+        name: Climbing
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.climb
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+            proficient:
+              changes:
+                - key: system.speedAdjustments.climb
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+            proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: NOEjDSLWMLTr7ert
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.NOEjDSLWMLTr7ert
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        type: ability
+      - _id: osSiWkEwXVoP1Xvj
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.osSiWkEwXVoP1Xvj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/digging.webp
+        name: Digging
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.dig
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '1'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 32OZ12LcyTxyeHhr
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.32OZ12LcyTxyeHhr
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.elusive000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/elusive.webp
+        name: Elusive
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 4
+        type: ability
+      - _id: MiDrZycBY7m8Twis
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.MiDrZycBY7m8Twis
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/flying.webp
+        name: Flying
+        system:
+          class: corsair
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.fly
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+            proficient:
+              changes:
+                - key: system.speedAdjustments.fly
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
+            proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: lVzeOmb5dQgOiJbM
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.lVzeOmb5dQgOiJbM
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/night-vision.webp
+        name: Night Vision
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.dark
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '120'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see in the dark up to 60 feet as though it is bright
+              light and up to 120 feet as though it is dim light.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: CJje3taAOtXhVVMa
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.CJje3taAOtXhVVMa
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/no-hands.webp
+        name: No Hands
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: WjKvfcNbiKjwS3E4
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.WjKvfcNbiKjwS3E4
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.noStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/no-strength.webp
+        name: No Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -3
+        type: ability
+      - _id: JXAc6OgDwA2YxYTE
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.JXAc6OgDwA2YxYTE
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: PYamPU4OU46l7Smc
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.PYamPU4OU46l7Smc
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.poisonStrike0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/poison-strike.webp
+        name: Poison Strike
+        system:
+          class: assassin
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: 24 Hours
+            raw: '24'
+            stationary: false
+            unit: hour
+          effectTypes:
+            - poison
+          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                damage: 1d6[toxic]
+              statuses:
+                - poisoned
+            fluent:
+              rolls:
+                damage: 1d10[toxic]
+            proficient:
+              rolls:
+                damage: 1d8[toxic]
+          interaction: attack
+          maneuver: active
+          overview:
+            fluent: >-
+              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+              1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+            proficient: >-
+              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - alchemical
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            hit: >-
+              <p>Target is @L[Condition:Poisoned]{poisoned}. The
+              @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
+              @L[Core:Damage]{damage}.</p>
+          revealed: true
+          skill: true
+          targets:
+            - creature
+        type: ability
+      - _id: uCP1hpIt2z7Kge2o
+        _key: >-
+          !actors.items.effects!insect0000000000.insect0000000000.uCP1hpIt2z7Kge2o
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.scouting00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/scouting.webp
+        name: Scouting
+        system:
+          class: ranger
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You have @L[Core:Advantage]{advantage} on checks made with
+              @L[Ability:Perceive]{Perceive}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            competence:
+              attribute: per
+              value: 0
+            score:
+              attribute: per
+              value: 2
+        type: ability
+    folder: commonAnimalSpec
     img: systems/teriock/src/icons/creatures/insect.webp
+    name: Insect
     system:
+      br: 1
       competence:
         raw: 1
+      size:
+        enabled: true
+        value: 0.25
       statDice:
         hp:
           disabled: false
@@ -90,648 +652,92 @@ items:
           faces: 6
           number:
             raw: '1'
-      br: 1
-      size:
-        enabled: true
-        value: 0.25
       traits:
         - animal
-    effects:
-      - name: Climbing
-        type: ability
-        img: systems/teriock/src/icons/abilities/climbing.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '2'
-            proficient:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '3'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: SPOg2dvYV46pkoKg
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.SPOg2dvYV46pkoKg
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: int
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: NOEjDSLWMLTr7ert
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.NOEjDSLWMLTr7ert
-      - name: Digging
-        type: ability
-        img: systems/teriock/src/icons/abilities/digging.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.dig
-                  target: Actor
-                  qualifier: '1'
-                  value: '1'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: osSiWkEwXVoP1Xvj
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.osSiWkEwXVoP1Xvj
-      - name: Elusive
-        type: ability
-        img: systems/teriock/src/icons/abilities/elusive.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: special
-          upgrades:
-            score:
-              attribute: snk
-              value: 4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 32OZ12LcyTxyeHhr
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.elusive000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.32OZ12LcyTxyeHhr
-      - name: Flying
-        type: ability
-        img: systems/teriock/src/icons/abilities/flying.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: corsair
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.fly
-                  target: Actor
-                  qualifier: '1'
-                  value: '2'
-            proficient:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.fly
-                  target: Actor
-                  qualifier: '1'
-                  value: '3'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: MiDrZycBY7m8Twis
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.MiDrZycBY7m8Twis
-      - name: Night Vision
-        type: ability
-        img: systems/teriock/src/icons/abilities/night-vision.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You can see in the dark up to 60 feet as though it is bright
-              light and up to 120 feet as though it is dim light.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - sensory
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.senses.dark
-                  target: Actor
-                  qualifier: '1'
-                  value: '120'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: lVzeOmb5dQgOiJbM
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.lVzeOmb5dQgOiJbM
-      - name: No Hands
-        type: ability
-        img: systems/teriock/src/icons/abilities/no-hands.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
-          piercing:
-            raw: 0
-          form: flaw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: CJje3taAOtXhVVMa
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.CJje3taAOtXhVVMa
-      - name: No Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/no-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: str
-              value: -3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: WjKvfcNbiKjwS3E4
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.noStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.WjKvfcNbiKjwS3E4
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: JXAc6OgDwA2YxYTE
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.JXAc6OgDwA2YxYTE
-      - name: Poison Strike
-        type: ability
-        img: systems/teriock/src/icons/abilities/poison-strike.webp
-        system:
-          powerSources:
-            - alchemical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - creature
-          duration:
-            unit: hour
-            description: 24 Hours
-            dawn: false
-            stationary: false
-            raw: '24'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          overview:
-            proficient: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
-            fluent: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d10[toxic]]] @L[Core:Damage]{damage}.</p>
-          results:
-            hit: >-
-              <p>Target is @L[Condition:Poisoned]{poisoned}. The
-              @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-              @L[Core:Damage]{damage}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          class: assassin
-          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-          form: normal
-          effectTypes:
-            - poison
-          impacts:
-            base:
-              statuses:
-                - poisoned
-              rolls:
-                damage: 1d6[toxic]
-            proficient:
-              rolls:
-                damage: 1d8[toxic]
-            fluent:
-              rolls:
-                damage: 1d10[toxic]
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-        _id: PYamPU4OU46l7Smc
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.poisonStrike0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.PYamPU4OU46l7Smc
-      - name: Scouting
-        type: ability
-        img: systems/teriock/src/icons/abilities/scouting.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You have @L[Core:Advantage]{advantage} on checks made with
-              @L[Ability:Perceive]{Perceive}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: ranger
-          form: normal
-          effectTypes:
-            - sensory
-          upgrades:
-            competence:
-              attribute: per
-              value: 0
-            score:
-              attribute: per
-              value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: uCP1hpIt2z7Kge2o
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.scouting00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.insect0000000000.uCP1hpIt2z7Kge2o
+    type: species
+  - _id: tTa89m3wVPKPYmTV
+    _key: '!actors.items!insect0000000000.tTa89m3wVPKPYmTV'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.insect0000000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!insect0000000000.insect0000000000'
-  - name: Mouth
-    type: body
-    _id: tTa89m3wVPKPYmTV
+    effects:
+      - _id: 1keJAxX1vkfTL8Wl
+        _key: >-
+          !actors.items.effects!insect0000000000.tTa89m3wVPKPYmTV.1keJAxX1vkfTL8Wl
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: cj70nNvBKfT3EQ8P
+        _key: >-
+          !actors.items.effects!insect0000000000.tTa89m3wVPKPYmTV.cj70nNvBKfT3EQ8P
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 43UnM2Fnf4EpPLFE
+        _key: >-
+          !actors.items.effects!insect0000000000.tTa89m3wVPKPYmTV.43UnM2Fnf4EpPLFE
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: commonAnimalSpec
     img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
     system:
+      _sup: insect0000000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
       damage:
         base:
           raw: '1'
       fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: insect0000000000
-      attackPenalty:
-        raw: '-3'
       range:
         long:
           unit: self
@@ -740,118 +746,113 @@ items:
         short:
           unit: self
       vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 1keJAxX1vkfTL8Wl
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.tTa89m3wVPKPYmTV.1keJAxX1vkfTL8Wl
-      - name: Biting
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: cj70nNvBKfT3EQ8P
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.tTa89m3wVPKPYmTV.cj70nNvBKfT3EQ8P
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 43UnM2Fnf4EpPLFE
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!insect0000000000.tTa89m3wVPKPYmTV.43UnM2Fnf4EpPLFE
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!insect0000000000.tTa89m3wVPKPYmTV'
+    type: body
+name: Insect
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 0.5
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Insect
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/insect.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 0.5
 system:
-  hp:
-    value: 2
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '0.25'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: tTa89m3wVPKPYmTV
-    blocker: tTa89m3wVPKPYmTV
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: insect0000000000
-folder: xiQuFe17AXH1ZyVm
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!insect0000000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 2
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '0.25'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: tTa89m3wVPKPYmTV
+    blocker: tTa89m3wVPKPYmTV
+type: creature

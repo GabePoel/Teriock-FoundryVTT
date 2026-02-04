@@ -1,366 +1,414 @@
 _id: swampSaurage0000
-folder: si0Nxb9cjdtq6Ggy
-name: Swamp Saurage
-type: species
-img: systems/teriock/src/icons/creatures/swamp-saurage.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Swamp saurages are native to the Southern Isles. They are generally
-    tribal and often have trouble adjusting to cities and guilds.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '2'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  appearance: >-
-    <p>Saurages look like humanoid lizard men and are native to the southern
-    deserts in mainland Teriock. They are about @L[Creature:Common
-    Ogre]{ogre}-sized and covered in scales. Swamp saurages have tails.</p>
-  br: 1
-  size:
-    enabled: true
-    value: 4
-  traits:
-    - humanoid
+_key: '!items!swampSaurage0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Diving
-    type: ability
-    img: systems/teriock/src/icons/abilities/diving.webp
+  - _id: OpLOQH3TSRTzrIn6
+    _key: '!items.effects!swampSaurage0000.OpLOQH3TSRTzrIn6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/agile.webp
+    name: Agile
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      _sup: byU0QA4EI0RstEyG
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      limitation: <p>Swamp terrain only.</p>
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You walk through difficult terrain at @L[Core:Movement
+          Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: hNn0FuMASCCgas5W
+    _key: '!items.effects!swampSaurage0000.hNn0FuMASCCgas5W'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/diving.webp
+    name: Diving
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You no longer have to stay on the surface of water while
           @L[Ability:Swimming]{Swimming}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: hNn0FuMASCCgas5W
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.hNn0FuMASCCgas5W'
-  - name: Irregularly Shaped
-    type: ability
-    img: systems/teriock/src/icons/abilities/irregularly-shaped.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: xhmRLnLY1Dg1FHSh
+    _key: '!items.effects!swampSaurage0000.xhmRLnLY1Dg1FHSh'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.irregularlyShape
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/irregularly-shaped.webp
+    name: Irregularly Shaped
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>@L[Category:Armor]{Armor} you wear must be custom-made to fit
           you.</p>
       piercing:
         raw: 0
-      form: flaw
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: xhmRLnLY1Dg1FHSh
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.irregularlyShape
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.xhmRLnLY1Dg1FHSh'
-  - name: Low Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/low-intelligence.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: lGUdT1R3cMn243mX
+    _key: '!items.effects!swampSaurage0000.lGUdT1R3cMn243mX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lowIntelligence0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/low-intelligence.webp
+    name: Low Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: lGUdT1R3cMn243mX
+    type: ability
+  - _id: n5ELIhtZDBoCnxmU
+    _key: '!items.effects!swampSaurage0000.n5ELIhtZDBoCnxmU'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lowIntelligence0
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.lGUdT1R3cMn243mX'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: n5ELIhtZDBoCnxmU
+    type: ability
+  - _id: t6psj92aWICEnlCu
+    _key: '!items.effects!swampSaurage0000.t6psj92aWICEnlCu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.n5ELIhtZDBoCnxmU'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: t6psj92aWICEnlCu
+    type: ability
+  - _id: Hb8CHcEFJ9gdi7x8
+    _key: '!items.effects!swampSaurage0000.Hb8CHcEFJ9gdi7x8'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.t6psj92aWICEnlCu'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Hb8CHcEFJ9gdi7x8
+    type: ability
+  - _id: jWWz1wcPJmMqYNRm
+    _key: '!items.effects!swampSaurage0000.jWWz1wcPJmMqYNRm'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.Hb8CHcEFJ9gdi7x8'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: jWWz1wcPJmMqYNRm
+    type: ability
+  - _id: XxpqXeiKpE9PvTWc
+    _key: '!items.effects!swampSaurage0000.XxpqXeiKpE9PvTWc'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+      compendiumSource: Compendium.teriock.abilities.Item.swampActive00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.jWWz1wcPJmMqYNRm'
-  - name: Swamp Active
-    type: ability
+    img: systems/teriock/src/icons/abilities/swamp-active.webp
+    name: Swamp Active
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
@@ -374,299 +422,251 @@ effects:
         raw: 0
       powerSources:
         - martial
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: XxpqXeiKpE9PvTWc
-    img: systems/teriock/src/icons/abilities/swamp-active.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swampActive00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.XxpqXeiKpE9PvTWc'
-  - name: Swamp Native
-    type: ability
-    img: systems/teriock/src/icons/abilities/swamp-native.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: byU0QA4EI0RstEyG
+    _key: '!items.effects!swampSaurage0000.byU0QA4EI0RstEyG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swampNative00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/swamp-native.webp
+    name: Swamp Native
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>
       piercing:
         raw: 0
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swampNative00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: byU0QA4EI0RstEyG
-    _key: '!items.effects!swampSaurage0000.byU0QA4EI0RstEyG'
-  - name: Agile
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: Q1cdoUoaCVrrV4gZ
+    _key: '!items.effects!swampSaurage0000.Q1cdoUoaCVrrV4gZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You walk through difficult terrain at @L[Core:Movement
-          Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
-      limitation: <p>Swamp terrain only.</p>
-      effectTypes:
-        - movement
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.swim
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.difficultTerrain
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
               value: '3'
-      _sup: byU0QA4EI0RstEyG
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/agile.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: OpLOQH3TSRTzrIn6
-    _key: '!items.effects!swampSaurage0000.OpLOQH3TSRTzrIn6'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: corsair
+      targets:
+        - self
+    type: ability
+  - _id: Hu67v971yQp86uAC
+    _key: '!items.effects!swampSaurage0000.Hu67v971yQp86uAC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.talHunter0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: icons/creatures/mammals/deer-antlers-blue.webp
+    name: Talented Hunter
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.tradecrafts.hunter.score
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
               qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Q1cdoUoaCVrrV4gZ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.Q1cdoUoaCVrrV4gZ'
-  - name: Talented Hunter
-    type: ability
-    img: icons/creatures/mammals/deer-antlers-blue.webp
-    system:
-      powerSources:
-        - martial
+              target: Actor
+              time: normal
+              value: '1'
       interaction: manifest
-      featSaveAttribute: mov
+      limitation: <p>In swamps only.</p>
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You are a @L[Keyword:Talented]{talented}
           @L[Tradecraft:Hunter]{hunter}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: FoVFyOJtMLPrvpDo
+    _key: '!items.effects!swampSaurage0000.FoVFyOJtMLPrvpDo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.talTracker000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: icons/creatures/abilities/paw-print-tan.webp
+    name: Talented Tracker
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.tradecrafts.tracker.score
+              mode: 4
               priority: 10
-              time: normal
-              key: system.tradecrafts.hunter.score
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
               value: '1'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: <p>In swamps only.</p>
-      range:
-        unit: self
-    _id: Hu67v971yQp86uAC
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talHunter0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.Hu67v971yQp86uAC'
-  - name: Talented Tracker
-    type: ability
-    img: icons/creatures/abilities/paw-print-tan.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
+      limitation: <p>In swamps only.</p>
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You are a @L[Keyword:Talented]{talented}
           @L[Tradecraft:Tracker]{tracker}.</p>
       piercing:
         raw: 0
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.tracker.score
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: <p>In swamps only.</p>
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: FoVFyOJtMLPrvpDo
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talTracker000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!swampSaurage0000.FoVFyOJtMLPrvpDo'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!swampSaurage0000'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: saurages00000000
+img: systems/teriock/src/icons/creatures/swamp-saurage.webp
+name: Swamp Saurage
+system:
+  appearance: >-
+    <p>Saurages look like humanoid lizard men and are native to the southern
+    deserts in mainland Teriock. They are about @L[Creature:Common
+    Ogre]{ogre}-sized and covered in scales. Swamp saurages have tails.</p>
+  br: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>Swamp saurages are native to the Southern Isles. They are generally
+    tribal and often have trouble adjusting to cities and guilds.</p>
+  size:
+    enabled: true
+    value: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '2'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - humanoid
+type: species

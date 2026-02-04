@@ -1,61 +1,54 @@
 _id: C9RnXmhxd6iXheUR
-folder: qTlk5KD9WGOfDG5I
-name: Rank 5 Veteran
-system:
-  archetype: warrior
-  className: veteran
-  classRank: 5
-  competence:
-    raw: 1
-  description: >-
-    <p>Jaded and tough, these warriors act as if they have seen it all.
-    Obviously they are not all seasoned warriors, but the training of a Veteran
-    involves a great deal of time in battle, so even a first rank Veteran has
-    seen more action than other first rank warriors. The strategy of the Veteran
-    is to be an immovable wall, and hold the line. Veterans rely on defense in
-    battle, always working to better ensure their protection, which is why they
-    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
-    and pessimistic.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 4
-  _sup: mithrilDragon000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-5-veteran.webp
+_key: '!items!C9RnXmhxd6iXheUR'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r5Vet00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Intercept
-    type: ability
+  - _id: nEWl3ZXUcMWe83ed
+    _key: '!items.effects!C9RnXmhxd6iXheUR.nEWl3ZXUcMWe83ed'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.int0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/intercept.webp
+    name: Intercept
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      class: veteran
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: formula
+          value:
+            formula: 1d8
+            static: 0
       delivery:
         base: hand
-      targets:
-        - creature
       duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
         dawn: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: reactive
       overview:
         base: >-
           <p>If the effect causing the
@@ -65,66 +58,89 @@ effects:
           @L[Core:Temporary Hit Points]{temporary HP}.</p><div
           class="note"><b>Note:</b> Creatures can choose to be hit by attacks
           while up.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>The effect causing the target to become @L[Condition:Down]{down}
           @L[Core:Fizzles]{fizzles}.</p>
-      piercing:
-        raw: 0
+      revealed: true
       skill: true
       standard: true
-      class: veteran
-      costs:
-        hp:
-          type: formula
-          value:
-            static: 0
-            formula: 1d8
+      targets:
+        - creature
       trigger: <p>A creature within range would be @L[Condition:Down]{dropped}.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: nEWl3ZXUcMWe83ed
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
+    type: ability
+  - _id: DDCszBLFPaksOMMq
+    _key: '!items.effects!C9RnXmhxd6iXheUR.DDCszBLFPaksOMMq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.int0000000000000
+      compendiumSource: Compendium.teriock.abilities.Item.sentry0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!C9RnXmhxd6iXheUR.nEWl3ZXUcMWe83ed'
-  - name: Sentry
-    type: ability
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/sentry.webp
+    name: Sentry
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: veteran
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - down
-        description: While Up
-        stationary: false
-        raw: '0'
         dawn: false
+        description: While Up
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Surprised (Braced, Fortified Areas, Guard Duty)
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Frightened (Braced, Fortified Areas, Guard Duty)
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When in an area that's been "fortified" with @L[Ability:Fortify
@@ -143,62 +159,46 @@ effects:
           completes a @L[Category:Ritual delivery abilities]{ritual}.</li></ul>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Being Surprised (Braced, Fortified Areas, Guard Duty)
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Frightened (Braced, Fortified Areas, Guard Duty)
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: DDCszBLFPaksOMMq
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sentry0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!C9RnXmhxd6iXheUR.DDCszBLFPaksOMMq'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank5Veteran0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!C9RnXmhxd6iXheUR'
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-5-veteran.webp
+name: Rank 5 Veteran
+system:
+  _sup: mithrilDragon000
+  archetype: warrior
+  className: veteran
+  classRank: 5
+  competence:
+    raw: 1
+  description: >-
+    <p>Jaded and tough, these warriors act as if they have seen it all.
+    Obviously they are not all seasoned warriors, but the training of a Veteran
+    involves a great deal of time in battle, so even a first rank Veteran has
+    seen more action than other first rank warriors. The strategy of the Veteran
+    is to be an immovable wall, and hold the line. Veterans rely on defense in
+    battle, always working to better ensure their protection, which is why they
+    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
+    and pessimistic.</p>
+  innate: false
+  maxAv: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

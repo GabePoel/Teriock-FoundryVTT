@@ -1,34 +1,51 @@
 _id: mentalEffectImy0
+_key: '!items!mentalEffectImy0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Mental Effect Immunity
-    type: ability
+  - _id: mentalEffectImy0
+    _key: '!items.effects!mentalEffectImy0.mentalEffectImy0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
-    _id: mentalEffectImy0
+    name: Mental Effect Immunity
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mental
       interaction: manifest
       maneuver: passive
       overview:
@@ -36,34 +53,16 @@ effects:
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
           effects]{mental effects}. The effects of [[lookup name]] are
           maintained even if @L[Condition:Transformed]{transformed}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - unknown
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.effects
-              target: Actor
-              qualifier: '1'
-              value: mental
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mentalEffectImy0.mentalEffectImy0'
+    type: ability
 img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
 name: Mental Effect Immunity
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!mentalEffectImy0'

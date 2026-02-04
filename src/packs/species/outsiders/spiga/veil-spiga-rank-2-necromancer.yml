@@ -1,743 +1,57 @@
 _id: XPJ6DyI4bP9qecaL
-folder: 9hefOTar8MyozV5e
-name: Rank 2 Necromancer
-system:
-  archetype: mage
-  className: necromancer
-  classRank: 2
-  competence:
-    raw: 1
-  description: >-
-    <p>The true dealer of death, Necromancers are most at home in the cemetery
-    digging up future minions. Shunned by most of society, these dark mages are
-    not necessarily evil, they simply see death as full of potential energy
-    while others see it as the end of life. Necromancers fear nothing, as they
-    are always facing death. If you are playing a Necromancer be unafraid, kill
-    without remorse and be interested in dead bodies, close to death yourself,
-    almost in another world.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: veilSpiga0000000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-2-necromancer.webp
+_key: '!items!XPJ6DyI4bP9qecaL'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r2Nec00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Necromancy Rotators
-    type: ability
-    img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Crown of Fear]{Crown of Fear}, @L[Ability:Death
-          Rattle]{Death Rattle}, @L[Ability:Ethereal Shift]{Ethereal Shift},
-          @L[Ability:Spirit Bury]{Spirit Bury}, and @L[Ability:Undead
-          Reanimation]{Undead Reanimation}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      class: necromancer
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: '@rank.mag - 1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1)
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1) + @p
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
+  - _id: fsBv5b4tQSp6BeUJ
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.fsBv5b4tQSp6BeUJ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroRots0000000
+      compendiumSource: Compendium.teriock.abilities.Item.animateDead00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-    _id: GF9CzLYvEuHeIKIm
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.GF9CzLYvEuHeIKIm'
-  - name: Crown of Fear
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: hour
-        stationary: false
-        description: 8 Hours
-        raw: '8'
-        dawn: false
-      sustained: true
-      overview:
-        base: >-
-          <p>A small circle of glowing purple mist circles above your head. You
-          gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear Aura]{Fear
-          Aura}.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      form: special
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 3
-              time: normal
-              key: system.light.dim
-              target: Actor
-              qualifier: '1'
-              value: '0.01'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.color
-              target: Actor
-              qualifier: '1'
-              value: '#9141AC'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.animation.type
-              target: Actor
-              qualifier: '1'
-              value: sunburst
-      _sup: GF9CzLYvEuHeIKIm
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/crown-of-fear.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cOFear0000000000
-      coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 1BAPtC9VK930dc26
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.1BAPtC9VK930dc26'
-  - name: Fear Touch
-    type: ability
+    img: systems/teriock/src/icons/abilities/animate-dead.webp
+    name: Animate Dead
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        package: touch
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing:
-        raw: 2
-      spell: true
-      standard: true
-      class: necromancer
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      effectTypes:
-        - mental
-      impacts:
-        base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-        heightened:
-          rolls:
-            damage: 1d4[magic terror]
-        macros:
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: 1BAPtC9VK930dc26
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/fear-touch.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fearTouch0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: 3SL7OaAwx1etVSb5
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.3SL7OaAwx1etVSb5'
-  - name: Fear Aura
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: necromancer
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      effectTypes:
-        - mental
-      impacts:
-        base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-        heightened:
-          rolls:
-            damage: 1d4[magic terror]
-        macros:
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: 1BAPtC9VK930dc26
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/fear-aura.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fearAura00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: MUxdMBbkGw9PDEow
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.MUxdMBbkGw9PDEow'
-  - name: Death Rattle
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You execute one @L[Category:Single action abilities]{single action
-          ability} you have.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      trigger: <p>You @L[Condition:Dead]{die}.</p>
-      form: special
-      _sup: GF9CzLYvEuHeIKIm
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/death-rattle.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.deathRattle00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: YTuNmIhZ34t0Jc7O
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.YTuNmIhZ34t0Jc7O'
-  - name: Ethereal Shift
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a3
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: hour
-        stationary: false
-        description: 1 Hour
-        dawn: false
-        raw: '1'
-      overview:
-        base: >-
-          <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
-          Material Realm.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      form: special
-      impacts:
-        base:
-          statuses:
-            - ethereal
-      _sup: GF9CzLYvEuHeIKIm
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/ethereal-shift.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.etherealShift000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: Fn5cxrm9VCmp1T6A
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.Fn5cxrm9VCmp1T6A'
-  - name: Spirit Bury
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
-        dawn: false
-        raw: '1'
-      range:
-        unit: melee
-      overview:
-        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
-      results:
-        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      form: special
-      impacts:
-        proficient:
-          duration: 600
-        heightened:
-          duration: 3600
-      _sup: GF9CzLYvEuHeIKIm
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/spirit-bury.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: TnpiUvoqLIbNgTgF
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.TnpiUvoqLIbNgTgF'
-  - name: Undead Reanimation
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: hour
-        stationary: false
-        description: 8 Hours
-        raw: '8'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
-          Dead]{Animate Dead}.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      form: special
-      _sup: GF9CzLYvEuHeIKIm
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/undead-reanimation.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.undeadReanimatio
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: WrBepGdTXcu03wfx
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.WrBepGdTXcu03wfx'
-  - name: Zombify
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        package: touch
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      overview:
-        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
-        fluent: >-
-          <p>The base duration of this effect is 1 hour and the
-          @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
-          command.</p>
-      results:
-        hit: >-
-          <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
-          under your command, but is hostile to everyone other than you that is
-          not @L[Category:Zombies]{another zombie}. The
-          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
-          before, but loses all other traits and abilities. If the target was
-          already @L[Category:Zombies]{some kind of zombie}, then it is
-          reanimated as that type.</p>
-      piercing:
-        raw: 2
-      spell: true
-      standard: true
-      class: necromancer
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      form: normal
-      effectTypes:
-        - control
-        - reanimation
-      impacts:
-        fluent:
-          duration: 3600
-        heightened:
-          duration: 3600
       _sup: WrBepGdTXcu03wfx
+      class: necromancer
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/zombify.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.zombify000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: Zb6qxYcPtA9HYMMB
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.Zb6qxYcPtA9HYMMB'
-  - name: Animate Dead
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
-      elements:
-        - necromancy
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        stationary: false
+        unit: instant
+      effectTypes:
+        - reanimation
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
       overview:
         base: >-
           <p>Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
@@ -746,206 +60,63 @@ effects:
           (minimum of 1) until it completes a @L[Core:Short Rest]{short rest}.
           This does not count as a @L[Category:Revival effects]{revival
           effect}.</p>
+        fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
         proficient: >-
           <p>Target has all @L[Core:HP]{HP} restored, but its maximum
           @L[Core:HP]{HP} is still halved. This does not count as a
           @L[Category:Healing effects]{healing effect}.</p>
-        fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
       piercing:
         raw: 2
-      spell: true
-      standard: true
-      class: necromancer
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
       requirements: >-
         <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
         creatures]{undead}.</p>
-      form: normal
-      effectTypes:
-        - reanimation
-      _sup: WrBepGdTXcu03wfx
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/animate-dead.webp
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 8bcybu7QjARUBouS
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.8bcybu7QjARUBouS'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.animateDead00000
+      compendiumSource: Compendium.teriock.abilities.Item.celestialESWords
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: fsBv5b4tQSp6BeUJ
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.fsBv5b4tQSp6BeUJ'
-  - name: Necromancy Elder Sorcery
-    type: ability
-    img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
-          Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial Elder
-          Sorcery Words}, and @L[Ability:Necromancy Elder Sorcery
-          Words]{Necromancy Elder Sorcery Words}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      class: necromancer
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroES000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: JFQwPusSGXNlFxzg
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.JFQwPusSGXNlFxzg'
-  - name: Elder Sorcery Creation
-    type: ability
-    system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Long Rest
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - self
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
-          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
-          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
-          dictated to you by your @L[Core:Game Master]{GM}. As with other
-          rotators, this spell is not always available to you. You have to
-          "rotate" into having it prepared. This spell may have a maximum number
-          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
-          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
-          as well, using whatever rules they wish.</p>
-        proficient: >-
-          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
-          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
-          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
-          @L[Category:Mage classes]{mage classes}.</p>
-        fluent: >-
-          <p>In addition to the spells that you crate, you can learn
-          @L[Core:Proficiency Bonus]{P} additional spells from other
-          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-          Sorcery]{Elder Sorcery} for more information.</p>
-      piercing:
-        raw: 0
-      skill: true
-      ritual: true
-      costs:
-        material: true
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        materialCost: >-
-          <p>Creation cost is at least 3 × the material components of the spell
-          itself.</p>
-      form: special
-      _sup: JFQwPusSGXNlFxzg
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     flags:
       teriock:
         dontConsume: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.eSCreation000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 80I3FDOR0od0PN6D
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.80I3FDOR0od0PN6D'
-  - name: Celestial Elder Sorcery Words
-    type: ability
+    img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
+    name: Celestial Elder Sorcery Words
     system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      _sup: JFQwPusSGXNlFxzg
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      elderSorcery: true
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
@@ -1035,61 +206,581 @@ effects:
           style="background-color:#dc8add1A"></td><td
           style="background-color:#dc8add1A"></td><td
           style="background-color:#dc8add1A">use</td></tr></tbody></table><p></p>
-        proficient: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Proficiency Bonus]{P}).</p>
         fluent: >-
           <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
           @L[Core:Fluency Bonus]{F}).</p>
+        proficient: >-
+          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+          @L[Core:Proficiency Bonus]{P}).</p>
       piercing:
         raw: 0
-      skill: true
-      form: special
-      _sup: JFQwPusSGXNlFxzg
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - magical
       range:
         unit: self
-    img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: 1BAPtC9VK930dc26
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.1BAPtC9VK930dc26'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cOFear0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/crown-of-fear.webp
+    name: Crown of Fear
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#9141AC'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A small circle of glowing purple mist circles above your head. You
+          gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear Aura]{Fear
+          Aura}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: YTuNmIhZ34t0Jc7O
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.YTuNmIhZ34t0Jc7O'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.deathRattle00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/death-rattle.webp
+    name: Death Rattle
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elements:
+        - necromancy
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You execute one @L[Category:Single action abilities]{single action
+          ability} you have.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You @L[Condition:Dead]{die}.</p>
+    type: ability
+  - _id: 80I3FDOR0od0PN6D
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.80I3FDOR0od0PN6D'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.eSCreation000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     flags:
       teriock:
         dontConsume: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.celestialESWords
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 8bcybu7QjARUBouS
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.8bcybu7QjARUBouS'
-  - name: Necromancy Elder Sorcery Words
-    type: ability
+    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    name: Elder Sorcery Creation
     system:
+      _sup: JFQwPusSGXNlFxzg
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
+        material: true
+        materialCost: >-
+          <p>Creation cost is at least 3 × the material components of the spell
+          itself.</p>
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
+              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
+              @L[Core:MP]{MP} of the spell itself.</p>
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       elderSorcery: true
+      executionTime: Long Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
+          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
+          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
+          dictated to you by your @L[Core:Game Master]{GM}. As with other
+          rotators, this spell is not always available to you. You have to
+          "rotate" into having it prepared. This spell may have a maximum number
+          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
+          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
+          as well, using whatever rules they wish.</p>
+        fluent: >-
+          <p>In addition to the spells that you crate, you can learn
+          @L[Core:Proficiency Bonus]{P} additional spells from other
+          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
+          Sorcery]{Elder Sorcery} for more information.</p>
+        proficient: >-
+          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
+          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
+          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
+          @L[Category:Mage classes]{mage classes}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: melee
+      revealed: true
+      ritual: true
+      skill: true
       targets:
         - self
+    type: ability
+  - _id: Fn5cxrm9VCmp1T6A
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.Fn5cxrm9VCmp1T6A'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.etherealShift000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/ethereal-shift.webp
+    name: Ethereal Shift
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       elements:
         - necromancy
+      executionTime: a3
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          statuses:
+            - ethereal
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
+          Material Realm.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: MUxdMBbkGw9PDEow
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.MUxdMBbkGw9PDEow'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fearAura00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/fear-aura.webp
+    name: Fear Aura
+    system:
+      _sup: 1BAPtC9VK930dc26
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: aura
       duration:
-        unit: unlimited
+        dawn: false
+        description: 1 Minute
+        raw: '1'
         stationary: false
+        unit: minute
+      effectTypes:
+        - mental
+      elements:
+        - necromancy
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
+        heightened:
+          rolls:
+            damage: 1d4[magic terror]
+        macros:
+          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 3SL7OaAwx1etVSb5
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.3SL7OaAwx1etVSb5'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fearTouch0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/fear-touch.webp
+    name: Fear Touch
+    system:
+      _sup: 1BAPtC9VK930dc26
+      class: necromancer
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - mental
+      elements:
+        - necromancy
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
+        heightened:
+          rolls:
+            damage: 1d4[magic terror]
+        macros:
+          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: JFQwPusSGXNlFxzg
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.JFQwPusSGXNlFxzg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.necroES000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
+    name: Necromancy Elder Sorcery
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
         description: Always Active
         raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
+          Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial Elder
+          Sorcery Words}, and @L[Ability:Necromancy Elder Sorcery
+          Words]{Necromancy Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: K8EJXv7LY5PpOXuY
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.K8EJXv7LY5PpOXuY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.necroESWords0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
+    name: Necromancy Elder Sorcery Words
+    system:
+      _sup: JFQwPusSGXNlFxzg
+      class: necromancer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      elderSorcery: true
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Necromancy Elder
@@ -1121,41 +812,350 @@ effects:
           style="background-color:#0000001A">twist</td></tr> <tr><td
           style="background-color:#77767b1A">woe</td><td
           style="background-color:#77767b1A">wrench</td></tr></tbody></table><p></p>
-        proficient: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Proficiency Bonus]{P}).</p>
         fluent: >-
           <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
           @L[Core:Fluency Bonus]{F}).</p>
+        proficient: >-
+          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+          @L[Core:Proficiency Bonus]{P}).</p>
       piercing:
         raw: 0
-      skill: true
-      class: necromancer
-      form: special
-      _sup: JFQwPusSGXNlFxzg
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - magical
       range:
         unit: self
-    img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: GF9CzLYvEuHeIKIm
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.GF9CzLYvEuHeIKIm'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroESWords0000
+      compendiumSource: Compendium.teriock.abilities.Item.necroRots0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
+    name: Necromancy Rotators
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @L[Category:Spells]{spells}. If you
+          create any @L[Core:Elder Sorcery]{Elder Sorcery}
+          @L[Category:Spells]{spells} of your own, they get added to this list.
+          However, just because you "know" how to cast these spells, doesn't
+          mean you are always prepared to. Although all @L[Category:Mage
+          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
+          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
+          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          rotated into your spell list at any given time across <i>all</i>
+          classes. @L[Category:Mage classes]{MR} refers to the number of
+          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
+          which spells you have prepared. The @L[Category:Rotator
+          spells]{rotator spells} automatically available to you are
+          @L[Ability:Crown of Fear]{Crown of Fear}, @L[Ability:Death
+          Rattle]{Death Rattle}, @L[Ability:Ethereal Shift]{Ethereal Shift},
+          @L[Ability:Spirit Bury]{Spirit Bury}, and @L[Ability:Undead
+          Reanimation]{Undead Reanimation}.</p>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: TnpiUvoqLIbNgTgF
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.TnpiUvoqLIbNgTgF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spirit-bury.webp
+    name: Spirit Bury
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+        proficient:
+          duration: 600
+      interaction: attack
+      maneuver: active
+      overview:
+        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+      results:
+        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: WrBepGdTXcu03wfx
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.WrBepGdTXcu03wfx'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.undeadReanimatio
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/undead-reanimation.webp
+    name: Undead Reanimation
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
+          Dead]{Animate Dead}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: Zb6qxYcPtA9HYMMB
+    _key: '!items.effects!XPJ6DyI4bP9qecaL.Zb6qxYcPtA9HYMMB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.zombify000000000
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _id: K8EJXv7LY5PpOXuY
-    _key: '!items.effects!XPJ6DyI4bP9qecaL.K8EJXv7LY5PpOXuY'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank2Necromancer
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!XPJ6DyI4bP9qecaL'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/zombify.webp
+    name: Zombify
+    system:
+      _sup: WrBepGdTXcu03wfx
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - control
+        - reanimation
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        fluent:
+          duration: 3600
+        heightened:
+          duration: 3600
+      interaction: attack
+      maneuver: active
+      overview:
+        fluent: >-
+          <p>The base duration of this effect is 1 hour and the
+          @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
+          command.</p>
+        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+      results:
+        hit: >-
+          <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
+          under your command, but is hostile to everyone other than you that is
+          not @L[Category:Zombies]{another zombie}. The
+          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
+          before, but loses all other traits and abilities. If the target was
+          already @L[Category:Zombies]{some kind of zombie}, then it is
+          reanimated as that type.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+folder: spiga00000000000
+img: systems/teriock/src/icons/ranks/rank-2-necromancer.webp
+name: Rank 2 Necromancer
+system:
+  _sup: veilSpiga0000000
+  archetype: mage
+  className: necromancer
+  classRank: 2
+  competence:
+    raw: 1
+  description: >-
+    <p>The true dealer of death, Necromancers are most at home in the cemetery
+    digging up future minions. Shunned by most of society, these dark mages are
+    not necessarily evil, they simply see death as full of potential energy
+    while others see it as the end of life. Necromancers fear nothing, as they
+    are always facing death. If you are playing a Necromancer be unafraid, kill
+    without remorse and be interested in dead bodies, close to death yourself,
+    almost in another world.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

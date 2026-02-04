@@ -1,66 +1,65 @@
 _id: cantClimb0000000
+_key: '!items!cantClimb0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Cannot Climb
-    type: ability
+  - _id: cantClimb0000000
+    _key: '!items.effects!cantClimb0000000.cantClimb0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/cannot-climb.webp
-    _id: cantClimb0000000
+    name: Cannot Climb
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You have no @L[Core:Movement Speed]{climb speed}. This overrides
           abilities such as @L[Ability:Climbing]{Climbing}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 20
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
-              qualifier: '1'
-              value: '0'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cantClimb0000000.cantClimb0000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/cannot-climb.webp
 name: Cannot Climb
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!cantClimb0000000'

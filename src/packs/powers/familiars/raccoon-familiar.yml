@@ -1,57 +1,137 @@
 _id: raccoonFamiliar0
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Raccoon Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.raccoon000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!raccoonFamiliar0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
+  - _id: ydtuQlpfvDvb9rXd
+    _key: '!items.effects!raccoonFamiliar0.ydtuQlpfvDvb9rXd'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+    name: Missile Reflexes
+    system:
+      _sup: 7E2djPMPPxCkmHFj
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - resistance
+      executionTime: r1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: block
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
+          Interaction]{attack}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - attack
+        - item
+      trigger: >-
+        <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
+        @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
+        Interaction]{attack}.</p>
+    type: ability
   - _id: raccoonTamer0000
+    _key: '!items.effects!raccoonFamiliar0.raccoonTamer0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Raccoon Tamer
     system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Raccoon]{raccoon}.</p>
       competence:
         raw: 2
+      description: <p>You know the way of the @L[Creature:Raccoon]{raccoon}.</p>
+      field: survivalist
       revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
+      tradecraft: tamer
     tint: '#ffffff'
-    _key: '!items.effects!raccoonFamiliar0.raccoonTamer0000'
-  - name: Reflexes
-    type: ability
+    transfer: true
+    type: fluency
+  - _id: 7E2djPMPPxCkmHFj
+    _key: '!items.effects!raccoonFamiliar0.7E2djPMPPxCkmHFj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/reflexes.webp
+    name: Reflexes
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: archer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.abilities
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Disarm
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficiency
+          attribute: mov
+      interaction: manifest
+      limitation: >-
+        <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, but
+        gain no other benefits from this.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
@@ -60,162 +140,82 @@ effects:
           Reflexes}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      skill: true
-      standard: true
-      class: archer
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: >-
-        <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, but
-        gain no other benefits from this.</p>
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.abilities
-              target: Actor
-              qualifier: '1'
-              value: Disarm
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: 7E2djPMPPxCkmHFj
-    _key: '!items.effects!raccoonFamiliar0.7E2djPMPPxCkmHFj'
-  - name: Missile Reflexes
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: block
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: hand
-      targets:
-        - attack
-        - item
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
-          Interaction]{attack}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
       skill: true
       standard: true
-      class: archer
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
-        @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
-        Interaction]{attack}.</p>
-      form: normal
-      effectTypes:
-        - resistance
-      _sup: 7E2djPMPPxCkmHFj
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+      targets:
+        - self
+    type: ability
+  - _id: 3JchQOsjdwQORrgE
+    _key: '!items.effects!raccoonFamiliar0.3JchQOsjdwQORrgE'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
+      compendiumSource: Compendium.teriock.abilities.Item.unglue0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: ydtuQlpfvDvb9rXd
-    _key: '!items.effects!raccoonFamiliar0.ydtuQlpfvDvb9rXd'
-  - name: Unglue
-    type: ability
     img: systems/teriock/src/icons/abilities/unglue.webp
+    name: Unglue
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - item
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      overview:
-        base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
       class: thief
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
+      delivery:
+        base: hand
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - stealing
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: Your Hand's Range
+        unit: ft
       requirements: >-
         <p>Target's bearer is @L[Condition:Down]{down} or target it
         @L[Property:Searchable]{searchable}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - stealing
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-    _id: 3JchQOsjdwQORrgE
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.unglue0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!raccoonFamiliar0.3JchQOsjdwQORrgE'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!raccoonFamiliar0'
+      skill: true
+      standard: true
+      targets:
+        - item
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Raccoon Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.raccoon000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

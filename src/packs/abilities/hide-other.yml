@@ -1,36 +1,56 @@
 _id: hideOther0000000
+_key: '!items!hideOther0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Hide Other
-    type: ability
+  - _id: hideOther0000000
+    _key: '!items.effects!hideOther0000000.hideOther0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/hide-other.webp
-    _id: hideOther0000000
+    name: Hide Other
     system:
+      class: thief
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       endCondition: >-
         <p>Target moves or is no longer in a location with shadows, dim light,
         or @L[Core:Cover]{three-quarters cover}.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + @snk
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + @snk + @f
+        proficient:
+          rolls:
+            hide: 1d20 + @snk + @p
       interaction: attack
       maneuver: active
       overview:
@@ -38,8 +58,10 @@ effects:
           <p>Target becomes @L[Condition:Hidden]{hidden}. As you hide them, you
           may roll [[/roll 1d20 + @snk]]. You may choose to use this as their
           hidden DC.</p>
-        proficient: <p>Instead roll [[/roll 1d20 + @snk + @p]] for their hidden DC.</p>
         fluent: <p>Instead roll [[/roll 1d20 + @snk + @f]] for their hidden DC.</p>
+        proficient: <p>Instead roll [[/roll 1d20 + @snk + @p]] for their hidden DC.</p>
+      piercing:
+        raw: 2
       powerSources:
         - spiritual
       range:
@@ -48,35 +70,12 @@ effects:
       requirements: >-
         <p>Target is in a location with shadows, dim light, or
         @L[Core:Cover]{three-quarters cover}.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          rolls:
-            hide: 1d20 + @snk
-          startStatuses:
-            - hidden
-        proficient:
-          rolls:
-            hide: 1d20 + @snk + @p
-        fluent:
-          rolls:
-            hide: 1d20 + @snk + @f
-      class: thief
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hideOther0000000.hideOther0000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/hide-other.webp
 name: Hide Other
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!hideOther0000000'

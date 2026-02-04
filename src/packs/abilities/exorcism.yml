@@ -1,25 +1,25 @@
 _id: exorcism00000000
+_key: '!items!exorcism00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Exorcism
-    type: ability
+  - _id: exorcism00000000
+    _key: '!items.effects!exorcism00000000.exorcism00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/exorcism.webp
-    _id: exorcism00000000
+    name: Exorcism
     system:
+      class: paladin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>An amount of @L[Core:MP]{MP} equal to the
-              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
-              Paid only on failure.</p>
         hp:
           type: variable
           value:
@@ -28,20 +28,28 @@ effects:
               <p>An amount of @L[Core:HP]{HP} equal to the
               @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
               Paid only on failure.</p>
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>An amount of @L[Core:MP]{MP} equal to the
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.</p>
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -71,21 +79,27 @@ effects:
           an @L[Category:Undead creatures]{undead} target. The target pulls
           stones from the @L[Condition:Dead]{death bag} based on the severity of
           the effect being cleansed (see @L[Core:Game Master]{GM}).
+        fluent: >-
+          <p>You may add @L[Core:Fluency Bonus]{F} to the
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
+          of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
         proficient: >-
           <p>You may add @L[Core:Proficiency Bonus]{P} to the
           @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
           of whether or not you are proficient in
           @L[Tradecraft:Priest]{priest}.</p>
-        fluent: >-
-          <p>You may add @L[Core:Fluency Bonus]{F} to the
-          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
-          of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - divine
       range:
         raw: '5'
         unit: ft
       results:
+        fail: >-
+          <p>You pay an amount of @L[Core:MP]{MP} and @L[Core:HP]{HP} equal to
+          the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
+          DC.</p>
         save: >-
           <p>The target is "destroyed". They @L[Condition:Dead]{die}, they are
           @L[Condition:Ruined]{ruined}, and they pull additional stones from the
@@ -99,29 +113,13 @@ effects:
           survive, their body must be @L[Ability:Summon the Dead]{reconstructed}
           and then they can be @L[Category:Revival effects]{revived} in a
           non-undead state.</p>
-        fail: >-
-          <p>You pay an amount of @L[Core:MP]{MP} and @L[Core:HP]{HP} equal to
-          the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
-          DC.</p>
+      revealed: true
       ritual: true
       skill: true
       standard: true
       targets:
         - creature
-      impacts: {}
-      class: paladin
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!exorcism00000000.exorcism00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/exorcism.webp
 name: Exorcism
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!exorcism00000000'

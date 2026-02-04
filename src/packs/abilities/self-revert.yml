@@ -1,33 +1,47 @@
 _id: selfRevert000000
+_key: '!items!selfRevert000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Self Revert
-    type: ability
+  - _id: selfRevert000000
+    _key: '!items.effects!selfRevert000000.selfRevert000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/self-revert.webp
-    _id: selfRevert000000
+    name: Self Revert
     system:
+      basic: true
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
-      basic: true
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: int
       form: intrinsic
       grantOnly: false
+      impacts:
+        base:
+          endStatuses:
+            - transformed
+        macros:
+          Compendium_teriock_execution_Macro_dc0XWbqZgw04rJn5: preExecution
+          Compendium_teriock_execution_Macro_selfRevertPreExe: preExecution
       interaction: feat
       maneuver: active
       overview:
@@ -35,6 +49,8 @@ effects:
           <p>Instead of your normal @L[Core:Feat Interaction]{feat save DC}, the
           DC of [[lookup name]] is determined by the type of
           @L[Condition:Transformed]{transformation}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - primal
       range:
@@ -42,26 +58,10 @@ effects:
       requirements: <p>You are @L[Condition:Transformed]{transformed}.</p>
       results:
         save: <p>You cease being @L[Condition:Transformed]{transformed}.</p>
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          endStatuses:
-            - transformed
-        macros:
-          Compendium_teriock_execution_Macro_dc0XWbqZgw04rJn5: preExecution
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!selfRevert000000.selfRevert000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/self-revert.webp
 name: Self Revert
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!selfRevert000000'

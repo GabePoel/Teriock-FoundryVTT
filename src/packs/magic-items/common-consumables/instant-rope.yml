@@ -1,63 +1,48 @@
-name: Instant Rope
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/instant-rope.webp
+_id: instRope00000000
+_key: '!items!instRope00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
+  - _id: gj9zqoK2YmhiCY30
+    _key: '!items.effects!instRope00000000.gj9zqoK2YmhiCY30'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
+      competence:
+        raw: 0
       description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
       form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!GdNrqBR9aPA1YXxe.x6sjcsIVaOkVZOFD'
-  - name: Small
+      revealed: true
     type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
+  - _id: b8D2OveC9sJaTCNj
+    _key: '!items.effects!instRope00000000.b8D2OveC9sJaTCNj'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prInstRopeOnCrea
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!GdNrqBR9aPA1YXxe.VQDFXr0oJQZ7Waxe'
-  - name: Pour Instant Rope on Ground
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/pour-instant-rope-on-creature.webp
+    name: Pour Instant Rope on Creature
     system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -66,75 +51,27 @@ effects:
       delivery:
         base: item
       duration:
-        unit: minute
-        quantity: 10
-        stationary: false
+        dawn: false
         description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          startStatuses:
+            - immobilized
       interaction: manifest
       maneuver: active
-      overview:
-        base: >-
-          <p>Create a 30 foot @L[Category:Equipment]{rope} that lasts for the
-          @L[Core:Duration]{duration} of this effect.</p>
-      piercing: normal
-      powerSources:
-        - alchemical
-      range:
-        unit: melee
-      requirements: >-
-        <p>Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - area
-    _id: sxVHDnOxgPV6yEQ2
-    img: systems/teriock/src/icons/abilities/pour-instant-rope-on-ground.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.prInstRopeOnGrou
-    _key: '!items.effects!GdNrqBR9aPA1YXxe.sxVHDnOxgPV6yEQ2'
-  - name: Pour Instant Rope on Creature
-    type: ability
-    system:
-      costs:
-        material: true
-        materialCost: >-
-          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
-          that provides it.</p>
-      delivery:
-        base: item
-      duration:
-        unit: minute
-        quantity: 10
-        stationary: false
-        description: 10 Minutes
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: active
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -151,46 +88,132 @@ effects:
           @L[Condition:Immobilized]{immobilized}. They are not considered to
           have any @L[Equipment:Hand]{hands} or @L[Equipment:Foot]{feet} free
           while tied up.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          startStatuses:
-            - immobilized
-    _id: b8D2OveC9sJaTCNj
-    img: systems/teriock/src/icons/abilities/pour-instant-rope-on-creature.webp
+    type: ability
+  - _id: sxVHDnOxgPV6yEQ2
+    _key: '!items.effects!instRope00000000.sxVHDnOxgPV6yEQ2'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prInstRopeOnGrou
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.prInstRopeOnCrea
-    _key: '!items.effects!GdNrqBR9aPA1YXxe.b8D2OveC9sJaTCNj'
-  - name: Fragile
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/pour-instant-rope-on-ground.webp
+    name: Pour Instant Rope on Ground
     system:
-      description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
-    _id: gj9zqoK2YmhiCY30
-    img: systems/teriock/src/icons/properties/fragile.webp
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: >-
+          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
+          that provides it.</p>
+      delivery:
+        base: item
+      duration:
+        dawn: false
+        description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Create a 30 foot @L[Category:Equipment]{rope} that lasts for the
+          @L[Core:Duration]{duration} of this effect.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.</p>
+      revealed: true
+      targets:
+        - area
+    type: ability
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!instRope00000000.x6sjcsIVaOkVZOFD'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!GdNrqBR9aPA1YXxe.gj9zqoK2YmhiCY30'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: GdNrqBR9aPA1YXxe
-_key: '!items!GdNrqBR9aPA1YXxe'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!instRope00000000.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/instant-rope.webp
+name: Instant Rope
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

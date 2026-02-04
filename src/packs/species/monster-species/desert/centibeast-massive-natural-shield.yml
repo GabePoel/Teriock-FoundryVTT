@@ -1,70 +1,65 @@
-name: Massive Natural Shield
-type: body
 _id: NW1vOWgtptG2DZbP
-img: systems/teriock/src/icons/body-parts/massive-natural-shield.webp
-system:
-  damage:
-    base:
-      raw: '1'
-  competence:
-    raw: 0
-  _sup: centibeast000000
-  attackPenalty:
-    raw: '-3'
-  range:
-    long:
-      unit: self
-    melee: true
-    ranged: false
-    short:
-      unit: self
-  vitals: false
-  bv:
-    raw: '4'
+_key: '!items!NW1vOWgtptG2DZbP'
+_stats:
+  compendiumSource: Compendium.teriock.bodyParts.Item.massiveNaturalSh
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Bashing
-    type: property
+  - _id: eRqe6VlXBTieLMOY
+    _key: '!items.effects!NW1vOWgtptG2DZbP.eRqe6VlXBTieLMOY'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/properties/bashing.webp
+    name: Bashing
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
         weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
         Attack}.</p>
       form: intrinsic
-      competence:
-        raw: 0
       revealed: true
-    _id: eRqe6VlXBTieLMOY
-    img: systems/teriock/src/icons/properties/bashing.webp
+    type: property
+  - _id: IFghBPAw9nOD67bD
+    _key: '!items.effects!NW1vOWgtptG2DZbP.IFghBPAw9nOD67bD'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+      compendiumSource: Compendium.teriock.properties.Item.blking0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NW1vOWgtptG2DZbP.eRqe6VlXBTieLMOY'
-  - name: Blocking
-    type: property
+    img: systems/teriock/src/icons/properties/blocking.webp
+    name: Blocking
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property can be used
         for @L[Ability:Block Cone]{Block Cone}. It also does not have any
         @L[Core:Block Interaction]{block penalty}.</p>
       form: intrinsic
-      competence:
-        raw: 0
       revealed: true
-    _id: IFghBPAw9nOD67bD
-    img: systems/teriock/src/icons/properties/blocking.webp
+    type: property
+  - _id: N9ZCfdpbZlbdcrnO
+    _key: '!items.effects!NW1vOWgtptG2DZbP.N9ZCfdpbZlbdcrnO'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.blking0000000000
+      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NW1vOWgtptG2DZbP.IFghBPAw9nOD67bD'
-  - name: Cumbersome
-    type: property
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    name: Cumbersome
     system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
         <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
@@ -76,55 +71,60 @@ effects:
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
       form: flaw
-      modifiesActor: true
       impacts:
         changes:
-          - mode: 2
+          - key: system.encumbranceLevel
+            mode: 2
             priority: 10
-            time: normal
-            key: system.encumbranceLevel
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: '1'
-      competence:
-        raw: 0
+      modifiesActor: true
       revealed: true
-    _id: N9ZCfdpbZlbdcrnO
-    img: systems/teriock/src/icons/properties/cumbersome.webp
+    type: property
+  - _id: osVuSg5I4jj2CPm1
+    _key: '!items.effects!NW1vOWgtptG2DZbP.osVuSg5I4jj2CPm1'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
+      compendiumSource: Compendium.teriock.properties.Item.towerShielding00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NW1vOWgtptG2DZbP.N9ZCfdpbZlbdcrnO'
-  - name: Tower Shielding
-    type: property
+    img: systems/teriock/src/icons/properties/tower-shielding.webp
+    name: Tower Shielding
     system:
+      competence:
+        raw: 0
       description: >-
         <p>Only @L[Category:Small equipment]{small equipment} can be held in an
         arm that's @L[Keyword:Using]{using} @L[Category:Tower Shielding
         equipment]{tower shielding equipment}. But but no
         @L[Category:Equipment]{equipment} can be used to @L[Core:Attack
         Interaction]{attack} or @L[Core:Block Interaction]{block}.</p>
-      revealed: true
       form: flaw
-      competence:
-        raw: 0
-    _id: osVuSg5I4jj2CPm1
-    img: systems/teriock/src/icons/properties/tower-shielding.webp
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.towerShielding00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NW1vOWgtptG2DZbP.osVuSg5I4jj2CPm1'
-folder: s05Q2tRPUQEiiYA3
-_stats:
-  compendiumSource: Compendium.teriock.bodyParts.Item.massiveNaturalSh
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!NW1vOWgtptG2DZbP'
+      revealed: true
+    type: property
+folder: desert0000000000
+img: systems/teriock/src/icons/body-parts/massive-natural-shield.webp
+name: Massive Natural Shield
+system:
+  _sup: centibeast000000
+  attackPenalty:
+    raw: '-3'
+  bv:
+    raw: '4'
+  competence:
+    raw: 0
+  damage:
+    base:
+      raw: '1'
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+type: body

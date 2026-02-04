@@ -1,171 +1,195 @@
 _id: squirrelFamiliar
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Squirrel Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.squirrel00000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!squirrelFamiliar'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: squirrelTamer000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Squirrel Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Squirrel]{squirrel}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: WnTpVmHxs8K4WyMH
+    _key: '!items.effects!squirrelFamiliar.WnTpVmHxs8K4WyMH'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.acrobatics000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!squirrelFamiliar.squirrelTamer000'
-  - name: Acrobatics
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/acrobatics.webp
+    name: Acrobatics
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: assassin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficiency
+          attribute: mov
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Climbing]{Climbing} and
           @L[Ability:Leaping]{Leaping}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.acrobatics000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: WnTpVmHxs8K4WyMH
-    _key: '!items.effects!squirrelFamiliar.WnTpVmHxs8K4WyMH'
-  - name: Climbing
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: eoxLjZXWhFrAkTfB
+    _key: '!items.effects!squirrelFamiliar.eoxLjZXWhFrAkTfB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      _sup: WnTpVmHxs8K4WyMH
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: noLimit
+        description: Always Active
         quantity: 0
         stationary: false
-        description: Always Active
-      overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
+        unit: noLimit
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: klP4mbW67ugdmf11
+    _key: '!items.effects!squirrelFamiliar.klP4mbW67ugdmf11'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/leaping.webp
+    name: Leaping
+    system:
+      _sup: WnTpVmHxs8K4WyMH
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
       effectTypes:
         - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
               value: '2'
         proficient:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
               value: '3'
-      _sup: WnTpVmHxs8K4WyMH
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: eoxLjZXWhFrAkTfB
-    _key: '!items.effects!squirrelFamiliar.eoxLjZXWhFrAkTfB'
-  - name: Leaping
-    type: ability
-    system:
-      powerSources:
-        - martial
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
       overview:
         base: >-
           <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
@@ -175,125 +199,101 @@ effects:
           and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '2'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      _sup: WnTpVmHxs8K4WyMH
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/leaping.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: klP4mbW67ugdmf11
-    _key: '!items.effects!squirrelFamiliar.klP4mbW67ugdmf11'
-  - name: Shatter
-    type: ability
-    img: systems/teriock/src/icons/abilities/shatter.webp
-    system:
       powerSources:
         - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - item
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
-      piercing:
-        raw: 1
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: VfUeHhYpMxnBZEOA
+    _key: '!items.effects!squirrelFamiliar.VfUeHhYpMxnBZEOA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shatter000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/shatter.webp
+    name: Shatter
+    system:
       class: ranger
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>@L[Category:Knickknacks]{Knickknacks} only.</p>
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
       effectTypes:
         - destruction
-      competence:
-        raw: 0
-      revealed: true
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    _id: VfUeHhYpMxnBZEOA
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: attack
+      limitation: <p>@L[Category:Knickknacks]{Knickknacks} only.</p>
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - item
+    type: ability
+  - _id: squirrelTamer000
+    _key: '!items.effects!squirrelFamiliar.squirrelTamer000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.shatter000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!squirrelFamiliar.VfUeHhYpMxnBZEOA'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!squirrelFamiliar'
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Squirrel Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Squirrel]{squirrel}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Squirrel Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.squirrel00000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

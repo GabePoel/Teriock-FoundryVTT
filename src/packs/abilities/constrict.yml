@@ -1,35 +1,61 @@
 _id: constrict0000000
+_key: '!items!constrict0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Constrict
-    type: ability
+  - _id: constrict0000000
+    _key: '!items.effects!constrict0000000.constrict0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/constrict.webp
-    _id: constrict0000000
+    name: Constrict
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: true
-        description: While Stationary
       delivery:
         base: hand
+      duration:
+        dawn: false
+        description: While Stationary
+        raw: '0'
+        stationary: true
+        unit: unlimited
       endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: str
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
@@ -40,38 +66,11 @@ effects:
         fail: >-
           <p>Target is @L[Condition:Suffocating]{suffocating} and
           @L[Condition:Snared]{snared}.</p>
+      revealed: true
       sustained: true
       targets:
         - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!constrict0000000.constrict0000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/constrict.webp
 name: Constrict
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!constrict0000000'

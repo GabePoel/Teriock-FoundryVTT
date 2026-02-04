@@ -1,34 +1,51 @@
 _id: silverBeing00000
+_key: '!items!silverBeing00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Silver Being
-    type: ability
+  - _id: silverBeing00000
+    _key: '!items.effects!silverBeing00000.silverBeing00000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/silver-being.webp
-    _id: silverBeing00000
+    name: Silver Being
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.types
+              mode: 2
+              priority: 10
+              qualifier: '@class.bodyParts'
+              target: armament
+              time: normal
+              value: silver
       interaction: manifest
       maneuver: passive
       overview:
@@ -36,34 +53,16 @@ effects:
           <p>You are @L[Keyword:Immunity]{immune} to @L[Drain:Mana]{mana drain}
           and your @L[Category:Body parts]{body parts} deal
           @L[Damage:Silver]{silver damage}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.damage.types
-              target: armament
-              qualifier: '@class.bodyParts'
-              value: silver
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!silverBeing00000.silverBeing00000'
+    type: ability
 img: systems/teriock/src/icons/abilities/silver-being.webp
 name: Silver Being
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!silverBeing00000'

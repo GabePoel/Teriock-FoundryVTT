@@ -1,100 +1,54 @@
 _id: duelingTechnique
+_key: '!items!duelingTechnique'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Dueling Techniques
-    type: ability
-    img: systems/teriock/src/icons/abilities/dueling-techniques.webp
-    _id: duelingTechnique
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
-        somatic: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        conditions:
-          present:
-            - dueling
-        dawn: false
-        stationary: false
-        description: While Dueling
-      delivery:
-        base: self
-      endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using} of
-          your choice becomes @L[Property:AV0]{AV0} against creatures you are
-          @L[Condition:Dueling]{dueling} and you gain
-          @L[Keyword:Limited]{Limited} @L[Ability:Chi Strike]{Chi Strike}.</p>
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      requirements: >-
-        <p>You must be @L[Condition:Dueling]{dueling} and wielding the targeted
-        weapon.</p>
-      skill: true
-      standard: true
-      targets:
-        - weapon
-      impacts: {}
-      class: duelist
+  - _id: YRc7DFInJXZAbAAJ
+    _key: '!items.effects!duelingTechnique.YRc7DFInJXZAbAAJ'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.chiStrike0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!duelingTechnique.duelingTechnique'
-  - name: Chi Strike
-    type: ability
     img: systems/teriock/src/icons/abilities/chi-strike.webp
-    _id: YRc7DFInJXZAbAAJ
+    name: Chi Strike
     system:
+      _sup: duelingTechnique
+      class: duelist
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: weapon
         package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - draining
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
       interaction: attack
       limitation: >-
         <p>May only be delivered with the @L[Category:Weapons]{weapon} you made
@@ -110,43 +64,86 @@ effects:
           Damage Boost]{Triumphant Damage Boost} would
           @L[Keyword:Boosted]{boost} it, but @L[Ability:Improved Brace]{Improved
           Brace} would not @L[Keyword:Deboosted]{deboost} it.</p>
+      piercing:
+        raw: 0
       powerSources:
         - spiritual
       range:
         raw: Your Weapon's Range
         unit: ft
       results:
-        hit: >-
-          <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
-          @L[Core:Standard Damage]{standard damage} you would otherwise
-          deal.</p>
         critHit: >-
           <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the amount of
           @L[Core:Critical Damage]{critical damage} you would otherwise
           deal.</p>
+        hit: >-
+          <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
+          @L[Core:Standard Damage]{standard damage} you would otherwise
+          deal.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          common:
-            - standardDamage
-      _sup: duelingTechnique
-      class: duelist
+    type: ability
+  - _id: duelingTechnique
+    _key: '!items.effects!duelingTechnique.duelingTechnique'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.chiStrike0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!duelingTechnique.YRc7DFInJXZAbAAJ'
+    img: systems/teriock/src/icons/abilities/dueling-techniques.webp
+    name: Dueling Techniques
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+      delivery:
+        base: self
+      duration:
+        conditions:
+          present:
+            - dueling
+        dawn: false
+        description: While Dueling
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using} of
+          your choice becomes @L[Property:AV0]{AV0} against creatures you are
+          @L[Condition:Dueling]{dueling} and you gain
+          @L[Keyword:Limited]{Limited} @L[Ability:Chi Strike]{Chi Strike}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      requirements: >-
+        <p>You must be @L[Condition:Dueling]{dueling} and wielding the targeted
+        weapon.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - weapon
+    type: ability
 img: systems/teriock/src/icons/abilities/dueling-techniques.webp
 name: Dueling Techniques
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!duelingTechnique'

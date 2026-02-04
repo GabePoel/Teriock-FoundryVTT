@@ -1,61 +1,44 @@
 _id: stormRiftTroll00
-folder: dswe3W6BWnDww0sk
-name: Storm Rift Troll
-type: species
-img: systems/teriock/src/icons/creatures/storm-rift-troll.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Rift trolls are @L[Category:Elemental creatures]{elemental}
-    @L[Category:Trolls]{trolls} that have come to this plane. They are partial
-    @L[Category:Elemental creatures]{elementals} themselves and have the same
-    protections. They also have an uncanny power to shape their element to their
-    will and may have other abilities as well that aren't listed here.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '6'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '2'
-  appearance: >-
-    <p>Ugly, and hunched with a lanky build and dark blue, thick, leathery
-    skin.</p>
-  br: 30
-  size:
-    enabled: true
-    value: 7
-  traits:
-    - partialHumanoid
-    - monstrous
-    - outsider
-    - elemental
+_key: '!items!stormRiftTroll00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Acidic Blood
-    type: ability
+  - _id: kkchM5aAu7bLjgYH
+    _key: '!items.effects!stormRiftTroll00.kkchM5aAu7bLjgYH'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/acidic-blood.webp
+    name: Acidic Blood
     system:
-      powerSources:
-        - alchemical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - automatic
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Any @L[Category:Weapons]{weapon} that deals @L[Core:Damage]{damage}
@@ -63,437 +46,50 @@ effects:
           next @L[Core:Turns]{turn}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       trigger: >-
         <p> This triggers automatically. You cannot choose to not use it if you
         are able to.</p>
-      form: normal
-      effectTypes:
-        - automatic
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: kkchM5aAu7bLjgYH
+    type: ability
+  - _id: DymYPzGD5UXQDKKC
+    _key: '!items.effects!stormRiftTroll00.DymYPzGD5UXQDKKC'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.kkchM5aAu7bLjgYH'
-  - name: Dark Vision
-    type: ability
-    img: systems/teriock/src/icons/abilities/dark-vision.webp
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You can see in the dark up to 60 feet as though it is dim
-          light.</p>
-      piercing:
-        raw: 0
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.dark
-              target: Actor
-              qualifier: '1'
-              value: '60'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: g8LmKbKvJzb43DWK
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.g8LmKbKvJzb43DWK'
-  - name: High Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/high-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: int
-          value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: R9WaygDo7s7B9YtJ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.highIntelligence
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.R9WaygDo7s7B9YtJ'
-  - name: Magical Durability
-    type: ability
-    img: systems/teriock/src/icons/abilities/magical-durability.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
-          @L[Core:Damage]{damage}.</p>
-      piercing:
-        raw: 0
-      form: special
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: mundane
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: jo7tJfnYqV9n3SsN
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.jo7tJfnYqV9n3SsN'
-  - name: Monstrous Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
-          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
-          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
-          and they are @L[Keyword:AV0]{AV0} for you.</p>
-      piercing:
-        raw: 0
-      form: special
-      impacts:
-        base:
-          changes:
-            - mode: 0
-              priority: 100
-              time: normal
-              key: system.damage.all.raw
-              target: armament
-              qualifier: and(@dmg, @range.melee)
-              value: '1'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.piercing.raw
-              target: armament
-              qualifier: '@range.melee'
-              value: '1'
-      upgrades:
-        score:
-          attribute: str
-          value: 5
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.monstrousStrengt
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: nX6I3SPXElyOnNtm
-    _key: '!items.effects!stormRiftTroll00.nX6I3SPXElyOnNtm'
-  - name: Supernatural Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
-          @L[Category:Attack abilities]{attack} to make it
-          @L[Keyword:AV0]{AV0}.</p>
-      piercing:
-        raw: 0
-      form: special
-      _sup: nX6I3SPXElyOnNtm
-      upgrades:
-        score:
-          attribute: str
-          value: 4
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.supernaturalStre
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: M4xhEjdpkZYzoRMA
-    _key: '!items.effects!stormRiftTroll00.M4xhEjdpkZYzoRMA'
-  - name: Giant Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
+      _sup: TAIb8L8vGtnDLwYn
       class: knight
-      form: normal
-      _sup: M4xhEjdpkZYzoRMA
-      upgrades:
-        score:
-          attribute: str
-          value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/giant-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 20W0QGMmpkTPu52Y
-    _key: '!items.effects!stormRiftTroll00.20W0QGMmpkTPu52Y'
-  - name: Improved Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      _sup: 20W0QGMmpkTPu52Y
-      upgrades:
-        score:
-          attribute: str
-          value: 2
+        stationary: false
+        unit: unlimited
+      executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: TAIb8L8vGtnDLwYn
-    _key: '!items.effects!stormRiftTroll00.TAIb8L8vGtnDLwYn'
-  - name: Beastly Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
       featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
       overview:
         base: >-
           <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -502,104 +98,439 @@ effects:
           to be @L[Property:AV0]{AV0}.</div>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
-      _sup: TAIb8L8vGtnDLwYn
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    type: ability
+  - _id: tZc1xUNcPYpHflPV
+    _key: '!items.effects!stormRiftTroll00.tZc1xUNcPYpHflPV'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      compendiumSource: Compendium.teriock.abilities.Item.commandElite0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: DymYPzGD5UXQDKKC
-    _key: '!items.effects!stormRiftTroll00.DymYPzGD5UXQDKKC'
-  - name: Improved Armor Piercing
-    type: ability
+    img: systems/teriock/src/icons/abilities/command-elite.webp
+    name: Command Elite
     system:
+      _sup: Lgnz0Vgnl2BMSkGx
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 3
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - mental
+        - control
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: unp
+      form: special
+      grantOnly: false
+      interaction: feat
+      limitation: >-
+        <p>@L[Category:Elemental creatures]{Water elementals} only. Creatures
+        remain under your command only while they are within range of Storm
+        Element Shaping.</p>
+      maneuver: active
+      overview:
+        fluent: >-
+          <p>The command may be up to 3 × (1 + @L[Core:Fluency Bonus]{F}) words
+          in length.</p>
+        proficient: >-
+          <p>The command may be up to 3 × (1 + @L[Core:Proficiency Bonus]{P})
+          words in length.</p>
+      piercing:
+        raw: 0
       powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Give a command of up to 3 words in length. The target must follow
+          this command for the duration of this effect.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
+  - _id: g8LmKbKvJzb43DWK
+    _key: '!items.effects!stormRiftTroll00.g8LmKbKvJzb43DWK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/dark-vision.webp
+    name: Dark Vision
+    system:
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can see in the dark up to 60 feet as though it is dim
+          light.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: 20W0QGMmpkTPu52Y
+    _key: '!items.effects!stormRiftTroll00.20W0QGMmpkTPu52Y'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    name: Giant Strength
+    system:
+      _sup: M4xhEjdpkZYzoRMA
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
+          are no longer suffer the consequences of
+          @L[Property:Cumbersome]{cumbersome} items.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 3
+    type: ability
+  - _id: R9WaygDo7s7B9YtJ
+    _key: '!items.effects!stormRiftTroll00.R9WaygDo7s7B9YtJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.highIntelligence
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/high-intelligence.webp
+    name: High Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: 3
+    type: ability
+  - _id: N62trBlRtCuP80s3
+    _key: '!items.effects!stormRiftTroll00.N62trBlRtCuP80s3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: TAIb8L8vGtnDLwYn
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      _sup: TAIb8L8vGtnDLwYn
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: N62trBlRtCuP80s3
-    _key: '!items.effects!stormRiftTroll00.N62trBlRtCuP80s3'
-  - name: Melee Damage Boost
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: TAIb8L8vGtnDLwYn
+    _key: '!items.effects!stormRiftTroll00.TAIb8L8vGtnDLwYn'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: 20W0QGMmpkTPu52Y
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
+  - _id: jo7tJfnYqV9n3SsN
+    _key: '!items.effects!stormRiftTroll00.jo7tJfnYqV9n3SsN'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/magical-durability.webp
+    name: Magical Durability
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mundane
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
+          @L[Core:Damage]{damage}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: uEsXUgq7LSk5srbL
+    _key: '!items.effects!stormRiftTroll00.uEsXUgq7LSk5srbL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
+    system:
+      _sup: 20W0QGMmpkTPu52Y
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
-      range:
-        unit: melee
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -610,241 +541,262 @@ effects:
           @L[Core:Damage]{damage} again.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      class: knight
+      targets:
+        - creature
       trigger: >-
         <p>You have hit a creature with a @L[Category:Damaging
         effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
         @L[Category:Attack abilities]{attack}.</p>
-      form: normal
-      effectTypes:
-        - damaging
-      _sup: 20W0QGMmpkTPu52Y
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    type: ability
+  - _id: nX6I3SPXElyOnNtm
+    _key: '!items.effects!stormRiftTroll00.nX6I3SPXElyOnNtm'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+      compendiumSource: Compendium.teriock.abilities.Item.monstrousStrengt
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: uEsXUgq7LSk5srbL
-    _key: '!items.effects!stormRiftTroll00.uEsXUgq7LSk5srbL'
-  - name: Shattering Grip
-    type: ability
+    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
+    name: Monstrous Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
-      delivery:
-        base: hand
-      targets:
-        - item
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: melee
-      overview:
-        base: <p>Target is @L[Property:Shattered]{shattered}.</p>
-      piercing:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      requirements: <p>You are holding the target.</p>
-      form: normal
-      effectTypes:
-        - destruction
-      _sup: M4xhEjdpkZYzoRMA
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/shattering-grip.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: YDZweMK6ocoJFKou
-    _key: '!items.effects!stormRiftTroll00.YDZweMK6ocoJFKou'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.piercing.raw
+              mode: 4
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
+          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
+          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
+          and they are @L[Keyword:AV0]{AV0} for you.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 5
+    type: ability
+  - _id: vdALKD8fJgVEsRQG
+    _key: '!items.effects!stormRiftTroll00.vdALKD8fJgVEsRQG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: vdALKD8fJgVEsRQG
+    type: ability
+  - _id: xSTgOjpIPlI1Tb34
+    _key: '!items.effects!stormRiftTroll00.xSTgOjpIPlI1Tb34'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.vdALKD8fJgVEsRQG'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: xSTgOjpIPlI1Tb34
+    type: ability
+  - _id: izd4hTmkfHn0TOC7
+    _key: '!items.effects!stormRiftTroll00.izd4hTmkfHn0TOC7'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.xSTgOjpIPlI1Tb34'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: 8Lw5XRxF6xULG7n3
+    _key: '!items.effects!stormRiftTroll00.8Lw5XRxF6xULG7n3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.outsiderRgn00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
+    name: Outsider Regenerating
+    system:
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: izd4hTmkfHn0TOC7
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.izd4hTmkfHn0TOC7'
-  - name: Outsider Regenerating
-    type: ability
-    img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_5ObHOfAGjqqdVKPH: turnStart
+          Compendium_teriock_execution_Macro_outsiderRgnTurnS: turnStart
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you
@@ -859,48 +811,96 @@ effects:
           @L[Condition:Burned]{burned}</i>.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_5ObHOfAGjqqdVKPH: turnStart
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: 8Lw5XRxF6xULG7n3
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: YDZweMK6ocoJFKou
+    _key: '!items.effects!stormRiftTroll00.YDZweMK6ocoJFKou'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.outsiderRegenera
+      compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.8Lw5XRxF6xULG7n3'
-  - name: Storm Element Shaping
-    type: ability
+    img: systems/teriock/src/icons/abilities/shattering-grip.webp
+    name: Shattering Grip
     system:
+      _sup: M4xhEjdpkZYzoRMA
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - destruction
+      executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      requirements: <p>You are holding the target.</p>
+      revealed: true
+      targets:
+        - item
+    type: ability
+  - _id: Lgnz0Vgnl2BMSkGx
+    _key: '!items.effects!stormRiftTroll00.Lgnz0Vgnl2BMSkGx'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stormEleShaping0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/storm-element-shaping.webp
+    name: Storm Element Shaping
+    system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       effectTypes:
         - control
       elements:
         - storm
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -928,15 +928,15 @@ effects:
           @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat save}. You also
           gain @L[Keyword:Limited]{Limited} @L[Ability:Command Elite]{Command
           Elite}.</p>
-        proficient: >-
-          <p>The range of this ability increases by 10 × @L[Core:Proficiency
-          Bonus]{P} feet and you may add @L[Core:Proficiency Bonus]{P} to the
-          @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat saves} you make
-          to take take control of @L[Category:Storm element abilities]{storm
-          element abilities} if you wouldn't otherwise.</p>
         fluent: >-
           <p>The range of this ability increases by 10 × @L[Core:Fluency
           Bonus]{F} feet and you may add @L[Core:Fluency Bonus]{F} to the
+          @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat saves} you make
+          to take take control of @L[Category:Storm element abilities]{storm
+          element abilities} if you wouldn't otherwise.</p>
+        proficient: >-
+          <p>The range of this ability increases by 10 × @L[Core:Proficiency
+          Bonus]{P} feet and you may add @L[Core:Proficiency Bonus]{P} to the
           @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat saves} you make
           to take take control of @L[Category:Storm element abilities]{storm
           element abilities} if you wouldn't otherwise.</p>
@@ -947,115 +947,56 @@ effects:
       range:
         raw: '10'
         unit: self
+      revealed: true
       targets:
         - area
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-    img: systems/teriock/src/icons/abilities/storm-element-shaping.webp
+    type: ability
+  - _id: FdMc1cgCS2pF2WpA
+    _key: '!items.effects!stormRiftTroll00.FdMc1cgCS2pF2WpA'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stormEleShaping0
+      compendiumSource: Compendium.teriock.abilities.Item.stormMagHxs00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: Lgnz0Vgnl2BMSkGx
-    _key: '!items.effects!stormRiftTroll00.Lgnz0Vgnl2BMSkGx'
-  - name: Command Elite
-    type: ability
-    system:
-      costs:
-        mp:
-          type: static
-          value:
-            static: 3
-      delivery:
-        base: sight
-      duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
-        raw: '1'
-        dawn: false
-      effectTypes:
-        - mental
-        - control
-      elements:
-        - necromancy
-      executionTime: a1
-      featSaveAttribute: unp
-      form: special
-      grantOnly: false
-      interaction: feat
-      limitation: >-
-        <p>@L[Category:Elemental creatures]{Water elementals} only. Creatures
-        remain under your command only while they are within range of Storm
-        Element Shaping.</p>
-      maneuver: active
-      overview:
-        proficient: >-
-          <p>The command may be up to 3 × (1 + @L[Core:Proficiency Bonus]{P})
-          words in length.</p>
-        fluent: >-
-          <p>The command may be up to 3 × (1 + @L[Core:Fluency Bonus]{F}) words
-          in length.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: ft
-        raw: '10'
-      results:
-        fail: >-
-          <p>Give a command of up to 3 words in length. The target must follow
-          this command for the duration of this effect.</p>
-      targets:
-        - creature
-      _sup: Lgnz0Vgnl2BMSkGx
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-    img: systems/teriock/src/icons/abilities/command-elite.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.commandElite0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: tZc1xUNcPYpHflPV
-    _key: '!items.effects!stormRiftTroll00.tZc1xUNcPYpHflPV'
-  - name: Storm Magic Hexseal
-    type: ability
     img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
+    name: Storm Magic Hexseal
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         description: While Up
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - hexseal
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.hexseals.elements
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: storm
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
@@ -1063,97 +1004,157 @@ effects:
           abilities}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: M4xhEjdpkZYzoRMA
+    _key: '!items.effects!stormRiftTroll00.M4xhEjdpkZYzoRMA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.supernaturalStre
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+    name: Supernatural Strength
+    system:
+      _sup: nX6I3SPXElyOnNtm
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
+          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
+          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
+          @L[Category:Attack abilities]{attack} to make it
+          @L[Keyword:AV0]{AV0}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 4
+    type: ability
+  - _id: jHfJJN5KpUWqCn0w
+    _key: '!items.effects!stormRiftTroll00.jHfJJN5KpUWqCn0w'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+    name: Unconsciousness Immunity
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
-        - hexseal
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 2
+            - key: system.protections.immunities.statuses
+              mode: 2
               priority: 10
-              time: normal
-              key: system.protections.hexseals.elements
-              target: Actor
               qualifier: '1'
-              value: storm
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: FdMc1cgCS2pF2WpA
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stormMagHxs00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.FdMc1cgCS2pF2WpA'
-  - name: Unconsciousness Immunity
-    type: ability
-    img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
-    system:
-      powerSources:
-        - magical
+              target: Actor
+              time: normal
+              value: unconscious
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to falling
           @L[Condition:Unconscious]{unconscious}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: unconscious
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: jHfJJN5KpUWqCn0w
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormRiftTroll00.jHfJJN5KpUWqCn0w'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!stormRiftTroll00'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: riftTrolls000000
+img: systems/teriock/src/icons/creatures/storm-rift-troll.webp
+name: Storm Rift Troll
+system:
+  appearance: >-
+    <p>Ugly, and hunched with a lanky build and dark blue, thick, leathery
+    skin.</p>
+  br: 30
+  competence:
+    raw: 1
+  description: >-
+    <p>Rift trolls are @L[Category:Elemental creatures]{elemental}
+    @L[Category:Trolls]{trolls} that have come to this plane. They are partial
+    @L[Category:Elemental creatures]{elementals} themselves and have the same
+    protections. They also have an uncanny power to shape their element to their
+    will and may have other abilities as well that aren't listed here.</p>
+  size:
+    enabled: true
+    value: 7
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '6'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '2'
+  traits:
+    - partialHumanoid
+    - monstrous
+    - outsider
+    - elemental
+type: species

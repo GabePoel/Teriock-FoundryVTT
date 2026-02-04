@@ -1,58 +1,101 @@
-_id: rank3Veteran0000
-folder: veteran000000000
-name: Rank 3 Veteran
-system:
-  archetype: warrior
-  className: veteran
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>Jaded and tough, these warriors act as if they have seen it all.
-    Obviously they are not all seasoned warriors, but the training of a Veteran
-    involves a great deal of time in battle, so even a first rank Veteran has
-    seen more action than other first rank warriors. The strategy of the Veteran
-    is to be an immovable wall, and hold the line. Veterans rely on defense in
-    battle, always working to better ensure their protection, which is why they
-    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
-    and pessimistic.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 4
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-veteran.webp
+_id: r3Vet00000000000
+_key: '!items!r3Vet00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Armor Wound
-    type: ability
-    img: systems/teriock/src/icons/abilities/armor-wound.webp
+  - _id: PioQvKwJDZKIYNi3
+    _key: '!items.effects!r3Vet00000000000.PioQvKwJDZKIYNi3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.armorMas00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/armor-master.webp
+    name: Armor Master
     system:
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Master Armor Smith]{Master Armor Smith} and
+          @L[Ability:Runic Armor]{Runic Armor}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: armor
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: vLlgfZ2tZq02juSg
+    _key: '!items.effects!r3Vet00000000000.vLlgfZ2tZq02juSg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.armorWound000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/armor-wound.webp
+    name: Armor Wound
+    system:
+      class: veteran
+      competence:
+        raw: 0
+      costs:
+        break: shatter
+      delivery:
+        base: armor
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
-      range:
-        unit: melee
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>The triggering effect @L[Core:Fizzles]{fizzles} against you (and
@@ -61,57 +104,67 @@ effects:
           from some other source, it cannot be used for [[lookup name]].</div>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      class: veteran
-      costs:
-        break: shatter
-      expansionSaveAttribute: mov
+      targets:
+        - self
       trigger: <p>You would take damage.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: vLlgfZ2tZq02juSg
+    type: ability
+  - _id: v0Xb1GopbJqrtB0N
+    _key: '!items.effects!r3Vet00000000000.v0Xb1GopbJqrtB0N'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imBrace000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.armorWound000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Veteran0000.vLlgfZ2tZq02juSg'
-  - name: Improved Brace
-    type: ability
     img: systems/teriock/src/icons/abilities/improved-brace.webp
+    name: Improved Brace
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: veteran
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         conditions:
           absent:
             - down
+        dawn: false
         description: While Up
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: flags.teriockEffect.braceDieSize
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+          rolls:
+            tempHp: 1d6
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you use @L[Ability:Brace]{Brace}, you gain @L[Core:Temporary
@@ -126,65 +179,57 @@ effects:
           [[lookup name]] takes them away.</div>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: veteran
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          rolls:
-            tempHp: 1d6
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: flags.teriockEffect.braceDieSize
-              target: Actor
-              qualifier: '1'
-              value: '10'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: v0Xb1GopbJqrtB0N
+      targets:
+        - self
+    type: ability
+  - _id: nEWl3ZXUcMWe83ed
+    _key: '!items.effects!r3Vet00000000000.nEWl3ZXUcMWe83ed'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.int0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imBrace000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Veteran0000.v0Xb1GopbJqrtB0N'
-  - name: Intercept
-    type: ability
     img: systems/teriock/src/icons/abilities/intercept.webp
+    name: Intercept
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      class: veteran
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: formula
+          value:
+            formula: 1d8
+            static: 0
       delivery:
         base: hand
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: reactive
       overview:
         base: >-
           <p>If the effect causing the
@@ -194,113 +239,67 @@ effects:
           @L[Core:Temporary Hit Points]{temporary HP}.</p><div
           class="note"><b>Note:</b> Creatures can choose to be hit by attacks
           while up.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>The effect causing the target to become @L[Condition:Down]{down}
           @L[Core:Fizzles]{fizzles}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
       skill: true
       standard: true
-      class: veteran
-      costs:
-        hp:
-          type: formula
-          value:
-            static: 0
-            formula: 1d8
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: <p>A creature within range would be @L[Condition:Down]{dropped}.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: nEWl3ZXUcMWe83ed
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.int0000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Veteran0000.nEWl3ZXUcMWe83ed'
-  - name: Armor Master
     type: ability
-    img: systems/teriock/src/icons/abilities/armor-master.webp
+  - _id: 2NG0FR1OTg5Jyaez
+    _key: '!items.effects!r3Vet00000000000.2NG0FR1OTg5Jyaez'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.masArmorSmith000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/master-armor-smith.webp
+    name: Master Armor Smith
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Master Armor Smith]{Master Armor Smith} and
-          @L[Ability:Runic Armor]{Runic Armor}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
+      _sup: PioQvKwJDZKIYNi3
       class: veteran
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.armorMas00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: PioQvKwJDZKIYNi3
-    _key: '!items.effects!rank3Veteran0000.PioQvKwJDZKIYNi3'
-  - name: Master Armor Smith
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.blacksmith.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
@@ -309,124 +308,58 @@ effects:
           armor.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: VBoKPDCDrZYSanpd
+    _key: '!items.effects!r3Vet00000000000.VBoKPDCDrZYSanpd'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mysticItmRepair0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/mystic-item-repair.webp
+    name: Mystic Item Repair
+    system:
       class: veteran
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.blacksmith.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      _sup: PioQvKwJDZKIYNi3
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/master-armor-smith.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.masArmorSmith000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 2NG0FR1OTg5Jyaez
-    _key: '!items.effects!rank3Veteran0000.2NG0FR1OTg5Jyaez'
-  - name: Runic Armor
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - armor
-      duration:
-        unit: hour
-        quantity: 24
-        stationary: false
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>The targeted @L[Category:Armor]{armor} becomes
-          @L[Property:Runic]{runic}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      ritual: true
-      class: veteran
       costs:
         mp:
-          type: variable
+          type: static
           value:
-            static: 0
-            variable: >-
-              <p>[[lookup name]] costs an amount of @L[Core:MP]{MP} equal to the
-              armor's @L[Core:AV]{AV}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: PioQvKwJDZKIYNi3
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/runic-armor.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.runicArmor000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: TpOwqLqDcyL0iC1Y
-    _key: '!items.effects!rank3Veteran0000.TpOwqLqDcyL0iC1Y'
-  - name: Mystic Item Repair
-    type: ability
-    img: systems/teriock/src/icons/abilities/mystic-item-repair.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+            static: 1
+        somatic: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - item
       duration:
-        unit: hour
-        quantity: 8
+        dawn: false
         description: 8 Hours
+        raw: '8'
         stationary: false
-      range:
-        unit: ft
-        raw: '5'
+        unit: hour
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You wave your hand over an item as arcane runes appear on its
@@ -436,61 +369,143 @@ effects:
           @L[Property:Shattered]{shattered} instead.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>The item must not be a @L[Category:Weapons]{weapon}.</p>
+      revealed: true
+      ritual: true
       skill: true
       standard: true
-      ritual: true
+      targets:
+        - item
+    type: ability
+  - _id: TpOwqLqDcyL0iC1Y
+    _key: '!items.effects!r3Vet00000000000.TpOwqLqDcyL0iC1Y'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.runicArmor000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/runic-armor.webp
+    name: Runic Armor
+    system:
+      _sup: PioQvKwJDZKIYNi3
       class: veteran
-      costs:
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      requirements: <p>The item must not be a @L[Category:Weapons]{weapon}.</p>
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
+      costs:
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>[[lookup name]] costs an amount of @L[Core:MP]{MP} equal to the
+              armor's @L[Core:AV]{AV}.</p>
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    _id: VBoKPDCDrZYSanpd
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The targeted @L[Category:Armor]{armor} becomes
+          @L[Property:Runic]{runic}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - armor
+    type: ability
+  - _id: DDCszBLFPaksOMMq
+    _key: '!items.effects!r3Vet00000000000.DDCszBLFPaksOMMq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.sentry0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mysticItmRepair0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Veteran0000.VBoKPDCDrZYSanpd'
-  - name: Sentry
-    type: ability
     img: systems/teriock/src/icons/abilities/sentry.webp
+    name: Sentry
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: veteran
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         conditions:
           absent:
             - down
+        dawn: false
         description: While Up
+        raw: '0'
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Surprised (Braced, Fortified Areas, Guard Duty)
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Frightened (Braced, Fortified Areas, Guard Duty)
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When in an area that's been "fortified" with @L[Ability:Fortify
@@ -509,60 +524,45 @@ effects:
           completes a @L[Category:Ritual delivery abilities]{ritual}.</li></ul>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: veteran
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Being Surprised (Braced, Fortified Areas, Guard Duty)
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Frightened (Braced, Fortified Areas, Guard Duty)
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: DDCszBLFPaksOMMq
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sentry0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Veteran0000.DDCszBLFPaksOMMq'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank3Veteran0000'
+      targets:
+        - self
+    type: ability
+folder: veteran000000000
+img: systems/teriock/src/icons/ranks/rank-3-veteran.webp
+name: Rank 3 Veteran
+system:
+  archetype: warrior
+  className: veteran
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>Jaded and tough, these warriors act as if they have seen it all.
+    Obviously they are not all seasoned warriors, but the training of a Veteran
+    involves a great deal of time in battle, so even a first rank Veteran has
+    seen more action than other first rank warriors. The strategy of the Veteran
+    is to be an immovable wall, and hold the line. Veterans rely on defense in
+    battle, always working to better ensure their protection, which is why they
+    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
+    and pessimistic.</p>
+  innate: false
+  maxAv: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

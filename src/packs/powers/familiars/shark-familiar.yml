@@ -1,63 +1,55 @@
 _id: sharkFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Shark Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.shark00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!sharkFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: sharkTamer000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Shark Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Shark]{shark}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: dJM53bvDeVxfIV49
+    _key: '!items.effects!sharkFamiliar000.dJM53bvDeVxfIV49'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.resurrect0000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!sharkFamiliar000.sharkTamer000000'
-  - name: Resurrect
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/resurrect.webp
+    name: Resurrect
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      class: lifeMage
+      competence:
+        raw: 0
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - revival
+        - healing
       elements:
         - life
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target can have been
+        @L[Condition:Dead]{dead} for an additional 24 hours. If target is
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.</p>
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>If target is @L[Condition:Dead]{dead}, they are brought back to
@@ -66,77 +58,108 @@ effects:
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
           does not count as a @L[Category:Healing effects]{healing effect}
           unless you choose to @L[Core:Healing]{heal} with it.</p>
-        proficient: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
-          @L[Core:Proficiency Bonus]{P} times.</p>
         fluent: >-
           <p>If target is @L[Category:Undead creatures]{undead}, they are
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
           Bonus]{F} times.</p>
+        proficient: >-
+          <p>If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
+          @L[Core:Proficiency Bonus]{P} times.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 24 hours.</p>
+      revealed: true
+      ritual: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: sharkTamer000000
+    _key: '!items.effects!sharkFamiliar000.sharkTamer000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Shark Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Shark]{shark}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: XjojStGt56g9QFCj
+    _key: '!items.effects!sharkFamiliar000.XjojStGt56g9QFCj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.summonTheDead000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/summon-the-dead.webp
+    name: Summon the Dead
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{HP}
+              if the body is in your possession. Otherwise, it costs 3
+              @L[Core:Hit Points and Mana Points]{HP} per @L[Core:Size]{size} of
+              the body.</p>
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
+              if the body is in your possession. Otherwise, it costs 2
+              @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
+              the body.</p>
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - summoning
+      elements:
+        - necromancy
+      executionTime: 10 Minutes
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: lifeMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target can have been
-        @L[Condition:Dead]{dead} for an additional 24 hours. If target is
-        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
-        an additional time.</p>
-      requirements: >-
-        <p>Target is @L[Category:Undead creatures]{undead} or has
-        @L[Condition:Dead]{died} within the last 24 hours.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - revival
-        - healing
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: dJM53bvDeVxfIV49
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.resurrect0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sharkFamiliar000.dJM53bvDeVxfIV49'
-  - name: Summon the Dead
-    type: ability
-    img: systems/teriock/src/icons/abilities/summon-the-dead.webp
-    system:
-      powerSources:
-        - magical
-        - spiritual
-        - primal
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '5'
       overview:
         base: >-
           <p>If you have the body of the target in your possession, you can put
@@ -152,54 +175,31 @@ effects:
           is now intact.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+        - spiritual
+        - primal
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
+      revealed: true
+      ritual: true
       spell: true
       standard: true
-      ritual: true
-      class: necromancer
-      costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
-              if the body is in your possession. Otherwise, it costs 2
-              @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
-              the body.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{HP}
-              if the body is in your possession. Otherwise, it costs 3
-              @L[Core:Hit Points and Mana Points]{HP} per @L[Core:Size]{size} of
-              the body.</p>
-      requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - summoning
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: XjojStGt56g9QFCj
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.summonTheDead000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sharkFamiliar000.XjojStGt56g9QFCj'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!sharkFamiliar000'
+      targets:
+        - creature
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Shark Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.shark00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

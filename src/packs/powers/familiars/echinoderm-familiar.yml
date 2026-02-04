@@ -1,119 +1,138 @@
 _id: echinodermFamili
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Echinoderm Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.echinoderm000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!echinodermFamili'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: echinodermTamer0
-    img: icons/environment/settlement/stables-logo.webp
-    name: Echinoderm Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Echinoderm]{echinoderm}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: n74y06MAD7TyqPq7
+    _key: '!items.effects!echinodermFamili.n74y06MAD7TyqPq7'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.brace00000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!echinodermFamili.echinodermTamer0'
-  - name: Brace
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/brace.webp
+    name: Brace
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: veteran
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: While Stationary
+        quantity: 0
         stationary: true
-      sustained: true
-      overview:
-        base: >-
-          <p>Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain
-          [[/roll 1d6]] @L[Core:Temporary Hit Points]{temporary HP} as long as
-          you remain stationary.</p>
-        proficient: >-
-          <p>Instead gain [[/roll 1d6 + (@p)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.</p>
-        fluent: >-
-          <p>Instead gain [[/roll 1d6 + (@f)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.</p>
-      piercing:
-        raw: 0
+        unit: noLimit
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_0Gb7QPmgAotusvVQ: effectApplication
+          Compendium_teriock_execution_Macro_RCqX2d4YKWXd6o1i: movement
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain
+          [[/roll 1d6]] @L[Core:Temporary Hit Points]{temporary HP} as long as
+          you remain stationary.</p>
+        fluent: >-
+          <p>Instead gain [[/roll 1d6 + (@f)d6]] @L[Core:Temporary Hit
+          Points]{temporary HP}.</p>
+        proficient: >-
+          <p>Instead gain [[/roll 1d6 + (@p)d6]] @L[Core:Temporary Hit
+          Points]{temporary HP}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
       skill: true
       standard: true
-      class: veteran
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_0Gb7QPmgAotusvVQ: effectApplication
-          Compendium_teriock_execution_Macro_RCqX2d4YKWXd6o1i: movement
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: n74y06MAD7TyqPq7
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.brace00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!echinodermFamili.n74y06MAD7TyqPq7'
-  - name: Resist Effects
-    type: ability
-    img: systems/teriock/src/icons/abilities/resist-effects.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
+      sustained: true
       targets:
         - self
+    type: ability
+  - _id: echinodermTamer0
+    _key: '!items.effects!echinodermFamili.echinodermTamer0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Echinoderm Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Echinoderm]{echinoderm}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: YWQiFFU2VFbRkMnQ
+    _key: '!items.effects!echinodermFamili.YWQiFFU2VFbRkMnQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.resistEffects000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/resist-effects.webp
+    name: Resist Effects
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        description: 1 Hour
+        quantity: 1
+        stationary: false
+        unit: hour
+      effectTypes:
+        - resistance
       elements:
         - storm
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
-        stationary: false
-      sustained: true
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_5AsyrTgmr9NrD3XS: preExecution
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Pick one of the following @L[Category:Effects]{effect types}. You
@@ -141,45 +160,26 @@ effects:
           effects}</li></ol>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      revealed: true
+      rotator: true
       spell: true
       standard: true
-      class: stormMage
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - resistance
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_5AsyrTgmr9NrD3XS: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
-    _id: YWQiFFU2VFbRkMnQ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.resistEffects000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!echinodermFamili.YWQiFFU2VFbRkMnQ'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!echinodermFamili'
+      sustained: true
+      targets:
+        - self
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Echinoderm Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.echinoderm000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

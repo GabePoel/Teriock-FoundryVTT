@@ -1,128 +1,57 @@
-name: Bombardier Larva
-type: creature
+_id: bombardierLarva0
+_key: '!actors!bombardierLarva0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: infernalFaespawn
 img: systems/teriock/src/icons/creatures/bombardier-larva.webp
-prototypeToken:
-  name: Bombardier Larva
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/bombardier-larva.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: bombardierLarva0
-    folder: 2JZCJRlDbjPiZFHP
-    name: Bombardier Larva
-    type: species
-    img: systems/teriock/src/icons/creatures/bombardier-larva.webp
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Immature versions of @L[Creature:Bombardier Beetle]{bombardier
-        beetles}. These creatures are believed to been created by
-        @L[Category:Demons]{demon}-@L[Category:Fae creatures]{fae}
-        crossbreeds.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 6
-          number:
-            raw: '1'
-        mp:
-          disabled: false
-          faces: 4
-          number:
-            raw: '1'
-      br: 9
-      size:
-        enabled: true
-        value: 1
-      traits:
-        - animal
-        - monstrous
+    _key: '!actors.items!bombardierLarva0.bombardierLarva0'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.bombardierLarva0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Acidic Blood
-        type: ability
+      - _id: ZFYyHtKoOW6puT8F
+        _key: >-
+          !actors.items.effects!bombardierLarva0.bombardierLarva0.ZFYyHtKoOW6puT8F
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
+        name: Acidic Blood
         system:
-          powerSources:
-            - alchemical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - automatic
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Any @L[Category:Weapons]{weapon} that deals
@@ -131,50 +60,56 @@ items:
               @L[Core:Turns]{turn}.</p>
           piercing:
             raw: 0
+          powerSources:
+            - alchemical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           trigger: >-
             <p> This triggers automatically. You cannot choose to not use it if
             you are able to.</p>
-          form: normal
-          effectTypes:
-            - automatic
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: ZFYyHtKoOW6puT8F
+        type: ability
+      - _id: adi8nt7duC9D3upz
+        _key: >-
+          !actors.items.effects!bombardierLarva0.bombardierLarva0.adi8nt7duC9D3upz
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+          compendiumSource: Compendium.teriock.abilities.Item.combusting000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.bombardierLarva0.ZFYyHtKoOW6puT8F
-      - name: Combusting
-        type: ability
+        img: systems/teriock/src/icons/abilities/combusting.webp
+        name: Combusting
         system:
+          competence:
+            raw: 0
           delivery:
             base: aura
           duration:
-            unit: instant
-            stationary: false
-            description: Instant
             dawn: false
+            description: Instant
             raw: '0'
+            stationary: false
+            unit: instant
           effectTypes:
             - damaging
             - automatic
           executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: normal
           grantOnly: false
+          impacts:
+            base:
+              rolls:
+                damage: 1d10[fire]
+              startStatuses:
+                - ruined
           interaction: feat
           maneuver: reactive
           overview:
@@ -186,8 +121,8 @@ items:
           powerSources:
             - martial
           range:
-            unit: ft
             raw: '10'
+            unit: ft
           results:
             fail: >-
               <p>Target creatures take [[/damage 1d10[fire]]]
@@ -196,360 +131,341 @@ items:
               @L[Property:Shattered]{shattered}. Target items that are not
               @L[Keyword:Bearing]{bared} by a creature are
               @L[Property:Shattered]{shattered}.</p>
+          revealed: true
           targets:
             - creature
             - item
           trigger: >-
             <p>You @L[Condition:Down]{drop}. This triggers automatically. You
             cannot choose to not use it if you are able to.</p>
-          impacts:
-            base:
-              startStatuses:
-                - ruined
-              rolls:
-                damage: 1d10[fire]
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: adi8nt7duC9D3upz
-        img: systems/teriock/src/icons/abilities/combusting.webp
+        type: ability
+      - _id: xKJxjvInU4enxkcI
+        _key: >-
+          !actors.items.effects!bombardierLarva0.bombardierLarva0.xKJxjvInU4enxkcI
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.combusting000000
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.bombardierLarva0.adi8nt7duC9D3upz
-      - name: Dense Intelligence
-        type: ability
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: int
               value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: xKJxjvInU4enxkcI
+        type: ability
+      - _id: 1IGAgvidBmHxS1Ur
+        _key: >-
+          !actors.items.effects!bombardierLarva0.bombardierLarva0.1IGAgvidBmHxS1Ur
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.bombardierLarva0.xKJxjvInU4enxkcI
-      - name: Normal Perception
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 1IGAgvidBmHxS1Ur
+        type: ability
+      - _id: oafGEDVeHbN685DK
+        _key: >-
+          !actors.items.effects!bombardierLarva0.bombardierLarva0.oafGEDVeHbN685DK
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.bombardierLarva0.1IGAgvidBmHxS1Ur
-      - name: Normal Sneak
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: snk
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: oafGEDVeHbN685DK
+        type: ability
+      - _id: wQGxDeMQycZB2W1M
+        _key: >-
+          !actors.items.effects!bombardierLarva0.bombardierLarva0.wQGxDeMQycZB2W1M
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.bombardierLarva0.oafGEDVeHbN685DK
-      - name: Normal Strength
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-strength.webp
+        name: Normal Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: wQGxDeMQycZB2W1M
+        type: ability
+      - _id: v1vaRlbYxPHPv14P
+        _key: >-
+          !actors.items.effects!bombardierLarva0.bombardierLarva0.v1vaRlbYxPHPv14P
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+          compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.bombardierLarva0.wQGxDeMQycZB2W1M
-      - name: Slow
-        type: ability
         img: systems/teriock/src/icons/abilities/slow.webp
+        name: Slow
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: mov
               value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: v1vaRlbYxPHPv14P
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.bombardierLarva0.v1vaRlbYxPHPv14P
+        type: ability
+    folder: infernalFaespawn
+    img: systems/teriock/src/icons/creatures/bombardier-larva.webp
+    name: Bombardier Larva
+    system:
+      br: 9
+      competence:
+        raw: 1
+      description: >-
+        <p>Immature versions of @L[Creature:Bombardier Beetle]{bombardier
+        beetles}. These creatures are believed to been created by
+        @L[Category:Demons]{demon}-@L[Category:Fae creatures]{fae}
+        crossbreeds.</p>
+      size:
+        enabled: true
+        value: 1
+      statDice:
+        hp:
+          disabled: false
+          faces: 6
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 4
+          number:
+            raw: '1'
+      traits:
+        - animal
+        - monstrous
+    type: species
+  - _id: 641SI2n9bytAOQo4
+    _key: '!actors.items!bombardierLarva0.641SI2n9bytAOQo4'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.bombardierLarva0
+      compendiumSource: Compendium.teriock.bodyParts.Item.jaw0000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!bombardierLarva0.bombardierLarva0'
-  - name: Jaw
-    type: body
-    _id: 641SI2n9bytAOQo4
-    img: systems/teriock/src/icons/body-parts/jaw.webp
-    system:
-      damage:
-        base:
-          raw: 1d4
-      fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: bombardierLarva0
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
     effects:
-      - name: Biting
-        type: property
+      - _id: G0tdQXSp86EwqkNT
+        _key: >-
+          !actors.items.effects!bombardierLarva0.641SI2n9bytAOQo4.G0tdQXSp86EwqkNT
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: G0tdQXSp86EwqkNT
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        type: property
+      - _id: 37rxckf9CC1HPsQd
+        _key: >-
+          !actors.items.effects!bombardierLarva0.641SI2n9bytAOQo4.37rxckf9CC1HPsQd
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.641SI2n9bytAOQo4.G0tdQXSp86EwqkNT
-      - name: Weapon
-        type: property
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
         system:
+          competence:
+            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 37rxckf9CC1HPsQd
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!bombardierLarva0.641SI2n9bytAOQo4.37rxckf9CC1HPsQd
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.jaw0000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!bombardierLarva0.641SI2n9bytAOQo4'
-  - name: Light Carapace
-    type: body
-    _id: GcagcsHGGqqM96yY
-    img: systems/teriock/src/icons/body-parts/light-carapace.webp
+        type: property
+    folder: infernalFaespawn
+    img: systems/teriock/src/icons/body-parts/jaw.webp
+    name: Jaw
     system:
-      damage:
-        base:
-          raw: '0'
-      competence:
-        raw: 0
       _sup: bombardierLarva0
       attackPenalty:
         raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d4
+      fightingStyle: savage
       range:
         long:
           unit: self
@@ -558,58 +474,144 @@ items:
         short:
           unit: self
       vitals: false
-      av:
-        raw: '1'
+    type: body
+  - _id: GcagcsHGGqqM96yY
+    _key: '!actors.items!bombardierLarva0.GcagcsHGGqqM96yY'
     _stats:
       compendiumSource: Compendium.teriock.bodyParts.Item.lightCarapace000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!bombardierLarva0.GcagcsHGGqqM96yY'
+    folder: infernalFaespawn
+    img: systems/teriock/src/icons/body-parts/light-carapace.webp
+    name: Light Carapace
+    system:
+      _sup: bombardierLarva0
+      attackPenalty:
+        raw: '-3'
+      av:
+        raw: '1'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '0'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+name: Bombardier Larva
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Bombardier Larva
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/bombardier-larva.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 3
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '1'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: 641SI2n9bytAOQo4
-    blocker: GcagcsHGGqqM96yY
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: bombardierLarva0
-folder: 2AAdwm22W0jaCc52
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!bombardierLarva0'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 3
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '1'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: 641SI2n9bytAOQo4
+    blocker: GcagcsHGGqqM96yY
+type: creature

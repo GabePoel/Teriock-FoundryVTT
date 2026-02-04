@@ -1,84 +1,72 @@
-name: Warrior
-type: power
-_id: warrior000000000
-img: systems/teriock/src/icons/archetypes/warrior.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Warriors are primarily fighters and can handle themselves well in heavy
-    melee @L[Core:Combat]{combat}. Though they all have similar combat strength,
-    they achieve different goals in battle in order to win their objective.</p>
-  maxAv: 4
-  type: learned
+_id: wrr0000000000000
+_key: '!items!wrr0000000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Warrior Techniques
-    type: ability
-    img: systems/teriock/src/icons/abilities/warrior-techniques.webp
+  - _id: 4tKZWhHPGEJoR7dR
+    _key: '!items.effects!wrr0000000000000.4tKZWhHPGEJoR7dR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+    name: Defensive Martial Arts
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>For every 2 ranks you train in @L[Category:Warrior classes]{warrior
-          classes}, you gain a @L[Category:Warrior guildmaster
-          abilities]{warrior guildmaster ability} of your choice. You also gain
-          @L[Keyword:Limited]{Limited} @L[Ability:Defensive Martial
-          Arts]{Defensive Martial Arts}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      expansionSaveAttribute: mov
-      form: normal
+      _sup: 8e9roKoeCSmTjbbo
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.wrrTechniques000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 8e9roKoeCSmTjbbo
-    _key: '!items.effects!warrior000000000.8e9roKoeCSmTjbbo'
-  - name: Defensive Martial Arts
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '1'
+        fluent:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '3'
+        proficient:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '2'
+      interaction: manifest
+      limitation: <p>While wearing @L[Category:Armor]{armor} only.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
@@ -90,66 +78,80 @@ effects:
           Interaction]{block} with them and their @L[Core:Block Value]{BV} is
           +1.</p><div class="note"><b>Note:</b> This does not make your hands
           @L[Property:Blocking]{blocking}.</div>
-        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
         fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
+        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>While wearing @L[Category:Armor]{armor} only.</p>
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '2'
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '3'
-      _sup: 8e9roKoeCSmTjbbo
+      targets:
+        - self
+    type: ability
+  - _id: 8e9roKoeCSmTjbbo
+    _key: '!items.effects!wrr0000000000000.8e9roKoeCSmTjbbo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.wrrTechniques000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/warrior-techniques.webp
+    name: Warrior Techniques
+    system:
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 4tKZWhHPGEJoR7dR
-    _key: '!items.effects!warrior000000000.4tKZWhHPGEJoR7dR'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>For every 2 ranks you train in @L[Category:Warrior classes]{warrior
+          classes}, you gain a @L[Category:Warrior guildmaster
+          abilities]{warrior guildmaster ability} of your choice. You also gain
+          @L[Keyword:Limited]{Limited} @L[Ability:Defensive Martial
+          Arts]{Defensive Martial Arts}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
 folder: warrior000000000
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!warrior000000000'
+img: systems/teriock/src/icons/archetypes/warrior.webp
+name: Warrior
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Warriors are primarily fighters and can handle themselves well in heavy
+    melee @L[Core:Combat]{combat}. Though they all have similar combat strength,
+    they achieve different goals in battle in order to win their objective.</p>
+  maxAv: 4
+  type: learned
+type: power

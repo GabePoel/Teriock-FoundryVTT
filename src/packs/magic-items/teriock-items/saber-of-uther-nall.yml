@@ -1,280 +1,239 @@
-name: Saber of Uther-nall
-type: equipment
-system:
-  equipmentType: Cutlass
-  consumable: false
-  equipped: true
-  damage:
-    base:
-      saved: 1d8
-  weight:
-    saved: 3
-    raw: 0
-  range:
-    short:
-      unit: melee
-    long:
-      unit: melee
-    ranged: false
-  equipmentClasses:
-    - swords
-  minStr:
-    saved: -2
-    raw: -3
-  fightingStyle: swordsman
-  powerLevel: magic
-  notes: >-
-    <p>Rare even on the Inner Sea these blades are of unknown origin and seem to
-    turn up randomly all across Teriock. Their creation and use is as much a
-    mystery as their history.</p>
-  attackPenalty:
-    raw: '-3'
-img: systems/teriock/src/assets/items/saber-of-uther-nall.webp
+_id: saberOfUtherNall
+_key: '!items!saberOfUtherNall'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.lEq92ZEWCs1PoHsO
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: FmZgTQM1RxS29QW4
-    img: systems/teriock/src/icons/properties/weapon.webp
+  - _id: 9ECdsGO3JA96S6FJ
+    _key: '!items.effects!saberOfUtherNall.9ECdsGO3JA96S6FJ'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-    _key: '!items.effects!u8tKKDqWE0sC4bqt.FmZgTQM1RxS29QW4'
-  - name: Hack
-    type: ability
-    img: systems/teriock/src/icons/abilities/hack.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - arm
-        - leg
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
-          gets dealt accordingly.</p>
-      results:
-        hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
-        critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
-    _id: d1dRqZrY8Gc6jYl1
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
-    _key: '!items.effects!u8tKKDqWE0sC4bqt.d1dRqZrY8Gc6jYl1'
-  - name: Disarm
-    type: ability
-    img: systems/teriock/src/icons/abilities/disarm.webp
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/catch-item.webp
+    name: Catch Item
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - arm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>Anything held in the targeted arm is knocked out of their hand.
-          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: thief
-      expansionSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: true
-        amount: 1
-    _id: z7i2gC8kIWPNzvxl
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
-    _key: '!items.effects!u8tKKDqWE0sC4bqt.z7i2gC8kIWPNzvxl'
-  - name: Catch Item
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      _sup: z7i2gC8kIWPNzvxl
+      basic: true
+      competence:
+        raw: 0
       delivery:
         base: hand
-      targets:
-        - item
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You catch the item. If multiple creatures are all trying to catch
           the same item, they all roll [[/roll 1d20]]. The creature with the
           highest roll catches the item.</p>
-        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
         fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      trigger: <p>An item within range is falling or flying by.</p>
-      basic: true
-      form: intrinsic
-      _sup: z7i2gC8kIWPNzvxl
-    img: systems/teriock/src/icons/abilities/catch-item.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
-    _id: 9ECdsGO3JA96S6FJ
-    _key: '!items.effects!u8tKKDqWE0sC4bqt.9ECdsGO3JA96S6FJ'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
+        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      revealed: true
       targets:
-        - self
+        - item
+      trigger: <p>An item within range is falling or flying by.</p>
+    type: ability
+  - _id: z7i2gC8kIWPNzvxl
+    _key: '!items.effects!saberOfUtherNall.z7i2gC8kIWPNzvxl'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/disarm.webp
+    name: Disarm
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
       duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+        dawn: false
+        description: Instant
+        raw: '0'
         stationary: false
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      expansionSaveAttribute: mov
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
       gifted:
-        enabled: true
         amount: 1
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.swim
-              mode: 4
-              value: '3'
-              priority: 10
-    _id: YXkj0Qmqht2RsBux
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-    _key: '!items.effects!u8tKKDqWE0sC4bqt.YXkj0Qmqht2RsBux'
-  - name: Species Lore
-    type: ability
-    img: systems/teriock/src/icons/abilities/species-lore.webp
-    system:
+        enabled: true
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>Anything held in the targeted arm is knocked out of their hand.
+          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - arm
+    type: ability
+  - _id: d1dRqZrY8Gc6jYl1
+    _key: '!items.effects!saberOfUtherNall.d1dRqZrY8Gc6jYl1'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hack.webp
+    name: Hack
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          hacks:
+            - arm
+            - leg
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
+          gets dealt accordingly.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
+          legs, depending on what you chose.</p>
+        hit: >-
+          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    type: ability
+  - _id: hABJFOt5F7OJim6b
+    _key: '!items.effects!saberOfUtherNall.hABJFOt5F7OJim6b'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: icons/magic/control/debuff-chains-shackle-movement-red.webp
+    name: Not Usable by Neutral Creatures
+    system:
+      competence:
+        raw: 0
+      description: <p>Not usable by neutral creatures.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: ZBmupzN5yrmjo8qp
+    _key: '!items.effects!saberOfUtherNall.ZBmupzN5yrmjo8qp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.speciesLore00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/species-lore.webp
+    name: Species Lore
+    system:
+      class: ranger
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
         base: sight
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
-      range:
-        unit: ft
-        raw: '120'
+        unit: instant
+      effectTypes:
+        - truthDetecting
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          checks:
+            - hunter
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You recognize details about living creatures by sight. For a given
@@ -291,55 +250,129 @@ effects:
           Master]{GM} allows.</p><p>At @L[Core:Game Master]{GM} discretion, you
           can also spend 10 minutes studying a creature up close to get
           additional information.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '120'
+        unit: ft
+      revealed: true
       skill: true
       standard: true
-      class: ranger
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
+    type: ability
+  - _id: YXkj0Qmqht2RsBux
+    _key: '!items.effects!saberOfUtherNall.YXkj0Qmqht2RsBux'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
-      effectTypes:
-        - truthDetecting
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
       impacts:
         base:
-          checks:
-            - hunter
-    _id: ZBmupzN5yrmjo8qp
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: FmZgTQM1RxS29QW4
+    _key: '!items.effects!saberOfUtherNall.FmZgTQM1RxS29QW4'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.speciesLore00000
-    _key: '!items.effects!u8tKKDqWE0sC4bqt.ZBmupzN5yrmjo8qp'
-  - name: Not Usable by Neutral Creatures
-    type: property
-    _id: hABJFOt5F7OJim6b
-    img: icons/magic/control/debuff-chains-shackle-movement-red.webp
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
     system:
-      description: <p>Not usable by neutral creatures.</p>
-      form: flaw
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!u8tKKDqWE0sC4bqt.hABJFOt5F7OJim6b'
-folder: X3rVK7Ngg1mHq1vl
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.8
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.lEq92ZEWCs1PoHsO
-_id: u8tKKDqWE0sC4bqt
-_key: '!items!u8tKKDqWE0sC4bqt'
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/saber-of-uther-nall.webp
+name: Saber of Uther-nall
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d8
+  equipmentClasses:
+    - swords
+  equipmentType: Cutlass
+  equipped: true
+  fightingStyle: swordsman
+  minStr:
+    raw: '-2'
+  notes: >-
+    <p>Rare even on the Inner Sea these blades are of unknown origin and seem to
+    turn up randomly all across Teriock. Their creation and use is as much a
+    mystery as their history.</p>
+  powerLevel: magic
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  vitals: false
+  weight:
+    raw: '3'
+type: equipment

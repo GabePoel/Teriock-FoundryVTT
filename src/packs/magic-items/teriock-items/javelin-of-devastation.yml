@@ -1,249 +1,48 @@
-name: Javelin of Devastation
-type: equipment
-folder: X3rVK7Ngg1mHq1vl
-system:
-  equipmentType: Javelin
-  equipped: true
-  consumable: false
-  damage:
-    base:
-      saved: 1d6
-  weight:
-    saved: 2
-    raw: 0
-  range:
-    long:
-      saved: '60'
-      unit: ft
-    short:
-      saved: '20'
-      unit: ft
-    ranged: false
-  equipmentClasses:
-    - poleArms
-  minStr:
-    saved: -2
-    raw: -3
-  powerLevel: magic
-  fightingStyle: javelinier
-  tier:
-    saved: '3'
-  notes: >-
-    <p>The origin of these incredible [[lookup system.equipmentType style=lc]]s
-    is a mystery, though they are more encountered in Teriock than in Roekron.
-    Some theorize that these were made by renegade @L[Class:Storm Mage]{Storm
-    Mages} of Temnor who went eastward in the Second Age, but this is mere
-    speculation. Others believe these to be weapons brought here and left by
-    @L[Category:Elemental creatures]{lightning elementals}.</p>
-  attackPenalty:
-    raw: '-2'
-  bv:
-    raw: '1'
-img: systems/teriock/src/assets/items/javelin-of-devastation.webp
+_id: javelinOfDevasta
+_key: '!items!javelinOfDevasta'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.k0M8BvbWeRlL0hjL
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: vhVR5ybsuJjACo8Z
-    img: systems/teriock/src/icons/properties/weapon.webp
+  - _id: CBXbSN5d5NYEN84e
+    _key: '!items.effects!javelinOfDevasta.CBXbSN5d5NYEN84e'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ampStormSpells00
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.vhVR5ybsuJjACo8Z'
-  - name: Lethal Storms
-    type: ability
-    _id: XpjYFtONtH4Iibfz
-    img: icons/magic/lightning/bolt-forked-red.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - storm
-      duration:
-        unit: noLimit
-        quantity: 1
-        stationary: false
-        description: Always Active
-      overview:
-        base: >-
-          <p>@L[Core:Damage] dealt to you by storms is @L[Damage:Lethal]{lethal}
-          and @L[Core:Boosted]{boosted}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: flaw
-      effectTypes:
-        - damaging
-        - magical
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.XpjYFtONtH4Iibfz'
-  - name: Lightning Ray
-    type: ability
-    img: systems/teriock/src/icons/abilities/lightning-ray.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: stormMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-        - lightning
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic]
-    _id: qfR4yt0Gi3yY6RNr
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.qfR4yt0Gi3yY6RNr'
-  - name: Thunderbolt
-    type: ability
-    img: systems/teriock/src/icons/abilities/thunderbolt.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: <p>Deal [[/damage 1d10[magic]]] @L[Core:Damage]{damage}.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d10[magic]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-        - loud
-        - knockout
-        - lightning
-      impacts:
-        base:
-          rolls:
-            damage: 1d10[magic]
-        heightened:
-          rolls:
-            damage: 1d10[magic]
-    _id: usdaWXZ6v1ZwnioY
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.thunderbolt00000
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.usdaWXZ6v1ZwnioY'
-  - name: Amplify Storm Spells
-    type: ability
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/amplify-storm-spells.webp
+    name: Amplify Storm Spells
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvement: <p>This applies to @L[Ability:Thunderbolt] as well.</p>
+      interaction: manifest
+      limitation: >-
+        <p>This only applies to abilities provided by [[lookup parent.uuid
+        style=link]].</p>
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Core:Attack Interaction]{attack} with
@@ -256,111 +55,147 @@ effects:
         fluent: >-
           <p>You may instead choose up to 1 + @L[Core:Fluency Bonus]{F}
           additional or repeated targets.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: >-
-        <p>This only applies to abilities provided by [[lookup parent.uuid
-        style=link]].</p>
-      improvement: <p>This applies to @L[Ability:Thunderbolt] as well.</p>
-    _id: CBXbSN5d5NYEN84e
+      targets:
+        - self
+    type: ability
+  - _id: XpjYFtONtH4Iibfz
+    _key: '!items.effects!javelinOfDevasta.XpjYFtONtH4Iibfz'
     _stats:
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.ampStormSpells00
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.CBXbSN5d5NYEN84e'
-  - name: Spell Strike
-    type: ability
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: icons/magic/lightning/bolt-forked-red.webp
+    name: Lethal Storms
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      competence:
+        raw: 0
       delivery:
-        base: weapon
-      targets:
-        - creature
+        base: self
       duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+        dawn: false
+        description: Always Active
+        raw: '1'
         stationary: false
-      range:
-        unit: melee
+        unit: unlimited
+      effectTypes:
+        - damaging
+        - magical
+      elements:
+        - storm
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Conjured
-          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
-          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
-          triggering hit was a critical hit, then the target takes the "on
-          critical hit" effect instead.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
-      form: normal
-      limitation: >-
-        <p>Can only be used on @L[Category:Spells]{spells} provided by [[lookup
-        parent.uuid style=link]].</p>
-      grantOnly: true
-    _id: 3ZP0r8x7Ibw7Q5MN
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.3ZP0r8x7Ibw7Q5MN'
-  - name: Thrown
-    type: property
-    img: systems/teriock/src/icons/properties/thrown.webp
-    system:
-      description: >-
-        <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
-        be used to make melee attacks.</p>
-      form: intrinsic
+          <p>@L[Core:Damage] dealt to you by storms is @L[Damage:Lethal]{lethal}
+          and @L[Core:Boosted]{boosted}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: qfR4yt0Gi3yY6RNr
+    _key: '!items.effects!javelinOfDevasta.qfR4yt0Gi3yY6RNr'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _id: 2dXH2jxURSr7hRYp
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.2dXH2jxURSr7hRYp'
-  - name: Ranged
-    type: property
-    img: systems/teriock/src/icons/properties/ranged.webp
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/lightning-ray.webp
+    name: Lightning Ray
     system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+        - lightning
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: qm2HG2WMyxxCzoXL
+    _key: '!items.effects!javelinOfDevasta.qm2HG2WMyxxCzoXL'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/ranged.webp
+    name: Ranged
+    system:
+      _sup: 2dXH2jxURSr7hRYp
+      competence:
+        raw: 0
       description: >-
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
@@ -375,25 +210,225 @@ effects:
       form: intrinsic
       impacts:
         changes:
-          - key: item.system.range.ranged
+          - key: system.range.ranged
             mode: 5
-            value: 'true'
             priority: 10
-      _sup: 2dXH2jxURSr7hRYp
+            qualifier: '1'
+            target: parent
+            time: normal
+            value: 'true'
       revealed: true
+    type: property
+  - _id: 3ZP0r8x7Ibw7Q5MN
+    _key: '!items.effects!javelinOfDevasta.3ZP0r8x7Ibw7Q5MN'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.ranged0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _id: qm2HG2WMyxxCzoXL
-    _key: '!items.effects!6tu6NPO8fsDJZIY1.qm2HG2WMyxxCzoXL'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.k0M8BvbWeRlL0hjL
-_id: 6tu6NPO8fsDJZIY1
-_key: '!items!6tu6NPO8fsDJZIY1'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: true
+      interaction: manifest
+      limitation: >-
+        <p>Can only be used on @L[Category:Spells]{spells} provided by [[lookup
+        parent.uuid style=link]].</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Conjured
+          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
+          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
+          triggering hit was a critical hit, then the target takes the "on
+          critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    type: ability
+  - _id: 2dXH2jxURSr7hRYp
+    _key: '!items.effects!javelinOfDevasta.2dXH2jxURSr7hRYp'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.thrown0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/thrown.webp
+    name: Thrown
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A weapon with this property can be tossed to make a
+        @L[Property:Ranged]{ranged} attack. Unless noted otherwise, it can still
+        be used to make melee attacks.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: usdaWXZ6v1ZwnioY
+    _key: '!items.effects!javelinOfDevasta.usdaWXZ6v1ZwnioY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.thunderbolt00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/thunderbolt.webp
+    name: Thunderbolt
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+        - loud
+        - knockout
+        - lightning
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d10[magic]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d10[magic]
+        heightened:
+          rolls:
+            damage: 1d10[magic]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: <p>Deal [[/damage 1d10[magic]]] @L[Core:Damage]{damage}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: vhVR5ybsuJjACo8Z
+    _key: '!items.effects!javelinOfDevasta.vhVR5ybsuJjACo8Z'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/javelin-of-devastation.webp
+name: Javelin of Devastation
+system:
+  attackPenalty:
+    raw: '-2'
+  bv:
+    raw: '1'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d6
+  equipmentClasses:
+    - poleArms
+  equipmentType: Javelin
+  equipped: true
+  fightingStyle: javelinier
+  minStr:
+    raw: '-2'
+  notes: >-
+    <p>The origin of these incredible [[lookup system.equipmentType style=lc]]s
+    is a mystery, though they are more encountered in Teriock than in Roekron.
+    Some theorize that these were made by renegade @L[Class:Storm Mage]{Storm
+    Mages} of Temnor who went eastward in the Second Age, but this is mere
+    speculation. Others believe these to be weapons brought here and left by
+    @L[Category:Elemental creatures]{lightning elementals}.</p>
+  powerLevel: magic
+  range:
+    long:
+      raw: '60'
+      unit: ft
+    melee: true
+    ranged: false
+    short:
+      raw: '20'
+      unit: ft
+  tier:
+    raw: '3'
+  vitals: false
+  weight:
+    raw: '2'
+type: equipment

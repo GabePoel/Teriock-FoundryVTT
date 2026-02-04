@@ -1,116 +1,109 @@
 _id: salamanderFamili
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Salamander Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.salamander000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!salamanderFamili'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: salamanderTamer0
-    img: icons/environment/settlement/stables-logo.webp
-    name: Salamander Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Salamander]{salamander}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: 0bKHuWvJ4DsL1UAX
+    _key: '!items.effects!salamanderFamili.0bKHuWvJ4DsL1UAX'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fireDmgRsc000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!salamanderFamili.salamanderTamer0'
-  - name: Fire Damage Resistance
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
+    name: Fire Damage Resistance
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: fire
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire
           damage}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: anVeZIN2Fe6wkCRa
+    _key: '!items.effects!salamanderFamili.anVeZIN2Fe6wkCRa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hngFcr0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/healing-factor.webp
+    name: Healing Factor
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        conditions:
+          absent:
+            - down
+        description: While Up
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      effectTypes:
+        - healing
+        - regeneration
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_ZM9N8Z1sgRIN5HRZ: turnStart
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: fire
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 0bKHuWvJ4DsL1UAX
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fireDmgRsc000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!salamanderFamili.0bKHuWvJ4DsL1UAX'
-  - name: Healing Factor
-    type: ability
-    img: systems/teriock/src/icons/abilities/healing-factor.webp
-    system:
-      powerSources:
-        - primal
       interaction: manifest
-      featSaveAttribute: mov
+      limitation: <p>Limbs only.</p>
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          absent:
-            - down
-        description: While Up
-        stationary: false
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -120,35 +113,42 @@ effects:
           apply on your next @L[Core:Turns]{turn}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>Limbs only.</p>
-      effectTypes:
-        - healing
-        - regeneration
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_ZM9N8Z1sgRIN5HRZ: turnStart
-      competence:
-        raw: 0
+      powerSources:
+        - primal
       revealed: true
-      grantOnly: false
-    _id: anVeZIN2Fe6wkCRa
+      targets:
+        - self
+    type: ability
+  - _id: salamanderTamer0
+    _key: '!items.effects!salamanderFamili.salamanderTamer0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hngFactor0000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!salamanderFamili.anVeZIN2Fe6wkCRa'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!salamanderFamili'
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Salamander Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Salamander]{salamander}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Salamander Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.salamander000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

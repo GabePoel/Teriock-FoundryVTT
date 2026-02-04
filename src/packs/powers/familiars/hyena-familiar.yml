@@ -1,192 +1,192 @@
 _id: hyenaFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Hyena Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.hyena00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!hyenaFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
   - _id: hyenaTamer000000
+    _key: '!items.effects!hyenaFamiliar000.hyenaTamer000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Hyena Tamer
     system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Hyena]{hyena}.</p>
       competence:
         raw: 2
+      description: <p>You know the way of the @L[Creature:Hyena]{hyena}.</p>
+      field: survivalist
       revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
+      tradecraft: tamer
     tint: '#ffffff'
-    _key: '!items.effects!hyenaFamiliar000.hyenaTamer000000'
-  - name: Spirit Bury
-    type: ability
+    transfer: true
+    type: fluency
+  - _id: TBYG84ZNAR1k61DX
+    _key: '!items.effects!hyenaFamiliar000.TBYG84ZNAR1k61DX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
+    name: Spirit Bury
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
         base: hand
-      targets:
-        - creature
+      duration:
+        description: 1 Minute
+        quantity: 1
+        stationary: false
+        unit: minute
       elements:
         - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-        stationary: false
-      range:
-        unit: melee
-      overview:
-        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
-      results:
-        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-      piercing:
-        raw: 0
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+        proficient:
+          duration: 600
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      expansionSaveAttribute: mov
-      form: special
-      impacts:
-        proficient:
-          duration: 600
-        heightened:
-          duration: 3600
-      competence:
+      interaction: attack
+      maneuver: active
+      overview:
+        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+      piercing:
         raw: 0
-      revealed: true
-      grantOnly: false
-    _id: TBYG84ZNAR1k61DX
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hyenaFamiliar000.TBYG84ZNAR1k61DX'
-  - name: Spirit Guide
-    type: ability
-    img: systems/teriock/src/icons/abilities/spirit-guide.webp
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      range:
+        unit: melee
+      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+      results:
+        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: LWApwcIIJDEvc91f
+    _key: '!items.effects!hyenaFamiliar000.LWApwcIIJDEvc91f'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritGuide00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/spirit-guide.webp
+    name: Spirit Guide
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      duration:
+        description: 24 Hours
+        quantity: 24
+        stationary: false
+        unit: hour
+      effectTypes:
+        - sensory
       elements:
         - necromancy
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-        stationary: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, you may target an
+        additional creature.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.senses.ethereal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You can see, hear, and speak to spirits and
           @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
-        proficient: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
         fluent: >-
           <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
           @L[Category:Spiritually powered abilities]{spiritual}
           @L[Category:Ritual delivery spells]{ritual spells} such as
           @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+        proficient: >-
+          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Necromancy element abilities]{necromancy}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: necromancer
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional creature.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
       requirements: >-
         <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
         yourself.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.ethereal
-              target: Actor
-              qualifier: '1'
-              value: '120'
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-    _id: LWApwcIIJDEvc91f
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spiritGuide00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hyenaFamiliar000.LWApwcIIJDEvc91f'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!hyenaFamiliar000'
+      ritual: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Hyena Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.hyena00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

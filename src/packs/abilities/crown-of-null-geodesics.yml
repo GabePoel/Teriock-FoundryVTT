@@ -1,43 +1,74 @@
 _id: cONullGeodesics0
+_key: '!items!cONullGeodesics0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Crown of Null Geodesics
-    type: ability
+  - _id: cONullGeodesics0
+    _key: '!items.effects!cONullGeodesics0.cONullGeodesics0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/crown-of-null-geodesics.webp
-    _id: cONullGeodesics0
+    name: Crown of Null Geodesics
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
+        somatic: true
+        verbal: true
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
       elements:
         - life
         - storm
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#FF7800'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
       interaction: manifest
       maneuver: active
       overview:
@@ -45,174 +76,49 @@ effects:
           <p>A small circle of light and matter circles above your head. You
           gain @L[Ability:Null Touch]{Null Touch} and @L[Ability:Null Aura]{Null
           Aura}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       rotator: true
       spell: true
       standard: true
       sustained: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 3
-              time: normal
-              key: system.light.dim
-              target: Actor
-              qualifier: '1'
-              value: '0.01'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.color
-              target: Actor
-              qualifier: '1'
-              value: '#FF7800'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.animation.type
-              target: Actor
-              qualifier: '1'
-              value: sunburst
+    type: ability
+  - _id: WlLIRpNlLrHCzvpd
+    _key: '!items.effects!cONullGeodesics0.WlLIRpNlLrHCzvpd'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.nullAura00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cONullGeodesics0.cONullGeodesics0'
-  - name: Null Touch
-    type: ability
-    img: systems/teriock/src/icons/abilities/null-touch.webp
-    _id: qI4Eug38oEfOGOL2
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      costs:
-        verbal: true
-        somatic: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
-      delivery:
-        base: hand
-        package: touch
-      effectTypes:
-        - temporal
-      elements:
-        - life
-        - storm
-        - flame
-      endCondition: >-
-        <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
-        If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}\_as well.</p>"
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Lighted]{lighted} and
-          @L[Condition:Frozen]{frozen}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: action
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: action
-            changeOnCrit: true
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-          statuses:
-            - lighted
-            - frozen
-        heightened:
-          rolls:
-            damage: 1d4[magic fire]
-      _sup: cONullGeodesics0
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.nullTouch0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cONullGeodesics0.qI4Eug38oEfOGOL2'
-  - name: Null Aura
-    type: ability
     img: systems/teriock/src/icons/abilities/null-aura.webp
-    _id: WlLIRpNlLrHCzvpd
+    name: Null Aura
     system:
+      _sup: cONullGeodesics0
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
+        somatic: true
+        verbal: true
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - temporal
       elements:
@@ -224,15 +130,42 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - lighted
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic fire]
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -242,27 +175,85 @@ effects:
         fail: >-
           <p>Target is @L[Condition:Lighted]{lighted} and
           @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
       spell: true
       standard: true
       targets:
         - creature
+    type: ability
+  - _id: qI4Eug38oEfOGOL2
+    _key: '!items.effects!cONullGeodesics0.qI4Eug38oEfOGOL2'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.nullTouch0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/null-touch.webp
+    name: Null Touch
+    system:
+      _sup: cONullGeodesics0
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - temporal
+      elements:
+        - life
+        - storm
+        - flame
+      endCondition: >-
+        <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
+        If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}\_as well.</p>"
       impacts:
         base:
           expiration:
-            normal:
+            changeOnCrit: true
+            crit:
               combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: action
                 who:
                   type: target
+            doesExpire: true
+            normal:
+              combat:
                 what:
                   roll: 2d4kh1
                   threshold: 4
                   type: rolled
                 when:
                   skip: 0
-                  time: start
+                  time: end
                   trigger: action
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: target
           rolls:
             endCon: 2d4
           statuses:
@@ -271,20 +262,26 @@ effects:
         heightened:
           rolls:
             damage: 1d4[magic fire]
-      _sup: cONullGeodesics0
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.nullAura00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cONullGeodesics0.WlLIRpNlLrHCzvpd'
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: >-
+          <p>Target is @L[Condition:Lighted]{lighted} and
+          @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/crown-of-null-geodesics.webp
 name: Crown of Null Geodesics
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!cONullGeodesics0'

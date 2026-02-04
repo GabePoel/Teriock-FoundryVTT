@@ -1,70 +1,69 @@
 _id: chiArmor00000000
+_key: '!items!chiArmor00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Chi Armor
-    type: ability
+  - _id: chiArmor00000000
+    _key: '!items.effects!chiArmor00000000.chiArmor00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/chi-armor.webp
-    _id: chiArmor00000000
+    name: Chi Armor
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.defense.ac
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: active
       overview:
         base: <p>Your @L[Core:Armor Class]{AC} is increased by 1.</p>
+      piercing:
+        raw: 0
       powerSources:
         - spiritual
       range:
         unit: self
       requirements: <p>You do not have [[lookup name]] active.</p>
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.defense.ac
-              target: Actor
-              qualifier: '1'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!chiArmor00000000.chiArmor00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/chi-armor.webp
 name: Chi Armor
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!chiArmor00000000'

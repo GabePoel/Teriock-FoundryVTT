@@ -1,9 +1,11 @@
-name: Deattune - Execution
-type: script
-_id: ARwwvQ4JsEm4MicQ
+_id: deattuneExecutio
+_key: '!macros!deattuneExecutio'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 author: teriockBuilder00
-img: icons/svg/dice-target.svg
-scope: global
 command: |-
   const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
   data.execution.buttons = [];
@@ -16,9 +18,7 @@ command: |-
     hint: "Select equipment to deattune.",
   });
   await Promise.all(selectedEquipment.map((e) => e.system.deattune()));
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.1.0
-  lastModifiedBy: teriockBuilder00
-_key: '!macros!ARwwvQ4JsEm4MicQ'
+img: icons/svg/dice-target.svg
+name: Deattune - Execution
+scope: global
+type: script

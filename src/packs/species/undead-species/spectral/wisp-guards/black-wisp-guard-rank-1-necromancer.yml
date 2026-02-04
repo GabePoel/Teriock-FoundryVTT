@@ -1,132 +1,222 @@
 _id: veXRHv1fJdwcrSbs
-folder: WtG6js8TMik2wdlC
-name: Rank 1 Necromancer
-system:
-  archetype: mage
-  className: necromancer
-  classRank: 1
-  competence:
-    raw: 1
-  description: >-
-    <p>The true dealer of death, Necromancers are most at home in the cemetery
-    digging up future minions. Shunned by most of society, these dark mages are
-    not necessarily evil, they simply see death as full of potential energy
-    while others see it as the end of life. Necromancers fear nothing, as they
-    are always facing death. If you are playing a Necromancer be unafraid, kill
-    without remorse and be interested in dead bodies, close to death yourself,
-    almost in another world.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: blackWispGuard00
-type: rank
-img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
+_key: '!items!veXRHv1fJdwcrSbs'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Nec00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Terror Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/terror-ball.webp
+  - _id: Q3bElOKJWjw3DI9t
+    _key: '!items.effects!veXRHv1fJdwcrSbs.Q3bElOKJWjw3DI9t'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.deathRay00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/death-ray.webp
+    name: Death Ray
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: necromancer
+      competence:
+        raw: 0
       delivery:
         base: missile
-        package: ball
-      targets:
-        - creature
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
       elements:
         - necromancy
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing:
-        raw: 2
-      spell: true
-      standard: true
-      class: necromancer
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
-      effectTypes:
-        - damaging
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
+        1d6]].</p>
       impacts:
         base:
           rolls:
-            damage: 1d4[terror magic]
+            kill: 2d6
         heightened:
           rolls:
-            damage: 1d4[magic terror]
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: epbHgxy8x6bO3jkQ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.terrorBall000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!veXRHv1fJdwcrSbs.epbHgxy8x6bO3jkQ'
-  - name: Summon the Dead
-    type: ability
-    img: systems/teriock/src/icons/abilities/summon-the-dead.webp
-    system:
+            kill: 1d6
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
       powerSources:
         - magical
-        - spiritual
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      range:
+        raw: '60'
+        unit: ft
+      requirements: >-
+        <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
+        creatures]{undead}.</p>
+      results:
+        critHit: <p>Double the number of dice rolled.</p>
+        hit: >-
+          <p>Roll [[/kill 2d6]] if this is greater than or equal the number of
+          @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}. This
+          does not deal @L[Core:Damage]{damage}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 15t1ifTnUgXbHDY7
+    _key: '!items.effects!veXRHv1fJdwcrSbs.15t1ifTnUgXbHDY7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritGuide00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/spirit-guide.webp
+    name: Spirit Guide
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - sensory
       elements:
         - necromancy
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, you may target an
+        additional creature.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.senses.ethereal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You can see, hear, and speak to spirits and
+          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+        fluent: >-
+          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Spiritually powered abilities]{spiritual}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+        proficient: >-
+          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Necromancy element abilities]{necromancy}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: '5'
+        unit: ft
+      requirements: >-
+        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
+        yourself.</p>
+      revealed: true
+      ritual: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
+  - _id: 6ouKT638ARM4Cphm
+    _key: '!items.effects!veXRHv1fJdwcrSbs.6ouKT638ARM4Cphm'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.summonTheDead000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/summon-the-dead.webp
+    name: Summon the Dead
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{HP}
+              if the body is in your possession. Otherwise, it costs 3
+              @L[Core:Hit Points and Mana Points]{HP} per @L[Core:Size]{size} of
+              the body.</p>
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
+              if the body is in your possession. Otherwise, it costs 2
+              @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
+              the body.</p>
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - summoning
+      elements:
+        - necromancy
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>If you have the body of the target in your possession, you can put
@@ -142,207 +232,117 @@ effects:
           is now intact.</p>
       piercing:
         raw: 0
-      spell: true
-      standard: true
-      ritual: true
-      class: necromancer
-      costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
-              if the body is in your possession. Otherwise, it costs 2
-              @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
-              the body.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{HP}
-              if the body is in your possession. Otherwise, it costs 3
-              @L[Core:Hit Points and Mana Points]{HP} per @L[Core:Size]{size} of
-              the body.</p>
-      requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
-      form: normal
-      effectTypes:
-        - summoning
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: 6ouKT638ARM4Cphm
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.summonTheDead000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!veXRHv1fJdwcrSbs.6ouKT638ARM4Cphm'
-  - name: Death Ray
-    type: ability
-    img: systems/teriock/src/icons/abilities/death-ray.webp
-    system:
       powerSources:
         - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
+        - spiritual
+        - primal
       range:
+        raw: '5'
         unit: ft
-        raw: '60'
-      results:
-        hit: >-
-          <p>Roll [[/kill 2d6]] if this is greater than or equal the number of
-          @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}. This
-          does not deal @L[Core:Damage]{damage}.</p>
-        critHit: <p>Double the number of dice rolled.</p>
-      piercing:
-        raw: 1
+      requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
+      revealed: true
+      ritual: true
       spell: true
       standard: true
-      class: necromancer
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
-        1d6]].</p>
-      requirements: >-
-        <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
-        creatures]{undead}.</p>
-      form: normal
-      effectTypes:
-        - killing
-      impacts:
-        base:
-          rolls:
-            kill: 2d6
-        heightened:
-          rolls:
-            kill: 1d6
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: Q3bElOKJWjw3DI9t
+      targets:
+        - creature
+    type: ability
+  - _id: epbHgxy8x6bO3jkQ
+    _key: '!items.effects!veXRHv1fJdwcrSbs.epbHgxy8x6bO3jkQ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.deathRay00000000
+      compendiumSource: Compendium.teriock.abilities.Item.terrorBall000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!veXRHv1fJdwcrSbs.Q3bElOKJWjw3DI9t'
-  - name: Spirit Guide
-    type: ability
-    img: systems/teriock/src/icons/abilities/spirit-guide.webp
+    img: systems/teriock/src/icons/abilities/terror-ball.webp
+    name: Terror Ball
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: hour
-        description: 24 Hours
-        stationary: false
-        raw: '24'
-        dawn: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>You can see, hear, and speak to spirits and
-          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
-        proficient: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
-        fluent: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Spiritually powered abilities]{spiritual}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      ritual: true
       class: necromancer
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional creature.</p>
-      requirements: >-
-        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
-        yourself.</p>
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.ethereal
-              target: Actor
-              qualifier: '1'
-              value: '120'
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - necromancy
+      executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
-    _id: 15t1ifTnUgXbHDY7
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spiritGuide00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!veXRHv1fJdwcrSbs.15t1ifTnUgXbHDY7'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1Necromancer
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!veXRHv1fJdwcrSbs'
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d4[terror magic]
+        heightened:
+          rolls:
+            damage: 1d4[magic terror]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+folder: wispGuards000000
+img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
+name: Rank 1 Necromancer
+system:
+  _sup: blackWispGuard00
+  archetype: mage
+  className: necromancer
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>The true dealer of death, Necromancers are most at home in the cemetery
+    digging up future minions. Shunned by most of society, these dark mages are
+    not necessarily evil, they simply see death as full of potential energy
+    while others see it as the end of life. Necromancers fear nothing, as they
+    are always facing death. If you are playing a Necromancer be unafraid, kill
+    without remorse and be interested in dead bodies, close to death yourself,
+    almost in another world.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

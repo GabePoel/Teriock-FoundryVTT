@@ -1,30 +1,38 @@
 _id: berserk000000000
+_key: '!items!berserk000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Berserk
-    type: ability
+  - _id: berserk000000000
+    _key: '!items.effects!berserk000000000.berserk000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/berserk.webp
-    _id: berserk000000000
+    name: Berserk
     system:
+      class: berserker
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '5'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 5 Minutes
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 5 Minutes
+        raw: '5'
+        stationary: false
+        unit: minute
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -34,36 +42,26 @@ effects:
         base: >-
           <p>You gain 15 @L[Core:Temporary Hit Points]{temporary HP} and become
           @L[Condition:Frenzied]{frenzied}.</p>
-        proficient: >-
-          <p>You gain an additional 5 × @L[Core:Proficiency Bonus]{P}
-          @L[Core:Temporary Hit Points]{temporary HP} and gain
-          @L[Ability:Fast]{Fast}.</p>
         fluent: >-
           <p>You instead gain an additional 5 × @L[Core:Fluency Bonus]{F}
           @L[Core:Temporary Hit Points]{temporary HP} and gain
           @L[Ability:Swift]{Swift}.</p>
+        proficient: >-
+          <p>You gain an additional 5 × @L[Core:Proficiency Bonus]{P}
+          @L[Core:Temporary Hit Points]{temporary HP} and gain
+          @L[Ability:Fast]{Fast}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts: {}
-      class: berserker
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!berserk000000000.berserk000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/berserk.webp
 name: Berserk
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!berserk000000000'

@@ -1,54 +1,47 @@
-_id: rank3StormMage00
-folder: stormMage0000000
-name: Rank 3 Storm Mage
-system:
-  archetype: mage
-  className: stormMage
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>The true wonder seeker, these mages are the philosophers of the world,
-    always seeking out more knowledge and more wisdom. The Storm Mage is a
-    logician, a tactical intellectual who prefers to neutralize opponents rather
-    than destroy them. Often cold, the Storm Mage is also tumultuous and crafty.
-    If you are playing a Storm Mage, be curious, hungry for information, always
-    in the clouds, tricky and clever, eluding rather than confronting.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-storm-mage.webp
+_id: r3Sto00000000000
+_key: '!items!r3Sto00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Additional Storm Rotators
-    type: ability
+  - _id: BVSGkZaYwHz2UPKP
+    _key: '!items.effects!r3Sto00000000000.BVSGkZaYwHz2UPKP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.adlStormRots0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
+    name: Additional Storm Rotators
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Reflect Magic]{Reflect Magic} and
@@ -56,205 +49,50 @@ effects:
           @L[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
       revealed: true
-      grantOnly: false
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: j4OqsC7vHMFL273K
+    _key: '!items.effects!r3Sto00000000000.j4OqsC7vHMFL273K'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ampStormSpells00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.adlStormRots0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: BVSGkZaYwHz2UPKP
-    _key: '!items.effects!rank3StormMage00.BVSGkZaYwHz2UPKP'
-  - name: Reflect Magic
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: aura
-      targets:
-        - spell
-      elements:
-        - storm
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
-          range. Their casters take the spells' effects instead.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: stormMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 15 feet.</p>
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>A @L[Category:Conjured spells]{conjured spell} is used within
-        range.</p>
-      form: special
-      _sup: BVSGkZaYwHz2UPKP
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/reflect-magic.webp
-    flags:
-      teriock:
-        dontConsume: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reflectMag000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: aojUxv17gVm6riy8
-    _key: '!items.effects!rank3StormMage00.aojUxv17gVm6riy8'
-  - name: Teleport
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - area
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Target creature is moved to a location you have studied within your
-          level in miles. You can study locations by performing this ritual on
-          an area you are in over the course of a @L[Core:Long Rest]{long rest}.
-          This location must be a static part of the environment, not a moving
-          location like a wagon or ship. If the location substantially changes
-          beyond recognition, your ritual will fail to transport creatures
-          there. You can only have 2 location studied at a time.</p>
-        proficient: >-
-          <p>You may now have 2 × @L[Core:Proficiency Bonus]{P} locations
-          studied and can [[lookup name style=lc]] a distance of up to
-          @L[Core:Proficiency Bonus]{P} × your level in miles.</p>
-        fluent: >-
-          <p>You may now have 2 × @L[Core:Fluency Bonus]{F} locations studied
-          and can [[lookup name style=lc]] a distance of up to @L[Core:Fluency
-          Bonus]{F} × your level in miles.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: stormMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, your maximum [[lookup name
-        style=lc]] distance increases by your level in miles.</p>
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - displacement
-        - longRange
-      _sup: BVSGkZaYwHz2UPKP
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/teleport.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.teleport00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: vsigFigSZyZlUNmP
-    _key: '!items.effects!rank3StormMage00.vsigFigSZyZlUNmP'
-  - name: Amplify Storm Spells
-    type: ability
     img: systems/teriock/src/icons/abilities/amplify-storm-spells.webp
+    name: Amplify Storm Spells
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Core:Attack Interaction]{attack} with
@@ -269,118 +107,123 @@ effects:
           additional or repeated targets.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: j4OqsC7vHMFL273K
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ampStormSpells00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3StormMage00.j4OqsC7vHMFL273K'
-  - name: Storm Rotator Fluency
-    type: ability
-    img: systems/teriock/src/icons/abilities/storm-rotator-fluency.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You may rotate between @L[Category:Storm element spells]{storm}
-          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
-          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Storm
-          Rotators]{Storm Rotators}. (This does not make you @L[Core:Fluency
-          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.stormRotators'
-              value: '2'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: eNyO14VyiXUtWM5L
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stormRotFluency0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3StormMage00.eNyO14VyiXUtWM5L'
-  - name: Expanded Storm Elder Sorcery
-    type: ability
-    img: systems/teriock/src/icons/abilities/expanded-storm-elder-sorcery.webp
-    system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: slow
-      executionTime: Long Rest
-      delivery:
-        base: self
       targets:
         - self
+    type: ability
+  - _id: 0TFJOmAPQbkQotsr
+    _key: '!items.effects!r3Sto00000000000.0TFJOmAPQbkQotsr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bouncyCasting000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/bouncy-casting.webp
+    name: Bouncy Casting
+    system:
+      _sup: xizvvncphqwGSJXe
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - displacement
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may choose a new target for the @L[Category:Spells]{spell}. All
+          @L[Core:Attack Interaction]{attack rolls}, @L[Core:Feat
+          Interaction]{feat saves}, and other dice rolls or effects are
+          re-rolled or re-calculated as if the @L[Category:Spells]{spell} was
+          cast on the new target. The range of the @L[Category:Spells]{spell}
+          remains unchanged, but is calculated from the new target instead of
+          from you.</p><div class="note"><b>Note:</b> If the
+          @L[Category:Spells]{spell} was @L[Core:Heightening]{heightened}, or
+          you spent any other @L[Category:Cost spells]{costs} on the
+          @L[Category:Spells]{spell}, those remain unchanged and do not need to
+          be re-spent.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>The target of a @L[Category:Spells]{spell} does not get affected by
+        your @L[Category:Spells]{spell}.</p>
+    type: ability
+  - _id: zxnrJAzQWxbgpBqf
+    _key: '!items.effects!r3Sto00000000000.zxnrJAzQWxbgpBqf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.expandedStormES0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/expanded-storm-elder-sorcery.webp
+    name: Expanded Storm Elder Sorcery
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elderSorcery: true
       elements:
         - storm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
+      executionTime: Long Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -404,58 +247,255 @@ effects:
           Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
           Words]{Celestial Elder Sorcery Words}, and @L[Ability:Storm Elder
           Sorcery Words]{Storm Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       results:
-        save: <p>You learn the spell or word.</p>
         fail: >-
           <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
           that spell or word again.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        save: <p>You learn the spell or word.</p>
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: LU6fw1OjbOfF64GL
+    _key: '!items.effects!r3Sto00000000000.LU6fw1OjbOfF64GL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.illusiveCasting0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/illusive-casting.webp
+    name: Illusive Casting
+    system:
+      _sup: xizvvncphqwGSJXe
       class: stormMage
-      expansionSaveAttribute: mov
-      form: special
       competence:
         raw: 0
-      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - mental
+      endCondition: >-
+        <p>You ar no longer casting the triggering
+        @L[Category:Spells]{spell}.</p>
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    _id: zxnrJAzQWxbgpBqf
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering @L[Category:Spells]{spell} appears to be a different
+          @L[Category:Abilities]{ability} of the same @L[Category:Delivery
+          abilities]{delivery}. This is a @L[Keyword:Illusionary]{minor
+          illusion}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    type: ability
+  - _id: aojUxv17gVm6riy8
+    _key: '!items.effects!r3Sto00000000000.aojUxv17gVm6riy8'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reflectMag000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        dontConsume: false
+    img: systems/teriock/src/icons/abilities/reflect-magic.webp
+    name: Reflect Magic
+    system:
+      _sup: BVSGkZaYwHz2UPKP
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elements:
+        - storm
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
+        name]] increases by 15 feet.</p>
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target @L[Category:Conjured spells]{spell}
+          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
+          range. Their casters take the spells' effects instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>A @L[Category:Conjured spells]{conjured spell} is used within
+        range.</p>
+    type: ability
+  - _id: Pk68K8LvL0XdAGLz
+    _key: '!items.effects!r3Sto00000000000.Pk68K8LvL0XdAGLz'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: tbrnvDL0hRSTxu73
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Lightning Ray]{Lightning Ray} and
+        @L[Ability:Ice Ball]{Ice Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Conjured
+          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
+          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
+          triggering hit was a critical hit, then the target takes the "on
+          critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    type: ability
+  - _id: xizvvncphqwGSJXe
+    _key: '!items.effects!r3Sto00000000000.xizvvncphqwGSJXe'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stormDisciplines
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.expandedStormES0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3StormMage00.zxnrJAzQWxbgpBqf'
-  - name: Storm Disciplines
-    type: ability
     img: systems/teriock/src/icons/abilities/storm-disciplines.webp
+    name: Storm Disciplines
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -466,287 +506,255 @@ effects:
           @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
           @L[Ability:Bouncy Casting]{Bouncy} and @L[Ability:Illusive
           Casting]{Illusive} casting styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
+          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
         proficient: >-
           <p>You may now use the benefits from [[lookup name]]
           @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
           rest}.</p>
-        fluent: >-
-          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
-          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: int
-          amount: proficiency
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: int
+          value: 1
+    type: ability
+  - _id: eNyO14VyiXUtWM5L
+    _key: '!items.effects!r3Sto00000000000.eNyO14VyiXUtWM5L'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stormRotFluency0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/storm-rotator-fluency.webp
+    name: Storm Rotator Fluency
+    system:
       class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.stormRotators'
+              target: ability
+              time: fluency
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @L[Category:Storm element spells]{storm}
+          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
+          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Storm
+          Rotators]{Storm Rotators}. (This does not make you @L[Core:Fluency
+          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: tbrnvDL0hRSTxu73
+    _key: '!items.effects!r3Sto00000000000.tbrnvDL0hRSTxu73'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stormSS000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stormDisciplines
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: xizvvncphqwGSJXe
-    _key: '!items.effects!rank3StormMage00.xizvvncphqwGSJXe'
-  - name: Bouncy Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - spell
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      overview:
-        base: >-
-          <p>You may choose a new target for the @L[Category:Spells]{spell}. All
-          @L[Core:Attack Interaction]{attack rolls}, @L[Core:Feat
-          Interaction]{feat saves}, and other dice rolls or effects are
-          re-rolled or re-calculated as if the @L[Category:Spells]{spell} was
-          cast on the new target. The range of the @L[Category:Spells]{spell}
-          remains unchanged, but is calculated from the new target instead of
-          from you.</p><div class="note"><b>Note:</b> If the
-          @L[Category:Spells]{spell} was @L[Core:Heightening]{heightened}, or
-          you spent any other @L[Category:Cost spells]{costs} on the
-          @L[Category:Spells]{spell}, those remain unchanged and do not need to
-          be re-spent.</div>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: stormMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>The target of a @L[Category:Spells]{spell} does not get affected by
-        your @L[Category:Spells]{spell}.</p>
-      form: normal
-      effectTypes:
-        - displacement
-      _sup: xizvvncphqwGSJXe
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/bouncy-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bouncyCasting000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 0TFJOmAPQbkQotsr
-    _key: '!items.effects!rank3StormMage00.0TFJOmAPQbkQotsr'
-  - name: Illusive Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - spell
-      duration:
-        unit: hour
-        quantity: 24
-        stationary: false
-        description: 24 Hours
-      overview:
-        base: >-
-          <p>The triggering @L[Category:Spells]{spell} appears to be a different
-          @L[Category:Abilities]{ability} of the same @L[Category:Delivery
-          abilities]{delivery}. This is a @L[Keyword:Illusionary]{minor
-          illusion}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: stormMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      endCondition: >-
-        <p>You ar no longer casting the triggering
-        @L[Category:Spells]{spell}.</p>
-      expansionSaveAttribute: mov
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-      form: normal
-      effectTypes:
-        - mental
-      _sup: xizvvncphqwGSJXe
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/illusive-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.illusiveCasting0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: LU6fw1OjbOfF64GL
-    _key: '!items.effects!rank3StormMage00.LU6fw1OjbOfF64GL'
-  - name: Storm Spell Strikes
-    type: ability
     img: systems/teriock/src/icons/abilities/storm-spell-strikes.webp
+    name: Storm Spell Strikes
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
           Strike]{Spell Strike}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: stormMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stormSS000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: tbrnvDL0hRSTxu73
-    _key: '!items.effects!rank3StormMage00.tbrnvDL0hRSTxu73'
-  - name: Spell Strike
-    type: ability
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
       range:
-        unit: melee
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Conjured
-          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
-          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
-          triggering hit was a critical hit, then the target takes the "on
-          critical hit" effect instead.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: vsigFigSZyZlUNmP
+    _key: '!items.effects!r3Sto00000000000.vsigFigSZyZlUNmP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.teleport00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/teleport.webp
+    name: Teleport
+    system:
+      _sup: BVSGkZaYwHz2UPKP
+      class: stormMage
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable with @L[Ability:Lightning Ray]{Lightning Ray} and
-        @L[Ability:Ice Ball]{Ice Ball}.</p>
-      _sup: tbrnvDL0hRSTxu73
-      competence:
-        raw: 0
-      revealed: true
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - displacement
+        - longRange
+      elements:
+        - storm
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: Pk68K8LvL0XdAGLz
-    _key: '!items.effects!rank3StormMage00.Pk68K8LvL0XdAGLz'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank3StormMage00'
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, your maximum [[lookup name
+        style=lc]] distance increases by your level in miles.</p>
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Target creature is moved to a location you have studied within your
+          level in miles. You can study locations by performing this ritual on
+          an area you are in over the course of a @L[Core:Long Rest]{long rest}.
+          This location must be a static part of the environment, not a moving
+          location like a wagon or ship. If the location substantially changes
+          beyond recognition, your ritual will fail to transport creatures
+          there. You can only have 2 location studied at a time.</p>
+        fluent: >-
+          <p>You may now have 2 × @L[Core:Fluency Bonus]{F} locations studied
+          and can [[lookup name style=lc]] a distance of up to @L[Core:Fluency
+          Bonus]{F} × your level in miles.</p>
+        proficient: >-
+          <p>You may now have 2 × @L[Core:Proficiency Bonus]{P} locations
+          studied and can [[lookup name style=lc]] a distance of up to
+          @L[Core:Proficiency Bonus]{P} × your level in miles.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - area
+        - creature
+    type: ability
+folder: stormMage0000000
+img: systems/teriock/src/icons/ranks/rank-3-storm-mage.webp
+name: Rank 3 Storm Mage
+system:
+  archetype: mage
+  className: stormMage
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>The true wonder seeker, these mages are the philosophers of the world,
+    always seeking out more knowledge and more wisdom. The Storm Mage is a
+    logician, a tactical intellectual who prefers to neutralize opponents rather
+    than destroy them. Often cold, the Storm Mage is also tumultuous and crafty.
+    If you are playing a Storm Mage, be curious, hungry for information, always
+    in the clouds, tricky and clever, eluding rather than confronting.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

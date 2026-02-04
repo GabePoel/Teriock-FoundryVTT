@@ -1,53 +1,46 @@
-_id: rank4Corsair0000
-folder: corsair000000000
-name: Rank 4 Corsair
-system:
-  archetype: semi
-  className: corsair
-  classRank: 4
-  competence:
-    raw: 1
-  description: >-
-    <p>People of the sea, they are never very comfortable far from a large body
-    of water. Corsairs are wanderers and like to be on the move. Corsairs tend
-    to be humble in that they understand that nature is greater than they are
-    and respect it for that. If you are an Corsair, crave water and sailing, go
-    with the flow, keep on the move, and keep things ship shape.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 3
-type: rank
-img: systems/teriock/src/icons/ranks/rank-4-corsair.webp
+_id: r4Cor00000000000
+_key: '!items!r4Cor00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Amplify Wind Shuriken
-    type: ability
+  - _id: sirF8AgKotgf1kF7
+    _key: '!items.effects!r4Cor00000000000.sirF8AgKotgf1kF7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ampWindShuriken0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
     img: systems/teriock/src/icons/abilities/amplify-wind-shuriken.webp
+    name: Amplify Wind Shuriken
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: corsair
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Core:Attack Interaction]{attack} with @L[Ability:Wind
@@ -58,51 +51,131 @@ effects:
           separate @L[Category:Attack abilities]{attacks}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 2HXgggRBROZxbgyf
+    _key: '!items.effects!r4Cor00000000000.2HXgggRBROZxbgyf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.captainMoraleAwa
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/captain-morale-awaken.webp
+    name: Captain Morale Awaken
+    system:
       class: corsair
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    _id: sirF8AgKotgf1kF7
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @L[Keyword:Limited]{Limited} @L[Ability:Instant
+          Awaken]{Instant Awaken} for allies aboard the ship you are
+          captaining.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are captaining a ship.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 6EtpcjahNQlYqsT6
+    _key: '!items.effects!r4Cor00000000000.6EtpcjahNQlYqsT6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.combatShimmering
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ampWindShuriken0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Corsair0000.sirF8AgKotgf1kF7'
-  - name: Combat Shimmering
-    type: ability
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/combat-shimmering.webp
+    name: Combat Shimmering
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: corsair
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: minute
-        quantity: 1
+        dawn: false
         description: 1 Minute
+        raw: '1'
         stationary: false
-      sustained: true
+        unit: minute
+      effectTypes:
+        - resistance
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: snared
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: immobilized
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: hack
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Keyword:Resistance]{resistant} to effects that would
@@ -112,348 +185,287 @@ effects:
           not clear any existing effects.</div>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.statuses
-              target: Actor
-              qualifier: '1'
-              value: snared
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.statuses
-              target: Actor
-              qualifier: '1'
-              value: immobilized
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: hack
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 6EtpcjahNQlYqsT6
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.combatShimmering
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Corsair0000.6EtpcjahNQlYqsT6'
-  - name: Penetrate
-    type: ability
-    img: systems/teriock/src/icons/abilities/penetrate.webp
-    system:
       powerSources:
         - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-      targets:
-        - vitals
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
       range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
-        critHit: >-
-          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
-          as well.</p>
-      piercing:
-        raw: 2
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: corsair
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - body
-          common:
-            - standardDamage
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: nwd3lnopHlclWt88
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.penetrate0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Corsair0000.nwd3lnopHlclWt88'
-  - name: Captain Morale Awaken
-    type: ability
-    img: systems/teriock/src/icons/abilities/captain-morale-awaken.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      sustained: true
       targets:
         - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You have @L[Keyword:Limited]{Limited} @L[Ability:Instant
-          Awaken]{Instant Awaken} for allies aboard the ship you are
-          captaining.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      requirements: <p>You are captaining a ship.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+    type: ability
+  - _id: wMNBhNZW1iHjkmdk
+    _key: '!items.effects!r4Cor00000000000.wMNBhNZW1iHjkmdk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.captainMoraleAwa
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 2HXgggRBROZxbgyf
-    _key: '!items.effects!rank4Corsair0000.2HXgggRBROZxbgyf'
-  - name: Instant Awaken
-    type: ability
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/diving.webp
+    name: Diving
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>Target must be an ally aboard the ship you are captaining.</p>
-      effectTypes:
-        - awakening
-      _sup: 2HXgggRBROZxbgyf
+      class: corsair
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.instAwaken000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: TYyQitLpcFiavZuz
-    _key: '!items.effects!rank4Corsair0000.TYyQitLpcFiavZuz'
-  - name: Diving
-    type: ability
-    img: systems/teriock/src/icons/abilities/diving.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You no longer have to stay on the surface of water while
           @L[Ability:Swimming]{Swimming}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: wMNBhNZW1iHjkmdk
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Corsair0000.wMNBhNZW1iHjkmdk'
-  - name: Shipwright
-    type: ability
-    img: systems/teriock/src/icons/abilities/shipwright.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Ship Lore]{Ship Lore} and @L[Ability:Improvised
-          Ship Repairs]{Improvised Ship Repairs}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
+    type: ability
+  - _id: 6c540lMekcx8dAoN
+    _key: '!items.effects!r4Cor00000000000.6c540lMekcx8dAoN'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.impShipRepairs00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/improvised-ship-repairs.webp
+    name: Improvised Ship Repairs
+    system:
+      _sup: mEl07exy2fy1kWo7
       class: corsair
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.shipwright000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: mEl07exy2fy1kWo7
-    _key: '!items.effects!rank4Corsair0000.mEl07exy2fy1kWo7'
-  - name: Ship Lore
-    type: ability
-    system:
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
+          materials and repair 1 part of a ship. These repairs exist for 8 hours
+          before they are no longer functional. The types of repairs you can
+          make are as follows.</p><ul><li>A mast.</li><li>A sail.</li><li>A
+          steering wheel.</li><li>A rudder.</li><li>A hole in the
+          hull.</li><li>A cannon.</li><li>A crow's nest.</li><li>A
+          figurehead.</li><li>A plank.</li><li>A ladder.</li><li>An
+          anchor.</li></ul>With @L[Core:Game Master]{GM} permission, you may be
+          able to repair other parts of a ship as well.
+        fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} repairs.</p>
+        proficient: >-
+          <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
+          repairs.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - ship
+    type: ability
+  - _id: TYyQitLpcFiavZuz
+    _key: '!items.effects!r4Cor00000000000.TYyQitLpcFiavZuz'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.instAwaken000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+    name: Instant Awaken
+    system:
+      _sup: 2HXgggRBROZxbgyf
+      competence:
+        raw: 0
+      delivery:
+        base: hand
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      limitation: <p>Target must be an ally aboard the ship you are captaining.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
       range:
+        raw: Your Hand's Range
         unit: ft
-        raw: '120'
+      results:
+        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: nwd3lnopHlclWt88
+    _key: '!items.effects!r4Cor00000000000.nwd3lnopHlclWt88'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.penetrate0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/penetrate.webp
+    name: Penetrate
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
+          hacks:
+            - body
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
+          as well.</p>
+        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+  - _id: J69n7HZUGou29eyK
+    _key: '!items.effects!r4Cor00000000000.J69n7HZUGou29eyK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shipLore00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/ship-lore.webp
+    name: Ship Lore
+    system:
+      _sup: mEl07exy2fy1kWo7
+      class: corsair
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - truthDetecting
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          checks:
+            - mariner
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You recognize details about ships by sight. For a given ship, you
@@ -469,103 +481,94 @@ effects:
           information.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - truthDetecting
-      impacts:
-        base:
-          checks:
-            - mariner
-      _sup: mEl07exy2fy1kWo7
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/ship-lore.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.shipLore00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: J69n7HZUGou29eyK
-    _key: '!items.effects!rank4Corsair0000.J69n7HZUGou29eyK'
-  - name: Improvised Ship Repairs
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: self
-      targets:
-        - ship
-      duration:
-        unit: hour
-        quantity: 8
-        stationary: false
-        description: 8 Hours
-      overview:
-        base: >-
-          <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
-          materials and repair 1 part of a ship. These repairs exist for 8 hours
-          before they are no longer functional. The types of repairs you can
-          make are as follows.</p><ul><li>A mast.</li><li>A sail.</li><li>A
-          steering wheel.</li><li>A rudder.</li><li>A hole in the
-          hull.</li><li>A cannon.</li><li>A crow's nest.</li><li>A
-          figurehead.</li><li>A plank.</li><li>A ladder.</li><li>An
-          anchor.</li></ul>With @L[Core:Game Master]{GM} permission, you may be
-          able to repair other parts of a ship as well.
-        proficient: >-
-          <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
-          repairs.</p>
-        fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} repairs.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      range:
+        raw: '120'
+        unit: ft
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - ship
+    type: ability
+  - _id: mEl07exy2fy1kWo7
+    _key: '!items.effects!r4Cor00000000000.mEl07exy2fy1kWo7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shipwright000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/shipwright.webp
+    name: Shipwright
+    system:
       class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: mEl07exy2fy1kWo7
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/improvised-ship-repairs.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.impShipRepairs00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 6c540lMekcx8dAoN
-    _key: '!items.effects!rank4Corsair0000.6c540lMekcx8dAoN'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank4Corsair0000'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Ship Lore]{Ship Lore} and @L[Ability:Improvised
+          Ship Repairs]{Improvised Ship Repairs}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: corsair000000000
+img: systems/teriock/src/icons/ranks/rank-4-corsair.webp
+name: Rank 4 Corsair
+system:
+  archetype: semi
+  className: corsair
+  classRank: 4
+  competence:
+    raw: 1
+  description: >-
+    <p>People of the sea, they are never very comfortable far from a large body
+    of water. Corsairs are wanderers and like to be on the move. Corsairs tend
+    to be humble in that they understand that nature is greater than they are
+    and respect it for that. If you are an Corsair, crave water and sailing, go
+    with the flow, keep on the move, and keep things ship shape.</p>
+  innate: false
+  maxAv: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+type: rank

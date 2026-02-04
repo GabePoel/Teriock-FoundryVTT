@@ -1,77 +1,63 @@
-folder: MwRSCixW3oPgC6LW
-name: Worm Clan
-type: power
-_id: AUb6mDzNhAs4xvKr
-img: icons/environment/creatures/bug-worm-glow.webp
-system:
-  description: >-
-    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
-    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
-    color.</p>
-  type: backstory
+_id: wormClan00000000
+_key: '!items!wormClan00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Hitman
-    type: ability
-    img: systems/teriock/src/icons/abilities/hitman.webp
+  - _id: YunCcYNm9qnGvYTp
+    _key: '!items.effects!wormClan00000000.YunCcYNm9qnGvYTp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
+      _sup: iMnqdHqM1cssgp0L
+      class: thief
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - area
       duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
+        dawn: false
+        description: Instant
+        raw: '0'
         stationary: false
-      overview:
-        base: >-
-          <p>You prepare a 5 foot by 5 foot area. While in this area, you may
-          make a limited improved @L[Ability:Hide]{Hide} action.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 1
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
       grantOnly: false
-    _id: iMnqdHqM1cssgp0L
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hitman0000000000
-    _key: '!items.effects!AUb6mDzNhAs4xvKr.iMnqdHqM1cssgp0L'
-  - name: Hide
-    type: ability
-    system:
-      powerSources:
-        - martial
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
+      improvement: >-
+        You may Hide regardless of the environment (cover, lighting, etc.) that
+        you prepare.
       interaction: manifest
-      featSaveAttribute: mov
+      limitation: >-
+        You may only Hide in the location you have prepared and you do not get
+        the attribute improvement from this ability. You also do not remain
+        hidden if you leave this location.
       maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
       overview:
         base: >-
           <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
@@ -79,66 +65,101 @@ effects:
           @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
           @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
           your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
         fluent: >-
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
           (if it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          attribute: snk
-          amount: proficiency
-      skill: true
-      standard: true
-      class: thief
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: >-
-        You may only Hide in the location you have prepared and you do not get
-        the attribute improvement from this ability. You also do not remain
-        hidden if you leave this location.
-      improvement: >-
-        You may Hide regardless of the environment (cover, lighting, etc.) that
-        you prepare.
-      grantOnly: false
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-          rolls:
-            hide: 1d20 + (2 * @snk)
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
-      _sup: iMnqdHqM1cssgp0L
-    img: systems/teriock/src/icons/abilities/hide.webp
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 1
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: iMnqdHqM1cssgp0L
+    _key: '!items.effects!wormClan00000000.iMnqdHqM1cssgp0L'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hitman0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-    _id: YunCcYNm9qnGvYTp
-    _key: '!items.effects!AUb6mDzNhAs4xvKr.YunCcYNm9qnGvYTp'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!AUb6mDzNhAs4xvKr'
+    img: systems/teriock/src/icons/abilities/hitman.webp
+    name: Hitman
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You prepare a 5 foot by 5 foot area. While in this area, you may
+          make a limited improved @L[Ability:Hide]{Hide} action.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - area
+      upgrades:
+        score:
+          attribute: snk
+          value: 1
+    type: ability
+folder: saurageClans0000
+img: icons/environment/creatures/bug-worm-glow.webp
+name: Worm Clan
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
+    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
+    color.</p>
+  maxAv: 4
+  type: backstory
+type: power

@@ -1,31 +1,39 @@
 _id: blizzardAura0000
+_key: '!items!blizzardAura0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Blizzard Aura
-    type: ability
+  - _id: blizzardAura0000
+    _key: '!items.effects!blizzardAura0000.blizzardAura0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/blizzard-aura.webp
-    _id: blizzardAura0000
+    name: Blizzard Aura
     system:
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
+        somatic: true
+        verbal: true
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - temporal
       elements:
@@ -35,33 +43,20 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      interaction: feat
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
       impacts:
         base:
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: target
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -70,8 +65,8 @@ effects:
                   skip: 0
                   time: start
                   trigger: action
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: target
           rolls:
             endCon: 2d4
           statuses:
@@ -79,19 +74,23 @@ effects:
         heightened:
           rolls:
             damage: 1d4[magic ice]
-      class: stormMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blizzardAura0000.blizzardAura0000'
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/blizzard-aura.webp
 name: Blizzard Aura
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!blizzardAura0000'

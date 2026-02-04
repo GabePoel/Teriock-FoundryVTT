@@ -1,133 +1,61 @@
-name: Boa Constrictor
-type: creature
+_id: boaConstrictor00
+_key: '!actors!boaConstrictor00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+folder: commonAnimalSpec
 img: systems/teriock/src/icons/creatures/boa-constrictor.webp
-prototypeToken:
-  name: Boa Constrictor
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/boa-constrictor.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: boaConstrictor00
-    folder: Jg0dWUzFS1WNDl2g
-    name: Boa Constrictor
-    type: species
-    img: systems/teriock/src/icons/creatures/boa-constrictor.webp
-    system:
-      competence:
-        raw: 1
-      statDice:
-        hp:
-          disabled: false
-          faces: 8
-          number:
-            raw: '@size - 1'
-        mp:
-          disabled: false
-          faces: 6
-          number:
-            raw: '1'
-      attributeIncrease: >-
-        <p>@L[Ability:Beastly Strength]{Beastly Strength} if at least
-        @L[Core:Size]{size} 3. @L[Ability:Improved Strength]{Improved Strength}
-        if at least @L[Core:Size]{size} 4. @L[Ability:Giant Strength]{Giant
-        Strength} if at least @L[Core:Size]{size} 5.</p>
-      br: 4
-      hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      size:
-        enabled: true
-        value: 2
-        min: 2
-        max: 5
-      traits:
-        - animal
+    _key: '!actors.items!boaConstrictor00.boaConstrictor00'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.boaConstrictor00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Advanced Smell
-        type: ability
+      - _id: 5v5ltdayWvJPnazo
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.5v5ltdayWvJPnazo
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.advancedSmell000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
+        name: Advanced Smell
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: berserker
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
             conditions:
               absent:
                 - down
+            dawn: false
             description: While Up
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You can passively smell the types of all living creatures
@@ -138,190 +66,308 @@ items:
               this way.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
+          revealed: true
           skill: true
           standard: true
-          class: berserker
-          requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
-          form: normal
-          effectTypes:
-            - sensory
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
+        type: ability
+      - _id: hym9NdhYnXHOqvkf
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.hym9NdhYnXHOqvkf
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.advancedSmell000
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 5v5ltdayWvJPnazo
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.5v5ltdayWvJPnazo
-      - name: Scent Seeing
-        type: ability
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: knight
+          competence:
+            raw: 0
           delivery:
-            base: aura
-          targets:
-            - creature
+            base: self
           duration:
-            unit: unlimited
-            conditions:
-              absent:
-                - down
-            stationary: false
-            description: While Up
-            raw: '0'
             dawn: false
-          range:
-            unit: ft
-            raw: '10'
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all target creatures. You
-              continue to know the location of all targets within 10 feet,
-              whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Property:AV0]{AV0}.</div>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 3), gte(@size, 4))
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
-          class: berserker
-          requirements: >-
-            <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
-            not @L[Condition:Odorless]{odorless}.</p>
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: 6ZacwzLtiWpT7YJq
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.6ZacwzLtiWpT7YJq
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: K0bfFvxnkJgr2GS8
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Property:AV0]{AV0}.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: lOk094KT6noCpwDZ
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.lOk094KT6noCpwDZ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: dNLHJ5LuJbgDyhk7
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Property:AV0]{AV0}.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: 41v3kG6BY0y93LsJ
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.41v3kG6BY0y93LsJ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/climbing.webp
+        name: Climbing
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
           effectTypes:
-            - sensory
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
           impacts:
             base:
               changes:
-                - mode: 4
+                - key: system.speedAdjustments.climb
+                  mode: 4
                   priority: 10
-                  time: normal
-                  key: system.senses.smell
-                  target: Actor
                   qualifier: '1'
-                  value: '10'
-          _sup: 5v5ltdayWvJPnazo
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-        img: systems/teriock/src/icons/abilities/scent-seeing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.scentSeeing00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: EA0rHaDlC5JZ6yoP
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.EA0rHaDlC5JZ6yoP
-      - name: Climbing
-        type: ability
-        img: systems/teriock/src/icons/abilities/climbing.webp
-        system:
-          powerSources:
-            - martial
+                  target: Actor
+                  time: normal
+                  value: '2'
+            proficient:
+              changes:
+                - key: system.speedAdjustments.climb
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
           interaction: manifest
-          featSaveAttribute: mov
           maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
           overview:
             base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
             proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
           piercing:
             raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '2'
-            proficient:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '3'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - martial
           range:
             unit: self
-        _id: 41v3kG6BY0y93LsJ
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: mpaXA6XaEmCFMTko
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.mpaXA6XaEmCFMTko
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+          compendiumSource: Compendium.teriock.abilities.Item.constrict0000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.41v3kG6BY0y93LsJ
-      - name: Constrict
-        type: ability
+        img: systems/teriock/src/icons/abilities/constrict.webp
+        name: Constrict
         system:
+          competence:
+            raw: 0
           delivery:
             base: hand
           duration:
-            unit: unlimited
-            stationary: true
-            description: While Stationary
             dawn: false
+            description: While Stationary
             raw: '0'
+            stationary: true
+            unit: unlimited
           endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
           executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: str
           form: normal
           grantOnly: false
+          impacts:
+            base:
+              expiration:
+                changeOnCrit: false
+                doesExpire: true
+                normal:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: forced
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: turn
+                    who:
+                      type: executor
           interaction: feat
           maneuver: active
           piercing:
@@ -329,850 +375,99 @@ items:
           powerSources:
             - martial
           range:
-            unit: ft
             raw: Your Hand's Range
+            unit: ft
           requirements: <p>Target is your @L[Core:Size]{SIZE} or smaller.</p>
           results:
             fail: >-
               <p>Target is @L[Condition:Suffocating]{suffocating} and
               @L[Condition:Snared]{snared}.</p>
+          revealed: true
           sustained: true
           targets:
             - creature
-          impacts:
-            base:
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: executor
-                    what:
-                      type: forced
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: turn
-                      skip: 0
-                changeOnCrit: false
-                doesExpire: true
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: mpaXA6XaEmCFMTko
-        img: systems/teriock/src/icons/abilities/constrict.webp
+        type: ability
+      - _id: 2FGpCp1si6i5BO7Y
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.2FGpCp1si6i5BO7Y
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.constrict0000000
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.mpaXA6XaEmCFMTko
-      - name: Dense Intelligence
-        type: ability
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: int
               value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 2FGpCp1si6i5BO7Y
+        type: ability
+      - _id: eVnWMpvSTxCoZ92V
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.eVnWMpvSTxCoZ92V
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.2FGpCp1si6i5BO7Y
-      - name: Hack
-        type: ability
-        img: systems/teriock/src/icons/abilities/hack.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - arm
-            - leg
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          overview:
-            base: >-
-              <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The
-              damage gets dealt accordingly.</p>
-          results:
-            hit: >-
-              <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an
-              arm or leg, depending on what you chose.</p>
-            critHit: >-
-              <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms
-              or legs, depending on what you chose.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: berserker
-          form: normal
-          impacts:
-            base:
-              hacks:
-                - arm
-                - leg
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-        _id: e4Ht24dwqfiu8GyV
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.e4Ht24dwqfiu8GyV
-      - name: Hide
-        type: ability
-        img: systems/teriock/src/icons/abilities/hide.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          overview:
-            base: >-
-              <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
-              may roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-              @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2
-              × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
-              use your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}.</p>
-            proficient: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
-            fluent: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: thief
-          requirements: >-
-            <p>You are in a location with shadows, dim light,
-            @L[Core:Cover]{three-quarters cover}, or some other feature which
-            the @L[Core:Game Master]{GM} determines is appropriate for being
-            @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-            these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-          form: normal
-          impacts:
-            base:
-              startStatuses:
-                - hidden
-              rolls:
-                hide: 1d20 + (2 * @snk)
-            proficient:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @p
-            fluent:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @f
-          upgrades:
-            competence:
-              attribute: snk
-              value: 0
-            score:
-              attribute: snk
-              value: 2
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          range:
-            unit: self
-        _id: ar8bvEg1P1NsDJ0r
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.ar8bvEg1P1NsDJ0r
-      - name: Impale
-        type: ability
-        img: systems/teriock/src/icons/abilities/impale.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - vitals
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          results:
-            hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
-            critHit: >-
-              <p>If you want, target takes @L[Core:Standard Damage]{standard
-              damage} as well.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: corsair
-          form: normal
-          impacts:
-            base:
-              hacks:
-                - body
-              common:
-                - standardDamage
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-        _id: 5SjZwsCtJzCkDTNF
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.5SjZwsCtJzCkDTNF
-      - name: No Hands
-        type: ability
-        img: systems/teriock/src/icons/abilities/no-hands.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
-          piercing:
-            raw: 0
-          form: flaw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: quIawsa5mx9hEAtV
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.quIawsa5mx9hEAtV
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 9pjM17CzFcxUukeP
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.9pjM17CzFcxUukeP
-      - name: Normal Perception
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: mOzzzWaNx0RT8hLH
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.mOzzzWaNx0RT8hLH
-      - name: Normal Sneak
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 3sEEBh0m3F9MPy3j
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.3sEEBh0m3F9MPy3j
-      - name: Normal Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 0), gte(@size, 3))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: NJPY1FDHnxQeu9xJ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.NJPY1FDHnxQeu9xJ
-      - name: Vitals Hack
-        type: ability
-        img: systems/teriock/src/icons/abilities/vitals-hack.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - vitals
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          results:
-            hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
-            critHit: >-
-              <p>If you want, target takes @L[Core:Standard Damage]{standard
-              damage} as well.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: archer
-          form: normal
-          effectTypes:
-            - damaging
-          impacts:
-            base:
-              hacks:
-                - ear
-                - mouth
-                - nose
-              common:
-                - standardDamage
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-        _id: zrWFanGJlroMpZii
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.vitHack000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.zrWFanGJlroMpZii
-      - name: Beastly Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Property:AV0]{AV0}.</div>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 3), gte(@size, 4))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: hym9NdhYnXHOqvkf
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.hym9NdhYnXHOqvkf
-      - name: Improved Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 4), gte(@size, 5))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: K0bfFvxnkJgr2GS8
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.K0bfFvxnkJgr2GS8
-      - name: Beastly Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Property:AV0]{AV0}.</div>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: K0bfFvxnkJgr2GS8
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 6ZacwzLtiWpT7YJq
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.6ZacwzLtiWpT7YJq
-      - name: Improved Armor Piercing
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: K0bfFvxnkJgr2GS8
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: UT8kub8YR0dgPdKg
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.UT8kub8YR0dgPdKg
-      - name: Giant Strength
-        type: ability
         img: systems/teriock/src/icons/abilities/giant-strength.webp
+        name: Giant Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
@@ -1181,222 +476,484 @@ items:
               @L[Property:Cumbersome]{cumbersome} items.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 5), gte(@size, 99))
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
-          class: knight
-          form: normal
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 5), gte(@size, 99))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
+        type: ability
+      - _id: e4Ht24dwqfiu8GyV
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.e4Ht24dwqfiu8GyV
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+          compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: eVnWMpvSTxCoZ92V
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.eVnWMpvSTxCoZ92V
-      - name: Improved Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        img: systems/teriock/src/icons/abilities/hack.webp
+        name: Hack
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
+          class: berserker
+          competence:
             raw: 0
-          skill: true
-          standard: true
-          class: knight
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: normal
           grantOnly: false
-          _sup: eVnWMpvSTxCoZ92V
+          impacts:
+            base:
+              hacks:
+                - arm
+                - leg
+          interaction: attack
+          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          maneuver: active
+          overview:
+            base: >-
+              <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The
+              damage gets dealt accordingly.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms
+              or legs, depending on what you chose.</p>
+            hit: >-
+              <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an
+              arm or leg, depending on what you chose.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - arm
+            - leg
+        type: ability
+      - _id: ar8bvEg1P1NsDJ0r
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.ar8bvEg1P1NsDJ0r
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/hide.webp
+        name: Hide
+        system:
+          class: thief
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                hide: 1d20 + (2 * @snk)
+              startStatuses:
+                - hidden
+            fluent:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @f
+            proficient:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @p
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
+              may roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+              @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2
+              × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
+              use your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}.</p>
+            fluent: >-
+              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
+              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}).</p>
+            proficient: >-
+              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
+              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}).</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          requirements: >-
+            <p>You are in a location with shadows, dim light,
+            @L[Core:Cover]{three-quarters cover}, or some other feature which
+            the @L[Core:Game Master]{GM} determines is appropriate for being
+            @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+            these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
           upgrades:
+            competence:
+              attribute: snk
+              value: 0
             score:
-              attribute: str
+              attribute: snk
               value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
+        type: ability
+      - _id: 5SjZwsCtJzCkDTNF
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.5SjZwsCtJzCkDTNF
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: dNLHJ5LuJbgDyhk7
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.dNLHJ5LuJbgDyhk7
-      - name: Beastly Strength
-        type: ability
+        img: systems/teriock/src/icons/abilities/impale.webp
+        name: Impale
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Property:AV0]{AV0}.</div>
-          piercing:
+          class: corsair
+          competence:
             raw: 0
-          skill: true
-          standard: true
-          class: knight
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: normal
           grantOnly: false
-          _sup: dNLHJ5LuJbgDyhk7
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
+          impacts:
+            base:
+              common:
+                - standardDamage
+              hacks:
+                - body
+          interaction: attack
+          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          maneuver: active
+          piercing:
             raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: lOk094KT6noCpwDZ
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.lOk094KT6noCpwDZ
-      - name: Improved Armor Piercing
-        type: ability
-        system:
           powerSources:
             - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>If you want, target takes @L[Core:Standard Damage]{standard
+              damage} as well.</p>
+            hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - vitals
+        type: ability
+      - _id: UT8kub8YR0dgPdKg
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.UT8kub8YR0dgPdKg
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: K0bfFvxnkJgr2GS8
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
               piercing}.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          grantOnly: false
-          _sup: dNLHJ5LuJbgDyhk7
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
+          powerSources:
+            - martial
           range:
             unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: qY90r9EIqi4iGhuC
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.qY90r9EIqi4iGhuC
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: qY90r9EIqi4iGhuC
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.qY90r9EIqi4iGhuC
-      - name: Melee Damage Boost
-        type: ability
-        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
         system:
+          _sup: dNLHJ5LuJbgDyhk7
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+              piercing}.</p>
+          piercing:
+            raw: 0
           powerSources:
             - martial
-          interaction: manifest
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: K0bfFvxnkJgr2GS8
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.K0bfFvxnkJgr2GS8
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 4), gte(@size, 5))
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: dNLHJ5LuJbgDyhk7
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.dNLHJ5LuJbgDyhk7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          _sup: eVnWMpvSTxCoZ92V
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: oa2uKYBGqwkbNZHC
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.oa2uKYBGqwkbNZHC
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        name: Melee Damage Boost
+        system:
+          _sup: eVnWMpvSTxCoZ92V
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: weapon
-          targets:
-            - creature
           duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
             dawn: false
-          range:
-            unit: melee
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: reactive
           overview:
             base: >-
               <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -1408,187 +965,632 @@ items:
               @L[Core:Damage]{damage} again.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: melee
+          revealed: true
           skill: true
           standard: true
-          class: knight
+          targets:
+            - creature
           trigger: >-
             <p>You have hit a creature with a @L[Category:Damaging
             effects]{damaging} melee @L[Category:Weapon delivery
             abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          grantOnly: false
-          _sup: eVnWMpvSTxCoZ92V
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          impacts: {}
+        type: ability
+      - _id: quIawsa5mx9hEAtV
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.quIawsa5mx9hEAtV
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: oa2uKYBGqwkbNZHC
-        _key: >-
-          !actors.items.effects!boaConstrictor00.boaConstrictor00.oa2uKYBGqwkbNZHC
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.boaConstrictor00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!boaConstrictor00.boaConstrictor00'
-  - name: Hardened Scales
-    type: body
-    _id: 312Z1p7qN2YK8aPv
-    img: systems/teriock/src/icons/body-parts/hardened-scales.webp
-    system:
-      damage:
-        base:
-          raw: '0'
-      competence:
-        raw: 0
-      _sup: boaConstrictor00
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      av:
-        raw: '3'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.hardenedScales00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!boaConstrictor00.312Z1p7qN2YK8aPv'
-  - name: Fanged Jaw
-    type: body
-    _id: emrOAsvXoqI636i2
-    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
-    system:
-      damage:
-        base:
-          raw: 1d6
-      fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: boaConstrictor00
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      bv:
-        raw: '1'
-    effects:
-      - name: Biting
-        type: property
+        img: systems/teriock/src/icons/abilities/no-hands.webp
+        name: No Hands
         system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 9pjM17CzFcxUukeP
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.9pjM17CzFcxUukeP
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: mOzzzWaNx0RT8hLH
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.mOzzzWaNx0RT8hLH
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: 3sEEBh0m3F9MPy3j
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.3sEEBh0m3F9MPy3j
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        type: ability
+      - _id: NJPY1FDHnxQeu9xJ
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.NJPY1FDHnxQeu9xJ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-strength.webp
+        name: Normal Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 0), gte(@size, 3))
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 0
+        type: ability
+      - _id: EA0rHaDlC5JZ6yoP
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.EA0rHaDlC5JZ6yoP
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.scentSeeing00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/scent-seeing.webp
+        name: Scent Seeing
+        system:
+          _sup: 5v5ltdayWvJPnazo
+          class: berserker
+          competence:
+            raw: 0
+          delivery:
+            base: aura
+          duration:
+            conditions:
+              absent:
+                - down
+            dawn: false
+            description: While Up
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.smell
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '10'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You know the exact location of all target creatures. You
+              continue to know the location of all targets within 10 feet,
+              whether they are or you are moving or not, so long as they are
+              still within 10 feet of you.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: '10'
+            unit: ft
+          requirements: >-
+            <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
+            not @L[Condition:Odorless]{odorless}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: zrWFanGJlroMpZii
+        _key: >-
+          !actors.items.effects!boaConstrictor00.boaConstrictor00.zrWFanGJlroMpZii
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.vitHack000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/vitals-hack.webp
+        name: Vitals Hack
+        system:
+          class: archer
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              common:
+                - standardDamage
+              hacks:
+                - ear
+                - mouth
+                - nose
+          interaction: attack
+          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>If you want, target takes @L[Core:Standard Damage]{standard
+              damage} as well.</p>
+            hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - vitals
+        type: ability
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/creatures/boa-constrictor.webp
+    name: Boa Constrictor
+    system:
+      attributeIncrease: >-
+        <p>@L[Ability:Beastly Strength]{Beastly Strength} if at least
+        @L[Core:Size]{size} 3. @L[Ability:Improved Strength]{Improved Strength}
+        if at least @L[Core:Size]{size} 4. @L[Ability:Giant Strength]{Giant
+        Strength} if at least @L[Core:Size]{size} 5.</p>
+      br: 4
+      competence:
+        raw: 1
+      hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
+      size:
+        enabled: true
+        max: 5
+        min: 2
+        value: 2
+      statDice:
+        hp:
+          disabled: false
+          faces: 8
+          number:
+            raw: '@size - 1'
+        mp:
+          disabled: false
+          faces: 6
+          number:
+            raw: '1'
+      traits:
+        - animal
+    type: species
+  - _id: emrOAsvXoqI636i2
+    _key: '!actors.items!boaConstrictor00.emrOAsvXoqI636i2'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: ozGDVg02SHRX2hCr
+        _key: >-
+          !actors.items.effects!boaConstrictor00.emrOAsvXoqI636i2.ozGDVg02SHRX2hCr
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: ozGDVg02SHRX2hCr
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        type: property
+      - _id: u9pZ8QANF4C7gKB9
+        _key: >-
+          !actors.items.effects!boaConstrictor00.emrOAsvXoqI636i2.u9pZ8QANF4C7gKB9
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.emrOAsvXoqI636i2.ozGDVg02SHRX2hCr
-      - name: Weapon
-        type: property
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
         system:
+          competence:
+            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: u9pZ8QANF4C7gKB9
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!boaConstrictor00.emrOAsvXoqI636i2.u9pZ8QANF4C7gKB9
+        type: property
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
+    name: Fanged Jaw
+    system:
+      _sup: boaConstrictor00
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '1'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d6
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: 312Z1p7qN2YK8aPv
+    _key: '!actors.items!boaConstrictor00.312Z1p7qN2YK8aPv'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.hardenedScales00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!boaConstrictor00.emrOAsvXoqI636i2'
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/body-parts/hardened-scales.webp
+    name: Hardened Scales
+    system:
+      _sup: boaConstrictor00
+      attackPenalty:
+        raw: '-3'
+      av:
+        raw: '3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '0'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+name: Boa Constrictor
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Boa Constrictor
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/boa-constrictor.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 5
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '2'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: emrOAsvXoqI636i2
-    blocker: emrOAsvXoqI636i2
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: boaConstrictor00
-folder: xiQuFe17AXH1ZyVm
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!boaConstrictor00'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 5
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '2'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: emrOAsvXoqI636i2
+    blocker: emrOAsvXoqI636i2
+type: creature

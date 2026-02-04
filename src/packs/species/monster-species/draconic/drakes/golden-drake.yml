@@ -1,346 +1,383 @@
 _id: goldenDrake00000
-folder: RzPs61J6b8X8OR9T
-name: Golden Drake
-type: species
-img: systems/teriock/src/icons/creatures/golden-drake.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>These "half-dragons" are a hybrid of @L[Category:Dragons]{dragons}
-    created by @L[Core:Elder Sorcery]{Elder Sorcery}.
-    @L[Category:Dragons]{Dragons} hate these beasts, who possess little
-    intelligence beyond the desire to kill. Drakes can be ridden and are often
-    found as mounts for imperial guards. They spawn drakespawn.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '5'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  appearance: >-
-    <p>Similar to @L[Creature:Golden Dragon]{golden dragons}, but smaller and
-    more bestial.</p>
-  br: 13
-  innateRanks: "<p>Innately @L[Category:Classes]{rank} 1\_@L[Class:Duelist]{Duelist}.</p>"
-  size:
-    enabled: true
-    value: 5
-  traits:
-    - draconic
-    - monstrous
+_key: '!items!goldenDrake00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Battle Cry
-    type: ability
+  - _id: yEqJ8oCJlPQNCF2A
+    _key: '!items.effects!goldenDrake00000.yEqJ8oCJlPQNCF2A'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.battleCry0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/battle-cry.webp
+    name: Battle Cry
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: berserker
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
           @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: berserker
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.battleCry0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: yEqJ8oCJlPQNCF2A
-    _key: '!items.effects!goldenDrake00000.yEqJ8oCJlPQNCF2A'
-  - name: Battle Cry Aura
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      duration:
-        unit: minute
-        stationary: false
-        description: 1 Minute
-        dawn: false
-        raw: '1'
       range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
-      results:
-        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: berserker
-      costs:
-        verbal: true
-      endCondition: >-
-        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      effectTypes:
-        - loud
-      impacts:
-        base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-        macros:
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: yEqJ8oCJlPQNCF2A
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+      targets:
+        - self
+    type: ability
+  - _id: Zd6TMb4EORkV9VTf
+    _key: '!items.effects!goldenDrake00000.Zd6TMb4EORkV9VTf'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.battleCryAura000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: Zd6TMb4EORkV9VTf
-    _key: '!items.effects!goldenDrake00000.Zd6TMb4EORkV9VTf'
-  - name: Battle Cry Resistance
-    type: ability
+    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+    name: Battle Cry Aura
     system:
+      _sup: yEqJ8oCJlPQNCF2A
+      class: berserker
+      competence:
+        raw: 0
+      costs:
+        verbal: true
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - loud
+      endCondition: >-
+        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
+        macros:
+          Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
+          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
+      interaction: feat
+      maneuver: active
+      overview:
+        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: EHGO4GqZhuycClBa
+    _key: '!items.effects!goldenDrake00000.EHGO4GqZhuycClBa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.battleCryRsc0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    name: Battle Cry Resistance
+    system:
+      _sup: yEqJ8oCJlPQNCF2A
+      class: berserker
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: minute
-        stationary: false
+        dawn: false
         description: 5 Minutes
         raw: '5'
-        dawn: false
+        stationary: false
+        unit: minute
+      effectTypes:
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime: a0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: frightened
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} being
           @L[Condition:Frightened]{frightened}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: berserker
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.statuses
-              target: Actor
-              qualifier: '1'
-              value: frightened
-      _sup: yEqJ8oCJlPQNCF2A
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.battleCryRsc0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: EHGO4GqZhuycClBa
-    _key: '!items.effects!goldenDrake00000.EHGO4GqZhuycClBa'
-  - name: Fast
-    type: ability
-    img: systems/teriock/src/icons/abilities/fast.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: jpMEHA3xiSkQtg0I
+    _key: '!items.effects!goldenDrake00000.jpMEHA3xiSkQtg0I'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: PyvrawdzGJx3Uvhi
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Property:AV0]{AV0}.</div>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    type: ability
+  - _id: Zl0LttTq6ZOj6drS
+    _key: '!items.effects!goldenDrake00000.Zl0LttTq6ZOj6drS'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fast000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/fast.webp
+    name: Fast
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Zl0LttTq6ZOj6drS
+    type: ability
+  - _id: QLb8DJYswhIJRg7v
+    _key: '!items.effects!goldenDrake00000.QLb8DJYswhIJRg7v'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.fast000000000000
+      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.Zl0LttTq6ZOj6drS'
-  - name: Flying
-    type: ability
     img: systems/teriock/src/icons/abilities/flying.webp
+    name: Flying
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: corsair
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.fly
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
         proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.fly
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: QLb8DJYswhIJRg7v
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: ADVSsu3op3srn1Sq
+    _key: '!items.effects!goldenDrake00000.ADVSsu3op3srn1Sq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flying0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.goldenDrkBreath0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.QLb8DJYswhIJRg7v'
-  - name: Golden Drake Breath
-    type: ability
+    img: systems/teriock/src/icons/abilities/golden-drake-breath.webp
+    name: Golden Drake Breath
     system:
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
@@ -349,12 +386,16 @@ effects:
       delivery:
         base: cone
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: instant
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -366,425 +407,385 @@ effects:
         - magical
         - spiritual
       range:
-        unit: ft
         raw: '15'
+        unit: ft
       results:
         fail: >-
           <p>The next time the target would pull from the @L[Core:Death
           Bag]{death bag}, they pull 5 additional stones. If they attacked you,
           they instead pull 10.</p>
+      revealed: true
       targets:
         - creature
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-    _id: ADVSsu3op3srn1Sq
-    img: systems/teriock/src/icons/abilities/golden-drake-breath.webp
+    type: ability
+  - _id: 8pfqYt4qegOnMnDQ
+    _key: '!items.effects!goldenDrake00000.8pfqYt4qegOnMnDQ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.goldenDrkBreath0
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.ADVSsu3op3srn1Sq'
-  - name: Improved Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: PyvrawdzGJx3Uvhi
-    _key: '!items.effects!goldenDrake00000.PyvrawdzGJx3Uvhi'
-  - name: Beastly Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Property:AV0]{AV0}.</div>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
       _sup: PyvrawdzGJx3Uvhi
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      class: knight
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: jpMEHA3xiSkQtg0I
-    _key: '!items.effects!goldenDrake00000.jpMEHA3xiSkQtg0I'
-  - name: Improved Armor Piercing
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      _sup: PyvrawdzGJx3Uvhi
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 8pfqYt4qegOnMnDQ
-    _key: '!items.effects!goldenDrake00000.8pfqYt4qegOnMnDQ'
-  - name: Night Vision
-    type: ability
-    img: systems/teriock/src/icons/abilities/night-vision.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: PyvrawdzGJx3Uvhi
+    _key: '!items.effects!goldenDrake00000.PyvrawdzGJx3Uvhi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
+  - _id: TmdS2n8OJtuboy4w
+    _key: '!items.effects!goldenDrake00000.TmdS2n8OJtuboy4w'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/night-vision.webp
+    name: Night Vision
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is bright light
           and up to 120 feet as though it is dim light.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.dark
-              target: Actor
-              qualifier: '1'
-              value: '120'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: TmdS2n8OJtuboy4w
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.TmdS2n8OJtuboy4w'
-  - name: No Hands
-    type: ability
-    img: systems/teriock/src/icons/abilities/no-hands.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: R5aa3ckd1QexmnPN
+    _key: '!items.effects!goldenDrake00000.R5aa3ckd1QexmnPN'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/no-hands.webp
+    name: No Hands
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
       piercing:
         raw: 0
-      form: flaw
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: R5aa3ckd1QexmnPN
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.R5aa3ckd1QexmnPN'
-  - name: Normal Perception
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: WKOtftmDFSv6rhKt
+    _key: '!items.effects!goldenDrake00000.WKOtftmDFSv6rhKt'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: WKOtftmDFSv6rhKt
+    type: ability
+  - _id: 9C5s9Uo8Gbs2ADbM
+    _key: '!items.effects!goldenDrake00000.9C5s9Uo8Gbs2ADbM'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.WKOtftmDFSv6rhKt'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 9C5s9Uo8Gbs2ADbM
+    type: ability
+  - _id: hiFqgfyurOGCa8sq
+    _key: '!items.effects!goldenDrake00000.hiFqgfyurOGCa8sq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.9C5s9Uo8Gbs2ADbM'
-  - name: Stupid Intelligence
-    type: ability
     img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
+    name: Stupid Intelligence
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: -3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: hiFqgfyurOGCa8sq
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goldenDrake00000.hiFqgfyurOGCa8sq'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!goldenDrake00000'
+    type: ability
+folder: drakes0000000000
+img: systems/teriock/src/icons/creatures/golden-drake.webp
+name: Golden Drake
+system:
+  appearance: >-
+    <p>Similar to @L[Creature:Golden Dragon]{golden dragons}, but smaller and
+    more bestial.</p>
+  br: 13
+  competence:
+    raw: 1
+  description: >-
+    <p>These "half-dragons" are a hybrid of @L[Category:Dragons]{dragons}
+    created by @L[Core:Elder Sorcery]{Elder Sorcery}.
+    @L[Category:Dragons]{Dragons} hate these beasts, who possess little
+    intelligence beyond the desire to kill. Drakes can be ridden and are often
+    found as mounts for imperial guards. They spawn drakespawn.</p>
+  innateRanks: "<p>Innately @L[Category:Classes]{rank} 1\_@L[Class:Duelist]{Duelist}.</p>"
+  size:
+    enabled: true
+    value: 5
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '5'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - draconic
+    - monstrous
+type: species

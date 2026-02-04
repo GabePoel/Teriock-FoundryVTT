@@ -1,25 +1,25 @@
 _id: liquidate0000000
+_key: '!items!liquidate0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Liquidate
-    type: ability
+  - _id: liquidate0000000
+    _key: '!items.effects!liquidate0000000.liquidate0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/liquidate.webp
-    _id: liquidate0000000
+    name: Liquidate
     system:
+      class: paladin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>An amount of @L[Core:Hit Points and Mana Points]{MP} equal to
-              the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
-              DC. Paid only on failure.</p>
         hp:
           type: variable
           value:
@@ -28,25 +28,37 @@ effects:
               <p>An amount of @L[Core:Hit Points and Mana Points]{HP} equal to
               the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
               DC. Paid only on failure.</p>
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>An amount of @L[Core:Hit Points and Mana Points]{MP} equal to
+              the @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's}
+              DC. Paid only on failure.</p>
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - destruction
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          checks:
+            - priest
       interaction: manifest
       maneuver: slow
       overview:
@@ -63,15 +75,17 @@ effects:
           @L[Core:Game Master]{GM} may adjust them as they see fit. Item rarity
           may or may not correspond to how challenging it is to [[lookup name
           style=lc]].
+        fluent: >-
+          <p>You may add @L[Core:Fluency Bonus]{F} to the
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
+          of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
         proficient: >-
           <p>You may add @L[Core:Proficiency Bonus]{P} to the
           @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
           of whether or not you are proficient in
           @L[Tradecraft:Priest]{priest}.</p>
-        fluent: >-
-          <p>You may add @L[Core:Fluency Bonus]{F} to the
-          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
-          of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - divine
         - financial
@@ -79,38 +93,23 @@ effects:
         raw: '5'
         unit: ft
       results:
+        fail: >-
+          <p>You pay an amount of @L[Core:Hit Points and Mana Points]{MP} and
+          @L[Core:Hit Points and Mana Points]{HP} equal to the
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.</p>
         save: >-
           <p>The item is @L[Property:Destroyed]{destroyed} and the economic
           value of its raw materials and @L[Category:Magical properties]{magical
           properties} are extracted. This is very inefficient. Only 20% of the
           value of the item's materials and @L[Category:Properties]{properties}
           are extracted.</p>
-        fail: >-
-          <p>You pay an amount of @L[Core:Hit Points and Mana Points]{MP} and
-          @L[Core:Hit Points and Mana Points]{HP} equal to the
-          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.</p>
+      revealed: true
       ritual: true
       skill: true
       standard: true
       targets:
         - item
-      impacts:
-        base:
-          checks:
-            - priest
-      class: paladin
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!liquidate0000000.liquidate0000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/liquidate.webp
 name: Liquidate
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!liquidate0000000'

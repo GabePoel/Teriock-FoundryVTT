@@ -1,310 +1,107 @@
 _id: ZzTmN4WbQiGoLdOK
-folder: RzPs61J6b8X8OR9T
-name: Rank 1 Corsair
-system:
-  archetype: semi
-  className: corsair
-  classRank: 1
-  competence:
-    raw: 1
-  description: >-
-    <p>People of the sea, they are never very comfortable far from a large body
-    of water. Corsairs are wanderers and like to be on the move. Corsairs tend
-    to be humble in that they understand that nature is greater than they are
-    and respect it for that. If you are an Corsair, crave water and sailing, go
-    with the flow, keep on the move, and keep things ship shape.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 3
-  _sup: seaSpeedDrake000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-1-corsair.webp
+_key: '!items!ZzTmN4WbQiGoLdOK'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Cor00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Throwing Training
-    type: ability
-    img: systems/teriock/src/icons/abilities/throwing-training.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>All @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} are @L[Property:AV0]{AV0} for you.</p>
-        proficient: >-
-          <p>The range of all @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} you use is doubled.</p>
-        fluent: >-
-          <p>Instead, the range of all @L[Category:Thrown equipment]{thrown}
-          @L[Category:Weapons]{weapons} you use is tripled.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.equipmentChanges.upgrades.properties.thrown.av0
-              target: Actor
-              qualifier: '1'
-              value: 'true'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: ftTSlyY9ltUAbZor
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.throwingTraining
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ZzTmN4WbQiGoLdOK.ftTSlyY9ltUAbZor'
-  - name: Impale
-    type: ability
-    img: systems/teriock/src/icons/abilities/impale.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - vitals
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
-        critHit: >-
-          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
-          as well.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - body
-          common:
-            - standardDamage
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: scaVOzWMaud5etIU
+  - _id: scaVOzWMaud5etIU
+    _key: '!items.effects!ZzTmN4WbQiGoLdOK.scaVOzWMaud5etIU'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ZzTmN4WbQiGoLdOK.scaVOzWMaud5etIU'
-  - name: Wind Shuriken
-    type: ability
-    img: systems/teriock/src/icons/abilities/wind-shuriken.webp
+    img: systems/teriock/src/icons/abilities/impale.webp
+    name: Impale
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: '300'
-      overview:
-        base: >-
-          <p>[[lookup name]] counts as a @L[Category:Weapons]{weapon} in the
-          @L[Category:Daggers]{dagger weapon class}.</p><div
-          class="note"><b>Note:</b> Although [[lookup name]] does not deal
-          @L[Damage:Magic]{magic damage}, it can be made to using
-          @L[Ability:Might Strike]{Might Strike}.</div>
-        proficient: >-
-          <p>Instead, deal [[/damage 1d10]] @L[Core:Damage]{damage} to
-          target.</p>
-        fluent: >-
-          <p>Instead, deal [[/damage 1d12]] @L[Core:Damage]{damage} to
-          target.</p>
-      results:
-        hit: <p>Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target.</p>
-        critHit: <p>Double @L[Core:Damage]{damage dice}.</p>
-      piercing:
-        raw: 1
-      skill: true
-      standard: true
       class: corsair
-      form: normal
-      effectTypes:
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 1d8
-        proficient:
-          rolls:
-            damage: 1d10
-        fluent:
-          rolls:
-            damage: 1d12
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
-    _id: TghrjNoOWxDv9x4I
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.windShuriken0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ZzTmN4WbQiGoLdOK.TghrjNoOWxDv9x4I'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
+          hacks:
+            - body
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
+          as well.</p>
+        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+      revealed: true
       skill: true
       standard: true
-      class: corsair
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: ej0nV0N8AIv6Di9W
+      targets:
+        - vitals
+    type: ability
+  - _id: nzAe45xz0SRaadH9
+    _key: '!items.effects!ZzTmN4WbQiGoLdOK.nzAe45xz0SRaadH9'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      compendiumSource: Compendium.teriock.abilities.Item.skillShare000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ZzTmN4WbQiGoLdOK.ej0nV0N8AIv6Di9W'
-  - name: Skill Share
-    type: ability
     img: systems/teriock/src/icons/abilities/skill-share.webp
+    name: Skill Share
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: corsair
+      competence:
+        raw: 0
       delivery:
         base: sight
-      targets:
-        - creature
       duration:
-        unit: hour
-        description: 1 Hour
-        stationary: false
-        raw: '1'
         dawn: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '30'
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - contract
+      endCondition: <p>You use <a class="mw-selflink selflink">Skill Share</a> again.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Target gains one @L[Category:Abilities]{ability} of your choice
@@ -317,46 +114,249 @@ effects:
           @L[Keyword:Incapable]{incapable} of <a class="mw-selflink
           selflink">Skill Share</a>. You may only have this active on one
           creature at a time.</p>
-        proficient: >-
-          <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first @L[Core:Proficiency Bonus]{P} ranks in a
-          @L[Category:Classes]{class}.</p>
         fluent: >-
           <p>You can now share @L[Category:Abilities]{abilities} you have from
           any of your first @L[Core:Fluency Bonus]{F} ranks in a
           @L[Category:Classes]{class}.</p>
+        proficient: >-
+          <p>You can now share @L[Category:Abilities]{abilities} you have from
+          any of your first @L[Core:Proficiency Bonus]{P} ranks in a
+          @L[Category:Classes]{class}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      revealed: true
       skill: true
       standard: true
-      class: corsair
-      endCondition: <p>You use <a class="mw-selflink selflink">Skill Share</a> again.</p>
-      form: normal
-      effectTypes:
-        - contract
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: nzAe45xz0SRaadH9
+      sustained: true
+      targets:
+        - creature
+    type: ability
+  - _id: ej0nV0N8AIv6Di9W
+    _key: '!items.effects!ZzTmN4WbQiGoLdOK.ej0nV0N8AIv6Di9W'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.skillShare000000
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: ftTSlyY9ltUAbZor
+    _key: '!items.effects!ZzTmN4WbQiGoLdOK.ftTSlyY9ltUAbZor'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.throwingTraining
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ZzTmN4WbQiGoLdOK.nzAe45xz0SRaadH9'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1Corsair0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!ZzTmN4WbQiGoLdOK'
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/throwing-training.webp
+    name: Throwing Training
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.equipmentChanges.upgrades.properties.thrown.av0
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 'true'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>All @L[Category:Thrown equipment]{thrown}
+          @L[Category:Weapons]{weapons} are @L[Property:AV0]{AV0} for you.</p>
+        fluent: >-
+          <p>Instead, the range of all @L[Category:Thrown equipment]{thrown}
+          @L[Category:Weapons]{weapons} you use is tripled.</p>
+        proficient: >-
+          <p>The range of all @L[Category:Thrown equipment]{thrown}
+          @L[Category:Weapons]{weapons} you use is doubled.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: TghrjNoOWxDv9x4I
+    _key: '!items.effects!ZzTmN4WbQiGoLdOK.TghrjNoOWxDv9x4I'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.windShuriken0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/wind-shuriken.webp
+    name: Wind Shuriken
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 1d8
+        fluent:
+          rolls:
+            damage: 1d12
+        proficient:
+          rolls:
+            damage: 1d10
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>[[lookup name]] counts as a @L[Category:Weapons]{weapon} in the
+          @L[Category:Daggers]{dagger weapon class}.</p><div
+          class="note"><b>Note:</b> Although [[lookup name]] does not deal
+          @L[Damage:Magic]{magic damage}, it can be made to using
+          @L[Ability:Might Strike]{Might Strike}.</div>
+        fluent: >-
+          <p>Instead, deal [[/damage 1d12]] @L[Core:Damage]{damage} to
+          target.</p>
+        proficient: >-
+          <p>Instead, deal [[/damage 1d10]] @L[Core:Damage]{damage} to
+          target.</p>
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '300'
+        unit: ft
+      results:
+        critHit: <p>Double @L[Core:Damage]{damage dice}.</p>
+        hit: <p>Deal [[/damage 1d8]] @L[Core:Damage]{damage} to target.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+folder: drakes0000000000
+img: systems/teriock/src/icons/ranks/rank-1-corsair.webp
+name: Rank 1 Corsair
+system:
+  _sup: seaSpeedDrake000
+  archetype: semi
+  className: corsair
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>People of the sea, they are never very comfortable far from a large body
+    of water. Corsairs are wanderers and like to be on the move. Corsairs tend
+    to be humble in that they understand that nature is greater than they are
+    and respect it for that. If you are an Corsair, crave water and sailing, go
+    with the flow, keep on the move, and keep things ship shape.</p>
+  innate: false
+  maxAv: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+type: rank

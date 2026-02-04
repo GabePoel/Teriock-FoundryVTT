@@ -1,7 +1,150 @@
 _id: OfmoK146ouyU2zrk
-folder: qTlk5KD9WGOfDG5I
+_key: '!items!OfmoK146ouyU2zrk'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r5Due00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+effects:
+  - _id: Ra88uHOPc8IZzLb4
+    _key: '!items.effects!OfmoK146ouyU2zrk.Ra88uHOPc8IZzLb4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.iaido00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/iaido.webp
+    name: Iaido
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        conditions:
+          absent:
+            - down
+        dawn: false
+        description: While Up
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your first @L[Category:Strike delivery abilities]{strike} in any
+          @L[Condition:Dueling]{duel} deals @L[Keyword:Boosted Damage]{boosted}
+          @L[Core:Damage]{damage} and is @L[Keyword:Warded]{warded}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: BTg0NGa5swlixgtF
+    _key: '!items.effects!OfmoK146ouyU2zrk.BTg0NGa5swlixgtF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.rebuke0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/rebuke.webp
+    name: Rebuke
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
+      endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: executor
+          rolls:
+            damage: 1d6[spiritual]
+        macros:
+          Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering creature takes [[/damage 1d6[spiritual]]]
+          @L[Core:Damage]{damage} and is @L[Condition:Lighted]{lighted} towards
+          a creature of your choice.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '90'
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-5-duelist.webp
 name: Rank 5 Duelist
 system:
+  _sup: goldenDragon0000
   archetype: warrior
   className: duelist
   classRank: 5
@@ -14,6 +157,9 @@ system:
     in everything that they do. A true Duelist wins the battle before it has
     begun. Strategy and personal perfection are the Duelist's way. If you are a
     Duelist, be calm, focused, well spoken and confident in yourself.</p>
+  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
+  innate: false
+  maxAv: 4
   statDice:
     hp:
       disabled: false
@@ -25,150 +171,4 @@ system:
       faces: 8
       number:
         raw: '1'
-  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
-  innate: false
-  maxAv: 4
-  _sup: goldenDragon0000
 type: rank
-img: systems/teriock/src/icons/ranks/rank-5-duelist.webp
-effects:
-  - name: Rebuke
-    type: ability
-    img: systems/teriock/src/icons/abilities/rebuke.webp
-    system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      duration:
-        unit: second
-        description: 5 Seconds
-        stationary: false
-        dawn: false
-        raw: '5'
-      range:
-        unit: ft
-        raw: '90'
-      overview:
-        base: >-
-          <p>The triggering creature takes [[/damage 1d6[spiritual]]]
-          @L[Core:Damage]{damage} and is @L[Condition:Lighted]{lighted} towards
-          a creature of your choice.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: duelist
-      endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
-      trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[spiritual]
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  type: forced
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-        macros:
-          Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: BTg0NGa5swlixgtF
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.rebuke0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!OfmoK146ouyU2zrk.BTg0NGa5swlixgtF'
-  - name: Iaido
-    type: ability
-    img: systems/teriock/src/icons/abilities/iaido.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        conditions:
-          absent:
-            - down
-        description: While Up
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Your first @L[Category:Strike delivery abilities]{strike} in any
-          @L[Condition:Dueling]{duel} deals @L[Keyword:Boosted Damage]{boosted}
-          @L[Core:Damage]{damage} and is @L[Keyword:Warded]{warded}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: duelist
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: Ra88uHOPc8IZzLb4
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.iaido00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!OfmoK146ouyU2zrk.Ra88uHOPc8IZzLb4'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank5Duelist0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!OfmoK146ouyU2zrk'

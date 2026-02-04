@@ -1,88 +1,44 @@
-folder: 1lFMAV0Fky7fm76P
-name: Water Clan
-type: power
-img: icons/magic/water/water-drop-swirl-blue.webp
-system:
-  description: >-
-    <p>A group of @L[Creature:Cobben]{cobbens} from a group of islands connected
-    to the Blue Reefs that practice ancestor worship and have a complex set of
-    cultural traditions and dances that imbue their @L[Ability:Spirit
-    Item]{spirit items} with powers mastered by their ancestors. They have
-    complex facial tattoos that represent which of the eight clans they are
-    from.</p><p>Dancing is an integral part of Tei Koban culture. The dances
-    prepare young @L[Creature:Cobben]{cobbens} for obtaining their
-    @L[Ability:Spirit Item]{spirit items} and helps their ancestral connection
-    and training.</p>
-  type: backstory
+_id: waterClan0000000
+_key: '!items!waterClan0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.swim
-              mode: 4
-              value: '3'
-              priority: 10
-    _id: R4EF7o9ds6LICHME
+  - _id: T9Ql0lNq3WRTTOCm
+    _key: '!items.effects!waterClan0000000.T9Ql0lNq3WRTTOCm'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.fireFrailty00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-    _key: '!items.effects!iNgUPUrPUNNTxYAt.R4EF7o9ds6LICHME'
-  - name: Fire Frailty
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/fire-frailty.webp
+    name: Fire Frailty
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          rolls:
+            damage: 1d10[fire]
       interaction: manifest
       maneuver: passive
       overview:
@@ -95,28 +51,88 @@ effects:
           @L[Damage:Fire]{fire} @L[Core:Damage]{damage}. The
           @L[Core:Damage]{damage} from becoming @L[Condition:Burned]{burned} is
           not @L[Keyword:Boosted]{boosted}.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: R4EF7o9ds6LICHME
+    _key: '!items.effects!waterClan0000000.R4EF7o9ds6LICHME'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
-          rolls:
-            damage: 1d10[fire]
-    _id: T9Ql0lNq3WRTTOCm
-    img: systems/teriock/src/icons/abilities/fire-frailty.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.fireFrailty00000
-    _key: '!items.effects!iNgUPUrPUNNTxYAt.T9Ql0lNq3WRTTOCm'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: iNgUPUrPUNNTxYAt
-_key: '!items!iNgUPUrPUNNTxYAt'
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: teiKobanClans000
+img: icons/magic/water/water-drop-swirl-blue.webp
+name: Water Clan
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>A group of @L[Creature:Cobben]{cobbens} from a group of islands connected
+    to the Blue Reefs that practice ancestor worship and have a complex set of
+    cultural traditions and dances that imbue their @L[Ability:Spirit
+    Item]{spirit items} with powers mastered by their ancestors. They have
+    complex facial tattoos that represent which of the eight clans they are
+    from.</p><p>Dancing is an integral part of Tei Koban culture. The dances
+    prepare young @L[Creature:Cobben]{cobbens} for obtaining their
+    @L[Ability:Spirit Item]{spirit items} and helps their ancestral connection
+    and training.</p>
+  maxAv: 4
+  type: backstory
+type: power

@@ -1,9 +1,11 @@
-name: Attune - Pre-execution
-type: script
-_id: BwnMZZRk69x3211Q
+_id: attunePreExecuti
+_key: '!macros!attunePreExecuti'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 author: teriockBuilder00
-img: icons/svg/dice-target.svg
-scope: global
 command: |-
   const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
   data.execution.buttons = [];
@@ -17,9 +19,7 @@ command: |-
     tooltip: true,
   });
   await Promise.all(selectedEquipment.map((e) => e.system.attune()));
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.1.0
-  lastModifiedBy: teriockBuilder00
-_key: '!macros!BwnMZZRk69x3211Q'
+img: icons/svg/dice-target.svg
+name: Attune - Pre-execution
+scope: global
+type: script

@@ -1,8 +1,158 @@
-folder: 1lFMAV0Fky7fm76P
-name: Air Clan
-type: power
+_id: airClan000000000
+_key: '!items!airClan000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: CPc5MjhB7WFWYUiR
+    _key: '!items.effects!airClan000000000.CPc5MjhB7WFWYUiR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cantClimb0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/cannot-climb.webp
+    name: Cannot Climb
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have no @L[Core:Movement Speed]{climb speed}. This overrides
+          abilities such as @L[Ability:Climbing]{Climbing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: VwKOn8e99fmfSXV4
+    _key: '!items.effects!airClan000000000.VwKOn8e99fmfSXV4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/leaping.webp
+    name: Leaping
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
+          horizontally leap at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead vertically leap at @L[Core:Movement Speed]{half speed}
+          and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: teiKobanClans000
 img: icons/magic/air/weather-wind-gust.webp
+name: Air Clan
 system:
+  competence:
+    raw: 1
   description: >-
     <p>A group of @L[Creature:Cobben]{cobbens} from a group of islands connected
     to the Blue Reefs that practice ancestor worship and have a complex set of
@@ -13,128 +163,6 @@ system:
     prepare young @L[Creature:Cobben]{cobbens} for obtaining their
     @L[Ability:Spirit Item]{spirit items} and helps their ancestral connection
     and training.</p>
+  maxAv: 4
   type: backstory
-effects:
-  - name: Leaping
-    type: ability
-    img: systems/teriock/src/icons/abilities/leaping.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
-          horizontally leap at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: >-
-          <p>You instead vertically leap at @L[Core:Movement Speed]{half speed}
-          and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
-              value: '1'
-              priority: 10
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
-              value: '2'
-              priority: 10
-        proficient:
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 4
-              value: '2'
-              priority: 10
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 4
-              value: '3'
-              priority: 10
-    _id: VwKOn8e99fmfSXV4
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
-    _key: '!items.effects!7Qb4eJH1KYtI2GtC.VwKOn8e99fmfSXV4'
-  - name: Cannot Climb
-    type: ability
-    _id: CPc5MjhB7WFWYUiR
-    img: systems/teriock/src/icons/abilities/cannot-climb.webp
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
-      executionTime: passive
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: flaw
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You have no @L[Core:Movement Speed]{climb speed}. This overrides
-          abilities such as @L[Ability:Climbing]{Climbing}.</p>
-      piercing: normal
-      powerSources:
-        - martial
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 5
-              value: '0'
-              priority: 20
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cantClimb0000000
-    _key: '!items.effects!7Qb4eJH1KYtI2GtC.CPc5MjhB7WFWYUiR'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: 7Qb4eJH1KYtI2GtC
-_key: '!items!7Qb4eJH1KYtI2GtC'
+type: power

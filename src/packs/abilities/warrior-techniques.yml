@@ -1,83 +1,69 @@
 _id: wrrTechniques000
+_key: '!items!wrrTechniques000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Warrior Techniques
-    type: ability
-    img: systems/teriock/src/icons/abilities/warrior-techniques.webp
-    _id: wrrTechniques000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>For every 2 ranks you train in @L[Category:Warrior classes]{warrior
-          classes}, you gain a @L[Category:Warrior guildmaster
-          abilities]{warrior guildmaster ability} of your choice. You also gain
-          @L[Keyword:Limited]{Limited} @L[Ability:Defensive Martial
-          Arts]{Defensive Martial Arts}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      impacts: {}
+  - _id: G8neiM54IF7ObZSM
+    _key: '!items.effects!wrrTechniques000.G8neiM54IF7ObZSM'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wrrTechniques000.wrrTechniques000'
-  - name: Defensive Martial Arts
-    type: ability
     img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-    _id: G8neiM54IF7ObZSM
+    name: Defensive Martial Arts
     system:
+      _sup: wrrTechniques000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '1'
+        fluent:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '3'
+        proficient:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '2'
       interaction: manifest
       limitation: <p>While wearing @L[Category:Armor]{armor} only.</p>
       maneuver: passive
@@ -92,58 +78,69 @@ effects:
           Interaction]{block} with them and their @L[Core:Block Value]{BV} is
           +1.</p><div class="note"><b>Note:</b> This does not make your hands
           @L[Property:Blocking]{blocking}.</div>
-        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
         fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
+        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '2'
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '3'
-      _sup: wrrTechniques000
+    type: ability
+  - _id: wrrTechniques000
+    _key: '!items.effects!wrrTechniques000.wrrTechniques000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wrrTechniques000.G8neiM54IF7ObZSM'
+    img: systems/teriock/src/icons/abilities/warrior-techniques.webp
+    name: Warrior Techniques
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>For every 2 ranks you train in @L[Category:Warrior classes]{warrior
+          classes}, you gain a @L[Category:Warrior guildmaster
+          abilities]{warrior guildmaster ability} of your choice. You also gain
+          @L[Keyword:Limited]{Limited} @L[Ability:Defensive Martial
+          Arts]{Defensive Martial Arts}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/warrior-techniques.webp
 name: Warrior Techniques
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!wrrTechniques000'

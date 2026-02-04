@@ -1,32 +1,56 @@
 _id: assInept00000000
+_key: '!items!assInept00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Assassin Inept
-    type: ability
+  - _id: assInept00000000
+    _key: '!items.effects!assInept00000000.assInept00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/assassin-inept.webp
-    _id: assInept00000000
+    name: Assassin Inept
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.gifted.enabled
+              mode: 5
+              priority: 10
+              qualifier: '@class.assassin'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.gifted.amount
+              mode: 2
+              priority: 10
+              qualifier: '@class.assassin'
+              target: ability
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,41 +58,16 @@ effects:
           <p>You are @L[Keyword:Inept]{inept} at @L[Category:Assassin class
           abilities]{abilities} you get from ranks in
           @L[Class:Assassin]{Assassin}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.gifted.enabled
-              target: ability
-              qualifier: '@class.assassin'
-              value: 'true'
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.gifted.amount
-              target: ability
-              qualifier: '@class.assassin'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!assInept00000000.assInept00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/assassin-inept.webp
 name: Assassin Inept
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!assInept00000000'

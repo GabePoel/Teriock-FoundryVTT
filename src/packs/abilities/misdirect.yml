@@ -1,60 +1,50 @@
 _id: misdirect0000000
+_key: '!items!misdirect0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Misdirect
-    type: ability
+  - _id: misdirect0000000
+    _key: '!items.effects!misdirect0000000.misdirect0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/misdirect.webp
-    _id: misdirect0000000
+    name: Misdirect
     system:
+      class: archer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      interaction: block
-      maneuver: reactive
-      powerSources:
-        - martial
-      range:
-        unit: melee
-      requirements: <p>You block with a @L[Category:Bows]{bow} or your hand.</p>
-      results:
-        save: >-
-          <p>The @L[Core:Interactions]{attack's} effect
-          @L[Core:Fizzles]{fizzles} and the @L[Core:Attack
-          Interaction]{attacker} is @L[Condition:Snared]{snared}.</p>
-        fail: <p>The @L[Core:Interactions]{attack's} effect Applies.</p>
-      skill: true
-      standard: true
-      targets:
-        - attack
-      trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
       impacts:
         base:
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: target
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -63,23 +53,32 @@ effects:
                   skip: 0
                   time: end
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: target
           rolls:
             endCon: 2d4
-      class: archer
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!misdirect0000000.misdirect0000000'
+      interaction: block
+      maneuver: reactive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      requirements: <p>You block with a @L[Category:Bows]{bow} or your hand.</p>
+      results:
+        fail: <p>The @L[Core:Interactions]{attack's} effect Applies.</p>
+        save: >-
+          <p>The @L[Core:Interactions]{attack's} effect
+          @L[Core:Fizzles]{fizzles} and the @L[Core:Attack
+          Interaction]{attacker} is @L[Condition:Snared]{snared}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - attack
+      trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
+    type: ability
 img: systems/teriock/src/icons/abilities/misdirect.webp
 name: Misdirect
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!misdirect0000000'

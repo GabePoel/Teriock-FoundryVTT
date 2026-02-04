@@ -1,45 +1,64 @@
 _id: manaDrainPoisonS
+_key: '!items!manaDrainPoisonS'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Mana Drain Poison Strike
-    type: ability
+  - _id: manaDrainPoisonS
+    _key: '!items.effects!manaDrainPoisonS.manaDrainPoisonS'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/mana-drain-poison-strike.webp
-    _id: manaDrainPoisonS
+    name: Mana Drain Poison Strike
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '24'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 24 Hours
       delivery:
         base: weapon
         package: strike
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
       effectTypes:
         - poison
         - draining
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            drain: 1d6[mana]
+        fluent:
+          rolls:
+            drain: 1d10[mana]
+        proficient:
+          rolls:
+            drain: 1d8[mana]
       interaction: attack
       maneuver: active
       overview:
-        proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
-          1d8[mana]]] @L[Category:Drain types]{drain}.</p>
         fluent: >-
           <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
           1d10[mana]]] @L[Category:Drain types]{drain}.</p>
+        proficient: >-
+          <p>The @L[Condition:Poisoned]{poison} instead deals [[/drain
+          1d8[mana]]] @L[Category:Drain types]{drain}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -50,30 +69,10 @@ effects:
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} deals [[/drain 1d6[mana]]]
           @L[Category:Drain types]{drain}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          rolls:
-            drain: 1d6[mana]
-        proficient:
-          rolls:
-            drain: 1d8[mana]
-        fluent:
-          rolls:
-            drain: 1d10[mana]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!manaDrainPoisonS.manaDrainPoisonS'
+    type: ability
 img: systems/teriock/src/icons/abilities/mana-drain-poison-strike.webp
 name: Mana Drain Poison Strike
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!manaDrainPoisonS'

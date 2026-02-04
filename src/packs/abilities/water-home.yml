@@ -1,143 +1,39 @@
 _id: wtrHome000000000
+_key: '!items!wtrHome000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Water Home
-    type: ability
-    img: systems/teriock/src/icons/abilities/water-home.webp
-    _id: wtrHome000000000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You have @L[Ability:Swimming]{Swimming} and
-          @L[Ability:Diving]{Diving} but have @L[Core:Movement Speed]{no walk
-          speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 30
-              time: normal
-              key: system.speedAdjustments.walk
-              target: Actor
-              qualifier: '1'
-              value: '0'
+  - _id: O0CL2TgwIiKe4Byi
+    _key: '!items.effects!wtrHome000000000.O0CL2TgwIiKe4Byi'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wtrHome000000000.wtrHome000000000'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    _id: B1ugEgR7nohcYwkq
+    img: systems/teriock/src/icons/abilities/diving.webp
+    name: Diving
     system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
-              qualifier: '1'
-              value: '3'
       _sup: wtrHome000000000
       class: corsair
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wtrHome000000000.B1ugEgR7nohcYwkq'
-  - name: Diving
-    type: ability
-    img: systems/teriock/src/icons/abilities/diving.webp
-    _id: O0CL2TgwIiKe4Byi
-    system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -147,30 +43,130 @@ effects:
         base: >-
           <p>You no longer have to stay on the surface of water while
           @L[Ability:Swimming]{Swimming}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts: {}
-      _sup: wtrHome000000000
-      class: corsair
+    type: ability
+  - _id: B1ugEgR7nohcYwkq
+    _key: '!items.effects!wtrHome000000000.B1ugEgR7nohcYwkq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      _sup: wtrHome000000000
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: wtrHome000000000
+    _key: '!items.effects!wtrHome000000000.wtrHome000000000'
+    _stats:
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wtrHome000000000.O0CL2TgwIiKe4Byi'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/water-home.webp
+    name: Water Home
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.walk
+              mode: 5
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @L[Ability:Swimming]{Swimming} and
+          @L[Ability:Diving]{Diving} but have @L[Core:Movement Speed]{no walk
+          speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/water-home.webp
 name: Water Home
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!wtrHome000000000'

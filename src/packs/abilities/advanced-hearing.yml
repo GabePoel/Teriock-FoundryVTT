@@ -1,37 +1,54 @@
 _id: advancedHearing0
+_key: '!items!advancedHearing0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Advanced Hearing
-    type: ability
+  - _id: advancedHearing0
+    _key: '!items.effects!advancedHearing0.advancedHearing0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/advanced-hearing.webp
-    _id: advancedHearing0
+    name: Advanced Hearing
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
+      delivery:
+        base: self
       duration:
-        raw: '0'
-        unit: unlimited
         conditions:
           absent:
             - down
         dawn: false
-        stationary: false
         description: While Up
-      delivery:
-        base: self
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - sensory
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.hearing
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '30'
       interaction: manifest
       maneuver: passive
       overview:
@@ -39,38 +56,20 @@ effects:
           <p>You can hear all moving creatures within 30 feet. If the creature
           is breathing, you can hear it even if it is not moving. You can not
           detect @L[Condition:Silent]{silent} creatures in this way.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.hearing
-              target: Actor
-              qualifier: '1'
-              value: '30'
       upgrades:
         score:
           attribute: per
           value: 2
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!advancedHearing0.advancedHearing0'
+    type: ability
 img: systems/teriock/src/icons/abilities/advanced-hearing.webp
 name: Advanced Hearing
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!advancedHearing0'

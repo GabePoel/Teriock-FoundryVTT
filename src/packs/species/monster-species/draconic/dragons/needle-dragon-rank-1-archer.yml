@@ -1,57 +1,170 @@
 _id: jcrMCe68PR1NFgW1
-folder: qTlk5KD9WGOfDG5I
-name: Rank 1 Archer
-system:
-  archetype: semi
-  className: archer
-  classRank: 1
-  competence:
-    raw: 1
-  description: >-
-    <p>As precise and accurate as a well-crafted arrow, archers don't mess
-    around. They prefer to keep their distance, as that is where they are the
-    most effective, never letting anyone get too close to them. Archers are
-    direct and focused and thus make the best guards. Ever vigilant, archers are
-    always looking ahead as, if taken by surprise, they are easily killed. If
-    you are playing an Archer be direct, and on target, sturdy and perhaps high
-    strung, watchful of the future and of your back.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 2
-  _sup: needleDragon0000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-1-archer.webp
+_key: '!items!jcrMCe68PR1NFgW1'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Arc00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Crit Elite
-    type: ability
-    img: systems/teriock/src/icons/abilities/crit-elite.webp
+  - _id: IVnTbfny3bXUHzhY
+    _key: '!items.effects!jcrMCe68PR1NFgW1.IVnTbfny3bXUHzhY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.arcyTraining0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/archery-training.webp
+    name: Archery Training
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: archer
+      competence:
+        raw: 0
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Bow Blocking]{Bow Blocking} and @L[Ability:Free
+          Reload]{Free Reload}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: qAF62J1i4sqAhczW
+    _key: '!items.effects!jcrMCe68PR1NFgW1.qAF62J1i4sqAhczW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bowBlking0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/bow-blocking.webp
+    name: Bow Blocking
+    system:
+      _sup: IVnTbfny3bXUHzhY
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
-        description: While Stationary
-        stationary: true
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.equipmentChanges.upgrades.classes.bows.bv
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>@L[Category:Bows]{Bows} you use have their @L[Core:BV]{BV}
+          increased by 2.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: kicVfFFQVM83uIGK
+    _key: '!items.effects!jcrMCe68PR1NFgW1.kicVfFFQVM83uIGK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.critElite0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/crit-elite.webp
+    name: Crit Elite
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: While Stationary
+        raw: '0'
+        stationary: true
+        unit: unlimited
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: '@dmg'
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.vitals
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: armament
+              time: normal
+              value: 'true'
+        macros:
+          Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next @L[Category:Attack
@@ -64,68 +177,155 @@ effects:
           @L[Keyword:Boosted]{boosted} in this way.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: archer
-      requirements: <p>You are not already using [[lookup name]].</p>
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 0
-              priority: 100
-              time: normal
-              key: system.damage.all.raw
-              target: armament
-              qualifier: '@dmg'
-              value: '1'
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.vitals
-              target: armament
-              qualifier: '1'
-              value: 'true'
-        macros:
-          Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: kicVfFFQVM83uIGK
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.critElite0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!jcrMCe68PR1NFgW1.kicVfFFQVM83uIGK'
-  - name: Multi-Shot
-    type: ability
-    img: systems/teriock/src/icons/abilities/multi-shot.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      requirements: <p>You are not already using [[lookup name]].</p>
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: duNoV5jOnOxkTHXI
+    _key: '!items.effects!jcrMCe68PR1NFgW1.duNoV5jOnOxkTHXI'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.freeReload000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/free-reload.webp
+    name: Free Reload
+    system:
+      _sup: IVnTbfny3bXUHzhY
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: <p>Target is reloaded.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - item
+    type: ability
+  - _id: gGESbPOeFPXUymWp
+    _key: '!items.effects!jcrMCe68PR1NFgW1.gGESbPOeFPXUymWp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.impItms000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improvised-items.webp
+    name: Improvised Items
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
+          materials and make 1 @L[Category:Bows]{bow} a set of 5 arrows (these
+          count as "1 item" for the purpose of [[lookup name]]), general
+          @L[Category:Supplies]{supplies}. Only common
+          @L[Damage:Mundane]{mundane} items can typically be made in this way,
+          but the @L[Core:GM]{GM} may specify if other options are available to
+          you. These items exist for 8 hours before they are no longer
+          functional.</p>
+        fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} weapons.</p>
+        proficient: >-
+          <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
+          weapons.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - other
+    type: ability
+  - _id: XbFCbez2nXLc0aqO
+    _key: '!items.effects!jcrMCe68PR1NFgW1.XbFCbez2nXLc0aqO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.multiShot0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/multi-shot.webp
+    name: Multi-Shot
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Category:Attack abilities]{attack} with a
@@ -139,245 +339,45 @@ effects:
           They do not incur additional attack penalties.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: archer
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: XbFCbez2nXLc0aqO
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.multiShot0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!jcrMCe68PR1NFgW1.XbFCbez2nXLc0aqO'
-  - name: Archery Training
-    type: ability
-    img: systems/teriock/src/icons/abilities/archery-training.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Bow Blocking]{Bow Blocking} and @L[Ability:Free
-          Reload]{Free Reload}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.arcyTraining0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: IVnTbfny3bXUHzhY
-    _key: '!items.effects!jcrMCe68PR1NFgW1.IVnTbfny3bXUHzhY'
-  - name: Bow Blocking
     type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>@L[Category:Bows]{Bows} you use have their @L[Core:BV]{BV}
-          increased by 2.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.equipmentChanges.upgrades.classes.bows.bv
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      _sup: IVnTbfny3bXUHzhY
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/bow-blocking.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bowBlking0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: qAF62J1i4sqAhczW
-    _key: '!items.effects!jcrMCe68PR1NFgW1.qAF62J1i4sqAhczW'
-  - name: Free Reload
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
-      delivery:
-        base: self
-      targets:
-        - item
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      overview:
-        base: <p>Target is reloaded.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      requirements: <p>Target has the @L[Property:Loading]{loading property}.</p>
-      form: normal
-      _sup: IVnTbfny3bXUHzhY
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/free-reload.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.freeReload000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: duNoV5jOnOxkTHXI
-    _key: '!items.effects!jcrMCe68PR1NFgW1.duNoV5jOnOxkTHXI'
-  - name: Improvised Items
-    type: ability
-    img: systems/teriock/src/icons/abilities/improvised-items.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: self
-      targets:
-        - other
-      duration:
-        unit: hour
-        description: 8 Hours
-        stationary: false
-        raw: '8'
-        dawn: false
-      overview:
-        base: >-
-          <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
-          materials and make 1 @L[Category:Bows]{bow} a set of 5 arrows (these
-          count as "1 item" for the purpose of [[lookup name]]), general
-          @L[Category:Supplies]{supplies}. Only common
-          @L[Damage:Mundane]{mundane} items can typically be made in this way,
-          but the @L[Core:GM]{GM} may specify if other options are available to
-          you. These items exist for 8 hours before they are no longer
-          functional.</p>
-        proficient: >-
-          <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
-          weapons.</p>
-        fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} weapons.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: gGESbPOeFPXUymWp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.impItms000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!jcrMCe68PR1NFgW1.gGESbPOeFPXUymWp'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1Archer00000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!jcrMCe68PR1NFgW1'
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-1-archer.webp
+name: Rank 1 Archer
+system:
+  _sup: needleDragon0000
+  archetype: semi
+  className: archer
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>As precise and accurate as a well-crafted arrow, archers don't mess
+    around. They prefer to keep their distance, as that is where they are the
+    most effective, never letting anyone get too close to them. Archers are
+    direct and focused and thus make the best guards. Ever vigilant, archers are
+    always looking ahead as, if taken by surprise, they are easily killed. If
+    you are playing an Archer be direct, and on target, sturdy and perhaps high
+    strung, watchful of the future and of your back.</p>
+  innate: false
+  maxAv: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+type: rank

@@ -1,31 +1,38 @@
 _id: nullAura00000000
+_key: '!items!nullAura00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Null Aura
-    type: ability
+  - _id: nullAura00000000
+    _key: '!items.effects!nullAura00000000.nullAura00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/null-aura.webp
-    _id: nullAura00000000
+    name: Null Aura
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
+        somatic: true
+        verbal: true
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - temporal
       elements:
@@ -37,15 +44,42 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - lighted
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic fire]
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -55,47 +89,12 @@ effects:
         fail: >-
           <p>Target is @L[Condition:Lighted]{lighted} and
           @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: action
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-          statuses:
-            - lighted
-            - frozen
-        heightened:
-          rolls:
-            damage: 1d4[magic fire]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nullAura00000000.nullAura00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/null-aura.webp
 name: Null Aura
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!nullAura00000000'

@@ -1,36 +1,52 @@
 _id: terrify000000000
+_key: '!items!terrify000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Terrify
-    type: ability
+  - _id: terrify000000000
+    _key: '!items.effects!terrify000000000.terrify000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/terrify.webp
-    _id: terrify000000000
+    name: Terrify
     system:
+      class: berserker
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '5'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 5 Minutes
       delivery:
         base: sight
+      duration:
+        dawn: false
+        description: 5 Minutes
+        raw: '5'
+        stationary: false
+        unit: minute
       effectTypes:
         - mental
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: int
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 1d4[psychic]
+          statuses:
+            - frightened
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
@@ -43,29 +59,12 @@ effects:
           Additionally, if some effect would cause them to become
           @L[Condition:Frightened]{frightened}, they take [[/damage
           1d4[psychic]]] @L[Core:Damage]{damage} as well.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          rolls:
-            damage: 1d4[psychic]
-          statuses:
-            - frightened
-      class: berserker
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!terrify000000000.terrify000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/terrify.webp
 name: Terrify
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!terrify000000000'

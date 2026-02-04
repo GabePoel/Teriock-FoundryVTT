@@ -1,8 +1,128 @@
-folder: 1lFMAV0Fky7fm76P
-name: Lake Clan
-type: power
+_id: lakeClan00000000
+_key: '!items!lakeClan00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: CPc5MjhB7WFWYUiR
+    _key: '!items.effects!lakeClan00000000.CPc5MjhB7WFWYUiR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cantClimb0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/cannot-climb.webp
+    name: Cannot Climb
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have no @L[Core:Movement Speed]{climb speed}. This overrides
+          abilities such as @L[Ability:Climbing]{Climbing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: QBq7FYvaTsVJjC2M
+    _key: '!items.effects!lakeClan00000000.QBq7FYvaTsVJjC2M'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: teiKobanClans000
 img: icons/magic/water/wave-water-blue.webp
+name: Lake Clan
 system:
+  competence:
+    raw: 1
   description: >-
     <p>A group of @L[Creature:Cobben]{cobbens} from a group of islands connected
     to the Blue Reefs that practice ancestor worship and have a complex set of
@@ -13,107 +133,6 @@ system:
     prepare young @L[Creature:Cobben]{cobbens} for obtaining their
     @L[Ability:Spirit Item]{spirit items} and helps their ancestral connection
     and training.</p>
+  maxAv: 4
   type: backstory
-effects:
-  - name: Cannot Climb
-    type: ability
-    _id: CPc5MjhB7WFWYUiR
-    img: systems/teriock/src/icons/abilities/cannot-climb.webp
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
-      executionTime: passive
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: flaw
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You have no @L[Core:Movement Speed]{climb speed}. This overrides
-          abilities such as @L[Ability:Climbing]{Climbing}.</p>
-      piercing: normal
-      powerSources:
-        - martial
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 5
-              value: '0'
-              priority: 20
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cantClimb0000000
-    _key: '!items.effects!YTWT9rgTCBs5pLao.CPc5MjhB7WFWYUiR'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.swim
-              mode: 4
-              value: '3'
-              priority: 10
-    _id: QBq7FYvaTsVJjC2M
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-    _key: '!items.effects!YTWT9rgTCBs5pLao.QBq7FYvaTsVJjC2M'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: YTWT9rgTCBs5pLao
-_key: '!items!YTWT9rgTCBs5pLao'
+type: power

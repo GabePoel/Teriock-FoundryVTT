@@ -1,42 +1,59 @@
 _id: deathRay00000000
+_key: '!items!deathRay00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Death Ray
-    type: ability
+  - _id: deathRay00000000
+    _key: '!items.effects!deathRay00000000.deathRay00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/death-ray.webp
-    _id: deathRay00000000
+    name: Death Ray
     system:
+      class: necromancer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 1
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: missile
         package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - killing
       elements:
         - necromancy
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
         1d6]].</p>
+      impacts:
+        base:
+          rolls:
+            kill: 2d6
+        heightened:
+          rolls:
+            kill: 1d6
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 1
       powerSources:
         - magical
       range:
@@ -46,35 +63,17 @@ effects:
         <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
         creatures]{undead}.</p>
       results:
+        critHit: <p>Double the number of dice rolled.</p>
         hit: >-
           <p>Roll [[/kill 2d6]] if this is greater than or equal the number of
           @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}. This
           does not deal @L[Core:Damage]{damage}.</p>
-        critHit: <p>Double the number of dice rolled.</p>
+      revealed: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          rolls:
-            kill: 2d6
-        heightened:
-          rolls:
-            kill: 1d6
-      class: necromancer
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!deathRay00000000.deathRay00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/death-ray.webp
 name: Death Ray
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!deathRay00000000'

@@ -1,124 +1,271 @@
 _id: commonTreant0000
-folder: wcLYeXV25LWEWgyr
-name: Common Treant
-type: species
-img: systems/teriock/src/icons/creatures/common-treant.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Common treants usually @L[Core:Healing]{heal} anyone in need, but will
-    attack anyone with an @L[Category:Axes]{axe}! Protectors and shepherds of
-    the forest, these ancient beings are believed to be descendants of
-    @L[Creature:Small Earth Elemental]{nature elementals} or @L[Category:Fae
-    creatures]{fae}. Each is native to a particular forest which it protects and
-    maintains for hundreds of years. @L[Category:Treants]{Treants} are slow,
-    patient beings, ever on the watch for threats to nature and protecting
-    beings who can't protect themselves.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '4'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '2'
-  appearance: >-
-    <p>Walking @L[Creature:Tree]{tree} with a rough face, branches for arms, and
-    roots as feet.</p>
-  br: 15
-  size:
-    enabled: true
-    value: 8
-  traits:
-    - plant
+_key: '!items!commonTreant0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Healing Touch
-    type: ability
-    img: systems/teriock/src/icons/abilities/healing-touch.webp
+  - _id: HDSLBjVdu5OOuoYH
+    _key: '!items.effects!commonTreant0000.HDSLBjVdu5OOuoYH'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      powerSources:
-        - magical
-      interaction: attack
+      _sup: CHdsALBI35zpH0yp
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Property:AV0]{AV0}.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    type: ability
+  - _id: 7ZSwUvozBlBfPskF
+    _key: '!items.effects!commonTreant0000.7ZSwUvozBlBfPskF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    name: Giant Strength
+    system:
+      _sup: HRg362dHpfqHh9Wn
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
+          are no longer suffer the consequences of
+          @L[Property:Cumbersome]{cumbersome} items.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 3
+    type: ability
+  - _id: LUFSgqptaavw0kqa
+    _key: '!items.effects!commonTreant0000.LUFSgqptaavw0kqa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hngTouch00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/healing-touch.webp
+    name: Healing Touch
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
         base: hand
         package: touch
-      targets:
-        - creature
-      elements:
-        - life
       duration:
-        unit: instant
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
         stationary: false
+        unit: instant
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target is
+        @L[Core:Healing]{healed} again at the start of your next
+        @L[Core:Turns]{turn}.</p>
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: Your Hand's Range
+        unit: ft
       results:
         hit: >-
           <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
           @L[Core:Healing]{healed} at the start of your next
           @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 2
+      revealed: true
       spell: true
       standard: true
-      class: lifeMage
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target is
-        @L[Core:Healing]{healed} again at the start of your next
-        @L[Core:Turns]{turn}.</p>
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: LUFSgqptaavw0kqa
+      targets:
+        - creature
+    type: ability
+  - _id: IOafnuEMfOYQNsU5
+    _key: '!items.effects!commonTreant0000.IOafnuEMfOYQNsU5'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hngTouch00000000
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.LUFSgqptaavw0kqa'
-  - name: Improved Healing Factor
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      _sup: CHdsALBI35zpH0yp
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+          piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: 89Krh9FAaaBLdCus
+    _key: '!items.effects!commonTreant0000.89Krh9FAaaBLdCus'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imHngFcr00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
+    name: Improved Healing Factor
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - dead
+        dawn: false
         description: While Alive
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_imHngFcrTurnStar: turnStart
+          Compendium_teriock_execution_Macro_yYxed3JjyS2O1lzN: turnStart
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -128,385 +275,102 @@ effects:
           apply on your next @L[Core:Turns]{turn}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - healing
-        - regeneration
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_yYxed3JjyS2O1lzN: turnStart
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - primal
       range:
         unit: self
-    _id: 89Krh9FAaaBLdCus
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imHngFactor00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.89Krh9FAaaBLdCus'
-  - name: Monstrous Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
-          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
-          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
-          and they are @L[Keyword:AV0]{AV0} for you.</p>
-      piercing:
-        raw: 0
-      form: special
-      impacts:
-        base:
-          changes:
-            - mode: 0
-              priority: 100
-              time: normal
-              key: system.damage.all.raw
-              target: armament
-              qualifier: and(@dmg, @range.melee)
-              value: '1'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.piercing.raw
-              target: armament
-              qualifier: '@range.melee'
-              value: '1'
-      upgrades:
-        score:
-          attribute: str
-          value: 5
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.monstrousStrengt
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: hL9SmjCnsj1R7SVk
-    _key: '!items.effects!commonTreant0000.hL9SmjCnsj1R7SVk'
-  - name: Supernatural Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
-          @L[Category:Attack abilities]{attack} to make it
-          @L[Keyword:AV0]{AV0}.</p>
-      piercing:
-        raw: 0
-      form: special
-      _sup: hL9SmjCnsj1R7SVk
-      upgrades:
-        score:
-          attribute: str
-          value: 4
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+    type: ability
+  - _id: CHdsALBI35zpH0yp
+    _key: '!items.effects!commonTreant0000.CHdsALBI35zpH0yp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.supernaturalStre
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: HRg362dHpfqHh9Wn
-    _key: '!items.effects!commonTreant0000.HRg362dHpfqHh9Wn'
-  - name: Giant Strength
-    type: ability
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
+      _sup: 7ZSwUvozBlBfPskF
       class: knight
-      form: normal
-      _sup: HRg362dHpfqHh9Wn
-      upgrades:
-        score:
-          attribute: str
-          value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/giant-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 7ZSwUvozBlBfPskF
-    _key: '!items.effects!commonTreant0000.7ZSwUvozBlBfPskF'
-  - name: Improved Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
           @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
-      _sup: 7ZSwUvozBlBfPskF
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    type: ability
+  - _id: vrsD7CDu7QMRwTkR
+    _key: '!items.effects!commonTreant0000.vrsD7CDu7QMRwTkR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: CHdsALBI35zpH0yp
-    _key: '!items.effects!commonTreant0000.CHdsALBI35zpH0yp'
-  - name: Beastly Strength
-    type: ability
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Property:AV0]{AV0}.</div>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
+      _sup: 7ZSwUvozBlBfPskF
       class: knight
-      form: normal
-      _sup: CHdsALBI35zpH0yp
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: HDSLBjVdu5OOuoYH
-    _key: '!items.effects!commonTreant0000.HDSLBjVdu5OOuoYH'
-  - name: Improved Armor Piercing
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      _sup: CHdsALBI35zpH0yp
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: IOafnuEMfOYQNsU5
-    _key: '!items.effects!commonTreant0000.IOafnuEMfOYQNsU5'
-  - name: Melee Damage Boost
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
-      range:
-        unit: melee
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -517,344 +381,381 @@ effects:
           @L[Core:Damage]{damage} again.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      class: knight
+      targets:
+        - creature
       trigger: >-
         <p>You have hit a creature with a @L[Category:Damaging
         effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
         @L[Category:Attack abilities]{attack}.</p>
-      form: normal
-      effectTypes:
-        - damaging
-      _sup: 7ZSwUvozBlBfPskF
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    type: ability
+  - _id: hL9SmjCnsj1R7SVk
+    _key: '!items.effects!commonTreant0000.hL9SmjCnsj1R7SVk'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+      compendiumSource: Compendium.teriock.abilities.Item.monstrousStrengt
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: vrsD7CDu7QMRwTkR
-    _key: '!items.effects!commonTreant0000.vrsD7CDu7QMRwTkR'
-  - name: Shattering Grip
-    type: ability
+    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
+    name: Monstrous Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
-      delivery:
-        base: hand
-      targets:
-        - item
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: melee
-      overview:
-        base: <p>Target is @L[Property:Shattered]{shattered}.</p>
-      piercing:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      requirements: <p>You are holding the target.</p>
-      form: normal
-      effectTypes:
-        - destruction
-      _sup: HRg362dHpfqHh9Wn
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/shattering-grip.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: SltHTSiwPmXjB8zC
-    _key: '!items.effects!commonTreant0000.SltHTSiwPmXjB8zC'
-  - name: Normal Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.piercing.raw
+              mode: 4
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
+          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
+          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
+          and they are @L[Keyword:AV0]{AV0} for you.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 5
+    type: ability
+  - _id: mh0N0KfVwvxRmK1h
+    _key: '!items.effects!commonTreant0000.mh0N0KfVwvxRmK1h'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+    name: Normal Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: mh0N0KfVwvxRmK1h
+    type: ability
+  - _id: 13HNR6RAJRTwKXcx
+    _key: '!items.effects!commonTreant0000.13HNR6RAJRTwKXcx'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.mh0N0KfVwvxRmK1h'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 13HNR6RAJRTwKXcx
+    type: ability
+  - _id: RrSKhcn8kl2JvRQH
+    _key: '!items.effects!commonTreant0000.RrSKhcn8kl2JvRQH'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.13HNR6RAJRTwKXcx'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: RrSKhcn8kl2JvRQH
+    type: ability
+  - _id: 8xzaMLJ5GWz1b37c
+    _key: '!items.effects!commonTreant0000.8xzaMLJ5GWz1b37c'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.RrSKhcn8kl2JvRQH'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 8xzaMLJ5GWz1b37c
+    type: ability
+  - _id: 33p7fn5GUwXI7pAI
+    _key: '!items.effects!commonTreant0000.33p7fn5GUwXI7pAI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.partialHands0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.8xzaMLJ5GWz1b37c'
-  - name: Partial Hands
-    type: ability
     img: systems/teriock/src/icons/abilities/partial-hands.webp
+    name: Partial Hands
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You do not have real opposable thumbs. All items are
           @L[Property:Two-Handed]{two-handed} for you.</p>
       piercing:
         raw: 0
-      form: flaw
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: 33p7fn5GUwXI7pAI
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: DD9bG0DkMWfIf14b
+    _key: '!items.effects!commonTreant0000.DD9bG0DkMWfIf14b'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.partialHands0000
+      compendiumSource: Compendium.teriock.abilities.Item.rebirth000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.33p7fn5GUwXI7pAI'
-  - name: Rebirth
-    type: ability
     img: systems/teriock/src/icons/abilities/rebirth.webp
+    name: Rebirth
     system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
       delivery:
         base: hand
-      targets:
-        - creature
-      elements:
-        - life
       duration:
-        unit: instant
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
         stationary: false
-      range:
-        unit: melee
+        unit: instant
+      effectTypes:
+        - revival
+        - healing
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target can have been
+        @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.</p>
+      interaction: attack
+      limitation: <p>Only @L[Keyword:Adept]{adept} in home forest.</p>
+      maneuver: active
       overview:
-        proficient: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
-          @L[Core:Proficiency Bonus]{P} times.</p>
         fluent: >-
           <p>If target is @L[Category:Undead creatures]{undead}, they are
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
           Bonus]{F} times.</p>
+        proficient: >-
+          <p>If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
+          @L[Core:Proficiency Bonus]{P} times.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 10 minutes.</p>
       results:
         hit: >-
           <p>If target is @L[Condition:Dead]{dead}, they are brought back to
@@ -868,75 +769,174 @@ effects:
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
           does not count as a @L[Category:Healing effects]{healing effect}
           unless you choose to @L[Core:Healing]{heal} with it.</p>
-      piercing:
-        raw: 0
+      revealed: true
+      rotator: true
       spell: true
       standard: true
-      class: lifeMage
-      rotator: true
+      targets:
+        - creature
+    type: ability
+  - _id: SltHTSiwPmXjB8zC
+    _key: '!items.effects!commonTreant0000.SltHTSiwPmXjB8zC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/shattering-grip.webp
+    name: Shattering Grip
+    system:
+      _sup: HRg362dHpfqHh9Wn
+      competence:
+        raw: 0
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target can have been
-        @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
-        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
-        an additional time.</p>
-      requirements: >-
-        <p>Target is @L[Category:Undead creatures]{undead} or has
-        @L[Condition:Dead]{died} within the last 10 minutes.</p>
-      form: special
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
-        - revival
-        - healing
+        - destruction
+      executionTime: a2
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-      limitation: <p>Only @L[Keyword:Adept]{adept} in home forest.</p>
-    _id: DD9bG0DkMWfIf14b
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      requirements: <p>You are holding the target.</p>
+      revealed: true
+      targets:
+        - item
+    type: ability
+  - _id: HRg362dHpfqHh9Wn
+    _key: '!items.effects!commonTreant0000.HRg362dHpfqHh9Wn'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.rebirth000000000
+      compendiumSource: Compendium.teriock.abilities.Item.supernaturalStre
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.DD9bG0DkMWfIf14b'
-  - name: Treeform Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/treeform-ball.webp
+    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+    name: Supernatural Strength
     system:
-      powerSources:
-        - magical
-      interaction: attack
+      _sup: hL9SmjCnsj1R7SVk
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
+          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
+          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
+          @L[Category:Attack abilities]{attack} to make it
+          @L[Keyword:AV0]{AV0}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 4
+    type: ability
+  - _id: QrOuhydMUbuUYF9Z
+    _key: '!items.effects!commonTreant0000.QrOuhydMUbuUYF9Z'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.treeformBall0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/treeform-ball.webp
+    name: Treeform Ball
+    system:
+      class: natureMage
+      competence:
+        raw: 0
       delivery:
         base: missile
         package: ball
-      targets:
-        - creature
+      duration:
+        dawn: true
+        description: Until Dawn
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - transformation
       elements:
         - nature
-      duration:
-        unit: instant
-        description: Until Dawn
-        dawn: true
-        stationary: false
-        raw: '0'
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
+        addition turn without the target being able to @L[Ability:Self
+        Revert]{Self Revert}.</p>
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
+          Compendium_teriock_execution_Macro_treeformBallDmg0: takeDamage
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
       range:
-        unit: ft
         raw: '30'
+        unit: ft
       results:
+        critHit: >-
+          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
+          @L[Ability:Self Revert]{Self Revert}.</p>
         hit: >-
           <p>Target is @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
@@ -946,110 +946,115 @@ effects:
           reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
           and any remaining @L[Core:Damage]{damage} carries over to their
           reverted state.</p>
-        critHit: >-
-          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
-          @L[Ability:Self Revert]{Self Revert}.</p>
-      piercing:
-        raw: 2
+      revealed: true
       spell: true
       standard: true
-      class: natureMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
-        addition turn without the target being able to @L[Ability:Self
-        Revert]{Self Revert}.</p>
-      form: normal
-      effectTypes:
-        - transformation
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-    _id: QrOuhydMUbuUYF9Z
+      targets:
+        - creature
+    type: ability
+  - _id: aV5s2L3PpjuPDgFL
+    _key: '!items.effects!commonTreant0000.aV5s2L3PpjuPDgFL'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.treeformBall0000
+      compendiumSource: Compendium.teriock.abilities.Item.treeformSelf0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.QrOuhydMUbuUYF9Z'
-  - name: Treeform Self
-    type: ability
+    img: systems/teriock/src/icons/abilities/treeform-self.webp
+    name: Treeform Self
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        stationary: false
+        dawn: true
         description: Until Dawn
         raw: '0'
-        dawn: true
+        stationary: false
         unit: instant
       effectTypes:
         - transformation
       elements:
         - nature
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.transformation.img
+              mode: 5
+              priority: 40
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: icons/environment/wilderness/tree-ash.webp
+          statuses:
+            - transformed
+        macros:
+          Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
+          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
+          Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
+          Compendium_teriock_execution_Macro_treeformBallAppl: effectApplication
+          Compendium_teriock_execution_Macro_treeformBallDmg0: takeDamage
+          Compendium_teriock_execution_Macro_treeformBallExpi: effectExpiration
       interaction: manifest
       maneuver: active
       piercing:
         raw: 0
       powerSources:
         - magical
+      range:
+        unit: self
       results:
         hit: >-
           <p>You are @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree} or revert from being one. You may do this even
           if you are @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree}.</p>
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          statuses:
-            - transformed
-          changes:
-            - mode: 5
-              priority: 40
-              time: normal
-              key: system.transformation.img
-              target: Actor
-              qualifier: '1'
-              value: icons/environment/wilderness/tree-ash.webp
-        macros:
-          Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
-          Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
-          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: aV5s2L3PpjuPDgFL
-    img: systems/teriock/src/icons/abilities/treeform-self.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.treeformSelf0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!commonTreant0000.aV5s2L3PpjuPDgFL'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!commonTreant0000'
+    type: ability
+folder: treants000000000
+img: systems/teriock/src/icons/creatures/common-treant.webp
+name: Common Treant
+system:
+  appearance: >-
+    <p>Walking @L[Creature:Tree]{tree} with a rough face, branches for arms, and
+    roots as feet.</p>
+  br: 15
+  competence:
+    raw: 1
+  description: >-
+    <p>Common treants usually @L[Core:Healing]{heal} anyone in need, but will
+    attack anyone with an @L[Category:Axes]{axe}! Protectors and shepherds of
+    the forest, these ancient beings are believed to be descendants of
+    @L[Creature:Small Earth Elemental]{nature elementals} or @L[Category:Fae
+    creatures]{fae}. Each is native to a particular forest which it protects and
+    maintains for hundreds of years. @L[Category:Treants]{Treants} are slow,
+    patient beings, ever on the watch for threats to nature and protecting
+    beings who can't protect themselves.</p>
+  size:
+    enabled: true
+    value: 8
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '4'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '2'
+  traits:
+    - plant
+type: species

@@ -1,67 +1,66 @@
 _id: etherealFullPlat
+_key: '!items!etherealFullPlat'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Ethereal Full Plate
-    type: ability
+  - _id: etherealFullPlat
+    _key: '!items.effects!etherealFullPlat.etherealFullPlat'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/ethereal-full-plate.webp
-    _id: etherealFullPlat
+    name: Ethereal Full Plate
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
+      delivery:
+        base: self
       duration:
-        raw: '0'
-        unit: unlimited
         conditions:
           present:
             - ethereal
         dawn: false
-        stationary: false
         description: While Ethereal
-      delivery:
-        base: self
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.naturalAv
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '4'
       interaction: manifest
       maneuver: passive
       overview:
         base: "<p>While @L[Condition:Ethereal]{Ethereal}, have at least 4 @L[Core:AV]{AV}\_and appear to be wearing @L[Category:Equipment]{full plate}. This is the case even when you are not\_actually wearing @L[Category:Armor]{armor}. </p>"
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.naturalAv
-              target: Actor
-              qualifier: '1'
-              value: '4'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!etherealFullPlat.etherealFullPlat'
+    type: ability
 img: systems/teriock/src/icons/abilities/ethereal-full-plate.webp
 name: Ethereal Full Plate
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!etherealFullPlat'

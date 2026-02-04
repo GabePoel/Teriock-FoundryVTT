@@ -1,76 +1,65 @@
 _id: forcefield000000
+_key: '!items!forcefield000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Forcefield
-    type: ability
+  - _id: forcefield000000
+    _key: '!items.effects!forcefield000000.forcefield000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/forcefield.webp
-    _id: forcefield000000
+    name: Forcefield
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '5'
-        unit: second
-        dawn: false
-        stationary: false
-        description: 5 Seconds
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
       elements:
         - life
       endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, add 1 to the amount your
         @L[Core:Armor Class]{AC} increases by.</p>
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Your @L[Core:Armor Class]{AC} is increased by 1. Use the new value
-          in determining whether the triggering @L[Category:Attack
-          abilities]{attack} hits you.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-      trigger: <p>You would be hit by an @L[Category:Attack abilities]{attack}.</p>
       impacts:
         base:
           changes:
-            - mode: 2
+            - key: system.defense.ac
+              mode: 2
               priority: 10
-              time: normal
-              key: system.defense.ac
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
               value: '1'
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: executor
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -79,29 +68,39 @@ effects:
                   skip: 0
                   time: start
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: executor
         heightened:
           changes:
-            - mode: 2
+            - key: system.defense.ac
+              mode: 2
               priority: 10
-              time: normal
-              key: system.defense.ac
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
               value: '@h'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!forcefield000000.forcefield000000'
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Your @L[Core:Armor Class]{AC} is increased by 1. Use the new value
+          in determining whether the triggering @L[Category:Attack
+          abilities]{attack} hits you.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+      trigger: <p>You would be hit by an @L[Category:Attack abilities]{attack}.</p>
+    type: ability
 img: systems/teriock/src/icons/abilities/forcefield.webp
 name: Forcefield
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!forcefield000000'

@@ -1,148 +1,148 @@
 _id: mooseFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Moose Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.moose00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!mooseFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: mooseTamer000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Moose Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Moose]{moose}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: bHiXseh8XXCl7qN6
+    _key: '!items.effects!mooseFamiliar000.bHiXseh8XXCl7qN6'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.knockback0000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!mooseFamiliar000.mooseTamer000000'
-  - name: Knockback
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/knockback.webp
+    name: Knockback
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
         description: Instant
+        quantity: 0
         stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <div class="note"><b>Note:</b> A target moving due to [[lookup name]]
-          can still provoke reactions like @L[Ability:Opportunity
-          Attack]{Opportunity Attack}.</div>
-      results:
-        hit: <p>Target moves 10 feet away from you.</p>
-        critHit: <p>Target moves 20 feet away from you.</p>
-      piercing:
-        raw: 0
+        unit: instant
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      class: knight
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <div class="note"><b>Note:</b> A target moving due to [[lookup name]]
+          can still provoke reactions like @L[Ability:Opportunity
+          Attack]{Opportunity Attack}.</div>
+      piercing:
         raw: 0
-      revealed: true
-      grantOnly: false
-    _id: bHiXseh8XXCl7qN6
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.knockback0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mooseFamiliar000.bHiXseh8XXCl7qN6'
-  - name: Triumphant Damage Boost
-    type: ability
-    img: systems/teriock/src/icons/abilities/triumphant-damage-boost.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>Target moves 20 feet away from you.</p>
+        hit: <p>Target moves 10 feet away from you.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: mooseTamer000000
+    _key: '!items.effects!mooseFamiliar000.mooseTamer000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Moose Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Moose]{moose}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: B68EeOVfz8MAn75J
+    _key: '!items.effects!mooseFamiliar000.B68EeOVfz8MAn75J'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.trtDmgBoost00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/triumphant-damage-boost.webp
+    name: Triumphant Damage Boost
+    system:
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: minute
-        quantity: 1
         description: 1 Minute
+        quantity: 1
         stationary: false
+        unit: minute
+      endCondition: <p>You make another @L[Category:Attack abilities]{attack}.</p>
+      executionTime: r0
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>Your next @L[Category:Attack abilities]{attack} is
           @L[Keyword:Boosted]{boosted}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      endCondition: <p>You make another @L[Category:Attack abilities]{attack}.</p>
-      expansionSaveAttribute: mov
+      targets:
+        - self
       trigger: <p>@L[Condition:Down]{Dropping} an opponent.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
-    _id: B68EeOVfz8MAn75J
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.trtDmgBoost00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mooseFamiliar000.B68EeOVfz8MAn75J'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!mooseFamiliar000'
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Moose Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.moose00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

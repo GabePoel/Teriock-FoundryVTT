@@ -1,36 +1,43 @@
 _id: dkTimeFreezePtn0
+_key: '!items!dkTimeFreezePtn0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Drink Time Freeze Potion
-    type: ability
+  - _id: dkTimeFreezePtn0
+    _key: '!items.effects!dkTimeFreezePtn0.dkTimeFreezePtn0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/drink-time-freeze-potion.webp
-    _id: dkTimeFreezePtn0
+    name: Drink Time Freeze Potion
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - temporal
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -40,6 +47,8 @@ effects:
         base: >-
           <p>You become @L[Condition:Frozen]{frozen} and gain
           @L[Ability:Prethaw]{Prethaw}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -49,46 +58,48 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - self
-      impacts: {}
+    type: ability
+  - _id: OaDBaB7jrJm1m7cT
+    _key: '!items.effects!dkTimeFreezePtn0.OaDBaB7jrJm1m7cT'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prethaw000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dkTimeFreezePtn0.dkTimeFreezePtn0'
-  - name: Prethaw
-    type: ability
     img: systems/teriock/src/icons/abilities/prethaw.webp
-    _id: OaDBaB7jrJm1m7cT
+    name: Prethaw
     system:
+      _sup: dkTimeFreezePtn0
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - temporal
       elements:
         - storm
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          endStatuses:
+            - frozen
       interaction: manifest
       maneuver: active
       overview:
@@ -96,52 +107,47 @@ effects:
           <p>You immediately stop being @L[Condition:Frozen]{frozen}. You may
           use this ability even while @L[Condition:Frozen]{frozen}. However, you
           also gain @L[Ability:Temporal Lethargy]{Temporal Lethargy}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          endStatuses:
-            - frozen
-      _sup: dkTimeFreezePtn0
+    type: ability
+  - _id: yOB7qWEstiqaV8sg
+    _key: '!items.effects!dkTimeFreezePtn0.yOB7qWEstiqaV8sg'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.prethaw000000000
+      compendiumSource: Compendium.teriock.abilities.Item.temporalLethargy
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dkTimeFreezePtn0.OaDBaB7jrJm1m7cT'
-  - name: Temporal Lethargy
-    type: ability
     img: systems/teriock/src/icons/abilities/temporal-lethargy.webp
-    _id: yOB7qWEstiqaV8sg
+    name: Temporal Lethargy
     system:
+      _sup: OaDBaB7jrJm1m7cT
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - temporal
       elements:
         - storm
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
@@ -154,27 +160,16 @@ effects:
           doubled. Additionally, if you would roll some number of [[/roll d4]]s
           to end effects placed on you by opponents, you roll one less [[/roll
           d4]] than you would otherwise.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts: {}
-      _sup: OaDBaB7jrJm1m7cT
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.temporalLethargy
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dkTimeFreezePtn0.yOB7qWEstiqaV8sg'
+    type: ability
 img: systems/teriock/src/icons/abilities/drink-time-freeze-potion.webp
 name: Drink Time Freeze Potion
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!dkTimeFreezePtn0'

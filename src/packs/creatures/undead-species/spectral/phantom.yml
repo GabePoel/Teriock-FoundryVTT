@@ -1,410 +1,229 @@
-name: Phantom
-type: creature
+_id: phantom000000000
+_key: '!actors!phantom000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: spectral00000000
 img: systems/teriock/src/icons/creatures/phantom.webp
-prototypeToken:
-  name: Phantom
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/phantom.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: phantom000000000
-    folder: adG7i8YDbpvGQRi0
-    name: Phantom
-    type: species
-    img: systems/teriock/src/icons/creatures/phantom.webp
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Often mistaken for @L[Creature:Ghost]{ghosts}, these more dangerous
-        @L[Category:Undead creatures]{undead} are a common form that
-        @L[Creature:Haunt]{haunts} will take.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '1'
-        mp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '1'
-      appearance: >-
-        <p>[[lookup name]]s appear to be transparent @L[Category:Humanoid
-        creatures]{humanoids}.</p>
-      br: 5
-      size:
-        enabled: true
-        value: 3
-      traits:
-        - undead
+    _key: '!actors.items!phantom000000000.phantom000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.phantom000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Ethereal Shift
-        type: ability
-        img: systems/teriock/src/icons/abilities/ethereal-shift.webp
+      - _id: 5YNV0fyKGKC2zdfc
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.5YNV0fyKGKC2zdfc
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.etherealSenses00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
         system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a3
+          _sup: zpIZcV8iDNfOF8V4
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
           elements:
             - necromancy
-          duration:
-            unit: hour
-            description: 1 Hour
-            dawn: false
-            stationary: false
-            raw: '1'
-          overview:
-            base: >-
-              <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into
-              the Material Realm.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          class: necromancer
-          rotator: true
-          costs:
-            mp:
-              type: static
-              value:
-                static: 1
-          form: special
-          impacts:
-            base:
-              statuses:
-                - ethereal
-          competence:
-            raw: 0
-          revealed: true
+          executionTime: passive
           expansion:
+            featSaveAttribute: mov
             range:
               unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          range:
-            unit: self
-        _id: EzGqjqxvNXcmJ4yZ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.etherealShift000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.EzGqjqxvNXcmJ4yZ
-      - name: Ghostlike
-        type: ability
-        img: systems/teriock/src/icons/abilities/ghostlike.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
           featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: special
-          upgrades:
-            score:
-              attribute: snk
-              value: 5
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: gYRuhaTDcrZsGgnK
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ghostlike0000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.gYRuhaTDcrZsGgnK
-      - name: Incorporeal
-        type: ability
-        img: systems/teriock/src/icons/abilities/incorporeal.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You cannot wear @L[Category:Armor]{armor} and you may pass
-              through non-@L[Property:Silver]{silver} walls while
-              @L[Condition:Ethereal]{Ethereal}. You are also
-              @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Snared]{snared}.</p>
-          piercing:
-            raw: 0
           form: normal
-          effectTypes:
-            - immunity
+          grantOnly: false
           impacts:
             base:
               changes:
-                - mode: 5
+                - key: system.senses.ethereal
+                  mode: 4
                   priority: 10
-                  time: normal
-                  key: system.weight.self.raw
-                  target: Actor
                   qualifier: '1'
-                  value: '0'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: 8dBbuuho4d8jTNQM
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.incorporeal00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.8dBbuuho4d8jTNQM
-      - name: Minor Undead
-        type: ability
-        img: systems/teriock/src/icons/abilities/minor-undead.webp
-        system:
-          powerSources:
-            - magical
+                  target: Actor
+                  time: normal
+                  value: '120'
           interaction: manifest
-          featSaveAttribute: mov
           maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - necromancy
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Slow Mana Drain]{Slow Mana Drain},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
-          piercing:
-            raw: 0
-          form: normal
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.minorUndead00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: zpIZcV8iDNfOF8V4
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.zpIZcV8iDNfOF8V4
-      - name: Ethereal Senses
-        type: ability
-        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-        system:
-          powerSources:
-            - magical
-            - spiritual
-            - primal
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - necromancy
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
           overview:
             base: >-
               <p>You can see and hear spirits and
               @L[Condition:Ethereal]{Ethereal} creatures.</p>
           piercing:
             raw: 0
-          form: normal
-          effectTypes:
-            - sensory
+          powerSources:
+            - magical
+            - spiritual
+            - primal
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: EzGqjqxvNXcmJ4yZ
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.EzGqjqxvNXcmJ4yZ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.etherealShift000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/ethereal-shift.webp
+        name: Ethereal Shift
+        system:
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: 1 Hour
+            raw: '1'
+            stationary: false
+            unit: hour
+          elements:
+            - necromancy
+          executionTime: a3
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
           grantOnly: false
           impacts:
             base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.senses.ethereal
-                  target: Actor
-                  qualifier: '1'
-                  value: '120'
-          _sup: zpIZcV8iDNfOF8V4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
+              statuses:
+                - ethereal
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into
+              the Material Realm.</p>
+          piercing:
             raw: 0
-          revealed: true
-          range:
-            unit: self
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.etherealSenses00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 5YNV0fyKGKC2zdfc
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.5YNV0fyKGKC2zdfc
-      - name: Healing Sensitivity
-        type: ability
-        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-        system:
           powerSources:
             - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          range:
+            unit: self
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
           targets:
             - self
+        type: ability
+      - _id: gYRuhaTDcrZsGgnK
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.gYRuhaTDcrZsGgnK
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.ghostlike0000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/ghostlike.webp
+        name: Ghostlike
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 5
+        type: ability
+      - _id: JlISkc7y9WeYg0ra
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.JlISkc7y9WeYg0ra
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
+        system:
+          _sup: zpIZcV8iDNfOF8V4
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
           elements:
             - necromancy
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>@L[Core:Healing]{Healing} can be used to
@@ -416,51 +235,300 @@ items:
               This does not consume any of your @L[Core:HP]{hit dice}.</p>
           piercing:
             raw: 0
-          form: flaw
-          grantOnly: false
-          _sup: zpIZcV8iDNfOF8V4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: JlISkc7y9WeYg0ra
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.JlISkc7y9WeYg0ra
-      - name: Slow Mana Drain
-        type: ability
-        img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
-        system:
           powerSources:
             - magical
-          interaction: manifest
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 8dBbuuho4d8jTNQM
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.8dBbuuho4d8jTNQM
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.incorporeal00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/incorporeal.webp
+        name: Incorporeal
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
-          maneuver: slow
-          executionTime: 10 Minutes
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.weight.self.raw
+                  mode: 5
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '0'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You cannot wear @L[Category:Armor]{armor} and you may pass
+              through non-@L[Property:Silver]{silver} walls while
+              @L[Condition:Ethereal]{Ethereal}. You are also
+              @L[Keyword:Immunity]{immune} to being
+              @L[Condition:Snared]{snared}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: zpIZcV8iDNfOF8V4
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.zpIZcV8iDNfOF8V4
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.minorUndead00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/minor-undead.webp
+        name: Minor Undead
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Slow Mana Drain]{Slow Mana Drain},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: xrAARO5OZUGvc4Qv
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.xrAARO5OZUGvc4Qv
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: ZgrFVemIjStFUXFX
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.ZgrFVemIjStFUXFX
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: jaGOmKqQWx33gx9n
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.jaGOmKqQWx33gx9n
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-strength.webp
+        name: Normal Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 0
+        type: ability
+      - _id: uWsnyZ7vz2Hgqlgt
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.uWsnyZ7vz2Hgqlgt
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.slowManaDrain000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
+        name: Slow Mana Drain
+        system:
+          _sup: zpIZcV8iDNfOF8V4
+          competence:
+            raw: 0
           delivery:
             base: hand
-          targets:
-            - creature
           duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
             dawn: false
-          range:
-            unit: ft
-            raw: Your Hand's Range
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - revitalization
+            - draining
+          executionTime: 10 Minutes
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: slow
           overview:
             base: >-
               <p>Deal enough @L[Drain:Mana]{mana drain} to
@@ -469,51 +537,69 @@ items:
               @L[Core:Revitalizing]{revitalize}.</p>
           piercing:
             raw: 0
-          form: normal
-          effectTypes:
-            - revitalization
-            - draining
-          grantOnly: false
-          _sup: zpIZcV8iDNfOF8V4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.slowManaDrain000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: uWsnyZ7vz2Hgqlgt
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.uWsnyZ7vz2Hgqlgt
-      - name: Undead Mind
-        type: ability
-        img: systems/teriock/src/icons/abilities/undead-mind.webp
-        system:
           powerSources:
             - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          range:
+            raw: Your Hand's Range
+            unit: ft
+          revealed: true
+          targets:
+            - creature
+        type: ability
+      - _id: RDZ1Ce3ReKlf9311
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.RDZ1Ce3ReKlf9311
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.undeadMind000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/undead-mind.webp
+        name: Undead Mind
+        system:
+          _sup: zpIZcV8iDNfOF8V4
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
           elements:
             - necromancy
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frightened
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: charmed
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to being
@@ -522,68 +608,75 @@ items:
               maintained even if @L[Condition:Transformed]{transformed}.</p>
           piercing:
             raw: 0
-          form: special
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: W0YM1JPMcawzd2Uj
+        _key: >-
+          !actors.items.effects!phantom000000000.phantom000000000.W0YM1JPMcawzd2Uj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.undyingDur000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/undying-durability.webp
+        name: Undying Durability
+        system:
+          _sup: zpIZcV8iDNfOF8V4
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
           effectTypes:
             - immunity
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
           grantOnly: false
           impacts:
             base:
               changes:
-                - mode: 2
+                - key: system.protections.immunities.statuses
+                  mode: 2
                   priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
                   qualifier: '1'
-                  value: frightened
-                - mode: 2
+                  target: Actor
+                  time: normal
+                  value: unconscious
+                - key: system.protections.immunities.statuses
+                  mode: 2
                   priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
                   qualifier: '1'
-                  value: charmed
-          _sup: zpIZcV8iDNfOF8V4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.undeadMind000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: RDZ1Ce3ReKlf9311
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.RDZ1Ce3ReKlf9311
-      - name: Undying Durability
-        type: ability
-        img: systems/teriock/src/icons/abilities/undying-durability.webp
-        system:
-          powerSources:
-            - magical
+                  target: Actor
+                  time: normal
+                  value: suffocating
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: poisoned
           interaction: manifest
-          featSaveAttribute: mov
           maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - necromancy
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to
@@ -597,215 +690,127 @@ items:
               @L[Core:Drowning]{breathe}.</p>
           piercing:
             raw: 0
-          form: special
-          effectTypes:
-            - immunity
-          grantOnly: false
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: unconscious
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: suffocating
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: poisoned
-          _sup: zpIZcV8iDNfOF8V4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
+          powerSources:
+            - magical
           range:
             unit: self
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.undyingDur000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: W0YM1JPMcawzd2Uj
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.W0YM1JPMcawzd2Uj
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: xrAARO5OZUGvc4Qv
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.xrAARO5OZUGvc4Qv
-      - name: Normal Perception
         type: ability
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: ZgrFVemIjStFUXFX
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.ZgrFVemIjStFUXFX
-      - name: Normal Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: jaGOmKqQWx33gx9n
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.phantom000000000.jaGOmKqQWx33gx9n
+    folder: spectral00000000
+    img: systems/teriock/src/icons/creatures/phantom.webp
+    name: Phantom
+    system:
+      appearance: >-
+        <p>[[lookup name]]s appear to be transparent @L[Category:Humanoid
+        creatures]{humanoids}.</p>
+      br: 5
+      competence:
+        raw: 1
+      description: >-
+        <p>Often mistaken for @L[Creature:Ghost]{ghosts}, these more dangerous
+        @L[Category:Undead creatures]{undead} are a common form that
+        @L[Creature:Haunt]{haunts} will take.</p>
+      size:
+        enabled: true
+        value: 3
+      statDice:
+        hp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '1'
+      traits:
+        - undead
+    type: species
+  - _id: XrPFlXDcfv1DLflE
+    _key: '!actors.items!phantom000000000.XrPFlXDcfv1DLflE'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.phantom000000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.prehensileClaw00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!phantom000000000.phantom000000000'
-  - name: Prehensile Claw
-    type: body
-    _id: XrPFlXDcfv1DLflE
+    effects:
+      - _id: 2BzyrinG9hOCt6Hg
+        _key: >-
+          !actors.items.effects!phantom000000000.XrPFlXDcfv1DLflE.2BzyrinG9hOCt6Hg
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: kHofNmEDiCNuRYru
+        _key: >-
+          !actors.items.effects!phantom000000000.XrPFlXDcfv1DLflE.kHofNmEDiCNuRYru
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item can be used to grasp, hold, or manipulate objects, such
+            as while using @L[Ability:Interact]{Interact}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: iXU2dd2zsJUYCqh2
+        _key: >-
+          !actors.items.effects!phantom000000000.XrPFlXDcfv1DLflE.iXU2dd2zsJUYCqh2
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: spectral00000000
     img: systems/teriock/src/icons/body-parts/prehensile-claw.webp
+    name: Prehensile Claw
     system:
+      _sup: phantom000000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
       damage:
         base:
           raw: 1d4
       fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: phantom000000000
-      attackPenalty:
-        raw: '-3'
       range:
         long:
           unit: self
@@ -814,117 +819,113 @@ items:
         short:
           unit: self
       vitals: false
-    effects:
-      - name: Handy
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 2BzyrinG9hOCt6Hg
-        img: systems/teriock/src/icons/properties/handy.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.XrPFlXDcfv1DLflE.2BzyrinG9hOCt6Hg
-      - name: Prehensile
-        type: property
-        system:
-          description: >-
-            <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: kHofNmEDiCNuRYru
-        img: systems/teriock/src/icons/properties/prehensile.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.XrPFlXDcfv1DLflE.kHofNmEDiCNuRYru
-      - name: Weapon
-        type: property
-        system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: iXU2dd2zsJUYCqh2
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!phantom000000000.XrPFlXDcfv1DLflE.iXU2dd2zsJUYCqh2
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.prehensileClaw00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!phantom000000000.XrPFlXDcfv1DLflE'
+    type: body
+name: Phantom
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Phantom
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/phantom.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 6
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 6
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '3'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: XrPFlXDcfv1DLflE
-    blocker: XrPFlXDcfv1DLflE
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: phantom000000000
-folder: 1pVtkm4sqW6x4Hmi
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!phantom000000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 6
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 6
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '3'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: XrPFlXDcfv1DLflE
+    blocker: XrPFlXDcfv1DLflE
+type: creature

@@ -1,63 +1,24 @@
-name: Gooseege Vial
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/gooseege-vial.webp
+_id: gooseegeVial0000
+_key: '!items!gooseegeVial0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: CihFRAqovlVzihgb
+    _key: '!items.effects!gooseegeVial0000.CihFRAqovlVzihgb'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.dkGooseegeVial00
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!aQkYVmPB6ynizffQ.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!aQkYVmPB6ynizffQ.VQDFXr0oJQZ7Waxe'
-  - name: Drink Gooseege Vial
-    type: ability
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/drink-gooseege-vial.webp
+    name: Drink Gooseege Vial
     system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -66,27 +27,39 @@ effects:
       delivery:
         base: item
       duration:
-        unit: minute
-        quantity: 10
-        stationary: false
+        dawn: false
         description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          changes:
+            - key: system.size.number.raw
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+          statuses:
+            - slowed
       interaction: manifest
       maneuver: active
       overview:
         base: >-
           <p>Your @L[Core:Size]{SIZE} is increased by 1, but you are
           @L[Condition:Slowed]{slowed}.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -96,90 +69,23 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          statuses:
-            - slowed
-          changes:
-            - key: system.size.number.raw
-              mode: 2
-              value: '1'
-              priority: 10
-    _id: CihFRAqovlVzihgb
-    img: systems/teriock/src/icons/abilities/drink-gooseege-vial.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.dkGooseegeVial00
-    _key: '!items.effects!aQkYVmPB6ynizffQ.CihFRAqovlVzihgb'
-  - name: Pour Gooseege Vial
     type: ability
-    system:
-      costs:
-        material: true
-        materialCost: >-
-          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
-          that provides it.</p>
-      delivery:
-        base: item
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: attack
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target's @L[Core:Size]{SIZE} is increased by 1, but they are
-          @L[Condition:Slowed]{slowed}.</p>
-      piercing: normal
-      powerSources:
-        - alchemical
-      range:
-        unit: melee
-      requirements: >-
-        <p>Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - creature
-      impacts:
-        base:
-          statuses:
-            - slowed
-          changes:
-            - key: system.size.number.raw
-              mode: 2
-              value: '1'
-              priority: 10
-    _id: z3qVOrP2JL1VWf1z
-    img: systems/teriock/src/icons/abilities/pour-gooseege-vial.webp
+  - _id: qSvziissv3FCq5J2
+    _key: '!items.effects!gooseegeVial0000.qSvziissv3FCq5J2'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.prGooseegeVial00
-    _key: '!items.effects!aQkYVmPB6ynizffQ.z3qVOrP2JL1VWf1z'
-  - name: Fragile
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
         becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
@@ -189,19 +95,142 @@ effects:
         through some other means, it is instead
         @L[Property:Destroyed]{destroyed}.</p>
       form: flaw
-    _id: qSvziissv3FCq5J2
-    img: systems/teriock/src/icons/properties/fragile.webp
+      revealed: true
+    type: property
+  - _id: z3qVOrP2JL1VWf1z
+    _key: '!items.effects!gooseegeVial0000.z3qVOrP2JL1VWf1z'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prGooseegeVial00
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!aQkYVmPB6ynizffQ.qSvziissv3FCq5J2'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: aQkYVmPB6ynizffQ
-_key: '!items!aQkYVmPB6ynizffQ'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/pour-gooseege-vial.webp
+    name: Pour Gooseege Vial
+    system:
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: >-
+          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
+          that provides it.</p>
+      delivery:
+        base: item
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.size.number.raw
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+          statuses:
+            - slowed
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target's @L[Core:Size]{SIZE} is increased by 1, but they are
+          @L[Condition:Slowed]{slowed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!gooseegeVial0000.x6sjcsIVaOkVZOFD'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!gooseegeVial0000.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/gooseege-vial.webp
+name: Gooseege Vial
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

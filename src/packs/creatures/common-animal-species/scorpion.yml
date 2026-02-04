@@ -1,84 +1,756 @@
-name: Scorpion
-type: creature
+_id: scorpion00000000
+_key: '!actors!scorpion00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: commonAnimalSpec
 img: systems/teriock/src/icons/creatures/scorpion.webp
-prototypeToken:
-  name: Scorpion
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/scorpion.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 0.5
-  height: 0.5
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
-  - _id: scorpion00000000
-    folder: Jg0dWUzFS1WNDl2g
-    name: Scorpion
-    type: species
-    img: systems/teriock/src/icons/creatures/scorpion.webp
+  - _id: 43m1dKMvTJ1naBZu
+    _key: '!actors.items!scorpion00000000.43m1dKMvTJ1naBZu'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.pincer0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: Sh5rWaV4ThO2Gez2
+        _key: >-
+          !actors.items.effects!scorpion00000000.43m1dKMvTJ1naBZu.Sh5rWaV4ThO2Gez2
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: yzVGECdJkrwBjqdk
+        _key: >-
+          !actors.items.effects!scorpion00000000.43m1dKMvTJ1naBZu.yzVGECdJkrwBjqdk
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/body-parts/pincer.webp
+    name: Pincer
     system:
+      _sup: scorpion00000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d4
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: scorpion00000000
+    _key: '!actors.items!scorpion00000000.scorpion00000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.scorpion00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: 5PSqieBqlfOtdieu
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.5PSqieBqlfOtdieu
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.aculeate00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/aculeate.webp
+        name: Aculeate
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You have a @L[Category:Equipment]{stinger}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: s4dF79aSuPNuirTA
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.s4dF79aSuPNuirTA
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/climbing.webp
+        name: Climbing
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.climb
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+            proficient:
+              changes:
+                - key: system.speedAdjustments.climb
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+            proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: lQqqKM4PZX5TiX7U
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.lQqqKM4PZX5TiX7U
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dark-vision.webp
+        name: Dark Vision
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.dark
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '60'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see in the dark up to 60 feet as though it is dim
+              light.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: Q6XZt4lv2zn67Ogx
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.Q6XZt4lv2zn67Ogx
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        type: ability
+      - _id: 00cKMARsD8BYdpjO
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.00cKMARsD8BYdpjO
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/digging.webp
+        name: Digging
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.dig
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '1'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 2G5C4fMpef3a6ppW
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.2G5C4fMpef3a6ppW
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/hide.webp
+        name: Hide
+        system:
+          class: thief
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                hide: 1d20 + (2 * @snk)
+              startStatuses:
+                - hidden
+            fluent:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @f
+            proficient:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @p
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
+              may roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+              @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2
+              × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
+              use your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}.</p>
+            fluent: >-
+              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
+              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}).</p>
+            proficient: >-
+              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
+              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}).</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          requirements: >-
+            <p>You are in a location with shadows, dim light,
+            @L[Core:Cover]{three-quarters cover}, or some other feature which
+            the @L[Core:Game Master]{GM} determines is appropriate for being
+            @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+            these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            competence:
+              attribute: snk
+              value: 0
+            score:
+              attribute: snk
+              value: 2
+        type: ability
+      - _id: tfoDm96K4XejS1S5
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.tfoDm96K4XejS1S5
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/no-hands.webp
+        name: No Hands
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: X6ZhpMPYtNlgcerT
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.X6ZhpMPYtNlgcerT
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: Z8auaSUzbRwHFqFG
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.Z8auaSUzbRwHFqFG
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: lnc0rsYNmJmQRkZR
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.lnc0rsYNmJmQRkZR
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        type: ability
+      - _id: 2I6VFKpQt87OldS5
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.2I6VFKpQt87OldS5
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.sting00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/sting.webp
+        name: Sting
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: 24 Hours
+            raw: '24'
+            stationary: false
+            unit: hour
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              common:
+                - standardDamage
+              rolls:
+                damage: 1d4[toxic]
+              statuses:
+                - poisoned
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - alchemical
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          requirements: >-
+            <p>[[lookup name]] must be made with a
+            @L[Category:Equipment]{stinger}.</p>
+          results:
+            critHit: <p>Deal @L[Core:Standard Damage]{standard damage} as well.</p>
+            hit: >-
+              <p>Target becomes @L[Condition:Poisoned]{poisoned}. The
+              @L[Condition:Poisoned]{poison} deals [[/damage 1d4[toxic]]]
+              @L[Core:Damage]{damage}.</p>
+          revealed: true
+          targets:
+            - creature
+        type: ability
+      - _id: mNr6gSbUpGQph8Eo
+        _key: >-
+          !actors.items.effects!scorpion00000000.scorpion00000000.mNr6gSbUpGQph8Eo
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/tiny-strength.webp
+        name: Tiny Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -2
+        type: ability
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/creatures/scorpion.webp
+    name: Scorpion
+    system:
+      br: 6
       competence:
         raw: 1
+      size:
+        enabled: true
+        value: 0.25
       statDice:
         hp:
           disabled: false
@@ -90,877 +762,207 @@ items:
           faces: 6
           number:
             raw: '1'
-      br: 6
-      size:
-        enabled: true
-        value: 0.25
       traits:
         - animal
-    effects:
-      - name: Aculeate
-        type: ability
-        system:
-          delivery:
-            base: self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          executionTime: passive
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>You have a @L[Category:Equipment]{stinger}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          targets:
-            - self
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _id: 5PSqieBqlfOtdieu
-        img: systems/teriock/src/icons/abilities/aculeate.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.aculeate00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.5PSqieBqlfOtdieu
-      - name: Climbing
-        type: ability
-        img: systems/teriock/src/icons/abilities/climbing.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '2'
-            proficient:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '3'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: s4dF79aSuPNuirTA
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.s4dF79aSuPNuirTA
-      - name: Dark Vision
-        type: ability
-        img: systems/teriock/src/icons/abilities/dark-vision.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You can see in the dark up to 60 feet as though it is dim
-              light.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - sensory
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.senses.dark
-                  target: Actor
-                  qualifier: '1'
-                  value: '60'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: lQqqKM4PZX5TiX7U
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.lQqqKM4PZX5TiX7U
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: int
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: Q6XZt4lv2zn67Ogx
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.Q6XZt4lv2zn67Ogx
-      - name: Digging
-        type: ability
-        img: systems/teriock/src/icons/abilities/digging.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.dig
-                  target: Actor
-                  qualifier: '1'
-                  value: '1'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: 00cKMARsD8BYdpjO
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.00cKMARsD8BYdpjO
-      - name: Hide
-        type: ability
-        img: systems/teriock/src/icons/abilities/hide.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          overview:
-            base: >-
-              <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
-              may roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-              @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2
-              × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
-              use your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}.</p>
-            proficient: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
-            fluent: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: thief
-          requirements: >-
-            <p>You are in a location with shadows, dim light,
-            @L[Core:Cover]{three-quarters cover}, or some other feature which
-            the @L[Core:Game Master]{GM} determines is appropriate for being
-            @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-            these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-          form: normal
-          impacts:
-            base:
-              startStatuses:
-                - hidden
-              rolls:
-                hide: 1d20 + (2 * @snk)
-            proficient:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @p
-            fluent:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @f
-          upgrades:
-            competence:
-              attribute: snk
-              value: 0
-            score:
-              attribute: snk
-              value: 2
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          range:
-            unit: self
-        _id: 2G5C4fMpef3a6ppW
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.2G5C4fMpef3a6ppW
-      - name: No Hands
-        type: ability
-        img: systems/teriock/src/icons/abilities/no-hands.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
-          piercing:
-            raw: 0
-          form: flaw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: tfoDm96K4XejS1S5
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.tfoDm96K4XejS1S5
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: X6ZhpMPYtNlgcerT
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.X6ZhpMPYtNlgcerT
-      - name: Normal Perception
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: Z8auaSUzbRwHFqFG
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.Z8auaSUzbRwHFqFG
-      - name: Normal Sneak
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: lnc0rsYNmJmQRkZR
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.lnc0rsYNmJmQRkZR
-      - name: Sting
-        type: ability
-        system:
-          delivery:
-            base: weapon
-            package: strike
-          duration:
-            unit: hour
-            stationary: false
-            description: 24 Hours
-            dawn: false
-            raw: '24'
-          executionTime: a1
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 0
-          powerSources:
-            - alchemical
-            - martial
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          requirements: >-
-            <p>[[lookup name]] must be made with a
-            @L[Category:Equipment]{stinger}.</p>
-          results:
-            hit: >-
-              <p>Target becomes @L[Condition:Poisoned]{poisoned}. The
-              @L[Condition:Poisoned]{poison} deals [[/damage 1d4[toxic]]]
-              @L[Core:Damage]{damage}.</p>
-            critHit: <p>Deal @L[Core:Standard Damage]{standard damage} as well.</p>
-          targets:
-            - creature
-          impacts:
-            base:
-              statuses:
-                - poisoned
-              rolls:
-                damage: 1d4[toxic]
-              common:
-                - standardDamage
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: 2I6VFKpQt87OldS5
-        img: systems/teriock/src/icons/abilities/sting.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.sting00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.2I6VFKpQt87OldS5
-      - name: Tiny Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/tiny-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: str
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: mNr6gSbUpGQph8Eo
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.scorpion00000000.mNr6gSbUpGQph8Eo
+    type: species
+  - _id: 58VhIBD3Ui0ODO5i
+    _key: '!actors.items!scorpion00000000.58VhIBD3Ui0ODO5i'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.scorpion00000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.stinger000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!scorpion00000000.scorpion00000000'
-  - name: Pincer
-    type: body
-    _id: 43m1dKMvTJ1naBZu
-    img: systems/teriock/src/icons/body-parts/pincer.webp
-    system:
-      damage:
-        base:
-          raw: 1d4
-      fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: scorpion00000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
     effects:
-      - name: Handy
-        type: property
+      - _id: BdMLxOjXVfuEdV6a
+        _key: >-
+          !actors.items.effects!scorpion00000000.58VhIBD3Ui0ODO5i.BdMLxOjXVfuEdV6a
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: Sh5rWaV4ThO2Gez2
-        img: systems/teriock/src/icons/properties/handy.webp
+        type: property
+      - _id: 3bTHdOmsDTbAQjtu
+        _key: >-
+          !actors.items.effects!scorpion00000000.58VhIBD3Ui0ODO5i.3bTHdOmsDTbAQjtu
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          compendiumSource: Compendium.teriock.properties.Item.stinging00000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.43m1dKMvTJ1naBZu.Sh5rWaV4ThO2Gez2
-      - name: Weapon
-        type: property
+        img: systems/teriock/src/icons/properties/stinging.webp
+        name: Stinging
         system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
           competence:
             raw: 0
-          revealed: true
-        _id: yzVGECdJkrwBjqdk
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.43m1dKMvTJ1naBZu.yzVGECdJkrwBjqdk
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.pincer0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!scorpion00000000.43m1dKMvTJ1naBZu'
-  - name: Stinger
-    type: body
-    _id: 58VhIBD3Ui0ODO5i
-    img: systems/teriock/src/icons/body-parts/stinger.webp
-    system:
-      damage:
-        base:
-          raw: 1d4
-      fightingStyle: wraparound
-      competence:
-        raw: 0
-      _sup: scorpion00000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    effects:
-      - name: Stinging
-        type: property
-        system:
+          damageType: Toxic
           description: >-
             <p>An item that is <b>[[lookup name style=lc]]</b>, deals
             @L[Damage:Toxic]{toxic damage}.</p>
           form: intrinsic
-          damageType: Toxic
-          competence:
-            raw: 0
           revealed: true
-        _id: 3bTHdOmsDTbAQjtu
-        img: systems/teriock/src/icons/properties/stinging.webp
+        type: property
+      - _id: QWgQYaUwkQ3Ibpt7
+        _key: >-
+          !actors.items.effects!scorpion00000000.58VhIBD3Ui0ODO5i.QWgQYaUwkQ3Ibpt7
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.stinging00000000
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.58VhIBD3Ui0ODO5i.3bTHdOmsDTbAQjtu
-      - name: Handy
-        type: property
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
         system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
           competence:
             raw: 0
-          revealed: true
-        _id: BdMLxOjXVfuEdV6a
-        img: systems/teriock/src/icons/properties/handy.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.58VhIBD3Ui0ODO5i.BdMLxOjXVfuEdV6a
-      - name: Weapon
-        type: property
-        system:
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: QWgQYaUwkQ3Ibpt7
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!scorpion00000000.58VhIBD3Ui0ODO5i.QWgQYaUwkQ3Ibpt7
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.stinger000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!scorpion00000000.58VhIBD3Ui0ODO5i'
+        type: property
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/body-parts/stinger.webp
+    name: Stinger
+    system:
+      _sup: scorpion00000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d4
+      fightingStyle: wraparound
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+name: Scorpion
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 0.5
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Scorpion
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/scorpion.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 0.5
 system:
-  hp:
-    value: 3
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '0.25'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: 58VhIBD3Ui0ODO5i
-    blocker: 58VhIBD3Ui0ODO5i
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: scorpion00000000
-folder: xiQuFe17AXH1ZyVm
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!scorpion00000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 3
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '0.25'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: 58VhIBD3Ui0ODO5i
+    blocker: 58VhIBD3Ui0ODO5i
+type: creature

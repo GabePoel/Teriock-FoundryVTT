@@ -1,98 +1,75 @@
 _id: viciousClaws0000
+_key: '!items!viciousClaws0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Vicious Claws
-    type: ability
-    img: systems/teriock/src/icons/abilities/vicious-claws.webp
-    _id: viciousClaws0000
+  - _id: IbeF4NElqSlqYhuA
+    _key: '!items.effects!viciousClaws0000.IbeF4NElqSlqYhuA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+    name: Offensive Martial Arts
     system:
+      _sup: viciousClaws0000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
-          and become @L[Core:Fluency Bonus]{fluent} in it. Additionally, your
-          @L[Equipment:Hand]{hands} are @L[Property:AV0]{AV0}. If you have
-          @L[Ability:Hind Claws]{Hind Claws}, you become @L[Core:Fluency
-          Bonus]{fluent} in it as well and your @L[Equipment:Foot]{feet} are
-          @L[Property:AV0]{AV0}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.damage.base.raw
+              mode: 4
               priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: or(@key.offensiveMartialArts, @key.hindClaws)
-              value: '2'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.piercing.raw
+              qualifier: '@prop.handy'
               target: body
-              qualifier: or(@prop.handy, @key.foot)
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!viciousClaws0000.viciousClaws0000'
-  - name: Offensive Martial Arts
-    type: ability
-    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
-    _id: IbeF4NElqSlqYhuA
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
+              time: normal
+              value: 1d4
+          rolls:
+            damage: 1d4
+        fluent:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d8
+          rolls:
+            damage: 1d8
+        proficient:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d6
+          rolls:
+            damage: 1d6
       interaction: manifest
       maneuver: passive
       overview:
@@ -105,64 +82,85 @@ effects:
           @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
           Interaction]{attack} with them and their damage die is now [[/damage
           1d4]].</p>
-        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
         fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
+    type: ability
+  - _id: viciousClaws0000
+    _key: '!items.effects!viciousClaws0000.viciousClaws0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/vicious-claws.webp
+    name: Vicious Claws
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.competence.raw
+              mode: 4
               priority: 10
-              time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d4
-          rolls:
-            damage: 1d4
-        proficient:
-          changes:
-            - mode: 4
+              qualifier: or(@key.offensiveMartialArts, @key.hindClaws)
+              target: ability
+              time: fluency
+              value: '2'
+            - key: system.piercing.raw
+              mode: 4
               priority: 10
-              time: normal
-              key: system.damage.base.raw
+              qualifier: or(@prop.handy, @key.foot)
               target: body
-              qualifier: '@prop.handy'
-              value: 1d6
-          rolls:
-            damage: 1d6
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
               time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d8
-          rolls:
-            damage: 1d8
-      _sup: viciousClaws0000
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!viciousClaws0000.IbeF4NElqSlqYhuA'
+              value: '1'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
+          and become @L[Core:Fluency Bonus]{fluent} in it. Additionally, your
+          @L[Equipment:Hand]{hands} are @L[Property:AV0]{AV0}. If you have
+          @L[Ability:Hind Claws]{Hind Claws}, you become @L[Core:Fluency
+          Bonus]{fluent} in it as well and your @L[Equipment:Foot]{feet} are
+          @L[Property:AV0]{AV0}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/vicious-claws.webp
 name: Vicious Claws
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!viciousClaws0000'

@@ -1,58 +1,43 @@
 _id: mediumAirElement
-folder: uISgxxvdpzSuMwoC
-name: Medium Air Elemental
-type: species
-img: systems/teriock/src/icons/creatures/medium-air-elemental.webp
-system:
-  competence:
-    raw: 1
-  statDice:
-    hp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '@size'
-    mp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '3'
-  appearance: >-
-    <p>Appear as a mass of air. This amorphous state is their default form, but
-    elementals can also take a humanoid form which resembles a human with an odd
-    skin color.</p>
-  br: 14
-  hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-  innateRanks: "<p>Innately @L[Category:Classes]{rank} 2\_@L[Class:Life Mage]{Life Mage}.</p>"
-  size:
-    enabled: true
-    value: 3
-    min: 3
-    max: 4
-  traits:
-    - outsider
-    - elemental
+_key: '!items!mediumAirElement'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Beastly Strength
-    type: ability
+  - _id: Bms3ZYHHjch8QgSK
+    _key: '!items.effects!mediumAirElement.Bms3ZYHHjch8QgSK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -61,112 +46,123 @@ effects:
           to be @L[Property:AV0]{AV0}.</div>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Bms3ZYHHjch8QgSK
+    type: ability
+  - _id: I2LxSwL6NNBEihjQ
+    _key: '!items.effects!mediumAirElement.I2LxSwL6NNBEihjQ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.Bms3ZYHHjch8QgSK'
-  - name: Dark Vision
-    type: ability
     img: systems/teriock/src/icons/abilities/dark-vision.webp
+    name: Dark Vision
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is dim
           light.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.dark
-              target: Actor
-              qualifier: '1'
-              value: '60'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: I2LxSwL6NNBEihjQ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.I2LxSwL6NNBEihjQ'
-  - name: Life Magic Hexseal
-    type: ability
-    img: systems/teriock/src/icons/abilities/life-magic-hexseal.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: IDGQXdyqGttNTHGb
+    _key: '!items.effects!mediumAirElement.IDGQXdyqGttNTHGb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lifeMagHxs000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/life-magic-hexseal.webp
+    name: Life Magic Hexseal
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         description: While Up
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - hexseal
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.hexseals.elements
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: life
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
@@ -174,114 +170,114 @@ effects:
           abilities}.</p>
       piercing:
         raw: 0
-      form: special
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: L0gtOiGE4a4butqr
+    _key: '!items.effects!mediumAirElement.L0gtOiGE4a4butqr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/magical-durability.webp
+    name: Magical Durability
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
-        - hexseal
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 2
+            - key: system.protections.immunities.damageTypes
+              mode: 2
               priority: 10
-              time: normal
-              key: system.protections.hexseals.elements
-              target: Actor
               qualifier: '1'
-              value: life
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: IDGQXdyqGttNTHGb
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lifeMagHxs000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.IDGQXdyqGttNTHGb'
-  - name: Magical Durability
-    type: ability
-    img: systems/teriock/src/icons/abilities/magical-durability.webp
-    system:
-      powerSources:
-        - magical
+              target: Actor
+              time: normal
+              value: mundane
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
           @L[Core:Damage]{damage}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: mundane
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: L0gtOiGE4a4butqr
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.L0gtOiGE4a4butqr'
-  - name: Mana Regenerating
-    type: ability
-    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
-    system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: zCtwt93pYPrhBqJQ
+    _key: '!items.effects!mediumAirElement.zCtwt93pYPrhBqJQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.manaRgn000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+    name: Mana Regenerating
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - revival
+        - regeneration
+        - revitalization
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
+          Compendium_teriock_execution_Macro_manaRgnTurnStart: turnStart
+      interaction: manifest
+      limitation: >-
+        <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
+        Mana Points]{MP} spent on @L[Category:Life element abilities]{life
+        element abilities}.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -295,230 +291,222 @@ effects:
           Points and Mana Points]{MP}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - revival
-        - regeneration
-        - revitalization
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: >-
-        <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
-        Mana Points]{MP} spent on @L[Category:Life element abilities]{life
-        element abilities}.</p>
+      powerSources:
+        - primal
       range:
         unit: self
-    _id: zCtwt93pYPrhBqJQ
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.manaRegenerating
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.zCtwt93pYPrhBqJQ'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: oCAWn2z1ALBypEa1
+    _key: '!items.effects!mediumAirElement.oCAWn2z1ALBypEa1'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: oCAWn2z1ALBypEa1
+    type: ability
+  - _id: OugVQs6Xtu1ZP8nC
+    _key: '!items.effects!mediumAirElement.OugVQs6Xtu1ZP8nC'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.oCAWn2z1ALBypEa1'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: OugVQs6Xtu1ZP8nC
+    type: ability
+  - _id: wjxBeHrKAQtKliCM
+    _key: '!items.effects!mediumAirElement.wjxBeHrKAQtKliCM'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.OugVQs6Xtu1ZP8nC'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: wjxBeHrKAQtKliCM
+    type: ability
+  - _id: kkk6nhyB5HP9UJOq
+    _key: '!items.effects!mediumAirElement.kkk6nhyB5HP9UJOq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.wjxBeHrKAQtKliCM'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: kkk6nhyB5HP9UJOq
+    type: ability
+  - _id: 9NY4Eg6SiPsXzXMi
+    _key: '!items.effects!mediumAirElement.9NY4Eg6SiPsXzXMi'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+      compendiumSource: Compendium.teriock.abilities.Item.takeAmorphousEle
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.kkk6nhyB5HP9UJOq'
-  - name: Take Amorphous Elemental Form
-    type: ability
+    img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+    name: Take Amorphous Elemental Form
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: instant
       effectTypes:
         - transformation
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -538,43 +526,43 @@ effects:
         raw: 0
       powerSources:
         - magical
+      range:
+        unit: self
       requirements: >-
         <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
         elemental form}.</p>
+      revealed: true
       targets:
         - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: 9NY4Eg6SiPsXzXMi
-    img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+    type: ability
+  - _id: kTd0O5oey5icDsCI
+    _key: '!items.effects!mediumAirElement.kTd0O5oey5icDsCI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.takeAmorphousEle
+      compendiumSource: Compendium.teriock.abilities.Item.takeHumanoidElea
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.9NY4Eg6SiPsXzXMi'
-  - name: Take Humanoid Elemental Form
-    type: ability
+    img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+    name: Take Humanoid Elemental Form
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: instant
       effectTypes:
         - transformation
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -592,89 +580,102 @@ effects:
         raw: 0
       powerSources:
         - magical
+      range:
+        unit: self
       requirements: >-
         <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
         elemental form}.</p>
+      revealed: true
       targets:
         - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: kTd0O5oey5icDsCI
-    img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+    type: ability
+  - _id: 5zbvFxESomtbykW8
+    _key: '!items.effects!mediumAirElement.5zbvFxESomtbykW8'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.takeHumanoidElea
+      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.kTd0O5oey5icDsCI'
-  - name: Unconsciousness Immunity
-    type: ability
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+    name: Unconsciousness Immunity
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: unconscious
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to falling
           @L[Condition:Unconscious]{unconscious}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: unconscious
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: 5zbvFxESomtbykW8
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mediumAirElement.5zbvFxESomtbykW8'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!mediumAirElement'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: airElementals000
+img: systems/teriock/src/icons/creatures/medium-air-elemental.webp
+name: Medium Air Elemental
+system:
+  appearance: >-
+    <p>Appear as a mass of air. This amorphous state is their default form, but
+    elementals can also take a humanoid form which resembles a human with an odd
+    skin color.</p>
+  br: 14
+  competence:
+    raw: 1
+  hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
+  innateRanks: "<p>Innately @L[Category:Classes]{rank} 2\_@L[Class:Life Mage]{Life Mage}.</p>"
+  size:
+    enabled: true
+    max: 4
+    min: 3
+    value: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '@size'
+    mp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '3'
+  traits:
+    - outsider
+    - elemental
+type: species

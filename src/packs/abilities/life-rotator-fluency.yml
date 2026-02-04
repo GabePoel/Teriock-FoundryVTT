@@ -1,32 +1,50 @@
 _id: lifeRotFluency00
+_key: '!items!lifeRotFluency00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Life Rotator Fluency
-    type: ability
+  - _id: lifeRotFluency00
+    _key: '!items.effects!lifeRotFluency00.lifeRotFluency00'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/life-rotator-fluency.webp
-    _id: lifeRotFluency00
+    name: Life Rotator Fluency
     system:
+      class: lifeMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.lifeRotators'
+              target: ability
+              time: fluency
+              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -38,37 +56,18 @@ effects:
           <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Life
           Rotators]{Life Rotators}. (This does not make you @L[Core:Fluency
           Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.lifeRotators'
-              value: '2'
-      class: lifeMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!lifeRotFluency00.lifeRotFluency00'
+    type: ability
 img: systems/teriock/src/icons/abilities/life-rotator-fluency.webp
 name: Life Rotator Fluency
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!lifeRotFluency00'

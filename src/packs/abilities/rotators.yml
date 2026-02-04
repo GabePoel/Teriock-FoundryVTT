@@ -1,32 +1,67 @@
 _id: rots000000000000
+_key: '!items!rots000000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Rotators
-    type: ability
+  - _id: rots000000000000
+    _key: '!items.effects!rots000000000000.rots000000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/rotators.webp
-    _id: rots000000000000
+    name: Rotators
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
       interaction: manifest
       maneuver: passive
       overview:
@@ -45,59 +80,23 @@ effects:
           Up]{ranks} you have in @L[Category:Mage classes]{mage classes}. During
           a @L[Core:Long Rest]{long rest}, you can "rotate" which spells you
           have prepared. </p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
         fluent: >-
           <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
           Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: '@rank.mag - 1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1)
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1) + @p
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rots000000000000.rots000000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/rotators.webp
 name: Rotators
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rots000000000000'

@@ -1,38 +1,66 @@
 _id: treeformSelf0000
+_key: '!items!treeformSelf0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Treeform Self
-    type: ability
+  - _id: treeformSelf0000
+    _key: '!items.effects!treeformSelf0000.treeformSelf0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/treeform-self.webp
-    _id: treeformSelf0000
+    name: Treeform Self
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: true
-        stationary: false
-        description: Until Dawn
       delivery:
         base: self
+      duration:
+        dawn: true
+        description: Until Dawn
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - transformation
       elements:
         - nature
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.transformation.img
+              mode: 5
+              priority: 40
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: icons/environment/wilderness/tree-ash.webp
+          statuses:
+            - transformed
+        macros:
+          Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
+          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
+          Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
+          Compendium_teriock_execution_Macro_treeformBallAppl: effectApplication
+          Compendium_teriock_execution_Macro_treeformBallDmg0: takeDamage
+          Compendium_teriock_execution_Macro_treeformBallExpi: effectExpiration
       interaction: manifest
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -43,36 +71,10 @@ effects:
           @L[Creature:Tree]{tree} or revert from being one. You may do this even
           if you are @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree}.</p>
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 40
-              time: normal
-              key: system.transformation.img
-              target: Actor
-              qualifier: '1'
-              value: icons/environment/wilderness/tree-ash.webp
-          statuses:
-            - transformed
-        macros:
-          Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
-          Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
-          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!treeformSelf0000.treeformSelf0000'
+    type: ability
 img: systems/teriock/src/icons/abilities/treeform-self.webp
 name: Treeform Self
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!treeformSelf0000'

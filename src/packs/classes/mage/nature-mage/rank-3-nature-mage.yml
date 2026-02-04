@@ -1,55 +1,47 @@
-_id: rank3NatureMage0
-folder: natureMage000000
-name: Rank 3 Nature Mage
-system:
-  archetype: mage
-  className: natureMage
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>The enchanter of the woods, these wandering spell casters resemble
-    Rangers in their wanderlust. More comfortable with animals than people,
-    Nature Mages are always heading to the woods and keeping to themselves. Ever
-    in defense of the land, Nature Mages are like environmentalists. Nature
-    Mages are in tune with the world at all times. If you are playing a Nature
-    Mage be reclusive, avoiding people if you can, happy in nature and eager to
-    leave any civilization.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-nature-mage.webp
+_id: r3Nat00000000000
+_key: '!items!r3Nat00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Additional Nature Rotators
-    type: ability
+  - _id: jbDXpSjfQaxxp5lb
+    _key: '!items.effects!r3Nat00000000000.jbDXpSjfQaxxp5lb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.adlNatureRots000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/additional-nature-rotators.webp
+    name: Additional Nature Rotators
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: natureMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Advanced Hack Healing]{Advanced Hack Healing} and
@@ -57,204 +49,113 @@ effects:
           @L[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      class: natureMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.adlNatureRots000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: jbDXpSjfQaxxp5lb
-    _key: '!items.effects!rank3NatureMage0.jbDXpSjfQaxxp5lb'
-  - name: Advanced Hack Healing
-    type: ability
-    system:
       powerSources:
-        - magical
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
       targets:
         - self
+    type: ability
+  - _id: so3ACT211AphzOjJ
+    _key: '!items.effects!r3Nat00000000000.so3ACT211AphzOjJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.advancedHackHng0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
+    name: Advanced Hack Healing
+    system:
+      _sup: jbDXpSjfQaxxp5lb
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - healing
+        - regeneration
       elements:
         - nature
-      duration:
-        unit: hour
-        quantity: 8
-        stationary: false
-        description: 8 Hours
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal}
           a @L[Damage:Hack]{hack} as well.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: natureMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - healing
-        - regeneration
-      _sup: jbDXpSjfQaxxp5lb
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.advancedHackHng0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: so3ACT211AphzOjJ
-    _key: '!items.effects!rank3NatureMage0.so3ACT211AphzOjJ'
-  - name: Transmute
-    type: ability
-    system:
       powerSources:
         - magical
         - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - nature
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      overview:
-        base: >-
-          <p>The triggering @L[Category:Standard abilities]{ability} is
-          "transformed" into a @L[Damage:Hack]{hack} instead of its normal
-          effect. The type of the @L[Damage:Hack]{hack} is determined by the
-          target of the triggering ability.</p><dl><dt>@L[Category:Creature
-          target abilities]{Creature target abilities}</dt><dd>Transformed into
-          a body hack.</dd><dt>@L[Category:Vitals target abilities]{Vitals
-          target abilities}</dt><dd>Transformed into a vitals hack of your
-          choice.</dd><dt>@L[Category:Arm target abilities]{Arm target
-          abilities}</dt><dd>Transformed into an arm
-          hack.</dd><dt>@L[Category:Leg target abilities]{Leg target
-          abilities}</dt><dd>Transformed into a leg
-          hack.</dd><dt>@L[Category:Limb target abilities]{Limb target
-          abilities}</dt><dd>If no limb is specified in either the target or the
-          effect, it is transformed into a limb hack of your
-          choice.</dd></dl><p>If the triggering @L[Category:Standard
-          abilities]{ability} was @L[Keyword:UB]{UB}, but you otherwise would
-          have been able to @L[Ability:Basic Block]{Block} it, you may treat it
-          as though it targeted your arm. </p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      range:
+        unit: self
+      revealed: true
+      rotator: true
       spell: true
       standard: true
-      class: natureMage
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        hp:
-          type: hack
-          value:
-            static: 0
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You would take a @L[Category:Standard abilities]{standard
-        ability}.</p>
-      form: special
-      effectTypes:
-        - transformation
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
-            - body
-            - eye
-            - ear
-            - mouth
-            - nose
-      _sup: jbDXpSjfQaxxp5lb
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/transmute.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.transmute0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: ygnVzct8zmZgxnMW
-    _key: '!items.effects!rank3NatureMage0.ygnVzct8zmZgxnMW'
-  - name: Amplify Nature Spells
-    type: ability
-    img: systems/teriock/src/icons/abilities/amplify-nature-spells.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
+    type: ability
+  - _id: 6EmaT2y5Xq7i6V5t
+    _key: '!items.effects!r3Nat00000000000.6EmaT2y5Xq7i6V5t'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ampNatureSpells0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/amplify-nature-spells.webp
+    name: Amplify Nature Spells
+    system:
+      class: natureMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Core:Attack Interaction]{attack} with
@@ -269,118 +170,115 @@ effects:
           additional or repeated targets.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: natureMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 6EmaT2y5Xq7i6V5t
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ampNatureSpells0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3NatureMage0.6EmaT2y5Xq7i6V5t'
-  - name: Nature Rotator Fluency
-    type: ability
-    img: systems/teriock/src/icons/abilities/nature-rotator-fluency.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You may rotate between @L[Category:Nature element spells]{nature}
-          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
-          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Nature
-          Rotators]{Nature Rotators}. (This does not make you @L[Core:Fluency
-          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: natureMage
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.natureRotators'
-              value: '2'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: vXSjdFIR4QeDIE3u
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.natureRotFluency
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3NatureMage0.vXSjdFIR4QeDIE3u'
-  - name: Expanded Nature Elder Sorcery
-    type: ability
-    img: systems/teriock/src/icons/abilities/expanded-nature-elder-sorcery.webp
-    system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: slow
-      executionTime: Long Rest
-      delivery:
-        base: self
       targets:
         - self
+    type: ability
+  - _id: NFX4rvqzs7wmlxwV
+    _key: '!items.effects!r3Nat00000000000.NFX4rvqzs7wmlxwV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.branchingCasting
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/branching-casting.webp
+    name: Branching Casting
+    system:
+      _sup: GfQcnd1z5QH8QthR
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may select an additional target within 30 feet of the
+          triggering @L[Category:Spells]{spell's} original target. Your
+          @L[Category:Spells]{spell} targets them as well. Any @L[Core:Attack
+          Interaction]{attack rolls}, @L[Core:Feat Interaction]{feat saves}, or
+          other necessary rolls must be made for the new target as well.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>A @L[Category:Spells]{spell} you cast affects at least one target
+        other than @L[Category:Self target spells]{yourself}.</p>
+    type: ability
+  - _id: YJcITkDfr8DrRLtf
+    _key: '!items.effects!r3Nat00000000000.YJcITkDfr8DrRLtf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.expandedNatureES
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/expanded-nature-elder-sorcery.webp
+    name: Expanded Nature Elder Sorcery
+    system:
+      class: natureMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elderSorcery: true
       elements:
         - nature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
+      executionTime: Long Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -404,58 +302,58 @@ effects:
           Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
           Words]{Celestial Elder Sorcery Words}, and @L[Ability:Nature Elder
           Sorcery Words]{Nature Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       results:
-        save: <p>You learn the spell or word.</p>
         fail: >-
           <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
           that spell or word again.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        save: <p>You learn the spell or word.</p>
+      revealed: true
       skill: true
       standard: true
-      class: natureMage
-      expansionSaveAttribute: mov
-      form: special
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: YJcITkDfr8DrRLtf
+      targets:
+        - self
+    type: ability
+  - _id: GfQcnd1z5QH8QthR
+    _key: '!items.effects!r3Nat00000000000.GfQcnd1z5QH8QthR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.natureDiscipline
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.expandedNatureES
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3NatureMage0.YJcITkDfr8DrRLtf'
-  - name: Nature Disciplines
-    type: ability
     img: systems/teriock/src/icons/abilities/nature-disciplines.webp
+    name: Nature Disciplines
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: natureMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -466,224 +364,186 @@ effects:
           @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
           @L[Ability:Branching Casting]{Branching} and @L[Ability:Territorial
           Casting]{Territorial} casting styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
+          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
         proficient: >-
           <p>You may now use the benefits from [[lookup name]]
           @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
           rest}.</p>
-        fluent: >-
-          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
-          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: int
-          amount: proficiency
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: int
+          value: 1
+    type: ability
+  - _id: vXSjdFIR4QeDIE3u
+    _key: '!items.effects!r3Nat00000000000.vXSjdFIR4QeDIE3u'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.natureRotFluency
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/nature-rotator-fluency.webp
+    name: Nature Rotator Fluency
+    system:
       class: natureMage
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.natureRotators'
+              target: ability
+              time: fluency
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @L[Category:Nature element spells]{nature}
+          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
+          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Nature
+          Rotators]{Nature Rotators}. (This does not make you @L[Core:Fluency
+          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: Nn4aCeeYAPG2aKzh
+    _key: '!items.effects!r3Nat00000000000.Nn4aCeeYAPG2aKzh'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.natureSS00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.natureDiscipline
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: GfQcnd1z5QH8QthR
-    _key: '!items.effects!rank3NatureMage0.GfQcnd1z5QH8QthR'
-  - name: Branching Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - spell
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      overview:
-        base: >-
-          <p>You may select an additional target within 30 feet of the
-          triggering @L[Category:Spells]{spell's} original target. Your
-          @L[Category:Spells]{spell} targets them as well. Any @L[Core:Attack
-          Interaction]{attack rolls}, @L[Core:Feat Interaction]{feat saves}, or
-          other necessary rolls must be made for the new target as well.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: natureMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>A @L[Category:Spells]{spell} you cast affects at least one target
-        other than @L[Category:Self target spells]{yourself}.</p>
-      form: normal
-      _sup: GfQcnd1z5QH8QthR
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/branching-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.branchingCasting
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: NFX4rvqzs7wmlxwV
-    _key: '!items.effects!rank3NatureMage0.NFX4rvqzs7wmlxwV'
-  - name: Territorial Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-      targets:
-        - spell
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      overview:
-        base: >-
-          <p>You cast a @L[Category:Single action spells]{single action spell}
-          at the triggering creature.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: natureMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      trigger: <p>Another creature moves within 5 feet of you.</p>
-      form: normal
-      _sup: GfQcnd1z5QH8QthR
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/territorial-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.territorialCasti
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 0wtFppLuWwFrVEOj
-    _key: '!items.effects!rank3NatureMage0.0wtFppLuWwFrVEOj'
-  - name: Nature Spell Strikes
-    type: ability
     img: systems/teriock/src/icons/abilities/nature-spell-strikes.webp
+    name: Nature Spell Strikes
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: natureMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
           Strike]{Spell Strike}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: natureMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.natureSS00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: Nn4aCeeYAPG2aKzh
-    _key: '!items.effects!rank3NatureMage0.Nn4aCeeYAPG2aKzh'
-  - name: Spell Strike
-    type: ability
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: cieKln69m0g8aAJI
+    _key: '!items.effects!r3Nat00000000000.cieKln69m0g8aAJI'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: Nn4aCeeYAPG2aKzh
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
-      range:
-        unit: melee
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Empathic Ray]{Empathic Ray} and
+        @L[Ability:Treeform Ball]{Treeform Ball}.</p>
+      maneuver: reactive
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @L[Category:Conjured
@@ -693,45 +553,197 @@ effects:
           critical hit" effect instead.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just landed a hit with a @L[Category:Weapon delivery
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable with @L[Ability:Empathic Ray]{Empathic Ray} and
-        @L[Ability:Treeform Ball]{Treeform Ball}.</p>
-      _sup: Nn4aCeeYAPG2aKzh
+    type: ability
+  - _id: 0wtFppLuWwFrVEOj
+    _key: '!items.effects!r3Nat00000000000.0wtFppLuWwFrVEOj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.territorialCasti
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/territorial-casting.webp
+    name: Territorial Casting
+    system:
+      _sup: GfQcnd1z5QH8QthR
+      class: natureMage
       competence:
         raw: 0
-      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You cast a @L[Category:Single action spells]{single action spell}
+          at the triggering creature.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>Another creature moves within 5 feet of you.</p>
+    type: ability
+  - _id: ygnVzct8zmZgxnMW
+    _key: '!items.effects!r3Nat00000000000.ygnVzct8zmZgxnMW'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
+      compendiumSource: Compendium.teriock.abilities.Item.transmute0000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _id: cieKln69m0g8aAJI
-    _key: '!items.effects!rank3NatureMage0.cieKln69m0g8aAJI'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank3NatureMage0'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/transmute.webp
+    name: Transmute
+    system:
+      _sup: jbDXpSjfQaxxp5lb
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: hack
+          value:
+            static: 0
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - transformation
+      elements:
+        - nature
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          hacks:
+            - arm
+            - leg
+            - body
+            - eye
+            - ear
+            - mouth
+            - nose
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering @L[Category:Standard abilities]{ability} is
+          "transformed" into a @L[Damage:Hack]{hack} instead of its normal
+          effect. The type of the @L[Damage:Hack]{hack} is determined by the
+          target of the triggering ability.</p><dl><dt>@L[Category:Creature
+          target abilities]{Creature target abilities}</dt><dd>Transformed into
+          a body hack.</dd><dt>@L[Category:Vitals target abilities]{Vitals
+          target abilities}</dt><dd>Transformed into a vitals hack of your
+          choice.</dd><dt>@L[Category:Arm target abilities]{Arm target
+          abilities}</dt><dd>Transformed into an arm
+          hack.</dd><dt>@L[Category:Leg target abilities]{Leg target
+          abilities}</dt><dd>Transformed into a leg
+          hack.</dd><dt>@L[Category:Limb target abilities]{Limb target
+          abilities}</dt><dd>If no limb is specified in either the target or the
+          effect, it is transformed into a limb hack of your
+          choice.</dd></dl><p>If the triggering @L[Category:Standard
+          abilities]{ability} was @L[Keyword:UB]{UB}, but you otherwise would
+          have been able to @L[Ability:Basic Block]{Block} it, you may treat it
+          as though it targeted your arm. </p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+      trigger: >-
+        <p>You would take a @L[Category:Standard abilities]{standard
+        ability}.</p>
+    type: ability
+folder: natureMage000000
+img: systems/teriock/src/icons/ranks/rank-3-nature-mage.webp
+name: Rank 3 Nature Mage
+system:
+  archetype: mage
+  className: natureMage
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>The enchanter of the woods, these wandering spell casters resemble
+    Rangers in their wanderlust. More comfortable with animals than people,
+    Nature Mages are always heading to the woods and keeping to themselves. Ever
+    in defense of the land, Nature Mages are like environmentalists. Nature
+    Mages are in tune with the world at all times. If you are playing a Nature
+    Mage be reclusive, avoiding people if you can, happy in nature and eager to
+    leave any civilization.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

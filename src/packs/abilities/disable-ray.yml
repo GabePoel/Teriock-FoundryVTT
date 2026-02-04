@@ -1,16 +1,24 @@
 _id: disableRay000000
+_key: '!items!disableRay000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Disable Ray
-    type: ability
+  - _id: disableRay000000
+    _key: '!items.effects!disableRay000000.disableRay000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/disable-ray.webp
-    _id: disableRay000000
+    name: Disable Ray
     system:
+      class: thief
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 1
-      revealed: true
       costs:
         mp:
           type: variable
@@ -21,32 +29,53 @@ effects:
               triggering @L[Category:Abilities]{ability} was used on you or some
               @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
               It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: missile
         package: ray
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
       interaction: attack
       maneuver: reactive
       overview:
         proficient: >-
           <p>This also makes the effect of that @L[Category:Abilities]{ability}
           @L[Core:Fizzles]{fizzle}.</p>
+      piercing:
+        raw: 1
       powerSources:
         - spiritual
       range:
@@ -57,6 +86,7 @@ effects:
         hit: >-
           <p>Target becomes @L[Keyword:Incapable]{incapable} of the
           @L[Category:Abilities]{ability} they were using.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
@@ -67,38 +97,7 @@ effects:
         abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
         against a different creature or some @L[Category:Equipment]{equipment}
         that different creature @L[Keyword:Bearing]{bares}.</p>
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-      class: thief
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!disableRay000000.disableRay000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/disable-ray.webp
 name: Disable Ray
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!disableRay000000'

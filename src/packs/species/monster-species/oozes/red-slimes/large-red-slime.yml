@@ -1,56 +1,44 @@
 _id: largeRedSlime000
-folder: RDEI6v0H4ape5mFm
-name: Large Red Slime
-type: species
-img: systems/teriock/src/icons/creatures/large-red-slime.webp
-system:
-  competence:
-    raw: 1
-  description: <p>Slimes are a conglomeration of semi-sentient ooze.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 6
-      number:
-        raw: 2 * @size
-    mp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '@size'
-  appearance: <p>A pool of thick opaque red liquid.</p>
-  br: 19
-  hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
-  innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Flame Mage]{Flame Mage}.</p>"
-  mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
-  size:
-    enabled: true
-    value: 7
-    min: 7
-    max: 8
-  traits:
-    - ooze
+_key: '!items!largeRedSlime000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Acidic Blood
-    type: ability
+  - _id: hfB5zjFaY33H5kI6
+    _key: '!items.effects!largeRedSlime000.hfB5zjFaY33H5kI6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/acidic-blood.webp
+    name: Acidic Blood
     system:
-      powerSources:
-        - alchemical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - automatic
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Any @L[Category:Weapons]{weapon} that deals @L[Core:Damage]{damage}
@@ -58,53 +46,54 @@ effects:
           next @L[Core:Turns]{turn}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       trigger: >-
         <p> This triggers automatically. You cannot choose to not use it if you
         are able to.</p>
-      form: normal
-      effectTypes:
-        - automatic
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: hfB5zjFaY33H5kI6
+    type: ability
+  - _id: vvyaiJKzfXKSlF2J
+    _key: '!items.effects!largeRedSlime000.vvyaiJKzfXKSlF2J'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+      compendiumSource: Compendium.teriock.abilities.Item.advancedSmell000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.hfB5zjFaY33H5kI6'
-  - name: Advanced Smell
-    type: ability
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
+    name: Advanced Smell
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: berserker
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - down
+        dawn: false
         description: While Up
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can passively smell the types of all living creatures within 30
@@ -114,125 +103,53 @@ effects:
           @L[Condition:Odorless]{odorless} creatures in this way.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
+      revealed: true
       skill: true
       standard: true
-      class: berserker
-      requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
-      form: normal
-      effectTypes:
-        - sensory
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
+    type: ability
+  - _id: 5wBLlpkPWjfzFcGD
+    _key: '!items.effects!largeRedSlime000.5wBLlpkPWjfzFcGD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.advancedSmell000
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: vvyaiJKzfXKSlF2J
-    _key: '!items.effects!largeRedSlime000.vvyaiJKzfXKSlF2J'
-  - name: Scent Seeing
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: aura
-      targets:
-        - creature
-      duration:
-        unit: unlimited
-        conditions:
-          absent:
-            - down
-        stationary: false
-        description: While Up
-        raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: >-
-          <p>You know the exact location of all target creatures. You continue
-          to know the location of all targets within 10 feet, whether they are
-          or you are moving or not, so long as they are still within 10 feet of
-          you.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: berserker
-      requirements: >-
-        <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
-        @L[Condition:Odorless]{odorless}.</p>
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.smell
-              target: Actor
-              qualifier: '1'
-              value: '10'
-      _sup: vvyaiJKzfXKSlF2J
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/scent-seeing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.scentSeeing00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: Ext7i3zbVveJ1tqw
-    _key: '!items.effects!largeRedSlime000.Ext7i3zbVveJ1tqw'
-  - name: Beastly Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -241,49 +158,61 @@ effects:
           to be @L[Property:AV0]{AV0}.</div>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 5wBLlpkPWjfzFcGD
+    type: ability
+  - _id: mszeyI7vgIxodYTZ
+    _key: '!items.effects!largeRedSlime000.mszeyI7vgIxodYTZ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      compendiumSource: Compendium.teriock.abilities.Item.blindFighting000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.5wBLlpkPWjfzFcGD'
-  - name: Blind Fighting
-    type: ability
+    img: icons/creatures/slimes/slime-giant-face-eyes.webp
+    name: Blind Fighting
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       effectTypes:
         - sensory
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.blind
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
       interaction: manifest
       maneuver: passive
       overview:
@@ -299,202 +228,192 @@ effects:
       powerSources:
         - magical
         - primal
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.blind
-              target: Actor
-              qualifier: '1'
-              value: '60'
       upgrades:
         score:
           attribute: per
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: mszeyI7vgIxodYTZ
-    img: icons/creatures/slimes/slime-giant-face-eyes.webp
+    type: ability
+  - _id: 2NBBuV6Ts4PA53nP
+    _key: '!items.effects!largeRedSlime000.2NBBuV6Ts4PA53nP'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.blindFighting000
+      compendiumSource: Compendium.teriock.abilities.Item.bumbling00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.mszeyI7vgIxodYTZ'
-  - name: Bumbling
-    type: ability
     img: systems/teriock/src/icons/abilities/bumbling.webp
+    name: Bumbling
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 2NBBuV6Ts4PA53nP
+    type: ability
+  - _id: 3HTgfSaiwuZLPJe8
+    _key: '!items.effects!largeRedSlime000.3HTgfSaiwuZLPJe8'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bumbling00000000
+      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.2NBBuV6Ts4PA53nP'
-  - name: Dark Vision
-    type: ability
     img: systems/teriock/src/icons/abilities/dark-vision.webp
+    name: Dark Vision
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is dim
           light.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.dark
-              target: Actor
-              qualifier: '1'
-              value: '60'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 3HTgfSaiwuZLPJe8
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.3HTgfSaiwuZLPJe8'
-  - name: Devour
-    type: ability
-    img: systems/teriock/src/icons/abilities/devour.webp
-    system:
       powerSources:
         - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: xJbq69ZUokAa3P67
+    _key: '!items.effects!largeRedSlime000.xJbq69ZUokAa3P67'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/devour.webp
+    name: Devour
+    system:
+      competence:
+        raw: 0
       delivery:
         base: bite
-      targets:
-        - creature
       duration:
-        unit: instant
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
         stationary: false
+        unit: instant
+      executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
       range:
-        unit: ft
         raw: Your Bite's Range
+        unit: ft
+      requirements: <p>Target is @L[Condition:Down]{down}.</p>
       results:
         hit: >-
           <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
           and their @L[Core:Size]{SIZE} is reduced by 1. If their
           @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
-      piercing:
-        raw: 0
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-    _id: xJbq69ZUokAa3P67
+      targets:
+        - creature
+    type: ability
+  - _id: JTKChgK7N4Zb9ZCD
+    _key: '!items.effects!largeRedSlime000.JTKChgK7N4Zb9ZCD'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.gooeyDmgReductio
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.xJbq69ZUokAa3P67'
-  - name: Gooey Damage Reduction
-    type: ability
+    img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
+    name: Gooey Damage Reduction
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -508,43 +427,74 @@ effects:
         raw: 0
       powerSources:
         - alchemical
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: JTKChgK7N4Zb9ZCD
-    img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: IsHGffKBlAzFKavR
+    _key: '!items.effects!largeRedSlime000.IsHGffKBlAzFKavR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.gooeyDmgReductio
+      compendiumSource: Compendium.teriock.abilities.Item.oozeMind00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.JTKChgK7N4Zb9ZCD'
-  - name: Ooze Mind
-    type: ability
+    img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
+    name: Ooze Mind
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: frightened
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: goaded
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: frenzied
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: charmed
       interaction: manifest
       maneuver: passive
       overview:
@@ -557,80 +507,57 @@ effects:
         raw: 0
       powerSources:
         - alchemical
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: frightened
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: goaded
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: frenzied
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: charmed
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: IsHGffKBlAzFKavR
-    img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.oozeMind00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.IsHGffKBlAzFKavR'
-  - name: Resist Effects
-    type: ability
-    img: systems/teriock/src/icons/abilities/resist-effects.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
-      elements:
-        - storm
+    type: ability
+  - _id: OLnuG7k0wFzQXQM6
+    _key: '!items.effects!largeRedSlime000.OLnuG7k0wFzQXQM6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.resistEffects000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/resist-effects.webp
+    name: Resist Effects
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
       duration:
-        unit: hour
+        dawn: false
         description: 1 Hour
         raw: '1'
-        dawn: false
         stationary: false
-      sustained: true
+        unit: hour
+      effectTypes:
+        - resistance
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_5AsyrTgmr9NrD3XS: preExecution
+          Compendium_teriock_execution_Macro_resistEffectsPre: preExecution
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>Pick one of the following @L[Category:Effects]{effect types}. You
@@ -658,208 +585,282 @@ effects:
           effects}</li></ol>
       piercing:
         raw: 0
-      spell: true
-      standard: true
-      class: stormMage
-      rotator: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      form: special
-      effectTypes:
-        - resistance
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_5AsyrTgmr9NrD3XS: preExecution
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: OLnuG7k0wFzQXQM6
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.resistEffects000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.OLnuG7k0wFzQXQM6'
-  - name: Slow
-    type: ability
-    img: systems/teriock/src/icons/abilities/slow.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
       targets:
         - self
+    type: ability
+  - _id: Ext7i3zbVveJ1tqw
+    _key: '!items.effects!largeRedSlime000.Ext7i3zbVveJ1tqw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.scentSeeing00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/scent-seeing.webp
+    name: Scent Seeing
+    system:
+      _sup: vvyaiJKzfXKSlF2J
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: aura
       duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
+        conditions:
+          absent:
+            - down
         dawn: false
+        description: While Up
+        raw: '0'
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.smell
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You know the exact location of all target creatures. You continue
+          to know the location of all targets within 10 feet, whether they are
+          or you are moving or not, so long as they are still within 10 feet of
+          you.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      requirements: >-
+        <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
+        @L[Condition:Odorless]{odorless}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: aYRUWrWihpMPbqUe
+    _key: '!items.effects!largeRedSlime000.aYRUWrWihpMPbqUe'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/slow.webp
+    name: Slow
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: aYRUWrWihpMPbqUe
+    type: ability
+  - _id: VNlQ3LhHighX3ul3
+    _key: '!items.effects!largeRedSlime000.VNlQ3LhHighX3ul3'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
+      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.aYRUWrWihpMPbqUe'
-  - name: Unconsciousness Immunity
-    type: ability
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+    name: Unconsciousness Immunity
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: unconscious
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to falling
           @L[Condition:Unconscious]{unconscious}.</p>
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: wHznvQCrv0ebNXyA
+    _key: '!items.effects!largeRedSlime000.wHznvQCrv0ebNXyA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.vitDur0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/vitals-durability.webp
+    name: Vitals Durability
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 2
+            - key: system.protections.immunities.other
+              mode: 2
               priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
               qualifier: '1'
-              value: unconscious
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: VNlQ3LhHighX3ul3
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.VNlQ3LhHighX3ul3'
-  - name: Vitals Durability
-    type: ability
-    img: systems/teriock/src/icons/abilities/vitals-durability.webp
-    system:
-      powerSources:
-        - martial
+              target: Actor
+              time: normal
+              value: Vitals Target Abilities
+            - key: system.protections.immunities.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Arrows
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Bows]{arrows}
           and @L[Category:Vitals target abilities]{vitals target abilities}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - immunity
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - martial
       range:
         unit: self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.other
-              target: Actor
-              qualifier: '1'
-              value: Vitals Target Abilities
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.other
-              target: Actor
-              qualifier: '1'
-              value: Arrows
-    _id: wHznvQCrv0ebNXyA
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.vitDur0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!largeRedSlime000.wHznvQCrv0ebNXyA'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!largeRedSlime000'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: redSlimes0000000
+img: systems/teriock/src/icons/creatures/large-red-slime.webp
+name: Large Red Slime
+system:
+  appearance: <p>A pool of thick opaque red liquid.</p>
+  br: 19
+  competence:
+    raw: 1
+  description: <p>Slimes are a conglomeration of semi-sentient ooze.</p>
+  hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
+  innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Flame Mage]{Flame Mage}.</p>"
+  mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
+  size:
+    enabled: true
+    max: 8
+    min: 7
+    value: 7
+  statDice:
+    hp:
+      disabled: false
+      faces: 6
+      number:
+        raw: 2 * @size
+    mp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '@size'
+  traits:
+    - ooze
+type: species

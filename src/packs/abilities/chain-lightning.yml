@@ -1,30 +1,37 @@
 _id: chainLightning00
+_key: '!items!chainLightning00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Chain Lightning
-    type: ability
+  - _id: chainLightning00
+    _key: '!items.effects!chainLightning00.chainLightning00'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/chain-lightning.webp
-    _id: chainLightning00
+    name: Chain Lightning
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 1
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 2
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: missile
         package: ray
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - damaging
         - loud
@@ -33,13 +40,13 @@ effects:
         - storm
       executionTime: a1
       expansion:
-        type: cascade
+        cap:
+          raw: '2'
+        featSaveAttribute: mov
         range:
           raw: '60'
           unit: ft
-        featSaveAttribute: mov
-        cap:
-          raw: '2'
+        type: cascade
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -47,23 +54,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 1d8[magic]]] @L[Core:Damage]{damage}. The cascade also
         executes an additional time.</p>
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      results:
-        hit: <p>Deal [[/damage 1d8[magic]]] @L[Core:Damage]{damage} to target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - creature
       impacts:
         base:
           rolls:
@@ -71,18 +61,27 @@ effects:
         heightened:
           rolls:
             damage: 1d8[magic]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!chainLightning00.chainLightning00'
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: <p>Deal [[/damage 1d8[magic]]] @L[Core:Damage]{damage} to target.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/chain-lightning.webp
 name: Chain Lightning
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!chainLightning00'

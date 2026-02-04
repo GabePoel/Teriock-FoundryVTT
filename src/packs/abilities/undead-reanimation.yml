@@ -1,34 +1,116 @@
 _id: undeadReanimatio
+_key: '!items!undeadReanimatio'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Undead Reanimation
-    type: ability
-    img: systems/teriock/src/icons/abilities/undead-reanimation.webp
-    _id: undeadReanimatio
+  - _id: fRrf0qnAS3Vc54Rm
+    _key: '!items.effects!undeadReanimatio.fRrf0qnAS3Vc54Rm'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.animateDead00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/animate-dead.webp
+    name: Animate Dead
     system:
+      _sup: undeadReanimatio
+      class: necromancer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
+        mp:
+          type: static
+          value:
+            static: 1
         somatic: true
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
+        verbal: true
       delivery:
-        base: self
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - reanimation
       elements:
         - necromancy
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
+          creatures]{undead}) at 1 @L[Core:Hit Points and Mana Points]{HP},
+          although its maximum @L[Core:Hit Points and Mana Points]{HP} is halved
+          (minimum of 1) until it completes a @L[Core:Short Rest]{short rest}.
+          This does not count as a @L[Category:Revival effects]{revival
+          effect}.</p>
+        fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+        proficient: >-
+          <p>Target has all @L[Core:HP]{HP} restored, but its maximum
+          @L[Core:HP]{HP} is still halved. This does not count as a
+          @L[Category:Healing effects]{healing effect}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: >-
+        <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
+        creatures]{undead}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: undeadReanimatio
+    _key: '!items.effects!undeadReanimatio.undeadReanimatio'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/undead-reanimation.webp
+    name: Undead Reanimation
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
         featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -38,46 +120,46 @@ effects:
         base: >-
           <p>You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
           Dead]{Animate Dead}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - self
-      impacts: {}
-      class: necromancer
+    type: ability
+  - _id: XPVzGZ9d9d5IQHtw
+    _key: '!items.effects!undeadReanimatio.XPVzGZ9d9d5IQHtw'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.zombify000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!undeadReanimatio.undeadReanimatio'
-  - name: Zombify
-    type: ability
     img: systems/teriock/src/icons/abilities/zombify.webp
-    _id: XPVzGZ9d9d5IQHtw
+    name: Zombify
     system:
+      _sup: undeadReanimatio
+      class: necromancer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
       costs:
-        verbal: true
         somatic: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
+        verbal: true
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - control
         - reanimation
@@ -85,9 +167,9 @@ effects:
         - necromancy
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -95,14 +177,21 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        fluent:
+          duration: 3600
+        heightened:
+          duration: 3600
       interaction: attack
       maneuver: active
       overview:
-        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
         fluent: >-
           <p>The base duration of this effect is 1 hour and the
           @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
           command.</p>
+        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
@@ -118,106 +207,12 @@ effects:
           before, but loses all other traits and abilities. If the target was
           already @L[Category:Zombies]{some kind of zombie}, then it is
           reanimated as that type.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-      impacts:
-        fluent:
-          duration: 3600
-        heightened:
-          duration: 3600
-      _sup: undeadReanimatio
-      class: necromancer
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.zombify000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!undeadReanimatio.XPVzGZ9d9d5IQHtw'
-  - name: Animate Dead
-    type: ability
-    img: systems/teriock/src/icons/abilities/animate-dead.webp
-    _id: fRrf0qnAS3Vc54Rm
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
       revealed: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
-      delivery:
-        base: hand
-        package: touch
-      effectTypes:
-        - reanimation
-      elements:
-        - necromancy
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: attack
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
-          creatures]{undead}) at 1 @L[Core:Hit Points and Mana Points]{HP},
-          although its maximum @L[Core:Hit Points and Mana Points]{HP} is halved
-          (minimum of 1) until it completes a @L[Core:Short Rest]{short rest}.
-          This does not count as a @L[Category:Revival effects]{revival
-          effect}.</p>
-        proficient: >-
-          <p>Target has all @L[Core:HP]{HP} restored, but its maximum
-          @L[Core:HP]{HP} is still halved. This does not count as a
-          @L[Category:Healing effects]{healing effect}.</p>
-        fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      requirements: >-
-        <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-        creatures]{undead}.</p>
       spell: true
       standard: true
       targets:
         - creature
-      impacts: {}
-      _sup: undeadReanimatio
-      class: necromancer
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.animateDead00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!undeadReanimatio.fRrf0qnAS3Vc54Rm'
+    type: ability
 img: systems/teriock/src/icons/abilities/undead-reanimation.webp
 name: Undead Reanimation
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!undeadReanimatio'

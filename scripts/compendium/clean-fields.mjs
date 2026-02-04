@@ -150,6 +150,9 @@ function cleanEquipment(doc) {
   delete doc.system.identification;
   delete doc.system.reference;
   delete doc.system.shattered;
+  if (doc.system.storage && !doc.system.storage.enabled) {
+    delete doc.system.storage;
+  }
   if (!doc.system.price) delete doc.system.price;
   if (!doc.system.equipped) delete doc.system.equipped;
 }

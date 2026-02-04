@@ -1,46 +1,21 @@
 _id: lantern000000000
-folder: a18imnpbyMt5Ft6E
-name: Lantern
-system:
-  equipmentType: Lantern
-  tier: {}
-  competence:
-    raw: 0
-  attackPenalty:
-    raw: '-3'
-  damage:
-    base:
-      raw: '0'
-    twoHanded: {}
-  hit: {}
-  range:
-    long:
-      unit: melee
-    melee: true
-    ranged: false
-    short:
-      unit: melee
-  vitals: false
-  consumable: false
-  storage:
-    enabled: false
-    maxCount: {}
-    maxWeight: {}
-    weightMultiplier: '1'
-  weight:
-    raw: '2'
-  minStr:
-    raw: '-3'
-  equipmentClasses:
-    - supplies
-  powerLevel: mundane
-type: equipment
-img: systems/teriock/src/icons/equipment/lantern.webp
+_key: '!items!lantern000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Fragile
-    type: property
+  - _id: sYJZWSmsd14AIKjV
+    _key: '!items.effects!lantern000000000.sYJZWSmsd14AIKjV'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/properties/fragile.webp
-    _id: sYJZWSmsd14AIKjV
+    name: Fragile
     system:
       competence:
         raw: 0
@@ -52,20 +27,19 @@ effects:
         effects]{damage}. If it would become @L[Property:Shattered]{shattered}
         through some other means, it is instead
         @L[Property:Destroyed]{destroyed}.</p>
-      suppression: {}
-      revealed: true
       form: flaw
+      revealed: true
+    type: property
+  - _id: wDcmaxQA5JlQOwyq
+    _key: '!items.effects!lantern000000000.wDcmaxQA5JlQOwyq'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      compendiumSource: Compendium.teriock.properties.Item.glowing000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!lantern000000000.sYJZWSmsd14AIKjV'
-  - name: Glowing
-    type: property
     img: systems/teriock/src/icons/properties/glowing.webp
-    _id: wDcmaxQA5JlQOwyq
+    name: Glowing
     system:
       competence:
         raw: 0
@@ -77,43 +51,59 @@ effects:
         specified, then the item is visible, but glows faintly enough that it
         doesn't illuminate other objects unless they are held <i>right</i> next
         to it.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - mode: 4
+          - key: system.light.dim
+            mode: 4
             priority: 5
-            time: normal
-            key: system.light.dim
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: '10'
-          - mode: 5
+          - key: system.light.color
+            mode: 5
             priority: 5
-            time: normal
-            key: system.light.color
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: '#C64600'
-          - mode: 5
+          - key: system.light.animation.type
+            mode: 5
             priority: 5
-            time: normal
-            key: system.light.animation.type
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: torch
       modifiesActor: true
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.glowing000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!lantern000000000.wDcmaxQA5JlQOwyq'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!lantern000000000'
+      revealed: true
+    type: property
+folder: survival00000000
+img: systems/teriock/src/icons/equipment/lantern.webp
+name: Lantern
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - supplies
+  equipmentType: Lantern
+  minStr:
+    raw: '-3'
+  powerLevel: mundane
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  vitals: false
+  weight:
+    raw: '2'
+type: equipment

@@ -1,247 +1,791 @@
-name: Small Water Elemental
-type: creature
+_id: smallWaterElemen
+_key: '!actors!smallWaterElemen'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: waterElementals0
 img: systems/teriock/src/icons/creatures/small-water-elemental.webp
-prototypeToken:
-  name: Small Water Elemental
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/small-water-elemental.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
-  - _id: smallWaterElemen
-    folder: c5zE9iTmMkA7iSD0
-    name: Small Water Elemental
-    type: species
-    img: systems/teriock/src/icons/creatures/small-water-elemental.webp
+  - _id: mage000000000000
+    _key: '!actors.items!smallWaterElemen.mage000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.mage000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: NGCuRUaVtXnxAbRe
+        _key: >-
+          !actors.items.effects!smallWaterElemen.mage000000000000.NGCuRUaVtXnxAbRe
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.arcaneRay0000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/arcane-ray.webp
+        name: Arcane Ray
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: missile
+            package: ray
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
+          impacts:
+            base:
+              rolls:
+                damage: 1d4[magic]
+            heightened:
+              rolls:
+                damage: 1d4[magic]
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
+              target.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: aCWLNsvSFjEuLTyl
+        _key: >-
+          !actors.items.effects!smallWaterElemen.mage000000000000.aCWLNsvSFjEuLTyl
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.staffTouch000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/staff-touch.webp
+        name: Staff Touch
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You may use your @L[Property:Magelore]{magelore} items as
+              though they were your @L[Body:Hand]{hand}. This makes them
+              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
+              You are not @L[Core:Proficiency Bonus]{proficient} nor
+              @L[Core:Fluency Bonus]{fluent} with
+              @L[Category:Abilities]{abilities} you use through your
+              @L[Property:Magelore]{magelore} items.</p>
+            fluent: >-
+              <p>If you are @L[Core:Fluency Bonus]{fluent} with an
+              @L[Category:Abilities]{ability} you use through your
+              @L[Property:Magelore]{magelore} items, you regain the
+              @L[Core:Fluency Bonus]{fluency bonus} for that
+              @L[Category:Abilities]{ability}.</p>
+            proficient: >-
+              <p>If you are @L[Core:Proficiency Bonus]{proficient} with an
+              @L[Category:Abilities]{ability} you use through your
+              @L[Property:Magelore]{magelore} items, you regain the
+              @L[Core:Proficiency Bonus]{proficiency bonus} for that
+              @L[Category:Abilities]{ability}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+    folder: mage000000000000
+    img: systems/teriock/src/icons/archetypes/mage.webp
+    name: Mage
     system:
       competence:
         raw: 1
+      description: >-
+        <p>Mages wield powerful @L[Magically powered spells]{magical spells} and
+        each class has a different approach, but are generally all quite
+        vulnerable in direct @L[Core:Combat]{combat}. Thus most mages prefer to
+        hang back and cast at their enemies from afar or use their magic to
+        control the flow of a battle while avoiding messy melees.</p>
+      maxAv: 0
+      type: learned
+    type: power
+  - _id: 98t8BEdn1qDyN1h4
+    _key: '!actors.items!smallWaterElemen.98t8BEdn1qDyN1h4'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.r1Sto00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: BhiYk6miYGlSd4I0
+        _key: >-
+          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.BhiYk6miYGlSd4I0
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.detIllusion00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/detect-illusion.webp
+        name: Detect Illusion
+        system:
+          _sup: XGWcDOE95PgdyWli
+          class: stormMage
+          competence:
+            raw: 0
+          delivery:
+            base: hand
+            package: touch
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - mental
+          elements:
+            - storm
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: attack
+          maneuver: active
+          overview:
+            proficient: >-
+              <p>You also know what <i>type</i> of
+              @L[Keyword:Illusionary]{illusion} it is (Minor, Full, or Greater)
+              as well as the DC needed to @L[Ability:Disbelieve]{Disbelieve} it.
+              This does not count as "disbelieving" the illusion.</p>
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: Your Hand's Range
+            unit: ft
+          results:
+            hit: >-
+              <p>You know if the target is
+              @L[Keyword:Illusionary]{illusionary}.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - area
+            - creature
+            - item
+        type: ability
+      - _id: UTE4vX4qQBQ5SaJA
+        _key: >-
+          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.UTE4vX4qQBQ5SaJA
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.iceBall000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/ice-ball.webp
+        name: Ice Ball
+        system:
+          class: stormMage
+          competence:
+            raw: 0
+          delivery:
+            base: missile
+            package: ball
+          duration:
+            dawn: false
+            description: 1 Minute
+            raw: '1'
+            stationary: false
+            unit: minute
+          effectTypes:
+            - temporal
+          elements:
+            - storm
+          endCondition: >-
+            <p>At the start of each of the target's actions, they roll [[/roll
+            2d4]]. If either of these dice roll a 4, this effect ends.</p>
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
+          impacts:
+            base:
+              expiration:
+                changeOnCrit: true
+                crit:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: rolled
+                    when:
+                      skip: 1
+                      time: start
+                      trigger: action
+                    who:
+                      type: target
+                doesExpire: true
+                normal:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: rolled
+                    when:
+                      skip: 0
+                      time: start
+                      trigger: action
+                    who:
+                      type: target
+              rolls:
+                endCon: 2d4
+              statuses:
+                - frozen
+            heightened:
+              rolls:
+                damage: 1d4[magic ice]
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: '30'
+            unit: ft
+          results:
+            critHit: >-
+              <p>The target automatically fails the first [[/roll 2d4]]
+              roll.</p>
+            hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: mF8W0tXnFIwY7ClK
+        _key: >-
+          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.mF8W0tXnFIwY7ClK
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.identify00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/identify.webp
+        name: Identify
+        system:
+          class: stormMage
+          competence:
+            raw: 0
+          delivery:
+            base: sight
+            package: ritual
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - truthDetecting
+          elements:
+            - storm
+          executionTime: 10 Minutes
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, you may target an
+            additional item.</p>
+          impacts: {}
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>If the target is an item, you know if it is
+              @L[Property:Magic]{magical} and what its
+              @L[Category:Properties]{properties} or
+              @L[Category:Abilities]{abilities} are, as well as any ongoing
+              spells that are affecting the item. You also learn the name of the
+              object, if it has one. If the target is a creature, you learn what
+              ongoing or @L[Category:Sustained spells]{sustained spells}, if
+              any, are affecting it.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            raw: '5'
+            unit: ft
+          revealed: true
+          ritual: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+            - item
+        type: ability
+      - _id: XGWcDOE95PgdyWli
+        _key: >-
+          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.XGWcDOE95PgdyWli
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.illusionaryArts0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/illusionary-arts.webp
+        name: Illusionary Arts
+        system:
+          class: stormMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Simple Illusion Creation]{Simple Illusion
+              Creation} and @L[Ability:Detect Illusion]{Detect Illusion}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: tJclZapWI7l0kdLc
+        _key: >-
+          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.tJclZapWI7l0kdLc
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/lightning-ray.webp
+        name: Lightning Ray
+        system:
+          class: stormMage
+          competence:
+            raw: 0
+          delivery:
+            base: missile
+            package: ray
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+            - lightning
+          elements:
+            - storm
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+          impacts:
+            base:
+              rolls:
+                damage: 1d6[magic]
+            heightened:
+              rolls:
+                damage: 1d6[magic]
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to
+              target.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: utNRAt3kaSlVSzee
+        _key: >-
+          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.utNRAt3kaSlVSzee
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.simpleIllusionCr
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
+        name: Simple Illusion Creation
+        system:
+          _sup: XGWcDOE95PgdyWli
+          class: stormMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: 1 Minute
+            raw: '1'
+            stationary: false
+            unit: minute
+          effectTypes:
+            - mental
+          elements:
+            - storm
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+            effect increases by 1 hour. The overall duration is rounded to the
+            nearest hour.</p>
+          impacts:
+            heightened:
+              duration: 3600
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You create a @L[Keyword:Illusionary]{minor illusion} of a
+              simple object or effect that fits within your hand. As soon as it
+              leaves your hand, the illusion fades. The illusion itself is a
+              @L[Category:Mental effects]{mental effect}, but [[lookup name]] is
+              not. You can cast it even if you @L[Keyword:Resistance]{resist} or
+              are @L[Keyword:Immunity]{immune} to @L[Category:Mental
+              effects]{mental effects}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - self
+        type: ability
+    folder: waterElementals0
+    img: systems/teriock/src/icons/ranks/rank-1-storm-mage.webp
+    name: Rank 1 Storm Mage
+    system:
+      _sup: smallWaterElemen
+      archetype: mage
+      className: stormMage
+      classRank: 1
+      competence:
+        raw: 1
+      description: >-
+        <p>The true wonder seeker, these mages are the philosophers of the
+        world, always seeking out more knowledge and more wisdom. The Storm Mage
+        is a logician, a tactical intellectual who prefers to neutralize
+        opponents rather than destroy them. Often cold, the Storm Mage is also
+        tumultuous and crafty. If you are playing a Storm Mage, be curious,
+        hungry for information, always in the clouds, tricky and clever, eluding
+        rather than confronting.</p>
+      innate: false
+      maxAv: 0
       statDice:
         hp:
           disabled: false
-          faces: 6
+          faces: 8
           number:
-            raw: '@size'
+            raw: '1'
         mp:
           disabled: false
-          faces: 6
+          faces: 12
           number:
-            raw: '2'
-      appearance: >-
-        <p>Appear as a mass of water. This amorphous state is their default
-        form, but elementals can also take a humanoid form which resembles a
-        human with an odd skin color.</p>
-      br: 10
-      hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      innateRanks: "<p>Innately @L[Category:Classes]{rank} 1\_@L[Class:Storm Mage]{Storm Mage}.</p>"
-      size:
-        enabled: true
-        value: 1
-        min: 1
-        max: 2
-      traits:
-        - outsider
-        - elemental
+            raw: '1'
+    type: rank
+  - _id: smallWaterElemen
+    _key: '!actors.items!smallWaterElemen.smallWaterElemen'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.smallWaterElemen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Dark Vision
-        type: ability
+      - _id: RkdmC1063m3KzqYh
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.RkdmC1063m3KzqYh
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
         img: systems/teriock/src/icons/abilities/dark-vision.webp
+        name: Dark Vision
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.dark
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '60'
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is dim
               light.</p>
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: kDfeebiuo9juMu6h
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.kDfeebiuo9juMu6h
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/magical-durability.webp
+        name: Magical Durability
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
           effectTypes:
-            - sensory
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
           impacts:
             base:
               changes:
-                - mode: 4
+                - key: system.protections.immunities.damageTypes
+                  mode: 2
                   priority: 10
-                  time: normal
-                  key: system.senses.dark
-                  target: Actor
                   qualifier: '1'
-                  value: '60'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: RkdmC1063m3KzqYh
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.RkdmC1063m3KzqYh
-      - name: Magical Durability
-        type: ability
-        img: systems/teriock/src/icons/abilities/magical-durability.webp
-        system:
-          powerSources:
-            - magical
+                  target: Actor
+                  time: normal
+                  value: mundane
           interaction: manifest
-          featSaveAttribute: mov
           maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to
               @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
           piercing:
             raw: 0
-          form: special
-          effectTypes:
-            - immunity
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.damageTypes
-                  target: Actor
-                  qualifier: '1'
-                  value: mundane
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - magical
           range:
             unit: self
-        _id: kDfeebiuo9juMu6h
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.kDfeebiuo9juMu6h
-      - name: Mana Regenerating
-        type: ability
-        img: systems/teriock/src/icons/abilities/mana-regenerating.webp
-        system:
-          powerSources:
-            - primal
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
+        type: ability
+      - _id: BZhpd0yZIWnc9k6l
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.BZhpd0yZIWnc9k6l
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.manaRgn000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/mana-regenerating.webp
+        name: Mana Regenerating
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - revival
+            - regeneration
+            - revitalization
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            macros:
+              Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
+              Compendium_teriock_execution_Macro_manaRgnTurnStart: turnStart
+          interaction: manifest
+          limitation: >-
+            <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
+            Mana Points]{MP} spent on @L[Category:Storm element abilities]{storm
+            element abilities}.</p>
+          maneuver: passive
           overview:
             base: >-
               <p>At the start of each of your @L[Core:Turns]{turns}, you 
@@ -256,248 +800,249 @@ items:
               Points]{MP}.</p>
           piercing:
             raw: 0
-          form: special
-          effectTypes:
-            - revival
-            - regeneration
-            - revitalization
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_YvCU8G4UE4a8QEQB: turnStart
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          limitation: >-
-            <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
-            Mana Points]{MP} spent on @L[Category:Storm element abilities]{storm
-            element abilities}.</p>
+          powerSources:
+            - primal
           range:
             unit: self
-        _id: BZhpd0yZIWnc9k6l
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.manaRegenerating
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.BZhpd0yZIWnc9k6l
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
+        type: ability
+      - _id: SiLGXXIETta6iDb2
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.SiLGXXIETta6iDb2
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: mov
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: SiLGXXIETta6iDb2
+        type: ability
+      - _id: ppeP4byaEZSysvdf
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.ppeP4byaEZSysvdf
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.SiLGXXIETta6iDb2
-      - name: Normal Perception
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: ppeP4byaEZSysvdf
+        type: ability
+      - _id: HB2yWELXiImJWIe1
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.HB2yWELXiImJWIe1
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.ppeP4byaEZSysvdf
-      - name: Normal Sneak
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: snk
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: HB2yWELXiImJWIe1
+        type: ability
+      - _id: Eumocdx0B70TtZNw
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.Eumocdx0B70TtZNw
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.HB2yWELXiImJWIe1
-      - name: Normal Strength
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-strength.webp
+        name: Normal Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: Eumocdx0B70TtZNw
+        type: ability
+      - _id: FoyZ380QhJd8HzN7
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.FoyZ380QhJd8HzN7
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
+          compendiumSource: Compendium.teriock.abilities.Item.stormMagHxs00000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.Eumocdx0B70TtZNw
-      - name: Storm Magic Hexseal
-        type: ability
         img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
+        name: Storm Magic Hexseal
         system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
             conditions:
               absent:
                 - down
+            dawn: false
             description: While Up
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - hexseal
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.hexseals.elements
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: storm
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
@@ -505,55 +1050,47 @@ items:
               abilities]{storm abilities}.</p>
           piercing:
             raw: 0
-          form: special
-          effectTypes:
-            - hexseal
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.hexseals.elements
-                  target: Actor
-                  qualifier: '1'
-                  value: storm
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - magical
           range:
             unit: self
-        _id: FoyZ380QhJd8HzN7
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: jfhf0V232odngD7l
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.jfhf0V232odngD7l
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.stormMagHxs00000
+          compendiumSource: Compendium.teriock.abilities.Item.takeAmorphousEle
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.FoyZ380QhJd8HzN7
-      - name: Take Amorphous Elemental Form
-        type: ability
+        img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+        name: Take Amorphous Elemental Form
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: instant
-            stationary: false
+            dawn: false
             description: Instant
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: instant
           effectTypes:
             - transformation
           executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: special
           grantOnly: false
+          impacts: {}
           interaction: manifest
           maneuver: active
           overview:
@@ -571,48 +1108,48 @@ items:
             raw: 0
           powerSources:
             - magical
+          range:
+            unit: self
           requirements: >-
             <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
             elemental form}.</p>
+          revealed: true
           targets:
             - self
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _id: jfhf0V232odngD7l
-        img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
+        type: ability
+      - _id: LHN6JhaT4NeYSO29
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.LHN6JhaT4NeYSO29
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.takeAmorphousEle
+          compendiumSource: Compendium.teriock.abilities.Item.takeHumanoidElea
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.jfhf0V232odngD7l
-      - name: Take Humanoid Elemental Form
-        type: ability
+        img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+        name: Take Humanoid Elemental Form
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: instant
-            stationary: false
+            dawn: false
             description: Instant
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: instant
           effectTypes:
             - transformation
           executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: special
           grantOnly: false
+          impacts: {}
           interaction: manifest
           maneuver: active
           overview:
@@ -627,563 +1164,191 @@ items:
             raw: 0
           powerSources:
             - magical
+          range:
+            unit: self
           requirements: >-
             <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
             elemental form}.</p>
+          revealed: true
           targets:
             - self
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _id: LHN6JhaT4NeYSO29
-        img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
+        type: ability
+      - _id: xVcOYN50E4XsEjTJ
+        _key: >-
+          !actors.items.effects!smallWaterElemen.smallWaterElemen.xVcOYN50E4XsEjTJ
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.takeHumanoidElea
+          compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.LHN6JhaT4NeYSO29
-      - name: Unconsciousness Immunity
-        type: ability
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+        name: Unconsciousness Immunity
         system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: unconscious
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to falling
               @L[Condition:Unconscious]{unconscious}.</p>
           piercing:
             raw: 0
-          form: normal
-          effectTypes:
-            - immunity
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: unconscious
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - magical
           range:
             unit: self
-        _id: xVcOYN50E4XsEjTJ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.smallWaterElemen.xVcOYN50E4XsEjTJ
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.smallWaterElemen
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!smallWaterElemen.smallWaterElemen'
-  - _id: 98t8BEdn1qDyN1h4
-    name: Rank 1 Storm Mage
+          revealed: true
+          targets:
+            - self
+        type: ability
+    folder: waterElementals0
+    img: systems/teriock/src/icons/creatures/small-water-elemental.webp
+    name: Small Water Elemental
     system:
-      archetype: mage
-      className: stormMage
-      classRank: 1
+      appearance: >-
+        <p>Appear as a mass of water. This amorphous state is their default
+        form, but elementals can also take a humanoid form which resembles a
+        human with an odd skin color.</p>
+      br: 10
       competence:
         raw: 1
-      description: >-
-        <p>The true wonder seeker, these mages are the philosophers of the
-        world, always seeking out more knowledge and more wisdom. The Storm Mage
-        is a logician, a tactical intellectual who prefers to neutralize
-        opponents rather than destroy them. Often cold, the Storm Mage is also
-        tumultuous and crafty. If you are playing a Storm Mage, be curious,
-        hungry for information, always in the clouds, tricky and clever, eluding
-        rather than confronting.</p>
+      hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
+      innateRanks: "<p>Innately @L[Category:Classes]{rank} 1\_@L[Class:Storm Mage]{Storm Mage}.</p>"
+      size:
+        enabled: true
+        max: 2
+        min: 1
+        value: 1
       statDice:
         hp:
           disabled: false
-          faces: 8
+          faces: 6
           number:
-            raw: '1'
+            raw: '@size'
         mp:
           disabled: false
-          faces: 12
+          faces: 6
           number:
-            raw: '1'
-      innate: false
-      maxAv: 0
-      _sup: smallWaterElemen
-    type: rank
-    img: systems/teriock/src/icons/ranks/rank-1-storm-mage.webp
-    effects:
-      - name: Lightning Ray
-        type: ability
-        img: systems/teriock/src/icons/abilities/lightning-ray.webp
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: missile
-            package: ray
-          targets:
-            - creature
-          elements:
-            - storm
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            dawn: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: '60'
-          results:
-            hit: >-
-              <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to
-              target.</p>
-            critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
-          piercing:
-            raw: 1
-          spell: true
-          standard: true
-          class: stormMage
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-            - lightning
-          impacts:
-            base:
-              rolls:
-                damage: 1d6[magic]
-            heightened:
-              rolls:
-                damage: 1d6[magic]
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: tJclZapWI7l0kdLc
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.lightningRay0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.tJclZapWI7l0kdLc
-      - name: Ice Ball
-        type: ability
-        img: systems/teriock/src/icons/abilities/ice-ball.webp
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: missile
-            package: ball
-          targets:
-            - creature
-          elements:
-            - storm
-          duration:
-            unit: minute
-            description: 1 Minute
-            stationary: false
-            dawn: false
-            raw: '1'
-          range:
-            unit: ft
-            raw: '30'
-          results:
-            hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-            critHit: >-
-              <p>The target automatically fails the first [[/roll 2d4]]
-              roll.</p>
-          piercing:
-            raw: 2
-          spell: true
-          standard: true
-          class: stormMage
-          heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-          endCondition: >-
-            <p>At the start of each of the target's actions, they roll [[/roll
-            2d4]]. If either of these dice roll a 4, this effect ends.</p>
-          form: normal
-          effectTypes:
-            - temporal
-          impacts:
-            base:
-              statuses:
-                - frozen
-              rolls:
-                endCon: 2d4
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: rolled
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: action
-                      skip: 0
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: rolled
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: start
-                      trigger: action
-                      skip: 1
-                changeOnCrit: true
-                doesExpire: true
-            heightened:
-              rolls:
-                damage: 1d4[magic ice]
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: UTE4vX4qQBQ5SaJA
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.iceBall000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.UTE4vX4qQBQ5SaJA
-      - name: Identify
-        type: ability
-        img: systems/teriock/src/icons/abilities/identify.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: slow
-          executionTime: 10 Minutes
-          delivery:
-            base: sight
-            package: ritual
-          targets:
-            - creature
-            - item
-          elements:
-            - storm
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
-            dawn: false
-          range:
-            unit: ft
-            raw: '5'
-          overview:
-            base: >-
-              <p>If the target is an item, you know if it is
-              @L[Property:Magic]{magical} and what its
-              @L[Category:Properties]{properties} or
-              @L[Category:Abilities]{abilities} are, as well as any ongoing
-              spells that are affecting the item. You also learn the name of the
-              object, if it has one. If the target is a creature, you learn what
-              ongoing or @L[Category:Sustained spells]{sustained spells}, if
-              any, are affecting it.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          ritual: true
-          class: stormMage
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, you may target an
-            additional item.</p>
-          form: normal
-          effectTypes:
-            - truthDetecting
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          impacts: {}
-        _id: mF8W0tXnFIwY7ClK
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.identify00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.mF8W0tXnFIwY7ClK
-      - name: Illusionary Arts
-        type: ability
-        img: systems/teriock/src/icons/abilities/illusionary-arts.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Simple Illusion Creation]{Simple Illusion
-              Creation} and @L[Ability:Detect Illusion]{Detect Illusion}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: stormMage
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.illusionaryArts0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: XGWcDOE95PgdyWli
-        _key: >-
-          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.XGWcDOE95PgdyWli
-      - name: Simple Illusion Creation
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - storm
-          duration:
-            unit: minute
-            stationary: false
-            description: 1 Minute
-            dawn: false
-            raw: '1'
-          overview:
-            base: >-
-              <p>You create a @L[Keyword:Illusionary]{minor illusion} of a
-              simple object or effect that fits within your hand. As soon as it
-              leaves your hand, the illusion fades. The illusion itself is a
-              @L[Category:Mental effects]{mental effect}, but [[lookup name]] is
-              not. You can cast it even if you @L[Keyword:Resistance]{resist} or
-              are @L[Keyword:Immunity]{immune} to @L[Category:Mental
-              effects]{mental effects}.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          class: stormMage
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour. The overall duration is rounded to the
-            nearest hour.</p>
-          form: normal
-          effectTypes:
-            - mental
-          impacts:
-            heightened:
-              duration: 3600
-          _sup: XGWcDOE95PgdyWli
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-        img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.simpleIllusionCr
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: utNRAt3kaSlVSzee
-        _key: >-
-          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.utNRAt3kaSlVSzee
-      - name: Detect Illusion
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: hand
-            package: touch
-          targets:
-            - area
-            - creature
-            - item
-          elements:
-            - storm
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: ft
-            raw: Your Hand's Range
-          overview:
-            proficient: >-
-              <p>You also know what <i>type</i> of
-              @L[Keyword:Illusionary]{illusion} it is (Minor, Full, or Greater)
-              as well as the DC needed to @L[Ability:Disbelieve]{Disbelieve} it.
-              This does not count as "disbelieving" the illusion.</p>
-          results:
-            hit: >-
-              <p>You know if the target is
-              @L[Keyword:Illusionary]{illusionary}.</p>
-          piercing:
-            raw: 2
-          spell: true
-          standard: true
-          class: stormMage
-          form: normal
-          effectTypes:
-            - mental
-          _sup: XGWcDOE95PgdyWli
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/detect-illusion.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.detIllusion00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: BhiYk6miYGlSd4I0
-        _key: >-
-          !actors.items.effects!smallWaterElemen.98t8BEdn1qDyN1h4.BhiYk6miYGlSd4I0
+            raw: '2'
+      traits:
+        - outsider
+        - elemental
+    type: species
+  - _id: B23kIRsZJT9NlZtJ
+    _key: '!actors.items!smallWaterElemen.B23kIRsZJT9NlZtJ'
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.rank1StormMage00
+      compendiumSource: Compendium.teriock.bodyParts.Item.waterTendril0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!smallWaterElemen.98t8BEdn1qDyN1h4'
-  - name: Water Tendril
-    type: body
-    _id: B23kIRsZJT9NlZtJ
+    effects:
+      - _id: CTLv7Ptq63esZe1H
+        _key: >-
+          !actors.items.effects!smallWaterElemen.B23kIRsZJT9NlZtJ.CTLv7Ptq63esZe1H
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.freezing00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/freezing.webp
+        name: Freezing
+        system:
+          competence:
+            raw: 0
+          damageType: Ice
+          description: >-
+            <p>An item that is <b>[[lookup name style=lc]]</b>, deals
+            @L[Damage:Ice]{ice damage}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: AXcqZm4PwVazY5Dq
+        _key: >-
+          !actors.items.effects!smallWaterElemen.B23kIRsZJT9NlZtJ.AXcqZm4PwVazY5Dq
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: BvYYA284Zj6DE3Zr
+        _key: >-
+          !actors.items.effects!smallWaterElemen.B23kIRsZJT9NlZtJ.BvYYA284Zj6DE3Zr
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: waterElementals0
     img: systems/teriock/src/icons/body-parts/water-tendril.webp
+    name: Water Tendril
     system:
+      _sup: smallWaterElemen
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '1'
+      competence:
+        raw: 0
       damage:
         base:
           raw: 1d6
       fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: smallWaterElemen
-      attackPenalty:
-        raw: '-3'
       range:
         long:
           unit: self
@@ -1192,275 +1357,113 @@ items:
         short:
           unit: self
       vitals: false
-      bv:
-        raw: '1'
-    effects:
-      - name: Freezing
-        type: property
-        system:
-          description: >-
-            <p>An item that is <b>[[lookup name style=lc]]</b>, deals
-            @L[Damage:Ice]{ice damage}.</p>
-          form: intrinsic
-          damageType: Ice
-          competence:
-            raw: 0
-          revealed: true
-        _id: CTLv7Ptq63esZe1H
-        img: systems/teriock/src/icons/properties/freezing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.freezing00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.B23kIRsZJT9NlZtJ.CTLv7Ptq63esZe1H
-      - name: Handy
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: AXcqZm4PwVazY5Dq
-        img: systems/teriock/src/icons/properties/handy.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.B23kIRsZJT9NlZtJ.AXcqZm4PwVazY5Dq
-      - name: Weapon
-        type: property
-        system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: BvYYA284Zj6DE3Zr
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.B23kIRsZJT9NlZtJ.BvYYA284Zj6DE3Zr
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.waterTendril0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!smallWaterElemen.B23kIRsZJT9NlZtJ'
-  - name: Mage
-    type: power
-    _id: mage000000000000
-    img: systems/teriock/src/icons/archetypes/mage.webp
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Mages wield powerful @L[Magically powered spells]{magical spells} and
-        each class has a different approach, but are generally all quite
-        vulnerable in direct @L[Core:Combat]{combat}. Thus most mages prefer to
-        hang back and cast at their enemies from afar or use their magic to
-        control the flow of a battle while avoiding messy melees.</p>
-      maxAv: 0
-      type: learned
-    effects:
-      - name: Arcane Ray
-        type: ability
-        img: systems/teriock/src/icons/abilities/arcane-ray.webp
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: missile
-            package: ray
-          targets:
-            - creature
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
-            dawn: false
-          range:
-            unit: ft
-            raw: '60'
-          results:
-            hit: >-
-              <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
-              target.</p>
-            critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
-          piercing:
-            raw: 1
-          spell: true
-          standard: true
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          impacts:
-            base:
-              rolls:
-                damage: 1d4[magic]
-            heightened:
-              rolls:
-                damage: 1d4[magic]
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: NGCuRUaVtXnxAbRe
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.arcaneRay0000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.mage000000000000.NGCuRUaVtXnxAbRe
-      - name: Staff Touch
-        type: ability
-        img: systems/teriock/src/icons/abilities/staff-touch.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You may use your @L[Property:Magelore]{magelore} items as
-              though they were your @L[Body:Hand]{hand}. This makes them
-              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
-              You are not @L[Core:Proficiency Bonus]{proficient} nor
-              @L[Core:Fluency Bonus]{fluent} with
-              @L[Category:Abilities]{abilities} you use through your
-              @L[Property:Magelore]{magelore} items.</p>
-            proficient: >-
-              <p>If you are @L[Core:Proficiency Bonus]{proficient} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Proficiency Bonus]{proficiency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
-            fluent: >-
-              <p>If you are @L[Core:Fluency Bonus]{fluent} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Fluency Bonus]{fluency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        _id: aCWLNsvSFjEuLTyl
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.staffTouch000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!smallWaterElemen.mage000000000000.aCWLNsvSFjEuLTyl
-    folder: mage000000000000
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.mage000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!smallWaterElemen.mage000000000000'
+    type: body
+name: Small Water Elemental
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Small Water Elemental
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/small-water-elemental.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 8
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '1'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: B23kIRsZJT9NlZtJ
-    blocker: B23kIRsZJT9NlZtJ
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: smallWaterElemen
-folder: gOzSqXnRWzn85ebE
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!smallWaterElemen'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 8
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '1'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: B23kIRsZJT9NlZtJ
+    blocker: B23kIRsZJT9NlZtJ
+type: creature

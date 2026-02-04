@@ -1,57 +1,63 @@
 _id: snakeFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Snake Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.snake00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!snakeFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: snakeTamer000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Snake Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Snake]{snake}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: iaIlHIRvPyhxJuQV
+    _key: '!items.effects!snakeFamiliar000.iaIlHIRvPyhxJuQV'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.critElite0000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!snakeFamiliar000.snakeTamer000000'
-  - name: Crit Elite
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/crit-elite.webp
+    name: Crit Elite
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: archer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: While Stationary
+        quantity: 0
         stationary: true
+        unit: noLimit
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: '@dmg'
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.vitals
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: armament
+              time: normal
+              value: 'true'
+        macros:
+          Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next @L[Category:Attack
@@ -64,70 +70,63 @@ effects:
           @L[Keyword:Boosted]{boosted} in this way.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      requirements: <p>You are not already using [[lookup name]].</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 208X9rXRFVKMIllx
+    _key: '!items.effects!snakeFamiliar000.208X9rXRFVKMIllx'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      class: archer
-      requirements: <p>You are not already using [[lookup name]].</p>
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 0
-              priority: 100
-              time: normal
-              key: system.damage.all.raw
-              target: armament
-              qualifier: '@dmg'
-              value: '1'
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.vitals
-              target: armament
-              qualifier: '1'
-              value: 'true'
-        macros:
-          Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: iaIlHIRvPyhxJuQV
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.critElite0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!snakeFamiliar000.iaIlHIRvPyhxJuQV'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -138,49 +137,50 @@ effects:
           @L[Core:Damage]{damage} instead.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
       skill: true
       standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      effectTypes:
-        - killing
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-      competence:
-        raw: 0
-      revealed: true
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
-    _id: 208X9rXRFVKMIllx
+    type: ability
+  - _id: snakeTamer000000
+    _key: '!items.effects!snakeFamiliar000.snakeTamer000000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!snakeFamiliar000.208X9rXRFVKMIllx'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!snakeFamiliar000'
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Snake Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Snake]{snake}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Snake Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.snake00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

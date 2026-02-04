@@ -1,7 +1,200 @@
 _id: NlYxEGCdnUF8g08Z
-folder: h0d5vpLfqwV9YCci
+_key: '!items!NlYxEGCdnUF8g08Z'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r5Lif00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+effects:
+  - _id: fh4suOlumlxkn3jC
+    _key: '!items.effects!NlYxEGCdnUF8g08Z.fh4suOlumlxkn3jC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lifeRotFluency00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/life-rotator-fluency.webp
+    name: Life Rotator Fluency
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.lifeRotators'
+              target: ability
+              time: fluency
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @L[Category:Life element spells]{life}
+          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
+          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Life
+          Rotators]{Life Rotators}. (This does not make you @L[Core:Fluency
+          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: ARunLguXJBf7xHwi
+    _key: '!items.effects!NlYxEGCdnUF8g08Z.ARunLguXJBf7xHwi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lifeSS0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/life-spell-strikes.webp
+    name: Life Spell Strikes
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
+          Strike]{Spell Strike}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: gfCyRLfsQP2c5Frp
+    _key: '!items.effects!NlYxEGCdnUF8g08Z.gfCyRLfsQP2c5Frp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: ARunLguXJBf7xHwi
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Light Ray]{Light Ray} and
+        @L[Ability:Medicine Ball]{Medicine Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @L[Category:Conjured
+          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
+          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
+          triggering hit was a critical hit, then the target takes the "on
+          critical hit" effect instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.</p>
+    type: ability
+folder: whiteSlimes00000
+img: systems/teriock/src/icons/ranks/rank-5-life-mage.webp
 name: Rank 5 Life Mage
 system:
+  _sup: hugeWhiteSlime00
   archetype: mage
   className: lifeMage
   classRank: 5
@@ -16,6 +209,8 @@ system:
     prefer to stand behind the troops, healing when needed. If you are playing a
     Life Mage be helpful, kind and loving, protective but committed to saving
     lives and fighting death.</p>
+  innate: false
+  maxAv: 0
   statDice:
     hp:
       disabled: false
@@ -27,199 +222,4 @@ system:
       faces: 12
       number:
         raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: hugeWhiteSlime00
 type: rank
-img: systems/teriock/src/icons/ranks/rank-5-life-mage.webp
-effects:
-  - name: Life Rotator Fluency
-    type: ability
-    img: systems/teriock/src/icons/abilities/life-rotator-fluency.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You may rotate between @L[Category:Life element spells]{life}
-          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
-          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Life
-          Rotators]{Life Rotators}. (This does not make you @L[Core:Fluency
-          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: lifeMage
-      form: normal
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.lifeRotators'
-              value: '2'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: fh4suOlumlxkn3jC
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lifeRotFluency00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NlYxEGCdnUF8g08Z.fh4suOlumlxkn3jC'
-  - name: Life Spell Strikes
-    type: ability
-    img: systems/teriock/src/icons/abilities/life-spell-strikes.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
-          Strike]{Spell Strike}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: lifeMage
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lifeSS0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: ARunLguXJBf7xHwi
-    _key: '!items.effects!NlYxEGCdnUF8g08Z.ARunLguXJBf7xHwi'
-  - name: Spell Strike
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Conjured
-          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
-          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
-          triggering hit was a critical hit, then the target takes the "on
-          critical hit" effect instead.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable with @L[Ability:Light Ray]{Light Ray} and
-        @L[Ability:Medicine Ball]{Medicine Ball}.</p>
-      _sup: ARunLguXJBf7xHwi
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: gfCyRLfsQP2c5Frp
-    _key: '!items.effects!NlYxEGCdnUF8g08Z.gfCyRLfsQP2c5Frp'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank5LifeMage000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!NlYxEGCdnUF8g08Z'

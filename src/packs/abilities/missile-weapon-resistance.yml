@@ -1,74 +1,73 @@
 _id: missileWepRsc000
+_key: '!items!missileWepRsc000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Missile Weapon Resistance
-    type: ability
+  - _id: missileWepRsc000
+    _key: '!items.effects!missileWepRsc000.missileWepRsc000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/missile-weapon-resistance.webp
-    _id: missileWepRsc000
+    name: Missile Weapon Resistance
     system:
+      class: berserker
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
+      delivery:
+        base: self
       duration:
-        raw: '0'
-        unit: unlimited
         conditions:
           absent:
             - down
         dawn: false
-        stationary: false
         description: While Up
-      delivery:
-        base: self
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - resistance
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Ranged Weapons
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Resistant]{resistant} to all
           @L[Property:Ranged]{ranged} @L[Category:Weapons]{weapons}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - primal
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Ranged Weapons
-      class: berserker
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!missileWepRsc000.missileWepRsc000'
+    type: ability
 img: systems/teriock/src/icons/abilities/missile-weapon-resistance.webp
 name: Missile Weapon Resistance
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!missileWepRsc000'

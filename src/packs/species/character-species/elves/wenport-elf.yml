@@ -1,124 +1,107 @@
 _id: wenportElf000000
-folder: dTP7uBtXYgVDtwBE
-name: Wenport Elf
-type: species
-img: systems/teriock/src/icons/creatures/wenport-elf.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Pygmy @L[Category:Elves]{elves} that evolved on the West Salamani Isle.
-    These small elves are natural sea fairers and fishermen that are highly
-    sought after for captains of voyages. They are also known for their
-    culture's fine cuisine. Wenport elves also gain either @L[Ability:Talented
-    Mariner]{Talented Mariner} or @L[Ability:Talented Chef]{Talented Chef}.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  adult: 100
-  appearance: >-
-    <p>Small @L[Category:Elves]{elves} the size of
-    @L[Creature:Halfling]{halflings}.</p>
-  br: 1
-  size:
-    enabled: true
-    value: 1
-  traits:
-    - humanoid
+_key: '!items!wenportElf000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Climbing
-    type: ability
+  - _id: 48L62yJi9ZMSqaTx
+    _key: '!items.effects!wenportElf000000.48L62yJi9ZMSqaTx'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
         proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: 48L62yJi9ZMSqaTx
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.48L62yJi9ZMSqaTx'
-  - name: Infinite Lifespan
-    type: ability
-    img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
-    system:
-      powerSources:
-        - unknown
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: RAHc7axRgzmYD6gk
+    _key: '!items.effects!wenportElf000000.RAHc7axRgzmYD6gk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.infLifespan00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
+    name: Infinite Lifespan
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You have no maximum lifespan. Your aging slows down with time and
@@ -126,90 +109,102 @@ effects:
           your mid 30s.</p>
       piercing:
         raw: 0
-      form: special
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
       range:
         unit: self
-    _id: RAHc7axRgzmYD6gk
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.infLifespan00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.RAHc7axRgzmYD6gk'
-  - name: Low Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/low-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: 6QAkhDzwQTXFrDBJ
+    _key: '!items.effects!wenportElf000000.6QAkhDzwQTXFrDBJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/low-strength.webp
+    name: Low Strength
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 6QAkhDzwQTXFrDBJ
+    type: ability
+  - _id: fovNW1UuKOC3Noe7
+    _key: '!items.effects!wenportElf000000.fovNW1UuKOC3Noe7'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+      compendiumSource: Compendium.teriock.abilities.Item.mentalEffectImy0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.6QAkhDzwQTXFrDBJ'
-  - name: Mental Effect Immunity
-    type: ability
     img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
+    name: Mental Effect Immunity
     system:
-      powerSources:
-        - unknown
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mental
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
@@ -217,229 +212,220 @@ effects:
           maintained even if @L[Condition:Transformed]{transformed}.</p>
       piercing:
         raw: 0
-      form: special
-      effectTypes:
-        - immunity
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.effects
-              target: Actor
-              qualifier: '1'
-              value: mental
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
       range:
         unit: self
-    _id: fovNW1UuKOC3Noe7
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mentalEffectImy0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.fovNW1UuKOC3Noe7'
-  - name: Normal Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: Lg4aEKtLPnblnnpu
+    _key: '!items.effects!wenportElf000000.Lg4aEKtLPnblnnpu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+    name: Normal Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Lg4aEKtLPnblnnpu
+    type: ability
+  - _id: pDdIkdi4EvB5rWZc
+    _key: '!items.effects!wenportElf000000.pDdIkdi4EvB5rWZc'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.Lg4aEKtLPnblnnpu'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: pDdIkdi4EvB5rWZc
+    type: ability
+  - _id: EO2Koh7AdSXwE4Dz
+    _key: '!items.effects!wenportElf000000.EO2Koh7AdSXwE4Dz'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.pDdIkdi4EvB5rWZc'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: EO2Koh7AdSXwE4Dz
+    type: ability
+  - _id: bNvJDbt49nJJjx1x
+    _key: '!items.effects!wenportElf000000.bNvJDbt49nJJjx1x'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.EO2Koh7AdSXwE4Dz'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: bNvJDbt49nJJjx1x
+    type: ability
+  - _id: jo58jhAnIATQIrTt
+    _key: '!items.effects!wenportElf000000.jo58jhAnIATQIrTt'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.seaActive0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.bNvJDbt49nJJjx1x'
-  - name: Sea Active
-    type: ability
+    img: systems/teriock/src/icons/abilities/sea-active.webp
+    name: Sea Active
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
@@ -454,46 +440,52 @@ effects:
         raw: 0
       powerSources:
         - martial
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: jo58jhAnIATQIrTt
-    img: systems/teriock/src/icons/abilities/sea-active.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.seaActive0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.jo58jhAnIATQIrTt'
-  - name: Sense Weather
-    type: ability
-    img: systems/teriock/src/icons/abilities/sense-weather.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: gYCPYld5hf7O6PXS
+    _key: '!items.effects!wenportElf000000.gYCPYld5hf7O6PXS'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.senseWeather0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/sense-weather.webp
+    name: Sense Weather
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
       duration:
-        unit: instant
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
         stationary: false
+        unit: instant
+      effectTypes:
+        - truthDetecting
+        - sensory
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You know what the natural weather will be like in the next 24 hours
@@ -506,150 +498,158 @@ effects:
           weather at your location is natural or unnatural.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      form: normal
-      effectTypes:
-        - truthDetecting
-        - sensory
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: gYCPYld5hf7O6PXS
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.senseWeather0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.gYCPYld5hf7O6PXS'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: DTGXSriELjBlqQ9T
+    _key: '!items.effects!wenportElf000000.DTGXSriELjBlqQ9T'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: corsair
-      form: normal
+      targets:
+        - self
+    type: ability
+  - _id: BLc7zhNI5otegTUe
+    _key: '!items.effects!wenportElf000000.BLc7zhNI5otegTUe'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/thin-soul.webp
+    name: Thin Soul
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
+            - key: system.deathBag.pull
+              mode: 4
+              priority: 5
               qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: DTGXSriELjBlqQ9T
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.DTGXSriELjBlqQ9T'
-  - name: Thin Soul
-    type: ability
-    img: systems/teriock/src/icons/abilities/thin-soul.webp
-    system:
-      powerSources:
-        - unknown
+              target: Actor
+              time: normal
+              value: '15'
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
       overview:
         base: >-
           <p>You pull an additional 5 stones from the @L[Core:Death Bag]{death
           bag}.</p>
       piercing:
         raw: 0
-      form: flaw
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 5
-              time: normal
-              key: system.deathBag.pull
-              target: Actor
-              qualifier: '1'
-              value: '15'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
       range:
         unit: self
-    _id: BLc7zhNI5otegTUe
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wenportElf000000.BLc7zhNI5otegTUe'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!wenportElf000000'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: elves00000000000
+img: systems/teriock/src/icons/creatures/wenport-elf.webp
+name: Wenport Elf
+system:
+  adult: 100
+  appearance: >-
+    <p>Small @L[Category:Elves]{elves} the size of
+    @L[Creature:Halfling]{halflings}.</p>
+  br: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>Pygmy @L[Category:Elves]{elves} that evolved on the West Salamani Isle.
+    These small elves are natural sea fairers and fishermen that are highly
+    sought after for captains of voyages. They are also known for their
+    culture's fine cuisine. Wenport elves also gain either @L[Ability:Talented
+    Mariner]{Talented Mariner} or @L[Ability:Talented Chef]{Talented Chef}.</p>
+  size:
+    enabled: true
+    value: 1
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - humanoid
+type: species

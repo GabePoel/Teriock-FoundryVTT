@@ -1,74 +1,73 @@
 _id: brilliantExpandi
+_key: '!items!brilliantExpandi'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Brilliant Expanding Mind
-    type: ability
+  - _id: brilliantExpandi
+    _key: '!items.effects!brilliantExpandi.brilliantExpandi'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/brilliant-expanding-mind.webp
-    _id: brilliantExpandi
+    name: Brilliant Expanding Mind
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.attributes.int.score.raw
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@f'
+            - key: system.attributes.int.score.raw
+              mode: 3
+              priority: 15
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>Your @L[Core:Intelligence]{INT} increases by @L[Core:Fluency
           Bonus]{F} up to a maximum of 2.</p>
+      piercing:
+        raw: 0
       powerSources:
         - spiritual
         - primal
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.attributes.int.score.raw
-              target: Actor
-              qualifier: '1'
-              value: '@f'
-            - mode: 3
-              priority: 15
-              time: normal
-              key: system.attributes.int.score.raw
-              target: Actor
-              qualifier: '1'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!brilliantExpandi.brilliantExpandi'
+    type: ability
 img: systems/teriock/src/icons/abilities/brilliant-expanding-mind.webp
 name: Brilliant Expanding Mind
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!brilliantExpandi'

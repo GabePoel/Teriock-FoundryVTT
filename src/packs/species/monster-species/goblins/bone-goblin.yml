@@ -1,393 +1,155 @@
 _id: boneGoblin000000
-folder: h6qMUnBl9QLrvZEN
-name: Bone Goblin
-type: species
-img: systems/teriock/src/icons/creatures/bone-goblin.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>@L[Category:Goblins]{Goblins} have only a loose grasp on reality and are
-    easily fooled. In combat, they prefer to attack in large numbers.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '1'
-  appearance: <p>Green skinned, with a slight build, wide eyes, and sharp features.</p>
-  br: 2
-  size:
-    enabled: true
-    value: 1
-  traits:
-    - humanoid
+_key: '!items!boneGoblin000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Death Rattle
-    type: ability
+  - _id: dyCQQ07AfBTG9PkB
+    _key: '!items.effects!boneGoblin000000.dyCQQ07AfBTG9PkB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.deathRattle00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/death-rattle.webp
+    name: Death Rattle
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
         base: self
-      targets:
-        - self
-      elements:
-        - necromancy
       duration:
-        unit: instant
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
         stationary: false
+        unit: instant
+      elements:
+        - necromancy
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You execute one @L[Category:Single action abilities]{single action
           ability} you have.</p>
       piercing:
         raw: 0
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      trigger: <p>You @L[Condition:Dead]{die}.</p>
-      form: special
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    _id: dyCQQ07AfBTG9PkB
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.deathRattle00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boneGoblin000000.dyCQQ07AfBTG9PkB'
-  - name: Digging
-    type: ability
-    img: systems/teriock/src/icons/abilities/digging.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
       targets:
         - self
+      trigger: <p>You @L[Condition:Dead]{die}.</p>
+    type: ability
+  - _id: nmKo5xL4gNJ0xxph
+    _key: '!items.effects!boneGoblin000000.nmKo5xL4gNJ0xxph'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.digging000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/digging.webp
+    name: Digging
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.dig
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.dig
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: nmKo5xL4gNJ0xxph
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.digging000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boneGoblin000000.nmKo5xL4gNJ0xxph'
-  - name: Low Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/low-strength.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: Z91Nz4pz8vUMnWJq
+    _key: '!items.effects!boneGoblin000000.Z91Nz4pz8vUMnWJq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    name: Healing Sensitivity
+    system:
+      _sup: h3MwHbTE8DlihZUM
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
-      piercing:
-        raw: 0
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: flaw
-      upgrades:
-        score:
-          attribute: str
-          value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       grantOnly: false
-      range:
-        unit: self
-    _id: HiWgweMsD7fbxeXk
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boneGoblin000000.HiWgweMsD7fbxeXk'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: mov
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: fwmKNUKT1Vk1reW7
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boneGoblin000000.fwmKNUKT1Vk1reW7'
-  - name: Normal Perception
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-perception.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: per
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 3KR9yzeEKqv5Rajk
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boneGoblin000000.3KR9yzeEKqv5Rajk'
-  - name: Normal Sneak
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-sneak.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      piercing:
-        raw: 0
-      form: normal
-      upgrades:
-        score:
-          attribute: snk
-          value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 2bOrIz4TehvwXtcx
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boneGoblin000000.2bOrIz4TehvwXtcx'
-  - name: Partial Undead
-    type: ability
-    img: systems/teriock/src/icons/abilities/partial-undead.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You count as being @L[Keyword:Undead]{undead} for the purposes of
-          @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage},
-          and other @L[Category:Effects]{effects}. You also gain
-          @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
-      piercing:
-        raw: 0
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.partialUndead000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: h3MwHbTE8DlihZUM
-    _key: '!items.effects!boneGoblin000000.h3MwHbTE8DlihZUM'
-  - name: Healing Sensitivity
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      elements:
-        - necromancy
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
       overview:
         base: >-
           <p>@L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage}
@@ -399,75 +161,313 @@ effects:
           @L[Core:HP]{hit dice}.</p>
       piercing:
         raw: 0
-      form: flaw
-      _sup: h3MwHbTE8DlihZUM
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - magical
       range:
         unit: self
-    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: Z91Nz4pz8vUMnWJq
-    _key: '!items.effects!boneGoblin000000.Z91Nz4pz8vUMnWJq'
-  - name: Stupid Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: HiWgweMsD7fbxeXk
+    _key: '!items.effects!boneGoblin000000.HiWgweMsD7fbxeXk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/low-strength.webp
+    name: Low Strength
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: -1
+    type: ability
+  - _id: fwmKNUKT1Vk1reW7
+    _key: '!items.effects!boneGoblin000000.fwmKNUKT1Vk1reW7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    type: ability
+  - _id: 3KR9yzeEKqv5Rajk
+    _key: '!items.effects!boneGoblin000000.3KR9yzeEKqv5Rajk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    type: ability
+  - _id: 2bOrIz4TehvwXtcx
+    _key: '!items.effects!boneGoblin000000.2bOrIz4TehvwXtcx'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 0
+    type: ability
+  - _id: h3MwHbTE8DlihZUM
+    _key: '!items.effects!boneGoblin000000.h3MwHbTE8DlihZUM'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.partialUndead000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/partial-undead.webp
+    name: Partial Undead
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You count as being @L[Keyword:Undead]{undead} for the purposes of
+          @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage},
+          and other @L[Category:Effects]{effects}. You also gain
+          @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: iq4uBVsS6OygY9Yo
+    _key: '!items.effects!boneGoblin000000.iq4uBVsS6OygY9Yo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
+    name: Stupid Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: -3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: iq4uBVsS6OygY9Yo
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stupidIntelligen
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boneGoblin000000.iq4uBVsS6OygY9Yo'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!boneGoblin000000'
+    type: ability
+folder: goblins000000000
+img: systems/teriock/src/icons/creatures/bone-goblin.webp
+name: Bone Goblin
+system:
+  appearance: <p>Green skinned, with a slight build, wide eyes, and sharp features.</p>
+  br: 2
+  competence:
+    raw: 1
+  description: >-
+    <p>@L[Category:Goblins]{Goblins} have only a loose grasp on reality and are
+    easily fooled. In combat, they prefer to attack in large numbers.</p>
+  size:
+    enabled: true
+    value: 1
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '1'
+  traits:
+    - humanoid
+type: species

@@ -1,24 +1,31 @@
 _id: elderInfernoAura
+_key: '!items!elderInfernoAura'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Elder Inferno Aura
-    type: ability
+  - _id: elderInfernoAura
+    _key: '!items.effects!elderInfernoAura.elderInfernoAura'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/elder-inferno-aura.webp
-    _id: elderInfernoAura
+    name: Elder Inferno Aura
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - damaging
       elderSorcery: true
@@ -27,17 +34,26 @@ effects:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d6[magic fire]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 2d6[magic fire]
+        heightened:
+          rolls:
+            damage: 2d6[magic fire]
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -47,29 +63,12 @@ effects:
         fail: >-
           <p>Deal [[/damage 2d6[magic fire]]] @L[Core:Damage]{damage} to
           target.</p>
+      revealed: true
       spell: true
       targets:
         - creature
       warded: true
-      impacts:
-        base:
-          rolls:
-            damage: 2d6[magic fire]
-        heightened:
-          rolls:
-            damage: 2d6[magic fire]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!elderInfernoAura.elderInfernoAura'
+    type: ability
 img: systems/teriock/src/icons/abilities/elder-inferno-aura.webp
 name: Elder Inferno Aura
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!elderInfernoAura'

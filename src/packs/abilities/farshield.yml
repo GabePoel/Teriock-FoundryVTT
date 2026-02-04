@@ -1,73 +1,65 @@
 _id: farshield0000000
+_key: '!items!farshield0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Farshield
-    type: ability
+  - _id: farshield0000000
+    _key: '!items.effects!farshield0000000.farshield0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/farshield.webp
-    _id: farshield0000000
+    name: Farshield
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '5'
-        unit: second
-        dawn: false
-        stationary: false
-        description: 5 Seconds
       delivery:
         base: sight
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
       elements:
         - life
       endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, add 1 to the amount the
         target's @L[Core:Armor Class]{AC} increases by.</p>
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: <p>Target's @L[Core:Armor Class]{AC} is increased by 1.</p>
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - creature
       impacts:
         base:
           changes:
-            - mode: 2
+            - key: system.defense.ac
+              mode: 2
               priority: 10
-              time: normal
-              key: system.defense.ac
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
               value: '1'
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: executor
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -76,29 +68,36 @@ effects:
                   skip: 0
                   time: start
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: executor
         heightened:
           changes:
-            - mode: 2
+            - key: system.defense.ac
+              mode: 2
               priority: 10
-              time: normal
-              key: system.defense.ac
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
               value: '@h'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!farshield0000000.farshield0000000'
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: <p>Target's @L[Core:Armor Class]{AC} is increased by 1.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/farshield.webp
 name: Farshield
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!farshield0000000'

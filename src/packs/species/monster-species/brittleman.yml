@@ -1,57 +1,61 @@
 _id: brittleman000000
-folder: 0uFBB4RLcgYbUuzG
-name: Brittleman
-type: species
-img: systems/teriock/src/icons/creatures/brittleman.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>The origin of brittlemen is unknown. They are often said to be some sort
-    of drakespawn or some sort of failed species creation attempt. Brittlemen
-    tend to attack in hordes, eating whatever they can find. They use
-    @L[Category:Weapons]{weapons} if they can find them.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '2'
-    mp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '1'
-  appearance: >-
-    <p>Strangely elongated and carnivorous @L[Category:Goblins]{goblins} that
-    almost appear to be on stilts.</p>
-  br: 5
-  size:
-    enabled: true
-    value: 2
-  traits:
-    - partialHumanoid
+_key: '!items!brittleman000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Adrenaline
-    type: ability
+  - _id: Q8MuLk6xjYxpcNjn
+    _key: '!items.effects!brittleman000000.Q8MuLk6xjYxpcNjn'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.adrenaline000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/adrenaline.webp
+    name: Adrenaline
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Dropping From Negative HP
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: unconscious
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist}
@@ -62,234 +66,207 @@ effects:
           below zero.</p>
       piercing:
         raw: 0
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Dropping From Negative HP
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.statuses
-              target: Actor
-              qualifier: '1'
-              value: unconscious
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Q8MuLk6xjYxpcNjn
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.adrenaline000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!brittleman000000.Q8MuLk6xjYxpcNjn'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: OOlBfNWqPTdAdTVZ
+    _key: '!items.effects!brittleman000000.OOlBfNWqPTdAdTVZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: OOlBfNWqPTdAdTVZ
+    type: ability
+  - _id: q87CRoEhRSGbHwCj
+    _key: '!items.effects!brittleman000000.q87CRoEhRSGbHwCj'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!brittleman000000.OOlBfNWqPTdAdTVZ'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: q87CRoEhRSGbHwCj
+    type: ability
+  - _id: YopblNmkE4fC3Mi5
+    _key: '!items.effects!brittleman000000.YopblNmkE4fC3Mi5'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!brittleman000000.q87CRoEhRSGbHwCj'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: YopblNmkE4fC3Mi5
+    type: ability
+  - _id: WhuSzHLs1nRJb7VX
+    _key: '!items.effects!brittleman000000.WhuSzHLs1nRJb7VX'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!brittleman000000.YopblNmkE4fC3Mi5'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: ZQjbZj7Faz5YCAjP
+    _key: '!items.effects!brittleman000000.ZQjbZj7Faz5YCAjP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.pasEndure0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/passive-endure.webp
+    name: Passive Endure
+    system:
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: WhuSzHLs1nRJb7VX
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!brittleman000000.WhuSzHLs1nRJb7VX'
-  - name: Passive Endure
-    type: ability
-    _id: ZQjbZj7Faz5YCAjP
-    img: systems/teriock/src/icons/abilities/passive-endure.webp
-    system:
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
       costs:
         hp:
           type: hack
@@ -298,18 +275,27 @@ effects:
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
         dawn: false
+        description: Always Active
         raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - damaging
         - automatic
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          hacks:
+            - arm
+            - leg
       interaction: manifest
       maneuver: passive
       overview:
@@ -332,30 +318,44 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
       trigger: >-
         <p> This triggers automatically. You cannot choose to not use it if you
         are able to.</p>
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.pasEndure0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!brittleman000000.ZQjbZj7Faz5YCAjP'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!brittleman000000'
+    type: ability
+folder: monsterSpecies00
+img: systems/teriock/src/icons/creatures/brittleman.webp
+name: Brittleman
+system:
+  appearance: >-
+    <p>Strangely elongated and carnivorous @L[Category:Goblins]{goblins} that
+    almost appear to be on stilts.</p>
+  br: 5
+  competence:
+    raw: 1
+  description: >-
+    <p>The origin of brittlemen is unknown. They are often said to be some sort
+    of drakespawn or some sort of failed species creation attempt. Brittlemen
+    tend to attack in hordes, eating whatever they can find. They use
+    @L[Category:Weapons]{weapons} if they can find them.</p>
+  size:
+    enabled: true
+    value: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '2'
+    mp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '1'
+  traits:
+    - partialHumanoid
+type: species

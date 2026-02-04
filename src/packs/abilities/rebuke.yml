@@ -1,57 +1,48 @@
 _id: rebuke0000000000
+_key: '!items!rebuke0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Rebuke
-    type: ability
+  - _id: rebuke0000000000
+    _key: '!items.effects!rebuke0000000000.rebuke0000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/rebuke.webp
-    _id: rebuke0000000000
+    name: Rebuke
     system:
+      class: duelist
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '5'
-        unit: second
-        dawn: false
-        stationary: false
-        description: 5 Seconds
       delivery:
         base: sight
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
       endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>The triggering creature takes [[/damage 1d6[spiritual]]]
-          @L[Core:Damage]{damage} and is @L[Condition:Lighted]{lighted} towards
-          a creature of your choice.</p>
-      powerSources:
-        - spiritual
-      range:
-        raw: '90'
-        unit: ft
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
       impacts:
         base:
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: executor
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -60,25 +51,34 @@ effects:
                   skip: 0
                   time: end
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: executor
           rolls:
             damage: 1d6[spiritual]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      class: duelist
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rebuke0000000000.rebuke0000000000'
+          Compendium_teriock_execution_Macro_genericLightPreE: preExecution
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering creature takes [[/damage 1d6[spiritual]]]
+          @L[Core:Damage]{damage} and is @L[Condition:Lighted]{lighted} towards
+          a creature of your choice.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '90'
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
+    type: ability
 img: systems/teriock/src/icons/abilities/rebuke.webp
 name: Rebuke
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rebuke0000000000'

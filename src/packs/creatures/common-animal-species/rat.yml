@@ -1,235 +1,272 @@
-name: Rat
-type: creature
+_id: rat0000000000000
+_key: '!actors!rat0000000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: commonAnimalSpec
 img: systems/teriock/src/icons/creatures/rat.webp
-prototypeToken:
-  name: Rat
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/rat.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 0.5
-  height: 0.5
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
-  - _id: rat0000000000000
-    folder: Jg0dWUzFS1WNDl2g
-    name: Rat
-    type: species
-    img: systems/teriock/src/icons/creatures/rat.webp
-    system:
-      competence:
-        raw: 1
-      statDice:
-        hp:
-          disabled: false
-          faces: 4
-          number:
-            raw: '1'
-        mp:
-          disabled: false
-          faces: 6
-          number:
-            raw: '1'
-      br: 2
-      size:
-        enabled: true
-        value: 0.25
-      traits:
-        - animal
+  - _id: uV4Kz0hhZ2YhEJTH
+    _key: '!actors.items!rat0000000000000.uV4Kz0hhZ2YhEJTH'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Climbing
-        type: ability
-        img: systems/teriock/src/icons/abilities/climbing.webp
+      - _id: 1keJAxX1vkfTL8Wl
+        _key: >-
+          !actors.items.effects!rat0000000000000.uV4Kz0hhZ2YhEJTH.1keJAxX1vkfTL8Wl
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: cj70nNvBKfT3EQ8P
+        _key: >-
+          !actors.items.effects!rat0000000000000.uV4Kz0hhZ2YhEJTH.cj70nNvBKfT3EQ8P
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 43UnM2Fnf4EpPLFE
+        _key: >-
+          !actors.items.effects!rat0000000000000.uV4Kz0hhZ2YhEJTH.43UnM2Fnf4EpPLFE
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: commonAnimalSpec
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
+    system:
+      _sup: rat0000000000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: rat0000000000000
+    _key: '!actors.items!rat0000000000000.rat0000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.rat0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: RTPDiDT3TbcfL1Q4
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.RTPDiDT3TbcfL1Q4
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/climbing.webp
+        name: Climbing
+        system:
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.climb
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+            proficient:
+              changes:
+                - key: system.speedAdjustments.climb
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
+          interaction: manifest
+          maneuver: passive
           overview:
             base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
             proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
           piercing:
             raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '2'
-            proficient:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.climb
-                  target: Actor
-                  qualifier: '1'
-                  value: '3'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: RTPDiDT3TbcfL1Q4
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.RTPDiDT3TbcfL1Q4
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
           powerSources:
             - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          range:
+            unit: self
+          revealed: true
           targets:
             - self
+        type: ability
+      - _id: itXAGtX3LVV5HecH
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.itXAGtX3LVV5HecH
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: int
               value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: itXAGtX3LVV5HecH
+        type: ability
+      - _id: uLdnA9nPMqqnQMwv
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.uLdnA9nPMqqnQMwv
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.itXAGtX3LVV5HecH
-      - name: Hide
-        type: ability
         img: systems/teriock/src/icons/abilities/hide.webp
+        name: Hide
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
+          class: thief
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: instant
-            description: Instant
             dawn: false
-            stationary: false
+            description: Instant
             raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                hide: 1d20 + (2 * @snk)
+              startStatuses:
+                - hidden
+            fluent:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @f
+            proficient:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @p
+          interaction: manifest
+          maneuver: active
           overview:
             base: >-
               <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
@@ -238,38 +275,31 @@ items:
               × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
               use your @L[Core:Passive Attributes]{passive}
               @L[Core:Sneak]{sneak}.</p>
-            proficient: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
             fluent: >-
               <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
               DC (if it's greater than your @L[Core:Passive Attributes]{passive}
               @L[Core:Sneak]{sneak}).</p>
+            proficient: >-
+              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
+              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}).</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: thief
+          powerSources:
+            - martial
+          range:
+            unit: self
           requirements: >-
             <p>You are in a location with shadows, dim light,
             @L[Core:Cover]{three-quarters cover}, or some other feature which
             the @L[Core:Game Master]{GM} determines is appropriate for being
             @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
             these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-          form: normal
-          impacts:
-            base:
-              startStatuses:
-                - hidden
-              rolls:
-                hide: 1d20 + (2 * @snk)
-            proficient:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @p
-            fluent:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @f
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
           upgrades:
             competence:
               attribute: snk
@@ -277,352 +307,348 @@ items:
             score:
               attribute: snk
               value: 2
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          range:
-            unit: self
-        _id: uLdnA9nPMqqnQMwv
+        type: ability
+      - _id: yzVfPJkRdTudFAON
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.yzVfPJkRdTudFAON
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.uLdnA9nPMqqnQMwv
-      - name: No Hands
-        type: ability
         img: systems/teriock/src/icons/abilities/no-hands.webp
+        name: No Hands
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
           piercing:
             raw: 0
-          form: flaw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: yzVfPJkRdTudFAON
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.yzVfPJkRdTudFAON
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
           powerSources:
             - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          range:
+            unit: self
+          revealed: true
           targets:
             - self
+        type: ability
+      - _id: NB3sxCTWbSOQ6LgD
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.NB3sxCTWbSOQ6LgD
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: mov
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: NB3sxCTWbSOQ6LgD
+        type: ability
+      - _id: kAIbMsh47ZE5cjGz
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.kAIbMsh47ZE5cjGz
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.NB3sxCTWbSOQ6LgD
-      - name: Normal Perception
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: kAIbMsh47ZE5cjGz
+        type: ability
+      - _id: Ud6kM3alXBkdD9zn
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.Ud6kM3alXBkdD9zn
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.kAIbMsh47ZE5cjGz
-      - name: Normal Sneak
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: snk
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: Ud6kM3alXBkdD9zn
+        type: ability
+      - _id: nlqT8mSK3uwfrFP0
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.nlqT8mSK3uwfrFP0
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          compendiumSource: Compendium.teriock.abilities.Item.partialHands0000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.Ud6kM3alXBkdD9zn
-      - name: Partial Hands
-        type: ability
         img: systems/teriock/src/icons/abilities/partial-hands.webp
+        name: Partial Hands
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You do not have real opposable thumbs. All items are
               @L[Property:Two-Handed]{two-handed} for you.</p>
           piercing:
             raw: 0
-          form: flaw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - martial
           range:
             unit: self
-          impacts: {}
-        _id: nlqT8mSK3uwfrFP0
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: ZvoaHdbBaW4hlL6f
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.ZvoaHdbBaW4hlL6f
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.partialHands0000
+          compendiumSource: Compendium.teriock.abilities.Item.poisonStrike0000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.nlqT8mSK3uwfrFP0
-      - name: Poison Strike
-        type: ability
         img: systems/teriock/src/icons/abilities/poison-strike.webp
+        name: Poison Strike
         system:
-          powerSources:
-            - alchemical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
+          class: assassin
+          competence:
+            raw: 0
           delivery:
             base: weapon
             package: strike
-          targets:
-            - creature
           duration:
-            unit: hour
-            description: 24 Hours
             dawn: false
-            stationary: false
+            description: 24 Hours
             raw: '24'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
+            stationary: false
+            unit: hour
+          effectTypes:
+            - poison
+          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                damage: 1d6[toxic]
+              statuses:
+                - poisoned
+            fluent:
+              rolls:
+                damage: 1d10[toxic]
+            proficient:
+              rolls:
+                damage: 1d8[toxic]
+          interaction: attack
+          limitation: <p>@L[Category:Equipment]{Mouth} only.</p>
+          maneuver: active
           overview:
-            proficient: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
             fluent: >-
               <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
               1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+            proficient: >-
+              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - alchemical
+          range:
+            raw: Your Weapon's Range
+            unit: ft
           results:
             hit: >-
               <p>Target is @L[Condition:Poisoned]{poisoned}. The
               @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
               @L[Core:Damage]{damage}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          class: assassin
-          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-          form: normal
-          effectTypes:
-            - poison
-          impacts:
-            base:
-              statuses:
-                - poisoned
-              rolls:
-                damage: 1d6[toxic]
-            proficient:
-              rolls:
-                damage: 1d8[toxic]
-            fluent:
-              rolls:
-                damage: 1d10[toxic]
-          competence:
-            raw: 0
           revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          limitation: <p>@L[Category:Equipment]{Mouth} only.</p>
-        _id: ZvoaHdbBaW4hlL6f
+          skill: true
+          targets:
+            - creature
+        type: ability
+      - _id: xvF1mmnRyi0P4gEP
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.xvF1mmnRyi0P4gEP
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.poisonStrike0000
+          compendiumSource: Compendium.teriock.abilities.Item.stealth000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.ZvoaHdbBaW4hlL6f
-      - name: Stealth
-        type: ability
         img: systems/teriock/src/icons/abilities/stealth.webp
+        name: Stealth
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: thief
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You crawl at @L[Core:Movement Speed]{half speed} and can
@@ -637,10 +663,15 @@ items:
               while @L[Condition:Hidden]{hidden}.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
-          class: thief
-          form: normal
+          targets:
+            - self
           upgrades:
             competence:
               attribute: snk
@@ -648,214 +679,184 @@ items:
             score:
               attribute: snk
               value: 3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: xvF1mmnRyi0P4gEP
+        type: ability
+      - _id: QIqXdF9Livfv8xFp
+        _key: >-
+          !actors.items.effects!rat0000000000000.rat0000000000000.QIqXdF9Livfv8xFp
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.stealth000000000
+          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.xvF1mmnRyi0P4gEP
-      - name: Tiny Strength
-        type: ability
         img: systems/teriock/src/icons/abilities/tiny-strength.webp
+        name: Tiny Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: QIqXdF9Livfv8xFp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.rat0000000000000.QIqXdF9Livfv8xFp
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.rat0000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!rat0000000000000.rat0000000000000'
-  - name: Mouth
-    type: body
-    _id: uV4Kz0hhZ2YhEJTH
-    img: icons/creatures/abilities/mouth-teeth-human.webp
+        type: ability
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/creatures/rat.webp
+    name: Rat
     system:
-      damage:
-        base:
-          raw: '1'
-      fightingStyle: savage
+      br: 2
       competence:
-        raw: 0
-      _sup: rat0000000000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 1keJAxX1vkfTL8Wl
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.uV4Kz0hhZ2YhEJTH.1keJAxX1vkfTL8Wl
-      - name: Biting
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: cj70nNvBKfT3EQ8P
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.uV4Kz0hhZ2YhEJTH.cj70nNvBKfT3EQ8P
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 43UnM2Fnf4EpPLFE
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!rat0000000000000.uV4Kz0hhZ2YhEJTH.43UnM2Fnf4EpPLFE
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!rat0000000000000.uV4Kz0hhZ2YhEJTH'
+        raw: 1
+      size:
+        enabled: true
+        value: 0.25
+      statDice:
+        hp:
+          disabled: false
+          faces: 4
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 6
+          number:
+            raw: '1'
+      traits:
+        - animal
+    type: species
+name: Rat
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 0.5
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Rat
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/rat.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 0.5
 system:
-  hp:
-    value: 3
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '0.25'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: uV4Kz0hhZ2YhEJTH
-    blocker: uV4Kz0hhZ2YhEJTH
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: rat0000000000000
-folder: xiQuFe17AXH1ZyVm
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!rat0000000000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 3
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '0.25'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: uV4Kz0hhZ2YhEJTH
+    blocker: uV4Kz0hhZ2YhEJTH
+type: creature

@@ -1,208 +1,59 @@
 _id: W7pzDiDZzYnommT7
-folder: qTlk5KD9WGOfDG5I
-name: Rank 1 Berserker
-system:
-  archetype: warrior
-  className: berserker
-  classRank: 1
-  competence:
-    raw: 1
-  description: >-
-    <p>Wild and savage. They distrust magic of all kinds and put their faith in
-    themselves before others. Always at the front of a battle, Berserkers love
-    the sport of combat and don't like missile weapons. Not reliable as guards
-    as they are too distracted and are rarely very intelligent. If you are a
-    Berserker be larger than life, brash, not too bright and stupidly brave.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 2
-  _sup: ironDragon000000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-1-berserker.webp
+_key: '!items!W7pzDiDZzYnommT7'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Ber00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Threat
-    type: ability
-    img: systems/teriock/src/icons/abilities/threat.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - vitals
-      duration:
-        unit: minute
-        description: 1 Minute
-        stationary: false
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Targeted creature is @L[Condition:Frightened]{frightened}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: berserker
-      endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-        macros:
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: OOiK94kwZWhClKjl
+  - _id: Sl0nzLp79MCyqwfT
+    _key: '!items.effects!W7pzDiDZzYnommT7.Sl0nzLp79MCyqwfT'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.threat0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.gladiatorSkills0
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!W7pzDiDZzYnommT7.OOiK94kwZWhClKjl'
-  - name: Hack
-    type: ability
-    img: systems/teriock/src/icons/abilities/hack.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - arm
-        - leg
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
-          gets dealt accordingly.</p>
-      results:
-        hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
-        critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: berserker
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: svSDVD3jJiukQGTO
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!W7pzDiDZzYnommT7.svSDVD3jJiukQGTO'
-  - name: Gladiator Skills
-    type: ability
+      systemVersion: 0.9.14
     img: systems/teriock/src/icons/abilities/gladiator-skills.webp
+    name: Gladiator Skills
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: berserker
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
         conditions:
           present:
             - dueling
-        description: While Dueling
-        stationary: false
-        raw: '0'
         dawn: false
+        description: While Dueling
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.hp.base
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '7'
+          rolls:
+            hitDie: 1d12
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>While @L[Condition:Dueling]{dueling} or in a staged battle
@@ -215,44 +66,193 @@ effects:
           gladiator fighting style} are @L[Property:AV0]{AV0} as well.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: berserker
-      form: normal
-      impacts:
-        base:
-          rolls:
-            hitDie: 1d12
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.hp.base
-              target: Actor
-              qualifier: '1'
-              value: '7'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: Sl0nzLp79MCyqwfT
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: svSDVD3jJiukQGTO
+    _key: '!items.effects!W7pzDiDZzYnommT7.svSDVD3jJiukQGTO'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.gladiatorSkills0
+      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!W7pzDiDZzYnommT7.Sl0nzLp79MCyqwfT'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1Berserker00
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!W7pzDiDZzYnommT7'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hack.webp
+    name: Hack
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          hacks:
+            - arm
+            - leg
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
+          gets dealt accordingly.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
+          legs, depending on what you chose.</p>
+        hit: >-
+          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    type: ability
+  - _id: OOiK94kwZWhClKjl
+    _key: '!items.effects!W7pzDiDZzYnommT7.OOiK94kwZWhClKjl'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.threat0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/threat.webp
+    name: Threat
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      endCondition: >-
+        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
+        macros:
+          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Targeted creature is @L[Condition:Frightened]{frightened}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-1-berserker.webp
+name: Rank 1 Berserker
+system:
+  _sup: ironDragon000000
+  archetype: warrior
+  className: berserker
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>Wild and savage. They distrust magic of all kinds and put their faith in
+    themselves before others. Always at the front of a battle, Berserkers love
+    the sport of combat and don't like missile weapons. Not reliable as guards
+    as they are too distracted and are rarely very intelligent. If you are a
+    Berserker be larger than life, brash, not too bright and stupidly brave.</p>
+  innate: false
+  maxAv: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

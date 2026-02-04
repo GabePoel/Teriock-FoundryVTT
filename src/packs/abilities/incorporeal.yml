@@ -1,34 +1,51 @@
 _id: incorporeal00000
+_key: '!items!incorporeal00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Incorporeal
-    type: ability
+  - _id: incorporeal00000
+    _key: '!items.effects!incorporeal00000.incorporeal00000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/incorporeal.webp
-    _id: incorporeal00000
+    name: Incorporeal
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.weight.self.raw
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
       interaction: manifest
       maneuver: passive
       overview:
@@ -38,34 +55,16 @@ effects:
           @L[Condition:Ethereal]{Ethereal}. You are also
           @L[Keyword:Immunity]{immune} to being
           @L[Condition:Snared]{snared}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.weight.self.raw
-              target: Actor
-              qualifier: '1'
-              value: '0'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!incorporeal00000.incorporeal00000'
+    type: ability
 img: systems/teriock/src/icons/abilities/incorporeal.webp
 name: Incorporeal
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!incorporeal00000'

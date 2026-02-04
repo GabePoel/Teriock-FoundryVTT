@@ -1,46 +1,21 @@
 _id: torch00000000000
-folder: a18imnpbyMt5Ft6E
-name: Torch
-system:
-  equipmentType: Torch
-  tier: {}
-  competence:
-    raw: 0
-  attackPenalty:
-    raw: '-3'
-  damage:
-    base:
-      raw: '1'
-    twoHanded: {}
-  hit: {}
-  range:
-    long:
-      unit: melee
-    melee: true
-    ranged: false
-    short:
-      unit: melee
-  vitals: false
-  consumable: false
-  storage:
-    enabled: false
-    maxCount: {}
-    maxWeight: {}
-    weightMultiplier: '1'
-  weight:
-    raw: '1'
-  minStr:
-    raw: '-3'
-  equipmentClasses:
-    - supplies
-  powerLevel: mundane
-type: equipment
-img: systems/teriock/src/icons/equipment/torch.webp
+_key: '!items!torch00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Bashing
-    type: property
+  - _id: bashing000000000
+    _key: '!items.effects!torch00000000000.bashing000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/properties/bashing.webp
-    _id: bashing000000000
+    name: Bashing
     system:
       competence:
         raw: 0
@@ -48,19 +23,41 @@ effects:
         <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
         weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
         Attack}.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
+      revealed: true
+    type: property
+  - _id: dIVwDeC6OjdthY4a
+    _key: '!items.effects!torch00000000000.dIVwDeC6OjdthY4a'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+      compendiumSource: Compendium.teriock.properties.Item.burning000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!torch00000000000.bashing000000000'
-  - name: Flaming
+    img: systems/teriock/src/icons/properties/burning.webp
+    name: Burning
+    system:
+      _sup: W7zBwBVrBOlOAAnp
+      competence:
+        raw: 0
+      damageType: Fire
+      description: >-
+        <p>An item that is <b>[[lookup name style=lc]]</b>, deals
+        @L[Damage:Fire]{fire damage} and can be used to deliver
+        @L[Ability:Burn]{Burn}.</p>
+      form: intrinsic
+      revealed: true
     type: property
+  - _id: W7zBwBVrBOlOAAnp
+    _key: '!items.effects!torch00000000000.W7zBwBVrBOlOAAnp'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.flaming000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/properties/flaming.webp
+    name: Flaming
     system:
       competence:
         raw: 0
@@ -68,21 +65,21 @@ effects:
         <p>If an item is <b>[[lookup name style=lc]]</b> (on fire), it is
         @L[Property:Glowing]{glowing} (10 feet) and
         @L[Property:Burning]{burning}.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
+      revealed: true
+    type: property
+  - _id: WkmvIShmSbN9O6yz
+    _key: '!items.effects!torch00000000000.WkmvIShmSbN9O6yz'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.flaming000000000
+      compendiumSource: Compendium.teriock.properties.Item.glowing000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: W7zBwBVrBOlOAAnp
-    _key: '!items.effects!torch00000000000.W7zBwBVrBOlOAAnp'
-  - name: Glowing
-    type: property
     img: systems/teriock/src/icons/properties/glowing.webp
+    name: Glowing
     system:
+      _sup: W7zBwBVrBOlOAAnp
       competence:
         raw: 0
       description: >-
@@ -93,68 +90,59 @@ effects:
         specified, then the item is visible, but glows faintly enough that it
         doesn't illuminate other objects unless they are held <i>right</i> next
         to it.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - mode: 4
+          - key: system.light.dim
+            mode: 4
             priority: 5
-            time: normal
-            key: system.light.dim
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: '10'
-          - mode: 5
+          - key: system.light.color
+            mode: 5
             priority: 5
-            time: normal
-            key: system.light.color
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: '#C64600'
-          - mode: 5
+          - key: system.light.animation.type
+            mode: 5
             priority: 5
-            time: normal
-            key: system.light.animation.type
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: torch
       modifiesActor: true
-      _sup: W7zBwBVrBOlOAAnp
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.glowing000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: WkmvIShmSbN9O6yz
-    _key: '!items.effects!torch00000000000.WkmvIShmSbN9O6yz'
-  - name: Burning
-    type: property
-    img: systems/teriock/src/icons/properties/burning.webp
-    system:
-      competence:
-        raw: 0
-      description: >-
-        <p>An item that is <b>[[lookup name style=lc]]</b>, deals
-        @L[Damage:Fire]{fire damage} and can be used to deliver
-        @L[Ability:Burn]{Burn}.</p>
-      suppression: {}
       revealed: true
-      damageType: Fire
-      form: intrinsic
-      _sup: W7zBwBVrBOlOAAnp
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.burning000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: dIVwDeC6OjdthY4a
-    _key: '!items.effects!torch00000000000.dIVwDeC6OjdthY4a'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!torch00000000000'
+    type: property
+folder: survival00000000
+img: systems/teriock/src/icons/equipment/torch.webp
+name: Torch
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: '1'
+  equipmentClasses:
+    - supplies
+  equipmentType: Torch
+  minStr:
+    raw: '-3'
+  powerLevel: mundane
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

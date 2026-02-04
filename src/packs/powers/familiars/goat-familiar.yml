@@ -1,154 +1,154 @@
 _id: goatFamiliar0000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Goat Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.goat000000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!goatFamiliar0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
   - _id: goatTamer0000000
+    _key: '!items.effects!goatFamiliar0000.goatTamer0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Goat Tamer
     system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Goat]{goat}.</p>
       competence:
         raw: 2
+      description: <p>You know the way of the @L[Creature:Goat]{goat}.</p>
+      field: survivalist
       revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
+      tradecraft: tamer
     tint: '#ffffff'
-    _key: '!items.effects!goatFamiliar0000.goatTamer0000000'
-  - name: Impale
-    type: ability
+    transfer: true
+    type: fluency
+  - _id: V9ZFSyBHmTQIuWNf
+    _key: '!items.effects!goatFamiliar0000.V9ZFSyBHmTQIuWNf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/impale.webp
+    name: Impale
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: corsair
+      competence:
+        raw: 0
       delivery:
         base: weapon
         package: strike
-      targets:
-        - vitals
       duration:
-        unit: instant
-        quantity: 0
         description: Instant
+        quantity: 0
         stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
-        critHit: >-
-          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
-          as well.</p>
-      piercing:
-        raw: 0
+        unit: instant
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
+          hacks:
+            - body
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      class: corsair
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - body
-          common:
-            - standardDamage
-      competence:
+      interaction: attack
+      maneuver: active
+      piercing:
         raw: 0
-      revealed: true
-      grantOnly: false
-    _id: V9ZFSyBHmTQIuWNf
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goatFamiliar0000.V9ZFSyBHmTQIuWNf'
-  - name: Knockback
-    type: ability
-    img: systems/teriock/src/icons/abilities/knockback.webp
-    system:
       powerSources:
         - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, target takes @L[Core:Standard Damage]{standard damage}
+          as well.</p>
+        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+  - _id: ZxqiEHdl0GTCizcX
+    _key: '!items.effects!goatFamiliar0000.ZxqiEHdl0GTCizcX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.knockback0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/knockback.webp
+    name: Knockback
+    system:
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: weapon
         package: strike
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
         description: Instant
+        quantity: 0
         stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+        unit: instant
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: attack
+      maneuver: active
       overview:
         base: >-
           <div class="note"><b>Note:</b> A target moving due to [[lookup name]]
           can still provoke reactions like @L[Ability:Opportunity
           Attack]{Opportunity Attack}.</div>
-      results:
-        hit: <p>Target moves 10 feet away from you.</p>
-        critHit: <p>Target moves 20 feet away from you.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>Target moves 20 feet away from you.</p>
+        hit: <p>Target moves 10 feet away from you.</p>
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: ZxqiEHdl0GTCizcX
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.knockback0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!goatFamiliar0000.ZxqiEHdl0GTCizcX'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!goatFamiliar0000'
+      targets:
+        - creature
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Goat Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.goat000000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

@@ -1,29 +1,37 @@
 _id: adlStormRots0000
+_key: '!items!adlStormRots0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Additional Storm Rotators
-    type: ability
+  - _id: adlStormRots0000
+    _key: '!items.effects!adlStormRots0000.adlStormRots0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
-    _id: adlStormRots0000
+    name: Additional Storm Rotators
     system:
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -34,54 +42,54 @@ effects:
           <p>Add @L[Ability:Reflect Magic]{Reflect Magic} and
           @L[Ability:Teleport]{Teleport} to your list of possible
           @L[Category:Rotator spells]{rotator spells}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       targets:
         - self
-      impacts: {}
-      class: stormMage
+    type: ability
+  - _id: zQv17kb267N9Gz3k
+    _key: '!items.effects!adlStormRots0000.zQv17kb267N9Gz3k'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reflectMag000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!adlStormRots0000.adlStormRots0000'
-  - name: Reflect Magic
-    type: ability
     img: systems/teriock/src/icons/abilities/reflect-magic.webp
-    _id: zQv17kb267N9Gz3k
+    name: Reflect Magic
     system:
+      _sup: adlStormRots0000
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        somatic: true
+        verbal: true
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       elements:
         - storm
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -95,12 +103,15 @@ effects:
           <p>Target @L[Category:Conjured spells]{spell}
           @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
           range. Their casters take the spells' effects instead.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '10'
         unit: ft
       requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -109,43 +120,38 @@ effects:
       trigger: >-
         <p>A @L[Category:Conjured spells]{conjured spell} is used within
         range.</p>
-      impacts: {}
-      _sup: adlStormRots0000
-      class: stormMage
+    type: ability
+  - _id: 1H4342ENqLtsvIsb
+    _key: '!items.effects!adlStormRots0000.1H4342ENqLtsvIsb'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reflectMag000000
+      compendiumSource: Compendium.teriock.abilities.Item.teleport00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!adlStormRots0000.zQv17kb267N9Gz3k'
-  - name: Teleport
-    type: ability
     img: systems/teriock/src/icons/abilities/teleport.webp
-    _id: 1H4342ENqLtsvIsb
+    name: Teleport
     system:
+      _sup: adlStormRots0000
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - displacement
         - longRange
@@ -153,9 +159,9 @@ effects:
         - storm
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -173,19 +179,22 @@ effects:
           location like a wagon or ship. If the location substantially changes
           beyond recognition, your ritual will fail to transport creatures
           there. You can only have 2 location studied at a time.</p>
-        proficient: >-
-          <p>You may now have 2 × @L[Core:Proficiency Bonus]{P} locations
-          studied and can [[lookup name style=lc]] a distance of up to
-          @L[Core:Proficiency Bonus]{P} × your level in miles.</p>
         fluent: >-
           <p>You may now have 2 × @L[Core:Fluency Bonus]{F} locations studied
           and can [[lookup name style=lc]] a distance of up to @L[Core:Fluency
           Bonus]{F} × your level in miles.</p>
+        proficient: >-
+          <p>You may now have 2 × @L[Core:Proficiency Bonus]{P} locations
+          studied and can [[lookup name style=lc]] a distance of up to
+          @L[Core:Proficiency Bonus]{P} × your level in miles.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '5'
         unit: ft
+      revealed: true
       ritual: true
       rotator: true
       spell: true
@@ -193,22 +202,7 @@ effects:
       targets:
         - area
         - creature
-      impacts: {}
-      _sup: adlStormRots0000
-      class: stormMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.teleport00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!adlStormRots0000.1H4342ENqLtsvIsb'
+    type: ability
 img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
 name: Additional Storm Rotators
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!adlStormRots0000'

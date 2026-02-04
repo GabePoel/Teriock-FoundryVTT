@@ -1,7 +1,355 @@
 _id: fcvIYmo3Ut6Okm1a
-folder: h0d5vpLfqwV9YCci
+_key: '!items!fcvIYmo3Ut6Okm1a'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r1Lif00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+effects:
+  - _id: adgcgL2LDEbLUjHa
+    _key: '!items.effects!fcvIYmo3Ut6Okm1a.adgcgL2LDEbLUjHa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hibernation00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/hibernation.webp
+    name: Hibernation
+    system:
+      _sup: 06z0wz68hsmApPL9
+      class: ranger
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        conditions:
+          present:
+            - down
+        dawn: false
+        description: While Down
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 06z0wz68hsmApPL9
+    _key: '!items.effects!fcvIYmo3Ut6Okm1a.06z0wz68hsmApPL9'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hibernationShiel
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/hibernation-shield.webp
+    name: Hibernation Shield
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        conditions:
+          present:
+            - down
+        dawn: true
+        description: Until Dawn While Down
+        raw: '0'
+        stationary: false
+        unit: instant
+      elements:
+        - life
+      endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
+          yourself with this as you go @L[Condition:Down]{down}.</p>
+        fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
+        proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      requirements: <p>Target must be @L[Condition:Down]{down}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+      trigger: <p>You go @L[Condition:Down]{down}.</p>
+    type: ability
+  - _id: JhNbjfOBP4vq6fDO
+    _key: '!items.effects!fcvIYmo3Ut6Okm1a.JhNbjfOBP4vq6fDO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lightRay00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        dontConsume: false
+    img: systems/teriock/src/icons/abilities/light-ray.webp
+    name: Light Ray
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: executor
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          statuses:
+            - lighted
+        heightened:
+          rolls:
+            damage: 1d4[magic holy]
+        macros:
+          Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, target is @L[Condition:Lighted]{lighted} until the end
+          of your next @L[Core:Turns]{turn}.</p>
+        hit: >-
+          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
+          choice until the end of their next @L[Core:Turns]{turn}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: oGy0WqGTsolvIjRT
+    _key: '!items.effects!fcvIYmo3Ut6Okm1a.oGy0WqGTsolvIjRT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.medicineBall0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/medicine-ball.webp
+    name: Medicine Ball
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: missile
+        package: ball
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - healing
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
+        target again. This does not consume their @L[Core:Hit Dice]{hit dice}
+        (including the @L[Core:Hit Dice]{hit dice} for the initial
+        @L[Core:Healing]{healing}).</p>
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
+        hit: <p>Target @L[Core:Healing]{heals}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: DuPrz66O8MibMz5a
+    _key: '!items.effects!fcvIYmo3Ut6Okm1a.DuPrz66O8MibMz5a'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.resurrect0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/resurrect.webp
+    name: Resurrect
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - revival
+        - healing
+      elements:
+        - life
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target can have been
+        @L[Condition:Dead]{dead} for an additional 24 hours. If target is
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.</p>
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>If target is @L[Condition:Dead]{dead}, they are brought back to
+          life with 1 @L[Core:Hit Points and Mana Points]{HP}. If target is
+          @L[Category:Undead creatures]{undead}, you can choose to have them be
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
+          does not count as a @L[Category:Healing effects]{healing effect}
+          unless you choose to @L[Core:Healing]{heal} with it.</p>
+        fluent: >-
+          <p>If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
+          Bonus]{F} times.</p>
+        proficient: >-
+          <p>If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
+          @L[Core:Proficiency Bonus]{P} times.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 24 hours.</p>
+      revealed: true
+      ritual: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+folder: whiteSlimes00000
+img: systems/teriock/src/icons/ranks/rank-1-life-mage.webp
 name: Rank 1 Life Mage
 system:
+  _sup: massiveWhiteSlim
   archetype: mage
   className: lifeMage
   classRank: 1
@@ -16,6 +364,8 @@ system:
     prefer to stand behind the troops, healing when needed. If you are playing a
     Life Mage be helpful, kind and loving, protective but committed to saving
     lives and fighting death.</p>
+  innate: false
+  maxAv: 0
   statDice:
     hp:
       disabled: false
@@ -27,354 +377,4 @@ system:
       faces: 12
       number:
         raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: massiveWhiteSlim
 type: rank
-img: systems/teriock/src/icons/ranks/rank-1-life-mage.webp
-effects:
-  - name: Light Ray
-    type: ability
-    img: systems/teriock/src/icons/abilities/light-ray.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: minute
-        description: 1 Minute
-        stationary: false
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: '60'
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
-          choice until the end of their next @L[Core:Turns]{turn}.</p>
-        critHit: >-
-          <p>If you want, target is @L[Condition:Lighted]{lighted} until the end
-          of your next @L[Core:Turns]{turn}.</p>
-      piercing:
-        raw: 1
-      spell: true
-      standard: true
-      class: lifeMage
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - lighted
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: forced
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: executor
-                what:
-                  type: forced
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: true
-            doesExpire: true
-        heightened:
-          rolls:
-            damage: 1d4[magic holy]
-        macros:
-          Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: JhNbjfOBP4vq6fDO
-    flags:
-      teriock:
-        dontConsume: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lightRay00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!fcvIYmo3Ut6Okm1a.JhNbjfOBP4vq6fDO'
-  - name: Medicine Ball
-    type: ability
-    img: systems/teriock/src/icons/abilities/medicine-ball.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        package: ball
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        hit: <p>Target @L[Core:Healing]{heals}.</p>
-        critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
-      piercing:
-        raw: 2
-      spell: true
-      standard: true
-      class: lifeMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
-        target again. This does not consume their @L[Core:Hit Dice]{hit dice}
-        (including the @L[Core:Hit Dice]{hit dice} for the initial
-        @L[Core:Healing]{healing}).</p>
-      form: normal
-      effectTypes:
-        - healing
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: oGy0WqGTsolvIjRT
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.medicineBall0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!fcvIYmo3Ut6Okm1a.oGy0WqGTsolvIjRT'
-  - name: Resurrect
-    type: ability
-    img: systems/teriock/src/icons/abilities/resurrect.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>If target is @L[Condition:Dead]{dead}, they are brought back to
-          life with 1 @L[Core:Hit Points and Mana Points]{HP}. If target is
-          @L[Category:Undead creatures]{undead}, you can choose to have them be
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
-          does not count as a @L[Category:Healing effects]{healing effect}
-          unless you choose to @L[Core:Healing]{heal} with it.</p>
-        proficient: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
-          @L[Core:Proficiency Bonus]{P} times.</p>
-        fluent: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
-          Bonus]{F} times.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      ritual: true
-      class: lifeMage
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target can have been
-        @L[Condition:Dead]{dead} for an additional 24 hours. If target is
-        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
-        an additional time.</p>
-      requirements: >-
-        <p>Target is @L[Category:Undead creatures]{undead} or has
-        @L[Condition:Dead]{died} within the last 24 hours.</p>
-      form: normal
-      effectTypes:
-        - revival
-        - healing
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: DuPrz66O8MibMz5a
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.resurrect0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!fcvIYmo3Ut6Okm1a.DuPrz66O8MibMz5a'
-  - name: Hibernation Shield
-    type: ability
-    img: systems/teriock/src/icons/abilities/hibernation-shield.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        conditions:
-          present:
-            - down
-        description: Until Dawn While Down
-        stationary: false
-        raw: '0'
-        dawn: true
-        unit: instant
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: >-
-          <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
-          yourself with this as you go @L[Condition:Down]{down}.</p>
-        proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
-        fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: lifeMage
-      endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
-      requirements: <p>Target must be @L[Condition:Down]{down}.</p>
-      trigger: <p>You go @L[Condition:Down]{down}.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hibernationShiel
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 06z0wz68hsmApPL9
-    _key: '!items.effects!fcvIYmo3Ut6Okm1a.06z0wz68hsmApPL9'
-  - name: Hibernation
-    type: ability
-    system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        conditions:
-          present:
-            - down
-        stationary: false
-        description: While Down
-        raw: '0'
-        dawn: false
-      overview:
-        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: ranger
-      form: normal
-      _sup: 06z0wz68hsmApPL9
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/hibernation.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hibernation00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: adgcgL2LDEbLUjHa
-    _key: '!items.effects!fcvIYmo3Ut6Okm1a.adgcgL2LDEbLUjHa'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank1LifeMage000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!fcvIYmo3Ut6Okm1a'

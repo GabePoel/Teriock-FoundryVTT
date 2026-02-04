@@ -1,97 +1,45 @@
 _id: dkPtnOfHunger000
+_key: '!items!dkPtnOfHunger000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Drink Potion of Hunger
-    type: ability
-    img: systems/teriock/src/icons/abilities/drink-potion-of-hunger.webp
-    _id: dkPtnOfHunger000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
-        material: true
-        materialCost: >-
-          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
-          that provides it.</p>
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
-      delivery:
-        base: item
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Devour]{Devour} and can eat to 2 ×
-          @L[Core:Size]{SIZE} @L[Core:Size]{sizes} of
-          @L[Category:Creatures]{creatures}. If you eat more than this, you
-          @L[Condition:Dead]{die}. But your hunger is insatiable. You are
-          @L[Keyword:Incapable]{incapable} of stopping eating any
-          @L[Category:Creatures]{creature} you start eating.</p>
-      powerSources:
-        - alchemical
-      range:
-        unit: melee
-      requirements: >-
-        <p>Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - self
-      impacts:
-        base:
-          startStatuses:
-            - dead
+  - _id: HLuszFQKJ0AjRftC
+    _key: '!items.effects!dkPtnOfHunger000.HLuszFQKJ0AjRftC'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dkPtnOfHunger000.dkPtnOfHunger000'
-  - name: Devour
-    type: ability
     img: systems/teriock/src/icons/abilities/devour.webp
-    _id: HLuszFQKJ0AjRftC
+    name: Devour
     system:
+      _sup: dkPtnOfHunger000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: bite
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a2
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
@@ -103,23 +51,72 @@ effects:
           <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
           and their @L[Core:Size]{SIZE} is reduced by 1. If their
           @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
+      revealed: true
       targets:
         - creature
-      impacts: {}
-      _sup: dkPtnOfHunger000
+    type: ability
+  - _id: dkPtnOfHunger000
+    _key: '!items.effects!dkPtnOfHunger000.dkPtnOfHunger000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dkPtnOfHunger000.HLuszFQKJ0AjRftC'
+    img: systems/teriock/src/icons/abilities/drink-potion-of-hunger.webp
+    name: Drink Potion of Hunger
+    system:
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: >-
+          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
+          that provides it.</p>
+      delivery:
+        base: item
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          startStatuses:
+            - dead
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Devour]{Devour} and can eat to 2 ×
+          @L[Core:Size]{SIZE} @L[Core:Size]{sizes} of
+          @L[Category:Creatures]{creatures}. If you eat more than this, you
+          @L[Condition:Dead]{die}. But your hunger is insatiable. You are
+          @L[Keyword:Incapable]{incapable} of stopping eating any
+          @L[Category:Creatures]{creature} you start eating.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.</p>
+      revealed: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/drink-potion-of-hunger.webp
 name: Drink Potion of Hunger
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!dkPtnOfHunger000'

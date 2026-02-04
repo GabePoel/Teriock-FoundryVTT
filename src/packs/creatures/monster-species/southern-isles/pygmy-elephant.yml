@@ -1,287 +1,220 @@
-name: Pygmy Elephant
-type: creature
+_id: pygmyElephant000
+_key: '!actors!pygmyElephant000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+folder: southernIsles000
 img: systems/teriock/src/icons/creatures/pygmy-elephant.webp
-prototypeToken:
-  name: Pygmy Elephant
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/pygmy-elephant.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
-  - _id: pygmyElephant000
-    folder: JWyDfjLkE2E9S902
-    name: Pygmy Elephant
-    type: species
-    img: systems/teriock/src/icons/creatures/pygmy-elephant.webp
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Pygmy elephants are common mounts in the Oni Isles. They are half the
-        size of traditional @L[Creature:Elephant]{elephants}, but are just as
-        dangerous!</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 8
-          number:
-            raw: '2'
-        mp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '1'
-      appearance: <p>Miniature @L[Creature:Elephant]{elephants}.</p>
-      br: 9
-      size:
-        enabled: true
-        value: 4
-      traits:
-        - animal
+  - _id: Ef4pK1BRZ8C8jtIv
+    _key: '!actors.items!pygmyElephant000.Ef4pK1BRZ8C8jtIv'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Disarm
-        type: ability
-        img: systems/teriock/src/icons/abilities/disarm.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - arm
-          duration:
-            unit: instant
-            description: Instant
-            raw: '0'
-            dawn: false
-            stationary: false
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          overview:
-            base: >-
-              <p>Anything held in the targeted arm is knocked out of their hand.
-              This triggers @L[Ability:Catch Item]{Catch Item}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: thief
-          form: normal
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
-          impacts: {}
+      - _id: LwntE76DWV8LsMYk
+        _key: >-
+          !actors.items.effects!pygmyElephant000.Ef4pK1BRZ8C8jtIv.LwntE76DWV8LsMYk
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: vT1F8qjc3x0y89nw
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.vT1F8qjc3x0y89nw
-      - name: Catch Item
-        type: ability
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r1
-          delivery:
-            base: hand
-          targets:
-            - item
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: ft
-            raw: Your Hand's Range
-          overview:
-            base: >-
-              <p>You catch the item. If multiple creatures are all trying to
-              catch the same item, they all roll [[/roll 1d20]]. The creature
-              with the highest roll catches the item.</p>
-            proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-            fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-          piercing:
+          competence:
             raw: 0
-          trigger: <p>An item within range is falling or flying by.</p>
-          basic: true
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
           form: intrinsic
-          _sup: vT1F8qjc3x0y89nw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
           revealed: true
-          grantOnly: false
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/catch-item.webp
+        type: property
+      - _id: 70oASdJA4Iza7rlK
+        _key: >-
+          !actors.items.effects!pygmyElephant000.Ef4pK1BRZ8C8jtIv.70oASdJA4Iza7rlK
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: AKeFRROLDUTTsGGE
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.AKeFRROLDUTTsGGE
-      - name: Improved Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
+          competence:
             raw: 0
-          skill: true
-          standard: true
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: southernIsles000
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: pygmyElephant000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: 9S4W7WfPzHivS2it
+    _key: '!actors.items!pygmyElephant000.9S4W7WfPzHivS2it'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: 1keJAxX1vkfTL8Wl
+        _key: >-
+          !actors.items.effects!pygmyElephant000.9S4W7WfPzHivS2it.1keJAxX1vkfTL8Wl
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: cj70nNvBKfT3EQ8P
+        _key: >-
+          !actors.items.effects!pygmyElephant000.9S4W7WfPzHivS2it.cj70nNvBKfT3EQ8P
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 43UnM2Fnf4EpPLFE
+        _key: >-
+          !actors.items.effects!pygmyElephant000.9S4W7WfPzHivS2it.43UnM2Fnf4EpPLFE
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: southernIsles000
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
+    system:
+      _sup: pygmyElephant000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: pygmyElephant000
+    _key: '!actors.items!pygmyElephant000.pygmyElephant000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.pygmyElephant000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: 7PF5BmN89lr6v25D
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.7PF5BmN89lr6v25D
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: wHoU7ozioP7O7c7y
           class: knight
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
           competence:
             raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: wHoU7ozioP7O7c7y
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.wHoU7ozioP7O7c7y
-      - name: Beastly Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -290,388 +223,548 @@ items:
               hands to be @L[Property:AV0]{AV0}.</div>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
-          class: knight
-          form: normal
-          _sup: wHoU7ozioP7O7c7y
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        type: ability
+      - _id: AKeFRROLDUTTsGGE
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.AKeFRROLDUTTsGGE
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 7PF5BmN89lr6v25D
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.7PF5BmN89lr6v25D
-      - name: Improved Armor Piercing
-        type: ability
+        img: systems/teriock/src/icons/abilities/catch-item.webp
+        name: Catch Item
         system:
+          _sup: vT1F8qjc3x0y89nw
+          basic: true
+          competence:
+            raw: 0
+          delivery:
+            base: hand
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: r1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: intrinsic
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You catch the item. If multiple creatures are all trying to
+              catch the same item, they all roll [[/roll 1d20]]. The creature
+              with the highest roll catches the item.</p>
+            fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
+            proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+          piercing:
+            raw: 0
           powerSources:
             - martial
-          interaction: manifest
+          range:
+            raw: Your Hand's Range
+            unit: ft
+          revealed: true
+          targets:
+            - item
+          trigger: <p>An item within range is falling or flying by.</p>
+        type: ability
+      - _id: vT1F8qjc3x0y89nw
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.vT1F8qjc3x0y89nw
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/disarm.webp
+        name: Disarm
+        system:
+          class: thief
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: attack
+          limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+          maneuver: active
+          overview:
+            base: >-
+              <p>Anything held in the targeted arm is knocked out of their hand.
+              This triggers @L[Ability:Catch Item]{Catch Item}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - arm
+        type: ability
+      - _id: 9JhudgoEoZRZTItr
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.9JhudgoEoZRZTItr
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: wHoU7ozioP7O7c7y
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
               piercing}.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: wHoU7ozioP7O7c7y
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 9JhudgoEoZRZTItr
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.9JhudgoEoZRZTItr
-      - name: Low Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/low-strength.webp
-        system:
           powerSources:
             - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
           targets:
             - self
+        type: ability
+      - _id: wHoU7ozioP7O7c7y
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.wHoU7ozioP7O7c7y
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: QNgs45g17A5aDnI2
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.QNgs45g17A5aDnI2
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/low-strength.webp
+        name: Low Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: QNgs45g17A5aDnI2
+        type: ability
+      - _id: T1e2PrQ3Jy0DBJnc
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.T1e2PrQ3Jy0DBJnc
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.QNgs45g17A5aDnI2
-      - name: Normal Movement
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: mov
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: T1e2PrQ3Jy0DBJnc
+        type: ability
+      - _id: 8zs6OmPgD7RfpE4u
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.8zs6OmPgD7RfpE4u
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.T1e2PrQ3Jy0DBJnc
-      - name: Normal Perception
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 8zs6OmPgD7RfpE4u
+        type: ability
+      - _id: b0nJnBkBxy0AIvua
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.b0nJnBkBxy0AIvua
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.8zs6OmPgD7RfpE4u
-      - name: Normal Sneak
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: snk
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: b0nJnBkBxy0AIvua
+        type: ability
+      - _id: 2KqoQGnriBkNmGlI
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.2KqoQGnriBkNmGlI
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          compendiumSource: Compendium.teriock.abilities.Item.snare00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.b0nJnBkBxy0AIvua
-      - name: Snare
-        type: ability
         img: systems/teriock/src/icons/abilities/snare.webp
+        name: Snare
         system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
+          class: ranger
+          competence:
+            raw: 0
           delivery:
             base: weapon
             package: strike
-          targets:
-            - leg
           duration:
-            unit: unlimited
-            description: No Limit
             dawn: false
-            stationary: false
+            description: No Limit
             raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          results:
-            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-            critHit: >-
-              <p>The target automatically fails the first [[/roll 2d4]]
-              roll.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: ranger
+            stationary: false
+            unit: unlimited
           endCondition: >-
             <p>At the end of each of the target's @L[Core:Turn]{turns}, they
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
-          form: normal
-          impacts:
-            base:
-              statuses:
-                - snared
-              rolls:
-                endCon: 2d4
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: rolled
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: end
-                      trigger: turn
-                      skip: 0
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: rolled
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: end
-                      trigger: turn
-                      skip: 1
-                changeOnCrit: true
-                doesExpire: true
-          competence:
-            raw: 0
-          revealed: true
+          executionTime: a1
           expansion:
+            featSaveAttribute: mov
             range:
               unit: self
-            featSaveAttribute: mov
+          featSaveAttribute: mov
+          form: normal
           grantOnly: false
+          impacts:
+            base:
+              expiration:
+                changeOnCrit: true
+                crit:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: rolled
+                    when:
+                      skip: 1
+                      time: end
+                      trigger: turn
+                    who:
+                      type: target
+                doesExpire: true
+                normal:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: rolled
+                    when:
+                      skip: 0
+                      time: end
+                      trigger: turn
+                    who:
+                      type: target
+              rolls:
+                endCon: 2d4
+              statuses:
+                - snared
+          interaction: attack
           limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
-        _id: 2KqoQGnriBkNmGlI
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.snare00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.2KqoQGnriBkNmGlI
-      - name: Trample
-        type: ability
-        img: systems/teriock/src/icons/abilities/trample.webp
-        system:
+          maneuver: active
+          piercing:
+            raw: 0
           powerSources:
             - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>The target automatically fails the first [[/roll 2d4]]
+              roll.</p>
+            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - leg
+        type: ability
+      - _id: q10UfF8d6JAjGhba
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.q10UfF8d6JAjGhba
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.trample000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/trample.webp
+        name: Trample
+        system:
+          competence:
+            raw: 0
           delivery:
             base: weapon
-          targets:
-            - creature
           duration:
-            unit: instant
-            description: Instant
             dawn: false
-            stationary: false
+            description: Instant
             raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
+            stationary: false
+            unit: instant
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              common:
+                - standardDamage
+              rolls:
+                damage: 1d6
+          interaction: attack
+          maneuver: reactive
           overview:
             base: >-
               <p>If you use [[lookup name]] on a
@@ -679,58 +772,61 @@ items:
               category} smaller than you, add [[/damage 1d6]]
               @L[Core:Damage]{damage} to its @L[Core:Standard Damage]{standard
               damage}.</p>
-          results:
-            hit: <p>Deal @L[Core:Standard Damage]{standard damage}.</p>
-            critHit: <p>Deal @L[Core:Critical Damage]{critical damage}.</p>
           piercing:
             raw: 2
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: <p>Deal @L[Core:Critical Damage]{critical damage}.</p>
+            hit: <p>Deal @L[Core:Standard Damage]{standard damage}.</p>
+          revealed: true
+          targets:
+            - creature
           trigger: >-
             <p>Moving at least 10 feet in a straight line towards the target and
             becoming adjacent to them.</p>
-          form: normal
-          impacts:
-            base:
-              rolls:
-                damage: 1d6
-              common:
-                - standardDamage
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-        _id: q10UfF8d6JAjGhba
+        type: ability
+      - _id: 93BqZT2T0OjK1doN
+        _key: >-
+          !actors.items.effects!pygmyElephant000.pygmyElephant000.93BqZT2T0OjK1doN
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.trample000000000
+          compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.q10UfF8d6JAjGhba
-      - name: Weapons Mastery
-        type: ability
         img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+        name: Weapons Mastery
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: assassin
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            macros:
+              Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
+              Compendium_teriock_execution_Macro_wepsMasyExecutio: execution
+          interaction: manifest
+          limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+          maneuver: passive
           overview:
             base: >-
               <p>Pick a @L[Category:Weapon classes]{class of weapons}. These
@@ -750,335 +846,109 @@ items:
               reactions} in this way.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: assassin
-          form: normal
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          limitation: <p>@L[Category:Trunks]{Trunks} only.</p>
+          powerSources:
+            - martial
           range:
             unit: self
-        _id: 93BqZT2T0OjK1doN
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.pygmyElephant000.93BqZT2T0OjK1doN
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+    folder: southernIsles000
+    img: systems/teriock/src/icons/creatures/pygmy-elephant.webp
+    name: Pygmy Elephant
+    system:
+      appearance: <p>Miniature @L[Creature:Elephant]{elephants}.</p>
+      br: 9
+      competence:
+        raw: 1
+      description: >-
+        <p>Pygmy elephants are common mounts in the Oni Isles. They are half the
+        size of traditional @L[Creature:Elephant]{elephants}, but are just as
+        dangerous!</p>
+      size:
+        enabled: true
+        value: 4
+      statDice:
+        hp:
+          disabled: false
+          faces: 8
+          number:
+            raw: '2'
+        mp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '1'
+      traits:
+        - animal
+    type: species
+  - _id: q6n7YmDR39HenKr0
+    _key: '!actors.items!pygmyElephant000.q6n7YmDR39HenKr0'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.pygmyElephant000
+      compendiumSource: Compendium.teriock.bodyParts.Item.sharpClaw0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!pygmyElephant000.pygmyElephant000'
-  - name: Mouth
-    type: body
-    _id: 9S4W7WfPzHivS2it
-    img: icons/creatures/abilities/mouth-teeth-human.webp
-    system:
-      damage:
-        base:
-          raw: '1'
-      fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: pygmyElephant000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
     effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 1keJAxX1vkfTL8Wl
-        img: systems/teriock/src/icons/properties/bashing.webp
+      - _id: Wez1JXmo9LjBU1oA
+        _key: >-
+          !actors.items.effects!pygmyElephant000.q6n7YmDR39HenKr0.Wez1JXmo9LjBU1oA
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.9S4W7WfPzHivS2it.1keJAxX1vkfTL8Wl
-      - name: Biting
-        type: property
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
           competence:
             raw: 0
-          revealed: true
-        _id: cj70nNvBKfT3EQ8P
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.9S4W7WfPzHivS2it.cj70nNvBKfT3EQ8P
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 43UnM2Fnf4EpPLFE
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.9S4W7WfPzHivS2it.43UnM2Fnf4EpPLFE
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!pygmyElephant000.9S4W7WfPzHivS2it'
-  - name: Thick Hide
-    type: body
-    _id: AxjGDrM9INFyQOrN
-    img: systems/teriock/src/icons/body-parts/thick-hide.webp
-    system:
-      damage:
-        base:
-          raw: '0'
-      competence:
-        raw: 0
-      _sup: pygmyElephant000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      av:
-        raw: '2'
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.thickHide0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!pygmyElephant000.AxjGDrM9INFyQOrN'
-  - name: Foot
-    type: body
-    _id: Ef4pK1BRZ8C8jtIv
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
-      _sup: pygmyElephant000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: LwntE76DWV8LsMYk
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.Ef4pK1BRZ8C8jtIv.LwntE76DWV8LsMYk
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 70oASdJA4Iza7rlK
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.Ef4pK1BRZ8C8jtIv.70oASdJA4Iza7rlK
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!pygmyElephant000.Ef4pK1BRZ8C8jtIv'
-  - name: Swinging Trunk
-    type: body
-    _id: Fsr4OjMLlNeZOOwP
-    img: systems/teriock/src/icons/body-parts/swinging-trunk.webp
-    system:
-      damage:
-        base:
-          raw: 1d4
-      fightingStyle: wraparound
-      competence:
-        raw: 0
-      _sup: pygmyElephant000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    effects:
-      - name: Handy
-        type: property
-        system:
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: gvo3IW4iVTlxINSn
-        img: systems/teriock/src/icons/properties/handy.webp
+        type: property
+      - _id: 6CVqlpk3uf4VDbFY
+        _key: >-
+          !actors.items.effects!pygmyElephant000.q6n7YmDR39HenKr0.6CVqlpk3uf4VDbFY
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.Fsr4OjMLlNeZOOwP.gvo3IW4iVTlxINSn
-      - name: Prehensile
-        type: property
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
         system:
-          description: >-
-            <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
-          form: intrinsic
           competence:
             raw: 0
-          revealed: true
-        _id: nlSVR2LKkwrIBtZP
-        img: systems/teriock/src/icons/properties/prehensile.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.Fsr4OjMLlNeZOOwP.nlSVR2LKkwrIBtZP
-      - name: Weapon
-        type: property
-        system:
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: mMQwUG1obLqPY0Rz
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.Fsr4OjMLlNeZOOwP.mMQwUG1obLqPY0Rz
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.swingingTrunk000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!pygmyElephant000.Fsr4OjMLlNeZOOwP'
-  - name: Sharp Claw
-    type: body
-    _id: q6n7YmDR39HenKr0
+        type: property
+    folder: southernIsles000
     img: systems/teriock/src/icons/body-parts/sharp-claw.webp
+    name: Sharp Claw
     system:
+      _sup: pygmyElephant000
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '1'
+      competence:
+        raw: 0
       damage:
         base:
           raw: 1d6
       fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: pygmyElephant000
-      attackPenalty:
-        raw: '-3'
       range:
         long:
           unit: self
@@ -1087,99 +957,235 @@ items:
         short:
           unit: self
       vitals: false
-      bv:
-        raw: '1'
+    type: body
+  - _id: Fsr4OjMLlNeZOOwP
+    _key: '!actors.items!pygmyElephant000.Fsr4OjMLlNeZOOwP'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.swingingTrunk000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Handy
-        type: property
+      - _id: gvo3IW4iVTlxINSn
+        _key: >-
+          !actors.items.effects!pygmyElephant000.Fsr4OjMLlNeZOOwP.gvo3IW4iVTlxINSn
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: Wez1JXmo9LjBU1oA
-        img: systems/teriock/src/icons/properties/handy.webp
+        type: property
+      - _id: nlSVR2LKkwrIBtZP
+        _key: >-
+          !actors.items.effects!pygmyElephant000.Fsr4OjMLlNeZOOwP.nlSVR2LKkwrIBtZP
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.q6n7YmDR39HenKr0.Wez1JXmo9LjBU1oA
-      - name: Weapon
-        type: property
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
         system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item can be used to grasp, hold, or manipulate objects, such
+            as while using @L[Ability:Interact]{Interact}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: mMQwUG1obLqPY0Rz
+        _key: >-
+          !actors.items.effects!pygmyElephant000.Fsr4OjMLlNeZOOwP.mMQwUG1obLqPY0Rz
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 6CVqlpk3uf4VDbFY
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!pygmyElephant000.q6n7YmDR39HenKr0.6CVqlpk3uf4VDbFY
+        type: property
+    folder: southernIsles000
+    img: systems/teriock/src/icons/body-parts/swinging-trunk.webp
+    name: Swinging Trunk
+    system:
+      _sup: pygmyElephant000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d4
+      fightingStyle: wraparound
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: AxjGDrM9INFyQOrN
+    _key: '!actors.items!pygmyElephant000.AxjGDrM9INFyQOrN'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.sharpClaw0000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.thickHide0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!pygmyElephant000.q6n7YmDR39HenKr0'
+    folder: southernIsles000
+    img: systems/teriock/src/icons/body-parts/thick-hide.webp
+    name: Thick Hide
+    system:
+      _sup: pygmyElephant000
+      attackPenalty:
+        raw: '-3'
+      av:
+        raw: '2'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '0'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+name: Pygmy Elephant
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Pygmy Elephant
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/pygmy-elephant.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 10
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 6
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '4'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: q6n7YmDR39HenKr0
-    blocker: q6n7YmDR39HenKr0
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: pygmyElephant000
-folder: 87J1Cv81XIW9AuHz
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!pygmyElephant000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 10
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 6
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '4'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: q6n7YmDR39HenKr0
+    blocker: q6n7YmDR39HenKr0
+type: creature

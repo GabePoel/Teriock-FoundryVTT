@@ -1,37 +1,56 @@
 _id: dkOverslowPtn000
+_key: '!items!dkOverslowPtn000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Drink Overslow Potion
-    type: ability
+  - _id: dkOverslowPtn000
+    _key: '!items.effects!dkOverslowPtn000.dkOverslowPtn000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/drink-overslow-potion.webp
-    _id: dkOverslowPtn000
+    name: Drink Overslow Potion
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.attributes.int.value
+              mode: 2
+              priority: 40
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '-2'
+          statuses:
+            - slowed
       interaction: manifest
       maneuver: active
       overview:
@@ -39,6 +58,8 @@ effects:
           <p>You gain @L[Ability:Overslow Blood]{Overslow Blood}, become
           @L[Condition:Slowed]{slowed}, and have your @L[Core:Intelligence]{INT}
           decreased by 2.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -48,45 +69,32 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 40
-              time: normal
-              key: system.attributes.int.value
-              target: Actor
-              qualifier: '1'
-              value: '-2'
-          statuses:
-            - slowed
+    type: ability
+  - _id: o8CZzzvBLoN4PrXk
+    _key: '!items.effects!dkOverslowPtn000.o8CZzzvBLoN4PrXk'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.overslowBlood000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dkOverslowPtn000.dkOverslowPtn000'
-  - name: Overslow Blood
-    type: ability
     img: systems/teriock/src/icons/abilities/overslow-blood.webp
-    _id: o8CZzzvBLoN4PrXk
+    name: Overslow Blood
     system:
+      _sup: dkOverslowPtn000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - automatic
       endCondition: >-
@@ -94,33 +102,19 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r0
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      interaction: feat
-      maneuver: reactive
-      powerSources:
-        - alchemical
-      range:
-        unit: self
-      results:
-        fail: <p>Target creature becomes @L[Condition:Slowed]{slowed}.</p>
-      targets:
-        - creature
-      trigger: >-
-        <p>You are hit with a melee @L[Category:Weapon delivery
-        abilities]{weapon} @L[Category:Attack abilities]{attack}. This triggers
-        automatically. You cannot choose to not use it if you are able to.</p>
       impacts:
         base:
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: target
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -129,26 +123,30 @@ effects:
                   skip: 0
                   time: end
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: target
           rolls:
             endCon: 2d4
           statuses:
             - slowed
-      _sup: dkOverslowPtn000
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.overslowBlood000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dkOverslowPtn000.o8CZzzvBLoN4PrXk'
+      interaction: feat
+      maneuver: reactive
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: self
+      results:
+        fail: <p>Target creature becomes @L[Condition:Slowed]{slowed}.</p>
+      revealed: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You are hit with a melee @L[Category:Weapon delivery
+        abilities]{weapon} @L[Category:Attack abilities]{attack}. This triggers
+        automatically. You cannot choose to not use it if you are able to.</p>
+    type: ability
 img: systems/teriock/src/icons/abilities/drink-overslow-potion.webp
 name: Drink Overslow Potion
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!dkOverslowPtn000'

@@ -1,240 +1,59 @@
-name: Amulet of Telepelec
-type: equipment
-folder: X3rVK7Ngg1mHq1vl
-system:
-  equipmentType: Amulet
-  equipped: true
-  consumable: false
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    long:
-      unit: melee
-    short:
-      unit: melee
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: magic
-  tier:
-    saved: '1'
-  notes: >-
-    <p>Made only in the Far East by a band of nomadic halflings, these [[lookup
-    system.equipmentType style=lc]]s are quite popular throughout Teriock due to
-    their lack of flaws! How the halflings made these is a lost art and thus
-    these [[lookup system.equipmentType style=lc]]s are sought after pieces.</p>
-  attackPenalty:
-    raw: '-3'
-img: systems/teriock/src/assets/items/amulet-of-telepelec.webp
+_id: amuletOfTelepele
+_key: '!items!amuletOfTelepele'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.UW66epSSlkQ19iBS
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: OSUfWN5SzN62RVpC
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: yx0k4q4qNtNjndHx
+    _key: '!items.effects!amuletOfTelepele.yx0k4q4qNtNjndHx'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.crcOfProtection0
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!3gjV00UUKXVdIzKu.OSUfWN5SzN62RVpC'
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: BLwO7Qmml5jRDg7y
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!3gjV00UUKXVdIzKu.BLwO7Qmml5jRDg7y'
-  - name: Spirit Bury
-    type: ability
-    img: systems/teriock/src/icons/abilities/spirit-bury.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-        stationary: false
-      range:
-        unit: melee
-      overview:
-        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
-      results:
-        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      expansionSaveAttribute: mov
-      form: special
-      impacts:
-        proficient:
-          duration: 600
-        heightened:
-          duration: 3600
-    _id: lzGFuje40zyadBDE
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
-    _key: '!items.effects!3gjV00UUKXVdIzKu.lzGFuje40zyadBDE'
-  - name: Mana Storing
-    type: property
-    img: systems/teriock/src/icons/properties/mana-storing.webp
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
-        within it that creatures can use to power their own
-        @L[Category:Abilities]{abilities}. Mana storing items will always have a
-        number N associated with them (1, by default, if no number is listed).
-        This number refers to a "mana die" analogous to those that creatures
-        have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
-        maximum of N × 3 @L[Core:MP]{MP}. At dawn, if
-        @L[Ability:Attune]{attuned} to the [[lookup name style=lc]] item, roll
-        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
-        dawn comes and nobody is @L[Ability:Attune]{attuned} to a [[lookup
-        name]] item, it releases all @L[Core:MP]{MP} it had stored.</p>
-      form: normal
-    _id: rBXjfjPMo5CdyY32
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.manaStoring00000
-    _key: '!items.effects!3gjV00UUKXVdIzKu.rBXjfjPMo5CdyY32'
-  - name: Stored Mana (1)
-    type: resource
-    _id: SbD1CxcPvGHftDx5
-    img: systems/teriock/src/icons/general/celestial-mana-storing.webp
-    system:
-      description: >-
-        A <b>mana storing</b> item has some latent energy held within it that
-        creatures can use to power their own @L[Category:Abilities]{abilities}.
-        Mana storing items will always have a number N associated with them (1,
-        by default, if no number is listed). This number refers to a "mana die"
-        analogous to those that creatures have. It is always [[/roll 1d4]] (3
-        MP), which means the item stores a maximum of N × 3 @L[Core:MP]{MP}. At
-        dawn, if @L[Ability:Attune]{attuned} to the mana storing item, roll
-        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
-        dawn comes and nobody is @L[Ability:Attune]{attuned} to a Mana Storing
-        item, it releases all @L[Core:MP]{MP} it had stored.
-      consumable: true
-      quantity: 0
-      maxQuantity:
-        saved: '3'
-      macros:
-        - Compendium.teriock.player.Macro.20AgUNM6tioUSxHq
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!3gjV00UUKXVdIzKu.SbD1CxcPvGHftDx5'
-  - name: Conditional Glowing
-    type: property
-    _id: 1KbJcAiYgOJ4d6gn
-    img: icons/magic/light/explosion-star-large-teal-purple.webp
-    system:
-      description: <p>This item glows blue in the presence of evil.</p>
-      form: normal
-      impacts:
-        changes:
-          - key: system.light.dim
-            mode: 4
-            value: '1'
-            priority: 4
-          - key: system.light.color
-            mode: 5
-            value: '#3584E4'
-            priority: 4
-          - key: system.light.animation.type
-            mode: 5
-            value: starlight
-            priority: 4
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!3gjV00UUKXVdIzKu.1KbJcAiYgOJ4d6gn'
-  - name: Circle of Protection
-    type: ability
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/circle-of-protection.webp
+    name: Circle of Protection
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
         base: hand
         package: ritual
-      targets:
-        - area
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
       elements:
         - life
-      duration:
-        unit: hour
-        quantity: 8
-        description: 8 Hours
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 24 hours. The overall duration is rounded to the
+        nearest 24 hours.</p>
+      impacts:
+        heightened:
+          duration: 86400
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You enchant an area no larger than 30 feet in any direction. This
@@ -250,122 +69,217 @@ effects:
           without issue. Any other creature may attempt to pass by making a
           @L[Tradecraft:Priest]{priest check} with a DC equal to the difference
           between @L[Core:Leveling Up]{your level} and theirs.</p>
-        proficient: >-
-          <p>You may select up to 2 × @L[Core:Proficiency Bonus]{P} creatures
-          that can pass through this barrier without issue. You may also select
-          up to 2 × @L[Core:Proficiency Bonus]{P} creatures that cannot pass
-          through this barrier at all.</p>
         fluent: >-
           <p>You may select up to 2 × @L[Core:Fluency Bonus]{F} creatures that
           can pass through this barrier without issue. You may also select up to
           2 × @L[Core:Fluency Bonus]{F} creatures that cannot pass through this
           barrier at all.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        proficient: >-
+          <p>You may select up to 2 × @L[Core:Proficiency Bonus]{P} creatures
+          that can pass through this barrier without issue. You may also select
+          up to 2 × @L[Core:Proficiency Bonus]{P} creatures that cannot pass
+          through this barrier at all.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      revealed: true
+      ritual: true
+      rotator: true
       spell: true
       standard: true
-      ritual: true
-      class: paladin
-      rotator: true
+      targets:
+        - area
+    type: ability
+  - _id: 1KbJcAiYgOJ4d6gn
+    _key: '!items.effects!amuletOfTelepele.1KbJcAiYgOJ4d6gn'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: icons/magic/light/explosion-star-large-teal-purple.webp
+    name: Conditional Glowing
+    system:
+      competence:
+        raw: 0
+      description: <p>This item glows blue in the presence of evil.</p>
+      form: normal
+      impacts:
+        changes:
+          - key: system.light.dim
+            mode: 4
+            priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: '1'
+          - key: system.light.color
+            mode: 5
+            priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: '#3584E4'
+          - key: system.light.animation.type
+            mode: 5
+            priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: starlight
+      revealed: true
+    type: property
+  - _id: 823nqH198nACfJpj
+    _key: '!items.effects!amuletOfTelepele.823nqH198nACfJpj'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: icons/magic/life/heart-hand-gold-green-light.webp
+    name: Gain Adept Rebirth
+    system:
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours. The overall duration is rounded to the
-        nearest 24 hours.</p>
-      expansionSaveAttribute: mov
-      form: special
-      impacts:
-        heightened:
-          duration: 86400
-    _id: yx0k4q4qNtNjndHx
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.crcOfProtection0
-    _key: '!items.effects!3gjV00UUKXVdIzKu.yx0k4q4qNtNjndHx'
-  - name: Gain Adept Rebirth
-    type: ability
-    _id: 823nqH198nACfJpj
-    img: icons/magic/life/heart-hand-gold-green-light.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
       delivery:
         base: self
-      targets:
-        - self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - magical
       elements:
         - life
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      executionTime: a0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: rBXjfjPMo5CdyY32
+    _key: '!items.effects!amuletOfTelepele.rBXjfjPMo5CdyY32'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.manaStoring00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/mana-storing.webp
+    name: Mana Storing
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
+        within it that creatures can use to power their own
+        @L[Category:Abilities]{abilities}. Mana storing items will always have a
+        number N associated with them (1, by default, if no number is listed).
+        This number refers to a "mana die" analogous to those that creatures
+        have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
+        maximum of N × 3 @L[Core:MP]{MP}. At dawn, if
+        @L[Ability:Attune]{attuned} to the [[lookup name style=lc]] item, roll
+        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
+        dawn comes and nobody is @L[Ability:Attune]{attuned} to a [[lookup
+        name]] item, it releases all @L[Core:MP]{MP} it had stored.</p>
+      form: normal
+      revealed: true
+    type: property
+  - _id: RE7zCZxS63ZOlyXr
+    _key: '!items.effects!amuletOfTelepele.RE7zCZxS63ZOlyXr'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/rebirth.webp
+    name: Rebirth
+    system:
+      _sup: 823nqH198nACfJpj
+      adept:
+        amount: 1
+        enabled: true
+      class: lifeMage
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - magical
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!3gjV00UUKXVdIzKu.823nqH198nACfJpj'
-  - name: Rebirth
-    type: ability
-    img: systems/teriock/src/icons/abilities/rebirth.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+        somatic: true
+        verbal: true
       delivery:
         base: hand
-      targets:
-        - creature
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - revival
+        - healing
       elements:
         - life
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        For each additional @L[Core:MP]{MP} spent, target can have been
+        @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.
+      interaction: attack
+      maneuver: active
       overview:
-        proficient: >-
-          If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
-          @L[Core:Proficiency Bonus]{P} times.
         fluent: >-
           If target is @L[Category:Undead creatures]{undead}, they are
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
           Bonus]{F} times.
+        proficient: >-
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
+          @L[Core:Proficiency Bonus]{P} times.
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      requirements: >-
+        Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 10 minutes.
       results:
         hit: >-
           If target is @L[Condition:Dead]{dead}, they are brought back to life.
@@ -376,52 +290,184 @@ effects:
           have them be @L[Core:Healing]{healed} for @L[Core:Damage]{damage}.
           Rebirth does not count as a @L[Category:Healing effects]{healing
           effect} unless you choose to @L[Core:Healing]{heal} with it.
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
+      rotator: true
       spell: true
       standard: true
-      class: lifeMage
-      rotator: true
+      targets:
+        - creature
+    type: ability
+  - _id: OSUfWN5SzN62RVpC
+    _key: '!items.effects!amuletOfTelepele.OSUfWN5SzN62RVpC'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: BLwO7Qmml5jRDg7y
+    _key: '!items.effects!amuletOfTelepele.BLwO7Qmml5jRDg7y'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: lzGFuje40zyadBDE
+    _key: '!items.effects!amuletOfTelepele.lzGFuje40zyadBDE'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritBury000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spirit-bury.webp
+    name: Spirit Bury
+    system:
+      class: necromancer
+      competence:
+        raw: 0
       costs:
-        verbal: true
         somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        For each additional @L[Core:MP]{MP} spent, target can have been
-        @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
-        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
-        an additional time.
-      requirements: >-
-        Target is @L[Category:Undead creatures]{undead} or has
-        @L[Condition:Dead]{died} within the last 10 minutes.
-      expansionSaveAttribute: mov
+        verbal: true
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: special
-      effectTypes:
-        - revival
-        - healing
-      adept:
-        enabled: true
-        amount: 1
-      _sup: 823nqH198nACfJpj
-    _id: RE7zCZxS63ZOlyXr
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+        proficient:
+          duration: 600
+      interaction: attack
+      maneuver: active
+      overview:
+        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+      results:
+        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: SbD1CxcPvGHftDx5
+    _key: '!items.effects!amuletOfTelepele.SbD1CxcPvGHftDx5'
     _stats:
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!3gjV00UUKXVdIzKu.RE7zCZxS63ZOlyXr'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.UW66epSSlkQ19iBS
-_id: 3gjV00UUKXVdIzKu
-_key: '!items!3gjV00UUKXVdIzKu'
+      systemId: teriock
+      systemVersion: 0.9.16
+    disabled: false
+    img: systems/teriock/src/icons/general/celestial-mana-storing.webp
+    name: Stored Mana (1)
+    system:
+      competence:
+        raw: 0
+      consumable: true
+      description: >-
+        A <b>mana storing</b> item has some latent energy held within it that
+        creatures can use to power their own @L[Category:Abilities]{abilities}.
+        Mana storing items will always have a number N associated with them (1,
+        by default, if no number is listed). This number refers to a "mana die"
+        analogous to those that creatures have. It is always [[/roll 1d4]] (3
+        MP), which means the item stores a maximum of N × 3 @L[Core:MP]{MP}. At
+        dawn, if @L[Ability:Attune]{attuned} to the mana storing item, roll
+        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
+        dawn comes and nobody is @L[Ability:Attune]{attuned} to a Mana Storing
+        item, it releases all @L[Core:MP]{MP} it had stored.
+      macros:
+        - Compendium.teriock.player.Macro.20AgUNM6tioUSxHq
+      maxQuantity:
+        raw: '3'
+      quantity: 0
+      revealed: true
+    tint: '#ffffff'
+    transfer: true
+    type: resource
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/amulet-of-telepelec.webp
+name: Amulet of Telepelec
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Amulet
+  equipped: true
+  minStr:
+    raw: '-3'
+  notes: >-
+    <p>Made only in the Far East by a band of nomadic halflings, these [[lookup
+    system.equipmentType style=lc]]s are quite popular throughout Teriock due to
+    their lack of flaws! How the halflings made these is a lost art and thus
+    these [[lookup system.equipmentType style=lc]]s are sought after pieces.</p>
+  powerLevel: magic
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  tier:
+    raw: '1'
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

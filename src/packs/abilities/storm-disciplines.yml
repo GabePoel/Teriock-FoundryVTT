@@ -1,102 +1,46 @@
 _id: stormDisciplines
+_key: '!items!stormDisciplines'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Storm Disciplines
-    type: ability
-    img: systems/teriock/src/icons/abilities/storm-disciplines.webp
-    _id: stormDisciplines
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
-          @L[Category:Ritual delivery spells]{ritual} @L[Category:Storm element
-          spells]{storm spell} in half the time it would normally take.
-          Additionally, once per long rest, you may cast a @L[Category:Storm
-          element spells]{storm spell} as though you were
-          @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
-          @L[Ability:Bouncy Casting]{Bouncy} and @L[Ability:Illusive
-          Casting]{Illusive} casting styles.</p>
-        proficient: >-
-          <p>You may now use the benefits from [[lookup name]]
-          @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
-          rest}.</p>
-        fluent: >-
-          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
-          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      impacts: {}
-      upgrades:
-        competence:
-          attribute: int
-          value: 0
-      class: stormMage
+  - _id: FbTrow6t8Z0JJQb6
+    _key: '!items.effects!stormDisciplines.FbTrow6t8Z0JJQb6'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bouncyCasting000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormDisciplines.stormDisciplines'
-  - name: Bouncy Casting
-    type: ability
     img: systems/teriock/src/icons/abilities/bouncy-casting.webp
-    _id: FbTrow6t8Z0JJQb6
+    name: Bouncy Casting
     system:
+      _sup: stormDisciplines
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - displacement
       executionTime: r0
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -115,10 +59,13 @@ effects:
           you spent any other @L[Category:Cost spells]{costs} on the
           @L[Category:Spells]{spell}, those remain unchanged and do not need to
           be re-spent.</div>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
@@ -126,40 +73,35 @@ effects:
       trigger: >-
         <p>The target of a @L[Category:Spells]{spell} does not get affected by
         your @L[Category:Spells]{spell}.</p>
-      impacts: {}
-      _sup: stormDisciplines
-      class: stormMage
+    type: ability
+  - _id: FlzCfztb1LwYU4jg
+    _key: '!items.effects!stormDisciplines.FlzCfztb1LwYU4jg'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bouncyCasting000
+      compendiumSource: Compendium.teriock.abilities.Item.illusiveCasting0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormDisciplines.FbTrow6t8Z0JJQb6'
-  - name: Illusive Casting
-    type: ability
     img: systems/teriock/src/icons/abilities/illusive-casting.webp
-    _id: FlzCfztb1LwYU4jg
+    name: Illusive Casting
     system:
+      _sup: stormDisciplines
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '24'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 24 Hours
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
       effectTypes:
         - mental
       endCondition: >-
@@ -167,9 +109,9 @@ effects:
         @L[Category:Spells]{spell}.</p>
       executionTime: r0
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -181,31 +123,83 @@ effects:
           @L[Category:Abilities]{ability} of the same @L[Category:Delivery
           abilities]{delivery}. This is a @L[Keyword:Illusionary]{minor
           illusion}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - spell
       trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-      impacts: {}
-      _sup: stormDisciplines
-      class: stormMage
+    type: ability
+  - _id: stormDisciplines
+    _key: '!items.effects!stormDisciplines.stormDisciplines'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.illusiveCasting0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormDisciplines.FlzCfztb1LwYU4jg'
+    img: systems/teriock/src/icons/abilities/storm-disciplines.webp
+    name: Storm Disciplines
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
+          @L[Category:Ritual delivery spells]{ritual} @L[Category:Storm element
+          spells]{storm spell} in half the time it would normally take.
+          Additionally, once per long rest, you may cast a @L[Category:Storm
+          element spells]{storm spell} as though you were
+          @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
+          @L[Ability:Bouncy Casting]{Bouncy} and @L[Ability:Illusive
+          Casting]{Illusive} casting styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
+          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
+        proficient: >-
+          <p>You may now use the benefits from [[lookup name]]
+          @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
+          rest}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: int
+          value: 0
+    type: ability
 img: systems/teriock/src/icons/abilities/storm-disciplines.webp
 name: Storm Disciplines
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!stormDisciplines'

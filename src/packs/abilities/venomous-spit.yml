@@ -1,57 +1,50 @@
 _id: venomousSpit0000
+_key: '!items!venomousSpit0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Venomous Spit
-    type: ability
+  - _id: venomousSpit0000
+    _key: '!items.effects!venomousSpit0000.venomousSpit0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/venomous-spit.webp
-    _id: venomousSpit0000
+    name: Venomous Spit
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 1
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: No Limit
       delivery:
         base: missile
         package: ray
+      duration:
+        dawn: false
+        description: No Limit
+        raw: '0'
+        stationary: false
+        unit: unlimited
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      interaction: attack
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @L[Core:Damage]{damage}.</p>
-      powerSources:
-        - martial
-      range:
-        raw: '10'
-        unit: ft
-      targets:
-        - vitals
       impacts:
         base:
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: target
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -60,25 +53,31 @@ effects:
                   skip: 0
                   time: end
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: target
           rolls:
             damage: 1d6[toxic]
             endCon: 2d4
           statuses:
             - poisoned
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!venomousSpit0000.venomousSpit0000'
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target is @L[Condition:Poisoned]{poisoned}. The
+          @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @L[Core:Damage]{damage}.</p>
+      piercing:
+        raw: 1
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      revealed: true
+      targets:
+        - vitals
+    type: ability
 img: systems/teriock/src/icons/abilities/venomous-spit.webp
 name: Venomous Spit
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!venomousSpit0000'

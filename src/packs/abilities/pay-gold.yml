@@ -1,40 +1,52 @@
 _id: payGold000000000
+_key: '!items!payGold000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Pay Gold
-    type: ability
+  - _id: payGold000000000
+    _key: '!items.effects!payGold000000000.payGold000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/pay-gold.webp
-    _id: payGold000000000
+    name: Pay Gold
     system:
+      basic: true
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        material: true
         gp:
           type: variable
           value:
             static: 0
             variable: <p>An amount of @L[Equipment:Coin]{gold} of your choosing.</p>
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
-      basic: true
+        material: true
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
+      impacts:
+        base:
+          endStatuses:
+            - hollied
+            - terrored
       interaction: manifest
       maneuver: active
       overview:
@@ -42,30 +54,17 @@ effects:
           <p>If the target is "@L[Damage:Financial]{indebted}", this pays off an
           amount of their debt equal to the amount paid upon using [[lookup
           name]].</p>
+      piercing:
+        raw: 0
       powerSources:
         - divine
         - financial
       range:
         unit: self
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          endStatuses:
-            - hollied
-            - terrored
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!payGold000000000.payGold000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/pay-gold.webp
 name: Pay Gold
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!payGold000000000'

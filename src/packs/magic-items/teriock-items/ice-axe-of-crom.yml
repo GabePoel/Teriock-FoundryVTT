@@ -1,269 +1,53 @@
-name: Ice Axe of Crom
-type: equipment
-folder: X3rVK7Ngg1mHq1vl
-system:
-  equipmentType: Pickaxe
-  consumable: false
-  damage:
-    base:
-      saved: 1d8
-    twoHanded:
-      saved: 1d10
-  weight:
-    saved: 15
-    raw: 0
-  range:
-    long:
-      unit: melee
-    short:
-      unit: melee
-    ranged: false
-  equipmentClasses:
-    - impactWeapons
-  minStr:
-    saved: -1
-    raw: -3
-  powerLevel: magic
-  fightingStyle: gladiator
-  tier:
-    saved: 1 + min(@rank.mag, 1)
-  notes: >-
-    <p>Made by the @L[Creature:Dwarf]{dwarves} of the Teriock mountains, these
-    items are only found in the Far East near Odilathen. Sometimes use by
-    pirates on the Inner Sea, these weapons are not often encountered anymore
-    due to the retreat of the dwarves to their ancestral caves in the early
-    Second Age.</p>
-  attackPenalty:
-    raw: '-4'
-img: systems/teriock/src/assets/items/ice-axe-of-crom.webp
+_id: iceAxeOfCrom0000
+_key: '!items!iceAxeOfCrom0000'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.sm20H2opIgCv1DgS
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Versatile
-    type: property
-    system:
-      description: >-
-        <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be
-        used in one or two hands. The two-handed damage value appears in
-        parentheses next to the one-handed value.</p>
-      form: intrinsic
-    _id: 2NUbdpSCrYIIuTFD
-    img: systems/teriock/src/icons/properties/versatile.webp
+  - _id: UOgFBVrt5unmCZlb
+    _key: '!items.effects!iceAxeOfCrom0000.UOgFBVrt5unmCZlb'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.armorPiercing000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.versatile0000000
-    _key: '!items.effects!NRx4igusRRoAHFwx.2NUbdpSCrYIIuTFD'
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: lU4awaXin8c9SC60
-    img: systems/teriock/src/icons/properties/weapon.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-    _key: '!items.effects!NRx4igusRRoAHFwx.lU4awaXin8c9SC60'
-  - name: Armor Piercing
-    type: property
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/properties/armor-piercing.webp
+    name: Armor Piercing
     system:
+      competence:
+        raw: 0
       description: >-
         <p>An item with this property is @L[Property:AV0]{AV0} when wielded in
         two hands.</p>
       form: intrinsic
       revealed: true
-    _id: UOgFBVrt5unmCZlb
+    type: property
+  - _id: PWtoetMZ9Mi0gNta
+    _key: '!items.effects!iceAxeOfCrom0000.PWtoetMZ9Mi0gNta'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.armorPiercing000
+      compendiumSource: Compendium.teriock.abilities.Item.freezingStrike00
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NRx4igusRRoAHFwx.UOgFBVrt5unmCZlb'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      effectTypes:
-        - killing
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-      revealed: true
-      grantOnly: false
-    _id: kw5J0AvEGmFFVw84
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NRx4igusRRoAHFwx.kw5J0AvEGmFFVw84'
-  - name: Hack
-    type: ability
-    img: systems/teriock/src/icons/abilities/hack.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - arm
-        - leg
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
-          gets dealt accordingly.</p>
-      results:
-        hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
-        critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
-      revealed: true
-      grantOnly: true
-    _id: 1EO2Yxp6wl6EfVCr
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NRx4igusRRoAHFwx.1EO2Yxp6wl6EfVCr'
-  - name: Freezing Strike
-    type: ability
-    _id: PWtoetMZ9Mi0gNta
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/freezing-strike.webp
+    name: Freezing Strike
     system:
-      revealed: true
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: action
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: start
-                  trigger: action
-            changeOnCrit: true
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frozen
-        heightened:
-          rolls:
-            damage: 1d4[magic ice]
+      competence:
+        raw: 0
       delivery:
         base: weapon
         package: strike
       duration:
-        unit: minute
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - temporal
       elements:
@@ -272,47 +56,279 @@ effects:
         <p>At the start of each of the target's actions, they roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       gifted:
-        enabled: true
         amount: 1
+        enabled: true
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic ice]
       interaction: attack
       maneuver: active
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
-        unit: ft
         raw: Your Weapon's Range
+        unit: ft
       results:
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
       targets:
         - creature
+    type: ability
+  - _id: 1EO2Yxp6wl6EfVCr
+    _key: '!items.effects!iceAxeOfCrom0000.1EO2Yxp6wl6EfVCr'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.freezingStrike00
+      compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!NRx4igusRRoAHFwx.PWtoetMZ9Mi0gNta'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/hack.webp
+    name: Hack
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: true
+      impacts:
+        base:
+          hacks:
+            - arm
+            - leg
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
+          gets dealt accordingly.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
+          legs, depending on what you chose.</p>
+        hit: >-
+          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    type: ability
+  - _id: kw5J0AvEGmFFVw84
+    _key: '!items.effects!iceAxeOfCrom0000.kw5J0AvEGmFFVw84'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    type: ability
+  - _id: 2NUbdpSCrYIIuTFD
+    _key: '!items.effects!iceAxeOfCrom0000.2NUbdpSCrYIIuTFD'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.versatile0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/versatile.webp
+    name: Versatile
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be
+        used in one or two hands. The two-handed damage value appears in
+        parentheses next to the one-handed value.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: lU4awaXin8c9SC60
+    _key: '!items.effects!iceAxeOfCrom0000.lU4awaXin8c9SC60'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
 flags:
   teriock:
     dontConsume: false
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.sm20H2opIgCv1DgS
-_id: NRx4igusRRoAHFwx
-_key: '!items!NRx4igusRRoAHFwx'
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/ice-axe-of-crom.webp
+name: Ice Axe of Crom
+system:
+  attackPenalty:
+    raw: '-4'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d8
+    twoHanded:
+      raw: 1d10
+  equipmentClasses:
+    - impactWeapons
+  equipmentType: Pickaxe
+  fightingStyle: gladiator
+  minStr:
+    raw: '-1'
+  notes: >-
+    <p>Made by the @L[Creature:Dwarf]{dwarves} of the Teriock mountains, these
+    items are only found in the Far East near Odilathen. Sometimes use by
+    pirates on the Inner Sea, these weapons are not often encountered anymore
+    due to the retreat of the dwarves to their ancestral caves in the early
+    Second Age.</p>
+  powerLevel: magic
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  tier:
+    raw: 1 + min(@rank.mag, 1)
+  vitals: false
+  weight:
+    raw: '15'
+type: equipment

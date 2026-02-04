@@ -1,55 +1,46 @@
-_id: rank4Necromancer
-folder: necromancer00000
-name: Rank 4 Necromancer
-system:
-  archetype: mage
-  className: necromancer
-  classRank: 4
-  competence:
-    raw: 1
-  description: >-
-    <p>The true dealer of death, Necromancers are most at home in the cemetery
-    digging up future minions. Shunned by most of society, these dark mages are
-    not necessarily evil, they simply see death as full of potential energy
-    while others see it as the end of life. Necromancers fear nothing, as they
-    are always facing death. If you are playing a Necromancer be unafraid, kill
-    without remorse and be interested in dead bodies, close to death yourself,
-    almost in another world.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-type: rank
-img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp
+_id: r4Nec00000000000
+_key: '!items!r4Nec00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Additional Necromancy Rotators
-    type: ability
+  - _id: xA54xZe45OymoYLK
+    _key: '!items.effects!r4Nec00000000000.xA54xZe45OymoYLK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.adlNecroRots0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
     img: systems/teriock/src/icons/abilities/additional-necromancy-rotators.webp
+    name: Additional Necromancy Rotators
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: necromancer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Augment Undead]{Augment Undead} and
@@ -57,209 +48,51 @@ effects:
           @L[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      class: necromancer
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
       revealed: true
-      grantOnly: false
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: 0J9CrQq9kLFUU4Iu
+    _key: '!items.effects!r4Nec00000000000.0J9CrQq9kLFUU4Iu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ampNecroSpells00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.adlNecroRots0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: xA54xZe45OymoYLK
-    _key: '!items.effects!rank4Necromancer.xA54xZe45OymoYLK'
-  - name: Augment Undead
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: hour
-        quantity: 24
-        stationary: false
-        description: 24 Hours
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Target gains 1 @L[Core:Common Undead Abilities]{common undead
-          ability} of your
-          choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.eiraErq2sZaDK98b
-          rollable]</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      endCondition: <p>Target is no longer @L[Category:Undead creatures]{undead}.</p>
-      requirements: <p>Target is @L[Category:Undead creatures]{undead}.</p>
-      expansionSaveAttribute: mov
-      form: special
-      _sup: xA54xZe45OymoYLK
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/augment-undead.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.augmentUndead000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: Dy9C0qPHsJtl6L3x
-    _key: '!items.effects!rank4Necromancer.Dy9C0qPHsJtl6L3x'
-  - name: Spirit Pact
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - other
-      elements:
-        - necromancy
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>You make a pact with some spirit, @L[Category:Elemental
-          creatures]{elemental}, @L[Category:Demons]{demon},
-          @L[Category:Outsider creatures]{outsider}, or other supernatural
-          being. In doing this, you are free to offer some sort of vow or
-          sacrifice to the entity in question, but you do not have to. If the
-          entity is interested in making a pact with you, they will offer you
-          one that you can choose to either accept or reject. If you accept, you
-          gain the benefits of the pact, but you must also fulfill its terms and
-          live with the consequences of your choice. If you reject the pact,
-          then you may not attempt to make another pact for at least 24 hours.
-          The entity that you rejected is aware that you have rejected their
-          offer and may not offer you another pact. Rather, they have likely
-          taken offense to your rejection and may seek to punish you for it.
-          When the pact is offered, you may not ask any clarifying questions,
-          and you must accept or reject the pact as it is offered.</p>
-        proficient: >-
-          <p>You may ask up to @L[Core:Proficiency Bonus]{P} yes or no questions
-          about the pact before you make your decision. The entity will answer
-          truthfully, but will not offer any additional information.</p>
-        fluent: >-
-          <p>You may now ask up to @L[Core:Fluency Bonus]{F} yes or no questions
-          about the pact before you make your decision. In addition, you may ask
-          one question to which you receive a more involved answer. The entity
-          will answer this question truthfully.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: necromancer
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 3
-        hp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      form: special
-      effectTypes:
-        - longRange
-        - contract
-      _sup: xA54xZe45OymoYLK
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/spirit-pact.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spiritPact000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: dJHmAzHGDIw0BSPE
-    _key: '!items.effects!rank4Necromancer.dJHmAzHGDIw0BSPE'
-  - name: Amplify Necromancy Spells
-    type: ability
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/amplify-necromancy-spells.webp
+    name: Amplify Necromancy Spells
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: necromancer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Core:Attack Interaction]{attack} with @L[Ability:Death
@@ -274,121 +107,120 @@ effects:
           additional or repeated targets.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: necromancer
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 0J9CrQq9kLFUU4Iu
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ampNecroSpells00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Necromancer.0J9CrQq9kLFUU4Iu'
-  - name: Necromancy Rotator Fluency
-    type: ability
-    img: systems/teriock/src/icons/abilities/necromancy-rotator-fluency.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You may rotate between @L[Category:Necromancy element
-          spells]{necromancy} rotator @L[Category:Spells]{spells} during a
-          @L[Core:Short Rest]{short rest} instead of a @L[Core:Long Rest]{long
-          rest}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Necromancy
-          Rotators]{Necromancy Rotators}. (This does not make you
-          @L[Core:Fluency Bonus]{fluent} in the @L[Category:Spells]{spells}
-          themselves.)</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: necromancer
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.necromancyRotators'
-              value: '2'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: cCxUqjkZ41n5NbD3
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroRotFluency0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Necromancer.cCxUqjkZ41n5NbD3'
-  - name: Expanded Necromancy Elder Sorcery
-    type: ability
-    img: systems/teriock/src/icons/abilities/expanded-necromancy-elder-sorcery.webp
-    system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: slow
-      executionTime: Long Rest
-      delivery:
-        base: self
       targets:
         - self
+    type: ability
+  - _id: Dy9C0qPHsJtl6L3x
+    _key: '!items.effects!r4Nec00000000000.Dy9C0qPHsJtl6L3x'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.augmentUndead000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/augment-undead.webp
+    name: Augment Undead
+    system:
+      _sup: xA54xZe45OymoYLK
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
       elements:
         - necromancy
+      endCondition: <p>Target is no longer @L[Category:Undead creatures]{undead}.</p>
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Target gains 1 @L[Core:Common Undead Abilities]{common undead
+          ability} of your
+          choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.eiraErq2sZaDK98b
+          rollable]</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target is @L[Category:Undead creatures]{undead}.</p>
+      revealed: true
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 1r9NkHHxpXmJ6sLN
+    _key: '!items.effects!r4Nec00000000000.1r9NkHHxpXmJ6sLN'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.expandedNecroES0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/expanded-necromancy-elder-sorcery.webp
+    name: Expanded Necromancy Elder Sorcery
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
+        unit: instant
+      elderSorcery: true
+      elements:
+        - necromancy
+      executionTime: Long Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -412,57 +244,116 @@ effects:
           Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
           Words]{Celestial Elder Sorcery Words}, and @L[Ability:Necromancy Elder
           Sorcery Words]{Necromancy Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       results:
-        save: <p>You learn the spell or word.</p>
         fail: >-
           <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
           that spell or word again.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        save: <p>You learn the spell or word.</p>
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: BJB7gS2iyaE1o3wj
+    _key: '!items.effects!r4Nec00000000000.BJB7gS2iyaE1o3wj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.intrusiveCasting
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
+    name: Intrusive Casting
+    system:
+      _sup: c03uQvPFAXLocKls
       class: necromancer
-      expansionSaveAttribute: mov
-      form: special
       competence:
         raw: 0
-      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    _id: 1r9NkHHxpXmJ6sLN
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The range of the triggering @L[Category:Spells]{spell} is
+          doubled.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You are casting a @L[Category:Spells]{spell} with a range other than
+        @L[Category:Self target spells]{self}.</p>
+    type: ability
+  - _id: c03uQvPFAXLocKls
+    _key: '!items.effects!r4Nec00000000000.c03uQvPFAXLocKls'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.necroDisciplines
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.expandedNecroES0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank4Necromancer.1r9NkHHxpXmJ6sLN'
-  - name: Necromancy Disciplines
-    type: ability
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/necromancy-disciplines.webp
+    name: Necromancy Disciplines
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: necromancer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -473,116 +364,186 @@ effects:
           were @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
           @L[Ability:Intrusive Casting]{Intrusive} and @L[Ability:Oppressive
           Casting]{Oppressive} casting styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
+          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
         proficient: >-
           <p>You may now use the benefits from [[lookup name]]
           @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
           rest}.</p>
-        fluent: >-
-          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
-          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: int
-          amount: proficiency
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: int
+          value: 1
+    type: ability
+  - _id: cCxUqjkZ41n5NbD3
+    _key: '!items.effects!r4Nec00000000000.cCxUqjkZ41n5NbD3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.necroRotFluency0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/necromancy-rotator-fluency.webp
+    name: Necromancy Rotator Fluency
+    system:
       class: necromancer
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.necromancyRotators'
+              target: ability
+              time: fluency
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @L[Category:Necromancy element
+          spells]{necromancy} rotator @L[Category:Spells]{spells} during a
+          @L[Core:Short Rest]{short rest} instead of a @L[Core:Long Rest]{long
+          rest}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Necromancy
+          Rotators]{Necromancy Rotators}. (This does not make you
+          @L[Core:Fluency Bonus]{fluent} in the @L[Category:Spells]{spells}
+          themselves.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: td63laRCpKoaADrC
+    _key: '!items.effects!r4Nec00000000000.td63laRCpKoaADrC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.necroSS000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroDisciplines
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: c03uQvPFAXLocKls
-    _key: '!items.effects!rank4Necromancer.c03uQvPFAXLocKls'
-  - name: Intrusive Casting
-    type: ability
+    img: systems/teriock/src/icons/abilities/necromancy-spell-strikes.webp
+    name: Necromancy Spell Strikes
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      class: necromancer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - spell
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
+        description: Always Active
+        raw: '0'
         stationary: false
-        description: Instant
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
-          <p>The range of the triggering @L[Category:Spells]{spell} is
-          doubled.</p>
+          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
+          Strike]{Spell Strike}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: BNurBexkjTBc6BeZ
+    _key: '!items.effects!r4Nec00000000000.BNurBexkjTBc6BeZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.oppressiveCastin
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
+    name: Oppressive Casting
+    system:
+      _sup: c03uQvPFAXLocKls
       class: necromancer
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You are casting a @L[Category:Spells]{spell} with a range other than
-        @L[Category:Self target spells]{self}.</p>
-      form: normal
-      _sup: c03uQvPFAXLocKls
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.intrusiveCasting
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: BJB7gS2iyaE1o3wj
-    _key: '!items.effects!rank4Necromancer.BJB7gS2iyaE1o3wj'
-  - name: Oppressive Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
       delivery:
         base: self
-      targets:
-        - spell
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>If the triggering @L[Category:Spells]{spell} is an
@@ -593,108 +554,59 @@ effects:
           @L[Core:Disadvantage]{disadvantage}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: necromancer
+      targets:
+        - spell
+      trigger: >-
+        <p>You cast an @L[Category:Attack spells]{attack} or @L[Category:Feat
+        spells]{feat interaction spell}.</p>
+    type: ability
+  - _id: xXrh8VyRkRk09hIi
+    _key: '!items.effects!r4Nec00000000000.xXrh8VyRkRk09hIi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: td63laRCpKoaADrC
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You cast an @L[Category:Attack spells]{attack} or @L[Category:Feat
-        spells]{feat interaction spell}.</p>
-      form: normal
-      _sup: c03uQvPFAXLocKls
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.oppressiveCastin
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: BNurBexkjTBc6BeZ
-    _key: '!items.effects!rank4Necromancer.BNurBexkjTBc6BeZ'
-  - name: Necromancy Spell Strikes
-    type: ability
-    img: systems/teriock/src/icons/abilities/necromancy-spell-strikes.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
-          Strike]{Spell Strike}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: necromancer
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroSS000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: td63laRCpKoaADrC
-    _key: '!items.effects!rank4Necromancer.td63laRCpKoaADrC'
-  - name: Spell Strike
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
-      range:
-        unit: melee
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Death Ray]{Death Ray} and
+        @L[Ability:Terror Ball]{Terror Ball}.</p>
+      maneuver: reactive
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @L[Category:Conjured
@@ -704,45 +616,141 @@ effects:
           critical hit" effect instead.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just landed a hit with a @L[Category:Weapon delivery
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable with @L[Ability:Death Ray]{Death Ray} and
-        @L[Ability:Terror Ball]{Terror Ball}.</p>
-      _sup: td63laRCpKoaADrC
+    type: ability
+  - _id: dJHmAzHGDIw0BSPE
+    _key: '!items.effects!r4Nec00000000000.dJHmAzHGDIw0BSPE'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritPact000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spirit-pact.webp
+    name: Spirit Pact
+    system:
+      _sup: xA54xZe45OymoYLK
+      class: necromancer
       competence:
         raw: 0
-      revealed: true
+      costs:
+        hp:
+          type: static
+          value:
+            static: 1
+        mp:
+          type: static
+          value:
+            static: 3
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - longRange
+        - contract
+      elements:
+        - necromancy
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: xXrh8VyRkRk09hIi
-    _key: '!items.effects!rank4Necromancer.xXrh8VyRkRk09hIi'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank4Necromancer'
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You make a pact with some spirit, @L[Category:Elemental
+          creatures]{elemental}, @L[Category:Demons]{demon},
+          @L[Category:Outsider creatures]{outsider}, or other supernatural
+          being. In doing this, you are free to offer some sort of vow or
+          sacrifice to the entity in question, but you do not have to. If the
+          entity is interested in making a pact with you, they will offer you
+          one that you can choose to either accept or reject. If you accept, you
+          gain the benefits of the pact, but you must also fulfill its terms and
+          live with the consequences of your choice. If you reject the pact,
+          then you may not attempt to make another pact for at least 24 hours.
+          The entity that you rejected is aware that you have rejected their
+          offer and may not offer you another pact. Rather, they have likely
+          taken offense to your rejection and may seek to punish you for it.
+          When the pact is offered, you may not ask any clarifying questions,
+          and you must accept or reject the pact as it is offered.</p>
+        fluent: >-
+          <p>You may now ask up to @L[Core:Fluency Bonus]{F} yes or no questions
+          about the pact before you make your decision. In addition, you may ask
+          one question to which you receive a more involved answer. The entity
+          will answer this question truthfully.</p>
+        proficient: >-
+          <p>You may ask up to @L[Core:Proficiency Bonus]{P} yes or no questions
+          about the pact before you make your decision. The entity will answer
+          truthfully, but will not offer any additional information.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - other
+    type: ability
+folder: necromancer00000
+img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp
+name: Rank 4 Necromancer
+system:
+  archetype: mage
+  className: necromancer
+  classRank: 4
+  competence:
+    raw: 1
+  description: >-
+    <p>The true dealer of death, Necromancers are most at home in the cemetery
+    digging up future minions. Shunned by most of society, these dark mages are
+    not necessarily evil, they simply see death as full of potential energy
+    while others see it as the end of life. Necromancers fear nothing, as they
+    are always facing death. If you are playing a Necromancer be unafraid, kill
+    without remorse and be interested in dead bodies, close to death yourself,
+    almost in another world.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

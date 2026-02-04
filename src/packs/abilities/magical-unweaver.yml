@@ -1,82 +1,45 @@
 _id: magalUnweaver000
+_key: '!items!magalUnweaver000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Magical Unweaver
-    type: ability
-    img: systems/teriock/src/icons/abilities/magical-unweaver.webp
-    _id: magalUnweaver000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Dispel Magic]{Dispel Magic},
-          @L[Ability:Interrupt Magic]{Interrupt Magic}, and @L[Ability:Mitigate
-          Magic]{Mitigate Magic}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      impacts: {}
+  - _id: xQ45smRPF1ZAKxDp
+    _key: '!items.effects!magalUnweaver000.xQ45smRPF1ZAKxDp'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.dispelMag0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!magalUnweaver000.magalUnweaver000'
-  - name: Dispel Magic
-    type: ability
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
-    _id: xQ45smRPF1ZAKxDp
+    name: Dispel Magic
     system:
+      _sup: magalUnweaver000
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
         somatic: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        verbal: true
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       elements:
         - storm
       endCondition: <p>The start of your next turn.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -89,22 +52,25 @@ effects:
         base: >-
           <p>Target @L[Category:Conjured spells]{spell}
           @L[Core:Fizzles]{fizzles}.</p>
-        proficient: >-
-          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
-          additional times as a @L[Category:Free reaction abilities]{free
-          reaction} before the start of your next turn. These additional uses do
-          not in turn allow for additional uses.</p>
         fluent: >-
           <p>You may now use [[lookup name]] @L[Core:Fluency Bonus]{F}
           additional times as a @L[Category:Free reaction abilities]{free
           reaction} before the start of your next turn. These additional uses do
           not in turn allow for additional uses.</p>
+        proficient: >-
+          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
+          additional times as a @L[Category:Free reaction abilities]{free
+          reaction} before the start of your next turn. These additional uses do
+          not in turn allow for additional uses.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '30'
         unit: ft
       requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -113,53 +79,68 @@ effects:
       trigger: >-
         <p>A @L[Category:Conjured spells]{conjured spell} is used within
         range.</p>
-      impacts: {}
-      _sup: magalUnweaver000
-      class: stormMage
+    type: ability
+  - _id: 8SRjaidoxcNSh1An
+    _key: '!items.effects!magalUnweaver000.8SRjaidoxcNSh1An'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.dispelMag0000000
+      compendiumSource: Compendium.teriock.abilities.Item.interruptMag0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!magalUnweaver000.xQ45smRPF1ZAKxDp'
-  - name: Interrupt Magic
-    type: ability
     img: systems/teriock/src/icons/abilities/interrupt-magic.webp
-    _id: 8SRjaidoxcNSh1An
+    name: Interrupt Magic
     system:
+      _sup: magalUnweaver000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: unp
       form: special
       grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
@@ -172,65 +153,88 @@ effects:
           abilities]{magical abilities.}  Any @L[Category:Magically powered
           abilities]{magical} @L[Category:Sustained abilities]{sustained
           abilities} on them @L[Core:Fizzles]{fizzle}.</p>
+      revealed: true
       rotator: true
       targets:
         - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-      _sup: magalUnweaver000
+    type: ability
+  - _id: magalUnweaver000
+    _key: '!items.effects!magalUnweaver000.magalUnweaver000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.interruptMag0000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!magalUnweaver000.8SRjaidoxcNSh1An'
-  - name: Mitigate Magic
-    type: ability
-    img: systems/teriock/src/icons/abilities/mitigate-magic.webp
-    _id: tYsiwz1nIuF8jlNs
+    img: systems/teriock/src/icons/abilities/magical-unweaver.webp
+    name: Magical Unweaver
     system:
       competence:
         raw: 0
-      suppression: {}
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Dispel Magic]{Dispel Magic},
+          @L[Ability:Interrupt Magic]{Interrupt Magic}, and @L[Ability:Mitigate
+          Magic]{Mitigate Magic}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
       revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: tYsiwz1nIuF8jlNs
+    _key: '!items.effects!magalUnweaver000.tYsiwz1nIuF8jlNs'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mitigateMag00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mitigate-magic.webp
+    name: Mitigate Magic
+    system:
+      _sup: magalUnweaver000
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -243,10 +247,13 @@ effects:
           effect}, it only hits you, items you @L[Keyword:Bearing]{bare}, and
           the @L[Core:Size]{space you take up}, according to what it
           @L[Core:Targets]{targets}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -256,21 +263,7 @@ effects:
         <p>You, an item you @L[Keyword:Bearing]{bare}, or a space within reach
         of you, would be affected by a @L[Category:Magically powered
         abilities]{magical effect.}</p>
-      impacts: {}
-      _sup: magalUnweaver000
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mitigateMag00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!magalUnweaver000.tYsiwz1nIuF8jlNs'
+    type: ability
 img: systems/teriock/src/icons/abilities/magical-unweaver.webp
 name: Magical Unweaver
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!magalUnweaver000'

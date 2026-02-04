@@ -1,32 +1,56 @@
 _id: stormMagInept000
+_key: '!items!stormMagInept000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Storm Magic Inept
-    type: ability
+  - _id: stormMagInept000
+    _key: '!items.effects!stormMagInept000.stormMagInept000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/storm-magic-inept.webp
-    _id: stormMagInept000
+    name: Storm Magic Inept
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.system.gifted.enabled
+              mode: 4
+              priority: 10
+              qualifier: '@element.storm'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.system.gifted.amount
+              mode: 2
+              priority: 10
+              qualifier: '@element.storm'
+              target: ability
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,41 +58,16 @@ effects:
           <p>You are @L[Keyword:Inept]{inept} at @L[Category:Magically powered
           abilities]{magical} @L[Category:Storm element abilities]{storm
           abilities}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.system.gifted.enabled
-              target: ability
-              qualifier: '@element.storm'
-              value: 'true'
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.system.gifted.amount
-              target: ability
-              qualifier: '@element.storm'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stormMagInept000.stormMagInept000'
+    type: ability
 img: systems/teriock/src/icons/abilities/storm-magic-inept.webp
 name: Storm Magic Inept
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!stormMagInept000'

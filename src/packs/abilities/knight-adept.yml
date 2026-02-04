@@ -1,32 +1,56 @@
 _id: kniAdept00000000
+_key: '!items!kniAdept00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Knight Adept
-    type: ability
+  - _id: kniAdept00000000
+    _key: '!items.effects!kniAdept00000000.kniAdept00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/knight-adept.webp
-    _id: kniAdept00000000
+    name: Knight Adept
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.adept.enabled
+              mode: 5
+              priority: 10
+              qualifier: '@class.knight'
+              target: ability
+              time: normal
+              value: 'true'
+            - key: system.adept.amount
+              mode: 4
+              priority: 10
+              qualifier: '@class.knight'
+              target: ability
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,41 +58,16 @@ effects:
           <p>You are @L[Keyword:Adept]{adept} at @L[Category:Knight class
           abilities]{abilities} you get from ranks in
           @L[Class:Knight]{Knight}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.adept.enabled
-              target: ability
-              qualifier: '@class.knight'
-              value: 'true'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.adept.amount
-              target: ability
-              qualifier: '@class.knight'
-              value: '1'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kniAdept00000000.kniAdept00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/knight-adept.webp
 name: Knight Adept
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!kniAdept00000000'

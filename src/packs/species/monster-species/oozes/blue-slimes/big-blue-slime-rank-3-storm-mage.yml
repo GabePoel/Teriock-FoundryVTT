@@ -1,56 +1,48 @@
 _id: bMgsTEG2KkEmMGit
-folder: Tk6pbr9vvAktVhpb
-name: Rank 3 Storm Mage
-system:
-  archetype: mage
-  className: stormMage
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>The true wonder seeker, these mages are the philosophers of the world,
-    always seeking out more knowledge and more wisdom. The Storm Mage is a
-    logician, a tactical intellectual who prefers to neutralize opponents rather
-    than destroy them. Often cold, the Storm Mage is also tumultuous and crafty.
-    If you are playing a Storm Mage, be curious, hungry for information, always
-    in the clouds, tricky and clever, eluding rather than confronting.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: bigBlueSlime0000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-storm-mage.webp
+_key: '!items!bMgsTEG2KkEmMGit'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r3Sto00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Additional Storm Rotators
-    type: ability
+  - _id: BVSGkZaYwHz2UPKP
+    _key: '!items.effects!bMgsTEG2KkEmMGit.BVSGkZaYwHz2UPKP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.adlStormRots0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
+    name: Additional Storm Rotators
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: stormMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Reflect Magic]{Reflect Magic} and
@@ -58,207 +50,54 @@ effects:
           @L[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
-      skill: true
-      class: stormMage
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - martial
       range:
         unit: self
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.adlStormRots0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: BVSGkZaYwHz2UPKP
-    _key: '!items.effects!bMgsTEG2KkEmMGit.BVSGkZaYwHz2UPKP'
-  - name: Reflect Magic
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: aura
-      targets:
-        - spell
-      elements:
-        - storm
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
-          range. Their casters take the spells' effects instead.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      class: stormMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 15 feet.</p>
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
-      trigger: >-
-        <p>A @L[Category:Conjured spells]{conjured spell} is used within
-        range.</p>
-      form: special
-      _sup: BVSGkZaYwHz2UPKP
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/reflect-magic.webp
-    flags:
-      teriock:
-        dontConsume: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reflectMag000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: aojUxv17gVm6riy8
-    _key: '!items.effects!bMgsTEG2KkEmMGit.aojUxv17gVm6riy8'
-  - name: Teleport
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - area
-        - creature
-      elements:
-        - storm
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Target creature is moved to a location you have studied within your
-          level in miles. You can study locations by performing this ritual on
-          an area you are in over the course of a @L[Core:Long Rest]{long rest}.
-          This location must be a static part of the environment, not a moving
-          location like a wagon or ship. If the location substantially changes
-          beyond recognition, your ritual will fail to transport creatures
-          there. You can only have 2 location studied at a time.</p>
-        proficient: >-
-          <p>You may now have 2 × @L[Core:Proficiency Bonus]{P} locations
-          studied and can [[lookup name style=lc]] a distance of up to
-          @L[Core:Proficiency Bonus]{P} × your level in miles.</p>
-        fluent: >-
-          <p>You may now have 2 × @L[Core:Fluency Bonus]{F} locations studied
-          and can [[lookup name style=lc]] a distance of up to @L[Core:Fluency
-          Bonus]{F} × your level in miles.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
-      ritual: true
-      class: stormMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, your maximum [[lookup name
-        style=lc]] distance increases by your level in miles.</p>
-      form: special
-      effectTypes:
-        - displacement
-        - longRange
-      _sup: BVSGkZaYwHz2UPKP
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/teleport.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.teleport00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: vsigFigSZyZlUNmP
-    _key: '!items.effects!bMgsTEG2KkEmMGit.vsigFigSZyZlUNmP'
-  - name: Expanded Storm Elder Sorcery
-    type: ability
-    img: systems/teriock/src/icons/abilities/expanded-storm-elder-sorcery.webp
-    system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: slow
-      executionTime: Long Rest
-      delivery:
-        base: self
+      skill: true
       targets:
         - self
+    type: ability
+  - _id: zxnrJAzQWxbgpBqf
+    _key: '!items.effects!bMgsTEG2KkEmMGit.zxnrJAzQWxbgpBqf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.expandedStormES0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/expanded-storm-elder-sorcery.webp
+    name: Expanded Storm Elder Sorcery
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elderSorcery: true
       elements:
         - storm
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
+      executionTime: Long Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -282,43 +121,204 @@ effects:
           Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
           Words]{Celestial Elder Sorcery Words}, and @L[Ability:Storm Elder
           Sorcery Words]{Storm Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       results:
-        save: <p>You learn the spell or word.</p>
         fail: >-
           <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
           that spell or word again.</p>
-      piercing:
-        raw: 0
+        save: <p>You learn the spell or word.</p>
+      revealed: true
       skill: true
       standard: true
-      class: stormMage
-      form: special
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: zxnrJAzQWxbgpBqf
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
+      targets:
+        - self
+    type: ability
+  - _id: aojUxv17gVm6riy8
+    _key: '!items.effects!bMgsTEG2KkEmMGit.aojUxv17gVm6riy8'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.expandedStormES0
+      compendiumSource: Compendium.teriock.abilities.Item.reflectMag000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
+    flags:
+      teriock:
+        dontConsume: false
+    img: systems/teriock/src/icons/abilities/reflect-magic.webp
+    name: Reflect Magic
+    system:
+      _sup: BVSGkZaYwHz2UPKP
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elements:
+        - storm
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
+        name]] increases by 15 feet.</p>
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target @L[Category:Conjured spells]{spell}
+          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
+          range. Their casters take the spells' effects instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>A @L[Category:Conjured spells]{conjured spell} is used within
+        range.</p>
+    type: ability
+  - _id: vsigFigSZyZlUNmP
+    _key: '!items.effects!bMgsTEG2KkEmMGit.vsigFigSZyZlUNmP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.teleport00000000
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bMgsTEG2KkEmMGit.zxnrJAzQWxbgpBqf'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank3StormMage00
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!bMgsTEG2KkEmMGit'
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/teleport.webp
+    name: Teleport
+    system:
+      _sup: BVSGkZaYwHz2UPKP
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - displacement
+        - longRange
+      elements:
+        - storm
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, your maximum [[lookup name
+        style=lc]] distance increases by your level in miles.</p>
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Target creature is moved to a location you have studied within your
+          level in miles. You can study locations by performing this ritual on
+          an area you are in over the course of a @L[Core:Long Rest]{long rest}.
+          This location must be a static part of the environment, not a moving
+          location like a wagon or ship. If the location substantially changes
+          beyond recognition, your ritual will fail to transport creatures
+          there. You can only have 2 location studied at a time.</p>
+        fluent: >-
+          <p>You may now have 2 × @L[Core:Fluency Bonus]{F} locations studied
+          and can [[lookup name style=lc]] a distance of up to @L[Core:Fluency
+          Bonus]{F} × your level in miles.</p>
+        proficient: >-
+          <p>You may now have 2 × @L[Core:Proficiency Bonus]{P} locations
+          studied and can [[lookup name style=lc]] a distance of up to
+          @L[Core:Proficiency Bonus]{P} × your level in miles.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - area
+        - creature
+    type: ability
+folder: blueSlimes000000
+img: systems/teriock/src/icons/ranks/rank-3-storm-mage.webp
+name: Rank 3 Storm Mage
+system:
+  _sup: bigBlueSlime0000
+  archetype: mage
+  className: stormMage
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>The true wonder seeker, these mages are the philosophers of the world,
+    always seeking out more knowledge and more wisdom. The Storm Mage is a
+    logician, a tactical intellectual who prefers to neutralize opponents rather
+    than destroy them. Often cold, the Storm Mage is also tumultuous and crafty.
+    If you are playing a Storm Mage, be curious, hungry for information, always
+    in the clouds, tricky and clever, eluding rather than confronting.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

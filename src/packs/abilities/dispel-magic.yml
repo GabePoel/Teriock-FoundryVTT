@@ -1,35 +1,43 @@
 _id: dispelMag0000000
+_key: '!items!dispelMag0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Dispel Magic
-    type: ability
+  - _id: dispelMag0000000
+    _key: '!items.effects!dispelMag0000000.dispelMag0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
-    _id: dispelMag0000000
+    name: Dispel Magic
     system:
+      class: stormMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
         somatic: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        verbal: true
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       elements:
         - storm
       endCondition: <p>The start of your next turn.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -42,22 +50,25 @@ effects:
         base: >-
           <p>Target @L[Category:Conjured spells]{spell}
           @L[Core:Fizzles]{fizzles}.</p>
-        proficient: >-
-          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
-          additional times as a @L[Category:Free reaction abilities]{free
-          reaction} before the start of your next turn. These additional uses do
-          not in turn allow for additional uses.</p>
         fluent: >-
           <p>You may now use [[lookup name]] @L[Core:Fluency Bonus]{F}
           additional times as a @L[Category:Free reaction abilities]{free
           reaction} before the start of your next turn. These additional uses do
           not in turn allow for additional uses.</p>
+        proficient: >-
+          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
+          additional times as a @L[Category:Free reaction abilities]{free
+          reaction} before the start of your next turn. These additional uses do
+          not in turn allow for additional uses.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '30'
         unit: ft
       requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
@@ -66,20 +77,7 @@ effects:
       trigger: >-
         <p>A @L[Category:Conjured spells]{conjured spell} is used within
         range.</p>
-      impacts: {}
-      class: stormMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dispelMag0000000.dispelMag0000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/dispel-magic.webp
 name: Dispel Magic
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!dispelMag0000000'

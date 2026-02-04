@@ -1,50 +1,94 @@
 _id: nobleSnake000000
-folder: JWyDfjLkE2E9S902
-name: Noble Snake
-type: species
-img: systems/teriock/src/icons/creatures/noble-snake.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Noble snakes are found throughout southern Teriock and the Southern Isles
-    and are often given a very wide berth for being fierce apex predators. They
-    fear nothing save the packs of @L[Creature:Mongoose Squirrel]{mongoose
-    squirrels} that prey on them.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '8'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  appearance: <p>Giant metallic blue snakes.</p>
-  br: 26
-  innateRanks: "<p>Innately @L[Category:Classes]{rank} 2\_@L[Class:Berserker]{Berserker}. Innately @L[Category:Classes]{rank} 2\_@L[Class:Veteran]{Veteran}.</p>"
-  size:
-    enabled: true
-    value: 8
-  traits:
-    - animal
+_key: '!items!nobleSnake000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Breath Weapon Resistance
-    type: ability
+  - _id: 2b9hXdExpJl1NJxy
+    _key: '!items.effects!nobleSnake000000.2b9hXdExpJl1NJxy'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
+      _sup: 0eWyhU67zbCUAmMW
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Property:AV0]{AV0}.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    type: ability
+  - _id: C6t07r0ozZFSBtmv
+    _key: '!items.effects!nobleSnake000000.C6t07r0ozZFSBtmv'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.breathWepRsc0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/breath-weapon-resistance.webp
+    name: Breath Weapon Resistance
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - resistance
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -58,46 +102,71 @@ effects:
         raw: 0
       powerSources:
         - primal
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: C6t07r0ozZFSBtmv
-    img: systems/teriock/src/icons/abilities/breath-weapon-resistance.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.breathWepRsc0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.C6t07r0ozZFSBtmv'
-  - name: Defensive Martial Arts
-    type: ability
-    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: COJP52tAVu3IoFR5
+    _key: '!items.effects!nobleSnake000000.COJP52tAVu3IoFR5'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+    name: Defensive Martial Arts
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '1'
+        fluent:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '3'
+        proficient:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
@@ -109,124 +178,97 @@ effects:
           Interaction]{block} with them and their @L[Core:Block Value]{BV} is
           +1.</p><div class="note"><b>Note:</b> This does not make your hands
           @L[Property:Blocking]{blocking}.</div>
-        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
         fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
+        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '2'
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: COJP52tAVu3IoFR5
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.COJP52tAVu3IoFR5'
-  - name: Dense Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: PnBSdTbnt9Pxx1tR
+    _key: '!items.effects!nobleSnake000000.PnBSdTbnt9Pxx1tR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: PnBSdTbnt9Pxx1tR
+    type: ability
+  - _id: An7CzHceSQbvWjiq
+    _key: '!items.effects!nobleSnake000000.An7CzHceSQbvWjiq'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.PnBSdTbnt9Pxx1tR'
-  - name: Giant Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/giant-strength.webp
+    name: Giant Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
@@ -235,211 +277,157 @@ effects:
           @L[Property:Cumbersome]{cumbersome} items.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
+    type: ability
+  - _id: j82E9MWpC4ePEZCS
+    _key: '!items.effects!nobleSnake000000.j82E9MWpC4ePEZCS'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: An7CzHceSQbvWjiq
-    _key: '!items.effects!nobleSnake000000.An7CzHceSQbvWjiq'
-  - name: Improved Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      grantOnly: false
-      _sup: An7CzHceSQbvWjiq
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 0eWyhU67zbCUAmMW
-    _key: '!items.effects!nobleSnake000000.0eWyhU67zbCUAmMW'
-  - name: Beastly Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Property:AV0]{AV0}.</div>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      grantOnly: false
       _sup: 0eWyhU67zbCUAmMW
-      upgrades:
-        score:
-          attribute: str
-          value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      class: knight
       competence:
         raw: 0
-      revealed: true
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 2b9hXdExpJl1NJxy
-    _key: '!items.effects!nobleSnake000000.2b9hXdExpJl1NJxy'
-  - name: Improved Armor Piercing
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      grantOnly: false
-      _sup: 0eWyhU67zbCUAmMW
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: j82E9MWpC4ePEZCS
-    _key: '!items.effects!nobleSnake000000.j82E9MWpC4ePEZCS'
-  - name: Melee Damage Boost
-    type: ability
-    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 0eWyhU67zbCUAmMW
+    _key: '!items.effects!nobleSnake000000.0eWyhU67zbCUAmMW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: An7CzHceSQbvWjiq
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
+  - _id: rRJmT88EYX9inKUR
+    _key: '!items.effects!nobleSnake000000.rRJmT88EYX9inKUR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
+    system:
+      _sup: An7CzHceSQbvWjiq
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
         dawn: false
-      range:
-        unit: melee
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -450,48 +438,67 @@ effects:
           @L[Core:Damage]{damage} again.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      class: knight
+      targets:
+        - creature
       trigger: >-
         <p>You have hit a creature with a @L[Category:Damaging
         effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
         @L[Category:Attack abilities]{attack}.</p>
-      form: normal
-      effectTypes:
-        - damaging
-      grantOnly: false
-      _sup: An7CzHceSQbvWjiq
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
+    type: ability
+  - _id: 8nPPaTjURZKvuSt0
+    _key: '!items.effects!nobleSnake000000.8nPPaTjURZKvuSt0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+      compendiumSource: Compendium.teriock.abilities.Item.naturalUnbreacha
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: rRJmT88EYX9inKUR
-    _key: '!items.effects!nobleSnake000000.rRJmT88EYX9inKUR'
-  - name: Natural Unbreachability
-    type: ability
+    img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
+    name: Natural Unbreachability
     system:
+      class: veteran
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.av.bonus
+              mode: 4
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: '1'
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@av'
+              target: body
+              time: normal
+              value: unbreachable
       interaction: manifest
       maneuver: passive
       overview:
@@ -502,61 +509,53 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      class: veteran
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.av.bonus
-              target: body
-              qualifier: '@av'
-              value: '1'
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.props
-              target: body
-              qualifier: '@av'
-              value: unbreachable
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    _id: 8nPPaTjURZKvuSt0
-    img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
+    type: ability
+  - _id: buFCquiEGHH3Ke9g
+    _key: '!items.effects!nobleSnake000000.buFCquiEGHH3Ke9g'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.naturalUnbreacha
+      compendiumSource: Compendium.teriock.abilities.Item.nobleVenom000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.8nPPaTjURZKvuSt0'
-  - name: Noble Venom
-    type: ability
+    img: systems/teriock/src/icons/abilities/noble-venom.webp
+    name: Noble Venom
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.piercing.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: body
+              time: normal
+              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -568,174 +567,175 @@ effects:
       powerSources:
         - primal
         - alchemical
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.piercing.raw
-              target: body
-              qualifier: '1'
-              value: '2'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: buFCquiEGHH3Ke9g
-    img: systems/teriock/src/icons/abilities/noble-venom.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.nobleVenom000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.buFCquiEGHH3Ke9g'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: mMHgGNElDP44naK6
+    _key: '!items.effects!nobleSnake000000.mMHgGNElDP44naK6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: mMHgGNElDP44naK6
+    type: ability
+  - _id: jY79MJHsWJ9lUGVI
+    _key: '!items.effects!nobleSnake000000.jY79MJHsWJ9lUGVI'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.mMHgGNElDP44naK6'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: jY79MJHsWJ9lUGVI
+    type: ability
+  - _id: K3hNKXnw76c0kkQA
+    _key: '!items.effects!nobleSnake000000.K3hNKXnw76c0kkQA'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.jY79MJHsWJ9lUGVI'
-  - name: Sneaky
-    type: ability
     img: systems/teriock/src/icons/abilities/sneaky.webp
+    name: Sneaky
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: K3hNKXnw76c0kkQA
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sneaky0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!nobleSnake000000.K3hNKXnw76c0kkQA'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!nobleSnake000000'
+    type: ability
+folder: southernIsles000
+img: systems/teriock/src/icons/creatures/noble-snake.webp
+name: Noble Snake
+system:
+  appearance: <p>Giant metallic blue snakes.</p>
+  br: 26
+  competence:
+    raw: 1
+  description: >-
+    <p>Noble snakes are found throughout southern Teriock and the Southern Isles
+    and are often given a very wide berth for being fierce apex predators. They
+    fear nothing save the packs of @L[Creature:Mongoose Squirrel]{mongoose
+    squirrels} that prey on them.</p>
+  innateRanks: "<p>Innately @L[Category:Classes]{rank} 2\_@L[Class:Berserker]{Berserker}. Innately @L[Category:Classes]{rank} 2\_@L[Class:Veteran]{Veteran}.</p>"
+  size:
+    enabled: true
+    value: 8
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '8'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - animal
+type: species

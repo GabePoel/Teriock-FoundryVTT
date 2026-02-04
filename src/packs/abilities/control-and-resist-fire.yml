@@ -1,43 +1,70 @@
 _id: ctrlAndResistFir
+_key: '!items!ctrlAndResistFir'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Control and Resist Fire
-    type: ability
+  - _id: ctrlAndResistFir
+    _key: '!items.effects!ctrlAndResistFir.ctrlAndResistFir'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
-    _id: ctrlAndResistFir
+    name: Control and Resist Fire
     system:
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
+        somatic: true
+        verbal: true
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - resistance
       elements:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 2
+              priority: 30
+              qualifier: '@dmg'
+              target: armament
+              time: normal
+              value: 1d4[fire magic]
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: fire
+          rolls:
+            damage: 1d4[fire magic]
       interaction: manifest
       maneuver: active
       overview:
@@ -45,48 +72,20 @@ effects:
           <p>Your @L[Core:Standard Damage]{standard damage} increases by
           [[/damage 1d4[fire magic]]] @L[Core:Damage]{damage}. You also
           @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       rotator: true
       spell: true
       standard: true
       sustained: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 30
-              time: normal
-              key: system.damage.all.raw
-              target: armament
-              qualifier: '@dmg'
-              value: 1d4[fire magic]
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: fire
-          rolls:
-            damage: 1d4[fire magic]
-      class: flameMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ctrlAndResistFir.ctrlAndResistFir'
+    type: ability
 img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
 name: Control and Resist Fire
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!ctrlAndResistFir'

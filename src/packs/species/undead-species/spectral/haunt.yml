@@ -1,54 +1,163 @@
 _id: haunt00000000000
-folder: adG7i8YDbpvGQRi0
-name: Haunt
-type: species
-img: systems/teriock/src/icons/creatures/haunt.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>[[lookup name]]s always have some other baseline @L[Category:Spectral
-    undead creatures]{spectral undead} that they are. They will @L[Ability:Haunt
-    Escalation]{escalate} or @L[Ability:Haunt Deescalation]{deescalate} from
-    this point. [[lookup name]]s often have additional
-    @L[Category:Abilities]{abilities} reflecting who they were in life or
-    whatever it is that is causing them to @L[Ability:Haunting]{haunt}.</p>
-  statDice:
-    hp:
-      disabled: true
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: true
-      faces: 10
-      number:
-        raw: '1'
-  appearance: >-
-    <p>[[lookup name]]s often appear to be transparent @L[Category:Humanoid
-    creatures]{humanoids} with the traits of some type of @L[Category:Spectral
-    undead creatures]{spectral undead}. But, if powerful enough, they may also
-    shape the world around them in a way that reflects the time in which they
-    lived or the circumstances of their @L[Condition:Dead]{death}.</p>
-  br: 15
-  size:
-    enabled: false
-    value: 3
-  traits:
-    - undead
+_key: '!items!haunt00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Haunting
-    type: ability
+  - _id: DuOkUqP4nHB05329
+    _key: '!items.effects!haunt00000000000.DuOkUqP4nHB05329'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hauntDeescalatio
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/haunt-deescalation.webp
+    name: Haunt Deescalation
     system:
+      _sup: VtuzcCGa7INzo53u
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
+        dawn: false
+        description: Instant
+        raw: '0'
         stationary: false
+        unit: instant
+      effectTypes:
+        - automatic
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You become a calmer and less powerful @L[Category:Undead
+          creatures]{undead} being. Every time you deescalate, you move one step
+          back on the following track. For instance, if you were already a
+          @L[Creature:Specter]{specter}, you would deescalate into being a
+          @L[Creature:Phantom]{phantom}.</p><p>@Embed[Compendium.teriock.tables.RollTable.hauntEscalation0]</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - unknown
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      trigger: >-
+        <p>24 hours passes without anyone interacting with you or a someone
+        makes substantial progress towards resolving whatever it is that is
+        causing your haunting in a way that would not aggravate you. This
+        triggers automatically. You cannot choose to not use it if you are able
+        to.</p>
+    type: ability
+  - _id: 3NafPpB4RFtp4ztr
+    _key: '!items.effects!haunt00000000000.3NafPpB4RFtp4ztr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hauntEscalation0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/haunt-escalation.webp
+    name: Haunt Escalation
+    system:
+      _sup: VtuzcCGa7INzo53u
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - automatic
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You remanifest at the start of your next turn as an angrier and
+          more powerful @L[Category:Undead creatures]{undead} being, lashing out
+          at whatever @L[Condition:Dead]{killed} you as well as anything else in
+          your way. This resets all @L[Core:Hit Points and Mana Points]{HP},
+          @L[Core:Hit Points and Mana Points]{MP}, and temporary effects that
+          may be present on you. Every time you escalate, you move one step
+          forward on the following track. For instance, if you were already a
+          @L[Creature:Phantom]{phantom}, you would escalate into being a
+          @L[Creature:Specter]{specter}.</p><p>@Embed[Compendium.teriock.tables.RollTable.hauntEscalation0]</p><p>Most
+          @L[Creature:Haunt]{haunts} do not escalate past
+          @L[Creature:Wraith]{wraith}. But the @L[Core:Game Master]{GM} may rule
+          that certain especially angry or powerful ones have additional
+          @L[Category:Abilities]{abilities} or escalation steps. If you escalate
+          while already fully escalated, you do not change @L[Category:Spectral
+          undead creatures]{species} or gain additional
+          @L[Category:Abilities]{abilities}, but you still become more
+          aggressive, harder to solve, and reset all @L[Core:Hit Points and Mana
+          Points]{HP}, @L[Core:Hit Points and Mana Points]{MP}, and temporary
+          effects.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - unknown
+      range:
+        unit: self
+      requirements: <p>You are a @L[Creature:Haunt]{haunt}.</p>
+      revealed: true
+      targets:
+        - self
+      trigger: >-
+        <p>You would @L[Condition:Dead]{die}. This triggers automatically. You
+        cannot choose to not use it if you are able to.</p>
+    type: ability
+  - _id: VtuzcCGa7INzo53u
+    _key: '!items.effects!haunt00000000000.VtuzcCGa7INzo53u'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.haunting00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/haunting.webp
+    name: Haunting
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -79,156 +188,47 @@ effects:
         raw: 0
       powerSources:
         - unknown
+      range:
+        unit: self
       requirements: <p>You are a @L[Creature:Haunt]{haunt}.</p>
+      revealed: true
       targets:
         - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/haunting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.haunting00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: VtuzcCGa7INzo53u
-    _key: '!items.effects!haunt00000000000.VtuzcCGa7INzo53u'
-  - name: Haunt Escalation
     type: ability
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      effectTypes:
-        - automatic
-      executionTime: r0
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You remanifest at the start of your next turn as an angrier and
-          more powerful @L[Category:Undead creatures]{undead} being, lashing out
-          at whatever @L[Condition:Dead]{killed} you as well as anything else in
-          your way. This resets all @L[Core:Hit Points and Mana Points]{HP},
-          @L[Core:Hit Points and Mana Points]{MP}, and temporary effects that
-          may be present on you. Every time you escalate, you move one step
-          forward on the following track. For instance, if you were already a
-          @L[Creature:Phantom]{phantom}, you would escalate into being a
-          @L[Creature:Specter]{specter}.</p><p>@Embed[Compendium.teriock.tables.RollTable.LHGwqGbefAfHR3so]</p><p>Most
-          @L[Creature:Haunt]{haunts} do not escalate past
-          @L[Creature:Wraith]{wraith}. But the @L[Core:Game Master]{GM} may rule
-          that certain especially angry or powerful ones have additional
-          @L[Category:Abilities]{abilities} or escalation steps. If you escalate
-          while already fully escalated, you do not change @L[Category:Spectral
-          undead creatures]{species} or gain additional
-          @L[Category:Abilities]{abilities}, but you still become more
-          aggressive, harder to solve, and reset all @L[Core:Hit Points and Mana
-          Points]{HP}, @L[Core:Hit Points and Mana Points]{MP}, and temporary
-          effects.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - unknown
-      requirements: <p>You are a @L[Creature:Haunt]{haunt}.</p>
-      targets:
-        - self
-      trigger: >-
-        <p>You would @L[Condition:Dead]{die}. This triggers automatically. You
-        cannot choose to not use it if you are able to.</p>
-      _sup: VtuzcCGa7INzo53u
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/haunt-escalation.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hauntEscalation0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 3NafPpB4RFtp4ztr
-    _key: '!items.effects!haunt00000000000.3NafPpB4RFtp4ztr'
-  - name: Haunt Deescalation
-    type: ability
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      effectTypes:
-        - automatic
-      executionTime: r0
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You become a calmer and less powerful @L[Category:Undead
-          creatures]{undead} being. Every time you deescalate, you move one step
-          back on the following track. For instance, if you were already a
-          @L[Creature:Specter]{specter}, you would deescalate into being a
-          @L[Creature:Phantom]{phantom}.</p><p>@Embed[Compendium.teriock.tables.RollTable.LHGwqGbefAfHR3so]</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - unknown
-      targets:
-        - self
-      trigger: >-
-        <p>24 hours passes without anyone interacting with you or a someone
-        makes substantial progress towards resolving whatever it is that is
-        causing your haunting in a way that would not aggravate you. This
-        triggers automatically. You cannot choose to not use it if you are able
-        to.</p>
-      _sup: VtuzcCGa7INzo53u
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/haunt-deescalation.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hauntDeescalatio
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: DuOkUqP4nHB05329
-    _key: '!items.effects!haunt00000000000.DuOkUqP4nHB05329'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!haunt00000000000'
+folder: spectral00000000
+img: systems/teriock/src/icons/creatures/haunt.webp
+name: Haunt
+system:
+  appearance: >-
+    <p>[[lookup name]]s often appear to be transparent @L[Category:Humanoid
+    creatures]{humanoids} with the traits of some type of @L[Category:Spectral
+    undead creatures]{spectral undead}. But, if powerful enough, they may also
+    shape the world around them in a way that reflects the time in which they
+    lived or the circumstances of their @L[Condition:Dead]{death}.</p>
+  br: 15
+  competence:
+    raw: 1
+  description: >-
+    <p>[[lookup name]]s always have some other baseline @L[Category:Spectral
+    undead creatures]{spectral undead} that they are. They will @L[Ability:Haunt
+    Escalation]{escalate} or @L[Ability:Haunt Deescalation]{deescalate} from
+    this point. [[lookup name]]s often have additional
+    @L[Category:Abilities]{abilities} reflecting who they were in life or
+    whatever it is that is causing them to @L[Ability:Haunting]{haunt}.</p>
+  size:
+    enabled: false
+    value: 3
+  statDice:
+    hp:
+      disabled: true
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: true
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - undead
+type: species

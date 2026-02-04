@@ -1,47 +1,37 @@
 _id: redCrab000000000
-folder: JWyDfjLkE2E9S902
-name: Red Crab
-type: species
-img: systems/teriock/src/icons/creatures/red-crab.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>These scavenge on the beaches and rock shores of Teriock making the
-    creepy sounds like "didachum datachum". They will only eat their food once
-    claim over it is not challenged.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  appearance: <p>Huge [[lookup name style=lc]]s with razor sharp claws.</p>
-  br: 5
-  size:
-    enabled: true
-    value: 2
-  traits:
-    - aquatic
-    - animal
+_key: '!items!redCrab000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Carrying
-    type: ability
+  - _id: 0l93KBdJfWZh651r
+    _key: '!items.effects!redCrab000000000.0l93KBdJfWZh651r'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.carrying00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/carrying.webp
+    name: Carrying
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -56,315 +46,320 @@ effects:
         raw: 0
       powerSources:
         - martial
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: 0l93KBdJfWZh651r
-    img: systems/teriock/src/icons/abilities/carrying.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.carrying00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.0l93KBdJfWZh651r'
-  - name: Dense Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: 7r7C8oo5LpbBYlAO
+    _key: '!items.effects!redCrab000000000.7r7C8oo5LpbBYlAO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: flaw
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: -2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 7r7C8oo5LpbBYlAO
+    type: ability
+  - _id: BUFirNZWFMayxB3D
+    _key: '!items.effects!redCrab000000000.BUFirNZWFMayxB3D'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+      compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.7r7C8oo5LpbBYlAO'
-  - name: Devour
-    type: ability
     img: systems/teriock/src/icons/abilities/devour.webp
+    name: Devour
     system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
+      competence:
+        raw: 0
       delivery:
         base: bite
-      targets:
-        - creature
       duration:
-        unit: instant
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
         stationary: false
+        unit: instant
+      executionTime: a2
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
       range:
-        unit: ft
         raw: Your Bite's Range
+        unit: ft
+      requirements: <p>Target is @L[Condition:Down]{down}.</p>
       results:
         hit: >-
           <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
           and their @L[Core:Size]{SIZE} is reduced by 1. If their
           @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
-      piercing:
-        raw: 0
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-    _id: BUFirNZWFMayxB3D
+      targets:
+        - creature
+    type: ability
+  - _id: JcF7vxXyuyXHgTE4
+    _key: '!items.effects!redCrab000000000.JcF7vxXyuyXHgTE4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.BUFirNZWFMayxB3D'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: JcF7vxXyuyXHgTE4
+    type: ability
+  - _id: GMdbjo4odKWg0hOR
+    _key: '!items.effects!redCrab000000000.GMdbjo4odKWg0hOR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.JcF7vxXyuyXHgTE4'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: GMdbjo4odKWg0hOR
+    type: ability
+  - _id: XNWNiwlZEyWclvIV
+    _key: '!items.effects!redCrab000000000.XNWNiwlZEyWclvIV'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.GMdbjo4odKWg0hOR'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: XNWNiwlZEyWclvIV
+    type: ability
+  - _id: YkXhYCXOQIL18PE4
+    _key: '!items.effects!redCrab000000000.YkXhYCXOQIL18PE4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.XNWNiwlZEyWclvIV'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: QdJReCoj5dehL5hn
+    _key: '!items.effects!redCrab000000000.QdJReCoj5dehL5hn'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.pince00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/pince.webp
+    name: Pince
+    system:
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: YkXhYCXOQIL18PE4
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.YkXhYCXOQIL18PE4'
-  - name: Pince
-    type: ability
-    system:
       delivery:
         base: weapon
         package: strike
       duration:
-        unit: instant
-        stationary: false
-        description: Instant
         dawn: false
+        description: Instant
         raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          hacks:
+            - arm
+            - leg
       interaction: attack
       maneuver: active
       overview:
@@ -376,98 +371,103 @@ effects:
       powerSources:
         - martial
       range:
-        unit: ft
         raw: Your Weapon's Range
+        unit: ft
       results:
-        hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
         critHit: >-
           <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
           legs, depending on what you chose.</p>
+        hit: >-
+          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
+      revealed: true
       targets:
         - arm
         - leg
-      impacts:
-        base:
-          hacks:
-            - arm
-            - leg
+    type: ability
+  - _id: C5gzB9E2fJlG6hVH
+    _key: '!items.effects!redCrab000000000.C5gzB9E2fJlG6hVH'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      class: corsair
       competence:
         raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: QdJReCoj5dehL5hn
-    img: systems/teriock/src/icons/abilities/pince.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.pince00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.QdJReCoj5dehL5hn'
-  - name: Swimming
-    type: ability
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: C5gzB9E2fJlG6hVH
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redCrab000000000.C5gzB9E2fJlG6hVH'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!redCrab000000000'
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: southernIsles000
+img: systems/teriock/src/icons/creatures/red-crab.webp
+name: Red Crab
+system:
+  appearance: <p>Huge [[lookup name style=lc]]s with razor sharp claws.</p>
+  br: 5
+  competence:
+    raw: 1
+  description: >-
+    <p>These scavenge on the beaches and rock shores of Teriock making the
+    creepy sounds like "didachum datachum". They will only eat their food once
+    claim over it is not challenged.</p>
+  size:
+    enabled: true
+    value: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - aquatic
+    - animal
+type: species

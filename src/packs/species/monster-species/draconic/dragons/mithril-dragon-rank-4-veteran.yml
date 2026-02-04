@@ -1,61 +1,63 @@
 _id: I1r29DDckGjAOPhZ
-folder: qTlk5KD9WGOfDG5I
-name: Rank 4 Veteran
-system:
-  archetype: warrior
-  className: veteran
-  classRank: 4
-  competence:
-    raw: 1
-  description: >-
-    <p>Jaded and tough, these warriors act as if they have seen it all.
-    Obviously they are not all seasoned warriors, but the training of a Veteran
-    involves a great deal of time in battle, so even a first rank Veteran has
-    seen more action than other first rank warriors. The strategy of the Veteran
-    is to be an immovable wall, and hold the line. Veterans rely on defense in
-    battle, always working to better ensure their protection, which is why they
-    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
-    and pessimistic.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 4
-  _sup: mithrilDragon000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-4-veteran.webp
+_key: '!items!I1r29DDckGjAOPhZ'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r4Vet00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Improved Brace
-    type: ability
+  - _id: v0Xb1GopbJqrtB0N
+    _key: '!items.effects!I1r29DDckGjAOPhZ.v0Xb1GopbJqrtB0N'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imBrace000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/improved-brace.webp
+    name: Improved Brace
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: veteran
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
         conditions:
           absent:
             - down
-        description: While Up
-        stationary: false
-        raw: '0'
         dawn: false
+        description: While Up
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: flags.teriockEffect.braceDieSize
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+          rolls:
+            tempHp: 1d6
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you use @L[Ability:Brace]{Brace}, you gain @L[Core:Temporary
@@ -70,68 +72,59 @@ effects:
           [[lookup name]] takes them away.</div>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: veteran
-      form: normal
-      impacts:
-        base:
-          rolls:
-            tempHp: 1d6
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: flags.teriockEffect.braceDieSize
-              target: Actor
-              qualifier: '1'
-              value: '10'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: v0Xb1GopbJqrtB0N
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: VBoKPDCDrZYSanpd
+    _key: '!items.effects!I1r29DDckGjAOPhZ.VBoKPDCDrZYSanpd'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imBrace000000000
+      compendiumSource: Compendium.teriock.abilities.Item.mysticItmRepair0
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!I1r29DDckGjAOPhZ.v0Xb1GopbJqrtB0N'
-  - name: Mystic Item Repair
-    type: ability
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/mystic-item-repair.webp
+    name: Mystic Item Repair
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      class: veteran
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - item
       duration:
-        unit: hour
-        description: 8 Hours
-        stationary: false
-        raw: '8'
         dawn: false
-      range:
-        unit: ft
-        raw: '5'
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>You wave your hand over an item as arcane runes appear on its
@@ -141,42 +134,49 @@ effects:
           @L[Property:Shattered]{shattered} instead.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>The item must not be a @L[Category:Weapons]{weapon}.</p>
+      revealed: true
+      ritual: true
       skill: true
       standard: true
-      ritual: true
-      class: veteran
-      costs:
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      requirements: <p>The item must not be a @L[Category:Weapons]{weapon}.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: VBoKPDCDrZYSanpd
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mysticItmRepair0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!I1r29DDckGjAOPhZ.VBoKPDCDrZYSanpd'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank4Veteran0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!I1r29DDckGjAOPhZ'
+      targets:
+        - item
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-4-veteran.webp
+name: Rank 4 Veteran
+system:
+  _sup: mithrilDragon000
+  archetype: warrior
+  className: veteran
+  classRank: 4
+  competence:
+    raw: 1
+  description: >-
+    <p>Jaded and tough, these warriors act as if they have seen it all.
+    Obviously they are not all seasoned warriors, but the training of a Veteran
+    involves a great deal of time in battle, so even a first rank Veteran has
+    seen more action than other first rank warriors. The strategy of the Veteran
+    is to be an immovable wall, and hold the line. Veterans rely on defense in
+    battle, always working to better ensure their protection, which is why they
+    survive to be veterans. If you are a Veteran be jaded, unimpressed, hard,
+    and pessimistic.</p>
+  innate: false
+  maxAv: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

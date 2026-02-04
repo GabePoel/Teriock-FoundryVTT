@@ -1,26 +1,25 @@
 _id: summonTheDead000
+_key: '!items!summonTheDead000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Summon the Dead
-    type: ability
+  - _id: summonTheDead000
+    _key: '!items.effects!summonTheDead000.summonTheDead000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/summon-the-dead.webp
-    _id: summonTheDead000
+    name: Summon the Dead
     system:
+      class: necromancer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
-              if the body is in your possession. Otherwise, it costs 2
-              @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
-              the body.</p>
         hp:
           type: variable
           value:
@@ -30,24 +29,33 @@ effects:
               if the body is in your possession. Otherwise, it costs 3
               @L[Core:Hit Points and Mana Points]{HP} per @L[Core:Size]{size} of
               the body.</p>
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
+              if the body is in your possession. Otherwise, it costs 2
+              @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
+              the body.</p>
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - summoning
       elements:
         - necromancy
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -66,6 +74,8 @@ effects:
           additional @L[Core:Hit Points and Mana Points]{MP} and @L[Core:Hit
           Points and Mana Points]{HP}. The creature is still dead, but the body
           is now intact.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
         - spiritual
@@ -74,25 +84,13 @@ effects:
         raw: '5'
         unit: ft
       requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
+      revealed: true
       ritual: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts: {}
-      class: necromancer
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!summonTheDead000.summonTheDead000'
+    type: ability
 img: systems/teriock/src/icons/abilities/summon-the-dead.webp
 name: Summon the Dead
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!summonTheDead000'

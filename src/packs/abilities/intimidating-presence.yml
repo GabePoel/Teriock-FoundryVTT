@@ -1,69 +1,68 @@
 _id: intimidatingPres
+_key: '!items!intimidatingPres'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Intimidating Presence
-    type: ability
+  - _id: intimidatingPres
+    _key: '!items.effects!intimidatingPres.intimidatingPres'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/intimidating-presence.webp
-    _id: intimidatingPres
+    name: Intimidating Presence
     system:
+      class: berserker
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.enforcer.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You are an @L[Keyword:Expertise]{expert}
           @L[Tradecraft:Enforcer]{enforcer}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.enforcer.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      class: berserker
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!intimidatingPres.intimidatingPres'
+    type: ability
 img: systems/teriock/src/icons/abilities/intimidating-presence.webp
 name: Intimidating Presence
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!intimidatingPres'

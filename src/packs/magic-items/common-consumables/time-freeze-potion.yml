@@ -1,84 +1,24 @@
-name: Time Freeze Potion
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/time-freeze-potion.webp
+_id: timeFreezePtn000
+_key: '!items!timeFreezePtn000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: 00Jx8eBDx8jdp0uV
+    _key: '!items.effects!timeFreezePtn000.00Jx8eBDx8jdp0uV'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.dkTimeFreezePtn0
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!CGUIRI0EAe8eQcxg.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!CGUIRI0EAe8eQcxg.VQDFXr0oJQZ7Waxe'
-  - name: Fragile
-    type: property
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/drink-time-freeze-potion.webp
+    name: Drink Time Freeze Potion
     system:
-      description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
-    _id: Z8Q21X7QboeySzUT
-    img: systems/teriock/src/icons/properties/fragile.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!CGUIRI0EAe8eQcxg.Z8Q21X7QboeySzUT'
-  - name: Drink Time Freeze Potion
-    type: ability
-    system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -87,29 +27,29 @@ effects:
       delivery:
         base: item
       duration:
-        unit: hour
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - temporal
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
         base: >-
           <p>You become @L[Condition:Frozen]{frozen} and gain
           @L[Ability:Prethaw]{Prethaw}.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -119,41 +59,72 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - self
-    _id: 00Jx8eBDx8jdp0uV
-    img: systems/teriock/src/icons/abilities/drink-time-freeze-potion.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.dkTimeFreezePtn0
-    _key: '!items.effects!CGUIRI0EAe8eQcxg.00Jx8eBDx8jdp0uV'
-  - name: Prethaw
     type: ability
+  - _id: Z8Q21X7QboeySzUT
+    _key: '!items.effects!timeFreezePtn000.Z8Q21X7QboeySzUT'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: IjqKjlN9r30abNSt
+    _key: '!items.effects!timeFreezePtn000.IjqKjlN9r30abNSt'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prethaw000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/prethaw.webp
+    name: Prethaw
+    system:
+      _sup: 00Jx8eBDx8jdp0uV
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: hour
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - temporal
       elements:
         - storm
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          endStatuses:
+            - frozen
       interaction: manifest
       maneuver: active
       overview:
@@ -161,49 +132,166 @@ effects:
           <p>You immediately stop being @L[Condition:Frozen]{frozen}. You may
           use this ability even while @L[Condition:Frozen]{frozen}. However, you
           also gain @L[Ability:Temporal Lethargy]{Temporal Lethargy}.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - magical
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!timeFreezePtn000.x6sjcsIVaOkVZOFD'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!timeFreezePtn000.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: t5nyBwyQW8qnlVYV
+    _key: '!items.effects!timeFreezePtn000.t5nyBwyQW8qnlVYV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.smTimeFreezePtn0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/smash-time-freeze-potion.webp
+    name: Smash Time Freeze Potion
+    system:
+      competence:
+        raw: 0
+      costs:
+        break: shatter
+        material: true
+        materialCost: >-
+          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
+          that provides it.</p>
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      endCondition: >-
+        <p>At the start of each of the target's actions, they roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: unp
+      form: normal
+      grantOnly: false
       impacts:
         base:
-          endStatuses:
-            - frozen
-      _sup: 00Jx8eBDx8jdp0uV
-    img: systems/teriock/src/icons/abilities/prethaw.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.prethaw000000000
-    _id: IjqKjlN9r30abNSt
-    _key: '!items.effects!CGUIRI0EAe8eQcxg.IjqKjlN9r30abNSt'
-  - name: Temporal Lethargy
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        raw: '50'
+        unit: ft
+      requirements: >-
+        <p>Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.</p>
+      results:
+        fail: <p>Target becomes @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
+      targets:
+        - creature
     type: ability
+  - _id: xvesGYAtsHNmJo7a
+    _key: '!items.effects!timeFreezePtn000.xvesGYAtsHNmJo7a'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.temporalLethargy
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/temporal-lethargy.webp
+    name: Temporal Lethargy
     system:
+      _sup: IjqKjlN9r30abNSt
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - temporal
       elements:
         - storm
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -213,99 +301,44 @@ effects:
           doubled. Additionally, if you would roll some number of [[/roll d4]]s
           to end effects placed on you by opponents, you roll one less [[/roll
           d4]] than you would otherwise.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - magical
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
-      _sup: IjqKjlN9r30abNSt
-    img: systems/teriock/src/icons/abilities/temporal-lethargy.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.temporalLethargy
-    _id: xvesGYAtsHNmJo7a
-    _key: '!items.effects!CGUIRI0EAe8eQcxg.xvesGYAtsHNmJo7a'
-  - name: Smash Time Freeze Potion
     type: ability
-    system:
-      costs:
-        material: true
-        break: shatter
-        materialCost: >-
-          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
-          that provides it.</p>
-      delivery:
-        base: aura
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      endCondition: >-
-        <p>At the start of each of the target's actions, they roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: unp
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: feat
-      maneuver: active
-      piercing: normal
-      powerSources:
-        - alchemical
-      range:
-        unit: ft
-        raw: '50'
-      requirements: >-
-        <p>Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      results:
-        fail: <p>Target becomes @L[Condition:Frozen]{frozen}.</p>
-      targets:
-        - creature
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: action
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-    _id: t5nyBwyQW8qnlVYV
-    img: systems/teriock/src/icons/abilities/smash-time-freeze-potion.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.smTimeFreezePtn0
-    _key: '!items.effects!CGUIRI0EAe8eQcxg.t5nyBwyQW8qnlVYV'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: CGUIRI0EAe8eQcxg
-_key: '!items!CGUIRI0EAe8eQcxg'
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/time-freeze-potion.webp
+name: Time Freeze Potion
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

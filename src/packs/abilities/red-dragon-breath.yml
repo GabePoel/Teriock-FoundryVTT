@@ -1,38 +1,45 @@
 _id: redDrgBreath0000
+_key: '!items!redDrgBreath0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Red Dragon Breath
-    type: ability
+  - _id: redDrgBreath0000
+    _key: '!items.effects!redDrgBreath0000.redDrgBreath0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/red-dragon-breath.webp
-    _id: redDrgBreath0000
+    name: Red Dragon Breath
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: cone
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -40,23 +47,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic fire]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      interaction: feat
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        save: >-
-          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
-          would otherwise. This is calculated after any
-          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
-        fail: >-
-          <p>Target takes [[/damage 4d10[magic fire]]]
-          @L[Core:Damage]{damage}.</p>
-      targets:
-        - creature
       impacts:
         base:
           rolls:
@@ -64,18 +54,27 @@ effects:
         heightened:
           rolls:
             damage: 2d10[magic fire]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!redDrgBreath0000.redDrgBreath0000'
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target takes [[/damage 4d10[magic fire]]]
+          @L[Core:Damage]{damage}.</p>
+        save: >-
+          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
+          would otherwise. This is calculated after any
+          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/red-dragon-breath.webp
 name: Red Dragon Breath
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!redDrgBreath0000'

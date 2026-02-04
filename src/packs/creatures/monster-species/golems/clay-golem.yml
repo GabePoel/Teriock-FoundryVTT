@@ -1,138 +1,56 @@
-name: Clay Golem
-type: creature
+_id: clayGolem0000000
+_key: '!actors!clayGolem0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+folder: golems0000000000
 img: systems/teriock/src/icons/creatures/clay-golem.webp
-prototypeToken:
-  name: Clay Golem
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/clay-golem.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: clayGolem0000000
-    folder: urmGTxp98zGEPdyp
-    name: Clay Golem
-    type: species
-    img: systems/teriock/src/icons/creatures/clay-golem.webp
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>@L[Category:Golems]{Golems} are built as sentries to guard particular
-        spots or items and have a trigger system that activates them. They
-        generally follow a set "program" while active.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '@size'
-        mp:
-          disabled: false
-          faces: 6
-          number:
-            raw: '1'
-      appearance: <p>@L[Category:Humanoid creatures]{Humanoid} statue made of clay.</p>
-      attributeIncrease: >-
-        <p>@L[Ability:Improved Strength]{Improved Strength} if at least
-        @L[Core:Size]{size} 3. @L[Ability:Giant Strength]{Giant Strength} if at
-        least @L[Core:Size]{size} 4. @L[Ability:Supernatural
-        Strength]{Supernatural Strength} if at least @L[Core:Size]{size} 6.
-        @L[Ability:Monstrous Strength]{Monstrous Strength} if at least
-        @L[Core:Size]{size} 8.</p>
-      br: 10
-      hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
-      size:
-        enabled: true
-        value: 1
-        min: 1
-        max: 10
-      traits:
-        - humanoid
-        - construct
+    _key: '!actors.items!clayGolem0000000.clayGolem0000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.clayGolem0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Beastly Strength
-        type: ability
+      - _id: tZXeg6YqisGZOUAI
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.tZXeg6YqisGZOUAI
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -141,101 +59,361 @@ items:
               hands to be @L[Property:AV0]{AV0}.</div>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 0), gte(@size, 3))
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
-          class: knight
-          form: normal
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 0), gte(@size, 3))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: tZXeg6YqisGZOUAI
+        type: ability
+      - _id: sQK44KmrPEoyjfKd
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.sQK44KmrPEoyjfKd
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.tZXeg6YqisGZOUAI
-      - name: Clumsy
-        type: ability
-        img: systems/teriock/src/icons/abilities/clumsy.webp
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          _sup: jZwgFQSOgJyILtAQ
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Property:AV0]{AV0}.</div>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: oGYnY5D1DYRHA1nM
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.oGYnY5D1DYRHA1nM
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: kPMRTeUOow2Y0wHp
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Property:AV0]{AV0}.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: gy07ek1H54LHmhUm
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.gy07ek1H54LHmhUm
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: HUYkDvt4M8LjX6BD
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Property:AV0]{AV0}.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: qAIyPDIyjz7BAkue
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.qAIyPDIyjz7BAkue
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: eFS2tUSpKtqy0BOO
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+              Piercing]{Armor piercing} weapons must still be wielded in two
+              hands to be @L[Property:AV0]{AV0}.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        type: ability
+      - _id: U6MIam9vCNQcUOZE
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.U6MIam9vCNQcUOZE
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.clumsy0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/clumsy.webp
+        name: Clumsy
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: snk
               value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: U6MIam9vCNQcUOZE
+        type: ability
+      - _id: mqOITKdHFVZqlQRj
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.mqOITKdHFVZqlQRj
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.clumsy0000000000
+          compendiumSource: Compendium.teriock.abilities.Item.constructMind000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.U6MIam9vCNQcUOZE
-      - name: Construct Mind
-        type: ability
+        img: systems/teriock/src/icons/abilities/construct-mind.webp
+        name: Construct Mind
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
           effectTypes:
             - immunity
           executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: special
           grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frightened
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frenzied
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: charmed
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: allured
           interaction: manifest
           maneuver: passive
           overview:
@@ -248,128 +426,271 @@ items:
             raw: 0
           powerSources:
             - magical
-          targets:
-            - self
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: frightened
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: frenzied
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: charmed
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: allured
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
           range:
             unit: self
-        _id: mqOITKdHFVZqlQRj
-        img: systems/teriock/src/icons/abilities/construct-mind.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.constructMind000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.mqOITKdHFVZqlQRj
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
+        type: ability
+      - _id: yBGGokzxE1QiCUdb
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.yBGGokzxE1QiCUdb
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: int
               value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: yBGGokzxE1QiCUdb
+        type: ability
+      - _id: Ya23CgP4AySip5Jz
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.Ya23CgP4AySip5Jz
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.yBGGokzxE1QiCUdb
-      - name: Golem Reactivation
-        type: ability
+        img: systems/teriock/src/icons/abilities/giant-strength.webp
+        name: Giant Strength
         system:
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
             unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
+              you are no longer suffer the consequences of
+              @L[Property:Cumbersome]{cumbersome} items.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 4), gte(@size, 6))
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 3
+        type: ability
+      - _id: ufZurm4AW2ccp9Om
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.ufZurm4AW2ccp9Om
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/giant-strength.webp
+        name: Giant Strength
+        system:
+          _sup: Y83lhgkVjGBPzpwU
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
+              you are no longer suffer the consequences of
+              @L[Property:Cumbersome]{cumbersome} items.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 3
+        type: ability
+      - _id: sABFSuBZeYt8lCSs
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.sABFSuBZeYt8lCSs
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/giant-strength.webp
+        name: Giant Strength
+        system:
+          _sup: t6CNHab2qRJHY35V
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
+              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
+              you are no longer suffer the consequences of
+              @L[Property:Cumbersome]{cumbersome} items.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 3
+        type: ability
+      - _id: ed5pYOlrLX3OVXod
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.ed5pYOlrLX3OVXod
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.golemReactivatio
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/golem-reactivation.webp
+        name: Golem Reactivation
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
             conditions:
               present:
                 - down
-            stationary: false
+            dawn: false
             description: While Down
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
           effectTypes:
             - revival
             - healing
             - revitalization
             - automatic
           executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: normal
           grantOnly: false
+          impacts: {}
           interaction: manifest
           maneuver: passive
           overview:
@@ -387,6 +708,9 @@ items:
             raw: 0
           powerSources:
             - magical
+          range:
+            unit: self
+          revealed: true
           targets:
             - self
           trigger: >-
@@ -394,1101 +718,528 @@ items:
             @L[Core:Hit Points and Mana Points]{MP} into you. This triggers
             automatically. You cannot choose to not use it if you are able
             to.</p>
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _id: ed5pYOlrLX3OVXod
-        img: systems/teriock/src/icons/abilities/golem-reactivation.webp
+        type: ability
+      - _id: IbHNEJQZr87NLk1l
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.IbHNEJQZr87NLk1l
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.golemReactivatio
+          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.ed5pYOlrLX3OVXod
-      - name: Magical Durability
-        type: ability
-        img: systems/teriock/src/icons/abilities/magical-durability.webp
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
         system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          _sup: jZwgFQSOgJyILtAQ
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+              piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: aNI9gmVlE5HQy2FA
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.aNI9gmVlE5HQy2FA
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: kPMRTeUOow2Y0wHp
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+              piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: CJDAsjSrjLqCIhc7
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.CJDAsjSrjLqCIhc7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: HUYkDvt4M8LjX6BD
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+              piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: RHktLAr7yT5FBOat
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.RHktLAr7yT5FBOat
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: eFS2tUSpKtqy0BOO
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+              piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: jZwgFQSOgJyILtAQ
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.jZwgFQSOgJyILtAQ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 3), gte(@size, 4))
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: kPMRTeUOow2Y0wHp
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.kPMRTeUOow2Y0wHp
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          _sup: Ya23CgP4AySip5Jz
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: HUYkDvt4M8LjX6BD
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.HUYkDvt4M8LjX6BD
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          _sup: ufZurm4AW2ccp9Om
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: eFS2tUSpKtqy0BOO
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.eFS2tUSpKtqy0BOO
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          _sup: sABFSuBZeYt8lCSs
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        type: ability
+      - _id: Sdv7faeQOU3Cme80
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.Sdv7faeQOU3Cme80
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/magical-durability.webp
+        name: Magical Durability
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: mundane
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to
               @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
           piercing:
             raw: 0
-          form: special
-          effectTypes:
-            - immunity
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.damageTypes
-                  target: Actor
-                  qualifier: '1'
-                  value: mundane
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: Sdv7faeQOU3Cme80
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.magalDur00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.Sdv7faeQOU3Cme80
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 9F6Uk370PUhORkhm
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.9F6Uk370PUhORkhm
-      - name: Normal Perception
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: eColhrVR5PN2cRZR
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.eColhrVR5PN2cRZR
-      - name: Shattering Armor
-        type: ability
-        img: systems/teriock/src/icons/abilities/shattering-armor.webp
-        system:
           powerSources:
             - magical
-          interaction: block
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r1
-          delivery:
-            base: armor
-          targets:
-            - item
-          duration:
-            unit: instant
-            description: Instant
-            raw: '0'
-            dawn: false
-            stationary: false
-          range:
-            unit: melee
-          overview:
-            base: >-
-              <p>You may @L[Core:Block Interaction]{block} with a @L[Core:Block
-              Interaction]{BV} equal to your @L[Core:Armor Class]{AV} for the
-              purpose of [[lookup name]]. </p><div class="note"><b>Note:</b>
-              This does not allow you to delivery other @L[Core:Block
-              Interaction]{blocks} in this way.</div>
-          results:
-            save: >-
-              <p>@L[Category:Equipment]{Equipment} that delivers
-              @L[Category:Attack abilities]{attack} you @L[Core:Block
-              Interaction]{block} becomes @L[Property:Shattered]{shattered}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - destruction
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          impacts: {}
-        _id: cABq9EHmtr1XpSoP
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.shtArmor00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.cABq9EHmtr1XpSoP
-      - name: Spell Immunity
-        type: ability
-        img: systems/teriock/src/icons/abilities/spell-immunity.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            conditions:
-              absent:
-                - down
-            description: While Up
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Category:Spells]{spells}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - immunity
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.other
-                  target: Actor
-                  qualifier: '1'
-                  value: Spells
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
           range:
             unit: self
-        _id: zYCm0SDEvvRch0OK
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.spellImy00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.zYCm0SDEvvRch0OK
-      - name: Unconsciousness Immunity
-        type: ability
-        img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to falling
-              @L[Condition:Unconscious]{unconscious}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - immunity
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: unconscious
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: cuvewQeDD9E5A1Mt
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.cuvewQeDD9E5A1Mt
-      - name: Improved Strength
         type: ability
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 3), gte(@size, 4))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: jZwgFQSOgJyILtAQ
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.jZwgFQSOgJyILtAQ
-      - name: Beastly Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Property:AV0]{AV0}.</div>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: jZwgFQSOgJyILtAQ
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: sQK44KmrPEoyjfKd
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.sQK44KmrPEoyjfKd
-      - name: Improved Armor Piercing
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: jZwgFQSOgJyILtAQ
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: IbHNEJQZr87NLk1l
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.IbHNEJQZr87NLk1l
-      - name: Giant Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/giant-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          upgrades:
-            score:
-              attribute: str
-              value: 3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 4), gte(@size, 6))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: Ya23CgP4AySip5Jz
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.Ya23CgP4AySip5Jz
-      - name: Improved Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          grantOnly: false
-          _sup: Ya23CgP4AySip5Jz
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: kPMRTeUOow2Y0wHp
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.kPMRTeUOow2Y0wHp
-      - name: Beastly Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Property:AV0]{AV0}.</div>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          grantOnly: false
-          _sup: kPMRTeUOow2Y0wHp
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: oGYnY5D1DYRHA1nM
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.oGYnY5D1DYRHA1nM
-      - name: Improved Armor Piercing
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          grantOnly: false
-          _sup: kPMRTeUOow2Y0wHp
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: aNI9gmVlE5HQy2FA
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.aNI9gmVlE5HQy2FA
-      - name: Melee Damage Boost
-        type: ability
-        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
-          delivery:
-            base: weapon
-          targets:
-            - creature
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
-            dawn: false
-          range:
-            unit: melee
-          overview:
-            base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
-            proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          grantOnly: false
-          _sup: Ya23CgP4AySip5Jz
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 8b9FNH0OHCAsWHja
+      - _id: 8b9FNH0OHCAsWHja
         _key: >-
           !actors.items.effects!clayGolem0000000.clayGolem0000000.8b9FNH0OHCAsWHja
-      - name: Supernatural Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-              @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-              @L[Keyword:Deboosted]{deboost} any melee
-              @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attack}
-              to make it @L[Keyword:AV0]{AV0}.</p>
-          piercing:
-            raw: 0
-          form: special
-          upgrades:
-            score:
-              attribute: str
-              value: 4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 6), gte(@size, 8))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.supernaturalStre
+          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: Y83lhgkVjGBPzpwU
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.Y83lhgkVjGBPzpwU
-      - name: Giant Strength
-        type: ability
+        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        name: Melee Damage Boost
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
+          _sup: Ya23CgP4AySip5Jz
           class: knight
-          form: normal
-          _sup: Y83lhgkVjGBPzpwU
-          upgrades:
-            score:
-              attribute: str
-              value: 3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
           competence:
             raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/giant-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: ufZurm4AW2ccp9Om
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.ufZurm4AW2ccp9Om
-      - name: Improved Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: ufZurm4AW2ccp9Om
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: HUYkDvt4M8LjX6BD
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.HUYkDvt4M8LjX6BD
-      - name: Beastly Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Property:AV0]{AV0}.</div>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: HUYkDvt4M8LjX6BD
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: gy07ek1H54LHmhUm
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.gy07ek1H54LHmhUm
-      - name: Improved Armor Piercing
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: HUYkDvt4M8LjX6BD
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: CJDAsjSrjLqCIhc7
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.CJDAsjSrjLqCIhc7
-      - name: Melee Damage Boost
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
           delivery:
             base: weapon
-          targets:
-            - creature
           duration:
-            unit: instant
-            stationary: false
+            dawn: false
             description: Instant
             raw: '0'
-            dawn: false
-          range:
-            unit: melee
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: reactive
           overview:
             base: >-
               <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
@@ -1500,110 +1251,193 @@ items:
               @L[Core:Damage]{damage} again.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: melee
+          revealed: true
           skill: true
           standard: true
-          class: knight
+          targets:
+            - creature
           trigger: >-
             <p>You have hit a creature with a @L[Category:Damaging
             effects]{damaging} melee @L[Category:Weapon delivery
             abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          _sup: ufZurm4AW2ccp9Om
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        type: ability
+      - _id: APzwdWZhUHQ496OE
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.APzwdWZhUHQ496OE
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: APzwdWZhUHQ496OE
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.APzwdWZhUHQ496OE
-      - name: Shattering Grip
-        type: ability
+        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        name: Melee Damage Boost
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a2
-          delivery:
-            base: hand
-          targets:
-            - item
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: melee
-          overview:
-            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
-          piercing:
-            raw: 0
-          costs:
-            mp:
-              type: static
-              value:
-                static: 1
-          requirements: <p>You are holding the target.</p>
-          form: normal
-          effectTypes:
-            - destruction
-          _sup: Y83lhgkVjGBPzpwU
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
+          _sup: ufZurm4AW2ccp9Om
+          class: knight
           competence:
             raw: 0
-          revealed: true
+          delivery:
+            base: weapon
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
           grantOnly: false
           impacts: {}
-        img: systems/teriock/src/icons/abilities/shattering-grip.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 30KuNrVrGmVcoS6q
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.30KuNrVrGmVcoS6q
-      - name: Monstrous Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/monstrous-strength.webp
-        system:
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
+              @L[Keyword:Boosted]{boost} the triggering
+              @L[Core:Damage]{damage}.</p>
+            proficient: >-
+              <p>You may spend an additional unused @L[Core:Active
+              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
+              @L[Core:Damage]{damage} again.</p>
+          piercing:
+            raw: 0
           powerSources:
             - martial
-          interaction: manifest
+          range:
+            unit: melee
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - creature
+          trigger: >-
+            <p>You have hit a creature with a @L[Category:Damaging
+            effects]{damaging} melee @L[Category:Weapon delivery
+            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
+        type: ability
+      - _id: J3tQgSJZBhb4jld8
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.J3tQgSJZBhb4jld8
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        name: Melee Damage Boost
+        system:
+          _sup: sABFSuBZeYt8lCSs
+          class: knight
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
+              @L[Keyword:Boosted]{boost} the triggering
+              @L[Core:Damage]{damage}.</p>
+            proficient: >-
+              <p>You may spend an additional unused @L[Core:Active
+              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
+              @L[Core:Damage]{damage} again.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: melee
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - creature
+          trigger: >-
+            <p>You have hit a creature with a @L[Category:Damaging
+            effects]{damaging} melee @L[Category:Weapon delivery
+            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
+        type: ability
+      - _id: DEa1ADqGUL5u9JmC
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.DEa1ADqGUL5u9JmC
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.monstrousStrengt
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/monstrous-strength.webp
+        name: Monstrous Strength
+        system:
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.damage.all.raw
+                  mode: 0
+                  priority: 100
+                  qualifier: and(@dmg, @range.melee)
+                  target: armament
+                  time: normal
+                  value: '1'
+                - key: system.piercing.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '@range.melee'
+                  target: armament
+                  time: normal
+                  value: '1'
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You gain @L[Ability:Supernatural Strength]{Supernatural
@@ -1612,69 +1446,374 @@ items:
               abilities]{attacks} and they are @L[Keyword:AV0]{AV0} for you.</p>
           piercing:
             raw: 0
-          form: special
-          impacts:
-            base:
-              changes:
-                - mode: 0
-                  priority: 100
-                  time: normal
-                  key: system.damage.all.raw
-                  target: armament
-                  qualifier: and(@dmg, @range.melee)
-                  value: '1'
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.piercing.raw
-                  target: armament
-                  qualifier: '@range.melee'
-                  value: '1'
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 8), gte(@size, 99))
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 5
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          qualifiers:
-            ephemeral:
-              raw: or(lt(@size, 8), gte(@size, 99))
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
+        type: ability
+      - _id: 9F6Uk370PUhORkhm
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.9F6Uk370PUhORkhm
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.monstrousStrengt
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: DEa1ADqGUL5u9JmC
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.DEa1ADqGUL5u9JmC
-      - name: Supernatural Strength
-        type: ability
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: eColhrVR5PN2cRZR
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.eColhrVR5PN2cRZR
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
             dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: cABq9EHmtr1XpSoP
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.cABq9EHmtr1XpSoP
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.shtArmor00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/shattering-armor.webp
+        name: Shattering Armor
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: armor
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - destruction
+          executionTime: r1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: block
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You may @L[Core:Block Interaction]{block} with a @L[Core:Block
+              Interaction]{BV} equal to your @L[Core:Armor Class]{AV} for the
+              purpose of [[lookup name]]. </p><div class="note"><b>Note:</b>
+              This does not allow you to delivery other @L[Core:Block
+              Interaction]{blocks} in this way.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: melee
+          results:
+            save: >-
+              <p>@L[Category:Equipment]{Equipment} that delivers
+              @L[Category:Attack abilities]{attack} you @L[Core:Block
+              Interaction]{block} becomes @L[Property:Shattered]{shattered}.</p>
+          revealed: true
+          targets:
+            - item
+        type: ability
+      - _id: 30KuNrVrGmVcoS6q
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.30KuNrVrGmVcoS6q
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/shattering-grip.webp
+        name: Shattering Grip
+        system:
+          _sup: Y83lhgkVjGBPzpwU
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+          delivery:
+            base: hand
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - destruction
+          executionTime: a2
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: melee
+          requirements: <p>You are holding the target.</p>
+          revealed: true
+          targets:
+            - item
+        type: ability
+      - _id: ZV0Odoc8ThmAIyRR
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.ZV0Odoc8ThmAIyRR
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/shattering-grip.webp
+        name: Shattering Grip
+        system:
+          _sup: t6CNHab2qRJHY35V
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+          delivery:
+            base: hand
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - destruction
+          executionTime: a2
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: melee
+          requirements: <p>You are holding the target.</p>
+          revealed: true
+          targets:
+            - item
+        type: ability
+      - _id: zYCm0SDEvvRch0OK
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.zYCm0SDEvvRch0OK
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.spellImy00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/spell-immunity.webp
+        name: Spell Immunity
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            conditions:
+              absent:
+                - down
+            dawn: false
+            description: While Up
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Spells
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              @L[Category:Spells]{spells}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: Y83lhgkVjGBPzpwU
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.Y83lhgkVjGBPzpwU
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.supernaturalStre
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+        name: Supernatural Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
@@ -1684,389 +1823,236 @@ items:
               to make it @L[Keyword:AV0]{AV0}.</p>
           piercing:
             raw: 0
-          form: special
-          _sup: DEa1ADqGUL5u9JmC
+          powerSources:
+            - martial
+          qualifiers:
+            ephemeral:
+              raw: or(lt(@size, 6), gte(@size, 8))
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+        type: ability
+      - _id: t6CNHab2qRJHY35V
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.t6CNHab2qRJHY35V
         _stats:
           compendiumSource: Compendium.teriock.abilities.Item.supernaturalStre
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: t6CNHab2qRJHY35V
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.t6CNHab2qRJHY35V
-      - name: Giant Strength
-        type: ability
+        img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+        name: Supernatural Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          _sup: DEa1ADqGUL5u9JmC
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
+              <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
+              @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
+              @L[Keyword:Deboosted]{deboost} any melee
+              @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attack}
+              to make it @L[Keyword:AV0]{AV0}.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: t6CNHab2qRJHY35V
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
-              value: 3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/giant-strength.webp
+              value: 4
+        type: ability
+      - _id: cuvewQeDD9E5A1Mt
+        _key: >-
+          !actors.items.effects!clayGolem0000000.clayGolem0000000.cuvewQeDD9E5A1Mt
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.giantStrength000
+          compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: sABFSuBZeYt8lCSs
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.sABFSuBZeYt8lCSs
-      - name: Improved Strength
-        type: ability
+        img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+        name: Unconsciousness Immunity
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: sABFSuBZeYt8lCSs
-          upgrades:
-            score:
-              attribute: str
-              value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: eFS2tUSpKtqy0BOO
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.eFS2tUSpKtqy0BOO
-      - name: Beastly Strength
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
+            stationary: false
             unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Property:AV0]{AV0}.</div>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: eFS2tUSpKtqy0BOO
-          upgrades:
-            score:
-              attribute: str
-              value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/beastly-strength.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: qAIyPDIyjz7BAkue
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.qAIyPDIyjz7BAkue
-      - name: Improved Armor Piercing
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          form: normal
-          _sup: eFS2tUSpKtqy0BOO
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: RHktLAr7yT5FBOat
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.RHktLAr7yT5FBOat
-      - name: Melee Damage Boost
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
-          delivery:
-            base: weapon
-          targets:
-            - creature
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: melee
-          overview:
-            base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
-            proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: knight
-          trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
-          form: normal
           effectTypes:
-            - damaging
-          _sup: sABFSuBZeYt8lCSs
+            - immunity
+          executionTime: passive
           expansion:
+            featSaveAttribute: mov
             range:
               unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.meleeDmgBoost000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: J3tQgSJZBhb4jld8
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.J3tQgSJZBhb4jld8
-      - name: Shattering Grip
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
           featSaveAttribute: mov
-          maneuver: active
-          executionTime: a2
-          delivery:
-            base: hand
-          targets:
-            - item
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: melee
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: unconscious
+          interaction: manifest
+          maneuver: passive
           overview:
-            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to falling
+              @L[Condition:Unconscious]{unconscious}.</p>
           piercing:
             raw: 0
-          costs:
-            mp:
-              type: static
-              value:
-                static: 1
-          requirements: <p>You are holding the target.</p>
-          form: normal
-          effectTypes:
-            - destruction
-          _sup: t6CNHab2qRJHY35V
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
           revealed: true
-          grantOnly: false
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/shattering-grip.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.shtGrip000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: ZV0Odoc8ThmAIyRR
-        _key: >-
-          !actors.items.effects!clayGolem0000000.clayGolem0000000.ZV0Odoc8ThmAIyRR
+          targets:
+            - self
+        type: ability
+    folder: golems0000000000
+    img: systems/teriock/src/icons/creatures/clay-golem.webp
+    name: Clay Golem
+    system:
+      appearance: <p>@L[Category:Humanoid creatures]{Humanoid} statue made of clay.</p>
+      attributeIncrease: >-
+        <p>@L[Ability:Improved Strength]{Improved Strength} if at least
+        @L[Core:Size]{size} 3. @L[Ability:Giant Strength]{Giant Strength} if at
+        least @L[Core:Size]{size} 4. @L[Ability:Supernatural
+        Strength]{Supernatural Strength} if at least @L[Core:Size]{size} 6.
+        @L[Ability:Monstrous Strength]{Monstrous Strength} if at least
+        @L[Core:Size]{size} 8.</p>
+      br: 10
+      competence:
+        raw: 1
+      description: >-
+        <p>@L[Category:Golems]{Golems} are built as sentries to guard particular
+        spots or items and have a trigger system that activates them. They
+        generally follow a set "program" while active.</p>
+      hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
+      size:
+        enabled: true
+        max: 10
+        min: 1
+        value: 1
+      statDice:
+        hp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '@size'
+        mp:
+          disabled: false
+          faces: 6
+          number:
+            raw: '1'
+      traits:
+        - humanoid
+        - construct
+    type: species
+  - _id: krCvm6unXiT14ZKo
+    _key: '!actors.items!clayGolem0000000.krCvm6unXiT14ZKo'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.clayGolem0000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!clayGolem0000000.clayGolem0000000'
-  - name: Hand
-    type: body
-    _id: 59eCuZk2o2vDXOsl
-    img: systems/teriock/src/icons/body-parts/hand.webp
+    effects:
+      - _id: LwntE76DWV8LsMYk
+        _key: >-
+          !actors.items.effects!clayGolem0000000.krCvm6unXiT14ZKo.LwntE76DWV8LsMYk
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 70oASdJA4Iza7rlK
+        _key: >-
+          !actors.items.effects!clayGolem0000000.krCvm6unXiT14ZKo.70oASdJA4Iza7rlK
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: golems0000000000
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
     system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
       _sup: clayGolem0000000
       attackPenalty:
         raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
       range:
         long:
           unit: self
@@ -2075,108 +2061,109 @@ items:
         short:
           unit: self
       vitals: false
+    type: body
+  - _id: 59eCuZk2o2vDXOsl
+    _key: '!actors.items!clayGolem0000000.59eCuZk2o2vDXOsl'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.hand000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Bashing
-        type: property
+      - _id: FAUPXdLk1A1fD0k8
+        _key: >-
+          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.FAUPXdLk1A1fD0k8
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
             a weapon, but can still be used to make a @L[Ability:Basic
             Attack]{Basic Attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: FAUPXdLk1A1fD0k8
-        img: systems/teriock/src/icons/properties/bashing.webp
+        type: property
+      - _id: wGdRsURrcXoNZsur
+        _key: >-
+          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.wGdRsURrcXoNZsur
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.FAUPXdLk1A1fD0k8
-      - name: Handy
-        type: property
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: wGdRsURrcXoNZsur
-        img: systems/teriock/src/icons/properties/handy.webp
+        type: property
+      - _id: 1eIcI58ulvhlFYKA
+        _key: >-
+          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.1eIcI58ulvhlFYKA
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.wGdRsURrcXoNZsur
-      - name: Prehensile
-        type: property
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such
             as while using @L[Ability:Interact]{Interact}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 1eIcI58ulvhlFYKA
-        img: systems/teriock/src/icons/properties/prehensile.webp
+        type: property
+      - _id: r6jJPWhMBH4YpEKr
+        _key: >-
+          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.r6jJPWhMBH4YpEKr
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.1eIcI58ulvhlFYKA
-      - name: Small
-        type: property
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: r6jJPWhMBH4YpEKr
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.59eCuZk2o2vDXOsl.r6jJPWhMBH4YpEKr
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.hand000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!clayGolem0000000.59eCuZk2o2vDXOsl'
-  - name: Foot
-    type: body
-    _id: krCvm6unXiT14ZKo
-    img: systems/teriock/src/icons/body-parts/foot.webp
+        type: property
+    folder: golems0000000000
+    img: systems/teriock/src/icons/body-parts/hand.webp
+    name: Hand
     system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
       _sup: clayGolem0000000
       attackPenalty:
         raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
       range:
         long:
           unit: self
@@ -2185,98 +2172,113 @@ items:
         short:
           unit: self
       vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: LwntE76DWV8LsMYk
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.krCvm6unXiT14ZKo.LwntE76DWV8LsMYk
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 70oASdJA4Iza7rlK
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!clayGolem0000000.krCvm6unXiT14ZKo.70oASdJA4Iza7rlK
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!clayGolem0000000.krCvm6unXiT14ZKo'
+    type: body
+name: Clay Golem
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Clay Golem
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/clay-golem.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 6
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '1'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: krCvm6unXiT14ZKo
-    blocker: krCvm6unXiT14ZKo
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: clayGolem0000000
-folder: VF06N16SskDdOGcb
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!clayGolem0000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 6
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '1'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: krCvm6unXiT14ZKo
+    blocker: krCvm6unXiT14ZKo
+type: creature

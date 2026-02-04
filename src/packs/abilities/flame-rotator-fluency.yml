@@ -1,32 +1,50 @@
 _id: flameRotFluency0
+_key: '!items!flameRotFluency0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Flame Rotator Fluency
-    type: ability
+  - _id: flameRotFluency0
+    _key: '!items.effects!flameRotFluency0.flameRotFluency0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/flame-rotator-fluency.webp
-    _id: flameRotFluency0
+    name: Flame Rotator Fluency
     system:
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.flameRotators'
+              target: ability
+              time: fluency
+              value: '2'
       interaction: manifest
       maneuver: passive
       overview:
@@ -38,37 +56,18 @@ effects:
           <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Flame
           Rotators]{Flame Rotators}. (This does not make you @L[Core:Fluency
           Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.flameRotators'
-              value: '2'
-      class: flameMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!flameRotFluency0.flameRotFluency0'
+    type: ability
 img: systems/teriock/src/icons/abilities/flame-rotator-fluency.webp
 name: Flame Rotator Fluency
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!flameRotFluency0'

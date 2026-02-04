@@ -1,74 +1,279 @@
-name: Clamis Cleaver
-type: equipment
-folder: X3rVK7Ngg1mHq1vl
-system:
-  equipmentType: Longsword
-  equipped: true
-  consumable: false
-  damage:
-    base:
-      saved: 1d8
-  weight:
-    saved: 3
-    raw: 0
-  range:
-    long:
-      unit: melee
-    short:
-      unit: melee
-    ranged: false
-  equipmentClasses:
-    - swords
-  minStr:
-    saved: -2
-    raw: -3
-  powerLevel: enchanted
-  fightingStyle: swordsman
-  notes: >-
-    <p>Found mostly in the Far East, these [[lookup system.equipmentType
-    style=lc]]s are uncommon everywhere in Roekron except Oreiri, where they are
-    often seen in the hands of guards.</p>
-  attackPenalty:
-    raw: '-1'
-  bv:
-    raw: '2'
-img: systems/teriock/src/assets/items/clamis-cleaver.webp
+_id: clamisCleaver000
+_key: '!items!clamisCleaver000'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.iXRnjNds2Fx0SMlw
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Weapon
-    type: property
+  - _id: e73U6cQJmiaoXkXA
+    _key: '!items.effects!clamisCleaver000.e73U6cQJmiaoXkXA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/burning-touch.webp
+    name: Burning Touch
     system:
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[fire magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic fire]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: ZrlQ6ULP1UcagvH8
+    _key: '!items.effects!clamisCleaver000.ZrlQ6ULP1UcagvH8'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: icons/magic/light/explosion-star-large-orange.webp
+    name: Conditional Glowing
+    system:
+      competence:
+        raw: 0
+      description: <p>This item glows red in the presence of good.</p>
+      form: normal
+      impacts:
+        changes:
+          - key: system.light.dim
+            mode: 4
+            priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: '1'
+          - key: system.light.color
+            mode: 5
+            priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: '#E01B24'
+          - key: system.light.animation.type
+            mode: 5
+            priority: 4
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: starlight
+      revealed: true
+    type: property
+  - _id: 2YscVV39H19iMP5j
+    _key: '!items.effects!clamisCleaver000.2YscVV39H19iMP5j'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.runic00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/runic.webp
+    name: Runic
+    system:
+      applyIfShattered: true
+      competence:
+        raw: 0
+      description: >-
+        <p><b>[[lookup name]]</b> items repair themselves. If a [[lookup name
+        style=lc]] item is also @L[Property:Shattered]{shattered}, it retains
+        the [[lookup name style=lc]] property. When a creature is
+        @L[Core:Attunement]{attuned} to a @L[Property:Shattered]{shattered}
+        [[lookup name style=lc]] item, they roll [[/roll 2d4]] at the end of
+        each of their turns. If at least 1 die rolls a 4, the item is no longer
+        @L[Property:Shattered]{shattered}.</p>
+      form: normal
+      revealed: true
+    type: property
+  - _id: 81xRyexcNCpSw4IY
+    _key: '!items.effects!clamisCleaver000.81xRyexcNCpSw4IY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
+      interaction: manifest
+      limitation: <p>Trolls only.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    type: ability
+  - _id: jzzvRKzEvcANdWVW
+    _key: '!items.effects!clamisCleaver000.jzzvRKzEvcANdWVW'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      competence:
+        raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
         @L[Category:Attack abilities]{attack}.</p>
       form: intrinsic
-    _id: jzzvRKzEvcANdWVW
-    img: systems/teriock/src/icons/properties/weapon.webp
+      revealed: true
+    type: property
+  - _id: 6ZVulFfTJa1j7Ek2
+    _key: '!items.effects!clamisCleaver000.6ZVulFfTJa1j7Ek2'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-    _key: '!items.effects!YSM33n9xf2rSKD0P.jzzvRKzEvcANdWVW'
-  - name: Weapons Mastery
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+    name: Weapons Mastery
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: assassin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
+      interaction: manifest
+      limitation: <p>@L[Equipment:Longsword]{Longswords} only.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
@@ -86,223 +291,52 @@ effects:
           action} non-attack @L[Category:Assassin class abilities]{Assassin
           abilities} as @L[Core:Reactive Maneuvers]{free reactions} in this
           way.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>@L[Equipment:Longsword]{Longswords} only.</p>
-      gifted:
-        enabled: true
-        amount: 1
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
-    _id: 6ZVulFfTJa1j7Ek2
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
-    _key: '!items.effects!YSM33n9xf2rSKD0P.6ZVulFfTJa1j7Ek2'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
       range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      limitation: <p>Trolls only.</p>
-      effectTypes:
-        - killing
-        - damaging
-      gifted:
-        enabled: true
-        amount: 1
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-    _id: 81xRyexcNCpSw4IY
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
-    _key: '!items.effects!YSM33n9xf2rSKD0P.81xRyexcNCpSw4IY'
-  - name: Burning Touch
-    type: ability
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        package: touch
       targets:
-        - creature
-      elements:
-        - flame
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: flameMage
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - damaging
-      gifted:
-        enabled: true
-        amount: 1
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[fire magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
-    _id: e73U6cQJmiaoXkXA
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
-    _key: '!items.effects!YSM33n9xf2rSKD0P.e73U6cQJmiaoXkXA'
-  - name: Runic
-    type: property
-    img: systems/teriock/src/icons/properties/runic.webp
-    system:
-      description: >-
-        <p><b>[[lookup name]]</b> items repair themselves. If a [[lookup name
-        style=lc]] item is also @L[Property:Shattered]{shattered}, it retains
-        the [[lookup name style=lc]] property. When a creature is
-        @L[Core:Attunement]{attuned} to a @L[Property:Shattered]{shattered}
-        [[lookup name style=lc]] item, they roll [[/roll 2d4]] at the end of
-        each of their turns. If at least 1 die rolls a 4, the item is no longer
-        @L[Property:Shattered]{shattered}.</p>
-      form: normal
-      applyIfShattered: true
-    _id: 2YscVV39H19iMP5j
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.runic00000000000
-    _key: '!items.effects!YSM33n9xf2rSKD0P.2YscVV39H19iMP5j'
-  - name: Conditional Glowing
-    type: property
-    _id: ZrlQ6ULP1UcagvH8
-    img: icons/magic/light/explosion-star-large-orange.webp
-    system:
-      description: <p>This item glows red in the presence of good.</p>
-      form: normal
-      impacts:
-        changes:
-          - key: system.light.dim
-            mode: 4
-            value: '1'
-            priority: 4
-          - key: system.light.color
-            mode: 5
-            value: '#E01B24'
-            priority: 4
-          - key: system.light.animation.type
-            mode: 5
-            value: starlight
-            priority: 4
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!YSM33n9xf2rSKD0P.ZrlQ6ULP1UcagvH8'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.iXRnjNds2Fx0SMlw
-_id: YSM33n9xf2rSKD0P
-_key: '!items!YSM33n9xf2rSKD0P'
+        - self
+    type: ability
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/clamis-cleaver.webp
+name: Clamis Cleaver
+system:
+  attackPenalty:
+    raw: '-1'
+  bv:
+    raw: '2'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d8
+  equipmentClasses:
+    - swords
+  equipmentType: Longsword
+  equipped: true
+  fightingStyle: swordsman
+  minStr:
+    raw: '-2'
+  notes: >-
+    <p>Found mostly in the Far East, these [[lookup system.equipmentType
+    style=lc]]s are uncommon everywhere in Roekron except Oreiri, where they are
+    often seen in the hands of guards.</p>
+  powerLevel: enchanted
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  vitals: false
+  weight:
+    raw: '3'
+type: equipment

@@ -1,63 +1,24 @@
-name: Displacement Potion
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/displacement-potion.webp
+_id: displacementPtn0
+_key: '!items!displacementPtn0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: ClG0GBLDYmlAaPMT
+    _key: '!items.effects!displacementPtn0.ClG0GBLDYmlAaPMT'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.dkDisplacementPt
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!KblXLLZHWphzU2SV.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!KblXLLZHWphzU2SV.VQDFXr0oJQZ7Waxe'
-  - name: Drink Displacement Potion
-    type: ability
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/drink-displacement-potion.webp
+    name: Drink Displacement Potion
     system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -66,22 +27,21 @@ effects:
       delivery:
         base: item
       duration:
-        unit: minute
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - displacement
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
@@ -90,7 +50,8 @@ effects:
           action. It is not @L[Core:Proficiency Bonus]{proficient} nor
           @L[Core:Fluency Bonus]{fluent}. You also gain @L[Ability:Quivering
           Vitals]{Quivering Vitals}.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -100,39 +61,70 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - self
-    _id: ClG0GBLDYmlAaPMT
-    img: systems/teriock/src/icons/abilities/drink-displacement-potion.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.dkDisplacementPt
-    _key: '!items.effects!KblXLLZHWphzU2SV.ClG0GBLDYmlAaPMT'
-  - name: Quivering Vitals
     type: ability
+  - _id: g6Ae2i83zSrDNcPl
+    _key: '!items.effects!displacementPtn0.g6Ae2i83zSrDNcPl'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: pigJ1OPSQjiHBoMU
+    _key: '!items.effects!displacementPtn0.pigJ1OPSQjiHBoMU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.quiveringVit0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/quivering-vitals.webp
+    name: Quivering Vitals
+    system:
+      _sup: ClG0GBLDYmlAaPMT
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - displacement
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          rolls:
+            damage: 1d4[lethal]
       interaction: manifest
       maneuver: passive
       overview:
@@ -143,50 +135,83 @@ effects:
           @L[Damage:Lethal]{lethal} in addition to its other types. Those that
           don't normally deal @L[Core:Damage]{damage} deal [[/damage
           1d4[lethal]]] @L[Core:Damage]{damage}.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          rolls:
-            damage: 1d4[lethal]
-      _sup: ClG0GBLDYmlAaPMT
-    img: systems/teriock/src/icons/abilities/quivering-vitals.webp
+    type: ability
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!displacementPtn0.x6sjcsIVaOkVZOFD'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.quiveringVit0000
-    _id: pigJ1OPSQjiHBoMU
-    _key: '!items.effects!KblXLLZHWphzU2SV.pigJ1OPSQjiHBoMU'
-  - name: Fragile
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
     system:
+      competence:
+        raw: 0
       description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
       form: flaw
-    _id: g6Ae2i83zSrDNcPl
-    img: systems/teriock/src/icons/properties/fragile.webp
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!displacementPtn0.VQDFXr0oJQZ7Waxe'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!KblXLLZHWphzU2SV.g6Ae2i83zSrDNcPl'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: KblXLLZHWphzU2SV
-_key: '!items!KblXLLZHWphzU2SV'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/displacement-potion.webp
+name: Displacement Potion
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

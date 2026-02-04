@@ -1,59 +1,136 @@
 _id: boaConstrictorFa
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Boa Constrictor Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.boaConstrictor00]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!boaConstrictorFa'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
+  - _id: s77deq3UWIum1Vxw
+    _key: '!items.effects!boaConstrictorFa.s77deq3UWIum1Vxw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: w1vWlgBnvyPPb3Iv
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          attribute: str
+          minVal: 1
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Property:AV0]{AV0}.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
   - _id: boaConstrictorTa
+    _key: '!items.effects!boaConstrictorFa.boaConstrictorTa'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Boa Constrictor Tamer
     system:
-      field: survivalist
-      tradecraft: tamer
+      competence:
+        raw: 2
       description: >-
         <p>You know the way of the @L[Creature:Boa Constrictor]{boa
         constrictor}.</p>
-      competence:
-        raw: 2
+      field: survivalist
       revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
+      tradecraft: tamer
     tint: '#ffffff'
-    _key: '!items.effects!boaConstrictorFa.boaConstrictorTa'
-  - name: Crit Elite
-    type: ability
+    transfer: true
+    type: fluency
+  - _id: CbXeZ4uMymycSzsS
+    _key: '!items.effects!boaConstrictorFa.CbXeZ4uMymycSzsS'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.critElite0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/crit-elite.webp
+    name: Crit Elite
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: archer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: While Stationary
+        quantity: 0
         stationary: true
+        unit: noLimit
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: '@dmg'
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.vitals
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: armament
+              time: normal
+              value: 'true'
+        macros:
+          Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next @L[Category:Attack
@@ -66,198 +143,121 @@ effects:
           @L[Keyword:Boosted]{boosted} in this way.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      requirements: <p>You are not already using [[lookup name]].</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: eHWAjtMTtx0RrWOd
+    _key: '!items.effects!boaConstrictorFa.eHWAjtMTtx0RrWOd'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: w1vWlgBnvyPPb3Iv
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      class: archer
-      requirements: <p>You are not already using [[lookup name]].</p>
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 0
-              priority: 100
-              time: normal
-              key: system.damage.all.raw
-              target: armament
-              qualifier: '@dmg'
-              value: '1'
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.vitals
-              target: armament
-              qualifier: '1'
-              value: 'true'
-        macros:
-          Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: CbXeZ4uMymycSzsS
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.critElite0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boaConstrictorFa.CbXeZ4uMymycSzsS'
-  - name: Improved Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 2
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: knight
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: w1vWlgBnvyPPb3Iv
-    _key: '!items.effects!boaConstrictorFa.w1vWlgBnvyPPb3Iv'
-  - name: Beastly Strength
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Property:AV0]{AV0}.</div>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 1
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: knight
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: w1vWlgBnvyPPb3Iv
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: s77deq3UWIum1Vxw
-    _key: '!items.effects!boaConstrictorFa.s77deq3UWIum1Vxw'
-  - name: Improved Armor Piercing
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      expansionSaveAttribute: mov
-      form: normal
-      _sup: w1vWlgBnvyPPb3Iv
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+      targets:
+        - self
+    type: ability
+  - _id: w1vWlgBnvyPPb3Iv
+    _key: '!items.effects!boaConstrictorFa.w1vWlgBnvyPPb3Iv'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: eHWAjtMTtx0RrWOd
-    _key: '!items.effects!boaConstrictorFa.eHWAjtMTtx0RrWOd'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!boaConstrictorFa'
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          attribute: str
+          minVal: 2
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Boa Constrictor Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.boaConstrictor00]</p>
+  maxAv: 0
+  type: familiar
+type: power

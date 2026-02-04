@@ -1,25 +1,33 @@
 _id: fearTouch0000000
+_key: '!items!fearTouch0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Fear Touch
-    type: ability
+  - _id: fearTouch0000000
+    _key: '!items.effects!fearTouch0000000.fearTouch0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/fear-touch.webp
-    _id: fearTouch0000000
+    name: Fear Touch
     system:
+      class: necromancer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - mental
       elements:
@@ -29,46 +37,19 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well.</p>"
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
       impacts:
         base:
           expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
+            changeOnCrit: true
             crit:
               combat:
-                who:
-                  type: target
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -77,8 +58,21 @@ effects:
                   skip: 1
                   time: end
                   trigger: turn
-            changeOnCrit: true
+                who:
+                  type: target
             doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
           rolls:
             endCon: 2d4
           statuses:
@@ -87,20 +81,26 @@ effects:
           rolls:
             damage: 1d4[magic terror]
         macros:
+          Compendium_teriock_execution_Macro_selfFearPreExecu: preExecution
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      class: necromancer
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!fearTouch0000000.fearTouch0000000'
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/fear-touch.webp
 name: Fear Touch
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!fearTouch0000000'

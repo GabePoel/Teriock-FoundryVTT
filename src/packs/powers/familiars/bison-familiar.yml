@@ -1,60 +1,116 @@
 _id: bisonFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Bison Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.bison00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!bisonFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
   - _id: bisonTamer000000
+    _key: '!items.effects!bisonFamiliar000.bisonTamer000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Bison Tamer
     system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Bison]{bison}.</p>
       competence:
         raw: 2
+      description: <p>You know the way of the @L[Creature:Bison]{bison}.</p>
+      field: survivalist
       revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
+      tradecraft: tamer
     tint: '#ffffff'
-    _key: '!items.effects!bisonFamiliar000.bisonTamer000000'
-  - name: Partner Awaken
-    type: ability
-    img: systems/teriock/src/icons/abilities/partner-awaken.webp
+    transfer: true
+    type: fluency
+  - _id: 1biSgSXvHnsLlejU
+    _key: '!items.effects!bisonFamiliar000.1biSgSXvHnsLlejU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.instAwaken000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+    name: Instant Awaken
     system:
+      _sup: Q520nvwkW8jaQ8rF
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        description: Instant
+        quantity: 0
+        stationary: false
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - creature
+    type: ability
+  - _id: Q520nvwkW8jaQ8rF
+    _key: '!items.effects!bisonFamiliar000.Q520nvwkW8jaQ8rF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.partnerAwaken000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/partner-awaken.webp
+    name: Partner Awaken
+    system:
+      class: veteran
+      competence:
+        raw: 0
+      delivery:
+        base: sight
       duration:
-        unit: hour
-        quantity: 1
         description: 1 Hour
+        quantity: 1
         stationary: false
-      range:
-        unit: ft
-        raw: '30'
+        unit: hour
+      endCondition: <p>You use [[lookup name]] again.</p>
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You and the target gain @L[Keyword:Limited]{Limited}
@@ -64,154 +120,107 @@ effects:
           one creature at a time.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: veteran
-      endCondition: <p>You use [[lookup name]] again.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.partnerAwaken000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: Q520nvwkW8jaQ8rF
-    _key: '!items.effects!bisonFamiliar000.Q520nvwkW8jaQ8rF'
-  - name: Instant Awaken
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
       range:
+        raw: '30'
         unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
       skill: true
       standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      effectTypes:
-        - awakening
+      targets:
+        - creature
+    type: ability
+  - _id: O3Np3N2ApxaCNoDY
+    _key: '!items.effects!bisonFamiliar000.O3Np3N2ApxaCNoDY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reAwaken00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
+    name: Reactive Awaken
+    system:
       _sup: Q520nvwkW8jaQ8rF
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.instAwaken000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 1biSgSXvHnsLlejU
-    _key: '!items.effects!bisonFamiliar000.1biSgSXvHnsLlejU'
-  - name: Reactive Awaken
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
       delivery:
         base: hand
-      targets:
-        - creature
       duration:
-        unit: instant
+        description: Instant
         quantity: 0
         stationary: false
-        description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime: r1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: reactive
       overview:
         base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: RS5sEbPPJxe2Ql0Z
+    _key: '!items.effects!bisonFamiliar000.RS5sEbPPJxe2Ql0Z'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.skillShare000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/skill-share.webp
+    name: Skill Share
+    system:
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        description: 1 Hour
+        quantity: 1
+        stationary: false
+        unit: hour
+      effectTypes:
+        - contract
+      endCondition: <p>You use <a class="mw-selflink selflink">Skill Share</a> again.</p>
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
-      effectTypes:
-        - awakening
-      _sup: Q520nvwkW8jaQ8rF
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reAwaken00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: O3Np3N2ApxaCNoDY
-    _key: '!items.effects!bisonFamiliar000.O3Np3N2ApxaCNoDY'
-  - name: Skill Share
-    type: ability
-    img: systems/teriock/src/icons/abilities/skill-share.webp
-    system:
-      powerSources:
-        - magical
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
-        stationary: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '30'
       overview:
         base: >-
           <p>Target gains one @L[Category:Abilities]{ability} of your choice
@@ -224,47 +233,38 @@ effects:
           @L[Keyword:Incapable]{incapable} of <a class="mw-selflink
           selflink">Skill Share</a>. You may only have this active on one
           creature at a time.</p>
-        proficient: >-
-          <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first @L[Core:Proficiency Bonus]{P} ranks in a
-          @L[Category:Classes]{class}.</p>
         fluent: >-
           <p>You can now share @L[Category:Abilities]{abilities} you have from
           any of your first @L[Core:Fluency Bonus]{F} ranks in a
           @L[Category:Classes]{class}.</p>
+        proficient: >-
+          <p>You can now share @L[Category:Abilities]{abilities} you have from
+          any of your first @L[Core:Proficiency Bonus]{P} ranks in a
+          @L[Category:Classes]{class}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      revealed: true
       skill: true
       standard: true
-      class: corsair
-      endCondition: <p>You use <a class="mw-selflink selflink">Skill Share</a> again.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - contract
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: RS5sEbPPJxe2Ql0Z
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.skillShare000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bisonFamiliar000.RS5sEbPPJxe2Ql0Z'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!bisonFamiliar000'
+      sustained: true
+      targets:
+        - creature
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Bison Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.bison00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

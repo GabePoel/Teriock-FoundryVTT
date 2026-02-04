@@ -1,88 +1,551 @@
-name: Gnome
-type: creature
+_id: gnome00000000000
+_key: '!actors!gnome00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+folder: characterSpecies
 img: systems/teriock/src/icons/creatures/gnome.webp
-prototypeToken:
-  name: Gnome
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/gnome.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 0.5
-  height: 0.5
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
-  - _id: gnome00000000000
-    folder: mvJumfuWYLiylnji
-    name: Gnome
-    type: species
-    img: systems/teriock/src/icons/creatures/gnome.webp
+  - _id: qOqerRHOhsYOp5Ee
+    _key: '!actors.items!gnome00000000000.qOqerRHOhsYOp5Ee'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: LwntE76DWV8LsMYk
+        _key: >-
+          !actors.items.effects!gnome00000000000.qOqerRHOhsYOp5Ee.LwntE76DWV8LsMYk
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 70oASdJA4Iza7rlK
+        _key: >-
+          !actors.items.effects!gnome00000000000.qOqerRHOhsYOp5Ee.70oASdJA4Iza7rlK
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: characterSpecies
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
     system:
+      _sup: gnome00000000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: gnome00000000000
+    _key: '!actors.items!gnome00000000000.gnome00000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.gnome00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: TVjychCCbFDFz9SR
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.TVjychCCbFDFz9SR
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.atkRsc0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/attack-resistance.webp
+        name: Attack Resistance
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - resistance
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.resistances.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Non-critical Attacks
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Resistance]{resistant} to being hit by
+              non-critical @L[Category:Attack abilities]{attacks}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 6tN6AMRHWnmHysDe
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.6tN6AMRHWnmHysDe
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.greedy0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/greedy.webp
+        name: Greedy
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You must rob anyone you @L[Condition:Down]{drop}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: miwwh9YKwueMOYP5
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.miwwh9YKwueMOYP5
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.infLifespan00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
+        name: Infinite Lifespan
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You have no maximum lifespan. Your aging slows down with time
+              and seems to asymptote at around 500 years old, when you appear to
+              be in your mid 30s.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - unknown
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: luBsjzESq3gzR1Ze
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.luBsjzESq3gzR1Ze
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+        name: Normal Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: 0
+        type: ability
+      - _id: a0ia80wvVrwR9XeS
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.a0ia80wvVrwR9XeS
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: oLk2YuKN8zynW5TH
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.oLk2YuKN8zynW5TH
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: P1XzuoWljA0lURaU
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.P1XzuoWljA0lURaU
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        type: ability
+      - _id: OXQLLWNuWIMP2zw7
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.OXQLLWNuWIMP2zw7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/thin-soul.webp
+        name: Thin Soul
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.deathBag.pull
+                  mode: 4
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '15'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You pull an additional 5 stones from the @L[Core:Death
+              Bag]{death bag}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - unknown
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: A5buGUa1VRs9AhN3
+        _key: >-
+          !actors.items.effects!gnome00000000000.gnome00000000000.A5buGUa1VRs9AhN3
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/tiny-strength.webp
+        name: Tiny Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -2
+        type: ability
+    folder: characterSpecies
+    img: systems/teriock/src/icons/creatures/gnome.webp
+    name: Gnome
+    system:
+      adult: 100
+      appearance: <p>Often resemble tiny @L[Creature:Dwarf]{dwarves}.</p>
+      br: 1
       competence:
         raw: 1
       description: >-
         <p>[[lookup name]]s are very paranoid and avoid most other
         @L[Category:Creatures]{species}. They are considered to be incredibly
         greedy.</p>
+      size:
+        enabled: true
+        value: 0.5
       statDice:
         hp:
           disabled: false
@@ -94,679 +557,112 @@ items:
           faces: 10
           number:
             raw: '1'
-      adult: 100
-      appearance: <p>Often resemble tiny @L[Creature:Dwarf]{dwarves}.</p>
-      br: 1
-      size:
-        enabled: true
-        value: 0.5
       traits:
         - fae
         - humanoid
-    effects:
-      - name: Attack Resistance
-        type: ability
-        system:
-          delivery:
-            base: self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          effectTypes:
-            - resistance
-          executionTime: passive
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Resistance]{resistant} to being hit by
-              non-critical @L[Category:Attack abilities]{attacks}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          targets:
-            - self
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.other
-                  target: Actor
-                  qualifier: '1'
-                  value: Non-critical Attacks
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-        _id: TVjychCCbFDFz9SR
-        img: systems/teriock/src/icons/abilities/attack-resistance.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.atkRsc0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.TVjychCCbFDFz9SR
-      - name: Greedy
-        type: ability
-        system:
-          delivery:
-            base: self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          executionTime: passive
-          featSaveAttribute: mov
-          form: flaw
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: <p>You must rob anyone you @L[Condition:Down]{drop}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          targets:
-            - self
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _id: 6tN6AMRHWnmHysDe
-        img: systems/teriock/src/icons/abilities/greedy.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.greedy0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.6tN6AMRHWnmHysDe
-      - name: Infinite Lifespan
-        type: ability
-        img: systems/teriock/src/icons/abilities/infinite-lifespan.webp
-        system:
-          powerSources:
-            - unknown
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You have no maximum lifespan. Your aging slows down with time
-              and seems to asymptote at around 500 years old, when you appear to
-              be in your mid 30s.</p>
-          piercing:
-            raw: 0
-          form: special
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: miwwh9YKwueMOYP5
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.infLifespan00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.miwwh9YKwueMOYP5
-      - name: Normal Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: int
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: luBsjzESq3gzR1Ze
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.luBsjzESq3gzR1Ze
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: a0ia80wvVrwR9XeS
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.a0ia80wvVrwR9XeS
-      - name: Normal Perception
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: oLk2YuKN8zynW5TH
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.oLk2YuKN8zynW5TH
-      - name: Normal Sneak
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: P1XzuoWljA0lURaU
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.P1XzuoWljA0lURaU
-      - name: Thin Soul
-        type: ability
-        img: systems/teriock/src/icons/abilities/thin-soul.webp
-        system:
-          powerSources:
-            - unknown
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You pull an additional 5 stones from the @L[Core:Death
-              Bag]{death bag}.</p>
-          piercing:
-            raw: 0
-          form: flaw
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 5
-                  time: normal
-                  key: system.deathBag.pull
-                  target: Actor
-                  qualifier: '1'
-                  value: '15'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: OXQLLWNuWIMP2zw7
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.OXQLLWNuWIMP2zw7
-      - name: Tiny Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/tiny-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: str
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: A5buGUa1VRs9AhN3
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.gnome00000000000.A5buGUa1VRs9AhN3
+    type: species
+  - _id: OccBKAyhFBgUZDBd
+    _key: '!actors.items!gnome00000000000.OccBKAyhFBgUZDBd'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.gnome00000000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.hand000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!gnome00000000000.gnome00000000000'
-  - name: Mouth
-    type: body
-    _id: Jcw3TernwJmSm09n
-    img: icons/creatures/abilities/mouth-teeth-human.webp
-    system:
-      damage:
-        base:
-          raw: '1'
-      fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: gnome00000000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
     effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 1keJAxX1vkfTL8Wl
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.Jcw3TernwJmSm09n.1keJAxX1vkfTL8Wl
-      - name: Biting
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: cj70nNvBKfT3EQ8P
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.Jcw3TernwJmSm09n.cj70nNvBKfT3EQ8P
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 43UnM2Fnf4EpPLFE
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.Jcw3TernwJmSm09n.43UnM2Fnf4EpPLFE
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!gnome00000000000.Jcw3TernwJmSm09n'
-  - name: Hand
-    type: body
-    _id: OccBKAyhFBgUZDBd
-    img: systems/teriock/src/icons/body-parts/hand.webp
-    system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
-      _sup: gnome00000000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: FAUPXdLk1A1fD0k8
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
+      - _id: FAUPXdLk1A1fD0k8
         _key: >-
           !actors.items.effects!gnome00000000000.OccBKAyhFBgUZDBd.FAUPXdLk1A1fD0k8
-      - name: Handy
-        type: property
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: wGdRsURrcXoNZsur
+        _key: >-
+          !actors.items.effects!gnome00000000000.OccBKAyhFBgUZDBd.wGdRsURrcXoNZsur
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property can be used to deliver
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: wGdRsURrcXoNZsur
-        img: systems/teriock/src/icons/properties/handy.webp
+        type: property
+      - _id: 1eIcI58ulvhlFYKA
+        _key: >-
+          !actors.items.effects!gnome00000000000.OccBKAyhFBgUZDBd.1eIcI58ulvhlFYKA
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.OccBKAyhFBgUZDBd.wGdRsURrcXoNZsur
-      - name: Prehensile
-        type: property
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such
             as while using @L[Ability:Interact]{Interact}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 1eIcI58ulvhlFYKA
-        img: systems/teriock/src/icons/properties/prehensile.webp
+        type: property
+      - _id: r6jJPWhMBH4YpEKr
+        _key: >-
+          !actors.items.effects!gnome00000000000.OccBKAyhFBgUZDBd.r6jJPWhMBH4YpEKr
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.prehensile000000
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.OccBKAyhFBgUZDBd.1eIcI58ulvhlFYKA
-      - name: Small
-        type: property
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: r6jJPWhMBH4YpEKr
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.OccBKAyhFBgUZDBd.r6jJPWhMBH4YpEKr
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.hand000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!gnome00000000000.OccBKAyhFBgUZDBd'
-  - name: Foot
-    type: body
-    _id: qOqerRHOhsYOp5Ee
-    img: systems/teriock/src/icons/body-parts/foot.webp
+        type: property
+    folder: characterSpecies
+    img: systems/teriock/src/icons/body-parts/hand.webp
+    name: Hand
     system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
       _sup: gnome00000000000
       attackPenalty:
         raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
       range:
         long:
           unit: self
@@ -775,98 +671,205 @@ items:
         short:
           unit: self
       vitals: false
+    type: body
+  - _id: Jcw3TernwJmSm09n
+    _key: '!actors.items!gnome00000000000.Jcw3TernwJmSm09n'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Bashing
-        type: property
+      - _id: 1keJAxX1vkfTL8Wl
+        _key: >-
+          !actors.items.effects!gnome00000000000.Jcw3TernwJmSm09n.1keJAxX1vkfTL8Wl
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
         system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
             a weapon, but can still be used to make a @L[Ability:Basic
             Attack]{Basic Attack}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: LwntE76DWV8LsMYk
-        img: systems/teriock/src/icons/properties/bashing.webp
+        type: property
+      - _id: cj70nNvBKfT3EQ8P
+        _key: >-
+          !actors.items.effects!gnome00000000000.Jcw3TernwJmSm09n.cj70nNvBKfT3EQ8P
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.qOqerRHOhsYOp5Ee.LwntE76DWV8LsMYk
-      - name: Small
-        type: property
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
         system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 43UnM2Fnf4EpPLFE
+        _key: >-
+          !actors.items.effects!gnome00000000000.Jcw3TernwJmSm09n.43UnM2Fnf4EpPLFE
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
             used in the same hand as a @L[Category:Shields]{shield}.</p>
           form: intrinsic
-          competence:
-            raw: 0
           revealed: true
-        _id: 70oASdJA4Iza7rlK
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!gnome00000000000.qOqerRHOhsYOp5Ee.70oASdJA4Iza7rlK
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.foot000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!gnome00000000000.qOqerRHOhsYOp5Ee'
+        type: property
+    folder: characterSpecies
+    img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
+    system:
+      _sup: gnome00000000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+name: Gnome
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 0.5
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Gnome
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/gnome.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 0.5
 system:
-  hp:
-    value: 3
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 6
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '0.5'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: qOqerRHOhsYOp5Ee
-    blocker: qOqerRHOhsYOp5Ee
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: gnome00000000000
-folder: CSg33tJaMdQxbzeO
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!gnome00000000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 3
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 6
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '0.5'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: qOqerRHOhsYOp5Ee
+    blocker: qOqerRHOhsYOp5Ee
+type: creature

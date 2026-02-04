@@ -1,59 +1,50 @@
 _id: missileDodge0000
+_key: '!items!missileDodge0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Missile Dodge
-    type: ability
+  - _id: missileDodge0000
+    _key: '!items.effects!missileDodge0000.missileDodge0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/missile-dodge.webp
-    _id: missileDodge0000
+    name: Missile Dodge
     system:
+      basic: true
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '5'
-        unit: second
-        dawn: false
-        stationary: false
-        description: 5 Seconds
-      basic: true
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
       effectTypes:
         - movement
       endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You are @L[Condition:Missile Dodging]{missile dodging} until the
-          start of your next @L[Core:Turns]{turn}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: >-
-        <p>You are not @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared},
-        or @L[Condition:Immobile]{immobile}.</p>
-      sustained: true
-      targets:
-        - self
       impacts:
         base:
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: executor
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -62,22 +53,30 @@ effects:
                   skip: 0
                   time: start
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: executor
           statuses:
             - missileDodging
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!missileDodge0000.missileDodge0000'
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You are @L[Condition:Missile Dodging]{missile dodging} until the
+          start of your next @L[Core:Turns]{turn}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are not @L[Condition:Prone]{prone}, @L[Condition:Snared]{snared},
+        or @L[Condition:Immobile]{immobile}.</p>
+      revealed: true
+      sustained: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/missile-dodge.webp
 name: Missile Dodge
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!missileDodge0000'

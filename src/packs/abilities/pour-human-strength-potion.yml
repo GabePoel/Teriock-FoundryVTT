@@ -1,45 +1,64 @@
 _id: prHumanStrengthP
+_key: '!items!prHumanStrengthP'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Pour Human Strength Potion
-    type: ability
+  - _id: prHumanStrengthP
+    _key: '!items.effects!prHumanStrengthP.prHumanStrengthP'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/pour-human-strength-potion.webp
-    _id: prHumanStrengthP
+    name: Pour Human Strength Potion
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - transformation
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.attributes.str.value
+              mode: 5
+              priority: 50
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
       interaction: attack
       maneuver: active
       overview:
         base: >-
           <p>Target's @L[Core:Strength]{STR} is set to 0. This applies
           regardless of what it was prior.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -49,30 +68,10 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 50
-              time: normal
-              key: system.attributes.str.value
-              target: Actor
-              qualifier: '1'
-              value: '0'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!prHumanStrengthP.prHumanStrengthP'
+    type: ability
 img: systems/teriock/src/icons/abilities/pour-human-strength-potion.webp
 name: Pour Human Strength Potion
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!prHumanStrengthP'

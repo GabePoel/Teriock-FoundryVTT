@@ -1,16 +1,23 @@
 _id: manaBlade0000000
+_key: '!items!manaBlade0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Mana Blade
-    type: ability
+  - _id: manaBlade0000000
+    _key: '!items.effects!manaBlade0000000.manaBlade0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/mana-blade.webp
-    _id: manaBlade0000000
+    name: Mana Blade
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: variable
@@ -21,23 +28,23 @@ effects:
               plus an additional @L[Core:Hit Points and Mana Points]{MP} if you
               choose to use the @L[Core:Proficiency Bonus]{proficiency}
               upgrade.</p>
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - immunity
       elements:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -45,6 +52,33 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.Losing Grafted Items
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: other
+            - key: >-
+                system.protections.immunities.Destruction Effects on Grafted
+                Items
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: other
+        fluent:
+          rolls:
+            damage: 1d8[magic]
+        heightened:
+          duration: 3600
+        proficient:
+          rolls:
+            damage: 1d4[magic]
       interaction: manifest
       maneuver: active
       overview:
@@ -60,65 +94,30 @@ effects:
           what type of @L[Category:Weapons]{weapon} it is. This
           @L[Category:Weapons]{weapon} is called a "[[lookup name
           style=lc]]".</p>
+        fluent: >-
+          <p>The additional @L[Category:Elemental damage types]{elemental}
+          @L[Core:Damage]{damage} your [[lookup name style=lc]]s deals is
+          increased to [[/damage 1d8[magic]]].</p>
         proficient: >-
           <p>You may spend an additional @L[Core:Hit Points and Mana Points]{MP}
           while casting this to make the [[lookup name style=lc]] deal an
           additional [[/damage 1d4[magic]]] @L[Core:Damage]{damage} of an
           @L[Category:Elemental damage types]{elemental damage type} of your
           choice.</p>
-        fluent: >-
-          <p>The additional @L[Category:Elemental damage types]{elemental}
-          @L[Core:Damage]{damage} your [[lookup name style=lc]]s deals is
-          increased to [[/damage 1d8[magic]]].</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
       requirements: <p>You have at least one hand free.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.Losing Grafted Items
-              target: Actor
-              qualifier: '1'
-              value: other
-            - mode: 2
-              priority: 10
-              time: normal
-              key: >-
-                system.protections.immunities.Destruction Effects on Grafted
-                Items
-              target: Actor
-              qualifier: '1'
-              value: other
-        proficient:
-          rolls:
-            damage: 1d4[magic]
-        fluent:
-          rolls:
-            damage: 1d8[magic]
-        heightened:
-          duration: 3600
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!manaBlade0000000.manaBlade0000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/mana-blade.webp
 name: Mana Blade
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!manaBlade0000000'

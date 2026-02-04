@@ -54,21 +54,21 @@ export default class SpeciesSystem extends mix(
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {
-      adult: new fields.NumberField({ initial: 20 }),
+      adult: new fields.NumberField({ initial: 0, min: 0 }),
       appearance: new TextField({ label: "Appearance" }),
       attributeIncrease: new TextField({ label: "Attribute increase" }),
       br: new fields.NumberField({
         initial: 1,
         label: "Battle Rating",
       }),
-      description: new TextField({ label: "Description" }),
-      hpIncrease: new TextField({ label: "Hit increase" }),
-      innateRanks: new TextField({ label: "Innate ranks" }),
-      lifespan: new fields.NumberField({ initial: 100 }),
-      mpIncrease: new TextField({ label: "Mana increase" }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {
         initial: { raw: 1 },
       }),
+      description: new TextField({ label: "Description" }),
+      hpIncrease: new TextField({ label: "Hit increase" }),
+      innateRanks: new TextField({ label: "Innate ranks" }),
+      lifespan: new fields.NumberField({ initial: 0, min: 0 }),
+      mpIncrease: new TextField({ label: "Mana increase" }),
       size: new fields.SchemaField({
         enabled: new fields.BooleanField({
           hint: "Whether or not this species has a size associated with it.",

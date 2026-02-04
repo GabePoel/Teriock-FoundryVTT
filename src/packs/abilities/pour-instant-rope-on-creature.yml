@@ -1,39 +1,52 @@
 _id: prInstRopeOnCrea
+_key: '!items!prInstRopeOnCrea'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Pour Instant Rope on Creature
-    type: ability
+  - _id: prInstRopeOnCrea
+    _key: '!items.effects!prInstRopeOnCrea.prInstRopeOnCrea'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/pour-instant-rope-on-creature.webp
-    _id: prInstRopeOnCrea
+    name: Pour Instant Rope on Creature
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '10'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 10 Minutes
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          startStatuses:
+            - immobilized
       interaction: manifest
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -50,24 +63,10 @@ effects:
           @L[Condition:Immobilized]{immobilized}. They are not considered to
           have any @L[Equipment:Hand]{hands} or @L[Equipment:Foot]{feet} free
           while tied up.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          startStatuses:
-            - immobilized
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!prInstRopeOnCrea.prInstRopeOnCrea'
+    type: ability
 img: systems/teriock/src/icons/abilities/pour-instant-rope-on-creature.webp
 name: Pour Instant Rope on Creature
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!prInstRopeOnCrea'

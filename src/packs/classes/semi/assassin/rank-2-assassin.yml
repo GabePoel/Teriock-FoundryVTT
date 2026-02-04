@@ -1,58 +1,235 @@
-_id: rank2Assassin000
-folder: assassin00000000
-name: Rank 2 Assassin
-system:
-  archetype: semi
-  className: assassin
-  classRank: 2
-  competence:
-    raw: 1
-  description: >-
-    <p>The shadiest of all the classes, Assassins see life as expendable and
-    unimportant. Even their own life is trivial, someone will kill them sooner
-    or later. That's life. Life is short and thus Assassins tend to get to the
-    point quickly, literally. Some-what of a martial artist, there is something
-    Zen about the Assassin's way, not unlike the @L[Class:Duelist]{Duelist} in
-    that they have strong inner motivation, though care nothing for honor.
-    Assassins try to increase hatred between people in the hopes of creating
-    more job opportunities for themselves. If you're an Assassin, don't think
-    twice about killing someone, care little for your own life and cut to the
-    chase!</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 2
-type: rank
-img: systems/teriock/src/icons/ranks/rank-2-assassin.webp
+_id: r2Ass00000000000
+_key: '!items!r2Ass00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Weapons Mastery
-    type: ability
-    img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+  - _id: 3jZPi7VXyvPT6qYL
+    _key: '!items.effects!r2Ass00000000000.3jZPi7VXyvPT6qYL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.carefulPlanning0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/careful-planning.webp
+    name: Careful Planning
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: assassin
+      competence:
+        raw: 0
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Surprised (Inside Towns)
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>When you use @L[Ability:Hitman]{Hitman}, you may instead prepare an
+          area up to 15 feet by 15 feet. In addition, you
+          @L[Keyword:Resistance]{resist} being @L[Core:Surprise
+          Rounds]{surprised} in towns and other urban areas. You also gain
+          @L[Ability:Reactive Hide]{Reactive Hide}.</p>
+        fluent: >-
+          <p>The size of area you can prepare is (@L[Core:Fluency Bonus]{F} + 2)
+          × 5 feet by (@L[Core:Fluency Bonus]{F} + 2) × 5 feet.</p>
+        proficient: >-
+          <p>The size of area you can prepare is (@L[Core:Proficiency Bonus]{P}
+          + 2) × 5 feet by (@L[Core:Proficiency Bonus]{P} + 2) × 5 feet.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: iywHXVzwQTpsfsCr
+    _key: '!items.effects!r2Ass00000000000.iywHXVzwQTpsfsCr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reHide0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/reactive-hide.webp
+    name: Reactive Hide
+    system:
+      _sup: 3jZPi7VXyvPT6qYL
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
+        dawn: false
+        description: Instant
+        raw: '0'
         stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          startStatuses:
+            - hidden
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: <p>You become @L[Condition:Hidden]{hidden}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You @L[Condition:Down]{drop} another creature.</p>
+    type: ability
+  - _id: Qp4EozMa6bGC47pj
+    _key: '!items.effects!r2Ass00000000000.Qp4EozMa6bGC47pj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    type: ability
+  - _id: 2pTkWDwm4qO9nGUR
+    _key: '!items.effects!r2Ass00000000000.2pTkWDwm4qO9nGUR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+    name: Weapons Mastery
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
@@ -72,222 +249,47 @@ effects:
           way.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 2pTkWDwm4qO9nGUR
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank2Assassin000.2pTkWDwm4qO9nGUR'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
       range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      effectTypes:
-        - killing
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: Qp4EozMa6bGC47pj
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank2Assassin000.Qp4EozMa6bGC47pj'
-  - name: Careful Planning
-    type: ability
-    img: systems/teriock/src/icons/abilities/careful-planning.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>When you use @L[Ability:Hitman]{Hitman}, you may instead prepare an
-          area up to 15 feet by 15 feet. In addition, you
-          @L[Keyword:Resistance]{resist} being @L[Core:Surprise
-          Rounds]{surprised} in towns and other urban areas. You also gain
-          @L[Ability:Reactive Hide]{Reactive Hide}.</p>
-        proficient: >-
-          <p>The size of area you can prepare is (@L[Core:Proficiency Bonus]{P}
-          + 2) × 5 feet by (@L[Core:Proficiency Bonus]{P} + 2) × 5 feet.</p>
-        fluent: >-
-          <p>The size of area you can prepare is (@L[Core:Fluency Bonus]{F} + 2)
-          × 5 feet by (@L[Core:Fluency Bonus]{F} + 2) × 5 feet.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Being Surprised (Inside Towns)
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.carefulPlanning0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: 3jZPi7VXyvPT6qYL
-    _key: '!items.effects!rank2Assassin000.3jZPi7VXyvPT6qYL'
-  - name: Reactive Hide
     type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      overview:
-        base: <p>You become @L[Condition:Hidden]{hidden}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      trigger: <p>You @L[Condition:Down]{drop} another creature.</p>
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-      _sup: 3jZPi7VXyvPT6qYL
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/reactive-hide.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reHide0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: iywHXVzwQTpsfsCr
-    _key: '!items.effects!rank2Assassin000.iywHXVzwQTpsfsCr'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank2Assassin000'
+folder: assassin00000000
+img: systems/teriock/src/icons/ranks/rank-2-assassin.webp
+name: Rank 2 Assassin
+system:
+  archetype: semi
+  className: assassin
+  classRank: 2
+  competence:
+    raw: 1
+  description: >-
+    <p>The shadiest of all the classes, Assassins see life as expendable and
+    unimportant. Even their own life is trivial, someone will kill them sooner
+    or later. That's life. Life is short and thus Assassins tend to get to the
+    point quickly, literally. Some-what of a martial artist, there is something
+    Zen about the Assassin's way, not unlike the @L[Class:Duelist]{Duelist} in
+    that they have strong inner motivation, though care nothing for honor.
+    Assassins try to increase hatred between people in the hopes of creating
+    more job opportunities for themselves. If you're an Assassin, don't think
+    twice about killing someone, care little for your own life and cut to the
+    chase!</p>
+  innate: false
+  maxAv: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+type: rank

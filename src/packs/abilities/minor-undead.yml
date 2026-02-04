@@ -1,140 +1,102 @@
 _id: minorUndead00000
+_key: '!items!minorUndead00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Minor Undead
-    type: ability
-    img: systems/teriock/src/icons/abilities/minor-undead.webp
-    _id: minorUndead00000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      elements:
-        - necromancy
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Slow Mana Drain]{Slow Mana Drain},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-      impacts: {}
+  - _id: ppfA22GhZicU2XNK
+    _key: '!items.effects!minorUndead00000.ppfA22GhZicU2XNK'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.etherealSenses00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!minorUndead00000.minorUndead00000'
-  - name: Ethereal Senses
-    type: ability
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-    _id: ppfA22GhZicU2XNK
+    name: Ethereal Senses
     system:
+      _sup: minorUndead00000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - sensory
       elements:
         - necromancy
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.ethereal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
           creatures.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
         - spiritual
         - primal
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.ethereal
-              target: Actor
-              qualifier: '1'
-              value: '120'
-      _sup: minorUndead00000
+    type: ability
+  - _id: qXoa5wcWrj0gzHZo
+    _key: '!items.effects!minorUndead00000.qXoa5wcWrj0gzHZo'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.etherealSenses00
+      compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!minorUndead00000.ppfA22GhZicU2XNK'
-  - name: Healing Sensitivity
-    type: ability
     img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-    _id: qXoa5wcWrj0gzHZo
+    name: Healing Sensitivity
     system:
+      _sup: minorUndead00000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       elements:
         - necromancy
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
@@ -149,48 +111,90 @@ effects:
           @L[Damage:Magic]{magic damage} instead of the normal
           @L[Core:Healing]{healing} effect. This does not consume any of your
           @L[Core:HP]{hit dice}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts: {}
-      _sup: minorUndead00000
+    type: ability
+  - _id: minorUndead00000
+    _key: '!items.effects!minorUndead00000.minorUndead00000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!minorUndead00000.qXoa5wcWrj0gzHZo'
-  - name: Slow Mana Drain
-    type: ability
-    img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
-    _id: H4kqq77REscRnAoe
+    img: systems/teriock/src/icons/abilities/minor-undead.webp
+    name: Minor Undead
     system:
       competence:
         raw: 0
-      suppression: {}
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Slow Mana Drain]{Slow Mana Drain},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+      targets:
+        - self
+    type: ability
+  - _id: H4kqq77REscRnAoe
+    _key: '!items.effects!minorUndead00000.H4kqq77REscRnAoe'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slowManaDrain000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/slow-mana-drain.webp
+    name: Slow Mana Drain
+    system:
+      _sup: minorUndead00000
+      competence:
+        raw: 0
       delivery:
         base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - revitalization
         - draining
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -201,53 +205,68 @@ effects:
           <p>Deal enough @L[Drain:Mana]{mana drain} to @L[Condition:Dead]{kill}
           the target. If this successfully @L[Condition:Dead]{kills} the target,
           you @L[Core:Revitalizing]{revitalize}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: Your Hand's Range
         unit: ft
+      revealed: true
       targets:
         - creature
-      impacts: {}
-      _sup: minorUndead00000
+    type: ability
+  - _id: KeQwP29cZY3vT3Xp
+    _key: '!items.effects!minorUndead00000.KeQwP29cZY3vT3Xp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slowManaDrain000
+      compendiumSource: Compendium.teriock.abilities.Item.undeadMind000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!minorUndead00000.H4kqq77REscRnAoe'
-  - name: Undead Mind
-    type: ability
     img: systems/teriock/src/icons/abilities/undead-mind.webp
-    _id: KeQwP29cZY3vT3Xp
+    name: Undead Mind
     system:
+      _sup: minorUndead00000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       elements:
         - necromancy
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: frightened
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: charmed
       interaction: manifest
       maneuver: passive
       overview:
@@ -256,68 +275,74 @@ effects:
           @L[Condition:Frightened]{frightened} and
           @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
           maintained even if @L[Condition:Transformed]{transformed}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: frightened
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: charmed
-      _sup: minorUndead00000
+    type: ability
+  - _id: yMsGLKYBJjDp61Lc
+    _key: '!items.effects!minorUndead00000.yMsGLKYBJjDp61Lc'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.undeadMind000000
+      compendiumSource: Compendium.teriock.abilities.Item.undyingDur000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!minorUndead00000.KeQwP29cZY3vT3Xp'
-  - name: Undying Durability
-    type: ability
     img: systems/teriock/src/icons/abilities/undying-durability.webp
-    _id: yMsGLKYBJjDp61Lc
+    name: Undying Durability
     system:
+      _sup: minorUndead00000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       elements:
         - necromancy
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: unconscious
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: suffocating
+            - key: system.protections.immunities.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: poisoned
       interaction: manifest
       maneuver: passive
       overview:
@@ -330,50 +355,16 @@ effects:
           still @L[Condition:Dead]{die} when you reach half your maximum
           @L[Core:Hit Points and Mana Points]{HP} below zero. You also do not
           have to @L[Core:Drowning]{breathe}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: unconscious
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: suffocating
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.statuses
-              target: Actor
-              qualifier: '1'
-              value: poisoned
-      _sup: minorUndead00000
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.undyingDur000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!minorUndead00000.yMsGLKYBJjDp61Lc'
+    type: ability
 img: systems/teriock/src/icons/abilities/minor-undead.webp
 name: Minor Undead
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!minorUndead00000'

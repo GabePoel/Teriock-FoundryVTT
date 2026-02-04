@@ -1,25 +1,32 @@
 _id: spigaWebBall0000
+_key: '!items!spigaWebBall0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Spiga Web Ball
-    type: ability
+  - _id: spigaWebBall0000
+    _key: '!items.effects!spigaWebBall0000.spigaWebBall0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: icons/creatures/webs/web-nest-ball-teal.webp
-    _id: spigaWebBall0000
+    name: Spiga Web Ball
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: missile
         package: ball
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       endCondition: >-
         <p>The @L[Condition:Snared]{snare} caused by this ability does not end
         on its own. It can be escaped by @L[Ability:Interact]{interacting} with
@@ -30,14 +37,20 @@ effects:
         @L[Core:Size]{SIZE} 1 or larger that is assisting the target.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          statuses:
+            - snared
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - martial
       range:
@@ -45,24 +58,10 @@ effects:
         unit: ft
       results:
         hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          statuses:
-            - snared
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!spigaWebBall0000.spigaWebBall0000'
+    type: ability
 img: icons/creatures/webs/web-nest-ball-teal.webp
 name: Spiga Web Ball
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!spigaWebBall0000'

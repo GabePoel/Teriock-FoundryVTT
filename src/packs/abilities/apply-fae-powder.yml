@@ -1,37 +1,75 @@
 _id: applyFaePowder00
+_key: '!items!applyFaePowder00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Apply Fae Powder
-    type: ability
+  - _id: applyFaePowder00
+    _key: '!items.effects!applyFaePowder00.applyFaePowder00'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/apply-fae-powder.webp
-    _id: applyFaePowder00
+    name: Apply Fae Powder
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: fire
+            - key: system.protections.resistances.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: burned
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Set on Fire
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Harmed by Acid
       interaction: manifest
       maneuver: slow
       overview:
@@ -46,6 +84,8 @@ effects:
           acid. Otherwise, the target is @L[Keyword:Immunity]{immune} to being
           @L[Property:Shattered]{shattered} or @L[Property:Destroyed]{destroyed}
           by fire or acid.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -53,53 +93,12 @@ effects:
       requirements: >-
         <p>Use this ability by interacting with the
         @L[Category:Equipment]{equipment} that provides it.</p>
+      revealed: true
       targets:
         - area
         - creature
         - item
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.damageTypes
-              target: Actor
-              qualifier: '1'
-              value: fire
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.effects
-              target: Actor
-              qualifier: '1'
-              value: burned
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Being Set on Fire
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Being Harmed by Acid
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!applyFaePowder00.applyFaePowder00'
+    type: ability
 img: systems/teriock/src/icons/abilities/apply-fae-powder.webp
 name: Apply Fae Powder
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!applyFaePowder00'

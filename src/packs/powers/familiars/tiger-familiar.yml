@@ -1,192 +1,72 @@
 _id: tigerFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Tiger Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.tiger00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!tigerFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: tigerTamer000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Tiger Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Tiger]{tiger}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: AnpK6LlfNR3FJPQr
+    _key: '!items.effects!tigerFamiliar000.AnpK6LlfNR3FJPQr'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!tigerFamiliar000.tigerTamer000000'
-  - name: Martial Arts
-    type: ability
-    img: systems/teriock/src/icons/abilities/martial-arts.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
-          and @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.martialArts00000
-      coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: gLU5oiKjowJFjXzg
-    _key: '!items.effects!tigerFamiliar000.gLU5oiKjowJFjXzg'
-  - name: Offensive Martial Arts
-    type: ability
+    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+    name: Defensive Martial Arts
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
-      overview:
-        base: >-
-          <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
-          equipment]{handy items} count as @L[Category:Weapons]{weapons} for the
-          purposes of @L[Category:Weapon target abilities]{abilities that
-          target} or are @L[Category:Weapon delivery abilities]{delivered by}
-          them (although they cannot be @L[Property:Shattered]{shattered} or
-          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
-          Interaction]{attack} with them and their damage die is now [[/damage
-          1d4]].</p>
-        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
-        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d4
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d4
-        proficient:
-          rolls:
-            damage: 1d6
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d6
-        fluent:
-          rolls:
-            damage: 1d8
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.damage.base.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: 1d8
       _sup: gLU5oiKjowJFjXzg
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: PJIwNB0MlAc7TsYj
-    _key: '!items.effects!tigerFamiliar000.PJIwNB0MlAc7TsYj'
-  - name: Defensive Martial Arts
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
+        description: Always Active
         quantity: 0
         stationary: false
-        description: Always Active
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '1'
+        fluent:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '3'
+        proficient:
+          changes:
+            - key: system.bv.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: '2'
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
@@ -198,83 +78,202 @@ effects:
           Interaction]{block} with them and their @L[Core:Block Value]{BV} is
           +1.</p><div class="note"><b>Note:</b> This does not make your hands
           @L[Property:Blocking]{blocking}.</div>
-        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
         fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
+        proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: gLU5oiKjowJFjXzg
+    _key: '!items.effects!tigerFamiliar000.gLU5oiKjowJFjXzg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.martialArts00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/martial-arts.webp
+    name: Martial Arts
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
+          and @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
       skill: true
       standard: true
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '2'
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.bv.raw
-              target: body
-              qualifier: '@prop.handy'
-              value: '3'
+      targets:
+        - self
+    type: ability
+  - _id: PJIwNB0MlAc7TsYj
+    _key: '!items.effects!tigerFamiliar000.PJIwNB0MlAc7TsYj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.offensiveMartial
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
+    name: Offensive Martial Arts
+    system:
       _sup: gLU5oiKjowJFjXzg
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: AnpK6LlfNR3FJPQr
-    _key: '!items.effects!tigerFamiliar000.AnpK6LlfNR3FJPQr'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
+      impacts:
+        base:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d4
+          rolls:
+            damage: 1d4
+        fluent:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d8
+          rolls:
+            damage: 1d8
+        proficient:
+          changes:
+            - key: system.damage.base.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.handy'
+              target: body
+              time: normal
+              value: 1d6
+          rolls:
+            damage: 1d6
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
+          equipment]{handy items} count as @L[Category:Weapons]{weapons} for the
+          purposes of @L[Category:Weapon target abilities]{abilities that
+          target} or are @L[Category:Weapon delivery abilities]{delivered by}
+          them (although they cannot be @L[Property:Shattered]{shattered} or
+          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
+          Interaction]{attack} with them and their damage die is now [[/damage
+          1d4]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: sgekudyQTXCfiXtG
+    _key: '!items.effects!tigerFamiliar000.sgekudyQTXCfiXtG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
         description: Instant
+        quantity: 0
         stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -285,49 +284,50 @@ effects:
           @L[Core:Damage]{damage} instead.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
       skill: true
       standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      effectTypes:
-        - killing
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-      competence:
-        raw: 0
-      revealed: true
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
-    _id: sgekudyQTXCfiXtG
+    type: ability
+  - _id: tigerTamer000000
+    _key: '!items.effects!tigerFamiliar000.tigerTamer000000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!tigerFamiliar000.sgekudyQTXCfiXtG'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!tigerFamiliar000'
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Tiger Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Tiger]{tiger}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Tiger Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.tiger00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

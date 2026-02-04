@@ -1,25 +1,33 @@
 _id: resurrect0000000
+_key: '!items!resurrect0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Resurrect
-    type: ability
+  - _id: resurrect0000000
+    _key: '!items.effects!resurrect0000000.resurrect0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/resurrect.webp
-    _id: resurrect0000000
+    name: Resurrect
     system:
+      class: lifeMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - revival
         - healing
@@ -27,9 +35,9 @@ effects:
         - life
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -48,14 +56,16 @@ effects:
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
           does not count as a @L[Category:Healing effects]{healing effect}
           unless you choose to @L[Core:Healing]{heal} with it.</p>
-        proficient: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
-          @L[Core:Proficiency Bonus]{P} times.</p>
         fluent: >-
           <p>If target is @L[Category:Undead creatures]{undead}, they are
           @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
           Bonus]{F} times.</p>
+        proficient: >-
+          <p>If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
+          @L[Core:Proficiency Bonus]{P} times.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -64,25 +74,13 @@ effects:
       requirements: >-
         <p>Target is @L[Category:Undead creatures]{undead} or has
         @L[Condition:Dead]{died} within the last 24 hours.</p>
+      revealed: true
       ritual: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts: {}
-      class: lifeMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!resurrect0000000.resurrect0000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/resurrect.webp
 name: Resurrect
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!resurrect0000000'

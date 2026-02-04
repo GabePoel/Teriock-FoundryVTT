@@ -1,37 +1,44 @@
 _id: grow000000000000
+_key: '!items!grow000000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Grow
-    type: ability
+  - _id: grow000000000000
+    _key: '!items.effects!grow000000000000.grow000000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: icons/magic/control/sihouette-hold-beam-green.webp
-    _id: grow000000000000
+    name: Grow
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       elements:
         - nature
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -39,8 +46,22 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.size.number.raw
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+        heightened:
+          duration: 3600
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
@@ -48,35 +69,13 @@ effects:
         unit: ft
       results:
         hit: <p>Target's @L[Core:Size]{SIZE} increases by 1. </p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.size.number.raw
-              target: Actor
-              qualifier: '1'
-              value: '1'
-        heightened:
-          duration: 3600
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!grow000000000000.grow000000000000'
+    type: ability
 img: icons/magic/control/sihouette-hold-beam-green.webp
 name: Grow
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!grow000000000000'

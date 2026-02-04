@@ -1,56 +1,48 @@
 _id: C8ZnNHCFo9ShSGnJ
-folder: RDEI6v0H4ape5mFm
-name: Rank 3 Flame Mage
-system:
-  archetype: mage
-  className: flameMage
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>Fierce and brazen, these mages are always at war. The arms dealers of the
-    world, their magic is completely focused on destruction and thus they seek
-    to create bigger and better ways to blow things up. Passionate, wild and a
-    bit chaotic, these mages like the mountains and underground spaces. If you
-    are playing a Flame Mage be hot tempered, war-like, ready for battle, and
-    consuming everything.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: hugeRedSlime0000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
+_key: '!items!C8ZnNHCFo9ShSGnJ'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r3Fla00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Additional Flame Rotators
-    type: ability
+  - _id: CaTTWTstOULxfkrp
+    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.CaTTWTstOULxfkrp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.adlFlameRots0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/additional-flame-rotators.webp
+    name: Additional Flame Rotators
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: flameMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Cremate]{Cremate} and @L[Ability:Minor Weapon
@@ -58,200 +50,125 @@ effects:
           @L[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
-      skill: true
-      class: flameMage
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - martial
       range:
         unit: self
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.adlFlameRots0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: CaTTWTstOULxfkrp
-    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.CaTTWTstOULxfkrp'
-  - name: Cremate
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
+      revealed: true
+      skill: true
       targets:
-        - vitals
-      elements:
-        - flame
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Burned]{burned}, and
-          @L[Condition:Ruined]{ruined}.</p>
-      piercing:
-        raw: 0
-      spell: true
-      standard: true
+        - self
+    type: ability
+  - _id: Of9sOoo4szd2CEOp
+    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.Of9sOoo4szd2CEOp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cremate000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/cremate.webp
+    name: Cremate
+    system:
+      _sup: CaTTWTstOULxfkrp
       class: flameMage
-      rotator: true
+      competence:
+        raw: 0
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
-      form: special
+        somatic: true
+        verbal: true
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - killing
         - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
       impacts:
         base:
           startStatuses:
             - burned
             - ruined
-      _sup: CaTTWTstOULxfkrp
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/cremate.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cremate000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: Of9sOoo4szd2CEOp
-    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.Of9sOoo4szd2CEOp'
-  - name: Minor Weapon Enchantment
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - weapon
-      elements:
-        - flame
-      duration:
-        unit: hour
-        stationary: false
-        description: 1 Hour
-        dawn: false
-        raw: '1'
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic damage}
-          and @L[Property:Granting]{grant} a @L[Category:Conjured
-          spells]{conjured} @L[Category:Ray delivery spells]{ray spell} that you
-          know. Except, the spell has the @L[Category:AV0 spells]{AV0}
-          @L[Category:Weapon delivery spells]{weapon delivery} instead, is
-          @L[Keyword:Gifted]{gifted}, and can only be delivered with the
-          enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier 1}.
-          If the weapon is @L[Property:Shattered]{shattered}, this enchantment
-          fades.</p>
+      interaction: attack
+      maneuver: active
       piercing:
         raw: 0
-      spell: true
-      standard: true
-      ritual: true
-      class: flameMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      form: special
-      impacts:
-        heightened:
-          duration: 3600
-      _sup: CaTTWTstOULxfkrp
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.minorWepEnchantm
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: OFPEJ5NINFBzzVjj
-    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.OFPEJ5NINFBzzVjj'
-  - name: Expanded Flame Elder Sorcery
-    type: ability
-    img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
-    system:
-      elderSorcery: true
       powerSources:
         - magical
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: slow
-      executionTime: Long Rest
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      results:
+        hit: >-
+          <p>Target is @L[Condition:Burned]{burned}, and
+          @L[Condition:Ruined]{ruined}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - vitals
+    type: ability
+  - _id: EjA48yTYBOoAhMOD
+    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.EjA48yTYBOoAhMOD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.expandedFlameES0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+        dontConsume: false
+    img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
+    name: Expanded Flame Elder Sorcery
+    system:
+      class: flameMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elderSorcery: true
       elements:
         - flame
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
+      executionTime: Long Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -275,44 +192,127 @@ effects:
           Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
           Words]{Celestial Elder Sorcery Words}, and @L[Ability:Flame Elder
           Sorcery Words]{Flame Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       results:
-        save: <p>You learn the spell or word.</p>
         fail: >-
           <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
           that spell or word again.</p>
-      piercing:
-        raw: 0
+        save: <p>You learn the spell or word.</p>
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: OFPEJ5NINFBzzVjj
+    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.OFPEJ5NINFBzzVjj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.minorWepEnchantm
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
+    name: Minor Weapon Enchantment
+    system:
+      _sup: CaTTWTstOULxfkrp
       class: flameMage
-      form: special
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      elements:
+        - flame
+      executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic damage}
+          and @L[Property:Granting]{grant} a @L[Category:Conjured
+          spells]{conjured} @L[Category:Ray delivery spells]{ray spell} that you
+          know. Except, the spell has the @L[Category:AV0 spells]{AV0}
+          @L[Category:Weapon delivery spells]{weapon delivery} instead, is
+          @L[Keyword:Gifted]{gifted}, and can only be delivered with the
+          enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier 1}.
+          If the weapon is @L[Property:Shattered]{shattered}, this enchantment
+          fades.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
       range:
-        unit: self
-    _id: EjA48yTYBOoAhMOD
-    flags:
-      teriock:
-        dontConsume: false
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.expandedFlameES0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!C8ZnNHCFo9ShSGnJ.EjA48yTYBOoAhMOD'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank3FlameMage00
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!C8ZnNHCFo9ShSGnJ'
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - weapon
+    type: ability
+folder: redSlimes0000000
+img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
+name: Rank 3 Flame Mage
+system:
+  _sup: hugeRedSlime0000
+  archetype: mage
+  className: flameMage
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>Fierce and brazen, these mages are always at war. The arms dealers of the
+    world, their magic is completely focused on destruction and thus they seek
+    to create bigger and better ways to blow things up. Passionate, wild and a
+    bit chaotic, these mages like the mountains and underground spaces. If you
+    are playing a Flame Mage be hot tempered, war-like, ready for battle, and
+    consuming everything.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

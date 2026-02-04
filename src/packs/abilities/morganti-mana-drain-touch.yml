@@ -1,74 +1,73 @@
 _id: morgantiManaDrai
+_key: '!items!morgantiManaDrai'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Morganti Mana Drain Touch
-    type: ability
+  - _id: morgantiManaDrai
+    _key: '!items.effects!morgantiManaDrai.morgantiManaDrai'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/morganti-mana-drain-touch.webp
-    _id: morgantiManaDrai
+    name: Morganti Mana Drain Touch
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - revitalization
         - draining
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            drain: 1d8[morganti mana]
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
         raw: Your Hand's Range
         unit: ft
       results:
-        hit: >-
-          <p>Deal [[/drain 1d8[morganti mana]]] @L[Category:Drain types]{drain}
-          to the target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize}.  This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
         critHit: >-
           <p>Deal [[/drain 2d8[morganti morganti]]] @L[Category:Drain
           types]{drain} to the target. If this @L[Condition:Dead]{kills} the
           target, you @L[Core:Revitalizing]{revitalize} twice. This
           @L[Core:Revitalizing]{revitalization} is the only part of this that is
           a @L[Category:Revitalization effects]{revitalization effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[morganti mana]]] @L[Category:Drain types]{drain}
+          to the target. If this @L[Condition:Dead]{kills} the target, you
+          @L[Core:Revitalizing]{revitalize}.  This
+          @L[Core:Revitalizing]{revitalization} is the only part of this that is
+          a @L[Category:Revitalization effects]{revitalization effect}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          rolls:
-            drain: 1d8[morganti mana]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!morgantiManaDrai.morgantiManaDrai'
+    type: ability
 img: systems/teriock/src/icons/abilities/morganti-mana-drain-touch.webp
 name: Morganti Mana Drain Touch
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!morgantiManaDrai'

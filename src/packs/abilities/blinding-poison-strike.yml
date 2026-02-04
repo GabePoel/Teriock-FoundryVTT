@@ -1,37 +1,50 @@
 _id: blindingPoisonSt
+_key: '!items!blindingPoisonSt'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Blinding Poison Strike
-    type: ability
+  - _id: blindingPoisonSt
+    _key: '!items.effects!blindingPoisonSt.blindingPoisonSt'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/blinding-poison-strike.webp
-    _id: blindingPoisonSt
+    name: Blinding Poison Strike
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '24'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 24 Hours
       delivery:
         base: weapon
         package: strike
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
       effectTypes:
         - poison
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          statuses:
+            - blind
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -42,24 +55,10 @@ effects:
           <p>Target is @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} causes the target to become
           @L[Condition:Blind]{blind}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          statuses:
-            - blind
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!blindingPoisonSt.blindingPoisonSt'
+    type: ability
 img: systems/teriock/src/icons/abilities/blinding-poison-strike.webp
 name: Blinding Poison Strike
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!blindingPoisonSt'

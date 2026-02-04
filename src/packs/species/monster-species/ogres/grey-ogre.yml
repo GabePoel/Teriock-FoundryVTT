@@ -1,184 +1,44 @@
 _id: greyOgre00000000
-folder: Ik6LrPxnC9hOaDkp
-name: Grey Ogre
-type: species
-img: systems/teriock/src/icons/creatures/grey-ogre.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Grey ogres are terrified of magic and will flee from it. These people
-    look like bigger and stronger @L[Category:Orks]{orks}.
-    @L[Category:Ogres]{Ogres} have a wild culture, tending towards solitude and
-    hunting smaller humanoid species for food. Relying on superior strength and
-    toughness in combat, ogres are known to underestimate their foes. Ogres are
-    often recruited by evil armies due to their hunting instincts for humanoids,
-    which are their natural prey.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  appearance: "<p>Ugly muscular humanoids with sharp teeth\_and grayish skin.</p>"
-  br: 4
-  size:
-    enabled: true
-    value: 5
-  traits:
-    - partialHumanoid
-    - monstrous
+_key: '!items!greyOgre00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Cowardly
-    type: ability
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: No Limit
-        dawn: false
-        raw: '0'
-      effectTypes:
-        - automatic
-      endCondition: >-
-        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: r0
-      featSaveAttribute: mov
-      form: flaw
-      grantOnly: false
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You become @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      targets:
-        - self
-      trigger: >-
-        <p>You are hit by an @L[Category:Attack abilities]{attack}. This
-        triggers automatically. You cannot choose to not use it if you are able
-        to.</p>
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      limitation: >-
-        <p>From @L[Category:Magically powered abilities]{magically powered
-        abilities} only.</p>
-      range:
-        unit: self
-    _id: Txe7fVo1TtiFSAT2
-    img: systems/teriock/src/icons/abilities/cowardly.webp
+  - _id: 4k7HxUTHLdCB9VuM
+    _key: '!items.effects!greyOgre00000000.4k7HxUTHLdCB9VuM'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cowardly00000000
+      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!greyOgre00000000.Txe7fVo1TtiFSAT2'
-  - name: Improved Strength
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      upgrades:
-        score:
-          attribute: str
-          value: 2
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: S0YurmVfoMrhZI52
-    _key: '!items.effects!greyOgre00000000.S0YurmVfoMrhZI52'
-  - name: Beastly Strength
-    type: ability
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      _sup: S0YurmVfoMrhZI52
+      class: knight
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -187,140 +47,266 @@ effects:
           to be @L[Property:AV0]{AV0}.</div>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      form: normal
-      _sup: S0YurmVfoMrhZI52
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: Txe7fVo1TtiFSAT2
+    _key: '!items.effects!greyOgre00000000.Txe7fVo1TtiFSAT2'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cowardly00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/cowardly.webp
+    name: Cowardly
+    system:
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 4k7HxUTHLdCB9VuM
-    _key: '!items.effects!greyOgre00000000.4k7HxUTHLdCB9VuM'
-  - name: Improved Armor Piercing
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: No Limit
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - automatic
+      endCondition: >-
+        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+          rolls:
+            endCon: 2d4
+      interaction: manifest
+      limitation: >-
+        <p>From @L[Category:Magically powered abilities]{magically powered
+        abilities} only.</p>
+      maneuver: reactive
+      overview:
+        base: <p>You become @L[Condition:Frightened]{frightened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+      trigger: >-
+        <p>You are hit by an @L[Category:Attack abilities]{attack}. This
+        triggers automatically. You cannot choose to not use it if you are able
+        to.</p>
+    type: ability
+  - _id: 8RBQUVrdlwqRk8WT
+    _key: '!items.effects!greyOgre00000000.8RBQUVrdlwqRk8WT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: S0YurmVfoMrhZI52
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
           piercing}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: knight
-      form: normal
-      _sup: S0YurmVfoMrhZI52
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 8RBQUVrdlwqRk8WT
-    _key: '!items.effects!greyOgre00000000.8RBQUVrdlwqRk8WT'
-  - name: Low Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/low-intelligence.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: S0YurmVfoMrhZI52
+    _key: '!items.effects!greyOgre00000000.S0YurmVfoMrhZI52'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
+          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    type: ability
+  - _id: Afn1hP0MnljkWKji
+    _key: '!items.effects!greyOgre00000000.Afn1hP0MnljkWKji'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lowIntelligence0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/low-intelligence.webp
+    name: Low Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
       form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: -1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Afn1hP0MnljkWKji
+    type: ability
+  - _id: On9OCvDwCSDppYNg
+    _key: '!items.effects!greyOgre00000000.On9OCvDwCSDppYNg'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lowIntelligence0
+      compendiumSource: Compendium.teriock.abilities.Item.necroMagVulnerab
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!greyOgre00000000.Afn1hP0MnljkWKji'
-  - name: Necromancy Magic Vulnerability
-    type: ability
+    img: systems/teriock/src/icons/abilities/necromancy-magic-vulnerability.webp
+    name: Necromancy Magic Vulnerability
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
@@ -335,38 +321,38 @@ effects:
         raw: 0
       powerSources:
         - martial
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: On9OCvDwCSDppYNg
-    img: systems/teriock/src/icons/abilities/necromancy-magic-vulnerability.webp
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: 2q3dYQbaLQx2MNjp
+    _key: '!items.effects!greyOgre00000000.2q3dYQbaLQx2MNjp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroMagVulnerab
+      compendiumSource: Compendium.teriock.abilities.Item.necroRavagedSoul
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!greyOgre00000000.On9OCvDwCSDppYNg'
-  - name: Necromancy Ravaged Soul
-    type: ability
+    img: systems/teriock/src/icons/abilities/necromancy-ravaged-soul.webp
+    name: Necromancy Ravaged Soul
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: unlimited
-        stationary: false
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: unlimited
       executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
@@ -381,164 +367,178 @@ effects:
         raw: 0
       powerSources:
         - martial
-      targets:
-        - self
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
       range:
         unit: self
-    _id: 2q3dYQbaLQx2MNjp
-    img: systems/teriock/src/icons/abilities/necromancy-ravaged-soul.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroRavagedSoul
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!greyOgre00000000.2q3dYQbaLQx2MNjp'
-  - name: Normal Movement
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-movement.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: Yb6gjQqMqp85keuf
+    _key: '!items.effects!greyOgre00000000.Yb6gjQqMqp85keuf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Yb6gjQqMqp85keuf
+    type: ability
+  - _id: Bxh2xbGsl0ncaeQs
+    _key: '!items.effects!greyOgre00000000.Bxh2xbGsl0ncaeQs'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!greyOgre00000000.Yb6gjQqMqp85keuf'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: Bxh2xbGsl0ncaeQs
+    type: ability
+  - _id: WKS9PXhnod2ZEFFa
+    _key: '!items.effects!greyOgre00000000.WKS9PXhnod2ZEFFa'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!greyOgre00000000.Bxh2xbGsl0ncaeQs'
-  - name: Normal Sneak
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: snk
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: WKS9PXhnod2ZEFFa
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!greyOgre00000000.WKS9PXhnod2ZEFFa'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!greyOgre00000000'
+    type: ability
+folder: ogres00000000000
+img: systems/teriock/src/icons/creatures/grey-ogre.webp
+name: Grey Ogre
+system:
+  appearance: "<p>Ugly muscular humanoids with sharp teeth\_and grayish skin.</p>"
+  br: 4
+  competence:
+    raw: 1
+  description: >-
+    <p>Grey ogres are terrified of magic and will flee from it. These people
+    look like bigger and stronger @L[Category:Orks]{orks}.
+    @L[Category:Ogres]{Ogres} have a wild culture, tending towards solitude and
+    hunting smaller humanoid species for food. Relying on superior strength and
+    toughness in combat, ogres are known to underestimate their foes. Ogres are
+    often recruited by evil armies due to their hunting instincts for humanoids,
+    which are their natural prey.</p>
+  size:
+    enabled: true
+    value: 5
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+  traits:
+    - partialHumanoid
+    - monstrous
+type: species

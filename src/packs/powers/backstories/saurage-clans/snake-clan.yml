@@ -1,34 +1,68 @@
-folder: MwRSCixW3oPgC6LW
-name: Snake Clan
-type: power
-_id: 6pEoa1kHAztoG2z9
-img: icons/creatures/reptiles/snake-poised-white.webp
-system:
-  description: >-
-    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
-    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
-    color.</p>
-  type: backstory
+_id: snakeClan0000000
+_key: '!items!snakeClan0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Evasive Shimmering
-    type: ability
+  - _id: BKQraLuf74UQFrTT
+    _key: '!items.effects!snakeClan0000000.BKQraLuf74UQFrTT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.evasiveShimmerin
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
+    name: Evasive Shimmering
     system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
         description: Instant
+        raw: '0'
         stationary: false
+        unit: instant
+      effectTypes:
+        - resistance
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: snared
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: immobilized
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: hack
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Keyword:Resistance]{resistant} to effects that would
@@ -36,44 +70,27 @@ effects:
           @L[Condition:Immobile]{immobile}, and to @L[Damage:Hack]{hack damage}
           dealt by other creatures.</p><div class="note"><b>Note:</b> This does
           not clear any existing effects.</div>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
       requirements: <p>You are not within 10 feet of any enemy creature.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.protections.resistances.statuses
-              mode: 2
-              value: snared
-              priority: 10
-            - key: system.protections.resistances.statuses
-              mode: 2
-              value: immobilized
-              priority: 10
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: hack
-              priority: 10
-    _id: BKQraLuf74UQFrTT
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.evasiveShimmerin
-    _key: '!items.effects!6pEoa1kHAztoG2z9.BKQraLuf74UQFrTT'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!6pEoa1kHAztoG2z9'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: saurageClans0000
+img: icons/creatures/reptiles/snake-poised-white.webp
+name: Snake Clan
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
+    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
+    color.</p>
+  maxAv: 4
+  type: backstory
+type: power

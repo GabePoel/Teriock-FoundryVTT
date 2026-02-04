@@ -1,150 +1,150 @@
 _id: boarFamiliar0000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Boar Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.boar000000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!boarFamiliar0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
   - _id: boarTamer0000000
+    _key: '!items.effects!boarFamiliar0000.boarTamer0000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Boar Tamer
     system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Boar]{boar}.</p>
       competence:
         raw: 2
+      description: <p>You know the way of the @L[Creature:Boar]{boar}.</p>
+      field: survivalist
       revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
+      tradecraft: tamer
     tint: '#ffffff'
-    _key: '!items.effects!boarFamiliar0000.boarTamer0000000'
-  - name: Defy Death
-    type: ability
+    transfer: true
+    type: fluency
+  - _id: YDnITgPGV831s6pL
+    _key: '!items.effects!boarFamiliar0000.YDnITgPGV831s6pL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.defyDeath0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/defy-death.webp
+    name: Defy Death
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      class: duelist
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: minute
-        quantity: 1
         description: 1 Minute
+        quantity: 1
         stationary: false
-      sustained: true
-      overview:
-        base: <p>You begin @L[Condition:Defying Death]{defying death}.</p>
-      piercing:
-        raw: 0
+        unit: minute
+      effectTypes:
+        - resistance
+      executionTime: r1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            endCon: 2d4
+          statuses:
+            - defyingDeath
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      class: duelist
-      expansionSaveAttribute: mov
-      trigger: <p>You would @L[Condition:Down]{drop}.</p>
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          statuses:
-            - defyingDeath
-          rolls:
-            endCon: 2d4
-      competence:
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: <p>You begin @L[Condition:Defying Death]{defying death}.</p>
+      piercing:
         raw: 0
-      revealed: true
-      grantOnly: false
-    _id: YDnITgPGV831s6pL
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.defyDeath0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boarFamiliar0000.YDnITgPGV831s6pL'
-  - name: Talented Enforcer
-    type: ability
-    img: icons/skills/melee/unarmed-punch-fist-white.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
+      sustained: true
       targets:
         - self
+      trigger: <p>You would @L[Condition:Down]{drop}.</p>
+    type: ability
+  - _id: nDxSnyWPawkL83CV
+    _key: '!items.effects!boarFamiliar0000.nDxSnyWPawkL83CV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.talEnforcer00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: icons/skills/melee/unarmed-punch-fist-white.webp
+    name: Talented Enforcer
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.enforcer.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You are a @L[Keyword:Talented]{talented}
           @L[Tradecraft:Enforcer]{enforcer}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.enforcer.score
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      competence:
-        raw: 0
+      powerSources:
+        - martial
       revealed: true
-      grantOnly: false
-    _id: nDxSnyWPawkL83CV
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talEnforcer00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!boarFamiliar0000.nDxSnyWPawkL83CV'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!boarFamiliar0000'
+      targets:
+        - self
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Boar Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.boar000000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

@@ -1,57 +1,58 @@
 _id: mrEhjjiVonihlCTl
-folder: aMNNoChJiHMattOK
-name: Rank 5 Necromancer
-system:
-  archetype: mage
-  className: necromancer
-  classRank: 5
-  competence:
-    raw: 1
-  description: >-
-    <p>The true dealer of death, Necromancers are most at home in the cemetery
-    digging up future minions. Shunned by most of society, these dark mages are
-    not necessarily evil, they simply see death as full of potential energy
-    while others see it as the end of life. Necromancers fear nothing, as they
-    are always facing death. If you are playing a Necromancer be unafraid, kill
-    without remorse and be interested in dead bodies, close to death yourself,
-    almost in another world.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: shadowDemon00000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-5-necromancer.webp
+_key: '!items!mrEhjjiVonihlCTl'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r5Nec00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Necromancy Rotator Fluency
-    type: ability
+  - _id: cCxUqjkZ41n5NbD3
+    _key: '!items.effects!mrEhjjiVonihlCTl.cCxUqjkZ41n5NbD3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.necroRotFluency0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/necromancy-rotator-fluency.webp
+    name: Necromancy Rotator Fluency
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: necromancer
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.necromancyRotators'
+              target: ability
+              time: fluency
+              value: '2'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You may rotate between @L[Category:Necromancy element
@@ -65,115 +66,108 @@ effects:
           themselves.)</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: necromancer
-      form: normal
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.necromancyRotators'
-              value: '2'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: cCxUqjkZ41n5NbD3
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroRotFluency0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mrEhjjiVonihlCTl.cCxUqjkZ41n5NbD3'
-  - name: Necromancy Spell Strikes
-    type: ability
-    img: systems/teriock/src/icons/abilities/necromancy-spell-strikes.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: NV2xRIOWuOeqby2I
+    _key: '!items.effects!mrEhjjiVonihlCTl.NV2xRIOWuOeqby2I'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.necroSS000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/necromancy-spell-strikes.webp
+    name: Necromancy Spell Strikes
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
           Strike]{Spell Strike}.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: necromancer
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.necroSS000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: NV2xRIOWuOeqby2I
-    _key: '!items.effects!mrEhjjiVonihlCTl.NV2xRIOWuOeqby2I'
-  - name: Spell Strike
-    type: ability
-    system:
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: VNyuykzJP4NOUraT
+    _key: '!items.effects!mrEhjjiVonihlCTl.VNyuykzJP4NOUraT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: NV2xRIOWuOeqby2I
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
-      range:
-        unit: melee
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Death Ray]{Death Ray} and
+        @L[Ability:Terror Ball]{Terror Ball}.</p>
+      maneuver: reactive
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @L[Category:Conjured
@@ -183,44 +177,50 @@ effects:
           critical hit" effect instead.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
+      targets:
+        - creature
       trigger: >-
         <p>You have just landed a hit with a @L[Category:Weapon delivery
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable with @L[Ability:Death Ray]{Death Ray} and
-        @L[Ability:Terror Ball]{Terror Ball}.</p>
-      _sup: NV2xRIOWuOeqby2I
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: VNyuykzJP4NOUraT
-    _key: '!items.effects!mrEhjjiVonihlCTl.VNyuykzJP4NOUraT'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank5Necromancer
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!mrEhjjiVonihlCTl'
+    type: ability
+folder: demons0000000000
+img: systems/teriock/src/icons/ranks/rank-5-necromancer.webp
+name: Rank 5 Necromancer
+system:
+  _sup: shadowDemon00000
+  archetype: mage
+  className: necromancer
+  classRank: 5
+  competence:
+    raw: 1
+  description: >-
+    <p>The true dealer of death, Necromancers are most at home in the cemetery
+    digging up future minions. Shunned by most of society, these dark mages are
+    not necessarily evil, they simply see death as full of potential energy
+    while others see it as the end of life. Necromancers fear nothing, as they
+    are always facing death. If you are playing a Necromancer be unafraid, kill
+    without remorse and be interested in dead bodies, close to death yourself,
+    almost in another world.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

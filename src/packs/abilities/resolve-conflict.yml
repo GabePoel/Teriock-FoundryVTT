@@ -1,114 +1,68 @@
 _id: resolveConflict0
+_key: '!items!resolveConflict0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Resolve Conflict
-    type: ability
-    img: systems/teriock/src/icons/abilities/resolve-conflict.webp
-    _id: resolveConflict0
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
-          @L[Ability:Detect Lie]{Detect Lie}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.peacekeeper.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      class: duelist
+  - _id: mzoR9WSwlgFls2PK
+    _key: '!items.effects!resolveConflict0.mzoR9WSwlgFls2PK'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.detLie0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!resolveConflict0.resolveConflict0'
-  - name: Detect Lie
-    type: ability
     img: systems/teriock/src/icons/abilities/detect-lie.webp
-    _id: mzoR9WSwlgFls2PK
+    name: Detect Lie
     system:
+      _sup: resolveConflict0
+      class: duelist
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: sight
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - truthDetecting
       executionTime: r0
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: snk
       form: normal
       grantOnly: false
       interaction: feat
       maneuver: reactive
+      piercing:
+        raw: 0
       powerSources:
         - spiritual
       range:
         raw: '15'
         unit: ft
       results:
+        fail: >-
+          <p>You detect whether the target believes the statement is true or
+          false.</p>
         save: >-
           <p>You detect that the statement is true, regardless of what the
           target actually believes. This also applies if [[lookup name]] is
           @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for some
           other reason.</p>
-        fail: >-
-          <p>You detect whether the target believes the statement is true or
-          false.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
@@ -116,22 +70,65 @@ effects:
       trigger: >-
         <p>Someone makes a statement which could, in principle, be true or
         false.</p>
-      impacts: {}
-      _sup: resolveConflict0
-      class: duelist
+    type: ability
+  - _id: resolveConflict0
+    _key: '!items.effects!resolveConflict0.resolveConflict0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.detLie0000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!resolveConflict0.mzoR9WSwlgFls2PK'
+    img: systems/teriock/src/icons/abilities/resolve-conflict.webp
+    name: Resolve Conflict
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.peacekeeper.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
+          @L[Ability:Detect Lie]{Detect Lie}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/resolve-conflict.webp
 name: Resolve Conflict
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!resolveConflict0'

@@ -1,9 +1,11 @@
-name: Bodyguard Backup - Roll Feat Save
-type: script
-_id: U3eabIvCln4vwrrO
+_id: bodyguardBackupR
+_key: '!macros!bodyguardBackupR'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 author: teriockBuilder00
-img: icons/svg/dice-target.svg
-scope: global
 command: |-
   const data = /** @type {Teriock.HookData.RollFeatSave} */ scope.data;
   if (["mov", "str"].includes(data.attribute)) {
@@ -11,9 +13,7 @@ command: |-
     const effect = actor.effects.getName("Bodyguard Backup Effect");
     await effect.delete();
   }
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.1.0
-  lastModifiedBy: teriockBuilder00
-_key: '!macros!U3eabIvCln4vwrrO'
+img: icons/svg/dice-target.svg
+name: Bodyguard Backup - Roll Feat Save
+scope: global
+type: script

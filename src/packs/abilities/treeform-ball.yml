@@ -1,34 +1,42 @@
 _id: treeformBall0000
+_key: '!items!treeformBall0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Treeform Ball
-    type: ability
+  - _id: treeformBall0000
+    _key: '!items.effects!treeformBall0000.treeformBall0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
-    _id: treeformBall0000
+    name: Treeform Ball
     system:
+      class: natureMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: true
-        stationary: false
-        description: Until Dawn
       delivery:
         base: missile
         package: ball
+      duration:
+        dawn: true
+        description: Until Dawn
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - transformation
       elements:
         - nature
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -36,14 +44,23 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
         addition turn without the target being able to @L[Ability:Self
         Revert]{Self Revert}.</p>
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
+          Compendium_teriock_execution_Macro_treeformBallDmg0: takeDamage
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
         raw: '30'
         unit: ft
       results:
+        critHit: >-
+          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
+          @L[Ability:Self Revert]{Self Revert}.</p>
         hit: >-
           <p>Target is @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
@@ -53,29 +70,12 @@ effects:
           reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
           and any remaining @L[Core:Damage]{damage} carries over to their
           reverted state.</p>
-        critHit: >-
-          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
-          @L[Ability:Self Revert]{Self Revert}.</p>
+      revealed: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
-      class: natureMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!treeformBall0000.treeformBall0000'
+    type: ability
 img: systems/teriock/src/icons/abilities/treeform-ball.webp
 name: Treeform Ball
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!treeformBall0000'

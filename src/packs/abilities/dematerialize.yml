@@ -1,36 +1,43 @@
 _id: dematerialize000
+_key: '!items!dematerialize000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Dematerialize
-    type: ability
+  - _id: dematerialize000
+    _key: '!items.effects!dematerialize000.dematerialize000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/dematerialize.webp
-    _id: dematerialize000
+    name: Dematerialize
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       elements:
         - necromancy
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -38,58 +45,69 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
       interaction: manifest
       maneuver: active
       overview:
         base: <p>You gain @L[Ability:Incorporeal]{Incorporeal}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
         - spiritual
       range:
         unit: self
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - self
-      impacts:
-        heightened:
-          duration: 3600
+    type: ability
+  - _id: WNcPJ4NMpQYGTefN
+    _key: '!items.effects!dematerialize000.WNcPJ4NMpQYGTefN'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.incorporeal00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dematerialize000.dematerialize000'
-  - name: Incorporeal
-    type: ability
     img: systems/teriock/src/icons/abilities/incorporeal.webp
-    _id: WNcPJ4NMpQYGTefN
+    name: Incorporeal
     system:
+      _sup: dematerialize000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - immunity
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.weight.self.raw
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
       interaction: manifest
       maneuver: passive
       overview:
@@ -99,36 +117,16 @@ effects:
           @L[Condition:Ethereal]{Ethereal}. You are also
           @L[Keyword:Immunity]{immune} to being
           @L[Condition:Snared]{snared}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.weight.self.raw
-              target: Actor
-              qualifier: '1'
-              value: '0'
-      _sup: dematerialize000
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.incorporeal00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!dematerialize000.WNcPJ4NMpQYGTefN'
+    type: ability
 img: systems/teriock/src/icons/abilities/dematerialize.webp
 name: Dematerialize
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!dematerialize000'

@@ -1,71 +1,70 @@
 _id: resistMentalEffe
+_key: '!items!resistMentalEffe'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Resist Mental Effects
-    type: ability
+  - _id: resistMentalEffe
+    _key: '!items.effects!resistMentalEffe.resistMentalEffe'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/resist-mental-effects.webp
-    _id: resistMentalEffe
+    name: Resist Mental Effects
     system:
+      class: paladin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - resistance
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mental
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You @L[Keyword:Resistance]{resist} @L[Category:Mental
           effects]{mental effects}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - divine
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.effects
-              target: Actor
-              qualifier: '1'
-              value: mental
-      class: paladin
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!resistMentalEffe.resistMentalEffe'
+    type: ability
 img: systems/teriock/src/icons/abilities/resist-mental-effects.webp
 name: Resist Mental Effects
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!resistMentalEffe'

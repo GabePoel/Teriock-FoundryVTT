@@ -1,37 +1,45 @@
 _id: tangleZone000000
+_key: '!items!tangleZone000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Tangle Zone
-    type: ability
+  - _id: tangleZone000000
+    _key: '!items.effects!tangleZone000000.tangleZone000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/tangle-zone.webp
-    _id: tangleZone000000
+    name: Tangle Zone
     system:
+      class: paladin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
       delivery:
         base: hand
         package: ritual
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
       elements:
         - nature
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -39,6 +47,30 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 24 hours. The overall duration is rounded to the
         nearest 24 hours.</p>
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            damage: 1d4[vine]
+            endCon: 2d4
+          startStatuses:
+            - snared
+        heightened:
+          duration: 86400
       interaction: manifest
       maneuver: slow
       overview:
@@ -52,55 +84,22 @@ effects:
           @L[Core:Movement]{moving} through this area takes [[/damage
           1d4[vine]]] @L[Core:Damage]{damage} for every 5 feet they move through
           it.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
         - primal
       range:
         raw: Your Hand's Range
         unit: ft
+      revealed: true
       ritual: true
       rotator: true
       spell: true
       standard: true
       targets:
         - area
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-            damage: 1d4[vine]
-          startStatuses:
-            - snared
-        heightened:
-          duration: 86400
-      class: paladin
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!tangleZone000000.tangleZone000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/tangle-zone.webp
 name: Tangle Zone
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!tangleZone000000'

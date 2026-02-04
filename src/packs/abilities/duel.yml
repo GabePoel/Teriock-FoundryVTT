@@ -1,32 +1,67 @@
 _id: duel000000000000
+_key: '!items!duel000000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Duel
-    type: ability
+  - _id: duel000000000000
+    _key: '!items.effects!duel000000000000.duel000000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/duel.webp
-    _id: duel000000000000
+    name: Duel
     system:
+      class: duelist
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: No Limit
       delivery:
         base: sight
+      duration:
+        dawn: false
+        description: No Limit
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: executor
+          startStatuses:
+            - dueling
+          statuses:
+            - lighted
+        macros:
+          Compendium_teriock_execution_Macro_duelPreExecution: preExecution
+          Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
+        proficient:
+          abilityButtonNames:
+            - Move
       interaction: manifest
       maneuver: active
       overview:
@@ -44,6 +79,8 @@ effects:
           action abilities]{single action} @L[Category:Duelist class
           abilities]{Duelist ability} as a @L[Core:Reactive Maneuvers]{free
           reaction} to the target's decision and subsequent movement.</p>
+      piercing:
+        raw: 0
       powerSources:
         - spiritual
       range:
@@ -52,49 +89,12 @@ effects:
       requirements: >-
         <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
         an opponent.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          startStatuses:
-            - dueling
-          statuses:
-            - lighted
-        proficient:
-          abilityButtonNames:
-            - Move
-        macros:
-          Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
-      class: duelist
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!duel000000000000.duel000000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/duel.webp
 name: Duel
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!duel000000000000'

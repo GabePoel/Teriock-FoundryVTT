@@ -1,24 +1,31 @@
 _id: cowardly00000000
+_key: '!items!cowardly00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Cowardly
-    type: ability
+  - _id: cowardly00000000
+    _key: '!items.effects!cowardly00000000.cowardly00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/cowardly.webp
-    _id: cowardly00000000
+    name: Cowardly
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: No Limit
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: No Limit
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - automatic
       endCondition: >-
@@ -26,33 +33,19 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r0
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: <p>You become @L[Condition:Frightened]{frightened}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      trigger: >-
-        <p>You are hit by an @L[Category:Attack abilities]{attack}. This
-        triggers automatically. You cannot choose to not use it if you are able
-        to.</p>
       impacts:
         base:
           expiration:
+            changeOnCrit: false
+            doesExpire: true
             normal:
               combat:
-                who:
-                  type: executor
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -61,22 +54,28 @@ effects:
                   skip: 0
                   time: start
                   trigger: turn
-            changeOnCrit: false
-            doesExpire: true
+                who:
+                  type: executor
           rolls:
             endCon: 2d4
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cowardly00000000.cowardly00000000'
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: <p>You become @L[Condition:Frightened]{frightened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      trigger: >-
+        <p>You are hit by an @L[Category:Attack abilities]{attack}. This
+        triggers automatically. You cannot choose to not use it if you are able
+        to.</p>
+    type: ability
 img: systems/teriock/src/icons/abilities/cowardly.webp
 name: Cowardly
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!cowardly00000000'

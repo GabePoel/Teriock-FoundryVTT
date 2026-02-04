@@ -1,124 +1,53 @@
 _id: mountainNative00
+_key: '!items!mountainNative00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Mountain Native
-    type: ability
-    img: systems/teriock/src/icons/abilities/mountain-native.webp
-    _id: mountainNative00
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: "<p>You gain @L[Ability:Mountain Resilience]{Mountain Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      impacts: {}
+  - _id: zdN2KBjZQC83hP71
+    _key: '!items.effects!mountainNative00.zdN2KBjZQC83hP71'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mountainNative00.mountainNative00'
-  - name: Mountain Resilience
-    type: ability
-    img: systems/teriock/src/icons/abilities/mountain-resilience.webp
-    _id: 8vUHRNXz3xkvX2gT
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by mountainous\_weather.</p>"
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      impacts: {}
-      _sup: mountainNative00
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mountainResilien
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mountainNative00.8vUHRNXz3xkvX2gT'
-  - name: Agile
-    type: ability
     img: systems/teriock/src/icons/abilities/agile.webp
-    _id: zdN2KBjZQC83hP71
+    name: Agile
     system:
+      _sup: mountainNative00
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - movement
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
       interaction: manifest
       limitation: <p>Mountainous terrain only.</p>
       maneuver: passive
@@ -126,36 +55,102 @@ effects:
         base: >-
           <p>You walk through difficult terrain at @L[Core:Movement
           Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.difficultTerrain
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      _sup: mountainNative00
+    type: ability
+  - _id: mountainNative00
+    _key: '!items.effects!mountainNative00.mountainNative00'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mountain-native.webp
+    name: Mountain Native
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You gain @L[Ability:Mountain Resilience]{Mountain Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: 8vUHRNXz3xkvX2gT
+    _key: '!items.effects!mountainNative00.8vUHRNXz3xkvX2gT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mountainResilien
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!mountainNative00.zdN2KBjZQC83hP71'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mountain-resilience.webp
+    name: Mountain Resilience
+    system:
+      _sup: mountainNative00
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by mountainous\_weather.</p>"
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/mountain-native.webp
 name: Mountain Native
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!mountainNative00'

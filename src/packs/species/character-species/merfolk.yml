@@ -1,15 +1,180 @@
 _id: merfolk000000000
-folder: mvJumfuWYLiylnji
-name: Merfolk
-type: species
+_key: '!items!merfolk000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: yyxUb2HT0HXHkxDR
+    _key: '!items.effects!merfolk000000000.yyxUb2HT0HXHkxDR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/diving.webp
+    name: Diving
+    system:
+      _sup: 1FfsX0XkXFuC079B
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You no longer have to stay on the surface of water while
+          @L[Ability:Swimming]{Swimming}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: SnTXFRbOQdLzbQwT
+    _key: '!items.effects!merfolk000000000.SnTXFRbOQdLzbQwT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      _sup: 1FfsX0XkXFuC079B
+      class: corsair
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 1FfsX0XkXFuC079B
+    _key: '!items.effects!merfolk000000000.1FfsX0XkXFuC079B'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.wtrNative0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/water-native.webp
+    name: Water Native
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @L[Ability:Swimming]{Swimming} and
+          @L[Ability:Diving]{Diving} but are @L[Condition:Slow]{slow} on
+          land.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: characterSpecies
 img: systems/teriock/src/icons/creatures/merfolk.webp
+name: Merfolk
 system:
+  appearance: >-
+    <p>Aquatic versions of many land @L[Category:Humanoid creatures]{humanoid
+    species} with gills, fins, and other "fishy" features.</p>
+  br: 1
   competence:
     raw: 1
   description: >-
     <p>[[lookup name]] tend to be territorial about their waters, lay claim to
     anything below the waves, and raid ships. Despite this, they can be as
     friendly or hostile as anyone.</p>
+  size:
+    enabled: false
+    value: 3
   statDice:
     hp:
       disabled: true
@@ -21,172 +186,7 @@ system:
       faces: 10
       number:
         raw: '1'
-  appearance: >-
-    <p>Aquatic versions of many land @L[Category:Humanoid creatures]{humanoid
-    species} with gills, fins, and other "fishy" features.</p>
-  br: 1
-  size:
-    enabled: false
-    value: 3
   traits:
     - aquatic
     - humanoid
-effects:
-  - name: Water Native
-    type: ability
-    img: systems/teriock/src/icons/abilities/water-native.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        raw: '0'
-        dawn: false
-        stationary: false
-      overview:
-        base: >-
-          <p>You have @L[Ability:Swimming]{Swimming} and
-          @L[Ability:Diving]{Diving} but are @L[Condition:Slow]{slow} on
-          land.</p>
-      piercing:
-        raw: 0
-      form: normal
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.wtrNative0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 1FfsX0XkXFuC079B
-    _key: '!items.effects!merfolk000000000.1FfsX0XkXFuC079B'
-  - name: Swimming
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      _sup: 1FfsX0XkXFuC079B
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/swimming.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: SnTXFRbOQdLzbQwT
-    _key: '!items.effects!merfolk000000000.SnTXFRbOQdLzbQwT'
-  - name: Diving
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        stationary: false
-        description: Always Active
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You no longer have to stay on the surface of water while
-          @L[Ability:Swimming]{Swimming}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: corsair
-      form: normal
-      _sup: 1FfsX0XkXFuC079B
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/diving.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.diving0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: yyxUb2HT0HXHkxDR
-    _key: '!items.effects!merfolk000000000.yyxUb2HT0HXHkxDR'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!merfolk000000000'
+type: species

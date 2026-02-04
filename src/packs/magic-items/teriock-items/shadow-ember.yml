@@ -1,171 +1,172 @@
-name: Shadow Ember
-type: equipment
-system:
-  equipmentType: Saber
-  consumable: false
-  equipped: true
-  damage:
-    base:
-      saved: 1d8
-  weight:
-    saved: 3
-    raw: 0
-  range:
-    short:
-      unit: melee
-    long:
-      unit: melee
-    ranged: false
-  equipmentClasses:
-    - swords
-  minStr:
-    saved: -2
-    raw: -3
-  fightingStyle: swordsman
-  powerLevel: magic
-  tier:
-    saved: '2'
-  notes: >-
-    <p>Crafted by the @L[Class:Corsair]{Corsairs} of Galengloom, these sabers
-    are a popular weapon on the Inner Sea. Often found in the hands of a pirate
-    captain or hero, Shadow Embers are infamous all across Teriock. These are
-    not often given up freely.</p>
-  attackPenalty:
-    raw: '-3'
-img: systems/teriock/src/assets/items/shadow-ember.webp
+_id: shadowEmber00000
+_key: '!items!shadowEmber00000'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.tYbqNZuKj2demYKv
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Weapon
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
-      form: intrinsic
-    _id: A7JvIXUEmGC4U67D
-    img: systems/teriock/src/icons/properties/weapon.webp
+  - _id: h7t0LCA1Gpm30JlL
+    _key: '!items.effects!shadowEmber00000.h7t0LCA1Gpm30JlL'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.A7JvIXUEmGC4U67D'
-  - name: Disarm
-    type: ability
-    img: systems/teriock/src/icons/abilities/disarm.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - arm
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>Anything held in the targeted arm is knocked out of their hand.
-          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: thief
-      expansionSaveAttribute: mov
-      form: normal
-    _id: FiSNgjACXxhy51cC
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.FiSNgjACXxhy51cC'
-  - name: Catch Item
-    type: ability
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/catch-item.webp
+    name: Catch Item
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      _sup: FiSNgjACXxhy51cC
+      basic: true
+      competence:
+        raw: 0
       delivery:
         base: hand
-      targets:
-        - item
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
-      range:
-        unit: ft
-        raw: Your Hand's Range
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: intrinsic
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You catch the item. If multiple creatures are all trying to catch
           the same item, they all roll [[/roll 1d20]]. The creature with the
           highest roll catches the item.</p>
-        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
         fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      trigger: <p>An item within range is falling or flying by.</p>
-      basic: true
-      form: intrinsic
-      _sup: FiSNgjACXxhy51cC
-    img: systems/teriock/src/icons/abilities/catch-item.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.catchItm00000000
-    _id: h7t0LCA1Gpm30JlL
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.h7t0LCA1Gpm30JlL'
-  - name: Duel
-    type: ability
-    img: systems/teriock/src/icons/abilities/duel.webp
-    system:
+        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
+      piercing:
+        raw: 0
       powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      revealed: true
+      targets:
+        - item
+      trigger: <p>An item within range is falling or flying by.</p>
+    type: ability
+  - _id: FiSNgjACXxhy51cC
+    _key: '!items.effects!shadowEmber00000.FiSNgjACXxhy51cC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.disarm0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/disarm.webp
+    name: Disarm
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>Anything held in the targeted arm is knocked out of their hand.
+          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - arm
+    type: ability
+  - _id: DI3hrm9tJWEGUHcj
+    _key: '!items.effects!shadowEmber00000.DI3hrm9tJWEGUHcj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.duel000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/duel.webp
+    name: Duel
+    system:
+      class: duelist
+      competence:
+        raw: 0
       delivery:
         base: sight
-      targets:
-        - creature
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: No Limit
+        raw: '0'
         stationary: false
-      range:
-        unit: ft
-        raw: '30'
+        unit: unlimited
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: executor
+          startStatuses:
+            - dueling
+          statuses:
+            - lighted
+        macros:
+          Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
+        proficient:
+          abilityButtonNames:
+            - Move
+      interaction: manifest
+      maneuver: active
       overview:
         base: >-
           <p>You challenge the target to advance and fight you. They may
@@ -181,76 +182,155 @@ effects:
           action abilities]{single action} @L[Category:Duelist class
           abilities]{Duelist ability} as a @L[Core:Reactive Maneuvers]{free
           reaction} to the target's decision and subsequent movement.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: duelist
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '30'
+        unit: ft
       requirements: >-
         <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
         an opponent.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - lighted
-          startStatuses:
-            - dueling
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  type: forced
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-        proficient:
-          abilityButtonNames:
-            - Move
-        macros:
-          Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
-    _id: DI3hrm9tJWEGUHcj
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.duel000000000000
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.DI3hrm9tJWEGUHcj'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - creature
+    type: ability
+  - _id: bFl9WiVPizkOyDa6
+    _key: '!items.effects!shadowEmber00000.bFl9WiVPizkOyDa6'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: icons/magic/control/voodoo-doll-pain-damage-tan.webp
+    name: Incapable of Life Spells
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: instant
-        quantity: 0
-        description: Instant
+        dawn: false
+        description: Always Active
+        raw: '1'
         stationary: false
+        unit: unlimited
+      effectTypes:
+        - magical
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are incapable of casting @L[Category:Life element spells]{life
+          spells}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
       range:
-        unit: ft
-        raw: Your Weapon's Range
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: Ezkt7dnAzlxAckTG
+    _key: '!items.effects!shadowEmber00000.Ezkt7dnAzlxAckTG'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/classes/corsair.webp
+    name: Only Usable by Corsairs
+    system:
+      competence:
+        raw: 0
+      description: <p>Only usable by @L[Class:Corsair]{Corsairs}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: 1ENXjeayGVq9JiJ0
+    _key: '!items.effects!shadowEmber00000.1ENXjeayGVq9JiJ0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: icons/magic/fire/explosion-fireball-small-red.webp
+    name: Shadow Ember Implosion
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>If this becomes @L[Property:Shattered]{shattered}, it is
+        @L[Property:Destroyed]{destroyed}, casts @L[Ability:Inferno Aura] on
+        everyone within 10 feet (including the user), and also casts
+        @L[Ability:Spirit Bury] on its user. Both of these are fully
+        @L[Core:Heightening]{heightened} up to the user's @L[Core:Proficiency
+        Bonus]{proficiency bonus}. Neither of these cost any @L[Core:MP].</p>
+      form: flaw
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_shadowEmberImplo: equipmentShatter
+          Compendium_teriock_maintenance_Macro_jVgmJz7eQseesnZe: equipmentShatter
+      revealed: true
+    type: property
+  - _id: ZpS051RhVoapWJDU
+    _key: '!items.effects!shadowEmber00000.ZpS051RhVoapWJDU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
+      interaction: manifest
+      limitation: <p>With @L[Equipment:Dagger]{daggers} only.</p>
+      maneuver: reactive
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -259,60 +339,77 @@ effects:
           abilities]{attack}. If the triggering @L[Category:Attack
           abilities]{attack} was a critical hit, this deals 10
           @L[Core:Damage]{damage} instead.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
       skill: true
       standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just hit a creature with an @L[Category:Attack
         abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      limitation: <p>With @L[Equipment:Dagger]{daggers} only.</p>
-      effectTypes:
-        - killing
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-    _id: ZpS051RhVoapWJDU
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.ZpS051RhVoapWJDU'
-  - name: Weapons Mastery
     type: ability
-    img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+  - _id: A7JvIXUEmGC4U67D
+    _key: '!items.effects!shadowEmber00000.A7JvIXUEmGC4U67D'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @L[Category:Attack abilities]{attack}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: O0mxfYVztMnFVFOX
+    _key: '!items.effects!shadowEmber00000.O0mxfYVztMnFVFOX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/weapons-mastery.webp
+    name: Weapons Mastery
+    system:
+      class: assassin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
+      interaction: manifest
+      limitation: <p>With @L[Equipment:Saber]{sabers} only.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>Pick a @L[Category:Weapon classes]{class of weapons}. These weapons
@@ -330,110 +427,53 @@ effects:
           action} non-attack @L[Category:Assassin class abilities]{Assassin
           abilities} as @L[Core:Reactive Maneuvers]{free reactions} in this
           way.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>With @L[Equipment:Saber]{sabers} only.</p>
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_BGmnfUMxPw2BZeCI: execution
-    _id: O0mxfYVztMnFVFOX
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.wepsMasy00000000
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.O0mxfYVztMnFVFOX'
-  - name: Incapable of Life Spells
-    type: ability
-    _id: bFl9WiVPizkOyDa6
-    img: icons/magic/control/voodoo-doll-pain-damage-tan.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
-      duration:
-        unit: noLimit
-        quantity: 1
-        stationary: false
-        description: Always Active
-      overview:
-        base: >-
-          <p>You are incapable of casting @L[Category:Life element spells]{life
-          spells}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      effectTypes:
-        - magical
-      expansionSaveAttribute: mov
-      form: flaw
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.bFl9WiVPizkOyDa6'
-  - name: Only Usable by Corsairs
-    type: property
-    _id: Ezkt7dnAzlxAckTG
-    img: systems/teriock/src/icons/classes/corsair.webp
-    system:
-      description: <p>Only usable by @L[Class:Corsair]{Corsairs}.</p>
-      form: flaw
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.Ezkt7dnAzlxAckTG'
-  - name: Shadow Ember Implosion
-    type: property
-    _id: 1ENXjeayGVq9JiJ0
-    img: icons/magic/fire/explosion-fireball-small-red.webp
-    system:
-      description: >-
-        <p>If this becomes @L[Property:Shattered]{shattered}, it is
-        @L[Property:Destroyed]{destroyed}, casts @L[Ability:Inferno Aura] on
-        everyone within 10 feet (including the user), and also casts
-        @L[Ability:Spirit Bury] on its user. Both of these are fully
-        @L[Core:Heightening]{heightened} up to the user's @L[Core:Proficiency
-        Bonus]{proficiency bonus}. Neither of these cost any @L[Core:MP].</p>
-      form: flaw
-      impacts:
-        macros:
-          Compendium_teriock_maintenance_Macro_jVgmJz7eQseesnZe: equipmentShatter
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!TeU0Z1MwBNFR67qd.1ENXjeayGVq9JiJ0'
-folder: X3rVK7Ngg1mHq1vl
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-  compendiumSource: Compendium.teriock.equipment.Item.tYbqNZuKj2demYKv
-_id: TeU0Z1MwBNFR67qd
-_key: '!items!TeU0Z1MwBNFR67qd'
+    type: ability
+folder: teriockItems0000
+img: systems/teriock/src/assets/items/shadow-ember.webp
+name: Shadow Ember
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d8
+  equipmentClasses:
+    - swords
+  equipmentType: Saber
+  equipped: true
+  fightingStyle: swordsman
+  minStr:
+    raw: '-2'
+  notes: >-
+    <p>Crafted by the @L[Class:Corsair]{Corsairs} of Galengloom, these sabers
+    are a popular weapon on the Inner Sea. Often found in the hands of a pirate
+    captain or hero, Shadow Embers are infamous all across Teriock. These are
+    not often given up freely.</p>
+  powerLevel: magic
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  tier:
+    raw: '2'
+  vitals: false
+  weight:
+    raw: '3'
+type: equipment

@@ -1,32 +1,40 @@
 _id: cremate000000000
+_key: '!items!cremate000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Cremate
-    type: ability
+  - _id: cremate000000000
+    _key: '!items.effects!cremate000000000.cremate000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/cremate.webp
-    _id: cremate000000000
+    name: Cremate
     system:
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        somatic: true
+        verbal: true
       delivery:
         base: weapon
         package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - killing
         - damaging
@@ -34,14 +42,21 @@ effects:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          startStatuses:
+            - burned
+            - ruined
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -52,29 +67,13 @@ effects:
         hit: >-
           <p>Target is @L[Condition:Burned]{burned}, and
           @L[Condition:Ruined]{ruined}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - vitals
-      impacts:
-        base:
-          startStatuses:
-            - burned
-            - ruined
-      class: flameMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cremate000000000.cremate000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/cremate.webp
 name: Cremate
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!cremate000000000'

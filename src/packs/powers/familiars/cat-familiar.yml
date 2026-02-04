@@ -1,171 +1,215 @@
 _id: catFamiliar00000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Cat Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.cat0000000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!catFamiliar00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: catTamer00000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Cat Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Cat]{cat}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: Oe0lPYQ5dsW78GFf
+    _key: '!items.effects!catFamiliar00000.Oe0lPYQ5dsW78GFf'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.acrobatics000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!catFamiliar00000.catTamer00000000'
-  - name: Acrobatics
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/acrobatics.webp
+    name: Acrobatics
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: assassin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficiency
+          attribute: mov
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Climbing]{Climbing} and
           @L[Ability:Leaping]{Leaping}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.acrobatics000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: Oe0lPYQ5dsW78GFf
-    _key: '!items.effects!catFamiliar00000.Oe0lPYQ5dsW78GFf'
-  - name: Climbing
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: catTamer00000000
+    _key: '!items.effects!catFamiliar00000.catTamer00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Cat Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Cat]{cat}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: OWKLLRwtZY79rWLD
+    _key: '!items.effects!catFamiliar00000.OWKLLRwtZY79rWLD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      _sup: Oe0lPYQ5dsW78GFf
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: noLimit
+        description: Always Active
         quantity: 0
         stationary: false
-        description: Always Active
-      overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
+        unit: noLimit
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: MQnQHzwwDWNO4I5I
+    _key: '!items.effects!catFamiliar00000.MQnQHzwwDWNO4I5I'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/leaping.webp
+    name: Leaping
+    system:
+      _sup: Oe0lPYQ5dsW78GFf
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
       effectTypes:
         - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
               value: '2'
         proficient:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
               value: '3'
-      _sup: Oe0lPYQ5dsW78GFf
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: OWKLLRwtZY79rWLD
-    _key: '!items.effects!catFamiliar00000.OWKLLRwtZY79rWLD'
-  - name: Leaping
-    type: ability
-    system:
-      powerSources:
-        - martial
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
       overview:
         base: >-
           <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
@@ -175,154 +219,110 @@ effects:
           and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: SNbhrBp4waLXFPqy
+    _key: '!items.effects!catFamiliar00000.SNbhrBp4waLXFPqy'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spiritGuide00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/spirit-guide.webp
+    name: Spirit Guide
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        description: 24 Hours
+        quantity: 24
+        stationary: false
+        unit: hour
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime: 10 Minutes
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, you may target an
+        additional creature.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.senses.ethereal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '2'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      _sup: Oe0lPYQ5dsW78GFf
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/leaping.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: MQnQHzwwDWNO4I5I
-    _key: '!items.effects!catFamiliar00000.MQnQHzwwDWNO4I5I'
-  - name: Spirit Guide
-    type: ability
-    img: systems/teriock/src/icons/abilities/spirit-guide.webp
-    system:
-      powerSources:
-        - magical
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-        stationary: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
       overview:
         base: >-
           <p>You can see, hear, and speak to spirits and
           @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
-        proficient: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
         fluent: >-
           <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
           @L[Category:Spiritually powered abilities]{spiritual}
           @L[Category:Ritual delivery spells]{ritual spells} such as
           @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+        proficient: >-
+          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Necromancy element abilities]{necromancy}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: necromancer
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional creature.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
       requirements: >-
         <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
         yourself.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.ethereal
-              target: Actor
-              qualifier: '1'
-              value: '120'
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-    _id: SNbhrBp4waLXFPqy
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spiritGuide00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!catFamiliar00000.SNbhrBp4waLXFPqy'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!catFamiliar00000'
+      ritual: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Cat Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.cat0000000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

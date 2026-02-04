@@ -1,124 +1,53 @@
 _id: desertNative0000
+_key: '!items!desertNative0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Desert Native
-    type: ability
-    img: systems/teriock/src/icons/abilities/desert-native.webp
-    _id: desertNative0000
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: "<p>You gain @L[Ability:Desert Resilience]{Desert Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      impacts: {}
+  - _id: kh3g4UqMx2N057le
+    _key: '!items.effects!desertNative0000.kh3g4UqMx2N057le'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!desertNative0000.desertNative0000'
-  - name: Desert Resilience
-    type: ability
-    img: systems/teriock/src/icons/abilities/desert-resilience.webp
-    _id: hyty1c2RCO0cXIFz
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by desert\_weather.</p>"
-      powerSources:
-        - martial
-      range:
-        unit: self
-      targets:
-        - self
-      impacts: {}
-      _sup: desertNative0000
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.desertResilience
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!desertNative0000.hyty1c2RCO0cXIFz'
-  - name: Agile
-    type: ability
     img: systems/teriock/src/icons/abilities/agile.webp
-    _id: kh3g4UqMx2N057le
+    name: Agile
     system:
+      _sup: desertNative0000
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - movement
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
       interaction: manifest
       limitation: <p>Desert terrain only.</p>
       maneuver: passive
@@ -126,36 +55,102 @@ effects:
         base: >-
           <p>You walk through difficult terrain at @L[Core:Movement
           Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.difficultTerrain
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      _sup: desertNative0000
+    type: ability
+  - _id: desertNative0000
+    _key: '!items.effects!desertNative0000.desertNative0000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/desert-native.webp
+    name: Desert Native
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You gain @L[Ability:Desert Resilience]{Desert Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: hyty1c2RCO0cXIFz
+    _key: '!items.effects!desertNative0000.hyty1c2RCO0cXIFz'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.desertResilience
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!desertNative0000.kh3g4UqMx2N057le'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/desert-resilience.webp
+    name: Desert Resilience
+    system:
+      _sup: desertNative0000
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by desert\_weather.</p>"
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/desert-native.webp
 name: Desert Native
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!desertNative0000'

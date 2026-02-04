@@ -1,34 +1,62 @@
 _id: sTItms0000000000
+_key: '!items!sTItms0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Spell Turning Items
-    type: ability
+  - _id: sTItms0000000000
+    _key: '!items.effects!sTItms0000000000.sTItms0000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/spell-turning-items.webp
-    _id: sTItms0000000000
+    name: Spell Turning Items
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - resistance
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: >-
+                or(@class.objects, @class.knickknacks, @class.tools,
+                @class.containers, @class.clothing)
+              target: equipment
+              time: normal
+              value: spellTurning
+            - key: system.spellTurning
+              mode: 5
+              priority: 10
+              qualifier: >-
+                or(@class.objects, @class.knickknacks, @class.tools,
+                @class.containers, @class.clothing)
+              target: equipment
+              time: normal
+              value: 'true'
       interaction: manifest
       maneuver: passive
       overview:
@@ -38,45 +66,16 @@ effects:
           @L[Category:Containers]{containers}, and
           @L[Category:Clothing]{clothing} you use are @L[Property:Spell
           Turning]{spell turning}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - spiritual
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.props
-              target: equipment
-              qualifier: >-
-                or(@class.objects, @class.knickknacks, @class.tools,
-                @class.containers, @class.clothing)
-              value: spellTurning
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.spellTurning
-              target: equipment
-              qualifier: >-
-                or(@class.objects, @class.knickknacks, @class.tools,
-                @class.containers, @class.clothing)
-              value: 'true'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sTItms0000000000.sTItms0000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/spell-turning-items.webp
 name: Spell Turning Items
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!sTItms0000000000'

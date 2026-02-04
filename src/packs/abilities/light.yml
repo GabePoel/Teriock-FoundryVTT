@@ -1,34 +1,80 @@
 _id: light00000000000
+_key: '!items!light00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Light
-    type: ability
+  - _id: light00000000000
+    _key: '!items.effects!light00000000000.light00000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/light.webp
-    _id: light00000000000
+    name: Light
     system:
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: cone
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       elements:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.bright
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '50'
+            - key: system.light.dim
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '100'
+            - key: system.light.color
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#C64600'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: pulse
+            - key: system.light.angle
+              mode: 5
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '60'
       interaction: manifest
       maneuver: active
       overview:
@@ -36,67 +82,20 @@ effects:
           <p>The area is illuminated. This [[lookup name style=lc]] emanates
           from your hand and moves with you. You may change its direction at
           will.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '100'
         unit: ft
+      revealed: true
       spell: true
       standard: true
       sustained: true
       targets:
         - area
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.light.bright
-              target: Actor
-              qualifier: '1'
-              value: '50'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.light.dim
-              target: Actor
-              qualifier: '1'
-              value: '100'
-            - mode: 5
-              priority: 5
-              time: normal
-              key: system.light.color
-              target: Actor
-              qualifier: '1'
-              value: '#C64600'
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.light.animation.type
-              target: Actor
-              qualifier: '1'
-              value: pulse
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.light.angle
-              target: Actor
-              qualifier: '1'
-              value: '60'
-      class: flameMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!light00000000000.light00000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/light.webp
 name: Light
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!light00000000000'

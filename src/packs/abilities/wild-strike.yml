@@ -1,40 +1,69 @@
 _id: wildStrike000000
+_key: '!items!wildStrike000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Wild Strike
-    type: ability
+  - _id: wildStrike000000
+    _key: '!items.effects!wildStrike000000.wildStrike000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/wild-strike.webp
-    _id: wildStrike000000
+    name: Wild Strike
     system:
+      class: berserker
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         hp:
           type: hack
           value:
             static: 0
-      duration:
-        raw: '5'
-        unit: second
-        dawn: false
-        stationary: false
-        description: 5 Seconds
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
       endCondition: >-
         <p>The start of your next @L[Core:Turn]{turn}. This also ends the next
         time you make a melee @L[Category:Attack abilities]{attack}.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+          hacks:
+            - arm
+            - leg
+            - body
       interaction: manifest
       maneuver: active
       overview:
@@ -45,48 +74,18 @@ effects:
           this @L[Category:Attack abilities]{attack}, take a limb or body
           @L[Condition:Hacked]{hack} as a cost. You do not pay this cost unless
           you make the corresponding @L[Category:Attack abilities]{attack}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          hacks:
-            - arm
-            - leg
-            - body
-      class: berserker
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wildStrike000000.wildStrike000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/wild-strike.webp
 name: Wild Strike
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!wildStrike000000'

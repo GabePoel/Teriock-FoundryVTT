@@ -1,186 +1,24 @@
-name: Glow Bulb
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/glow-bulb.webp
+_id: glowBulb00000000
+_key: '!items!glowBulb00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: noKdZjPi2sibwmHs
+    _key: '!items.effects!glowBulb00000000.noKdZjPi2sibwmHs'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!XulEbO8Db240HloN.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!XulEbO8Db240HloN.VQDFXr0oJQZ7Waxe'
-  - name: Smash Glow Bulb
-    type: ability
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
-      costs:
-        material: true
-        break: shatter
-        materialCost: >-
-          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
-          that provides it.</p>
-      delivery:
-        base: item
-      duration:
-        unit: minute
-        quantity: 10
-        stationary: false
-        description: 10 Minutes
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The spot on the ground where the source of this ability was smashed
-          starts @L[Property:Glowing]{glowing} (100 feet).</p>
-      piercing: normal
-      powerSources:
-        - alchemical
-      range:
-        unit: melee
-      requirements: >-
-        <p>Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - area
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              value: '100'
-              priority: 5
-    _id: 3tRBJEOyF2iqoSWP
-    img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.smGlowBulb000000
-    _key: '!items.effects!XulEbO8Db240HloN.3tRBJEOyF2iqoSWP'
-  - name: Shake Glow Bulb
-    type: ability
-    system:
-      costs:
-        material: true
-        materialCost: >-
-          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
-          that provides it.</p>
-      delivery:
-        base: item
-      duration:
-        unit: minute
-        quantity: 10
-        stationary: false
-        description: 10 Minutes
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>The source of this ability starts @L[Property:Glowing]{glowing} (30
-          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
-          renders it inert.</p>
-      piercing: normal
-      powerSources:
-        - alchemical
-      range:
-        unit: melee
-      requirements: >-
-        <p>Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
-      targets:
-        - item
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              value: '30'
-              priority: 5
-    _id: ggtGhVK8MhJkniZo
-    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
-    flags:
-      teriock:
-        dontConsume: false
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.shakeGlowBulb000
-    _key: '!items.effects!XulEbO8Db240HloN.ggtGhVK8MhJkniZo'
-  - name: Fragile
-    type: property
-    system:
+      competence:
+        raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
         becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
@@ -190,22 +28,213 @@ effects:
         through some other means, it is instead
         @L[Property:Destroyed]{destroyed}.</p>
       form: flaw
-    _id: noKdZjPi2sibwmHs
-    img: systems/teriock/src/icons/properties/fragile.webp
+      revealed: true
+    type: property
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!glowBulb00000000.x6sjcsIVaOkVZOFD'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!XulEbO8Db240HloN.noKdZjPi2sibwmHs'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: ggtGhVK8MhJkniZo
+    _key: '!items.effects!glowBulb00000000.ggtGhVK8MhJkniZo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shakeGlowBulb000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        dontConsume: false
+    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+    name: Shake Glow Bulb
+    system:
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: >-
+          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
+          that provides it.</p>
+      delivery:
+        base: item
+      duration:
+        dawn: false
+        description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '30'
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>The source of this ability starts @L[Property:Glowing]{glowing} (30
+          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
+          renders it inert.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.</p>
+      revealed: true
+      targets:
+        - item
+    type: ability
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!glowBulb00000000.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: 3tRBJEOyF2iqoSWP
+    _key: '!items.effects!glowBulb00000000.3tRBJEOyF2iqoSWP'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.smGlowBulb000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
+    name: Smash Glow Bulb
+    system:
+      competence:
+        raw: 0
+      costs:
+        break: shatter
+        material: true
+        materialCost: >-
+          <p>Using this ability consumes the @L[Category:Equipment]{equipment}
+          that provides it.</p>
+      delivery:
+        base: item
+      duration:
+        dawn: false
+        description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '100'
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>The spot on the ground where the source of this ability was smashed
+          starts @L[Property:Glowing]{glowing} (100 feet).</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: melee
+      requirements: >-
+        <p>Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.</p>
+      revealed: true
+      targets:
+        - area
+    type: ability
 flags:
   teriock:
     dontConsume: false
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: XulEbO8Db240HloN
-_key: '!items!XulEbO8Db240HloN'
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/glow-bulb.webp
+name: Glow Bulb
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

@@ -1,8 +1,145 @@
-folder: 1lFMAV0Fky7fm76P
-name: Thunder Clan
-type: power
+_id: thunderClan00000
+_key: '!items!thunderClan00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: tvIlyONZIVuclWyG
+    _key: '!items.effects!thunderClan00000.tvIlyONZIVuclWyG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cantLeap00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/cannot-leap.webp
+    name: Cannot Leap
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have no horizontal nor vertical @L[Core:Movement Speed]{leap
+          speed}. This overrides abilities such as
+          @L[Ability:Leaping]{Leaping}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: ErNPiCq5Fz44ag5A
+    _key: '!items.effects!thunderClan00000.ErNPiCq5Fz44ag5A'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: teiKobanClans000
 img: icons/magic/lightning/barrier-wall-shield-gray.webp
+name: Thunder Clan
 system:
+  competence:
+    raw: 1
   description: >-
     <p>A group of @L[Creature:Cobben]{cobbens} from a group of islands connected
     to the Blue Reefs that practice ancestor worship and have a complex set of
@@ -13,118 +150,6 @@ system:
     prepare young @L[Creature:Cobben]{cobbens} for obtaining their
     @L[Ability:Spirit Item]{spirit items} and helps their ancestral connection
     and training.</p>
+  maxAv: 4
   type: backstory
-effects:
-  - name: Cannot Leap
-    type: ability
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
-      executionTime: passive
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: flaw
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You have no horizontal nor vertical @L[Core:Movement Speed]{leap
-          speed}. This overrides abilities such as
-          @L[Ability:Leaping]{Leaping}.</p>
-      piercing: normal
-      powerSources:
-        - martial
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.leapVertical
-              mode: 5
-              value: '0'
-              priority: 20
-            - key: system.speedAdjustments.leapHorizontal
-              mode: 5
-              value: '0'
-              priority: 20
-    _id: tvIlyONZIVuclWyG
-    img: systems/teriock/src/icons/abilities/cannot-leap.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.cantLeap00000000
-    _key: '!items.effects!OtWrMBZ098cPVIAp.tvIlyONZIVuclWyG'
-  - name: Climbing
-    type: ability
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              value: '2'
-              priority: 10
-        proficient:
-          changes:
-            - key: system.speedAdjustments.climb
-              mode: 4
-              value: '3'
-              priority: 10
-    _id: ErNPiCq5Fz44ag5A
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-    _key: '!items.effects!OtWrMBZ098cPVIAp.ErNPiCq5Fz44ag5A'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: OtWrMBZ098cPVIAp
-_key: '!items!OtWrMBZ098cPVIAp'
+type: power

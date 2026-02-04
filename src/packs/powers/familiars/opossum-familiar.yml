@@ -1,125 +1,155 @@
 _id: opossumFamiliar0
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Opossum Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.opossum000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!opossumFamiliar0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: opossumTamer0000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Opossum Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Opossum]{opossum}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: JaShmZEdTQvQsx4l
+    _key: '!items.effects!opossumFamiliar0.JaShmZEdTQvQsx4l'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!opossumFamiliar0.opossumTamer0000'
-  - name: Night Vision
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/night-vision.webp
+    name: Night Vision
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - sensory
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.senses.dark
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '120'
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is bright light
           and up to 120 feet as though it is dim light.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: opossumTamer0000
+    _key: '!items.effects!opossumFamiliar0.opossumTamer0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Opossum Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Opossum]{opossum}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: 1Eu5rkZFZJUrtkok
+    _key: '!items.effects!opossumFamiliar0.1Eu5rkZFZJUrtkok'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.zombify000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/zombify.webp
+    name: Zombify
+    system:
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        description: 1 Minute
+        quantity: 1
+        stationary: false
+        unit: minute
+      effectTypes:
+        - control
+        - reanimation
+      elements:
+        - necromancy
+      executionTime: a1
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        fluent:
+          duration: 3600
+        heightened:
+          duration: 3600
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - sensory
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.senses.dark
-              target: Actor
-              qualifier: '1'
-              value: '120'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: JaShmZEdTQvQsx4l
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.nightVision00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!opossumFamiliar0.JaShmZEdTQvQsx4l'
-  - name: Zombify
-    type: ability
-    img: systems/teriock/src/icons/abilities/zombify.webp
-    system:
-      powerSources:
-        - magical
       interaction: attack
-      featSaveAttribute: mov
       maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        package: touch
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-        stationary: false
-      range:
-        unit: ft
-        raw: Your Hand's Range
       overview:
-        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
         fluent: >-
           <p>The base duration of this effect is 1 hour and the
           @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
           command.</p>
+        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
       results:
         hit: >-
           <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
@@ -129,52 +159,22 @@ effects:
           before, but loses all other traits and abilities. If the target was
           already @L[Category:Zombies]{some kind of zombie}, then it is
           reanimated as that type.</p>
-      piercing:
-        raw: 2
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
       spell: true
       standard: true
-      class: necromancer
-      costs:
-        verbal: true
-        somatic: true
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - control
-        - reanimation
-      impacts:
-        fluent:
-          duration: 3600
-        heightened:
-          duration: 3600
-      competence:
-        raw: 0
-      revealed: true
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
-    _id: 1Eu5rkZFZJUrtkok
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.zombify000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!opossumFamiliar0.1Eu5rkZFZJUrtkok'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!opossumFamiliar0'
+      targets:
+        - creature
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Opossum Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.opossum000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

@@ -1,63 +1,60 @@
 _id: wolfFamiliar0000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Wolf Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.wolf000000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!wolfFamiliar0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: wolfTamer0000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Wolf Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Wolf]{wolf}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: 1kALtmHs4eoCEvNI
+    _key: '!items.effects!wolfFamiliar0000.1kALtmHs4eoCEvNI'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cureIllness00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!wolfFamiliar0000.wolfTamer0000000'
-  - name: Cure Illness
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/cure-illness.webp
+    name: Cure Illness
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
+      duration:
+        description: 1 Hour
+        quantity: 1
+        stationary: false
+        unit: hour
+      effectTypes:
+        - healing
       elements:
         - life
-      duration:
-        unit: hour
-        quantity: 1
-        description: 1 Hour
-        stationary: false
-      range:
-        unit: ft
-        raw: '5'
+      executionTime: 10 Minutes
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
+        reduced by 1.</p>
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      limitation: <p>Mental only.</p>
+      maneuver: slow
       overview:
         base: >-
           <p>Make an @L[Tradecraft:Herbalist]{herbalist} check to remove a
@@ -74,108 +71,111 @@ effects:
           @L[Core:Proficiency Bonus]{proficiency bonus} to the
           @L[Tradecraft:Herbalist]{herbalist} check regardless of whether or not
           you are proficient in @L[Tradecraft:Herbalist]{herbalist}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
       results:
-        save: <p>The target is cured of the illness.</p>
         fail: >-
           <p>The target is not cured, but the illness does not worsen for the
           duration of Healing Touch. You may cast [[lookup name]] again to keep
           the disease from progressing, but you may not attempt the check
           again.</p>
-      piercing:
+        save: <p>The target is cured of the illness.</p>
+      revealed: true
+      ritual: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: dmhMCQrMMF6gKgY4
+    _key: '!items.effects!wolfFamiliar0000.dmhMCQrMMF6gKgY4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.talTracker000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: icons/creatures/abilities/paw-print-tan.webp
+    name: Talented Tracker
+    system:
+      competence:
         raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.tracker.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: lifeMage
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
-        reduced by 1.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      limitation: <p>Mental only.</p>
-      effectTypes:
-        - healing
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 1kALtmHs4eoCEvNI
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cureIllness00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wolfFamiliar0000.1kALtmHs4eoCEvNI'
-  - name: Talented Tracker
-    type: ability
-    img: icons/creatures/abilities/paw-print-tan.webp
-    system:
-      powerSources:
-        - martial
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
       overview:
         base: >-
           <p>You are a @L[Keyword:Talented]{talented}
           @L[Tradecraft:Tracker]{tracker}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.tracker.score
-              target: Actor
-              qualifier: '1'
-              value: '1'
-      competence:
-        raw: 0
+      powerSources:
+        - martial
       revealed: true
-      grantOnly: false
-    _id: dmhMCQrMMF6gKgY4
+      targets:
+        - self
+    type: ability
+  - _id: wolfTamer0000000
+    _key: '!items.effects!wolfFamiliar0000.wolfTamer0000000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talTracker000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wolfFamiliar0000.dmhMCQrMMF6gKgY4'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!wolfFamiliar0000'
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Wolf Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Wolf]{wolf}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Wolf Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.wolf000000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

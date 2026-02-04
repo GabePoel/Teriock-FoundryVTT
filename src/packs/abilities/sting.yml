@@ -1,35 +1,52 @@
 _id: sting00000000000
+_key: '!items!sting00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Sting
-    type: ability
+  - _id: sting00000000000
+    _key: '!items.effects!sting00000000000.sting00000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/sting.webp
-    _id: sting00000000000
+    name: Sting
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '24'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 24 Hours
       delivery:
         base: weapon
         package: strike
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
+          rolls:
+            damage: 1d4[toxic]
+          statuses:
+            - poisoned
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
         - martial
@@ -40,33 +57,15 @@ effects:
         <p>[[lookup name]] must be made with a
         @L[Category:Equipment]{stinger}.</p>
       results:
+        critHit: <p>Deal @L[Core:Standard Damage]{standard damage} as well.</p>
         hit: >-
           <p>Target becomes @L[Condition:Poisoned]{poisoned}. The
           @L[Condition:Poisoned]{poison} deals [[/damage 1d4[toxic]]]
           @L[Core:Damage]{damage}.</p>
-        critHit: <p>Deal @L[Core:Standard Damage]{standard damage} as well.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          common:
-            - standardDamage
-          rolls:
-            damage: 1d4[toxic]
-          statuses:
-            - poisoned
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!sting00000000000.sting00000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/sting.webp
 name: Sting
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!sting00000000000'

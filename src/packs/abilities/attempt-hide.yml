@@ -1,33 +1,52 @@
 _id: attemptHide00000
+_key: '!items!attemptHide00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Attempt Hide
-    type: ability
+  - _id: attemptHide00000
+    _key: '!items.effects!attemptHide00000.attemptHide00000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/attempt-hide.webp
-    _id: attemptHide00000
+    name: Attempt Hide
     system:
+      basic: true
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
-      basic: true
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: intrinsic
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
       interaction: manifest
       maneuver: active
       overview:
@@ -38,12 +57,14 @@ effects:
           @L[Core:Perception]{PER}) of any creatures that could see you, you
           become @L[Condition:Hidden]{hidden} from them. The value you rolled is
           your hidden DC.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
-          DC.</p>
         fluent: >-
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
           DC.</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
+          DC.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
@@ -54,32 +75,10 @@ effects:
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          rolls:
-            hide: 1d20 + (2 * @snk)
-          startStatuses:
-            - hidden
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!attemptHide00000.attemptHide00000'
+    type: ability
 img: systems/teriock/src/icons/abilities/attempt-hide.webp
 name: Attempt Hide
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!attemptHide00000'

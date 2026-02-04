@@ -1,37 +1,44 @@
 _id: shrink0000000000
+_key: '!items!shrink0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Shrink
-    type: ability
+  - _id: shrink0000000000
+    _key: '!items.effects!shrink0000000000.shrink0000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/shrink.webp
-    _id: shrink0000000000
+    name: Shrink
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       elements:
         - nature
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -39,8 +46,22 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.size.number.raw
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '-1'
+        heightened:
+          duration: 3600
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - magical
       range:
@@ -50,35 +71,13 @@ effects:
         hit: >-
           <p>Target's @L[Core:Size]{SIZE} decreases by 1 to a minimum of 0.25.
           </p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.size.number.raw
-              target: Actor
-              qualifier: '1'
-              value: '-1'
-        heightened:
-          duration: 3600
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!shrink0000000000.shrink0000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/shrink.webp
 name: Shrink
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!shrink0000000000'

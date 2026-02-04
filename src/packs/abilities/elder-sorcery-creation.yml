@@ -1,18 +1,35 @@
 _id: eSCreation000000
+_key: '!items!eSCreation000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Elder Sorcery Creation
-    type: ability
+  - _id: eSCreation000000
+    _key: '!items.effects!eSCreation000000.eSCreation000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
-    _id: eSCreation000000
+    name: Elder Sorcery Creation
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              itself.</p>
         material: true
+        materialCost: >-
+          <p>Creation cost is at least 3 × the material components of the spell
+          itself.</p>
         mp:
           type: variable
           value:
@@ -21,31 +38,21 @@ effects:
               <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
               Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
               @L[Core:MP]{MP} of the spell itself.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-              itself.</p>
-        materialCost: >-
-          <p>Creation cost is at least 3 × the material components of the spell
-          itself.</p>
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       elderSorcery: true
       executionTime: Long Rest
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -62,37 +69,28 @@ effects:
           of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
           Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
           as well, using whatever rules they wish.</p>
-        proficient: >-
-          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
-          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
-          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
-          @L[Category:Mage classes]{mage classes}.</p>
         fluent: >-
           <p>In addition to the spells that you crate, you can learn
           @L[Core:Proficiency Bonus]{P} additional spells from other
           @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
           Sorcery]{Elder Sorcery} for more information.</p>
+        proficient: >-
+          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
+          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
+          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
+          @L[Category:Mage classes]{mage classes}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: melee
+      revealed: true
       ritual: true
       skill: true
       targets:
         - self
-      impacts: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!eSCreation000000.eSCreation000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
 name: Elder Sorcery Creation
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!eSCreation000000'

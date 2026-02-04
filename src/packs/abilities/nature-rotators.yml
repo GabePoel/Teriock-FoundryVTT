@@ -1,32 +1,320 @@
 _id: natureRots000000
+_key: '!items!natureRots000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Nature Rotators
-    type: ability
-    img: systems/teriock/src/icons/abilities/nature-rotators.webp
-    _id: natureRots000000
+  - _id: QkvOPq4CwKXiHOaR
+    _key: '!items.effects!natureRots000000.QkvOPq4CwKXiHOaR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cOVines000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/crown-of-vines.webp
+    name: Crown of Vines
     system:
+      _sup: natureRots000000
+      class: natureMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
         base: self
-      executionTime: passive
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - nature
+      executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#33D17A'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A small circle of glowing vines circles above your head. You gain
+          @L[Ability:Earthbind Touch]{Earthbind Touch} and @L[Ability:Earthbind
+          Aura]{Earthbind Aura}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: 7DmvWLfQPusPYGKL
+    _key: '!items.effects!natureRots000000.7DmvWLfQPusPYGKL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.earthbindAura000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/earthbind-aura.webp
+    name: Earthbind Aura
+    system:
+      _sup: QkvOPq4CwKXiHOaR
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - nature
+      endCondition: >-
+        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
         featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - grounded
+            - immobilized
+        heightened:
+          rolls:
+            damage: 1d4[magic vine]
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target is @L[Condition:Grounded]{grounded} and
+          @L[Condition:Immobile]{immobilized}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: jhxF6W8daCnc706C
+    _key: '!items.effects!natureRots000000.jhxF6W8daCnc706C'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.earthbindTouch00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/earthbind-touch.webp
+    name: Earthbind Touch
+    system:
+      _sup: QkvOPq4CwKXiHOaR
+      class: natureMage
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      elements:
+        - nature
+      endCondition: >-
+        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - grounded
+            - immobilized
+        heightened:
+          rolls:
+            damage: 1d4[magic vine]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: >-
+          <p>Target is @L[Condition:Grounded]{grounded} and
+          @L[Condition:Immobile]{immobilized}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: natureRots000000
+    _key: '!items.effects!natureRots000000.natureRots000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/nature-rotators.webp
+    name: Nature Rotators
+    system:
+      class: natureMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
       interaction: manifest
       maneuver: passive
       overview:
@@ -50,347 +338,69 @@ effects:
           @L[Ability:Polymorph]{Polymorph}, @L[Ability:Regeneration
           Touch]{Regeneration Touch}, @L[Ability:Unforge]{Unforge}, and
           @L[Ability:Wildborn]{Wildborn}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
         fluent: >-
           <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
           Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: '@rank.mag - 1'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1)
-        fluent:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.magic.maxRotators.raw
-              target: Actor
-              qualifier: '1'
-              value: 2 * (@rank.mag - 1) + @p
-      class: natureMage
+    type: ability
+  - _id: nuvgvI7pIofjPlDH
+    _key: '!items.effects!natureRots000000.nuvgvI7pIofjPlDH'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.polymorph0000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!natureRots000000.natureRots000000'
-  - name: Crown of Vines
-    type: ability
-    img: systems/teriock/src/icons/abilities/crown-of-vines.webp
+    img: systems/teriock/src/icons/abilities/polymorph.webp
+    name: Polymorph
     system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
-      delivery:
-        base: self
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>A small circle of glowing vines circles above your head. You gain
-          @L[Ability:Earthbind Touch]{Earthbind Touch} and @L[Ability:Earthbind
-          Aura]{Earthbind Aura}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 3
-              time: normal
-              key: system.light.dim
-              target: Actor
-              qualifier: '1'
-              value: '0.01'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.color
-              target: Actor
-              qualifier: '1'
-              value: '#33D17A'
-            - mode: 5
-              priority: 3
-              time: normal
-              key: system.light.animation.type
-              target: Actor
-              qualifier: '1'
-              value: sunburst
       _sup: natureRots000000
       class: natureMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cOVines000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: QkvOPq4CwKXiHOaR
-    _key: '!items.effects!natureRots000000.QkvOPq4CwKXiHOaR'
-  - name: Earthbind Touch
-    type: ability
-    img: systems/teriock/src/icons/abilities/earthbind-touch.webp
-    system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
-      delivery:
-        base: hand
-        package: touch
-      elements:
-        - nature
-      endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well.</p>"
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Grounded]{grounded} and
-          @L[Condition:Immobile]{immobilized}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-          statuses:
-            - grounded
-            - immobilized
-        heightened:
-          rolls:
-            damage: 1d4[magic vine]
-      _sup: QkvOPq4CwKXiHOaR
-      class: natureMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.earthbindTouch00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: jhxF6W8daCnc706C
-    _key: '!items.effects!natureRots000000.jhxF6W8daCnc706C'
-  - name: Earthbind Aura
-    type: ability
-    img: systems/teriock/src/icons/abilities/earthbind-aura.webp
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
-      delivery:
-        base: aura
-      elements:
-        - nature
-      endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well.</p>"
-      interaction: feat
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is @L[Condition:Grounded]{grounded} and
-          @L[Condition:Immobile]{immobilized}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-          statuses:
-            - grounded
-            - immobilized
-        heightened:
-          rolls:
-            damage: 1d4[magic vine]
-      _sup: QkvOPq4CwKXiHOaR
-      class: natureMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.earthbindAura000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: 7DmvWLfQPusPYGKL
-    _key: '!items.effects!natureRots000000.7DmvWLfQPusPYGKL'
-  - name: Polymorph
-    type: ability
-    img: systems/teriock/src/icons/abilities/polymorph.webp
-    _id: nuvgvI7pIofjPlDH
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
-        verbal: true
         somatic: true
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
+        verbal: true
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       effectTypes:
         - transformation
       elements:
         - nature
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, the maximum @L[Core:Battle
         Rating]{BR} available to you increases by 3.</p>
+      impacts:
+        base:
+          statuses:
+            - transformed
       interaction: manifest
       maneuver: slow
       overview:
@@ -399,279 +409,64 @@ effects:
           @L[Category:Common animal creatures]{common animals}. The maximum
           @L[Core:Battle Rating]{BR} of @L[Category:Common animal
           creatures]{animals} you can choose is 3.</p>
-        proficient: >-
-          <p>The maximum @L[Core:Battle Rating]{BR} available to you is now 3 ×
-          @L[Core:Proficiency Bonus]{P}.</p>
         fluent: >-
           <p>The maximum @L[Core:Battle Rating]{BR} available to you is now 3 ×
           @L[Core:Fluency Bonus]{F}.</p>
+        proficient: >-
+          <p>The maximum @L[Core:Battle Rating]{BR} available to you is now 3 ×
+          @L[Core:Proficiency Bonus]{P}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '5'
         unit: ft
+      revealed: true
       ritual: true
       rotator: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        base:
-          statuses:
-            - transformed
-      _sup: natureRots000000
-      class: natureMage
+    type: ability
+  - _id: ehm9SEqeBkpA1Yf0
+    _key: '!items.effects!natureRots000000.ehm9SEqeBkpA1Yf0'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.polymorph0000000
+      compendiumSource: Compendium.teriock.abilities.Item.rgn0000000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!natureRots000000.nuvgvI7pIofjPlDH'
-  - name: Regeneration Touch
-    type: ability
-    img: systems/teriock/src/icons/abilities/regeneration-touch.webp
-    _id: RO79YAigulrUk2El
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      costs:
-        verbal: true
-        somatic: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
-      delivery:
-        base: hand
-        package: touch
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
-      elements:
-        - nature
-      endCondition: >-
-        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - martial
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: >-
-          <p>Target gains @L[Keyword:Limited]{Limited}
-          @L[Ability:Regenerating]{Regenerating}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-      _sup: natureRots000000
-      class: natureMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.regenerationTouc
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!natureRots000000.RO79YAigulrUk2El'
-  - name: Unforge
-    type: ability
-    img: systems/teriock/src/icons/abilities/unforge.webp
-    _id: 9fJtiOdzRgfOPBiL
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 1
-      revealed: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
-      delivery:
-        base: hand
-      effectTypes:
-        - destruction
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        unit: melee
-      results:
-        hit: <p>Target is @L[Property:Destroyed]{destroyed}.</p>
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - item
-      impacts: {}
-      _sup: natureRots000000
-      class: natureMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.unforge000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!natureRots000000.9fJtiOdzRgfOPBiL'
-  - name: Wildborn
-    type: ability
-    img: systems/teriock/src/icons/abilities/wildborn.webp
-    _id: NdI6k0roo2JfOkTa
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
-      delivery:
-        base: self
-      effectTypes:
-        - transformation
-      elements:
-        - nature
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Gain one @L[Core:Common Animal Abilities]{common animal ability} of
-          your
-          choosing.</p><p>@Embed[Compendium.teriock.tables.RollTable.2W09Ym1uwZ0rJkIy
-          rollable]</p>
-      powerSources:
-        - magical
-        - primal
-      range:
-        unit: self
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
-      impacts: {}
-      _sup: natureRots000000
-      class: natureMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.wildborn00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!natureRots000000.NdI6k0roo2JfOkTa'
-  - name: Regenerating
-    type: ability
     img: systems/teriock/src/icons/abilities/regenerating.webp
-    _id: ehm9SEqeBkpA1Yf0
+    name: Regenerating
     system:
+      _sup: RO79YAigulrUk2El
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - revival
         - healing
         - regeneration
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
       interaction: manifest
       limitation: >-
         <p>You must spend 1 @L[Core:Hit Points and Mana Points]{MP} or
@@ -692,29 +487,223 @@ effects:
           @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana Points]{HP}
           loss if you start your @L[Core:Turns]{turn} without successfully
           [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - primal
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_Fxodz6ZFE3MOjEON: turnStart
-      _sup: RO79YAigulrUk2El
+    type: ability
+  - _id: RO79YAigulrUk2El
+    _key: '!items.effects!natureRots000000.RO79YAigulrUk2El'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.regenerating0000
+      compendiumSource: Compendium.teriock.abilities.Item.regenerationTouc
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/regeneration-touch.webp
+    name: Regeneration Touch
+    system:
+      _sup: natureRots000000
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      elements:
+        - nature
+      endCondition: >-
+        <p>At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+          rolls:
+            endCon: 2d4
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - martial
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: >-
+          <p>Target gains @L[Keyword:Limited]{Limited}
+          @L[Ability:Regenerating]{Regenerating}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 9fJtiOdzRgfOPBiL
+    _key: '!items.effects!natureRots000000.9fJtiOdzRgfOPBiL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.unforge000000000
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!natureRots000000.ehm9SEqeBkpA1Yf0'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/unforge.webp
+    name: Unforge
+    system:
+      _sup: natureRots000000
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - destruction
+      elements:
+        - nature
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      results:
+        hit: <p>Target is @L[Property:Destroyed]{destroyed}.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - item
+    type: ability
+  - _id: NdI6k0roo2JfOkTa
+    _key: '!items.effects!natureRots000000.NdI6k0roo2JfOkTa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.wildborn00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/wildborn.webp
+    name: Wildborn
+    system:
+      _sup: natureRots000000
+      class: natureMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - transformation
+      elements:
+        - nature
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Gain one @L[Core:Common Animal Abilities]{common animal ability} of
+          your
+          choosing.</p><p>@Embed[Compendium.teriock.tables.RollTable.2W09Ym1uwZ0rJkIy
+          rollable]</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+        - primal
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
 img: systems/teriock/src/icons/abilities/nature-rotators.webp
 name: Nature Rotators
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!natureRots000000'

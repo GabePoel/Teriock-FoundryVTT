@@ -1,66 +1,65 @@
 _id: cantSwim00000000
+_key: '!items!cantSwim00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Cannot Swim
-    type: ability
+  - _id: cantSwim00000000
+    _key: '!items.effects!cantSwim00000000.cantSwim00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/cannot-swim.webp
-    _id: cantSwim00000000
+    name: Cannot Swim
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.swim
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
           <p>You have no @L[Core:Movement Speed]{swim speed}. This overrides
           abilities such as @L[Ability:Swimming]{Swimming}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 20
-              time: normal
-              key: system.speedAdjustments.swim
-              target: Actor
-              qualifier: '1'
-              value: '0'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cantSwim00000000.cantSwim00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/cannot-swim.webp
 name: Cannot Swim
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!cantSwim00000000'

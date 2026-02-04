@@ -1,36 +1,43 @@
 _id: needleDrgBreath0
+_key: '!items!needleDrgBreath0'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Needle Dragon Breath
-    type: ability
+  - _id: needleDrgBreath0
+    _key: '!items.effects!needleDrgBreath0.needleDrgBreath0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/needle-dragon-breath.webp
-    _id: needleDrgBreath0
+    name: Needle Dragon Breath
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: cone
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - damaging
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -38,21 +45,6 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 4d4[magic fire]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
-      interaction: feat
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '30'
-        unit: ft
-      results:
-        save: >-
-          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
-          would otherwise. This is calculated after any
-          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
-        fail: <p>Target takes [[/damage 8d4[magic]]] @L[Core:Damage]{damage}.</p>
-      targets:
-        - creature
       impacts:
         base:
           rolls:
@@ -60,18 +52,26 @@ effects:
         heightened:
           rolls:
             damage: 4d4[magic fire]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!needleDrgBreath0.needleDrgBreath0'
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        fail: <p>Target takes [[/damage 8d4[magic]]] @L[Core:Damage]{damage}.</p>
+        save: >-
+          <p>Target takes half as much @L[Core:Damage]{damage} from this as they
+          would otherwise. This is calculated after any
+          @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
+      revealed: true
+      targets:
+        - creature
+      warded: true
+    type: ability
 img: systems/teriock/src/icons/abilities/needle-dragon-breath.webp
 name: Needle Dragon Breath
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!needleDrgBreath0'

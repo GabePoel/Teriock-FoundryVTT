@@ -1,56 +1,48 @@
 _id: hKOolKJS95VZr4I4
-folder: aMNNoChJiHMattOK
-name: Rank 4 Flame Mage
-system:
-  archetype: mage
-  className: flameMage
-  classRank: 4
-  competence:
-    raw: 1
-  description: >-
-    <p>Fierce and brazen, these mages are always at war. The arms dealers of the
-    world, their magic is completely focused on destruction and thus they seek
-    to create bigger and better ways to blow things up. Passionate, wild and a
-    bit chaotic, these mages like the mountains and underground spaces. If you
-    are playing a Flame Mage be hot tempered, war-like, ready for battle, and
-    consuming everything.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-  _sup: fireDemon0000000
-type: rank
-img: systems/teriock/src/icons/ranks/rank-4-flame-mage.webp
+_key: '!items!hKOolKJS95VZr4I4'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r4Fla00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Amplify Flame Spells
-    type: ability
+  - _id: QEczhwfNaJmkOSOw
+    _key: '!items.effects!hKOolKJS95VZr4I4.QEczhwfNaJmkOSOw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ampFlameSpells00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/amplify-flame-spells.webp
+    name: Amplify Flame Spells
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: flameMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Core:Attack Interaction]{attack} with @L[Ability:Flame
@@ -65,52 +57,111 @@ effects:
           additional or repeated targets.</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: flameMage
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+      powerSources:
+        - martial
       range:
         unit: self
-    _id: QEczhwfNaJmkOSOw
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ampFlameSpells00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!hKOolKJS95VZr4I4.QEczhwfNaJmkOSOw'
-  - name: Flame Disciplines
-    type: ability
-    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: UCXDnOIkZGTvDLNX
+    _key: '!items.effects!hKOolKJS95VZr4I4.UCXDnOIkZGTvDLNX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bombasticCasting
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
+    name: Bombastic Casting
+    system:
+      _sup: ZmjFFlMRQIBtml1N
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - loud
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering @L[Category:Spells]{spell} becomes extremely visible
+          and loud. Visually the @L[Category:Spells]{spell} extends 10 feet in
+          all directions from a line between the caster and each of its targets.
+          The spell can be heard up to 600 feet away.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    type: ability
+  - _id: ZmjFFlMRQIBtml1N
+    _key: '!items.effects!hKOolKJS95VZr4I4.ZmjFFlMRQIBtml1N'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.flameDisciplines
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+    name: Flame Disciplines
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -121,123 +172,69 @@ effects:
           @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
           @L[Ability:Bombastic Casting]{Bombastic} and @L[Ability:Sudden
           Casting]{Sudden} casting styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
+          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
         proficient: >-
           <p>You may now use the benefits from [[lookup name]]
           @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
           rest}.</p>
-        fluent: >-
-          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
-          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: flameMage
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      targets:
+        - self
       upgrades:
         competence:
           attribute: int
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.flameDisciplines
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: ZmjFFlMRQIBtml1N
-    _key: '!items.effects!hKOolKJS95VZr4I4.ZmjFFlMRQIBtml1N'
-  - name: Bombastic Casting
     type: ability
+  - _id: l7jDMypW1zTIhmA3
+    _key: '!items.effects!hKOolKJS95VZr4I4.l7jDMypW1zTIhmA3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.suddenCasting000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/sudden-casting.webp
+    name: Sudden Casting
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: self
-      targets:
-        - spell
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>The triggering @L[Category:Spells]{spell} becomes extremely visible
-          and loud. Visually the @L[Category:Spells]{spell} extends 10 feet in
-          all directions from a line between the caster and each of its targets.
-          The spell can be heard up to 600 feet away.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
+      _sup: ZmjFFlMRQIBtml1N
       class: flameMage
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-      form: normal
-      effectTypes:
-        - loud
-      _sup: ZmjFFlMRQIBtml1N
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/bombastic-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bombasticCasting
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: UCXDnOIkZGTvDLNX
-    _key: '!items.effects!hKOolKJS95VZr4I4.UCXDnOIkZGTvDLNX'
-  - name: Sudden Casting
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
       delivery:
         base: self
-      targets:
-        - spell
       duration:
-        unit: instant
-        stationary: false
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: instant
+      effectTypes:
+        - sensory
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You cast a @L[Category:Single action spells]{single action spell}
@@ -247,45 +244,48 @@ effects:
           action spells]{spell} you cast.</p>
       piercing:
         raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: flameMage
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
+      targets:
+        - spell
       trigger: >-
         <p>Another creatures would move out of sight or out of range of a
         @L[Category:Single action spells]{single action spell} you could
         cast.</p>
-      form: normal
-      effectTypes:
-        - sensory
-      _sup: ZmjFFlMRQIBtml1N
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/sudden-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.suddenCasting000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: l7jDMypW1zTIhmA3
-    _key: '!items.effects!hKOolKJS95VZr4I4.l7jDMypW1zTIhmA3'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank4FlameMage00
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!hKOolKJS95VZr4I4'
+    type: ability
+folder: demons0000000000
+img: systems/teriock/src/icons/ranks/rank-4-flame-mage.webp
+name: Rank 4 Flame Mage
+system:
+  _sup: fireDemon0000000
+  archetype: mage
+  className: flameMage
+  classRank: 4
+  competence:
+    raw: 1
+  description: >-
+    <p>Fierce and brazen, these mages are always at war. The arms dealers of the
+    world, their magic is completely focused on destruction and thus they seek
+    to create bigger and better ways to blow things up. Passionate, wild and a
+    bit chaotic, these mages like the mountains and underground spaces. If you
+    are playing a Flame Mage be hot tempered, war-like, ready for battle, and
+    consuming everything.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

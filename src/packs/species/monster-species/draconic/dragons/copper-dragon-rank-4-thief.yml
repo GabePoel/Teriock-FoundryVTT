@@ -1,7 +1,127 @@
 _id: t48G3YCKtq5XDYgL
-folder: qTlk5KD9WGOfDG5I
+_key: '!items!t48G3YCKtq5XDYgL'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r4Thi00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+effects:
+  - _id: GiCDSyWgjn3UHUgp
+    _key: '!items.effects!t48G3YCKtq5XDYgL.GiCDSyWgjn3UHUgp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.disarmKnockback0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/disarm-knockback.webp
+    name: Disarm Knockback
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Whenever you hit another creature with @L[Ability:Disarm]{Disarm},
+          they are also moved 10 feet away from you. If it was a critical hit,
+          they are instead moved 20 feet away from you.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: Hj6pHa544ganuBR3
+    _key: '!items.effects!t48G3YCKtq5XDYgL.Hj6pHa544ganuBR3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.discard000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/discard.webp
+    name: Discard
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The @L[Category:Abilities]{ability} @L[Core:Fizzles]{fizzles}
+          against you. You may use [[lookup name]] even if there's something in
+          your hand.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: melee
+      requirements: <p>You must be holding at least one item in your hand.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - ability
+      trigger: >-
+        <p>You would take @L[Core:Damage]{damage} from an
+        @L[Category:Abilities]{ability}.</p>
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-4-thief.webp
 name: Rank 4 Thief
 system:
+  _sup: copperDragon0000
   archetype: semi
   className: thief
   classRank: 4
@@ -16,6 +136,8 @@ system:
     blinking an eyelash, that is their job. If you are playing a thief, lie and
     make up stories, be ever watchful for a chance to search or loot and look
     for the profit angle, never doing anything for free.</p>
+  innate: false
+  maxAv: 2
   statDice:
     hp:
       disabled: false
@@ -27,126 +149,4 @@ system:
       faces: 10
       number:
         raw: '1'
-  innate: false
-  maxAv: 2
-  _sup: copperDragon0000
 type: rank
-img: systems/teriock/src/icons/ranks/rank-4-thief.webp
-effects:
-  - name: Discard
-    type: ability
-    img: systems/teriock/src/icons/abilities/discard.webp
-    system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: hand
-      targets:
-        - ability
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        raw: '0'
-        dawn: false
-      range:
-        unit: melee
-      overview:
-        base: >-
-          <p>The @L[Category:Abilities]{ability} @L[Core:Fizzles]{fizzles}
-          against you. You may use [[lookup name]] even if there's something in
-          your hand.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: thief
-      requirements: <p>You must be holding at least one item in your hand.</p>
-      trigger: >-
-        <p>You would take @L[Core:Damage]{damage} from an
-        @L[Category:Abilities]{ability}.</p>
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: Hj6pHa544ganuBR3
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.discard000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!t48G3YCKtq5XDYgL.Hj6pHa544ganuBR3'
-  - name: Disarm Knockback
-    type: ability
-    img: systems/teriock/src/icons/abilities/disarm-knockback.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Whenever you hit another creature with @L[Ability:Disarm]{Disarm},
-          they are also moved 10 feet away from you. If it was a critical hit,
-          they are instead moved 20 feet away from you.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: thief
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: GiCDSyWgjn3UHUgp
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.disarmKnockback0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!t48G3YCKtq5XDYgL.GiCDSyWgjn3UHUgp'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank4Thief000000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!t48G3YCKtq5XDYgL'

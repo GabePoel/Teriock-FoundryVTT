@@ -1,25 +1,91 @@
 _id: protectiveMental
+_key: '!items!protectiveMental'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Protective Mental Link
+  - _id: qb5r7YhgKaQtqTbw
+    _key: '!items.effects!protectiveMental.qb5r7YhgKaQtqTbw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mentalEffectImy0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
+    name: Mental Effect Immunity
+    system:
+      _sup: protectiveMental
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: mental
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
+          effects]{mental effects}. The effects of [[lookup name]] are
+          maintained even if @L[Condition:Transformed]{transformed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - unknown
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
     type: ability
+  - _id: protectiveMental
+    _key: '!items.effects!protectiveMental.protectiveMental'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/protective-mental-link.webp
-    _id: protectiveMental
+    name: Protective Mental Link
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 2
-      revealed: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: hand
         package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - mental
       endCondition: >-
@@ -27,14 +93,35 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 2
       powerSources:
         - unknown
       range:
@@ -47,99 +134,10 @@ effects:
         hit: >-
           <p>Target gains @L[Ability:Mental Effect Immunity]{Mental Effect
           Immunity}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!protectiveMental.protectiveMental'
-  - name: Mental Effect Immunity
     type: ability
-    img: systems/teriock/src/icons/abilities/mental-effect-immunity.webp
-    _id: qb5r7YhgKaQtqTbw
-    system:
-      competence:
-        raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
-      delivery:
-        base: self
-      effectTypes:
-        - immunity
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Mental
-          effects]{mental effects}. The effects of [[lookup name]] are
-          maintained even if @L[Condition:Transformed]{transformed}.</p>
-      powerSources:
-        - unknown
-      range:
-        unit: self
-      targets:
-        - self
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.effects
-              target: Actor
-              qualifier: '1'
-              value: mental
-      _sup: protectiveMental
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mentalEffectImy0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!protectiveMental.qb5r7YhgKaQtqTbw'
 img: systems/teriock/src/icons/abilities/protective-mental-link.webp
 name: Protective Mental Link
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!protectiveMental'

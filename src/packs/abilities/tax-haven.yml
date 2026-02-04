@@ -1,35 +1,43 @@
 _id: taxHaven00000000
+_key: '!items!taxHaven00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Tax Haven
-    type: ability
+  - _id: taxHaven00000000
+    _key: '!items.effects!taxHaven00000000.taxHaven00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/tax-haven.webp
-    _id: taxHaven00000000
+    name: Tax Haven
     system:
+      class: paladin
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '8'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 8 Hours
       delivery:
         base: hand
         package: ritual
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -37,6 +45,9 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 24 hours. The overall duration is rounded to the
         nearest 24 hours.</p>
+      impacts:
+        heightened:
+          duration: 86400
       interaction: manifest
       maneuver: slow
       overview:
@@ -46,41 +57,29 @@ effects:
           be owned by a trust managed indirectly by your deity rather than by
           any individual. This trust is not subject to any taxes or tariffs, and
           the items are not subject to any confiscation or seizure.</p>
+        fluent: >-
+          <p>You may instead select up to 2 × @L[Core:Fluency Bonus]{F} items
+          that are considered to be owned by this trust.</p>
         proficient: >-
           <p>You may select up to 2 × @L[Core:Proficiency Bonus]{P} items that
           are not considered to be owned by this trust. These items are subject
           to all normal taxes, tariffs, confiscation, and seizure.</p>
-        fluent: >-
-          <p>You may instead select up to 2 × @L[Core:Fluency Bonus]{F} items
-          that are considered to be owned by this trust.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
         - financial
       range:
         raw: Your Hand's Range
         unit: ft
+      revealed: true
       ritual: true
       rotator: true
       spell: true
       standard: true
       targets:
         - area
-      impacts:
-        heightened:
-          duration: 86400
-      class: paladin
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!taxHaven00000000.taxHaven00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/tax-haven.webp
 name: Tax Haven
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!taxHaven00000000'

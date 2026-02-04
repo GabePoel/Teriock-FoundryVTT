@@ -1,34 +1,41 @@
 _id: enchantmentSense
+_key: '!items!enchantmentSense'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Enchantment Sense
-    type: ability
+  - _id: enchantmentSense
+    _key: '!items.effects!enchantmentSense.enchantmentSense'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/enchantment-sense.webp
-    _id: enchantmentSense
+    name: Enchantment Sense
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
+      delivery:
+        base: self
       duration:
-        raw: '0'
-        unit: unlimited
         conditions:
           absent:
             - blind
         dawn: false
-        stationary: false
         description: While Not Blind
-      delivery:
-        base: self
+        raw: '0'
+        stationary: false
+        unit: unlimited
       effectTypes:
         - sensory
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -42,27 +49,18 @@ effects:
           otherwise @L[Property:Granting]{enchanted}. If you pick a creature,
           you can tell whether each of the visible items you can see it
           @L[Keyword:Bearing]{bearing} meet this criteria.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '60'
         unit: self
+      revealed: true
       targets:
         - creature
         - item
-      impacts: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!enchantmentSense.enchantmentSense'
+    type: ability
 img: systems/teriock/src/icons/abilities/enchantment-sense.webp
 name: Enchantment Sense
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!enchantmentSense'

@@ -1,129 +1,57 @@
-name: Large Red Slime
-type: creature
+_id: largeRedSlime000
+_key: '!actors!largeRedSlime000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: redSlimes0000000
 img: systems/teriock/src/icons/creatures/large-red-slime.webp
-prototypeToken:
-  name: Large Red Slime
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/large-red-slime.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 2
-  height: 2
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: largeRedSlime000
-    folder: RDEI6v0H4ape5mFm
-    name: Large Red Slime
-    type: species
-    img: systems/teriock/src/icons/creatures/large-red-slime.webp
-    system:
-      competence:
-        raw: 1
-      description: <p>Slimes are a conglomeration of semi-sentient ooze.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 6
-          number:
-            raw: 2 * @size
-        mp:
-          disabled: false
-          faces: 6
-          number:
-            raw: '@size'
-      appearance: <p>A pool of thick opaque red liquid.</p>
-      br: 19
-      hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
-      innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Flame Mage]{Flame Mage}.</p>"
-      mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
-      size:
-        enabled: true
-        value: 7
-        min: 7
-        max: 8
-      traits:
-        - ooze
+    _key: '!actors.items!largeRedSlime000.largeRedSlime000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.largeRedSlime000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Acidic Blood
-        type: ability
+      - _id: hfB5zjFaY33H5kI6
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.hfB5zjFaY33H5kI6
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
+        name: Acidic Blood
         system:
-          powerSources:
-            - alchemical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - automatic
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Any @L[Category:Weapons]{weapon} that deals
@@ -132,55 +60,56 @@ items:
               @L[Core:Turns]{turn}.</p>
           piercing:
             raw: 0
+          powerSources:
+            - alchemical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           trigger: >-
             <p> This triggers automatically. You cannot choose to not use it if
             you are able to.</p>
-          form: normal
-          effectTypes:
-            - automatic
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: hfB5zjFaY33H5kI6
+        type: ability
+      - _id: vvyaiJKzfXKSlF2J
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.vvyaiJKzfXKSlF2J
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.acidicBlood00000
+          compendiumSource: Compendium.teriock.abilities.Item.advancedSmell000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.hfB5zjFaY33H5kI6
-      - name: Advanced Smell
-        type: ability
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
+        name: Advanced Smell
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: berserker
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
             conditions:
               absent:
                 - down
+            dawn: false
             description: While Up
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You can passively smell the types of all living creatures
@@ -191,128 +120,55 @@ items:
               this way.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
+          revealed: true
           skill: true
           standard: true
-          class: berserker
-          requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
-          form: normal
-          effectTypes:
-            - sensory
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: 2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
+        type: ability
+      - _id: 5wBLlpkPWjfzFcGD
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.5wBLlpkPWjfzFcGD
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.advancedSmell000
+          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: vvyaiJKzfXKSlF2J
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.vvyaiJKzfXKSlF2J
-      - name: Scent Seeing
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: aura
-          targets:
-            - creature
-          duration:
-            unit: unlimited
-            conditions:
-              absent:
-                - down
-            stationary: false
-            description: While Up
-            raw: '0'
-            dawn: false
-          range:
-            unit: ft
-            raw: '10'
-          overview:
-            base: >-
-              <p>You know the exact location of all target creatures. You
-              continue to know the location of all targets within 10 feet,
-              whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: berserker
-          requirements: >-
-            <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
-            not @L[Condition:Odorless]{odorless}.</p>
-          form: normal
-          effectTypes:
-            - sensory
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.senses.smell
-                  target: Actor
-                  qualifier: '1'
-                  value: '10'
-          _sup: vvyaiJKzfXKSlF2J
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-        img: systems/teriock/src/icons/abilities/scent-seeing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.scentSeeing00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: Ext7i3zbVveJ1tqw
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.Ext7i3zbVveJ1tqw
-      - name: Beastly Strength
-        type: ability
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: knight
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -321,51 +177,62 @@ items:
               hands to be @L[Property:AV0]{AV0}.</div>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
-          class: knight
-          form: normal
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 5wBLlpkPWjfzFcGD
+        type: ability
+      - _id: mszeyI7vgIxodYTZ
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.mszeyI7vgIxodYTZ
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+          compendiumSource: Compendium.teriock.abilities.Item.blindFighting000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.5wBLlpkPWjfzFcGD
-      - name: Blind Fighting
-        type: ability
+        img: icons/creatures/slimes/slime-giant-face-eyes.webp
+        name: Blind Fighting
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
           effectTypes:
             - sensory
           executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: normal
           grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.blind
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '60'
           interaction: manifest
           maneuver: passive
           overview:
@@ -381,212 +248,203 @@ items:
           powerSources:
             - magical
             - primal
+          range:
+            unit: self
+          revealed: true
           targets:
             - self
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.senses.blind
-                  target: Actor
-                  qualifier: '1'
-                  value: '60'
           upgrades:
             score:
               attribute: per
               value: 1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-        _id: mszeyI7vgIxodYTZ
-        img: icons/creatures/slimes/slime-giant-face-eyes.webp
+        type: ability
+      - _id: 2NBBuV6Ts4PA53nP
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.2NBBuV6Ts4PA53nP
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.blindFighting000
+          compendiumSource: Compendium.teriock.abilities.Item.bumbling00000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.mszeyI7vgIxodYTZ
-      - name: Bumbling
-        type: ability
         img: systems/teriock/src/icons/abilities/bumbling.webp
+        name: Bumbling
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: snk
               value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 2NBBuV6Ts4PA53nP
+        type: ability
+      - _id: 3HTgfSaiwuZLPJe8
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.3HTgfSaiwuZLPJe8
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.bumbling00000000
+          compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.2NBBuV6Ts4PA53nP
-      - name: Dark Vision
-        type: ability
         img: systems/teriock/src/icons/abilities/dark-vision.webp
+        name: Dark Vision
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.dark
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '60'
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is dim
               light.</p>
           piercing:
             raw: 0
-          form: normal
-          effectTypes:
-            - sensory
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.senses.dark
-                  target: Actor
-                  qualifier: '1'
-                  value: '60'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: 3HTgfSaiwuZLPJe8
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.darkVision000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.3HTgfSaiwuZLPJe8
-      - name: Devour
-        type: ability
-        img: systems/teriock/src/icons/abilities/devour.webp
-        system:
           powerSources:
             - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a2
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: xJbq69ZUokAa3P67
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.xJbq69ZUokAa3P67
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/devour.webp
+        name: Devour
+        system:
+          competence:
+            raw: 0
           delivery:
             base: bite
-          targets:
-            - creature
           duration:
-            unit: instant
+            dawn: false
             description: Instant
             raw: '0'
-            dawn: false
             stationary: false
+            unit: instant
+          executionTime: a2
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
           range:
-            unit: ft
             raw: Your Bite's Range
+            unit: ft
+          requirements: <p>Target is @L[Condition:Down]{down}.</p>
           results:
             hit: >-
               <p>Target is @L[Condition:Dead]{dead},
               @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
               reduced by 1. If their @L[Core:Size]{SIZE} was already less than
               1, it is reduced to 0.</p>
-          piercing:
-            raw: 0
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
-          form: normal
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
           revealed: true
-          grantOnly: false
-          impacts: {}
-        _id: xJbq69ZUokAa3P67
+          targets:
+            - creature
+        type: ability
+      - _id: JTKChgK7N4Zb9ZCD
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.JTKChgK7N4Zb9ZCD
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.devour0000000000
+          compendiumSource: Compendium.teriock.abilities.Item.gooeyDmgReductio
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.xJbq69ZUokAa3P67
-      - name: Gooey Damage Reduction
-        type: ability
+        img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
+        name: Gooey Damage Reduction
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
           executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: special
           grantOnly: false
+          impacts: {}
           interaction: manifest
           maneuver: passive
           overview:
@@ -597,45 +455,75 @@ items:
             raw: 0
           powerSources:
             - alchemical
-          targets:
-            - self
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
           range:
             unit: self
-          impacts: {}
-        _id: JTKChgK7N4Zb9ZCD
-        img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: IsHGffKBlAzFKavR
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.IsHGffKBlAzFKavR
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.gooeyDmgReductio
+          compendiumSource: Compendium.teriock.abilities.Item.oozeMind00000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.JTKChgK7N4Zb9ZCD
-      - name: Ooze Mind
-        type: ability
+        img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
+        name: Ooze Mind
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
           effectTypes:
             - immunity
           executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: special
           grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frightened
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: goaded
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frenzied
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: charmed
           interaction: manifest
           maneuver: passive
           overview:
@@ -648,81 +536,58 @@ items:
             raw: 0
           powerSources:
             - alchemical
-          targets:
-            - self
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: frightened
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: goaded
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: frenzied
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: charmed
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
           range:
             unit: self
-        _id: IsHGffKBlAzFKavR
-        img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.oozeMind00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.IsHGffKBlAzFKavR
-      - name: Resist Effects
-        type: ability
-        img: systems/teriock/src/icons/abilities/resist-effects.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
-          elements:
-            - storm
+        type: ability
+      - _id: OLnuG7k0wFzQXQM6
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.OLnuG7k0wFzQXQM6
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.resistEffects000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/resist-effects.webp
+        name: Resist Effects
+        system:
+          class: stormMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+          delivery:
+            base: self
           duration:
-            unit: hour
+            dawn: false
             description: 1 Hour
             raw: '1'
-            dawn: false
             stationary: false
-          sustained: true
+            unit: hour
+          effectTypes:
+            - resistance
+          elements:
+            - storm
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            macros:
+              Compendium_teriock_execution_Macro_5AsyrTgmr9NrD3XS: preExecution
+              Compendium_teriock_execution_Macro_resistEffectsPre: preExecution
+          interaction: manifest
+          maneuver: active
           overview:
             base: >-
               <p>Pick one of the following @L[Category:Effects]{effect types}.
@@ -750,165 +615,245 @@ items:
               detecting effects]{Truth detecting effects}</li></ol>
           piercing:
             raw: 0
-          spell: true
-          standard: true
-          class: stormMage
-          rotator: true
-          costs:
-            mp:
-              type: static
-              value:
-                static: 1
-          form: special
-          effectTypes:
-            - resistance
-          impacts:
-            macros:
-              Compendium_teriock_execution_Macro_5AsyrTgmr9NrD3XS: preExecution
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - magical
           range:
             unit: self
-        _id: OLnuG7k0wFzQXQM6
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.resistEffects000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.OLnuG7k0wFzQXQM6
-      - name: Slow
-        type: ability
-        img: systems/teriock/src/icons/abilities/slow.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
           targets:
             - self
+        type: ability
+      - _id: Ext7i3zbVveJ1tqw
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.Ext7i3zbVveJ1tqw
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.scentSeeing00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/scent-seeing.webp
+        name: Scent Seeing
+        system:
+          _sup: vvyaiJKzfXKSlF2J
+          class: berserker
+          competence:
+            raw: 0
+          delivery:
+            base: aura
           duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
+            conditions:
+              absent:
+                - down
             dawn: false
+            description: While Up
+            raw: '0'
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.smell
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '10'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You know the exact location of all target creatures. You
+              continue to know the location of all targets within 10 feet,
+              whether they are or you are moving or not, so long as they are
+              still within 10 feet of you.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: '10'
+            unit: ft
+          requirements: >-
+            <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
+            not @L[Condition:Odorless]{odorless}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: aYRUWrWihpMPbqUe
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.aYRUWrWihpMPbqUe
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/slow.webp
+        name: Slow
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: mov
               value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: aYRUWrWihpMPbqUe
+        type: ability
+      - _id: VNlQ3LhHighX3ul3
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.VNlQ3LhHighX3ul3
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
+          compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.aYRUWrWihpMPbqUe
-      - name: Unconsciousness Immunity
-        type: ability
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+        name: Unconsciousness Immunity
         system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: unconscious
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to falling
               @L[Condition:Unconscious]{unconscious}.</p>
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: wHznvQCrv0ebNXyA
+        _key: >-
+          !actors.items.effects!largeRedSlime000.largeRedSlime000.wHznvQCrv0ebNXyA
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.vitDur0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/vitals-durability.webp
+        name: Vitals Durability
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
           effectTypes:
             - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
           impacts:
             base:
               changes:
-                - mode: 2
+                - key: system.protections.immunities.other
+                  mode: 2
                   priority: 10
-                  time: normal
-                  key: system.protections.immunities.statuses
-                  target: Actor
                   qualifier: '1'
-                  value: unconscious
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: VNlQ3LhHighX3ul3
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.unconsciousnessI
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.VNlQ3LhHighX3ul3
-      - name: Vitals Durability
-        type: ability
-        img: systems/teriock/src/icons/abilities/vitals-durability.webp
-        system:
-          powerSources:
-            - martial
+                  target: Actor
+                  time: normal
+                  value: Vitals Target Abilities
+                - key: system.protections.immunities.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Arrows
           interaction: manifest
-          featSaveAttribute: mov
           maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to
@@ -916,679 +861,752 @@ items:
               abilities]{vitals target abilities}.</p>
           piercing:
             raw: 0
-          form: normal
-          effectTypes:
-            - immunity
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - martial
           range:
             unit: self
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.other
-                  target: Actor
-                  qualifier: '1'
-                  value: Vitals Target Abilities
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.other
-                  target: Actor
-                  qualifier: '1'
-                  value: Arrows
-        _id: wHznvQCrv0ebNXyA
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.vitDur0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.largeRedSlime000.wHznvQCrv0ebNXyA
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.largeRedSlime000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!largeRedSlime000.largeRedSlime000'
-  - _id: HrcvjwZJPn5ErTVi
-    name: Rank 3 Flame Mage
+          revealed: true
+          targets:
+            - self
+        type: ability
+    folder: redSlimes0000000
+    img: systems/teriock/src/icons/creatures/large-red-slime.webp
+    name: Large Red Slime
     system:
-      archetype: mage
-      className: flameMage
-      classRank: 3
+      appearance: <p>A pool of thick opaque red liquid.</p>
+      br: 19
       competence:
         raw: 1
-      description: >-
-        <p>Fierce and brazen, these mages are always at war. The arms dealers of
-        the world, their magic is completely focused on destruction and thus
-        they seek to create bigger and better ways to blow things up.
-        Passionate, wild and a bit chaotic, these mages like the mountains and
-        underground spaces. If you are playing a Flame Mage be hot tempered,
-        war-like, ready for battle, and consuming everything.</p>
+      description: <p>Slimes are a conglomeration of semi-sentient ooze.</p>
+      hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
+      innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Flame Mage]{Flame Mage}.</p>"
+      mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
+      size:
+        enabled: true
+        max: 8
+        min: 7
+        value: 7
       statDice:
         hp:
           disabled: false
-          faces: 8
+          faces: 6
           number:
-            raw: '1'
+            raw: 2 * @size
         mp:
           disabled: false
-          faces: 12
+          faces: 6
           number:
-            raw: '1'
-      innate: false
-      maxAv: 0
-      _sup: largeRedSlime000
-    type: rank
-    img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
+            raw: '@size'
+      traits:
+        - ooze
+    type: species
+  - _id: mage000000000000
+    _key: '!actors.items!largeRedSlime000.mage000000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.mage000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Additional Flame Rotators
-        type: ability
-        img: systems/teriock/src/icons/abilities/additional-flame-rotators.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Add @L[Ability:Cremate]{Cremate} and @L[Ability:Minor Weapon
-              Enchantment]{Minor Weapon Enchantment} to your list of possible
-              @L[Category:Rotator spells]{rotator spells}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          class: flameMage
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        flags:
-          teriock:
-            category: combat
-            defaultAbility: true
+      - _id: NGCuRUaVtXnxAbRe
+        _key: >-
+          !actors.items.effects!largeRedSlime000.mage000000000000.NGCuRUaVtXnxAbRe
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.adlFlameRots0000
+          compendiumSource: Compendium.teriock.abilities.Item.arcaneRay0000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: CaTTWTstOULxfkrp
-        _key: >-
-          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.CaTTWTstOULxfkrp
-      - name: Cremate
-        type: ability
+        img: systems/teriock/src/icons/abilities/arcane-ray.webp
+        name: Arcane Ray
         system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - vitals
-          elements:
-            - flame
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            dawn: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          results:
-            hit: >-
-              <p>Target is @L[Condition:Burned]{burned}, and
-              @L[Condition:Ruined]{ruined}.</p>
-          piercing:
+          competence:
             raw: 0
-          spell: true
-          standard: true
-          class: flameMage
-          rotator: true
-          costs:
-            verbal: true
-            somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
-          form: special
+          delivery:
+            base: missile
+            package: ray
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
           effectTypes:
-            - killing
             - damaging
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
           impacts:
             base:
-              startStatuses:
-                - burned
-                - ruined
-          _sup: CaTTWTstOULxfkrp
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        img: systems/teriock/src/icons/abilities/cremate.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.cremate000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: Of9sOoo4szd2CEOp
-        _key: >-
-          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.Of9sOoo4szd2CEOp
-      - name: Minor Weapon Enchantment
-        type: ability
-        system:
+              rolls:
+                damage: 1d4[magic]
+            heightened:
+              rolls:
+                damage: 1d4[magic]
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
           powerSources:
             - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: slow
-          executionTime: 10 Minutes
-          delivery:
-            base: sight
-            package: ritual
-          targets:
-            - weapon
-          elements:
-            - flame
-          duration:
-            unit: hour
-            stationary: false
-            description: 1 Hour
-            dawn: false
-            raw: '1'
           range:
+            raw: '60'
             unit: ft
-            raw: '5'
-          overview:
-            base: >-
-              <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic
-              damage} and @L[Property:Granting]{grant} a @L[Category:Conjured
-              spells]{conjured} @L[Category:Ray delivery spells]{ray spell} that
-              you know. Except, the spell has the @L[Category:AV0 spells]{AV0}
-              @L[Category:Weapon delivery spells]{weapon delivery} instead, is
-              @L[Keyword:Gifted]{gifted}, and can only be delivered with the
-              enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier
-              1}. If the weapon is @L[Property:Shattered]{shattered}, this
-              enchantment fades.</p>
-          piercing:
-            raw: 0
+          results:
+            critHit: >-
+              <p>Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
+              target.</p>
+          revealed: true
           spell: true
           standard: true
-          ritual: true
+          targets:
+            - creature
+        type: ability
+      - _id: aCWLNsvSFjEuLTyl
+        _key: >-
+          !actors.items.effects!largeRedSlime000.mage000000000000.aCWLNsvSFjEuLTyl
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.staffTouch000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/staff-touch.webp
+        name: Staff Touch
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You may use your @L[Property:Magelore]{magelore} items as
+              though they were your @L[Body:Hand]{hand}. This makes them
+              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
+              You are not @L[Core:Proficiency Bonus]{proficient} nor
+              @L[Core:Fluency Bonus]{fluent} with
+              @L[Category:Abilities]{abilities} you use through your
+              @L[Property:Magelore]{magelore} items.</p>
+            fluent: >-
+              <p>If you are @L[Core:Fluency Bonus]{fluent} with an
+              @L[Category:Abilities]{ability} you use through your
+              @L[Property:Magelore]{magelore} items, you regain the
+              @L[Core:Fluency Bonus]{fluency bonus} for that
+              @L[Category:Abilities]{ability}.</p>
+            proficient: >-
+              <p>If you are @L[Core:Proficiency Bonus]{proficient} with an
+              @L[Category:Abilities]{ability} you use through your
+              @L[Property:Magelore]{magelore} items, you regain the
+              @L[Core:Proficiency Bonus]{proficiency bonus} for that
+              @L[Category:Abilities]{ability}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+    folder: mage000000000000
+    img: systems/teriock/src/icons/archetypes/mage.webp
+    name: Mage
+    system:
+      competence:
+        raw: 1
+      description: >-
+        <p>Mages wield powerful @L[Magically powered spells]{magical spells} and
+        each class has a different approach, but are generally all quite
+        vulnerable in direct @L[Core:Combat]{combat}. Thus most mages prefer to
+        hang back and cast at their enemies from afar or use their magic to
+        control the flow of a battle while avoiding messy melees.</p>
+      maxAv: 0
+      type: learned
+    type: power
+  - _id: SnpAWDHmUI941IIy
+    _key: '!actors.items!largeRedSlime000.SnpAWDHmUI941IIy'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.pseudopod0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: xyFOvtABAgzGwL4a
+        _key: >-
+          !actors.items.effects!largeRedSlime000.SnpAWDHmUI941IIy.xyFOvtABAgzGwL4a
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: m1dnpbfEEctxiIi7
+        _key: >-
+          !actors.items.effects!largeRedSlime000.SnpAWDHmUI941IIy.m1dnpbfEEctxiIi7
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 6kXcYLaqKdbDi8Gz
+        _key: >-
+          !actors.items.effects!largeRedSlime000.SnpAWDHmUI941IIy.6kXcYLaqKdbDi8Gz
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: redSlimes0000000
+    img: icons/creatures/slimes/slime-movement-pseudopods-blue.webp
+    name: Pseudopod
+    system:
+      _sup: largeRedSlime000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: JeqkJKfhvBuqzKq3
+    _key: '!actors.items!largeRedSlime000.JeqkJKfhvBuqzKq3'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.r1Fla00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: wKxfL6pzdYHJceL0
+        _key: >-
+          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.wKxfL6pzdYHJceL0
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/fire-ball.webp
+        name: Fire Ball
+        system:
           class: flameMage
-          rotator: true
-          costs:
-            verbal: true
-            somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
+          competence:
+            raw: 0
+          delivery:
+            base: missile
+            package: ball
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
+          impacts:
+            base:
+              rolls:
+                damage: 1d4[magic fire]
+            heightened:
+              rolls:
+                damage: 1d4[magic fire]
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: '30'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
+              target.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: jNVwWGftQrYicpwi
+        _key: >-
+          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.jNVwWGftQrYicpwi
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.flameRay00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/flame-ray.webp
+        name: Flame Ray
+        system:
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: missile
+            package: ray
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
+          impacts:
+            base:
+              rolls:
+                damage: 1d8[fire magic]
+            heightened:
+              rolls:
+                damage: 1d8[fire magic]
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage} to
+              target.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: ltZA2RRIcCYTzW0J
+        _key: >-
+          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.ltZA2RRIcCYTzW0J
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.ignite0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/ignite.webp
+        name: Ignite
+        system:
+          _sup: LbLjjWiopqGfltmW
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: hand
+          duration:
+            dawn: false
+            description: 1 Hour
+            raw: '1'
+            stationary: false
+            unit: hour
+          elements:
+            - flame
+          executionTime: a0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
             effect increases by 1 hour. The overall duration is rounded to the
             nearest hour.</p>
-          form: special
           impacts:
+            base:
+              changes:
+                - key: system.light.dim
+                  mode: 4
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '10'
+                - key: system.light.color
+                  mode: 5
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '#C64600'
+                - key: system.light.animation.type
+                  mode: 5
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: torch
             heightened:
               duration: 3600
-          _sup: CaTTWTstOULxfkrp
-          competence:
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>Target is set @L[Property:On Fire]{on fire} or put out. Your
+              hand counts as a torch for the purpose of this
+              @L[Category:Spells]{spell}. When @L[Property:On Fire]{on fire},
+              your hand produces no smoke and being set @L[Property:On Fire]{on
+              fire} does not harm it.</p>
+          piercing:
             raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.minorWepEnchantm
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: OFPEJ5NINFBzzVjj
-        _key: >-
-          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.OFPEJ5NINFBzzVjj
-      - name: Expanded Flame Elder Sorcery
-        type: ability
-        img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
-        system:
-          elderSorcery: true
           powerSources:
             - magical
-          interaction: feat
-          featSaveAttribute: int
-          maneuver: slow
-          executionTime: Long Rest
-          delivery:
-            base: self
+          range:
+            unit: melee
+          requirements: <p>Target must be a torch.</p>
+          revealed: true
+          spell: true
+          standard: true
+          sustained: true
           targets:
-            - self
+            - item
+        type: ability
+      - _id: DEJ3d4VyZch9MA2u
+        _key: >-
+          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.DEJ3d4VyZch9MA2u
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.light00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/light.webp
+        name: Light
+        system:
+          _sup: LbLjjWiopqGfltmW
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: cone
+          duration:
+            dawn: false
+            description: 1 Minute
+            raw: '1'
+            stationary: false
+            unit: minute
           elements:
             - flame
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>In addition to the custom rotator spells you create, you can
-              learn @L[Category:Rotator spells]{spells} created by others. When
-              you come across a fully created spell using only words you are
-              @L[Core:Fluency Bonus]{fluent} in, can make a DC 12 + OP
-              @L[Core:INT]{INT} @L[Core:Feat Interaction]{feat save} to attempt
-              to learn it. If you succeed, you can add it to your rotator spell
-              list. If you fail, you are @L[Keyword:Incapable]{incapable} of
-              attempting to learn that spell again. The @L[Core:Game Master]{GM}
-              may modify the DC based on the spell's complexity, your knowledge
-              of the spell, any special training you receive, if the spell's
-              creator is there to assist you, or for any other factors they see
-              fit. You may also attempt to learn words that you come across as
-              long as they are of elements you are @L[Core:Fluency
-              Bonus]{fluent} in. The @L[Core:Game Master]{GM} may adjust the DC
-              for these as they see fit as well, but the default is DC 15 + OP
-              @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
-              save}.</p>
-            proficient: >-
-              <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder
-              Sorcery Creation]{Elder Sorcery Creation}, @L[Ability:Celestial
-              Elder Sorcery Words]{Celestial Elder Sorcery Words}, and
-              @L[Ability:Flame Elder Sorcery Words]{Flame Elder Sorcery
-              Words}.</p>
-          results:
-            save: <p>You learn the spell or word.</p>
-            fail: >-
-              <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
-              that spell or word again.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: flameMage
-          form: special
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          executionTime: a1
           expansion:
+            featSaveAttribute: mov
             range:
               unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        _id: EjA48yTYBOoAhMOD
-        flags:
-          teriock:
-            dontConsume: false
-            category: support
-            defaultAbility: true
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.expandedFlameES0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.EjA48yTYBOoAhMOD
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.rank3FlameMage00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!largeRedSlime000.HrcvjwZJPn5ErTVi'
-  - _id: IScLoo8h1rrC5YUm
-    name: Rank 4 Flame Mage
-    system:
-      archetype: mage
-      className: flameMage
-      classRank: 4
-      competence:
-        raw: 1
-      description: >-
-        <p>Fierce and brazen, these mages are always at war. The arms dealers of
-        the world, their magic is completely focused on destruction and thus
-        they seek to create bigger and better ways to blow things up.
-        Passionate, wild and a bit chaotic, these mages like the mountains and
-        underground spaces. If you are playing a Flame Mage be hot tempered,
-        war-like, ready for battle, and consuming everything.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 8
-          number:
-            raw: '1'
-        mp:
-          disabled: false
-          faces: 12
-          number:
-            raw: '1'
-      innate: false
-      maxAv: 0
-      _sup: largeRedSlime000
-    type: rank
-    img: systems/teriock/src/icons/ranks/rank-4-flame-mage.webp
-    effects:
-      - name: Amplify Flame Spells
-        type: ability
-        img: systems/teriock/src/icons/abilities/amplify-flame-spells.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
           featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.light.bright
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '50'
+                - key: system.light.dim
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '100'
+                - key: system.light.color
+                  mode: 5
+                  priority: 5
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '#C64600'
+                - key: system.light.animation.type
+                  mode: 5
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: pulse
+                - key: system.light.angle
+                  mode: 5
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '60'
+          interaction: manifest
+          maneuver: active
           overview:
             base: >-
-              <p>When you @L[Core:Attack Interaction]{attack} with
-              @L[Ability:Flame Ray]{Flame Ray} or @L[Ability:Fire Ball]{Fire
-              Ball}, you may target an additional creature or the same creature
-              twice. Any costs you pay must be paid twice and be the same for
-              both @L[Core:Attack Interaction]{attacks} These incur
-              @L[Core:Attack Interaction]{attack penalties} as though they were
-              two separate @L[Category:Attack abilities]{attacks}.</p>
-            fluent: >-
-              <p>You may instead choose up to 1 + @L[Core:Fluency Bonus]{F}
-              additional or repeated targets.</p>
+              <p>The area is illuminated. This [[lookup name style=lc]] emanates
+              from your hand and moves with you. You may change its direction at
+              will.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: flameMage
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        _id: QEczhwfNaJmkOSOw
-        flags:
-          teriock:
-            category: combat
-            defaultAbility: true
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ampFlameSpells00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.QEczhwfNaJmkOSOw
-      - name: Flame Disciplines
-        type: ability
-        img: systems/teriock/src/icons/abilities/flame-disciplines.webp
-        system:
           powerSources:
             - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
-              @L[Category:Ritual delivery spells]{ritual} @L[Category:Flame
-              element spells]{flame spell} in half the time it would normally
-              take. Additionally, once per long rest, you may cast a
-              @L[Category:Flame element spells]{flame spell} as though you were
-              @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
-              @L[Ability:Bombastic Casting]{Bombastic} and @L[Ability:Sudden
-              Casting]{Sudden} casting styles.</p>
-            proficient: >-
-              <p>You may now use the benefits from [[lookup name]]
-              @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
-              rest}.</p>
-            fluent: >-
-              <p>You may now use the benefits from [[lookup name]]
-              @L[Core:Fluency Bonus]{F} times per @L[Core:Short Rest]{short
-              rest}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: flameMage
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          upgrades:
-            competence:
-              attribute: int
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
           range:
-            unit: self
-          impacts: {}
-        flags:
-          teriock:
-            category: support
-            defaultAbility: true
+            raw: '100'
+            unit: ft
+          revealed: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - area
+        type: ability
+      - _id: LbLjjWiopqGfltmW
+        _key: >-
+          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.LbLjjWiopqGfltmW
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.flameDisciplines
+          compendiumSource: Compendium.teriock.abilities.Item.mageLight0000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: ZmjFFlMRQIBtml1N
-        _key: >-
-          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.ZmjFFlMRQIBtml1N
-      - name: Bombastic Casting
-        type: ability
+        img: systems/teriock/src/icons/abilities/mage-light.webp
+        name: Mage Light
         system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r0
+          class: flameMage
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - spell
           duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
             dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
-              <p>The triggering @L[Category:Spells]{spell} becomes extremely
-              visible and loud. Visually the @L[Category:Spells]{spell} extends
-              10 feet in all directions from a line between the caster and each
-              of its targets. The spell can be heard up to 600 feet away.</p>
+              <p>You gain @L[Ability:Light]{Light} and
+              @L[Ability:Ignite]{Ignite}.</p>
           piercing:
             raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
           skill: true
           standard: true
+          targets:
+            - self
+        type: ability
+      - _id: yHA67BqutokLx7uo
+        _key: >-
+          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.yHA67BqutokLx7uo
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.selfDetonate0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/self-detonate.webp
+        name: Self Detonate
+        system:
           class: flameMage
+          competence:
+            raw: 0
           costs:
             mp:
               type: static
               value:
                 static: 1
-          trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-          form: normal
-          effectTypes:
-            - loud
-          _sup: ZmjFFlMRQIBtml1N
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+            somatic: true
+            verbal: true
+          delivery:
+            base: sight
+            package: ritual
+          duration:
+            dawn: false
+            description: 8 Hours
+            raw: '8'
+            stationary: false
+            unit: hour
+          elements:
+            - flame
+          executionTime: 10 Minutes
           expansion:
+            featSaveAttribute: mov
             range:
               unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/bombastic-casting.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.bombasticCasting
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: UCXDnOIkZGTvDLNX
-        _key: >-
-          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.UCXDnOIkZGTvDLNX
-      - name: Sudden Casting
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
           featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r1
-          delivery:
-            base: self
-          targets:
-            - spell
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, you may target an
+            additional person.</p>
+          impacts: {}
+          interaction: manifest
+          maneuver: slow
           overview:
             base: >-
-              <p>You cast a @L[Category:Single action spells]{single action
-              spell} that the triggering creature is moving out of sight or out
-              of range of. The triggering creature must be within range of the
-              spell when it triggers and at least one of the targets of the
-              @L[Category:Single action spells]{spell} you cast.</p>
+              <p>The next @L[Category:Conjured spells]{conjured}
+              @L[Category:Missile delivery spells]{missile spell} cast on the
+              target @L[Core:Detonate Expansion]{detonates} (emanates in a 10
+              foot radius @L[Core:Aura Delivery]{aura} from the target). This is
+              a @L[Core:MOV]{MOV} @L[Core:Feat Interaction]{feat save} using
+              <i>your</i> DC. Do not add your @L[Core:Proficiency
+              Bonus]{proficiency bonus} to the DC. This detonating @L[Core:Aura
+              Delivery]{aura} is @L[Category:Loud effects]{loud}.</p>
+            fluent: >-
+              <p>Your @L[Core:Fluency Bonus]{fluency bonus} is now included in
+              the @L[Core:Feat Interaction]{feat save DC}.</p>
+            proficient: >-
+              <p>Your @L[Core:Proficiency Bonus]{proficiency bonus} is now
+              included in the @L[Core:Feat Interaction]{feat save DC}.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: flameMage
-          costs:
-            mp:
-              type: static
-              value:
-                static: 1
-          trigger: >-
-            <p>Another creatures would move out of sight or out of range of a
-            @L[Category:Single action spells]{single action spell} you could
-            cast.</p>
-          form: normal
-          effectTypes:
-            - sensory
-          _sup: ZmjFFlMRQIBtml1N
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
+          powerSources:
+            - magical
           range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/sudden-casting.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.suddenCasting000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: l7jDMypW1zTIhmA3
-        _key: >-
-          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.l7jDMypW1zTIhmA3
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.rank4FlameMage00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!largeRedSlime000.IScLoo8h1rrC5YUm'
-  - _id: JeqkJKfhvBuqzKq3
+            raw: '5'
+            unit: ft
+          requirements: >-
+            <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only
+            target yourself.</p>
+          revealed: true
+          ritual: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - creature
+        type: ability
+    folder: redSlimes0000000
+    img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
     name: Rank 1 Flame Mage
     system:
+      _sup: largeRedSlime000
       archetype: mage
       className: flameMage
       classRank: 1
@@ -1601,6 +1619,8 @@ items:
         Passionate, wild and a bit chaotic, these mages like the mountains and
         underground spaces. If you are playing a Flame Mage be hot tempered,
         war-like, ready for battle, and consuming everything.</p>
+      innate: false
+      maxAv: 0
       statDice:
         hp:
           disabled: false
@@ -1612,1112 +1632,145 @@ items:
           faces: 12
           number:
             raw: '1'
-      innate: false
-      maxAv: 0
-      _sup: largeRedSlime000
     type: rank
-    img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
+  - _id: ceZ8RRZ54FBzLXyP
+    _key: '!actors.items!largeRedSlime000.ceZ8RRZ54FBzLXyP'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.r2Fla00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Flame Ray
-        type: ability
-        img: systems/teriock/src/icons/abilities/flame-ray.webp
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: missile
-            package: ray
-          targets:
-            - creature
-          elements:
-            - flame
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            dawn: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: '60'
-          results:
-            hit: >-
-              <p>Deal [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage} to
-              target.</p>
-            critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
-          piercing:
-            raw: 1
-          spell: true
-          standard: true
-          class: flameMage
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          impacts:
-            base:
-              rolls:
-                damage: 1d8[fire magic]
-            heightened:
-              rolls:
-                damage: 1d8[fire magic]
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: jNVwWGftQrYicpwi
+      - _id: l0uzxUxLi5NfMRNz
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.l0uzxUxLi5NfMRNz
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.flameRay00000000
+          compendiumSource: Compendium.teriock.abilities.Item.bellows000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.jNVwWGftQrYicpwi
-      - name: Fire Ball
-        type: ability
-        img: systems/teriock/src/icons/abilities/fire-ball.webp
+        img: systems/teriock/src/icons/abilities/bellows.webp
+        name: Bellows
         system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: missile
-            package: ball
-          targets:
-            - creature
-          elements:
-            - flame
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            dawn: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: '30'
-          results:
-            hit: >-
-              <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
-              target.</p>
-            critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
-          piercing:
-            raw: 2
-          spell: true
-          standard: true
+          _sup: cirogt3aILQXokIv
           class: flameMage
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          impacts:
-            base:
-              rolls:
-                damage: 1d4[magic fire]
-            heightened:
-              rolls:
-                damage: 1d4[magic fire]
           competence:
             raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: wKxfL6pzdYHJceL0
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.fireBall00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.wKxfL6pzdYHJceL0
-      - name: Mage Light
-        type: ability
-        img: systems/teriock/src/icons/abilities/mage-light.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Light]{Light} and
-              @L[Ability:Ignite]{Ignite}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: flameMage
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.mageLight0000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: LbLjjWiopqGfltmW
-        _key: >-
-          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.LbLjjWiopqGfltmW
-      - name: Light
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: cone
-          targets:
-            - area
-          elements:
-            - flame
-          duration:
-            unit: minute
-            stationary: false
-            description: 1 Minute
-            raw: '1'
-            dawn: false
-          sustained: true
-          range:
-            unit: ft
-            raw: '100'
-          overview:
-            base: >-
-              <p>The area is illuminated. This [[lookup name style=lc]] emanates
-              from your hand and moves with you. You may change its direction at
-              will.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          class: flameMage
-          form: normal
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.light.bright
-                  target: Actor
-                  qualifier: '1'
-                  value: '50'
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.light.dim
-                  target: Actor
-                  qualifier: '1'
-                  value: '100'
-                - mode: 5
-                  priority: 5
-                  time: normal
-                  key: system.light.color
-                  target: Actor
-                  qualifier: '1'
-                  value: '#C64600'
-                - mode: 5
-                  priority: 10
-                  time: normal
-                  key: system.light.animation.type
-                  target: Actor
-                  qualifier: '1'
-                  value: pulse
-                - mode: 5
-                  priority: 10
-                  time: normal
-                  key: system.light.angle
-                  target: Actor
-                  qualifier: '1'
-                  value: '60'
-          _sup: LbLjjWiopqGfltmW
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        img: systems/teriock/src/icons/abilities/light.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.light00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: DEJ3d4VyZch9MA2u
-        _key: >-
-          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.DEJ3d4VyZch9MA2u
-      - name: Ignite
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a0
-          delivery:
-            base: hand
-          targets:
-            - item
-          elements:
-            - flame
-          duration:
-            unit: hour
-            stationary: false
-            description: 1 Hour
-            dawn: false
-            raw: '1'
-          sustained: true
-          range:
-            unit: melee
-          overview:
-            base: >-
-              <p>Target is set @L[Property:On Fire]{on fire} or put out. Your
-              hand counts as a torch for the purpose of this
-              @L[Category:Spells]{spell}. When @L[Property:On Fire]{on fire},
-              your hand produces no smoke and being set @L[Property:On Fire]{on
-              fire} does not harm it.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          class: flameMage
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour. The overall duration is rounded to the
-            nearest hour.</p>
-          requirements: <p>Target must be a torch.</p>
-          form: normal
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 5
-                  time: normal
-                  key: system.light.dim
-                  target: Actor
-                  qualifier: '1'
-                  value: '10'
-                - mode: 5
-                  priority: 5
-                  time: normal
-                  key: system.light.color
-                  target: Actor
-                  qualifier: '1'
-                  value: '#C64600'
-                - mode: 5
-                  priority: 5
-                  time: normal
-                  key: system.light.animation.type
-                  target: Actor
-                  qualifier: '1'
-                  value: torch
-            heightened:
-              duration: 3600
-          _sup: LbLjjWiopqGfltmW
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        img: systems/teriock/src/icons/abilities/ignite.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ignite0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: ltZA2RRIcCYTzW0J
-        _key: >-
-          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.ltZA2RRIcCYTzW0J
-      - name: Self Detonate
-        type: ability
-        img: systems/teriock/src/icons/abilities/self-detonate.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: slow
-          executionTime: 10 Minutes
-          delivery:
-            base: sight
-            package: ritual
-          targets:
-            - creature
-          elements:
-            - flame
-          duration:
-            unit: hour
-            description: 8 Hours
-            stationary: false
-            raw: '8'
-            dawn: false
-          sustained: true
-          range:
-            unit: ft
-            raw: '5'
-          overview:
-            base: >-
-              <p>The next @L[Category:Conjured spells]{conjured}
-              @L[Category:Missile delivery spells]{missile spell} cast on the
-              target @L[Core:Detonate Expansion]{detonates} (emanates in a 10
-              foot radius @L[Core:Aura Delivery]{aura} from the target). This is
-              a @L[Core:MOV]{MOV} @L[Core:Feat Interaction]{feat save} using
-              <i>your</i> DC. Do not add your @L[Core:Proficiency
-              Bonus]{proficiency bonus} to the DC. This detonating @L[Core:Aura
-              Delivery]{aura} is @L[Category:Loud effects]{loud}.</p>
-            proficient: >-
-              <p>Your @L[Core:Proficiency Bonus]{proficiency bonus} is now
-              included in the @L[Core:Feat Interaction]{feat save DC}.</p>
-            fluent: >-
-              <p>Your @L[Core:Fluency Bonus]{fluency bonus} is now included in
-              the @L[Core:Feat Interaction]{feat save DC}.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          ritual: true
-          class: flameMage
           costs:
-            verbal: true
-            somatic: true
             mp:
               type: static
               value:
                 static: 1
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, you may target an
-            additional person.</p>
-          requirements: >-
-            <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only
-            target yourself.</p>
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          impacts: {}
-        _id: yHA67BqutokLx7uo
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.selfDetonate0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.JeqkJKfhvBuqzKq3.yHA67BqutokLx7uo
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.rank1FlameMage00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!largeRedSlime000.JeqkJKfhvBuqzKq3'
-  - name: Pseudopod
-    type: body
-    _id: SnpAWDHmUI941IIy
-    img: icons/creatures/slimes/slime-movement-pseudopods-blue.webp
-    system:
-      damage:
-        base:
-          raw: '1'
-      competence:
-        raw: 0
-      _sup: largeRedSlime000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: xyFOvtABAgzGwL4a
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.SnpAWDHmUI941IIy.xyFOvtABAgzGwL4a
-      - name: Handy
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: m1dnpbfEEctxiIi7
-        img: systems/teriock/src/icons/properties/handy.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.SnpAWDHmUI941IIy.m1dnpbfEEctxiIi7
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 6kXcYLaqKdbDi8Gz
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.SnpAWDHmUI941IIy.6kXcYLaqKdbDi8Gz
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.pseudopod0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!largeRedSlime000.SnpAWDHmUI941IIy'
-  - _id: ceZ8RRZ54FBzLXyP
-    name: Rank 2 Flame Mage
-    system:
-      archetype: mage
-      className: flameMage
-      classRank: 2
-      competence:
-        raw: 1
-      description: >-
-        <p>Fierce and brazen, these mages are always at war. The arms dealers of
-        the world, their magic is completely focused on destruction and thus
-        they seek to create bigger and better ways to blow things up.
-        Passionate, wild and a bit chaotic, these mages like the mountains and
-        underground spaces. If you are playing a Flame Mage be hot tempered,
-        war-like, ready for battle, and consuming everything.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 8
-          number:
-            raw: '1'
-        mp:
-          disabled: false
-          faces: 12
-          number:
-            raw: '1'
-      innate: false
-      maxAv: 0
-      _sup: largeRedSlime000
-    type: rank
-    img: systems/teriock/src/icons/ranks/rank-2-flame-mage.webp
-    effects:
-      - name: Flame Rotators
-        type: ability
-        img: systems/teriock/src/icons/abilities/flame-rotators.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+            somatic: true
+            verbal: true
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
             dawn: false
-          overview:
-            base: >-
-              <p>Having mastered the basic techniques in this field of magic,
-              you are able to cast more advanced @L[Category:Spells]{spells}. If
-              you create any @L[Core:Elder Sorcery]{Elder Sorcery}
-              @L[Category:Spells]{spells} of your own, they get added to this
-              list. However, just because you "know" how to cast these spells,
-              doesn't mean you are always prepared to. Although all
-              @L[Category:Mage classes]{mage classes} grant their own
-              @L[Core:Elder Sorcery]{Elder Sorcery} and @L[Category:Rotator
-              spells]{rotator spells}, you may only have a maximum of
-              @L[Category:Mage classes]{MR} - 1 of these spells rotated into
-              your spell list at any given time across <i>all</i> classes.
-              @L[Category:Mage classes]{MR} refers to the number of
-              @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage
-              classes]{mage classes}. During a @L[Core:Long Rest]{long rest},
-              you can "rotate" which spells you have prepared. The
-              @L[Category:Rotator spells]{rotator spells} automatically
-              available to you are @L[Ability:Bellows]{Bellows},
-              @L[Ability:Control and Resist Fire]{Control and Resist Fire},
-              @L[Ability:Crown of Flame]{Crown of Flame}, @L[Ability:Melting
-              Grasp]{Melting Grasp}, and @L[Ability:Rupture Mark]{Rupture
-              Mark}.</p>
-            proficient: >-
-              <p>You may instead prepare 2 × (MR - 1) of these
-              @L[Category:Spells]{spells}.</p>
-            fluent: >-
-              <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-              Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          class: flameMage
-          form: normal
+            description: 1 Minute
+            raw: '1'
+            stationary: false
+            unit: minute
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, the next
+            @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
+            again.</p>
           impacts:
             base:
               changes:
-                - mode: 4
+                - key: system.impacts.boosts.damage
+                  mode: 2
                   priority: 10
+                  qualifier: '@spell'
+                  target: ability
                   time: normal
-                  key: system.magic.maxRotators.raw
-                  target: Actor
-                  qualifier: '1'
-                  value: '@rank.mag - 1'
-            proficient:
+                  value: '1'
+            heightened:
               changes:
-                - mode: 4
+                - key: system.impacts.boosts.damage
+                  mode: 2
                   priority: 10
+                  qualifier: '@spell'
+                  target: ability
                   time: normal
-                  key: system.magic.maxRotators.raw
-                  target: Actor
-                  qualifier: '1'
-                  value: 2 * (@rank.mag - 1)
-            fluent:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.magic.maxRotators.raw
-                  target: Actor
-                  qualifier: '1'
-                  value: 2 * (@rank.mag - 1) + @p
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.flameRots0000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: cirogt3aILQXokIv
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.cirogt3aILQXokIv
-      - name: Bellows
-        type: ability
-        system:
-          powerSources:
-            - magical
+                  value: '@h'
+            macros:
+              Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
           interaction: manifest
-          featSaveAttribute: mov
           maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - flame
-          duration:
-            unit: minute
-            stationary: false
-            description: 1 Minute
-            raw: '1'
-            dawn: false
-          sustained: true
           overview:
             base: >-
               <p>The next @L[Category:Spells]{spell} you cast that would deal
               @L[Core:Damage]{damage} is @L[Keyword:Boosted]{boosted}.</p>
           piercing:
             raw: 0
-          spell: true
-          standard: true
-          class: flameMage
-          rotator: true
-          costs:
-            verbal: true
-            somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the next
-            @L[Category:Spells]{spell} you cast is @L[Keyword:Boosted]{boosted}
-            again.</p>
-          form: special
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.impacts.boosts.damage
-                  target: ability
-                  qualifier: '@spell'
-                  value: '1'
-            heightened:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.impacts.boosts.damage
-                  target: ability
-                  qualifier: '@spell'
-                  value: '@h'
-            macros:
-              Compendium_teriock_execution_Macro_3ggAKA5UMx4YqKni: useAbility
-          _sup: cirogt3aILQXokIv
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-        img: systems/teriock/src/icons/abilities/bellows.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.bellows000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: l0uzxUxLi5NfMRNz
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.l0uzxUxLi5NfMRNz
-      - name: Control and Resist Fire
-        type: ability
-        system:
           powerSources:
             - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
+          range:
+            unit: self
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
           targets:
             - self
-          elements:
-            - flame
-          duration:
-            unit: hour
-            stationary: false
-            description: 1 Hour
-            raw: '1'
-            dawn: false
-          sustained: true
-          overview:
-            base: >-
-              <p>Your @L[Core:Standard Damage]{standard damage} increases by
-              [[/damage 1d4[fire magic]]] @L[Core:Damage]{damage}. You also
-              @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          class: flameMage
-          rotator: true
-          costs:
-            verbal: true
-            somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
-          form: special
-          effectTypes:
-            - resistance
-          impacts:
-            base:
-              rolls:
-                damage: 1d4[fire magic]
-              changes:
-                - mode: 2
-                  priority: 30
-                  time: normal
-                  key: system.damage.all.raw
-                  target: armament
-                  qualifier: '@dmg'
-                  value: 1d4[fire magic]
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.damageTypes
-                  target: Actor
-                  qualifier: '1'
-                  value: fire
-          _sup: cirogt3aILQXokIv
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-        img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
+        type: ability
+      - _id: 6pl2jjEByLtX2NXS
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.6pl2jjEByLtX2NXS
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ctrlAndResistFir
+          compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: cAMiBfoHp96yVsgj
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.cAMiBfoHp96yVsgj
-      - name: Melting Grasp
-        type: ability
+        img: systems/teriock/src/icons/abilities/burning-touch.webp
+        name: Burning Touch
         system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: hand
-          targets:
-            - item
-          elements:
-            - flame
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: ft
-            raw: Your Hand's Range
-          results:
-            hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
-          piercing:
-            raw: 1
-          spell: true
-          standard: true
+          _sup: zoqmIHCIZ7OiK29D
           class: flameMage
-          rotator: true
-          costs:
-            verbal: true
-            somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
-          form: special
-          _sup: cirogt3aILQXokIv
           competence:
             raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/melting-grasp.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.meltingGrasp0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: IjJWN9RhtiHF2HQz
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.IjJWN9RhtiHF2HQz
-      - name: Rupture Mark
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: hand
-          targets:
-            - creature
-          elements:
-            - flame
-          duration:
-            unit: minute
-            stationary: false
-            description: 1 Minute
-            raw: '1'
-            dawn: false
-          range:
-            unit: melee
-          results:
-            hit: >-
-              <p>Target's next @L[Category:Conjured spells]{conjured spell} does
-              not trigger @L[Category:Reaction abilities]{reactions}.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          class: flameMage
-          rotator: true
           costs:
-            verbal: true
             somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
-          form: special
-          _sup: cirogt3aILQXokIv
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/rupture-mark.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.ruptureMark00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: HsAvRyFVOF2rkuO3
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.HsAvRyFVOF2rkuO3
-      - name: Crown of Flame
-        type: ability
-        img: systems/teriock/src/icons/abilities/crown-of-flame.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - flame
-          duration:
-            unit: hour
-            description: 8 Hours
-            stationary: false
-            raw: '8'
-            dawn: false
-          sustained: true
-          overview:
-            base: >-
-              <p>A small circle of smokeless fire circles above your head. You
-              gain @L[Ability:Burning Touch]{Burning Touch} and
-              @L[Ability:Inferno Aura]{Inferno Aura}.</p>
-          piercing:
-            raw: 0
-          spell: true
-          standard: true
-          class: flameMage
-          rotator: true
-          costs:
             verbal: true
-            somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
-          form: special
-          grantOnly: false
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 3
-                  time: normal
-                  key: system.light.dim
-                  target: Actor
-                  qualifier: '1'
-                  value: '0.01'
-                - mode: 5
-                  priority: 3
-                  time: normal
-                  key: system.light.color
-                  target: Actor
-                  qualifier: '1'
-                  value: '#E01B24'
-                - mode: 5
-                  priority: 3
-                  time: normal
-                  key: system.light.animation.type
-                  target: Actor
-                  qualifier: '1'
-                  value: sunburst
-          _sup: cirogt3aILQXokIv
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.cOFlame000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: zoqmIHCIZ7OiK29D
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.zoqmIHCIZ7OiK29D
-      - name: Burning Touch
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
           delivery:
             base: hand
             package: touch
-          targets:
-            - creature
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
           elements:
             - flame
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            dawn: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Hand's Range
-          results:
-            hit: >-
-              <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-              target.</p>
-            critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
-          piercing:
-            raw: 2
-          spell: true
-          standard: true
-          class: flameMage
-          costs:
-            verbal: true
-            somatic: true
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, deal an additional
             [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          grantOnly: false
           impacts:
             base:
               rolls:
@@ -2725,261 +1778,66 @@ items:
             heightened:
               rolls:
                 damage: 1d6[magic fire]
-          _sup: zoqmIHCIZ7OiK29D
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        img: systems/teriock/src/icons/abilities/burning-touch.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 6pl2jjEByLtX2NXS
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.6pl2jjEByLtX2NXS
-      - name: Inferno Aura
-        type: ability
-        system:
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 2
           powerSources:
             - magical
-          interaction: feat
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: aura
-          targets:
-            - creature
-          elements:
-            - flame
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            dawn: false
-            raw: '0'
           range:
+            raw: Your Hand's Range
             unit: ft
-            raw: '10'
           results:
-            fail: >-
-              <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
+            critHit: >-
+              <p>Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
               target.</p>
-          piercing:
-            raw: 0
+          revealed: true
           spell: true
           standard: true
-          class: flameMage
-          costs:
-            verbal: true
-            somatic: true
-            mp:
-              type: static
-              value:
-                static: 1
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-          form: normal
-          effectTypes:
-            - damaging
-          grantOnly: false
-          impacts:
-            base:
-              rolls:
-                damage: 1d6[magic fire]
-            heightened:
-              rolls:
-                damage: 1d6[magic fire]
-          _sup: zoqmIHCIZ7OiK29D
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        img: systems/teriock/src/icons/abilities/inferno-aura.webp
+          targets:
+            - creature
+        type: ability
+      - _id: qkkzlRkJQGBEogMP
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.qkkzlRkJQGBEogMP
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.infernoAura00000
+          compendiumSource: Compendium.teriock.abilities.Item.celestialESWords
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: XJFYqke3aLCrWM1Q
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.XJFYqke3aLCrWM1Q
-      - name: Flame Elder Sorcery
-        type: ability
-        img: systems/teriock/src/icons/abilities/flame-elder-sorcery.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
-              Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial
-              Elder Sorcery Words}, and @L[Ability:Flame Elder Sorcery
-              Words]{Flame Elder Sorcery Words}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          class: flameMage
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.flameES000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: eYLadmAGh7YjVXpX
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.eYLadmAGh7YjVXpX
-      - name: Elder Sorcery Creation
-        type: ability
-        system:
-          elderSorcery: true
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: slow
-          executionTime: Long Rest
-          delivery:
-            base: sight
-            package: ritual
-          targets:
-            - self
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: melee
-          overview:
-            base: >-
-              <p>You may create 1 custom "rotator" @L[Category:Spells]{spells}
-              using @L[Core:Elder Sorcery]{Elder Sorcery} words that you know
-              using whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation
-              rules are dictated to you by your @L[Core:Game Master]{GM}. As
-              with other rotators, this spell is not always available to you.
-              You have to "rotate" into having it prepared. This spell may have
-              a maximum number of words equal to your @L[Core:Leveling
-              Up]{level}. Your @L[Core:Game Master]{GM} may allow you to
-              "improvise" @L[Category:Spells]{spells} as well, using whatever
-              rules they wish.</p>
-            proficient: >-
-              <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1)
-              custom "rotator" @L[Category:Spells]{spells} where
-              @L[Category:Mage classes]{MR} is the number of @L[Core:Leveling
-              Up]{ranks} you have in @L[Category:Mage classes]{mage
-              classes}.</p>
-            fluent: >-
-              <p>In addition to the spells that you crate, you can learn
-              @L[Core:Proficiency Bonus]{P} additional spells from other
-              @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-              Sorcery]{Elder Sorcery} for more information.</p>
-          piercing:
-            raw: 0
-          skill: true
-          ritual: true
-          costs:
-            material: true
-            mp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
-                  <p>Creation cost is at least 1 @L[Core:MP]{MP} per
-                  @L[Core:Elder Sorcery]{OP} of <i>each</i> word in the spell
-                  plus 3 × @L[Core:MP]{MP} of the spell itself.</p>
-            hp:
-              type: variable
-              value:
-                static: 0
-                variable: >-
-                  <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-                  itself.</p>
-            materialCost: >-
-              <p>Creation cost is at least 3 × the material components of the
-              spell itself.</p>
-          form: special
-          _sup: eYLadmAGh7YjVXpX
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         flags:
           teriock:
             dontConsume: false
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.eSCreation000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 7cc0bKbspKASuJa5
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.7cc0bKbspKASuJa5
-      - name: Celestial Elder Sorcery Words
-        type: ability
+        img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
+        name: Celestial Elder Sorcery Words
         system:
-          elderSorcery: true
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          _sup: eYLadmAGh7YjVXpX
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
+          elderSorcery: true
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
@@ -3070,63 +1928,375 @@ items:
               style="background-color:#dc8add1A"></td><td
               style="background-color:#dc8add1A"></td><td
               style="background-color:#dc8add1A">use</td></tr></tbody></table><p></p>
-            proficient: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Proficiency Bonus]{P}).</p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
+            proficient: >-
+              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+              @L[Core:Proficiency Bonus]{P}).</p>
           piercing:
             raw: 0
-          skill: true
-          form: special
-          _sup: eYLadmAGh7YjVXpX
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
+          powerSources:
+            - magical
           range:
             unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
+          revealed: true
+          skill: true
+          targets:
+            - self
+        type: ability
+      - _id: cAMiBfoHp96yVsgj
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.cAMiBfoHp96yVsgj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.ctrlAndResistFir
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
+        name: Control and Resist Fire
+        system:
+          _sup: cirogt3aILQXokIv
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: 1 Hour
+            raw: '1'
+            stationary: false
+            unit: hour
+          effectTypes:
+            - resistance
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.damage.all.raw
+                  mode: 2
+                  priority: 30
+                  qualifier: '@dmg'
+                  target: armament
+                  time: normal
+                  value: 1d4[fire magic]
+                - key: system.protections.resistances.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: fire
+              rolls:
+                damage: 1d4[fire magic]
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>Your @L[Core:Standard Damage]{standard damage} increases by
+              [[/damage 1d4[fire magic]]] @L[Core:Damage]{damage}. You also
+              @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+        type: ability
+      - _id: zoqmIHCIZ7OiK29D
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.zoqmIHCIZ7OiK29D
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.cOFlame000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/crown-of-flame.webp
+        name: Crown of Flame
+        system:
+          _sup: cirogt3aILQXokIv
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: 8 Hours
+            raw: '8'
+            stationary: false
+            unit: hour
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.light.dim
+                  mode: 4
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '0.01'
+                - key: system.light.color
+                  mode: 5
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '#E01B24'
+                - key: system.light.animation.type
+                  mode: 5
+                  priority: 3
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: sunburst
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>A small circle of smokeless fire circles above your head. You
+              gain @L[Ability:Burning Touch]{Burning Touch} and
+              @L[Ability:Inferno Aura]{Inferno Aura}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+        type: ability
+      - _id: 7cc0bKbspKASuJa5
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.7cc0bKbspKASuJa5
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.eSCreation000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
         flags:
           teriock:
             dontConsume: false
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.celestialESWords
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: qkkzlRkJQGBEogMP
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.qkkzlRkJQGBEogMP
-      - name: Flame Elder Sorcery Words
-        type: ability
+        img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+        name: Elder Sorcery Creation
         system:
+          _sup: eYLadmAGh7YjVXpX
+          competence:
+            raw: 0
+          costs:
+            hp:
+              type: variable
+              value:
+                static: 0
+                variable: >-
+                  <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+                  itself.</p>
+            material: true
+            materialCost: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            mp:
+              type: variable
+              value:
+                static: 0
+                variable: >-
+                  <p>Creation cost is at least 1 @L[Core:MP]{MP} per
+                  @L[Core:Elder Sorcery]{OP} of <i>each</i> word in the spell
+                  plus 3 × @L[Core:MP]{MP} of the spell itself.</p>
+          delivery:
+            base: sight
+            package: ritual
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
           elderSorcery: true
+          executionTime: Long Rest
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>You may create 1 custom "rotator" @L[Category:Spells]{spells}
+              using @L[Core:Elder Sorcery]{Elder Sorcery} words that you know
+              using whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation
+              rules are dictated to you by your @L[Core:Game Master]{GM}. As
+              with other rotators, this spell is not always available to you.
+              You have to "rotate" into having it prepared. This spell may have
+              a maximum number of words equal to your @L[Core:Leveling
+              Up]{level}. Your @L[Core:Game Master]{GM} may allow you to
+              "improvise" @L[Category:Spells]{spells} as well, using whatever
+              rules they wish.</p>
+            fluent: >-
+              <p>In addition to the spells that you crate, you can learn
+              @L[Core:Proficiency Bonus]{P} additional spells from other
+              @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
+              Sorcery]{Elder Sorcery} for more information.</p>
+            proficient: >-
+              <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1)
+              custom "rotator" @L[Category:Spells]{spells} where
+              @L[Category:Mage classes]{MR} is the number of @L[Core:Leveling
+              Up]{ranks} you have in @L[Category:Mage classes]{mage
+              classes}.</p>
+          piercing:
+            raw: 0
           powerSources:
             - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          range:
+            unit: melee
+          revealed: true
+          ritual: true
+          skill: true
           targets:
             - self
-          elements:
-            - flame
+        type: ability
+      - _id: eYLadmAGh7YjVXpX
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.eYLadmAGh7YjVXpX
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.flameES000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/flame-elder-sorcery.webp
+        name: Flame Elder Sorcery
+        system:
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
+              Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial
+              Elder Sorcery Words}, and @L[Ability:Flame Elder Sorcery
+              Words]{Flame Elder Sorcery Words}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          targets:
+            - self
+        type: ability
+      - _id: IjVJt6SUr2woDHm8
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.IjVJt6SUr2woDHm8
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.flameESWords0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/flame-elder-sorcery-words.webp
+        name: Flame Elder Sorcery Words
+        system:
+          _sup: eYLadmAGh7YjVXpX
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
             dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          elderSorcery: true
+          elements:
+            - flame
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Flame Elder
@@ -3157,244 +2327,1080 @@ items:
               style="background-color:#a51d2d1A">temper</td></tr> <tr><td
               style="background-color:#f661511A">warmth</td><td
               style="background-color:#f661511A">warm</td></tr></tbody></table><p></p>
-            proficient: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Proficiency Bonus]{P}).</p>
             fluent: >-
               <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
               @L[Core:Fluency Bonus]{F}).</p>
+            proficient: >-
+              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
+              @L[Core:Proficiency Bonus]{P}).</p>
           piercing:
             raw: 0
-          skill: true
-          class: flameMage
-          form: special
-          _sup: eYLadmAGh7YjVXpX
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/flame-elder-sorcery-words.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.flameESWords0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: IjVJt6SUr2woDHm8
-        _key: >-
-          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.IjVJt6SUr2woDHm8
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.rank2FlameMage00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!largeRedSlime000.ceZ8RRZ54FBzLXyP'
-  - name: Mage
-    type: power
-    _id: mage000000000000
-    img: systems/teriock/src/icons/archetypes/mage.webp
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Mages wield powerful @L[Magically powered spells]{magical spells} and
-        each class has a different approach, but are generally all quite
-        vulnerable in direct @L[Core:Combat]{combat}. Thus most mages prefer to
-        hang back and cast at their enemies from afar or use their magic to
-        control the flow of a battle while avoiding messy melees.</p>
-      maxAv: 0
-      type: learned
-    effects:
-      - name: Arcane Ray
-        type: ability
-        img: systems/teriock/src/icons/abilities/arcane-ray.webp
-        system:
           powerSources:
             - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: missile
-            package: ray
-          targets:
-            - creature
-          duration:
-            unit: instant
-            description: Instant
-            stationary: false
-            raw: '0'
-            dawn: false
           range:
-            unit: ft
-            raw: '60'
-          results:
-            hit: >-
-              <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
-              target.</p>
-            critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
-          piercing:
-            raw: 1
-          spell: true
-          standard: true
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
+            unit: self
+          revealed: true
+          skill: true
+          targets:
+            - self
+        type: ability
+      - _id: cirogt3aILQXokIv
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.cirogt3aILQXokIv
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.flameRots0000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/flame-rotators.webp
+        name: Flame Rotators
+        system:
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '@rank.mag - 1'
+            fluent:
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: 2 * (@rank.mag - 1) + @p
+            proficient:
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: 2 * (@rank.mag - 1)
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Having mastered the basic techniques in this field of magic,
+              you are able to cast more advanced @L[Category:Spells]{spells}. If
+              you create any @L[Core:Elder Sorcery]{Elder Sorcery}
+              @L[Category:Spells]{spells} of your own, they get added to this
+              list. However, just because you "know" how to cast these spells,
+              doesn't mean you are always prepared to. Although all
+              @L[Category:Mage classes]{mage classes} grant their own
+              @L[Core:Elder Sorcery]{Elder Sorcery} and @L[Category:Rotator
+              spells]{rotator spells}, you may only have a maximum of
+              @L[Category:Mage classes]{MR} - 1 of these spells rotated into
+              your spell list at any given time across <i>all</i> classes.
+              @L[Category:Mage classes]{MR} refers to the number of
+              @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage
+              classes]{mage classes}. During a @L[Core:Long Rest]{long rest},
+              you can "rotate" which spells you have prepared. The
+              @L[Category:Rotator spells]{rotator spells} automatically
+              available to you are @L[Ability:Bellows]{Bellows},
+              @L[Ability:Control and Resist Fire]{Control and Resist Fire},
+              @L[Ability:Crown of Flame]{Crown of Flame}, @L[Ability:Melting
+              Grasp]{Melting Grasp}, and @L[Ability:Rupture Mark]{Rupture
+              Mark}.</p>
+            fluent: >-
+              <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+              Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+            proficient: >-
+              <p>You may instead prepare 2 × (MR - 1) of these
+              @L[Category:Spells]{spells}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          targets:
+            - self
+        type: ability
+      - _id: XJFYqke3aLCrWM1Q
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.XJFYqke3aLCrWM1Q
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.infernoAura00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/inferno-aura.webp
+        name: Inferno Aura
+        system:
+          _sup: zoqmIHCIZ7OiK29D
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: aura
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
           effectTypes:
             - damaging
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
           impacts:
             base:
               rolls:
-                damage: 1d4[magic]
+                damage: 1d6[magic fire]
             heightened:
               rolls:
-                damage: 1d4[magic]
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: NGCuRUaVtXnxAbRe
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.arcaneRay0000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!largeRedSlime000.mage000000000000.NGCuRUaVtXnxAbRe
-      - name: Staff Touch
-        type: ability
-        img: systems/teriock/src/icons/abilities/staff-touch.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            stationary: false
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You may use your @L[Property:Magelore]{magelore} items as
-              though they were your @L[Body:Hand]{hand}. This makes them
-              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
-              You are not @L[Core:Proficiency Bonus]{proficient} nor
-              @L[Core:Fluency Bonus]{fluent} with
-              @L[Category:Abilities]{abilities} you use through your
-              @L[Property:Magelore]{magelore} items.</p>
-            proficient: >-
-              <p>If you are @L[Core:Proficiency Bonus]{proficient} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Proficiency Bonus]{proficiency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
-            fluent: >-
-              <p>If you are @L[Core:Fluency Bonus]{fluent} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Fluency Bonus]{fluency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
+                damage: 1d6[magic fire]
+          interaction: feat
+          maneuver: active
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          form: normal
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
+          powerSources:
+            - magical
           range:
-            unit: self
-          impacts: {}
-        _id: aCWLNsvSFjEuLTyl
+            raw: '10'
+            unit: ft
+          results:
+            fail: >-
+              <p>Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to
+              target.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: IjJWN9RhtiHF2HQz
+        _key: >-
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.IjJWN9RhtiHF2HQz
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.staffTouch000000
+          compendiumSource: Compendium.teriock.abilities.Item.meltingGrasp0000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
+        img: systems/teriock/src/icons/abilities/melting-grasp.webp
+        name: Melting Grasp
+        system:
+          _sup: cirogt3aILQXokIv
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: hand
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: Your Hand's Range
+            unit: ft
+          results:
+            hit: <p>Item is @L[Property:Shattered]{shattered}.</p>
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - item
+        type: ability
+      - _id: HsAvRyFVOF2rkuO3
         _key: >-
-          !actors.items.effects!largeRedSlime000.mage000000000000.aCWLNsvSFjEuLTyl
-    folder: mage000000000000
+          !actors.items.effects!largeRedSlime000.ceZ8RRZ54FBzLXyP.HsAvRyFVOF2rkuO3
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.ruptureMark00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/rupture-mark.webp
+        name: Rupture Mark
+        system:
+          _sup: cirogt3aILQXokIv
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: hand
+          duration:
+            dawn: false
+            description: 1 Minute
+            raw: '1'
+            stationary: false
+            unit: minute
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: melee
+          results:
+            hit: >-
+              <p>Target's next @L[Category:Conjured spells]{conjured spell} does
+              not trigger @L[Category:Reaction abilities]{reactions}.</p>
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+    folder: redSlimes0000000
+    img: systems/teriock/src/icons/ranks/rank-2-flame-mage.webp
+    name: Rank 2 Flame Mage
+    system:
+      _sup: largeRedSlime000
+      archetype: mage
+      className: flameMage
+      classRank: 2
+      competence:
+        raw: 1
+      description: >-
+        <p>Fierce and brazen, these mages are always at war. The arms dealers of
+        the world, their magic is completely focused on destruction and thus
+        they seek to create bigger and better ways to blow things up.
+        Passionate, wild and a bit chaotic, these mages like the mountains and
+        underground spaces. If you are playing a Flame Mage be hot tempered,
+        war-like, ready for battle, and consuming everything.</p>
+      innate: false
+      maxAv: 0
+      statDice:
+        hp:
+          disabled: false
+          faces: 8
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 12
+          number:
+            raw: '1'
+    type: rank
+  - _id: HrcvjwZJPn5ErTVi
+    _key: '!actors.items!largeRedSlime000.HrcvjwZJPn5ErTVi'
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.mage000000000000
+      compendiumSource: Compendium.teriock.classes.Item.r3Fla00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
+    effects:
+      - _id: CaTTWTstOULxfkrp
+        _key: >-
+          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.CaTTWTstOULxfkrp
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.adlFlameRots0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        flags:
+          teriock:
+            category: combat
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/additional-flame-rotators.webp
+        name: Additional Flame Rotators
+        system:
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Add @L[Ability:Cremate]{Cremate} and @L[Ability:Minor Weapon
+              Enchantment]{Minor Weapon Enchantment} to your list of possible
+              @L[Category:Rotator spells]{rotator spells}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          targets:
+            - self
+        type: ability
+      - _id: Of9sOoo4szd2CEOp
+        _key: >-
+          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.Of9sOoo4szd2CEOp
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.cremate000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/cremate.webp
+        name: Cremate
+        system:
+          _sup: CaTTWTstOULxfkrp
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - killing
+            - damaging
+          elements:
+            - flame
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              startStatuses:
+                - burned
+                - ruined
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          results:
+            hit: >-
+              <p>Target is @L[Condition:Burned]{burned}, and
+              @L[Condition:Ruined]{ruined}.</p>
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - vitals
+        type: ability
+      - _id: EjA48yTYBOoAhMOD
+        _key: >-
+          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.EjA48yTYBOoAhMOD
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.expandedFlameES0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        flags:
+          teriock:
+            category: support
+            defaultAbility: true
+            dontConsume: false
+        img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
+        name: Expanded Flame Elder Sorcery
+        system:
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          elderSorcery: true
+          elements:
+            - flame
+          executionTime: Long Rest
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: int
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: feat
+          maneuver: slow
+          overview:
+            base: >-
+              <p>In addition to the custom rotator spells you create, you can
+              learn @L[Category:Rotator spells]{spells} created by others. When
+              you come across a fully created spell using only words you are
+              @L[Core:Fluency Bonus]{fluent} in, can make a DC 12 + OP
+              @L[Core:INT]{INT} @L[Core:Feat Interaction]{feat save} to attempt
+              to learn it. If you succeed, you can add it to your rotator spell
+              list. If you fail, you are @L[Keyword:Incapable]{incapable} of
+              attempting to learn that spell again. The @L[Core:Game Master]{GM}
+              may modify the DC based on the spell's complexity, your knowledge
+              of the spell, any special training you receive, if the spell's
+              creator is there to assist you, or for any other factors they see
+              fit. You may also attempt to learn words that you come across as
+              long as they are of elements you are @L[Core:Fluency
+              Bonus]{fluent} in. The @L[Core:Game Master]{GM} may adjust the DC
+              for these as they see fit as well, but the default is DC 15 + OP
+              @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
+              save}.</p>
+            proficient: >-
+              <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder
+              Sorcery Creation]{Elder Sorcery Creation}, @L[Ability:Celestial
+              Elder Sorcery Words]{Celestial Elder Sorcery Words}, and
+              @L[Ability:Flame Elder Sorcery Words]{Flame Elder Sorcery
+              Words}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          results:
+            fail: >-
+              <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
+              that spell or word again.</p>
+            save: <p>You learn the spell or word.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: OFPEJ5NINFBzzVjj
+        _key: >-
+          !actors.items.effects!largeRedSlime000.HrcvjwZJPn5ErTVi.OFPEJ5NINFBzzVjj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.minorWepEnchantm
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
+        name: Minor Weapon Enchantment
+        system:
+          _sup: CaTTWTstOULxfkrp
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: sight
+            package: ritual
+          duration:
+            dawn: false
+            description: 1 Hour
+            raw: '1'
+            stationary: false
+            unit: hour
+          elements:
+            - flame
+          executionTime: 10 Minutes
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+            effect increases by 1 hour. The overall duration is rounded to the
+            nearest hour.</p>
+          impacts:
+            heightened:
+              duration: 3600
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic
+              damage} and @L[Property:Granting]{grant} a @L[Category:Conjured
+              spells]{conjured} @L[Category:Ray delivery spells]{ray spell} that
+              you know. Except, the spell has the @L[Category:AV0 spells]{AV0}
+              @L[Category:Weapon delivery spells]{weapon delivery} instead, is
+              @L[Keyword:Gifted]{gifted}, and can only be delivered with the
+              enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier
+              1}. If the weapon is @L[Property:Shattered]{shattered}, this
+              enchantment fades.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            raw: '5'
+            unit: ft
+          revealed: true
+          ritual: true
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - weapon
+        type: ability
+    folder: redSlimes0000000
+    img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
+    name: Rank 3 Flame Mage
+    system:
+      _sup: largeRedSlime000
+      archetype: mage
+      className: flameMage
+      classRank: 3
+      competence:
+        raw: 1
+      description: >-
+        <p>Fierce and brazen, these mages are always at war. The arms dealers of
+        the world, their magic is completely focused on destruction and thus
+        they seek to create bigger and better ways to blow things up.
+        Passionate, wild and a bit chaotic, these mages like the mountains and
+        underground spaces. If you are playing a Flame Mage be hot tempered,
+        war-like, ready for battle, and consuming everything.</p>
+      innate: false
+      maxAv: 0
+      statDice:
+        hp:
+          disabled: false
+          faces: 8
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 12
+          number:
+            raw: '1'
+    type: rank
+  - _id: IScLoo8h1rrC5YUm
+    _key: '!actors.items!largeRedSlime000.IScLoo8h1rrC5YUm'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.r4Fla00000000000
+      coreVersion: '13'
       lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!largeRedSlime000.mage000000000000'
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: QEczhwfNaJmkOSOw
+        _key: >-
+          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.QEczhwfNaJmkOSOw
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.ampFlameSpells00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        flags:
+          teriock:
+            category: combat
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/amplify-flame-spells.webp
+        name: Amplify Flame Spells
+        system:
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>When you @L[Core:Attack Interaction]{attack} with
+              @L[Ability:Flame Ray]{Flame Ray} or @L[Ability:Fire Ball]{Fire
+              Ball}, you may target an additional creature or the same creature
+              twice. Any costs you pay must be paid twice and be the same for
+              both @L[Core:Attack Interaction]{attacks} These incur
+              @L[Core:Attack Interaction]{attack penalties} as though they were
+              two separate @L[Category:Attack abilities]{attacks}.</p>
+            fluent: >-
+              <p>You may instead choose up to 1 + @L[Core:Fluency Bonus]{F}
+              additional or repeated targets.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: UCXDnOIkZGTvDLNX
+        _key: >-
+          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.UCXDnOIkZGTvDLNX
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.bombasticCasting
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/bombastic-casting.webp
+        name: Bombastic Casting
+        system:
+          _sup: ZmjFFlMRQIBtml1N
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - loud
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>The triggering @L[Category:Spells]{spell} becomes extremely
+              visible and loud. Visually the @L[Category:Spells]{spell} extends
+              10 feet in all directions from a line between the caster and each
+              of its targets. The spell can be heard up to 600 feet away.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - spell
+          trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+        type: ability
+      - _id: ZmjFFlMRQIBtml1N
+        _key: >-
+          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.ZmjFFlMRQIBtml1N
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.flameDisciplines
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        flags:
+          teriock:
+            category: support
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/flame-disciplines.webp
+        name: Flame Disciplines
+        system:
+          class: flameMage
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
+              @L[Category:Ritual delivery spells]{ritual} @L[Category:Flame
+              element spells]{flame spell} in half the time it would normally
+              take. Additionally, once per long rest, you may cast a
+              @L[Category:Flame element spells]{flame spell} as though you were
+              @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
+              @L[Ability:Bombastic Casting]{Bombastic} and @L[Ability:Sudden
+              Casting]{Sudden} casting styles.</p>
+            fluent: >-
+              <p>You may now use the benefits from [[lookup name]]
+              @L[Core:Fluency Bonus]{F} times per @L[Core:Short Rest]{short
+              rest}.</p>
+            proficient: >-
+              <p>You may now use the benefits from [[lookup name]]
+              @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
+              rest}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            competence:
+              attribute: int
+              value: 0
+        type: ability
+      - _id: l7jDMypW1zTIhmA3
+        _key: >-
+          !actors.items.effects!largeRedSlime000.IScLoo8h1rrC5YUm.l7jDMypW1zTIhmA3
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.suddenCasting000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/sudden-casting.webp
+        name: Sudden Casting
+        system:
+          _sup: ZmjFFlMRQIBtml1N
+          class: flameMage
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - sensory
+          executionTime: r1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You cast a @L[Category:Single action spells]{single action
+              spell} that the triggering creature is moving out of sight or out
+              of range of. The triggering creature must be within range of the
+              spell when it triggers and at least one of the targets of the
+              @L[Category:Single action spells]{spell} you cast.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - spell
+          trigger: >-
+            <p>Another creatures would move out of sight or out of range of a
+            @L[Category:Single action spells]{single action spell} you could
+            cast.</p>
+        type: ability
+    folder: redSlimes0000000
+    img: systems/teriock/src/icons/ranks/rank-4-flame-mage.webp
+    name: Rank 4 Flame Mage
+    system:
+      _sup: largeRedSlime000
+      archetype: mage
+      className: flameMage
+      classRank: 4
+      competence:
+        raw: 1
+      description: >-
+        <p>Fierce and brazen, these mages are always at war. The arms dealers of
+        the world, their magic is completely focused on destruction and thus
+        they seek to create bigger and better ways to blow things up.
+        Passionate, wild and a bit chaotic, these mages like the mountains and
+        underground spaces. If you are playing a Flame Mage be hot tempered,
+        war-like, ready for battle, and consuming everything.</p>
+      innate: false
+      maxAv: 0
+      statDice:
+        hp:
+          disabled: false
+          faces: 8
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 12
+          number:
+            raw: '1'
+    type: rank
+name: Large Red Slime
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 2
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Large Red Slime
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/large-red-slime.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 2
 system:
-  hp:
-    value: 56
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 28
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '7'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: SnpAWDHmUI941IIy
-    blocker: SnpAWDHmUI941IIy
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: largeRedSlime000
-folder: vxQoY3VTQlOY1xHv
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!largeRedSlime000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 56
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 28
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '7'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: SnpAWDHmUI941IIy
+    blocker: SnpAWDHmUI941IIy
+type: creature

@@ -1,79 +1,25 @@
 _id: skunkFamiliar000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Skunk Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.skunk00000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!skunkFamiliar000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: skunkTamer000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Skunk Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Skunk]{skunk}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: JMtK1yCnqAhbEEZV
+    _key: '!items.effects!skunkFamiliar000.JMtK1yCnqAhbEEZV'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.disableRay000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!skunkFamiliar000.skunkTamer000000'
-  - name: Disable Ray
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/disable-ray.webp
+    name: Disable Ray
     system:
-      powerSources:
-        - spiritual
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: missile
-        package: ray
-      targets:
-        - creature
-      duration:
-        unit: minute
-        quantity: 1
-        description: 1 Minute
-        stationary: false
-      range:
-        unit: ft
-        raw: '60'
-      overview:
-        proficient: >-
-          <p>This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.</p>
-      results:
-        hit: >-
-          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.</p>
-      piercing:
-        raw: 1
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
       class: thief
+      competence:
+        raw: 0
       costs:
         mp:
           type: variable
@@ -84,59 +30,96 @@ effects:
               triggering @L[Category:Abilities]{ability} was used on you or some
               @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
               It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        description: 1 Minute
+        quantity: 1
+        stationary: false
+        unit: minute
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      requirements: <p>You may only target the triggering creature.</p>
+      executionTime: r1
       expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: attack
+      maneuver: reactive
+      overview:
+        proficient: >-
+          <p>This also makes the effect of that @L[Category:Abilities]{ability}
+          @L[Core:Fizzles]{fizzle}.</p>
+      piercing:
+        raw: 1
+      powerSources:
+        - spiritual
+      range:
+        raw: '60'
+        unit: ft
+      requirements: <p>You may only target the triggering creature.</p>
+      results:
+        hit: >-
+          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
       trigger: >-
         <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
         @L[Category:Active abilities]{active} or @L[Category:Reactive
         abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
         against a different creature or some @L[Category:Equipment]{equipment}
         that different creature @L[Keyword:Bearing]{bares}.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: JMtK1yCnqAhbEEZV
+    type: ability
+  - _id: WzJUOYpyjt2Hr9w7
+    _key: '!items.effects!skunkFamiliar000.WzJUOYpyjt2Hr9w7'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.disableRay000000
+      compendiumSource: Compendium.teriock.abilities.Item.inedible00000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!skunkFamiliar000.JMtK1yCnqAhbEEZV'
-  - name: Inedible
-    type: ability
+    img: systems/teriock/src/icons/abilities/inedible.webp
+    name: Inedible
     system:
+      competence:
+        raw: 0
       delivery:
         base: self
       duration:
-        unit: noLimit
+        description: Always Active
         quantity: 0
         stationary: false
-        description: Always Active
+        unit: noLimit
       effectTypes:
         - resistance
       executionTime: passive
@@ -164,23 +147,40 @@ effects:
         raw: 0
       powerSources:
         - martial
+      revealed: true
       targets:
         - self
-      competence:
-        raw: 0
-      revealed: true
-    _id: WzJUOYpyjt2Hr9w7
-    img: systems/teriock/src/icons/abilities/inedible.webp
+    type: ability
+  - _id: skunkTamer000000
+    _key: '!items.effects!skunkFamiliar000.skunkTamer000000'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.inedible00000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!skunkFamiliar000.WzJUOYpyjt2Hr9w7'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!skunkFamiliar000'
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Skunk Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Skunk]{skunk}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Skunk Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.skunk00000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

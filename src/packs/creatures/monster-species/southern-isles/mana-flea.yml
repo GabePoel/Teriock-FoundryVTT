@@ -1,129 +1,64 @@
-name: Mana Flea
-type: creature
+_id: manaFlea00000000
+_key: '!actors!manaFlea00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: southernIsles000
 img: systems/teriock/src/icons/creatures/mana-flea.webp
-prototypeToken:
-  name: Mana Flea
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/mana-flea.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 0.5
-  height: 0.5
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: manaFlea00000000
-    folder: JWyDfjLkE2E9S902
-    name: Mana Flea
-    type: species
-    img: systems/teriock/src/icons/creatures/mana-flea.webp
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>These are tiny relatives to the infamous
-        @L[Creature:Monsquito]{monsquito}. After feeding, they look like tiny
-        ticks. They feed off @L[Core:Hit Points and Mana Points]{MP} and are
-        relatively harmless at first. After four days, they fall off their
-        victims to lay their eggs which will hatch in 24 hours. Mana fleas can
-        have anywhere from one hundred to two hundred offspring. If a party
-        becomes infested by these critters, there can soon be an epidemic of
-        @L[Core:Hit Points and Mana Points]{MP} loss.</p>
-      statDice:
-        hp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '1'
-        mp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '1'
-      appearance: <p>Tiny colorful ticks.</p>
-      br: 2
-      size:
-        enabled: true
-        value: 0.25
-      traits:
-        - animal
+    _key: '!actors.items!manaFlea00000000.manaFlea00000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.manaFlea00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Attack Resistance
-        type: ability
+      - _id: yBu3jRUk0cDVpG2y
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.yBu3jRUk0cDVpG2y
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.atkRsc0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/attack-resistance.webp
+        name: Attack Resistance
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
           effectTypes:
             - resistance
           executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: special
           grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.resistances.other
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Non-critical Attacks
           interaction: manifest
           maneuver: passive
           overview:
@@ -134,151 +69,174 @@ items:
             raw: 0
           powerSources:
             - magical
-          targets:
-            - self
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.other
-                  target: Actor
-                  qualifier: '1'
-                  value: Non-critical Attacks
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
           range:
             unit: self
-        _id: yBu3jRUk0cDVpG2y
-        img: systems/teriock/src/icons/abilities/attack-resistance.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.atkRsc0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.yBu3jRUk0cDVpG2y
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
+        type: ability
+      - _id: iFIt4UugFU8ZFZS9
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.iFIt4UugFU8ZFZS9
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: int
               value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: iFIt4UugFU8ZFZS9
+        type: ability
+      - _id: ceh0Gqx53RFCEA08
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.ceh0Gqx53RFCEA08
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          compendiumSource: Compendium.teriock.abilities.Item.elusive000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.iFIt4UugFU8ZFZS9
-      - name: Elusive
-        type: ability
         img: systems/teriock/src/icons/abilities/elusive.webp
+        name: Elusive
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: special
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: snk
               value: 4
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: ceh0Gqx53RFCEA08
+        type: ability
+      - _id: 6KQMX2BdSKbxVpvG
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.6KQMX2BdSKbxVpvG
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.elusive000000000
+          compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.ceh0Gqx53RFCEA08
-      - name: Leaping
-        type: ability
         img: systems/teriock/src/icons/abilities/leaping.webp
+        name: Leaping
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          class: assassin
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.leapVertical
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '1'
+                - key: system.speedAdjustments.leapHorizontal
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+            proficient:
+              changes:
+                - key: system.speedAdjustments.leapVertical
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
+                - key: system.speedAdjustments.leapHorizontal
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You vertically leap at @L[Core:Movement Speed]{quarter speed}
@@ -289,87 +247,60 @@ items:
               speed}.</p>
           piercing:
             raw: 0
-          skill: true
-          standard: true
-          class: assassin
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.leapVertical
-                  target: Actor
-                  qualifier: '1'
-                  value: '1'
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.leapHorizontal
-                  target: Actor
-                  qualifier: '1'
-                  value: '2'
-            proficient:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.leapVertical
-                  target: Actor
-                  qualifier: '1'
-                  value: '2'
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.leapHorizontal
-                  target: Actor
-                  qualifier: '1'
-                  value: '3'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - martial
           range:
             unit: self
-        _id: 6KQMX2BdSKbxVpvG
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: ZkXU9KAfYHe9MDAd
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.ZkXU9KAfYHe9MDAd
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
+          compendiumSource: Compendium.teriock.abilities.Item.manaFleaInfest00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.6KQMX2BdSKbxVpvG
-      - name: Mana Flea Infest
-        type: ability
+        img: systems/teriock/src/icons/abilities/mana-flea-infest.webp
+        name: Mana Flea Infest
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: unlimited
-            stationary: false
-            description: No Limit
             dawn: false
+            description: No Limit
             raw: '0'
+            stationary: false
+            unit: unlimited
           effectTypes:
             - draining
           executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: normal
           grantOnly: false
+          impacts:
+            base:
+              startStatuses:
+                - paralyzed
           interaction: attack
           maneuver: active
           piercing:
             raw: 0
           powerSources:
             - martial
+          range:
+            unit: self
           results:
             hit: >-
               <p>You bury yourself into the body of the creature you're
@@ -385,190 +316,188 @@ items:
               While infested in someone, you cannot be target by
               @L[Category:Attack abilities]{attacks}, but you are
               @L[Condition:Paralyzed]{paralyzed}.</p>
+          revealed: true
           targets:
             - creature
-          impacts:
-            base:
-              startStatuses:
-                - paralyzed
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          range:
-            unit: self
-        _id: ZkXU9KAfYHe9MDAd
-        img: systems/teriock/src/icons/abilities/mana-flea-infest.webp
+        type: ability
+      - _id: 5hSTig9DZWgtTlAn
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.5hSTig9DZWgtTlAn
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.manaFleaInfest00
+          compendiumSource: Compendium.teriock.abilities.Item.noStrength000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.ZkXU9KAfYHe9MDAd
-      - name: No Strength
-        type: ability
         img: systems/teriock/src/icons/abilities/no-strength.webp
+        name: No Strength
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: flaw
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: str
               value: -3
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 5hSTig9DZWgtTlAn
+        type: ability
+      - _id: M3dcS5l00GKTtQUq
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.M3dcS5l00GKTtQUq
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.noStrength000000
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.5hSTig9DZWgtTlAn
-      - name: Normal Movement
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: mov
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: M3dcS5l00GKTtQUq
+        type: ability
+      - _id: 0qUiFOrfhhByRFrX
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.0qUiFOrfhhByRFrX
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.M3dcS5l00GKTtQUq
-      - name: Normal Perception
-        type: ability
         img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           piercing:
             raw: 0
-          form: normal
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
           upgrades:
             score:
               attribute: per
               value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 0qUiFOrfhhByRFrX
+        type: ability
+      - _id: lLLstsdzgPUydgqc
+        _key: >-
+          !actors.items.effects!manaFlea00000000.manaFlea00000000.lLLstsdzgPUydgqc
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          compendiumSource: Compendium.teriock.abilities.Item.verySlowManaDrai
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.0qUiFOrfhhByRFrX
-      - name: Very Slow Mana Drain
-        type: ability
+        img: systems/teriock/src/icons/abilities/very-slow-mana-drain.webp
+        name: Very Slow Mana Drain
         system:
+          competence:
+            raw: 0
           delivery:
             base: bite
           duration:
-            unit: instant
-            stationary: false
-            description: Instant
             dawn: false
+            description: Instant
             raw: '0'
+            stationary: false
+            unit: instant
           effectTypes:
             - revitalization
             - draining
           executionTime: Short Rest
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: normal
           grantOnly: false
+          impacts:
+            base:
+              rolls:
+                drain: 1d4[mana]
           interaction: manifest
           maneuver: slow
           overview:
@@ -584,52 +513,129 @@ items:
           powerSources:
             - martial
           range:
-            unit: ft
             raw: Your Bite's Range
+            unit: ft
+          revealed: true
           targets:
             - creature
-          impacts:
-            base:
-              rolls:
-                drain: 1d4[mana]
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-        _id: lLLstsdzgPUydgqc
-        img: systems/teriock/src/icons/abilities/very-slow-mana-drain.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.verySlowManaDrai
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.manaFlea00000000.lLLstsdzgPUydgqc
+        type: ability
+    folder: southernIsles000
+    img: systems/teriock/src/icons/creatures/mana-flea.webp
+    name: Mana Flea
+    system:
+      appearance: <p>Tiny colorful ticks.</p>
+      br: 2
+      competence:
+        raw: 1
+      description: >-
+        <p>These are tiny relatives to the infamous
+        @L[Creature:Monsquito]{monsquito}. After feeding, they look like tiny
+        ticks. They feed off @L[Core:Hit Points and Mana Points]{MP} and are
+        relatively harmless at first. After four days, they fall off their
+        victims to lay their eggs which will hatch in 24 hours. Mana fleas can
+        have anywhere from one hundred to two hundred offspring. If a party
+        becomes infested by these critters, there can soon be an epidemic of
+        @L[Core:Hit Points and Mana Points]{MP} loss.</p>
+      size:
+        enabled: true
+        value: 0.25
+      statDice:
+        hp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '1'
+      traits:
+        - animal
+    type: species
+  - _id: pln5xdDMAcmprQpk
+    _key: '!actors.items!manaFlea00000000.pln5xdDMAcmprQpk'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.manaFlea00000000
+      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!manaFlea00000000.manaFlea00000000'
-  - name: Mouth
-    type: body
-    _id: pln5xdDMAcmprQpk
+    effects:
+      - _id: 1keJAxX1vkfTL8Wl
+        _key: >-
+          !actors.items.effects!manaFlea00000000.pln5xdDMAcmprQpk.1keJAxX1vkfTL8Wl
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: cj70nNvBKfT3EQ8P
+        _key: >-
+          !actors.items.effects!manaFlea00000000.pln5xdDMAcmprQpk.cj70nNvBKfT3EQ8P
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 43UnM2Fnf4EpPLFE
+        _key: >-
+          !actors.items.effects!manaFlea00000000.pln5xdDMAcmprQpk.43UnM2Fnf4EpPLFE
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.small00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: southernIsles000
     img: icons/creatures/abilities/mouth-teeth-human.webp
+    name: Mouth
     system:
+      _sup: manaFlea00000000
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
       damage:
         base:
           raw: '1'
       fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: manaFlea00000000
-      attackPenalty:
-        raw: '-3'
       range:
         long:
           unit: self
@@ -638,118 +644,113 @@ items:
         short:
           unit: self
       vitals: false
-    effects:
-      - name: Bashing
-        type: property
-        system:
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 1keJAxX1vkfTL8Wl
-        img: systems/teriock/src/icons/properties/bashing.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.bashing000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.pln5xdDMAcmprQpk.1keJAxX1vkfTL8Wl
-      - name: Biting
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: cj70nNvBKfT3EQ8P
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.pln5xdDMAcmprQpk.cj70nNvBKfT3EQ8P
-      - name: Small
-        type: property
-        system:
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: 43UnM2Fnf4EpPLFE
-        img: systems/teriock/src/icons/properties/small.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.small00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!manaFlea00000000.pln5xdDMAcmprQpk.43UnM2Fnf4EpPLFE
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.mouth00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!manaFlea00000000.pln5xdDMAcmprQpk'
+    type: body
+name: Mana Flea
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 0.5
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Mana Flea
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/mana-flea.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 0.5
 system:
-  hp:
-    value: 6
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 6
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '0.25'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: pln5xdDMAcmprQpk
-    blocker: pln5xdDMAcmprQpk
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: manaFlea00000000
-folder: 87J1Cv81XIW9AuHz
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!manaFlea00000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 6
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 6
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '0.25'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: pln5xdDMAcmprQpk
+    blocker: pln5xdDMAcmprQpk
+type: creature

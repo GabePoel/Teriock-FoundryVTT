@@ -1,34 +1,42 @@
 _id: spiritBury000000
+_key: '!items!spiritBury000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Spirit Bury
-    type: ability
+  - _id: spiritBury000000
+    _key: '!items.effects!spiritBury000000.spiritBury000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
-    _id: spiritBury000000
+    name: Spirit Bury
     system:
+      class: necromancer
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
         somatic: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
+        verbal: true
       delivery:
         base: hand
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       elements:
         - necromancy
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -36,10 +44,17 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+        proficient:
+          duration: 600
       interaction: attack
       maneuver: active
       overview:
         proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -47,29 +62,13 @@ effects:
       requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
       results:
         hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - creature
-      impacts:
-        proficient:
-          duration: 600
-        heightened:
-          duration: 3600
-      class: necromancer
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!spiritBury000000.spiritBury000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/spirit-bury.webp
 name: Spirit Bury
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!spiritBury000000'

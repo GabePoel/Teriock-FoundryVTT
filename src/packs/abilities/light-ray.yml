@@ -1,73 +1,50 @@
 _id: lightRay00000000
+_key: '!items!lightRay00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Light Ray
-    type: ability
+  - _id: lightRay00000000
+    _key: '!items.effects!lightRay00000000.lightRay00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/light-ray.webp
-    _id: lightRay00000000
+    name: Light Ray
     system:
+      class: lifeMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 1
-      revealed: true
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: missile
         package: ray
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       elements:
         - life
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}\_as well.</p>"
-      interaction: attack
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '60'
-        unit: ft
-      results:
-        hit: >-
-          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
-          choice until the end of their next @L[Core:Turns]{turn}.</p>
-        critHit: >-
-          <p>If you want, target is @L[Condition:Lighted]{lighted} until the end
-          of your next @L[Core:Turns]{turn}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
       impacts:
         base:
           expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
+            changeOnCrit: true
             crit:
               combat:
-                who:
-                  type: executor
                 what:
                   roll: 2d4kh1
                   threshold: 4
@@ -76,8 +53,21 @@ effects:
                   skip: 0
                   time: end
                   trigger: turn
-            changeOnCrit: true
+                who:
+                  type: executor
             doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
           statuses:
             - lighted
         heightened:
@@ -85,19 +75,29 @@ effects:
             damage: 1d4[magic holy]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      class: lifeMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!lightRay00000000.lightRay00000000'
+          Compendium_teriock_execution_Macro_genericLightPreE: preExecution
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        critHit: >-
+          <p>If you want, target is @L[Condition:Lighted]{lighted} until the end
+          of your next @L[Core:Turns]{turn}.</p>
+        hit: >-
+          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
+          choice until the end of their next @L[Core:Turns]{turn}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 img: systems/teriock/src/icons/abilities/light-ray.webp
 name: Light Ray
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!lightRay00000000'

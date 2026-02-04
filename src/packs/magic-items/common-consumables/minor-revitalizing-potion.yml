@@ -1,131 +1,44 @@
-name: Minor Revitalizing Potion
-type: equipment
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      raw: '0'
-  weight:
-    raw: '1'
-  range:
-    long:
-      unit: melee
-    short:
-      unit: melee
-    melee: true
-    ranged: false
-  equipmentClasses:
-    - containers
-    - knickknacks
-  minStr:
-    raw: '-3'
-  powerLevel: enchanted
-  attackPenalty:
-    raw: '-3'
-  competence:
-    raw: 0
-  vitals: false
-  storage:
-    enabled: false
-    weightMultiplier: '1'
-img: systems/teriock/src/icons/consumables/minor-revitalizing-potion.webp
+_id: minorRngPtn00000
+_key: '!items!minorRngPtn00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-      competence:
-        raw: 0
-      revealed: true
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: VO6n5Tlffdqtf7Qu
+    _key: '!items.effects!minorRngPtn00000.VO6n5Tlffdqtf7Qu'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.dkMinorRngPtn000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!1mW4RZV0DqrbiqO2.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-      competence:
-        raw: 0
-      revealed: true
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!1mW4RZV0DqrbiqO2.VQDFXr0oJQZ7Waxe'
-  - name: Fragile
-    type: property
-    system:
-      description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
-      competence:
-        raw: 0
-      revealed: true
-    _id: Z8Q21X7QboeySzUT
-    img: systems/teriock/src/icons/properties/fragile.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!1mW4RZV0DqrbiqO2.Z8Q21X7QboeySzUT'
-  - name: Drink Minor Revitalizing Potion
-    type: ability
-    _id: VO6n5Tlffdqtf7Qu
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/drink-minor-revitalizing-potion.webp
+    name: Drink Minor Revitalizing Potion
     system:
       competence:
         raw: 0
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - revitalization
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -135,6 +48,8 @@ effects:
         base: >-
           <p>You @L[Core:Revitalizing]{revitalizes} without consuming
           @L[Core:Hit Points and Mana Points]{mana dice}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -144,50 +59,67 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - creature
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.dkMinorRevitaliz
-    _key: '!items.effects!1mW4RZV0DqrbiqO2.VO6n5Tlffdqtf7Qu'
-  - name: Pour Minor Revitalizing Potion
     type: ability
-    _id: 893T7ayYW3OD8GEw
-    img: systems/teriock/src/icons/abilities/pour-minor-revitalizing-potion.webp
+  - _id: Z8Q21X7QboeySzUT
+    _key: '!items.effects!minorRngPtn00000.Z8Q21X7QboeySzUT'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
       competence:
         raw: 0
-      piercing:
-        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
+      form: flaw
       revealed: true
+    type: property
+  - _id: 893T7ayYW3OD8GEw
+    _key: '!items.effects!minorRngPtn00000.893T7ayYW3OD8GEw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prMinorRngPtn000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/pour-minor-revitalizing-potion.webp
+    name: Pour Minor Revitalizing Potion
+    system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: item
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - revitalization
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -197,6 +129,8 @@ effects:
         base: >-
           <p>The target @L[Core:Revitalizing]{revitalizes} without consuming
           @L[Core:Hit Points and Mana Points]{mana dice}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -206,25 +140,78 @@ effects:
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - self
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+    type: ability
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!minorRngPtn00000.x6sjcsIVaOkVZOFD'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.prMinorRevitaliz
-    _key: '!items.effects!1mW4RZV0DqrbiqO2.893T7ayYW3OD8GEw'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.11
-  lastModifiedBy: teriockBuilder00
-folder: EAXfBtYX8GFp5gBt
-_id: 1mW4RZV0DqrbiqO2
-_key: '!items!1mW4RZV0DqrbiqO2'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!minorRngPtn00000.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/minor-revitalizing-potion.webp
+name: Minor Revitalizing Potion
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - containers
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

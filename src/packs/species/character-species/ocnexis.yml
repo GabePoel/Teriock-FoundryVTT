@@ -1,58 +1,56 @@
 _id: ocnexis000000000
-folder: mvJumfuWYLiylnji
-name: Ocnexis
-type: species
-img: systems/teriock/src/icons/creatures/ocnexis.webp
-system:
-  competence:
-    raw: 1
-  description: >-
-    <p>Because of their tentacles, [[lookup name style=lc]]es walk like
-    @L[Category:Spiders]{spiders}. These creatures are thought to originally be
-    from another world.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 10
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 6
-      number:
-        raw: '1'
-  adult: 100
-  appearance: >-
-    <p>Oxnexises have the torso of a purple-skinned @L[Category:Elves]{elf} with
-    a slightly enlarged head, no hair, and the legs of an octopus.</p>
-  br: 1
-  size:
-    enabled: true
-    value: 4
-  traits:
-    - humanoid
-    - partialHumanoid
+_key: '!items!ocnexis000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Hide
-    type: ability
+  - _id: 6cBlo93uH5Eu0p2t
+    _key: '!items.effects!ocnexis000000000.6cBlo93uH5Eu0p2t'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      class: thief
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: instant
-        description: Instant
         dawn: false
-        stationary: false
+        description: Instant
         raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
+      interaction: manifest
+      limitation: <p>While wearing no @L[Category:Armor]{armor} only.</p>
+      maneuver: active
       overview:
         base: >-
           <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
@@ -60,38 +58,31 @@ effects:
           @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
           @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
           your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
-        proficient: >-
-          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
-          (if it's greater than your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}).</p>
         fluent: >-
           <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
           (if it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      class: thief
+      powerSources:
+        - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
         @L[Core:Game Master]{GM} determines is appropriate for being
         @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
         these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - hidden
-          rolls:
-            hide: 1d20 + (2 * @snk)
-        proficient:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @p
-        fluent:
-          rolls:
-            hide: 1d20 + (2 * @snk) + @f
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
       upgrades:
         competence:
           attribute: snk
@@ -99,358 +90,353 @@ effects:
         score:
           attribute: snk
           value: 2
+    type: ability
+  - _id: HtoK3qa2bEe0nZMg
+    _key: '!items.effects!ocnexis000000000.HtoK3qa2bEe0nZMg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.irregularlyShape
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/irregularly-shaped.webp
+    name: Irregularly Shaped
+    system:
       competence:
         raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: <p>While wearing no @L[Category:Armor]{armor} only.</p>
-      range:
-        unit: self
-    _id: 6cBlo93uH5Eu0p2t
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.6cBlo93uH5Eu0p2t'
-  - name: Irregularly Shaped
-    type: ability
-    img: systems/teriock/src/icons/abilities/irregularly-shaped.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>@L[Category:Armor]{Armor} you wear must be custom-made to fit
           you.</p>
       piercing:
         raw: 0
-      form: flaw
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: HtoK3qa2bEe0nZMg
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.irregularlyShape
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.HtoK3qa2bEe0nZMg'
-  - name: Normal Intelligence
-    type: ability
-    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
+    type: ability
+  - _id: M29XqRvOkpdjHOQh
+    _key: '!items.effects!ocnexis000000000.M29XqRvOkpdjHOQh'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+    name: Normal Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: int
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: M29XqRvOkpdjHOQh
+    type: ability
+  - _id: HPCt4PN7KDXW16Nh
+    _key: '!items.effects!ocnexis000000000.HPCt4PN7KDXW16Nh'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalIntelligen
+      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.M29XqRvOkpdjHOQh'
-  - name: Normal Movement
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: mov
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: HPCt4PN7KDXW16Nh
+    type: ability
+  - _id: 9O75AAFiJrSN9qSw
+    _key: '!items.effects!ocnexis000000000.9O75AAFiJrSN9qSw'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.HPCt4PN7KDXW16Nh'
-  - name: Normal Perception
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: per
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: 9O75AAFiJrSN9qSw
+    type: ability
+  - _id: AATMSYIvV2Uhq4L2
+    _key: '!items.effects!ocnexis000000000.AATMSYIvV2Uhq4L2'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.9O75AAFiJrSN9qSw'
-  - name: Normal Strength
-    type: ability
     img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       piercing:
         raw: 0
-      form: normal
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
       upgrades:
         score:
           attribute: str
           value: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      range:
-        unit: self
-    _id: AATMSYIvV2Uhq4L2
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.normalStrength00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.AATMSYIvV2Uhq4L2'
-  - name: Snare
     type: ability
-    img: systems/teriock/src/icons/abilities/snare.webp
-    system:
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        package: strike
-      targets:
-        - leg
-      duration:
-        unit: unlimited
-        description: No Limit
-        dawn: false
-        stationary: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      results:
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: ranger
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      form: normal
-      impacts:
-        base:
-          statuses:
-            - snared
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 1
-            changeOnCrit: true
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      grantOnly: false
-      limitation: >-
-        <p>With @L[Body:Tentacle]{tentacles} only. Cannot go more than 10 feet
-        away from someone they have @L[Condition:Snared]{snared}.</p>
-    _id: GjTgiUBgHpLXUZY2
+  - _id: GjTgiUBgHpLXUZY2
+    _key: '!items.effects!ocnexis000000000.GjTgiUBgHpLXUZY2'
     _stats:
       compendiumSource: Compendium.teriock.abilities.Item.snare00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.GjTgiUBgHpLXUZY2'
-  - name: Stealth
-    type: ability
-    img: systems/teriock/src/icons/abilities/stealth.webp
+    img: systems/teriock/src/icons/abilities/snare.webp
+    name: Snare
     system:
+      class: ranger
+      competence:
+        raw: 0
+      delivery:
+        base: weapon
+        package: strike
+      duration:
+        dawn: false
+        description: No Limit
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - snared
+      interaction: attack
+      limitation: >-
+        <p>With @L[Body:Tentacle]{tentacles} only. Cannot go more than 10 feet
+        away from someone they have @L[Condition:Snared]{snared}.</p>
+      maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - leg
+    type: ability
+  - _id: f9YyvMfXEP1U0C5r
+    _key: '!items.effects!ocnexis000000000.f9YyvMfXEP1U0C5r'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.stealth000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/stealth.webp
+    name: Stealth
+    system:
+      class: thief
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: <p>If @L[Core:Leveling Up]{level} 6 or greater.</p>
+      maneuver: passive
       overview:
         base: >-
           <p>You crawl at @L[Core:Movement Speed]{half speed} and can
@@ -465,10 +451,15 @@ effects:
           @L[Condition:Hidden]{hidden}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: thief
-      form: normal
+      targets:
+        - self
       upgrades:
         competence:
           attribute: snk
@@ -476,83 +467,92 @@ effects:
         score:
           attribute: snk
           value: 3
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
+    type: ability
+  - _id: a30HHP0mLVdpzva6
+    _key: '!items.effects!ocnexis000000000.a30HHP0mLVdpzva6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/thin-soul.webp
+    name: Thin Soul
+    system:
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      limitation: <p>If @L[Core:Leveling Up]{level} 6 or greater.</p>
-      range:
-        unit: self
-    _id: f9YyvMfXEP1U0C5r
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.stealth000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.f9YyvMfXEP1U0C5r'
-  - name: Thin Soul
-    type: ability
-    img: systems/teriock/src/icons/abilities/thin-soul.webp
-    system:
-      powerSources:
-        - unknown
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: unlimited
+        dawn: false
         description: Always Active
         raw: '0'
-        dawn: false
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: flaw
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.deathBag.pull
+              mode: 4
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '15'
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You pull an additional 5 stones from the @L[Core:Death Bag]{death
           bag}.</p>
       piercing:
         raw: 0
-      form: flaw
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 5
-              time: normal
-              key: system.deathBag.pull
-              target: Actor
-              qualifier: '1'
-              value: '15'
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
+      powerSources:
+        - unknown
       range:
         unit: self
-    _id: a30HHP0mLVdpzva6
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.thinSoul00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ocnexis000000000.a30HHP0mLVdpzva6'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!ocnexis000000000'
+      revealed: true
+      targets:
+        - self
+    type: ability
+folder: characterSpecies
+img: systems/teriock/src/icons/creatures/ocnexis.webp
+name: Ocnexis
+system:
+  adult: 100
+  appearance: >-
+    <p>Oxnexises have the torso of a purple-skinned @L[Category:Elves]{elf} with
+    a slightly enlarged head, no hair, and the legs of an octopus.</p>
+  br: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>Because of their tentacles, [[lookup name style=lc]]es walk like
+    @L[Category:Spiders]{spiders}. These creatures are thought to originally be
+    from another world.</p>
+  size:
+    enabled: true
+    value: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '1'
+  traits:
+    - humanoid
+    - partialHumanoid
+type: species

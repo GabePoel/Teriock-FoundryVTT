@@ -1,24 +1,32 @@
 _id: tumble0000000000
+_key: '!items!tumble0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Tumble
-    type: ability
+  - _id: tumble0000000000
+    _key: '!items.effects!tumble0000000000.tumble0000000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/tumble.webp
-    _id: tumble0000000000
+    name: Tumble
     system:
+      class: veteran
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - movement
       endCondition: >-
@@ -26,12 +34,31 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: executor
+          rolls:
+            endCon: 2d4
       interaction: manifest
       maneuver: reactive
       overview:
@@ -46,47 +73,19 @@ effects:
           were originally dealt 15 @L[Damage:Fire]{fire damage} and 3
           @L[Damage:Holy]{holy damage} then you would only take 7
           @L[Damage:Fire]{fire damage} and 1 @L[Damage:Holy]{holy damage}.</div>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
         - self
       trigger: <p>You would take @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: true
-          rolls:
-            endCon: 2d4
-      class: veteran
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!tumble0000000000.tumble0000000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/tumble.webp
 name: Tumble
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!tumble0000000000'

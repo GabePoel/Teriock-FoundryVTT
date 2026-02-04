@@ -1,266 +1,47 @@
-_id: rank3Duelist0000
-folder: duelist000000000
-name: Rank 3 Duelist
-system:
-  archetype: warrior
-  className: duelist
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>Honor-bound and honest to the core, Duelists are often judges and
-    referees for duels as well as devoted warriors. Duelists prize the honor of
-    their family above any sort of personal gain and thus strive for excellence
-    in everything that they do. A true Duelist wins the battle before it has
-    begun. Strategy and personal perfection are the Duelist's way. If you are a
-    Duelist, be calm, focused, well spoken and confident in yourself.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
-  innate: false
-  maxAv: 4
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-duelist.webp
+_id: r3Due00000000000
+_key: '!items!r3Due00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Duel Swap
-    type: ability
-    img: systems/teriock/src/icons/abilities/duel-swap.webp
-    system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
-      range:
-        unit: ft
-        raw: '15'
-      overview:
-        base: >-
-          <p>The target leaves their @L[Condition:Dueling]{duel} and you enter
-          in their place. This does not end the @L[Condition:Dueling]{duel} and
-          the target is not considered to have "lost" or "forfeited". Any
-          @L[Category:Duel modifying effects]{duel modifying effects} remain in
-          place.</p><div class="note"><b>Note:</b> This ability costs no
-          @L[Core:MP]{MP} to use on creatures you have sworn @L[Ability:Clan
-          Fealty]{Clan Fealty} with.</div>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: duelist
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      requirements: >-
-        <p>Target must be an allied creature in a @L[Condition:Dueling]{duel}
-        within range.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - dueling
-          endStatuses:
-            - dueling
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: yCLjgtUua4ROR3qi
+  - _id: QxDyN7VLtCaq1ppD
+    _key: '!items.effects!r3Due00000000000.QxDyN7VLtCaq1ppD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.clanFealty000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
-        category: combat
+        category: support
         defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.duelSwap00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Duelist0000.yCLjgtUua4ROR3qi'
-  - name: Final Fury
-    type: ability
-    img: systems/teriock/src/icons/abilities/final-fury.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          absent:
-            - down
-        description: While Up
-        stationary: false
-      overview:
-        base: >-
-          <p>While @L[Condition:Defying Death]{defying death}, your
-          @L[Category:Weapon delivery abilities]{weapon} @L[Category:Attack
-          abilities]{attacks} are @L[Keyword:Boosted]{boosted} and
-          @L[Keyword:UB]{UB}. When you stop @L[Condition:Defying Death]{defying
-          death}, you @L[Condition:Dead]{die} and your body is
-          @L[Condition:Ruined]{ruined}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: duelist
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          startStatuses:
-            - ruined
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: InKLgMMWFVEQTpGk
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.finalFury0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Duelist0000.InKLgMMWFVEQTpGk'
-  - name: Rebuke
-    type: ability
-    img: systems/teriock/src/icons/abilities/rebuke.webp
-    system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      duration:
-        unit: second
-        quantity: 5
-        description: 5 Seconds
-        stationary: false
-      range:
-        unit: ft
-        raw: '90'
-      overview:
-        base: >-
-          <p>The triggering creature takes [[/damage 1d6[spiritual]]]
-          @L[Core:Damage]{damage} and is @L[Condition:Lighted]{lighted} towards
-          a creature of your choice.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: duelist
-      endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
-      expansionSaveAttribute: mov
-      trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[spiritual]
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: executor
-                what:
-                  type: forced
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-        macros:
-          Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: sNb0MpCuNQOiPQM4
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.rebuke0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Duelist0000.sNb0MpCuNQOiPQM4'
-  - name: Clan Fealty
-    type: ability
     img: systems/teriock/src/icons/abilities/clan-fealty.webp
+    name: Clan Fealty
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: duelist
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You may declare "fealty" 1 group or individual. You are said to
@@ -278,118 +59,194 @@ effects:
           @L[Keyword:Warded]{warded} on those you have declared fealty to and
           costs one less @L[Core:Hit Points and Mana Points]{MP} per participant
           you've declared fealty to.</li></ul><div style="padding:0em"></div>
-        proficient: >-
-          <p>You may declare "fealty" to up to @L[Core:Proficiency Bonus]{P}
-          groups or individuals.</p>
         fluent: >-
           <p>You may declare "fealty" to up to @L[Core:Fluency Bonus]{F} groups
           or individuals.</p>
+        proficient: >-
+          <p>You may declare "fealty" to up to @L[Core:Proficiency Bonus]{P}
+          groups or individuals.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: duelist
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: QxDyN7VLtCaq1ppD
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.clanFealty000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Duelist0000.QxDyN7VLtCaq1ppD'
-  - name: Iaido
-    type: ability
-    img: systems/teriock/src/icons/abilities/iaido.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
       targets:
         - self
+    type: ability
+  - _id: yCLjgtUua4ROR3qi
+    _key: '!items.effects!r3Due00000000000.yCLjgtUua4ROR3qi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.duelSwap00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/duel-swap.webp
+    name: Duel Swap
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: sight
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          endStatuses:
+            - dueling
+          startStatuses:
+            - dueling
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>The target leaves their @L[Condition:Dueling]{duel} and you enter
+          in their place. This does not end the @L[Condition:Dueling]{duel} and
+          the target is not considered to have "lost" or "forfeited". Any
+          @L[Category:Duel modifying effects]{duel modifying effects} remain in
+          place.</p><div class="note"><b>Note:</b> This ability costs no
+          @L[Core:MP]{MP} to use on creatures you have sworn @L[Ability:Clan
+          Fealty]{Clan Fealty} with.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '15'
+        unit: ft
+      requirements: >-
+        <p>Target must be an allied creature in a @L[Condition:Dueling]{duel}
+        within range.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: InKLgMMWFVEQTpGk
+    _key: '!items.effects!r3Due00000000000.InKLgMMWFVEQTpGk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.finalFury0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/final-fury.webp
+    name: Final Fury
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
         conditions:
           absent:
             - down
+        dawn: false
         description: While Up
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          startStatuses:
+            - ruined
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
-          <p>Your first @L[Category:Strike delivery abilities]{strike} in any
-          @L[Condition:Dueling]{duel} deals @L[Keyword:Boosted Damage]{boosted}
-          @L[Core:Damage]{damage} and is @L[Keyword:Warded]{warded}.</p>
+          <p>While @L[Condition:Defying Death]{defying death}, your
+          @L[Category:Weapon delivery abilities]{weapon} @L[Category:Attack
+          abilities]{attacks} are @L[Keyword:Boosted]{boosted} and
+          @L[Keyword:UB]{UB}. When you stop @L[Condition:Defying Death]{defying
+          death}, you @L[Condition:Dead]{die} and your body is
+          @L[Condition:Ruined]{ruined}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: duelist
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 5SCwWu1v6UtAFQau
+      targets:
+        - self
+    type: ability
+  - _id: BpqCFcyosxmNw45i
+    _key: '!items.effects!r3Due00000000000.BpqCFcyosxmNw45i'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.haraKiri00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.iaido00000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Duelist0000.5SCwWu1v6UtAFQau'
-  - name: Hara-Kiri
-    type: ability
     img: systems/teriock/src/icons/abilities/hara-kiri.webp
+    name: Hara-Kiri
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      class: duelist
+      competence:
+        raw: 0
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: No Limit
+        raw: '0'
         stationary: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
+        unit: unlimited
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>The next time you would pull from the @L[Core:Death Bag]{death
@@ -401,42 +258,185 @@ effects:
           pulls. Add one black stone to the @L[Core:Death Bag]{death bag} prior
           to making each pull. You may not use [[lookup name]] if you would pull
           less than 3 stones from the @L[Core:Death Bag]{death bag}.</p>
-        proficient: <p>You do not need to add an additional black stone to each pull.</p>
         fluent: >-
           <p>You know all the details of any @L[Core:Divine Intervention]{divine
           intervention} you are offered if you @L[Core:Permanent
           Death]{permanently die} from these pulls.</p>
+        proficient: <p>You do not need to add an additional black stone to each pull.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - spiritual
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
       skill: true
       standard: true
-      ritual: true
-      class: duelist
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: BpqCFcyosxmNw45i
+      sustained: true
+      targets:
+        - creature
+    type: ability
+  - _id: 5SCwWu1v6UtAFQau
+    _key: '!items.effects!r3Due00000000000.5SCwWu1v6UtAFQau'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.iaido00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
+    img: systems/teriock/src/icons/abilities/iaido.webp
+    name: Iaido
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        conditions:
+          absent:
+            - down
+        dawn: false
+        description: While Up
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your first @L[Category:Strike delivery abilities]{strike} in any
+          @L[Condition:Dueling]{duel} deals @L[Keyword:Boosted Damage]{boosted}
+          @L[Core:Damage]{damage} and is @L[Keyword:Warded]{warded}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: sNb0MpCuNQOiPQM4
+    _key: '!items.effects!r3Due00000000000.sNb0MpCuNQOiPQM4'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.haraKiri00000000
+      compendiumSource: Compendium.teriock.abilities.Item.rebuke0000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Duelist0000.BpqCFcyosxmNw45i'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank3Duelist0000'
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/rebuke.webp
+    name: Rebuke
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        description: 5 Seconds
+        raw: '5'
+        stationary: false
+        unit: second
+      endCondition: <p>Your next @L[Core:Turns]{turn} ends.</p>
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: executor
+          rolls:
+            damage: 1d6[spiritual]
+        macros:
+          Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering creature takes [[/damage 1d6[spiritual]]]
+          @L[Core:Damage]{damage} and is @L[Condition:Lighted]{lighted} towards
+          a creature of your choice.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '90'
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: <p>A creature forfeits a @L[Condition:Dueling]{duel} with you.</p>
+    type: ability
+folder: duelist000000000
+img: systems/teriock/src/icons/ranks/rank-3-duelist.webp
+name: Rank 3 Duelist
+system:
+  archetype: warrior
+  className: duelist
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>Honor-bound and honest to the core, Duelists are often judges and
+    referees for duels as well as devoted warriors. Duelists prize the honor of
+    their family above any sort of personal gain and thus strive for excellence
+    in everything that they do. A true Duelist wins the battle before it has
+    begun. Strategy and personal perfection are the Duelist's way. If you are a
+    Duelist, be calm, focused, well spoken and confident in yourself.</p>
+  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
+  innate: false
+  maxAv: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

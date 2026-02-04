@@ -1,48 +1,21 @@
 _id: anchor0000000000
-folder: rIw1nYFbCFsXwhHY
-name: Anchor
-system:
-  equipmentType: Anchor
-  tier: {}
-  competence:
-    raw: 0
-  attackPenalty:
-    raw: '6'
-  bv:
-    raw: '1'
-  damage:
-    base:
-      raw: 1d20
-    twoHanded: {}
-  hit: {}
-  range:
-    long:
-      unit: melee
-    melee: true
-    ranged: false
-    short:
-      unit: melee
-  vitals: false
-  consumable: false
-  storage:
-    enabled: false
-    maxCount: {}
-    maxWeight: {}
-    weightMultiplier: '1'
-  weight:
-    raw: '1500'
-  minStr:
-    raw: '4'
-  equipmentClasses:
-    - objects
-  powerLevel: mundane
-type: equipment
-img: systems/teriock/src/icons/equipment/anchor.webp
+_key: '!items!anchor0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Cumbersome
-    type: property
+  - _id: w2yj5GUx8hRBvfQq
+    _key: '!items.effects!anchor0000000000.w2yj5GUx8hRBvfQq'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/properties/cumbersome.webp
-    _id: w2yj5GUx8hRBvfQq
+    name: Cumbersome
     system:
       competence:
         raw: 0
@@ -56,56 +29,73 @@ effects:
         otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
         they would have been @L[Condition:Encumbered]{heavily encumbered}
         otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
-      suppression: {}
-      revealed: true
       form: flaw
       impacts:
         changes:
-          - mode: 2
+          - key: system.encumbranceLevel
+            mode: 2
             priority: 10
-            time: normal
-            key: system.encumbranceLevel
-            target: Actor
             qualifier: '1'
+            target: Actor
+            time: normal
             value: '1'
       modifiesActor: true
+      revealed: true
+    type: property
+  - _id: Cut0da3jtuQD9ppG
+    _key: '!items.effects!anchor0000000000.Cut0da3jtuQD9ppG'
     _stats:
-      compendiumSource: Compendium.teriock.properties.Item.cumbersome000000
+      compendiumSource: Compendium.teriock.properties.Item.unblockable00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!anchor0000000000.w2yj5GUx8hRBvfQq'
-  - name: Unblockable
-    type: property
     img: systems/teriock/src/icons/properties/unblockable.webp
-    _id: Cut0da3jtuQD9ppG
+    name: Unblockable
     system:
       competence:
         raw: 0
       description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
-      suppression: {}
-      revealed: true
       form: intrinsic
       impacts:
         changes:
-          - mode: 4
+          - key: system.piercing.raw
+            mode: 4
             priority: 10
-            time: normal
-            key: system.piercing.raw
-            target: parent
             qualifier: '1'
+            target: parent
+            time: normal
             value: '2'
-    _stats:
-      compendiumSource: Compendium.teriock.properties.Item.unblockable00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!anchor0000000000.Cut0da3jtuQD9ppG'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!anchor0000000000'
+      revealed: true
+    type: property
+folder: objects000000000
+img: systems/teriock/src/icons/equipment/anchor.webp
+name: Anchor
+system:
+  attackPenalty:
+    raw: '6'
+  bv:
+    raw: '1'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: 1d20
+  equipmentClasses:
+    - objects
+  equipmentType: Anchor
+  minStr:
+    raw: '4'
+  powerLevel: mundane
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  vitals: false
+  weight:
+    raw: '1500'
+type: equipment

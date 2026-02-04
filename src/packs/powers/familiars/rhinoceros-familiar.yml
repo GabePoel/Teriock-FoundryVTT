@@ -1,59 +1,68 @@
 _id: rhinocerosFamili
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Rhinoceros Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.rhinoceros000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!rhinocerosFamili'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: rhinocerosTamer0
-    img: icons/environment/settlement/stables-logo.webp
-    name: Rhinoceros Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Rhinoceros]{rhinoceros}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: riGYdtYQjiCU4jSG
+    _key: '!items.effects!rhinocerosFamili.riGYdtYQjiCU4jSG'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.mightStrike00000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!rhinocerosFamili.rhinocerosTamer0'
-  - name: Might Strike
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.8
     img: systems/teriock/src/icons/abilities/might-strike.webp
+    name: Might Strike
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        material: true
+        materialCost: <p>Something symbolic of your deity.</p>
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
       delivery:
         base: self
         package: ritual
-      targets:
-        - self
       duration:
-        unit: untilDawn
-        quantity: 0
         description: Until Dawn
+        quantity: 0
         stationary: false
-      sustained: true
+        unit: untilDawn
+      executionTime: 10 Minutes
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.standard
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: +1d4[holy]
+          rolls:
+            damage: 1d4
+        macros:
+          Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>Choose a @L[Category:Weapon classes]{class of weapons}. All
@@ -73,124 +82,115 @@ effects:
           Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table><p></p>
       piercing:
         raw: 0
+      powerSources:
+        - divine
+      requirements: >-
+        <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
+        name]].</p>
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: rhinocerosTamer0
+    _key: '!items.effects!rhinocerosFamili.rhinocerosTamer0'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Rhinoceros Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Rhinoceros]{rhinoceros}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: LJTFYxAqMchkbwFR
+    _key: '!items.effects!rhinocerosFamili.LJTFYxAqMchkbwFR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.sTShields0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
+    name: Spell Turning Shields
+    system:
+      class: paladin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.props
+              mode: 2
+              priority: 10
+              qualifier: '@class.shields'
+              target: equipment
+              time: normal
+              value: spellTurning
+            - key: system.spellTurning
+              mode: 5
+              priority: 10
+              qualifier: '@class.shields'
+              target: equipment
+              time: normal
+              value: 'true'
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
-      skill: true
-      standard: true
-      ritual: true
-      class: paladin
-      costs:
-        verbal: true
-        somatic: true
-        material: true
-        mp:
-          type: static
-          value:
-            static: 1
-        materialCost: <p>Something symbolic of your deity.</p>
-      requirements: >-
-        <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
-        name]].</p>
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          rolls:
-            damage: 1d4
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.damage.standard
-              target: Actor
-              qualifier: '1'
-              value: +1d4[holy]
-        macros:
-          Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: riGYdtYQjiCU4jSG
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mightStrike00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rhinocerosFamili.riGYdtYQjiCU4jSG'
-  - name: Spell Turning Shields
-    type: ability
-    img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
-    system:
-      powerSources:
-        - divine
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
       overview:
         base: >-
           <p>@L[Category:Shields]{Shields} you use are @L[Property:Spell
           Turning]{spell turning}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - divine
+      revealed: true
       skill: true
       standard: true
-      class: paladin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.props
-              target: equipment
-              qualifier: '@class.shields'
-              value: spellTurning
-            - mode: 5
-              priority: 10
-              time: normal
-              key: system.spellTurning
-              target: equipment
-              qualifier: '@class.shields'
-              value: 'true'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: LJTFYxAqMchkbwFR
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sTShields0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rhinocerosFamili.LJTFYxAqMchkbwFR'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rhinocerosFamili'
+      targets:
+        - self
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Rhinoceros Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.rhinoceros000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

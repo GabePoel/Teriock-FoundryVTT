@@ -1,29 +1,37 @@
 _id: adlFlameRots0000
+_key: '!items!adlFlameRots0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Additional Flame Rotators
-    type: ability
+  - _id: adlFlameRots0000
+    _key: '!items.effects!adlFlameRots0000.adlFlameRots0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/additional-flame-rotators.webp
-    _id: adlFlameRots0000
+    name: Additional Flame Rotators
     system:
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -34,48 +42,48 @@ effects:
           <p>Add @L[Ability:Cremate]{Cremate} and @L[Ability:Minor Weapon
           Enchantment]{Minor Weapon Enchantment} to your list of possible
           @L[Category:Rotator spells]{rotator spells}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       skill: true
       targets:
         - self
-      impacts: {}
-      class: flameMage
+    type: ability
+  - _id: riJu9TJKsgw8lvaG
+    _key: '!items.effects!adlFlameRots0000.riJu9TJKsgw8lvaG'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cremate000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!adlFlameRots0000.adlFlameRots0000'
-  - name: Cremate
-    type: ability
     img: systems/teriock/src/icons/abilities/cremate.webp
-    _id: riJu9TJKsgw8lvaG
+    name: Cremate
     system:
+      _sup: adlFlameRots0000
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
+        somatic: true
+        verbal: true
       delivery:
         base: weapon
         package: strike
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - killing
         - damaging
@@ -83,14 +91,21 @@ effects:
         - flame
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
+      impacts:
+        base:
+          startStatuses:
+            - burned
+            - ruined
       interaction: attack
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
@@ -101,59 +116,51 @@ effects:
         hit: >-
           <p>Target is @L[Condition:Burned]{burned}, and
           @L[Condition:Ruined]{ruined}.</p>
+      revealed: true
       rotator: true
       spell: true
       standard: true
       targets:
         - vitals
-      impacts:
-        base:
-          startStatuses:
-            - burned
-            - ruined
-      _sup: adlFlameRots0000
-      class: flameMage
+    type: ability
+  - _id: EJJUf0kvxkObv2Xv
+    _key: '!items.effects!adlFlameRots0000.EJJUf0kvxkObv2Xv'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cremate000000000
+      compendiumSource: Compendium.teriock.abilities.Item.minorWepEnchantm
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!adlFlameRots0000.riJu9TJKsgw8lvaG'
-  - name: Minor Weapon Enchantment
-    type: ability
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
-    _id: EJJUf0kvxkObv2Xv
+    name: Minor Weapon Enchantment
     system:
+      _sup: adlFlameRots0000
+      class: flameMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        verbal: true
-        somatic: true
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: hour
-        dawn: false
-        stationary: false
-        description: 1 Hour
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
       elements:
         - flame
       executionTime: 10 Minutes
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -161,6 +168,9 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, the duration of this
         effect increases by 1 hour. The overall duration is rounded to the
         nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
       interaction: manifest
       maneuver: slow
       overview:
@@ -174,35 +184,21 @@ effects:
           enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier 1}.
           If the weapon is @L[Property:Shattered]{shattered}, this enchantment
           fades.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '5'
         unit: ft
+      revealed: true
       ritual: true
       rotator: true
       spell: true
       standard: true
       targets:
         - weapon
-      impacts:
-        heightened:
-          duration: 3600
-      _sup: adlFlameRots0000
-      class: flameMage
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.minorWepEnchantm
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!adlFlameRots0000.EJJUf0kvxkObv2Xv'
+    type: ability
 img: systems/teriock/src/icons/abilities/additional-flame-rotators.webp
 name: Additional Flame Rotators
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!adlFlameRots0000'

@@ -1,56 +1,47 @@
-_id: rank3LifeMage000
-folder: lifeMage00000000
-name: Rank 3 Life Mage
-system:
-  archetype: mage
-  className: lifeMage
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>The true healers of the world, they are committed to sustaining all life.
-    The truly altruistic characters, Life Mages are known to enter battles on
-    neither side, healing anyone and everyone who they can. Obsessed with
-    keeping people alive and conquering death, Life Mages are not as righteous
-    as the Paladin but much more humble and kind. Shying away from combat, they
-    prefer to stand behind the troops, healing when needed. If you are playing a
-    Life Mage be helpful, kind and loving, protective but committed to saving
-    lives and fighting death.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 0
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-life-mage.webp
+_id: r3Lif00000000000
+_key: '!items!r3Lif00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Additional Life Rotators
-    type: ability
+  - _id: byYbma8NDzi77Mh0
+    _key: '!items.effects!r3Lif00000000000.byYbma8NDzi77Mh0'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.adlLifeRots00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/additional-life-rotators.webp
+    name: Additional Life Rotators
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: lifeMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Add @L[Ability:Minor Item Enchantment]{Minor Item Enchantment} and
@@ -58,212 +49,50 @@ effects:
           possible @L[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
       revealed: true
-      grantOnly: false
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: i5ClxMJqr4B84tsr
+    _key: '!items.effects!r3Lif00000000000.i5ClxMJqr4B84tsr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ampLifeSpells000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.adlLifeRots00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: byYbma8NDzi77Mh0
-    _key: '!items.effects!rank3LifeMage000.byYbma8NDzi77Mh0'
-  - name: Minor Item Enchantment
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - weapon
-      elements:
-        - life
-      duration:
-        unit: hour
-        quantity: 1
-        stationary: false
-        description: 1 Hour
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
-          @L[Property:Granting]{grant} a @L[Category:Conjured spells]{conjured}
-          @L[Category:Ray delivery spells]{ray spell} that you know. Except, the
-          spell is @L[Keyword:Gifted]{gifted} and must be @L[Category:Invoked
-          component abilities]{invoked} for. The enchanted item is
-          @L[Core:Presence]{tier 1}. If the item is
-          @L[Property:Shattered]{shattered}, this enchantment fades.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      ritual: true
-      class: lifeMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
-      expansionSaveAttribute: mov
-      form: special
-      impacts:
-        heightened:
-          duration: 3600
-      _sup: byYbma8NDzi77Mh0
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.minorItmEnchantm
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: OM13kQaRTAUkBcB6
-    _key: '!items.effects!rank3LifeMage000.OM13kQaRTAUkBcB6'
-  - name: Swift Sleep Aura
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: per
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: untilDawn
-        quantity: 0
-        stationary: false
-        description: Until Dawn
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: >-
-          <p>A hypnotizing shimmer spreads through the air around you. Roll
-          [[/sleep 1d8]] to determine the strength of this effect.</p>
-        proficient: <p>Instead roll [[/sleep (@p)d8]].</p>
-        fluent: <p>Instead roll [[/sleep (@f)d8]].</p>
-      results:
-        fail: >-
-          <p>Any creatures who have fewer @L[Core:HP]{HP} than the result of the
-          die roll are rendered @L[Condition:Asleep]{asleep} until this effect
-          ends.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      spell: true
-      standard: true
-      class: lifeMage
-      rotator: true
-      costs:
-        verbal: true
-        somatic: true
-        mp:
-          type: static
-          value:
-            static: 1
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, roll an additional
-        [[/sleep 1d8]]. Target is also @L[Keyword:Resistance]{resistant} to
-        being @L[Keyword:Awaken]{awakened}.</p>
-      endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
-      expansionSaveAttribute: mov
-      form: special
-      impacts:
-        base:
-          rolls:
-            sleep: 1d8
-        proficient:
-          rolls:
-            sleep: (@p)d8
-        fluent:
-          rolls:
-            sleep: (@f)d8
-        heightened:
-          rolls:
-            sleep: 1d8
-      _sup: byYbma8NDzi77Mh0
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swiftSleepAura00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: rq4naxQ5OEabu5zH
-    _key: '!items.effects!rank3LifeMage000.rq4naxQ5OEabu5zH'
-  - name: Amplify Life Spells
-    type: ability
     img: systems/teriock/src/icons/abilities/amplify-life-spells.webp
+    name: Amplify Life Spells
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: lifeMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>When you @L[Core:Attack Interaction]{attack} with @L[Ability:Light
@@ -278,118 +107,112 @@ effects:
           additional or repeated targets.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: i5ClxMJqr4B84tsr
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ampLifeSpells000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3LifeMage000.i5ClxMJqr4B84tsr'
-  - name: Life Rotator Fluency
-    type: ability
-    img: systems/teriock/src/icons/abilities/life-rotator-fluency.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You may rotate between @L[Category:Life element spells]{life}
-          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
-          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
-        proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Life
-          Rotators]{Life Rotators}. (This does not make you @L[Core:Fluency
-          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: fluency
-              key: system.competence.raw
-              target: ability
-              qualifier: '@key.lifeRotators'
-              value: '2'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: fh4suOlumlxkn3jC
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lifeRotFluency00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3LifeMage000.fh4suOlumlxkn3jC'
-  - name: Expanded Life Elder Sorcery
-    type: ability
-    img: systems/teriock/src/icons/abilities/expanded-life-elder-sorcery.webp
-    system:
-      elderSorcery: true
-      powerSources:
-        - magical
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: slow
-      executionTime: Long Rest
-      delivery:
-        base: self
       targets:
         - self
+    type: ability
+  - _id: NpHxGWOjlHherm10
+    _key: '!items.effects!r3Lif00000000000.NpHxGWOjlHherm10'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.emergencyCasting
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/emergency-casting.webp
+    name: Emergency Casting
+    system:
+      _sup: si4IIiwmrSVb3KFR
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You cast a @L[Category:Single action spells]{single action spell}
+          at the triggering creature.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You are being @L[Category:Attack abilities]{attacked} by another
+        creature.</p>
+    type: ability
+  - _id: H7xLb8uTY3Fv0E7P
+    _key: '!items.effects!r3Lif00000000000.H7xLb8uTY3Fv0E7P'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.expandedLifeES00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/expanded-life-elder-sorcery.webp
+    name: Expanded Life Elder Sorcery
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elderSorcery: true
       elements:
         - life
-      duration:
-        unit: instant
-        quantity: 0
-        description: Instant
-        stationary: false
+      executionTime: Long Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: special
+      grantOnly: false
+      interaction: feat
+      maneuver: slow
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
@@ -413,58 +236,58 @@ effects:
           Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
           Words]{Celestial Elder Sorcery Words}, and @L[Ability:Life Elder
           Sorcery Words]{Life Elder Sorcery Words}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
       results:
-        save: <p>You learn the spell or word.</p>
         fail: >-
           <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
           that spell or word again.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+        save: <p>You learn the spell or word.</p>
+      revealed: true
       skill: true
       standard: true
-      class: lifeMage
-      expansionSaveAttribute: mov
-      form: special
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: H7xLb8uTY3Fv0E7P
+      targets:
+        - self
+    type: ability
+  - _id: si4IIiwmrSVb3KFR
+    _key: '!items.effects!r3Lif00000000000.si4IIiwmrSVb3KFR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lifeDisciplines0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.expandedLifeES00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3LifeMage000.H7xLb8uTY3Fv0E7P'
-  - name: Life Disciplines
-    type: ability
     img: systems/teriock/src/icons/abilities/life-disciplines.webp
+    name: Life Disciplines
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: lifeMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
+        dawn: false
         description: Always Active
+        raw: '0'
         stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>Once per @L[Core:Short Rest]{short rest}, you may cast a
@@ -475,115 +298,259 @@ effects:
           @L[Keyword:Adept]{adept} at it.</p><p>You also gain the
           @L[Ability:Emergency Casting]{Emergency} and @L[Ability:Sheltered
           Casting]{Sheltered} casting styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
+          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
         proficient: >-
           <p>You may now use the benefits from [[lookup name]]
           @L[Core:Proficiency Bonus]{P} times per @L[Core:Long Rest]{long
           rest}.</p>
-        fluent: >-
-          <p>You may now use the benefits from [[lookup name]] @L[Core:Fluency
-          Bonus]{F} times per @L[Core:Short Rest]{short rest}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: int
-          amount: proficiency
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: int
+          value: 1
+    type: ability
+  - _id: fh4suOlumlxkn3jC
+    _key: '!items.effects!r3Lif00000000000.fh4suOlumlxkn3jC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lifeRotFluency00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/life-rotator-fluency.webp
+    name: Life Rotator Fluency
+    system:
       class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
       competence:
         raw: 0
-      revealed: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
       grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.lifeRotators'
+              target: ability
+              time: fluency
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @L[Category:Life element spells]{life}
+          rotator @L[Category:Spells]{spells} during a @L[Core:Short Rest]{short
+          rest} instead of a @L[Core:Long Rest]{long rest}.</p>
+        proficient: >-
+          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Life
+          Rotators]{Life Rotators}. (This does not make you @L[Core:Fluency
+          Bonus]{fluent} in the @L[Category:Spells]{spells} themselves.)</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: cyTxNCLIpZkWNZpB
+    _key: '!items.effects!r3Lif00000000000.cyTxNCLIpZkWNZpB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.lifeSS0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     flags:
       teriock:
         category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lifeDisciplines0
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: si4IIiwmrSVb3KFR
-    _key: '!items.effects!rank3LifeMage000.si4IIiwmrSVb3KFR'
-  - name: Emergency Casting
-    type: ability
+    img: systems/teriock/src/icons/abilities/life-spell-strikes.webp
+    name: Life Spell Strikes
     system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      class: lifeMage
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - spell
       duration:
-        unit: instant
-        quantity: 0
+        dawn: false
+        description: Always Active
+        raw: '0'
         stationary: false
-        description: Instant
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
-          <p>You cast a @L[Category:Single action spells]{single action spell}
-          at the triggering creature.</p>
+          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
+          Strike]{Spell Strike}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
+      targets:
+        - self
+    type: ability
+  - _id: OM13kQaRTAUkBcB6
+    _key: '!items.effects!r3Lif00000000000.OM13kQaRTAUkBcB6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.minorItmEnchantm
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
+    name: Minor Item Enchantment
+    system:
+      _sup: byYbma8NDzi77Mh0
       class: lifeMage
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      trigger: >-
-        <p>You are being @L[Category:Attack abilities]{attacked} by another
-        creature.</p>
-      form: normal
-      _sup: si4IIiwmrSVb3KFR
-      competence:
-        raw: 0
-      revealed: true
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      elements:
+        - life
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/emergency-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.emergencyCasting
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: NpHxGWOjlHherm10
-    _key: '!items.effects!rank3LifeMage000.NpHxGWOjlHherm10'
-  - name: Sheltered Casting
-    type: ability
-    system:
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Target item is enchanted to be @L[Property:Magelore]{magelore} and
+          @L[Property:Granting]{grant} a @L[Category:Conjured spells]{conjured}
+          @L[Category:Ray delivery spells]{ray spell} that you know. Except, the
+          spell is @L[Keyword:Gifted]{gifted} and must be @L[Category:Invoked
+          component abilities]{invoked} for. The enchanted item is
+          @L[Core:Presence]{tier 1}. If the item is
+          @L[Property:Shattered]{shattered}, this enchantment fades.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target is not a @L[Category:Weapons]{weapon}.</p>
+      revealed: true
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - weapon
+    type: ability
+  - _id: otUt4DaRHRH07d3k
+    _key: '!items.effects!r3Lif00000000000.otUt4DaRHRH07d3k'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.shelteredCasting
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
+    name: Sheltered Casting
+    system:
+      _sup: si4IIiwmrSVb3KFR
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
         base: self
-      targets:
-        - spell
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>You may keep the triggering @L[Category:Spells]{spell} from
@@ -591,106 +558,57 @@ effects:
           that it would otherwise target.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: lifeMage
+      targets:
+        - spell
+      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
+    type: ability
+  - _id: SBSL4gF5HIUuy36z
+    _key: '!items.effects!r3Lif00000000000.SBSL4gF5HIUuy36z'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: cyTxNCLIpZkWNZpB
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
           value:
             static: 1
-      expansionSaveAttribute: mov
-      trigger: <p>You are casting a @L[Category:Spells]{spell}.</p>
-      form: normal
-      _sup: si4IIiwmrSVb3KFR
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/sheltered-casting.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.shelteredCasting
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: otUt4DaRHRH07d3k
-    _key: '!items.effects!rank3LifeMage000.otUt4DaRHRH07d3k'
-  - name: Life Spell Strikes
-    type: ability
-    img: systems/teriock/src/icons/abilities/life-spell-strikes.webp
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Keyword:Limited]{Limited} @L[Ability:Spell
-          Strike]{Spell Strike}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: lifeMage
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lifeSS0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: cyTxNCLIpZkWNZpB
-    _key: '!items.effects!rank3LifeMage000.cyTxNCLIpZkWNZpB'
-  - name: Spell Strike
-    type: ability
-    system:
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
       delivery:
         base: weapon
-      targets:
-        - creature
       duration:
-        unit: instant
-        quantity: 0
-        stationary: false
+        dawn: false
         description: Instant
-      range:
-        unit: melee
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @L[Ability:Light Ray]{Light Ray} and
+        @L[Ability:Medicine Ball]{Medicine Ball}.</p>
+      maneuver: reactive
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @L[Category:Conjured
@@ -700,45 +618,135 @@ effects:
           critical hit" effect instead.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
       skill: true
       standard: true
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      expansionSaveAttribute: mov
+      targets:
+        - creature
       trigger: >-
         <p>You have just landed a hit with a @L[Category:Weapon delivery
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable with @L[Ability:Light Ray]{Light Ray} and
-        @L[Ability:Medicine Ball]{Medicine Ball}.</p>
-      _sup: cyTxNCLIpZkWNZpB
+    type: ability
+  - _id: rq4naxQ5OEabu5zH
+    _key: '!items.effects!r3Lif00000000000.rq4naxQ5OEabu5zH'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.swiftSleepAura00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
+    name: Swift Sleep Aura
+    system:
+      _sup: byYbma8NDzi77Mh0
+      class: lifeMage
       competence:
         raw: 0
-      revealed: true
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: aura
+      duration:
+        dawn: true
+        description: Until Dawn
+        raw: '0'
+        stationary: false
+        unit: instant
+      elements:
+        - life
+      endCondition: <p>Target is successfully @L[Keyword:Awaken]{awakened}.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: per
+      form: special
       grantOnly: false
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.spellStrike00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: SBSL4gF5HIUuy36z
-    _key: '!items.effects!rank3LifeMage000.SBSL4gF5HIUuy36z'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank3LifeMage000'
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, roll an additional
+        [[/sleep 1d8]]. Target is also @L[Keyword:Resistance]{resistant} to
+        being @L[Keyword:Awaken]{awakened}.</p>
+      impacts:
+        base:
+          rolls:
+            sleep: 1d8
+        fluent:
+          rolls:
+            sleep: (@f)d8
+        heightened:
+          rolls:
+            sleep: 1d8
+        proficient:
+          rolls:
+            sleep: (@p)d8
+      interaction: feat
+      maneuver: active
+      overview:
+        base: >-
+          <p>A hypnotizing shimmer spreads through the air around you. Roll
+          [[/sleep 1d8]] to determine the strength of this effect.</p>
+        fluent: <p>Instead roll [[/sleep (@f)d8]].</p>
+        proficient: <p>Instead roll [[/sleep (@p)d8]].</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Any creatures who have fewer @L[Core:HP]{HP} than the result of the
+          die roll are rendered @L[Condition:Asleep]{asleep} until this effect
+          ends.</p>
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+folder: lifeMage00000000
+img: systems/teriock/src/icons/ranks/rank-3-life-mage.webp
+name: Rank 3 Life Mage
+system:
+  archetype: mage
+  className: lifeMage
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>The true healers of the world, they are committed to sustaining all life.
+    The truly altruistic characters, Life Mages are known to enter battles on
+    neither side, healing anyone and everyone who they can. Obsessed with
+    keeping people alive and conquering death, Life Mages are not as righteous
+    as the Paladin but much more humble and kind. Shying away from combat, they
+    prefer to stand behind the troops, healing when needed. If you are playing a
+    Life Mage be helpful, kind and loving, protective but committed to saving
+    lives and fighting death.</p>
+  innate: false
+  maxAv: 0
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+type: rank

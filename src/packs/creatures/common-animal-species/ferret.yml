@@ -1,84 +1,916 @@
-name: Ferret
-type: creature
+_id: ferret0000000000
+_key: '!actors!ferret0000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: commonAnimalSpec
 img: systems/teriock/src/icons/creatures/ferret.webp
-prototypeToken:
-  name: Ferret
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/ferret.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 0.5
-  height: 0.5
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
-  - _id: ferret0000000000
-    folder: Jg0dWUzFS1WNDl2g
-    name: Ferret
-    type: species
-    img: systems/teriock/src/icons/creatures/ferret.webp
+  - _id: WaFdEpkY68rcxcWk
+    _key: '!actors.items!ferret0000000000.WaFdEpkY68rcxcWk'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: ozGDVg02SHRX2hCr
+        _key: >-
+          !actors.items.effects!ferret0000000000.WaFdEpkY68rcxcWk.ozGDVg02SHRX2hCr
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: u9pZ8QANF4C7gKB9
+        _key: >-
+          !actors.items.effects!ferret0000000000.WaFdEpkY68rcxcWk.u9pZ8QANF4C7gKB9
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
+    name: Fanged Jaw
     system:
+      _sup: ferret0000000000
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '1'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d6
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: ferret0000000000
+    _key: '!actors.items!ferret0000000000.ferret0000000000'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.ferret0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: EHxILHNyovSgBBDG
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.EHxILHNyovSgBBDG
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        type: ability
+      - _id: HR8g76VtAe27DR6s
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.HR8g76VtAe27DR6s
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/digging.webp
+        name: Digging
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.dig
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '1'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: tp0z0fBaXuvGXyGH
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.tp0z0fBaXuvGXyGH
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.evasiveShimmerin
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
+        name: Evasive Shimmering
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - resistance
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.resistances.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: snared
+                - key: system.protections.resistances.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: immobilized
+                - key: system.protections.resistances.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: hack
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You become @L[Keyword:Resistance]{resistant} to effects that
+              would make you @L[Condition:Snared]{snared}, effects that would
+              make you @L[Condition:Immobile]{immobile}, and to
+              @L[Damage:Hack]{hack damage} dealt by other creatures.</p><div
+              class="note"><b>Note:</b> This does not clear any existing
+              effects.</div>
+          piercing:
+            raw: 0
+          powerSources:
+            - primal
+          range:
+            unit: self
+          requirements: <p>You are not within 10 feet of any enemy creature.</p>
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: VeoVjSYJEBpeOU9v
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.VeoVjSYJEBpeOU9v
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/hack.webp
+        name: Hack
+        system:
+          class: berserker
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              hacks:
+                - arm
+                - leg
+          interaction: attack
+          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          maneuver: active
+          overview:
+            base: >-
+              <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The
+              damage gets dealt accordingly.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms
+              or legs, depending on what you chose.</p>
+            hit: >-
+              <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an
+              arm or leg, depending on what you chose.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - arm
+            - leg
+        type: ability
+      - _id: 6iPSz8R2054UtSi4
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.6iPSz8R2054UtSi4
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/hide.webp
+        name: Hide
+        system:
+          class: thief
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                hide: 1d20 + (2 * @snk)
+              startStatuses:
+                - hidden
+            fluent:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @f
+            proficient:
+              rolls:
+                hide: 1d20 + (2 * @snk) + @p
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
+              may roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+              @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2
+              × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
+              use your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}.</p>
+            fluent: >-
+              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
+              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}).</p>
+            proficient: >-
+              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
+              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
+              @L[Core:Sneak]{sneak}).</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          requirements: >-
+            <p>You are in a location with shadows, dim light,
+            @L[Core:Cover]{three-quarters cover}, or some other feature which
+            the @L[Core:Game Master]{GM} determines is appropriate for being
+            @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+            these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            competence:
+              attribute: snk
+              value: 0
+            score:
+              attribute: snk
+              value: 2
+        type: ability
+      - _id: SgCBivtrjtjiTslI
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.SgCBivtrjtjiTslI
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/impale.webp
+        name: Impale
+        system:
+          class: corsair
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              common:
+                - standardDamage
+              hacks:
+                - body
+          interaction: attack
+          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>If you want, target takes @L[Core:Standard Damage]{standard
+              damage} as well.</p>
+            hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - vitals
+        type: ability
+      - _id: m1uoRDyaU4Uc7Twk
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.m1uoRDyaU4Uc7Twk
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+        name: Missile Reflexes
+        system:
+          _sup: 3zdHK2ibeiEyUYdu
+          class: archer
+          competence:
+            raw: 0
+          delivery:
+            base: hand
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - resistance
+          executionTime: r1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: block
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
+              Interaction]{attack}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: melee
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - attack
+            - item
+          trigger: >-
+            <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
+            @L[Category:Missile delivery abilities]{missile delivery}
+            @L[Core:Attack Interaction]{attack}.</p>
+        type: ability
+      - _id: LsWamvZJQZXCnS2e
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.LsWamvZJQZXCnS2e
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/no-hands.webp
+        name: No Hands
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: Ph4tUIbe6nzisJHJ
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.Ph4tUIbe6nzisJHJ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: QfhFJbLvYV4eLacP
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.QfhFJbLvYV4eLacP
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: X39w4owDXpd9Mkqk
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.X39w4owDXpd9Mkqk
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        type: ability
+      - _id: 3zdHK2ibeiEyUYdu
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.3zdHK2ibeiEyUYdu
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/reflexes.webp
+        name: Reflexes
+        system:
+          class: archer
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - resistance
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.resistances.abilities
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: Disarm
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm},
+              have @L[Core:Advantage]{advantage} on the roll made for
+              @L[Ability:Catch Item]{Catch Item}, and gain @L[Ability:Missile
+              Reflexes]{Missile Reflexes}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            competence:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: KNuyfaKDm4xhdohJ
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.KNuyfaKDm4xhdohJ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/tiny-strength.webp
+        name: Tiny Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -2
+        type: ability
+      - _id: N95BnQ84tPcYoLtO
+        _key: >-
+          !actors.items.effects!ferret0000000000.ferret0000000000.N95BnQ84tPcYoLtO
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.vitHack000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/vitals-hack.webp
+        name: Vitals Hack
+        system:
+          class: archer
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              common:
+                - standardDamage
+              hacks:
+                - ear
+                - mouth
+                - nose
+          interaction: attack
+          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>If you want, target takes @L[Core:Standard Damage]{standard
+              damage} as well.</p>
+            hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - vitals
+        type: ability
+    folder: commonAnimalSpec
+    img: systems/teriock/src/icons/creatures/ferret.webp
+    name: Ferret
+    system:
+      br: 2
       competence:
         raw: 1
+      size:
+        enabled: true
+        value: 0.5
       statDice:
         hp:
           disabled: false
@@ -90,946 +922,115 @@ items:
           faces: 6
           number:
             raw: '1'
-      br: 2
-      size:
-        enabled: true
-        value: 0.5
       traits:
         - animal
-    effects:
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: int
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: EHxILHNyovSgBBDG
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.EHxILHNyovSgBBDG
-      - name: Digging
-        type: ability
-        img: systems/teriock/src/icons/abilities/digging.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.dig
-                  target: Actor
-                  qualifier: '1'
-                  value: '1'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: HR8g76VtAe27DR6s
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.digging000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.HR8g76VtAe27DR6s
-      - name: Evasive Shimmering
-        type: ability
-        img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
-        system:
-          powerSources:
-            - primal
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: instant
-            description: Instant
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You become @L[Keyword:Resistance]{resistant} to effects that
-              would make you @L[Condition:Snared]{snared}, effects that would
-              make you @L[Condition:Immobile]{immobile}, and to
-              @L[Damage:Hack]{hack damage} dealt by other creatures.</p><div
-              class="note"><b>Note:</b> This does not clear any existing
-              effects.</div>
-          piercing:
-            raw: 0
-          requirements: <p>You are not within 10 feet of any enemy creature.</p>
-          form: normal
-          effectTypes:
-            - resistance
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: snared
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.statuses
-                  target: Actor
-                  qualifier: '1'
-                  value: immobilized
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.damageTypes
-                  target: Actor
-                  qualifier: '1'
-                  value: hack
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: tp0z0fBaXuvGXyGH
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.evasiveShimmerin
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.tp0z0fBaXuvGXyGH
-      - name: Hack
-        type: ability
-        img: systems/teriock/src/icons/abilities/hack.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - arm
-            - leg
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          overview:
-            base: >-
-              <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The
-              damage gets dealt accordingly.</p>
-          results:
-            hit: >-
-              <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an
-              arm or leg, depending on what you chose.</p>
-            critHit: >-
-              <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms
-              or legs, depending on what you chose.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: berserker
-          form: normal
-          impacts:
-            base:
-              hacks:
-                - arm
-                - leg
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-        _id: VeoVjSYJEBpeOU9v
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hack000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.VeoVjSYJEBpeOU9v
-      - name: Hide
-        type: ability
-        img: systems/teriock/src/icons/abilities/hide.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          overview:
-            base: >-
-              <p>You become @L[Condition:Hidden]{hidden}. As you do this, you
-              may roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
-              @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2
-              × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
-              use your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}.</p>
-            proficient: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
-            fluent: >-
-              <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden
-              DC (if it's greater than your @L[Core:Passive Attributes]{passive}
-              @L[Core:Sneak]{sneak}).</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: thief
-          requirements: >-
-            <p>You are in a location with shadows, dim light,
-            @L[Core:Cover]{three-quarters cover}, or some other feature which
-            the @L[Core:Game Master]{GM} determines is appropriate for being
-            @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-            these conditions to stay @L[Condition:Hidden]{hidden}.</p>
-          form: normal
-          impacts:
-            base:
-              startStatuses:
-                - hidden
-              rolls:
-                hide: 1d20 + (2 * @snk)
-            proficient:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @p
-            fluent:
-              rolls:
-                hide: 1d20 + (2 * @snk) + @f
-          upgrades:
-            competence:
-              attribute: snk
-              value: 0
-            score:
-              attribute: snk
-              value: 2
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          range:
-            unit: self
-        _id: 6iPSz8R2054UtSi4
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.6iPSz8R2054UtSi4
-      - name: Impale
-        type: ability
-        img: systems/teriock/src/icons/abilities/impale.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - vitals
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          results:
-            hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
-            critHit: >-
-              <p>If you want, target takes @L[Core:Standard Damage]{standard
-              damage} as well.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: corsair
-          form: normal
-          impacts:
-            base:
-              hacks:
-                - body
-              common:
-                - standardDamage
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-        _id: SgCBivtrjtjiTslI
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.impale0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.SgCBivtrjtjiTslI
-      - name: No Hands
-        type: ability
-        img: systems/teriock/src/icons/abilities/no-hands.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
-          piercing:
-            raw: 0
-          form: flaw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: LsWamvZJQZXCnS2e
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.noHands000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.LsWamvZJQZXCnS2e
-      - name: Normal Movement
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: Ph4tUIbe6nzisJHJ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalMovement00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.Ph4tUIbe6nzisJHJ
-      - name: Normal Perception
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: QfhFJbLvYV4eLacP
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalPerception
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.QfhFJbLvYV4eLacP
-      - name: Normal Sneak
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: X39w4owDXpd9Mkqk
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.X39w4owDXpd9Mkqk
-      - name: Reflexes
-        type: ability
-        img: systems/teriock/src/icons/abilities/reflexes.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm},
-              have @L[Core:Advantage]{advantage} on the roll made for
-              @L[Ability:Catch Item]{Catch Item}, and gain @L[Ability:Missile
-              Reflexes]{Missile Reflexes}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: archer
-          form: normal
-          effectTypes:
-            - resistance
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.resistances.abilities
-                  target: Actor
-                  qualifier: '1'
-                  value: Disarm
-          upgrades:
-            competence:
-              attribute: mov
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.reflexes00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 3zdHK2ibeiEyUYdu
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.3zdHK2ibeiEyUYdu
-      - name: Missile Reflexes
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: block
-          featSaveAttribute: mov
-          maneuver: reactive
-          executionTime: r1
-          delivery:
-            base: hand
-          targets:
-            - attack
-            - item
-          duration:
-            unit: instant
-            stationary: false
-            description: Instant
-            raw: '0'
-            dawn: false
-          range:
-            unit: melee
-          overview:
-            base: >-
-              <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
-              Interaction]{attack}.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: archer
-          trigger: >-
-            <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
-            @L[Category:Missile delivery abilities]{missile delivery}
-            @L[Core:Attack Interaction]{attack}.</p>
-          form: normal
-          effectTypes:
-            - resistance
-          _sup: 3zdHK2ibeiEyUYdu
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/missile-reflexes.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.missileReflexes0
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: m1uoRDyaU4Uc7Twk
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.m1uoRDyaU4Uc7Twk
-      - name: Tiny Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/tiny-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: str
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: KNuyfaKDm4xhdohJ
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.tinyStrength0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.KNuyfaKDm4xhdohJ
-      - name: Vitals Hack
-        type: ability
-        img: systems/teriock/src/icons/abilities/vitals-hack.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - vitals
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          results:
-            hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
-            critHit: >-
-              <p>If you want, target takes @L[Core:Standard Damage]{standard
-              damage} as well.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: archer
-          form: normal
-          effectTypes:
-            - damaging
-          impacts:
-            base:
-              hacks:
-                - ear
-                - mouth
-                - nose
-              common:
-                - standardDamage
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
-        _id: N95BnQ84tPcYoLtO
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.vitHack000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.ferret0000000000.N95BnQ84tPcYoLtO
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.ferret0000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!ferret0000000000.ferret0000000000'
-  - name: Fanged Jaw
-    type: body
-    _id: WaFdEpkY68rcxcWk
-    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
-    system:
-      damage:
-        base:
-          raw: 1d6
-      fightingStyle: savage
-      competence:
-        raw: 0
-      _sup: ferret0000000000
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      bv:
-        raw: '1'
-    effects:
-      - name: Biting
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: ozGDVg02SHRX2hCr
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.WaFdEpkY68rcxcWk.ozGDVg02SHRX2hCr
-      - name: Weapon
-        type: property
-        system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: u9pZ8QANF4C7gKB9
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!ferret0000000000.WaFdEpkY68rcxcWk.u9pZ8QANF4C7gKB9
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!ferret0000000000.WaFdEpkY68rcxcWk'
+    type: species
+name: Ferret
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 0.5
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Ferret
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/ferret.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 0.5
 system:
-  hp:
-    value: 3
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 4
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '0.5'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: WaFdEpkY68rcxcWk
-    blocker: WaFdEpkY68rcxcWk
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: ferret0000000000
-folder: xiQuFe17AXH1ZyVm
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!ferret0000000000'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 3
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '0.5'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: WaFdEpkY68rcxcWk
+    blocker: WaFdEpkY68rcxcWk
+type: creature

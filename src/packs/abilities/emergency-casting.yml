@@ -1,34 +1,42 @@
 _id: emergencyCasting
+_key: '!items!emergencyCasting'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Emergency Casting
-    type: ability
+  - _id: emergencyCasting
+    _key: '!items.effects!emergencyCasting.emergencyCasting'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/emergency-casting.webp
-    _id: emergencyCasting
+    name: Emergency Casting
     system:
+      class: lifeMage
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '0'
-        unit: instant
-        dawn: false
-        stationary: false
-        description: Instant
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
       executionTime: r1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -38,10 +46,13 @@ effects:
         base: >-
           <p>You cast a @L[Category:Single action spells]{single action spell}
           at the triggering creature.</p>
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         unit: self
+      revealed: true
       skill: true
       standard: true
       targets:
@@ -49,20 +60,7 @@ effects:
       trigger: >-
         <p>You are being @L[Category:Attack abilities]{attacked} by another
         creature.</p>
-      impacts: {}
-      class: lifeMage
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!emergencyCasting.emergencyCasting'
+    type: ability
 img: systems/teriock/src/icons/abilities/emergency-casting.webp
 name: Emergency Casting
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!emergencyCasting'

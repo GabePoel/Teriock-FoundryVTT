@@ -1,39 +1,72 @@
 _id: stinkSpray000000
+_key: '!items!stinkSpray000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Stink Spray
-    type: ability
+  - _id: stinkSpray000000
+    _key: '!items.effects!stinkSpray000000.stinkSpray000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/stink-spray.webp
-    _id: stinkSpray000000
+    name: Stink Spray
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '1'
-        unit: week
-        dawn: false
-        stationary: false
-        description: 1 Week
       delivery:
         base: cone
+      duration:
+        dawn: false
+        description: 1 Week
+        raw: '1'
+        stationary: false
+        unit: week
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.attributes.snk.score.raw
+              mode: 3
+              priority: 50
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '-3'
+            - key: system.protections.immunities.hidden
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: statuses
+            - key: system.protections.immunities.odorless
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: statuses
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -47,44 +80,10 @@ effects:
           to becoming @L[Condition:Odorless]{odorless} or
           @L[Condition:Hidden]{hidden} to creatures that are not
           @L[Condition:Anosmatic]{anosmatic}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          changes:
-            - mode: 3
-              priority: 50
-              time: normal
-              key: system.attributes.snk.score.raw
-              target: Actor
-              qualifier: '1'
-              value: '-3'
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.hidden
-              target: Actor
-              qualifier: '1'
-              value: statuses
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.immunities.odorless
-              target: Actor
-              qualifier: '1'
-              value: statuses
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!stinkSpray000000.stinkSpray000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/stink-spray.webp
 name: Stink Spray
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!stinkSpray000000'

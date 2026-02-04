@@ -1,171 +1,270 @@
 _id: apeFamiliar00000
-folder: 3OD1Sj2noLROIrdg
-img: systems/teriock/src/icons/abilities/familiar-bond.webp
-name: Ape Familiar
-system:
-  type: familiar
-  description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.ape0000000000000]</p>
-  maxAv: 0
-  competence:
-    raw: 1
-type: power
+_key: '!items!apeFamiliar00000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - _id: apeTamer00000000
-    img: icons/environment/settlement/stables-logo.webp
-    name: Ape Tamer
-    system:
-      field: survivalist
-      tradecraft: tamer
-      description: <p>You know the way of the @L[Creature:Ape]{ape}.</p>
-      competence:
-        raw: 2
-      revealed: true
-    type: fluency
-    disabled: false
-    transfer: true
+  - _id: GxdnMUTZF1AEOfnu
+    _key: '!items.effects!apeFamiliar00000.GxdnMUTZF1AEOfnu'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.acrobatics000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    tint: '#ffffff'
-    _key: '!items.effects!apeFamiliar00000.apeTamer00000000'
-  - name: Acrobatics
-    type: ability
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/acrobatics.webp
+    name: Acrobatics
     system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      class: assassin
+      competence:
+        raw: 0
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: noLimit
-        quantity: 0
         description: Always Active
+        quantity: 0
         stationary: false
+        unit: noLimit
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficiency
+          attribute: mov
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
           <p>You gain @L[Ability:Climbing]{Climbing} and
           @L[Ability:Leaping]{Leaping}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.acrobatics000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: GxdnMUTZF1AEOfnu
-    _key: '!items.effects!apeFamiliar00000.GxdnMUTZF1AEOfnu'
-  - name: Climbing
-    type: ability
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
+    type: ability
+  - _id: apeTamer00000000
+    _key: '!items.effects!apeFamiliar00000.apeTamer00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.1
+    disabled: false
+    img: icons/environment/settlement/stables-logo.webp
+    name: Ape Tamer
+    system:
+      competence:
+        raw: 2
+      description: <p>You know the way of the @L[Creature:Ape]{ape}.</p>
+      field: survivalist
+      revealed: true
+      tradecraft: tamer
+    tint: '#ffffff'
+    transfer: true
+    type: fluency
+  - _id: kYq1XuY746QrqiCe
+    _key: '!items.effects!apeFamiliar00000.kYq1XuY746QrqiCe'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/climbing.webp
+    name: Climbing
+    system:
+      _sup: GxdnMUTZF1AEOfnu
+      competence:
+        raw: 0
+      delivery:
+        base: self
       duration:
-        unit: noLimit
+        description: Always Active
         quantity: 0
         stationary: false
-        description: Always Active
-      overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
-      piercing:
-        raw: 0
+        unit: noLimit
+      effectTypes:
+        - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+        proficient:
+          changes:
+            - key: system.speedAdjustments.climb
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '3'
       improvements:
         attributeImprovement:
           minVal: 0
         featSaveImprovement:
           amount: proficient
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
+        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: 7CBO4wbJmkgiRHKF
+    _key: '!items.effects!apeFamiliar00000.7CBO4wbJmkgiRHKF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.impWeps000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/improvised-weapons.webp
+    name: Improvised Weapons
+    system:
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: 8 Hours
+        quantity: 8
+        stationary: false
+        unit: hour
+      executionTime: Short Rest
       expansionSaveAttribute: mov
+      featSaveAttribute: mov
       form: normal
+      grantOnly: false
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
+          materials and make 1 melee @L[Category:Weapons]{weapon}. Only common
+          @L[Damage:Mundane]{mundane} items can typically be made in this way,
+          but the @L[Core:GM]{GM} may specify if other options are available to
+          you. These items exist for 8 hours before they are no longer
+          functional.</p>
+        fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} weapons.</p>
+        proficient: >-
+          <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
+          weapons.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - other
+    type: ability
+  - _id: KuLrJ51UHHLlBnmb
+    _key: '!items.effects!apeFamiliar00000.KuLrJ51UHHLlBnmb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.8
+    img: systems/teriock/src/icons/abilities/leaping.webp
+    name: Leaping
+    system:
+      _sup: GxdnMUTZF1AEOfnu
+      class: assassin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        description: Always Active
+        quantity: 0
+        stationary: false
+        unit: noLimit
       effectTypes:
         - movement
+      executionTime: passive
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
               value: '2'
         proficient:
           changes:
-            - mode: 4
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
               priority: 10
-              time: normal
-              key: system.speedAdjustments.climb
-              target: Actor
               qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
               value: '3'
-      _sup: GxdnMUTZF1AEOfnu
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/climbing.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.climbing00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: kYq1XuY746QrqiCe
-    _key: '!items.effects!apeFamiliar00000.kYq1XuY746QrqiCe'
-  - name: Leaping
-    type: ability
-    system:
-      powerSources:
-        - martial
+      improvements:
+        attributeImprovement:
+          minVal: 0
+        featSaveImprovement:
+          amount: proficient
       interaction: manifest
-      featSaveAttribute: mov
       maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
       overview:
         base: >-
           <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
@@ -175,123 +274,24 @@ effects:
           and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
       piercing:
         raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: assassin
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - movement
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '1'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '2'
-        proficient:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '2'
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '3'
-      _sup: GxdnMUTZF1AEOfnu
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/leaping.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.leaping000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: KuLrJ51UHHLlBnmb
-    _key: '!items.effects!apeFamiliar00000.KuLrJ51UHHLlBnmb'
-  - name: Improvised Weapons
-    type: ability
-    img: systems/teriock/src/icons/abilities/improvised-weapons.webp
-    system:
       powerSources:
         - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: self
-      targets:
-        - other
-      duration:
-        unit: hour
-        quantity: 8
-        description: 8 Hours
-        stationary: false
-      overview:
-        base: >-
-          <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
-          materials and make 1 melee @L[Category:Weapons]{weapon}. Only common
-          @L[Damage:Mundane]{mundane} items can typically be made in this way,
-          but the @L[Core:GM]{GM} may specify if other options are available to
-          you. These items exist for 8 hours before they are no longer
-          functional.</p>
-        proficient: >-
-          <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
-          weapons.</p>
-        fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} weapons.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      revealed: true
       skill: true
       standard: true
-      class: knight
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 7CBO4wbJmkgiRHKF
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.impWeps000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!apeFamiliar00000.7CBO4wbJmkgiRHKF'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!apeFamiliar00000'
+      targets:
+        - self
+    type: ability
+folder: familiars0000000
+img: systems/teriock/src/icons/abilities/familiar-bond.webp
+name: Ape Familiar
+system:
+  competence:
+    raw: 1
+  description: >-
+    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
+    and delete the other
+    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.ape0000000000000]</p>
+  maxAv: 0
+  type: familiar
+type: power

@@ -1,104 +1,135 @@
 _id: 1WwYsYbnLwItEVj7
-folder: IiMVvNrihSEP66aT
-name: Rank 2 Duelist
-system:
-  archetype: warrior
-  className: duelist
-  classRank: 2
-  competence:
-    raw: 1
-  description: >-
-    <p>Honor-bound and honest to the core, Duelists are often judges and
-    referees for duels as well as devoted warriors. Duelists prize the honor of
-    their family above any sort of personal gain and thus strive for excellence
-    in everything that they do. A true Duelist wins the battle before it has
-    begun. Strategy and personal perfection are the Duelist's way. If you are a
-    Duelist, be calm, focused, well spoken and confident in yourself.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
-  innate: false
-  maxAv: 4
-  _sup: superiorCemerai0
-type: rank
-img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
+_key: '!items!1WwYsYbnLwItEVj7'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r2Due00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Dueling Techniques
-    type: ability
-    img: systems/teriock/src/icons/abilities/dueling-techniques.webp
+  - _id: azq2YepcyMcJsrp2
+    _key: '!items.effects!1WwYsYbnLwItEVj7.azq2YepcyMcJsrp2'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.activeBowOut0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/active-bow-out.webp
+    name: Active Bow Out
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - weapon
-      duration:
-        unit: unlimited
-        conditions:
-          present:
-            - dueling
-        description: While Dueling
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using} of
-          your choice becomes @L[Property:AV0]{AV0} against creatures you are
-          @L[Condition:Dueling]{dueling} and you gain
-          @L[Keyword:Limited]{Limited} @L[Ability:Chi Strike]{Chi Strike}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
+      _sup: vU4DiB0u1DAfzrs5
       class: duelist
-      costs:
-        somatic: true
-      endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
-      requirements: >-
-        <p>You must be @L[Condition:Dueling]{dueling} and wielding the targeted
-        weapon.</p>
-      form: normal
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - duelModifying
+      executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.duelingTechnique
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: Ckzn261n62CcGUwr
-    _key: '!items.effects!1WwYsYbnLwItEVj7.Ckzn261n62CcGUwr'
-  - name: Chi Strike
-    type: ability
-    system:
-      revealed: true
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
       impacts:
         base:
-          common:
-            - standardDamage
+          endStatuses:
+            - dueling
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You end a @L[Condition:Dueling]{duel} you are currently in. You do
+          not count as "forfeiting" or "losing" if you use [[lookup name]] to
+          stop @L[Condition:Dueling]{dueling}.</p>
+        proficient: >-
+          <p>If you want, everyone in the @L[Condition:Dueling]{duel} returns to
+          the number of @L[Core:Hit Points and Mana Points]{HP} they had prior
+          to @L[Condition:Dueling]{dueling}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: vU4DiB0u1DAfzrs5
+    _key: '!items.effects!1WwYsYbnLwItEVj7.vU4DiB0u1DAfzrs5'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bowOut0000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/bow-out.webp
+    name: Bow Out
+    system:
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
+          @L[Ability:Reactive Bow Out]{Reactive Bow Out}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: YjmoMRnYDjIZ7YKZ
+    _key: '!items.effects!1WwYsYbnLwItEVj7.YjmoMRnYDjIZ7YKZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.chiStrike0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/chi-strike.webp
+    name: Chi Strike
+    system:
+      _sup: Ckzn261n62CcGUwr
+      class: duelist
+      competence:
+        raw: 0
       costs:
         mp:
           type: static
@@ -108,17 +139,25 @@ effects:
         base: weapon
         package: strike
       duration:
-        unit: instant
-        stationary: false
-        description: Instant
         dawn: false
+        description: Instant
         raw: '0'
+        stationary: false
+        unit: instant
       effectTypes:
         - draining
       executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          common:
+            - standardDamage
       interaction: attack
       limitation: >-
         <p>May only be delivered with the @L[Category:Weapons]{weapon} you made
@@ -139,105 +178,115 @@ effects:
       powerSources:
         - spiritual
       range:
-        unit: ft
         raw: Your Weapon's Range
+        unit: ft
       results:
-        hit: >-
-          <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
-          @L[Core:Standard Damage]{standard damage} you would otherwise
-          deal.</p>
         critHit: >-
           <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the amount of
           @L[Core:Critical Damage]{critical damage} you would otherwise
           deal.</p>
+        hit: >-
+          <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
+          @L[Core:Standard Damage]{standard damage} you would otherwise
+          deal.</p>
+      revealed: true
       skill: true
       standard: true
       targets:
         - creature
-      class: duelist
-      _sup: Ckzn261n62CcGUwr
-      competence:
-        raw: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    img: systems/teriock/src/icons/abilities/chi-strike.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.chiStrike0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: YjmoMRnYDjIZ7YKZ
-    _key: '!items.effects!1WwYsYbnLwItEVj7.YjmoMRnYDjIZ7YKZ'
-  - name: Bow Out
     type: ability
-    img: systems/teriock/src/icons/abilities/bow-out.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
-          @L[Ability:Reactive Bow Out]{Reactive Bow Out}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: duelist
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
+  - _id: Ckzn261n62CcGUwr
+    _key: '!items.effects!1WwYsYbnLwItEVj7.Ckzn261n62CcGUwr'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bowOut0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.duelingTechnique
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: vU4DiB0u1DAfzrs5
-    _key: '!items.effects!1WwYsYbnLwItEVj7.vU4DiB0u1DAfzrs5'
-  - name: Reactive Bow Out
-    type: ability
+    img: systems/teriock/src/icons/abilities/dueling-techniques.webp
+    name: Dueling Techniques
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
+      class: duelist
+      competence:
+        raw: 0
+      costs:
+        somatic: true
       delivery:
         base: self
-      targets:
-        - self
       duration:
-        unit: instant
+        conditions:
+          present:
+            - dueling
+        dawn: false
+        description: While Dueling
+        raw: '0'
         stationary: false
+        unit: unlimited
+      endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using} of
+          your choice becomes @L[Property:AV0]{AV0} against creatures you are
+          @L[Condition:Dueling]{dueling} and you gain
+          @L[Keyword:Limited]{Limited} @L[Ability:Chi Strike]{Chi Strike}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      requirements: >-
+        <p>You must be @L[Condition:Dueling]{dueling} and wielding the targeted
+        weapon.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - weapon
+    type: ability
+  - _id: FSNN7eraWqSNTFKY
+    _key: '!items.effects!1WwYsYbnLwItEVj7.FSNN7eraWqSNTFKY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.reBowOut00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
+    name: Reactive Bow Out
+    system:
+      _sup: vU4DiB0u1DAfzrs5
+      class: duelist
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
         description: Instant
         raw: '0'
-        dawn: false
+        stationary: false
+        unit: instant
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: reactive
       overview:
         base: >-
           <p>The effect causing you to enter a @L[Condition:Dueling]{duel} or
@@ -247,118 +296,64 @@ effects:
           stop @L[Condition:Dueling]{dueling}.</p>
       piercing:
         raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      revealed: true
       skill: true
       standard: true
-      class: duelist
+      targets:
+        - self
       trigger: >-
         <p>Some effect would cause you to start @L[Condition:Dueling]{dueling}
         or @L[Category:Duel modifying effects]{modify} a
         @L[Condition:Dueling]{duel} you are in.</p>
-      form: normal
-      _sup: vU4DiB0u1DAfzrs5
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
+    type: ability
+  - _id: aMpBM1gwJl2mau2J
+    _key: '!items.effects!1WwYsYbnLwItEVj7.aMpBM1gwJl2mau2J'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.reBowOut00000000
+      compendiumSource: Compendium.teriock.abilities.Item.teaCeremony00000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: FSNN7eraWqSNTFKY
-    _key: '!items.effects!1WwYsYbnLwItEVj7.FSNN7eraWqSNTFKY'
-  - name: Active Bow Out
-    type: ability
+    img: systems/teriock/src/icons/abilities/tea-ceremony.webp
+    name: Tea Ceremony
     system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: instant
-        stationary: false
-        description: Instant
-        dawn: false
-        raw: '0'
-      overview:
-        base: >-
-          <p>You end a @L[Condition:Dueling]{duel} you are currently in. You do
-          not count as "forfeiting" or "losing" if you use [[lookup name]] to
-          stop @L[Condition:Dueling]{dueling}.</p>
-        proficient: >-
-          <p>If you want, everyone in the @L[Condition:Dueling]{duel} returns to
-          the number of @L[Core:Hit Points and Mana Points]{HP} they had prior
-          to @L[Condition:Dueling]{dueling}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
       class: duelist
-      form: normal
-      effectTypes:
-        - duelModifying
-      impacts:
-        base:
-          endStatuses:
-            - dueling
-      _sup: vU4DiB0u1DAfzrs5
       competence:
         raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    img: systems/teriock/src/icons/abilities/active-bow-out.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.activeBowOut0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: azq2YepcyMcJsrp2
-    _key: '!items.effects!1WwYsYbnLwItEVj7.azq2YepcyMcJsrp2'
-  - name: Tea Ceremony
-    type: ability
-    img: systems/teriock/src/icons/abilities/tea-ceremony.webp
-    system:
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
+      costs:
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>2 MP per participant. Each participant must pay at least 1 MP.
+              After that, the remaining cost of may be paid in any combination
+              by any of the participants.</p>
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
       duration:
-        unit: hour
-        description: 24 Hours
-        stationary: false
-        raw: '24'
         dawn: false
-      range:
-        unit: ft
-        raw: '5'
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - truthDetecting
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>[[lookup name]] is done in collaboration with up to 1 other
@@ -385,50 +380,55 @@ effects:
           are.</div><div class="note"><b>Note:</b> If an effect such as
           @L[Ability:Lie]{Lie} is used to deceive the [[lookup name]], it
           continues as if the lie were true.</div>
-        proficient: >-
-          <p>You may now target up to 2 × @L[Core:Proficiency Bonus]{P}
-          creatures (including yourself) with [[lookup name]].</p>
         fluent: >-
           <p>You may now target up to 2 × @L[Core:Fluency Bonus]{F} creatures
           (including yourself) with [[lookup name]].</p>
+        proficient: >-
+          <p>You may now target up to 2 × @L[Core:Proficiency Bonus]{P}
+          creatures (including yourself) with [[lookup name]].</p>
       piercing:
         raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
       skill: true
       standard: true
-      ritual: true
-      class: duelist
-      costs:
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>2 MP per participant. Each participant must pay at least 1 MP.
-              After that, the remaining cost of may be paid in any combination
-              by any of the participants.</p>
-      form: normal
-      effectTypes:
-        - truthDetecting
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: aMpBM1gwJl2mau2J
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.teaCeremony00000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!1WwYsYbnLwItEVj7.aMpBM1gwJl2mau2J'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank2Duelist0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!1WwYsYbnLwItEVj7'
+      targets:
+        - creature
+    type: ability
+folder: moritost00000000
+img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
+name: Rank 2 Duelist
+system:
+  _sup: superiorCemerai0
+  archetype: warrior
+  className: duelist
+  classRank: 2
+  competence:
+    raw: 1
+  description: >-
+    <p>Honor-bound and honest to the core, Duelists are often judges and
+    referees for duels as well as devoted warriors. Duelists prize the honor of
+    their family above any sort of personal gain and thus strive for excellence
+    in everything that they do. A true Duelist wins the battle before it has
+    begun. Strategy and personal perfection are the Duelist's way. If you are a
+    Duelist, be calm, focused, well spoken and confident in yourself.</p>
+  flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
+  innate: false
+  maxAv: 4
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

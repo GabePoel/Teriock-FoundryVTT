@@ -1,30 +1,37 @@
 _id: smPtnOfBones0000
+_key: '!items!smPtnOfBones0000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Smash Potion of Bones
-    type: ability
+  - _id: smPtnOfBones0000
+    _key: '!items.effects!smPtnOfBones0000.smPtnOfBones0000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/smash-potion-of-bones.webp
-    _id: smPtnOfBones0000
+    name: Smash Potion of Bones
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
-        material: true
         break: shatter
+        material: true
         materialCost: >-
           <p>Using this ability consumes the @L[Category:Equipment]{equipment}
           that provides it.</p>
-      duration:
-        raw: '1'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 1 Minute
       delivery:
         base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       effectTypes:
         - mental
       endCondition: >-
@@ -33,14 +40,23 @@ effects:
         once, not once for each other target.</p>
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: int
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          statuses:
+            - frightened
+        macros:
+          Compendium_teriock_execution_Macro_3ttAYecC0nfqceqo: preExecution
+          Compendium_teriock_execution_Macro_genericFearPreEx: preExecution
       interaction: manifest
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -57,26 +73,10 @@ effects:
           every other target. You all appear as @L[Creature:Skeleton]{skeletons}
           to each other instead of your true forms. This is a
           @L[Keyword:Illusionary]{minor illusion}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          statuses:
-            - frightened
-        macros:
-          Compendium_teriock_execution_Macro_3ttAYecC0nfqceqo: preExecution
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!smPtnOfBones0000.smPtnOfBones0000'
+    type: ability
 img: systems/teriock/src/icons/abilities/smash-potion-of-bones.webp
 name: Smash Potion of Bones
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!smPtnOfBones0000'

@@ -1,7 +1,235 @@
 _id: A0A12kO0F6LGoWHI
-folder: qTlk5KD9WGOfDG5I
+_key: '!items!A0A12kO0F6LGoWHI'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r4Arc00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+effects:
+  - _id: 0qq9MUxz5NFJh1tW
+    _key: '!items.effects!A0A12kO0F6LGoWHI.0qq9MUxz5NFJh1tW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.gamesman00000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.14
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/gamesman.webp
+    name: Gamesman
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.hunter.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Hunter]{hunter}. In addition, you have
+          @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for one species of
+          your choice. You can change the species once per a @L[Core:Short
+          Rest]{short rest}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: W9ekYaonCEkM8hNy
+    _key: '!items.effects!A0A12kO0F6LGoWHI.W9ekYaonCEkM8hNy'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.misdirect0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/misdirect.webp
+    name: Misdirect
+    system:
+      class: archer
+      competence:
+        raw: 0
+      delivery:
+        base: item
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+      interaction: block
+      maneuver: reactive
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: melee
+      requirements: <p>You block with a @L[Category:Bows]{bow} or your hand.</p>
+      results:
+        fail: <p>The @L[Core:Interactions]{attack's} effect Applies.</p>
+        save: >-
+          <p>The @L[Core:Interactions]{attack's} effect
+          @L[Core:Fizzles]{fizzles} and the @L[Core:Attack
+          Interaction]{attacker} is @L[Condition:Snared]{snared}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - attack
+      trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
+    type: ability
+  - _id: W9yFGFrMmg1QF4lK
+    _key: '!items.effects!A0A12kO0F6LGoWHI.W9yFGFrMmg1QF4lK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      _sup: 0qq9MUxz5NFJh1tW
+      adept:
+        amount: 1
+        enabled: true
+      class: assassin
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: weapon
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - killing
+        - damaging
+      executionTime: r0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 5[lethal]
+      interaction: manifest
+      limitation: >-
+        <p>Only usable against one species, as specified when you use <a
+        class="mw-selflink selflink">Gamesman</a>.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes an additional [[/damage 5[lethal]]]
+          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
+          types]{damage types} of the triggering @L[Category:Attack
+          abilities]{attack}. If the triggering @L[Category:Attack
+          abilities]{attack} was a critical hit, this deals 10
+          @L[Core:Damage]{damage} instead.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: Your Weapon's Range
+        unit: ft
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just hit a creature with an @L[Category:Attack
+        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-4-archer.webp
 name: Rank 4 Archer
 system:
+  _sup: needleDragon0000
   archetype: semi
   className: archer
   classRank: 4
@@ -15,6 +243,8 @@ system:
     always looking ahead as, if taken by surprise, they are easily killed. If
     you are playing an Archer be direct, and on target, sturdy and perhaps high
     strung, watchful of the future and of your back.</p>
+  innate: false
+  maxAv: 2
   statDice:
     hp:
       disabled: false
@@ -26,234 +256,4 @@ system:
       faces: 10
       number:
         raw: '1'
-  innate: false
-  maxAv: 2
-  _sup: needleDragon0000
 type: rank
-img: systems/teriock/src/icons/ranks/rank-4-archer.webp
-effects:
-  - name: Misdirect
-    type: ability
-    img: systems/teriock/src/icons/abilities/misdirect.webp
-    system:
-      powerSources:
-        - martial
-      interaction: block
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: item
-      targets:
-        - attack
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: melee
-      results:
-        save: >-
-          <p>The @L[Core:Interactions]{attack's} effect
-          @L[Core:Fizzles]{fizzles} and the @L[Core:Attack
-          Interaction]{attacker} is @L[Condition:Snared]{snared}.</p>
-        fail: <p>The @L[Core:Interactions]{attack's} effect Applies.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      requirements: <p>You block with a @L[Category:Bows]{bow} or your hand.</p>
-      trigger: <p>You are being @L[Core:Interactions]{attacked}.</p>
-      form: normal
-      impacts:
-        base:
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: end
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: W9ekYaonCEkM8hNy
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.misdirect0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!A0A12kO0F6LGoWHI.W9ekYaonCEkM8hNy'
-  - name: Gamesman
-    type: ability
-    img: systems/teriock/src/icons/abilities/gamesman.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Hunter]{hunter}. In addition, you have
-          @L[Keyword:Adept]{adept} @L[Ability:Slay]{Slay} for one species of
-          your choice. You can change the species once per a @L[Core:Short
-          Rest]{short rest}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: archer
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.hunter.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.gamesman00000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _id: 0qq9MUxz5NFJh1tW
-    _key: '!items.effects!A0A12kO0F6LGoWHI.0qq9MUxz5NFJh1tW'
-  - name: Slay
-    type: ability
-    img: systems/teriock/src/icons/abilities/slay.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-      targets:
-        - creature
-      duration:
-        unit: instant
-        description: Instant
-        stationary: false
-        dawn: false
-        raw: '0'
-      range:
-        unit: ft
-        raw: Your Weapon's Range
-      overview:
-        base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: assassin
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
-      form: normal
-      limitation: >-
-        <p>Only usable against one species, as specified when you use <a
-        class="mw-selflink selflink">Gamesman</a>.</p>
-      effectTypes:
-        - killing
-        - damaging
-      impacts:
-        base:
-          rolls:
-            damage: 5[lethal]
-      revealed: true
-      adept:
-        enabled: true
-        amount: 1
-      grantOnly: false
-      _sup: 0qq9MUxz5NFJh1tW
-      competence:
-        raw: 0
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.slay000000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _id: W9yFGFrMmg1QF4lK
-    _key: '!items.effects!A0A12kO0F6LGoWHI.W9yFGFrMmg1QF4lK'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank4Archer00000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!A0A12kO0F6LGoWHI'

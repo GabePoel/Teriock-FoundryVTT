@@ -1,84 +1,24 @@
-name: Fae Powder
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/fae-powder.webp
+_id: faePowder0000000
+_key: '!items!faePowder0000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: lQz9ev1ciFWGsVAk
+    _key: '!items.effects!faePowder0000000.lQz9ev1ciFWGsVAk'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.applyFaePowder00
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!VvzcPP0QfCvdPU22.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
-    system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!VvzcPP0QfCvdPU22.VQDFXr0oJQZ7Waxe'
-  - name: Fragile
-    type: property
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/apply-fae-powder.webp
+    name: Apply Fae Powder
     system:
-      description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
-    _id: Z8Q21X7QboeySzUT
-    img: systems/teriock/src/icons/properties/fragile.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!VvzcPP0QfCvdPU22.Z8Q21X7QboeySzUT'
-  - name: Apply Fae Powder
-    type: ability
-    system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -87,20 +27,50 @@ effects:
       delivery:
         base: item
       duration:
-        unit: minute
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       executionTime: 10 Minutes
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.damageTypes
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: fire
+            - key: system.protections.resistances.effects
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: burned
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Set on Fire
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Being Harmed by Acid
       interaction: manifest
       maneuver: slow
       overview:
@@ -115,7 +85,8 @@ effects:
           acid. Otherwise, the target is @L[Keyword:Immunity]{immune} to being
           @L[Property:Shattered]{shattered} or @L[Property:Destroyed]{destroyed}
           by fire or acid.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -123,41 +94,88 @@ effects:
       requirements: >-
         <p>Use this ability by interacting with the
         @L[Category:Equipment]{equipment} that provides it.</p>
+      revealed: true
       targets:
         - area
         - creature
         - item
-      impacts:
-        base:
-          changes:
-            - key: system.protections.resistances.damageTypes
-              mode: 2
-              value: fire
-              priority: 10
-            - key: system.protections.resistances.effects
-              mode: 2
-              value: burned
-              priority: 10
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Being Set on Fire
-              priority: 10
-            - key: system.protections.resistances.other
-              mode: 2
-              value: Being Harmed by Acid
-              priority: 10
-    _id: lQz9ev1ciFWGsVAk
-    img: systems/teriock/src/icons/abilities/apply-fae-powder.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.applyFaePowder00
-    _key: '!items.effects!VvzcPP0QfCvdPU22.lQz9ev1ciFWGsVAk'
-  - name: Smash Fae Powder
     type: ability
+  - _id: Z8Q21X7QboeySzUT
+    _key: '!items.effects!faePowder0000000.Z8Q21X7QboeySzUT'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
     system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!faePowder0000000.x6sjcsIVaOkVZOFD'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!faePowder0000000.VQDFXr0oJQZ7Waxe'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+  - _id: TFQlcV6afDIMNP3j
+    _key: '!items.effects!faePowder0000000.TFQlcV6afDIMNP3j'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.smFaePowder00000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/smash-fae-powder.webp
+    name: Smash Fae Powder
+    system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -166,58 +184,75 @@ effects:
       delivery:
         base: aura
       duration:
-        unit: minute
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          endStatuses:
+            - burned
       interaction: manifest
       maneuver: active
       overview:
         base: >-
           <p>Extinguish all flames and neutralize all acids within range. Any
           creatures within range are no longer @L[Condition:Burned]{burned}.</p>
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
-        unit: ft
         raw: '10'
+        unit: ft
       requirements: >-
         <p>Use this ability by interacting with the
         @L[Category:Equipment]{equipment} that provides it. That counts as the
         @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
         the ability.</p>
+      revealed: true
       targets:
         - area
         - creature
         - item
-      impacts:
-        base:
-          endStatuses:
-            - burned
-    _id: TFQlcV6afDIMNP3j
-    img: systems/teriock/src/icons/abilities/smash-fae-powder.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.smFaePowder00000
-    _key: '!items.effects!VvzcPP0QfCvdPU22.TFQlcV6afDIMNP3j'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: VvzcPP0QfCvdPU22
-_key: '!items!VvzcPP0QfCvdPU22'
+    type: ability
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/fae-powder.webp
+name: Fae Powder
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

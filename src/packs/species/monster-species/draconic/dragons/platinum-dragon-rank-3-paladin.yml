@@ -1,116 +1,72 @@
 _id: IOTwK8os5Z4V4PNK
-folder: qTlk5KD9WGOfDG5I
-name: Rank 3 Paladin
-system:
-  archetype: warrior
-  className: paladin
-  classRank: 3
-  competence:
-    raw: 1
-  description: >-
-    <p>The least martial of the warriors, their outlook on life is that of the
-    combat medic, focusing on keeping others alive on the front lines. Paladins
-    are often leaders, as their charismatic charm draws followers to them and
-    everyone likes to have a healer on their side. Paladins see themselves as
-    somewhat better than most others as they have magical powers that other
-    warriors lack. Paladins usually have a strong guiding force in their life to
-    help those in need and do what is right. If you are a Paladin be righteous,
-    concerned for others, and take charge.</p>
-  statDice:
-    hp:
-      disabled: false
-      faces: 12
-      number:
-        raw: '1'
-    mp:
-      disabled: false
-      faces: 8
-      number:
-        raw: '1'
-  innate: false
-  maxAv: 3
-  _sup: platinumDragon00
-type: rank
-img: systems/teriock/src/icons/ranks/rank-3-paladin.webp
+_key: '!items!IOTwK8os5Z4V4PNK'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.r3Pal00000000000
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
 effects:
-  - name: Improved Might Strike
-    type: ability
-    img: systems/teriock/src/icons/abilities/improved-might-strike.webp
-    system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
-        dawn: false
-      overview:
-        base: >-
-          <p>Your @L[Ability:Might Strike]{Might Strike} also makes attacks with
-          the chosen @L[Category:Weapon classes]{weapon class}
-          @L[Property:AV0]{AV0} and @L[Keyword:Boosted]{boosted}.</p>
-      piercing:
-        raw: 0
-      skill: true
-      standard: true
-      class: paladin
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-      range:
-        unit: self
-    _id: q2jjzulkWyMGcIFJ
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
+  - _id: 7Wk3s8Y54plF4wzb
+    _key: '!items.effects!IOTwK8os5Z4V4PNK.7Wk3s8Y54plF4wzb'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imMightStrike000
+      compendiumSource: Compendium.teriock.abilities.Item.bless00000000000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!IOTwK8os5Z4V4PNK.q2jjzulkWyMGcIFJ'
-  - name: Bless
-    type: ability
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
     img: systems/teriock/src/icons/abilities/bless.webp
+    name: Bless
     system:
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
+      class: paladin
+      competence:
+        raw: 0
+      costs:
+        hp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>You may sacrifice any amount of health as a part of this
+              ritual.</p>
+        material: true
+        materialCost: >-
+          <p>You may sacrifice any material components as a part of this ritual,
+          but you must have a symbol of your deity present.</p>
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>You may sacrifice any amount of mana as a part of this
+              ritual.</p>
+        somatic: true
+        verbal: true
       delivery:
         base: sight
         package: ritual
-      targets:
-        - creature
       duration:
-        unit: unlimited
-        description: Always Active
-        stationary: false
-        raw: '0'
         dawn: false
-      sustained: true
-      range:
-        unit: ft
-        raw: '5'
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - contract
+      executionTime: Short Rest
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
       overview:
         base: >-
           <p>[[lookup name]] Self in a ritual that improves your
@@ -128,61 +84,105 @@ effects:
           Gift}, then you loose the effects of [[lookup name]] Self.</div>
       piercing:
         raw: 0
-      skill: true
-      standard: true
-      ritual: true
-      class: paladin
-      costs:
-        verbal: true
-        somatic: true
-        material: true
-        mp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of mana as a part of this
-              ritual.</p>
-        hp:
-          type: variable
-          value:
-            static: 0
-            variable: >-
-              <p>You may sacrifice any amount of health as a part of this
-              ritual.</p>
-        materialCost: >-
-          <p>You may sacrifice any material components as a part of this ritual,
-          but you must have a symbol of your deity present.</p>
+      powerSources:
+        - divine
+      range:
+        raw: '5'
+        unit: ft
       requirements: >-
         <p>You already have a @L[Ability:Divine Gift]{Divine Gift}. This ritual
         can typically be used only once.</p>
-      form: normal
-      effectTypes:
-        - contract
-      competence:
-        raw: 0
       revealed: true
-      grantOnly: false
-      expansion:
-        range:
-          unit: self
-        featSaveAttribute: mov
-    _id: 7Wk3s8Y54plF4wzb
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
+      ritual: true
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    type: ability
+  - _id: q2jjzulkWyMGcIFJ
+    _key: '!items.effects!IOTwK8os5Z4V4PNK.q2jjzulkWyMGcIFJ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bless00000000000
+      compendiumSource: Compendium.teriock.abilities.Item.imMightStrike000
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.14
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!IOTwK8os5Z4V4PNK.7Wk3s8Y54plF4wzb'
-_stats:
-  compendiumSource: Compendium.teriock.classes.Item.rank3Paladin0000
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!items!IOTwK8os5Z4V4PNK'
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/improved-might-strike.webp
+    name: Improved Might Strike
+    system:
+      class: paladin
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @L[Ability:Might Strike]{Might Strike} also makes attacks with
+          the chosen @L[Category:Weapon classes]{weapon class}
+          @L[Property:AV0]{AV0} and @L[Keyword:Boosted]{boosted}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - divine
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+folder: dragons000000000
+img: systems/teriock/src/icons/ranks/rank-3-paladin.webp
+name: Rank 3 Paladin
+system:
+  _sup: platinumDragon00
+  archetype: warrior
+  className: paladin
+  classRank: 3
+  competence:
+    raw: 1
+  description: >-
+    <p>The least martial of the warriors, their outlook on life is that of the
+    combat medic, focusing on keeping others alive on the front lines. Paladins
+    are often leaders, as their charismatic charm draws followers to them and
+    everyone likes to have a healer on their side. Paladins see themselves as
+    somewhat better than most others as they have magical powers that other
+    warriors lack. Paladins usually have a strong guiding force in their life to
+    help those in need and do what is right. If you are a Paladin be righteous,
+    concerned for others, and take charge.</p>
+  innate: false
+  maxAv: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 12
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '1'
+type: rank

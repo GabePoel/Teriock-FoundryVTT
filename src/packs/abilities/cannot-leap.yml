@@ -1,32 +1,56 @@
 _id: cantLeap00000000
+_key: '!items!cantLeap00000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Cannot Leap
-    type: ability
+  - _id: cantLeap00000000
+    _key: '!items.effects!cantLeap00000000.cantLeap00000000'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/cannot-leap.webp
-    _id: cantLeap00000000
+    name: Cannot Leap
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
-      duration:
-        raw: '0'
-        unit: unlimited
-        dawn: false
-        stationary: false
-        description: Always Active
       delivery:
         base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
       executionTime: passive
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: flaw
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 5
+              priority: 20
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
       interaction: manifest
       maneuver: passive
       overview:
@@ -34,41 +58,16 @@ effects:
           <p>You have no horizontal nor vertical @L[Core:Movement Speed]{leap
           speed}. This overrides abilities such as
           @L[Ability:Leaping]{Leaping}.</p>
+      piercing:
+        raw: 0
       powerSources:
         - martial
       range:
         unit: self
+      revealed: true
       targets:
         - self
-      impacts:
-        base:
-          changes:
-            - mode: 5
-              priority: 20
-              time: normal
-              key: system.speedAdjustments.leapVertical
-              target: Actor
-              qualifier: '1'
-              value: '0'
-            - mode: 5
-              priority: 20
-              time: normal
-              key: system.speedAdjustments.leapHorizontal
-              target: Actor
-              qualifier: '1'
-              value: '0'
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cantLeap00000000.cantLeap00000000'
+    type: ability
 img: systems/teriock/src/icons/abilities/cannot-leap.webp
 name: Cannot Leap
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!cantLeap00000000'

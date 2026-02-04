@@ -1,190 +1,191 @@
-name: Sired-by Vampire
-type: creature
+_id: siredByVampire00
+_key: '!actors!siredByVampire00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: vampires00000000
 img: systems/teriock/src/icons/creatures/sired-by-vampire.webp
-prototypeToken:
-  name: Sired-by Vampire
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/sired-by-vampire.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
-  - _id: siredByVampire00
-    folder: LjCSY8jEu8IzHbAQ
-    name: Sired-by Vampire
-    type: species
-    img: systems/teriock/src/icons/creatures/sired-by-vampire.webp
-    system:
-      competence:
-        raw: 1
-      description: <p>Running water is painful to these creatures.</p>
-      statDice:
-        hp:
-          disabled: true
-          faces: 10
-          number:
-            raw: '1'
-        mp:
-          disabled: true
-          faces: 10
-          number:
-            raw: '1'
-      appearance: >-
-        <p>These creatures look exactly like their original species and often do
-        not even seem undead! They usually have slightly pale skin and more
-        pronounced fangs.</p>
-      br: 5
-      size:
-        enabled: false
-        value: 3
-      traits:
-        - undead
+  - _id: SQSUBNMRC9ZZz9a8
+    _key: '!actors.items!siredByVampire00.SQSUBNMRC9ZZz9a8'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     effects:
-      - name: Charm
-        type: ability
-        img: systems/teriock/src/icons/abilities/charm.webp
+      - _id: ozGDVg02SHRX2hCr
+        _key: >-
+          !actors.items.effects!siredByVampire00.SQSUBNMRC9ZZz9a8.ozGDVg02SHRX2hCr
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
         system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: hand
-            package: touch
-          targets:
-            - creature
-          duration:
-            unit: hour
-            description: 1 Hour
-            dawn: false
-            stationary: false
-            raw: '1'
-          range:
-            unit: ft
-            raw: Your Hand's Range
-          results:
-            hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
-          piercing:
-            raw: 2
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: u9pZ8QANF4C7gKB9
+        _key: >-
+          !actors.items.effects!siredByVampire00.SQSUBNMRC9ZZz9a8.u9pZ8QANF4C7gKB9
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: vampires00000000
+    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
+    name: Fanged Jaw
+    system:
+      _sup: siredByVampire00
+      attackPenalty:
+        raw: '-3'
+      bv:
+        raw: '1'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: 1d6
+      fightingStyle: savage
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: siredByVampire00
+    _key: '!actors.items!siredByVampire00.siredByVampire00'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.siredByVampire00
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: CZNNIYanYN7IjNGz
+        _key: >-
+          !actors.items.effects!siredByVampire00.siredByVampire00.CZNNIYanYN7IjNGz
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.charm00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/charm.webp
+        name: Charm
+        system:
+          competence:
+            raw: 0
           costs:
             mp:
               type: static
               value:
                 static: 1
-          requirements: >-
-            <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
-            @L[Condition:Charmed]{charmed} at a time.</p>
-          form: normal
+          delivery:
+            base: hand
+            package: touch
+          duration:
+            dawn: false
+            description: 1 Hour
+            raw: '1'
+            stationary: false
+            unit: hour
           effectTypes:
             - mental
             - control
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
           impacts:
             base:
               statuses:
                 - charmed
-          competence:
-            raw: 0
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: Your Hand's Range
+            unit: ft
+          requirements: >-
+            <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
+            @L[Condition:Charmed]{charmed} at a time.</p>
+          results:
+            hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
           revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-        _id: CZNNIYanYN7IjNGz
+          targets:
+            - creature
+        type: ability
+      - _id: gBvpeZhiR2R8VcAK
+        _key: >-
+          !actors.items.effects!siredByVampire00.siredByVampire00.gBvpeZhiR2R8VcAK
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.charm00000000000
+          compendiumSource: Compendium.teriock.abilities.Item.feeding000000000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!siredByVampire00.siredByVampire00.CZNNIYanYN7IjNGz
-      - name: Feeding
-        type: ability
         img: systems/teriock/src/icons/abilities/feeding.webp
+        name: Feeding
         system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
+          competence:
+            raw: 0
           delivery:
             base: self
-          targets:
-            - self
-          elements:
-            - necromancy
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You must @L[Drain:Mana]{mana drain} at least 3 creatures to
@@ -201,99 +202,50 @@ items:
               1 lost @L[Core:HP]{hit die} and @L[Core:MP]{mana die}.</p>
           piercing:
             raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 5knaN7QJa0LlA1O4
+        _key: >-
+          !actors.items.effects!siredByVampire00.siredByVampire00.5knaN7QJa0LlA1O4
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
+        system:
+          _sup: zQF4QDxZRplgxvFW
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
           form: flaw
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
           grantOnly: false
-          range:
-            unit: self
           impacts: {}
-        _id: gBvpeZhiR2R8VcAK
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.feeding000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!siredByVampire00.siredByVampire00.gBvpeZhiR2R8VcAK
-      - name: Partial Undead
-        type: ability
-        img: systems/teriock/src/icons/abilities/partial-undead.webp
-        system:
-          powerSources:
-            - magical
           interaction: manifest
-          featSaveAttribute: mov
           maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - necromancy
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
-              of @L[Category:Abilities]{abilities}, @L[Category:Damage
-              types]{damage}, and other @L[Category:Effects]{effects}. You also
-              gain @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.partialUndead000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: zQF4QDxZRplgxvFW
-        _key: >-
-          !actors.items.effects!siredByVampire00.siredByVampire00.zQF4QDxZRplgxvFW
-      - name: Healing Sensitivity
-        type: ability
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          elements:
-            - necromancy
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
           overview:
             base: >-
               <p>@L[Core:Healing]{Healing} can be used to
@@ -305,46 +257,98 @@ items:
               This does not consume any of your @L[Core:HP]{hit dice}.</p>
           piercing:
             raw: 0
-          form: flaw
-          _sup: zQF4QDxZRplgxvFW
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - magical
           range:
             unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: zQF4QDxZRplgxvFW
+        _key: >-
+          !actors.items.effects!siredByVampire00.siredByVampire00.zQF4QDxZRplgxvFW
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.hngSensitivity00
+          compendiumSource: Compendium.teriock.abilities.Item.partialUndead000
           coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 5knaN7QJa0LlA1O4
-        _key: >-
-          !actors.items.effects!siredByVampire00.siredByVampire00.5knaN7QJa0LlA1O4
-      - name: Sunlight Sensitivity
-        type: ability
+        img: systems/teriock/src/icons/abilities/partial-undead.webp
+        name: Partial Undead
         system:
+          competence:
+            raw: 0
           delivery:
             base: self
           duration:
-            unit: unlimited
-            stationary: false
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
+            stationary: false
+            unit: unlimited
           elements:
             - necromancy
           executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
+              of @L[Category:Abilities]{abilities}, @L[Category:Damage
+              types]{damage}, and other @L[Category:Effects]{effects}. You also
+              gain @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: qVVcljp60fiIY8b7
+        _key: >-
+          !actors.items.effects!siredByVampire00.siredByVampire00.qVVcljp60fiIY8b7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.sunlightSensitiv
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/sunlight-sensitivity.webp
+        name: Sunlight Sensitivity
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
           featSaveAttribute: mov
           form: flaw
           grantOnly: false
+          impacts: {}
           interaction: manifest
           maneuver: passive
           overview:
@@ -358,206 +362,203 @@ items:
             raw: 0
           powerSources:
             - magical
-          targets:
-            - self
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
           range:
             unit: self
-          impacts: {}
-        _id: qVVcljp60fiIY8b7
-        img: systems/teriock/src/icons/abilities/sunlight-sensitivity.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.sunlightSensitiv
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!siredByVampire00.siredByVampire00.qVVcljp60fiIY8b7
-      - name: Talented Courtier
-        type: ability
-        img: icons/skills/social/diplomacy-handshake-blue.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
+          revealed: true
           targets:
             - self
+        type: ability
+      - _id: whSRR9lPVOKiqPit
+        _key: >-
+          !actors.items.effects!siredByVampire00.siredByVampire00.whSRR9lPVOKiqPit
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.talCourtier00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: icons/skills/social/diplomacy-handshake-blue.webp
+        name: Talented Courtier
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
           duration:
-            unit: unlimited
+            dawn: false
             description: Always Active
             raw: '0'
-            dawn: false
             stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.tradecrafts.courtier.score
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '1'
+          interaction: manifest
+          maneuver: passive
           overview:
             base: >-
               <p>You are a @L[Keyword:Talented]{talented}
               @L[Tradecraft:Courtier]{courtier}.</p>
           piercing:
             raw: 0
-          form: normal
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.tradecrafts.courtier.score
-                  target: Actor
-                  qualifier: '1'
-                  value: '1'
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
+          powerSources:
+            - martial
           range:
             unit: self
-        _id: whSRR9lPVOKiqPit
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.talCourtier00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!siredByVampire00.siredByVampire00.whSRR9lPVOKiqPit
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.siredByVampire00
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!siredByVampire00.siredByVampire00'
-  - name: Fanged Jaw
-    type: body
-    _id: SQSUBNMRC9ZZz9a8
-    img: systems/teriock/src/icons/body-parts/fanged-jaw.webp
+          revealed: true
+          targets:
+            - self
+        type: ability
+    folder: vampires00000000
+    img: systems/teriock/src/icons/creatures/sired-by-vampire.webp
+    name: Sired-by Vampire
     system:
-      damage:
-        base:
-          raw: 1d6
-      fightingStyle: savage
+      appearance: >-
+        <p>These creatures look exactly like their original species and often do
+        not even seem undead! They usually have slightly pale skin and more
+        pronounced fangs.</p>
+      br: 5
       competence:
-        raw: 0
-      _sup: siredByVampire00
-      attackPenalty:
-        raw: '-3'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      bv:
-        raw: '1'
-    effects:
-      - name: Biting
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: ozGDVg02SHRX2hCr
-        img: icons/creatures/abilities/mouth-teeth-long-red.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.biting0000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!siredByVampire00.SQSUBNMRC9ZZz9a8.ozGDVg02SHRX2hCr
-      - name: Weapon
-        type: property
-        system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: u9pZ8QANF4C7gKB9
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!siredByVampire00.SQSUBNMRC9ZZz9a8.u9pZ8QANF4C7gKB9
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.fangedJaw0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!siredByVampire00.SQSUBNMRC9ZZz9a8'
+        raw: 1
+      description: <p>Running water is painful to these creatures.</p>
+      size:
+        enabled: false
+        value: 3
+      statDice:
+        hp:
+          disabled: true
+          faces: 10
+          number:
+            raw: '1'
+        mp:
+          disabled: true
+          faces: 10
+          number:
+            raw: '1'
+      traits:
+        - undead
+    type: species
+name: Sired-by Vampire
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Sired-by Vampire
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/sired-by-vampire.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 1
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 1
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '3'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: SQSUBNMRC9ZZz9a8
-    blocker: SQSUBNMRC9ZZz9a8
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: siredByVampire00
-folder: a4VMausM7daY6o3X
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!siredByVampire00'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 1
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 1
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '3'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: SQSUBNMRC9ZZz9a8
+    blocker: SQSUBNMRC9ZZz9a8
+type: creature

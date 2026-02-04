@@ -1,88 +1,689 @@
-name: Deathcap Succulent
-type: creature
+_id: deathcapSucculen
+_key: '!actors!deathcapSucculen'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.14
+folder: desert0000000000
 img: systems/teriock/src/icons/creatures/deathcap-succulent.webp
-prototypeToken:
-  name: Deathcap Succulent
-  ring:
-    enabled: true
-    colors: {}
-    effects: 1
-    subject:
-      scale: 1
-  texture:
-    src: systems/teriock/src/icons/tokens/deathcap-succulent.webp
-    anchorX: 0.5
-    anchorY: 0.5
-    offsetX: 0
-    offsetY: 0
-    fit: contain
-    scaleX: 1
-    scaleY: 1
-    rotation: 0
-    tint: '#ffffff'
-    alphaThreshold: 0.75
-  width: 1
-  height: 1
-  displayName: 30
-  actorLink: false
-  lockRotation: false
-  rotation: 0
-  alpha: 1
-  displayBars: 20
-  bar1:
-    attribute: hp
-  bar2:
-    attribute: mp
-  light:
-    negative: false
-    priority: 0
-    alpha: 0.5
-    angle: 360
-    bright: 0
-    coloration: 1
-    dim: 0
-    attenuation: 0.5
-    luminosity: 0.5
-    saturation: 0
-    contrast: 0
-    shadows: 0
-    animation:
-      speed: 5
-      intensity: 5
-      reverse: false
-    darkness:
-      min: 0
-      max: 1
-  sight:
-    enabled: true
-    range: 0
-    angle: 360
-    visionMode: basic
-    attenuation: 0.1
-    brightness: 0
-    saturation: 0
-    contrast: 0
-  occludable:
-    radius: 0
-  turnMarker:
-    mode: 1
-    disposition: false
-  randomImg: false
-  appendNumber: false
-  prependAdjective: false
 items:
   - _id: deathcapSucculen
-    folder: s05Q2tRPUQEiiYA3
-    name: Deathcap Succulent
-    type: species
+    _key: '!actors.items!deathcapSucculen.deathcapSucculen'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.deathcapSucculen
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    effects:
+      - _id: 4gvVgt2wEGQsiJtd
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.4gvVgt2wEGQsiJtd
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/agile.webp
+        name: Agile
+        system:
+          _sup: lAzmhJjEhR3ocyro
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.speedAdjustments.difficultTerrain
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '3'
+          interaction: manifest
+          limitation: <p>Desert terrain only.</p>
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You walk through difficult terrain at @L[Core:Movement
+              Speed]{normal speed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: Q1SSsaZyZxAEhPVW
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.Q1SSsaZyZxAEhPVW
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.deathRay00000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/death-ray.webp
+        name: Death Ray
+        system:
+          class: necromancer
+          competence:
+            raw: 0
+          delivery:
+            base: missile
+            package: ray
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - killing
+          elements:
+            - necromancy
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          heightened: >-
+            <p>For each additional @L[Core:MP]{MP} spent, roll an additional
+            [[/kill 1d6]].</p>
+          impacts:
+            base:
+              rolls:
+                kill: 2d6
+            heightened:
+              rolls:
+                kill: 1d6
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          requirements: >-
+            <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
+            creatures]{undead}.</p>
+          results:
+            critHit: <p>Double the number of dice rolled.</p>
+            hit: >-
+              <p>Roll [[/kill 2d6]] if this is greater than or equal the number
+              of @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}.
+              This does not deal @L[Core:Damage]{damage}.</p>
+          revealed: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: Q2QbifHpziiHr2h7
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.Q2QbifHpziiHr2h7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        type: ability
+      - _id: lAzmhJjEhR3ocyro
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.lAzmhJjEhR3ocyro
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.desertNative0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/desert-native.webp
+        name: Desert Native
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: "<p>You gain @L[Ability:Desert Resilience]{Desert Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 05xrN0HqYcaywEo9
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.05xrN0HqYcaywEo9
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.desertResilience
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/desert-resilience.webp
+        name: Desert Resilience
+        system:
+          _sup: lAzmhJjEhR3ocyro
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by desert\_weather.</p>"
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 90ooN69k4RDaK7Rr
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.90ooN69k4RDaK7Rr
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.fireDmgImy000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
+        name: Fire Damage Immunity
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: fire
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Fire]{fire
+              damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: ZNnov7qQuNKBbO9g
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.ZNnov7qQuNKBbO9g
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.lightningImy0000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/lightning-immunity.webp
+        name: Lightning Immunity
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Lightning
+              effects]{lightning effects}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - primal
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: AmUccOj545Xpfd2h
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.AmUccOj545Xpfd2h
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/low-strength.webp
+        name: Low Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -1
+        type: ability
+      - _id: ev3jrOeyt50bM3hq
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.ev3jrOeyt50bM3hq
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        type: ability
+      - _id: eHTwZSRzRUP8cSUi
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.eHTwZSRzRUP8cSUi
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.poorPerception00
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/poor-perception.webp
+        name: Poor Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: -1
+        type: ability
+      - _id: 3B3Np7O8R9zZSXt9
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.3B3Np7O8R9zZSXt9
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/slow.webp
+        name: Slow
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          impacts: {}
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: -1
+        type: ability
+      - _id: 5UQqad1ItpW1UbID
+        _key: >-
+          !actors.items.effects!deathcapSucculen.deathcapSucculen.5UQqad1ItpW1UbID
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.snare00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/abilities/snare.webp
+        name: Snare
+        system:
+          class: ranger
+          competence:
+            raw: 0
+          delivery:
+            base: weapon
+            package: strike
+          duration:
+            dawn: false
+            description: No Limit
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          endCondition: >-
+            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
+            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+            ends.</p>
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              expiration:
+                changeOnCrit: true
+                crit:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: rolled
+                    when:
+                      skip: 1
+                      time: end
+                      trigger: turn
+                    who:
+                      type: target
+                doesExpire: true
+                normal:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: rolled
+                    when:
+                      skip: 0
+                      time: end
+                      trigger: turn
+                    who:
+                      type: target
+              rolls:
+                endCon: 2d4
+              statuses:
+                - snared
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            raw: Your Weapon's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>The target automatically fails the first [[/roll 2d4]]
+              roll.</p>
+            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - leg
+        type: ability
+    folder: desert0000000000
     img: systems/teriock/src/icons/creatures/deathcap-succulent.webp
+    name: Deathcap Succulent
     system:
+      appearance: >-
+        <p>Large hybrid cactus-@L[Creature:Toad]{toads}. Deathcap succulents are
+        red with black spots.</p>
+      br: 6
       competence:
         raw: 1
       description: >-
         <p>Found originally in the Teriock Mists, [[lookup name style=lc]]s are
         very dangerous and have many uses when properly harvested by herbalists.
         They shoot spores of death when potential predators approach them.</p>
+      size:
+        enabled: true
+        value: 1
       statDice:
         hp:
           disabled: false
@@ -94,688 +695,72 @@ items:
           faces: 4
           number:
             raw: '1'
-      appearance: >-
-        <p>Large hybrid cactus-@L[Creature:Toad]{toads}. Deathcap succulents are
-        red with black spots.</p>
-      br: 6
-      size:
-        enabled: true
-        value: 1
       traits:
         - animal
         - plant
-    effects:
-      - name: Death Ray
-        type: ability
-        img: systems/teriock/src/icons/abilities/death-ray.webp
-        system:
-          powerSources:
-            - magical
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: missile
-            package: ray
-          targets:
-            - creature
-          elements:
-            - necromancy
-          duration:
-            unit: instant
-            description: Instant
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: '60'
-          results:
-            hit: >-
-              <p>Roll [[/kill 2d6]] if this is greater than or equal the number
-              of @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}.
-              This does not deal @L[Core:Damage]{damage}.</p>
-            critHit: <p>Double the number of dice rolled.</p>
-          piercing:
-            raw: 1
-          spell: true
-          standard: true
-          class: necromancer
-          heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, roll an additional
-            [[/kill 1d6]].</p>
-          requirements: >-
-            <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
-            creatures]{undead}.</p>
-          form: normal
-          effectTypes:
-            - killing
-          impacts:
-            base:
-              rolls:
-                kill: 2d6
-            heightened:
-              rolls:
-                kill: 1d6
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-        _id: Q1SSsaZyZxAEhPVW
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.deathRay00000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.Q1SSsaZyZxAEhPVW
-      - name: Dense Intelligence
-        type: ability
-        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: int
-              value: -2
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: Q2QbifHpziiHr2h7
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.denseIntelligenc
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.Q2QbifHpziiHr2h7
-      - name: Desert Native
-        type: ability
-        img: systems/teriock/src/icons/abilities/desert-native.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: "<p>You gain @L[Ability:Desert Resilience]{Desert Resilience}\_and\_@L[Keyword:Limited]{Limited} @L[Ability:Agile]{Agile}.</p>"
-          piercing:
-            raw: 0
-          form: normal
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.desertNative0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: lAzmhJjEhR3ocyro
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.lAzmhJjEhR3ocyro
-      - name: Desert Resilience
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: "<p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused by desert\_weather.</p>"
-          piercing:
-            raw: 0
-          form: normal
-          _sup: lAzmhJjEhR3ocyro
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        img: systems/teriock/src/icons/abilities/desert-resilience.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.desertResilience
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 05xrN0HqYcaywEo9
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.05xrN0HqYcaywEo9
-      - name: Agile
-        type: ability
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          overview:
-            base: >-
-              <p>You walk through difficult terrain at @L[Core:Movement
-              Speed]{normal speed}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          limitation: <p>Desert terrain only.</p>
-          effectTypes:
-            - movement
-          impacts:
-            base:
-              changes:
-                - mode: 4
-                  priority: 10
-                  time: normal
-                  key: system.speedAdjustments.difficultTerrain
-                  target: Actor
-                  qualifier: '1'
-                  value: '3'
-          _sup: lAzmhJjEhR3ocyro
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        img: systems/teriock/src/icons/abilities/agile.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.agile00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _id: 4gvVgt2wEGQsiJtd
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.4gvVgt2wEGQsiJtd
-      - name: Fire Damage Immunity
-        type: ability
-        img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
-        system:
-          powerSources:
-            - magical
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Fire]{fire
-              damage}.</p>
-          piercing:
-            raw: 0
-          form: normal
-          effectTypes:
-            - immunity
-          impacts:
-            base:
-              changes:
-                - mode: 2
-                  priority: 10
-                  time: normal
-                  key: system.protections.immunities.damageTypes
-                  target: Actor
-                  qualifier: '1'
-                  value: fire
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-        _id: 90ooN69k4RDaK7Rr
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.fireDmgImy000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.90ooN69k4RDaK7Rr
-      - name: Lightning Immunity
-        type: ability
-        system:
-          delivery:
-            base: self
-          duration:
-            unit: unlimited
-            stationary: false
-            description: Always Active
-            raw: '0'
-            dawn: false
-          executionTime: passive
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to @L[Category:Lightning
-              effects]{lightning effects}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - primal
-          targets:
-            - self
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          range:
-            unit: self
-          impacts: {}
-        _id: ZNnov7qQuNKBbO9g
-        img: systems/teriock/src/icons/abilities/lightning-immunity.webp
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.lightningImy0000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.ZNnov7qQuNKBbO9g
-      - name: Low Strength
-        type: ability
-        img: systems/teriock/src/icons/abilities/low-strength.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: str
-              value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: AmUccOj545Xpfd2h
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.lowStrength00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.AmUccOj545Xpfd2h
-      - name: Normal Sneak
-        type: ability
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: normal
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: ev3jrOeyt50bM3hq
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.normalSneak00000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.ev3jrOeyt50bM3hq
-      - name: Poor Perception
-        type: ability
-        img: systems/teriock/src/icons/abilities/poor-perception.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: per
-              value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: eHTwZSRzRUP8cSUi
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.poorPerception00
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.eHTwZSRzRUP8cSUi
-      - name: Slow
-        type: ability
-        img: systems/teriock/src/icons/abilities/slow.webp
-        system:
-          powerSources:
-            - martial
-          interaction: manifest
-          featSaveAttribute: mov
-          maneuver: passive
-          executionTime: passive
-          delivery:
-            base: self
-          targets:
-            - self
-          duration:
-            unit: unlimited
-            description: Always Active
-            raw: '0'
-            dawn: false
-            stationary: false
-          piercing:
-            raw: 0
-          form: flaw
-          upgrades:
-            score:
-              attribute: mov
-              value: -1
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          competence:
-            raw: 0
-          revealed: true
-          grantOnly: false
-          range:
-            unit: self
-          impacts: {}
-        _id: 3B3Np7O8R9zZSXt9
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.slow000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.3B3Np7O8R9zZSXt9
-      - name: Snare
-        type: ability
-        img: systems/teriock/src/icons/abilities/snare.webp
-        system:
-          powerSources:
-            - martial
-          interaction: attack
-          featSaveAttribute: mov
-          maneuver: active
-          executionTime: a1
-          delivery:
-            base: weapon
-            package: strike
-          targets:
-            - leg
-          duration:
-            unit: unlimited
-            description: No Limit
-            dawn: false
-            stationary: false
-            raw: '0'
-          range:
-            unit: ft
-            raw: Your Weapon's Range
-          results:
-            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
-            critHit: >-
-              <p>The target automatically fails the first [[/roll 2d4]]
-              roll.</p>
-          piercing:
-            raw: 0
-          skill: true
-          standard: true
-          class: ranger
-          endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
-          form: normal
-          impacts:
-            base:
-              statuses:
-                - snared
-              rolls:
-                endCon: 2d4
-              expiration:
-                normal:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: rolled
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: end
-                      trigger: turn
-                      skip: 0
-                crit:
-                  combat:
-                    who:
-                      type: target
-                    what:
-                      type: rolled
-                      roll: 2d4kh1
-                      threshold: 4
-                    when:
-                      time: end
-                      trigger: turn
-                      skip: 1
-                changeOnCrit: true
-                doesExpire: true
-          competence:
-            raw: 0
-          revealed: true
-          expansion:
-            range:
-              unit: self
-            featSaveAttribute: mov
-          grantOnly: false
-        _id: 5UQqad1ItpW1UbID
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.snare00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.deathcapSucculen.5UQqad1ItpW1UbID
+    type: species
+  - _id: GU7fCilDKwIQBHx4
+    _key: '!actors.items!deathcapSucculen.GU7fCilDKwIQBHx4'
     _stats:
-      compendiumSource: Compendium.teriock.species.Item.deathcapSucculen
+      compendiumSource: Compendium.teriock.bodyParts.Item.wrigglingTentacl
       coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!deathcapSucculen.deathcapSucculen'
-  - name: Wriggling Tentacle
-    type: body
-    _id: GU7fCilDKwIQBHx4
+    effects:
+      - _id: BTkFYS0srt7nth4M
+        _key: >-
+          !actors.items.effects!deathcapSucculen.GU7fCilDKwIQBHx4.BTkFYS0srt7nth4M
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: na1bKMVAWKxpkfWZ
+        _key: >-
+          !actors.items.effects!deathcapSucculen.GU7fCilDKwIQBHx4.na1bKMVAWKxpkfWZ
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.16
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @L[Category:Attack abilities]{attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: desert0000000000
     img: systems/teriock/src/icons/body-parts/wriggling-tentacle.webp
+    name: Wriggling Tentacle
     system:
+      _sup: deathcapSucculen
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
       damage:
         base:
           raw: 1d4
       fightingStyle: wraparound
-      competence:
-        raw: 0
-      _sup: deathcapSucculen
-      attackPenalty:
-        raw: '-3'
       range:
         long:
           unit: self
@@ -784,97 +769,113 @@ items:
         short:
           unit: self
       vitals: false
-    effects:
-      - name: Handy
-        type: property
-        system:
-          description: >-
-            <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: BTkFYS0srt7nth4M
-        img: systems/teriock/src/icons/properties/handy.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.handy00000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.GU7fCilDKwIQBHx4.BTkFYS0srt7nth4M
-      - name: Weapon
-        type: property
-        system:
-          description: >-
-            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
-          form: intrinsic
-          competence:
-            raw: 0
-          revealed: true
-        _id: na1bKMVAWKxpkfWZ
-        img: systems/teriock/src/icons/properties/weapon.webp
-        _stats:
-          compendiumSource: Compendium.teriock.properties.Item.wep0000000000000
-          coreVersion: '13'
-          systemId: teriock
-          systemVersion: 0.9.16
-          lastModifiedBy: teriockBuilder00
-        _key: >-
-          !actors.items.effects!deathcapSucculen.GU7fCilDKwIQBHx4.na1bKMVAWKxpkfWZ
-    _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.wrigglingTentacl
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!actors.items!deathcapSucculen.GU7fCilDKwIQBHx4'
+    type: body
+name: Deathcap Succulent
+prototypeToken:
+  actorLink: false
+  alpha: 1
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    animation:
+      intensity: 5
+      reverse: false
+      speed: 5
+    attenuation: 0.5
+    bright: 0
+    coloration: 1
+    contrast: 0
+    darkness:
+      max: 1
+      min: 0
+    dim: 0
+    luminosity: 0.5
+    negative: false
+    priority: 0
+    saturation: 0
+    shadows: 0
+  lockRotation: false
+  name: Deathcap Succulent
+  occludable:
+    radius: 0
+  prependAdjective: false
+  randomImg: false
+  ring:
+    colors: {}
+    effects: 1
+    enabled: true
+    subject:
+      scale: 1
+  rotation: 0
+  sight:
+    angle: 360
+    attenuation: 0.1
+    brightness: 0
+    contrast: 0
+    enabled: true
+    range: 0
+    saturation: 0
+    visionMode: basic
+  texture:
+    alphaThreshold: 0.75
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    scaleX: 1
+    scaleY: 1
+    src: systems/teriock/src/icons/tokens/deathcap-succulent.webp
+    tint: '#ffffff'
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
 system:
-  hp:
-    value: 5
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  mp:
-    value: 3
-    max: 1
-    min: 0
-    morganti: 0
-    temp: 0
-  size:
-    number:
-      raw: '1'
-  presence:
-    max: 1
-    min: 0
-    value: 0
-  scaling:
-    lvl: 1
-    brScale: true
   combat:
     attackPenalty: 0
     hasReaction: true
-  initiative: 1d20 + @mov
-  wielding:
-    attacker: GU7fCilDKwIQBHx4
-    blocker: GU7fCilDKwIQBHx4
-  weight:
-    self:
-      raw: pow(3 + @size, 3)
   detection:
     hiding:
       raw: '@snk.pas'
     perceiving:
       raw: '@per.pas'
-_id: deathcapSucculen
-folder: aQWUbCV9QIzsnZgo
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.14
-  lastModifiedBy: teriockBuilder00
-_key: '!actors!deathcapSucculen'
+  hp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 5
+  initiative: 1d20 + @mov
+  mp:
+    max: 1
+    min: 0
+    morganti: 0
+    temp: 0
+    value: 3
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+    lvl: 1
+  size:
+    number:
+      raw: '1'
+  weight:
+    self:
+      raw: pow(3 + @size, 3)
+  wielding:
+    attacker: GU7fCilDKwIQBHx4
+    blocker: GU7fCilDKwIQBHx4
+type: creature

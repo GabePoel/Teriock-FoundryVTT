@@ -1,36 +1,43 @@
 _id: whiteDrgBreath00
+_key: '!items!whiteDrgBreath00'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: White Dragon Breath
-    type: ability
+  - _id: whiteDrgBreath00
+    _key: '!items.effects!whiteDrgBreath00.whiteDrgBreath00'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
     img: systems/teriock/src/icons/abilities/white-dragon-breath.webp
-    _id: whiteDrgBreath00
+    name: White Dragon Breath
     system:
       competence:
         raw: 0
-      suppression: {}
-      piercing:
-        raw: 0
-      revealed: true
       costs:
         mp:
           type: static
           value:
             static: 1
-      duration:
-        raw: '10'
-        unit: minute
-        dawn: false
-        stationary: false
-        description: 10 Minutes
       delivery:
         base: cone
+      duration:
+        dawn: false
+        description: 10 Minutes
+        raw: '10'
+        stationary: false
+        unit: minute
       elements:
         - life
       executionTime: a1
       expansion:
+        featSaveAttribute: mov
         range:
           unit: self
-        featSaveAttribute: mov
       featSaveAttribute: mov
       form: special
       grantOnly: false
@@ -38,40 +45,32 @@ effects:
         <p>For each additional @L[Core:MP]{MP} spent, deal an additional
         [[/damage 2d10[magic holy]]] @L[Core:Damage]{damage}. Additionally, the
         @L[Core:Range]{range} of this increases by 5 feet.</p>
+      impacts:
+        heightened:
+          rolls:
+            damage: 2d10[magic holy]
       interaction: feat
       maneuver: active
+      piercing:
+        raw: 0
       powerSources:
         - magical
       range:
         raw: '30'
         unit: ft
       results:
+        fail: >-
+          <p>Target cannot deal @L[Core:Damage]{damage} and is
+          @L[Condition:Lighted]{lighted} to a creature of your choice.</p>
         save: >-
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
           choice and takes half as much @L[Core:Damage]{damage} from this as
           they would otherwise. This is calculated after any
           @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
-        fail: >-
-          <p>Target cannot deal @L[Core:Damage]{damage} and is
-          @L[Condition:Lighted]{lighted} to a creature of your choice.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        heightened:
-          rolls:
-            damage: 2d10[magic holy]
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.16
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!whiteDrgBreath00.whiteDrgBreath00'
+    type: ability
 img: systems/teriock/src/icons/abilities/white-dragon-breath.webp
 name: White Dragon Breath
 type: wrapper
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.16
-  lastModifiedBy: teriockBuilder00
-_key: '!items!whiteDrgBreath00'

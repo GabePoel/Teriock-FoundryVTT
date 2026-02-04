@@ -1,63 +1,167 @@
-name: Burning Liquid
-type: equipment
-folder: EAXfBtYX8GFp5gBt
-system:
-  equipmentType: Bottle
-  equipped: true
-  consumable: true
-  quantity: 1
-  damage:
-    base:
-      saved: '0'
-  weight:
-    saved: 1
-    raw: 0
-  range:
-    ranged: false
-  equipmentClasses:
-    - knickknacks
-  minStr:
-    saved: -3
-    raw: -3
-  powerLevel: enchanted
-img: systems/teriock/src/icons/consumables/burning-liquid.webp
+_id: burningLiquid000
+_key: '!items!burningLiquid000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
 effects:
-  - name: Searchable
-    type: property
-    system:
-      description: >-
-        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
-    _id: x6sjcsIVaOkVZOFD
-    img: systems/teriock/src/icons/properties/searchable.webp
+  - _id: ayQ7bixoUs68Akwk
+    _key: '!items.effects!burningLiquid000.ayQ7bixoUs68Akwk'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.searchable000000
-    _key: '!items.effects!duwIWyky0qrmKHNg.x6sjcsIVaOkVZOFD'
-  - name: Small
-    type: property
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/burning-touch.webp
+    name: Burning Touch
     system:
-      description: >-
-        <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
-      form: intrinsic
-    _id: VQDFXr0oJQZ7Waxe
-    img: systems/teriock/src/icons/properties/small.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.small00000000000
-    _key: '!items.effects!duwIWyky0qrmKHNg.VQDFXr0oJQZ7Waxe'
-  - name: Pour Burning Liquid
+      _sup: 3YFdGwrhVCum4i46
+      class: flameMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        amount: 1
+        enabled: true
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[fire magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic fire]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
+          target.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
     type: ability
+  - _id: 3YFdGwrhVCum4i46
+    _key: '!items.effects!burningLiquid000.3YFdGwrhVCum4i46'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.dkBurningLiquid0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+    name: Drink Burning Liquid
     system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Burning
+          Touch]{Burning Touch}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: 4rs9JifhiZThItUz
+    _key: '!items.effects!burningLiquid000.4rs9JifhiZThItUz'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
+      form: flaw
+      revealed: true
+    type: property
+  - _id: isFF2aDAzacYhDBF
+    _key: '!items.effects!burningLiquid000.isFF2aDAzacYhDBF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.prBurningLiquid0
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/pour-burning-liquid.webp
+    name: Pour Burning Liquid
+    system:
+      competence:
+        raw: 0
       costs:
         material: true
         materialCost: >-
@@ -66,23 +170,27 @@ effects:
       delivery:
         base: item
       duration:
-        unit: minute
-        quantity: 1
-        stationary: false
+        dawn: false
         description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+      impacts:
+        base:
+          startStatuses:
+            - burned
       interaction: attack
       maneuver: active
-      piercing: normal
+      piercing:
+        raw: 0
       powerSources:
         - alchemical
       range:
@@ -94,157 +202,77 @@ effects:
         the ability. Target must be @L[Condition:Down]{down}.</p>
       results:
         hit: <p>Target becomes @L[Condition:Burned]{burned}.</p>
+      revealed: true
       targets:
         - creature
-      impacts:
-        base:
-          startStatuses:
-            - burned
-    _id: isFF2aDAzacYhDBF
-    img: systems/teriock/src/icons/abilities/pour-burning-liquid.webp
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.prBurningLiquid0
-    _key: '!items.effects!duwIWyky0qrmKHNg.isFF2aDAzacYhDBF'
-  - name: Drink Burning Liquid
     type: ability
-    system:
-      delivery:
-        base: self
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Burning
-          Touch]{Burning Touch}.</p>
-      piercing: normal
-      powerSources:
-        - alchemical
-      targets:
-        - self
-    _id: 3YFdGwrhVCum4i46
-    img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+  - _id: x6sjcsIVaOkVZOFD
+    _key: '!items.effects!burningLiquid000.x6sjcsIVaOkVZOFD'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.searchable000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.dkBurningLiquid0
-    _key: '!items.effects!duwIWyky0qrmKHNg.3YFdGwrhVCum4i46'
-  - name: Burning Touch
-    type: ability
-    system:
-      costs:
-        verbal: true
-        somatic: true
-      delivery:
-        base: hand
-        package: touch
-      duration:
-        unit: instant
-        quantity: 0
-        stationary: false
-        description: Instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: true
-        amount: 1
-      grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: attack
-      maneuver: active
-      piercing: ub
-      powerSources:
-        - magical
-      range:
-        unit: ft
-        raw: Your Hand's Range
-      results:
-        hit: >-
-          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-      class: flameMage
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[fire magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
-      _sup: 3YFdGwrhVCum4i46
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
-    _stats:
-      coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.11
-      lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.abilities.Item.burningTouch0000
-    _id: ayQ7bixoUs68Akwk
-    _key: '!items.effects!duwIWyky0qrmKHNg.ayQ7bixoUs68Akwk'
-  - name: Fragile
-    type: property
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/searchable.webp
+    name: Searchable
     system:
+      competence:
+        raw: 0
       description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
+        <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
+        steal through @L[Category:Abilities]{abilities} like
+        @L[Ability:Search]{Search}.</p>
       form: flaw
-    _id: 4rs9JifhiZThItUz
-    img: systems/teriock/src/icons/properties/fragile.webp
+      revealed: true
+    type: property
+  - _id: VQDFXr0oJQZ7Waxe
+    _key: '!items.effects!burningLiquid000.VQDFXr0oJQZ7Waxe'
     _stats:
+      compendiumSource: Compendium.teriock.properties.Item.small00000000000
       coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-      compendiumSource: Compendium.teriock.properties.Item.fragile000000000
-    _key: '!items.effects!duwIWyky0qrmKHNg.4rs9JifhiZThItUz'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_id: duwIWyky0qrmKHNg
-_key: '!items!duwIWyky0qrmKHNg'
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/properties/small.webp
+    name: Small
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is easily concealed and can often be used
+        in the same hand as a @L[Category:Shields]{shield}.</p>
+      form: intrinsic
+      revealed: true
+    type: property
+folder: commonConsumable
+img: systems/teriock/src/icons/consumables/burning-liquid.webp
+name: Burning Liquid
+system:
+  attackPenalty:
+    raw: '-3'
+  competence:
+    raw: 0
+  consumable: true
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - knickknacks
+  equipmentType: Bottle
+  equipped: true
+  minStr:
+    raw: '-3'
+  powerLevel: enchanted
+  quantity: 1
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+  vitals: false
+  weight:
+    raw: '1'
+type: equipment

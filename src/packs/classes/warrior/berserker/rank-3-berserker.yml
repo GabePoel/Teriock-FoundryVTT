@@ -1,5 +1,626 @@
-_id: rank3Berserker00
+_id: r3Ber00000000000
+_key: '!items!r3Ber00000000000'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.16
+effects:
+  - _id: AtUPPT2VKpl3SDUg
+    _key: '!items.effects!r3Ber00000000000.AtUPPT2VKpl3SDUg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.battleCry0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/battle-cry.webp
+    name: Battle Cry
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
+          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: DKLJOu0AxsOK92sk
+    _key: '!items.effects!r3Ber00000000000.DKLJOu0AxsOK92sk'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.battleCryAura000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+    name: Battle Cry Aura
+    system:
+      _sup: AtUPPT2VKpl3SDUg
+      class: berserker
+      competence:
+        raw: 0
+      costs:
+        verbal: true
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - loud
+      endCondition: >-
+        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
+        macros:
+          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
+      interaction: feat
+      maneuver: active
+      overview:
+        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: Rusv2sBLHPXJvDgF
+    _key: '!items.effects!r3Ber00000000000.Rusv2sBLHPXJvDgF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.battleCryRsc0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+    name: Battle Cry Resistance
+    system:
+      _sup: AtUPPT2VKpl3SDUg
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 5 Minutes
+        raw: '5'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - resistance
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime: a0
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.statuses
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: frightened
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} being
+          @L[Condition:Frightened]{frightened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: T9boNaMCYQ6rnTzO
+    _key: '!items.effects!r3Ber00000000000.T9boNaMCYQ6rnTzO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.berserk000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/berserk.webp
+    name: Berserk
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 5 Minutes
+        raw: '5'
+        stationary: false
+        unit: minute
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You gain 15 @L[Core:Temporary Hit Points]{temporary HP} and become
+          @L[Condition:Frenzied]{frenzied}.</p>
+        fluent: >-
+          <p>You instead gain an additional 5 × @L[Core:Fluency Bonus]{F}
+          @L[Core:Temporary Hit Points]{temporary HP} and gain
+          @L[Ability:Swift]{Swift}.</p>
+        proficient: >-
+          <p>You gain an additional 5 × @L[Core:Proficiency Bonus]{P}
+          @L[Core:Temporary Hit Points]{temporary HP} and gain
+          @L[Ability:Fast]{Fast}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: ss8nMvpGEnj5nnXU
+    _key: '!items.effects!r3Ber00000000000.ss8nMvpGEnj5nnXU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.berHngFcr0000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/berserker-healing-factor.webp
+    name: Berserker Healing Factor
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        conditions:
+          absent:
+            - dead
+        dawn: false
+        description: While Alive
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_7Kae2klQGEeDaA7B: turnStart
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turn]{turns}, you
+          @L[Core:Healing]{heal}. You cannot restore @L[Core:Hit Points and Mana
+          Points]{HP} in this way.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 5KZgbY0Lkn3zj6Jz
+    _key: '!items.effects!r3Ber00000000000.5KZgbY0Lkn3zj6Jz'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.calledMagRsc0000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: combat
+    img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
+    name: Called Magic Resistance
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        conditions:
+          absent:
+            - dead
+        dawn: false
+        description: While Alive
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Conjured Spells
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You @L[Keyword:Resistance]{resist} all @L[Category:Conjured
+          spells]{Conjured spells} that aren't @L[Category:Self target
+          spells]{self targeted}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: UrlBZBiVT2ktwrD9
+    _key: '!items.effects!r3Ber00000000000.UrlBZBiVT2ktwrD9'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.intimidate000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/intimidate.webp
+    name: Intimidate
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Intimidating Presence]{Intimidating Presence}
+          and @L[Ability:Terrify]{Terrify}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: A0r6mF4wbzDT6K3d
+    _key: '!items.effects!r3Ber00000000000.A0r6mF4wbzDT6K3d'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.intimidatingPres
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/intimidating-presence.webp
+    name: Intimidating Presence
+    system:
+      _sup: UrlBZBiVT2ktwrD9
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.enforcer.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '2'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @L[Keyword:Expertise]{expert}
+          @L[Tradecraft:Enforcer]{enforcer}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: llBsqzhqWh4FcI6K
+    _key: '!items.effects!r3Ber00000000000.llBsqzhqWh4FcI6K'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.terrify000000000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    img: systems/teriock/src/icons/abilities/terrify.webp
+    name: Terrify
+    system:
+      _sup: UrlBZBiVT2ktwrD9
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+      duration:
+        dawn: false
+        description: 5 Minutes
+        raw: '5'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - mental
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 1d4[psychic]
+          statuses:
+            - frightened
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        fail: >-
+          <p>If the target is @L[Condition:Frightened]{frightened}, they
+          immediately take [[/damage 1d4[psychic]]] @L[Core:Damage]{damage}.
+          Additionally, if some effect would cause them to become
+          @L[Condition:Frightened]{frightened}, they take [[/damage
+          1d4[psychic]]] @L[Core:Damage]{damage} as well.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: JbmNXuSEKivN1kMo
+    _key: '!items.effects!r3Ber00000000000.JbmNXuSEKivN1kMo'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.throwTheBones000
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.16
+    flags:
+      teriock:
+        category: support
+    img: systems/teriock/src/icons/abilities/throw-the-bones.webp
+    name: Throw the Bones
+    system:
+      class: berserker
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - immunity
+      endCondition: >-
+        <p>Once the @L[Keyword:Immune]{immunity} provided by [[lookup name]] is
+        used, this effect ends.</p>
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Target is @L[Keyword:Immune]{immune} to the next use of a
+          @L[Category:Spells]{spells} that would affect them.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        raw: '5'
+        unit: ft
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    type: ability
 folder: berserker0000000
+img: systems/teriock/src/icons/ranks/rank-3-berserker.webp
 name: Rank 3 Berserker
 system:
   archetype: warrior
@@ -13,6 +634,8 @@ system:
     the sport of combat and don't like missile weapons. Not reliable as guards
     as they are too distracted and are rarely very intelligent. If you are a
     Berserker be larger than life, brash, not too bright and stupidly brave.</p>
+  innate: false
+  maxAv: 2
   statDice:
     hp:
       disabled: false
@@ -24,623 +647,4 @@ system:
       faces: 8
       number:
         raw: '1'
-  innate: false
-  maxAv: 2
 type: rank
-img: systems/teriock/src/icons/ranks/rank-3-berserker.webp
-effects:
-  - name: Battle Cry
-    type: ability
-    img: systems/teriock/src/icons/abilities/battle-cry.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
-          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: combat
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.battleCry0000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: AtUPPT2VKpl3SDUg
-    _key: '!items.effects!rank3Berserker00.AtUPPT2VKpl3SDUg'
-  - name: Battle Cry Aura
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: aura
-      targets:
-        - creature
-      duration:
-        unit: minute
-        quantity: 1
-        stationary: false
-        description: 1 Minute
-      range:
-        unit: ft
-        raw: '10'
-      overview:
-        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
-      results:
-        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      costs:
-        verbal: true
-      endCondition: >-
-        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - loud
-      impacts:
-        base:
-          statuses:
-            - frightened
-          rolls:
-            endCon: 2d4
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: rolled
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: true
-        macros:
-          Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      _sup: AtUPPT2VKpl3SDUg
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.battleCryAura000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: DKLJOu0AxsOK92sk
-    _key: '!items.effects!rank3Berserker00.DKLJOu0AxsOK92sk'
-  - name: Battle Cry Resistance
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a0
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: minute
-        quantity: 5
-        stationary: false
-        description: 5 Minutes
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} being
-          @L[Condition:Frightened]{frightened}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.statuses
-              target: Actor
-              qualifier: '1'
-              value: frightened
-      _sup: AtUPPT2VKpl3SDUg
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.battleCryRsc0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: Rusv2sBLHPXJvDgF
-    _key: '!items.effects!rank3Berserker00.Rusv2sBLHPXJvDgF'
-  - name: Berserk
-    type: ability
-    img: systems/teriock/src/icons/abilities/berserk.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: minute
-        quantity: 5
-        description: 5 Minutes
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain 15 @L[Core:Temporary Hit Points]{temporary HP} and become
-          @L[Condition:Frenzied]{frenzied}.</p>
-        proficient: >-
-          <p>You gain an additional 5 × @L[Core:Proficiency Bonus]{P}
-          @L[Core:Temporary Hit Points]{temporary HP} and gain
-          @L[Ability:Fast]{Fast}.</p>
-        fluent: >-
-          <p>You instead gain an additional 5 × @L[Core:Fluency Bonus]{F}
-          @L[Core:Temporary Hit Points]{temporary HP} and gain
-          @L[Ability:Swift]{Swift}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      endCondition: <p>You die or 1 minute passes without combat.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: T9boNaMCYQ6rnTzO
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.berserk000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Berserker00.T9boNaMCYQ6rnTzO'
-  - name: Called Magic Resistance
-    type: ability
-    img: systems/teriock/src/icons/abilities/called-magic-resistance.webp
-    system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          absent:
-            - dead
-        description: While Alive
-        stationary: false
-      overview:
-        base: >-
-          <p>You @L[Keyword:Resistance]{resist} all @L[Category:Conjured
-          spells]{Conjured spells} that aren't @L[Category:Self target
-          spells]{self targeted}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - resistance
-      impacts:
-        base:
-          changes:
-            - mode: 2
-              priority: 10
-              time: normal
-              key: system.protections.resistances.other
-              target: Actor
-              qualifier: '1'
-              value: Conjured Spells
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: 5KZgbY0Lkn3zj6Jz
-    flags:
-      teriock:
-        category: combat
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.calledMagRsc0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Berserker00.5KZgbY0Lkn3zj6Jz'
-  - name: Berserker Healing Factor
-    type: ability
-    img: systems/teriock/src/icons/abilities/berserker-healing-factor.webp
-    system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          absent:
-            - dead
-        description: While Alive
-        stationary: false
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turn]{turns}, you
-          @L[Core:Healing]{heal}. You cannot restore @L[Core:Hit Points and Mana
-          Points]{HP} in this way.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - healing
-        - regeneration
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_7Kae2klQGEeDaA7B: turnStart
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: ss8nMvpGEnj5nnXU
-    flags:
-      teriock:
-        category: support
-        defaultAbility: true
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.berHngFactor0000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Berserker00.ss8nMvpGEnj5nnXU'
-  - name: Intimidate
-    type: ability
-    img: systems/teriock/src/icons/abilities/intimidate.webp
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        description: Always Active
-        stationary: false
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Intimidating Presence]{Intimidating Presence}
-          and @L[Ability:Terrify]{Terrify}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.intimidate000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: UrlBZBiVT2ktwrD9
-    _key: '!items.effects!rank3Berserker00.UrlBZBiVT2ktwrD9'
-  - name: Intimidating Presence
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-      targets:
-        - self
-      duration:
-        unit: noLimit
-        quantity: 0
-        stationary: false
-        description: Always Active
-      overview:
-        base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Enforcer]{enforcer}.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      impacts:
-        base:
-          changes:
-            - mode: 4
-              priority: 10
-              time: normal
-              key: system.tradecrafts.enforcer.score
-              target: Actor
-              qualifier: '1'
-              value: '2'
-      _sup: UrlBZBiVT2ktwrD9
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/intimidating-presence.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.intimidatingPres
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: A0r6mF4wbzDT6K3d
-    _key: '!items.effects!rank3Berserker00.A0r6mF4wbzDT6K3d'
-  - name: Terrify
-    type: ability
-    system:
-      powerSources:
-        - martial
-      interaction: feat
-      featSaveAttribute: int
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-      targets:
-        - creature
-      duration:
-        unit: minute
-        quantity: 5
-        stationary: false
-        description: 5 Minutes
-      range:
-        unit: ft
-        raw: '30'
-      results:
-        fail: >-
-          <p>If the target is @L[Condition:Frightened]{frightened}, they
-          immediately take [[/damage 1d4[psychic]]] @L[Core:Damage]{damage}.
-          Additionally, if some effect would cause them to become
-          @L[Condition:Frightened]{frightened}, they take [[/damage
-          1d4[psychic]]] @L[Core:Damage]{damage} as well.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      class: berserker
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - mental
-      impacts:
-        base:
-          statuses:
-            - frightened
-          rolls:
-            damage: 1d4[psychic]
-      _sup: UrlBZBiVT2ktwrD9
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    img: systems/teriock/src/icons/abilities/terrify.webp
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.terrify000000000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _id: llBsqzhqWh4FcI6K
-    _key: '!items.effects!rank3Berserker00.llBsqzhqWh4FcI6K'
-  - name: Throw the Bones
-    type: ability
-    img: systems/teriock/src/icons/abilities/throw-the-bones.webp
-    system:
-      powerSources:
-        - primal
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        package: ritual
-      targets:
-        - creature
-      duration:
-        unit: hour
-        quantity: 24
-        description: 24 Hours
-        stationary: false
-      range:
-        unit: ft
-        raw: '5'
-      overview:
-        base: >-
-          <p>Target is @L[Keyword:Immune]{immune} to the next use of a
-          @L[Category:Spells]{spells} that would affect them.</p>
-      piercing:
-        raw: 0
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      skill: true
-      standard: true
-      ritual: true
-      class: berserker
-      endCondition: >-
-        <p>Once the @L[Keyword:Immune]{immunity} provided by [[lookup name]] is
-        used, this effect ends.</p>
-      expansionSaveAttribute: mov
-      form: normal
-      effectTypes:
-        - immunity
-      competence:
-        raw: 0
-      revealed: true
-      grantOnly: false
-    _id: JbmNXuSEKivN1kMo
-    flags:
-      teriock:
-        category: support
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.throwTheBones000
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.8
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!rank3Berserker00.JbmNXuSEKivN1kMo'
-_stats:
-  coreVersion: '13'
-  systemId: teriock
-  systemVersion: 0.9.1
-  lastModifiedBy: teriockBuilder00
-_key: '!items!rank3Berserker00'
