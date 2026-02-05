@@ -6,19 +6,16 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
-  - _id: 3yI3M0VJNmIhSZpr
-    _key: '!items.effects!eabb35503034070a.3yI3M0VJNmIhSZpr'
+  - _id: eabb35503034070a
+    _key: '!items.effects!eabb35503034070a.eabb35503034070a'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
+    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
+    name: Monstrous Strength
     system:
-      _sup: g3EITagf5czbLaFs
-      class: knight
       competence:
         raw: 0
       delivery:
@@ -35,16 +32,33 @@ effects:
         range:
           unit: self
       featSaveAttribute: mov
-      form: normal
+      form: special
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.damage.all.raw
+              mode: 0
+              priority: 100
+              qualifier: and(@dmg, @range.melee)
+              target: armament
+              time: normal
+              value: '1'
+            - key: system.piercing.raw
+              mode: 4
+              priority: 10
+              qualifier: '@range.melee'
+              target: armament
+              time: normal
+              value: '1'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Property:AV0]{AV0}.</div>
+          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
+          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
+          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
+          and they are @L[Keyword:AV0]{AV0} for you.</p>
       piercing:
         raw: 0
       powerSources:
@@ -52,14 +66,65 @@ effects:
       range:
         unit: self
       revealed: true
-      skill: true
-      standard: true
       targets:
         - self
       upgrades:
         score:
           attribute: str
-          value: 1
+          value: 5
+    type: ability
+  - _id: ItRjMpo3XSZAYYQQ
+    _key: '!items.effects!eabb35503034070a.ItRjMpo3XSZAYYQQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.abbed3e48efec13a
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
+    name: Supernatural Strength
+    system:
+      _sup: eabb35503034070a
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
+          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
+          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
+          @L[Category:Attack abilities]{attack} to make it
+          @L[Keyword:AV0]{AV0}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 4
     type: ability
   - _id: ElgNURrH9OTECkbk
     _key: '!items.effects!eabb35503034070a.ElgNURrH9OTECkbk'
@@ -115,55 +180,6 @@ effects:
         score:
           attribute: str
           value: 3
-    type: ability
-  - _id: JBJlNOWABKOczPAK
-    _key: '!items.effects!eabb35503034070a.JBJlNOWABKOczPAK'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.54f63d63ae4376a9
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: g3EITagf5czbLaFs
-      class: knight
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      skill: true
-      standard: true
-      targets:
-        - self
     type: ability
   - _id: g3EITagf5czbLaFs
     _key: '!items.effects!eabb35503034070a.g3EITagf5czbLaFs'
@@ -277,73 +293,6 @@ effects:
         effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
         @L[Category:Attack abilities]{attack}.</p>
     type: ability
-  - _id: eabb35503034070a
-    _key: '!items.effects!eabb35503034070a.eabb35503034070a'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/monstrous-strength.webp
-    name: Monstrous Strength
-    system:
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.damage.all.raw
-              mode: 0
-              priority: 100
-              qualifier: and(@dmg, @range.melee)
-              target: armament
-              time: normal
-              value: '1'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '@range.melee'
-              target: armament
-              time: normal
-              value: '1'
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
-          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
-          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
-          and they are @L[Keyword:AV0]{AV0} for you.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 5
-    type: ability
   - _id: DYr6GrWagYhH1EZW
     _key: '!items.effects!eabb35503034070a.DYr6GrWagYhH1EZW'
     _stats:
@@ -396,18 +345,19 @@ effects:
       targets:
         - item
     type: ability
-  - _id: ItRjMpo3XSZAYYQQ
-    _key: '!items.effects!eabb35503034070a.ItRjMpo3XSZAYYQQ'
+  - _id: JBJlNOWABKOczPAK
+    _key: '!items.effects!eabb35503034070a.JBJlNOWABKOczPAK'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.abbed3e48efec13a
+      compendiumSource: Compendium.teriock.abilities.Item.54f63d63ae4376a9
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/supernatural-strength.webp
-    name: Supernatural Strength
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
     system:
-      _sup: eabb35503034070a
+      _sup: g3EITagf5czbLaFs
+      class: knight
       competence:
         raw: 0
       delivery:
@@ -424,17 +374,14 @@ effects:
         range:
           unit: self
       featSaveAttribute: mov
-      form: special
+      form: normal
       grantOnly: false
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
-          @L[Category:Attack abilities]{attack} to make it
-          @L[Keyword:AV0]{AV0}.</p>
+          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+          piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -442,12 +389,65 @@ effects:
       range:
         unit: self
       revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: 3yI3M0VJNmIhSZpr
+    _key: '!items.effects!eabb35503034070a.3yI3M0VJNmIhSZpr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: g3EITagf5czbLaFs
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Property:AV0]{AV0}.</div>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
       targets:
         - self
       upgrades:
         score:
           attribute: str
-          value: 4
+          value: 1
     type: ability
 img: systems/teriock/src/icons/abilities/monstrous-strength.webp
 name: Monstrous Strength

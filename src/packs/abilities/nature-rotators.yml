@@ -6,6 +6,103 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
+  - _id: 063b0cceb9b65c6c
+    _key: '!items.effects!063b0cceb9b65c6c.063b0cceb9b65c6c'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/nature-rotators.webp
+    name: Nature Rotators
+    system:
+      class: natureMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @L[Category:Spells]{spells}. If you
+          create any @L[Core:Elder Sorcery]{Elder Sorcery}
+          @L[Category:Spells]{spells} of your own, they get added to this list.
+          However, just because you "know" how to cast these spells, doesn't
+          mean you are always prepared to. Although all @L[Category:Mage
+          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
+          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
+          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          rotated into your spell list at any given time across <i>all</i>
+          classes. @L[Category:Mage classes]{MR} refers to the number of
+          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
+          which spells you have prepared. The @L[Category:Rotator
+          spells]{rotator spells} automatically available to you are
+          @L[Ability:Crown of Vines]{Crown of Vines},
+          @L[Ability:Polymorph]{Polymorph}, @L[Ability:Regeneration
+          Touch]{Regeneration Touch}, @L[Ability:Unforge]{Unforge}, and
+          @L[Ability:Wildborn]{Wildborn}.</p>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
   - _id: Iz1cir73WdRZ2ghL
     _key: '!items.effects!063b0cceb9b65c6c.Iz1cir73WdRZ2ghL'
     _stats:
@@ -258,103 +355,6 @@ effects:
       targets:
         - creature
     type: ability
-  - _id: 063b0cceb9b65c6c
-    _key: '!items.effects!063b0cceb9b65c6c.063b0cceb9b65c6c'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/nature-rotators.webp
-    name: Nature Rotators
-    system:
-      class: natureMage
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@rank.mag - 1'
-        fluent:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1) + @p
-        proficient:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1)
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Crown of Vines]{Crown of Vines},
-          @L[Ability:Polymorph]{Polymorph}, @L[Ability:Regeneration
-          Touch]{Regeneration Touch}, @L[Ability:Unforge]{Unforge}, and
-          @L[Ability:Wildborn]{Wildborn}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      skill: true
-      targets:
-        - self
-    type: ability
   - _id: ImkOXAw79U4AZ1Tn
     _key: '!items.effects!063b0cceb9b65c6c.ImkOXAw79U4AZ1Tn'
     _stats:
@@ -429,73 +429,6 @@ effects:
       standard: true
       targets:
         - creature
-    type: ability
-  - _id: pqH0l3xsUk3wo2k3
-    _key: '!items.effects!063b0cceb9b65c6c.pqH0l3xsUk3wo2k3'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.873114c38f087ff8
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/regenerating.webp
-    name: Regenerating
-    system:
-      _sup: 4oKL6zrNPkYdXkj1
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      effectTypes:
-        - revival
-        - healing
-        - regeneration
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      impacts:
-        macros:
-          Compendium_teriock_execution_Macro_e95a90ea3d657b96: turnStart
-      interaction: manifest
-      limitation: >-
-        <p>You must spend 1 @L[Core:Hit Points and Mana Points]{MP} or
-        @L[Core:Healing]{healing} in this way consumes a @L[Core:Hit Die]{hit
-        die} as normal (except that it can @L[Category:Revival effects]{revive}
-        you). This can only @L[Category:Revival effects]{revive} creatures that
-        have been @L[Condition:Dead]{dead} for 1 minute or less.</p>
-      maneuver: passive
-      overview:
-        base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
-          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
-          die}. If you were @L[Condition:Dead]{dead} due to @L[Core:Hit Points
-          and Mana Points]{HP} loss, this brings you @L[Condition:Alive]{back to
-          life}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
-          apply on your next @L[Core:Turns]{turn}. You only
-          @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana Points]{HP}
-          loss if you start your @L[Core:Turns]{turn} without successfully
-          [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - primal
-      range:
-        unit: self
-      revealed: true
-      targets:
-        - self
     type: ability
   - _id: 4oKL6zrNPkYdXkj1
     _key: '!items.effects!063b0cceb9b65c6c.4oKL6zrNPkYdXkj1'
@@ -701,6 +634,73 @@ effects:
       spell: true
       standard: true
       sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: pqH0l3xsUk3wo2k3
+    _key: '!items.effects!063b0cceb9b65c6c.pqH0l3xsUk3wo2k3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.873114c38f087ff8
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/regenerating.webp
+    name: Regenerating
+    system:
+      _sup: 4oKL6zrNPkYdXkj1
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      effectTypes:
+        - revival
+        - healing
+        - regeneration
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        macros:
+          Compendium_teriock_execution_Macro_e95a90ea3d657b96: turnStart
+      interaction: manifest
+      limitation: >-
+        <p>You must spend 1 @L[Core:Hit Points and Mana Points]{MP} or
+        @L[Core:Healing]{healing} in this way consumes a @L[Core:Hit Die]{hit
+        die} as normal (except that it can @L[Category:Revival effects]{revive}
+        you). This can only @L[Category:Revival effects]{revive} creatures that
+        have been @L[Condition:Dead]{dead} for 1 minute or less.</p>
+      maneuver: passive
+      overview:
+        base: >-
+          <p>At the start of each of your @L[Core:Turns]{turns}, you 
+          @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
+          Mana Points]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
+          die}. If you were @L[Condition:Dead]{dead} due to @L[Core:Hit Points
+          and Mana Points]{HP} loss, this brings you @L[Condition:Alive]{back to
+          life}. If you take @L[Damage:Fire]{fire damage}, this effect doesn't
+          apply on your next @L[Core:Turns]{turn}. You only
+          @L[Condition:Dead]{die} due to @L[Core:Hit Points and Mana Points]{HP}
+          loss if you start your @L[Core:Turns]{turn} without successfully
+          [[lookup name style=lc]] @L[Core:Hit Points and Mana Points]{HP}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - primal
+      range:
+        unit: self
+      revealed: true
       targets:
         - self
     type: ability

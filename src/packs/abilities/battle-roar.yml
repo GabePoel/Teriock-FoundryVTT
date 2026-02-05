@@ -6,6 +6,127 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
+  - _id: 13b3d010d6b4a76d
+    _key: '!items.effects!13b3d010d6b4a76d.13b3d010d6b4a76d'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/battle-roar.webp
+    name: Battle Roar
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Battle Roar Aura]{Battle Roar Aura} and
+          @L[Keyword:Improved]{Improved} @L[Ability:Battle Cry]{Battle Cry}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
+  - _id: LzDV9X5SWi9hk7cX
+    _key: '!items.effects!13b3d010d6b4a76d.LzDV9X5SWi9hk7cX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.15d5f45cbc367c6c
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
+    name: Battle Roar Aura
+    system:
+      _sup: 13b3d010d6b4a76d
+      competence:
+        raw: 0
+      costs:
+        verbal: true
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - loud
+      endCondition: >-
+        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: int
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frightened
+        macros:
+          Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
+      interaction: feat
+      maneuver: active
+      overview:
+        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        raw: '150'
+        unit: ft
+      results:
+        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+      revealed: true
+      targets:
+        - creature
+    type: ability
   - _id: 1DpSwqGbKUAvbn3q
     _key: '!items.effects!13b3d010d6b4a76d.1DpSwqGbKUAvbn3q'
     _stats:
@@ -199,127 +320,6 @@ effects:
       standard: true
       targets:
         - self
-    type: ability
-  - _id: 13b3d010d6b4a76d
-    _key: '!items.effects!13b3d010d6b4a76d.13b3d010d6b4a76d'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/battle-roar.webp
-    name: Battle Roar
-    system:
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Battle Roar Aura]{Battle Roar Aura} and
-          @L[Keyword:Improved]{Improved} @L[Ability:Battle Cry]{Battle Cry}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      targets:
-        - self
-    type: ability
-  - _id: LzDV9X5SWi9hk7cX
-    _key: '!items.effects!13b3d010d6b4a76d.LzDV9X5SWi9hk7cX'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.15d5f45cbc367c6c
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
-    name: Battle Roar Aura
-    system:
-      _sup: 13b3d010d6b4a76d
-      competence:
-        raw: 0
-      costs:
-        verbal: true
-      delivery:
-        base: aura
-      duration:
-        dawn: false
-        description: 1 Minute
-        raw: '1'
-        stationary: false
-        unit: minute
-      effectTypes:
-        - loud
-      endCondition: >-
-        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: int
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frightened
-        macros:
-          Compendium_teriock_execution_Macro_c172c60521a75122: preExecution
-      interaction: feat
-      maneuver: active
-      overview:
-        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        raw: '150'
-        unit: ft
-      results:
-        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
-      revealed: true
-      targets:
-        - creature
     type: ability
 img: systems/teriock/src/icons/abilities/battle-roar.webp
 name: Battle Roar

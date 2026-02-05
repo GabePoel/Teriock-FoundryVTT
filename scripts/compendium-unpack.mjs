@@ -117,7 +117,8 @@ function transformEntry(doc) {
     "pages",
     "results",
   ].forEach((key) => {
-    sortEmbedded(doc[key]);
+    // Sorting embedded breaks wrappers
+    //sortEmbedded(doc[key]);
     doc[key]?.forEach((d) => {
       transformEntry(d);
     });

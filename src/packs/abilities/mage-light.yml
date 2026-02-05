@@ -6,32 +6,28 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
-  - _id: ZcGe22OHBSf9Uhv9
-    _key: '!items.effects!27733508134aba43.ZcGe22OHBSf9Uhv9'
+  - _id: 27733508134aba43
+    _key: '!items.effects!27733508134aba43.27733508134aba43'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.9fca66d84679dd1f
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/ignite.webp
-    name: Ignite
+    img: systems/teriock/src/icons/abilities/mage-light.webp
+    name: Mage Light
     system:
-      _sup: 27733508134aba43
       class: flameMage
       competence:
         raw: 0
       delivery:
-        base: hand
+        base: self
       duration:
         dawn: false
-        description: 1 Hour
-        raw: '1'
+        description: Always Active
+        raw: '0'
         stationary: false
-        unit: hour
-      elements:
-        - flame
-      executionTime: a0
+        unit: unlimited
+      executionTime: passive
       expansion:
         featSaveAttribute: mov
         range:
@@ -39,57 +35,23 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '10'
-            - key: system.light.color
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#C64600'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 5
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: torch
-        heightened:
-          duration: 3600
       interaction: manifest
-      maneuver: active
+      maneuver: passive
       overview:
         base: >-
-          <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
-          counts as a torch for the purpose of this @L[Category:Spells]{spell}.
-          When @L[Property:On Fire]{on fire}, your hand produces no smoke and
-          being set @L[Property:On Fire]{on fire} does not harm it.</p>
+          <p>You gain @L[Ability:Light]{Light} and
+          @L[Ability:Ignite]{Ignite}.</p>
       piercing:
         raw: 0
       powerSources:
         - magical
       range:
-        unit: melee
-      requirements: <p>Target must be a torch.</p>
+        unit: self
       revealed: true
-      spell: true
+      skill: true
       standard: true
-      sustained: true
       targets:
-        - item
+        - self
     type: ability
   - _id: rHSlzSWdYZKnop39
     _key: '!items.effects!27733508134aba43.rHSlzSWdYZKnop39'
@@ -183,28 +145,32 @@ effects:
       targets:
         - area
     type: ability
-  - _id: 27733508134aba43
-    _key: '!items.effects!27733508134aba43.27733508134aba43'
+  - _id: ZcGe22OHBSf9Uhv9
+    _key: '!items.effects!27733508134aba43.ZcGe22OHBSf9Uhv9'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.9fca66d84679dd1f
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/mage-light.webp
-    name: Mage Light
+    img: systems/teriock/src/icons/abilities/ignite.webp
+    name: Ignite
     system:
+      _sup: 27733508134aba43
       class: flameMage
       competence:
         raw: 0
       delivery:
-        base: self
+        base: hand
       duration:
         dawn: false
-        description: Always Active
-        raw: '0'
+        description: 1 Hour
+        raw: '1'
         stationary: false
-        unit: unlimited
-      executionTime: passive
+        unit: hour
+      elements:
+        - flame
+      executionTime: a0
       expansion:
         featSaveAttribute: mov
         range:
@@ -212,23 +178,57 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '10'
+            - key: system.light.color
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#C64600'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 5
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: torch
+        heightened:
+          duration: 3600
       interaction: manifest
-      maneuver: passive
+      maneuver: active
       overview:
         base: >-
-          <p>You gain @L[Ability:Light]{Light} and
-          @L[Ability:Ignite]{Ignite}.</p>
+          <p>Target is set @L[Property:On Fire]{on fire} or put out. Your hand
+          counts as a torch for the purpose of this @L[Category:Spells]{spell}.
+          When @L[Property:On Fire]{on fire}, your hand produces no smoke and
+          being set @L[Property:On Fire]{on fire} does not harm it.</p>
       piercing:
         raw: 0
       powerSources:
         - magical
       range:
-        unit: self
+        unit: melee
+      requirements: <p>Target must be a torch.</p>
       revealed: true
-      skill: true
+      spell: true
       standard: true
+      sustained: true
       targets:
-        - self
+        - item
     type: ability
 img: systems/teriock/src/icons/abilities/mage-light.webp
 name: Mage Light

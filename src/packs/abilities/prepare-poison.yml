@@ -6,31 +6,31 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
-  - _id: veJknTa8aC7418wv
-    _key: '!items.effects!9db3f09e7a942624.veJknTa8aC7418wv'
+  - _id: 9db3f09e7a942624
+    _key: '!items.effects!9db3f09e7a942624.9db3f09e7a942624'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.15e9b598e41c0f04
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/poison-item.webp
-    name: Poison Item
+    img: systems/teriock/src/icons/abilities/prepare-poison.webp
+    name: Prepare Poison
     system:
-      _sup: 9db3f09e7a942624
       class: assassin
       competence:
         raw: 0
+      costs:
+        material: true
+        materialCost: <p>A vial of poison or constituent ingredients.</p>
       delivery:
-        base: hand
+        base: self
       duration:
         dawn: false
         description: 24 Hours
         raw: '24'
         stationary: false
         unit: hour
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
-      executionTime: a1
+      executionTime: Short Rest
       expansion:
         featSaveAttribute: mov
         range:
@@ -38,48 +38,28 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[toxic]
-          statuses:
-            - poisoned
-        fluent:
-          rolls:
-            damage: 1d10[toxic]
-        proficient:
-          rolls:
-            damage: 1d8[toxic]
       interaction: manifest
-      maneuver: active
+      maneuver: slow
       overview:
         base: >-
-          <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}.
-          The @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @L[Core:Damage]{damage}. The way the item delivers this to its user
-          depends on the nature of the item. If it's food or drink, it's when
-          the item is consumed. The @L[Core:GM]{GM} may approve other cases as
-          well. The item only delivers the @L[Condition:Poisoned]{poison} effect
-          once.</p>
-        fluent: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @L[Core:Damage]{damage}.</p>
-        proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>You spend a @L[Core:Short Rest]{short rest} preparing a vial of
+          poison for your own uses. Once the vial is prepared, you may either
+          apply it to a @L[Category:Weapons]{weapon}, which can then be used for
+          a single @L[Ability:Poison Strike]{Poison Strike}, or get it ready to
+          put on some other item, which can in turn be applied with
+          @L[Ability:Poison Item]{Poison Item}. Once prepared, the poison only
+          lasts 24 hours before it expires.</p>
       piercing:
         raw: 0
       powerSources:
-        - alchemical
+        - martial
       range:
-        raw: Your Hand's Range
-        unit: ft
-      requirements: <p>Target is not a weapon.</p>
+        unit: self
       revealed: true
       skill: true
       standard: true
       targets:
-        - item
+        - self
     type: ability
   - _id: EpRvRfd3739PhOP3
     _key: '!items.effects!9db3f09e7a942624.EpRvRfd3739PhOP3'
@@ -154,31 +134,31 @@ effects:
       targets:
         - creature
     type: ability
-  - _id: 9db3f09e7a942624
-    _key: '!items.effects!9db3f09e7a942624.9db3f09e7a942624'
+  - _id: veJknTa8aC7418wv
+    _key: '!items.effects!9db3f09e7a942624.veJknTa8aC7418wv'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.15e9b598e41c0f04
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/prepare-poison.webp
-    name: Prepare Poison
+    img: systems/teriock/src/icons/abilities/poison-item.webp
+    name: Poison Item
     system:
+      _sup: 9db3f09e7a942624
       class: assassin
       competence:
         raw: 0
-      costs:
-        material: true
-        materialCost: <p>A vial of poison or constituent ingredients.</p>
       delivery:
-        base: self
+        base: hand
       duration:
         dawn: false
         description: 24 Hours
         raw: '24'
         stationary: false
         unit: hour
-      executionTime: Short Rest
+      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      executionTime: a1
       expansion:
         featSaveAttribute: mov
         range:
@@ -186,28 +166,48 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          rolls:
+            damage: 1d6[toxic]
+          statuses:
+            - poisoned
+        fluent:
+          rolls:
+            damage: 1d10[toxic]
+        proficient:
+          rolls:
+            damage: 1d8[toxic]
       interaction: manifest
-      maneuver: slow
+      maneuver: active
       overview:
         base: >-
-          <p>You spend a @L[Core:Short Rest]{short rest} preparing a vial of
-          poison for your own uses. Once the vial is prepared, you may either
-          apply it to a @L[Category:Weapons]{weapon}, which can then be used for
-          a single @L[Ability:Poison Strike]{Poison Strike}, or get it ready to
-          put on some other item, which can in turn be applied with
-          @L[Ability:Poison Item]{Poison Item}. Once prepared, the poison only
-          lasts 24 hours before it expires.</p>
+          <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}.
+          The @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @L[Core:Damage]{damage}. The way the item delivers this to its user
+          depends on the nature of the item. If it's food or drink, it's when
+          the item is consumed. The @L[Core:GM]{GM} may approve other cases as
+          well. The item only delivers the @L[Condition:Poisoned]{poison} effect
+          once.</p>
+        fluent: >-
+          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+        proficient: >-
+          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @L[Core:Damage]{damage}.</p>
       piercing:
         raw: 0
       powerSources:
-        - martial
+        - alchemical
       range:
-        unit: self
+        raw: Your Hand's Range
+        unit: ft
+      requirements: <p>Target is not a weapon.</p>
       revealed: true
       skill: true
       standard: true
       targets:
-        - self
+        - item
     type: ability
 img: systems/teriock/src/icons/abilities/prepare-poison.webp
 name: Prepare Poison

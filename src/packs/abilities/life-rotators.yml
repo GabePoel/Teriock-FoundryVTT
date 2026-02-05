@@ -6,6 +6,102 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
+  - _id: 4b97db69b122c193
+    _key: '!items.effects!4b97db69b122c193.4b97db69b122c193'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/life-rotators.webp
+    name: Life Rotators
+    system:
+      class: lifeMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @L[Category:Spells]{spells}. If you
+          create any @L[Core:Elder Sorcery]{Elder Sorcery}
+          @L[Category:Spells]{spells} of your own, they get added to this list.
+          However, just because you "know" how to cast these spells, doesn't
+          mean you are always prepared to. Although all @L[Category:Mage
+          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
+          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
+          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          rotated into your spell list at any given time across <i>all</i>
+          classes. @L[Category:Mage classes]{MR} refers to the number of
+          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
+          which spells you have prepared. The @L[Category:Rotator
+          spells]{rotator spells} automatically available to you are
+          @L[Ability:Blessing]{Blessing}, @L[Ability:Crown of Light]{Crown of
+          Light}, @L[Ability:Glow of Healing]{Glow of Healing},
+          @L[Ability:Rebirth]{Rebirth}, and @L[Ability:Ward]{Ward}.</p>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
   - _id: 2glVARVA7VNCOt4d
     _key: '!items.effects!4b97db69b122c193.2glVARVA7VNCOt4d'
     _stats:
@@ -167,309 +263,6 @@ effects:
       spell: true
       standard: true
       sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: dDYwnRjJFZnrsO3c
-    _key: '!items.effects!4b97db69b122c193.dDYwnRjJFZnrsO3c'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3055b234b402b5ec
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/cure-illness.webp
-    name: Cure Illness
-    system:
-      _sup: rfDxcTWPlPuk50qN
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
-      delivery:
-        base: sight
-        package: ritual
-      duration:
-        dawn: false
-        description: 1 Hour
-        raw: '1'
-        stationary: false
-        unit: hour
-      effectTypes:
-        - healing
-      elements:
-        - life
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
-        reduced by 1.</p>
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Make an @L[Tradecraft:Herbalist]{herbalist} check to remove a
-          @L[Category:Disease effects]{disease or illness} from some creature.
-          The @L[Core:GM]{GM} determines the difficulty based on the severity of
-          the illness. The @L[Core:GM]{GM} may also require you to have access
-          to specific ingredients or tools or put other conditions in place. If
-          the illness is mental in nature, then [[lookup name]] acts as a
-          @L[Category:Mental effects]{mental effect}.</p>
-        proficient: >-
-          <p>You are @L[Keyword:Adept]{adept} at [[lookup name]]. Before you
-          make the check, you may spend 1 additional @L[Core:MP]{MP} to know the
-          DC if it is less than your total level. You may also add your
-          @L[Core:Proficiency Bonus]{proficiency bonus} to the
-          @L[Tradecraft:Herbalist]{herbalist} check regardless of whether or not
-          you are proficient in @L[Tradecraft:Herbalist]{herbalist}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      results:
-        fail: >-
-          <p>The target is not cured, but the illness does not worsen for the
-          duration of Healing Touch. You may cast [[lookup name]] again to keep
-          the disease from progressing, but you may not attempt the check
-          again.</p>
-        save: <p>The target is cured of the illness.</p>
-      revealed: true
-      ritual: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: rfDxcTWPlPuk50qN
-    _key: '!items.effects!4b97db69b122c193.rfDxcTWPlPuk50qN'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.3f919f2ab4945403
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/glow-of-healing.webp
-    name: Glow of Healing
-    system:
-      _sup: 4b97db69b122c193
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
-      delivery:
-        base: sight
-        package: ritual
-      duration:
-        dawn: false
-        description: 8 Hours
-        raw: '8'
-        stationary: false
-        unit: hour
-      elements:
-        - life
-      executionTime: 10 Minutes
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: slow
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Healing Touch]{Healing Touch} and
-          @L[Ability:Cure Illness]{Cure Illness}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: melee
-      revealed: true
-      ritual: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: PQjVZF3EybXgwuAL
-    _key: '!items.effects!4b97db69b122c193.PQjVZF3EybXgwuAL'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.bad0bae2fc8f44ce
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/healing-touch.webp
-    name: Healing Touch
-    system:
-      _sup: rfDxcTWPlPuk50qN
-      class: lifeMage
-      competence:
-        raw: 0
-      costs:
-        somatic: true
-        verbal: true
-      delivery:
-        base: hand
-        package: touch
-      duration:
-        dawn: false
-        description: Instant
-        raw: '0'
-        stationary: false
-        unit: instant
-      elements:
-        - life
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target is
-        @L[Core:Healing]{healed} again at the start of your next
-        @L[Core:Turns]{turn}.</p>
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: >-
-          <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
-          @L[Core:Healing]{healed} at the start of your next
-          @L[Core:Turns]{turn}.</p>
-      revealed: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
-  - _id: 4b97db69b122c193
-    _key: '!items.effects!4b97db69b122c193.4b97db69b122c193'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/life-rotators.webp
-    name: Life Rotators
-    system:
-      class: lifeMage
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@rank.mag - 1'
-        fluent:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1) + @p
-        proficient:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1)
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Blessing]{Blessing}, @L[Ability:Crown of Light]{Crown of
-          Light}, @L[Ability:Glow of Healing]{Glow of Healing},
-          @L[Ability:Rebirth]{Rebirth}, and @L[Ability:Ward]{Ward}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      skill: true
       targets:
         - self
     type: ability
@@ -651,6 +444,213 @@ effects:
           <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
           choice.</p>
       revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: rfDxcTWPlPuk50qN
+    _key: '!items.effects!4b97db69b122c193.rfDxcTWPlPuk50qN'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.3f919f2ab4945403
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/glow-of-healing.webp
+    name: Glow of Healing
+    system:
+      _sup: 4b97db69b122c193
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - life
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Healing Touch]{Healing Touch} and
+          @L[Ability:Cure Illness]{Cure Illness}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: melee
+      revealed: true
+      ritual: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: PQjVZF3EybXgwuAL
+    _key: '!items.effects!4b97db69b122c193.PQjVZF3EybXgwuAL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.bad0bae2fc8f44ce
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/healing-touch.webp
+    name: Healing Touch
+    system:
+      _sup: rfDxcTWPlPuk50qN
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      elements:
+        - life
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, target is
+        @L[Core:Healing]{healed} again at the start of your next
+        @L[Core:Turns]{turn}.</p>
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: >-
+          <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
+          @L[Core:Healing]{healed} at the start of your next
+          @L[Core:Turns]{turn}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: dDYwnRjJFZnrsO3c
+    _key: '!items.effects!4b97db69b122c193.dDYwnRjJFZnrsO3c'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.3055b234b402b5ec
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/cure-illness.webp
+    name: Cure Illness
+    system:
+      _sup: rfDxcTWPlPuk50qN
+      class: lifeMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - healing
+      elements:
+        - life
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
+        reduced by 1.</p>
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Make an @L[Tradecraft:Herbalist]{herbalist} check to remove a
+          @L[Category:Disease effects]{disease or illness} from some creature.
+          The @L[Core:GM]{GM} determines the difficulty based on the severity of
+          the illness. The @L[Core:GM]{GM} may also require you to have access
+          to specific ingredients or tools or put other conditions in place. If
+          the illness is mental in nature, then [[lookup name]] acts as a
+          @L[Category:Mental effects]{mental effect}.</p>
+        proficient: >-
+          <p>You are @L[Keyword:Adept]{adept} at [[lookup name]]. Before you
+          make the check, you may spend 1 additional @L[Core:MP]{MP} to know the
+          DC if it is less than your total level. You may also add your
+          @L[Core:Proficiency Bonus]{proficiency bonus} to the
+          @L[Tradecraft:Herbalist]{herbalist} check regardless of whether or not
+          you are proficient in @L[Tradecraft:Herbalist]{herbalist}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      results:
+        fail: >-
+          <p>The target is not cured, but the illness does not worsen for the
+          duration of Healing Touch. You may cast [[lookup name]] again to keep
+          the disease from progressing, but you may not attempt the check
+          again.</p>
+        save: <p>The target is cured of the illness.</p>
+      revealed: true
+      ritual: true
       spell: true
       standard: true
       targets:

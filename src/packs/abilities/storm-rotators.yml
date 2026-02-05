@@ -6,6 +6,285 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
+  - _id: 44482ab7d5675a40
+    _key: '!items.effects!44482ab7d5675a40.44482ab7d5675a40'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/storm-rotators.webp
+    name: Storm Rotators
+    system:
+      class: stormMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @L[Category:Spells]{spells}. If you
+          create any @L[Core:Elder Sorcery]{Elder Sorcery}
+          @L[Category:Spells]{spells} of your own, they get added to this list.
+          However, just because you "know" how to cast these spells, doesn't
+          mean you are always prepared to. Although all @L[Category:Mage
+          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
+          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
+          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          rotated into your spell list at any given time across <i>all</i>
+          classes. @L[Category:Mage classes]{MR} refers to the number of
+          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
+          which spells you have prepared. The @L[Category:Rotator
+          spells]{rotator spells} automatically available to you are
+          @L[Ability:Crown of Ice]{Crown of Ice}, @L[Ability:Dispel
+          Magic]{Dispel Magic}, @L[Ability:Displace]{Displace},
+          @L[Ability:Resist Effects]{Resist Effects}, and @L[Ability:Spell
+          Trigger]{Spell Trigger}.</p>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
+  - _id: 1wvgcniJekPcqDML
+    _key: '!items.effects!44482ab7d5675a40.1wvgcniJekPcqDML'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.ce69b7d14e269426
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/crown-of-ice.webp
+    name: Crown of Ice
+    system:
+      _sup: 44482ab7d5675a40
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 8 Hours
+        raw: '8'
+        stationary: false
+        unit: hour
+      elements:
+        - storm
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.light.dim
+              mode: 4
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0.01'
+            - key: system.light.color
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '#3584E4'
+            - key: system.light.animation.type
+              mode: 5
+              priority: 3
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: sunburst
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A small circle of glowing frost circles above your head. You gain
+          @L[Ability:Shock Touch]{Shock Touch} and @L[Ability:Blizzard
+          Aura]{Blizzard Aura}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    type: ability
+  - _id: qrdl8ym0juikSdkw
+    _key: '!items.effects!44482ab7d5675a40.qrdl8ym0juikSdkw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.4d4cbf6dfd95efca
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/shock-touch.webp
+    name: Shock Touch
+    system:
+      _sup: 1wvgcniJekPcqDML
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - temporal
+      elements:
+        - storm
+      endCondition: >-
+        <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
+        If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: true
+            crit:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: action
+                who:
+                  type: target
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic ice]
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
   - _id: NzdKMtHbstH5M7MG
     _key: '!items.effects!44482ab7d5675a40.NzdKMtHbstH5M7MG'
     _stats:
@@ -92,91 +371,6 @@ effects:
       standard: true
       targets:
         - creature
-    type: ability
-  - _id: 1wvgcniJekPcqDML
-    _key: '!items.effects!44482ab7d5675a40.1wvgcniJekPcqDML'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.ce69b7d14e269426
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/crown-of-ice.webp
-    name: Crown of Ice
-    system:
-      _sup: 44482ab7d5675a40
-      class: stormMage
-      competence:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: 8 Hours
-        raw: '8'
-        stationary: false
-        unit: hour
-      elements:
-        - storm
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.light.dim
-              mode: 4
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '0.01'
-            - key: system.light.color
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '#3584E4'
-            - key: system.light.animation.type
-              mode: 5
-              priority: 3
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: sunburst
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>A small circle of glowing frost circles above your head. You gain
-          @L[Ability:Shock Touch]{Shock Touch} and @L[Ability:Blizzard
-          Aura]{Blizzard Aura}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      revealed: true
-      rotator: true
-      spell: true
-      standard: true
-      sustained: true
-      targets:
-        - self
     type: ability
   - _id: 2mJqBVXyACqBNics
     _key: '!items.effects!44482ab7d5675a40.2mJqBVXyACqBNics'
@@ -399,103 +593,6 @@ effects:
       targets:
         - self
     type: ability
-  - _id: qrdl8ym0juikSdkw
-    _key: '!items.effects!44482ab7d5675a40.qrdl8ym0juikSdkw'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.4d4cbf6dfd95efca
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/shock-touch.webp
-    name: Shock Touch
-    system:
-      _sup: 1wvgcniJekPcqDML
-      class: stormMage
-      competence:
-        raw: 0
-      costs:
-        somatic: true
-        verbal: true
-      delivery:
-        base: hand
-        package: touch
-      duration:
-        dawn: false
-        description: 1 Minute
-        raw: '1'
-        stationary: false
-        unit: minute
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      endCondition: >-
-        <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
-        If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: true
-            crit:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: action
-                who:
-                  type: target
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: action
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frozen
-        heightened:
-          rolls:
-            damage: 1d4[magic ice]
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-      revealed: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
   - _id: 3rFaHX2do5rIuHoT
     _key: '!items.effects!44482ab7d5675a40.3rFaHX2do5rIuHoT'
     _stats:
@@ -552,103 +649,6 @@ effects:
       targets:
         - self
       trigger: <p>You @L[Condition:Down]{drop}.</p>
-    type: ability
-  - _id: 44482ab7d5675a40
-    _key: '!items.effects!44482ab7d5675a40.44482ab7d5675a40'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/storm-rotators.webp
-    name: Storm Rotators
-    system:
-      class: stormMage
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@rank.mag - 1'
-        fluent:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1) + @p
-        proficient:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1)
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Crown of Ice]{Crown of Ice}, @L[Ability:Dispel
-          Magic]{Dispel Magic}, @L[Ability:Displace]{Displace},
-          @L[Ability:Resist Effects]{Resist Effects}, and @L[Ability:Spell
-          Trigger]{Spell Trigger}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      skill: true
-      targets:
-        - self
     type: ability
 img: systems/teriock/src/icons/abilities/storm-rotators.webp
 name: Storm Rotators

@@ -6,6 +6,71 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
+  - _id: 639f4a31cbb018a1
+    _key: '!items.effects!639f4a31cbb018a1.639f4a31cbb018a1'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/vicious-claws.webp
+    name: Vicious Claws
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: or(@key.offensiveMartialArts, @key.hindClaws)
+              target: ability
+              time: fluency
+              value: '2'
+            - key: system.piercing.raw
+              mode: 4
+              priority: 10
+              qualifier: or(@prop.handy, @key.foot)
+              target: body
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
+          and become @L[Core:Fluency Bonus]{fluent} in it. Additionally, your
+          @L[Equipment:Hand]{hands} are @L[Property:AV0]{AV0}. If you have
+          @L[Ability:Hind Claws]{Hind Claws}, you become @L[Core:Fluency
+          Bonus]{fluent} in it as well and your @L[Equipment:Foot]{feet} are
+          @L[Property:AV0]{AV0}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
   - _id: RyFFAAlAAYdNnAGF
     _key: '!items.effects!639f4a31cbb018a1.RyFFAAlAAYdNnAGF'
     _stats:
@@ -93,71 +158,6 @@ effects:
       revealed: true
       skill: true
       standard: true
-      targets:
-        - self
-    type: ability
-  - _id: 639f4a31cbb018a1
-    _key: '!items.effects!639f4a31cbb018a1.639f4a31cbb018a1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/vicious-claws.webp
-    name: Vicious Claws
-    system:
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: or(@key.offensiveMartialArts, @key.hindClaws)
-              target: ability
-              time: fluency
-              value: '2'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: or(@prop.handy, @key.foot)
-              target: body
-              time: normal
-              value: '1'
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Offensive Martial Arts]{Offensive Martial Arts}
-          and become @L[Core:Fluency Bonus]{fluent} in it. Additionally, your
-          @L[Equipment:Hand]{hands} are @L[Property:AV0]{AV0}. If you have
-          @L[Ability:Hind Claws]{Hind Claws}, you become @L[Core:Fluency
-          Bonus]{fluent} in it as well and your @L[Equipment:Foot]{feet} are
-          @L[Property:AV0]{AV0}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
       targets:
         - self
     type: ability

@@ -6,42 +6,28 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
-  - _id: OJa7qEXpvUsuQzvQ
-    _key: '!items.effects!e28f577c843bc530.OJa7qEXpvUsuQzvQ'
+  - _id: e28f577c843bc530
+    _key: '!items.effects!e28f577c843bc530.e28f577c843bc530'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a04434f696dc637e
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/animate-dead.webp
-    name: Animate Dead
+    img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
+    name: Necromancy Rotators
     system:
-      _sup: 42x5ExJDC2KutTTJ
       class: necromancer
       competence:
         raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
       delivery:
-        base: hand
-        package: touch
+        base: self
       duration:
         dawn: false
-        description: Instant
+        description: Always Active
         raw: '0'
         stationary: false
-        unit: instant
-      effectTypes:
-        - reanimation
-      elements:
-        - necromancy
-      executionTime: a1
+        unit: unlimited
+      executionTime: passive
       expansion:
         featSaveAttribute: mov
         range:
@@ -49,36 +35,73 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      interaction: attack
-      maneuver: active
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
+      interaction: manifest
+      maneuver: passive
       overview:
         base: >-
-          <p>Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
-          creatures]{undead}) at 1 @L[Core:Hit Points and Mana Points]{HP},
-          although its maximum @L[Core:Hit Points and Mana Points]{HP} is halved
-          (minimum of 1) until it completes a @L[Core:Short Rest]{short rest}.
-          This does not count as a @L[Category:Revival effects]{revival
-          effect}.</p>
-        fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @L[Category:Spells]{spells}. If you
+          create any @L[Core:Elder Sorcery]{Elder Sorcery}
+          @L[Category:Spells]{spells} of your own, they get added to this list.
+          However, just because you "know" how to cast these spells, doesn't
+          mean you are always prepared to. Although all @L[Category:Mage
+          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
+          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
+          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          rotated into your spell list at any given time across <i>all</i>
+          classes. @L[Category:Mage classes]{MR} refers to the number of
+          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
+          which spells you have prepared. The @L[Category:Rotator
+          spells]{rotator spells} automatically available to you are
+          @L[Ability:Crown of Fear]{Crown of Fear}, @L[Ability:Death
+          Rattle]{Death Rattle}, @L[Ability:Ethereal Shift]{Ethereal Shift},
+          @L[Ability:Spirit Bury]{Spirit Bury}, and @L[Ability:Undead
+          Reanimation]{Undead Reanimation}.</p>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
         proficient: >-
-          <p>Target has all @L[Core:HP]{HP} restored, but its maximum
-          @L[Core:HP]{HP} is still halved. This does not count as a
-          @L[Category:Healing effects]{healing effect}.</p>
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
       piercing:
-        raw: 2
+        raw: 0
       powerSources:
-        - magical
+        - martial
       range:
-        raw: Your Hand's Range
-        unit: ft
-      requirements: >-
-        <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-        creatures]{undead}.</p>
+        unit: self
       revealed: true
-      spell: true
-      standard: true
+      skill: true
       targets:
-        - creature
+        - self
     type: ability
   - _id: wzrmU3WzjMDmYAx8
     _key: '!items.effects!e28f577c843bc530.wzrmU3WzjMDmYAx8'
@@ -160,123 +183,6 @@ effects:
       spell: true
       standard: true
       sustained: true
-      targets:
-        - self
-    type: ability
-  - _id: EZt37ToLutUxjQ2r
-    _key: '!items.effects!e28f577c843bc530.EZt37ToLutUxjQ2r'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.a117c508ccc3bbe5
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/death-rattle.webp
-    name: Death Rattle
-    system:
-      _sup: e28f577c843bc530
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        somatic: true
-        verbal: true
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Instant
-        raw: '0'
-        stationary: false
-        unit: instant
-      elements:
-        - necromancy
-      executionTime: r1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      interaction: manifest
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>You execute one @L[Category:Single action abilities]{single action
-          ability} you have.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      revealed: true
-      rotator: true
-      spell: true
-      standard: true
-      targets:
-        - self
-      trigger: <p>You @L[Condition:Dead]{die}.</p>
-    type: ability
-  - _id: 6tAKo9OpEP5DbSoj
-    _key: '!items.effects!e28f577c843bc530.6tAKo9OpEP5DbSoj'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.2f4f5e357e9b92c7
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/ethereal-shift.webp
-    name: Ethereal Shift
-    system:
-      _sup: e28f577c843bc530
-      class: necromancer
-      competence:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: 1 Hour
-        raw: '1'
-        stationary: false
-        unit: hour
-      elements:
-        - necromancy
-      executionTime: a3
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: special
-      grantOnly: false
-      impacts:
-        base:
-          statuses:
-            - ethereal
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
-          Material Realm.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        unit: self
-      revealed: true
-      rotator: true
-      spell: true
-      standard: true
       targets:
         - self
     type: ability
@@ -463,100 +369,120 @@ effects:
       targets:
         - creature
     type: ability
-  - _id: e28f577c843bc530
-    _key: '!items.effects!e28f577c843bc530.e28f577c843bc530'
+  - _id: EZt37ToLutUxjQ2r
+    _key: '!items.effects!e28f577c843bc530.EZt37ToLutUxjQ2r'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.a117c508ccc3bbe5
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
-    name: Necromancy Rotators
+    img: systems/teriock/src/icons/abilities/death-rattle.webp
+    name: Death Rattle
     system:
+      _sup: e28f577c843bc530
       class: necromancer
       competence:
         raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
         base: self
       duration:
         dawn: false
-        description: Always Active
+        description: Instant
         raw: '0'
         stationary: false
-        unit: unlimited
-      executionTime: passive
+        unit: instant
+      elements:
+        - necromancy
+      executionTime: r1
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
-      form: normal
+      form: special
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@rank.mag - 1'
-        fluent:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1) + @p
-        proficient:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1)
       interaction: manifest
-      maneuver: passive
+      maneuver: reactive
       overview:
         base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Crown of Fear]{Crown of Fear}, @L[Ability:Death
-          Rattle]{Death Rattle}, @L[Ability:Ethereal Shift]{Ethereal Shift},
-          @L[Ability:Spirit Bury]{Spirit Bury}, and @L[Ability:Undead
-          Reanimation]{Undead Reanimation}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
+          <p>You execute one @L[Category:Single action abilities]{single action
+          ability} you have.</p>
       piercing:
         raw: 0
       powerSources:
-        - martial
+        - magical
       range:
         unit: self
       revealed: true
-      skill: true
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You @L[Condition:Dead]{die}.</p>
+    type: ability
+  - _id: 6tAKo9OpEP5DbSoj
+    _key: '!items.effects!e28f577c843bc530.6tAKo9OpEP5DbSoj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.2f4f5e357e9b92c7
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/ethereal-shift.webp
+    name: Ethereal Shift
+    system:
+      _sup: e28f577c843bc530
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: 1 Hour
+        raw: '1'
+        stationary: false
+        unit: hour
+      elements:
+        - necromancy
+      executionTime: a3
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: special
+      grantOnly: false
+      impacts:
+        base:
+          statuses:
+            - ethereal
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
+          Material Realm.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: self
+      revealed: true
+      rotator: true
+      spell: true
+      standard: true
       targets:
         - self
     type: ability
@@ -679,6 +605,80 @@ effects:
       standard: true
       targets:
         - self
+    type: ability
+  - _id: OJa7qEXpvUsuQzvQ
+    _key: '!items.effects!e28f577c843bc530.OJa7qEXpvUsuQzvQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.a04434f696dc637e
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/animate-dead.webp
+    name: Animate Dead
+    system:
+      _sup: 42x5ExJDC2KutTTJ
+      class: necromancer
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: hand
+        package: touch
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - reanimation
+      elements:
+        - necromancy
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target is @L[Condition:Alive]{alive} (but still @L[Category:Undead
+          creatures]{undead}) at 1 @L[Core:Hit Points and Mana Points]{HP},
+          although its maximum @L[Core:Hit Points and Mana Points]{HP} is halved
+          (minimum of 1) until it completes a @L[Core:Short Rest]{short rest}.
+          This does not count as a @L[Category:Revival effects]{revival
+          effect}.</p>
+        fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+        proficient: >-
+          <p>Target has all @L[Core:HP]{HP} restored, but its maximum
+          @L[Core:HP]{HP} is still halved. This does not count as a
+          @L[Category:Healing effects]{healing effect}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: >-
+        <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
+        creatures]{undead}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
     type: ability
   - _id: StXApwbbbA9zS73E
     _key: '!items.effects!e28f577c843bc530.StXApwbbbA9zS73E'

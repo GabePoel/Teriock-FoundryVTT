@@ -6,6 +6,103 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
+  - _id: d0b84764493398aa
+    _key: '!items.effects!d0b84764493398aa.d0b84764493398aa'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/flame-rotators.webp
+    name: Flame Rotators
+    system:
+      class: flameMage
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '@rank.mag - 1'
+        fluent:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1) + @p
+        proficient:
+          changes:
+            - key: system.magic.maxRotators.raw
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: 2 * (@rank.mag - 1)
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @L[Category:Spells]{spells}. If you
+          create any @L[Core:Elder Sorcery]{Elder Sorcery}
+          @L[Category:Spells]{spells} of your own, they get added to this list.
+          However, just because you "know" how to cast these spells, doesn't
+          mean you are always prepared to. Although all @L[Category:Mage
+          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
+          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
+          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          rotated into your spell list at any given time across <i>all</i>
+          classes. @L[Category:Mage classes]{MR} refers to the number of
+          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
+          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
+          which spells you have prepared. The @L[Category:Rotator
+          spells]{rotator spells} automatically available to you are
+          @L[Ability:Bellows]{Bellows}, @L[Ability:Control and Resist
+          Fire]{Control and Resist Fire}, @L[Ability:Crown of Flame]{Crown of
+          Flame}, @L[Ability:Melting Grasp]{Melting Grasp}, and
+          @L[Ability:Rupture Mark]{Rupture Mark}.</p>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
+          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      targets:
+        - self
+    type: ability
   - _id: 1QbMxtzwRThtJgm8
     _key: '!items.effects!d0b84764493398aa.1QbMxtzwRThtJgm8'
     _stats:
@@ -90,77 +187,6 @@ effects:
       sustained: true
       targets:
         - self
-    type: ability
-  - _id: 5mq2yWHo9SivIxO9
-    _key: '!items.effects!d0b84764493398aa.5mq2yWHo9SivIxO9'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.d75976fc51986c97
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
-    name: Burning Touch
-    system:
-      _sup: xM229v7K5qeUVqTK
-      class: flameMage
-      competence:
-        raw: 0
-      costs:
-        somatic: true
-        verbal: true
-      delivery:
-        base: hand
-        package: touch
-      duration:
-        dawn: false
-        description: Instant
-        raw: '0'
-        stationary: false
-        unit: instant
-      effectTypes:
-        - damaging
-      elements:
-        - flame
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
-      impacts:
-        base:
-          rolls:
-            damage: 1d6[fire magic]
-        heightened:
-          rolls:
-            damage: 1d6[magic fire]
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: >-
-          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
-      revealed: true
-      spell: true
-      standard: true
-      targets:
-        - creature
     type: ability
   - _id: 2WkstCMZkBBJDAJA
     _key: '!items.effects!d0b84764493398aa.2WkstCMZkBBJDAJA'
@@ -329,28 +355,38 @@ effects:
       targets:
         - self
     type: ability
-  - _id: d0b84764493398aa
-    _key: '!items.effects!d0b84764493398aa.d0b84764493398aa'
+  - _id: 5mq2yWHo9SivIxO9
+    _key: '!items.effects!d0b84764493398aa.5mq2yWHo9SivIxO9'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.d75976fc51986c97
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/flame-rotators.webp
-    name: Flame Rotators
+    img: systems/teriock/src/icons/abilities/burning-touch.webp
+    name: Burning Touch
     system:
+      _sup: xM229v7K5qeUVqTK
       class: flameMage
       competence:
         raw: 0
+      costs:
+        somatic: true
+        verbal: true
       delivery:
-        base: self
+        base: hand
+        package: touch
       duration:
         dawn: false
-        description: Always Active
+        description: Instant
         raw: '0'
         stationary: false
-        unit: unlimited
-      executionTime: passive
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - flame
+      executionTime: a1
       expansion:
         featSaveAttribute: mov
         range:
@@ -358,73 +394,37 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
+        [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage}.</p>
       impacts:
         base:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '@rank.mag - 1'
-        fluent:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1) + @p
-        proficient:
-          changes:
-            - key: system.magic.maxRotators.raw
-              mode: 4
-              priority: 10
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: 2 * (@rank.mag - 1)
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
-          rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Bellows]{Bellows}, @L[Ability:Control and Resist
-          Fire]{Control and Resist Fire}, @L[Ability:Crown of Flame]{Crown of
-          Flame}, @L[Ability:Melting Grasp]{Melting Grasp}, and
-          @L[Ability:Rupture Mark]{Rupture Mark}.</p>
-        fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
-        proficient: >-
-          <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
+          rolls:
+            damage: 1d6[fire magic]
+        heightened:
+          rolls:
+            damage: 1d6[magic fire]
+      interaction: attack
+      maneuver: active
       piercing:
-        raw: 0
+        raw: 2
       powerSources:
-        - martial
+        - magical
       range:
-        unit: self
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to
+          target.</p>
       revealed: true
-      skill: true
+      spell: true
+      standard: true
       targets:
-        - self
+        - creature
     type: ability
   - _id: paI0l1vtL2yFd7LA
     _key: '!items.effects!d0b84764493398aa.paI0l1vtL2yFd7LA'

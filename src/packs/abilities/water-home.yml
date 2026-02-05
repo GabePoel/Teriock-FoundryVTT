@@ -6,19 +6,16 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
-  - _id: 7r5JjGQvtwKhfyE3
-    _key: '!items.effects!19925cf09e2d82c7.7r5JjGQvtwKhfyE3'
+  - _id: 19925cf09e2d82c7
+    _key: '!items.effects!19925cf09e2d82c7.19925cf09e2d82c7'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.103a1d356ae8fc20
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/diving.webp
-    name: Diving
+    img: systems/teriock/src/icons/abilities/water-home.webp
+    name: Water Home
     system:
-      _sup: 19925cf09e2d82c7
-      class: corsair
       competence:
         raw: 0
       delivery:
@@ -37,12 +34,23 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.speedAdjustments.walk
+              mode: 5
+              priority: 30
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '0'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
-          <p>You no longer have to stay on the surface of water while
-          @L[Ability:Swimming]{Swimming}.</p>
+          <p>You have @L[Ability:Swimming]{Swimming} and
+          @L[Ability:Diving]{Diving} but have @L[Core:Movement Speed]{no walk
+          speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -50,8 +58,6 @@ effects:
       range:
         unit: self
       revealed: true
-      skill: true
-      standard: true
       targets:
         - self
     type: ability
@@ -112,16 +118,19 @@ effects:
       targets:
         - self
     type: ability
-  - _id: 19925cf09e2d82c7
-    _key: '!items.effects!19925cf09e2d82c7.19925cf09e2d82c7'
+  - _id: 7r5JjGQvtwKhfyE3
+    _key: '!items.effects!19925cf09e2d82c7.7r5JjGQvtwKhfyE3'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.103a1d356ae8fc20
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/water-home.webp
-    name: Water Home
+    img: systems/teriock/src/icons/abilities/diving.webp
+    name: Diving
     system:
+      _sup: 19925cf09e2d82c7
+      class: corsair
       competence:
         raw: 0
       delivery:
@@ -140,23 +149,12 @@ effects:
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.speedAdjustments.walk
-              mode: 5
-              priority: 30
-              qualifier: '1'
-              target: Actor
-              time: normal
-              value: '0'
       interaction: manifest
       maneuver: passive
       overview:
         base: >-
-          <p>You have @L[Ability:Swimming]{Swimming} and
-          @L[Ability:Diving]{Diving} but have @L[Core:Movement Speed]{no walk
-          speed}.</p>
+          <p>You no longer have to stay on the surface of water while
+          @L[Ability:Swimming]{Swimming}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -164,6 +162,8 @@ effects:
       range:
         unit: self
       revealed: true
+      skill: true
+      standard: true
       targets:
         - self
     type: ability

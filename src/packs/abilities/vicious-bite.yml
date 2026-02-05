@@ -6,6 +6,68 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
+  - _id: eef78749c65f8ea1
+    _key: '!items.effects!eef78749c65f8ea1.eef78749c65f8ea1'
+    _stats:
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/vicious-bite.webp
+    name: Vicious Bite
+    system:
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.bite'
+              target: ability
+              time: fluency
+              value: '2'
+            - key: system.piercing.raw
+              mode: 4
+              priority: 10
+              qualifier: '@prop.biting'
+              target: body
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @L[Ability:Bite]{Bite} and become @L[Core:Fluency
+          Bonus]{fluent} in it. Additionally, your @L[Category:Biting
+          equipment]{biting items} are @L[Property:AV0]{AV0}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      targets:
+        - self
+    type: ability
   - _id: K17kzrX3OVlFebSV
     _key: '!items.effects!eef78749c65f8ea1.K17kzrX3OVlFebSV'
     _stats:
@@ -83,68 +145,6 @@ effects:
           1d4]].</p>
         fluent: <p>The damage die is instead [[/damage 1d8]].</p>
         proficient: <p>The damage die is instead [[/damage 1d6]].</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      targets:
-        - self
-    type: ability
-  - _id: eef78749c65f8ea1
-    _key: '!items.effects!eef78749c65f8ea1.eef78749c65f8ea1'
-    _stats:
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/vicious-bite.webp
-    name: Vicious Bite
-    system:
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      impacts:
-        base:
-          changes:
-            - key: system.competence.raw
-              mode: 4
-              priority: 10
-              qualifier: '@key.bite'
-              target: ability
-              time: fluency
-              value: '2'
-            - key: system.piercing.raw
-              mode: 4
-              priority: 10
-              qualifier: '@prop.biting'
-              target: body
-              time: normal
-              value: '1'
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Bite]{Bite} and become @L[Core:Fluency
-          Bonus]{fluent} in it. Additionally, your @L[Category:Biting
-          equipment]{biting items} are @L[Property:AV0]{AV0}.</p>
       piercing:
         raw: 0
       powerSources:

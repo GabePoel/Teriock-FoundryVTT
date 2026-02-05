@@ -6,60 +6,66 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
-  - _id: IwKtGyF74lcDTxOd
-    _key: '!items.effects!9e06a3139f17d9b3.IwKtGyF74lcDTxOd'
+  - _id: 9e06a3139f17d9b3
+    _key: '!items.effects!9e06a3139f17d9b3.9e06a3139f17d9b3'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
-    name: Beastly Strength
+    img: systems/teriock/src/icons/abilities/strengthen.webp
+    name: Strengthen
     system:
-      _sup: PLdFmQSYMfuBNF9C
-      class: knight
       competence:
         raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
       delivery:
-        base: self
+        base: hand
+        package: touch
       duration:
         dawn: false
-        description: Always Active
-        raw: '0'
+        description: 1 Minute
+        raw: '1'
         stationary: false
-        unit: unlimited
-      executionTime: passive
+        unit: minute
+      elements:
+        - nature
+      executionTime: a1
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
-      form: normal
+      form: special
       grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Property:AV0]{AV0}.</div>
+      heightened: >-
+        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
+        effect increases by 1 hour. The overall duration is rounded to the
+        nearest hour.</p>
+      impacts:
+        heightened:
+          duration: 3600
+      interaction: attack
+      maneuver: active
       piercing:
-        raw: 0
+        raw: 2
       powerSources:
-        - martial
+        - magical
       range:
-        unit: self
+        raw: Your Hand's Range
+        unit: ft
+      results:
+        hit: <p>Target gains @L[Ability:Giant Strength]{Giant Strength}.</p>
       revealed: true
-      skill: true
+      rotator: true
+      spell: true
       standard: true
       targets:
-        - self
-      upgrades:
-        score:
-          attribute: str
-          value: 1
+        - creature
     type: ability
   - _id: yVRnTkg9CgrcJMmK
     _key: '!items.effects!9e06a3139f17d9b3.yVRnTkg9CgrcJMmK'
@@ -115,55 +121,6 @@ effects:
         score:
           attribute: str
           value: 3
-    type: ability
-  - _id: SuND2RMYWRwwOiSO
-    _key: '!items.effects!9e06a3139f17d9b3.SuND2RMYWRwwOiSO'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.54f63d63ae4376a9
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: PLdFmQSYMfuBNF9C
-      class: knight
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        dawn: false
-        description: Always Active
-        raw: '0'
-        stationary: false
-        unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: self
-      revealed: true
-      skill: true
-      standard: true
-      targets:
-        - self
     type: ability
   - _id: PLdFmQSYMfuBNF9C
     _key: '!items.effects!9e06a3139f17d9b3.PLdFmQSYMfuBNF9C'
@@ -277,66 +234,109 @@ effects:
         effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
         @L[Category:Attack abilities]{attack}.</p>
     type: ability
-  - _id: 9e06a3139f17d9b3
-    _key: '!items.effects!9e06a3139f17d9b3.9e06a3139f17d9b3'
+  - _id: IwKtGyF74lcDTxOd
+    _key: '!items.effects!9e06a3139f17d9b3.IwKtGyF74lcDTxOd'
     _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/strengthen.webp
-    name: Strengthen
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
     system:
+      _sup: PLdFmQSYMfuBNF9C
+      class: knight
       competence:
         raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
       delivery:
-        base: hand
-        package: touch
+        base: self
       duration:
         dawn: false
-        description: 1 Minute
-        raw: '1'
+        description: Always Active
+        raw: '0'
         stationary: false
-        unit: minute
-      elements:
-        - nature
-      executionTime: a1
+        unit: unlimited
+      executionTime: passive
       expansion:
         featSaveAttribute: mov
         range:
           unit: self
       featSaveAttribute: mov
-      form: special
+      form: normal
       grantOnly: false
-      heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour. The overall duration is rounded to the
-        nearest hour.</p>
-      impacts:
-        heightened:
-          duration: 3600
-      interaction: attack
-      maneuver: active
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
+          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
+          Piercing]{Armor piercing} weapons must still be wielded in two hands
+          to be @L[Property:AV0]{AV0}.</div>
       piercing:
-        raw: 2
+        raw: 0
       powerSources:
-        - magical
+        - martial
       range:
-        raw: Your Hand's Range
-        unit: ft
-      results:
-        hit: <p>Target gains @L[Ability:Giant Strength]{Giant Strength}.</p>
+        unit: self
       revealed: true
-      rotator: true
-      spell: true
+      skill: true
       standard: true
       targets:
-        - creature
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    type: ability
+  - _id: SuND2RMYWRwwOiSO
+    _key: '!items.effects!9e06a3139f17d9b3.SuND2RMYWRwwOiSO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.54f63d63ae4376a9
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: PLdFmQSYMfuBNF9C
+      class: knight
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
+          piercing}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
     type: ability
 img: systems/teriock/src/icons/abilities/strengthen.webp
 name: Strengthen

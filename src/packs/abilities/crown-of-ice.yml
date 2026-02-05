@@ -6,93 +6,6 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.21
 effects:
-  - _id: 4doSo1ScTm6iEC2E
-    _key: '!items.effects!ce69b7d14e269426.4doSo1ScTm6iEC2E'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.b08e7b4738d3b31e
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.21
-    img: systems/teriock/src/icons/abilities/blizzard-aura.webp
-    name: Blizzard Aura
-    system:
-      _sup: ce69b7d14e269426
-      class: stormMage
-      competence:
-        raw: 0
-      costs:
-        mp:
-          type: static
-          value:
-            static: 1
-        somatic: true
-        verbal: true
-      delivery:
-        base: aura
-      duration:
-        dawn: false
-        description: 1 Minute
-        raw: '1'
-        stationary: false
-        unit: minute
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      endCondition: >-
-        <p>At the start of each of the target's actions, they roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
-      impacts:
-        base:
-          expiration:
-            changeOnCrit: false
-            doesExpire: true
-            normal:
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: action
-                who:
-                  type: target
-          rolls:
-            endCon: 2d4
-          statuses:
-            - frozen
-        heightened:
-          rolls:
-            damage: 1d4[magic ice]
-      interaction: feat
-      maneuver: active
-      piercing:
-        raw: 0
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
-      revealed: true
-      spell: true
-      standard: true
-      targets:
-        - creature
-    type: ability
   - _id: ce69b7d14e269426
     _key: '!items.effects!ce69b7d14e269426.ce69b7d14e269426'
     _stats:
@@ -267,6 +180,93 @@ effects:
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
         hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+      revealed: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    type: ability
+  - _id: 4doSo1ScTm6iEC2E
+    _key: '!items.effects!ce69b7d14e269426.4doSo1ScTm6iEC2E'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.b08e7b4738d3b31e
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    img: systems/teriock/src/icons/abilities/blizzard-aura.webp
+    name: Blizzard Aura
+    system:
+      _sup: ce69b7d14e269426
+      class: stormMage
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+        somatic: true
+        verbal: true
+      delivery:
+        base: aura
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      effectTypes:
+        - temporal
+      elements:
+        - storm
+      endCondition: >-
+        <p>At the start of each of the target's actions, they roll [[/roll
+        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      heightened: "<p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well.</p>"
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: start
+                  trigger: action
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+          statuses:
+            - frozen
+        heightened:
+          rolls:
+            damage: 1d4[magic ice]
+      interaction: feat
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
       revealed: true
       spell: true
       standard: true
