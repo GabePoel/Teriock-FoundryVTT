@@ -7,7 +7,7 @@
     )
     action="updateUnit"
     dataset=(object path="system.range")
-    icon=(lookup TERIOCK.display.icons "range")
+    icon=(makeIcon TERIOCK.display.icons.ability.range "sheetForm")
     label=(ifThen (eq system.range.unitType "finite") system.range.symbol "")
     include=(or
       (eq system.delivery.base "area")
@@ -19,13 +19,13 @@
   }}
   {{formBox
     system.targetString
-    icon=(lookup TERIOCK.display.icons "target")
+    icon=(makeIcon TERIOCK.display.icons.ability.target "sheetForm")
     tooltip="Targets"
     dataset=(object action="updatePaths" paths="system.targets" title="Update Targets" icon="crosshairs-simple")
   }}
   {{formBox
     system.duration.text
-    icon=(lookup TERIOCK.display.icons "duration")
+    icon=(makeIcon TERIOCK.display.icons.ability.duration "sheetForm")
     action=(ifThen editable "updateUnit" "")
     tooltip="Duration"
     dataset=(object path="system.duration")

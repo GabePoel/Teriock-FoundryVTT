@@ -10,6 +10,7 @@ export const iconStyles = {
   sharp: "sharp",
   sharpDuotone: "sharp-duotone",
   sheet: "light",
+  sheetForm: "light",
   solid: "solid",
   thin: "thin",
   title: "solid",

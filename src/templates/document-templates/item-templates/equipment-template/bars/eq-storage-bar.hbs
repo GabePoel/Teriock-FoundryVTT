@@ -8,7 +8,7 @@
         disabled=(not editable)
         value=system._source.storage.maxCount.raw
       )
-      icon=(path TERIOCK.display.icons "maxCount")
+      icon=(makeIcon TERIOCK.display.icons.equipment.maxCount "sheetForm")
       unselected=(concat system.storage.carriedCount " / " system.storage.maxCount.value)
       label="ITEMS"
       iconColor=(ifThen
@@ -25,7 +25,7 @@
         disabled=(not editable)
         value=system._source.storage.maxWeight.raw
       )
-      icon=(path TERIOCK.display.icons "maxWeight")
+      icon=(makeIcon TERIOCK.display.icons.equipment.maxWeight "sheetForm")
       unselected=(concat (roundTo system.storage.carriedWeight 2) " / " system.storage.maxWeight.value)
       label="lb"
       iconColor=(ifThen
@@ -41,7 +41,10 @@
         disabled=(not editable)
         value=system._source.storage.weightMultiplier
       )
-      icon=(path TERIOCK.display.icons "weightMultiplier")
+      icon=(makeIcon
+        TERIOCK.display.icons.equipment.weightMultiplier
+        "sheetForm"
+      )
       unselected=system.storage.weightMultiplier
     }}
   </div>

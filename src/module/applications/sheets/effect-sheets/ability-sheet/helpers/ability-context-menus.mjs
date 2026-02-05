@@ -9,6 +9,29 @@ import { TeriockContextMenu } from "../../../../ux/_module.mjs";
  */
 export default function abilityContextMenus(ability) {
   /**
+   * Finds an icon name by key from nested icon maps.
+   * @param {string} key
+   * @param {object} [iconMap]
+   * @returns {string | null}
+   */
+  function findIconByKey(key, iconMap = TERIOCK.display.icons) {
+    const attributeIcon = TERIOCK.options.attribute?.[key]?.icon;
+    if (attributeIcon) {
+      return attributeIcon;
+    }
+    for (const value of Object.values(iconMap)) {
+      if (value && typeof value === "object") {
+        const found = findIconByKey(key, value);
+        if (found) return found;
+      }
+    }
+    if (Object.prototype.hasOwnProperty.call(iconMap, key)) {
+      return iconMap[key];
+    }
+    return null;
+  }
+
+  /**
    * Fetches configuration values from `TERIOCK.options.ability`.
    * @param {string} keychain - Dot-separated keychain to traverse.
    * @returns {*} The configuration value at the specified path.
@@ -33,13 +56,13 @@ export default function abilityContextMenus(ability) {
     const keys = fetch(keychain);
     const out = Object.entries(keys).map(([key, value]) => ({
       name: value,
-      icon: TERIOCK.display.icons[key],
+      icon: makeIcon(findIconByKey(key) ?? key, "contextMenu"),
       callback: () => ability.update({ [updateKey]: key }),
     }));
     if (nullOption) {
       out.unshift({
         name: "None",
-        icon: TERIOCK.display.icons.remove,
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () => ability.update({ [updateKey]: null }),
       });
     }
@@ -62,7 +85,7 @@ export default function abilityContextMenus(ability) {
     maneuver: [
       {
         name: "Active",
-        icon: TERIOCK.display.icons.active,
+        icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
         callback: async () => {
           await ability.update({
             "system.maneuver": "active",
@@ -73,7 +96,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Reactive",
-        icon: TERIOCK.display.icons.reactive,
+        icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
         callback: async () => {
           await ability.update({
             "system.maneuver": "reactive",
@@ -84,7 +107,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Passive",
-        icon: TERIOCK.display.icons.passive,
+        icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
         callback: async () =>
           await ability.update({
             "system.maneuver": "passive",
@@ -93,7 +116,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Slow",
-        icon: TERIOCK.display.icons.slow,
+        icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
         callback: async () => {
           await ability.update({
             "system.maneuver": "slow",
@@ -113,7 +136,7 @@ export default function abilityContextMenus(ability) {
     manaCost: [
       {
         name: "No Mana Cost",
-        icon: TERIOCK.display.icons.remove,
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.mp.type": "none",
@@ -121,7 +144,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Static Cost",
-        icon: TERIOCK.display.icons.numerical,
+        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.mp": {
@@ -132,7 +155,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Formula Cost",
-        icon: TERIOCK.display.icons.formula,
+        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.mp": {
@@ -143,7 +166,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Variable Cost",
-        icon: TERIOCK.display.icons.variable,
+        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.mp": {
@@ -156,7 +179,7 @@ export default function abilityContextMenus(ability) {
     hitCost: [
       {
         name: "No Hit Cost",
-        icon: TERIOCK.display.icons.remove,
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.hp.type": "none",
@@ -164,7 +187,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Static Cost",
-        icon: TERIOCK.display.icons.numerical,
+        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -175,7 +198,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Hack Cost",
-        icon: TERIOCK.display.icons.hack,
+        icon: makeIcon(TERIOCK.display.icons.ui.hack, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.hp.type": "hack",
@@ -183,7 +206,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Formula Cost",
-        icon: TERIOCK.display.icons.formula,
+        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -194,7 +217,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Variable Cost",
-        icon: TERIOCK.display.icons.variable,
+        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -207,7 +230,7 @@ export default function abilityContextMenus(ability) {
     goldCost: [
       {
         name: "No Gold Cost",
-        icon: TERIOCK.display.icons.remove,
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.gp.type": "none",
@@ -215,7 +238,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Static Cost",
-        icon: TERIOCK.display.icons.numerical,
+        icon: makeIcon(TERIOCK.display.icons.ui.numerical, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.gp": {
@@ -226,7 +249,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Formula Cost",
-        icon: TERIOCK.display.icons.formula,
+        icon: makeIcon(TERIOCK.display.icons.ui.formula, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.gp": {
@@ -237,7 +260,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Variable Cost",
-        icon: TERIOCK.display.icons.variable,
+        icon: makeIcon(TERIOCK.display.icons.ui.variable, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.gp": {
@@ -250,7 +273,7 @@ export default function abilityContextMenus(ability) {
     breakCost: [
       {
         name: "No Break Cost",
-        icon: TERIOCK.display.icons.remove,
+        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.break": null,
@@ -258,7 +281,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Shatter Cost",
-        icon: TERIOCK.display.icons.shatter,
+        icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.break": "shatter",
@@ -266,7 +289,7 @@ export default function abilityContextMenus(ability) {
       },
       {
         name: "Destroy Cost",
-        icon: TERIOCK.display.icons.destroy,
+        icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
         callback: () =>
           ability.update({
             "system.costs.break": "destroy",

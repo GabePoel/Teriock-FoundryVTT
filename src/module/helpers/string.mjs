@@ -83,7 +83,6 @@ export function dotJoin(strings) {
  * Converts a string to an ID.
  * @param {string} str
  * @param {object} [options]
- * @param {boolean} [options.abbreviate]
  * @param {boolean} [options.hash]
  * @param {number} [options.length]
  * @param {string} [options.background]
@@ -91,7 +90,6 @@ export function dotJoin(strings) {
  */
 export function toId(str, options = {}) {
   const {
-    abbreviate = false,
     background = "0000000000000000",
     length = 16,
     hash = false,
@@ -106,12 +104,6 @@ export function toId(str, options = {}) {
       val = (val * FNV_PRIME_64) & MASK_64;
     }
     return val.toString(16).padStart(16, "0");
-  }
-  if (abbreviate) {
-    str = toTitleCase(str);
-    for (const [k, v] of Object.entries(TERIOCK.aliases.abbreviations)) {
-      str = str.replace(k, v);
-    }
   }
   const camel = toCamelCase(str);
   return camel.slice(0, length) + background.slice(camel.length);

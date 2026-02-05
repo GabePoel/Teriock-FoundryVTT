@@ -1,32 +1,32 @@
 export const attributeOptions = {
   int: {
+    icon: "brain",
     label: "INT",
     name: "Intelligence",
-    icon: "brain",
   },
   mov: {
+    icon: "person-running",
     label: "MOV",
     name: "Movement",
-    icon: "person-running",
   },
   per: {
+    icon: "eye",
     label: "PER",
     name: "Perception",
-    icon: "eyes",
   },
   snk: {
+    icon: "mask",
     label: "SNK",
     name: "Sneak",
-    icon: "mask",
   },
   str: {
+    icon: "dumbbell",
     label: "STR",
     name: "Strength",
-    icon: "dumbbell",
   },
   unp: {
+    icon: "person-rays",
     label: "UNP",
     name: "Unused Presence",
-    icon: "user-rays",
   },
 };

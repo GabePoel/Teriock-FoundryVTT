@@ -19,7 +19,7 @@
         editable (concat "expansion-box expansion-box-" system.expansion) ""
       )
       tooltip="Expansion Delivery"
-      icon=(lookup TERIOCK.display.icons "expansion")
+      icon=(makeIcon TERIOCK.display.icons.ability.expansion "sheetForm")
     }}
     {{formBox
       (concat
@@ -31,7 +31,7 @@
         "</span>"
       )
       action="updateUnit"
-      icon=(lookup TERIOCK.display.icons "expansionRange")
+      icon=(makeIcon TERIOCK.display.icons.ability.expansionRange "sheetForm")
       tooltip="Expansion Range"
       label=(ifThen (eq system.expansion.range.unitType "finite") system.expansion.range.symbol "")
     }}
@@ -42,7 +42,7 @@
         disabled=(not editable)
         dataset=(object tooltip="Expansion Cap")
       )
-      icon=(lookup TERIOCK.display.icons "expansionCap")
+      icon=(makeIcon TERIOCK.display.icons.ability.expansionCap "sheetForm")
       unselected=system.expansion.cap.value
       include=(exists system.expansion.cap.raw)
     }}
