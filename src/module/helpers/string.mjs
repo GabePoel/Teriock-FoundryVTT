@@ -105,7 +105,6 @@ export function toId(str, options = {}) {
       val ^= BigInt(str.charCodeAt(i));
       val = (val * FNV_PRIME_64) & MASK_64;
     }
-
     return val.toString(16).padStart(16, "0");
   }
   if (abbreviate) {
