@@ -66,7 +66,7 @@ effects:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.21
     flags:
       teriock:
         category: support
@@ -88,7 +88,7 @@ effects:
       elderSorcery: true
       elements:
         - storm
-      executionTime: Long Rest
+      executionTime: passive
       expansion:
         featSaveAttribute: mov
         range:
@@ -96,17 +96,42 @@ effects:
       featSaveAttribute: int
       form: special
       grantOnly: false
+      impacts:
+        proficient:
+          changes:
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.elderSorceryCreation'
+              target: ability
+              time: fluency
+              value: '2'
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.celestialElderSorceryWords'
+              target: ability
+              time: fluency
+              value: '2'
+            - key: system.competence.raw
+              mode: 4
+              priority: 10
+              qualifier: '@key.stormElderSorceryWords'
+              target: ability
+              time: fluency
+              value: '2'
       interaction: feat
-      maneuver: slow
+      maneuver: passive
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
           @L[Category:Rotator spells]{spells} created by others. When you come
           across a fully created spell using only words you are @L[Core:Fluency
           Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
-          @L[Core:Feat Interaction]{feat save} to attempt to learn it. If you
-          succeed, you can add it to your rotator spell list. If you fail, you
-          are @L[Keyword:Incapable]{incapable} of attempting to learn that spell
+          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
+          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
+          it to your rotator spell list. If you fail, you are
+          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
           again. The @L[Core:Game Master]{GM} may modify the DC based on the
           spell's complexity, your knowledge of the spell, any special training
           you receive, if the spell's creator is there to assist you, or for any

@@ -8,117 +8,930 @@ _stats:
 folder: 0b00935e53673daa
 img: systems/teriock/src/icons/creatures/superior-cemerai.webp
 items:
-  - _id: dzGTTJFf8DIMl6du
-    _key: '!actors.items!d3672cafa9fd70c4.dzGTTJFf8DIMl6du'
+  - _id: d3672cafa9fd70c4
+    _key: '!actors.items!d3672cafa9fd70c4.d3672cafa9fd70c4'
     _stats:
-      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+      compendiumSource: Compendium.teriock.species.Item.d3672cafa9fd70c4
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.21
     effects:
-      - _id: LwntE76DWV8LsMYk
+      - _id: s8YD16Kef53pRjfV
         _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.dzGTTJFf8DIMl6du.LwntE76DWV8LsMYk
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.s8YD16Kef53pRjfV
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.294cd7a4f1545ed9
+          compendiumSource: Compendium.teriock.abilities.Item.a04434f696dc637e
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/properties/bashing.webp
-        name: Bashing
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/animate-dead.webp
+        name: Animate Dead
         system:
+          class: necromancer
           competence:
             raw: 0
-          description: >-
-            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
-          form: intrinsic
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+            somatic: true
+            verbal: true
+          delivery:
+            base: hand
+            package: touch
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - reanimation
+          elements:
+            - necromancy
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          interaction: attack
+          limitation: <p>Self only.</p>
+          maneuver: active
+          overview:
+            base: >-
+              <p>Target is @L[Condition:Alive]{alive} (but still
+              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
+              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
+              Points]{HP} is halved (minimum of 1) until it completes a
+              @L[Core:Short Rest]{short rest}. This does not count as a
+              @L[Category:Revival effects]{revival effect}.</p>
+            fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+            proficient: >-
+              <p>Target has all @L[Core:HP]{HP} restored, but its maximum
+              @L[Core:HP]{HP} is still halved. This does not count as a
+              @L[Category:Healing effects]{healing effect}.</p>
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: Your Hand's Range
+            unit: ft
+          requirements: >-
+            <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
+            creatures]{undead}.</p>
           revealed: true
-        type: property
-      - _id: 70oASdJA4Iza7rlK
+          spell: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: KjskUVFSxjD6qJRz
         _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.dzGTTJFf8DIMl6du.70oASdJA4Iza7rlK
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.KjskUVFSxjD6qJRz
         _stats:
-          compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
+          compendiumSource: Compendium.teriock.abilities.Item.235923981d1ebd09
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/properties/small.webp
-        name: Small
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/constructed-body.webp
+        name: Constructed Body
         system:
           competence:
             raw: 0
-          description: >-
-            <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
-          form: intrinsic
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                damage: 1d10
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You count as an @L[Category:Equipment]{item} for the purposes
+              of certain @L[Category:Item target abilities]{abilities that
+              target them}. The relevant @L[Category:Item target
+              abilities]{abilities} are those would apply one of the following
+              @L[Category:Properties]{properties} to a piece of
+              @L[Category:Equipment]{equipment}. You take the effect listed
+              below instead. If the @L[Category:Item target abilities]{ability}
+              was @L[Category:Magically powered abilities]{magically powered},
+              then any @L[Core:Damage]{damage} dealt is @L[Damage:Magic]{magic}
+              in addition to its other @L[Category:Damage types]{types}. If the
+              @L[Category:Item target abilities]{ability} was delivered by a
+              @L[Category:Weapon delivery abilities]{weapon}, then the
+              @L[Core:Damage]{damage} has all the @L[Category:Damage
+              types]{damage types} that that @L[Category:Weapons]{weapon} would
+              deal in addition to its other @L[Category:Damage
+              types]{types}.</p><ul><li>@L[Property:Destroyed]{Destroyed}: Take
+              [[/damage 1d10]]
+              @L[Core:Damage]{damage}.</li><li>@L[Property:Shattered]{Shattered}:
+              Take a @L[Damage:Hack]{hack} of your
+              choice.</li><li>@L[Property:Warded]{Warded}: The next
+              @L[Category:Self delivery abilities]{self delivery ability} you
+              use is @L[Keyword:Warded]{warded}.</li></ul><p>For any other
+              passive @L[Category:Properties]{properties}, that the
+              @L[Category:Equipment]{equipment} may gain, your @L[Category:Body
+              parts]{body parts} gain those @L[Category:Properties]{properties}.
+              Additionally, any @L[Category:AV granting abilities]{natural AV}
+              you may have counts as @L[Category:Equipment]{armor} for these
+              purposes.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
           revealed: true
-        type: property
+          targets:
+            - self
+        type: ability
+      - _id: 8I9usZKaBuhsRMUM
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.8I9usZKaBuhsRMUM
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.a117c508ccc3bbe5
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/death-rattle.webp
+        name: Death Rattle
+        system:
+          class: necromancer
+          competence:
+            raw: 0
+          costs:
+            somatic: true
+            verbal: true
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          elements:
+            - necromancy
+          executionTime: r1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          interaction: manifest
+          limitation: <p>@L[Ability:Animate Dead]{Animate Dead} only.</p>
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You execute one @L[Category:Single action abilities]{single
+              action ability} you have.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - self
+          trigger: <p>You @L[Condition:Dead]{die}.</p>
+        type: ability
+      - _id: VtS7AjWjv90P7Sgf
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.VtS7AjWjv90P7Sgf
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.5f8896d1928dfede
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
+        system:
+          _sup: MC48Wr4pUR4mRAFi
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - sensory
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.senses.ethereal
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '120'
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see and hear spirits and
+              @L[Condition:Ethereal]{Ethereal} creatures.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+            - spiritual
+            - primal
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: MC48Wr4pUR4mRAFi
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.MC48Wr4pUR4mRAFi
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.a3ba1215e06bfb82
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/greater-undead.webp
+        name: Greater Undead
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Magical Durability]{Magical Durability},\_@L[Ability:Mana Drain Touch]{Mana Drain Touch},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: AAhmIUtg4NuTVKPa
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.AAhmIUtg4NuTVKPa
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.646bdfc53ff71572
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
+        system:
+          _sup: MC48Wr4pUR4mRAFi
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: flaw
+          grantOnly: false
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>@L[Core:Healing]{Healing} can be used to
+              @L[Core:Damage]{damage} you. If the creature providing you
+              @L[Core:Healing]{healing} specifies that they are doing so "for
+              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
+              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
+              damage} instead of the normal @L[Core:Healing]{healing} effect.
+              This does not consume any of your @L[Core:HP]{hit dice}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 6lrArwKI1xM9jCqY
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.6lrArwKI1xM9jCqY
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.fd30dcae55669994
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/magical-durability.webp
+        name: Magical Durability
+        system:
+          _sup: MC48Wr4pUR4mRAFi
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.damageTypes
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: mundane
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: 7xERzn1bASztkFOz
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.7xERzn1bASztkFOz
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.267a2993fd42e843
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
+        name: Mana Drain Touch
+        system:
+          _sup: MC48Wr4pUR4mRAFi
+          competence:
+            raw: 0
+          delivery:
+            base: hand
+            package: touch
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - revitalization
+            - draining
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                drain: 1d8[mana]
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: Your Hand's Range
+            unit: ft
+          results:
+            critHit: >-
+              <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to
+              the target. If this @L[Condition:Dead]{kills} the target, you
+              @L[Core:Revitalizing]{revitalize} twice. This
+              @L[Core:Revitalizing]{revitalization} is the only part of this
+              that is a @L[Category:Revitalization effects]{revitalization
+              effect}.</p>
+            hit: >-
+              <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to
+              the target. If this @L[Condition:Dead]{kills} the target, you
+              @L[Core:Revitalizing]{revitalize}.  This
+              @L[Core:Revitalizing]{revitalization} is the only part of this
+              that is a @L[Category:Revitalization effects]{revitalization
+              effect}.</p>
+          revealed: true
+          targets:
+            - creature
+        type: ability
+      - _id: 4pgOjXoO38jKpfPi
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.4pgOjXoO38jKpfPi
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.db77687509a7309d
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+        name: Normal Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: 0
+        type: ability
+      - _id: 6M2tpZwyLYGa9UPy
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.6M2tpZwyLYGa9UPy
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        type: ability
+      - _id: IrZLelFleiXOnh07
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.IrZLelFleiXOnh07
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        type: ability
+      - _id: bi377ursFXlC9ksM
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.bi377ursFXlC9ksM
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.1d13190e5b38bda6
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        type: ability
+      - _id: BvkeIsr1u7lrM2Gx
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.BvkeIsr1u7lrM2Gx
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.14d28d6322eec2ff
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/normal-strength.webp
+        name: Normal Strength
+        system:
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          interaction: manifest
+          maneuver: passive
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 0
+        type: ability
+      - _id: j5sgk4NhEMDWeDOU
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.j5sgk4NhEMDWeDOU
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.1e47c2f1c0cd5428
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/undead-mind.webp
+        name: Undead Mind
+        system:
+          _sup: MC48Wr4pUR4mRAFi
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: frightened
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: charmed
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to being
+              @L[Condition:Frightened]{frightened} and
+              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
+              maintained even if @L[Condition:Transformed]{transformed}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
+      - _id: mAHuh83TeahT9MEY
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.mAHuh83TeahT9MEY
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.3a19d7ff7a1f3b26
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/undying-durability.webp
+        name: Undying Durability
+        system:
+          _sup: MC48Wr4pUR4mRAFi
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: special
+          grantOnly: false
+          impacts:
+            base:
+              changes:
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: unconscious
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: suffocating
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: poisoned
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @L[Keyword:Immunity]{immune} to
+              @L[Condition:Unconscious]{unconsciousness},
+              @L[Condition:Suffocating]{suffocating}, and being
+              @L[Condition:Poisoned]{poisoned}. You do not
+              @L[Condition:Down]{drop} due to being at negative @L[Core:Hit
+              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
+              when you reach half your maximum @L[Core:Hit Points and Mana
+              Points]{HP} below zero. You also do not have to
+              @L[Core:Drowning]{breathe}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: self
+          revealed: true
+          targets:
+            - self
+        type: ability
     folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/body-parts/foot.webp
-    name: Foot
+    img: systems/teriock/src/icons/creatures/superior-cemerai.webp
+    name: Superior Cemerai
     system:
-      _sup: d3672cafa9fd70c4
-      attackPenalty:
-        raw: '-3'
+      adult: 0
+      appearance: >-
+        <p>Complete suits of armor with full helm, walking around, with empty
+        black voids where a face should be.</p>
+      br: 24
       competence:
-        raw: 0
-      damage:
-        base:
-          raw: '1'
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-    type: body
-  - _id: VM1M7GMDShdOHq2U
-    _key: '!actors.items!d3672cafa9fd70c4.VM1M7GMDShdOHq2U'
-    _stats:
-      compendiumSource: Compendium.teriock.equipment.Item.abd8733cb795a7e0
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.17
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/equipment/full-plate.webp
-    name: Full Plate
-    system:
-      _sup: d3672cafa9fd70c4
-      attackPenalty:
-        raw: '-3'
-      av:
-        raw: '4'
-      competence:
-        raw: 0
-      consumable: false
-      damage:
-        base:
-          raw: '0'
-      equipmentClasses:
-        - armor
-      equipmentType: Full Plate
-      minStr:
-        raw: '-1'
-      powerLevel: mundane
-      range:
-        long:
-          unit: self
-        melee: true
-        ranged: false
-        short:
-          unit: self
-      vitals: false
-      weight:
-        raw: '65'
-    type: equipment
+        raw: 1
+      description: >-
+        <p>Usually used as military commanders or guardians, these dangerous
+        creatures are believed to be a form of haunt or haunted armor that is
+        created when a @L[Class:Duelist]{Duelist} is killed in a particular
+        way.</p>
+      innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Duelist]{Duelist}.</p>"
+      lifespan: 0
+      size:
+        enabled: true
+        value: 3
+      statDice:
+        hp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '4'
+        mp:
+          disabled: false
+          faces: 10
+          number:
+            raw: '1'
+      traits:
+        - undead
+        - construct
+    type: species
   - _id: 1P62RUyLuPIWxEy8
     _key: '!actors.items!d3672cafa9fd70c4.1P62RUyLuPIWxEy8'
     _stats:
@@ -126,7 +939,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.21
     effects:
       - _id: FAUPXdLk1A1fD0k8
         _key: >-
@@ -136,7 +949,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -157,7 +970,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -177,7 +990,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -197,7 +1010,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -230,322 +1043,6 @@ items:
           unit: self
       vitals: false
     type: body
-  - _id: eXwgyoj413tkufHh
-    _key: '!actors.items!d3672cafa9fd70c4.eXwgyoj413tkufHh'
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.f49c6d015bc8589a
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.17
-    effects:
-      - _id: Uz1hvRPju7UkGtEK
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.Uz1hvRPju7UkGtEK
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.043078efb9756b45
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/defy-death.webp
-        name: Defy Death
-        system:
-          class: duelist
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: 1 Minute
-            raw: '1'
-            stationary: false
-            unit: minute
-          effectTypes:
-            - resistance
-          executionTime: r1
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          impacts:
-            base:
-              rolls:
-                endCon: 2d4
-              statuses:
-                - defyingDeath
-          interaction: manifest
-          maneuver: reactive
-          overview:
-            base: <p>You begin @L[Condition:Defying Death]{defying death}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          skill: true
-          standard: true
-          sustained: true
-          targets:
-            - self
-          trigger: <p>You would @L[Condition:Down]{drop}.</p>
-        type: ability
-      - _id: WCJUDTZBY0DrItAn
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.WCJUDTZBY0DrItAn
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.f908a2d44f50a6e0
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/detect-lie.webp
-        name: Detect Lie
-        system:
-          _sup: ez42WB6ZV9yzul09
-          class: duelist
-          competence:
-            raw: 0
-          costs:
-            mp:
-              type: static
-              value:
-                static: 1
-          delivery:
-            base: sight
-          duration:
-            dawn: false
-            description: Instant
-            raw: '0'
-            stationary: false
-            unit: instant
-          effectTypes:
-            - truthDetecting
-          executionTime: r0
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: snk
-          form: normal
-          grantOnly: false
-          interaction: feat
-          maneuver: reactive
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            raw: '15'
-            unit: ft
-          results:
-            fail: >-
-              <p>You detect whether the target believes the statement is true or
-              false.</p>
-            save: >-
-              <p>You detect that the statement is true, regardless of what the
-              target actually believes. This also applies if [[lookup name]] is
-              @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for
-              some other reason.</p>
-          revealed: true
-          skill: true
-          standard: true
-          targets:
-            - creature
-          trigger: >-
-            <p>Someone makes a statement which could, in principle, be true or
-            false.</p>
-        type: ability
-      - _id: A4WZCzLVp8Jq9ykR
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.A4WZCzLVp8Jq9ykR
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.47728b72f6c25e3b
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/duel.webp
-        name: Duel
-        system:
-          class: duelist
-          competence:
-            raw: 0
-          delivery:
-            base: sight
-          duration:
-            dawn: false
-            description: No Limit
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: a1
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          impacts:
-            base:
-              expiration:
-                changeOnCrit: false
-                doesExpire: true
-                normal:
-                  combat:
-                    what:
-                      roll: 2d4kh1
-                      threshold: 4
-                      type: forced
-                    when:
-                      skip: 0
-                      time: end
-                      trigger: turn
-                    who:
-                      type: executor
-              startStatuses:
-                - dueling
-              statuses:
-                - lighted
-            macros:
-              Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
-            proficient:
-              abilityButtonNames:
-                - Move
-          interaction: manifest
-          maneuver: active
-          overview:
-            base: >-
-              <p>You challenge the target to advance and fight you. They may
-              immediately @L[Ability:Move]{Move} towards you as a
-              @L[Core:Reactive Maneuvers]{free reaction} to this and begin
-              @L[Condition:Dueling]{dueling} with you. If they choose not to or
-              are unable to do so, then they are considered to have "forfeited"
-              the [[lookup name style=lc]] (but are not considered to have
-              "lost" it) and become @L[Condition:Lighted]{lighted} to you until
-              the end of your next @L[Core:Turns]{turn}.</p>
-            proficient: >-
-              <p>You may also @L[Ability:Move]{Move} or make a
-              @L[Category:Single action abilities]{single action}
-              @L[Category:Duelist class abilities]{Duelist ability} as a
-              @L[Core:Reactive Maneuvers]{free reaction} to the target's
-              decision and subsequent movement.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            raw: '30'
-            unit: ft
-          requirements: >-
-            <p>You are not @L[Condition:Dueling]{dueling} and can only use this
-            on an opponent.</p>
-          revealed: true
-          skill: true
-          standard: true
-          targets:
-            - creature
-        type: ability
-      - _id: ez42WB6ZV9yzul09
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.ez42WB6ZV9yzul09
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.10797b5ac88b2f6b
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/resolve-conflict.webp
-        name: Resolve Conflict
-        system:
-          class: duelist
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.tradecrafts.peacekeeper.score
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '2'
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are an @L[Keyword:Expertise]{expert}
-              @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
-              @L[Ability:Detect Lie]{Detect Lie}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          skill: true
-          standard: true
-          targets:
-            - self
-        type: ability
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
-    name: Rank 1 Duelist
-    system:
-      _sup: d3672cafa9fd70c4
-      archetype: warrior
-      className: duelist
-      classRank: 1
-      competence:
-        raw: 1
-      description: >-
-        <p>Honor-bound and honest to the core, Duelists are often judges and
-        referees for duels as well as devoted warriors. Duelists prize the honor
-        of their family above any sort of personal gain and thus strive for
-        excellence in everything that they do. A true Duelist wins the battle
-        before it has begun. Strategy and personal perfection are the Duelist's
-        way. If you are a Duelist, be calm, focused, well spoken and confident
-        in yourself.</p>
-      flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
-      innate: false
-      maxAv: 4
-      statDice:
-        hp:
-          disabled: false
-          faces: 12
-          number:
-            raw: '1'
-        mp:
-          disabled: false
-          faces: 8
-          number:
-            raw: '1'
-    type: rank
   - _id: 1WwYsYbnLwItEVj7
     _key: '!actors.items!d3672cafa9fd70c4.1WwYsYbnLwItEVj7'
     _stats:
@@ -553,7 +1050,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.21
     effects:
       - _id: azq2YepcyMcJsrp2
         _key: >-
@@ -563,7 +1060,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/active-bow-out.webp
         name: Active Bow Out
         system:
@@ -624,7 +1121,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/bow-out.webp
         name: Bow Out
         system:
@@ -673,7 +1170,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/chi-strike.webp
         name: Chi Strike
         system:
@@ -755,7 +1252,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/dueling-techniques.webp
         name: Dueling Techniques
         system:
@@ -816,7 +1313,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
         name: Reactive Bow Out
         system:
@@ -873,7 +1370,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/tea-ceremony.webp
         name: Tea Ceremony
         system:
@@ -990,6 +1487,184 @@ items:
           number:
             raw: '1'
     type: rank
+  - _id: 2wc7vk29VUbTTFZG
+    _key: '!actors.items!d3672cafa9fd70c4.2wc7vk29VUbTTFZG'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.c9ac57bad8e1fbb5
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    effects:
+      - _id: ygSqYQJfPOv9a0Fr
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.2wc7vk29VUbTTFZG.ygSqYQJfPOv9a0Fr
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.2979c948c07b8151
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        flags:
+          teriock:
+            category: combat
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/final-fury.webp
+        name: Final Fury
+        system:
+          class: duelist
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            conditions:
+              absent:
+                - down
+            dawn: false
+            description: While Up
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: passive
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              startStatuses:
+                - ruined
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>While @L[Condition:Defying Death]{defying death}, your
+              @L[Category:Weapon delivery abilities]{weapon} @L[Category:Attack
+              abilities]{attacks} are @L[Keyword:Boosted]{boosted} and
+              @L[Keyword:UB]{UB}. When you stop @L[Condition:Defying
+              Death]{defying death}, you @L[Condition:Dead]{die} and your body
+              is @L[Condition:Ruined]{ruined}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - self
+        type: ability
+      - _id: yZ3N79vChFytd8iT
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.2wc7vk29VUbTTFZG.yZ3N79vChFytd8iT
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.07806fe5345b9727
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        flags:
+          teriock:
+            category: support
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/hara-kiri.webp
+        name: Hara-Kiri
+        system:
+          class: duelist
+          competence:
+            raw: 0
+          delivery:
+            base: sight
+            package: ritual
+          duration:
+            dawn: false
+            description: No Limit
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: 10 Minutes
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>The next time you would pull from the @L[Core:Death Bag]{death
+              bag}, you will pull twice with a total number of stones between
+              the two pulls equal to the amount you would have pulled had you
+              not used [[lookup name]]. You declare how many stones are in each
+              group prior to pulling and then do both pulls from the
+              @L[Core:Death Bag]{death bag}. The pulls are independent and you
+              take the effects of both pulls. Add one black stone to the
+              @L[Core:Death Bag]{death bag} prior to making each pull. You may
+              not use [[lookup name]] if you would pull less than 3 stones from
+              the @L[Core:Death Bag]{death bag}.</p>
+            fluent: >-
+              <p>You know all the details of any @L[Core:Divine
+              Intervention]{divine intervention} you are offered if you
+              @L[Core:Permanent Death]{permanently die} from these pulls.</p>
+            proficient: >-
+              <p>You do not need to add an additional black stone to each
+              pull.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            raw: '5'
+            unit: ft
+          revealed: true
+          ritual: true
+          skill: true
+          standard: true
+          sustained: true
+          targets:
+            - creature
+        type: ability
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/ranks/rank-4-duelist.webp
+    name: Rank 4 Duelist
+    system:
+      _sup: d3672cafa9fd70c4
+      archetype: warrior
+      className: duelist
+      classRank: 4
+      competence:
+        raw: 1
+      description: >-
+        <p>Honor-bound and honest to the core, Duelists are often judges and
+        referees for duels as well as devoted warriors. Duelists prize the honor
+        of their family above any sort of personal gain and thus strive for
+        excellence in everything that they do. A true Duelist wins the battle
+        before it has begun. Strategy and personal perfection are the Duelist's
+        way. If you are a Duelist, be calm, focused, well spoken and confident
+        in yourself.</p>
+      flaws: <p>Duelists cannot use @L[Category:Shields]{shields}.</p>
+      innate: false
+      maxAv: 4
+      statDice:
+        hp:
+          disabled: false
+          faces: 12
+          number:
+            raw: '1'
+        mp:
+          disabled: false
+          faces: 8
+          number:
+            raw: '1'
+    type: rank
   - _id: TeAxF9wGVKkm8DYS
     _key: '!actors.items!d3672cafa9fd70c4.TeAxF9wGVKkm8DYS'
     _stats:
@@ -997,7 +1672,7 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.21
     effects:
       - _id: QxDyN7VLtCaq1ppD
         _key: >-
@@ -1007,7 +1682,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         flags:
           teriock:
             category: support
@@ -1080,7 +1755,7 @@ items:
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         flags:
           teriock:
             category: combat
@@ -1179,30 +1854,137 @@ items:
           number:
             raw: '1'
     type: rank
-  - _id: 2wc7vk29VUbTTFZG
-    _key: '!actors.items!d3672cafa9fd70c4.2wc7vk29VUbTTFZG'
+  - _id: VM1M7GMDShdOHq2U
+    _key: '!actors.items!d3672cafa9fd70c4.VM1M7GMDShdOHq2U'
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.c9ac57bad8e1fbb5
+      compendiumSource: Compendium.teriock.equipment.Item.abd8733cb795a7e0
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.21
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/equipment/full-plate.webp
+    name: Full Plate
+    system:
+      _sup: d3672cafa9fd70c4
+      attackPenalty:
+        raw: '-3'
+      av:
+        raw: '4'
+      competence:
+        raw: 0
+      consumable: false
+      damage:
+        base:
+          raw: '0'
+      equipmentClasses:
+        - armor
+      equipmentType: Full Plate
+      minStr:
+        raw: '-1'
+      powerLevel: mundane
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+      weight:
+        raw: '65'
+    type: equipment
+  - _id: dzGTTJFf8DIMl6du
+    _key: '!actors.items!d3672cafa9fd70c4.dzGTTJFf8DIMl6du'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.079ffd850d9567f9
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
     effects:
-      - _id: ygSqYQJfPOv9a0Fr
+      - _id: LwntE76DWV8LsMYk
         _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.2wc7vk29VUbTTFZG.ygSqYQJfPOv9a0Fr
+          !actors.items.effects!d3672cafa9fd70c4.dzGTTJFf8DIMl6du.LwntE76DWV8LsMYk
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.2979c948c07b8151
+          compendiumSource: Compendium.teriock.properties.Item.294cd7a4f1545ed9
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
-        flags:
-          teriock:
-            category: combat
-            defaultAbility: true
-        img: systems/teriock/src/icons/abilities/final-fury.webp
-        name: Final Fury
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a @L[Ability:Basic
+            Attack]{Basic Attack}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+      - _id: 70oASdJA4Iza7rlK
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.dzGTTJFf8DIMl6du.70oASdJA4Iza7rlK
+        _stats:
+          compendiumSource: Compendium.teriock.properties.Item.3d2cc8d952adebec
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a @L[Category:Shields]{shield}.</p>
+          form: intrinsic
+          revealed: true
+        type: property
+    folder: 0b00935e53673daa
+    img: systems/teriock/src/icons/body-parts/foot.webp
+    name: Foot
+    system:
+      _sup: d3672cafa9fd70c4
+      attackPenalty:
+        raw: '-3'
+      competence:
+        raw: 0
+      damage:
+        base:
+          raw: '1'
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+      vitals: false
+    type: body
+  - _id: eXwgyoj413tkufHh
+    _key: '!actors.items!d3672cafa9fd70c4.eXwgyoj413tkufHh'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.f49c6d015bc8589a
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.21
+    effects:
+      - _id: Uz1hvRPju7UkGtEK
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.Uz1hvRPju7UkGtEK
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.043078efb9756b45
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/defy-death.webp
+        name: Defy Death
         system:
           class: duelist
           competence:
@@ -1210,11 +1992,223 @@ items:
           delivery:
             base: self
           duration:
-            conditions:
-              absent:
-                - down
             dawn: false
-            description: While Up
+            description: 1 Minute
+            raw: '1'
+            stationary: false
+            unit: minute
+          effectTypes:
+            - resistance
+          executionTime: r1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              rolls:
+                endCon: 2d4
+              statuses:
+                - defyingDeath
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: <p>You begin @L[Condition:Defying Death]{defying death}.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: self
+          revealed: true
+          skill: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+          trigger: <p>You would @L[Condition:Down]{drop}.</p>
+        type: ability
+      - _id: WCJUDTZBY0DrItAn
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.WCJUDTZBY0DrItAn
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.f908a2d44f50a6e0
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/detect-lie.webp
+        name: Detect Lie
+        system:
+          _sup: ez42WB6ZV9yzul09
+          class: duelist
+          competence:
+            raw: 0
+          costs:
+            mp:
+              type: static
+              value:
+                static: 1
+          delivery:
+            base: sight
+          duration:
+            dawn: false
+            description: Instant
+            raw: '0'
+            stationary: false
+            unit: instant
+          effectTypes:
+            - truthDetecting
+          executionTime: r0
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: snk
+          form: normal
+          grantOnly: false
+          interaction: feat
+          maneuver: reactive
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            raw: '15'
+            unit: ft
+          results:
+            fail: >-
+              <p>You detect whether the target believes the statement is true or
+              false.</p>
+            save: >-
+              <p>You detect that the statement is true, regardless of what the
+              target actually believes. This also applies if [[lookup name]] is
+              @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for
+              some other reason.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - creature
+          trigger: >-
+            <p>Someone makes a statement which could, in principle, be true or
+            false.</p>
+        type: ability
+      - _id: A4WZCzLVp8Jq9ykR
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.A4WZCzLVp8Jq9ykR
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.47728b72f6c25e3b
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/duel.webp
+        name: Duel
+        system:
+          class: duelist
+          competence:
+            raw: 0
+          delivery:
+            base: sight
+          duration:
+            dawn: false
+            description: No Limit
+            raw: '0'
+            stationary: false
+            unit: unlimited
+          executionTime: a1
+          expansion:
+            featSaveAttribute: mov
+            range:
+              unit: self
+          featSaveAttribute: mov
+          form: normal
+          grantOnly: false
+          impacts:
+            base:
+              expiration:
+                changeOnCrit: false
+                doesExpire: true
+                normal:
+                  combat:
+                    what:
+                      roll: 2d4kh1
+                      threshold: 4
+                      type: forced
+                    when:
+                      skip: 0
+                      time: end
+                      trigger: turn
+                    who:
+                      type: executor
+              startStatuses:
+                - dueling
+              statuses:
+                - lighted
+            macros:
+              Compendium_teriock_execution_Macro_4fa8d68bc853e6ae: preExecution
+              Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
+            proficient:
+              abilityButtonNames:
+                - Move
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You challenge the target to advance and fight you. They may
+              immediately @L[Ability:Move]{Move} towards you as a
+              @L[Core:Reactive Maneuvers]{free reaction} to this and begin
+              @L[Condition:Dueling]{dueling} with you. If they choose not to or
+              are unable to do so, then they are considered to have "forfeited"
+              the [[lookup name style=lc]] (but are not considered to have
+              "lost" it) and become @L[Condition:Lighted]{lighted} to you until
+              the end of your next @L[Core:Turns]{turn}.</p>
+            proficient: >-
+              <p>You may also @L[Ability:Move]{Move} or make a
+              @L[Category:Single action abilities]{single action}
+              @L[Category:Duelist class abilities]{Duelist ability} as a
+              @L[Core:Reactive Maneuvers]{free reaction} to the target's
+              decision and subsequent movement.</p>
+          piercing:
+            raw: 0
+          powerSources:
+            - spiritual
+          range:
+            raw: '30'
+            unit: ft
+          requirements: >-
+            <p>You are not @L[Condition:Dueling]{dueling} and can only use this
+            on an opponent.</p>
+          revealed: true
+          skill: true
+          standard: true
+          targets:
+            - creature
+        type: ability
+      - _id: ez42WB6ZV9yzul09
+        _key: >-
+          !actors.items.effects!d3672cafa9fd70c4.eXwgyoj413tkufHh.ez42WB6ZV9yzul09
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.Item.10797b5ac88b2f6b
+          coreVersion: '13'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.9.21
+        img: systems/teriock/src/icons/abilities/resolve-conflict.webp
+        name: Resolve Conflict
+        system:
+          class: duelist
+          competence:
+            raw: 0
+          delivery:
+            base: self
+          duration:
+            dawn: false
+            description: Always Active
             raw: '0'
             stationary: false
             unit: unlimited
@@ -1228,18 +2222,21 @@ items:
           grantOnly: false
           impacts:
             base:
-              startStatuses:
-                - ruined
+              changes:
+                - key: system.tradecrafts.peacekeeper.score
+                  mode: 4
+                  priority: 10
+                  qualifier: '1'
+                  target: Actor
+                  time: normal
+                  value: '2'
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>While @L[Condition:Defying Death]{defying death}, your
-              @L[Category:Weapon delivery abilities]{weapon} @L[Category:Attack
-              abilities]{attacks} are @L[Keyword:Boosted]{boosted} and
-              @L[Keyword:UB]{UB}. When you stop @L[Condition:Defying
-              Death]{defying death}, you @L[Condition:Dead]{die} and your body
-              is @L[Condition:Ruined]{ruined}.</p>
+              <p>You are an @L[Keyword:Expertise]{expert}
+              @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
+              @L[Ability:Detect Lie]{Detect Lie}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1252,86 +2249,14 @@ items:
           targets:
             - self
         type: ability
-      - _id: yZ3N79vChFytd8iT
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.2wc7vk29VUbTTFZG.yZ3N79vChFytd8iT
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.07806fe5345b9727
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        flags:
-          teriock:
-            category: support
-            defaultAbility: true
-        img: systems/teriock/src/icons/abilities/hara-kiri.webp
-        name: Hara-Kiri
-        system:
-          class: duelist
-          competence:
-            raw: 0
-          delivery:
-            base: sight
-            package: ritual
-          duration:
-            dawn: false
-            description: No Limit
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: 10 Minutes
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: slow
-          overview:
-            base: >-
-              <p>The next time you would pull from the @L[Core:Death Bag]{death
-              bag}, you will pull twice with a total number of stones between
-              the two pulls equal to the amount you would have pulled had you
-              not used [[lookup name]]. You declare how many stones are in each
-              group prior to pulling and then do both pulls from the
-              @L[Core:Death Bag]{death bag}. The pulls are independent and you
-              take the effects of both pulls. Add one black stone to the
-              @L[Core:Death Bag]{death bag} prior to making each pull. You may
-              not use [[lookup name]] if you would pull less than 3 stones from
-              the @L[Core:Death Bag]{death bag}.</p>
-            fluent: >-
-              <p>You know all the details of any @L[Core:Divine
-              Intervention]{divine intervention} you are offered if you
-              @L[Core:Permanent Death]{permanently die} from these pulls.</p>
-            proficient: >-
-              <p>You do not need to add an additional black stone to each
-              pull.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - spiritual
-          range:
-            raw: '5'
-            unit: ft
-          revealed: true
-          ritual: true
-          skill: true
-          standard: true
-          sustained: true
-          targets:
-            - creature
-        type: ability
     folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/ranks/rank-4-duelist.webp
-    name: Rank 4 Duelist
+    img: systems/teriock/src/icons/ranks/rank-1-duelist.webp
+    name: Rank 1 Duelist
     system:
       _sup: d3672cafa9fd70c4
       archetype: warrior
       className: duelist
-      classRank: 4
+      classRank: 1
       competence:
         raw: 1
       description: >-
@@ -1357,928 +2282,6 @@ items:
           number:
             raw: '1'
     type: rank
-  - _id: d3672cafa9fd70c4
-    _key: '!actors.items!d3672cafa9fd70c4.d3672cafa9fd70c4'
-    _stats:
-      compendiumSource: Compendium.teriock.species.Item.d3672cafa9fd70c4
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.17
-    effects:
-      - _id: s8YD16Kef53pRjfV
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.s8YD16Kef53pRjfV
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a04434f696dc637e
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/animate-dead.webp
-        name: Animate Dead
-        system:
-          class: necromancer
-          competence:
-            raw: 0
-          costs:
-            mp:
-              type: static
-              value:
-                static: 1
-            somatic: true
-            verbal: true
-          delivery:
-            base: hand
-            package: touch
-          duration:
-            dawn: false
-            description: Instant
-            raw: '0'
-            stationary: false
-            unit: instant
-          effectTypes:
-            - reanimation
-          elements:
-            - necromancy
-          executionTime: a1
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: attack
-          limitation: <p>Self only.</p>
-          maneuver: active
-          overview:
-            base: >-
-              <p>Target is @L[Condition:Alive]{alive} (but still
-              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
-              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
-              Points]{HP} is halved (minimum of 1) until it completes a
-              @L[Core:Short Rest]{short rest}. This does not count as a
-              @L[Category:Revival effects]{revival effect}.</p>
-            fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
-            proficient: >-
-              <p>Target has all @L[Core:HP]{HP} restored, but its maximum
-              @L[Core:HP]{HP} is still halved. This does not count as a
-              @L[Category:Healing effects]{healing effect}.</p>
-          piercing:
-            raw: 2
-          powerSources:
-            - magical
-          range:
-            raw: Your Hand's Range
-            unit: ft
-          requirements: >-
-            <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-            creatures]{undead}.</p>
-          revealed: true
-          spell: true
-          standard: true
-          targets:
-            - creature
-        type: ability
-      - _id: KjskUVFSxjD6qJRz
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.KjskUVFSxjD6qJRz
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.235923981d1ebd09
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/constructed-body.webp
-        name: Constructed Body
-        system:
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          impacts:
-            base:
-              rolls:
-                damage: 1d10
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You count as an @L[Category:Equipment]{item} for the purposes
-              of certain @L[Category:Item target abilities]{abilities that
-              target them}. The relevant @L[Category:Item target
-              abilities]{abilities} are those would apply one of the following
-              @L[Category:Properties]{properties} to a piece of
-              @L[Category:Equipment]{equipment}. You take the effect listed
-              below instead. If the @L[Category:Item target abilities]{ability}
-              was @L[Category:Magically powered abilities]{magically powered},
-              then any @L[Core:Damage]{damage} dealt is @L[Damage:Magic]{magic}
-              in addition to its other @L[Category:Damage types]{types}. If the
-              @L[Category:Item target abilities]{ability} was delivered by a
-              @L[Category:Weapon delivery abilities]{weapon}, then the
-              @L[Core:Damage]{damage} has all the @L[Category:Damage
-              types]{damage types} that that @L[Category:Weapons]{weapon} would
-              deal in addition to its other @L[Category:Damage
-              types]{types}.</p><ul><li>@L[Property:Destroyed]{Destroyed}: Take
-              [[/damage 1d10]]
-              @L[Core:Damage]{damage}.</li><li>@L[Property:Shattered]{Shattered}:
-              Take a @L[Damage:Hack]{hack} of your
-              choice.</li><li>@L[Property:Warded]{Warded}: The next
-              @L[Category:Self delivery abilities]{self delivery ability} you
-              use is @L[Keyword:Warded]{warded}.</li></ul><p>For any other
-              passive @L[Category:Properties]{properties}, that the
-              @L[Category:Equipment]{equipment} may gain, your @L[Category:Body
-              parts]{body parts} gain those @L[Category:Properties]{properties}.
-              Additionally, any @L[Category:AV granting abilities]{natural AV}
-              you may have counts as @L[Category:Equipment]{armor} for these
-              purposes.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-        type: ability
-      - _id: 8I9usZKaBuhsRMUM
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.8I9usZKaBuhsRMUM
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a117c508ccc3bbe5
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/death-rattle.webp
-        name: Death Rattle
-        system:
-          class: necromancer
-          competence:
-            raw: 0
-          costs:
-            somatic: true
-            verbal: true
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Instant
-            raw: '0'
-            stationary: false
-            unit: instant
-          elements:
-            - necromancy
-          executionTime: r1
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          interaction: manifest
-          limitation: <p>@L[Ability:Animate Dead]{Animate Dead} only.</p>
-          maneuver: reactive
-          overview:
-            base: >-
-              <p>You execute one @L[Category:Single action abilities]{single
-              action ability} you have.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          revealed: true
-          rotator: true
-          spell: true
-          standard: true
-          targets:
-            - self
-          trigger: <p>You @L[Condition:Dead]{die}.</p>
-        type: ability
-      - _id: VtS7AjWjv90P7Sgf
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.VtS7AjWjv90P7Sgf
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.5f8896d1928dfede
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
-        name: Ethereal Senses
-        system:
-          _sup: MC48Wr4pUR4mRAFi
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          effectTypes:
-            - sensory
-          elements:
-            - necromancy
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.senses.ethereal
-                  mode: 4
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: '120'
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You can see and hear spirits and
-              @L[Condition:Ethereal]{Ethereal} creatures.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-            - spiritual
-            - primal
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-        type: ability
-      - _id: MC48Wr4pUR4mRAFi
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.MC48Wr4pUR4mRAFi
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.a3ba1215e06bfb82
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/greater-undead.webp
-        name: Greater Undead
-        system:
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: "<p>You count as being @L[Keyword:Undead]{undead} for the purposes of @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage}, and other @L[Category:Effects]{effects}. You also gain @L[Ability:Ethereal Senses]{Ethereal Senses},\_@L[Ability:Healing Sensitivity]{Healing Sensitivity},\_@L[Ability:Magical Durability]{Magical Durability},\_@L[Ability:Mana Drain Touch]{Mana Drain Touch},\_@L[Ability:Undead Mind]{Undead Mind},\_and @L[Ability:Undying Durability]{Undying Durability}.</p>"
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-        type: ability
-      - _id: AAhmIUtg4NuTVKPa
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.AAhmIUtg4NuTVKPa
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.646bdfc53ff71572
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
-        name: Healing Sensitivity
-        system:
-          _sup: MC48Wr4pUR4mRAFi
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          elements:
-            - necromancy
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: flaw
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>@L[Core:Healing]{Healing} can be used to
-              @L[Core:Damage]{damage} you. If the creature providing you
-              @L[Core:Healing]{healing} specifies that they are doing so "for
-              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
-              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
-              damage} instead of the normal @L[Core:Healing]{healing} effect.
-              This does not consume any of your @L[Core:HP]{hit dice}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-        type: ability
-      - _id: 6lrArwKI1xM9jCqY
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.6lrArwKI1xM9jCqY
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.fd30dcae55669994
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/magical-durability.webp
-        name: Magical Durability
-        system:
-          _sup: MC48Wr4pUR4mRAFi
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          effectTypes:
-            - immunity
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.damageTypes
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: mundane
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-        type: ability
-      - _id: 7xERzn1bASztkFOz
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.7xERzn1bASztkFOz
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.267a2993fd42e843
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
-        name: Mana Drain Touch
-        system:
-          _sup: MC48Wr4pUR4mRAFi
-          competence:
-            raw: 0
-          delivery:
-            base: hand
-            package: touch
-          duration:
-            dawn: false
-            description: Instant
-            raw: '0'
-            stationary: false
-            unit: instant
-          effectTypes:
-            - revitalization
-            - draining
-          executionTime: a1
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          impacts:
-            base:
-              rolls:
-                drain: 1d8[mana]
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 2
-          powerSources:
-            - magical
-          range:
-            raw: Your Hand's Range
-            unit: ft
-          results:
-            critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize} twice. This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
-            hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize}.  This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
-          revealed: true
-          targets:
-            - creature
-        type: ability
-      - _id: 4pgOjXoO38jKpfPi
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.4pgOjXoO38jKpfPi
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.db77687509a7309d
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
-        name: Normal Intelligence
-        system:
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: int
-              value: 0
-        type: ability
-      - _id: 6M2tpZwyLYGa9UPy
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.6M2tpZwyLYGa9UPy
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1c52eda8919d34a7
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/normal-movement.webp
-        name: Normal Movement
-        system:
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: mov
-              value: 0
-        type: ability
-      - _id: IrZLelFleiXOnh07
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.IrZLelFleiXOnh07
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.8249d99c527d09b1
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/normal-perception.webp
-        name: Normal Perception
-        system:
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: per
-              value: 0
-        type: ability
-      - _id: bi377ursFXlC9ksM
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.bi377ursFXlC9ksM
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1d13190e5b38bda6
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/normal-sneak.webp
-        name: Normal Sneak
-        system:
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: snk
-              value: 0
-        type: ability
-      - _id: BvkeIsr1u7lrM2Gx
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.BvkeIsr1u7lrM2Gx
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.14d28d6322eec2ff
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/normal-strength.webp
-        name: Normal Strength
-        system:
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: normal
-          grantOnly: false
-          interaction: manifest
-          maneuver: passive
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-          upgrades:
-            score:
-              attribute: str
-              value: 0
-        type: ability
-      - _id: j5sgk4NhEMDWeDOU
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.j5sgk4NhEMDWeDOU
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.1e47c2f1c0cd5428
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/undead-mind.webp
-        name: Undead Mind
-        system:
-          _sup: MC48Wr4pUR4mRAFi
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          effectTypes:
-            - immunity
-          elements:
-            - necromancy
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: frightened
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: charmed
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened} and
-              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
-              maintained even if @L[Condition:Transformed]{transformed}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-        type: ability
-      - _id: mAHuh83TeahT9MEY
-        _key: >-
-          !actors.items.effects!d3672cafa9fd70c4.d3672cafa9fd70c4.mAHuh83TeahT9MEY
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.3a19d7ff7a1f3b26
-          coreVersion: '13'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.9.17
-        img: systems/teriock/src/icons/abilities/undying-durability.webp
-        name: Undying Durability
-        system:
-          _sup: MC48Wr4pUR4mRAFi
-          competence:
-            raw: 0
-          delivery:
-            base: self
-          duration:
-            dawn: false
-            description: Always Active
-            raw: '0'
-            stationary: false
-            unit: unlimited
-          effectTypes:
-            - immunity
-          elements:
-            - necromancy
-          executionTime: passive
-          expansion:
-            featSaveAttribute: mov
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: special
-          grantOnly: false
-          impacts:
-            base:
-              changes:
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: unconscious
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: suffocating
-                - key: system.protections.immunities.statuses
-                  mode: 2
-                  priority: 10
-                  qualifier: '1'
-                  target: Actor
-                  time: normal
-                  value: poisoned
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Condition:Unconscious]{unconsciousness},
-              @L[Condition:Suffocating]{suffocating}, and being
-              @L[Condition:Poisoned]{poisoned}. You do not
-              @L[Condition:Down]{drop} due to being at negative @L[Core:Hit
-              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
-              when you reach half your maximum @L[Core:Hit Points and Mana
-              Points]{HP} below zero. You also do not have to
-              @L[Core:Drowning]{breathe}.</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - magical
-          range:
-            unit: self
-          revealed: true
-          targets:
-            - self
-        type: ability
-    folder: 0b00935e53673daa
-    img: systems/teriock/src/icons/creatures/superior-cemerai.webp
-    name: Superior Cemerai
-    system:
-      appearance: >-
-        <p>Complete suits of armor with full helm, walking around, with empty
-        black voids where a face should be.</p>
-      br: 24
-      competence:
-        raw: 1
-      description: >-
-        <p>Usually used as military commanders or guardians, these dangerous
-        creatures are believed to be a form of haunt or haunted armor that is
-        created when a @L[Class:Duelist]{Duelist} is killed in a particular
-        way.</p>
-      innateRanks: "<p>Innately @L[Category:Classes]{rank} 4\_@L[Class:Duelist]{Duelist}.</p>"
-      size:
-        enabled: true
-        value: 3
-      statDice:
-        hp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '4'
-        mp:
-          disabled: false
-          faces: 10
-          number:
-            raw: '1'
-      traits:
-        - undead
-        - construct
-    type: species
   - _id: 380dac2710b593e9
     _key: '!actors.items!d3672cafa9fd70c4.380dac2710b593e9'
     _stats:
@@ -2286,17 +2289,17 @@ items:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.17
+      systemVersion: 0.9.21
     effects:
       - _id: 4tKZWhHPGEJoR7dR
         _key: >-
           !actors.items.effects!d3672cafa9fd70c4.380dac2710b593e9.4tKZWhHPGEJoR7dR
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.defensiveMartial
+          compendiumSource: Compendium.teriock.abilities.Item.9713dc6aaadc794a
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
@@ -2379,11 +2382,11 @@ items:
         _key: >-
           !actors.items.effects!d3672cafa9fd70c4.380dac2710b593e9.8e9roKoeCSmTjbbo
         _stats:
-          compendiumSource: Compendium.teriock.abilities.Item.wrrTechniques000
+          compendiumSource: Compendium.teriock.abilities.Item.d97a0e2c8e3d8730
           coreVersion: '13'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.9.17
+          systemVersion: 0.9.21
         img: systems/teriock/src/icons/abilities/warrior-techniques.webp
         name: Warrior Techniques
         system:

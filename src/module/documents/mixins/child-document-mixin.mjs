@@ -75,10 +75,19 @@ export default function ChildDocumentMixin(Base) {
         if (data.cancel) {
           return data.copy;
         }
-        const copyDocument = await this.parent.createEmbeddedDocuments(
-          this.documentName,
-          [data.copy],
-        );
+        let copyDocument;
+        if (this.isEmbedded) {
+          copyDocument = await this.parent.createEmbeddedDocuments(
+            this.documentName,
+            [data.copy],
+          );
+        } else if (this.inCompendium) {
+          copyDocument = await this.constructor.create(data.copy, {
+            pack: this.compendium.collection,
+          });
+        } else {
+          copyDocument = await this.constructor.create(data.copy);
+        }
         return copyDocument[0];
       }
 
