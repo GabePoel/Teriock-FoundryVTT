@@ -82,7 +82,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
     return [
       ...super.embedIcons,
       {
-        icon: "comment",
+        icon: TERIOCK.display.icons.ui.chat,
         action: "chatDoc",
         tooltip: "Send to Chat",
         callback: async () => {
@@ -91,7 +91,9 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         condition: this.parent.isViewer,
       },
       {
-        icon: this.parent.disabled ? "circle" : "circle-check",
+        icon: this.parent.disabled
+          ? TERIOCK.display.icons.ui.disabled
+          : TERIOCK.display.icons.ui.enabled,
         action: "toggleDisabledDoc",
         callback: () => this.parent.toggleDisabled(),
         tooltip: this.parent.disabled ? "Disabled" : "Enabled",
@@ -212,7 +214,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         },
         {
           name: "Enable",
-          icon: makeIcon("check", "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
           callback: this.parent.enable.bind(this.parent),
           condition:
             this.parent.parent?.isOwner &&
@@ -222,7 +224,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         },
         {
           name: "Disable",
-          icon: makeIcon("xmark-large", "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
           callback: this.parent.disable.bind(this.parent),
           condition:
             this.parent.parent?.isOwner &&
@@ -234,7 +236,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         },
         {
           name: "Open GM Notes",
-          icon: makeIcon("notes", "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
           callback: async () => {
             await this.gmNotesOpen();
           },
@@ -243,7 +245,7 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         },
         {
           name: "Open Image",
-          icon: makeIcon("image", "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
           callback: async () => {
             await new ImagePopout({
               src: this.parent.img,
@@ -255,19 +257,19 @@ export default class ChildSystem extends UsableDataMixin(CommonSystem) {
         },
         {
           name: "Share Image",
-          icon: makeIcon("comment-image", "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
           callback: this.parent.chatImage.bind(this.parent),
           group: "share",
         },
         {
           name: "Share Writeup",
-          icon: makeIcon("comment-lines", "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
           callback: this.parent.toMessage.bind(this.parent),
           group: "share",
         },
         {
           name: "Duplicate",
-          icon: makeIcon("copy", "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
           callback: async () => {
             await this.parent.duplicate();
           },

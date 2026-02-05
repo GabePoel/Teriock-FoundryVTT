@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
@@ -15,7 +16,7 @@ async function primary(actor, options = {}) {
  */
 const command = {
   ...thresholdCommand,
-  icon: "shield-alt",
+  icon: icons.effect.resist,
   id: "resist",
   label: (options) => `Roll ${options?.hex ? "Hexproof" : "Resistance"}`,
   primary,

@@ -223,7 +223,7 @@ export default class SpeciesSystem extends mix(
       ...super.getCardContextMenuEntries(doc),
       {
         name: "Set Primary Transformation",
-        icon: makeIcon("tree", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
         callback: this.setPrimaryTransformation.bind(this),
         condition:
           this.isTransformation &&

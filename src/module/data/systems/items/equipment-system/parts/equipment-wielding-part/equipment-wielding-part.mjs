@@ -45,8 +45,9 @@ export default (Base) => {
       get canEquip() {
         return (
           ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+          this.actor &&
           !this.equipped &&
-          this.actor?.system.attributes.str.score >= this.minStr
+          this.actor.system.attributes.str.score >= this.minStr.currentValue
         );
       }
 
@@ -57,6 +58,7 @@ export default (Base) => {
       get canUnequip() {
         return (
           ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+          this.actor &&
           this.equipped
         );
       }
@@ -130,28 +132,31 @@ export default (Base) => {
           ...super.getCardContextMenuEntries(doc),
           {
             name: "Equip",
-            icon: makeIcon("check", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             callback: this.equip.bind(this),
             condition: this.canEquip,
             group: "control",
           },
           {
             name: "Unequip",
-            icon: makeIcon("xmark", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             callback: this.unequip.bind(this),
             condition: this.parent.isOwner && this.canUnequip,
             group: "control",
           },
           {
             name: "Glue",
-            icon: makeIcon("link", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
             callback: this.glue.bind(this),
             condition: this.parent.isOwner && !this.glued,
             group: "control",
           },
           {
             name: "Unglue",
-            icon: makeIcon("link-slash", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.unglue,
+              "contextMenu",
+            ),
             callback: this.unglue.bind(this),
             condition: this.parent.isOwner && this.glued,
             group: "control",

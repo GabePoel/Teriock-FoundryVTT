@@ -1,3 +1,5 @@
+import { icons } from "../../../constants/display/icons.mjs";
+
 /**
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
@@ -11,7 +13,7 @@ async function primary(actor) {
  * @type {Teriock.Interactions.CommandEntry}
  */
 const command = {
-  icon: "sack",
+  icon: icons.ui.deathBag,
   id: "bag",
   label: "Death Bag Pull",
   primary,

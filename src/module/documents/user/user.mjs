@@ -43,7 +43,7 @@ export default class TeriockUser extends mix(
     return [
       {
         name: "Open Character",
-        icon: makeIcon("user", "contextMenu"),
+        icon: makeIcon(TERIOCK.options.document.character.icon, "contextMenu"),
         callback: async () => await this.character.sheet.render(true),
         condition: () => this.character && this.character.isViewer,
       },

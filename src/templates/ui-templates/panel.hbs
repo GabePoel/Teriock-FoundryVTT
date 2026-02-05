@@ -20,7 +20,7 @@
     </div>
     <div class="teriock-panel-header-name">{{{name}}}</div>
     <div class="teriock-panel-header-icon">
-      <i class="fa-fw fa-light fa-{{{icon}}}"></i>
+      {{makeIcon icon "light"}}
     </div>
     <div class="teriock-panel-header-expander">
       <i class="fa-fw fa-light fa-chevron-down"></i>
@@ -35,7 +35,7 @@
               {{#if (exists (concatArray wrappers))}}
                 <div class="teriock-panel-bar">
                   <div class="teriock-panel-bar-icon" data-tooltip="{{{label}}}" data-tooltip-direction="LEFT">
-                    <i class="fa-fw fa-light {{{icon}}}"></i>
+                    {{makeIcon icon "light"}}
                   </div>
                   <div class="teriock-panel-bar-wrappers">
                     {{#each wrappers as |wrapper|}}
@@ -71,7 +71,7 @@
                 >
                   {{#if (exists icon)}}
                     <div class="teriock-panel-association-icon">
-                      <i class="fa-fw fa-light fa-{{{icon}}}"></i>
+                      {{makeIcon icon "light"}}
                     </div>
                   {{/if}}
                   <div class="teriock-panel-association-name">
@@ -110,7 +110,7 @@
                                data-tooltip-direction="DOWN"
                             {{/if}}
                           >
-                            <i class="fa-fw fa-light fa-{{{icon.icon}}}"></i>
+                            {{makeIcon icon.icon "light"}}
                           </div>
                         {{/if}}
                       </a>

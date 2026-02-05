@@ -1,3 +1,4 @@
+import { icons } from "../../../../../constants/display/icons.mjs";
 import { documentOptions } from "../../../../../constants/options/document-options.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 import TeriockTextEditor from "../../../../ux/text-editor.mjs";
@@ -60,7 +61,7 @@ export default (Base) =>
           },
           {
             id: "protections",
-            icon: makeIconClass("shield-halved", "solid"),
+            icon: makeIconClass(icons.effect.protection, "solid"),
             label: "Protections",
           },
           {

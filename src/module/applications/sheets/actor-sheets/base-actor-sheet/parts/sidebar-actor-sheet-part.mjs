@@ -29,9 +29,9 @@ export default (Base) =>
       return TeriockContextMenu.makeUpdateEntries(
         this.actor,
         [
-          { name: "None", icon: "xmark", value: 0 },
-          { name: "AV0", icon: "a", value: 1 },
-          { name: "UB", icon: "u", value: 2 },
+          { name: "None", icon: TERIOCK.display.icons.piercing.none, value: 0 },
+          { name: "AV0", icon: TERIOCK.display.icons.piercing.av0, value: 1 },
+          { name: "UB", icon: TERIOCK.display.icons.piercing.ub, value: 2 },
         ],
         {
           path: "system.offense.piercing.raw",
@@ -49,12 +49,12 @@ export default (Base) =>
         [
           {
             name: "Scale P and F off LVL",
-            icon: "wreath-laurel",
+            icon: TERIOCK.display.icons.document.rank,
             value: false,
           },
           {
             name: "Scale P and F off BR",
-            icon: "swords",
+            icon: TERIOCK.display.icons.species.br,
             value: true,
           },
         ],

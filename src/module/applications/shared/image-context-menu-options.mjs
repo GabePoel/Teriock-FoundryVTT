@@ -1,3 +1,4 @@
+import { icons } from "../../constants/display/icons.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import { previewSheet } from "./_module.mjs";
 
@@ -11,7 +12,7 @@ const { ImagePopout } = foundry.applications.apps;
 const imageContextMenuOptions = [
   {
     name: "Open Image",
-    icon: makeIcon("image", "contextMenu"),
+    icon: makeIcon(icons.ui.image, "contextMenu"),
     callback: async (target) => {
       await new ImagePopout({
         src: target.getAttribute("src"),
@@ -25,7 +26,7 @@ const imageContextMenuOptions = [
   },
   {
     name: "Share Image",
-    icon: makeIcon("share", "contextMenu"),
+    icon: makeIcon(icons.ui.shareImage, "contextMenu"),
     callback: async (target) => {
       await chatImage(target.getAttribute("src"));
     },
@@ -36,7 +37,7 @@ const imageContextMenuOptions = [
   },
   {
     name: "Open Document",
-    icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+    icon: makeIcon(icons.ui.openWindow, "contextMenu"),
     callback: async (target) => {
       const uuid = target.getAttribute("data-uuid");
       if (uuid) {

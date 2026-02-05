@@ -70,7 +70,7 @@ export default class BodySystem extends mix(
       ...super.panelParts,
       bars: [
         {
-          icon: "fa-crosshairs-simple",
+          icon: TERIOCK.display.icons.interaction.attack,
           label: "Attack",
           wrappers: [
             this.piercing.value,
@@ -81,7 +81,7 @@ export default class BodySystem extends mix(
           ],
         },
         {
-          icon: "fa-shield",
+          icon: TERIOCK.display.icons.interaction.block,
           label: "Defense",
           wrappers: [
             this.av.value ? `${this.av.value} AV` : "",
@@ -89,7 +89,7 @@ export default class BodySystem extends mix(
           ],
         },
         {
-          icon: "fa-flag",
+          icon: TERIOCK.display.icons.equipment.equipmentClasses,
           label: "Equipment Classes",
           wrappers: [
             "Body parts",

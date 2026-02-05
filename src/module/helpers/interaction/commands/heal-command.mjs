@@ -1,3 +1,5 @@
+import { icons } from "../../../constants/display/icons.mjs";
+
 /**
  * @param {TeriockActor} actor
  * @returns {Promise<void>}
@@ -7,7 +9,7 @@ async function primary(actor) {
 }
 
 const command = {
-  icon: "hand-holding-heart",
+  icon: icons.effect.heal,
   id: "heal",
   label: "Heal",
   primary,

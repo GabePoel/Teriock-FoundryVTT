@@ -36,7 +36,7 @@
           "Variable Mana Cost"
         )
       )
-      icon=(makeIcon TERIOCK.display.icons.cost.mp "sheetForm")
+      icon=TERIOCK.display.icons.stat.mp
       label="MP"
       include=(not (eq system.costs.mp.type "none"))
       classes=(ifThen editable "mana-cost-box" "")
@@ -49,7 +49,7 @@
       )
       tooltip="Adept Mana Cost"
       label="MP"
-      icon="minus"
+      icon=TERIOCK.display.icons.ability.adept
       include=system.adept.enabled
     }}
     {{formBox
@@ -60,7 +60,7 @@
       )
       tooltip="Gifted Mana Cost"
       label="MP"
-      icon="plus"
+      icon=TERIOCK.display.icons.ability.gifted
       include=system.gifted.enabled
     }}
     {{formBox
@@ -92,7 +92,7 @@
           )
         )
       )
-      icon=(makeIcon TERIOCK.display.icons.cost.hp "sheetForm")
+      icon=TERIOCK.display.icons.stat.hp
       label="HP"
       classes=(ifThen editable "hit-cost-box" "")
       include=(not (eq system.costs.hp.type "none"))
@@ -124,14 +124,14 @@
           "Variable Gold Cost"
         )
       )
-      icon=(makeIcon TERIOCK.display.icons.cost.gp "sheetForm")
+      icon=TERIOCK.display.icons.stat.gp
       label="₲"
       classes=(ifThen editable "gold-cost-box" "")
       include=(not (eq system.costs.gp.type "none"))
     }}
     {{formBox
       (path TERIOCK.options.ability.breakCost system.costs.break)
-      icon=(makeIcon TERIOCK.display.icons.ability.break "sheetForm")
+      icon=TERIOCK.display.icons.ability.break
       tooltip="Break Cost"
       classes=(ifThen editable "break-cost-box" "")
       include=(exists system.costs.break)

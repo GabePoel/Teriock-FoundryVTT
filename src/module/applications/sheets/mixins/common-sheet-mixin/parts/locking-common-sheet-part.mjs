@@ -43,9 +43,18 @@ export default (Base) => {
           "[data-action='toggleLockThis']",
         );
         if (toggleButton) {
-          toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
+          toggleButton.classList.remove(
+            ...[
+              `fa-${TERIOCK.display.icons.ui.unlocked}`,
+              `fa-${TERIOCK.display.icons.ui.locked}`,
+            ],
+          );
           toggleButton.classList.add(
-            ...[this.isEditable ? "fa-lock-open" : "fa-lock"],
+            ...[
+              this.isEditable
+                ? `fa-${TERIOCK.display.icons.ui.unlocked}`
+                : `fa-${TERIOCK.display.icons.ui.locked}`,
+            ],
           );
           toggleButton.setAttribute(
             "data-tooltip",
@@ -67,7 +76,9 @@ export default (Base) => {
               "header-control",
               "icon",
               "fa-solid",
-              this.isEditable ? "fa-lock-open" : "fa-lock",
+              this.isEditable
+                ? `fa-${TERIOCK.display.icons.ui.unlocked}`
+                : `fa-${TERIOCK.display.icons.ui.locked}`,
             ],
           );
           toggleButton.setAttribute("data-action", "toggleLockThis");

@@ -53,7 +53,7 @@ export default class AttunementSystem extends BaseEffectSystem {
   get embedIcons() {
     return [
       {
-        icon: "handshake-simple-slash",
+        icon: TERIOCK.display.icons.attunable.deattune,
         action: "deattuneDoc",
         tooltip: "Deattune",
         condition: this.parent.isOwner,
@@ -81,7 +81,7 @@ export default class AttunementSystem extends BaseEffectSystem {
     const parts = super.panelParts;
     parts.bars = [
       {
-        icon: "fa-weight-hanging",
+        icon: TERIOCK.display.icons.attunable.tier,
         label: "Tier",
         wrappers: [`Tier ${this.tier}`],
       },
@@ -158,7 +158,7 @@ export default class AttunementSystem extends BaseEffectSystem {
       ...entries,
       {
         name: "Deattune",
-        icon: makeIcon("handshake-simple-slash", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
         callback: async () => await this.deattune(),
         group: "attunement",
       },

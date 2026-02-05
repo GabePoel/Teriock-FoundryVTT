@@ -44,7 +44,7 @@ export default class ResourceSystem extends mix(
   get panelParts() {
     const parts = super.panelParts;
     parts.bars.push({
-      icon: "fa-hashtag",
+      icon: TERIOCK.display.icons.ui.quantity,
       label: "Quantity",
       wrappers: [
         `${this.quantity} Remaining`,

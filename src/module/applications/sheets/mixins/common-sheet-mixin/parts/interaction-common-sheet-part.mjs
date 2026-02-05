@@ -1,3 +1,4 @@
+import { icons } from "../../../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 
 /**
@@ -24,7 +25,7 @@ export default (Base) => {
           controls: [
             {
               action: "deleteThis",
-              icon: makeIconClass("trash", "contextMenu"),
+              icon: makeIconClass(icons.ui.delete, "contextMenu"),
               label: "Delete Document",
               ownership: "OWNER",
             },

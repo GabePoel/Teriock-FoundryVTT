@@ -39,7 +39,7 @@ export default class TeriockTableResult extends mix(
     });
     parts.bars.push({
       label: "Result Type",
-      icon: "fa-circle-info",
+      icon: TERIOCK.display.icons.ui.info,
       wrappers: [this.type],
     });
     if (this.documentUuid) {
@@ -47,7 +47,7 @@ export default class TeriockTableResult extends mix(
       parts.associations = [
         {
           title: "Documents",
-          icon: "file",
+          icon: TERIOCK.display.icons.ui.document,
           cards: [
             {
               draggable: true,
@@ -70,7 +70,7 @@ export default class TeriockTableResult extends mix(
     return [
       {
         name: "Open Referenced Document",
-        icon: makeIcon("file", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
         condition: () => this.documentUuid,
         callback: async () =>
           await (await fromUuid(this.documentUuid))?.sheet.render(true),

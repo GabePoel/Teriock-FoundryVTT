@@ -1,4 +1,5 @@
 import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
+import { icons } from "../display/icons.mjs";
 
 /**
  * Options that describe documents.
@@ -8,7 +9,7 @@ export const documentOptions = {
   ability: {
     doc: "ActiveEffect",
     getter: "abilities",
-    icon: "hand-sparkles",
+    icon: icons.document.ability,
     index: "abilities",
     name: "Ability",
     pack: "abilities",
@@ -17,14 +18,14 @@ export const documentOptions = {
   attunement: {
     doc: "ActiveEffect",
     getter: "attunements",
-    icon: "handshake",
+    icon: icons.document.attunement,
     name: "Attunement",
     sorter: docSort,
   },
   body: {
     doc: "Item",
     getter: "bodyParts",
-    icon: "boot",
+    icon: icons.document.body,
     index: "bodyParts",
     name: "Body Part",
     pack: "bodyParts",
@@ -33,14 +34,14 @@ export const documentOptions = {
   character: {
     doc: "Actor",
     getter: "characters",
-    icon: "user",
+    icon: icons.document.character,
     name: "Character",
     sorter: docSort,
   },
   condition: {
     doc: "ActiveEffect",
     getter: "conditions",
-    icon: "disease",
+    icon: icons.document.condition,
     index: "conditions",
     name: "Condition",
     sorter: docSort,
@@ -48,14 +49,14 @@ export const documentOptions = {
   consequence: {
     doc: "ActiveEffect",
     getter: "consequences",
-    icon: "explosion",
+    icon: icons.document.consequence,
     name: "Consequence",
     sorter: docSort,
   },
   creature: {
     doc: "Actor",
     getter: "creatures",
-    icon: "octopus",
+    icon: icons.document.creature,
     name: "Creature",
     pack: "creatures",
     sorter: docSort,
@@ -63,14 +64,14 @@ export const documentOptions = {
   effect: {
     doc: "ActiveEffect",
     getter: "effects",
-    icon: "disease",
+    icon: icons.document.effect,
     name: "Effect",
     sorter: docSort,
   },
   equipment: {
     doc: "Item",
     getter: "equipment",
-    icon: "treasure-chest",
+    icon: icons.document.equipment,
     index: "equipment",
     name: "Equipment",
     pack: "equipment",
@@ -79,28 +80,28 @@ export const documentOptions = {
   fluency: {
     doc: "ActiveEffect",
     getter: "fluencies",
-    icon: "compass-drafting",
+    icon: icons.document.fluency,
     name: "Fluency",
     sorter: docSort,
   },
   mount: {
     doc: "Item",
     getter: "mounts",
-    icon: "horse",
+    icon: icons.document.mount,
     name: "Mount",
     sorter: docSort,
   },
   power: {
     doc: "Item",
     getter: "powers",
-    icon: "person-rays",
+    icon: icons.document.power,
     name: "Power",
     sorter: docSort,
   },
   property: {
     doc: "ActiveEffect",
     getter: "properties",
-    icon: "atom-simple",
+    icon: icons.document.property,
     index: "properties",
     name: "Property",
     pack: "properties",
@@ -109,7 +110,7 @@ export const documentOptions = {
   rank: {
     doc: "Item",
     getter: "ranks",
-    icon: "wreath-laurel",
+    icon: icons.document.rank,
     index: "classes",
     name: "Rank",
     pack: "classes",
@@ -118,14 +119,14 @@ export const documentOptions = {
   resource: {
     doc: "ActiveEffect",
     getter: "resources",
-    icon: "hashtag",
+    icon: icons.document.resource,
     name: "Resource",
     sorter: docSort,
   },
   species: {
     doc: "Item",
     getter: "species",
-    icon: "skull-cow",
+    icon: icons.document.species,
     index: "creatures",
     name: "Species",
     pack: "species",
@@ -133,10 +134,10 @@ export const documentOptions = {
   },
   wrapper: {
     doc: "Item",
-    icon: "hand-sparkles",
+    icon: icons.document.ability,
   },
   stone: {
     doc: "Card",
-    icon: "circle",
+    icon: icons.document.stone,
   },
 };

@@ -1,3 +1,4 @@
+import { icons } from "../../../../../constants/display/icons.mjs";
 import { formulaExists } from "../../../../../helpers/formula.mjs";
 import { elementClass } from "../../../../../helpers/html.mjs";
 
@@ -44,7 +45,7 @@ export default (Base) => {
         }
         const bars = [
           {
-            icon: "fa-arrows-turn-right",
+            icon: icons.ability.execution,
             label: "Execution",
             wrappers: [
               ref.executionTime[this.maneuver][this.executionTime] || "",
@@ -57,7 +58,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-crosshairs-simple",
+            icon: icons.ability.target,
             label: "Targeting",
             wrappers: [
               ["missile", "cone", "sight", "aura"].includes(this.delivery.base)
@@ -70,7 +71,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-expand",
+            icon: icons.ability.expansion,
             label: "Expansion",
             wrappers: this.expansion.type
               ? [
@@ -86,7 +87,7 @@ export default (Base) => {
               : [],
           },
           {
-            icon: "fa-coins",
+            icon: icons.ability.cost,
             label: "Costs",
             wrappers: [
               mpCost || "",
@@ -100,7 +101,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-bolt",
+            icon: icons.ability.effectType,
             label: "Effects and Power Sources",
             wrappers: [
               this.basic ? "Basic" : "",
@@ -116,7 +117,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-" + ref.form[this.form].icon,
+            icon: ref.form[this.form].icon,
             label: "Ability Type",
             wrappers: [
               ref.form[this.form].name || "",

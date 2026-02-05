@@ -19,7 +19,7 @@
             name=(concat ../../changesPath "." i ".key")
             value=change.key
             disabled=(not @root/editable)
-            icon="search"
+            icon=@root/TERIOCK.display.icons.ui.changeKey
             id=(concat @root/sheetId ../../changesPath "." i ".key")
             dataset=(object tooltip=change.key)
           }}
@@ -27,7 +27,7 @@
             changeFields.value
             name=(concat ../../changesPath "." i ".value")
             value=change.value
-            icon="arrow-turn-down-right"
+            icon=@root/TERIOCK.display.icons.ui.changeValue
             disabled=(not @root/editable)
             id=(concat @root/sheetId ../../changesPath "." i ".value")
             dataset=(object tooltip=change.value)
@@ -40,7 +40,7 @@
               name=(concat ../../changesPath "." i ".qualifier")
               value=change.qualifier
               disabled=(not @root/editable)
-              icon="eye-low-vision"
+              icon=@root/TERIOCK.display.icons.ui.qualifier
               id=(concat @root/sheetId ../../changesPath "." i ".qualifier")
               dataset=(object tooltip=change.qualifier)
             }}
@@ -48,7 +48,7 @@
               changeFields.priority
               name=(concat ../../changesPath "." i ".priority")
               value=change.priority
-              icon="arrow-down-arrow-up"
+              icon=@root/TERIOCK.display.icons.ui.priority
               placeholder=(lookup ../../priorities change.mode)
               disabled=(not @root/editable)
               id=(concat @root/sheetId ../../changesPath "." i ".priority")
@@ -60,8 +60,8 @@
               changeFields.mode
               name=(concat ../../changesPath "." i ".mode")
               value=change.mode
-              icon="calculator-simple"
-              choices=@root/TERCIOCK.options.effect.changeMode
+              icon=@root/TERIOCK.display.icons.ui.changeMode
+              choices=@root/TERIOCK.options.effect.changeMode
               disabled=(not @root/editable)
               id=(concat @root/sheetId ../../changesPath "." i ".mode")
             }}
@@ -69,14 +69,14 @@
               changeFields.target
               name=(concat ../../changesPath "." i ".target")
               value=change.target
-              icon="bullseye-pointer"
+              icon=@root/TERIOCK.display.icons.ui.changeTarget
               disabled=(not @root/editable)
               id=(concat @root/sheetId ../../changesPath "." i ".target")
             }}
             {{formInput
               changeFields.time
               name=(concat ../../changesPath "." i ".time")
-              icon="clock"
+              icon=@root/TERIOCK.display.icons.ui.time
               value=change.time
               disabled=(not @root/editable)
               id=(concat @root/sheetId ../../changesPath "." i ".time")
@@ -94,7 +94,7 @@
             {{#each ../additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
             {{#if (not @root/editable)}}disabled="disabled"{{/if}}
           >
-            <i class="fa-solid fa-trash"></i>
+            {{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}
           </button>
         </div>
       </li>
@@ -107,7 +107,7 @@
     {{#each additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
     {{#if (not @root/editable)}}disabled="disabled"{{/if}}
   >
-    <i class="fas fa-plus"></i>
+    {{makeIcon TERIOCK.display.icons.ui.add "button"}}
     Add Change
   </button>
 </ol>

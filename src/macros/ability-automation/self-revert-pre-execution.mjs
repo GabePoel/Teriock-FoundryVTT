@@ -42,7 +42,7 @@ for (let i = 0; i < data.execution.rolls.length; i++) {
             },
             total: {
               classes: "feat",
-              icon: "star",
+              icon: TERIOCK.display.icons.interaction.feat,
             },
           },
           flavor: transformationLevels[chosenTransformationLevel] + " DC",

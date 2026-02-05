@@ -1,9 +1,10 @@
+import { icons } from "../../constants/display/icons.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 
 const wikiContextMenuOptions = [
   {
     name: "View on Wiki",
-    icon: makeIcon("globe", "contextMenu"),
+    icon: makeIcon(icons.ui.wiki, "contextMenu"),
     callback: /** @param {HTMLElement} target */ (target) => {
       const address = target.dataset.wikiAddress;
       if (address) {
@@ -14,7 +15,7 @@ const wikiContextMenuOptions = [
   },
   {
     name: "View in Foundry",
-    icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+    icon: makeIcon(icons.ui.openWindow, "contextMenu"),
     callback: /** @param {HTMLElement} target */ async (target) => {
       const uuid = target.dataset.uuid;
       if (uuid) {

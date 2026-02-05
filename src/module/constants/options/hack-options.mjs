@@ -1,3 +1,5 @@
+import { icons } from "../display/icons.mjs";
+
 /**
  * Hack button definitions.
  * @type {Record<string, Teriock.UI.ButtonDefinition>}
@@ -5,30 +7,30 @@
 export const hackOptions = {
   arm: {
     label: "Hack Arm",
-    icon: "fas fa-hand",
+    icon: icons.hack.arm,
   },
   leg: {
     label: "Hack Leg",
-    icon: "fas fa-boot",
+    icon: icons.hack.leg,
   },
   body: {
     label: "Hack Body",
-    icon: "fas fa-kidneys",
+    icon: icons.hack.body,
   },
   eye: {
     label: "Hack Eye",
-    icon: "fas fa-eye",
+    icon: icons.hack.eye,
   },
   ear: {
     label: "Hack Ear",
-    icon: "fas fa-ear",
+    icon: icons.hack.ear,
   },
   mouth: {
     label: "Hack Mouth",
-    icon: "fas fa-lips",
+    icon: icons.hack.mouth,
   },
   nose: {
     label: "Hack Nose",
-    icon: "fas fa-nose",
+    icon: icons.hack.nose,
   },
 };

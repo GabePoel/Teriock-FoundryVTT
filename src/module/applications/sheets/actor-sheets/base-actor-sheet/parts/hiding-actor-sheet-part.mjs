@@ -38,9 +38,18 @@ export default (Base) =>
         "[data-action='toggleHideThis']",
       );
       if (toggleButton) {
-        toggleButton.classList.remove(...["fa-eye", "fa-eye-slash"]);
+        toggleButton.classList.remove(
+          ...[
+            `fa-${TERIOCK.display.icons.ui.show}`,
+            `fa-${TERIOCK.display.icons.ui.hide}`,
+          ],
+        );
         toggleButton.classList.add(
-          ...[this._hideInactive ? "fa-eye-slash" : "fa-eye"],
+          ...[
+            this._hideInactive
+              ? `fa-${TERIOCK.display.icons.ui.hide}`
+              : `fa-${TERIOCK.display.icons.ui.show}`,
+          ],
         );
         toggleButton.setAttribute(
           "data-tooltip",
@@ -65,7 +74,9 @@ export default (Base) =>
           "header-control",
           "icon",
           "fa-solid",
-          this._hideInactive ? "fa-eye-slash" : "fa-eye",
+          this._hideInactive
+            ? `fa-${TERIOCK.display.icons.ui.hide}`
+            : `fa-${TERIOCK.display.icons.ui.show}`,
         ],
       );
       toggleButton.setAttribute("data-action", "toggleHideThis");

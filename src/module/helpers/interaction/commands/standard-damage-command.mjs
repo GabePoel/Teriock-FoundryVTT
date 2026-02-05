@@ -1,4 +1,5 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
+import { icons } from "../../../constants/display/icons.mjs";
 import { pureUuid } from "../../resolve.mjs";
 
 /**
@@ -59,7 +60,7 @@ const command = {
   aliases: ["sd", "standard"],
   alt: "crit",
   ctrl: "twoHanded",
-  icon: "hammer-crash",
+  icon: icons.effect.dealDamage,
   id: "standardDamage",
   label: "Standard Damage",
   primary,

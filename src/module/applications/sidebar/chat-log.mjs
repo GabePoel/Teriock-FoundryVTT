@@ -9,7 +9,7 @@ export default class TeriockChatLog extends ChatLog {
       ...super._getEntryContextOptions(),
       {
         name: "Expand All",
-        icon: makeIcon("expand", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.ui.expand, "contextMenu"),
         callback: (li) => {
           li.querySelectorAll(".collapsable").forEach((el) => {
             el.classList.toggle("collapsed", false);
@@ -19,7 +19,7 @@ export default class TeriockChatLog extends ChatLog {
       },
       {
         name: "Collapse All",
-        icon: makeIcon("compress", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.ui.collapse, "contextMenu"),
         callback: (li) => {
           li.querySelectorAll(".collapsable").forEach((el) => {
             el.classList.toggle("collapsed", true);

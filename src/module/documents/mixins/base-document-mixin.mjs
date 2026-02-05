@@ -1,4 +1,5 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
+import { icons } from "../../constants/display/icons.mjs";
 import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
 
 /**
@@ -74,7 +75,10 @@ export default function BaseDocumentMixin(Base) {
           ...[
             {
               name: "Open Source",
-              icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+              icon: makeIcon(
+                TERIOCK.display.icons.ui.openWindow,
+                "contextMenu",
+              ),
               callback: async () => await this.elder.sheet.render(true),
               condition: () =>
                 this.elder?.isViewer && doc?.uuid !== this.elder?.uuid,
@@ -82,7 +86,7 @@ export default function BaseDocumentMixin(Base) {
             },
             {
               name: "Delete",
-              icon: makeIcon("trash", "contextMenu"),
+              icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
               callback: async () => await this.safeDelete(),
               condition: () =>
                 this.isOwner &&
@@ -118,7 +122,7 @@ export default function BaseDocumentMixin(Base) {
         const remove = await TeriockDialog.confirm({
           window: {
             title: `Delete ${this.nameString || this.name}`,
-            icon: makeIconClass("trash", "title"),
+            icon: makeIconClass(icons.ui.delete, "title"),
           },
           content:
             "Are you sure you want to delete this? This can't be reversed.",

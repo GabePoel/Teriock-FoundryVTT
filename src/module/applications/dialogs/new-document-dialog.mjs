@@ -13,7 +13,7 @@ export default async function newDocumentDialog(type) {
       ` scratch?`,
     window: {
       title: `New ${TERIOCK.options.document[type].name}`,
-      icon: makeIconClass("plus", "title"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
     },
     modal: true,
     ok: {

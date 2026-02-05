@@ -28,7 +28,7 @@ export default class ImmunityExecution extends BaseExecution {
       name: toTitleCase(this.rule),
       bars: [
         {
-          icon: "fa-shield",
+          icon: TERIOCK.display.icons.effect.immune,
           label: this.label,
           wrappers: this.wrappers,
         },
@@ -39,7 +39,7 @@ export default class ImmunityExecution extends BaseExecution {
           text: TERIOCK.content.keywords[this.rule],
         },
       ],
-      icon: "shield-halved",
+      icon: TERIOCK.display.icons.effect.protection,
       label: "Protection",
     });
     await TeriockTextEditor.enrichPanels(this.panels);

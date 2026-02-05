@@ -193,14 +193,20 @@ export default function AttunableSystemMixin(Base) {
           ...super.getCardContextMenuEntries(doc),
           {
             name: "Attune",
-            icon: makeIcon("handshake-simple", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.attunable.attune,
+              "contextMenu",
+            ),
             callback: this.attune.bind(this),
             condition: this.parent.isOwner && !this.isAttuned,
             group: "control",
           },
           {
             name: "Deattune",
-            icon: makeIcon("handshake-simple-slash", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.attunable.deattune,
+              "contextMenu",
+            ),
             callback: this.deattune.bind(this),
             condition: this.parent.isOwner && this.isAttuned,
             group: "control",

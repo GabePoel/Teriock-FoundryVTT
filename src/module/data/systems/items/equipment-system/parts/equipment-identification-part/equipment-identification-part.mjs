@@ -47,14 +47,20 @@ export default (Base) => {
           ...super.getCardContextMenuEntries(doc),
           {
             name: "Identify",
-            icon: makeIcon("eye", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.identify,
+              "contextMenu",
+            ),
             callback: this.identification.identify.bind(this.identification),
             condition: !this.identification.identified,
             group: "usage",
           },
           {
             name: "Read Magic",
-            icon: makeIcon("hand", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.readMagic,
+              "contextMenu",
+            ),
             callback: this.identification.readMagic.bind(this.identification),
             condition:
               this.parent.isOwner &&
@@ -64,7 +70,10 @@ export default (Base) => {
           },
           {
             name: "Unidentify",
-            icon: makeIcon("eye-slash", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.unidentify,
+              "contextMenu",
+            ),
             callback: this.identification.unidentify.bind(this.identification),
             condition:
               this.parent.isOwner &&

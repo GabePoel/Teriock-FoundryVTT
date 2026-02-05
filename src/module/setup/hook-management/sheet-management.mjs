@@ -13,7 +13,7 @@ function addWikiOpenToHeader(application, controls) {
   ) {
     controls.push({
       action: "wikiOpenThis",
-      icon: makeIconClass("globe", "contextMenu"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.wiki, "contextMenu"),
       label: "View on Wiki",
     });
   }
@@ -28,7 +28,7 @@ function addGmNotesToHeader(_application, controls) {
   if (game.user.isGM) {
     controls.push({
       action: "gmNotesOpen",
-      icon: makeIconClass("notes", "contextMenu"),
+      icon: makeIconClass(TERIOCK.display.icons.ui.notes, "contextMenu"),
       label: "Open GM Notes",
     });
   }

@@ -131,7 +131,7 @@ export default class BaseActorSystem extends mix(
     return [
       {
         name: "Open Token",
-        icon: makeIcon("user-circle", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
         condition: () => this.parent.token && this.parent.token.isViewer,
         callback: async () => this.parent.token.sheet.render(true),
       },

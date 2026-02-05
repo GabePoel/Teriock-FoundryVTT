@@ -329,7 +329,7 @@ export default class TeriockTokenDocument extends mix(
     return [
       {
         name: "Open Actor",
-        icon: makeIcon("user", "contextMenu"),
+        icon: makeIcon(TERIOCK.options.document.character.icon, "contextMenu"),
         condition: () => this.actor && this.actor.isViewer,
         callback: async () => this.actor.sheet.render(true),
       },

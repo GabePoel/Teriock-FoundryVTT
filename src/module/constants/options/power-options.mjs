@@ -1,59 +1,60 @@
 import { colors } from "../display/colors.mjs";
+import { icons } from "../display/icons.mjs";
 
 export const powerOptions = {
   backstory: {
     name: "Backstory",
-    icon: "book-open-cover",
+    icon: icons.power.backstory,
     color: colors.green,
   },
   blessing: {
     name: "Blessing",
-    icon: "sun-bright",
+    icon: icons.power.blessing,
     color: colors.yellow,
   },
   curse: {
     name: "Curse",
-    icon: "hand-holding-skull",
+    icon: icons.power.curse,
     color: colors.red,
   },
   deathScar: {
     name: "Death Scar",
-    icon: "scythe",
+    icon: icons.power.deathScar,
     color: colors.red,
   },
   familiar: {
     name: "Familiar",
-    icon: "monkey",
+    icon: icons.power.familiar,
     color: colors.green,
   },
   holiday: {
     name: "Holiday",
-    icon: "party-bell",
+    icon: icons.power.holiday,
     color: colors.yellow,
   },
   innate: {
     name: "Innate",
-    icon: "person",
+    icon: icons.power.innate,
     color: colors.purple,
   },
   learned: {
     name: "Learned",
-    icon: "head-side-brain",
+    icon: icons.power.learned,
     color: colors.brown,
   },
   other: {
     name: "Other",
-    icon: "question",
+    icon: icons.power.other,
     color: colors.green,
   },
   pact: {
     name: "Pact",
-    icon: "signature",
+    icon: icons.power.pact,
     color: colors.grey,
   },
   traits: {
     name: "Traits",
-    icon: "ghost",
+    icon: icons.power.traits,
     color: colors.green,
   },
 };

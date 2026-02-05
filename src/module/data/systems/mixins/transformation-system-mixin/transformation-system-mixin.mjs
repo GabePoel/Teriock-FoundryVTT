@@ -197,7 +197,10 @@ export default function TransformationSystemMixin(Base) {
           ...super.getCardContextMenuEntries(doc),
           {
             name: "Set Primary Transformation",
-            icon: makeIcon("tree", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.effect.transform,
+              "contextMenu",
+            ),
             callback: this.setPrimaryTransformation.bind(this),
             condition: this.isTransformation && !this.isPrimaryTransformation,
             group: "usage",

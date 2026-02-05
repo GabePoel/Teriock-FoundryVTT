@@ -1,29 +1,31 @@
+import { icons } from "../display/icons.mjs";
+
 export const rankOptions = {
   mage: {
     classes: {
       flameMage: {
         name: "Flame Mage",
-        icon: "fire",
+        icon: icons.class.flameMage,
       },
       lifeMage: {
         name: "Life Mage",
-        icon: "sun",
+        icon: icons.class.lifeMage,
       },
       natureMage: {
         name: "Nature Mage",
-        icon: "leaf",
+        icon: icons.class.natureMage,
       },
       necromancer: {
         name: "Necromancer",
-        icon: "skull",
+        icon: icons.class.necromancer,
       },
       stormMage: {
         name: "Storm Mage",
-        icon: "cloud-showers",
+        icon: icons.class.stormMage,
       },
     },
     hp: 8,
-    icon: "hat-wizard",
+    icon: icons.archetype.mage,
     mp: 12,
     name: "Mage",
   },
@@ -31,27 +33,27 @@ export const rankOptions = {
     classes: {
       archer: {
         name: "Archer",
-        icon: "bow-arrow",
+        icon: icons.class.archer,
       },
       assassin: {
         name: "Assassin",
-        icon: "user-ninja",
+        icon: icons.class.assassin,
       },
       corsair: {
         name: "Corsair",
-        icon: "anchor",
+        icon: icons.class.corsair,
       },
       ranger: {
         name: "Ranger",
-        icon: "paw-claws",
+        icon: icons.class.ranger,
       },
       thief: {
         name: "Thief",
-        icon: "sack",
+        icon: icons.class.thief,
       },
     },
     hp: 10,
-    icon: "person-running",
+    icon: icons.archetype.semi,
     mp: 10,
     name: "Semi",
   },
@@ -59,27 +61,27 @@ export const rankOptions = {
     classes: {
       berserker: {
         name: "Berserker",
-        icon: "axe-battle",
+        icon: icons.class.berserker,
       },
       duelist: {
         name: "Duelist",
-        icon: "swords",
+        icon: icons.class.duelist,
       },
       knight: {
         name: "Knight",
-        icon: "sword",
+        icon: icons.class.knight,
       },
       paladin: {
         name: "Paladin",
-        icon: "shield",
+        icon: icons.class.paladin,
       },
       veteran: {
         name: "Veteran",
-        icon: "helmet-battle",
+        icon: icons.class.veteran,
       },
     },
     hp: 12,
-    icon: "mace",
+    icon: icons.archetype.warrior,
     mp: 8,
     name: "Warrior",
   },
@@ -87,15 +89,15 @@ export const rankOptions = {
     classes: {
       tradesman: {
         name: "Tradesman",
-        icon: "tools",
+        icon: icons.class.tradesman,
       },
       journeyman: {
         name: "Journeyman",
-        icon: "person-hiking",
+        icon: icons.class.journeyman,
       },
     },
     hp: 10,
-    icon: "user",
+    icon: icons.archetype.everyman,
     mp: 10,
     name: "Everyman",
   },

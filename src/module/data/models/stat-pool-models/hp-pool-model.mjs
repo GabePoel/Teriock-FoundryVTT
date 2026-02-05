@@ -58,7 +58,7 @@ export default class HpPoolModel extends StatPoolModel {
     } else if (this.parent.actor?.statuses.has("unconscious")) {
       panels.push({
         image: getImage("effect-types", "Awakening"),
-        icon: "sunrise",
+        icon: TERIOCK.display.icons.effect.awaken,
         name: "Awaken",
         bars: [],
         blocks: [

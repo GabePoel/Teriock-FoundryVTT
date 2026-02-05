@@ -90,7 +90,7 @@ export default class MountSystem extends mix(
   get messageBars() {
     return [
       {
-        icon: "fa-dice",
+        icon: TERIOCK.display.icons.ui.dice,
         label: "Stat Dice",
         wrappers: [
           this.statDice.hp.formula + " Hit Dice",
@@ -98,7 +98,7 @@ export default class MountSystem extends mix(
         ],
       },
       {
-        icon: "fa-trophy",
+        icon: TERIOCK.display.icons.armament.load,
         label: "Load",
         wrappers: ["Tier " + this.tier.raw || "0", this.mountType],
       },

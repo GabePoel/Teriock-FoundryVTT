@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import AbstractButtonHandler from "./abstract-button-handler.mjs";
 
@@ -11,7 +12,7 @@ export class ExecuteMacroHandler extends AbstractButtonHandler {
    */
   static buildButton(uuid, data = {}) {
     const button = super.buildButton();
-    button.icon = makeIconClass("code", "button");
+    button.icon = makeIconClass(icons.document.macro, "button");
     const macro = fromUuidSync(uuid);
     button.label = macro.name;
     button.dataset.uuid = uuid;

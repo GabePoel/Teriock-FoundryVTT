@@ -1,3 +1,5 @@
+import { icons } from "../../../constants/display/icons.mjs";
+
 /**
  * @param {TeriockActor} actor
  * @param {Teriock.Interactions.StatusOptions} options
@@ -37,7 +39,7 @@ async function toggle(actor, options = {}) {
  */
 export const applyStatusCommand = {
   args: ["status"],
-  icon: "share-all",
+  icon: icons.ui.apply,
   id: "apply",
   label: (options) =>
     options?.status
@@ -53,7 +55,7 @@ export const applyStatusCommand = {
  */
 export const removeStatusCommand = {
   args: ["status"],
-  icon: "arrow-rotate-left",
+  icon: icons.ui.undo,
   id: "remove",
   label: (options) =>
     options?.status
@@ -69,7 +71,7 @@ export const removeStatusCommand = {
  */
 export const toggleStatusCommand = {
   args: ["status"],
-  icon: "arrow-left-arrow-right",
+  icon: icons.ui.toggle,
   id: "toggle",
   label: (options) =>
     options?.status

@@ -66,7 +66,7 @@ export default function PanelDocumentMixin(Base) {
         return {
           name: this.nameString || this.name,
           image: systemPath("icons/documents/uncertainty.svg"),
-          icon: "file",
+          icon: TERIOCK.display.icons.ui.document,
           blocks: [],
           bars: [],
         };

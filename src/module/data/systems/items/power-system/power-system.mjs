@@ -95,7 +95,7 @@ export default class PowerSystem extends mix(
   get messageBars() {
     return [
       {
-        icon: "fa-" + TERIOCK.options.power[this.type].icon,
+        icon: TERIOCK.options.power[this.type].icon,
         label: "Power Type",
         wrappers: [
           TERIOCK.options.power[this.type].name,

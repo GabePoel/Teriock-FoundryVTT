@@ -198,7 +198,7 @@ export default class PropertySystem extends mix(
   get messageBars() {
     return [
       {
-        icon: "fa-" + TERIOCK.options.ability.form[this.form].icon,
+        icon: TERIOCK.options.ability.form[this.form].icon,
         label: "Property Type",
         wrappers: [TERIOCK.options.ability.form[this.form].name],
       },

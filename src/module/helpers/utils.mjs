@@ -31,6 +31,7 @@ export function makeIconElement(icon, ...styles) {
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIconClass(icon, ...styles) {
+  if (!icon) return "";
   const styleClasses = styles.map((s) => iconStyles[s] || s);
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
   if (!icon.startsWith("fa-")) {

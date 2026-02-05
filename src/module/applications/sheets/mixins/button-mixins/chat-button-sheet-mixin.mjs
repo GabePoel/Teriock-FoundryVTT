@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 /**
@@ -15,7 +16,7 @@ export default function ChatButtonSheetMixin(Base) {
         controls: [
           {
             action: "chatThis",
-            icon: makeIconClass("comment", "contextMenu"),
+            icon: makeIconClass(icons.ui.chat, "contextMenu"),
             label: "Share in Chat",
           },
         ],

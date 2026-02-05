@@ -52,9 +52,9 @@ export default class CompetenceModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get icon() {
-    if (this.fluent) return "award";
-    if (this.proficient) return "award-simple";
-    return "certificate";
+    if (this.fluent) return TERIOCK.display.icons.competence.fluent;
+    if (this.proficient) return TERIOCK.display.icons.competence.proficient;
+    return TERIOCK.display.icons.competence.none;
   }
 
   /**

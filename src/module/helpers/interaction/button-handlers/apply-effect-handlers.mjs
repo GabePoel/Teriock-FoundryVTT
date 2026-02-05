@@ -1,3 +1,4 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { pureUuid, safeUuid } from "../../resolve.mjs";
 import { makeIconClass } from "../../utils.mjs";
 import AbstractButtonHandler from "./abstract-button-handler.mjs";
@@ -20,7 +21,7 @@ export class ApplyEffectHandler extends AbstractButtonHandler {
   static buildButton(primaryData, options = {}) {
     const { secondaryData, sustainingAbility, bonusSubs = new Set() } = options;
     const button = super.buildButton();
-    button.icon = makeIconClass("share-all", "button");
+    button.icon = makeIconClass(icons.ui.apply, "button");
     button.label = "Apply Effect";
     const primaryJSON = JSON.stringify(primaryData);
     const secondaryJSON = JSON.stringify(secondaryData);

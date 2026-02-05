@@ -42,7 +42,7 @@ export default function RevelationSystemMixin(Base) {
           ...super.getCardContextMenuEntries(doc),
           {
             name: "Reveal",
-            icon: makeIcon("fa-eye", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.ui.show, "contextMenu"),
             callback: async () =>
               this.parent.update({
                 "system.revealed": true,
@@ -53,7 +53,7 @@ export default function RevelationSystemMixin(Base) {
           },
           {
             name: "Unreveal",
-            icon: makeIcon("fa-eye-slash", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.ui.hide, "contextMenu"),
             callback: async () =>
               this.parent.update({
                 "system.revealed": false,

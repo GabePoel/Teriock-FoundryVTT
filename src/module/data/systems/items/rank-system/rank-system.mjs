@@ -1,3 +1,4 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getRollIcon, makeIcon, mix } from "../../../../helpers/utils.mjs";
@@ -142,9 +143,7 @@ export default class RankSystem extends mix(
   get messageBars() {
     return [
       {
-        icon:
-          "fa-" +
-          TERIOCK.options.rank[this.archetype].classes[this.className].icon,
+        icon: TERIOCK.options.rank[this.archetype].classes[this.className].icon,
         label: "Class",
         wrappers: [
           TERIOCK.options.rank[this.archetype].name,
@@ -153,7 +152,7 @@ export default class RankSystem extends mix(
         ],
       },
       {
-        icon: "fa-dice",
+        icon: icons.ui.dice,
         label: "Stat Dice",
         wrappers: [
           this.statDice.hp.formula + " Hit Dice",
@@ -161,7 +160,7 @@ export default class RankSystem extends mix(
         ],
       },
       {
-        icon: "fa-helmet-battle",
+        icon: icons.armament.av,
         label: "Details",
         wrappers: [
           this.maxAv === 0 ? "No Armor" : this.maxAv + " Max AV",
@@ -255,7 +254,7 @@ export default class RankSystem extends mix(
       },
       {
         name: "Recover Hit Die",
-        icon: makeIcon("rotate-left", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
         callback: async () => await this.hpDie.unuse(),
         condition: this.hpDie.spent,
         group: "usage",
@@ -269,7 +268,7 @@ export default class RankSystem extends mix(
       },
       {
         name: "Recover Mana Die",
-        icon: makeIcon("rotate-left", "contextMenu"),
+        icon: makeIcon(TERIOCK.display.icons.ui.undo, "contextMenu"),
         callback: async () => await this.mpDie.unuse(),
         condition: this.mpDie.spent,
         group: "usage",

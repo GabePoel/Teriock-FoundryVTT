@@ -1,4 +1,4 @@
-import { colors } from "../display/_module.mjs";
+import { colors, icons } from "../display/_module.mjs";
 import * as index from "../index/_module.mjs";
 
 export const abilityOptions = {
@@ -128,32 +128,32 @@ export const abilityOptions = {
   form: {
     special: {
       name: "Special",
-      icon: "star",
+      icon: icons.form.special,
       color: colors.purple,
     },
     normal: {
       name: "Normal",
-      icon: "diamond",
+      icon: icons.form.normal,
       color: colors.green,
     },
     gifted: {
       name: "Gifted",
-      icon: "plus",
+      icon: icons.form.gifted,
       color: colors.blue,
     },
     echo: {
       name: "Echo",
-      icon: "circles-overlap",
+      icon: icons.form.echo,
       color: colors.orange,
     },
     intrinsic: {
       name: "Intrinsic",
-      icon: "cube",
+      icon: icons.form.intrinsic,
       color: colors.grey,
     },
     flaw: {
       name: "Flaw",
-      icon: "ban",
+      icon: icons.form.flaw,
       color: colors.red,
     },
   },

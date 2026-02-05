@@ -41,7 +41,7 @@ export default class TeriockHotbar extends Hotbar {
     const options = super._getContextMenuOptions();
     options.push({
       name: "Open Document Sheet",
-      icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+      icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
       condition: (li) => {
         const macro = this.#getMacroForSlot(li);
         return ["useGeneral", "useLinked"].includes(

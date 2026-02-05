@@ -17,13 +17,13 @@ export default (Base) => {
         if (this.parent.parent?.type === "rank") {
           if (this.parent.getFlag("teriock", "category") === "combat") {
             return {
-              icon: "hand-fist",
+              icon: TERIOCK.display.icons.rank.combatAbility,
               tooltip: "Combat",
               classes: "ability-category-tag-icon",
             };
           } else if (this.parent.getFlag("teriock", "category") === "support") {
             return {
-              icon: "shield-heart",
+              icon: TERIOCK.display.icons.rank.supportAbility,
               tooltip: "Support",
               classes: "ability-category-tag-icon",
             };
@@ -43,7 +43,10 @@ export default (Base) => {
         ) {
           entries.push({
             name: "Set Combat Category",
-            icon: makeIcon("hand-fist", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.rank.combatAbility,
+              "contextMenu",
+            ),
             callback: async () =>
               await this.parent.setFlag("teriock", "category", "combat"),
             condition: this.parent.getFlag("teriock", "category") !== "combat",
@@ -51,7 +54,10 @@ export default (Base) => {
           });
           entries.push({
             name: "Set Support Category",
-            icon: makeIcon("shield-heart", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.rank.supportAbility,
+              "contextMenu",
+            ),
             callback: async () =>
               await this.parent.setFlag("teriock", "category", "support"),
             condition: this.parent.getFlag("teriock", "category") !== "support",
@@ -59,7 +65,7 @@ export default (Base) => {
           });
           entries.push({
             name: "Unset Category",
-            icon: makeIcon("delete-left", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.ui.unset, "contextMenu"),
             callback: async () =>
               await this.parent.unsetFlag("teriock", "category"),
             condition: !!this.parent.getFlag("teriock", "category"),

@@ -112,7 +112,7 @@ export function makeDamageTypePanel(damageType) {
     return {
       name: TERIOCK.index.damageTypes[damageType] + " Damage",
       image: getImage("damage-types", TERIOCK.index.damageTypes[damageType]),
-      icon: "heart-crack",
+      icon: TERIOCK.display.icons.effect.damage,
       blocks: [
         {
           title: "Description",
@@ -133,7 +133,7 @@ export function makeDrainTypePanel(drainType) {
     return {
       name: TERIOCK.index.drainTypes[drainType] + " Drain",
       image: getImage("drain-types", TERIOCK.index.drainTypes[drainType]),
-      icon: "droplet-slash",
+      icon: TERIOCK.display.icons.effect.drain,
       blocks: [
         {
           title: "Description",
@@ -253,7 +253,7 @@ export async function attributePanel(attribute) {
         text: TERIOCK.data.attributes[attribute],
       },
     ],
-    icon: "star",
+    icon: TERIOCK.display.icons.interaction.feat,
     label: "Attribute",
   });
 }
@@ -275,7 +275,7 @@ export async function tradecraftPanel(tradecraft) {
     name: TERIOCK.index.tradecrafts[tradecraft],
     bars: [
       {
-        icon: "fa-" + TERIOCK.options.tradecraft[field].icon,
+        icon: TERIOCK.options.tradecraft[field].icon,
         label: "Field",
         wrappers: [TERIOCK.options.tradecraft[field].name],
       },
@@ -308,7 +308,7 @@ export async function classPanel(className) {
     name: TERIOCK.index.classes[className],
     bars: [
       {
-        icon: "fa-" + TERIOCK.options.rank[archetype].icon,
+        icon: TERIOCK.options.rank[archetype].icon,
         label: "Archetype",
         wrappers: [TERIOCK.options.rank[archetype].name],
       },

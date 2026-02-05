@@ -52,7 +52,9 @@ export default (Base) => {
             },
           },
           {
-            icon: this.shattered ? "wine-glass-crack" : "wine-glass",
+            icon: this.shattered
+              ? TERIOCK.display.icons.break.shatter
+              : TERIOCK.display.icons.break.repair,
             action: "toggleShatteredDoc",
             tooltip: this.shattered ? "Shattered" : "Shattered",
             condition: this.parent.isOwner,
@@ -102,28 +104,34 @@ export default (Base) => {
           ...super.getCardContextMenuEntries(doc),
           {
             name: "Shatter",
-            icon: makeIcon("wine-glass-crack", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
             callback: this.shatter.bind(this),
             condition: this.parent.isOwner && !this.shattered,
             group: "control",
           },
           {
             name: "Repair",
-            icon: makeIcon("wine-glass", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
             callback: this.repair.bind(this),
             condition: this.parent.isOwner && this.shattered,
             group: "control",
           },
           {
             name: "Dampen",
-            icon: makeIcon("bell-slash", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.dampen,
+              "contextMenu",
+            ),
             callback: this.dampen.bind(this),
             condition: this.parent.isOwner && !this.dampened,
             group: "control",
           },
           {
             name: "Undampen",
-            icon: makeIcon("bell", "contextMenu"),
+            icon: makeIcon(
+              TERIOCK.display.icons.equipment.undampen,
+              "contextMenu",
+            ),
             callback: this.undampen.bind(this),
             condition: this.parent.isOwner && this.dampened,
             group: "control",

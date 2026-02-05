@@ -1,3 +1,5 @@
+import { icons } from "../../../../../constants/display/icons.mjs";
+
 /**
  * Species panel part.
  * @param {typeof SpeciesSystem} Base
@@ -14,7 +16,7 @@ export default (Base) => {
       get panelParts() {
         const bars = [
           {
-            icon: "fa-dice",
+            icon: icons.ui.dice,
             label: "Stat Dice",
             wrappers: [
               this.statDice.hp.formula + " Hit Dice",
@@ -23,7 +25,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-person",
+            icon: icons.species.lifespan,
             label: "Lifespan",
             wrappers: [
               this.adult ? `Adult at ${this.adult} Years` : "",
@@ -35,7 +37,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-child-reaching",
+            icon: icons.species.size,
             label: "Size",
             wrappers: [
               `Size ${this.size.value}`,
@@ -48,7 +50,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-flag",
+            icon: icons.species.traits,
             label: "Traits",
             wrappers: [
               ...this.traits.map((t) => TERIOCK.index.traits[t]),

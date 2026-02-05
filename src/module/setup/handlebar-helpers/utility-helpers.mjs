@@ -215,7 +215,7 @@ export default function registerUiHelpers() {
             data-action="${addAction}"
             data-tooltip="New ${tabDisplay}"
           >
-            <i class="fa-fw fa-solid fa-plus"></i>
+            <i class="fa-fw fa-solid fa-${TERIOCK.display.icons.ui.add}"></i>
           </button>`
             : ""
         }

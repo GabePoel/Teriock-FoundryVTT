@@ -53,7 +53,10 @@ export default (Base) => {
               [
                 {
                   name: "Unlink",
-                  icon: makeIcon("link-slash", "contextMenu"),
+                  icon: makeIcon(
+                    TERIOCK.display.icons.ui.unlink,
+                    "contextMenu",
+                  ),
                   callback: async () => {
                     const uuid = target.dataset.uuid;
                     await this.document.system.unlinkMacro(uuid);
@@ -63,7 +66,10 @@ export default (Base) => {
                 },
                 {
                   name: "Change Run Hook",
-                  icon: makeIcon("gear-code", "contextMenu"),
+                  icon: makeIcon(
+                    TERIOCK.display.icons.ui.changeMacro,
+                    "contextMenu",
+                  ),
                   callback: async () => {
                     const uuid = target.dataset.uuid;
                     await this.document.system.changeMacroRunHook(uuid);

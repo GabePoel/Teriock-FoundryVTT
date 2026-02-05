@@ -1,31 +1,33 @@
+import { icons } from "../display/icons.mjs";
+
 export const attributeOptions = {
   int: {
-    icon: "brain",
+    icon: icons.attribute.int,
     label: "INT",
     name: "Intelligence",
   },
   mov: {
-    icon: "person-running",
+    icon: icons.attribute.mov,
     label: "MOV",
     name: "Movement",
   },
   per: {
-    icon: "eye",
+    icon: icons.attribute.per,
     label: "PER",
     name: "Perception",
   },
   snk: {
-    icon: "mask",
+    icon: icons.attribute.snk,
     label: "SNK",
     name: "Sneak",
   },
   str: {
-    icon: "dumbbell",
+    icon: icons.attribute.str,
     label: "STR",
     name: "Strength",
   },
   unp: {
-    icon: "person-rays",
+    icon: icons.attribute.unp,
     label: "UNP",
     name: "Unused Presence",
   },

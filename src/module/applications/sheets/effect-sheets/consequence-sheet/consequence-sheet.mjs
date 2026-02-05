@@ -41,9 +41,10 @@ export default class ConsequenceSheet extends mix(
     const context = await super._prepareContext(options);
     //noinspection JSUnresolvedReference
     Object.assign(context, {
+      TERIOCK,
+      sheetId: this.id,
       system: this.document.system,
       systemFields: this.document.system.schema.fields,
-      sheetId: this.id,
     });
     return context;
   }

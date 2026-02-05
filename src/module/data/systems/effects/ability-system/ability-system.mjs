@@ -155,7 +155,7 @@ export default class AbilitySystem extends mix(
             paths:
               "system.upgrades.score.attribute system.upgrades.score.value",
             title: "Update Attribute Score Upgrade",
-            icon: "hashtag",
+            icon: TERIOCK.display.icons.ui.numerical,
           },
         },
         {
@@ -167,7 +167,7 @@ export default class AbilitySystem extends mix(
             paths:
               "system.upgrades.competence.attribute system.upgrades.competence.value",
             title: "Update Attribute Competence Upgrade",
-            icon: "award",
+            icon: TERIOCK.display.icons.competence.fluent,
           },
         },
       ],
@@ -221,7 +221,7 @@ export default class AbilitySystem extends mix(
     );
     if (this.isBasic) {
       icons.push({
-        icon: "lock",
+        icon: TERIOCK.display.icons.ui.locked,
         action: "toggleDisableLocked",
         tooltip: "Locked",
         callback: () => {

@@ -20,9 +20,7 @@ export default (Base) => {
           : "";
         const bars = [
           {
-            icon:
-              "fa-" +
-              TERIOCK.options.equipment.powerLevel[this.powerLevel].icon,
+            icon: TERIOCK.options.equipment.powerLevel[this.powerLevel].icon,
             label: "Equipment Type",
             wrappers: [
               TERIOCK.options.equipment.powerLevel[this.powerLevel].name,
@@ -32,7 +30,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-crosshairs-simple",
+            icon: TERIOCK.display.icons.interaction.attack,
             label: "Attack",
             wrappers: [
               this.piercing.value,
@@ -46,7 +44,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-shield",
+            icon: TERIOCK.display.icons.interaction.block,
             label: "Defense",
             wrappers: [
               this.av.value ? `${this.av.value} AV` : "",
@@ -54,7 +52,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-trophy",
+            icon: TERIOCK.display.icons.armament.load,
             label: "Load",
             wrappers: [
               this.weight.value + " lb",
@@ -63,7 +61,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-flag",
+            icon: TERIOCK.display.icons.equipment.equipmentClasses,
             label: "Equipment Classes",
             wrappers: [
               ...this.equipmentClasses.map(
@@ -73,7 +71,7 @@ export default (Base) => {
             ],
           },
           {
-            icon: "fa-backpack",
+            icon: TERIOCK.display.icons.equipment.storage,
             label: "Storage",
             wrappers: this.storage.enabled
               ? [

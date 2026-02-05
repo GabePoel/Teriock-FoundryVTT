@@ -174,12 +174,12 @@ export default class ConsequenceSystem extends mix(
     const parts = super.panelParts;
     parts.bars = [
       {
-        icon: "fa-hourglass",
+        icon: TERIOCK.display.icons.ability.duration,
         label: "Duration",
         wrappers: [this.parent.remainingString],
       },
       {
-        icon: "fa-disease",
+        icon: TERIOCK.display.icons.document.condition,
         label: "Conditions",
         wrappers: [
           ...Array.from(

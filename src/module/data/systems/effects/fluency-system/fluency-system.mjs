@@ -125,10 +125,9 @@ export default class FluencySystem extends mix(
       ...super.panelParts,
       bars: [
         {
-          icon:
-            "fa-" +
-            TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft]
-              .icon,
+          icon: TERIOCK.options.tradecraft[this.field].tradecrafts[
+            this.tradecraft
+          ].icon,
           label: "Tradecraft",
           wrappers: [
             TERIOCK.options.tradecraft[this.field].name,

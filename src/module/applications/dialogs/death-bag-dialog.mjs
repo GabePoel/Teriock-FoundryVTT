@@ -42,7 +42,7 @@ export default async function deathBagDialog(actor) {
   try {
     await new TeriockDialog({
       window: {
-        icon: makeIconClass("sack", "title"),
+        icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
         title: "Death Bag",
       },
       content: contentHTML,
@@ -138,7 +138,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         bars: [
           {
             label: "Initial Stones in Bag",
-            icon: "fa-sack",
+            icon: TERIOCK.display.icons.ui.deathBag,
             wrappers: wrappers,
           },
         ],
@@ -152,7 +152,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
             italic: true,
           },
         ],
-        icon: "sack",
+        icon: TERIOCK.display.icons.ui.deathBag,
         label: "Death Bag",
       };
       const pullContent = await foundry.applications.handlebars.renderTemplate(

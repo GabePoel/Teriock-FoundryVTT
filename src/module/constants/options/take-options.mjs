@@ -1,36 +1,38 @@
+import { icons } from "../display/icons.mjs";
+
 export const takeOptions = {
   damage: {
     aliases: ["dmg"],
     apply: async (actor, amt) => await actor?.system.takeDamage(amt),
-    icon: "heart-crack",
+    icon: icons.effect.damage,
     label: "Damage",
     prefix: "Take",
     reverse: async (actor, amt) => await actor?.system.takeHealing(amt),
   },
   drain: {
     apply: async (actor, amt) => await actor?.system.takeDrain(amt),
-    icon: "droplet-slash",
+    icon: icons.effect.drain,
     label: "Drain",
     prefix: "Take",
     reverse: async (actor, amt) => await actor?.system.takeRevitalizing(amt),
   },
   wither: {
     apply: async (actor, amt) => await actor?.system.takeWither(amt),
-    icon: "hourglass-half",
+    icon: icons.effect.wither,
     label: "Wither",
     prefix: "Take",
     reverse: async (actor, amt) => await actor?.system.takeWither(-amt),
   },
   healing: {
     apply: async (actor, amt) => await actor?.system.takeHealing(amt),
-    icon: "hand-holding-heart",
+    icon: icons.effect.heal,
     label: "Healing",
     prefix: "Apply",
     reverse: async (actor, amt) => await actor?.system.takeDamage(amt),
   },
   revitalizing: {
     apply: async (actor, amt) => await actor?.system.takeRevitalizing(amt),
-    icon: "hand-holding-droplet",
+    icon: icons.effect.revitalize,
     label: "Revitalizing",
     prefix: "Apply",
     reverse: async (actor, amt) => await actor?.system.takeDrain(amt),
@@ -38,7 +40,7 @@ export const takeOptions = {
   setTempHp: {
     aliases: ["sth", "sthp"],
     apply: async (actor, amt) => await actor?.system.takeSetTempHp(amt),
-    icon: "heart",
+    icon: icons.stat.hp,
     label: "Temp HP",
     prefix: "Set",
     reverse: async (actor) => await actor?.system.takeSetTempHp(0),
@@ -46,7 +48,7 @@ export const takeOptions = {
   setTempMp: {
     aliases: ["stm", "stmp"],
     apply: async (actor, amt) => await actor?.system.takeGainTempHp(amt),
-    icon: "droplet",
+    icon: icons.stat.mp,
     label: "Temp MP",
     prefix: "Set",
     reverse: async (actor) => await actor?.system.takeSetTempHp(0),
@@ -54,7 +56,7 @@ export const takeOptions = {
   gainTempHp: {
     aliases: ["gth", "gthp"],
     apply: async (actor, amt) => await actor?.system.takeSetTempMp(amt),
-    icon: "heart",
+    icon: icons.stat.hp,
     label: "Temp HP",
     prefix: "Gain",
     reverse: async (actor) => await actor?.system.takeSetTempMp(0),
@@ -62,14 +64,14 @@ export const takeOptions = {
   gainTempMp: {
     aliases: ["gtm", "gtmp"],
     apply: async (actor, amt) => await actor?.system.takeGainTempMp(amt),
-    icon: "droplet",
+    icon: icons.stat.mp,
     label: "Temp MP",
     prefix: "Gain",
     reverse: async (actor) => await actor?.system.takeSetTempMp(0),
   },
   sleep: {
     apply: async (actor, amt) => await actor?.system.takeSleep(amt),
-    icon: "bed",
+    icon: icons.effect.sleep,
     label: "Sleep",
     prefix: "Test",
     reverse: async (actor) =>
@@ -77,7 +79,7 @@ export const takeOptions = {
   },
   kill: {
     apply: async (actor, amt) => await actor?.system.takeKill(amt),
-    icon: "skull",
+    icon: icons.effect.kill,
     label: "Kill",
     prefix: "Test",
     reverse: async (actor) =>
@@ -85,7 +87,7 @@ export const takeOptions = {
   },
   pay: {
     apply: async (actor, amt) => await actor?.system.takePay(amt),
-    icon: "coin",
+    icon: icons.stat.gp,
     label: "Gold",
     prefix: "Pay",
     reverse: async (actor, amt) => await actor?.system.takePay(-amt),

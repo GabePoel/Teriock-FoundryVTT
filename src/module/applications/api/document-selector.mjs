@@ -171,9 +171,10 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     Object.assign(context, {
+      TERIOCK,
       documents: this.docs,
-      multi: this.multi,
       hint: this.hint,
+      multi: this.multi,
       tooltip: this.tooltip,
       tooltipAsync: this.tooltipAsync,
     });

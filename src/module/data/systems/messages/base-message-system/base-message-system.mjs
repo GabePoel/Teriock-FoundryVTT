@@ -420,7 +420,7 @@ export default class BaseMessageSystem extends TypeDataModel {
         [
           {
             name: "Boost",
-            icon: makeIcon("arrow-up-from-arc", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
             callback: async () => {
               const boostedRoll = /** @type {TeriockRoll} */ await roll.boost(
                 roll.options,
@@ -438,7 +438,7 @@ export default class BaseMessageSystem extends TypeDataModel {
           },
           {
             name: "Deboost",
-            icon: makeIcon("arrow-down-from-arc", "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
             callback: async () => {
               const deboostedRoll =
                 /** @type {TeriockRoll} */ await roll.deboost(roll.options);
