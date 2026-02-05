@@ -5,6 +5,7 @@ import {
   TeriockItem,
 } from "../../../../documents/_module.mjs";
 import { buildHTMLButton } from "../../../../helpers/html.mjs";
+import { buttonHandlers } from "../../../../helpers/interaction/_module.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import {
   associationsField,
@@ -383,6 +384,31 @@ export default class BaseMessageSystem extends TypeDataModel {
     );
 
     bindCommonActions(htmlElement);
+
+    const buttonActionElements = htmlElement
+      .querySelector(".teriock-buttons")
+      ?.querySelectorAll("[data-action]");
+    for (const /** @type {HTMLElement} */ element of buttonActionElements) {
+      const action = element.dataset.action;
+      const HandlerClass = Object.values(buttonHandlers).find(
+        (Handler) => Handler.ACTION === action,
+      );
+      if (!HandlerClass) {
+        continue;
+      }
+      element.addEventListener("click", async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const handler = new HandlerClass(event, element);
+        await handler.primaryAction();
+      });
+      element.addEventListener("contextmenu", async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const handler = new HandlerClass(event, element);
+        await handler.secondaryAction();
+      });
+    }
 
     for (const roll of this.parent.rolls) {
       const id = roll.id;
