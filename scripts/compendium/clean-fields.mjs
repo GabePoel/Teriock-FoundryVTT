@@ -25,7 +25,6 @@ export function cleanDocument(doc) {
     if (doc.type === "power") cleanPower(doc);
     if (doc.type === "property") cleanProperty(doc);
   }
-  removeEmptyValues(doc);
 }
 
 /**
@@ -247,40 +246,6 @@ function cleanAbilityImpact(impact) {
     delete impact.transformation;
   }
   if (!impact.noTemplate) delete impact.noTemplate;
-}
-
-/**
- *
- * @param {object} obj
- * @returns {object}
- */
-function removeEmptyValues(obj) {
-  if (Array.isArray(obj)) {
-    for (let i = obj.length - 1; i >= 0; i--) {
-      if (obj[i] === "") {
-        obj.splice(i, 1);
-      } else if (typeof obj[i] === "object" && obj[i] !== null) {
-        removeEmptyValues(obj[i]);
-      }
-    }
-  } else {
-    for (const key in obj) {
-      if (obj[key] === "") {
-        delete obj[key];
-      } else if (obj[key] === null) {
-        delete obj[key];
-      } else if (Array.isArray(obj[key]) && obj[key].length === 0) {
-        delete obj[key];
-      } else if (typeof obj[key] === "object" && obj[key] !== null) {
-        if (Object.keys(obj[key]).length === 0) {
-          delete obj[key];
-        } else {
-          removeEmptyValues(obj[key]);
-        }
-      }
-    }
-  }
-  return obj;
 }
 
 /**

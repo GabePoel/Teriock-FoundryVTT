@@ -1,19 +1,19 @@
-_id: ratFamiliar00000
-_key: '!items!ratFamiliar00000'
+_id: 9524e96e2ddfadfb
+_key: '!items!9524e96e2ddfadfb'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: NIFpxj9Zr1mhuMqg
-    _key: '!items.effects!ratFamiliar00000.NIFpxj9Zr1mhuMqg'
+    _key: '!items.effects!9524e96e2ddfadfb.NIFpxj9Zr1mhuMqg'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      compendiumSource: Compendium.teriock.abilities.Item.9df212d89cab196d
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.16
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -23,12 +23,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Instant
-        quantity: 0
+        raw: '0'
         stationary: false
         unit: instant
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -44,13 +48,6 @@ effects:
         proficient:
           rolls:
             hide: 1d20 + (2 * @snk) + @p
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          amount: proficiency
-          attribute: snk
       interaction: manifest
       maneuver: active
       overview:
@@ -72,6 +69,8 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
@@ -83,14 +82,21 @@ effects:
       standard: true
       targets:
         - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 0
+        score:
+          attribute: snk
+          value: 2
     type: ability
   - _id: ratTamer00000000
-    _key: '!items.effects!ratFamiliar00000.ratTamer00000000'
+    _key: '!items.effects!9524e96e2ddfadfb.ratTamer00000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Rat Tamer
@@ -105,13 +111,13 @@ effects:
     transfer: true
     type: fluency
   - _id: vdcGgogifbOsG7Sy
-    _key: '!items.effects!ratFamiliar00000.vdcGgogifbOsG7Sy'
+    _key: '!items.effects!9524e96e2ddfadfb.vdcGgogifbOsG7Sy'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talInvestigator0
+      compendiumSource: Compendium.teriock.abilities.Item.3b5d535895cf0e0f
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: icons/skills/trades/academics-investigation-study-blue.webp
     name: Talented Investigator
     system:
@@ -120,12 +126,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -139,11 +149,6 @@ effects:
               target: Actor
               time: normal
               value: '1'
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -154,11 +159,13 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       targets:
         - self
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Rat Familiar
 system:

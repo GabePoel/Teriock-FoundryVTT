@@ -1,19 +1,19 @@
-_id: toothedWhaleFami
-_key: '!items!toothedWhaleFami'
+_id: cc563f69fcef8b3c
+_key: '!items!cc563f69fcef8b3c'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: S7al1vHgW2kMOT46
-    _key: '!items.effects!toothedWhaleFami.S7al1vHgW2kMOT46'
+    _key: '!items.effects!cc563f69fcef8b3c.S7al1vHgW2kMOT46'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.skillShare000000
+      compendiumSource: Compendium.teriock.abilities.Item.784d022aa6b16299
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/skill-share.webp
     name: Skill Share
     system:
@@ -23,26 +23,27 @@ effects:
       delivery:
         base: sight
       duration:
+        dawn: false
         description: 1 Hour
-        quantity: 1
+        raw: '1'
         stationary: false
         unit: hour
       effectTypes:
         - contract
       endCondition: <p>You use <a class="mw-selflink selflink">Skill Share</a> again.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       impacts:
         macros:
+          Compendium_teriock_execution_Macro_b20a3ed766f6438c: preExecution
+          Compendium_teriock_execution_Macro_skillSharePreExe: preExecution
           Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
@@ -80,13 +81,13 @@ effects:
         - creature
     type: ability
   - _id: EpySDJMwIfMwFEWh
-    _key: '!items.effects!toothedWhaleFami.EpySDJMwIfMwFEWh'
+    _key: '!items.effects!cc563f69fcef8b3c.EpySDJMwIfMwFEWh'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      compendiumSource: Compendium.teriock.abilities.Item.1b64c8a7cc5847a8
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/swimming.webp
     name: Swimming
     system:
@@ -96,12 +97,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -115,11 +120,6 @@ effects:
               target: Actor
               time: normal
               value: '3'
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -128,6 +128,8 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       skill: true
       standard: true
@@ -135,12 +137,12 @@ effects:
         - self
     type: ability
   - _id: toothedWhaleTame
-    _key: '!items.effects!toothedWhaleFami.toothedWhaleTame'
+    _key: '!items.effects!cc563f69fcef8b3c.toothedWhaleTame'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Toothed Whale Tamer
@@ -156,7 +158,7 @@ effects:
     tint: '#ffffff'
     transfer: true
     type: fluency
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Toothed Whale Familiar
 system:

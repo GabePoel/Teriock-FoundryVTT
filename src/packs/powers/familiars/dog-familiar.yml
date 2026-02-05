@@ -1,19 +1,19 @@
-_id: dogFamiliar00000
-_key: '!items!dogFamiliar00000'
+_id: 6e9e61747543f694
+_key: '!items!6e9e61747543f694'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: TTbTOMfpu4kJlGlp
-    _key: '!items.effects!dogFamiliar00000.TTbTOMfpu4kJlGlp'
+    _key: '!items.effects!6e9e61747543f694.TTbTOMfpu4kJlGlp'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.cureIllness00000
+      compendiumSource: Compendium.teriock.abilities.Item.3055b234b402b5ec
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/cure-illness.webp
     name: Cure Illness
     system:
@@ -31,8 +31,9 @@ effects:
         base: sight
         package: ritual
       duration:
+        dawn: false
         description: 1 Hour
-        quantity: 1
+        raw: '1'
         stationary: false
         unit: hour
       effectTypes:
@@ -40,18 +41,16 @@ effects:
       elements:
         - life
       executionTime: 10 Minutes
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
       heightened: >-
         <p>For each additional @L[Core:MP]{MP} spent, The DC of the check is
         reduced by 1.</p>
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       limitation: <p>Mental only.</p>
       maneuver: slow
@@ -93,12 +92,12 @@ effects:
         - creature
     type: ability
   - _id: dogTamer00000000
-    _key: '!items.effects!dogFamiliar00000.dogTamer00000000'
+    _key: '!items.effects!6e9e61747543f694.dogTamer00000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Dog Tamer
@@ -113,13 +112,13 @@ effects:
     transfer: true
     type: fluency
   - _id: 5fv7Eu3WdwKp8aYt
-    _key: '!items.effects!dogFamiliar00000.5fv7Eu3WdwKp8aYt'
+    _key: '!items.effects!6e9e61747543f694.5fv7Eu3WdwKp8aYt'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talTracker000000
+      compendiumSource: Compendium.teriock.abilities.Item.34ea66cec75b375e
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: icons/creatures/abilities/paw-print-tan.webp
     name: Talented Tracker
     system:
@@ -128,12 +127,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -147,11 +150,6 @@ effects:
               target: Actor
               time: normal
               value: '1'
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -162,11 +160,13 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       targets:
         - self
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Dog Familiar
 system:

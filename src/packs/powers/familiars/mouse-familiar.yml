@@ -1,19 +1,19 @@
-_id: mouseFamiliar000
-_key: '!items!mouseFamiliar000'
+_id: 376c10bf4fcd2c37
+_key: '!items!376c10bf4fcd2c37'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: KyTWLVdDdGQvpo3E
-    _key: '!items.effects!mouseFamiliar000.KyTWLVdDdGQvpo3E'
+    _key: '!items.effects!376c10bf4fcd2c37.KyTWLVdDdGQvpo3E'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.hide000000000000
+      compendiumSource: Compendium.teriock.abilities.Item.9df212d89cab196d
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.16
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -23,12 +23,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Instant
-        quantity: 0
+        raw: '0'
         stationary: false
         unit: instant
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -44,13 +48,6 @@ effects:
         proficient:
           rolls:
             hide: 1d20 + (2 * @snk) + @p
-      improvements:
-        attributeImprovement:
-          attribute: snk
-          minVal: 2
-        featSaveImprovement:
-          amount: proficiency
-          attribute: snk
       interaction: manifest
       maneuver: active
       overview:
@@ -72,6 +69,8 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
         @L[Core:Cover]{three-quarters cover}, or some other feature which the
@@ -83,14 +82,21 @@ effects:
       standard: true
       targets:
         - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 0
+        score:
+          attribute: snk
+          value: 2
     type: ability
   - _id: mouseTamer000000
-    _key: '!items.effects!mouseFamiliar000.mouseTamer000000'
+    _key: '!items.effects!376c10bf4fcd2c37.mouseTamer000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Mouse Tamer
@@ -105,13 +111,13 @@ effects:
     transfer: true
     type: fluency
   - _id: xFfzOacqWWomgvmj
-    _key: '!items.effects!mouseFamiliar000.xFfzOacqWWomgvmj'
+    _key: '!items.effects!376c10bf4fcd2c37.xFfzOacqWWomgvmj'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talInvestigator0
+      compendiumSource: Compendium.teriock.abilities.Item.3b5d535895cf0e0f
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: icons/skills/trades/academics-investigation-study-blue.webp
     name: Talented Investigator
     system:
@@ -120,12 +126,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -139,11 +149,6 @@ effects:
               target: Actor
               time: normal
               value: '1'
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -154,11 +159,13 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       targets:
         - self
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Mouse Familiar
 system:

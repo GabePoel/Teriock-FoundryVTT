@@ -1,44 +1,41 @@
-_id: boaConstrictorFa
-_key: '!items!boaConstrictorFa'
+_id: 406d2376b04fea54
+_key: '!items!406d2376b04fea54'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
-  - _id: s77deq3UWIum1Vxw
-    _key: '!items.effects!boaConstrictorFa.s77deq3UWIum1Vxw'
+  - _id: w1vWlgBnvyPPb3Iv
+    _key: '!items.effects!406d2376b04fea54.w1vWlgBnvyPPb3Iv'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.beastlyStrength0
+      compendiumSource: Compendium.teriock.abilities.Item.07a0880b230cdb14
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
-      _sup: w1vWlgBnvyPPb3Iv
       class: knight
       competence:
         raw: 0
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 1
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -51,19 +48,25 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       skill: true
       standard: true
       targets:
         - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
     type: ability
   - _id: boaConstrictorTa
-    _key: '!items.effects!boaConstrictorFa.boaConstrictorTa'
+    _key: '!items.effects!406d2376b04fea54.boaConstrictorTa'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Boa Constrictor Tamer
@@ -80,13 +83,13 @@ effects:
     transfer: true
     type: fluency
   - _id: CbXeZ4uMymycSzsS
-    _key: '!items.effects!boaConstrictorFa.CbXeZ4uMymycSzsS'
+    _key: '!items.effects!406d2376b04fea54.CbXeZ4uMymycSzsS'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.critElite0000000
+      compendiumSource: Compendium.teriock.abilities.Item.9c9a75c65c73fc72
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
@@ -96,12 +99,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: While Stationary
-        quantity: 0
+        raw: '0'
         stationary: true
-        unit: noLimit
+        unit: unlimited
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -123,12 +130,9 @@ effects:
               time: normal
               value: 'true'
         macros:
+          Compendium_teriock_execution_Macro_1389cba93223924f: useArmament
           Compendium_teriock_execution_Macro_2U8tSQk1fcHRzL6i: useArmament
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+          Compendium_teriock_execution_Macro_critEliteUseArma: useArmament
       interaction: manifest
       maneuver: active
       overview:
@@ -145,6 +149,8 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       requirements: <p>You are not already using [[lookup name]].</p>
       revealed: true
       skill: true
@@ -152,103 +158,7 @@ effects:
       targets:
         - self
     type: ability
-  - _id: eHWAjtMTtx0RrWOd
-    _key: '!items.effects!boaConstrictorFa.eHWAjtMTtx0RrWOd'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imArmorPiercing0
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.8
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
-    name: Improved Armor Piercing
-    system:
-      _sup: w1vWlgBnvyPPb3Iv
-      class: knight
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        description: Always Active
-        quantity: 0
-        stationary: false
-        unit: noLimit
-      executionTime: passive
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      revealed: true
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-  - _id: w1vWlgBnvyPPb3Iv
-    _key: '!items.effects!boaConstrictorFa.w1vWlgBnvyPPb3Iv'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.imStrength000000
-      coreVersion: '13'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.9.8
-    img: systems/teriock/src/icons/abilities/improved-strength.webp
-    name: Improved Strength
-    system:
-      class: knight
-      competence:
-        raw: 0
-      delivery:
-        base: self
-      duration:
-        description: Always Active
-        quantity: 0
-        stationary: false
-        unit: noLimit
-      executionTime: passive
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      grantOnly: false
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 2
-        featSaveImprovement:
-          amount: proficient
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      revealed: true
-      skill: true
-      standard: true
-      targets:
-        - self
-    type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Boa Constrictor Familiar
 system:

@@ -1,19 +1,19 @@
-_id: deerFamiliar0000
-_key: '!items!deerFamiliar0000'
+_id: 3c9b956461443a90
+_key: '!items!3c9b956461443a90'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: OETxl49OzNR2BZkZ
-    _key: '!items.effects!deerFamiliar0000.OETxl49OzNR2BZkZ'
+    _key: '!items.effects!3c9b956461443a90.OETxl49OzNR2BZkZ'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.alert00000000000
+      compendiumSource: Compendium.teriock.abilities.Item.f1ec4acb8d744ed9
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.16
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/alert.webp
     name: Alert
     system:
@@ -22,15 +22,19 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       effectTypes:
         - resistance
         - sensory
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -44,12 +48,6 @@ effects:
               target: Actor
               time: normal
               value: Being Surprised
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficiency
-          attribute: per
       interaction: manifest
       maneuver: passive
       overview:
@@ -60,17 +58,23 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       targets:
         - self
+      upgrades:
+        competence:
+          attribute: per
+          value: 0
     type: ability
   - _id: deerTamer0000000
-    _key: '!items.effects!deerFamiliar0000.deerTamer0000000'
+    _key: '!items.effects!3c9b956461443a90.deerTamer0000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Deer Tamer
@@ -85,13 +89,13 @@ effects:
     transfer: true
     type: fluency
   - _id: rgxGlI8Ahf5gIYBx
-    _key: '!items.effects!deerFamiliar0000.rgxGlI8Ahf5gIYBx'
+    _key: '!items.effects!3c9b956461443a90.rgxGlI8Ahf5gIYBx'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.lightTouch000000
+      compendiumSource: Compendium.teriock.abilities.Item.f9621e7f686db2c0
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/light-touch.webp
     name: Light Touch
     system:
@@ -102,8 +106,9 @@ effects:
         base: hand
         package: touch
       duration:
+        dawn: false
         description: 1 Minute
-        quantity: 1
+        raw: '1'
         stationary: false
         unit: minute
       elements:
@@ -112,7 +117,10 @@ effects:
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -155,11 +163,8 @@ effects:
             damage: 1d4[magic holy]
         macros:
           Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB: preExecution
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+          Compendium_teriock_execution_Macro_a4ee85386d246e23: preExecution
+          Compendium_teriock_execution_Macro_genericLightPreE: preExecution
       interaction: attack
       maneuver: active
       piercing:
@@ -180,7 +185,7 @@ effects:
       targets:
         - creature
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Deer Familiar
 system:

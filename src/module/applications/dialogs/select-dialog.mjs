@@ -243,7 +243,7 @@ export async function selectCompendiumsDialog(selected = true) {
       return {
         name: p.title,
         uuid: p.collection,
-        img: "icons/svg/book.svg",
+        img: p.banner || "icons/svg/book.svg",
       };
     });
   packDocs.sort((a, b) => a.name.localeCompare(b.name));

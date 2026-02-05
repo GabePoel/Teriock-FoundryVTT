@@ -1,19 +1,19 @@
-_id: fishFamiliar0000
-_key: '!items!fishFamiliar0000'
+_id: 989c1ad90faf976a
+_key: '!items!989c1ad90faf976a'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: GM2b7CzajoTiRQzn
-    _key: '!items.effects!fishFamiliar0000.GM2b7CzajoTiRQzn'
+    _key: '!items.effects!989c1ad90faf976a.GM2b7CzajoTiRQzn'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.duel000000000000
+      compendiumSource: Compendium.teriock.abilities.Item.47728b72f6c25e3b
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/duel.webp
     name: Duel
     system:
@@ -23,12 +23,16 @@ effects:
       delivery:
         base: sight
       duration:
+        dawn: false
         description: No Limit
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: a1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -54,15 +58,12 @@ effects:
           statuses:
             - lighted
         macros:
+          Compendium_teriock_execution_Macro_4fa8d68bc853e6ae: preExecution
+          Compendium_teriock_execution_Macro_duelPreExecution: preExecution
           Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k: preExecution
         proficient:
           abilityButtonNames:
             - Move
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: active
       overview:
@@ -97,12 +98,12 @@ effects:
         - creature
     type: ability
   - _id: fishTamer0000000
-    _key: '!items.effects!fishFamiliar0000.fishTamer0000000'
+    _key: '!items.effects!989c1ad90faf976a.fishTamer0000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Fish Tamer
@@ -117,13 +118,13 @@ effects:
     transfer: true
     type: fluency
   - _id: t6cCR8jzHP1NS6NV
-    _key: '!items.effects!fishFamiliar0000.t6cCR8jzHP1NS6NV'
+    _key: '!items.effects!989c1ad90faf976a.t6cCR8jzHP1NS6NV'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.swimming00000000
+      compendiumSource: Compendium.teriock.abilities.Item.1b64c8a7cc5847a8
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/swimming.webp
     name: Swimming
     system:
@@ -133,12 +134,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -152,11 +157,6 @@ effects:
               target: Actor
               time: normal
               value: '3'
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -165,13 +165,15 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       skill: true
       standard: true
       targets:
         - self
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Fish Familiar
 system:

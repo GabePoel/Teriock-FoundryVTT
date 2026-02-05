@@ -1,19 +1,19 @@
-_id: rhinocerosFamili
-_key: '!items!rhinocerosFamili'
+_id: 89cfa5957c900f6a
+_key: '!items!89cfa5957c900f6a'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: riGYdtYQjiCU4jSG
-    _key: '!items.effects!rhinocerosFamili.riGYdtYQjiCU4jSG'
+    _key: '!items.effects!89cfa5957c900f6a.riGYdtYQjiCU4jSG'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.mightStrike00000
+      compendiumSource: Compendium.teriock.abilities.Item.21aacc3415e6c532
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/might-strike.webp
     name: Might Strike
     system:
@@ -33,12 +33,16 @@ effects:
         base: self
         package: ritual
       duration:
+        dawn: true
         description: Until Dawn
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: untilDawn
+        unit: instant
       executionTime: 10 Minutes
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -56,11 +60,8 @@ effects:
             damage: 1d4
         macros:
           Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
+          Compendium_teriock_execution_Macro_e805e3fad6cedde3: preExecution
+          Compendium_teriock_execution_Macro_mightStrikePreEx: preExecution
       interaction: manifest
       maneuver: slow
       overview:
@@ -84,6 +85,8 @@ effects:
         raw: 0
       powerSources:
         - divine
+      range:
+        unit: self
       requirements: >-
         <p>You not already @L[Category:Sustained abilities]{sustaining} [[lookup
         name]].</p>
@@ -96,12 +99,12 @@ effects:
         - self
     type: ability
   - _id: rhinocerosTamer0
-    _key: '!items.effects!rhinocerosFamili.rhinocerosTamer0'
+    _key: '!items.effects!89cfa5957c900f6a.rhinocerosTamer0'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Rhinoceros Tamer
@@ -116,13 +119,13 @@ effects:
     transfer: true
     type: fluency
   - _id: LJTFYxAqMchkbwFR
-    _key: '!items.effects!rhinocerosFamili.LJTFYxAqMchkbwFR'
+    _key: '!items.effects!89cfa5957c900f6a.LJTFYxAqMchkbwFR'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.sTShields0000000
+      compendiumSource: Compendium.teriock.abilities.Item.2c8b71b1f4604456
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
     name: Spell Turning Shields
     system:
@@ -132,14 +135,18 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       effectTypes:
         - resistance
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -160,11 +167,6 @@ effects:
               target: equipment
               time: normal
               value: 'true'
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -175,13 +177,15 @@ effects:
         raw: 0
       powerSources:
         - divine
+      range:
+        unit: self
       revealed: true
       skill: true
       standard: true
       targets:
         - self
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Rhinoceros Familiar
 system:

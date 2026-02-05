@@ -1,18 +1,18 @@
-_id: alpacaFamiliar00
-_key: '!items!alpacaFamiliar00'
+_id: 8430bebad15ec25a
+_key: '!items!8430bebad15ec25a'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: alpacaTamer00000
-    _key: '!items.effects!alpacaFamiliar00.alpacaTamer00000'
+    _key: '!items.effects!8430bebad15ec25a.alpacaTamer00000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Alpaca Tamer
@@ -27,13 +27,13 @@ effects:
     transfer: true
     type: fluency
   - _id: JqzN8XYQ9cxV7vWB
-    _key: '!items.effects!alpacaFamiliar00.JqzN8XYQ9cxV7vWB'
+    _key: '!items.effects!8430bebad15ec25a.JqzN8XYQ9cxV7vWB'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.disableRay000000
+      compendiumSource: Compendium.teriock.abilities.Item.b0bcfcca93a41eab
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     name: Disable Ray
     system:
@@ -54,15 +54,19 @@ effects:
         base: missile
         package: ray
       duration:
+        dawn: false
         description: 1 Minute
-        quantity: 1
+        raw: '1'
         stationary: false
         unit: minute
       endCondition: >-
         <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -85,11 +89,6 @@ effects:
                   type: target
           rolls:
             endCon: 2d4
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: attack
       maneuver: reactive
       overview:
@@ -121,13 +120,13 @@ effects:
         that different creature @L[Keyword:Bearing]{bares}.</p>
     type: ability
   - _id: e8k4c1n3etWPCBWy
-    _key: '!items.effects!alpacaFamiliar00.e8k4c1n3etWPCBWy'
+    _key: '!items.effects!8430bebad15ec25a.e8k4c1n3etWPCBWy'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.endure0000000000
+      compendiumSource: Compendium.teriock.abilities.Item.eae89799c230fd18
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/endure.webp
     name: Endure
     system:
@@ -142,14 +141,18 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Instant
-        quantity: 0
+        raw: '0'
         stationary: false
         unit: instant
       effectTypes:
         - damaging
       executionTime: r1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -158,11 +161,6 @@ effects:
           hacks:
             - arm
             - leg
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
       overview:
@@ -183,6 +181,8 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       skill: true
       standard: true
@@ -192,7 +192,7 @@ effects:
         <p>You are hit by an @L[Category:Attack abilities]{attack} that would
         @L[Core:Damage]{damage} you.</p>
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Alpaca Familiar
 system:

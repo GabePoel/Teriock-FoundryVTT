@@ -104,10 +104,10 @@ function cleanEntry(doc) {
   }
   sortKeys(doc);
 }
-
 function transformEntry(doc) {
   if (buildTree && doc.system?._sup) return false;
   cleanEntry(doc);
+  if (doc.system) removeEmptyValues(doc.system);
   [
     "cards",
     "categories",
@@ -122,6 +122,7 @@ function transformEntry(doc) {
       transformEntry(d);
     });
   });
+  removeEmptyValues(doc);
 }
 
 /**
@@ -129,7 +130,7 @@ function transformEntry(doc) {
  * @param {object} obj
  */
 function sortKeys(obj) {
-  if (typeof obj !== "object") return;
+  if (typeof obj !== "object" || !obj) return;
   const keys = Object.keys(obj).sort();
   const cache = { ...obj };
   for (const key in obj) {
@@ -155,4 +156,38 @@ function sortKeys(obj) {
 function sortEmbedded(collection) {
   if (!collection) return;
   collection.sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ *
+ * @param {object} obj
+ * @returns {object}
+ */
+function removeEmptyValues(obj) {
+  if (Array.isArray(obj)) {
+    for (let i = obj.length - 1; i >= 0; i--) {
+      if (obj[i] === "") {
+        obj.splice(i, 1);
+      } else if (typeof obj[i] === "object" && obj[i] !== null) {
+        removeEmptyValues(obj[i]);
+      }
+    }
+  } else {
+    for (const key in obj) {
+      if (obj[key] === "") {
+        delete obj[key];
+      } else if (obj[key] === null) {
+        delete obj[key];
+      } else if (Array.isArray(obj[key]) && obj[key].length === 0) {
+        delete obj[key];
+      } else if (typeof obj[key] === "object" && obj[key] !== null) {
+        if (Object.keys(obj[key]).length === 0) {
+          delete obj[key];
+        } else {
+          removeEmptyValues(obj[key]);
+        }
+      }
+    }
+  }
+  return obj;
 }

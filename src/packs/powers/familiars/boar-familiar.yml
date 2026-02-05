@@ -1,18 +1,18 @@
-_id: boarFamiliar0000
-_key: '!items!boarFamiliar0000'
+_id: 0512891a3ba36a78
+_key: '!items!0512891a3ba36a78'
 _stats:
   coreVersion: '13'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.14
+  systemVersion: 0.9.17
 effects:
   - _id: boarTamer0000000
-    _key: '!items.effects!boarFamiliar0000.boarTamer0000000'
+    _key: '!items.effects!0512891a3ba36a78.boarTamer0000000'
     _stats:
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.1
+      systemVersion: 0.9.17
     disabled: false
     img: icons/environment/settlement/stables-logo.webp
     name: Boar Tamer
@@ -27,13 +27,13 @@ effects:
     transfer: true
     type: fluency
   - _id: YDnITgPGV831s6pL
-    _key: '!items.effects!boarFamiliar0000.YDnITgPGV831s6pL'
+    _key: '!items.effects!0512891a3ba36a78.YDnITgPGV831s6pL'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.defyDeath0000000
+      compendiumSource: Compendium.teriock.abilities.Item.043078efb9756b45
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: systems/teriock/src/icons/abilities/defy-death.webp
     name: Defy Death
     system:
@@ -43,14 +43,18 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: 1 Minute
-        quantity: 1
+        raw: '1'
         stationary: false
         unit: minute
       effectTypes:
         - resistance
       executionTime: r1
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -60,11 +64,6 @@ effects:
             endCon: 2d4
           statuses:
             - defyingDeath
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: reactive
       overview:
@@ -73,6 +72,8 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       skill: true
       standard: true
@@ -82,13 +83,13 @@ effects:
       trigger: <p>You would @L[Condition:Down]{drop}.</p>
     type: ability
   - _id: nDxSnyWPawkL83CV
-    _key: '!items.effects!boarFamiliar0000.nDxSnyWPawkL83CV'
+    _key: '!items.effects!0512891a3ba36a78.nDxSnyWPawkL83CV'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.Item.talEnforcer00000
+      compendiumSource: Compendium.teriock.abilities.Item.80cff6953e6e95aa
       coreVersion: '13'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.9.8
+      systemVersion: 0.9.17
     img: icons/skills/melee/unarmed-punch-fist-white.webp
     name: Talented Enforcer
     system:
@@ -97,12 +98,16 @@ effects:
       delivery:
         base: self
       duration:
+        dawn: false
         description: Always Active
-        quantity: 0
+        raw: '0'
         stationary: false
-        unit: noLimit
+        unit: unlimited
       executionTime: passive
-      expansionSaveAttribute: mov
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
       featSaveAttribute: mov
       form: normal
       grantOnly: false
@@ -116,11 +121,6 @@ effects:
               target: Actor
               time: normal
               value: '1'
-      improvements:
-        attributeImprovement:
-          minVal: 0
-        featSaveImprovement:
-          amount: proficient
       interaction: manifest
       maneuver: passive
       overview:
@@ -131,11 +131,13 @@ effects:
         raw: 0
       powerSources:
         - martial
+      range:
+        unit: self
       revealed: true
       targets:
         - self
     type: ability
-folder: familiars0000000
+folder: 31fe961f0b485187
 img: systems/teriock/src/icons/abilities/familiar-bond.webp
 name: Boar Familiar
 system:
