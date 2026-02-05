@@ -84,8 +84,9 @@ export function dotJoin(strings) {
  * @param {string} str
  * @param {object} [options]
  * @param {boolean} [options.abbreviate]
- * @param {string} [options.background]
+ * @param {boolean} [options.hash]
  * @param {number} [options.length]
+ * @param {string} [options.background]
  * @returns {string}
  */
 export function toId(str, options = {}) {
@@ -93,7 +94,20 @@ export function toId(str, options = {}) {
     abbreviate = false,
     background = "0000000000000000",
     length = 16,
+    hash = false,
   } = options;
+  if (hash) {
+    const FNV_OFFSET_64 = 0xcbf29ce484222325n;
+    const FNV_PRIME_64 = 0x100000001b3n;
+    const MASK_64 = (1n << 64n) - 1n;
+    let val = FNV_OFFSET_64;
+    for (let i = 0; i < str.length; i++) {
+      val ^= BigInt(str.charCodeAt(i));
+      val = (val * FNV_PRIME_64) & MASK_64;
+    }
+
+    return val.toString(16).padStart(16, "0");
+  }
   if (abbreviate) {
     str = toTitleCase(str);
     for (const [k, v] of Object.entries(TERIOCK.aliases.abbreviations)) {
