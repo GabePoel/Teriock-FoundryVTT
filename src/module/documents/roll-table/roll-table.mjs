@@ -47,7 +47,7 @@ export default class TeriockRollTable extends mix(
       },
       messageData,
     );
-    if (roll) {
+    if (this.displayRoll && roll) {
       messageData.rolls.push(roll);
     }
     messageData.system.panels.forEach((panel) => {

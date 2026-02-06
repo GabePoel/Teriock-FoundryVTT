@@ -1,6 +1,6 @@
 //noinspection RegExpRedundantEscape
 
-import { documentOptions } from "../../constants/options/document-options.mjs";
+import { icons } from "../../constants/display/icons.mjs";
 import {
   commands,
   getInteractionEntryValue,
@@ -15,12 +15,13 @@ import {
 import { makeIconElement } from "../../helpers/utils.mjs";
 
 const enricherIcons = {
-  Core: "book",
-  Keyword: "quote-left",
-  Damage: "heart-crack",
-  Drain: "droplet-slash",
-  Tradecraft: documentOptions.fluency.icon,
-  Class: documentOptions.rank.icon,
+  Class: icons.document.rank,
+  Condition: icons.document.condition,
+  Core: icons.document.core,
+  Damage: icons.effect.damage,
+  Drain: icons.effect.drain,
+  Keyword: icons.document.keyword,
+  Tradecraft: icons.document.fluency,
 };
 
 /**

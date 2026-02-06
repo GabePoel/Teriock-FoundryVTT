@@ -1,0 +1,398 @@
+_id: StlghZswHfXqz8L0
+_key: '!items!StlghZswHfXqz8L0'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.a7cc1d41ec0343bc
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.23
+effects:
+  - _id: pLl3eyOVyPolHKkX
+    _key: '!items.effects!StlghZswHfXqz8L0.pLl3eyOVyPolHKkX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.b0bcfcca93a41eab
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.23
+    img: systems/teriock/src/icons/abilities/disable-ray.webp
+    name: Disable Ray
+    system:
+      class: thief
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: variable
+          value:
+            static: 0
+            variable: >-
+              <p>This costs 0 @L[Core:Hit Points and Mana Points]{MP} if the
+              triggering @L[Category:Abilities]{ability} was used on you or some
+              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
+              It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+      delivery:
+        base: missile
+        package: ray
+      duration:
+        dawn: false
+        description: 1 Minute
+        raw: '1'
+        stationary: false
+        unit: minute
+      endCondition: >-
+        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime: r1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          expiration:
+            changeOnCrit: false
+            doesExpire: true
+            normal:
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+          rolls:
+            endCon: 2d4
+      interaction: attack
+      maneuver: reactive
+      overview:
+        proficient: >-
+          <p>This also makes the effect of that @L[Category:Abilities]{ability}
+          @L[Core:Fizzles]{fizzle}.</p>
+      piercing:
+        raw: 1
+      powerSources:
+        - spiritual
+      range:
+        raw: '60'
+        unit: ft
+      requirements: <p>You may only target the triggering creature.</p>
+      results:
+        hit: >-
+          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
+        @L[Category:Active abilities]{active} or @L[Category:Reactive
+        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
+        against a different creature or some @L[Category:Equipment]{equipment}
+        that different creature @L[Keyword:Bearing]{bares}.</p>
+    type: ability
+  - _id: B57L4hOAEP7S1PZt
+    _key: '!items.effects!StlghZswHfXqz8L0.B57L4hOAEP7S1PZt'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.cf1a117e14199f5c
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.23
+    img: systems/teriock/src/icons/abilities/glue.webp
+    name: Glue
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: sight
+        package: ritual
+      duration:
+        dawn: false
+        description: 24 Hours
+        raw: '24'
+        stationary: false
+        unit: hour
+      effectTypes:
+        - immunity
+      executionTime: 10 Minutes
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.protections.immunities.other
+              mode: 2
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: Stealing (Glued Items)
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>Target is @L[Property:Glued]{glued} to the creature
+          @L[Keyword:Bearing]{bearing} it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target item must be @L[Keyword:Bearing]{beared} by a creature.</p>
+      revealed: true
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - item
+    type: ability
+  - _id: YDyX9dmo6gtY702e
+    _key: '!items.effects!StlghZswHfXqz8L0.YDyX9dmo6gtY702e'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.9df212d89cab196d
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.23
+    img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          rolls:
+            hide: 1d20 + (2 * @snk)
+          startStatuses:
+            - hidden
+        fluent:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @f
+        proficient:
+          rolls:
+            hide: 1d20 + (2 * @snk) + @p
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You become @L[Condition:Hidden]{hidden}. As you do this, you may
+          roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
+          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
+          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.</p>
+        fluent: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+        proficient: >-
+          <p>Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC
+          (if it's greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light,
+        @L[Core:Cover]{three-quarters cover}, or some other feature which the
+        @L[Core:Game Master]{GM} determines is appropriate for being
+        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 0
+        score:
+          attribute: snk
+          value: 2
+    type: ability
+  - _id: VgHo3DycU5e8Ragl
+    _key: '!items.effects!StlghZswHfXqz8L0.VgHo3DycU5e8Ragl'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.85ec1030b2693cfc
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.23
+    img: icons/skills/trades/security-locksmith-key-gray.webp
+    name: Talented Locksmith
+    system:
+      class: thief
+      competence:
+        raw: 0
+      delivery:
+        base: self
+      duration:
+        dawn: false
+        description: Always Active
+        raw: '0'
+        stationary: false
+        unit: unlimited
+      executionTime: passive
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      impacts:
+        base:
+          changes:
+            - key: system.tradecrafts.locksmith.score
+              mode: 4
+              priority: 10
+              qualifier: '1'
+              target: Actor
+              time: normal
+              value: '1'
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are a @L[Keyword:Talented]{talented}
+          @L[Tradecraft:Locksmith]{locksmith}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: self
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - self
+    type: ability
+  - _id: kXI7EUy5B5Hqz4C7
+    _key: '!items.effects!StlghZswHfXqz8L0.kXI7EUy5B5Hqz4C7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.Item.aaa59cf7fb2b88ab
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.23
+    img: systems/teriock/src/icons/abilities/unglue.webp
+    name: Unglue
+    system:
+      class: thief
+      competence:
+        raw: 0
+      costs:
+        mp:
+          type: static
+          value:
+            static: 1
+      delivery:
+        base: hand
+      duration:
+        dawn: false
+        description: Instant
+        raw: '0'
+        stationary: false
+        unit: instant
+      effectTypes:
+        - stealing
+      executionTime: a1
+      expansion:
+        featSaveAttribute: mov
+        range:
+          unit: self
+      featSaveAttribute: mov
+      form: normal
+      grantOnly: false
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        raw: Your Hand's Range
+        unit: ft
+      requirements: >-
+        <p>Target's bearer is @L[Condition:Down]{down} or target it
+        @L[Property:Searchable]{searchable}.</p>
+      revealed: true
+      skill: true
+      standard: true
+      targets:
+        - item
+    type: ability
+folder: bd7120d756dc6f4f
+img: systems/teriock/src/icons/ranks/rank-1-thief.webp
+name: Rank 1 Thief
+system:
+  _sup: fdec3f206b747460
+  archetype: semi
+  className: thief
+  classRank: 1
+  competence:
+    raw: 1
+  description: >-
+    <p>Almost as shady as the @L[Class:Assassin]{Assassin}, a Thief is a bit
+    more socially oriented and has a much greater care for her own life. Thieves
+    are the flip side of the @L[Class:Duelist]{Duelist} and tend to follow laws
+    and tell the truth only if it serves their purpose. Always trying to make a
+    profit, thieves are the businessmen of the world and will cheat you without
+    blinking an eyelash, that is their job. If you are playing a thief, lie and
+    make up stories, be ever watchful for a chance to search or loot and look
+    for the profit angle, never doing anything for free.</p>
+  innate: false
+  maxAv: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+type: rank

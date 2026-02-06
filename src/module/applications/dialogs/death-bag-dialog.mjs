@@ -1,6 +1,9 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { getImage, systemPath } from "../../helpers/path.mjs";
+import {
+  getImage,
+  systemPath
+} from "../../helpers/path.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -146,15 +149,31 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
           {
             title: "Description",
             text:
-              "You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something?" +
+              "<p>You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something?" +
               " Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as" +
-              " well.",
+              " well.</p>",
             italic: true,
           },
         ],
-        icon: TERIOCK.display.icons.ui.deathBag,
-        label: "Death Bag",
       };
+      let outcome = "";
+      switch (pulledStones.black ?? 0) {
+        case 1:
+          outcome = "<p>You @L[Core:Death Bag]{forget how you died}.</p>";
+          break;
+        case 2:
+          outcome = "<p>You gain a @L[Core:Death Scars]{death scar}.</p>";
+          break;
+        case 3:
+          outcome =
+            "<p>You @L[Core:Permanent Death]{PD} or gain a" +
+            " @UUID[Compendium.teriock.tables.RollTable.b034b3cd8f613d8c]{DI}.";
+          break;
+      }
+      panelParts.blocks.push({
+        title: "Outcome",
+        text: outcome,
+      });
       const pullContent = await foundry.applications.handlebars.renderTemplate(
         systemPath("templates/ui-templates/death-bag.hbs"),
         context,
