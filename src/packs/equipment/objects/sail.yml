@@ -1,0 +1,98 @@
+_id: 33fb5624c0f81694
+_key: '!items!33fb5624c0f81694'
+_stats:
+  coreVersion: '13'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.9.25
+effects:
+  - _id: E6q5xsR0sa3T35PJ
+    _key: '!items.effects!33fb5624c0f81694.E6q5xsR0sa3T35PJ'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.eac47e503515cd7d
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.25
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    name: Cumbersome
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
+        <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
+        regardless of how much they are @L[Core:Carrying Capacity]{carrying}. If
+        the user would have not been @L[Condition:Encumbered]{encumbered}
+        otherwise, they are @L[Condition:Encumbered]{lightly encumbered}. If
+        they would have been @L[Condition:Encumbered]{lightly encumbered}
+        otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
+        they would have been @L[Condition:Encumbered]{heavily encumbered}
+        otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
+      form: flaw
+      impacts:
+        changes:
+          - key: system.encumbranceLevel
+            mode: 2
+            priority: 10
+            qualifier: '1'
+            target: Actor
+            time: normal
+            value: '1'
+      modifiesActor: true
+      revealed: true
+    type: property
+  - _id: NKQQW0NzGozHZneH
+    _key: '!items.effects!33fb5624c0f81694.NKQQW0NzGozHZneH'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.Item.7b3e6d546e3b26f7
+      coreVersion: '13'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.9.25
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.</p>
+      form: flaw
+      revealed: true
+    type: property
+folder: a2ddb53b55f7432b
+img: systems/teriock/src/icons/equipment/sail.webp
+name: Sail
+system:
+  attackPenalty:
+    raw: '-4'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base:
+      raw: '0'
+  equipmentClasses:
+    - supplies
+  equipmentType: Sail
+  fightingStyle: wraparound
+  minStr:
+    raw: '-3'
+  powerLevel: mundane
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  vitals: false
+  weight:
+    raw: '30'
+type: equipment
