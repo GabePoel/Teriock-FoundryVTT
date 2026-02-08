@@ -5,6 +5,7 @@ export * from "./unit-models/_module.mjs";
 export { default as CompetenceModel } from "./competence-model.mjs";
 export { default as DamageModel } from "./damage-model.mjs";
 export { default as DefenseModel } from "./defense-model.mjs";
+export { default as EmbeddedDataModel } from "./embedded-data-model.mjs";
 export { default as EvaluationModel } from "./evaluation-model.mjs";
 export { default as IdentificationModel } from "./identification-model/identification-model.mjs";
 export { default as PiercingModel } from "./piercing-model.mjs";

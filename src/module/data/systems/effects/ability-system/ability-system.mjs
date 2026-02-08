@@ -69,6 +69,12 @@ export default class AbilitySystem extends mix(
         "system.competence",
         "system.quantity",
       ],
+      pseudoAutomationTypes: [
+        "abilityMacro",
+        "duration",
+        "status",
+        "useAbility",
+      ],
       type: "ability",
       usable: true,
       visibleTypes: ["ability"],

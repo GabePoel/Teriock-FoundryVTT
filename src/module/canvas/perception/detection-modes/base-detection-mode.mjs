@@ -34,14 +34,11 @@ export default class BaseDetectionMode extends DetectionMode {
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       ethereal: new fields.BooleanField({ initial: false }),
       hidden: new fields.BooleanField({ initial: true }),
       material: new fields.BooleanField({ initial: true }),
     });
-    //noinspection JSValidateTypes
-    return schema;
   }
 
   /**

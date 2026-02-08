@@ -9,8 +9,7 @@ const { fields } = foundry.data;
 export default class ActorSettingsModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    Object.assign(schema, {
+    return Object.assign(super.defineSchema(), {
       autoWound: new fields.BooleanField({
         initial: true,
         label: "Auto Wound",
@@ -51,6 +50,5 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
       }),
       sheetBlockTradecraftsSize: new blockSizeField({ label: "Tradecrafts" }),
     });
-    return schema;
   }
 }

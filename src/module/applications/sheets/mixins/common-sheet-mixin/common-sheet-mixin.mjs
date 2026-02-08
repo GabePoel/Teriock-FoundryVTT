@@ -45,6 +45,7 @@ export default function CommonSheetMixin(Base) {
       parts.MenuCommonSheetPart,
       parts.StatDiceCommonSheetPart,
       parts.ToggleCommonSheetPart,
+      parts.ImpactsCommonSheetPart,
       IndexButtonSheetMixin,
     ) {
       /** @type {Partial<ApplicationConfiguration>} */

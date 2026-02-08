@@ -25,6 +25,10 @@
         {{> (template "document-templates/shared/display-fields.hbs")}}
       </div>
       {{> (template "document-templates/shared/children.hbs")}}
+      <div class="teriock-form-container">
+        <button data-action="createImpact">Create Impact</button>
+        {{#each impactEditors as |editor|}}{{{editor}}}{{/each}}
+      </div>
     </div>
   {{/if}}
   {{#if (eq tab "impacts")}}

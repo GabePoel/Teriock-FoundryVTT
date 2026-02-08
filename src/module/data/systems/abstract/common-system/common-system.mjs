@@ -1,6 +1,9 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { quickAddAssociation } from "../../../../helpers/html.mjs";
 import { toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
+import { PseudoCollectionField } from "../../../fields/_module.mjs";
+import { BaseAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -8,9 +11,10 @@ const { fields } = foundry.data;
 //noinspection JSClosureCompilerSyntax
 /**
  * @extends {TypeDataModel}
+ * @mixes AccessData
  * @implements {Teriock.Models.CommonSystemInterface}
  */
-export default class CommonSystem extends TypeDataModel {
+export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
   /**
    * Metadata.
    * @returns {Teriock.Documents.ModelMetadata}
@@ -29,6 +33,10 @@ export default class CommonSystem extends TypeDataModel {
       pageNameKey: "name",
       passive: false,
       preservedProperties: [],
+      pseudoAutomationTypes: [],
+      pseudos: {
+        Automation: "system.automations",
+      },
       revealable: false,
       tooltip: true,
       type: "base",
@@ -44,19 +52,15 @@ export default class CommonSystem extends TypeDataModel {
    */
   static defineSchema() {
     return {
+      automations: new PseudoCollectionField(BaseAutomation, {
+        allowedTypes: this.metadata.pseudoAutomationTypes,
+      }),
       gmNotes: new fields.DocumentUUIDField({
         required: false,
         nullable: true,
         initial: null,
       }),
     };
-  }
-
-  /**
-   * @returns {TeriockActor|null}
-   */
-  get actor() {
-    return this.parent.actor;
   }
 
   /**
@@ -172,14 +176,6 @@ export default class CommonSystem extends TypeDataModel {
       }
     }
     return parts;
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {TeriockCommon}
-   */
-  get parent() {
-    return /** @type {TeriockCommon} */ super.parent;
   }
 
   /**
@@ -366,10 +362,7 @@ export default class CommonSystem extends TypeDataModel {
     return {};
   }
 
-  /**
-   * Fetch roll data specific to this document.
-   * @returns {object}
-   */
+  /** @inheritDoc */
   getLocalRollData() {
     return {
       name: this.parent.name,
@@ -380,10 +373,7 @@ export default class CommonSystem extends TypeDataModel {
     };
   }
 
-  /**
-   * Fetch roll data.
-   * @returns {object}
-   */
+  /** @inheritDoc */
   getRollData() {
     let rollData = {};
     if (this.parent.parent?.getRollData) {

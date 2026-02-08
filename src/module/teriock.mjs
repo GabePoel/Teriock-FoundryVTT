@@ -1,5 +1,6 @@
 import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
+import * as config from "./config/_module.mjs";
 import * as constants from "./constants/_module.mjs";
 import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
@@ -22,6 +23,8 @@ Object.assign(globalThis, {
     dice: dice,
     documents: documents,
     helpers: helpers,
+    CONST: constants,
+    CONFIG: config,
   },
   tm: {
     dialogs: applications.dialogs,
