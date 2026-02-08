@@ -81,14 +81,14 @@ export default class BaseAutomation extends TypedPseudoDocument {
    */
   async getEditor() {
     return dedent(`
-      <fieldset>
+      <fieldset class="teriock-full-width teriock-form-container">
         <legend>${this.label}
-          <i 
+          <a><i 
             class="${makeIconClass(icons.ui.delete, "solid")}" 
             data-action="deleteImpact" 
             data-id="${this.id}"
           ></i>
-        </legend>
+        </legend></a>
         ${await this._getEditorForms()}
       </fieldset>
     `);

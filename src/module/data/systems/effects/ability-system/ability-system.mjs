@@ -71,7 +71,11 @@ export default class AbilitySystem extends mix(
       ],
       pseudoAutomationTypes: [
         "abilityMacro",
+        "changes",
+        "check",
+        "combatExpiration",
         "duration",
+        "feat",
         "status",
         "useAbility",
       ],

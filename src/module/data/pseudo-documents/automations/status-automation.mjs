@@ -1,8 +1,8 @@
-import BaseAutomation from "./base-automation.mjs";
+import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
-export default class StatusAutomation extends BaseAutomation {
+export default class StatusAutomation extends CritAutomation {
   /** @inheritDoc */
   static get TYPE() {
     return "status";
@@ -42,6 +42,6 @@ export default class StatusAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["status", "relation", "target", "executor"];
+    return ["status", "relation", "target", "executor", ...super._formPaths];
   }
 }

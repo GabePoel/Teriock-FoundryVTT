@@ -1,11 +1,11 @@
-import BaseAutomation from "./base-automation.mjs";
+import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {number} duration
  */
-export default class DurationAutomation extends BaseAutomation {
+export default class DurationAutomation extends CritAutomation {
   /** @inheritDoc */
   static get TYPE() {
     return "duration";
@@ -24,6 +24,6 @@ export default class DurationAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["duration"];
+    return ["duration", ...super._formPaths];
   }
 }

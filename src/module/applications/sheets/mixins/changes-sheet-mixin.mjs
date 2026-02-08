@@ -21,20 +21,25 @@ export default function ChangesSheetMixin(Base) {
        */
       static async _onAddChange(_event, target) {
         const path = target.dataset.path;
+        let valuePath = target.dataset.valuePath;
+        if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
           console.error("No path specified for addChange action");
           return;
         }
-        const currentChanges =
-          foundry.utils.getProperty(this.document, path) || [];
+        const changes =
+          foundry.utils.deepClone(
+            foundry.utils.getProperty(this.document, valuePath),
+          ) || [];
         const newChange = {
           key: "",
           mode: 0,
           value: "",
           priority: 0,
         };
-        currentChanges.push(newChange);
-        await this.document.update({ [path]: currentChanges });
+        changes.push(newChange);
+        const updateData = { [path]: changes };
+        await this.document.update(updateData);
       }
 
       /**
@@ -47,13 +52,17 @@ export default function ChangesSheetMixin(Base) {
       static async _onDeleteChange(_event, target) {
         const index = parseInt(target.dataset.index, 10);
         const path = target.dataset.path;
+        let valuePath = target.dataset.valuePath;
+        if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
           console.error("No path specified for deleteChange action");
           return;
         }
-        const changes = foundry.utils.getProperty(this.document, path);
+        const changes = foundry.utils.deepClone(
+          foundry.utils.getProperty(this.document, valuePath),
+        );
         if (!changes || !Array.isArray(changes)) {
-          console.error(`No changes array found at path: ${path}`);
+          console.error(`No changes array found at path: ${valuePath}`);
           return;
         }
         if (index >= 0 && index < changes.length) {
