@@ -27,7 +27,7 @@ async function abstractTakeOperation(actor, options) {
     else await take.apply(actor, amount);
     return;
   }
-  const flavor = `Roll ${take.label}`;
+  const flavor = `Roll ${take.LABEL}`;
   if (options.boost) formula = await boostDialog(formula);
   const roll = new TeriockRoll(formula, actor?.getRollData() || {}, { flavor });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });

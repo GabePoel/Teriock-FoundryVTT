@@ -1,0 +1,87 @@
+@use "../mixins";
+
+.teriock-automation-collection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.teriock-automation-container {
+  overflow: hidden;
+  width: 100%;
+  @include mixins.inverse-roll-style;
+
+  .teriock-automation-header {
+    align-items: center;
+    border-bottom: 1px solid var(--color-panel-edge);
+    display: flex;
+    flex-direction: row;
+    min-height: 2rem;
+    padding: 0.25rem;
+    width: 100%;
+
+    .teriock-automation-header-name {
+      flex: 1;
+      font-family: "Modesto Condensed", serif;
+      font-size: large;
+      line-height: 1rem;
+      padding-left: 0.25rem;
+    }
+
+    .teriock-automation-header-buttons {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      gap: 0.25rem;
+      justify-content: flex-end;
+
+      .teriock-automation-header-button-group {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        gap: 0.25rem;
+        height: 1.5rem;
+
+        & + .teriock-automation-header-button-group {
+          border-left: 1px solid var(--color-panel-edge);
+          padding-left: 0.25rem;
+        }
+
+        button {
+          border: none;
+          height: 1.5rem;
+          min-height: unset;
+          padding: 0;
+          width: 1.5rem;
+
+          &:not(:hover) {
+            background: none;
+            color: var(--color-text-subtle);
+
+            i.fa-regular {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .teriock-automation-content {
+    padding: 0.5rem;
+
+    &.teriock-form-container {
+      gap: 0.5rem;
+    }
+
+    .change-config-container {
+      gap: 0.5rem;
+
+      .change-container + .change-container {
+        padding-top: 0.5rem;
+      }
+    }
+  }
+}

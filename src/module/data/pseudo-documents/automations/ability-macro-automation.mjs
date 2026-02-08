@@ -1,9 +1,17 @@
 import { abilityPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-import { BaseAutomation } from "./_module.mjs";
+import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
-export default class AbilityMacroAutomation extends BaseAutomation {
+/**
+ * @property {"button"|"pseudoHook"} relation
+ */
+export default class AbilityMacroAutomation extends CritAutomation {
+  /** @inheritDoc */
+  static get LABEL() {
+    return "Macro";
+  }
+
   /** @inheritDoc */
   static get TYPE() {
     return "abilityMacro";
@@ -37,5 +45,10 @@ export default class AbilityMacroAutomation extends BaseAutomation {
       paths.push("pseudoHook");
     }
     return paths;
+  }
+
+  /** @inheritDoc */
+  get canCrit() {
+    return this.relation === "pseudoHook" && super.canCrit;
   }
 }

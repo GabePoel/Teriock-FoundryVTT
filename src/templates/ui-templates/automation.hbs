@@ -1,0 +1,164 @@
+<div class="teriock-automation-container collapsible">
+  <header
+    class="teriock-automation-header"
+    data-action="toggle-collapse"
+  >
+    <div class="teriock-automation-header-name">{{{automation.label}}}</div>
+    <div class="teriock-automation-header-buttons">
+      {{#if automation.canCrit}}
+        <div class="teriock-automation-header-button-group">
+          <button
+            id="{{automation.uuid}}.noncrit"
+            data-tooltip="Applies on Non-Crit"
+            data-action="setToggle"
+            data-type="number"
+            data-term="0"
+            {{#if (has automation.crit 0)}}data-present="true"{{/if}}
+            data-path="{{automation.fieldPath}}.{{automation.id}}.crit"
+            name="_source.{{automation.fieldPath}}.{{automation.id}}.crit"
+          >
+            {{makeIcon @root/TERIOCK.display.icons.consequence.none (ifThen
+              (has automation.crit 0)
+              "solid"
+              "regular"
+            )}}
+          </button>
+          <button
+            id="{{automation.uuid}}.crit"
+            data-tooltip="Applies on Crit"
+            data-action="setToggle"
+            data-type="number"
+            data-term="1"
+            {{#if (has automation.crit 1)}}data-present="true"{{/if}}
+            data-path="{{automation.fieldPath}}.{{automation.id}}.crit"
+            name="_source.{{automation.fieldPath}}.{{automation.id}}.crit"
+          >
+            {{makeIcon @root/TERIOCK.display.icons.consequence.crit (ifThen
+              (has automation.crit 1)
+              "solid"
+              "regular"
+            )}}
+          </button>
+        </div>
+      {{/if}}
+      <div class="teriock-automation-header-button-group">
+        <button
+          id="{{automation.uuid}}.base"
+          data-action="setToggle"
+          data-type="number"
+          data-term="0"
+          {{#if (has automation.competencies 0)}}
+          data-present="true"
+          data-tooltip="Always Applies"
+          {{else}}
+          data-tooltip="Doesn't Always Apply"
+          {{/if}}
+          data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
+          name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+        >
+          {{makeIcon @root/TERIOCK.display.icons.competence.none (ifThen
+            (has automation.competencies 0)
+            "solid"
+            "regular"
+          )}}
+        </button>
+        <button
+          id="{{automation.uuid}}.proficient"
+          data-action="setToggle"
+          data-type="number"
+          data-term="1"
+          {{#if (has automation.competencies 1)}}
+          data-present="true"
+          data-tooltip="Applies if Proficient"
+          {{else}}
+          data-tooltip="Doesn't Apply if Proficient"
+          {{/if}}
+          data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
+          name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+        >
+          {{makeIcon @root/TERIOCK.display.icons.competence.proficient (ifThen
+            (has automation.competencies 1)
+            "solid"
+            "regular"
+          )}}
+        </button>
+        <button
+          id="{{automation.uuid}}.fluent"
+          data-action="setToggle"
+          data-type="number"
+          data-term="2"
+          {{#if (has automation.competencies 2)}}
+          data-present="true"
+          data-tooltip="Applies if Fluent"
+          {{else}}
+          data-tooltip="Doesn't Apply if Fluent"
+          {{/if}}
+          data-path="{{automation.fieldPath}}.{{automation.id}}.competencies"
+          name="_source.{{automation.fieldPath}}.{{automation.id}}.competencies"
+        >
+          {{makeIcon @root/TERIOCK.display.icons.competence.fluent (ifThen
+            (has automation.competencies 2)
+            "solid"
+            "regular"
+          )}}
+        </button>
+      </div>
+      {{#if automation.canHeighten}}
+        <div class="teriock-automation-header-button-group">
+          <button
+            id="{{automation.uuid}}.unheightened"
+            data-action="setToggle"
+            data-type="number"
+            data-term="0"
+            {{#if (has automation.heighten 0)}}
+            data-present="true"
+            data-tooltip="Applies if Unheightened"
+            {{else}}
+            data-tooltip="Doesn't Apply if Unheightened"
+            {{/if}}
+            data-path="{{automation.fieldPath}}.{{automation.id}}.heighten"
+            name="_source.{{automation.fieldPath}}.{{automation.id}}.heighten"
+          >
+            {{makeIcon @root/TERIOCK.display.icons.ability.unheightened (ifThen
+              (has automation.heighten 0)
+              "solid"
+              "regular"
+            )}}
+          </button>
+          <button
+            id="{{automation.uuid}}.heightened"
+            data-action="setToggle"
+            data-type="number"
+            data-term="1"
+            {{#if (has automation.heighten 1)}}
+            data-present="true"
+            data-tooltip="Applies if Heightened"
+            {{else}}
+            data-tooltip="Doesn't Apply if Heightened"
+            {{/if}}
+            data-path="{{automation.fieldPath}}.{{automation.id}}.heighten"
+            name="_source.{{automation.fieldPath}}.{{automation.id}}.heighten"
+          >
+            {{makeIcon @root/TERIOCK.display.icons.ability.heightened (ifThen
+              (has automation.heighten 1)
+              "solid"
+              "regular"
+            )}}
+          </button>
+        </div>
+      {{/if}}
+      <div class="teriock-automation-header-button-group">
+        <button
+          data-tooltip="Delete"
+          data-action="deleteAutomation"
+          data-id="{{automation.id}}"
+        >
+          {{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="teriock-automation-content teriock-form-container">
+    {{{formEditor}}}
+  </div>
+</div>

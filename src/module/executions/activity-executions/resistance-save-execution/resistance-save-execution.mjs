@@ -27,7 +27,7 @@ export default class ResistanceSaveExecution extends ThresholdExecutionMixin(
         ? getImage("effect-types", "Hexproof")
         : getImage("effect-types", "Resistance"));
     this.rule = this.hex ? "hexproof" : "resistance";
-    this.label = "Resistance";
+    this.LABEL = "Resistance";
   }
 
   /** @inheritDoc */

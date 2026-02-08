@@ -2,9 +2,6 @@
   {{#each document.visibleTypes as |type|}}
     {{#if (or @root/editable (exists (lookup @root (path @root/TERIOCK.options.document type "getter"))))}}
       <div class="ab-main">
-        {{#if @root/editable}}
-          <button class="create{{ucFirst type}}" data-action="create{{ucFirst type}}">Add {{path
-            @root/TERIOCK.options.document type "name"}}</button>{{/if}}
         {{#if (exists (lookup @root (path @root/TERIOCK.options.document type "getter")))}}
           <div
             class="teriock-block-container {{@root.document.flags.teriockDocumentSettings.sheetBlockChildSize}} {{#if
@@ -16,6 +13,10 @@
             {{/each}}
           </div>
         {{/if}}
+        {{#if @root/editable}}
+          <button class="create{{ucFirst type}}" data-action="create{{ucFirst type}}">
+            {{makeIcon (path @root/TERIOCK.options.document type "icon") "button"}}
+            Add {{path @root/TERIOCK.options.document type "name"}}</button>{{/if}}
       </div>
     {{/if}}
   {{/each}}

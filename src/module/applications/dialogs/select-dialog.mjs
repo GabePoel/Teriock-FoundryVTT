@@ -23,6 +23,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @param {string} [options.title="Select"] - Dialog title.
  * @param {boolean} [options.other=false] - Whether to include an "Other" button.
  * @param {boolean} [options.genericOther=true] - If true, "Other" returns `null` instead of prompting again.
+ * @param {string} [options.icon="circle-question"] - Icon to use for the select window.
  * @returns {Promise<string|null>} The chosen value, or `null` if canceled or genericOther.
  */
 export async function selectDialog(choices, options = {}) {
@@ -35,6 +36,7 @@ export async function selectDialog(choices, options = {}) {
     title = "Select",
     other = false,
     genericOther = true,
+    icon = "circle-question",
   } = options;
 
   const selectContentHtml = document.createElement("div");
@@ -69,7 +71,7 @@ export async function selectDialog(choices, options = {}) {
   if (!other) {
     return await TeriockDialog.prompt({
       window: {
-        icon: makeIconClass("circle-question", "title"),
+        icon: makeIconClass(icon, "title"),
         title,
       },
       modal: true,

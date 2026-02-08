@@ -5,7 +5,12 @@ const { fields } = foundry.data;
 /**
  * @property {string} abilityName
  */
-export default class UseAbilityAutomation extends BaseAutomation {
+export default class UseAbilitiesAutomation extends BaseAutomation {
+  /** @inheritDoc */
+  static get LABEL() {
+    return "Use Abilities";
+  }
+
   /** @inheritDoc */
   static get TYPE() {
     return "useAbility";
@@ -14,15 +19,15 @@ export default class UseAbilityAutomation extends BaseAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      abilityName: new fields.StringField({
-        label: "Ability Name",
-        hint: "A different ability that this ability can cause the execution of.",
+      abilityNames: new fields.SetField(new fields.StringField(), {
+        label: "Abilities",
+        hint: "Abilities that this can directly cause the execution of.",
       }),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["abilityName"];
+    return ["abilityNames"];
   }
 }

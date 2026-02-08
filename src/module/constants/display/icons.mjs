@@ -15,6 +15,7 @@ export const icons = {
     interaction: "swords",
     range: "ruler",
     target: "crosshairs-simple",
+    unheightened: "equals",
   },
   archetype: {
     everyman: "user",
@@ -46,6 +47,10 @@ export const icons = {
     veteran: "helmet-battle",
     tradesman: "tools",
     journeyman: "person-hiking",
+  },
+  consequence: {
+    none: "fire-flame-simple",
+    crit: "burst",
   },
   armament: {
     ap: "chevron-circle-down",
@@ -91,6 +96,7 @@ export const icons = {
   },
   document: {
     ability: "hand-sparkles",
+    automation: "gears",
     attunement: "handshake",
     body: "boot",
     character: "user",
@@ -277,6 +283,7 @@ export const icons = {
   ui: {
     add: "plus",
     apply: "share-all",
+    back: "chevron-left",
     changeKey: "search",
     changeMacro: "gear-code",
     changeMode: "calculator-simple",

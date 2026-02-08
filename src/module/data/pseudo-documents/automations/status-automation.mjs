@@ -4,6 +4,11 @@ const { fields } = foundry.data;
 
 export default class StatusAutomation extends CritAutomation {
   /** @inheritDoc */
+  static get LABEL() {
+    return "Condition";
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "status";
   }

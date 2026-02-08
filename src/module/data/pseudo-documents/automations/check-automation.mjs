@@ -4,6 +4,11 @@ const { fields } = foundry.data;
 
 export default class CheckAutomation extends ThresholdAutomation {
   /** @inheritDoc */
+  static get LABEL() {
+    return "Tradecraft Check";
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "check";
   }

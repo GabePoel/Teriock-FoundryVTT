@@ -41,6 +41,7 @@ export function combatExpirationSourceTypeField() {
  * @param {object} [options]
  * @param {boolean} [options.implementation] - Make this into an implementation.
  * @param {boolean} [options.configuration] - Make this into a configuration.
+ * @param {boolean} [options.alwaysEnabled] - Do not include an enabled key.
  * @returns {SchemaField}
  */
 export function transformationField(options = {}) {
@@ -169,6 +170,7 @@ export function transformationField(options = {}) {
       }),
     });
   }
+  if (options.alwaysEnabled) delete schema.enabled;
   return new SchemaField(schema);
 }
 

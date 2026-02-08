@@ -3,6 +3,14 @@ import { EmbeddedDataModel } from "../../models/_module.mjs";
 const { fields } = foundry.data;
 
 export default class PseudoDocument extends EmbeddedDataModel {
+  /**
+   * Label for this pseudo-document class.
+   * @returns {string}
+   */
+  static get LABEL() {
+    return "";
+  }
+
   static get metadata() {
     return {
       documentName: "",
@@ -73,6 +81,14 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   get id() {
     return this._id;
+  }
+
+  /**
+   * Label for this pseudo-document.
+   * @returns {string}
+   */
+  get label() {
+    return this.constructor.LABEL;
   }
 
   /**

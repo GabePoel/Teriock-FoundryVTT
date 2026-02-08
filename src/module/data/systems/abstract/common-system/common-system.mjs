@@ -16,6 +16,26 @@ const { fields } = foundry.data;
  */
 export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
   /**
+   * Array of the types of automations that this document can have.
+   * @returns {(typeof BaseAutomation)[]}
+   */
+  static get _automationTypes() {
+    return [];
+  }
+
+  /**
+   * The types of automations that this document can have.
+   * @returns {Record<string, BaseAutomation>}
+   */
+  static get automationTypes() {
+    return Object.fromEntries(
+      this._automationTypes
+        .map((a) => [a.TYPE, a])
+        .sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
+    );
+  }
+
+  /**
    * Metadata.
    * @returns {Teriock.Documents.ModelMetadata}
    */
@@ -33,7 +53,6 @@ export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
       pageNameKey: "name",
       passive: false,
       preservedProperties: [],
-      pseudoAutomationTypes: [],
       pseudos: {
         Automation: "system.automations",
       },
@@ -53,7 +72,7 @@ export default class CommonSystem extends AccessDataMixin(TypeDataModel) {
   static defineSchema() {
     return {
       automations: new PseudoCollectionField(BaseAutomation, {
-        allowedTypes: this.metadata.pseudoAutomationTypes,
+        types: this.automationTypes,
       }),
       gmNotes: new fields.DocumentUUIDField({
         required: false,

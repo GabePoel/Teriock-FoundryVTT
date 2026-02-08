@@ -1,6 +1,3 @@
-import { icons } from "../../../constants/display/_module.mjs";
-import { dedent } from "../../../helpers/string.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
 import { competenceField } from "../../fields/helpers/builders.mjs";
 import TypedPseudoDocument from "../abstract/typed-pseudo-document.mjs";
 
@@ -21,7 +18,20 @@ export default class BaseAutomation extends TypedPseudoDocument {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      competencies: new fields.SetField(competenceField()),
+      competencies: new fields.SetField(competenceField(), {
+        initial: [0, 1, 2],
+      }),
+      heighten: new fields.SetField(
+        new fields.NumberField({
+          choices: {
+            0: "Non-Heighten",
+            1: "Heighten",
+          },
+        }),
+        {
+          initial: [0, 1],
+        },
+      ),
     });
   }
 
@@ -42,11 +52,27 @@ export default class BaseAutomation extends TypedPseudoDocument {
   }
 
   /**
+   * Whether this can crit.
+   * @returns {boolean}
+   */
+  get canCrit() {
+    return false;
+  }
+
+  /**
+   * Whether this can heighten.
+   * @returns {boolean}
+   */
+  get canHeighten() {
+    return this.document.type === "ability";
+  }
+
+  /**
    * Whether the competence requirements for this to be active are met.
    * @returns {boolean}
    */
   get competent() {
-    return this.competencies.has(this.parent.competence.value);
+    return this.competencies.has(this.parent.competence.raw);
   }
 
   /**
@@ -80,17 +106,6 @@ export default class BaseAutomation extends TypedPseudoDocument {
    * @returns {Promise<string>}
    */
   async getEditor() {
-    return dedent(`
-      <fieldset class="teriock-full-width teriock-form-container">
-        <legend>${this.label}
-          <a><i 
-            class="${makeIconClass(icons.ui.delete, "solid")}" 
-            data-action="deleteImpact" 
-            data-id="${this.id}"
-          ></i>
-        </legend></a>
-        ${await this._getEditorForms()}
-      </fieldset>
-    `);
+    return this._getEditorForms();
   }
 }

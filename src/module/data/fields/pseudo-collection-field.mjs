@@ -8,19 +8,17 @@ export default class PseudoCollectionField extends TypedObjectField {
   /**
    * @param {typeof TypedPseudoDocument} model
    * @param {DataFieldOptions} [options]
-   * @param {string[]} [options.allowedTypes]
+   * @param {Record<string, typeof TypedPseudoDocument>} [options.types]
    * @param {DataFieldContext} [context]
    */
   constructor(model, options = {}, context = {}) {
     if (!foundry.utils.isSubclass(model, TypedPseudoDocument)) {
       throw new Error("The model must be a PseudoDocument");
     }
-    let types = model.TYPES;
-    if (options.allowedTypes) {
-      types = Object.fromEntries(
-        Object.entries(types).filter(([type, _Cls]) =>
-          options.allowedTypes.includes(type),
-        ),
+    const types = (options.types ||= model.TYPES);
+    if (!types) {
+      throw new Error(
+        "Either the model must define types or they must be explicitly provided.",
       );
     }
     super(new PseudoTypedSchemaField(types), options, context);

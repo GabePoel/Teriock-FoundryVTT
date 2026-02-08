@@ -18,7 +18,7 @@ export default class ImmunityExecution extends BaseExecution {
         ? getImage("effect-types", "Hexseal")
         : getImage("effect-types", "Immunity"));
     this.rule = this.hex ? "hexseal" : "immunity";
-    this.label = "Immunity";
+    this.LABEL = "Immunity";
   }
 
   /** @inheritDoc */

@@ -2,29 +2,29 @@ import ThresholdAutomation from "./threshold-automation.mjs";
 
 const { fields } = foundry.data;
 
-export default class FeatAutomation extends ThresholdAutomation {
+export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static get LABEL() {
-    return "Feat Save";
+    return "Resistance Save";
   }
 
   /** @inheritDoc */
   static get TYPE() {
-    return "feat";
+    return "resist";
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      feat: new fields.StringField({
-        choices: TERIOCK.index.attributesFull,
-        label: "Attribute",
+      hex: new fields.BooleanField({
+        label: "Hexproof",
+        hint: "Whether this is a hexproof roll.",
       }),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["feat", ...super._formPaths];
+    return [...super._formPaths, "hex"];
   }
 }

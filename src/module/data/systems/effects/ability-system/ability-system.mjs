@@ -3,6 +3,7 @@ import { pseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
 import { safeUuid } from "../../../../helpers/resolve.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
+import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-model.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -50,6 +51,24 @@ export default class AbilitySystem extends mix(
   parts.AbilityRankPart,
 ) {
   /** @inheritDoc */
+  static get _automationTypes() {
+    return [
+      automations.AbilityMacroAutomation,
+      automations.ChangesAutomation,
+      automations.CheckAutomation,
+      automations.CommonImpactsAutomation,
+      automations.DurationAutomation,
+      automations.FeatAutomation,
+      automations.HacksAutomation,
+      automations.ResistAutomation,
+      automations.RollAutomation,
+      automations.StatusAutomation,
+      automations.TransformationAutomation,
+      automations.UseAbilitiesAutomation,
+    ];
+  }
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability"],
@@ -68,16 +87,6 @@ export default class AbilitySystem extends mix(
         "system.maxQuantity",
         "system.competence",
         "system.quantity",
-      ],
-      pseudoAutomationTypes: [
-        "abilityMacro",
-        "changes",
-        "check",
-        "combatExpiration",
-        "duration",
-        "feat",
-        "status",
-        "useAbility",
       ],
       type: "ability",
       usable: true,

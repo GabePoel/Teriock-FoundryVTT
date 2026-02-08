@@ -6,6 +6,11 @@ const { fields } = foundry.data;
 
 export default class ChangesAutomation extends BaseAutomation {
   /** @inheritDoc */
+  static get LABEL() {
+    return "Changes";
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "changes";
   }

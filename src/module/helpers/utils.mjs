@@ -32,7 +32,9 @@ export function makeIconElement(icon, ...styles) {
  */
 export function makeIconClass(icon, ...styles) {
   if (!icon) return "";
-  const styleClasses = styles.map((s) => iconStyles[s] || s);
+  const styleClasses = styles
+    .map((s) => iconStyles[s] || s)
+    .filter((s) => typeof s === "string");
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
   if (!icon.startsWith("fa-")) {
     icon = `fa-${icon}`;
@@ -193,4 +195,14 @@ export function sortObject(obj) {
   return Object.fromEntries(
     Object.entries(obj).sort((a, b) => a[0].localeCompare(b[0])),
   );
+}
+
+/**
+ * Map the values of an object.
+ * @param {Record<string, any>} obj
+ * @param {(any) => any} fn
+ * @returns {Record<string, any>}
+ */
+export function objectMap(obj, fn) {
+  return Object.fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]));
 }

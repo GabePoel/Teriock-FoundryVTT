@@ -18,7 +18,7 @@ export class RollRollableTakeHandler extends AbstractButtonHandler {
   static buildButton(rollType, formula) {
     const button = super.buildButton();
     button.icon = makeIconClass(getRollIcon(formula), "button");
-    button.label = `Roll ${TERIOCK.options.take[rollType].label}`;
+    button.label = `Roll ${TERIOCK.options.take[rollType].LABEL}`;
     button.dataset.type = rollType;
     button.dataset.formula = formula;
     button.dataset.tooltip = formula;
@@ -55,7 +55,7 @@ export class TakeRollableTakeHandler extends AbstractButtonHandler {
   static buildButton(rollType, amount) {
     const button = super.buildButton();
     button.icon = makeIconClass(TERIOCK.options.take[rollType].icon, "button");
-    button.label = `${TERIOCK.options.take[rollType].prefix} ${TERIOCK.options.take[rollType].label}`;
+    button.label = `${TERIOCK.options.take[rollType].prefix} ${TERIOCK.options.take[rollType].LABEL}`;
     button.classes = ["teriock-chat-button", `${rollType}-button`];
     button.dataset.type = rollType;
     button.dataset.amount = amount.toString();

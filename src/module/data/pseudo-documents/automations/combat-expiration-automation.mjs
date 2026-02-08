@@ -4,6 +4,12 @@ import CritAutomation from "./crit-automation.mjs";
 const { fields } = foundry.data;
 
 export default class CombatExpirationAutomation extends CritAutomation {
+  /** @inheritDoc */
+  static get LABEL() {
+    return "Combat Expiration";
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "combatExpiration";
   }

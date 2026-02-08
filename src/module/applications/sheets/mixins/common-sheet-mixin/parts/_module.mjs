@@ -10,4 +10,4 @@ export { default as MacroCommonSheetPart } from "./macro-common-sheet-part.mjs";
 export { default as MenuCommonSheetPart } from "./menu-common-sheet-part.mjs";
 export { default as StatDiceCommonSheetPart } from "./stat-dice-common-sheet-part.mjs";
 export { default as ToggleCommonSheetPart } from "./toggle-common-sheet-part.mjs";
-export { default as ImpactsCommonSheetPart } from "./impacts-common-sheet-part.mjs";
+export { default as ImpactsCommonSheetPart } from "./automations-common-sheet-part.mjs";

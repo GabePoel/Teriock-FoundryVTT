@@ -7,6 +7,11 @@ const { fields } = foundry.data;
  */
 export default class DurationAutomation extends CritAutomation {
   /** @inheritDoc */
+  static get LABEL() {
+    return "Duration";
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "duration";
   }

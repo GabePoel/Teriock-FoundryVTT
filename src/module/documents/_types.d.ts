@@ -94,7 +94,6 @@ declare global {
       pageNameKey: string;
       passive: boolean;
       preservedProperties: string[];
-      pseudoAutomationTypes: string[];
       pseudos: Record<string, string>;
       revealable: boolean;
       tooltip: boolean;

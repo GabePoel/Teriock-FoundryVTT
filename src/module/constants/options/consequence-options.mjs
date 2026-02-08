@@ -44,5 +44,7 @@ export const consequenceOptions = {
     standardDamage: "Standard Damage",
     heal: "Heal",
     revitalize: "Revitalize",
+    bag: "Death Bag Pull",
+    revive: "Revive",
   },
 };
