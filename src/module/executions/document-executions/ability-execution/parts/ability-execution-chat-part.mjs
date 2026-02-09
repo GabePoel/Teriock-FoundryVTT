@@ -99,7 +99,7 @@ export default function AbilityExecutionChatPart(Base) {
           mergeRollAutomations
             .filter((a) => a.roll === rollType)
             .forEach((a) => (formula = addFormula(formula, a.formula)));
-          const boostAmount = this.source.system.impacts.boosts[rollType];
+          const boostAmount = this.source.system.boosts[rollType];
           if (formulaExists(boostAmount)) {
             formula = boostFormula(formula, boostAmount);
           }

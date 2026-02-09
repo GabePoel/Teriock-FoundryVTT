@@ -1,16 +1,17 @@
 import { selectDialog } from "../../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
-import { pureUuid, safeUuid } from "../../../../helpers/resolve.mjs";
+import { safeUuid } from "../../../../helpers/resolve.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import { FormulaField, TextField } from "../../../fields/_module.mjs";
 import { qualifiedChangeField } from "../../../fields/helpers/builders.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import { PropertyMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import {
   qualifyChange,
   scaleChange,
 } from "../../../shared/migrations/migrate-changes.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-model.mjs";
+import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 
@@ -35,11 +36,7 @@ export default class PropertySystem extends mix(
 ) {
   /** @inheritDoc */
   static get _automationTypes() {
-    return [
-      automations.ChangesAutomation,
-      automations.CheckAutomation,
-      automations.RollAutomation,
-    ];
+    return [automations.ChangesAutomation, automations.PropertyMacroAutomation];
   }
 
   /** @inheritDoc */
@@ -126,24 +123,6 @@ export default class PropertySystem extends mix(
       );
     }
     return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
-  get changes() {
-    return [
-      ...this.impacts.changes,
-      ...Object.entries(this.impacts.macros).map(([safeUuid, pseudoHook]) => {
-        return {
-          key: `system.hookedMacros.${pseudoHook}`,
-          mode: 2,
-          priority: 5,
-          qualifier: "1",
-          target: "parent",
-          time: "normal",
-          value: pureUuid(safeUuid),
-        };
-      }),
-    ];
   }
 
   /** @inheritDoc */
@@ -243,6 +222,25 @@ export default class PropertySystem extends mix(
       nameAddition = ` (${additions.join(", ")})`;
     }
     return this.parent.name + nameAddition;
+  }
+
+  /** @inheritDoc */
+  get pseudoHookChanges() {
+    const macroAutomations =
+      /** @type {PropertyMacroAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === PropertyMacroAutomation.TYPE,
+      );
+    return macroAutomations.map((a) => {
+      return {
+        key: `system.hookedMacros.${a.pseudoHook}`,
+        mode: 2,
+        priority: 5,
+        qualifier: "1",
+        target: "parent",
+        time: "normal",
+        value: a.macro,
+      };
+    });
   }
 
   /**

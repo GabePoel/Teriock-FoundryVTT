@@ -1,11 +1,7 @@
 import { pseudoHooks } from "../../../../../../constants/system/pseudo-hooks.mjs";
 import { FormulaField, RecordField } from "../../../../../fields/_module.mjs";
 import { builders } from "../../../../../fields/helpers/_module.mjs";
-import {
-  AbilityMacroAutomation,
-  ChangesAutomation,
-  StatusAutomation,
-} from "../../../../../pseudo-documents/automations/_module.mjs";
+import { AbilityMacroAutomation } from "../../../../../pseudo-documents/automations/_module.mjs";
 import {
   qualifyChange,
   scaleChange,
@@ -68,23 +64,6 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      get changes() {
-        const changes = super.changes;
-        const changesAutomations =
-          /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
-            (a) => a.type === ChangesAutomation.TYPE,
-          );
-        changesAutomations.forEach((a) => {
-          changes.push(...a.changes);
-        });
-        changes.push(...this.pseudoHookChanges);
-        return changes;
-      }
-
-      /**
-       * Changes corresponding to pseudo-hooks.
-       * @returns {Teriock.Changes.QualifiedChangeData[]}
-       */
       get pseudoHookChanges() {
         const macroAutomations =
           /** @type {AbilityMacroAutomation[]} */ this.activeAutomations.filter(
@@ -108,17 +87,8 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.impacts.boosts =
+        this.boosts =
           /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {};
-        const statusAutomations =
-          /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
-            (a) => a.type === StatusAutomation.TYPE,
-          );
-        statusAutomations.forEach((a) => {
-          if (a.relation === "include") {
-            this.parent.statuses.add(a.status);
-          }
-        });
       }
 
       /** @inheritDoc */

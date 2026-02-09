@@ -1,3 +1,7 @@
+import {
+  ChangesAutomation,
+  StatusAutomation,
+} from "../../../pseudo-documents/automations/_module.mjs";
 import { ChildSystem } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -44,7 +48,16 @@ export default class BaseEffectSystem extends ChildSystem {
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get changes() {
-    return [];
+    const changes = [];
+    const changesAutomations =
+      /** @type {ChangesAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === ChangesAutomation.TYPE,
+      );
+    changesAutomations.forEach((a) => {
+      changes.push(...a.changes);
+    });
+    changes.push(...this.pseudoHookChanges);
+    return changes;
   }
 
   /** @inheritDoc */
@@ -72,6 +85,14 @@ export default class BaseEffectSystem extends ChildSystem {
    */
   get modifies() {
     return this.metadata.modifies;
+  }
+
+  /**
+   * Changes corresponding to pseudo-hooks.
+   * @returns {Teriock.Changes.QualifiedChangeData[]}
+   */
+  get pseudoHookChanges() {
+    return [];
   }
 
   /** @inheritDoc */
@@ -120,6 +141,20 @@ export default class BaseEffectSystem extends ChildSystem {
       data[`condition.${status}`] = 1;
     }
     return data;
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    const statusAutomations =
+      /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
+        (a) => a.type === StatusAutomation.TYPE,
+      );
+    statusAutomations.forEach((a) => {
+      if (a.relation === "include") {
+        this.parent.statuses.add(a.status);
+      }
+    });
   }
 
   /**

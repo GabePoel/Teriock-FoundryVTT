@@ -6,7 +6,7 @@ import { mix } from "../../../../helpers/utils.mjs";
 import { TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-model.mjs";
+import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 

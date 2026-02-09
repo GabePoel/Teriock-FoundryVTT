@@ -1,7 +1,7 @@
 import { attunementOptions } from "../../../../constants/options/attunement-options.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-model.mjs";
+import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 

@@ -3,7 +3,7 @@ import { getRollIcon, mix } from "../../../../helpers/utils.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-model.mjs";
+import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 

@@ -3,7 +3,7 @@ import { toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, mix } from "../../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-model.mjs";
+import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
 

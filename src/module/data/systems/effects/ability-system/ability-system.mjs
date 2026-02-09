@@ -5,7 +5,7 @@ import { safeUuid } from "../../../../helpers/resolve.mjs";
 import { mix } from "../../../../helpers/utils.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSystem from "../base-effect-system/base-effect-model.mjs";
+import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
 //noinspection JSClosureCompilerSyntax

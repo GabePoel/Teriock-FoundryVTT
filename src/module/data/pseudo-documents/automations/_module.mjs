@@ -7,6 +7,7 @@ export { default as CommonImpactsAutomation } from "./common-impacts-automation.
 export { default as DurationAutomation } from "./duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation.mjs";
+export { default as PropertyMacroAutomation } from "./property-macro-automation.mjs";
 export { default as ResistAutomation } from "./resist-automation.mjs";
 export { default as RollAutomation } from "./roll-automation.mjs";
 export { default as StatusAutomation } from "./status-automation.mjs";
