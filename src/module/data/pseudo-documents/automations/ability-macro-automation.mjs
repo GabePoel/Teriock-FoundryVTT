@@ -1,10 +1,13 @@
 import { abilityPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { ExecuteMacroHandler } from "../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
 import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * @property {UUID<TeriockMacro>} macro
  * @property {"button"|"pseudoHook"} relation
+ * @property {Teriock.Parameters.Shared.AbilityPseudoHook} pseudoHook
  */
 export default class AbilityMacroAutomation extends CritAutomation {
   /** @inheritDoc */
@@ -45,6 +48,16 @@ export default class AbilityMacroAutomation extends CritAutomation {
       paths.push("pseudoHook");
     }
     return paths;
+  }
+
+  /** @inheritDoc */
+  get buttons() {
+    return [
+      ExecuteMacroHandler.buildButton(this.macro, {
+        proficient: this.document?.system.competence?.proficient,
+        fluent: this.document?.system.competence?.fluent,
+      }),
+    ];
   }
 
   /** @inheritDoc */

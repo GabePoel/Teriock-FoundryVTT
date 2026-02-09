@@ -10,6 +10,7 @@ import standardDamageCommand from "../commands/standard-damage-command.mjs";
 import {
   applyStatusCommand,
   removeStatusCommand,
+  toggleStatusCommand,
 } from "../commands/status-commands.mjs";
 import tradecraftCommand from "../commands/tradecraft-command.mjs";
 import useAbilityCommand from "../commands/use-ability-command.mjs";
@@ -145,15 +146,31 @@ export class RemoveStatusHandler extends CommandButtonHandlerBuilder(
 }
 
 /**
+ * Action to toggle a condition.
+ */
+export class ToggleStatusHandler extends CommandButtonHandlerBuilder(
+  toggleStatusCommand,
+) {
+  /**
+   * @inheritDoc
+   * @param {Teriock.Parameters.Condition.ConditionKey} status
+   */
+  static buildButton(status) {
+    return super.buildButton({ status });
+  }
+}
+
+/**
  * Action to trigger a resistance roll.
  */
 export class ResistHandler extends CommandButtonHandlerBuilder(resistCommand) {
   /**
    * @inheritDoc
    * @param {boolean} [hex]
+   * @param {number} [threshold]
    */
-  static buildButton(hex) {
-    return super.buildButton({ hex });
+  static buildButton(hex, threshold) {
+    return super.buildButton({ hex, threshold });
   }
 }
 

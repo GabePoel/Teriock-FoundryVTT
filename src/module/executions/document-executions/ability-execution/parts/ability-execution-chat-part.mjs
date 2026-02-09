@@ -2,6 +2,11 @@ import {
   selectDocumentDialog,
   selectDocumentsDialog,
 } from "../../../../applications/dialogs/select-document-dialog.mjs";
+import {
+  ChangesAutomation,
+  RollAutomation,
+  StatusAutomation,
+} from "../../../../data/pseudo-documents/automations/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockFolder } from "../../../../documents/_module.mjs";
 import {
@@ -10,23 +15,9 @@ import {
   formulaExists,
 } from "../../../../helpers/formula.mjs";
 import { ApplyEffectHandler } from "../../../../helpers/interaction/button-handlers/apply-effect-handlers.mjs";
-import { ExecuteMacroHandler } from "../../../../helpers/interaction/button-handlers/execute-macro-handlers.mjs";
 import { RollRollableTakeHandler } from "../../../../helpers/interaction/button-handlers/rollable-takes-handlers.mjs";
-import {
-  ApplyStatusHandler,
-  AwakenHandler,
-  DeathBagHandler,
-  FeatHandler,
-  HealHandler,
-  RemoveStatusHandler,
-  ResistHandler,
-  RevitalizeHandler,
-  ReviveHandler,
-  StandardDamageHandler,
-  TakeHackHandler,
-  TradecraftCheckHandler,
-  UseAbilityHandler,
-} from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import { FeatHandler } from "../../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
+import standardDamageCommand from "../../../../helpers/interaction/commands/standard-damage-command.mjs";
 import { upgradeTransformation } from "../../../../helpers/utils.mjs";
 
 /**
@@ -39,9 +30,26 @@ export default function AbilityExecutionChatPart(Base) {
      * @mixin
      */
     class AbilityExecutionChat extends Base {
+      /**
+       * Get all active automations of a given type.
+       * @template T
+       * @param {T} automation
+       * @param {boolean} crit
+       * @returns {T[]}
+       */
+      #getCritAutomations(automation, crit) {
+        const automations =
+          /** @type {CritAutomation[]} */ this.activeAutomations;
+        return automations.filter(
+          (a) =>
+            a.type === automation.TYPE &&
+            ((crit && a.crit?.has(1)) || (!crit && a.crit?.has(0))),
+        );
+      }
+
       /** @inheritDoc */
       async _buildButtons() {
-        // Feat Save Button
+        // Build feat save button
         if (this.source.system.interaction === "feat") {
           this.buttons.push(
             FeatHandler.buildButton(
@@ -51,7 +59,7 @@ export default function AbilityExecutionChatPart(Base) {
           );
         }
 
-        // Apply Effect Button
+        // Build apply effects button
         if (
           (this.mergeImpactsNumber("duration") > 0 ||
             this.source.system.duration.unit !== "instant") &&
@@ -68,68 +76,26 @@ export default function AbilityExecutionChatPart(Base) {
           );
         }
 
-        // Macro Execution Buttons
-        for (const impact of [
-          this.source.system.impacts.base,
-          this.source.system.impacts.proficient,
-          this.source.system.impacts.fluent,
-          this.source.system.impacts.heightened,
-        ]) {
-          for (const uuid of impact.macroButtonUuids) {
-            const data = {
-              rollOptions: this.rollOptions,
-              abilityData: this.source.toObject(),
-              costs: this.costs,
-              heightened: this.heightened,
-              proficient: this.proficient,
-              fluent: this.fluent,
-            };
-            this.buttons.push(ExecuteMacroHandler.buildButton(uuid, data));
-          }
+        // Add armament to standard damage button
+        const standardDamageButton = this.buttons.find(
+          (b) => b.dataset?.action === standardDamageCommand.id,
+        );
+        if (standardDamageButton && this.armament) {
+          standardDamageButton.dataset.armament = this.armament.uuid;
         }
 
-        // Standard Damage Button
-        if (this.mergeImpactsSet("common").has("standardDamage")) {
-          this.buttons.push(
-            StandardDamageHandler.buildButton(this.armament?.uuid),
+        // Add merged roll automation buttons
+        const rollAutomations =
+          /** @type {RollAutomation[]} */ this.activeAutomations.filter(
+            (a) => a.type === RollAutomation.TYPE,
           );
-        }
-
-        // Buttons Based on Effect Type
-        const effects = this.source.system.effectTypes;
-
-        // Resistance Buttons
-        if (effects.has("resistance")) {
-          this.buttons.push(ResistHandler.buildButton());
-        }
-        if (effects.has("hexproof")) {
-          this.buttons.push(ResistHandler.buildButton(true));
-        }
-
-        // Awaken Button
-        if (effects.has("awakening")) {
-          this.buttons.push(AwakenHandler.buildButton());
-        }
-
-        // Revive Buttons
-        if (effects.has("revival")) {
-          this.buttons.push(ReviveHandler.buildButton());
-          this.buttons.push(DeathBagHandler.buildButton());
-        }
-
-        // Heal Buttons
-        if (effects.has("healing")) {
-          this.buttons.push(HealHandler.buildButton());
-        }
-
-        // Heal Buttons
-        if (effects.has("revitalization")) {
-          this.buttons.push(RevitalizeHandler.buildButton());
-        }
-
-        // Rollable Take Buttons
-        const rolls = this.mergeImpactsRolls("rolls");
-        Object.entries(rolls).forEach(([rollType, formula]) => {
+        const mergeRollAutomations = rollAutomations.filter((a) => a.merge);
+        const rollTypes = new Set(mergeRollAutomations.map((a) => a.roll));
+        for (const rollType of rollTypes) {
+          let formula = "";
+          mergeRollAutomations
+            .filter((a) => a.roll === rollType)
+            .forEach((a) => (formula = addFormula(formula, a.formula)));
           const boostAmount = this.source.system.impacts.boosts[rollType];
           if (formulaExists(boostAmount)) {
             formula = boostFormula(formula, boostAmount);
@@ -139,37 +105,17 @@ export default function AbilityExecutionChatPart(Base) {
               RollRollableTakeHandler.buildButton(rollType, formula),
             );
           }
-        });
-
-        // Hack Buttons
-        const hacks = this.mergeImpactsSet("hacks");
-        for (const part of hacks) {
-          this.buttons.push(TakeHackHandler.buildButton(part));
         }
 
-        // Apply Condition Buttons
-        const startStatuses = this.mergeImpactsSet("startStatuses");
-        for (const status of startStatuses) {
-          this.buttons.push(ApplyStatusHandler.buildButton(status));
-        }
+        // Add all pre-defined buttons
+        await super._buildButtons();
 
-        // Remove Condition Buttons
-        const endStatuses = this.mergeImpactsSet("endStatuses");
-        for (const status of endStatuses) {
-          this.buttons.push(RemoveStatusHandler.buildButton(status));
-        }
-
-        // Tradecraft Check Buttons
-        const checks = this.mergeImpactsSet("checks");
-        for (const tradecraft of checks) {
-          this.buttons.push(TradecraftCheckHandler.buildButton(tradecraft));
-        }
-
-        // Ability Use Buttons
-        const abilityNames = this.mergeImpactsSet("abilityButtonNames");
-        for (const abilityName of abilityNames) {
-          this.buttons.push(UseAbilityHandler.buildButton(abilityName));
-        }
+        // Replace `@h` with heighten amount in all rolls
+        this.buttons
+          .filter((b) => b.dataset?.action === RollRollableTakeHandler.ACTION)
+          .forEach((b) => {
+            b.dataset.formula = this._heightenString(b.dataset.formula);
+          });
       }
 
       /** @inheritDoc */
@@ -211,33 +157,43 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<object>}
        */
       async generateConsequence(crit = false) {
-        const statuses = this.mergeImpactsSet("statuses");
-        if (crit) {
-          const critStatuses = this.mergeImpactsSet("critStatuses");
-          for (const status of critStatuses) {
-            statuses.add(status);
-          }
-        }
+        const statusAutomations = this.#getCritAutomations(
+          StatusAutomation,
+          crit,
+        );
+        const statuses = statusAutomations
+          .filter((a) => a.relation === "include")
+          .map((a) => a.status);
+
+        //const durationAutomations = this.#getCritAutomations(
+        //  DurationAutomation,
+        //  crit,
+        //);
+
+        const changesAutomations = this.#getCritAutomations(
+          ChangesAutomation,
+          crit,
+        );
+        const changes = [];
+        changesAutomations.forEach((a) => {
+          changes.push(...foundry.utils.deepClone(a.changes));
+        });
+        changes.forEach((c) => {
+          c.value = this._heightenString(c.value);
+        });
+
         let seconds = this.mergeImpactsNumber("duration");
         const interval = this.source.system.impacts.heightened.duration;
         if (interval) seconds = Math.round(seconds / interval) * interval;
         const expirations = this.mergeImpactsExpiration("expiration", crit);
         expirations.normal.combat.who.source = this.actor?.uuid;
-        let changes = foundry.utils.deepClone(
-          this.mergeImpactsChanges("changes"),
-        );
-        changes = await Promise.all(
-          changes.map(async (c) => {
-            const regex = /@h(?![a-zA-Z])/g;
-            if (regex.test(c.value)) {
-              c.value = c.value.replace(
-                regex,
-                (this.heightened || 0).toString(),
-              );
-            }
-            return c;
-          }),
-        );
+        //let changes = foundry.utils.deepClone(
+        //  this.mergeImpactsChanges("changes"),
+        //);
+        //changes = changes.map((c) => {
+        //  c.value = this._heightenString(c.value);
+        //  return c;
+        //});
         changes.push(...this.source.system.pseudoHookChanges);
         const transformation =
           this.mergeImpactsTransformation("transformation");

@@ -1,9 +1,10 @@
+import { UseAbilityHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import BaseAutomation from "./base-automation.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @property {string} abilityName
+ * @property {Set<string>} abilityNames
  */
 export default class UseAbilitiesAutomation extends BaseAutomation {
   /** @inheritDoc */
@@ -29,5 +30,12 @@ export default class UseAbilitiesAutomation extends BaseAutomation {
   /** @inheritDoc */
   get _formPaths() {
     return ["abilityNames"];
+  }
+
+  /** @inheritDoc */
+  get buttons() {
+    return Array.from(this.abilityNames).map((an) =>
+      UseAbilityHandler.buildButton(an),
+    );
   }
 }

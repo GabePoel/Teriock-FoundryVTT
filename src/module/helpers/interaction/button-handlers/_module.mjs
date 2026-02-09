@@ -17,6 +17,7 @@ import {
   StandardDamageHandler,
   TakeHackHandler,
   TakeUnhackHandler,
+  ToggleStatusHandler,
   TradecraftCheckHandler,
   UseAbilityHandler,
 } from "./simple-command-handlers.mjs";
@@ -39,6 +40,7 @@ const handlerArray = [
   TakeHackHandler,
   TakeRollableTakeHandler,
   TakeUnhackHandler,
+  ToggleStatusHandler,
   TradecraftCheckHandler,
   UseAbilityHandler,
 ];

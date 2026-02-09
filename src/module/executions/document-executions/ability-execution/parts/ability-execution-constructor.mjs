@@ -88,10 +88,37 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
 
   /**
    * @inheritDoc
+   * @returns {BaseAutomation[]}
+   */
+  get activeAutomations() {
+    const automations = /** @type {BaseAutomation[]} */ super.activeAutomations;
+    return automations.filter(
+      (a) =>
+        (a.heighten.has(0) && !this.heightened) ||
+        (a.heighten.has(1) && this.heightened),
+    );
+  }
+
+  /**
+   * @inheritDoc
    * @returns {TeriockAbility}
    */
   get source() {
     return super.source;
+  }
+
+  /**
+   * Replace `@h` with the heighten amount in strings.
+   * @param {string} s
+   * @returns {string}
+   */
+  _heightenString(s) {
+    const regex = /@h(?![a-zA-Z])/g;
+    if (regex.test(s)) {
+      return s.replace(regex, (this.heightened || 0).toString());
+    } else {
+      return s;
+    }
   }
 
   /**

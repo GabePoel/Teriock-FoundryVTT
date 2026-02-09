@@ -16,7 +16,7 @@ export default class CheckAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      check: new fields.StringField({
+      tradecraft: new fields.StringField({
         choices: TERIOCK.index.tradecrafts,
         label: "Tradecraft",
       }),
@@ -25,6 +25,6 @@ export default class CheckAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["check", ...super._formPaths];
+    return ["tradecraft", ...super._formPaths];
   }
 }

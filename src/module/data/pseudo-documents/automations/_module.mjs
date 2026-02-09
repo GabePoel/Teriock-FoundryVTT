@@ -2,6 +2,7 @@ export { default as AbilityMacroAutomation } from "./ability-macro-automation.mj
 export { default as BaseAutomation } from "./base-automation.mjs";
 export { default as ChangesAutomation } from "./changes-automation.mjs";
 export { default as CheckAutomation } from "./check-automation.mjs";
+export { default as CombatExpirationAutomation } from "./combat-expiration-automation.mjs";
 export { default as CommonImpactsAutomation } from "./common-impacts-automation.mjs";
 export { default as DurationAutomation } from "./duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";

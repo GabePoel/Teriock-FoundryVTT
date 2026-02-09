@@ -7,6 +7,7 @@ const { fields } = foundry.data;
  * @property {Teriock.Parameters.Consequence.RollConsequenceKey} roll
  * @property {string} formula
  * @property {string} name
+ * @property {boolean} merge
  */
 export default class RollAutomation extends BaseAutomation {
   /** @inheritDoc */
@@ -36,12 +37,17 @@ export default class RollAutomation extends BaseAutomation {
         label: "Title",
         hint: "The text to display on the roll button.",
       }),
+      merge: new fields.BooleanField({
+        label: "Merge",
+        hint: "Whether to merge this roll with other valid rolls of the same type that have merging enabled.",
+        initial: true,
+      }),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    const paths = ["roll", "formula"];
+    const paths = ["roll", "formula", "merge"];
     if (this.roll === "other") paths.push("title");
     return paths;
   }

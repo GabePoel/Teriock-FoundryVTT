@@ -1,3 +1,7 @@
+import {
+  TakeHackHandler,
+  TakeUnhackHandler,
+} from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import BaseAutomation from "./base-automation.mjs";
 
 const { fields } = foundry.data;
@@ -43,5 +47,18 @@ export default class HacksAutomation extends BaseAutomation {
   /** @inheritDoc */
   get _formPaths() {
     return ["hacks", "reverse"];
+  }
+
+  /** @inheritDoc */
+  get buttons() {
+    if (this.reverse) {
+      return Array.from(this.hacks).map((hack) =>
+        TakeUnhackHandler.buildButton(hack),
+      );
+    } else {
+      return Array.from(this.hacks).map((hack) =>
+        TakeHackHandler.buildButton(hack),
+      );
+    }
   }
 }

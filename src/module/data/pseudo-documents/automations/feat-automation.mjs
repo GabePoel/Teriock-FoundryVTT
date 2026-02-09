@@ -1,3 +1,4 @@
+import { FeatHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import ThresholdAutomation from "./threshold-automation.mjs";
 
 const { fields } = foundry.data;
@@ -16,7 +17,7 @@ export default class FeatAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      feat: new fields.StringField({
+      attribute: new fields.StringField({
         choices: TERIOCK.index.attributesFull,
         label: "Attribute",
       }),
@@ -25,6 +26,11 @@ export default class FeatAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["feat", ...super._formPaths];
+    return ["attribute", ...super._formPaths];
+  }
+
+  /** @inheritDoc */
+  get buttons() {
+    return [FeatHandler.buildButton(this.attribute, this.threshold)];
   }
 }

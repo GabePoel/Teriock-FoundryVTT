@@ -46,5 +46,6 @@ export const consequenceOptions = {
     revitalize: "Revitalize",
     bag: "Death Bag Pull",
     revive: "Revive",
+    awaken: "Awaken",
   },
 };

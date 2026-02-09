@@ -16,7 +16,11 @@ export default class BaseDocumentExecution extends BaseExecution {
     if (options.fluent === undefined) {
       this.fluent = options.source.system.competence.fluent;
     }
+    this.automations = this.source.system.automations.contents;
   }
+
+  /** @type {BaseAutomation[]} */
+  automations;
 
   /** @type {GenericChild} */
   _source;
@@ -27,6 +31,19 @@ export default class BaseDocumentExecution extends BaseExecution {
    */
   get source() {
     return this._source;
+  }
+
+  /**
+   * The automations that are active.
+   * @returns {BaseAutomation[]}
+   */
+  get activeAutomations() {
+    return this.automations.filter(
+      (a) =>
+        a.competencies.has(0) ||
+        (a.competencies.has(1) && this.proficient) ||
+        (a.competencies.has(2) && this.fluent),
+    );
   }
 
   /** @inheritDoc */
@@ -44,6 +61,11 @@ export default class BaseDocumentExecution extends BaseExecution {
     const rollData = this.source.system.getSystemRollData();
     Object.assign(rollData, super.rollData);
     return rollData;
+  }
+
+  /** @inheritDoc */
+  async _buildButtons() {
+    this.activeAutomations.forEach((a) => this.buttons.push(...a.buttons));
   }
 
   /** @inheritDoc */

@@ -9,6 +9,7 @@ const { ImagePopout } = foundry.applications.apps;
 //noinspection JSClosureCompilerSyntax
 /**
  * Data model shared by items and effects.
+ * @extends {Teriock.Models.CommonSystemInterface}
  * @mixes UsableData
  * @implements {Teriock.Models.ChildSystemInterface}
  */

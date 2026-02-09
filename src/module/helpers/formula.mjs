@@ -7,6 +7,7 @@
 export function addFormula(value, delta) {
   const operator = delta.startsWith("-") ? "-" : "+";
   delta = delta.replace(/^[+-]/, "").trim();
+  if (!value?.trim()?.length) return delta;
   return `${value} ${operator} ${delta}`;
 }
 

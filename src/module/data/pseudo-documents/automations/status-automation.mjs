@@ -1,7 +1,17 @@
+import {
+  ApplyStatusHandler,
+  RemoveStatusHandler,
+  ToggleStatusHandler,
+} from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @param {"apply"|"remove"|"toggle"|"inclde"} relation
+ * @param {boolean} target
+ * @param {boolean} executor
+ */
 export default class StatusAutomation extends CritAutomation {
   /** @inheritDoc */
   static get LABEL() {
@@ -47,6 +57,21 @@ export default class StatusAutomation extends CritAutomation {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["status", "relation", "target", "executor", ...super._formPaths];
+    const paths = ["status", "relation"];
+    if (this.relation === "include") paths.push(...["target", "executor"]);
+    return paths;
+  }
+
+  /** @inheritDoc */
+  get buttons() {
+    if (this.relation === "apply") {
+      return [ApplyStatusHandler.buildButton(this.status)];
+    } else if (this.relation === "remove") {
+      return [RemoveStatusHandler.buildButton(this.status)];
+    } else if (this.relation === "toggle") {
+      return [ToggleStatusHandler.buildButton(this.status)];
+    } else {
+      return [];
+    }
   }
 }

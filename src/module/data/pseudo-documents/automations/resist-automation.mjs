@@ -1,3 +1,4 @@
+import { ResistHandler } from "../../../helpers/interaction/button-handlers/simple-command-handlers.mjs";
 import ThresholdAutomation from "./threshold-automation.mjs";
 
 const { fields } = foundry.data;
@@ -26,5 +27,10 @@ export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   get _formPaths() {
     return [...super._formPaths, "hex"];
+  }
+
+  /** @inheritDoc */
+  get buttons() {
+    return [ResistHandler.buildButton(this.hex, this.threshold)];
   }
 }

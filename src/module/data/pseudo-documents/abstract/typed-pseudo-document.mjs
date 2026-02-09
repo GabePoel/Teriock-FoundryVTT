@@ -2,6 +2,9 @@ import PseudoDocument from "./pseudo-document.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @property {string} type
+ */
 export default class TypedPseudoDocument extends PseudoDocument {
   /**
    * The key for this pseudo-document's type.

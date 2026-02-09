@@ -4,6 +4,7 @@ declare global {
   namespace Teriock.Models {
     export interface BaseAutomationInterface {
       competencies: Set<number>;
+      heighten: Set<number>;
 
       get parent(): ChildSystem;
     }
